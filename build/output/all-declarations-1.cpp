@@ -9,899 +9,6 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation::GALGAS_llvmBinaryOperation (void) :
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_addNoOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_addNoOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_subNoOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_subNoOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_mulNoOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_mulNoOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivNoOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_udivNoOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivNoOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_sdivNoOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremNoOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_uremNoOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremNoOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_sremNoOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uaddOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_uaddOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_saddOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_saddOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_usubOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_usubOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ssubOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_ssubOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_umulOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_umulOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_smulOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_smulOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_udivOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_sdivOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_uremOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremOVF (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_sremOVF ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_and (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_and ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ior (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_ior ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_xor (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_xor ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_shl (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_shl ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ashr (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_ashr ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_lshr (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_lshr ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_eq ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ne (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_ne ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ult (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_ult ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ule (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_ule ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ugt (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_ugt ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_uge (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_uge ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_slt (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_slt ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sle (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_sle ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sgt (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_sgt ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sge (UNUSED_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_icmp_5F_sge ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_llvmBinaryOperation [34] = {
-  "(not built)",
-  "addNoOVF",
-  "subNoOVF",
-  "mulNoOVF",
-  "udivNoOVF",
-  "sdivNoOVF",
-  "uremNoOVF",
-  "sremNoOVF",
-  "uaddOVF",
-  "saddOVF",
-  "usubOVF",
-  "ssubOVF",
-  "umulOVF",
-  "smulOVF",
-  "udivOVF",
-  "sdivOVF",
-  "uremOVF",
-  "sremOVF",
-  "and",
-  "ior",
-  "xor",
-  "shl",
-  "ashr",
-  "lshr",
-  "icmp_eq",
-  "icmp_ne",
-  "icmp_ult",
-  "icmp_ule",
-  "icmp_ugt",
-  "icmp_uge",
-  "icmp_slt",
-  "icmp_sle",
-  "icmp_sgt",
-  "icmp_sge"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAddNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_addNoOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSubNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_subNoOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isMulNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulNoOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUdivNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_udivNoOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSdivNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sdivNoOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUremNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uremNoOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSremNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sremNoOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUaddOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uaddOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSaddOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_saddOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUsubOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_usubOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSsubOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ssubOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUmulOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_umulOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSmulOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_smulOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUdivOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_udivOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSdivOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sdivOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUremOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uremOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSremOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sremOVF == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAnd (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_and == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIor (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ior == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isXor (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_xor == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isShl (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_shl == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAshr (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ashr == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isLshr (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_lshr == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_eq (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_eq == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ne (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ne == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ult (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ult == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ule (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ule == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ugt (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ugt == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_uge (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_uge == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_slt (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_slt == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sle (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sle == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sgt (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sgt == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sge (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sge == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_llvmBinaryOperation::description (C_String & ioString,
-                                              const int32_t /* inIndentation */) const {
-  ioString << "<enum @llvmBinaryOperation: " << gEnumNameArrayFor_llvmBinaryOperation [mEnum] ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_llvmBinaryOperation::objectCompare (const GALGAS_llvmBinaryOperation & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @llvmBinaryOperation type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_llvmBinaryOperation ("llvmBinaryOperation",
-                                            NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_llvmBinaryOperation::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmBinaryOperation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_llvmBinaryOperation::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_llvmBinaryOperation (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_llvmBinaryOperation result ;
-  const GALGAS_llvmBinaryOperation * p = (const GALGAS_llvmBinaryOperation *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_llvmBinaryOperation *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmBinaryOperation", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator::GALGAS_literalIntegerInfixOperator (void) :
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_equal (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_equal ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_nonEqual (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_nonEqual ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_strictInf (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_strictInf ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_strictSup (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_strictSup ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_infEqual (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_infEqual ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_supEqual (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_supEqual ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_and (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_and ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_ior (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_ior ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_xor (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_xor ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_add (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_add ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_sub (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_sub ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_mul (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_mul ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_div (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_div ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_rem (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_rem ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_leftShift (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_leftShift ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_rightShift (UNUSED_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  result.mEnum = kEnum_rightShift ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_literalIntegerInfixOperator [17] = {
-  "(not built)",
-  "equal",
-  "nonEqual",
-  "strictInf",
-  "strictSup",
-  "infEqual",
-  "supEqual",
-  "and",
-  "ior",
-  "xor",
-  "add",
-  "sub",
-  "mul",
-  "div",
-  "rem",
-  "leftShift",
-  "rightShift"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isEqual (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_equal == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isNonEqual (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_nonEqual == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isStrictInf (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_strictInf == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isStrictSup (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_strictSup == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isInfEqual (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infEqual == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isSupEqual (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_supEqual == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isAnd (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_and == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isIor (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ior == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isXor (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_xor == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isAdd (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_add == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isSub (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sub == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isMul (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mul == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isDiv (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_div == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isRem (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_rem == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isLeftShift (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_leftShift == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isRightShift (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_rightShift == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_literalIntegerInfixOperator::description (C_String & ioString,
-                                                      const int32_t /* inIndentation */) const {
-  ioString << "<enum @literalIntegerInfixOperator: " << gEnumNameArrayFor_literalIntegerInfixOperator [mEnum] ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_literalIntegerInfixOperator::objectCompare (const GALGAS_literalIntegerInfixOperator & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @literalIntegerInfixOperator type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_literalIntegerInfixOperator ("literalIntegerInfixOperator",
-                                                    NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_literalIntegerInfixOperator::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_literalIntegerInfixOperator ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_literalIntegerInfixOperator::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_literalIntegerInfixOperator (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_literalIntegerInfixOperator result ;
-  const GALGAS_literalIntegerInfixOperator * p = (const GALGAS_literalIntegerInfixOperator *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_literalIntegerInfixOperator *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("literalIntegerInfixOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                   Class for element of '@instructionListAST' list                                   *
 //                                                                                                                     *
@@ -1030,10 +137,10 @@ void GALGAS_instructionListAST::addAssign_operation (const GALGAS_instructionAST
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::modifier_insertAtIndex (const GALGAS_instructionAST inOperand0,
-                                                        const GALGAS_uint inInsertionIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_instructionListAST::setter_insertAtIndex (const GALGAS_instructionAST inOperand0,
+                                                      const GALGAS_uint inInsertionIndex,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_instructionListAST (inOperand0 COMMA_THERE)) ;
@@ -1046,10 +153,10 @@ void GALGAS_instructionListAST::modifier_insertAtIndex (const GALGAS_instruction
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::modifier_removeAtIndex (GALGAS_instructionAST & outOperand0,
-                                                        const GALGAS_uint inRemoveIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_instructionListAST::setter_removeAtIndex (GALGAS_instructionAST & outOperand0,
+                                                      const GALGAS_uint inRemoveIndex,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -1065,9 +172,9 @@ void GALGAS_instructionListAST::modifier_removeAtIndex (GALGAS_instructionAST & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::modifier_popFirst (GALGAS_instructionAST & outOperand0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_instructionListAST::setter_popFirst (GALGAS_instructionAST & outOperand0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_instructionListAST * p = (cCollectionElement_instructionListAST *) attributes.ptr () ;
@@ -1081,9 +188,9 @@ void GALGAS_instructionListAST::modifier_popFirst (GALGAS_instructionAST & outOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::modifier_popLast (GALGAS_instructionAST & outOperand0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_instructionListAST::setter_popLast (GALGAS_instructionAST & outOperand0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_instructionListAST * p = (cCollectionElement_instructionListAST *) attributes.ptr () ;
@@ -1362,9 +469,9 @@ void GALGAS_bootRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootRoutinePriorityMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_bootRoutinePriorityMap::setter_insertKey (GALGAS_lstring inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cMapElement_bootRoutinePriorityMap * p = NULL ;
   macroMyNew (p, cMapElement_bootRoutinePriorityMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -1603,12 +710,12 @@ void GALGAS_bootListIR::addAssign_operation (const GALGAS_location & inOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::modifier_insertAtIndex (const GALGAS_location inOperand0,
-                                                const GALGAS_instructionListIR inOperand1,
-                                                const GALGAS_location inOperand2,
-                                                const GALGAS_uint inInsertionIndex,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GALGAS_bootListIR::setter_insertAtIndex (const GALGAS_location inOperand0,
+                                              const GALGAS_instructionListIR inOperand1,
+                                              const GALGAS_location inOperand2,
+                                              const GALGAS_uint inInsertionIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_bootListIR (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -1621,12 +728,12 @@ void GALGAS_bootListIR::modifier_insertAtIndex (const GALGAS_location inOperand0
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::modifier_removeAtIndex (GALGAS_location & outOperand0,
-                                                GALGAS_instructionListIR & outOperand1,
-                                                GALGAS_location & outOperand2,
-                                                const GALGAS_uint inRemoveIndex,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GALGAS_bootListIR::setter_removeAtIndex (GALGAS_location & outOperand0,
+                                              GALGAS_instructionListIR & outOperand1,
+                                              GALGAS_location & outOperand2,
+                                              const GALGAS_uint inRemoveIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -1646,11 +753,11 @@ void GALGAS_bootListIR::modifier_removeAtIndex (GALGAS_location & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::modifier_popFirst (GALGAS_location & outOperand0,
-                                           GALGAS_instructionListIR & outOperand1,
-                                           GALGAS_location & outOperand2,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) {
+void GALGAS_bootListIR::setter_popFirst (GALGAS_location & outOperand0,
+                                         GALGAS_instructionListIR & outOperand1,
+                                         GALGAS_location & outOperand2,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
@@ -1668,11 +775,11 @@ void GALGAS_bootListIR::modifier_popFirst (GALGAS_location & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootListIR::modifier_popLast (GALGAS_location & outOperand0,
-                                          GALGAS_instructionListIR & outOperand1,
-                                          GALGAS_location & outOperand2,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
+void GALGAS_bootListIR::setter_popLast (GALGAS_location & outOperand0,
+                                        GALGAS_instructionListIR & outOperand1,
+                                        GALGAS_location & outOperand2,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
@@ -2046,10 +1153,10 @@ void GALGAS_instructionListIR::addAssign_operation (const GALGAS_abstractInstruc
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListIR::modifier_insertAtIndex (const GALGAS_abstractInstructionIR inOperand0,
-                                                       const GALGAS_uint inInsertionIndex,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_instructionListIR::setter_insertAtIndex (const GALGAS_abstractInstructionIR inOperand0,
+                                                     const GALGAS_uint inInsertionIndex,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_instructionListIR (inOperand0 COMMA_THERE)) ;
@@ -2062,10 +1169,10 @@ void GALGAS_instructionListIR::modifier_insertAtIndex (const GALGAS_abstractInst
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListIR::modifier_removeAtIndex (GALGAS_abstractInstructionIR & outOperand0,
-                                                       const GALGAS_uint inRemoveIndex,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_instructionListIR::setter_removeAtIndex (GALGAS_abstractInstructionIR & outOperand0,
+                                                     const GALGAS_uint inRemoveIndex,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -2081,9 +1188,9 @@ void GALGAS_instructionListIR::modifier_removeAtIndex (GALGAS_abstractInstructio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListIR::modifier_popFirst (GALGAS_abstractInstructionIR & outOperand0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_instructionListIR::setter_popFirst (GALGAS_abstractInstructionIR & outOperand0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) attributes.ptr () ;
@@ -2097,9 +1204,9 @@ void GALGAS_instructionListIR::modifier_popFirst (GALGAS_abstractInstructionIR &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListIR::modifier_popLast (GALGAS_abstractInstructionIR & outOperand0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_instructionListIR::setter_popLast (GALGAS_abstractInstructionIR & outOperand0,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) attributes.ptr () ;
@@ -2421,11 +1528,11 @@ void GALGAS_initRequiredByProcList::addAssign_operation (const GALGAS_lstring & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initRequiredByProcList::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                            const GALGAS_procFormalArgumentList inOperand1,
-                                                            const GALGAS_uint inInsertionIndex,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_initRequiredByProcList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                          const GALGAS_procFormalArgumentList inOperand1,
+                                                          const GALGAS_uint inInsertionIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_initRequiredByProcList (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -2438,11 +1545,11 @@ void GALGAS_initRequiredByProcList::modifier_insertAtIndex (const GALGAS_lstring
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initRequiredByProcList::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                            GALGAS_procFormalArgumentList & outOperand1,
-                                                            const GALGAS_uint inRemoveIndex,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_initRequiredByProcList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                          GALGAS_procFormalArgumentList & outOperand1,
+                                                          const GALGAS_uint inRemoveIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -2460,10 +1567,10 @@ void GALGAS_initRequiredByProcList::modifier_removeAtIndex (GALGAS_lstring & out
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initRequiredByProcList::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                                       GALGAS_procFormalArgumentList & outOperand1,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_initRequiredByProcList::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                     GALGAS_procFormalArgumentList & outOperand1,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_initRequiredByProcList * p = (cCollectionElement_initRequiredByProcList *) attributes.ptr () ;
@@ -2479,10 +1586,10 @@ void GALGAS_initRequiredByProcList::modifier_popFirst (GALGAS_lstring & outOpera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initRequiredByProcList::modifier_popLast (GALGAS_lstring & outOperand0,
-                                                      GALGAS_procFormalArgumentList & outOperand1,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_initRequiredByProcList::setter_popLast (GALGAS_lstring & outOperand0,
+                                                    GALGAS_procFormalArgumentList & outOperand1,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_initRequiredByProcList * p = (cCollectionElement_initRequiredByProcList *) attributes.ptr () ;
@@ -2855,13 +1962,13 @@ void GALGAS_procFormalArgumentList::addAssign_operation (const GALGAS_procFormal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procFormalArgumentList::modifier_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
-                                                            const GALGAS_lstring inOperand1,
-                                                            const GALGAS_lstring inOperand2,
-                                                            const GALGAS_lstring inOperand3,
-                                                            const GALGAS_uint inInsertionIndex,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_procFormalArgumentList::setter_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
+                                                          const GALGAS_lstring inOperand1,
+                                                          const GALGAS_lstring inOperand2,
+                                                          const GALGAS_lstring inOperand3,
+                                                          const GALGAS_uint inInsertionIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_procFormalArgumentList (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
@@ -2874,13 +1981,13 @@ void GALGAS_procFormalArgumentList::modifier_insertAtIndex (const GALGAS_procFor
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procFormalArgumentList::modifier_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                            GALGAS_lstring & outOperand1,
-                                                            GALGAS_lstring & outOperand2,
-                                                            GALGAS_lstring & outOperand3,
-                                                            const GALGAS_uint inRemoveIndex,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_procFormalArgumentList::setter_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                          GALGAS_lstring & outOperand1,
+                                                          GALGAS_lstring & outOperand2,
+                                                          GALGAS_lstring & outOperand3,
+                                                          const GALGAS_uint inRemoveIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -2902,12 +2009,12 @@ void GALGAS_procFormalArgumentList::modifier_removeAtIndex (GALGAS_procFormalArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procFormalArgumentList::modifier_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                       GALGAS_lstring & outOperand1,
-                                                       GALGAS_lstring & outOperand2,
-                                                       GALGAS_lstring & outOperand3,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_procFormalArgumentList::setter_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                     GALGAS_lstring & outOperand1,
+                                                     GALGAS_lstring & outOperand2,
+                                                     GALGAS_lstring & outOperand3,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procFormalArgumentList * p = (cCollectionElement_procFormalArgumentList *) attributes.ptr () ;
@@ -2927,12 +2034,12 @@ void GALGAS_procFormalArgumentList::modifier_popFirst (GALGAS_procFormalArgument
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procFormalArgumentList::modifier_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                      GALGAS_lstring & outOperand1,
-                                                      GALGAS_lstring & outOperand2,
-                                                      GALGAS_lstring & outOperand3,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_procFormalArgumentList::setter_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                    GALGAS_lstring & outOperand1,
+                                                    GALGAS_lstring & outOperand2,
+                                                    GALGAS_lstring & outOperand3,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procFormalArgumentList * p = (cCollectionElement_procFormalArgumentList *) attributes.ptr () ;
@@ -3304,9 +2411,9 @@ void GALGAS_initRoutineMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initRoutineMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GALGAS_initRoutineMap::setter_insertKey (GALGAS_lstring inKey,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   cMapElement_initRoutineMap * p = NULL ;
   macroMyNew (p, cMapElement_initRoutineMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -3511,9 +2618,9 @@ void GALGAS_initRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initRoutinePriorityMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_initRoutinePriorityMap::setter_insertKey (GALGAS_lstring inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cMapElement_initRoutinePriorityMap * p = NULL ;
   macroMyNew (p, cMapElement_initRoutinePriorityMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -3762,13 +2869,13 @@ void GALGAS_initListIR::addAssign_operation (const GALGAS_initRequiredByProcList
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::modifier_insertAtIndex (const GALGAS_initRequiredByProcList inOperand0,
-                                                const GALGAS_location inOperand1,
-                                                const GALGAS_instructionListIR inOperand2,
-                                                const GALGAS_location inOperand3,
-                                                const GALGAS_uint inInsertionIndex,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GALGAS_initListIR::setter_insertAtIndex (const GALGAS_initRequiredByProcList inOperand0,
+                                              const GALGAS_location inOperand1,
+                                              const GALGAS_instructionListIR inOperand2,
+                                              const GALGAS_location inOperand3,
+                                              const GALGAS_uint inInsertionIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_initListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
@@ -3781,13 +2888,13 @@ void GALGAS_initListIR::modifier_insertAtIndex (const GALGAS_initRequiredByProcL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::modifier_removeAtIndex (GALGAS_initRequiredByProcList & outOperand0,
-                                                GALGAS_location & outOperand1,
-                                                GALGAS_instructionListIR & outOperand2,
-                                                GALGAS_location & outOperand3,
-                                                const GALGAS_uint inRemoveIndex,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GALGAS_initListIR::setter_removeAtIndex (GALGAS_initRequiredByProcList & outOperand0,
+                                              GALGAS_location & outOperand1,
+                                              GALGAS_instructionListIR & outOperand2,
+                                              GALGAS_location & outOperand3,
+                                              const GALGAS_uint inRemoveIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -3809,12 +2916,12 @@ void GALGAS_initListIR::modifier_removeAtIndex (GALGAS_initRequiredByProcList & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::modifier_popFirst (GALGAS_initRequiredByProcList & outOperand0,
-                                           GALGAS_location & outOperand1,
-                                           GALGAS_instructionListIR & outOperand2,
-                                           GALGAS_location & outOperand3,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) {
+void GALGAS_initListIR::setter_popFirst (GALGAS_initRequiredByProcList & outOperand0,
+                                         GALGAS_location & outOperand1,
+                                         GALGAS_instructionListIR & outOperand2,
+                                         GALGAS_location & outOperand3,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_initListIR * p = (cCollectionElement_initListIR *) attributes.ptr () ;
@@ -3834,12 +2941,12 @@ void GALGAS_initListIR::modifier_popFirst (GALGAS_initRequiredByProcList & outOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::modifier_popLast (GALGAS_initRequiredByProcList & outOperand0,
-                                          GALGAS_location & outOperand1,
-                                          GALGAS_instructionListIR & outOperand2,
-                                          GALGAS_location & outOperand3,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
+void GALGAS_initListIR::setter_popLast (GALGAS_initRequiredByProcList & outOperand0,
+                                        GALGAS_location & outOperand1,
+                                        GALGAS_instructionListIR & outOperand2,
+                                        GALGAS_location & outOperand3,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_initListIR * p = (cCollectionElement_initListIR *) attributes.ptr () ;
@@ -4211,9 +3318,9 @@ void GALGAS_exceptionRoutinePriorityMap::addAssign_operation (const GALGAS_lstri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionRoutinePriorityMap::modifier_insertSetupKey (GALGAS_lstring inKey,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_exceptionRoutinePriorityMap::setter_insertSetupKey (GALGAS_lstring inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
   cMapElement_exceptionRoutinePriorityMap * p = NULL ;
   macroMyNew (p, cMapElement_exceptionRoutinePriorityMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -4226,9 +3333,9 @@ void GALGAS_exceptionRoutinePriorityMap::modifier_insertSetupKey (GALGAS_lstring
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionRoutinePriorityMap::modifier_insertLoopKey (GALGAS_lstring inKey,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_exceptionRoutinePriorityMap::setter_insertLoopKey (GALGAS_lstring inKey,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
   cMapElement_exceptionRoutinePriorityMap * p = NULL ;
   macroMyNew (p, cMapElement_exceptionRoutinePriorityMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -4505,12 +3612,12 @@ void GALGAS_funcFormalArgumentList::addAssign_operation (const GALGAS_lstring & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcFormalArgumentList::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                            const GALGAS_lstring inOperand1,
-                                                            const GALGAS_lstring inOperand2,
-                                                            const GALGAS_uint inInsertionIndex,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_funcFormalArgumentList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                          const GALGAS_lstring inOperand1,
+                                                          const GALGAS_lstring inOperand2,
+                                                          const GALGAS_uint inInsertionIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_funcFormalArgumentList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -4523,12 +3630,12 @@ void GALGAS_funcFormalArgumentList::modifier_insertAtIndex (const GALGAS_lstring
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcFormalArgumentList::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                            GALGAS_lstring & outOperand1,
-                                                            GALGAS_lstring & outOperand2,
-                                                            const GALGAS_uint inRemoveIndex,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_funcFormalArgumentList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                          GALGAS_lstring & outOperand1,
+                                                          GALGAS_lstring & outOperand2,
+                                                          const GALGAS_uint inRemoveIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -4548,11 +3655,11 @@ void GALGAS_funcFormalArgumentList::modifier_removeAtIndex (GALGAS_lstring & out
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcFormalArgumentList::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                                       GALGAS_lstring & outOperand1,
-                                                       GALGAS_lstring & outOperand2,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_funcFormalArgumentList::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                     GALGAS_lstring & outOperand1,
+                                                     GALGAS_lstring & outOperand2,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_funcFormalArgumentList * p = (cCollectionElement_funcFormalArgumentList *) attributes.ptr () ;
@@ -4570,11 +3677,11 @@ void GALGAS_funcFormalArgumentList::modifier_popFirst (GALGAS_lstring & outOpera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcFormalArgumentList::modifier_popLast (GALGAS_lstring & outOperand0,
-                                                      GALGAS_lstring & outOperand1,
-                                                      GALGAS_lstring & outOperand2,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_funcFormalArgumentList::setter_popLast (GALGAS_lstring & outOperand0,
+                                                    GALGAS_lstring & outOperand1,
+                                                    GALGAS_lstring & outOperand2,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_funcFormalArgumentList * p = (cCollectionElement_funcFormalArgumentList *) attributes.ptr () ;
@@ -4958,11 +4065,11 @@ void GALGAS_funcSignature::addAssign_operation (const GALGAS_lstring & inOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcSignature::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                   const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
-                                                   const GALGAS_uint inInsertionIndex,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_funcSignature::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                 const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
+                                                 const GALGAS_uint inInsertionIndex,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_funcSignature (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -4975,11 +4082,11 @@ void GALGAS_funcSignature::modifier_insertAtIndex (const GALGAS_lstring inOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcSignature::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                   GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                                   const GALGAS_uint inRemoveIndex,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_funcSignature::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                                 const GALGAS_uint inRemoveIndex,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -4997,10 +4104,10 @@ void GALGAS_funcSignature::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcSignature::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                              GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
+void GALGAS_funcSignature::setter_popFirst (GALGAS_lstring & outOperand0,
+                                            GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_funcSignature * p = (cCollectionElement_funcSignature *) attributes.ptr () ;
@@ -5016,10 +4123,10 @@ void GALGAS_funcSignature::modifier_popFirst (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcSignature::modifier_popLast (GALGAS_lstring & outOperand0,
-                                             GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
+void GALGAS_funcSignature::setter_popLast (GALGAS_lstring & outOperand0,
+                                           GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_funcSignature * p = (cCollectionElement_funcSignature *) attributes.ptr () ;
@@ -5359,12 +4466,12 @@ void GALGAS_functionMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionMap::modifier_insertKey (GALGAS_lstring inKey,
-                                             GALGAS_modeMap inArgument0,
-                                             GALGAS_funcSignature inArgument1,
-                                             GALGAS_unifiedTypeMap_2D_proxy inArgument2,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
+void GALGAS_functionMap::setter_insertKey (GALGAS_lstring inKey,
+                                           GALGAS_modeMap inArgument0,
+                                           GALGAS_funcSignature inArgument1,
+                                           GALGAS_unifiedTypeMap_2D_proxy inArgument2,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
   cMapElement_functionMap * p = NULL ;
   macroMyNew (p, cMapElement_functionMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -5450,10 +4557,10 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_functionMap::getter_mResultTypeForKey (con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionMap::modifier_setMFunctionModeMapForKey (GALGAS_modeMap inAttributeValue,
-                                                             GALGAS_string inKey,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
+void GALGAS_functionMap::setter_setMFunctionModeMapForKey (GALGAS_modeMap inAttributeValue,
+                                                           GALGAS_string inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_functionMap * p = (cMapElement_functionMap *) attributes ;
   if (NULL != p) {
@@ -5464,10 +4571,10 @@ void GALGAS_functionMap::modifier_setMFunctionModeMapForKey (GALGAS_modeMap inAt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionMap::modifier_setMSignatureForKey (GALGAS_funcSignature inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_functionMap::setter_setMSignatureForKey (GALGAS_funcSignature inAttributeValue,
+                                                     GALGAS_string inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_functionMap * p = (cMapElement_functionMap *) attributes ;
   if (NULL != p) {
@@ -5478,10 +4585,10 @@ void GALGAS_functionMap::modifier_setMSignatureForKey (GALGAS_funcSignature inAt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionMap::modifier_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_functionMap::setter_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_functionMap * p = (cMapElement_functionMap *) attributes ;
   if (NULL != p) {
@@ -5689,9 +4796,9 @@ void GALGAS_modeMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_modeMap::modifier_insertKey (GALGAS_lstring inKey,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
+void GALGAS_modeMap::setter_insertKey (GALGAS_lstring inKey,
+                                       C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) {
   cMapElement_modeMap * p = NULL ;
   macroMyNew (p, cMapElement_modeMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -5939,11 +5046,11 @@ void GALGAS_funcFormalArgumentListForGeneration::addAssign_operation (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcFormalArgumentListForGeneration::modifier_insertAtIndex (const GALGAS_unifiedTypeMap_2D_proxy inOperand0,
-                                                                         const GALGAS_string inOperand1,
-                                                                         const GALGAS_uint inInsertionIndex,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_funcFormalArgumentListForGeneration::setter_insertAtIndex (const GALGAS_unifiedTypeMap_2D_proxy inOperand0,
+                                                                       const GALGAS_string inOperand1,
+                                                                       const GALGAS_uint inInsertionIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_funcFormalArgumentListForGeneration (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -5956,11 +5063,11 @@ void GALGAS_funcFormalArgumentListForGeneration::modifier_insertAtIndex (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcFormalArgumentListForGeneration::modifier_removeAtIndex (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
-                                                                         GALGAS_string & outOperand1,
-                                                                         const GALGAS_uint inRemoveIndex,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_funcFormalArgumentListForGeneration::setter_removeAtIndex (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                                                       GALGAS_string & outOperand1,
+                                                                       const GALGAS_uint inRemoveIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -5978,10 +5085,10 @@ void GALGAS_funcFormalArgumentListForGeneration::modifier_removeAtIndex (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcFormalArgumentListForGeneration::modifier_popFirst (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
-                                                                    GALGAS_string & outOperand1,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_funcFormalArgumentListForGeneration::setter_popFirst (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                                                  GALGAS_string & outOperand1,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_funcFormalArgumentListForGeneration * p = (cCollectionElement_funcFormalArgumentListForGeneration *) attributes.ptr () ;
@@ -5997,10 +5104,10 @@ void GALGAS_funcFormalArgumentListForGeneration::modifier_popFirst (GALGAS_unifi
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_funcFormalArgumentListForGeneration::modifier_popLast (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
-                                                                   GALGAS_string & outOperand1,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_funcFormalArgumentListForGeneration::setter_popLast (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                                                 GALGAS_string & outOperand1,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_funcFormalArgumentListForGeneration * p = (cCollectionElement_funcFormalArgumentListForGeneration *) attributes.ptr () ;
@@ -6310,9 +5417,9 @@ void GALGAS_labelMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_labelMap::modifier_insertKey (GALGAS_lstring inKey,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
+void GALGAS_labelMap::setter_insertKey (GALGAS_lstring inKey,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
   cMapElement_labelMap * p = NULL ;
   macroMyNew (p, cMapElement_labelMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -6538,13 +5645,13 @@ void GALGAS_procedureMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureMap::modifier_insertKey (GALGAS_lstring inKey,
-                                              GALGAS_bool inArgument0,
-                                              GALGAS_modeMap inArgument1,
-                                              GALGAS_procedureSignature inArgument2,
-                                              GALGAS_bool inArgument3,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
+void GALGAS_procedureMap::setter_insertKey (GALGAS_lstring inKey,
+                                            GALGAS_bool inArgument0,
+                                            GALGAS_modeMap inArgument1,
+                                            GALGAS_procedureSignature inArgument2,
+                                            GALGAS_bool inArgument3,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) {
   cMapElement_procedureMap * p = NULL ;
   macroMyNew (p, cMapElement_procedureMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -6588,13 +5695,13 @@ void GALGAS_procedureMap::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureMap::modifier_removeKey (GALGAS_lstring inKey,
-                                              GALGAS_bool & outArgument0,
-                                              GALGAS_modeMap & outArgument1,
-                                              GALGAS_procedureSignature & outArgument2,
-                                              GALGAS_bool & outArgument3,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
+void GALGAS_procedureMap::setter_removeKey (GALGAS_lstring inKey,
+                                            GALGAS_bool & outArgument0,
+                                            GALGAS_modeMap & outArgument1,
+                                            GALGAS_procedureSignature & outArgument2,
+                                            GALGAS_bool & outArgument3,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) {
   const char * kRemoveErrorMessage = "there is no '%K' proc" ;
   capCollectionElement attributes ;
   performRemove (inKey, attributes, inCompiler, kRemoveErrorMessage COMMA_THERE) ;
@@ -6670,10 +5777,10 @@ GALGAS_bool GALGAS_procedureMap::getter_mWeakProcedureForKey (const GALGAS_strin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureMap::modifier_setMMutatingForKey (GALGAS_bool inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_procedureMap::setter_setMMutatingForKey (GALGAS_bool inAttributeValue,
+                                                     GALGAS_string inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes ;
   if (NULL != p) {
@@ -6684,10 +5791,10 @@ void GALGAS_procedureMap::modifier_setMMutatingForKey (GALGAS_bool inAttributeVa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureMap::modifier_setMProcedureModeMapForKey (GALGAS_modeMap inAttributeValue,
-                                                               GALGAS_string inKey,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) {
+void GALGAS_procedureMap::setter_setMProcedureModeMapForKey (GALGAS_modeMap inAttributeValue,
+                                                             GALGAS_string inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes ;
   if (NULL != p) {
@@ -6698,10 +5805,10 @@ void GALGAS_procedureMap::modifier_setMProcedureModeMapForKey (GALGAS_modeMap in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureMap::modifier_setMSignatureForKey (GALGAS_procedureSignature inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_procedureMap::setter_setMSignatureForKey (GALGAS_procedureSignature inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes ;
   if (NULL != p) {
@@ -6712,10 +5819,10 @@ void GALGAS_procedureMap::modifier_setMSignatureForKey (GALGAS_procedureSignatur
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureMap::modifier_setMWeakProcedureForKey (GALGAS_bool inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_procedureMap::setter_setMWeakProcedureForKey (GALGAS_bool inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes ;
   if (NULL != p) {
@@ -6984,12 +6091,12 @@ void GALGAS_procFormalArgumentListForGeneration::addAssign_operation (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procFormalArgumentListForGeneration::modifier_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
-                                                                         const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
-                                                                         const GALGAS_string inOperand2,
-                                                                         const GALGAS_uint inInsertionIndex,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_procFormalArgumentListForGeneration::setter_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
+                                                                       const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
+                                                                       const GALGAS_string inOperand2,
+                                                                       const GALGAS_uint inInsertionIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_procFormalArgumentListForGeneration (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -7002,12 +6109,12 @@ void GALGAS_procFormalArgumentListForGeneration::modifier_insertAtIndex (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procFormalArgumentListForGeneration::modifier_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                                                         GALGAS_string & outOperand2,
-                                                                         const GALGAS_uint inRemoveIndex,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_procFormalArgumentListForGeneration::setter_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                                       GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                                                       GALGAS_string & outOperand2,
+                                                                       const GALGAS_uint inRemoveIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -7027,11 +6134,11 @@ void GALGAS_procFormalArgumentListForGeneration::modifier_removeAtIndex (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procFormalArgumentListForGeneration::modifier_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                                    GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                                                    GALGAS_string & outOperand2,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_procFormalArgumentListForGeneration::setter_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                                  GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                                                  GALGAS_string & outOperand2,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procFormalArgumentListForGeneration * p = (cCollectionElement_procFormalArgumentListForGeneration *) attributes.ptr () ;
@@ -7049,11 +6156,11 @@ void GALGAS_procFormalArgumentListForGeneration::modifier_popFirst (GALGAS_procF
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procFormalArgumentListForGeneration::modifier_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                                   GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                                                   GALGAS_string & outOperand2,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_procFormalArgumentListForGeneration::setter_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                                                 GALGAS_string & outOperand2,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procFormalArgumentListForGeneration * p = (cCollectionElement_procFormalArgumentListForGeneration *) attributes.ptr () ;
@@ -7318,10 +6425,10 @@ GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::constructor_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_subprogramInvocationGraph::modifier_addNode (GALGAS_lstring inKey,
-                                                         GALGAS_lstring inArgument_0,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_subprogramInvocationGraph::setter_addNode (GALGAS_lstring inKey,
+                                                       GALGAS_lstring inArgument_0,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   GALGAS_lstringlist::makeAttributesFromObjects (attributes, inArgument_0 COMMA_THERE) ;
   const char * kErrorMessage = "the '%K' subprogram is already declared at %L" ;
@@ -7626,12 +6733,12 @@ void GALGAS_registerDeclarationList::addAssign_operation (const GALGAS_lstring &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                             const GALGAS_lstringlist inOperand1,
-                                                             const GALGAS_lbigint inOperand2,
-                                                             const GALGAS_uint inInsertionIndex,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
+void GALGAS_registerDeclarationList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                           const GALGAS_lstringlist inOperand1,
+                                                           const GALGAS_lbigint inOperand2,
+                                                           const GALGAS_uint inInsertionIndex,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_registerDeclarationList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -7644,12 +6751,12 @@ void GALGAS_registerDeclarationList::modifier_insertAtIndex (const GALGAS_lstrin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                             GALGAS_lstringlist & outOperand1,
-                                                             GALGAS_lbigint & outOperand2,
-                                                             const GALGAS_uint inRemoveIndex,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
+void GALGAS_registerDeclarationList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                           GALGAS_lstringlist & outOperand1,
+                                                           GALGAS_lbigint & outOperand2,
+                                                           const GALGAS_uint inRemoveIndex,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -7669,11 +6776,11 @@ void GALGAS_registerDeclarationList::modifier_removeAtIndex (GALGAS_lstring & ou
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                                        GALGAS_lstringlist & outOperand1,
-                                                        GALGAS_lbigint & outOperand2,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_registerDeclarationList::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                      GALGAS_lstringlist & outOperand1,
+                                                      GALGAS_lbigint & outOperand2,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
@@ -7691,11 +6798,11 @@ void GALGAS_registerDeclarationList::modifier_popFirst (GALGAS_lstring & outOper
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::modifier_popLast (GALGAS_lstring & outOperand0,
-                                                       GALGAS_lstringlist & outOperand1,
-                                                       GALGAS_lbigint & outOperand2,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_registerDeclarationList::setter_popLast (GALGAS_lstring & outOperand0,
+                                                     GALGAS_lstringlist & outOperand1,
+                                                     GALGAS_lbigint & outOperand2,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
@@ -8069,10 +7176,10 @@ void GALGAS_registerBitSliceList::addAssign_operation (const GALGAS_registerBitS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::modifier_insertAtIndex (const GALGAS_registerBitSlice inOperand0,
-                                                          const GALGAS_uint inInsertionIndex,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceList::setter_insertAtIndex (const GALGAS_registerBitSlice inOperand0,
+                                                        const GALGAS_uint inInsertionIndex,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_registerBitSliceList (inOperand0 COMMA_THERE)) ;
@@ -8085,10 +7192,10 @@ void GALGAS_registerBitSliceList::modifier_insertAtIndex (const GALGAS_registerB
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::modifier_removeAtIndex (GALGAS_registerBitSlice & outOperand0,
-                                                          const GALGAS_uint inRemoveIndex,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceList::setter_removeAtIndex (GALGAS_registerBitSlice & outOperand0,
+                                                        const GALGAS_uint inRemoveIndex,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -8104,9 +7211,9 @@ void GALGAS_registerBitSliceList::modifier_removeAtIndex (GALGAS_registerBitSlic
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::modifier_popFirst (GALGAS_registerBitSlice & outOperand0,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceList::setter_popFirst (GALGAS_registerBitSlice & outOperand0,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
@@ -8120,9 +7227,9 @@ void GALGAS_registerBitSliceList::modifier_popFirst (GALGAS_registerBitSlice & o
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::modifier_popLast (GALGAS_registerBitSlice & outOperand0,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceList::setter_popLast (GALGAS_registerBitSlice & outOperand0,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
@@ -8421,11 +7528,11 @@ void GALGAS_registerFieldMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerFieldMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                  GALGAS_uint inArgument0,
-                                                  GALGAS_uint inArgument1,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_registerFieldMap::setter_insertKey (GALGAS_lstring inKey,
+                                                GALGAS_uint inArgument0,
+                                                GALGAS_uint inArgument1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cMapElement_registerFieldMap * p = NULL ;
   macroMyNew (p, cMapElement_registerFieldMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -8493,10 +7600,10 @@ GALGAS_uint GALGAS_registerFieldMap::getter_mBitCountForKey (const GALGAS_string
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerFieldMap::modifier_setMBitIndexForKey (GALGAS_uint inAttributeValue,
-                                                           GALGAS_string inKey,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_registerFieldMap::setter_setMBitIndexForKey (GALGAS_uint inAttributeValue,
+                                                         GALGAS_string inKey,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerFieldMap * p = (cMapElement_registerFieldMap *) attributes ;
   if (NULL != p) {
@@ -8507,10 +7614,10 @@ void GALGAS_registerFieldMap::modifier_setMBitIndexForKey (GALGAS_uint inAttribu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerFieldMap::modifier_setMBitCountForKey (GALGAS_uint inAttributeValue,
-                                                           GALGAS_string inKey,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_registerFieldMap::setter_setMBitCountForKey (GALGAS_uint inAttributeValue,
+                                                         GALGAS_string inKey,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerFieldMap * p = (cMapElement_registerFieldMap *) attributes ;
   if (NULL != p) {
@@ -8750,13 +7857,13 @@ void GALGAS_registerBitSliceAccessMap::addAssign_operation (const GALGAS_lstring
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceAccessMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                           GALGAS_llvmBinaryOperation inArgument0,
-                                                           GALGAS_bigint inArgument1,
-                                                           GALGAS_registerBitSliceAccessMap inArgument2,
-                                                           GALGAS_unifiedTypeMap_2D_proxy inArgument3,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceAccessMap::setter_insertKey (GALGAS_lstring inKey,
+                                                         GALGAS_llvmBinaryOperation inArgument0,
+                                                         GALGAS_bigint inArgument1,
+                                                         GALGAS_registerBitSliceAccessMap inArgument2,
+                                                         GALGAS_unifiedTypeMap_2D_proxy inArgument3,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   cMapElement_registerBitSliceAccessMap * p = NULL ;
   macroMyNew (p, cMapElement_registerBitSliceAccessMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -8860,10 +7967,10 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_registerBitSliceAccessMap::getter_mResultT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceAccessMap::modifier_setMAccessOperatorForKey (GALGAS_llvmBinaryOperation inAttributeValue,
-                                                                          GALGAS_string inKey,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceAccessMap::setter_setMAccessOperatorForKey (GALGAS_llvmBinaryOperation inAttributeValue,
+                                                                        GALGAS_string inKey,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerBitSliceAccessMap * p = (cMapElement_registerBitSliceAccessMap *) attributes ;
   if (NULL != p) {
@@ -8874,10 +7981,10 @@ void GALGAS_registerBitSliceAccessMap::modifier_setMAccessOperatorForKey (GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceAccessMap::modifier_setMAccessRightOperandForKey (GALGAS_bigint inAttributeValue,
-                                                                              GALGAS_string inKey,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceAccessMap::setter_setMAccessRightOperandForKey (GALGAS_bigint inAttributeValue,
+                                                                            GALGAS_string inKey,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerBitSliceAccessMap * p = (cMapElement_registerBitSliceAccessMap *) attributes ;
   if (NULL != p) {
@@ -8888,10 +7995,10 @@ void GALGAS_registerBitSliceAccessMap::modifier_setMAccessRightOperandForKey (GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceAccessMap::modifier_setMSubMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
-                                                                  GALGAS_string inKey,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceAccessMap::setter_setMSubMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
+                                                                GALGAS_string inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerBitSliceAccessMap * p = (cMapElement_registerBitSliceAccessMap *) attributes ;
   if (NULL != p) {
@@ -8902,10 +8009,10 @@ void GALGAS_registerBitSliceAccessMap::modifier_setMSubMapForKey (GALGAS_registe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceAccessMap::modifier_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                                      GALGAS_string inKey,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceAccessMap::setter_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                                    GALGAS_string inKey,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerBitSliceAccessMap * p = (cMapElement_registerBitSliceAccessMap *) attributes ;
   if (NULL != p) {
@@ -9171,14 +8278,14 @@ void GALGAS_registerMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerMap::modifier_insertKey (GALGAS_lstring inKey,
-                                             GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                             GALGAS_bool inArgument1,
-                                             GALGAS_registerBitSliceAccessMap inArgument2,
-                                             GALGAS_registerFieldMap inArgument3,
-                                             GALGAS_bigint inArgument4,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
+void GALGAS_registerMap::setter_insertKey (GALGAS_lstring inKey,
+                                           GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                           GALGAS_bool inArgument1,
+                                           GALGAS_registerBitSliceAccessMap inArgument2,
+                                           GALGAS_registerFieldMap inArgument3,
+                                           GALGAS_bigint inArgument4,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
   cMapElement_registerMap * p = NULL ;
   macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -9300,10 +8407,10 @@ GALGAS_bigint GALGAS_registerMap::getter_mAddressForKey (const GALGAS_string & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerMap::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                  GALGAS_string inKey,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_registerMap::setter_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                GALGAS_string inKey,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
   if (NULL != p) {
@@ -9314,10 +8421,10 @@ void GALGAS_registerMap::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerMap::modifier_setMIsReadOnlyForKey (GALGAS_bool inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_registerMap::setter_setMIsReadOnlyForKey (GALGAS_bool inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
   if (NULL != p) {
@@ -9328,10 +8435,10 @@ void GALGAS_registerMap::modifier_setMIsReadOnlyForKey (GALGAS_bool inAttributeV
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerMap::modifier_setMRegisterFieldAccessMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
-                                                                    GALGAS_string inKey,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_registerMap::setter_setMRegisterFieldAccessMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
+                                                                  GALGAS_string inKey,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
   if (NULL != p) {
@@ -9342,10 +8449,10 @@ void GALGAS_registerMap::modifier_setMRegisterFieldAccessMapForKey (GALGAS_regis
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerMap::modifier_setMRegisterFieldMapForKey (GALGAS_registerFieldMap inAttributeValue,
-                                                              GALGAS_string inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_registerMap::setter_setMRegisterFieldMapForKey (GALGAS_registerFieldMap inAttributeValue,
+                                                            GALGAS_string inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
   if (NULL != p) {
@@ -9356,10 +8463,10 @@ void GALGAS_registerMap::modifier_setMRegisterFieldMapForKey (GALGAS_registerFie
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerMap::modifier_setMAddressForKey (GALGAS_bigint inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_registerMap::setter_setMAddressForKey (GALGAS_bigint inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
   if (NULL != p) {
@@ -10012,11 +9119,11 @@ void GALGAS_infixOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_infixOperatorMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                  GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                  GALGAS_infixOperatorDescription inArgument1,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_infixOperatorMap::setter_insertKey (GALGAS_lstring inKey,
+                                                GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                GALGAS_infixOperatorDescription inArgument1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cMapElement_infixOperatorMap * p = NULL ;
   macroMyNew (p, cMapElement_infixOperatorMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -10084,10 +9191,10 @@ GALGAS_infixOperatorDescription GALGAS_infixOperatorMap::getter_mOperationForKey
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_infixOperatorMap::modifier_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                             GALGAS_string inKey,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
+void GALGAS_infixOperatorMap::setter_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                           GALGAS_string inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_infixOperatorMap * p = (cMapElement_infixOperatorMap *) attributes ;
   if (NULL != p) {
@@ -10098,10 +9205,10 @@ void GALGAS_infixOperatorMap::modifier_setMResultTypeForKey (GALGAS_unifiedTypeM
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_infixOperatorMap::modifier_setMOperationForKey (GALGAS_infixOperatorDescription inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_infixOperatorMap::setter_setMOperationForKey (GALGAS_infixOperatorDescription inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_infixOperatorMap * p = (cMapElement_infixOperatorMap *) attributes ;
   if (NULL != p) {
@@ -10450,10 +9557,10 @@ void GALGAS_prefixOperatorMap::addAssign_operation (const GALGAS_lstring & inKey
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_prefixOperatorMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                   GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_prefixOperatorMap::setter_insertKey (GALGAS_lstring inKey,
+                                                 GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cMapElement_prefixOperatorMap * p = NULL ;
   macroMyNew (p, cMapElement_prefixOperatorMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -10503,10 +9610,10 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_prefixOperatorMap::getter_mResultTypeForKe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_prefixOperatorMap::modifier_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                              GALGAS_string inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_prefixOperatorMap::setter_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                            GALGAS_string inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_prefixOperatorMap * p = (cMapElement_prefixOperatorMap *) attributes ;
   if (NULL != p) {
@@ -11219,11 +10326,11 @@ void GALGAS_procEffectiveParameterListAST::addAssign_operation (const GALGAS_pro
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procEffectiveParameterListAST::modifier_insertAtIndex (const GALGAS_procEffectiveParameterPassingModeAST inOperand0,
-                                                                   const GALGAS_lstring inOperand1,
-                                                                   const GALGAS_uint inInsertionIndex,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_procEffectiveParameterListAST::setter_insertAtIndex (const GALGAS_procEffectiveParameterPassingModeAST inOperand0,
+                                                                 const GALGAS_lstring inOperand1,
+                                                                 const GALGAS_uint inInsertionIndex,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_procEffectiveParameterListAST (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -11236,11 +10343,11 @@ void GALGAS_procEffectiveParameterListAST::modifier_insertAtIndex (const GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procEffectiveParameterListAST::modifier_removeAtIndex (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
-                                                                   GALGAS_lstring & outOperand1,
-                                                                   const GALGAS_uint inRemoveIndex,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_procEffectiveParameterListAST::setter_removeAtIndex (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
+                                                                 GALGAS_lstring & outOperand1,
+                                                                 const GALGAS_uint inRemoveIndex,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -11258,10 +10365,10 @@ void GALGAS_procEffectiveParameterListAST::modifier_removeAtIndex (GALGAS_procEf
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procEffectiveParameterListAST::modifier_popFirst (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
-                                                              GALGAS_lstring & outOperand1,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_procEffectiveParameterListAST::setter_popFirst (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
+                                                            GALGAS_lstring & outOperand1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procEffectiveParameterListAST * p = (cCollectionElement_procEffectiveParameterListAST *) attributes.ptr () ;
@@ -11277,10 +10384,10 @@ void GALGAS_procEffectiveParameterListAST::modifier_popFirst (GALGAS_procEffecti
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procEffectiveParameterListAST::modifier_popLast (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
-                                                             GALGAS_lstring & outOperand1,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
+void GALGAS_procEffectiveParameterListAST::setter_popLast (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
+                                                           GALGAS_lstring & outOperand1,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procEffectiveParameterListAST * p = (cCollectionElement_procEffectiveParameterListAST *) attributes.ptr () ;
@@ -11643,12 +10750,12 @@ void GALGAS_procEffectiveParameterList::addAssign_operation (const GALGAS_procEf
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procEffectiveParameterList::modifier_insertAtIndex (const GALGAS_procEffectiveParameterPassingModeAST inOperand0,
-                                                                const GALGAS_lstring inOperand1,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy inOperand2,
-                                                                const GALGAS_uint inInsertionIndex,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_procEffectiveParameterList::setter_insertAtIndex (const GALGAS_procEffectiveParameterPassingModeAST inOperand0,
+                                                              const GALGAS_lstring inOperand1,
+                                                              const GALGAS_unifiedTypeMap_2D_proxy inOperand2,
+                                                              const GALGAS_uint inInsertionIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_procEffectiveParameterList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -11661,12 +10768,12 @@ void GALGAS_procEffectiveParameterList::modifier_insertAtIndex (const GALGAS_pro
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procEffectiveParameterList::modifier_removeAtIndex (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
-                                                                GALGAS_lstring & outOperand1,
-                                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                                const GALGAS_uint inRemoveIndex,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_procEffectiveParameterList::setter_removeAtIndex (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
+                                                              GALGAS_lstring & outOperand1,
+                                                              GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                              const GALGAS_uint inRemoveIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -11686,11 +10793,11 @@ void GALGAS_procEffectiveParameterList::modifier_removeAtIndex (GALGAS_procEffec
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procEffectiveParameterList::modifier_popFirst (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
-                                                           GALGAS_lstring & outOperand1,
-                                                           GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_procEffectiveParameterList::setter_popFirst (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
+                                                         GALGAS_lstring & outOperand1,
+                                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procEffectiveParameterList * p = (cCollectionElement_procEffectiveParameterList *) attributes.ptr () ;
@@ -11708,11 +10815,11 @@ void GALGAS_procEffectiveParameterList::modifier_popFirst (GALGAS_procEffectiveP
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procEffectiveParameterList::modifier_popLast (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
-                                                          GALGAS_lstring & outOperand1,
-                                                          GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_procEffectiveParameterList::setter_popLast (GALGAS_procEffectiveParameterPassingModeAST & outOperand0,
+                                                        GALGAS_lstring & outOperand1,
+                                                        GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procEffectiveParameterList * p = (cCollectionElement_procEffectiveParameterList *) attributes.ptr () ;
@@ -12230,12 +11337,12 @@ void GALGAS_procCallEffectiveParameterListIR::addAssign_operation (const GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procCallEffectiveParameterListIR::modifier_insertAtIndex (const GALGAS_procEffectiveParameterPassingModeIR inOperand0,
-                                                                      const GALGAS_lstring inOperand1,
-                                                                      const GALGAS_operandIR inOperand2,
-                                                                      const GALGAS_uint inInsertionIndex,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_procCallEffectiveParameterListIR::setter_insertAtIndex (const GALGAS_procEffectiveParameterPassingModeIR inOperand0,
+                                                                    const GALGAS_lstring inOperand1,
+                                                                    const GALGAS_operandIR inOperand2,
+                                                                    const GALGAS_uint inInsertionIndex,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_procCallEffectiveParameterListIR (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -12248,12 +11355,12 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_insertAtIndex (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procCallEffectiveParameterListIR::modifier_removeAtIndex (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
-                                                                      GALGAS_lstring & outOperand1,
-                                                                      GALGAS_operandIR & outOperand2,
-                                                                      const GALGAS_uint inRemoveIndex,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_procCallEffectiveParameterListIR::setter_removeAtIndex (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
+                                                                    GALGAS_lstring & outOperand1,
+                                                                    GALGAS_operandIR & outOperand2,
+                                                                    const GALGAS_uint inRemoveIndex,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -12273,11 +11380,11 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_removeAtIndex (GALGAS_pro
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procCallEffectiveParameterListIR::modifier_popFirst (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
-                                                                 GALGAS_lstring & outOperand1,
-                                                                 GALGAS_operandIR & outOperand2,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_procCallEffectiveParameterListIR::setter_popFirst (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
+                                                               GALGAS_lstring & outOperand1,
+                                                               GALGAS_operandIR & outOperand2,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procCallEffectiveParameterListIR * p = (cCollectionElement_procCallEffectiveParameterListIR *) attributes.ptr () ;
@@ -12295,11 +11402,11 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_popFirst (GALGAS_procEffe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procCallEffectiveParameterListIR::modifier_popLast (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
-                                                                GALGAS_lstring & outOperand1,
-                                                                GALGAS_operandIR & outOperand2,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_procCallEffectiveParameterListIR::setter_popLast (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
+                                                              GALGAS_lstring & outOperand1,
+                                                              GALGAS_operandIR & outOperand2,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procCallEffectiveParameterListIR * p = (cCollectionElement_procCallEffectiveParameterListIR *) attributes.ptr () ;
@@ -12937,9 +12044,9 @@ static const cMapAutomatonFinalIssue kMapAutomatonFinalIssue_variableMap [24] = 
 } ;
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_closeBranch (GALGAS_location inErrorLocation,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_closeBranch (GALGAS_location inErrorLocation,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
   closeBranch (inErrorLocation,
                kMapAutomatonFinalIssue_variableMap,
                #ifndef DO_NOT_GENERATE_CHECKINGS
@@ -13042,8 +12149,8 @@ static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverrid
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_openOverrideForSelectBlock (C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_openOverrideForSelectBlock (C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   openOverride (kBranchBehaviourForOverride_variableMap_selectBlock, 30,
                 kBranchCombinationForOverride_variableMap_selectBlock, 42,
                 "selectBlock",
@@ -13115,8 +12222,8 @@ static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverrid
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_openOverrideForRepeatBlock (C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_openOverrideForRepeatBlock (C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   openOverride (kBranchBehaviourForOverride_variableMap_repeatBlock, 30,
                 kBranchCombinationForOverride_variableMap_repeatBlock, 20,
                 "repeatBlock",
@@ -13127,16 +12234,16 @@ void GALGAS_variableMap::modifier_openOverrideForRepeatBlock (C_Compiler * inCom
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_insertGlobalVariable (GALGAS_lstring inKey,
-                                                        GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                        GALGAS_bool inArgument1,
-                                                        GALGAS_objectInMemoryIR inArgument2,
-                                                        GALGAS_bool inArgument3,
-                                                        GALGAS_registerBitSliceAccessMap inArgument4,
-                                                        GALGAS_bool inArgument5,
-                                                        GALGAS_bool inArgument6,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertGlobalVariable (GALGAS_lstring inKey,
+                                                      GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                      GALGAS_bool inArgument1,
+                                                      GALGAS_objectInMemoryIR inArgument2,
+                                                      GALGAS_bool inArgument3,
+                                                      GALGAS_registerBitSliceAccessMap inArgument4,
+                                                      GALGAS_bool inArgument5,
+                                                      GALGAS_bool inArgument6,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
   macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -13155,16 +12262,16 @@ void GALGAS_variableMap::modifier_insertGlobalVariable (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_insertMutableAttribute (GALGAS_lstring inKey,
-                                                          GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                          GALGAS_bool inArgument1,
-                                                          GALGAS_objectInMemoryIR inArgument2,
-                                                          GALGAS_bool inArgument3,
-                                                          GALGAS_registerBitSliceAccessMap inArgument4,
-                                                          GALGAS_bool inArgument5,
-                                                          GALGAS_bool inArgument6,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertMutableAttribute (GALGAS_lstring inKey,
+                                                        GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                        GALGAS_bool inArgument1,
+                                                        GALGAS_objectInMemoryIR inArgument2,
+                                                        GALGAS_bool inArgument3,
+                                                        GALGAS_registerBitSliceAccessMap inArgument4,
+                                                        GALGAS_bool inArgument5,
+                                                        GALGAS_bool inArgument6,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
   macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -13183,16 +12290,16 @@ void GALGAS_variableMap::modifier_insertMutableAttribute (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_insertNonMutableAttribute (GALGAS_lstring inKey,
-                                                             GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                             GALGAS_bool inArgument1,
-                                                             GALGAS_objectInMemoryIR inArgument2,
-                                                             GALGAS_bool inArgument3,
-                                                             GALGAS_registerBitSliceAccessMap inArgument4,
-                                                             GALGAS_bool inArgument5,
-                                                             GALGAS_bool inArgument6,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertNonMutableAttribute (GALGAS_lstring inKey,
+                                                           GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                           GALGAS_bool inArgument1,
+                                                           GALGAS_objectInMemoryIR inArgument2,
+                                                           GALGAS_bool inArgument3,
+                                                           GALGAS_registerBitSliceAccessMap inArgument4,
+                                                           GALGAS_bool inArgument5,
+                                                           GALGAS_bool inArgument6,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
   macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -13211,16 +12318,16 @@ void GALGAS_variableMap::modifier_insertNonMutableAttribute (GALGAS_lstring inKe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_insertUndefinedLocalVariable (GALGAS_lstring inKey,
-                                                                GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                                GALGAS_bool inArgument1,
-                                                                GALGAS_objectInMemoryIR inArgument2,
-                                                                GALGAS_bool inArgument3,
-                                                                GALGAS_registerBitSliceAccessMap inArgument4,
-                                                                GALGAS_bool inArgument5,
-                                                                GALGAS_bool inArgument6,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertUndefinedLocalVariable (GALGAS_lstring inKey,
+                                                              GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                              GALGAS_bool inArgument1,
+                                                              GALGAS_objectInMemoryIR inArgument2,
+                                                              GALGAS_bool inArgument3,
+                                                              GALGAS_registerBitSliceAccessMap inArgument4,
+                                                              GALGAS_bool inArgument5,
+                                                              GALGAS_bool inArgument6,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
   macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -13239,16 +12346,16 @@ void GALGAS_variableMap::modifier_insertUndefinedLocalVariable (GALGAS_lstring i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_insertDefinedLocalVariable (GALGAS_lstring inKey,
-                                                              GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                              GALGAS_bool inArgument1,
-                                                              GALGAS_objectInMemoryIR inArgument2,
-                                                              GALGAS_bool inArgument3,
-                                                              GALGAS_registerBitSliceAccessMap inArgument4,
-                                                              GALGAS_bool inArgument5,
-                                                              GALGAS_bool inArgument6,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertDefinedLocalVariable (GALGAS_lstring inKey,
+                                                            GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                            GALGAS_bool inArgument1,
+                                                            GALGAS_objectInMemoryIR inArgument2,
+                                                            GALGAS_bool inArgument3,
+                                                            GALGAS_registerBitSliceAccessMap inArgument4,
+                                                            GALGAS_bool inArgument5,
+                                                            GALGAS_bool inArgument6,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
   macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -13267,231 +12374,7 @@ void GALGAS_variableMap::modifier_insertDefinedLocalVariable (GALGAS_lstring inK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_insertUndefinedLocalConstant (GALGAS_lstring inKey,
-                                                                GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                                GALGAS_bool inArgument1,
-                                                                GALGAS_objectInMemoryIR inArgument2,
-                                                                GALGAS_bool inArgument3,
-                                                                GALGAS_registerBitSliceAccessMap inArgument4,
-                                                                GALGAS_bool inArgument5,
-                                                                GALGAS_bool inArgument6,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_undefinedLocalConstant,
-                        kMapStateNames_variableMap [kMapState_variableMap_undefinedLocalConstant],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::modifier_insertLocalConstant (GALGAS_lstring inKey,
-                                                       GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                       GALGAS_bool inArgument1,
-                                                       GALGAS_objectInMemoryIR inArgument2,
-                                                       GALGAS_bool inArgument3,
-                                                       GALGAS_registerBitSliceAccessMap inArgument4,
-                                                       GALGAS_bool inArgument5,
-                                                       GALGAS_bool inArgument6,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_localConstant,
-                        kMapStateNames_variableMap [kMapState_variableMap_localConstant],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::modifier_insertUsedLocalConstant (GALGAS_lstring inKey,
-                                                           GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                           GALGAS_bool inArgument1,
-                                                           GALGAS_objectInMemoryIR inArgument2,
-                                                           GALGAS_bool inArgument3,
-                                                           GALGAS_registerBitSliceAccessMap inArgument4,
-                                                           GALGAS_bool inArgument5,
-                                                           GALGAS_bool inArgument6,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_usedLocalConstant,
-                        kMapStateNames_variableMap [kMapState_variableMap_usedLocalConstant],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::modifier_insertInputFormalArgument (GALGAS_lstring inKey,
-                                                             GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                             GALGAS_bool inArgument1,
-                                                             GALGAS_objectInMemoryIR inArgument2,
-                                                             GALGAS_bool inArgument3,
-                                                             GALGAS_registerBitSliceAccessMap inArgument4,
-                                                             GALGAS_bool inArgument5,
-                                                             GALGAS_bool inArgument6,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_inputFormalParameter,
-                        kMapStateNames_variableMap [kMapState_variableMap_inputFormalParameter],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::modifier_insertInputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
-                                                                             GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                                             GALGAS_bool inArgument1,
-                                                                             GALGAS_objectInMemoryIR inArgument2,
-                                                                             GALGAS_bool inArgument3,
-                                                                             GALGAS_registerBitSliceAccessMap inArgument4,
-                                                                             GALGAS_bool inArgument5,
-                                                                             GALGAS_bool inArgument6,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_inputFormalArgumentDeclaredAsUnused,
-                        kMapStateNames_variableMap [kMapState_variableMap_inputFormalArgumentDeclaredAsUnused],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::modifier_insertConstantInputFormalArgument (GALGAS_lstring inKey,
-                                                                     GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                                     GALGAS_bool inArgument1,
-                                                                     GALGAS_objectInMemoryIR inArgument2,
-                                                                     GALGAS_bool inArgument3,
-                                                                     GALGAS_registerBitSliceAccessMap inArgument4,
-                                                                     GALGAS_bool inArgument5,
-                                                                     GALGAS_bool inArgument6,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_constantInputFormalArgument,
-                        kMapStateNames_variableMap [kMapState_variableMap_constantInputFormalArgument],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::modifier_insertUsedConstantInputFormalArgument (GALGAS_lstring inKey,
-                                                                         GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                                         GALGAS_bool inArgument1,
-                                                                         GALGAS_objectInMemoryIR inArgument2,
-                                                                         GALGAS_bool inArgument3,
-                                                                         GALGAS_registerBitSliceAccessMap inArgument4,
-                                                                         GALGAS_bool inArgument5,
-                                                                         GALGAS_bool inArgument6,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_usedConstantInputFormalArgument,
-                        kMapStateNames_variableMap [kMapState_variableMap_usedConstantInputFormalArgument],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::modifier_insertConstantInputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
-                                                                                     GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                                                     GALGAS_bool inArgument1,
-                                                                                     GALGAS_objectInMemoryIR inArgument2,
-                                                                                     GALGAS_bool inArgument3,
-                                                                                     GALGAS_registerBitSliceAccessMap inArgument4,
-                                                                                     GALGAS_bool inArgument5,
-                                                                                     GALGAS_bool inArgument6,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused,
-                        kMapStateNames_variableMap [kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::modifier_insertOutputFormalArgument (GALGAS_lstring inKey,
+void GALGAS_variableMap::setter_insertUndefinedLocalConstant (GALGAS_lstring inKey,
                                                               GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                                               GALGAS_bool inArgument1,
                                                               GALGAS_objectInMemoryIR inArgument2,
@@ -13510,8 +12393,8 @@ void GALGAS_variableMap::modifier_insertOutputFormalArgument (GALGAS_lstring inK
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
-                        kMapState_variableMap_undefinedOutputFormalArgument,
-                        kMapStateNames_variableMap [kMapState_variableMap_undefinedOutputFormalArgument],
+                        kMapState_variableMap_undefinedLocalConstant,
+                        kMapStateNames_variableMap [kMapState_variableMap_undefinedLocalConstant],
                         kInsertErrorMessage,
                         kShadowErrorMessage
                         COMMA_THERE) ;
@@ -13519,7 +12402,119 @@ void GALGAS_variableMap::modifier_insertOutputFormalArgument (GALGAS_lstring inK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_insertInputOutputFormalArgument (GALGAS_lstring inKey,
+void GALGAS_variableMap::setter_insertLocalConstant (GALGAS_lstring inKey,
+                                                     GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                     GALGAS_bool inArgument1,
+                                                     GALGAS_objectInMemoryIR inArgument2,
+                                                     GALGAS_bool inArgument3,
+                                                     GALGAS_registerBitSliceAccessMap inArgument4,
+                                                     GALGAS_bool inArgument5,
+                                                     GALGAS_bool inArgument6,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  cMapElement_variableMap * p = NULL ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes,
+                        inCompiler,
+                        kMapState_variableMap_localConstant,
+                        kMapStateNames_variableMap [kMapState_variableMap_localConstant],
+                        kInsertErrorMessage,
+                        kShadowErrorMessage
+                        COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_insertUsedLocalConstant (GALGAS_lstring inKey,
+                                                         GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                         GALGAS_bool inArgument1,
+                                                         GALGAS_objectInMemoryIR inArgument2,
+                                                         GALGAS_bool inArgument3,
+                                                         GALGAS_registerBitSliceAccessMap inArgument4,
+                                                         GALGAS_bool inArgument5,
+                                                         GALGAS_bool inArgument6,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
+  cMapElement_variableMap * p = NULL ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes,
+                        inCompiler,
+                        kMapState_variableMap_usedLocalConstant,
+                        kMapStateNames_variableMap [kMapState_variableMap_usedLocalConstant],
+                        kInsertErrorMessage,
+                        kShadowErrorMessage
+                        COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_insertInputFormalArgument (GALGAS_lstring inKey,
+                                                           GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                           GALGAS_bool inArgument1,
+                                                           GALGAS_objectInMemoryIR inArgument2,
+                                                           GALGAS_bool inArgument3,
+                                                           GALGAS_registerBitSliceAccessMap inArgument4,
+                                                           GALGAS_bool inArgument5,
+                                                           GALGAS_bool inArgument6,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
+  cMapElement_variableMap * p = NULL ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes,
+                        inCompiler,
+                        kMapState_variableMap_inputFormalParameter,
+                        kMapStateNames_variableMap [kMapState_variableMap_inputFormalParameter],
+                        kInsertErrorMessage,
+                        kShadowErrorMessage
+                        COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_insertInputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
+                                                                           GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                                           GALGAS_bool inArgument1,
+                                                                           GALGAS_objectInMemoryIR inArgument2,
+                                                                           GALGAS_bool inArgument3,
+                                                                           GALGAS_registerBitSliceAccessMap inArgument4,
+                                                                           GALGAS_bool inArgument5,
+                                                                           GALGAS_bool inArgument6,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) {
+  cMapElement_variableMap * p = NULL ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes,
+                        inCompiler,
+                        kMapState_variableMap_inputFormalArgumentDeclaredAsUnused,
+                        kMapStateNames_variableMap [kMapState_variableMap_inputFormalArgumentDeclaredAsUnused],
+                        kInsertErrorMessage,
+                        kShadowErrorMessage
+                        COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_insertConstantInputFormalArgument (GALGAS_lstring inKey,
                                                                    GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                                                    GALGAS_bool inArgument1,
                                                                    GALGAS_objectInMemoryIR inArgument2,
@@ -13538,8 +12533,8 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgument (GALGAS_lstrin
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
-                        kMapState_variableMap_unusedInputOutputFormalArgument,
-                        kMapStateNames_variableMap [kMapState_variableMap_unusedInputOutputFormalArgument],
+                        kMapState_variableMap_constantInputFormalArgument,
+                        kMapStateNames_variableMap [kMapState_variableMap_constantInputFormalArgument],
                         kInsertErrorMessage,
                         kShadowErrorMessage
                         COMMA_THERE) ;
@@ -13547,7 +12542,35 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgument (GALGAS_lstrin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_insertInputOutputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
+void GALGAS_variableMap::setter_insertUsedConstantInputFormalArgument (GALGAS_lstring inKey,
+                                                                       GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                                       GALGAS_bool inArgument1,
+                                                                       GALGAS_objectInMemoryIR inArgument2,
+                                                                       GALGAS_bool inArgument3,
+                                                                       GALGAS_registerBitSliceAccessMap inArgument4,
+                                                                       GALGAS_bool inArgument5,
+                                                                       GALGAS_bool inArgument6,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
+  cMapElement_variableMap * p = NULL ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes,
+                        inCompiler,
+                        kMapState_variableMap_usedConstantInputFormalArgument,
+                        kMapStateNames_variableMap [kMapState_variableMap_usedConstantInputFormalArgument],
+                        kInsertErrorMessage,
+                        kShadowErrorMessage
+                        COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_insertConstantInputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
                                                                                    GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                                                                    GALGAS_bool inArgument1,
                                                                                    GALGAS_objectInMemoryIR inArgument2,
@@ -13557,6 +12580,90 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgumentDeclaredAsUnuse
                                                                                    GALGAS_bool inArgument6,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
+  cMapElement_variableMap * p = NULL ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes,
+                        inCompiler,
+                        kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused,
+                        kMapStateNames_variableMap [kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused],
+                        kInsertErrorMessage,
+                        kShadowErrorMessage
+                        COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_insertOutputFormalArgument (GALGAS_lstring inKey,
+                                                            GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                            GALGAS_bool inArgument1,
+                                                            GALGAS_objectInMemoryIR inArgument2,
+                                                            GALGAS_bool inArgument3,
+                                                            GALGAS_registerBitSliceAccessMap inArgument4,
+                                                            GALGAS_bool inArgument5,
+                                                            GALGAS_bool inArgument6,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  cMapElement_variableMap * p = NULL ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes,
+                        inCompiler,
+                        kMapState_variableMap_undefinedOutputFormalArgument,
+                        kMapStateNames_variableMap [kMapState_variableMap_undefinedOutputFormalArgument],
+                        kInsertErrorMessage,
+                        kShadowErrorMessage
+                        COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_insertInputOutputFormalArgument (GALGAS_lstring inKey,
+                                                                 GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                                 GALGAS_bool inArgument1,
+                                                                 GALGAS_objectInMemoryIR inArgument2,
+                                                                 GALGAS_bool inArgument3,
+                                                                 GALGAS_registerBitSliceAccessMap inArgument4,
+                                                                 GALGAS_bool inArgument5,
+                                                                 GALGAS_bool inArgument6,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_variableMap * p = NULL ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes,
+                        inCompiler,
+                        kMapState_variableMap_unusedInputOutputFormalArgument,
+                        kMapStateNames_variableMap [kMapState_variableMap_unusedInputOutputFormalArgument],
+                        kInsertErrorMessage,
+                        kShadowErrorMessage
+                        COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_insertInputOutputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
+                                                                                 GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                                                 GALGAS_bool inArgument1,
+                                                                                 GALGAS_objectInMemoryIR inArgument2,
+                                                                                 GALGAS_bool inArgument3,
+                                                                                 GALGAS_registerBitSliceAccessMap inArgument4,
+                                                                                 GALGAS_bool inArgument5,
+                                                                                 GALGAS_bool inArgument6,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
   macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -13579,16 +12686,16 @@ const char * kSearchErrorMessage_variableMap_searchForReadAccess = "the '%K' var
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_searchForReadAccess (GALGAS_lstring inKey,
-                                                       GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                       GALGAS_bool & outArgument1,
-                                                       GALGAS_objectInMemoryIR & outArgument2,
-                                                       GALGAS_bool & outArgument3,
-                                                       GALGAS_registerBitSliceAccessMap & outArgument4,
-                                                       GALGAS_bool & outArgument5,
-                                                       GALGAS_bool & outArgument6,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_searchForReadAccess (GALGAS_lstring inKey,
+                                                     GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                     GALGAS_bool & outArgument1,
+                                                     GALGAS_objectInMemoryIR & outArgument2,
+                                                     GALGAS_bool & outArgument3,
+                                                     GALGAS_registerBitSliceAccessMap & outArgument4,
+                                                     GALGAS_bool & outArgument5,
+                                                     GALGAS_bool & outArgument6,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
                                                                                          inCompiler,
                                                                                          kMapAction_variableMap_readAccess,
@@ -13627,16 +12734,16 @@ const char * kSearchErrorMessage_variableMap_searchForWriteAccess = "the '%K' va
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_searchForWriteAccess (GALGAS_lstring inKey,
-                                                        GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                        GALGAS_bool & outArgument1,
-                                                        GALGAS_objectInMemoryIR & outArgument2,
-                                                        GALGAS_bool & outArgument3,
-                                                        GALGAS_registerBitSliceAccessMap & outArgument4,
-                                                        GALGAS_bool & outArgument5,
-                                                        GALGAS_bool & outArgument6,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_searchForWriteAccess (GALGAS_lstring inKey,
+                                                      GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                      GALGAS_bool & outArgument1,
+                                                      GALGAS_objectInMemoryIR & outArgument2,
+                                                      GALGAS_bool & outArgument3,
+                                                      GALGAS_registerBitSliceAccessMap & outArgument4,
+                                                      GALGAS_bool & outArgument5,
+                                                      GALGAS_bool & outArgument6,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
                                                                                          inCompiler,
                                                                                          kMapAction_variableMap_writeAccess,
@@ -13675,16 +12782,16 @@ const char * kSearchErrorMessage_variableMap_searchForReadWriteAccess = "the '%K
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_searchForReadWriteAccess (GALGAS_lstring inKey,
-                                                            GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                            GALGAS_bool & outArgument1,
-                                                            GALGAS_objectInMemoryIR & outArgument2,
-                                                            GALGAS_bool & outArgument3,
-                                                            GALGAS_registerBitSliceAccessMap & outArgument4,
-                                                            GALGAS_bool & outArgument5,
-                                                            GALGAS_bool & outArgument6,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_searchForReadWriteAccess (GALGAS_lstring inKey,
+                                                          GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                          GALGAS_bool & outArgument1,
+                                                          GALGAS_objectInMemoryIR & outArgument2,
+                                                          GALGAS_bool & outArgument3,
+                                                          GALGAS_registerBitSliceAccessMap & outArgument4,
+                                                          GALGAS_bool & outArgument5,
+                                                          GALGAS_bool & outArgument6,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
                                                                                          inCompiler,
                                                                                          kMapAction_variableMap_readWriteAccess,
@@ -13723,16 +12830,16 @@ const char * kSearchErrorMessage_variableMap_searchForDropAccess = "the '%K' var
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_searchForDropAccess (GALGAS_lstring inKey,
-                                                       GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                       GALGAS_bool & outArgument1,
-                                                       GALGAS_objectInMemoryIR & outArgument2,
-                                                       GALGAS_bool & outArgument3,
-                                                       GALGAS_registerBitSliceAccessMap & outArgument4,
-                                                       GALGAS_bool & outArgument5,
-                                                       GALGAS_bool & outArgument6,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_searchForDropAccess (GALGAS_lstring inKey,
+                                                     GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                     GALGAS_bool & outArgument1,
+                                                     GALGAS_objectInMemoryIR & outArgument2,
+                                                     GALGAS_bool & outArgument3,
+                                                     GALGAS_registerBitSliceAccessMap & outArgument4,
+                                                     GALGAS_bool & outArgument5,
+                                                     GALGAS_bool & outArgument6,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
                                                                                          inCompiler,
                                                                                          kMapAction_variableMap_dropAccess,
@@ -13771,16 +12878,16 @@ const char * kSearchErrorMessage_variableMap_neutralAccess = "the '%K' variable 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_neutralAccess (GALGAS_lstring inKey,
-                                                 GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                 GALGAS_bool & outArgument1,
-                                                 GALGAS_objectInMemoryIR & outArgument2,
-                                                 GALGAS_bool & outArgument3,
-                                                 GALGAS_registerBitSliceAccessMap & outArgument4,
-                                                 GALGAS_bool & outArgument5,
-                                                 GALGAS_bool & outArgument6,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_neutralAccess (GALGAS_lstring inKey,
+                                               GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                               GALGAS_bool & outArgument1,
+                                               GALGAS_objectInMemoryIR & outArgument2,
+                                               GALGAS_bool & outArgument3,
+                                               GALGAS_registerBitSliceAccessMap & outArgument4,
+                                               GALGAS_bool & outArgument5,
+                                               GALGAS_bool & outArgument6,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
                                                                                          inCompiler,
                                                                                          kMapAction_variableMap_neutralAccess,
@@ -13920,10 +13027,10 @@ GALGAS_bool GALGAS_variableMap::getter_mIsConstantForKey (const GALGAS_string & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                  GALGAS_string inKey,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                GALGAS_string inKey,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
   if (NULL != p) {
@@ -13934,10 +13041,10 @@ void GALGAS_variableMap::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_setMReadAccessAllowedForKey (GALGAS_bool inAttributeValue,
-                                                               GALGAS_string inKey,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_setMReadAccessAllowedForKey (GALGAS_bool inAttributeValue,
+                                                             GALGAS_string inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
   if (NULL != p) {
@@ -13948,10 +13055,10 @@ void GALGAS_variableMap::modifier_setMReadAccessAllowedForKey (GALGAS_bool inAtt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_setMVariableKindForKey (GALGAS_objectInMemoryIR inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_setMVariableKindForKey (GALGAS_objectInMemoryIR inAttributeValue,
+                                                        GALGAS_string inKey,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
   if (NULL != p) {
@@ -13962,10 +13069,10 @@ void GALGAS_variableMap::modifier_setMVariableKindForKey (GALGAS_objectInMemoryI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_setCopiableForKey (GALGAS_bool inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_setCopiableForKey (GALGAS_bool inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
   if (NULL != p) {
@@ -13976,10 +13083,10 @@ void GALGAS_variableMap::modifier_setCopiableForKey (GALGAS_bool inAttributeValu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_setFieldMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_setFieldMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
+                                                   GALGAS_string inKey,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
   if (NULL != p) {
@@ -13990,10 +13097,10 @@ void GALGAS_variableMap::modifier_setFieldMapForKey (GALGAS_registerBitSliceAcce
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_setMCanBeUsedAsInputParameterForKey (GALGAS_bool inAttributeValue,
-                                                                       GALGAS_string inKey,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_setMCanBeUsedAsInputParameterForKey (GALGAS_bool inAttributeValue,
+                                                                     GALGAS_string inKey,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
   if (NULL != p) {
@@ -14004,10 +13111,10 @@ void GALGAS_variableMap::modifier_setMCanBeUsedAsInputParameterForKey (GALGAS_bo
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_setMIsConstantForKey (GALGAS_bool inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_setMIsConstantForKey (GALGAS_bool inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
   if (NULL != p) {
@@ -14360,6 +13467,886 @@ GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::extractObject (const GA
       result = *p ;
     }else{
       inCompiler->castError ("variableMap-proxy", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        '@semanticTypePrecedenceGraph' graph                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTypePrecedenceGraph::GALGAS_semanticTypePrecedenceGraph (void) :
+AC_GALGAS_graph () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::constructor_emptyGraph (LOCATION_ARGS) {
+  GALGAS_semanticTypePrecedenceGraph result ;
+  result.makeNewEmptyGraph (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTypePrecedenceGraph::setter_addNode (GALGAS_lstring inKey,
+                                                         GALGAS_abstractDeclaration inArgument_0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  GALGAS_declarationListAST::makeAttributesFromObjects (attributes, inArgument_0 COMMA_THERE) ;
+  const char * kErrorMessage = "the '%K' symbol is already declared at %L" ;
+  internalAddNode (inKey, kErrorMessage, attributes, inCompiler COMMA_THERE) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTypePrecedenceGraph::method_topologicalSort (GALGAS_declarationListAST & outSortedList,
+                                                                 GALGAS_lstringlist & outSortedKeyList,
+                                                                 GALGAS_declarationListAST & outUnsortedList,
+                                                                 GALGAS_lstringlist & outUnsortedKeyList,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) const {
+  cSharedList * sortedList = NULL ;
+  cSharedList * unsortedList = NULL ;
+  internalTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
+  outSortedList = GALGAS_declarationListAST (sortedList) ;
+  outUnsortedList = GALGAS_declarationListAST (unsortedList) ;
+  GALGAS_declarationListAST::detachSharedList (sortedList) ;
+  GALGAS_declarationListAST::detachSharedList (unsortedList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTypePrecedenceGraph::method_depthFirstTopologicalSort (GALGAS_declarationListAST & outSortedList,
+                                                                           GALGAS_lstringlist & outSortedKeyList,
+                                                                           GALGAS_declarationListAST & outUnsortedList,
+                                                                           GALGAS_lstringlist & outUnsortedKeyList,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const {
+  cSharedList * sortedList = NULL ;
+  cSharedList * unsortedList = NULL ;
+  internalDepthFirstTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
+  outSortedList = GALGAS_declarationListAST (sortedList) ;
+  outUnsortedList = GALGAS_declarationListAST (unsortedList) ;
+  GALGAS_declarationListAST::detachSharedList (sortedList) ;
+  GALGAS_declarationListAST::detachSharedList (unsortedList) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::getter_reversedGraph (LOCATION_ARGS) const {
+  GALGAS_semanticTypePrecedenceGraph result ;
+  result.reversedGraphFromGraph (*this COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTypePrecedenceGraph::method_circularities (GALGAS_declarationListAST & outInfoList,
+                                                               GALGAS_lstringlist & outKeyList
+                                                               COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalFindCircularities (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_declarationListAST (infoList) ;
+  GALGAS_declarationListAST::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTypePrecedenceGraph::method_nodesWithNoSuccessor (GALGAS_declarationListAST & outInfoList,
+                                                                      GALGAS_lstringlist & outKeyList
+                                                                      COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalNodesWithNoSuccessor (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_declarationListAST (infoList) ;
+  GALGAS_declarationListAST::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTypePrecedenceGraph::method_nodesWithNoPredecessor (GALGAS_declarationListAST & outInfoList,
+                                                                        GALGAS_lstringlist & outKeyList
+                                                                        COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalNodesWithNoPredecessor (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_declarationListAST (infoList) ;
+  GALGAS_declarationListAST::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::getter_subgraphFromNodes (const GALGAS_lstringlist & inStartKeyList,
+                                                                                                 const GALGAS_stringset & inKeysToExclude,
+                                                                                                 C_Compiler * inCompiler
+                                                                                                 COMMA_LOCATION_ARGS) const {
+  GALGAS_semanticTypePrecedenceGraph result ;
+  subGraph (result, inStartKeyList, inKeysToExclude, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_semanticTypePrecedenceGraph::getter_accessibleNodesFromNodes (const GALGAS_lstringlist & inStartKeyList,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  GALGAS_semanticTypePrecedenceGraph resultingGraph ;
+  subGraph (resultingGraph,
+            inStartKeyList,
+            GALGAS_stringset::constructor_emptySet (HERE),
+            inCompiler
+            COMMA_THERE) ;
+  if (resultingGraph.isValid ()) {
+    result = resultingGraph.getter_lkeyList (THERE) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @semanticTypePrecedenceGraph type                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_semanticTypePrecedenceGraph ("semanticTypePrecedenceGraph",
+                                                    NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_semanticTypePrecedenceGraph::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_semanticTypePrecedenceGraph ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_semanticTypePrecedenceGraph::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_semanticTypePrecedenceGraph (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_semanticTypePrecedenceGraph result ;
+  const GALGAS_semanticTypePrecedenceGraph * p = (const GALGAS_semanticTypePrecedenceGraph *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_semanticTypePrecedenceGraph *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("semanticTypePrecedenceGraph", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_typeKind_enumeration::cEnumAssociatedValues_typeKind_enumeration (const GALGAS_enumConstantMap & inAssociatedValue0
+                                                                                        COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_typeKind_enumeration::description (C_String & ioString,
+                                                              const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_typeKind_enumeration::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_typeKind_enumeration * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_enumeration *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_typeKind_structure::cEnumAssociatedValues_typeKind_structure (const GALGAS_string & inAssociatedValue0,
+                                                                                    const GALGAS_propertyMap & inAssociatedValue1,
+                                                                                    const GALGAS_propertyList & inAssociatedValue2
+                                                                                    COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_typeKind_structure::description (C_String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_typeKind_structure::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_typeKind_structure * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_structure *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_typeKind_integer::cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
+                                                                                const GALGAS_bigint & inAssociatedValue1,
+                                                                                const GALGAS_bool & inAssociatedValue2,
+                                                                                const GALGAS_uint & inAssociatedValue3
+                                                                                COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2),
+mAssociatedValue3 (inAssociatedValue3) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_typeKind_integer::description (C_String & ioString,
+                                                          const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
+  mAssociatedValue3.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_typeKind_integer::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_typeKind_integer * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_integer *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind::GALGAS_typeKind (void) :
+mAssociatedValues (),
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind GALGAS_typeKind::constructor_boolean (UNUSED_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  result.mEnum = kEnum_boolean ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind GALGAS_typeKind::constructor_boolset (UNUSED_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  result.mEnum = kEnum_boolset ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind GALGAS_typeKind::constructor_literalString (UNUSED_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  result.mEnum = kEnum_literalString ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind GALGAS_typeKind::constructor_enumeration (const GALGAS_enumConstantMap & inAssociatedValue0
+                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_enumeration ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_typeKind_enumeration (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind GALGAS_typeKind::constructor_structure (const GALGAS_string & inAssociatedValue0,
+                                                        const GALGAS_propertyMap & inAssociatedValue1,
+                                                        const GALGAS_propertyList & inAssociatedValue2
+                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
+    result.mEnum = kEnum_structure ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_typeKind_structure (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind GALGAS_typeKind::constructor_integer (const GALGAS_bigint & inAssociatedValue0,
+                                                      const GALGAS_bigint & inAssociatedValue1,
+                                                      const GALGAS_bool & inAssociatedValue2,
+                                                      const GALGAS_uint & inAssociatedValue3
+                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
+    result.mEnum = kEnum_integer ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_typeKind_integer (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind GALGAS_typeKind::constructor_literalInteger (UNUSED_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  result.mEnum = kEnum_literalInteger ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_typeKind::method_enumeration (GALGAS_enumConstantMap & outAssociatedValue0,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_enumeration) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @typeKind enumeration invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_typeKind_enumeration * ptr = (const cEnumAssociatedValues_typeKind_enumeration *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_typeKind::method_structure (GALGAS_string & outAssociatedValue0,
+                                        GALGAS_propertyMap & outAssociatedValue1,
+                                        GALGAS_propertyList & outAssociatedValue2,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_structure) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
+    C_String s ;
+    s << "method @typeKind structure invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_typeKind_structure * ptr = (const cEnumAssociatedValues_typeKind_structure *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_typeKind::method_integer (GALGAS_bigint & outAssociatedValue0,
+                                      GALGAS_bigint & outAssociatedValue1,
+                                      GALGAS_bool & outAssociatedValue2,
+                                      GALGAS_uint & outAssociatedValue3,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_integer) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
+    outAssociatedValue3.drop () ;
+    C_String s ;
+    s << "method @typeKind integer invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_typeKind_integer * ptr = (const cEnumAssociatedValues_typeKind_integer *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
+    outAssociatedValue3 = ptr->mAssociatedValue3 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_typeKind [8] = {
+  "(not built)",
+  "boolean",
+  "boolset",
+  "literalString",
+  "enumeration",
+  "structure",
+  "integer",
+  "literalInteger"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_typeKind::getter_isBoolean (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolean == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_typeKind::getter_isBoolset (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolset == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_typeKind::getter_isLiteralString (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalString == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_typeKind::getter_isEnumeration (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_enumeration == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_typeKind::getter_isStructure (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_structure == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_typeKind::getter_isInteger (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_integer == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_typeKind::getter_isLiteralInteger (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalInteger == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_typeKind::description (C_String & ioString,
+                                   const int32_t inIndentation) const {
+  ioString << "<enum @typeKind: " << gEnumNameArrayFor_typeKind [mEnum] ;
+  mAssociatedValues.description (ioString, inIndentation) ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_typeKind::objectCompare (const GALGAS_typeKind & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                   @typeKind type                                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_typeKind ("typeKind",
+                                 NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_typeKind::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_typeKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_typeKind::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_typeKind (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_typeKind GALGAS_typeKind::extractObject (const GALGAS_object & inObject,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  const GALGAS_typeKind * p = (const GALGAS_typeKind *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_typeKind *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("typeKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_incDecOperatorMap::cMapElement_incDecOperatorMap (const GALGAS_lstring & inKey,
+                                                              const GALGAS_llvmBinaryOperation & in_mOperationOvfCheck,
+                                                              const GALGAS_llvmBinaryOperation & in_mOperationNoOvf
+                                                              COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mAttribute_mOperationOvfCheck (in_mOperationOvfCheck),
+mAttribute_mOperationNoOvf (in_mOperationNoOvf) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_incDecOperatorMap::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mOperationOvfCheck.isValid () && mAttribute_mOperationNoOvf.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_incDecOperatorMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_incDecOperatorMap (mAttribute_lkey, mAttribute_mOperationOvfCheck, mAttribute_mOperationNoOvf COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_incDecOperatorMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mOperationOvfCheck" ":" ;
+  mAttribute_mOperationOvfCheck.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mOperationNoOvf" ":" ;
+  mAttribute_mOperationNoOvf.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_incDecOperatorMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_incDecOperatorMap * operand = (cMapElement_incDecOperatorMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperationOvfCheck.objectCompare (operand->mAttribute_mOperationOvfCheck) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperationNoOvf.objectCompare (operand->mAttribute_mOperationNoOvf) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap::GALGAS_incDecOperatorMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap::GALGAS_incDecOperatorMap (const GALGAS_incDecOperatorMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap & GALGAS_incDecOperatorMap::operator = (const GALGAS_incDecOperatorMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_incDecOperatorMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::constructor_mapWithMapToOverride (const GALGAS_incDecOperatorMap & inMapToOverride
+                                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_incDecOperatorMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  GALGAS_incDecOperatorMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                    const GALGAS_llvmBinaryOperation & inArgument0,
+                                                    const GALGAS_llvmBinaryOperation & inArgument1,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  cMapElement_incDecOperatorMap * p = NULL ;
+  macroMyNew (p, cMapElement_incDecOperatorMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@incDecOperatorMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::setter_insertKey (GALGAS_lstring inKey,
+                                                 GALGAS_llvmBinaryOperation inArgument0,
+                                                 GALGAS_llvmBinaryOperation inArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_incDecOperatorMap * p = NULL ;
+  macroMyNew (p, cMapElement_incDecOperatorMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "** internal error **" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_incDecOperatorMap_searchKey = "** internal error **" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::method_searchKey (GALGAS_lstring inKey,
+                                                 GALGAS_llvmBinaryOperation & outArgument0,
+                                                 GALGAS_llvmBinaryOperation & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) performSearch (inKey,
+                                                                                                     inCompiler,
+                                                                                                     kSearchErrorMessage_incDecOperatorMap_searchKey
+                                                                                                     COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+    outArgument0 = p->mAttribute_mOperationOvfCheck ;
+    outArgument1 = p->mAttribute_mOperationNoOvf ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_incDecOperatorMap::getter_mOperationOvfCheckForKey (const GALGAS_string & inKey,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) attributes ;
+  GALGAS_llvmBinaryOperation result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+    result = p->mAttribute_mOperationOvfCheck ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_incDecOperatorMap::getter_mOperationNoOvfForKey (const GALGAS_string & inKey,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) attributes ;
+  GALGAS_llvmBinaryOperation result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+    result = p->mAttribute_mOperationNoOvf ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::setter_setMOperationOvfCheckForKey (GALGAS_llvmBinaryOperation inAttributeValue,
+                                                                   GALGAS_string inKey,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_incDecOperatorMap * p = (cMapElement_incDecOperatorMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+    p->mAttribute_mOperationOvfCheck = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::setter_setMOperationNoOvfForKey (GALGAS_llvmBinaryOperation inAttributeValue,
+                                                                GALGAS_string inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_incDecOperatorMap * p = (cMapElement_incDecOperatorMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+    p->mAttribute_mOperationNoOvf = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_incDecOperatorMap * GALGAS_incDecOperatorMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                             const GALGAS_string & inKey
+                                                                                             COMMA_LOCATION_ARGS) {
+  cMapElement_incDecOperatorMap * result = (cMapElement_incDecOperatorMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_incDecOperatorMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_incDecOperatorMap::cEnumerator_incDecOperatorMap (const GALGAS_incDecOperatorMap & inEnumeratedObject,
+                                                              const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap_2D_element cEnumerator_incDecOperatorMap::current (LOCATION_ARGS) const {
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+  return GALGAS_incDecOperatorMap_2D_element (p->mAttribute_lkey, p->mAttribute_mOperationOvfCheck, p->mAttribute_mOperationNoOvf) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_incDecOperatorMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation cEnumerator_incDecOperatorMap::current_mOperationOvfCheck (LOCATION_ARGS) const {
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+  return p->mAttribute_mOperationOvfCheck ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation cEnumerator_incDecOperatorMap::current_mOperationNoOvf (LOCATION_ARGS) const {
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+  return p->mAttribute_mOperationNoOvf ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @incDecOperatorMap type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_incDecOperatorMap ("incDecOperatorMap",
+                                          NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_incDecOperatorMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_incDecOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_incDecOperatorMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_incDecOperatorMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_incDecOperatorMap result ;
+  const GALGAS_incDecOperatorMap * p = (const GALGAS_incDecOperatorMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_incDecOperatorMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("incDecOperatorMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

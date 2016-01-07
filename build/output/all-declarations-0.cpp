@@ -55,2589 +55,314 @@ C_String C_Lexique_plm_5F_lexique::indexingDirectory (void) const {
 //                        Lexical error message list                                                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const utf32 gLexicalMessage_plm_5F_lexique_attributeError [] = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (','),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (','),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('w'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('@'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gLexicalMessage_plm_5F_lexique_attributeError = "in an attribute name, a letter, a digit or a dot should follow the '@' character" ;
 
-static const utf32 gLexicalMessage_plm_5F_lexique_incorrectStringEnd [] = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('g'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('s'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\"'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (0)
-} ;
+static const char * gLexicalMessage_plm_5F_lexique_incorrectStringEnd = "string does not end with '\"'" ;
 
-static const utf32 gLexicalMessage_plm_5F_lexique_internalError [] = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gLexicalMessage_plm_5F_lexique_internalError = "internal error" ;
 
-static const utf32 gLexicalMessage_plm_5F_lexique_modeError [] = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (','),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('w'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('`'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gLexicalMessage_plm_5F_lexique_modeError = "in a mode name, a letter or a digit should follow the '`' character" ;
 
-static const utf32 gLexicalMessage_plm_5F_lexique_typeError [] = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (','),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('w'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('$'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gLexicalMessage_plm_5F_lexique_typeError = "in a type name, a letter or a digit should follow the '$' character" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //          Syntax error messages, for every terminal symbol                                                           *
 //---------------------------------------------------------------------------------------------------------------------*
 
 //--- Syntax error message for terminal '$identifier$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_identifier [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_identifier = "an identifier" ;
 
 //--- Syntax error message for terminal '$attribute$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_attribute [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('@'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_attribute = "an attribute @..." ;
 
 //--- Syntax error message for terminal '$typeName$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_typeName [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('$'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_typeName = "a type $..." ;
 
 //--- Syntax error message for terminal '$modeName$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_modeName [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('`'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_modeName = "a mode `..." ;
 
 //--- Syntax error message for terminal '$integer$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_integer [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_integer = "a literal integer" ;
 
 //--- Syntax error message for terminal '$literal_string$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_literal_5F_string [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('g'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\"'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('\"'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_literal_5F_string = "a literal character string \"...\"" ;
 
 //--- Syntax error message for terminal '$comment$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_comment [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_comment = "a comment" ;
 
 //--- Syntax error message for terminal '$?$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3F_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\?'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\?'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (':'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3F_ = "the '\?' or '\?selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$?!$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3F__21_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\?'),
-  TO_UNICODE ('!'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('\?'),
-  TO_UNICODE ('!'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (':'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3F__21_ = "the '\?!' or '\?!selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$!$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__21_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('!'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('!'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (':'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__21_ = "the '!' or '!selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$!?$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__21__3F_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('!'),
-  TO_UNICODE ('\?'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('!'),
-  TO_UNICODE ('\?'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (':'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__21__3F_ = "the '!\?' or '!\?selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$and$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_and [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_and = "the 'and' keyword" ;
 
 //--- Syntax error message for terminal '$assert$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_assert [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_assert = "the 'assert' keyword" ;
 
 //--- Syntax error message for terminal '$at$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_at [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_at = "the 'at' keyword" ;
 
 //--- Syntax error message for terminal '$boolset$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_boolset [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_boolset = "the 'boolset' keyword" ;
 
 //--- Syntax error message for terminal '$boot$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_boot [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_boot = "the 'boot' keyword" ;
 
 //--- Syntax error message for terminal '$case$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_case [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_case = "the 'case' keyword" ;
 
 //--- Syntax error message for terminal '$check$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_check [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_check = "the 'check' keyword" ;
 
 //--- Syntax error message for terminal '$convert$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_convert [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_convert = "the 'convert' keyword" ;
 
 //--- Syntax error message for terminal '$do$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_do [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_do = "the 'do' keyword" ;
 
 //--- Syntax error message for terminal '$else$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_else [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_else = "the 'else' keyword" ;
 
 //--- Syntax error message for terminal '$elsif$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_elsif [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_elsif = "the 'elsif' keyword" ;
 
 //--- Syntax error message for terminal '$end$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_end [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_end = "the 'end' keyword" ;
 
 //--- Syntax error message for terminal '$enum$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_enum [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_enum = "the 'enum' keyword" ;
 
 //--- Syntax error message for terminal '$extend$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_extend [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('x'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_extend = "the 'extend' keyword" ;
 
 //--- Syntax error message for terminal '$false$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_false [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_false = "the 'false' keyword" ;
 
 //--- Syntax error message for terminal '$for$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_for [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_for = "the 'for' keyword" ;
 
 //--- Syntax error message for terminal '$func$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_func [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_func = "the 'func' keyword" ;
 
 //--- Syntax error message for terminal '$if$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_if [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_if = "the 'if' keyword" ;
 
 //--- Syntax error message for terminal '$import$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_import [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_import = "the 'import' keyword" ;
 
 //--- Syntax error message for terminal '$in$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_in [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_in = "the 'in' keyword" ;
 
 //--- Syntax error message for terminal '$init$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_init [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_init = "the 'init' keyword" ;
 
 //--- Syntax error message for terminal '$let$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_let [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_let = "the 'let' keyword" ;
 
 //--- Syntax error message for terminal '$mutating$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_mutating [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_mutating = "the 'mutating' keyword" ;
 
 //--- Syntax error message for terminal '$mode$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_mode [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_mode = "the 'mode' keyword" ;
 
 //--- Syntax error message for terminal '$not$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_not [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_not = "the 'not' keyword" ;
 
 //--- Syntax error message for terminal '$or$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_or [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_or = "the 'or' keyword" ;
 
 //--- Syntax error message for terminal '$panic$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_panic [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_panic = "the 'panic' keyword" ;
 
 //--- Syntax error message for terminal '$pointerSize$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_pointerSize [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('S'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('z'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_pointerSize = "the 'pointerSize' keyword" ;
 
 //--- Syntax error message for terminal '$proc$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_proc [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_proc = "the 'proc' keyword" ;
 
 //--- Syntax error message for terminal '$register$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_register [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_register = "the 'register' keyword" ;
 
 //--- Syntax error message for terminal '$required$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_required [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('q'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_required = "the 'required' keyword" ;
 
 //--- Syntax error message for terminal '$requiredBy$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_requiredBy [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('q'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('B'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_requiredBy = "the 'requiredBy' keyword" ;
 
 //--- Syntax error message for terminal '$self$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_self [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_self = "the 'self' keyword" ;
 
 //--- Syntax error message for terminal '$signedIntegerType$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_signedIntegerType [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('I'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('T'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_signedIntegerType = "the 'signedIntegerType' keyword" ;
 
 //--- Syntax error message for terminal '$struct$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_struct [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_struct = "the 'struct' keyword" ;
 
 //--- Syntax error message for terminal '$target$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_target [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_target = "the 'target' keyword" ;
 
 //--- Syntax error message for terminal '$then$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_then [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_then = "the 'then' keyword" ;
 
 //--- Syntax error message for terminal '$true$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_true [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_true = "the 'true' keyword" ;
 
 //--- Syntax error message for terminal '$truncate$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_truncate [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_truncate = "the 'truncate' keyword" ;
 
 //--- Syntax error message for terminal '$unsignedIntegerType$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_unsignedIntegerType [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('I'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('T'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_unsignedIntegerType = "the 'unsignedIntegerType' keyword" ;
 
 //--- Syntax error message for terminal '$var$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_var [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_var = "the 'var' keyword" ;
 
 //--- Syntax error message for terminal '$while$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_while [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_while = "the 'while' keyword" ;
 
 //--- Syntax error message for terminal '$xor$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_xor [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('x'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique_xor = "the 'xor' keyword" ;
 
 //--- Syntax error message for terminal '$:$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3A_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE (':'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3A_ = "the ':' delimitor" ;
 
 //--- Syntax error message for terminal '$.$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2E_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2E_ = "the '.' delimitor" ;
 
 //--- Syntax error message for terminal '$,$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2C_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE (','),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2C_ = "the ',' delimitor" ;
 
 //--- Syntax error message for terminal '$;$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3B_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE (';'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3B_ = "the ';' delimitor" ;
 
 //--- Syntax error message for terminal '${$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__7B_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('{'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__7B_ = "the '{' delimitor" ;
 
 //--- Syntax error message for terminal '$}$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__7D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('}'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__7D_ = "the '}' delimitor" ;
 
 //--- Syntax error message for terminal '$=$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('='),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3D_ = "the '=' delimitor" ;
 
 //--- Syntax error message for terminal '$($' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__28_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('('),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__28_ = "the '(' delimitor" ;
 
 //--- Syntax error message for terminal '$)$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__29_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE (')'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__29_ = "the ')' delimitor" ;
 
 //--- Syntax error message for terminal '$==$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3D__3D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('='),
-  TO_UNICODE ('='),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3D__3D_ = "the '==' delimitor" ;
 
 //--- Syntax error message for terminal '$!=$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__21__3D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('!'),
-  TO_UNICODE ('='),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__21__3D_ = "the '!=' delimitor" ;
 
 //--- Syntax error message for terminal '$<$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3C_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('<'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3C_ = "the '<' delimitor" ;
 
 //--- Syntax error message for terminal '$<=$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3C__3D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('<'),
-  TO_UNICODE ('='),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3C__3D_ = "the '<=' delimitor" ;
 
 //--- Syntax error message for terminal '$>$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3E_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('>'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3E_ = "the '>' delimitor" ;
 
 //--- Syntax error message for terminal '$>=$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3E__3D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('>'),
-  TO_UNICODE ('='),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3E__3D_ = "the '>=' delimitor" ;
 
 //--- Syntax error message for terminal '$[$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__5B_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('['),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__5B_ = "the '[' delimitor" ;
 
 //--- Syntax error message for terminal '$]$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__5D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE (']'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__5D_ = "the ']' delimitor" ;
 
 //--- Syntax error message for terminal '$<<$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3C__3C_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('<'),
-  TO_UNICODE ('<'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3C__3C_ = "the '<<' delimitor" ;
 
 //--- Syntax error message for terminal '$>>$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3E__3E_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('>'),
-  TO_UNICODE ('>'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3E__3E_ = "the '>>' delimitor" ;
 
 //--- Syntax error message for terminal '$%$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__25_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('%'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__25_ = "the '%' delimitor" ;
 
 //--- Syntax error message for terminal '$&%$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__25_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('%'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26__25_ = "the '&%' delimitor" ;
 
 //--- Syntax error message for terminal '$~$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__7E_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('~'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__7E_ = "the '~' delimitor" ;
 
 //--- Syntax error message for terminal '$->$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2D__3E_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('-'),
-  TO_UNICODE ('>'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2D__3E_ = "the '->' delimitor" ;
 
 //--- Syntax error message for terminal '$::$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3A__3A_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE (':'),
-  TO_UNICODE (':'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__3A__3A_ = "the '::' delimitor" ;
 
 //--- Syntax error message for terminal '$++$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2B__2B_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('+'),
-  TO_UNICODE ('+'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2B__2B_ = "the '++' delimitor" ;
 
 //--- Syntax error message for terminal '$&++$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2B__2B_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('+'),
-  TO_UNICODE ('+'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26__2B__2B_ = "the '&++' delimitor" ;
 
 //--- Syntax error message for terminal '$--$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2D__2D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('-'),
-  TO_UNICODE ('-'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2D__2D_ = "the '--' delimitor" ;
 
 //--- Syntax error message for terminal '$&--$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2D__2D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('-'),
-  TO_UNICODE ('-'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26__2D__2D_ = "the '&--' delimitor" ;
 
 //--- Syntax error message for terminal '$|$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__7C_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('|'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__7C_ = "the '|' delimitor" ;
 
 //--- Syntax error message for terminal '$|=$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__7C__3D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('|'),
-  TO_UNICODE ('='),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__7C__3D_ = "the '|=' delimitor" ;
 
 //--- Syntax error message for terminal '$&$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26_ = "the '&' delimitor" ;
 
 //--- Syntax error message for terminal '$&=$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__3D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('='),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26__3D_ = "the '&=' delimitor" ;
 
 //--- Syntax error message for terminal '$^$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__5E_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('^'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__5E_ = "the '^' delimitor" ;
 
 //--- Syntax error message for terminal '$^=$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__5E__3D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('^'),
-  TO_UNICODE ('='),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__5E__3D_ = "the '^=' delimitor" ;
 
 //--- Syntax error message for terminal '$+$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2B_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('+'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2B_ = "the '+' delimitor" ;
 
 //--- Syntax error message for terminal '$&+$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2B_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('+'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26__2B_ = "the '&+' delimitor" ;
 
 //--- Syntax error message for terminal '$-$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('-'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2D_ = "the '-' delimitor" ;
 
 //--- Syntax error message for terminal '$&-$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2D_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('-'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26__2D_ = "the '&-' delimitor" ;
 
 //--- Syntax error message for terminal '$*$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2A_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('*'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2A_ = "the '*' delimitor" ;
 
 //--- Syntax error message for terminal '$&*$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2A_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('*'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26__2A_ = "the '&*' delimitor" ;
 
 //--- Syntax error message for terminal '$/$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2F_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('/'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__2F_ = "the '/' delimitor" ;
 
 //--- Syntax error message for terminal '$&/$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2F_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('/'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
+static const char * gSyntaxErrorMessage_plm_5F_lexique__26__2F_ = "the '&/' delimitor" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                getMessageForTerminal                                                                                *
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const utf32 * syntaxErrorMessageArray [97] = {kEndOfSourceLexicalErrorMessage,
+  static const char * syntaxErrorMessageArray [97] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_typeName,
@@ -4933,10 +2658,10 @@ void GALGAS_declarationListAST::addAssign_operation (const GALGAS_abstractDeclar
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_declarationListAST::modifier_insertAtIndex (const GALGAS_abstractDeclaration inOperand0,
-                                                        const GALGAS_uint inInsertionIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_declarationListAST::setter_insertAtIndex (const GALGAS_abstractDeclaration inOperand0,
+                                                      const GALGAS_uint inInsertionIndex,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_declarationListAST (inOperand0 COMMA_THERE)) ;
@@ -4949,10 +2674,10 @@ void GALGAS_declarationListAST::modifier_insertAtIndex (const GALGAS_abstractDec
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_declarationListAST::modifier_removeAtIndex (GALGAS_abstractDeclaration & outOperand0,
-                                                        const GALGAS_uint inRemoveIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_declarationListAST::setter_removeAtIndex (GALGAS_abstractDeclaration & outOperand0,
+                                                      const GALGAS_uint inRemoveIndex,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -4968,9 +2693,9 @@ void GALGAS_declarationListAST::modifier_removeAtIndex (GALGAS_abstractDeclarati
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_declarationListAST::modifier_popFirst (GALGAS_abstractDeclaration & outOperand0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_declarationListAST::setter_popFirst (GALGAS_abstractDeclaration & outOperand0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_declarationListAST * p = (cCollectionElement_declarationListAST *) attributes.ptr () ;
@@ -4984,9 +2709,9 @@ void GALGAS_declarationListAST::modifier_popFirst (GALGAS_abstractDeclaration & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_declarationListAST::modifier_popLast (GALGAS_abstractDeclaration & outOperand0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_declarationListAST::setter_popLast (GALGAS_abstractDeclaration & outOperand0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_declarationListAST * p = (cCollectionElement_declarationListAST *) attributes.ptr () ;
@@ -5348,15 +3073,15 @@ void GALGAS_globalVarDeclarationList::addAssign_operation (const GALGAS_lstring 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalVarDeclarationList::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                              const GALGAS_lstring inOperand1,
-                                                              const GALGAS_expressionAST inOperand2,
-                                                              const GALGAS_allowedProcList inOperand3,
-                                                              const GALGAS_allowedInitList inOperand4,
-                                                              const GALGAS_allowedExceptionList inOperand5,
-                                                              const GALGAS_uint inInsertionIndex,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_globalVarDeclarationList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                            const GALGAS_lstring inOperand1,
+                                                            const GALGAS_expressionAST inOperand2,
+                                                            const GALGAS_allowedProcList inOperand3,
+                                                            const GALGAS_allowedInitList inOperand4,
+                                                            const GALGAS_allowedExceptionList inOperand5,
+                                                            const GALGAS_uint inInsertionIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_globalVarDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5 COMMA_THERE)) ;
@@ -5369,15 +3094,15 @@ void GALGAS_globalVarDeclarationList::modifier_insertAtIndex (const GALGAS_lstri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalVarDeclarationList::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                              GALGAS_lstring & outOperand1,
-                                                              GALGAS_expressionAST & outOperand2,
-                                                              GALGAS_allowedProcList & outOperand3,
-                                                              GALGAS_allowedInitList & outOperand4,
-                                                              GALGAS_allowedExceptionList & outOperand5,
-                                                              const GALGAS_uint inRemoveIndex,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_globalVarDeclarationList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                            GALGAS_lstring & outOperand1,
+                                                            GALGAS_expressionAST & outOperand2,
+                                                            GALGAS_allowedProcList & outOperand3,
+                                                            GALGAS_allowedInitList & outOperand4,
+                                                            GALGAS_allowedExceptionList & outOperand5,
+                                                            const GALGAS_uint inRemoveIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -5403,14 +3128,14 @@ void GALGAS_globalVarDeclarationList::modifier_removeAtIndex (GALGAS_lstring & o
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalVarDeclarationList::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                                         GALGAS_lstring & outOperand1,
-                                                         GALGAS_expressionAST & outOperand2,
-                                                         GALGAS_allowedProcList & outOperand3,
-                                                         GALGAS_allowedInitList & outOperand4,
-                                                         GALGAS_allowedExceptionList & outOperand5,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_globalVarDeclarationList::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                       GALGAS_lstring & outOperand1,
+                                                       GALGAS_expressionAST & outOperand2,
+                                                       GALGAS_allowedProcList & outOperand3,
+                                                       GALGAS_allowedInitList & outOperand4,
+                                                       GALGAS_allowedExceptionList & outOperand5,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_globalVarDeclarationList * p = (cCollectionElement_globalVarDeclarationList *) attributes.ptr () ;
@@ -5434,14 +3159,14 @@ void GALGAS_globalVarDeclarationList::modifier_popFirst (GALGAS_lstring & outOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalVarDeclarationList::modifier_popLast (GALGAS_lstring & outOperand0,
-                                                        GALGAS_lstring & outOperand1,
-                                                        GALGAS_expressionAST & outOperand2,
-                                                        GALGAS_allowedProcList & outOperand3,
-                                                        GALGAS_allowedInitList & outOperand4,
-                                                        GALGAS_allowedExceptionList & outOperand5,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_globalVarDeclarationList::setter_popLast (GALGAS_lstring & outOperand0,
+                                                      GALGAS_lstring & outOperand1,
+                                                      GALGAS_expressionAST & outOperand2,
+                                                      GALGAS_allowedProcList & outOperand3,
+                                                      GALGAS_allowedInitList & outOperand4,
+                                                      GALGAS_allowedExceptionList & outOperand5,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_globalVarDeclarationList * p = (cCollectionElement_globalVarDeclarationList *) attributes.ptr () ;
@@ -5968,16 +3693,16 @@ void GALGAS_procedureDeclarationListAST::addAssign_operation (const GALGAS_proce
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureDeclarationListAST::modifier_insertAtIndex (const GALGAS_procedureKindAST inOperand0,
-                                                                 const GALGAS_lstringlist inOperand1,
-                                                                 const GALGAS_lstring inOperand2,
-                                                                 const GALGAS_lstringlist inOperand3,
-                                                                 const GALGAS_procFormalArgumentList inOperand4,
-                                                                 const GALGAS_instructionListAST inOperand5,
-                                                                 const GALGAS_location inOperand6,
-                                                                 const GALGAS_uint inInsertionIndex,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_procedureDeclarationListAST::setter_insertAtIndex (const GALGAS_procedureKindAST inOperand0,
+                                                               const GALGAS_lstringlist inOperand1,
+                                                               const GALGAS_lstring inOperand2,
+                                                               const GALGAS_lstringlist inOperand3,
+                                                               const GALGAS_procFormalArgumentList inOperand4,
+                                                               const GALGAS_instructionListAST inOperand5,
+                                                               const GALGAS_location inOperand6,
+                                                               const GALGAS_uint inInsertionIndex,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_procedureDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6 COMMA_THERE)) ;
@@ -5990,16 +3715,16 @@ void GALGAS_procedureDeclarationListAST::modifier_insertAtIndex (const GALGAS_pr
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureDeclarationListAST::modifier_removeAtIndex (GALGAS_procedureKindAST & outOperand0,
-                                                                 GALGAS_lstringlist & outOperand1,
-                                                                 GALGAS_lstring & outOperand2,
-                                                                 GALGAS_lstringlist & outOperand3,
-                                                                 GALGAS_procFormalArgumentList & outOperand4,
-                                                                 GALGAS_instructionListAST & outOperand5,
-                                                                 GALGAS_location & outOperand6,
-                                                                 const GALGAS_uint inRemoveIndex,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_procedureDeclarationListAST::setter_removeAtIndex (GALGAS_procedureKindAST & outOperand0,
+                                                               GALGAS_lstringlist & outOperand1,
+                                                               GALGAS_lstring & outOperand2,
+                                                               GALGAS_lstringlist & outOperand3,
+                                                               GALGAS_procFormalArgumentList & outOperand4,
+                                                               GALGAS_instructionListAST & outOperand5,
+                                                               GALGAS_location & outOperand6,
+                                                               const GALGAS_uint inRemoveIndex,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -6027,15 +3752,15 @@ void GALGAS_procedureDeclarationListAST::modifier_removeAtIndex (GALGAS_procedur
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureDeclarationListAST::modifier_popFirst (GALGAS_procedureKindAST & outOperand0,
-                                                            GALGAS_lstringlist & outOperand1,
-                                                            GALGAS_lstring & outOperand2,
-                                                            GALGAS_lstringlist & outOperand3,
-                                                            GALGAS_procFormalArgumentList & outOperand4,
-                                                            GALGAS_instructionListAST & outOperand5,
-                                                            GALGAS_location & outOperand6,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_procedureDeclarationListAST::setter_popFirst (GALGAS_procedureKindAST & outOperand0,
+                                                          GALGAS_lstringlist & outOperand1,
+                                                          GALGAS_lstring & outOperand2,
+                                                          GALGAS_lstringlist & outOperand3,
+                                                          GALGAS_procFormalArgumentList & outOperand4,
+                                                          GALGAS_instructionListAST & outOperand5,
+                                                          GALGAS_location & outOperand6,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procedureDeclarationListAST * p = (cCollectionElement_procedureDeclarationListAST *) attributes.ptr () ;
@@ -6061,15 +3786,15 @@ void GALGAS_procedureDeclarationListAST::modifier_popFirst (GALGAS_procedureKind
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureDeclarationListAST::modifier_popLast (GALGAS_procedureKindAST & outOperand0,
-                                                           GALGAS_lstringlist & outOperand1,
-                                                           GALGAS_lstring & outOperand2,
-                                                           GALGAS_lstringlist & outOperand3,
-                                                           GALGAS_procFormalArgumentList & outOperand4,
-                                                           GALGAS_instructionListAST & outOperand5,
-                                                           GALGAS_location & outOperand6,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_procedureDeclarationListAST::setter_popLast (GALGAS_procedureKindAST & outOperand0,
+                                                         GALGAS_lstringlist & outOperand1,
+                                                         GALGAS_lstring & outOperand2,
+                                                         GALGAS_lstringlist & outOperand3,
+                                                         GALGAS_procFormalArgumentList & outOperand4,
+                                                         GALGAS_instructionListAST & outOperand5,
+                                                         GALGAS_location & outOperand6,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procedureDeclarationListAST * p = (cCollectionElement_procedureDeclarationListAST *) attributes.ptr () ;
@@ -6597,13 +4322,13 @@ void GALGAS_requiredProcedureDeclarationListAST::addAssign_operation (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_requiredProcedureDeclarationListAST::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                                         const GALGAS_lstringlist inOperand1,
-                                                                         const GALGAS_procFormalArgumentList inOperand2,
-                                                                         const GALGAS_location inOperand3,
-                                                                         const GALGAS_uint inInsertionIndex,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_requiredProcedureDeclarationListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                                       const GALGAS_lstringlist inOperand1,
+                                                                       const GALGAS_procFormalArgumentList inOperand2,
+                                                                       const GALGAS_location inOperand3,
+                                                                       const GALGAS_uint inInsertionIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_requiredProcedureDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
@@ -6616,13 +4341,13 @@ void GALGAS_requiredProcedureDeclarationListAST::modifier_insertAtIndex (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_requiredProcedureDeclarationListAST::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                                         GALGAS_lstringlist & outOperand1,
-                                                                         GALGAS_procFormalArgumentList & outOperand2,
-                                                                         GALGAS_location & outOperand3,
-                                                                         const GALGAS_uint inRemoveIndex,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_requiredProcedureDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                                       GALGAS_lstringlist & outOperand1,
+                                                                       GALGAS_procFormalArgumentList & outOperand2,
+                                                                       GALGAS_location & outOperand3,
+                                                                       const GALGAS_uint inRemoveIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -6644,12 +4369,12 @@ void GALGAS_requiredProcedureDeclarationListAST::modifier_removeAtIndex (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_requiredProcedureDeclarationListAST::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                                                    GALGAS_lstringlist & outOperand1,
-                                                                    GALGAS_procFormalArgumentList & outOperand2,
-                                                                    GALGAS_location & outOperand3,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_requiredProcedureDeclarationListAST::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                                  GALGAS_lstringlist & outOperand1,
+                                                                  GALGAS_procFormalArgumentList & outOperand2,
+                                                                  GALGAS_location & outOperand3,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_requiredProcedureDeclarationListAST * p = (cCollectionElement_requiredProcedureDeclarationListAST *) attributes.ptr () ;
@@ -6669,12 +4394,12 @@ void GALGAS_requiredProcedureDeclarationListAST::modifier_popFirst (GALGAS_lstri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_requiredProcedureDeclarationListAST::modifier_popLast (GALGAS_lstring & outOperand0,
-                                                                   GALGAS_lstringlist & outOperand1,
-                                                                   GALGAS_procFormalArgumentList & outOperand2,
-                                                                   GALGAS_location & outOperand3,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_requiredProcedureDeclarationListAST::setter_popLast (GALGAS_lstring & outOperand0,
+                                                                 GALGAS_lstringlist & outOperand1,
+                                                                 GALGAS_procFormalArgumentList & outOperand2,
+                                                                 GALGAS_location & outOperand3,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_requiredProcedureDeclarationListAST * p = (cCollectionElement_requiredProcedureDeclarationListAST *) attributes.ptr () ;
@@ -7139,16 +4864,16 @@ void GALGAS_functionDeclarationListAST::addAssign_operation (const GALGAS_lstrin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionDeclarationListAST::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                                const GALGAS_lstringlist inOperand1,
-                                                                const GALGAS_funcFormalArgumentList inOperand2,
-                                                                const GALGAS_lstring inOperand3,
-                                                                const GALGAS_lstring inOperand4,
-                                                                const GALGAS_instructionListAST inOperand5,
-                                                                const GALGAS_location inOperand6,
-                                                                const GALGAS_uint inInsertionIndex,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_functionDeclarationListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                              const GALGAS_lstringlist inOperand1,
+                                                              const GALGAS_funcFormalArgumentList inOperand2,
+                                                              const GALGAS_lstring inOperand3,
+                                                              const GALGAS_lstring inOperand4,
+                                                              const GALGAS_instructionListAST inOperand5,
+                                                              const GALGAS_location inOperand6,
+                                                              const GALGAS_uint inInsertionIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_functionDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6 COMMA_THERE)) ;
@@ -7161,16 +4886,16 @@ void GALGAS_functionDeclarationListAST::modifier_insertAtIndex (const GALGAS_lst
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionDeclarationListAST::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                                GALGAS_lstringlist & outOperand1,
-                                                                GALGAS_funcFormalArgumentList & outOperand2,
-                                                                GALGAS_lstring & outOperand3,
-                                                                GALGAS_lstring & outOperand4,
-                                                                GALGAS_instructionListAST & outOperand5,
-                                                                GALGAS_location & outOperand6,
-                                                                const GALGAS_uint inRemoveIndex,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_functionDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                              GALGAS_lstringlist & outOperand1,
+                                                              GALGAS_funcFormalArgumentList & outOperand2,
+                                                              GALGAS_lstring & outOperand3,
+                                                              GALGAS_lstring & outOperand4,
+                                                              GALGAS_instructionListAST & outOperand5,
+                                                              GALGAS_location & outOperand6,
+                                                              const GALGAS_uint inRemoveIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -7198,15 +4923,15 @@ void GALGAS_functionDeclarationListAST::modifier_removeAtIndex (GALGAS_lstring &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionDeclarationListAST::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                                           GALGAS_lstringlist & outOperand1,
-                                                           GALGAS_funcFormalArgumentList & outOperand2,
-                                                           GALGAS_lstring & outOperand3,
-                                                           GALGAS_lstring & outOperand4,
-                                                           GALGAS_instructionListAST & outOperand5,
-                                                           GALGAS_location & outOperand6,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_functionDeclarationListAST::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                         GALGAS_lstringlist & outOperand1,
+                                                         GALGAS_funcFormalArgumentList & outOperand2,
+                                                         GALGAS_lstring & outOperand3,
+                                                         GALGAS_lstring & outOperand4,
+                                                         GALGAS_instructionListAST & outOperand5,
+                                                         GALGAS_location & outOperand6,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_functionDeclarationListAST * p = (cCollectionElement_functionDeclarationListAST *) attributes.ptr () ;
@@ -7232,15 +4957,15 @@ void GALGAS_functionDeclarationListAST::modifier_popFirst (GALGAS_lstring & outO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionDeclarationListAST::modifier_popLast (GALGAS_lstring & outOperand0,
-                                                          GALGAS_lstringlist & outOperand1,
-                                                          GALGAS_funcFormalArgumentList & outOperand2,
-                                                          GALGAS_lstring & outOperand3,
-                                                          GALGAS_lstring & outOperand4,
-                                                          GALGAS_instructionListAST & outOperand5,
-                                                          GALGAS_location & outOperand6,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_functionDeclarationListAST::setter_popLast (GALGAS_lstring & outOperand0,
+                                                        GALGAS_lstringlist & outOperand1,
+                                                        GALGAS_funcFormalArgumentList & outOperand2,
+                                                        GALGAS_lstring & outOperand3,
+                                                        GALGAS_lstring & outOperand4,
+                                                        GALGAS_instructionListAST & outOperand5,
+                                                        GALGAS_location & outOperand6,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_functionDeclarationListAST * p = (cCollectionElement_functionDeclarationListAST *) attributes.ptr () ;
@@ -7775,13 +5500,13 @@ void GALGAS_bootList::plusAssign_operation (const GALGAS_bootList inOperand,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootList::modifier_popSmallest (GALGAS_location & outOperand0,
-                                            GALGAS_instructionListAST & outOperand1,
-                                            GALGAS_location & outOperand2,
-                                            GALGAS_bigint & outOperand3,
-                                            GALGAS_location & outOperand4,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GALGAS_bootList::setter_popSmallest (GALGAS_location & outOperand0,
+                                          GALGAS_instructionListAST & outOperand1,
+                                          GALGAS_location & outOperand2,
+                                          GALGAS_bigint & outOperand3,
+                                          GALGAS_location & outOperand4,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_bootList * p = (cSortedListElement_bootList *) attributes.ptr () ;
@@ -7803,13 +5528,13 @@ void GALGAS_bootList::modifier_popSmallest (GALGAS_location & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootList::modifier_popGreatest (GALGAS_location & outOperand0,
-                                            GALGAS_instructionListAST & outOperand1,
-                                            GALGAS_location & outOperand2,
-                                            GALGAS_bigint & outOperand3,
-                                            GALGAS_location & outOperand4,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GALGAS_bootList::setter_popGreatest (GALGAS_location & outOperand0,
+                                          GALGAS_instructionListAST & outOperand1,
+                                          GALGAS_location & outOperand2,
+                                          GALGAS_bigint & outOperand3,
+                                          GALGAS_location & outOperand4,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_bootList * p = (cSortedListElement_bootList *) attributes.ptr () ;
@@ -8152,13 +5877,13 @@ void GALGAS_initList::plusAssign_operation (const GALGAS_initList inOperand,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initList::modifier_popSmallest (GALGAS_location & outOperand0,
-                                            GALGAS_initRequiredByProcList & outOperand1,
-                                            GALGAS_instructionListAST & outOperand2,
-                                            GALGAS_location & outOperand3,
-                                            GALGAS_lbigint & outOperand4,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GALGAS_initList::setter_popSmallest (GALGAS_location & outOperand0,
+                                          GALGAS_initRequiredByProcList & outOperand1,
+                                          GALGAS_instructionListAST & outOperand2,
+                                          GALGAS_location & outOperand3,
+                                          GALGAS_lbigint & outOperand4,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_initList * p = (cSortedListElement_initList *) attributes.ptr () ;
@@ -8180,13 +5905,13 @@ void GALGAS_initList::modifier_popSmallest (GALGAS_location & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initList::modifier_popGreatest (GALGAS_location & outOperand0,
-                                            GALGAS_initRequiredByProcList & outOperand1,
-                                            GALGAS_instructionListAST & outOperand2,
-                                            GALGAS_location & outOperand3,
-                                            GALGAS_lbigint & outOperand4,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GALGAS_initList::setter_popGreatest (GALGAS_location & outOperand0,
+                                          GALGAS_initRequiredByProcList & outOperand1,
+                                          GALGAS_instructionListAST & outOperand2,
+                                          GALGAS_location & outOperand3,
+                                          GALGAS_lbigint & outOperand4,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_initList * p = (cSortedListElement_initList *) attributes.ptr () ;
@@ -8529,13 +6254,13 @@ void GALGAS_exceptionClauseListAST::plusAssign_operation (const GALGAS_exception
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::modifier_popSmallest (GALGAS_lstring & outOperand0,
-                                                          GALGAS_instructionListAST & outOperand1,
-                                                          GALGAS_location & outOperand2,
-                                                          GALGAS_bigint & outOperand3,
-                                                          GALGAS_location & outOperand4,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_exceptionClauseListAST::setter_popSmallest (GALGAS_lstring & outOperand0,
+                                                        GALGAS_instructionListAST & outOperand1,
+                                                        GALGAS_location & outOperand2,
+                                                        GALGAS_bigint & outOperand3,
+                                                        GALGAS_location & outOperand4,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_exceptionClauseListAST * p = (cSortedListElement_exceptionClauseListAST *) attributes.ptr () ;
@@ -8557,13 +6282,13 @@ void GALGAS_exceptionClauseListAST::modifier_popSmallest (GALGAS_lstring & outOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::modifier_popGreatest (GALGAS_lstring & outOperand0,
-                                                          GALGAS_instructionListAST & outOperand1,
-                                                          GALGAS_location & outOperand2,
-                                                          GALGAS_bigint & outOperand3,
-                                                          GALGAS_location & outOperand4,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_exceptionClauseListAST::setter_popGreatest (GALGAS_lstring & outOperand0,
+                                                        GALGAS_instructionListAST & outOperand1,
+                                                        GALGAS_location & outOperand2,
+                                                        GALGAS_bigint & outOperand3,
+                                                        GALGAS_location & outOperand4,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_exceptionClauseListAST * p = (cSortedListElement_exceptionClauseListAST *) attributes.ptr () ;
@@ -8879,11 +6604,11 @@ void GALGAS_exceptionTypesAST::addAssign_operation (const GALGAS_lstring & inOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                       const GALGAS_lstring inOperand1,
-                                                       const GALGAS_uint inInsertionIndex,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_exceptionTypesAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                     const GALGAS_lstring inOperand1,
+                                                     const GALGAS_uint inInsertionIndex,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_exceptionTypesAST (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -8896,11 +6621,11 @@ void GALGAS_exceptionTypesAST::modifier_insertAtIndex (const GALGAS_lstring inOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                       GALGAS_lstring & outOperand1,
-                                                       const GALGAS_uint inRemoveIndex,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_exceptionTypesAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                     GALGAS_lstring & outOperand1,
+                                                     const GALGAS_uint inRemoveIndex,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -8918,10 +6643,10 @@ void GALGAS_exceptionTypesAST::modifier_removeAtIndex (GALGAS_lstring & outOpera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                                  GALGAS_lstring & outOperand1,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_exceptionTypesAST::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                GALGAS_lstring & outOperand1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
@@ -8937,10 +6662,10 @@ void GALGAS_exceptionTypesAST::modifier_popFirst (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::modifier_popLast (GALGAS_lstring & outOperand0,
-                                                 GALGAS_lstring & outOperand1,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_exceptionTypesAST::setter_popLast (GALGAS_lstring & outOperand0,
+                                               GALGAS_lstring & outOperand1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
@@ -11602,7 +9327,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i58_ (GALGAS_in
     var_ifLabel = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-if.galgas", 29)) ;
     {
-    ioArgument_ioLabelMap.modifier_insertKey (var_ifLabel, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 30)) ;
+    ioArgument_ioLabelMap.setter_insertKey (var_ifLabel, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 30)) ;
     }
   } break ;
   default:
@@ -11952,7 +9677,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i62_ (GALGAS_in
     var_whileLabel = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 26)) ;
     {
-    ioArgument_ioLabelMap.modifier_insertKey (var_whileLabel, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 27)) ;
+    ioArgument_ioLabelMap.setter_insertKey (var_whileLabel, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 27)) ;
     }
   } break ;
   default:
@@ -12340,12 +10065,12 @@ void GALGAS_procedureSignature::addAssign_operation (const GALGAS_procFormalArgu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureSignature::modifier_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
-                                                        const GALGAS_string inOperand1,
-                                                        const GALGAS_unifiedTypeMap_2D_proxy inOperand2,
-                                                        const GALGAS_uint inInsertionIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_procedureSignature::setter_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
+                                                      const GALGAS_string inOperand1,
+                                                      const GALGAS_unifiedTypeMap_2D_proxy inOperand2,
+                                                      const GALGAS_uint inInsertionIndex,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_procedureSignature (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -12358,12 +10083,12 @@ void GALGAS_procedureSignature::modifier_insertAtIndex (const GALGAS_procFormalA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureSignature::modifier_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                        GALGAS_string & outOperand1,
-                                                        GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                        const GALGAS_uint inRemoveIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_procedureSignature::setter_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                      GALGAS_string & outOperand1,
+                                                      GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                      const GALGAS_uint inRemoveIndex,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -12383,11 +10108,11 @@ void GALGAS_procedureSignature::modifier_removeAtIndex (GALGAS_procFormalArgumen
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureSignature::modifier_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                   GALGAS_string & outOperand1,
-                                                   GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_procedureSignature::setter_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                 GALGAS_string & outOperand1,
+                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
@@ -12405,11 +10130,11 @@ void GALGAS_procedureSignature::modifier_popFirst (GALGAS_procFormalArgumentPass
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureSignature::modifier_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                  GALGAS_string & outOperand1,
-                                                  GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_procedureSignature::setter_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
+                                                GALGAS_string & outOperand1,
+                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
@@ -12884,10 +10609,10 @@ void GALGAS_enumConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_enumConstantMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                 GALGAS_uint inArgument0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_enumConstantMap::setter_insertKey (GALGAS_lstring inKey,
+                                               GALGAS_uint inArgument0,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
   cMapElement_enumConstantMap * p = NULL ;
   macroMyNew (p, cMapElement_enumConstantMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -12937,10 +10662,10 @@ GALGAS_uint GALGAS_enumConstantMap::getter_mIndexForKey (const GALGAS_string & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_enumConstantMap::modifier_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_enumConstantMap::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
+                                                     GALGAS_string inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_enumConstantMap * p = (cMapElement_enumConstantMap *) attributes ;
   if (NULL != p) {
@@ -13185,12 +10910,12 @@ void GALGAS_structureFieldListAST::addAssign_operation (const GALGAS_lstring & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                           const GALGAS_lstring inOperand1,
-                                                           const GALGAS_expressionAST inOperand2,
-                                                           const GALGAS_uint inInsertionIndex,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_structureFieldListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                         const GALGAS_lstring inOperand1,
+                                                         const GALGAS_expressionAST inOperand2,
+                                                         const GALGAS_uint inInsertionIndex,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_structureFieldListAST (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -13203,12 +10928,12 @@ void GALGAS_structureFieldListAST::modifier_insertAtIndex (const GALGAS_lstring 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                           GALGAS_lstring & outOperand1,
-                                                           GALGAS_expressionAST & outOperand2,
-                                                           const GALGAS_uint inRemoveIndex,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_structureFieldListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                         GALGAS_lstring & outOperand1,
+                                                         GALGAS_expressionAST & outOperand2,
+                                                         const GALGAS_uint inRemoveIndex,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -13228,11 +10953,11 @@ void GALGAS_structureFieldListAST::modifier_removeAtIndex (GALGAS_lstring & outO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::modifier_popFirst (GALGAS_lstring & outOperand0,
-                                                      GALGAS_lstring & outOperand1,
-                                                      GALGAS_expressionAST & outOperand2,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_structureFieldListAST::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                    GALGAS_lstring & outOperand1,
+                                                    GALGAS_expressionAST & outOperand2,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
@@ -13250,11 +10975,11 @@ void GALGAS_structureFieldListAST::modifier_popFirst (GALGAS_lstring & outOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::modifier_popLast (GALGAS_lstring & outOperand0,
-                                                     GALGAS_lstring & outOperand1,
-                                                     GALGAS_expressionAST & outOperand2,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_structureFieldListAST::setter_popLast (GALGAS_lstring & outOperand0,
+                                                   GALGAS_lstring & outOperand1,
+                                                   GALGAS_expressionAST & outOperand2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
@@ -13638,11 +11363,11 @@ void GALGAS_propertyList::addAssign_operation (const GALGAS_string & inOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyList::modifier_insertAtIndex (const GALGAS_string inOperand0,
-                                                  const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
-                                                  const GALGAS_uint inInsertionIndex,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_propertyList::setter_insertAtIndex (const GALGAS_string inOperand0,
+                                                const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
+                                                const GALGAS_uint inInsertionIndex,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_propertyList (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -13655,11 +11380,11 @@ void GALGAS_propertyList::modifier_insertAtIndex (const GALGAS_string inOperand0
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyList::modifier_removeAtIndex (GALGAS_string & outOperand0,
-                                                  GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                                  const GALGAS_uint inRemoveIndex,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_propertyList::setter_removeAtIndex (GALGAS_string & outOperand0,
+                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                                const GALGAS_uint inRemoveIndex,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -13677,10 +11402,10 @@ void GALGAS_propertyList::modifier_removeAtIndex (GALGAS_string & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyList::modifier_popFirst (GALGAS_string & outOperand0,
-                                             GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
+void GALGAS_propertyList::setter_popFirst (GALGAS_string & outOperand0,
+                                           GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
@@ -13696,10 +11421,10 @@ void GALGAS_propertyList::modifier_popFirst (GALGAS_string & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyList::modifier_popLast (GALGAS_string & outOperand0,
-                                            GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
+void GALGAS_propertyList::setter_popLast (GALGAS_string & outOperand0,
+                                          GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
@@ -14029,11 +11754,11 @@ void GALGAS_propertyMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyMap::modifier_insertKey (GALGAS_lstring inKey,
-                                             GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                             GALGAS_uint inArgument1,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
+void GALGAS_propertyMap::setter_insertKey (GALGAS_lstring inKey,
+                                           GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                           GALGAS_uint inArgument1,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
   cMapElement_propertyMap * p = NULL ;
   macroMyNew (p, cMapElement_propertyMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -14101,10 +11826,10 @@ GALGAS_uint GALGAS_propertyMap::getter_mIndexForKey (const GALGAS_string & inKey
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyMap::modifier_setMTypeProxyForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_propertyMap::setter_setMTypeProxyForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                     GALGAS_string inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_propertyMap * p = (cMapElement_propertyMap *) attributes ;
   if (NULL != p) {
@@ -14115,10 +11840,10 @@ void GALGAS_propertyMap::modifier_setMTypeProxyForKey (GALGAS_unifiedTypeMap_2D_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyMap::modifier_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                   GALGAS_string inKey,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_propertyMap::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
+                                                 GALGAS_string inKey,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_propertyMap * p = (cMapElement_propertyMap *) attributes ;
   if (NULL != p) {
@@ -14361,11 +12086,11 @@ void GALGAS_allowedProcList::addAssign_operation (const GALGAS_bool & inOperand0
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedProcList::modifier_insertAtIndex (const GALGAS_bool inOperand0,
-                                                     const GALGAS_lstring inOperand1,
-                                                     const GALGAS_uint inInsertionIndex,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_allowedProcList::setter_insertAtIndex (const GALGAS_bool inOperand0,
+                                                   const GALGAS_lstring inOperand1,
+                                                   const GALGAS_uint inInsertionIndex,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_allowedProcList (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -14378,11 +12103,11 @@ void GALGAS_allowedProcList::modifier_insertAtIndex (const GALGAS_bool inOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedProcList::modifier_removeAtIndex (GALGAS_bool & outOperand0,
-                                                     GALGAS_lstring & outOperand1,
-                                                     const GALGAS_uint inRemoveIndex,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_allowedProcList::setter_removeAtIndex (GALGAS_bool & outOperand0,
+                                                   GALGAS_lstring & outOperand1,
+                                                   const GALGAS_uint inRemoveIndex,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -14400,10 +12125,10 @@ void GALGAS_allowedProcList::modifier_removeAtIndex (GALGAS_bool & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedProcList::modifier_popFirst (GALGAS_bool & outOperand0,
-                                                GALGAS_lstring & outOperand1,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GALGAS_allowedProcList::setter_popFirst (GALGAS_bool & outOperand0,
+                                              GALGAS_lstring & outOperand1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedProcList * p = (cCollectionElement_allowedProcList *) attributes.ptr () ;
@@ -14419,10 +12144,10 @@ void GALGAS_allowedProcList::modifier_popFirst (GALGAS_bool & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedProcList::modifier_popLast (GALGAS_bool & outOperand0,
-                                               GALGAS_lstring & outOperand1,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
+void GALGAS_allowedProcList::setter_popLast (GALGAS_bool & outOperand0,
+                                             GALGAS_lstring & outOperand1,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedProcList * p = (cCollectionElement_allowedProcList *) attributes.ptr () ;
@@ -14775,11 +12500,11 @@ void GALGAS_allowedInitList::addAssign_operation (const GALGAS_bool & inOperand0
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedInitList::modifier_insertAtIndex (const GALGAS_bool inOperand0,
-                                                     const GALGAS_lbigint inOperand1,
-                                                     const GALGAS_uint inInsertionIndex,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_allowedInitList::setter_insertAtIndex (const GALGAS_bool inOperand0,
+                                                   const GALGAS_lbigint inOperand1,
+                                                   const GALGAS_uint inInsertionIndex,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_allowedInitList (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -14792,11 +12517,11 @@ void GALGAS_allowedInitList::modifier_insertAtIndex (const GALGAS_bool inOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedInitList::modifier_removeAtIndex (GALGAS_bool & outOperand0,
-                                                     GALGAS_lbigint & outOperand1,
-                                                     const GALGAS_uint inRemoveIndex,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_allowedInitList::setter_removeAtIndex (GALGAS_bool & outOperand0,
+                                                   GALGAS_lbigint & outOperand1,
+                                                   const GALGAS_uint inRemoveIndex,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -14814,10 +12539,10 @@ void GALGAS_allowedInitList::modifier_removeAtIndex (GALGAS_bool & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedInitList::modifier_popFirst (GALGAS_bool & outOperand0,
-                                                GALGAS_lbigint & outOperand1,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
+void GALGAS_allowedInitList::setter_popFirst (GALGAS_bool & outOperand0,
+                                              GALGAS_lbigint & outOperand1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
@@ -14833,10 +12558,10 @@ void GALGAS_allowedInitList::modifier_popFirst (GALGAS_bool & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedInitList::modifier_popLast (GALGAS_bool & outOperand0,
-                                               GALGAS_lbigint & outOperand1,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
+void GALGAS_allowedInitList::setter_popLast (GALGAS_bool & outOperand0,
+                                             GALGAS_lbigint & outOperand1,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
@@ -15199,12 +12924,12 @@ void GALGAS_allowedExceptionList::addAssign_operation (const GALGAS_bool & inOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::modifier_insertAtIndex (const GALGAS_bool inOperand0,
-                                                          const GALGAS_lstring inOperand1,
-                                                          const GALGAS_lbigint inOperand2,
-                                                          const GALGAS_uint inInsertionIndex,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_allowedExceptionList::setter_insertAtIndex (const GALGAS_bool inOperand0,
+                                                        const GALGAS_lstring inOperand1,
+                                                        const GALGAS_lbigint inOperand2,
+                                                        const GALGAS_uint inInsertionIndex,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_allowedExceptionList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
@@ -15217,12 +12942,12 @@ void GALGAS_allowedExceptionList::modifier_insertAtIndex (const GALGAS_bool inOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::modifier_removeAtIndex (GALGAS_bool & outOperand0,
-                                                          GALGAS_lstring & outOperand1,
-                                                          GALGAS_lbigint & outOperand2,
-                                                          const GALGAS_uint inRemoveIndex,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_allowedExceptionList::setter_removeAtIndex (GALGAS_bool & outOperand0,
+                                                        GALGAS_lstring & outOperand1,
+                                                        GALGAS_lbigint & outOperand2,
+                                                        const GALGAS_uint inRemoveIndex,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
@@ -15242,11 +12967,11 @@ void GALGAS_allowedExceptionList::modifier_removeAtIndex (GALGAS_bool & outOpera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::modifier_popFirst (GALGAS_bool & outOperand0,
-                                                     GALGAS_lstring & outOperand1,
-                                                     GALGAS_lbigint & outOperand2,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_allowedExceptionList::setter_popFirst (GALGAS_bool & outOperand0,
+                                                   GALGAS_lstring & outOperand1,
+                                                   GALGAS_lbigint & outOperand2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
@@ -15264,11 +12989,11 @@ void GALGAS_allowedExceptionList::modifier_popFirst (GALGAS_bool & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::modifier_popLast (GALGAS_bool & outOperand0,
-                                                    GALGAS_lstring & outOperand1,
-                                                    GALGAS_lbigint & outOperand2,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_allowedExceptionList::setter_popLast (GALGAS_bool & outOperand0,
+                                                  GALGAS_lstring & outOperand1,
+                                                  GALGAS_lbigint & outOperand2,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
@@ -15619,10 +13344,10 @@ void GALGAS_allowedRoutineMap::addAssign_operation (const GALGAS_lstring & inKey
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedRoutineMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                   GALGAS_bool inArgument0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_allowedRoutineMap::setter_insertKey (GALGAS_lstring inKey,
+                                                 GALGAS_bool inArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cMapElement_allowedRoutineMap * p = NULL ;
   macroMyNew (p, cMapElement_allowedRoutineMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
@@ -15672,10 +13397,10 @@ GALGAS_bool GALGAS_allowedRoutineMap::getter_mHasWriteAccessForKey (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedRoutineMap::modifier_setMHasWriteAccessForKey (GALGAS_bool inAttributeValue,
-                                                                  GALGAS_string inKey,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_allowedRoutineMap::setter_setMHasWriteAccessForKey (GALGAS_bool inAttributeValue,
+                                                                GALGAS_string inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_allowedRoutineMap * p = (cMapElement_allowedRoutineMap *) attributes ;
   if (NULL != p) {
@@ -15766,6 +13491,899 @@ GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::extractObject (const GALGAS_o
       result = *p ;
     }else{
       inCompiler->castError ("allowedRoutineMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation::GALGAS_llvmBinaryOperation (void) :
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_addNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_addNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_subNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_subNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_mulNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_mulNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_udivNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_sdivNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_uremNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_sremNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uaddOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_uaddOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_saddOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_saddOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_usubOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_usubOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ssubOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_ssubOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_umulOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_umulOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_smulOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_smulOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_udivOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_sdivOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_uremOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_sremOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_and (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_and ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ior (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_ior ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_xor (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_xor ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_shl (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_shl ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ashr (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_ashr ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_lshr (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_lshr ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_eq ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ne (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_ne ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ult (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_ult ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ule (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_ule ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ugt (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_ugt ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_uge (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_uge ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_slt (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_slt ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sle (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_sle ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sgt (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_sgt ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sge (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_sge ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_llvmBinaryOperation [34] = {
+  "(not built)",
+  "addNoOVF",
+  "subNoOVF",
+  "mulNoOVF",
+  "udivNoOVF",
+  "sdivNoOVF",
+  "uremNoOVF",
+  "sremNoOVF",
+  "uaddOVF",
+  "saddOVF",
+  "usubOVF",
+  "ssubOVF",
+  "umulOVF",
+  "smulOVF",
+  "udivOVF",
+  "sdivOVF",
+  "uremOVF",
+  "sremOVF",
+  "and",
+  "ior",
+  "xor",
+  "shl",
+  "ashr",
+  "lshr",
+  "icmp_eq",
+  "icmp_ne",
+  "icmp_ult",
+  "icmp_ule",
+  "icmp_ugt",
+  "icmp_uge",
+  "icmp_slt",
+  "icmp_sle",
+  "icmp_sgt",
+  "icmp_sge"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAddNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_addNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSubNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_subNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isMulNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUdivNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_udivNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSdivNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sdivNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUremNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uremNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSremNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sremNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUaddOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uaddOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSaddOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_saddOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUsubOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_usubOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSsubOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ssubOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUmulOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_umulOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSmulOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_smulOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUdivOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_udivOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSdivOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sdivOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUremOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uremOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSremOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sremOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAnd (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_and == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIor (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ior == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isXor (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_xor == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isShl (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_shl == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAshr (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ashr == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isLshr (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_lshr == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_eq (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_eq == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ne (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ne == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ult (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ult == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ule (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ule == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ugt (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ugt == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_uge (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_uge == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_slt (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_slt == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sle (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sle == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sgt (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sgt == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sge (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sge == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_llvmBinaryOperation::description (C_String & ioString,
+                                              const int32_t /* inIndentation */) const {
+  ioString << "<enum @llvmBinaryOperation: " << gEnumNameArrayFor_llvmBinaryOperation [mEnum] ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_llvmBinaryOperation::objectCompare (const GALGAS_llvmBinaryOperation & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @llvmBinaryOperation type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_llvmBinaryOperation ("llvmBinaryOperation",
+                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_llvmBinaryOperation::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_llvmBinaryOperation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_llvmBinaryOperation::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_llvmBinaryOperation (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  const GALGAS_llvmBinaryOperation * p = (const GALGAS_llvmBinaryOperation *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_llvmBinaryOperation *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("llvmBinaryOperation", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator::GALGAS_literalIntegerInfixOperator (void) :
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_equal (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_equal ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_nonEqual (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_nonEqual ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_strictInf (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_strictInf ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_strictSup (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_strictSup ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_infEqual (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_infEqual ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_supEqual (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_supEqual ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_and (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_and ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_ior (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_ior ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_xor (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_xor ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_add (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_add ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_sub (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_sub ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_mul (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_mul ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_div (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_div ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_rem (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_rem ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_leftShift (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_leftShift ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::constructor_rightShift (UNUSED_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  result.mEnum = kEnum_rightShift ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_literalIntegerInfixOperator [17] = {
+  "(not built)",
+  "equal",
+  "nonEqual",
+  "strictInf",
+  "strictSup",
+  "infEqual",
+  "supEqual",
+  "and",
+  "ior",
+  "xor",
+  "add",
+  "sub",
+  "mul",
+  "div",
+  "rem",
+  "leftShift",
+  "rightShift"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isEqual (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_equal == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isNonEqual (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_nonEqual == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isStrictInf (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_strictInf == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isStrictSup (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_strictSup == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isInfEqual (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infEqual == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isSupEqual (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_supEqual == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isAnd (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_and == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isIor (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ior == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isXor (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_xor == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isAdd (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_add == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isSub (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sub == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isMul (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mul == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isDiv (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_div == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isRem (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_rem == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isLeftShift (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_leftShift == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_literalIntegerInfixOperator::getter_isRightShift (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_rightShift == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_literalIntegerInfixOperator::description (C_String & ioString,
+                                                      const int32_t /* inIndentation */) const {
+  ioString << "<enum @literalIntegerInfixOperator: " << gEnumNameArrayFor_literalIntegerInfixOperator [mEnum] ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_literalIntegerInfixOperator::objectCompare (const GALGAS_literalIntegerInfixOperator & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @literalIntegerInfixOperator type                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_literalIntegerInfixOperator ("literalIntegerInfixOperator",
+                                                    NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_literalIntegerInfixOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_literalIntegerInfixOperator ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_literalIntegerInfixOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_literalIntegerInfixOperator (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalIntegerInfixOperator GALGAS_literalIntegerInfixOperator::extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_literalIntegerInfixOperator result ;
+  const GALGAS_literalIntegerInfixOperator * p = (const GALGAS_literalIntegerInfixOperator *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_literalIntegerInfixOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("literalIntegerInfixOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
