@@ -9,7 +9,7 @@ enum @typeKind {
   case boolset
   case literalString
   case enumeration (@enumConstantMap constantMap)
-  case structure (@string name @propertyMap propertyMap @propertyList propertyList)
+  case structure (@string name @propertyMap propertyMap @propertyList propertyList @procedureMap procedureMap)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case literalInteger
 }
@@ -131,7 +131,7 @@ getter @unifiedTypeMap-proxy llvmTypeName -> @string outResult {
   case boolean : outResult = "i1"
   case boolset : outResult = "<<boolset>>"
   case enumeration (@enumConstantMap constantMap) : outResult = "i" + [[constantMap count] - 1 significantBitCount]
-  case structure (@string name @propertyMap unused propertyMap *) :  outResult = "%" + name
+  case structure (@string name @propertyMap unused propertyMap * *) :  outResult = "%" + name
   case integer (* * @bool unused unsigned @uint bitCount) : outResult = "i" + bitCount
   case literalString :  outResult = "i8*"
   case literalInteger : outResult = "<<literalInteger>>"

@@ -29,6 +29,7 @@ proc checkAssignmentCompatibility
 
 abstract method @abstractDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -64,13 +65,14 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
+  @semanticTemporariesStruct temporaries = .default
   for (declaration) in inAST.mDeclarationList do
     [declaration semanticAnalysis
       !context:inSemanticContext
+      !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
-  @semanticTemporariesStruct temporaries = .default
   for procedure in inAST.mProcedureListAST do
     [procedure procedureSemanticAnalysis
       !context:inSemanticContext

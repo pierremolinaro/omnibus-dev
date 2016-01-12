@@ -1,6 +1,6 @@
-#----------------------------------------------------------------------------------------------------------------------*
-#  AST                                                                                                                 *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @procEffectiveParameterPassingModeAST {
   case input (@lstring name)
@@ -8,7 +8,7 @@ enum @procEffectiveParameterPassingModeAST {
   case outputInput (@lstring name)
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstring inSelector -> @string outResult {
   switch self
@@ -21,28 +21,41 @@ getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstr
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procEffectiveParameterListAST {
   @procEffectiveParameterPassingModeAST mEffectiveParameterKind
   @lstring mSelector
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @procCallInstructionAST : @instructionAST {
-  @lstring mProcRoutineName
+  @lstring mReceiverName
+  @lstring mProcName
   @procEffectiveParameterListAST mEffectiveParameterList
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
 
+  #·····················································································································
+
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-    $identifier$ ?let procRoutineName
+    @lstring receiverName
+    @lstring procName
+    $identifier$ ?let x
+    select
+      procName = x
+      receiverName = ["" nowhere]
+    or
+      $.$
+      receiverName = x
+      $identifier$ ?procName
+    end
     @procEffectiveParameterListAST effectiveParameterList = {}
     $($
     repeat
@@ -61,16 +74,19 @@ syntax extension common_syntax {
     end
     $)$
     ioInstructionList += !@procCallInstructionAST.new {
-      !procRoutineName
+      !receiverName
+      !procName
       !effectiveParameterList
     }
   }
 
+  #·····················································································································
+
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  SEMANTICS                                                                                                           *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procEffectiveParameterList {
   @procEffectiveParameterPassingModeAST mEffectiveParameterPassingMode
@@ -78,7 +94,7 @@ list @procEffectiveParameterList {
   @unifiedTypeMap-proxy mParameterType
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procCallInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
@@ -92,21 +108,60 @@ override method @procCallInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Search proc in proc map
-  [inContext.mProcedureMap searchKey
-    !mProcRoutineName
-    ?*
-    ?let procedureModeMap
-    ?let @procedureSignature procSignature
-    ?*
-  ]
+  @procCallEffectiveParameterListIR procCallEffectiveParameterListIR = {}
+  @procedureSignature procSignature
+  @modeMap procedureModeMap
+  @string procedureMangledName = ""
+  if mReceiverName.string != "" then
+    [!?ioVariableMap searchForReadAccess
+      !mReceiverName
+      ?let type
+      ?*
+      ?@objectInMemoryIR variableKind
+      ?4*
+    ]
+  #--- Load variable
+    [variableKind loadFromMemory
+      !?temporary:ioTemporaries
+      !?instructionListIR:ioInstructionGenerationList
+      ?resultingValue:let receiverVariable
+    ]
+    procCallEffectiveParameterListIR += !.output !["" nowhere] !receiverVariable
+    procedureMangledName += [type key] + "."
+    @procedureMap procedureMap
+    switch [type kind]
+    case structure (* * * procMap) : procedureMap = procMap
+    case enumeration (*) : procedureMap = {}
+    case integer (* * * *) : procedureMap = {}
+    case literalInteger : procedureMap = {}
+    case boolean : procedureMap = {}
+    case boolset : procedureMap = {}
+    case literalString : procedureMap = {}
+    end
+    [procedureMap searchKey
+      !mProcName
+      ?*
+      ?procedureModeMap
+      ?procSignature
+      ?*
+    ]
+  else
+    [inContext.mProcedureMap searchKey
+      !mProcName
+      ?*
+      ?procedureModeMap
+      ?procSignature
+      ?*
+    ]
+  end
+  procedureMangledName += mProcName.string
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
     !inRoutineNameForInvocationGraph
-    !.new {!"proc " + mProcRoutineName !mProcRoutineName.location}
+    !.new {!"proc " + procedureMangledName !mProcName.location}
   ]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}
-  @procCallEffectiveParameterListIR procCallEffectiveParameterListIR = {}
   for () formal_ in procSignature, () in mEffectiveParameterList do
     switch mEffectiveParameterKind 
     case input (@lstring name) :
@@ -185,10 +240,10 @@ override method @procCallInstructionAST analyze
   checkMode (
     !requiredModes:inModeSet
     !possibleModes:[procedureModeMap keySet]
-    !error:mProcRoutineName.location
+    !error:mProcName.location
   )
   if [procSignature length] != [parameterList length] then
-    error mProcRoutineName: "this proc requires " + [procSignature length] + " argument(s), this call names "
+    error mProcName: "this proc requires " + [procSignature length] + " argument(s), this call names "
       + [procSignature length] + " argument(s)"
   else
     for () formal_ in procSignature, () actual_ in parameterList do
@@ -205,14 +260,14 @@ override method @procCallInstructionAST analyze
   end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
-    !mProcRoutineName.string
+    !procedureMangledName
     !procCallEffectiveParameterListIR
   }
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @procEffectiveParameterPassingModeIR {
   case input
@@ -220,7 +275,7 @@ enum @procEffectiveParameterPassingModeIR {
   case outputInput
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
@@ -228,14 +283,14 @@ list @procCallEffectiveParameterListIR {
   @operandIR mParameter
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @procCallInstructionIR : @abstractInstructionIR {
   @string mProcName
   @procCallEffectiveParameterListIR mParameters
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procCallInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -259,10 +314,10 @@ override method @procCallInstructionIR llvmInstructionCode
   ioLLVMcode += ")\n"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mProcedureSet += !mProcName
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

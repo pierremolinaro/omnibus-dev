@@ -167,6 +167,7 @@ override method @enumerationDeclaration initAnalysis ?!context:@semanticContext 
 
 override method @enumerationDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }

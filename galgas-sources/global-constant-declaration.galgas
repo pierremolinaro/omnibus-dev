@@ -133,6 +133,7 @@ override method @globalConstantDeclaration initAnalysis ?!context:@semanticConte
 
 override method @globalConstantDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   [inContext.mGlobalConstantMap searchKey

@@ -1076,9 +1076,49 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
+//--- File 'teensy-3-1-it/11-structure-procs.plm'
+
+const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "struct $MyStruct {\n"
+  "  var x $int32 = 9\n"
+  "  var y $int32 = 9\n"
+  "\n"
+  "  proc nop `user () {\n"
+  "  }\n"
+  "//  proc getX `user (!outX $int32) {\n"
+  "//    outX = x \n"
+  "//  }\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc setup `user () {\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc loop `user () {\n"
+  "  var s = $MyStruct ()\n"
+  "  s.nop ()\n"
+  "//  var x $int32 ; s.getX (\?x)\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
+  "11-structure-procs.plm",
+  "plm",
+  true, // Text file
+  495, // Text length
+  gWrapperFileContent_10_embeddedSampleCode
+) ;
+
 //--- All files of 'teensy-3-1-it' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [11] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [12] = {
   & gWrapperFile_0_embeddedSampleCode,
   & gWrapperFile_1_embeddedSampleCode,
   & gWrapperFile_2_embeddedSampleCode,
@@ -1089,6 +1129,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [11] = 
   & gWrapperFile_7_embeddedSampleCode,
   & gWrapperFile_8_embeddedSampleCode,
   & gWrapperFile_9_embeddedSampleCode,
+  & gWrapperFile_10_embeddedSampleCode,
   NULL
 } ;
 
@@ -1102,7 +1143,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1]
 
 const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   "teensy-3-1-it",
-  10,
+  11,
   gWrapperAllFiles_embeddedSampleCode_1,
   0,
   gWrapperAllDirectories_embeddedSampleCode_1
@@ -1110,7 +1151,7 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
 
 //--- File 'teensy-3-1-xtr/01-blinkled.plm'
 
-const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-xtr\"\n"
+const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-xtr\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1134,18 +1175,18 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-xt
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "01-blinkled.plm",
   "plm",
   true, // Text file
   445, // Text length
-  gWrapperFileContent_10_embeddedSampleCode
+  gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-xtr' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [2] = {
-  & gWrapperFile_10_embeddedSampleCode,
+  & gWrapperFile_11_embeddedSampleCode,
   NULL
 } ;
 
@@ -2855,6 +2896,9 @@ typeComparisonResult cPtr_structureDeclaration::dynamicObjectCompare (const acPt
   if (kOperandEqual == result) {
     result = mAttribute_mStructureFieldListAST.objectCompare (p->mAttribute_mStructureFieldListAST) ;
   }
+  if (kOperandEqual == result) {
+    result = mAttribute_mProcedureDeclarationListAST.objectCompare (p->mAttribute_mProcedureDeclarationListAST) ;
+  }
   return result ;
 }
 
@@ -2888,7 +2932,8 @@ GALGAS_abstractDeclaration () {
 GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_default (LOCATION_ARGS) {
   return GALGAS_structureDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
                                                        GALGAS_lstringlist::constructor_emptyList (HERE),
-                                                       GALGAS_structureFieldListAST::constructor_emptyList (HERE)
+                                                       GALGAS_structureFieldListAST::constructor_emptyList (HERE),
+                                                       GALGAS_procedureDeclarationListAST::constructor_emptyList (HERE)
                                                        COMMA_THERE) ;
 }
 
@@ -2903,11 +2948,12 @@ GALGAS_abstractDeclaration (inSourcePtr) {
 
 GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mStructureName,
                                                                           const GALGAS_lstringlist & inAttribute_mAttributeList,
-                                                                          const GALGAS_structureFieldListAST & inAttribute_mStructureFieldListAST
+                                                                          const GALGAS_structureFieldListAST & inAttribute_mStructureFieldListAST,
+                                                                          const GALGAS_procedureDeclarationListAST & inAttribute_mProcedureDeclarationListAST
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_structureDeclaration result ;
-  if (inAttribute_mStructureName.isValid () && inAttribute_mAttributeList.isValid () && inAttribute_mStructureFieldListAST.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_structureDeclaration (inAttribute_mStructureName, inAttribute_mAttributeList, inAttribute_mStructureFieldListAST COMMA_THERE)) ;
+  if (inAttribute_mStructureName.isValid () && inAttribute_mAttributeList.isValid () && inAttribute_mStructureFieldListAST.isValid () && inAttribute_mProcedureDeclarationListAST.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_structureDeclaration (inAttribute_mStructureName, inAttribute_mAttributeList, inAttribute_mStructureFieldListAST, inAttribute_mProcedureDeclarationListAST COMMA_THERE)) ;
   }
   return result ;
 }
@@ -2967,17 +3013,37 @@ GALGAS_structureFieldListAST cPtr_structureDeclaration::getter_mStructureFieldLi
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procedureDeclarationListAST GALGAS_structureDeclaration::getter_mProcedureDeclarationListAST (UNUSED_LOCATION_ARGS) const {
+  GALGAS_procedureDeclarationListAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_structureDeclaration * p = (const cPtr_structureDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_structureDeclaration) ;
+    result = p->mAttribute_mProcedureDeclarationListAST ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procedureDeclarationListAST cPtr_structureDeclaration::getter_mProcedureDeclarationListAST (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mProcedureDeclarationListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                    Pointer class for @structureDeclaration class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_structureDeclaration::cPtr_structureDeclaration (const GALGAS_lstring & in_mStructureName,
                                                       const GALGAS_lstringlist & in_mAttributeList,
-                                                      const GALGAS_structureFieldListAST & in_mStructureFieldListAST
+                                                      const GALGAS_structureFieldListAST & in_mStructureFieldListAST,
+                                                      const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclaration (THERE),
 mAttribute_mStructureName (in_mStructureName),
 mAttribute_mAttributeList (in_mAttributeList),
-mAttribute_mStructureFieldListAST (in_mStructureFieldListAST) {
+mAttribute_mStructureFieldListAST (in_mStructureFieldListAST),
+mAttribute_mProcedureDeclarationListAST (in_mProcedureDeclarationListAST) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2994,6 +3060,8 @@ void cPtr_structureDeclaration::description (C_String & ioString,
   mAttribute_mAttributeList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mStructureFieldListAST.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mProcedureDeclarationListAST.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -3001,7 +3069,7 @@ void cPtr_structureDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_structureDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_structureDeclaration (mAttribute_mStructureName, mAttribute_mAttributeList, mAttribute_mStructureFieldListAST COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_structureDeclaration (mAttribute_mStructureName, mAttribute_mAttributeList, mAttribute_mStructureFieldListAST, mAttribute_mProcedureDeclarationListAST COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -14143,7 +14211,10 @@ typeComparisonResult cPtr_procCallInstructionAST::dynamicObjectCompare (const ac
   const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_procCallInstructionAST) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mProcRoutineName.objectCompare (p->mAttribute_mProcRoutineName) ;
+    result = mAttribute_mReceiverName.objectCompare (p->mAttribute_mReceiverName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mProcName.objectCompare (p->mAttribute_mProcName) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mEffectiveParameterList.objectCompare (p->mAttribute_mEffectiveParameterList) ;
@@ -14180,6 +14251,7 @@ GALGAS_instructionAST () {
 
 GALGAS_procCallInstructionAST GALGAS_procCallInstructionAST::constructor_default (LOCATION_ARGS) {
   return GALGAS_procCallInstructionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                         GALGAS_lstring::constructor_default (HERE),
                                                          GALGAS_procEffectiveParameterListAST::constructor_emptyList (HERE)
                                                          COMMA_THERE) ;
 }
@@ -14193,32 +14265,51 @@ GALGAS_instructionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procCallInstructionAST GALGAS_procCallInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mProcRoutineName,
+GALGAS_procCallInstructionAST GALGAS_procCallInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mReceiverName,
+                                                                              const GALGAS_lstring & inAttribute_mProcName,
                                                                               const GALGAS_procEffectiveParameterListAST & inAttribute_mEffectiveParameterList
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_procCallInstructionAST result ;
-  if (inAttribute_mProcRoutineName.isValid () && inAttribute_mEffectiveParameterList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionAST (inAttribute_mProcRoutineName, inAttribute_mEffectiveParameterList COMMA_THERE)) ;
+  if (inAttribute_mReceiverName.isValid () && inAttribute_mProcName.isValid () && inAttribute_mEffectiveParameterList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionAST (inAttribute_mReceiverName, inAttribute_mProcName, inAttribute_mEffectiveParameterList COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_procCallInstructionAST::getter_mProcRoutineName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_procCallInstructionAST::getter_mReceiverName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_procCallInstructionAST) ;
-    result = p->mAttribute_mProcRoutineName ;
+    result = p->mAttribute_mReceiverName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_procCallInstructionAST::getter_mProcRoutineName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcRoutineName ;
+GALGAS_lstring cPtr_procCallInstructionAST::getter_mReceiverName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mReceiverName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_procCallInstructionAST::getter_mProcName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_procCallInstructionAST) ;
+    result = p->mAttribute_mProcName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_procCallInstructionAST::getter_mProcName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mProcName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14243,11 +14334,13 @@ GALGAS_procEffectiveParameterListAST cPtr_procCallInstructionAST::getter_mEffect
 //                                   Pointer class for @procCallInstructionAST class                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_procCallInstructionAST::cPtr_procCallInstructionAST (const GALGAS_lstring & in_mProcRoutineName,
+cPtr_procCallInstructionAST::cPtr_procCallInstructionAST (const GALGAS_lstring & in_mReceiverName,
+                                                          const GALGAS_lstring & in_mProcName,
                                                           const GALGAS_procEffectiveParameterListAST & in_mEffectiveParameterList
                                                           COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (THERE),
-mAttribute_mProcRoutineName (in_mProcRoutineName),
+mAttribute_mReceiverName (in_mReceiverName),
+mAttribute_mProcName (in_mProcName),
 mAttribute_mEffectiveParameterList (in_mEffectiveParameterList) {
 }
 
@@ -14260,7 +14353,9 @@ const C_galgas_type_descriptor * cPtr_procCallInstructionAST::classDescriptor (v
 void cPtr_procCallInstructionAST::description (C_String & ioString,
                                                const int32_t inIndentation) const {
   ioString << "[@procCallInstructionAST:" ;
-  mAttribute_mProcRoutineName.description (ioString, inIndentation+1) ;
+  mAttribute_mReceiverName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mProcName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mEffectiveParameterList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -14270,7 +14365,7 @@ void cPtr_procCallInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_procCallInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_procCallInstructionAST (mAttribute_mProcRoutineName, mAttribute_mEffectiveParameterList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_procCallInstructionAST (mAttribute_mReceiverName, mAttribute_mProcName, mAttribute_mEffectiveParameterList COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -15445,66 +15540,5 @@ GALGAS_location callCategoryGetter_location (const cPtr_abstractDeclaration * in
     }
   }
   return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Abstract category method '@expressionAST addDependenceEdgeForStaticExpression'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression> gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_addDependenceEdgeForStaticExpression (const int32_t inClassIndex,
-                                                               categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression inMethod) {
-  gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_expressionAST_addDependenceEdgeForStaticExpression (void) {
-  gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_expressionAST_addDependenceEdgeForStaticExpression (NULL,
-                                                                               freeCategoryMethod_expressionAST_addDependenceEdgeForStaticExpression) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
-                                                              const GALGAS_lstring constin_inConstantName,
-                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_expressionAST) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression f = NULL ;
-    if (classIndex < gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.count ()) {
-      f = gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.count ()) {
-           f = gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, constin_inConstantName, io_ioGraph, inCompiler COMMA_THERE) ;
-    }
-  }
 }
 

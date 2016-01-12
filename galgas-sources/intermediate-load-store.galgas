@@ -39,9 +39,9 @@ method @objectInMemoryIR loadFromMemory
     ]
   case fieldAccess (@unifiedTypeMap-proxy unused objectType
                     @string unused objectName
-                    @unifiedTypeMap-proxy unused fielfType
+                    @unifiedTypeMap-proxy unused fieldType
                     @uint unused fieldIndex) :
-    error .nowhere : "@objectInMemoryIR loadFromMemory:access" : outResultingValue
+    error .nowhere : "@objectInMemoryIR loadFromMemory:fieldAccess" : outResultingValue
   end
 }
 
