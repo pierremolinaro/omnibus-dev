@@ -401,6 +401,7 @@ extern const char * gWrapperFileContent_7_embeddedSampleCode ;
 extern const char * gWrapperFileContent_8_embeddedSampleCode ;
 extern const char * gWrapperFileContent_9_embeddedSampleCode ;
 extern const char * gWrapperFileContent_10_embeddedSampleCode ;
+extern const char * gWrapperFileContent_11_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -418,6 +419,7 @@ extern const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2973,30 +2975,5 @@ class cPtr_integerObject_5F_literal_5F_divisionOperator : public cPtr_infixOpera
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Abstract category method '@expressionAST addDependenceEdgeForStaticExpression'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression) (const class cPtr_expressionAST * inObject,
-                                                                                            const class GALGAS_lstring constinArgument0,
-                                                                                            class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
-                                                                                            class C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_addDependenceEdgeForStaticExpression (const int32_t inClassIndex,
-                                                               categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_addDependenceEdgeForStaticExpression (const class cPtr_expressionAST * inObject,
-                                                              const GALGAS_lstring constin_inConstantName,
-                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
 
 #endif

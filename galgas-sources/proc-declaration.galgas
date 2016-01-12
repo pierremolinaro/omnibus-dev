@@ -1,6 +1,6 @@
-#----------------------------------------------------------------------------------------------------------------------*
-#  AST                                                                                                                 *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @procFormalArgumentPassingMode {
   case input
@@ -8,7 +8,7 @@ enum @procFormalArgumentPassingMode {
   case inputOutput
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procFormalArgumentList {
   @procFormalArgumentPassingMode mFormalArgumentPassingMode
@@ -17,7 +17,7 @@ list @procFormalArgumentList {
   @lstring mFormalArgumentName
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@string inSelector -> @string outResult {
   switch self
@@ -30,17 +30,9 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@str
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-
-enum @procedureKindAST {
-  case standAloneProc
-  case structureProc (@lstring structureTypeName @bool mutating)
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procedureDeclarationListAST {
-  @procedureKindAST mProcedureKind
   @lstringlist mProcedureModeList
   @lstring mProcedureName
   @lstringlist mProcedureAttributeList
@@ -49,22 +41,21 @@ list @procedureDeclarationListAST {
   @location mEndOfProcLocation
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @labelMap {
   insert insertKey error message "the '%K' label is already declared"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
 
-  #--------------------------------------------------------------------------------------------------------------------*
+  #·····················································································································
 
   rule <procedure>
-    ?procedureKind:let @procedureKindAST inProcedureKind
     ?!@procedureDeclarationListAST ioProcListAST
   {
     <procedure_header>
@@ -77,7 +68,6 @@ syntax extension common_syntax {
     <instructionList> ?let instructionList !?labelMap
     $}$
     ioProcListAST +=
-      !inProcedureKind
       !procModeList
       !procName
       !attributeList
@@ -86,7 +76,7 @@ syntax extension common_syntax {
       !.here
   }
 
-  #--------------------------------------------------------------------------------------------------------------------*
+  #·····················································································································
 
   rule <procedure_header>
     !procModes:@lstringlist outProcModeList
@@ -111,7 +101,7 @@ syntax extension common_syntax {
     <procedure_formal_arguments> ?formalArguments:outProcFormalArgumentList
   }
 
-  #--------------------------------------------------------------------------------------------------------------------*
+  #·····················································································································
 
   rule <procedure_formal_arguments>
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
@@ -150,30 +140,26 @@ syntax extension common_syntax {
     $)$
   }
 
-  #--------------------------------------------------------------------------------------------------------------------*
+  #·····················································································································
 
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  PRECEDENCE GRAPH                                                                                                    *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @procedureDeclarationListAST-element enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
 #--- Enter only stand alone procedures
-  switch mProcedureKind
-  case standAloneProc :
-    for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
-      [!?ioGraph noteNode !formalArgumentTypeName]
-    end
-  case structureProc (* *) :
+  for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
+    [!?ioGraph noteNode !formalArgumentTypeName]
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  ENTER IN CONTEXT                                                                                                    *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @procedureMap {
   @bool mMutating
@@ -186,58 +172,45 @@ map @procedureMap {
   remove removeKey error message "there is no '%K' proc"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @procedureDeclarationListAST-element enterInContext
   ?!context:@semanticContext ioContext
 {
-#--- Enter only stand alone procedures
-  switch mProcedureKind
-  case standAloneProc :
-  #--- Signature
-    @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
-      signature += !formalArgumentPassingMode !selector.string !typeProxy
-    end
-  #--- Mode map
-    @modeMap procedureModeMap = {}
-    for () in mProcedureModeList do
-      [!?procedureModeMap insertKey !mValue] ;
-    end
-  #--- Weak procedure ?
-    var weakProcedure = false
-    for (attribute) in mProcedureAttributeList while not weakProcedure do
-      weakProcedure = attribute.string == weakAttribute ()
-    end
-  #--- Enter in context
-#    let mangledName = [self mangledName]
-    if [ioContext.mProcedureMap hasKey !mProcedureName.string] then
-      let weak = [ioContext.mProcedureMap mWeakProcedureForKey !mProcedureName.string]
-      if weakProcedure && not weak then
-        # redefined weak procedure is ignored
-      elsif weakProcedure && weak then
-        error mProcedureName : "this weak procedure overrides a weak procedure"
-      elsif (not weakProcedure) && weak then
-        [!?ioContext.mProcedureMap removeKey !mProcedureName ?4*] # Remove weak routine
-        [!?ioContext.mProcedureMap insertKey # Insert routine
-          !mProcedureName
-          !false # not mutating
-          !procedureModeMap
-          !signature
-          !weakProcedure
-        ]
-      else # (not weakProcedure) && (not weak)
-        [!?ioContext.mProcedureMap insertKey # Raises a redefinition error
-          !mProcedureName
-          !false # not mutating
-          !procedureModeMap
-          !signature
-          !weakProcedure
-        ]
-      end
-    else
-      [!?ioContext.mProcedureMap insertKey
+#--- Signature
+  @procedureSignature signature = {}
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+    signature += !formalArgumentPassingMode !selector.string !typeProxy
+  end
+#--- Mode map
+  @modeMap procedureModeMap = {}
+  for () in mProcedureModeList do
+    [!?procedureModeMap insertKey !mValue] ;
+  end
+#--- Weak procedure ?
+  var weakProcedure = false
+  for (attribute) in mProcedureAttributeList while not weakProcedure do
+    weakProcedure = attribute.string == weakAttribute ()
+  end
+#--- Enter in context
+  if [ioContext.mProcedureMap hasKey !mProcedureName.string] then
+    let weak = [ioContext.mProcedureMap mWeakProcedureForKey !mProcedureName.string]
+    if weakProcedure && not weak then
+      # redefined weak procedure is ignored
+    elsif weakProcedure && weak then
+      error mProcedureName : "this weak procedure overrides a weak procedure"
+    elsif (not weakProcedure) && weak then
+      [!?ioContext.mProcedureMap removeKey !mProcedureName ?4*] # Remove weak routine
+      [!?ioContext.mProcedureMap insertKey # Insert routine
+        !mProcedureName
+        !false # not mutating
+        !procedureModeMap
+        !signature
+        !weakProcedure
+      ]
+    else # (not weakProcedure) && (not weak)
+      [!?ioContext.mProcedureMap insertKey # Raises a redefinition error
         !mProcedureName
         !false # not mutating
         !procedureModeMap
@@ -245,13 +218,20 @@ method @procedureDeclarationListAST-element enterInContext
         !weakProcedure
       ]
     end
-  case structureProc (* *) :
+  else
+    [!?ioContext.mProcedureMap insertKey
+      !mProcedureName
+      !false # not mutating
+      !procedureModeMap
+      !signature
+      !weakProcedure
+    ]
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  SEMANTIC ANALYSIS                                                                                                   *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procFormalArgumentListForGeneration {
   @procFormalArgumentPassingMode mFormalArgumentKind
@@ -259,13 +239,64 @@ list @procFormalArgumentListForGeneration {
   @string mFormalArgumentName
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 graph @subprogramInvocationGraph (@lstringlist) {
   insert addNode error message "the '%K' subprogram is already declared at %L"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc enterFormalArguments
+  ?context:let @semanticContext inContext
+  ?let @procFormalArgumentList inFormalArgumentPassingMode
+  ?!@variableMap ioVariableMap
+  ?!@procFormalArgumentListForGeneration ioFormalArguments
+{
+  for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
+    switch argumentKind
+    case input :
+      [!?ioVariableMap insertConstantInputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !true
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
+        ![typeProxy copiable]
+        !{}
+        !true
+        !true # Is constant
+      ]
+      ioFormalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+    case inputOutput :
+      [!?ioVariableMap insertInputOutputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !true
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
+        ![typeProxy copiable]
+        !{}
+        !true
+        !false # Is not constant
+      ]
+      ioFormalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+    case output :
+      [!?ioVariableMap insertOutputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !true
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
+        ![typeProxy copiable]
+        !{}
+        !true
+        !false # Is not constant
+      ]
+      ioFormalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @procedureDeclarationListAST-element procedureSemanticAnalysis
   ?context:let @semanticContext inContext
@@ -278,7 +309,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     [inContext.mModeMap searchKey !mode.mValue]
     procedureModeSet += !mode.mValue.string
   end
-#--- Attribues
+#--- Attributes
   var warnIfUnused = true
   var weakProcedure = false
   var nullOnNoException = false
@@ -310,114 +341,14 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     !context:inContext
     !globalsAreConstant:false
   )
-#--- Add receiver properties, and receiver as first argument
-  @procFormalArgumentListForGeneration formalArguments = {}
-  @receiverType receiverType
-  switch mProcedureKind
-  case standAloneProc :
-    receiverType = .noReceiver
-  case structureProc (structureTypeName mutating) :
-    let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !structureTypeName}
-    @propertyMap propertyMap
-    switch [type kind]
-    case structure (* propMap *) : propertyMap = propMap
-    case enumeration (*) : propertyMap = {}
-    case integer (* * * *) : propertyMap = {}
-    case literalInteger : propertyMap = {}
-    case boolean : propertyMap = {}
-    case boolset : propertyMap = {}
-    case literalString : propertyMap = {}
-    end
-    if mutating then
-      receiverType = .mutatingReceiver {
-        !type:type
-        !receiverPointer:receiverPtrName ()
-      }
-      for (propertyName propertyType idx) in propertyMap do
-        [!?variableMap insertDefinedLocalVariable
-          !propertyName
-          !propertyType
-          !true
-          !.fieldAccess {
-            !objectType:type
-            !objectName:""
-            !fielfType:propertyType
-            !fieldIndex:idx
-          }
-          ![propertyType copiable]
-          !{}
-          !true
-          !false # Is not constant
-        ]
-      end
-      formalArguments += !.inputOutput !type !receiverPtrName ()
-    else
-      receiverType = .receiver {
-        !type:type
-        !receiverValue:receiverName ()
-      }
-      for (propertyName propertyType idx) in propertyMap do
-        [!?variableMap insertUsedLocalConstant
-          !propertyName
-          !propertyType
-          !true
-          !.fieldAccess {
-            !objectType:type
-            !objectName:""
-            !fielfType:propertyType
-            !fieldIndex:idx
-          }
-          ![propertyType copiable]
-          !{}
-          !true
-          !true # Is constant
-        ]
-      end
-      formalArguments += !.input !type !receiverName ()
-    end%if
-  end
 #--- Analyse formal arguments
-  for (argumentKind selector formalArgumentTypeName formalArgumentName) in mProcFormalArgumentList do
-    let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
-    switch argumentKind
-    case input :
-      [!?variableMap insertConstantInputFormalArgument
-        !formalArgumentName
-        !typeProxy
-        !true
-        !.localValue {!type:typeProxy !name:formalArgumentName.string}
-        ![typeProxy copiable]
-        !{}
-        !true
-        !true # Is constant
-      ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
-    case inputOutput :
-      [!?variableMap insertInputOutputFormalArgument
-        !formalArgumentName
-        !typeProxy
-        !true
-        !.localValue {!type:typeProxy !name:formalArgumentName.string}
-        ![typeProxy copiable]
-        !{}
-        !true
-        !false # Is not constant
-      ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
-    case output :
-      [!?variableMap insertOutputFormalArgument
-        !formalArgumentName
-        !typeProxy
-        !true
-        !.localValue {!type:typeProxy !name:formalArgumentName.string}
-        ![typeProxy copiable]
-        !{}
-        !true
-        !false # Is not constant
-      ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
-    end
-  end
+  @procFormalArgumentListForGeneration formalArguments = {}
+  enterFormalArguments (
+    !context:inContext
+    !mProcFormalArgumentList
+    !?variableMap
+    !?formalArguments
+  )
 #--- Enter subprogram invocation graph
   let procNameForInvocationGraph = @lstring.new {!"proc " + mProcedureName !mProcedureName.location}
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
@@ -430,7 +361,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
     !routineNameForInvocationGraph:procNameForInvocationGraph
-    !optionalReceiverType:receiverType
+    !optionalReceiverType:.noReceiver
     !context:inContext
     !modes:procedureModeSet
     !allowException:not [procedureModeSet hasKey !panicModeName ()]
@@ -483,9 +414,9 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @procedureMapIR-element llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -553,5 +484,5 @@ method @procedureMapIR-element llvmCodeGeneration
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

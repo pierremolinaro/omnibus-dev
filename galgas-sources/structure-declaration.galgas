@@ -1,20 +1,21 @@
-#----------------------------------------------------------------------------------------------------------------------*
-#  AST                                                                                                                 *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @structureDeclaration : @abstractDeclaration {
   @lstring mStructureName
   @lstringlist mAttributeList
   @structureFieldListAST mStructureFieldListAST
+  @procedureDeclarationListAST mProcedureDeclarationListAST
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @structureDeclaration location -> @location outLocation {
   outLocation = mStructureName.location
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @structureFieldListAST {
   @lstring mFieldName
@@ -22,18 +23,19 @@ list @structureFieldListAST {
   @expressionAST mInitExpression
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
 
-  #--------------------------------------------------------------------------------------------------------------------*
+  #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $struct$
     $typeName$ ?let structureName
     @lstringlist attributeList = {}
+    @procedureDeclarationListAST procedureDeclarationListAST = {}
     repeat
     while
       $attribute$ ?let attribute
@@ -51,13 +53,11 @@ syntax extension common_syntax {
       fieldList += !fieldName !typeName !initExpression
     while
       <procedure>
-        !procedureKind:.structureProc {!structureTypeName:structureName !mutating:false}
-        !?ioAST.mProcedureListAST
-    while
-      $mutating$
-      <procedure>
-        !procedureKind:.structureProc {!structureTypeName:structureName !mutating:true}
-        !?ioAST.mProcedureListAST
+        !?procedureDeclarationListAST
+#    while
+#      $mutating$
+#      <procedure>
+#        !?procedureDeclarationListAST
     while
       $;$
     end
@@ -66,16 +66,17 @@ syntax extension common_syntax {
       !structureName
       !attributeList
       !fieldList
+      !procedureDeclarationListAST
     }
   }
 
-  #--------------------------------------------------------------------------------------------------------------------*
+  #·····················································································································
 
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  PRECEDENCE GRAPH                                                                                                    *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -88,15 +89,15 @@ override method @structureDeclaration enterInPrecedenceGraph
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @structureDeclaration keyRepresentation -> @string outRepresentation {
   outRepresentation = "struct " + mStructureName 
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  ENTER IN CONTEXT                                                                                                    *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @procedureDeclarationListAST-element getMangledName -> @string outMangledName {
   outMangledName = mProcedureName.string
@@ -111,14 +112,14 @@ getter @procedureDeclarationListAST-element getMangledName -> @string outMangled
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @propertyList {
   @string mPropertyName
   @unifiedTypeMap-proxy mType
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @propertyMap {
   @unifiedTypeMap-proxy mTypeProxy
@@ -127,10 +128,10 @@ map @propertyMap {
   search searchKey error message "there is no '%K' property"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -156,30 +157,30 @@ override method @structureDeclaration enterInContext
   end
 #--- Procedures
   @procedureMap procedureMap = {}
-  for procedure in inProcedureListAST do
-    switch procedure.mProcedureKind
-    case standAloneProc :
-    case structureProc (structureTypeName mutating) :
-      if mStructureName.string == structureTypeName.string then
-        @procedureSignature signature = {}
-        for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
-          [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
-          signature += !formalArgumentPassingMode !selector.string !typeProxy
-        end
-        [!?procedureMap insertKey
-          !.new {![procedure getMangledName] !procedure.mProcedureName.location}
-          !mutating
-          !{}
-          !signature
-          !false # not weak
-        ]
-      end
+  for procedure in mProcedureDeclarationListAST do
+    @procedureSignature signature = {}
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+      signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
+  #--- Check modes
+    @modeMap procedureModeMap = {}
+    for mode in procedure.mProcedureModeList do
+      [ioContext.mModeMap searchKey !mode.mValue]
+      [!?procedureModeMap insertKey !mode.mValue]
+    end
+    [!?procedureMap insertKey
+      !.new {![procedure getMangledName] !procedure.mProcedureName.location}
+      !false # mutating
+      !procedureModeMap
+      !signature
+      !false # not weak
+    ]
   end
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
-    !kind:.structure {!name:mStructureName.string !propertyMap:propertyMap !propertyList:propertyList}
+    !kind:.structure {!name:mStructureName.string !propertyMap:propertyMap !propertyList:propertyList !procedureMap:procedureMap}
     !typedConstantMap:{}
     !procedureMap:procedureMap
     !copiable:copiable
@@ -189,9 +190,9 @@ override method @structureDeclaration enterInContext
   ]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  INIT ANALYSIS                                                                                                       *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  INIT ANALYSIS                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration initAnalysis
   ?!context:@semanticContext ioContext
@@ -234,24 +235,92 @@ override method @structureDeclaration initAnalysis
   [!?ioContext.mConstructorMap insertKey !mStructureName !operandIRList]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  SEMANTIC ANALYSIS                                                                                                   *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+  let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
+  @propertyMap propertyMap
+  switch [type kind]
+  case structure (* propMap * *) : propertyMap = propMap
+  case enumeration (*) : propertyMap = {}
+  case integer (* * * *) : propertyMap = {}
+  case literalInteger : propertyMap = {}
+  case boolean : propertyMap = {}
+  case boolset : propertyMap = {}
+  case literalString : propertyMap = {}
+  end
+
+  for procedure in mProcedureDeclarationListAST do
+  #--- Enter subprogram invocation graph
+    let procMangledName = "proc " + mStructureName + "." + procedure.mProcedureName
+    let procNameForInvocationGraph = @lstring.new {!procMangledName !procedure.mProcedureName.location}
+    if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
+      [!?ioTemporaries.mSubprogramInvocationGraph addNode
+        !procNameForInvocationGraph
+        !procedure.mProcedureName
+      ]
+    end
+  #--- Check modes
+    @stringset procedureModeSet = {}
+    for mode in procedure.mProcedureModeList do
+      [inContext.mModeMap searchKey !mode.mValue]
+      procedureModeSet += !mode.mValue.string
+    end
+    @variableMap variableMap = initialVariableMap (
+      !routineMangledName:procMangledName
+      !context:inContext
+      !globalsAreConstant:false
+    )
+  #--- Analyse formal arguments
+    @procFormalArgumentListForGeneration formalArguments = {}
+    formalArguments += !.input !type !mangledNameForLocalVariable (!"self")
+    enterFormalArguments (
+      !context:inContext
+      !procedure.mProcFormalArgumentList
+      !?variableMap
+      !?formalArguments
+    )
+  #--- Analyze instruction list
+    @instructionListIR instructionGenerationList = {}
+    [procedure.mInstructionList analyzeRoutineInstructionList
+      !routineNameForInvocationGraph:procNameForInvocationGraph
+      !optionalReceiverType:.receiver {!type:type !receiverValue:receiverName ()}
+      !context:inContext
+      !modes:procedureModeSet
+      !allowException:not [procedureModeSet hasKey !panicModeName ()]
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?variableMap:variableMap
+      !?generatedCode:instructionGenerationList
+    ]
+    [variableMap checkAutomatonStates !procedure.mEndOfProcLocation]
+  #--- Enter in map
+    [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
+      !.new {!mStructureName.string + "." + procedure.mProcedureName !procedure.mProcedureName.location}
+      !formalArguments
+      !instructionGenerationList
+      !false # [ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+      !false # warnIfUnused
+      !false
+      !false
+    ]  
+  end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   for () in inTypeMap do
     if [kind isStructure] then
-      [kind structure ?name:let name ?propertyMap:* ?propertyList:let propertyList]
+      [kind structure ?name:let name ?propertyMap:* ?propertyList:let propertyList ?procedureMap:*]
       ioLLVMcode += "%" + name + " = type {"
       for () in propertyList
         do ioLLVMcode += [mType llvmTypeName]
@@ -262,5 +331,5 @@ proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

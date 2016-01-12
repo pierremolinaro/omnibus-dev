@@ -14,7 +14,7 @@ syntax common_syntax (plm_lexique) {
     while
       <declaration> !?ioAst
     while
-      <procedure> !procedureKind:.standAloneProc !?ioAst.mProcedureListAST
+      <procedure> !?ioAst.mProcedureListAST
     while
       $import$
       $literal_string$ ?let importedFile

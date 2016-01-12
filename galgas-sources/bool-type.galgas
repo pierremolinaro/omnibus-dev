@@ -131,6 +131,7 @@ override method @booleanDeclaration initAnalysis ?!context:@semanticContext unus
 
 override method @booleanDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }

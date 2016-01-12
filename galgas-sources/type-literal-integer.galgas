@@ -197,6 +197,7 @@ override method @literalIntegerDeclaration initAnalysis ?!context:@semanticConte
 
 override method @literalIntegerDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }

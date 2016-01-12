@@ -1316,6 +1316,19 @@ class GALGAS_string function_mangledNameForType (class GALGAS_string inArgument0
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Routine 'enterFormalArguments'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
+                                   const class GALGAS_procFormalArgumentList constinArgument1,
+                                   class GALGAS_variableMap & ioArgument2,
+                                   class GALGAS_procFormalArgumentListForGeneration & ioArgument3,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          Routine 'checkRequiredProcedures'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1742,7 +1755,8 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
 
 typedef void (*categoryMethodSignature_abstractDeclaration_semanticAnalysis) (const class cPtr_abstractDeclaration * inObject,
                                                                               const class GALGAS_semanticContext constinArgument0,
-                                                                              class GALGAS_intermediateCodeStruct & ioArgument1,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                                                              class GALGAS_intermediateCodeStruct & ioArgument2,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -1755,6 +1769,7 @@ void enterCategoryMethod_semanticAnalysis (const int32_t inClassIndex,
 
 void callCategoryMethod_semanticAnalysis (const class cPtr_abstractDeclaration * inObject,
                                           const GALGAS_semanticContext constin_inContext,
+                                          GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                           GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
