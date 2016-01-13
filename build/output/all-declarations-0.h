@@ -149,7 +149,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__3C__3C_,
    kToken__3E__3E_,
    kToken__25_,
-   kToken__26__25_,
+   kToken__21__25_,
    kToken__7E_,
    kToken__2D__3E_,
    kToken__3A__3A_,
@@ -170,7 +170,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__2A_,
    kToken__25__2A_,
    kToken__2F_,
-   kToken__25__2F_} ;
+   kToken__21__2F_} ;
 
 //--- Key words table 'keyWordList'
   public : static int16_t search_into_keyWordList (const C_String & inSearchedString) ;

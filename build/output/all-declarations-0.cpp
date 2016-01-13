@@ -291,8 +291,8 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__3E__3E_ = "the '>>' deli
 //--- Syntax error message for terminal '$%$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique__25_ = "the '%' delimitor" ;
 
-//--- Syntax error message for terminal '$&%$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique__26__25_ = "the '&%' delimitor" ;
+//--- Syntax error message for terminal '$!%$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique__21__25_ = "the '!%' delimitor" ;
 
 //--- Syntax error message for terminal '$~$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique__7E_ = "the '~' delimitor" ;
@@ -354,8 +354,8 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__25__2A_ = "the '%*' deli
 //--- Syntax error message for terminal '$/$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique__2F_ = "the '/' delimitor" ;
 
-//--- Syntax error message for terminal '$%/$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique__25__2F_ = "the '%/' delimitor" ;
+//--- Syntax error message for terminal '$!/$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique__21__2F_ = "the '!/' delimitor" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                getMessageForTerminal                                                                                *
@@ -437,7 +437,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique__3C__3C_,
     gSyntaxErrorMessage_plm_5F_lexique__3E__3E_,
     gSyntaxErrorMessage_plm_5F_lexique__25_,
-    gSyntaxErrorMessage_plm_5F_lexique__26__25_,
+    gSyntaxErrorMessage_plm_5F_lexique__21__25_,
     gSyntaxErrorMessage_plm_5F_lexique__7E_,
     gSyntaxErrorMessage_plm_5F_lexique__2D__3E_,
     gSyntaxErrorMessage_plm_5F_lexique__3A__3A_,
@@ -458,13 +458,27 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique__2A_,
     gSyntaxErrorMessage_plm_5F_lexique__25__2A_,
     gSyntaxErrorMessage_plm_5F_lexique__2F_,
-    gSyntaxErrorMessage_plm_5F_lexique__25__2F_} ;
+    gSyntaxErrorMessage_plm_5F_lexique__21__2F_} ;
   return syntaxErrorMessageArray [inTerminalIndex] ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                      U N I C O D E    S T R I N G S                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
+
+//--- Unicode string for '$_21__25_$'
+static const utf32 kUnicodeString_plm_5F_lexique__21__25_ [] = {
+  TO_UNICODE ('!'),
+  TO_UNICODE ('%'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$_21__2F_$'
+static const utf32 kUnicodeString_plm_5F_lexique__21__2F_ [] = {
+  TO_UNICODE ('!'),
+  TO_UNICODE ('/'),
+  TO_UNICODE (0)
+} ;
 
 //--- Unicode string for '$_21__3D_$'
 static const utf32 kUnicodeString_plm_5F_lexique__21__3D_ [] = {
@@ -516,23 +530,9 @@ static const utf32 kUnicodeString_plm_5F_lexique__25__2D__2D_ [] = {
   TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$_25__2F_$'
-static const utf32 kUnicodeString_plm_5F_lexique__25__2F_ [] = {
-  TO_UNICODE ('%'),
-  TO_UNICODE ('/'),
-  TO_UNICODE (0)
-} ;
-
 //--- Unicode string for '$_26_$'
 static const utf32 kUnicodeString_plm_5F_lexique__26_ [] = {
   TO_UNICODE ('&'),
-  TO_UNICODE (0)
-} ;
-
-//--- Unicode string for '$_26__25_$'
-static const utf32 kUnicodeString_plm_5F_lexique__26__25_ [] = {
-  TO_UNICODE ('&'),
-  TO_UNICODE ('%'),
   TO_UNICODE (0)
 } ;
 
@@ -1231,12 +1231,12 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_delimitorsL
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__7C_, 1, C_Lexique_plm_5F_lexique::kToken__7C_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__7D_, 1, C_Lexique_plm_5F_lexique::kToken__7D_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__7E_, 1, C_Lexique_plm_5F_lexique::kToken__7E_),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__21__25_, 2, C_Lexique_plm_5F_lexique::kToken__21__25_),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__21__2F_, 2, C_Lexique_plm_5F_lexique::kToken__21__2F_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__21__3D_, 2, C_Lexique_plm_5F_lexique::kToken__21__3D_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__25__2A_, 2, C_Lexique_plm_5F_lexique::kToken__25__2A_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__25__2B_, 2, C_Lexique_plm_5F_lexique::kToken__25__2B_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__25__2D_, 2, C_Lexique_plm_5F_lexique::kToken__25__2D_),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__25__2F_, 2, C_Lexique_plm_5F_lexique::kToken__25__2F_),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__26__25_, 2, C_Lexique_plm_5F_lexique::kToken__26__25_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__26__3D_, 2, C_Lexique_plm_5F_lexique::kToken__26__3D_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__2B__2B_, 2, C_Lexique_plm_5F_lexique::kToken__2B__2B_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__2D__2D_, 2, C_Lexique_plm_5F_lexique::kToken__2D__2D_),
@@ -1718,9 +1718,9 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("%") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken__26__25_:
+    case kToken__21__25_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("&%") ;
+      s.appendCString ("!%") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7E_:
@@ -1823,9 +1823,9 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("/") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken__25__2F_:
+    case kToken__21__2F_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("%/") ;
+      s.appendCString ("!/") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     default:
@@ -2022,12 +2022,6 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__26__3D_, 2, true)) {
         token.mTokenCode = kToken__26__3D_ ;
         enterToken (token) ;
-      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__26__25_, 2, true)) {
-        token.mTokenCode = kToken__26__25_ ;
-        enterToken (token) ;
-      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__25__2F_, 2, true)) {
-        token.mTokenCode = kToken__25__2F_ ;
-        enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__25__2D_, 2, true)) {
         token.mTokenCode = kToken__25__2D_ ;
         enterToken (token) ;
@@ -2039,6 +2033,12 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
         enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__21__3D_, 2, true)) {
         token.mTokenCode = kToken__21__3D_ ;
+        enterToken (token) ;
+      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__21__2F_, 2, true)) {
+        token.mTokenCode = kToken__21__2F_ ;
+        enterToken (token) ;
+      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__21__25_, 2, true)) {
+        token.mTokenCode = kToken__21__25_ ;
         enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__7E_, 1, true)) {
         token.mTokenCode = kToken__7E_ ;
@@ -2372,7 +2372,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("<<") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (">>") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("%") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("&%") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("!%") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("~") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("->") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("::") COMMA_THERE) ;
@@ -2393,7 +2393,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("*") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("%*") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("/") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("%/") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("!/") COMMA_THERE) ;
   return result ;
 }
 
@@ -2477,7 +2477,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     8 /* plm_lexique_1__3C__3C_ */,
     8 /* plm_lexique_1__3E__3E_ */,
     8 /* plm_lexique_1__25_ */,
-    8 /* plm_lexique_1__26__25_ */,
+    8 /* plm_lexique_1__21__25_ */,
     8 /* plm_lexique_1__7E_ */,
     8 /* plm_lexique_1__2D__3E_ */,
     8 /* plm_lexique_1__3A__3A_ */,
@@ -2498,7 +2498,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     8 /* plm_lexique_1__2A_ */,
     8 /* plm_lexique_1__25__2A_ */,
     8 /* plm_lexique_1__2F_ */,
-    8 /* plm_lexique_1__25__2F_ */
+    8 /* plm_lexique_1__21__2F_ */
   } ;
   return (inTerminalIndex >= 0) ? kTerminalSymbolStyles [inTerminalIndex] : 0 ;
 }
@@ -8388,7 +8388,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_expression_5F__32__i26_ (GA
       outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_modOp (SOURCE_FILE ("expression-operator-priority.galgas", 316)), var_rightExpression  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 313)) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__25_) COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 320)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21__25_) COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 320)) ;
       GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 321)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_expression_5F__31__ (var_rightExpression, inCompiler) ;
@@ -8402,7 +8402,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_expression_5F__32__i26_ (GA
       outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_divOp (SOURCE_FILE ("expression-operator-priority.galgas", 336)), var_rightExpression  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 333)) ;
     } break ;
     case 7: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__25__2F_) COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 340)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21__2F_) COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 340)) ;
       GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 341)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_expression_5F__31__ (var_rightExpression, inCompiler) ;
@@ -8435,7 +8435,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_expression_5F__32__i26_pars
       nt_expression_5F__31__parse (inCompiler) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__25_) COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 320)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21__25_) COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 320)) ;
       nt_expression_5F__31__parse (inCompiler) ;
     } break ;
     case 6: {
@@ -8443,7 +8443,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_expression_5F__32__i26_pars
       nt_expression_5F__31__parse (inCompiler) ;
     } break ;
     case 7: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__25__2F_) COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 340)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21__2F_) COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 340)) ;
       nt_expression_5F__31__parse (inCompiler) ;
     } break ;
     default:

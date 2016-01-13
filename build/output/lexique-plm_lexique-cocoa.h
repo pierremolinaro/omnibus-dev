@@ -99,7 +99,7 @@ enum {plm_lexique_1_,
   plm_lexique_1__3C__3C_,
   plm_lexique_1__3E__3E_,
   plm_lexique_1__25_,
-  plm_lexique_1__26__25_,
+  plm_lexique_1__21__25_,
   plm_lexique_1__7E_,
   plm_lexique_1__2D__3E_,
   plm_lexique_1__3A__3A_,
@@ -120,7 +120,7 @@ enum {plm_lexique_1_,
   plm_lexique_1__2A_,
   plm_lexique_1__25__2A_,
   plm_lexique_1__2F_,
-  plm_lexique_1__25__2F_
+  plm_lexique_1__21__2F_
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
