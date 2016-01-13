@@ -170,7 +170,7 @@ override method @structureDeclaration enterInContext
       [!?procedureModeMap insertKey !mode.mValue]
     end
     [!?procedureMap insertKey
-      !.new {![procedure getMangledName] !procedure.mProcedureName.location}
+      !procedure.mProcedureName
       !false # mutating
       !procedureModeMap
       !signature
@@ -244,9 +244,9 @@ override method @structureDeclaration semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
+  let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
   @propertyMap propertyMap
-  switch [type kind]
+  switch [structureType kind]
   case structure (* propMap * *) : propertyMap = propMap
   case enumeration (*) : propertyMap = {}
   case integer (* * * *) : propertyMap = {}
@@ -255,7 +255,7 @@ override method @structureDeclaration semanticAnalysis
   case boolset : propertyMap = {}
   case literalString : propertyMap = {}
   end
-
+#--- Analyze procedures
   for procedure in mProcedureDeclarationListAST do
   #--- Enter subprogram invocation graph
     let procMangledName = "proc " + mStructureName + "." + procedure.mProcedureName
@@ -272,14 +272,26 @@ override method @structureDeclaration semanticAnalysis
       [inContext.mModeMap searchKey !mode.mValue]
       procedureModeSet += !mode.mValue.string
     end
+  #--- Variable map
     @variableMap variableMap = initialVariableMap (
       !routineMangledName:procMangledName
       !context:inContext
       !globalsAreConstant:false
     )
+  #--- Add "self" to variable map
+    [!?variableMap insertUsedLocalConstant
+      !.new {!"self" !.here}
+      !structureType
+      !true # mReadAccessAllowed
+      !.localValue {!type:structureType !name:"self"}
+      !true # copiable
+      !{} # fieldMap
+      !true # mCanBeUsedAsInputParameter
+      !false # mIsConstant
+    ]
   #--- Analyse formal arguments
     @procFormalArgumentListForGeneration formalArguments = {}
-    formalArguments += !.inputOutput !type !mangledNameForLocalVariable (!"self")
+    formalArguments += !.inputOutput !structureType !mangledNameForLocalVariable (!"self")
     enterFormalArguments (
       !context:inContext
       !procedure.mProcFormalArgumentList
@@ -290,7 +302,7 @@ override method @structureDeclaration semanticAnalysis
     @instructionListIR instructionGenerationList = {}
     [procedure.mInstructionList analyzeRoutineInstructionList
       !routineNameForInvocationGraph:procNameForInvocationGraph
-      !optionalReceiverType:.receiver {!type:type !receiverValue:receiverName ()}
+      !optionalReceiverType:.receiver {!type:structureType !receiverValue:receiverName ()}
       !context:inContext
       !modes:procedureModeSet
       !allowException:not [procedureModeSet hasKey !panicModeName ()]
