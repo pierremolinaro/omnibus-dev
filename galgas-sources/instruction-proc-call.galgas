@@ -121,12 +121,14 @@ override method @procCallInstructionAST analyze
       ?4*
     ]
   #--- Load variable
-    [variableKind loadFromMemory
-      !?temporary:ioTemporaries
-      !?instructionListIR:ioInstructionGenerationList
-      ?resultingValue:let receiverVariable
-    ]
-    procCallEffectiveParameterListIR += !.output !["" nowhere] !receiverVariable
+#    [variableKind loadFromMemory
+#      !?temporary:ioTemporaries
+#      !?instructionListIR:ioInstructionGenerationList
+#      ?resultingValue:let receiverVariable
+#    ]
+#    log variableKind
+    let @operandIR receiverVariable = [variableKind address]
+    procCallEffectiveParameterListIR += !.outputInput !["" nowhere] !receiverVariable 
     procedureMangledName += [type key] + "."
     @procedureMap procedureMap
     switch [type kind]

@@ -279,7 +279,7 @@ override method @structureDeclaration semanticAnalysis
     )
   #--- Analyse formal arguments
     @procFormalArgumentListForGeneration formalArguments = {}
-    formalArguments += !.input !type !mangledNameForLocalVariable (!"self")
+    formalArguments += !.inputOutput !type !mangledNameForLocalVariable (!"self")
     enterFormalArguments (
       !context:inContext
       !procedure.mProcFormalArgumentList
