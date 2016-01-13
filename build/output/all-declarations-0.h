@@ -154,9 +154,9 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__2D__3E_,
    kToken__3A__3A_,
    kToken__2B__2B_,
-   kToken__26__2B__2B_,
+   kToken__25__2B__2B_,
    kToken__2D__2D_,
-   kToken__26__2D__2D_,
+   kToken__25__2D__2D_,
    kToken__7C_,
    kToken__7C__3D_,
    kToken__26_,
@@ -164,13 +164,13 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__5E_,
    kToken__5E__3D_,
    kToken__2B_,
-   kToken__26__2B_,
+   kToken__25__2B_,
    kToken__2D_,
-   kToken__26__2D_,
+   kToken__25__2D_,
    kToken__2A_,
-   kToken__26__2A_,
+   kToken__25__2A_,
    kToken__2F_,
-   kToken__26__2F_} ;
+   kToken__25__2F_} ;
 
 //--- Key words table 'keyWordList'
   public : static int16_t search_into_keyWordList (const C_String & inSearchedString) ;
