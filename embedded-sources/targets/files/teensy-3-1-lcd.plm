@@ -431,13 +431,13 @@ proc printUnsignedInExceptionMode `panic @noWarningIfUnused (?inValue $uint32) {
   var isPrinting = false
   while divisor > 0 do
     if isPrinting or (value >= divisor) then
-      let quotient = value %/ divisor
+      let quotient = value !/ divisor
       let remainder = value %- quotient %* divisor
       writeDataInExceptionMode (!0x30 %+ truncate quotient : $uint8)
       value = remainder
       isPrinting = true
     end
-    divisor = divisor %/ 10
+    divisor = divisor !/ 10
   end
   if not isPrinting then
     writeDataInExceptionMode (!0x30)
