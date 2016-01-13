@@ -23,7 +23,7 @@ proc setup `user () {
 proc loop `user () {
   var s = $MyStruct ()
   s.nop ()
-//  var x $int32 ; s.getX (?x)
+  var x $int32 ; s.getX (?x)
 }
 
 //------------------------------------------------*

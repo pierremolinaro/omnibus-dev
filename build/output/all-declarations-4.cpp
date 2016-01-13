@@ -1103,7 +1103,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "proc loop `user () {\n"
   "  var s = $MyStruct ()\n"
   "  s.nop ()\n"
-  "//  var x $int32 ; s.getX (\?x)\n"
+  "  var x $int32 ; s.getX (\?x)\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n" ;
@@ -1112,7 +1112,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "11-structure-procs.plm",
   "plm",
   true, // Text file
-  495, // Text length
+  493, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
