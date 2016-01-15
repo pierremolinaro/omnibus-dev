@@ -125,7 +125,6 @@ method @initList-element initSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
     !routineNameForInvocationGraph:routineNameForInvocationGraph
-    !optionalReceiverType:.noReceiver
     !context:inContext
     !modes:{!"init"}
     !allowException:true

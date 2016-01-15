@@ -54,7 +54,6 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @selfMutatingMethodCallInstructionAST analyze
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext unused inContext
   ?mode:let @string inMode
   ?!temporary:@uint unused ioTemporaryIndex

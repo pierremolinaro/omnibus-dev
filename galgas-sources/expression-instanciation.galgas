@@ -38,7 +38,6 @@ override method @instanciationAST addDependenceEdgeForStaticExpression
 
 override method @instanciationAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModeSet

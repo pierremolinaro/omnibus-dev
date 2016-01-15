@@ -77,7 +77,6 @@ method @bootList-element bootSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
     !routineNameForInvocationGraph:routineNameForInvocationGraph
-    !optionalReceiverType:.noReceiver
     !context:inContext
     !modes:{!bootModeName ()}
     !allowException:true

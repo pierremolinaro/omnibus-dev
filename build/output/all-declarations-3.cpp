@@ -413,256 +413,6 @@ GALGAS_registerBitSlice GALGAS_registerBitSlice::extractObject (const GALGAS_obj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_receiverType_receiver::cEnumAssociatedValues_receiverType_receiver (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                          const GALGAS_string & inAssociatedValue1
-                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_receiverType_receiver::description (C_String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_receiverType_receiver::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_receiverType_receiver * ptr = dynamic_cast<const cEnumAssociatedValues_receiverType_receiver *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_receiverType_mutatingReceiver::cEnumAssociatedValues_receiverType_mutatingReceiver (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                          const GALGAS_string & inAssociatedValue1
-                                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_receiverType_mutatingReceiver::description (C_String & ioString,
-                                                                       const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_receiverType_mutatingReceiver::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_receiverType_mutatingReceiver * ptr = dynamic_cast<const cEnumAssociatedValues_receiverType_mutatingReceiver *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_receiverType::GALGAS_receiverType (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_receiverType GALGAS_receiverType::constructor_noReceiver (UNUSED_LOCATION_ARGS) {
-  GALGAS_receiverType result ;
-  result.mEnum = kEnum_noReceiver ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_receiverType GALGAS_receiverType::constructor_receiver (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                               const GALGAS_string & inAssociatedValue1
-                                                               COMMA_LOCATION_ARGS) {
-  GALGAS_receiverType result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_receiver ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_receiverType_receiver (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_receiverType GALGAS_receiverType::constructor_mutatingReceiver (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                       const GALGAS_string & inAssociatedValue1
-                                                                       COMMA_LOCATION_ARGS) {
-  GALGAS_receiverType result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_mutatingReceiver ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_receiverType_mutatingReceiver (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_receiverType::method_receiver (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                           GALGAS_string & outAssociatedValue1,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_receiver) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @receiverType receiver invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_receiverType_receiver * ptr = (const cEnumAssociatedValues_receiverType_receiver *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_receiverType::method_mutatingReceiver (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                   GALGAS_string & outAssociatedValue1,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_mutatingReceiver) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @receiverType mutatingReceiver invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_receiverType_mutatingReceiver * ptr = (const cEnumAssociatedValues_receiverType_mutatingReceiver *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_receiverType [4] = {
-  "(not built)",
-  "noReceiver",
-  "receiver",
-  "mutatingReceiver"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_receiverType::getter_isNoReceiver (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_noReceiver == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_receiverType::getter_isReceiver (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_receiver == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_receiverType::getter_isMutatingReceiver (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mutatingReceiver == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_receiverType::description (C_String & ioString,
-                                       const int32_t inIndentation) const {
-  ioString << "<enum @receiverType: " << gEnumNameArrayFor_receiverType [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_receiverType::objectCompare (const GALGAS_receiverType & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                 @receiverType type                                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_receiverType ("receiverType",
-                                     NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_receiverType::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_receiverType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_receiverType::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_receiverType (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_receiverType GALGAS_receiverType::extractObject (const GALGAS_object & inObject,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_receiverType result ;
-  const GALGAS_receiverType * p = (const GALGAS_receiverType *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_receiverType *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("receiverType", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 cEnumAssociatedValues_valueIR_literalInteger::cEnumAssociatedValues_valueIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
                                                                                             COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2319,27 +2069,27 @@ void routine_declareLLVMstructures (const GALGAS_unifiedTypeMap constinArgument_
                                     GALGAS_string & ioArgument_ioLLVMcode,
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_unifiedTypeMap enumerator_13300 (constinArgument_inTypeMap, kEnumeration_up) ;
-  while (enumerator_13300.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = enumerator_13300.current_kind (HERE).getter_isStructure (SOURCE_FILE ("structure-declaration.galgas", 342)).boolEnum () ;
+  cEnumerator_unifiedTypeMap enumerator_13209 (constinArgument_inTypeMap, kEnumeration_up) ;
+  while (enumerator_13209.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = enumerator_13209.current_kind (HERE).getter_isStructure (SOURCE_FILE ("structure-declaration.galgas", 341)).boolEnum () ;
     if (kBoolTrue == test_0) {
       GALGAS_string var_name ;
       GALGAS_propertyList var_propertyList ;
-      GALGAS_propertyMap joker_13385 ; // Joker input parameter
-      GALGAS_procedureMap joker_13432 ; // Joker input parameter
-      enumerator_13300.current_kind (HERE).method_structure (var_name, joker_13385, var_propertyList, joker_13432, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 343)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 344)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 344)), inCompiler  COMMA_SOURCE_FILE ("structure-declaration.galgas", 344)) ;
-      cEnumerator_propertyList enumerator_13508 (var_propertyList, kEnumeration_up) ;
-      while (enumerator_13508.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_13508.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 346)), inCompiler  COMMA_SOURCE_FILE ("structure-declaration.galgas", 346)) ;
-        if (enumerator_13508.hasNextObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("structure-declaration.galgas", 347)) ;
+      GALGAS_propertyMap joker_13294 ; // Joker input parameter
+      GALGAS_procedureMap joker_13341 ; // Joker input parameter
+      enumerator_13209.current_kind (HERE).method_structure (var_name, joker_13294, var_propertyList, joker_13341, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 342)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 343)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 343)), inCompiler  COMMA_SOURCE_FILE ("structure-declaration.galgas", 343)) ;
+      cEnumerator_propertyList enumerator_13417 (var_propertyList, kEnumeration_up) ;
+      while (enumerator_13417.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_13417.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 345)), inCompiler  COMMA_SOURCE_FILE ("structure-declaration.galgas", 345)) ;
+        if (enumerator_13417.hasNextObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("structure-declaration.galgas", 346)) ;
         }
-        enumerator_13508.gotoNextObject () ;
+        enumerator_13417.gotoNextObject () ;
       }
-      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("structure-declaration.galgas", 349)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("structure-declaration.galgas", 348)) ;
     }
-    enumerator_13300.gotoNextObject () ;
+    enumerator_13209.gotoNextObject () ;
   }
 }
 

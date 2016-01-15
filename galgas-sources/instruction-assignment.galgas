@@ -65,7 +65,6 @@ syntax extension common_syntax {
 
 override method @assignmentInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType unused  inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions

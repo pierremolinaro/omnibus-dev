@@ -208,7 +208,6 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
     !routineNameForInvocationGraph:routineNameForInvocationGraph
-    !optionalReceiverType:.noReceiver
     !context:inContext
     !modes:functionModeSet
     !allowException:not [functionModeSet hasKey !panicModeName ()]

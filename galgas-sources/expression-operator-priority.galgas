@@ -423,14 +423,6 @@ syntax extension common_syntax {
 #  SEMANTICS                                                                                                           *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @receiverType {
-  case noReceiver
-  case receiver (@unifiedTypeMap-proxy type @string receiverValue)
-  case mutatingReceiver (@unifiedTypeMap-proxy type @string receiverPointer)
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 abstract method @expressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType

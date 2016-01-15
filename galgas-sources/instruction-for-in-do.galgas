@@ -47,7 +47,6 @@ syntax extension common_syntax {
 
 override method @forInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
@@ -90,7 +89,6 @@ override method @forInstructionAST analyze
   [mDoInstructionList analyzeBranchInstructionList
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOf_do_instruction
-    !optionalReceiverType:inReceiverType
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions
