@@ -626,7 +626,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "proc loop `user () {\n"
-  "  gDelai %++\n"
+  "  gDelai ++%\n"
   "  if gDelai == 1_000_000 then\n"
   "    GPIOC_PSOR = 1 << 5 // Allumer la led\n"
   "  elsif gDelai == 2_000_000 then\n"
@@ -1089,9 +1089,9 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "  proc nop `user () {\n"
   "  }\n"
   "  proc getX `user (!outX $int32) {\n"
-  "    outX = self.x %+ 3\n"
+  "    outX = self.x +% 3\n"
   "  }\n"
-  "  proc setX `user (\?inX $int32) {\n"
+  "  mutating proc setX `user (\?inX $int32) {\n"
   "    self.x = inX + 8\n"
   "  }\n"
   "}\n"
@@ -1107,6 +1107,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "  var s = $MyStruct ()\n"
   "  s.nop ()\n"
   "  var x $int32 ; s.getX (\?x)\n"
+  "  s.setX (!999)\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n" ;
@@ -1115,7 +1116,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "11-structure-procs.plm",
   "plm",
   true, // Text file
-  556, // Text length
+  581, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 

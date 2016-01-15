@@ -141,9 +141,9 @@ Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateu
   \plm=*= & Multiplication avec détection de débordement\\
   \plm=/= & Division avec détection de débordement\\
   \plm=%= & Modulo avec détection de division par zéro\\
-  \plm=%+= & Addition sans détection de débordement\\
-  \plm=%-= & Soustraction sans détection de débordement\\
-  \plm=%*= & Multiplication sans détection de débordement\\
+  \plm=+%= & Addition sans détection de débordement\\
+  \plm=-%= & Soustraction sans détection de débordement\\
+  \plm=*%= & Multiplication sans détection de débordement\\
   \plm=!/= & Division sans détection de débordement\\
   \plm=!%= & Modulo sans détection de division par zéro\\
 \end{tabular}
@@ -162,9 +162,9 @@ Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateu
 L'opérateur préfixé \plm=-= est la négation arithmétique avec détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) entraîne un débordement arithmétique qui déclenche une panique dont le code est donné dans le \refTableau{tableauCodePanique}.
 
 
-\subsectionLabel{Opérateur \texttt{\%-}}{negationNoOvf}
+\subsectionLabel{Opérateur \texttt{-\%}}{negationNoOvf}
 
-L'opérateur préfixé \plm=%-= est la négation arithmétique sans détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) retourne cette même valeur. Cet opérateur ne déclenche jamais de panique.
+L'opérateur préfixé \plm=-%= est la négation arithmétique sans détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) retourne cette même valeur. Cet opérateur ne déclenche jamais de panique.
 
 
 
@@ -233,10 +233,10 @@ var variable $uint8 = 255
 variable ++ // Déclenchement d'une panique
 \end{PLM}
 
-Les opérateurs \plm=%++= et \plm=%--= ignorent le dépassement de capacité (et fonctionnent donc comme les opérateurs d'incrémentation et de décrémentation du C) :
+Les opérateurs \plm=++%= et \plm=--%= ignorent le dépassement de capacité (et fonctionnent donc comme les opérateurs d'incrémentation et de décrémentation du C) :
 \begin{PLM}
 var variable $uint8 = 255
-variable %++ // variable vaut 0
+variable ++% // variable vaut 0
 \end{PLM}
 
 

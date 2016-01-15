@@ -48,7 +48,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
-    $%++$
+    $++%$
     ioInstructionList += !@incDecInstructionAST.new {
       !.incNoOverflowCheck
       !varName
@@ -59,7 +59,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
-    $%--$
+    $--%$
     ioInstructionList += !@incDecInstructionAST.new {
       !.decNoOverflowCheck
       !varName

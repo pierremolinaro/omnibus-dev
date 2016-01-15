@@ -16,7 +16,7 @@ var gDelai $uint32 = 0 {
 //------------------------------------------------*
 
 proc loop `user () {
-  gDelai %++
+  gDelai ++%
   if gDelai == 1_000_000 then
     GPIOC_PSOR = 1 << 5 // Allumer la led
   elsif gDelai == 2_000_000 then

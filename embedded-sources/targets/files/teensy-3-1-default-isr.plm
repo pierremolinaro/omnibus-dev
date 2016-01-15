@@ -85,7 +85,7 @@ proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
 required proc systickHandler `isr ()
 
 proc systickHandler `isr () {
-  gCompteur %++
+  gCompteur ++%
   userSystickHandler ()
 }
 
