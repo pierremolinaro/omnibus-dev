@@ -5252,34 +5252,34 @@ static void categoryMethod_operatorAssignInstructionAST_analyze (const cPtr_inst
   GALGAS_unifiedTypeMap_2D_proxy var_targetType ;
   GALGAS_bool var_isConstant ;
   {
-  GALGAS_bool joker_3367_5 ; // Joker input parameter
-  GALGAS_objectInMemoryIR joker_3367_4 ; // Joker input parameter
-  GALGAS_bool joker_3367_3 ; // Joker input parameter
-  GALGAS_registerBitSliceAccessMap joker_3367_2 ; // Joker input parameter
-  GALGAS_bool joker_3367_1 ; // Joker input parameter
-  ioArgument_ioVariableMap.setter_neutralAccess (object->mAttribute_mTargetVarName, var_targetType, joker_3367_5, joker_3367_4, joker_3367_3, joker_3367_2, joker_3367_1, var_isConstant, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 92)) ;
+  GALGAS_bool joker_3443_5 ; // Joker input parameter
+  GALGAS_objectInMemoryIR joker_3443_4 ; // Joker input parameter
+  GALGAS_bool joker_3443_3 ; // Joker input parameter
+  GALGAS_registerBitSliceAccessMap joker_3443_2 ; // Joker input parameter
+  GALGAS_bool joker_3443_1 ; // Joker input parameter
+  ioArgument_ioVariableMap.setter_neutralAccess (object->mAttribute_mTargetVarName, var_targetType, joker_3443_5, joker_3443_4, joker_3443_3, joker_3443_2, joker_3443_1, var_isConstant, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 96)) ;
   }
   const enumGalgasBool test_0 = var_isConstant.boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("a constant cannot be modified")  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 99)) ;
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("a constant cannot be modified")  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 103)) ;
   }
   GALGAS_operandIR var_sourceValue ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, var_targetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_sourceValue, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 102)) ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, var_targetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_sourceValue, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 106)) ;
   GALGAS_bool var_accessIsAllowed ;
   GALGAS_objectInMemoryIR var_targetVariableKind ;
   GALGAS_bool var_isCopiable ;
   {
-  GALGAS_unifiedTypeMap_2D_proxy joker_4070 ; // Joker input parameter
-  GALGAS_registerBitSliceAccessMap joker_4150_3 ; // Joker input parameter
-  GALGAS_bool joker_4150_2 ; // Joker input parameter
-  GALGAS_bool joker_4150_1 ; // Joker input parameter
-  ioArgument_ioVariableMap.setter_searchForReadWriteAccess (object->mAttribute_mTargetVarName, joker_4070, var_accessIsAllowed, var_targetVariableKind, var_isCopiable, joker_4150_3, joker_4150_2, joker_4150_1, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 116)) ;
+  GALGAS_unifiedTypeMap_2D_proxy joker_4146 ; // Joker input parameter
+  GALGAS_registerBitSliceAccessMap joker_4226_3 ; // Joker input parameter
+  GALGAS_bool joker_4226_2 ; // Joker input parameter
+  GALGAS_bool joker_4226_1 ; // Joker input parameter
+  ioArgument_ioVariableMap.setter_searchForReadWriteAccess (object->mAttribute_mTargetVarName, joker_4146, var_accessIsAllowed, var_targetVariableKind, var_isCopiable, joker_4226_3, joker_4226_2, joker_4226_1, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 120)) ;
   }
-  const enumGalgasBool test_2 = var_accessIsAllowed.operator_not (SOURCE_FILE ("instruction-operator-assign.galgas", 124)).boolEnum () ;
+  const enumGalgasBool test_2 = var_accessIsAllowed.operator_not (SOURCE_FILE ("instruction-operator-assign.galgas", 128)).boolEnum () ;
   if (kBoolTrue == test_2) {
     GALGAS_location location_3 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_3, GALGAS_string ("routine has no access right on the this variable")  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 125)) ;
+    inCompiler->emitSemanticError (location_3, GALGAS_string ("routine has no access right on the this variable")  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 129)) ;
   }
   GALGAS_infixOperatorMap var_operatorMap ;
   switch (object->mAttribute_mOperator.enumValue ()) {
@@ -5330,20 +5330,40 @@ static void categoryMethod_operatorAssignInstructionAST_analyze (const cPtr_inst
       var_operatorMap = constinArgument_inContext.mAttribute_mMulNoOvfOperatorMap ;
     }
     break ;
+  case GALGAS_operatorAssignKind::kEnum_divAssign:
+    {
+      var_operatorMap = constinArgument_inContext.mAttribute_mDivOperatorMap ;
+    }
+    break ;
+  case GALGAS_operatorAssignKind::kEnum_divZeroAssign:
+    {
+      var_operatorMap = constinArgument_inContext.mAttribute_mDivNoOvfOperatorMap ;
+    }
+    break ;
+  case GALGAS_operatorAssignKind::kEnum_modAssign:
+    {
+      var_operatorMap = constinArgument_inContext.mAttribute_mModOperatorMap ;
+    }
+    break ;
+  case GALGAS_operatorAssignKind::kEnum_modZeroAssign:
+    {
+      var_operatorMap = constinArgument_inContext.mAttribute_mModNoOvfOperatorMap ;
+    }
+    break ;
   }
   GALGAS_infixOperatorDescription var_binaryOperator ;
-  GALGAS_unifiedTypeMap_2D_proxy joker_5149 ; // Joker input parameter
-  categoryMethod_checkBinaryOperationWith (var_operatorMap, var_targetType, var_sourceValue.mAttribute_mType, object->mAttribute_mTargetVarName.mAttribute_location, joker_5149, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 149)) ;
-  const enumGalgasBool test_4 = var_isCopiable.operator_not (SOURCE_FILE ("instruction-operator-assign.galgas", 156)).boolEnum () ;
+  GALGAS_unifiedTypeMap_2D_proxy joker_5495 ; // Joker input parameter
+  categoryMethod_checkBinaryOperationWith (var_operatorMap, var_targetType, var_sourceValue.mAttribute_mType, object->mAttribute_mTargetVarName.mAttribute_location, joker_5495, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 161)) ;
+  const enumGalgasBool test_4 = var_isCopiable.operator_not (SOURCE_FILE ("instruction-operator-assign.galgas", 168)).boolEnum () ;
   if (kBoolTrue == test_4) {
     GALGAS_location location_5 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_5, GALGAS_string ("the '").add_operation (object->mAttribute_mTargetVarName.getter_string (SOURCE_FILE ("instruction-operator-assign.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 157)).add_operation (GALGAS_string ("' variable is not copiable"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 157))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 157)) ;
+    inCompiler->emitSemanticError (location_5, GALGAS_string ("the '").add_operation (object->mAttribute_mTargetVarName.getter_string (SOURCE_FILE ("instruction-operator-assign.galgas", 169)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 169)).add_operation (GALGAS_string ("' variable is not copiable"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 169))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 169)) ;
   }
   GALGAS_operandIR var_variableValue ;
-  categoryMethod_loadFromMemory (var_targetVariableKind, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValue, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 160)) ;
+  categoryMethod_loadFromMemory (var_targetVariableKind, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValue, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 172)) ;
   GALGAS_operandIR var_newResultingValue ;
-  callCategoryMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValue, object->mAttribute_mTargetVarName.mAttribute_location, var_sourceValue, var_targetType, var_newResultingValue, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 165)) ;
-  categoryMethod_storeInMemory (var_targetVariableKind, var_newResultingValue, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 174)) ;
+  callCategoryMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValue, object->mAttribute_mTargetVarName.mAttribute_location, var_sourceValue, var_targetType, var_newResultingValue, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 177)) ;
+  categoryMethod_storeInMemory (var_targetVariableKind, var_newResultingValue, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 

@@ -260,6 +260,10 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       mTokenCode = plm_lexique_1__2B__25__3D_ ;
     }else if (scanningOk && [self testForInputString:@"*%=" advance:YES]) {
       mTokenCode = plm_lexique_1__2A__25__3D_ ;
+    }else if (scanningOk && [self testForInputString:@"!/=" advance:YES]) {
+      mTokenCode = plm_lexique_1__21__2F__3D_ ;
+    }else if (scanningOk && [self testForInputString:@"!%=" advance:YES]) {
+      mTokenCode = plm_lexique_1__21__25__3D_ ;
     }else if (scanningOk && [self testForInputString:@"|=" advance:YES]) {
       mTokenCode = plm_lexique_1__7C__3D_ ;
     }else if (scanningOk && [self testForInputString:@"^=" advance:YES]) {
@@ -276,6 +280,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       mTokenCode = plm_lexique_1__3C__3C_ ;
     }else if (scanningOk && [self testForInputString:@"::" advance:YES]) {
       mTokenCode = plm_lexique_1__3A__3A_ ;
+    }else if (scanningOk && [self testForInputString:@"/=" advance:YES]) {
+      mTokenCode = plm_lexique_1__2F__3D_ ;
     }else if (scanningOk && [self testForInputString:@"->" advance:YES]) {
       mTokenCode = plm_lexique_1__2D__3E_ ;
     }else if (scanningOk && [self testForInputString:@"-=" advance:YES]) {
@@ -292,6 +298,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       mTokenCode = plm_lexique_1__2A__25_ ;
     }else if (scanningOk && [self testForInputString:@"&=" advance:YES]) {
       mTokenCode = plm_lexique_1__26__3D_ ;
+    }else if (scanningOk && [self testForInputString:@"%=" advance:YES]) {
+      mTokenCode = plm_lexique_1__25__3D_ ;
     }else if (scanningOk && [self testForInputString:@"!=" advance:YES]) {
       mTokenCode = plm_lexique_1__21__3D_ ;
     }else if (scanningOk && [self testForInputString:@"!/" advance:YES]) {
@@ -451,7 +459,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) terminalVocabularyCount {
-  return 98 ;
+  return 102 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -481,7 +489,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) styleIndexForTerminal: (NSInteger) inTerminal {
-  static const NSUInteger kTerminalSymbolStyles [99] = {0,
+  static const NSUInteger kTerminalSymbolStyles [103] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_typeName */,
@@ -555,8 +563,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     8 /* plm_lexique_1__5D_ */,
     8 /* plm_lexique_1__3C__3C_ */,
     8 /* plm_lexique_1__3E__3E_ */,
-    8 /* plm_lexique_1__25_ */,
-    8 /* plm_lexique_1__21__25_ */,
     8 /* plm_lexique_1__7E_ */,
     8 /* plm_lexique_1__2D__3E_ */,
     8 /* plm_lexique_1__3A__3A_ */,
@@ -579,7 +585,13 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     8 /* plm_lexique_1__2A__3D_ */,
     8 /* plm_lexique_1__2A__25__3D_ */,
     8 /* plm_lexique_1__2F_ */,
-    8 /* plm_lexique_1__21__2F_ */
+    8 /* plm_lexique_1__21__2F_ */,
+    8 /* plm_lexique_1__2F__3D_ */,
+    8 /* plm_lexique_1__21__2F__3D_ */,
+    8 /* plm_lexique_1__25_ */,
+    8 /* plm_lexique_1__21__25_ */,
+    8 /* plm_lexique_1__25__3D_ */,
+    8 /* plm_lexique_1__21__25__3D_ */
   } ;
   return kTerminalSymbolStyles [inTerminal] ;
 }
@@ -591,7 +603,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (BOOL) atomicSelectionForToken: (NSUInteger) inTokenIndex {
-  static const BOOL kTerminalAtomicSelection [99] = {NO,
+  static const BOOL kTerminalAtomicSelection [103] = {NO,
     YES /* plm_lexique_1_identifier */,
     YES /* plm_lexique_1_attribute */,
     YES /* plm_lexique_1_typeName */,
@@ -665,8 +677,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1__5D_ */,
     YES /* plm_lexique_1__3C__3C_ */,
     YES /* plm_lexique_1__3E__3E_ */,
-    YES /* plm_lexique_1__25_ */,
-    YES /* plm_lexique_1__21__25_ */,
     YES /* plm_lexique_1__7E_ */,
     YES /* plm_lexique_1__2D__3E_ */,
     YES /* plm_lexique_1__3A__3A_ */,
@@ -689,7 +699,13 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1__2A__3D_ */,
     YES /* plm_lexique_1__2A__25__3D_ */,
     YES /* plm_lexique_1__2F_ */,
-    YES /* plm_lexique_1__21__2F_ */
+    YES /* plm_lexique_1__21__2F_ */,
+    YES /* plm_lexique_1__2F__3D_ */,
+    YES /* plm_lexique_1__21__2F__3D_ */,
+    YES /* plm_lexique_1__25_ */,
+    YES /* plm_lexique_1__21__25_ */,
+    YES /* plm_lexique_1__25__3D_ */,
+    YES /* plm_lexique_1__21__25__3D_ */
   } ;
   return kTerminalAtomicSelection [inTokenIndex] ;
 }

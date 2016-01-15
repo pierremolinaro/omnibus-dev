@@ -148,8 +148,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__5D_,
    kToken__3C__3C_,
    kToken__3E__3E_,
-   kToken__25_,
-   kToken__21__25_,
    kToken__7E_,
    kToken__2D__3E_,
    kToken__3A__3A_,
@@ -172,7 +170,13 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__2A__3D_,
    kToken__2A__25__3D_,
    kToken__2F_,
-   kToken__21__2F_} ;
+   kToken__21__2F_,
+   kToken__2F__3D_,
+   kToken__21__2F__3D_,
+   kToken__25_,
+   kToken__21__25_,
+   kToken__25__3D_,
+   kToken__21__25__3D_} ;
 
 //--- Key words table 'keyWordList'
   public : static int16_t search_into_keyWordList (const C_String & inSearchedString) ;
@@ -203,7 +207,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 98 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 102 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -6106,7 +6110,11 @@ class GALGAS_operatorAssignKind : public AC_GALGAS_root {
     kEnum_subAssign,
     kEnum_subModuloAssign,
     kEnum_mulAssign,
-    kEnum_mulModuloAssign
+    kEnum_mulModuloAssign,
+    kEnum_divAssign,
+    kEnum_divZeroAssign,
+    kEnum_modAssign,
+    kEnum_modZeroAssign
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -6138,6 +6146,14 @@ class GALGAS_operatorAssignKind : public AC_GALGAS_root {
 
   public : static GALGAS_operatorAssignKind constructor_bitWiseXorAssign (LOCATION_ARGS) ;
 
+  public : static GALGAS_operatorAssignKind constructor_divAssign (LOCATION_ARGS) ;
+
+  public : static GALGAS_operatorAssignKind constructor_divZeroAssign (LOCATION_ARGS) ;
+
+  public : static GALGAS_operatorAssignKind constructor_modAssign (LOCATION_ARGS) ;
+
+  public : static GALGAS_operatorAssignKind constructor_modZeroAssign (LOCATION_ARGS) ;
+
   public : static GALGAS_operatorAssignKind constructor_mulAssign (LOCATION_ARGS) ;
 
   public : static GALGAS_operatorAssignKind constructor_mulModuloAssign (LOCATION_ARGS) ;
@@ -6167,6 +6183,14 @@ class GALGAS_operatorAssignKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseOrAssign (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseXorAssign (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDivAssign (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDivZeroAssign (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModAssign (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModZeroAssign (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulAssign (LOCATION_ARGS) const ;
 
