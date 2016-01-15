@@ -6,14 +6,14 @@ setter @instructionListIR appendAlloca
   self += !@allocaConstantIR.new {!inLocalVariableName !inTargetVarType}
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @allocaConstantIR : @abstractInstructionIR {
   @string mLocalVariableName
   @unifiedTypeMap-proxy mVariableType
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @allocaConstantIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -24,10 +24,10 @@ override method @allocaConstantIR llvmInstructionCode
   ioLLVMcode += "  %" + mangledNameForLocalVariable (!mLocalVariableName) + " = alloca " + llvmType + "\n"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @allocaConstantIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

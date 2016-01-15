@@ -7,7 +7,7 @@ setter @instructionListIR appendLoadGlobalVariable
   self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inIsVolatile}
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadGlobalVariableIR : @abstractInstructionIR {
   @operandIR mTargetValue
@@ -15,7 +15,7 @@ class @loadGlobalVariableIR : @abstractInstructionIR {
   @bool mIsVolatile
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadGlobalVariableIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -30,11 +30,11 @@ override method @loadGlobalVariableIR llvmInstructionCode
   ioLLVMcode += llvmType + ", " + llvmType + "* @" + mangledNameForGlobalVariable (!mVariableName) + "\n"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mGlobalVariableSet += !mVariableName
 }
 
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

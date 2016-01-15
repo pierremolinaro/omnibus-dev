@@ -54,10 +54,6 @@ syntax extension common_syntax {
     while
       <procedure>
         !?procedureDeclarationListAST
-#    while
-#      $mutating$
-#      <procedure>
-#        !?procedureDeclarationListAST
     while
       $;$
     end
@@ -171,7 +167,7 @@ override method @structureDeclaration enterInContext
     end
     [!?procedureMap insertKey
       !procedure.mProcedureName
-      !false # mutating
+      !procedure.mMutating
       !procedureModeMap
       !signature
       !false # not weak
@@ -279,16 +275,29 @@ override method @structureDeclaration semanticAnalysis
       !globalsAreConstant:false
     )
   #--- Add "self" to variable map
-    [!?variableMap insertUsedLocalConstant
-      !.new {!"self" !.here}
-      !structureType
-      !true # mReadAccessAllowed
-      !.localValue {!type:structureType !name:"self"}
-      !true # copiable
-      !{} # fieldMap
-      !true # mCanBeUsedAsInputParameter
-      !false # mIsConstant
-    ]
+    if procedure.mMutating then
+      [!?variableMap insertDefinedLocalVariable
+        !.new {!"self" !.here}
+        !structureType
+        !true # mReadAccessAllowed
+        !.localValue {!type:structureType !name:"self"}
+        !true # copiable
+        !{} # fieldMap
+        !true # mCanBeUsedAsInputParameter
+        !false # mIsConstant
+      ]
+    else
+      [!?variableMap insertUsedLocalConstant
+        !.new {!"self" !.here}
+        !structureType
+        !true # mReadAccessAllowed
+        !.localValue {!type:structureType !name:"self"}
+        !true # copiable
+        !{} # fieldMap
+        !false # mCanBeUsedAsInputParameter
+        !true # mIsConstant
+      ]
+    end
   #--- Analyse formal arguments
     @procFormalArgumentListForGeneration formalArguments = {}
     formalArguments += !.inputOutput !structureType !mangledNameForLocalVariable (!"self")

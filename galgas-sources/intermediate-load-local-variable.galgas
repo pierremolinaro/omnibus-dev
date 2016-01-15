@@ -6,14 +6,14 @@ setter @instructionListIR appendLoadLocalVariable
   self += !@loadLocalVariableIR.new {!inTargetValue !inVariableName}
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadLocalVariableIR : @abstractInstructionIR {
   @operandIR mTargetValue
   @string mVariableName
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadLocalVariableIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -25,10 +25,10 @@ override method @loadLocalVariableIR llvmInstructionCode
   ioLLVMcode += llvmType + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mVariableName) + "\n"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadLocalVariableIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

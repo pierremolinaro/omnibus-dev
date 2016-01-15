@@ -1,13 +1,13 @@
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                 *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @registerConstantInExpressionAST : @expressionAST {
   @lstring mRegisterName
   @lstring mFieldName
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @registerIntegerExpInExpressionAST : @expressionAST {
   @lstring mRegisterName
@@ -16,9 +16,9 @@ class @registerIntegerExpInExpressionAST : @expressionAST {
   @location mExpressionLocation
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
 
@@ -42,9 +42,9 @@ syntax extension common_syntax {
 
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -53,7 +53,7 @@ override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpre
   [!?ioGraph addEdge !inConstantName !mRegisterName]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -62,9 +62,9 @@ override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExp
   [!?ioGraph addEdge !inConstantName !mRegisterName]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                           *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantInExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
@@ -98,7 +98,7 @@ override method @registerConstantInExpressionAST analyzeExpression
   outResult = .new {!type !.literalInteger {!value:((1G << bitCount) - 1G) << bitIndex}}
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerIntegerExpInExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
@@ -187,9 +187,9 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
   @location mInstructionLocation
@@ -200,7 +200,7 @@ class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
   @bool mNoCheck
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerIntegerConstantInExpressionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -225,7 +225,7 @@ override method @registerIntegerConstantInExpressionIR llvmInstructionCode
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerIntegerConstantInExpressionIR enterAccessibleEntities
   ?!@accessibleEntities unused ioAccessibleEntities
@@ -233,4 +233,4 @@ override method @registerIntegerConstantInExpressionIR enterAccessibleEntities
 #  [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

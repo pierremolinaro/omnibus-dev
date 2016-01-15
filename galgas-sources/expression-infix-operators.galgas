@@ -1,6 +1,6 @@
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                 *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @infixOperator {
   case equal
@@ -27,7 +27,7 @@ enum @infixOperator {
   case rightShiftOp
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @infixOperatorExpressionAST : @expressionAST {
   @expressionAST mLeftExpression
@@ -36,7 +36,7 @@ class @infixOperatorExpressionAST : @expressionAST {
   @expressionAST mRightExpression
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
   @expressionAST mLeftExpression
@@ -44,9 +44,9 @@ class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
   @expressionAST mRightExpression
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -56,7 +56,7 @@ override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
   [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -66,9 +66,9 @@ override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeFo
   [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                           *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @infixOperatorMap checkBinaryOperationWith
   ?leftType:let @unifiedTypeMap-proxy inLeftType
@@ -87,7 +87,7 @@ method @infixOperatorMap checkBinaryOperationWith
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @infixOperatorExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
@@ -153,7 +153,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func getInfixOperatorMap
   ?let @infixOperator inOp
@@ -245,7 +245,7 @@ private func getInfixOperatorMap
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
@@ -311,12 +311,12 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @infixOperatorDescription {
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @infixOperatorDescription generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
@@ -327,4 +327,4 @@ abstract method @infixOperatorDescription generateInfixOperatorCode
   ?let @unifiedTypeMap-proxy inResultType
   !@operandIR outResultValue
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

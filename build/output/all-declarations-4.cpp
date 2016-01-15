@@ -1089,7 +1089,10 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "  proc nop `user () {\n"
   "  }\n"
   "  proc getX `user (!outX $int32) {\n"
-  "    outX = self.x \n"
+  "    outX = self.x %+ 3\n"
+  "  }\n"
+  "  proc setX `user (\?inX $int32) {\n"
+  "    self.x = inX + 8\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1112,7 +1115,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "11-structure-procs.plm",
   "plm",
   true, // Text file
-  493, // Text length
+  556, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 

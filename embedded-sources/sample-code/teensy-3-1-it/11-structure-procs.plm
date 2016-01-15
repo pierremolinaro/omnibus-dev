@@ -9,7 +9,10 @@ struct $MyStruct {
   proc nop `user () {
   }
   proc getX `user (!outX $int32) {
-    outX = self.x 
+    outX = self.x %+ 3
+  }
+  mutating proc setX `user (?inX $int32) {
+    self.x = inX + 8
   }
 }
 
@@ -24,6 +27,7 @@ proc loop `user () {
   var s = $MyStruct ()
   s.nop ()
   var x $int32 ; s.getX (?x)
+  s.setX (!999)
 }
 
 //------------------------------------------------*
