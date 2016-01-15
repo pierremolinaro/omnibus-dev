@@ -33,6 +33,7 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@str
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procedureDeclarationListAST {
+  @bool mMutating
   @lstringlist mProcedureModeList
   @lstring mProcedureName
   @lstringlist mProcedureAttributeList
@@ -63,11 +64,13 @@ syntax extension common_syntax {
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
+      ?mutating:let mutating
     ${$
     @labelMap labelMap = {}
     <instructionList> ?let instructionList !?labelMap
     $}$
     ioProcListAST +=
+      !mutating
       !procModeList
       !procName
       !attributeList
@@ -83,7 +86,14 @@ syntax extension common_syntax {
     !name:@lstring outProcName
     !attributes:@lstringlist outAttributeList
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
+    !mutating:@bool outMutating
   {
+    select
+      outMutating = false
+    or
+      $mutating$
+      outMutating = true
+    end
     $proc$
     $identifier$ ?outProcName
     outProcModeList = {}

@@ -1,4 +1,4 @@
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendShortCircuitAndOperation
   ?let @operandIR inTargetOperand
@@ -18,7 +18,7 @@ setter @instructionListIR appendShortCircuitAndOperation
   }
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @shortCircuitAndOperationIR : @abstractInstructionIR {
   @operandIR mTargetOperand
@@ -29,14 +29,14 @@ class @shortCircuitAndOperationIR : @abstractInstructionIR {
   @location mLocation
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @shortCircuitAndOperationIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mLeftInstructionList  enterAccessibleEntities !?ioAccessibleEntities]
   [mRightInstructionList enterAccessibleEntities !?ioAccessibleEntities]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @shortCircuitAndOperationIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -58,4 +58,4 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ioLLVMcode += "  " + mTargetOperand.mValue + " = phi i1 [" + mRightOperand.mValue + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,8 +1,8 @@
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #                                                                                                                      *
 #    C O D E    O P T I M I S A T I O N                                                                                *
 #                                                                                                                      *
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @accessibleEntities {
   @stringset mAccessibleRegisterSet
@@ -11,7 +11,7 @@ struct @accessibleEntities {
   @stringset mGlobalVariableSet
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   switch self
@@ -29,11 +29,11 @@ method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessi
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   for (instruction) in self do
@@ -41,19 +41,19 @@ method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccess
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @procedureMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc codeOptimisation
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -138,7 +138,7 @@ proc codeOptimisation
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc suppressInaccessibleSubprograms
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -254,5 +254,5 @@ private proc suppressInaccessibleSubprograms
   end
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

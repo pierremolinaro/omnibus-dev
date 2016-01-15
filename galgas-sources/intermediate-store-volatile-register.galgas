@@ -8,7 +8,7 @@ setter @instructionListIR appendStoreVolatileRegister
   self += !@storeVolatileIR.new {!inRegisterName !inTargetVarType !inAddress !inSourceValue}
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @storeVolatileIR : @abstractInstructionIR {
   @string mRegisterName
@@ -17,7 +17,7 @@ class @storeVolatileIR : @abstractInstructionIR {
   @operandIR mSourceValue
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @storeVolatileIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -29,10 +29,10 @@ override method @storeVolatileIR llvmInstructionCode
          + "* inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @storeVolatileIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mAccessibleRegisterSet += !mRegisterName
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

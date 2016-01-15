@@ -6,14 +6,14 @@ setter @instructionListIR appendLoadStructureConstant
   self += !@loadStructureConstantIR.new {!inTargetValue !inTypeName}
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadStructureConstantIR : @abstractInstructionIR {
   @operandIR mTargetValue
   @string mTypeName
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadStructureConstantIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -25,10 +25,10 @@ override method @loadStructureConstantIR llvmInstructionCode
   ioLLVMcode += llvmType + ", " + llvmType + "* @" + mTypeName + ".init\n"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadStructureConstantIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

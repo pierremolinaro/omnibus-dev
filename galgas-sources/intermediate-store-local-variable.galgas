@@ -7,7 +7,7 @@ setter @instructionListIR appendStoreLocalVariable
   self += !@storeLocalVariableIR.new {!inLocalVarName !inTargetVarType !inSourceValue}
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @storeLocalVariableIR : @abstractInstructionIR {
   @string mLocalVarName
@@ -15,7 +15,7 @@ class @storeLocalVariableIR : @abstractInstructionIR {
   @operandIR mSourceValue
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @storeLocalVariableIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -27,9 +27,9 @@ override method @storeLocalVariableIR llvmInstructionCode
   ioLLVMcode += llvmType + " " + mSourceValue.mValue + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @storeLocalVariableIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
