@@ -371,7 +371,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
     !routineNameForInvocationGraph:procNameForInvocationGraph
-    !optionalReceiverType:.noReceiver
     !context:inContext
     !modes:procedureModeSet
     !allowException:not [procedureModeSet hasKey !panicModeName ()]

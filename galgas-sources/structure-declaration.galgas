@@ -310,7 +310,6 @@ override method @structureDeclaration semanticAnalysis
     @instructionListIR instructionGenerationList = {}
     [procedure.mInstructionList analyzeRoutineInstructionList
       !routineNameForInvocationGraph:procNameForInvocationGraph
-      !optionalReceiverType:.receiver {!type:structureType !receiverValue:receiverName ()}
       !context:inContext
       !modes:procedureModeSet
       !allowException:not [procedureModeSet hasKey !panicModeName ()]

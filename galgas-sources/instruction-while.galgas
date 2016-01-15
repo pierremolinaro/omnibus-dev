@@ -60,7 +60,6 @@ syntax extension common_syntax {
 
 override method @whileInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
@@ -96,7 +95,6 @@ override method @whileInstructionAST analyze
   [mWhileInstructionList analyzeBranchInstructionList
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOf_while_instruction
-    !optionalReceiverType:inReceiverType
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions

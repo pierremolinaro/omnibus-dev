@@ -105,7 +105,6 @@ syntax extension common_syntax {
 
 override method @ifInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
@@ -140,7 +139,6 @@ override method @ifInstructionAST analyze
   [mThenInstructionList analyzeBranchInstructionList
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOfThenInstructionList
-    !optionalReceiverType:inReceiverType
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions
@@ -154,7 +152,6 @@ override method @ifInstructionAST analyze
   [mElseInstructionList analyzeBranchInstructionList
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOfElseInstructionList
-    !optionalReceiverType:inReceiverType
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions

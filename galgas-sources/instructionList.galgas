@@ -39,7 +39,6 @@ syntax extension common_syntax {
 
 abstract method @instructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
@@ -53,7 +52,6 @@ abstract method @instructionAST analyze
 method @instructionListAST analyzeBranchInstructionList
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?endOfInstructionList:@location inEndOfInstructionList
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
@@ -67,7 +65,6 @@ method @instructionListAST analyzeBranchInstructionList
   for () in self do
     [mInstruction analyze 
       !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-      !optionalReceiverType:inReceiverType
       !context:inContext
       !modes:inModeSet
       !allowException:inAllowExceptions
@@ -85,7 +82,6 @@ method @instructionListAST analyzeBranchInstructionList
 
 method @instructionListAST analyzeRoutineInstructionList
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
@@ -97,7 +93,6 @@ method @instructionListAST analyzeRoutineInstructionList
   for () in self do
     [mInstruction analyze 
       !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-      !optionalReceiverType:inReceiverType
       !context:inContext
       !modes:inModeSet
       !allowException:inAllowExceptions

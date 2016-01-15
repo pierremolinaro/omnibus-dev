@@ -63,7 +63,6 @@ syntax extension common_syntax {
 
 override method @varInstructionWithAssignmentAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModes
   ?allowException:let @bool inAllowExceptions
@@ -127,7 +126,6 @@ override method @varInstructionWithAssignmentAST analyze
 
 override method @varInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModes
   ?allowException:let @bool unused inAllowExceptions
