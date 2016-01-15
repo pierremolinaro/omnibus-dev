@@ -249,7 +249,7 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
-      $%+$
+      $+%$
       let operatorLocation = @location.here
       <expression_2> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
@@ -269,7 +269,7 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
-      $%-$
+      $-%$
       let operatorLocation = @location.here
       <expression_2> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
@@ -297,7 +297,7 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
-      $%*$
+      $*%$
       let operatorLocation = @location.here
       <expression_1> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
@@ -397,7 +397,7 @@ syntax extension common_syntax {
   #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
 
   rule <primary> !@expressionAST outExpression {
-    $%-$
+    $-%$
     let operatorLocation = @location.here
     <primary> ?let expression
     outExpression = @prefixOperatorExpressionAST.new {

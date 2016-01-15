@@ -9,7 +9,7 @@ struct $MyStruct {
   proc nop `user () {
   }
   proc getX `user (!outX $int32) {
-    outX = self.x %+ 3
+    outX = self.x +% 3
   }
   mutating proc setX `user (?inX $int32) {
     self.x = inX + 8

@@ -403,7 +403,7 @@ proc waitMSInExceptionMode `panic @noWarningIfUnused (?duration: inDuration $uin
   var duration = inDuration
   while duration > 0 do
     waitOneMillisecondInExceptionMode ()
-    duration %--
+    duration --%
   end
 }
 
@@ -432,8 +432,8 @@ proc printUnsignedInExceptionMode `panic @noWarningIfUnused (?inValue $uint32) {
   while divisor > 0 do
     if isPrinting or (value >= divisor) then
       let quotient = value !/ divisor
-      let remainder = value %- quotient %* divisor
-      writeDataInExceptionMode (!0x30 %+ truncate quotient : $uint8)
+      let remainder = value -% quotient *% divisor
+      writeDataInExceptionMode (!0x30 +% truncate quotient : $uint8)
       value = remainder
       isPrinting = true
     end
@@ -451,7 +451,7 @@ proc printSignedInExceptionMode `panic @noWarningIfUnused (?inValue $int32) {
     printUnsignedInExceptionMode (!truncate inValue : $uint32)
   else
     writeDataInExceptionMode (!0x2D) // Signe -
-    printUnsignedInExceptionMode (!truncate %- inValue : $uint32)
+    printUnsignedInExceptionMode (!truncate -% inValue : $uint32)
   end
 }
 
@@ -476,13 +476,13 @@ proc write8bitCommandInExceptionMode `panic @noWarningIfUnused (?inCommand $uint
 proc gotoInExceptionMode `panic @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
   if inColumn < 20 then
     if inLine == 0 then
-      write8bitCommandInExceptionMode (!0x80 %+ 0 %+ inColumn) ;
+      write8bitCommandInExceptionMode (!0x80 +% 0 +% inColumn) ;
     elsif inLine == 1 then
-      write8bitCommandInExceptionMode (!0x80 %+ 64 %+ inColumn) ;
+      write8bitCommandInExceptionMode (!0x80 +% 64 +% inColumn) ;
     elsif inLine == 2 then
-      write8bitCommandInExceptionMode (!0x80 %+ 20 %+ inColumn) ;
+      write8bitCommandInExceptionMode (!0x80 +% 20 +% inColumn) ;
     elsif inLine == 3 then
-      write8bitCommandInExceptionMode (!0x80 %+ 84 %+ inColumn) ;
+      write8bitCommandInExceptionMode (!0x80 +% 84 +% inColumn) ;
     end
   end
 }
