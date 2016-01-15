@@ -121,18 +121,33 @@ Où :
 
 
 
-\sectionLabel {Opérateurs combinés avec une affectation}{operateursCombinesAffectation}
+\sectionLabel {Opérateurs combinés avec l'affectation}{operateursCombinesAffectation}
 \index{\&=}
 \index{\textbar=}
 \index{\^{}=}
 
-\plm!a &= b! est équivalent à \plm!a = a & b!.
-
-\plm!a |= b! est équivalent à \plm!a = a | b!.
-
-\plm!a ^= b! est équivalent à \plm!a = a ^ b!.
-
-Les opérateurs infixes \plm!&=!, \plm!|=! et \plm!^=! sur les entiers sont décrits à la \refSectionPage{operateursCombinesAffectationEntier}.
+Le \refTableau{tableauOperateursCombinesAffectation} liste les opérateurs combinés avec une affectation.
+\begin{table}[ht]
+\centering
+\begin{tabular}{rcl}
+  \textbf{Opérateur combiné} & \textbf{Écriture équivalente} & \textbf{Lien}\\
+  \plm!a &= b! & \plm!a = a & b! & \refSectionPage{operateursCombinesAffectationEntier}\\
+  \plm!a |= b! & \plm!a = a | b! & \refSectionPage{operateursCombinesAffectationEntier}\\
+  \plm!a ^= b! & \plm!a = a ^ b! & \refSectionPage{operateursCombinesAffectationEntier}\\
+  \plm!a += b! & \plm!a = a + b! \\
+  \plm!a +%= b! & \plm!a = a +% b! \\
+  \plm!a -= b! & \plm!a = a - b! \\
+  \plm!a -%= b! & \plm!a = a -% b! \\
+  \plm!a *= b! & \plm!a = a * b! \\
+  \plm!a *%= b! & \plm!a = a *% b! \\
+  \plm-a /= b- & \plm-a = a / b- \\
+  \plm-a !/= b- & \plm-a = a !/ b- \\
+  \plm-a %= b- & \plm-a = a % b- \\
+  \plm-a !%= b- & \plm-a = a !% b- \\
+\end{tabular}
+\caption{Opérateurs combinés avec l'affectation}
+\labelTableau{tableauOperateursCombinesAffectation}
+\end{table}
 
 
 \sectionLabel{Instruction \texttt{check}}{directiveCheck}\index{check@\plm=check=}

@@ -10004,7 +10004,39 @@ GALGAS_operatorAssignKind GALGAS_operatorAssignKind::constructor_mulModuloAssign
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_operatorAssignKind [10] = {
+GALGAS_operatorAssignKind GALGAS_operatorAssignKind::constructor_divAssign (UNUSED_LOCATION_ARGS) {
+  GALGAS_operatorAssignKind result ;
+  result.mEnum = kEnum_divAssign ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignKind GALGAS_operatorAssignKind::constructor_divZeroAssign (UNUSED_LOCATION_ARGS) {
+  GALGAS_operatorAssignKind result ;
+  result.mEnum = kEnum_divZeroAssign ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignKind GALGAS_operatorAssignKind::constructor_modAssign (UNUSED_LOCATION_ARGS) {
+  GALGAS_operatorAssignKind result ;
+  result.mEnum = kEnum_modAssign ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignKind GALGAS_operatorAssignKind::constructor_modZeroAssign (UNUSED_LOCATION_ARGS) {
+  GALGAS_operatorAssignKind result ;
+  result.mEnum = kEnum_modZeroAssign ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_operatorAssignKind [14] = {
   "(not built)",
   "bitWiseOrAssign",
   "bitWiseAndAssign",
@@ -10014,7 +10046,11 @@ static const char * gEnumNameArrayFor_operatorAssignKind [10] = {
   "subAssign",
   "subModuloAssign",
   "mulAssign",
-  "mulModuloAssign"
+  "mulModuloAssign",
+  "divAssign",
+  "divZeroAssign",
+  "modAssign",
+  "modZeroAssign"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10069,6 +10105,30 @@ GALGAS_bool GALGAS_operatorAssignKind::getter_isMulAssign (UNUSED_LOCATION_ARGS)
 
 GALGAS_bool GALGAS_operatorAssignKind::getter_isMulModuloAssign (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulModuloAssign == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_operatorAssignKind::getter_isDivAssign (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_divAssign == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_operatorAssignKind::getter_isDivZeroAssign (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_divZeroAssign == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_operatorAssignKind::getter_isModAssign (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_modAssign == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_operatorAssignKind::getter_isModZeroAssign (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_modZeroAssign == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -12,6 +12,10 @@ enum @operatorAssignKind {
   case subModuloAssign
   case mulAssign
   case mulModuloAssign
+  case divAssign
+  case divZeroAssign
+  case modAssign
+  case modZeroAssign
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -145,6 +149,14 @@ override method @operatorAssignInstructionAST analyze
     operatorMap = inContext.mMulOperatorMap
   case mulModuloAssign :
     operatorMap = inContext.mMulNoOvfOperatorMap
+  case divAssign :
+    operatorMap = inContext.mDivOperatorMap
+  case divZeroAssign :
+    operatorMap = inContext.mDivNoOvfOperatorMap
+  case modAssign :
+    operatorMap = inContext.mModOperatorMap
+  case modZeroAssign :
+    operatorMap = inContext.mModNoOvfOperatorMap
   end
   [operatorMap checkBinaryOperationWith
     !leftType:targetType
