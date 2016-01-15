@@ -206,7 +206,6 @@ override method @structureDeclaration initAnalysis
     @semanticTemporariesStruct temporaries = .default
     [mInitExpression analyzeExpression
       !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
-      !optionalReceiverType:.noReceiver
       !optionalTargetType:fieldType
       !context:ioContext
       !modes:{}

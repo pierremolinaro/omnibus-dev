@@ -98,7 +98,7 @@ list @procEffectiveParameterList {
 
 override method @procCallInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
@@ -188,7 +188,6 @@ override method @procCallInstructionAST analyze
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-        !optionalReceiverType:inReceiverType
         !optionalTargetType:formal_mType
         !context:inContext
         !modes:inModeSet

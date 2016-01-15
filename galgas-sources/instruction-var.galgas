@@ -63,7 +63,7 @@ syntax extension common_syntax {
 
 override method @varInstructionWithAssignmentAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModes
   ?allowException:let @bool inAllowExceptions
@@ -79,7 +79,6 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
     !optionalTargetType:targetType
     !context:inContext
     !modes:inModes

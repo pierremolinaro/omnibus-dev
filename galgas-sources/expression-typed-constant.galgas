@@ -46,7 +46,6 @@ override method @typedConstantCall addDependenceEdgeForStaticExpression
 
 override method @typedConstantCall analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModeSet

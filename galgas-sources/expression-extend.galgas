@@ -52,7 +52,6 @@ override method @extendExpressionAST addDependenceEdgeForStaticExpression
 
 override method @extendExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -66,7 +65,6 @@ override method @extendExpressionAST analyzeExpression
 #--- Analyze expression
   [mExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet

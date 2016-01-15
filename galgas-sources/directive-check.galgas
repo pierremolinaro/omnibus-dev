@@ -35,7 +35,7 @@ syntax extension common_syntax {
 
 override method @checkInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
@@ -48,7 +48,6 @@ override method @checkInstructionAST analyze
   @instructionListIR instructionGenerationList = {}
   [mExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
     !optionalTargetType:.null
     !context:inContext
     !modes:inModeSet
