@@ -6,6 +6,12 @@ enum @operatorAssignKind {
   case bitWiseOrAssign
   case bitWiseAndAssign
   case bitWiseXorAssign
+  case addAssign
+  case addModuloAssign
+  case subAssign
+  case subModuloAssign
+  case mulAssign
+  case mulModuloAssign
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -36,6 +42,24 @@ syntax extension common_syntax {
     or
       $^=$
       operatorAssign = .bitWiseXorAssign
+    or
+      $+=$
+      operatorAssign = .addAssign
+    or
+      $+%=$
+      operatorAssign = .addModuloAssign
+    or
+      $-=$
+      operatorAssign = .subAssign
+    or
+      $-%=$
+      operatorAssign = .subModuloAssign
+    or
+      $*=$
+      operatorAssign = .mulAssign
+    or
+      $*%=$
+      operatorAssign = .mulModuloAssign
     end
     <expression> ?let @expressionAST expression
     ioInstructionList += !@operatorAssignInstructionAST.new {
@@ -102,17 +126,25 @@ override method @operatorAssignInstructionAST analyze
   end
 #--- Check operator is available for type
   @infixOperatorMap operatorMap
-  @string commentOperator
   switch mOperator
   case bitWiseAndAssign :
     operatorMap = inContext.mAndOperatorMap
-    commentOperator = "&="
   case bitWiseOrAssign :
     operatorMap = inContext.mOrOperatorMap
-    commentOperator = "|="
   case bitWiseXorAssign :
     operatorMap = inContext.mXorOperatorMap
-    commentOperator = "^="
+  case addAssign :
+    operatorMap = inContext.mAddOperatorMap
+  case addModuloAssign :
+    operatorMap = inContext.mAddNoOvfOperatorMap
+  case subAssign :
+    operatorMap = inContext.mSubOperatorMap
+  case subModuloAssign :
+    operatorMap = inContext.mSubNoOvfOperatorMap
+  case mulAssign :
+    operatorMap = inContext.mMulOperatorMap
+  case mulModuloAssign :
+    operatorMap = inContext.mMulNoOvfOperatorMap
   end
   [operatorMap checkBinaryOperationWith
     !leftType:targetType
@@ -125,9 +157,6 @@ override method @operatorAssignInstructionAST analyze
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
 #--- Code generation
-  [!?ioInstructionGenerationList appendComment
-    ![targetVariableKind mangledName] + " " + commentOperator + " " + sourceValue.mValue
-  ]
   [targetVariableKind loadFromMemory
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
@@ -136,7 +165,7 @@ override method @operatorAssignInstructionAST analyze
   [binaryOperator generateInfixOperatorCode
     !?ioTemporaries
     !?ioInstructionGenerationList
-    !variableValue # .new {!targetType !variableValueName}
+    !variableValue
     !mTargetVarName.location
     !sourceValue
     !targetType

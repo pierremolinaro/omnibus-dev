@@ -9311,7 +9311,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc systickHandler `isr ()\n"
   "\n"
   "proc systickHandler `isr () {\n"
-  "  gCompteur ++%\n"
+  "  gCompteur +%= 1\n"
   "  userSystickHandler ()\n"
   "}\n"
   "\n"
@@ -9882,7 +9882,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "teensy-3-1-default-isr.plm",
   "plm",
   true, // Text file
-  16805, // Text length
+  16807, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -10151,7 +10151,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "//  if (NULL != inString) {\n"
   "//    while ('\\0' != *inString) {\n"
   "//      writeData (*inString) ;\n"
-  "//      inString ++ ;\n"
+  "//      inString += 1 ;\n"
   "//    }\n"
   "//  }\n"
   "//}\n"
@@ -10174,7 +10174,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "  var count = inCount\n"
   "  while (count > 0) do\n"
   "    writeData_inUserMode (!0x20)\n"
-  "    count -- ;\n"
+  "    count -= 1\n"
   "  end\n"
   "}\n"
   "\n"
@@ -10293,7 +10293,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "  var duration = inDuration\n"
   "  while duration > 0 do\n"
   "    waitOneMillisecondInExceptionMode ()\n"
-  "    duration --%\n"
+  "    duration -%= 1\n"
   "  end\n"
   "}\n"
   "\n"
@@ -10421,7 +10421,7 @@ const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  16399, // Text length
+  16403, // Text length
   gWrapperFileContent_6_targetTemplates
 ) ;
 

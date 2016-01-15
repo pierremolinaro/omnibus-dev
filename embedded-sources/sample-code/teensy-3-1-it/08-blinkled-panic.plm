@@ -24,7 +24,7 @@ proc loop `user () {
   ledOff (!LED_TEENSY)  // Éteindre la led
   toggle = not toggle
   if toggle then
-    gCount ++ // EXCEPTION AFTER 7s
+    gCount += 1 // EXCEPTION AFTER 7s
     goto (!line:1 !column:0)
     printUnsigned (!extend gCount : $uint32)
   end

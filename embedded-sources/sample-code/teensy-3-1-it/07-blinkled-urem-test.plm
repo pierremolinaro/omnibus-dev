@@ -24,7 +24,7 @@ proc loop `user () {
   ledOff (!LED_TEENSY)  // Éteindre la led
   toggle = not toggle
   if toggle then
-    gCount ++
+    gCount += 1
     goto (!line:1 !column:0)
     printUnsigned (!gCount)
     goto (!line:2 !column:0)
