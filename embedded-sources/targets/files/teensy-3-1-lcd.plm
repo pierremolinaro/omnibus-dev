@@ -261,7 +261,7 @@ proc goto `user @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8
 //  if (NULL != inString) {
 //    while ('\0' != *inString) {
 //      writeData (*inString) ;
-//      inString ++ ;
+//      inString += 1 ;
 //    }
 //  }
 //}
@@ -284,7 +284,7 @@ proc printSpaces `user @noWarningIfUnused (?inCount $uint32) {
   var count = inCount
   while (count > 0) do
     writeData_inUserMode (!0x20)
-    count -- ;
+    count -= 1
   end
 }
 
@@ -403,7 +403,7 @@ proc waitMSInExceptionMode `panic @noWarningIfUnused (?duration: inDuration $uin
   var duration = inDuration
   while duration > 0 do
     waitOneMillisecondInExceptionMode ()
-    duration --%
+    duration -%= 1
   end
 }
 

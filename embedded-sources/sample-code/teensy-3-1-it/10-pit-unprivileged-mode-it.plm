@@ -30,7 +30,7 @@ proc PITChannel0Handler `isr () {
 //--- Acquitter l'interruption
   PIT_TFLG0 = 1
 //--- Incrémenter le compteur
-  gPITValue ++
+  gPITValue += 1
 }
 
 //------------------------------------------------*

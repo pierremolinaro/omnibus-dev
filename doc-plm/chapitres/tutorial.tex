@@ -95,12 +95,12 @@ var gDelai $uint32 = 0 {
 }
 
 proc loop `user () {
-  gDelai ++ ;
+  gDelai += 1
   if gDelai == 1_500_000 then
-    GPIOC_PSOR = 1 << 5 ; // Allumer la led
+    GPIOC_PSOR = 1 << 5 // Allumer la led
   elsif gDelai == 3_000_000 then
     gDelai = 0
-    GPIOC_PCOR = 1 << 5 ; // Éteindre la led
+    GPIOC_PCOR = 1 << 5 // Éteindre la led
   end  
 }
 \end{PLM}
@@ -141,12 +141,12 @@ En PLM, une variable globale doit citer les routines qui ont le droit de l'utili
 Enfin, la routine \plm+loop+ :
 \begin{PLM}[12]
 proc loop `user () {
-  gDelai ++ ;
+  gDelai += 1
   if gDelai == 1_500_000 then
-    GPIOC_PSOR = 1 << 5 ; // Allumer la led
+    GPIOC_PSOR = 1 << 5 // Allumer la led
   elsif gDelai == 3_000_000 then
     gDelai = 0
-    GPIOC_PCOR = 1 << 5 ; // Éteindre la led
+    GPIOC_PCOR = 1 << 5 // Éteindre la led
   end  
 }
 \end{PLM}
@@ -191,7 +191,7 @@ var gUpTimeMS $uint32 = 0 {
 }
 
 proc systickHandler `isr () {
-  gUpTimeMS ++
+  gUpTimeMS += 1
 }
 
 proc wait `user (?ms: inDuration $uint32) {
@@ -225,7 +225,7 @@ La routine d'interruption \plm+systickHandler+ :
 
 \begin{PLM}[13]
 proc systickHandler `isr () {
-  gUpTimeMS ++
+  gUpTimeMS += 1
 }
 \end{PLM}
 

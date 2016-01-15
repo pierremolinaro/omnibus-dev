@@ -182,7 +182,7 @@ Par défaut, la routine d'interruption \plm+systickHandler+ est donc définie, v
 
 \begin{PLM}
 proc systickHandler `isr () {
-  gUpTimeMS ++
+  gUpTimeMS += 1
 }
 \end{PLM}
 
