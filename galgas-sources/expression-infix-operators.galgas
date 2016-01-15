@@ -91,7 +91,6 @@ method @infixOperatorMap checkBinaryOperationWith
 
 override method @infixOperatorExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -105,7 +104,6 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet
@@ -119,7 +117,6 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
     !optionalTargetType:leftOperand.mType
     !context:inContext
     !modes:inModeSet
@@ -249,7 +246,6 @@ private func getInfixOperatorMap
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
-  ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -264,7 +260,6 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   @instructionListIR leftInstructionGenerationList = {}
   [mLeftExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet
@@ -279,7 +274,6 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   @instructionListIR rightInstructionGenerationList = {}
   [mRightExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
     !optionalTargetType:leftOperand.mType
     !context:inContext
     !modes:inModeSet

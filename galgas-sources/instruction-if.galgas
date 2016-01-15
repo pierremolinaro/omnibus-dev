@@ -117,7 +117,6 @@ override method @ifInstructionAST analyze
 #--- Analyze test expression
   [mTestExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
     !optionalTargetType:.null
     !context:inContext
     !modes:inModeSet

@@ -28,16 +28,15 @@ class GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const 
 
 typedef void (*categoryMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
                                                                          const class GALGAS_lstring constinArgument0,
-                                                                         const class GALGAS_receiverType constinArgument1,
-                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
-                                                                         const class GALGAS_semanticContext constinArgument3,
-                                                                         const class GALGAS_stringset constinArgument4,
-                                                                         const class GALGAS_bool constinArgument5,
-                                                                         class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                                         class GALGAS_staticStringMap & ioArgument7,
-                                                                         class GALGAS_variableMap & ioArgument8,
-                                                                         class GALGAS_instructionListIR & ioArgument9,
-                                                                         class GALGAS_operandIR & outArgument10,
+                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
+                                                                         const class GALGAS_semanticContext constinArgument2,
+                                                                         const class GALGAS_stringset constinArgument3,
+                                                                         const class GALGAS_bool constinArgument4,
+                                                                         class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                                                         class GALGAS_staticStringMap & ioArgument6,
+                                                                         class GALGAS_variableMap & ioArgument7,
+                                                                         class GALGAS_instructionListIR & ioArgument8,
+                                                                         class GALGAS_operandIR & outArgument9,
                                                                          class C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -50,7 +49,6 @@ void enterCategoryMethod_analyzeExpression (const int32_t inClassIndex,
 
 void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
                                            const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
-                                           const GALGAS_receiverType constin_inReceiverType,
                                            const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
                                            const GALGAS_semanticContext constin_inContext,
                                            const GALGAS_stringset constin_inModes,
