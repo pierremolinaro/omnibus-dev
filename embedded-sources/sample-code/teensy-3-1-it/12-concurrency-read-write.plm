@@ -1,0 +1,51 @@
+target "teensy-3-1-it"
+
+//------------------------------------------------*
+
+var gValue1 $uint32 = 0 {
+  @rw proc loop
+  @rw proc userSystickHandler
+}
+
+//------------------------------------------------*
+
+var gValue2 $uint32 = 0 {
+  @rw proc loop
+  @rw proc userSystickHandler
+}
+
+//------------------------------------------------*
+
+var gCount $bool = true {
+  @rw proc loop
+  proc userSystickHandler
+}
+
+//------------------------------------------------*
+
+proc userSystickHandler `isr () {
+  if gCount then
+    gValue1 +%= 1
+    gValue2 +%= 1
+  end
+}
+
+//------------------------------------------------*
+
+proc setup `user () {
+}
+
+//------------------------------------------------*
+
+proc loop `user () {
+  gValue1 +%= 1
+  gValue2 +%= 1
+  if gCount and (gValue1 > 100_000_000) then
+    gCount = false
+    printUnsigned (!gValue1)
+    goto (!line:1 !column:0)
+    printUnsigned (!gValue2)
+  end
+}
+
+//------------------------------------------------*
