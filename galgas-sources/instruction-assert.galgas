@@ -96,7 +96,7 @@ override method @assertInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
-  ioLLVMcode += "if (!" + mExpressionValue.mValue + ") {\n"
+  ioLLVMcode += "if (!" + [mExpressionValue.mValue llvmName] + ") {\n"
   ioLLVMcode += "  raise_exception (20"
      + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mAssertInstructionLocation line] + ") ;\n"

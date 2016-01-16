@@ -143,7 +143,7 @@ override method @forInstructionIR llvmInstructionCode
   
 #--- Test
   ioLLVMcode += testLabel + ":\n"
-  ioLLVMcode += "  %" + ptrVar + " = phi i8* [" + mExpressionResult.mValue + ", %"
+  ioLLVMcode += "  %" + ptrVar + " = phi i8* [" + [mExpressionResult.mValue llvmName] + ", %"
   ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + loopLabel + "]\n"
   ioLLVMcode += "  %" + currentVar + " = load i8, i8* %" + ptrVar + "\n"
   ioLLVMcode += "  %" + currentVar + ".nul = icmp eq i8 %" + currentVar + ", 0\n"

@@ -49,12 +49,12 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
   [mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + mLeftOperand.mValue + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
+  ioLLVMcode += "  br i1 " + [mLeftOperand.mValue llvmName] + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
   ioLLVMcode += trueLabel + ":\n"
   [mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + falseLabel + "\n\n"
   ioLLVMcode += falseLabel + ":\n"
-  ioLLVMcode += "  " + mTargetOperand.mValue + " = phi i1 [" + mRightOperand.mValue + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
+  ioLLVMcode += "  " + [mTargetOperand.mValue llvmName] + " = phi i1 [" + [mRightOperand.mValue llvmName] + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

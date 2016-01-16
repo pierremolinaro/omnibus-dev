@@ -205,20 +205,20 @@ override method @registerIntegerConstantInExpressionIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   if mNoCheck then
-    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
+    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + [mResult.mValue llvmName]
             + " = ((" + mangledNameForType (!name:[mResult.mType key]) + " *) "
-            + mExpressionValue.mValue + ") << " + mBitShift + "\n" 
+            + [mExpressionValue.mValue llvmName] + ") << " + mBitShift + "\n" 
   elsif [option plm_options.noPanicGeneration value] then
-    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
-            + " = (" + mExpressionValue.mValue + " & " + mMaxBound + ") << " + mBitShift + "\n" 
+    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + [mResult.mValue llvmName]
+            + " = (" + [mExpressionValue.mValue llvmName] + " & " + mMaxBound + ") << " + mBitShift + "\n" 
   else
-    ioLLVMcode += "if (" + mExpressionValue.mValue + " > " + mMaxBound + ") {\n"
+    ioLLVMcode += "if (" + [mExpressionValue.mValue llvmName] + " > " + mMaxBound + ") {\n"
     ioLLVMcode += "  raise_exception (4, "
        + [[[mInstructionLocation file] lastPathComponent] utf8Representation]
        + ", " + [mInstructionLocation line] + ") ;\n"
     ioLLVMcode += "}\n" 
-    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
-               + " = " + mExpressionValue.mValue + " << " + mBitShift + "\n" 
+    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + [mResult.mValue llvmName]
+               + " = " + [mExpressionValue.mValue llvmName] + " << " + mBitShift + "\n" 
   end
 }
 
@@ -227,7 +227,6 @@ override method @registerIntegerConstantInExpressionIR llvmInstructionCode
 override method @registerIntegerConstantInExpressionIR enterAccessibleEntities
   ?!@accessibleEntities unused ioAccessibleEntities
 {
-#  [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

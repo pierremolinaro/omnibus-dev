@@ -149,13 +149,13 @@ override method @convertInstructionIR llvmInstructionCode
   if minTarget != minSource then
     ioLLVMcode += "  %" + compareMinVar + " = icmp "
     ioLLVMcode += if operandIsUnsigned then "uge" else "sge" end
-    ioLLVMcode += " " + operandType + " " + mOperand.mValue + ", " + minTarget + "\n"
+    ioLLVMcode += " " + operandType + " " + [mOperand.mValue llvmName] + ", " + minTarget + "\n"
     ioLLVMcode += "  br i1 %" + compareMinVar + ", label %" + convertMinOkLabel + ", label %" + convertFailLabel + "\n\n"
     ioLLVMcode += convertMinOkLabel + ":\n"
   end
   ioLLVMcode += "  %" + compareMaxVar + " = icmp "
   ioLLVMcode += if operandIsUnsigned then "ule" else "sle" end
-  ioLLVMcode += " " + operandType + " " + mOperand.mValue + ", " + maxTarget + "\n"
+  ioLLVMcode += " " + operandType + " " + [mOperand.mValue llvmName] + ", " + maxTarget + "\n"
   ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
   ioLLVMcode += convertFailLabel + ":\n"
   ioLLVMcode += "  call void @raise_exception." + staticStringIndex + " ("
@@ -163,7 +163,7 @@ override method @convertInstructionIR llvmInstructionCode
   ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " 5) ; File '" + [[mLocation file] lastPathComponent] + "'\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += convertMaxOkLabel + ":\n"
-  ioLLVMcode += "  " + mTarget.mValue + " = trunc " + operandType + " " + mOperand.mValue + " to " + [mTarget.mType llvmTypeName] + "\n"
+  ioLLVMcode += "  " + [mTarget.mValue llvmName] + " = trunc " + operandType + " " + [mOperand.mValue llvmName] + " to " + [mTarget.mType llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

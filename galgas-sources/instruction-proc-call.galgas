@@ -295,11 +295,11 @@ override method @procCallInstructionIR llvmInstructionCode
   for () in mParameters do
     switch mEffectiveParameterPassingMode
     case input:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue string]
+      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
     case output:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue string]
+      ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
     case outputInput:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue string]
+      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
     end
   between
     ioLLVMcode += ", "

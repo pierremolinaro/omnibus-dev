@@ -21,7 +21,7 @@ override method @loadLocalVariableIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + mTargetValue.mValue + " = load "
+  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
   ioLLVMcode += llvmType + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mVariableName) + "\n"
 }
 

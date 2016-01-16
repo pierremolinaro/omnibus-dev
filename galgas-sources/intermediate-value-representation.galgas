@@ -26,14 +26,14 @@ enum @valueIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR string -> @string outResult {
+getter @valueIR llvmName -> @string outResult {
   switch self
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = "%" + name
   case llvmStructureConstant (@operandIRList inValues) :
     outResult = "{"
     for () in inValues
-      do outResult += [mOperand.mType llvmTypeName] + " " + mOperand.mValue
+      do outResult += [mOperand.mType llvmTypeName] + " " + [mOperand.mValue llvmName]
       between outResult += ", "
     end
     outResult += "}"

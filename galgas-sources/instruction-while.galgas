@@ -137,7 +137,7 @@ override method @whileInstructionIR llvmInstructionCode
   ioLLVMcode += "  br label %" + labelTest + "\n\n"
   ioLLVMcode += labelTest + ":\n"
   [mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + mTestExpression.mValue + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
+  ioLLVMcode += "  br i1 " + [mTestExpression.mValue llvmName] + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioLLVMcode += labelLoop + ":\n"
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + labelTest + "\n\n"

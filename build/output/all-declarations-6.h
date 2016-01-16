@@ -50,13 +50,13 @@ class GALGAS_string extensionGetter_passingModeForActualSelector (const class GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Category getter '@valueIR string' (as function)                                   *
+//                                  Category getter '@valueIR llvmName' (as function)                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string extensionGetter_string (const class GALGAS_valueIR & inObject,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+class GALGAS_string extensionGetter_llvmName (const class GALGAS_valueIR & inObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
