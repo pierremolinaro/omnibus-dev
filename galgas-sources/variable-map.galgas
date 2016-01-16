@@ -52,11 +52,14 @@ func initialVariableMap
     ]
   end
 #--- Add global variables
-  for (variableName variableType modeSet allowedProcedureMap * isConstant) in inContext.mGlobalVariableMap do
-    let allowedAccess = [allowedProcedureMap hasKey !inMangledName]
+  for (variableName variableType modeSet allowedProcedureMap allowedFunctionMap * isConstant) in inContext.mGlobalVariableMap do
     var writeAccess = false
-    if allowedAccess then
-      writeAccess = [allowedProcedureMap mHasWriteAccessForKey !inMangledName]
+    var allowedAccess = [allowedFunctionMap hasKey !inMangledName]
+    if not allowedAccess then
+      allowedAccess = [allowedProcedureMap hasKey !inMangledName] || [allowedFunctionMap hasKey !inMangledName]
+      if allowedAccess then
+        writeAccess = [allowedProcedureMap mHasWriteAccessForKey !inMangledName]
+      end
     end
     if inGlobalsAreConstant || not writeAccess then
       [!?outVariableMap insertUsedLocalConstant

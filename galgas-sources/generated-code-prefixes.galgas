@@ -57,7 +57,7 @@ func %once literalIntegerTypeName -> @string outName {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func mangledNameForFunction ?name:@string inName -> @string outName {
-  outName = "func_" + inName
+  outName = "func." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

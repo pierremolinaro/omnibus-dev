@@ -31,6 +31,7 @@ list @globalVarDeclarationList {
   @allowedProcList mAllowedProcList
   @allowedInitList mAllowedInitList
   @allowedExceptionList mAllowedExceptionList
+  @lstringlist mAllowedFunctionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -54,6 +55,7 @@ syntax extension common_syntax {
     <expression> ?let @expressionAST expression
     @allowedProcList allowedProcList = {}
     @allowedInitList allowedInitList = {}
+    @lstringlist allowedFunctionList = {}
     @allowedExceptionList allowedExceptionList = {}
     ${$
     repeat
@@ -71,6 +73,13 @@ syntax extension common_syntax {
         $proc$
         $identifier$ ?let procName
         allowedProcList += !hasWriteAccess !procName
+      or
+        $func$
+        $identifier$ ?let funcName
+        if hasWriteAccess then
+          error funcName : "a function cannot write a global variable"
+        end
+        allowedFunctionList += !funcName
       or
         $init$
         $integer$ ?let @lbigint priority
@@ -92,6 +101,7 @@ syntax extension common_syntax {
       !allowedProcList
       !allowedInitList
       !allowedExceptionList
+      !allowedFunctionList
   }
 
   #·····················································································································
@@ -104,7 +114,14 @@ syntax extension common_syntax {
 
 map @allowedRoutineMap {
   @bool mHasWriteAccess
-  insert insertKey error message "the '%K' is already declared in %L"
+  insert insertKey error message "the '%K' procedure is already declared in %L"
+  search searchKey error message "there is no '%K'"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @allowedFunctionMap {
+  insert insertKey error message "the '%K' function is already declared in %L"
   search searchKey error message "there is no '%K'"
 }
 
@@ -150,8 +167,14 @@ method @globalVarDeclarationList-element enterInContext
     !errorLocation:mVarName.location
   )
   @stringset executionModes = {}
-  @allowedRoutineMap allowedProcedureMap = {}
+#--- Check allowed function are defined
+  @allowedFunctionMap allowedFunctionMap = {}
+  for () in mAllowedFunctionList do
+    [ioContext.mFunctionMap searchKey !mValue ?3*]
+    [!?allowedFunctionMap insertKey !.new{!mangledNameForFunction (!name:mValue.string) !mValue.location}]
+  end
 #--- Check allowed init routines are defined
+  @allowedRoutineMap allowedProcedureMap = {}
   for () in mAllowedInitList do
     [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
     [!?allowedProcedureMap insertKey
@@ -211,6 +234,7 @@ method @globalVarDeclarationList-element enterInContext
     !if variableType == .null then expressionResult.mType else variableType end
     !executionModes
     !allowedProcedureMap
+    !allowedFunctionMap
     !expressionResult.mValue
     !false # Is not constant
   ]
@@ -230,6 +254,7 @@ method @globalVarDeclarationList-element semanticAnalysis
     ?let inferredType
     ?let executionModeSet
     ?let unused allowedProcedureMap
+    ?let unused allowedFunctionMap
     ?let expressionGeneratedCode
     ?let unused isConstant
   ]

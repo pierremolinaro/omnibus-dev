@@ -74,6 +74,7 @@ var gCompteur $uint32 = 0 {
   @rw proc systickHandler
   proc waitMS
   proc busyWaitingDuringMS
+  func millis
 }
 
 proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
@@ -87,6 +88,10 @@ required proc systickHandler `isr ()
 proc systickHandler `isr () {
   gCompteur +%= 1
   userSystickHandler ()
+}
+
+func millis `user () -> result $uint32 {
+  result = gCompteur
 }
 
 proc userSystickHandler `isr @weak () {

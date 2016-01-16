@@ -30,13 +30,13 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $func$
+    $identifier$ ?let funcName
     @lstringlist funcModeList = {}
     repeat
       $modeName$ ?let funcMode
       funcModeList += !funcMode
     while
     end
-    $identifier$ ?let funcName
     @funcFormalArgumentList funcFormalArgumentList = {}
     $($
     repeat
@@ -99,18 +99,8 @@ map @functionMap {
   @modeMap mFunctionModeMap
   @funcSignature mSignature
   @unifiedTypeMap-proxy mResultType
-
   insert insertKey error message "the '%K' func is already declared in %L"
   search searchKey error message "there is no '%K' func"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @functionDeclarationListAST-element mangledName -> @string outMangledName {
-  outMangledName = mFunctionName.string
-  for (selector * *) in mFuncFormalArgumentList do
-    outMangledName += " ?" + selector.string
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -133,7 +123,7 @@ method @functionDeclarationListAST-element enterInContext
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
 #--- Enter in context
   [!?ioContext.mFunctionMap insertKey
-    !.new {![self mangledName] !mFunctionName.location}
+    !mFunctionName
     !functionModeMap
     !signature
     !resultType
@@ -164,7 +154,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:[self mangledName]
+    !routineMangledName:mangledNameForFunction (!name:mFunctionName.string)
     !context:inContext
     !globalsAreConstant:true
   )
@@ -197,7 +187,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     formalArguments += !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
   end
 #---
-  let routineNameForInvocationGraph = @lstring.new  {!"func " + [self mangledName] !mFunctionName.location}
+  let routineNameForInvocationGraph = @lstring.new{!mangledNameForFunction (!name:mFunctionName.string) !mFunctionName.location}
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph
@@ -220,7 +210,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   [variableMap checkAutomatonStates !mEndOfFuncLocation]
 #--- Code generation
   [!?ioIntermediateCodeStruct.mFunctionMapIR insertKey
-    !mFunctionName # [self mangledName]
+    !mFunctionName
     !formalArguments
     !instructionGenerationList
     !resultType
@@ -232,34 +222,43 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private filewrapper functionGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template implementation "function-implementation.galgasTemplate"
-    ?@string FUNCTION_NAME
-    ?@funcFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
-    ?@string INSTRUCTION_LLVM_CODE
-    ?@unifiedTypeMap-proxy RESULT_TYPE
-    ?@string RESULT_VAR_NAME
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  @funcFormalArgumentListForGeneration mFormalArgumentListForGeneration
+#  @instructionListIR mInstructionGenerationList
+#  @unifiedTypeMap-proxy mResultType
+#  @string mResultVarName
 
 method @functionMapIR-element implementationCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  var code = ""
-  [mInstructionGenerationList instructionListLLVMCode !?code !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += [filewrapper functionGenerationTemplate.implementation
-    !lkey.string # mFunctionMangledName
-#    !mangledNameForFunction (!name:lkey.string) # mFunctionMangledName
-    !mFormalArgumentListForGeneration
-    !code
-    !mResultType
-    !mResultVarName
-  ]
+  ioLLVMcode += llvmTitleComment (!"func " + lkey)
+  ioLLVMcode += "define internal "
+  ioLLVMcode += [mResultType llvmTypeName]
+  ioLLVMcode += " @" + mangledNameForFunction (!name:lkey.string) + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ") nounwind {\n"
+#--- Store result in memory
+  let resultMangledName = "%" + mangledNameForLocalVariable (!mResultVarName)
+  ioLLVMcode += "  " + resultMangledName + " = alloca " + [mResultType llvmTypeName] + "\n"
+#--- Store input arguments in memory
+  for () in mFormalArgumentListForGeneration do
+    let llvmType = [mFormalArgumentType llvmTypeName]
+    ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+    ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+  end
+ 
+#--- Instruction list
+  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#--- Epilog
+  ioLLVMcode += "  " + resultMangledName + ".loaded = load " + [mResultType llvmTypeName] + ", " + [mResultType llvmTypeName] + "* " + resultMangledName + "\n"
+  ioLLVMcode += "  ret " + [mResultType llvmTypeName] + " " + resultMangledName + ".loaded\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -18,8 +18,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/syntax-grammar.galgas"
   "galgas-sources/cocoa.galgas"
 
-  "galgas-sources/first-class-type.galgas"
-
 #--- Bool
   "galgas-sources/bool-type.galgas"
 
@@ -85,7 +83,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-true-false.galgas"
 ##  "galgas-sources/expression-self.galgas"
   "galgas-sources/expression-var.galgas"
-##  "galgas-sources/expression-func-call.galgas"
+  "galgas-sources/expression-func-call.galgas"
   "galgas-sources/expression-cst-registre.galgas"
 
 #--- Instructions
