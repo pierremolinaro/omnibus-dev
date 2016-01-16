@@ -487,7 +487,6 @@ method @procedureMapIR-element llvmCodeGeneration
   #--- Instruction list
     [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   #--- Epilog
-    ioLLVMcode += ";--- return\n"
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
   end

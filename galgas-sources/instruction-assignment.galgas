@@ -149,7 +149,7 @@ override method @assignmentInstructionAST analyze
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
 #--- Code generation
-  [!?ioInstructionGenerationList appendComment !comment]
+#  [!?ioInstructionGenerationList appendComment !comment]
   [target storeInMemory
     !value:sourceOperand
     !?instructionListIR:ioInstructionGenerationList

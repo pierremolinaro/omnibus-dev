@@ -291,7 +291,6 @@ override method @procCallInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += ";--- call " + mangledNameForProcedure (!mProcName) + " ()\n"
   ioLLVMcode += "  call void @" + mangledNameForProcedure (!mProcName) + " ("
   for () in mParameters do
     switch mEffectiveParameterPassingMode

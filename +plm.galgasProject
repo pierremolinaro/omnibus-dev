@@ -113,7 +113,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/generated-code-prefixes.galgas"
   "galgas-sources/intermediate-value-representation.galgas"
   "galgas-sources/intermediate-code-generation.galgas"
-  "galgas-sources/intermediate-comment.galgas"
+#  "galgas-sources/intermediate-comment.galgas"
   "galgas-sources/intermediate-alloca.galgas"
   "galgas-sources/intermediate-extract-value.galgas"
   "galgas-sources/intermediate-extend.galgas"

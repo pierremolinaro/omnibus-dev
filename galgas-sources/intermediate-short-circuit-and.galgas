@@ -47,7 +47,6 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   let trueLabel  = "and." + [mLocation locationIndex] + ".true"
   let falseLabel = "and." + [mLocation locationIndex] + ".false"
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
-  ioLLVMcode += ";--- left operand of short circuit and\n"
   ioLLVMcode += startLabel + ":\n"
   [mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br i1 " + mLeftOperand.mValue + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
