@@ -2145,6 +2145,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_lstring & in_mFunctionName,
                                                   const class GALGAS_lstringlist & in_mFunctionModeList,
+                                                  const class GALGAS_lstringlist & in_mFunctionAttributeList,
                                                   const class GALGAS_funcFormalArgumentList & in_mFuncFormalArgumentList,
                                                   const class GALGAS_lstring & in_mResultTypeName,
                                                   const class GALGAS_lstring & in_mResultVarName,
@@ -2167,11 +2168,12 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 
   public : static GALGAS_functionDeclarationListAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
                                                                                const class GALGAS_lstringlist & inOperand1,
-                                                                               const class GALGAS_funcFormalArgumentList & inOperand2,
-                                                                               const class GALGAS_lstring & inOperand3,
+                                                                               const class GALGAS_lstringlist & inOperand2,
+                                                                               const class GALGAS_funcFormalArgumentList & inOperand3,
                                                                                const class GALGAS_lstring & inOperand4,
-                                                                               const class GALGAS_instructionListAST & inOperand5,
-                                                                               const class GALGAS_location & inOperand6
+                                                                               const class GALGAS_lstring & inOperand5,
+                                                                               const class GALGAS_instructionListAST & inOperand6,
+                                                                               const class GALGAS_location & inOperand7
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -2182,11 +2184,12 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstringlist & inOperand1,
-                                                      const class GALGAS_funcFormalArgumentList & inOperand2,
-                                                      const class GALGAS_lstring & inOperand3,
+                                                      const class GALGAS_lstringlist & inOperand2,
+                                                      const class GALGAS_funcFormalArgumentList & inOperand3,
                                                       const class GALGAS_lstring & inOperand4,
-                                                      const class GALGAS_instructionListAST & inOperand5,
-                                                      const class GALGAS_location & inOperand6
+                                                      const class GALGAS_lstring & inOperand5,
+                                                      const class GALGAS_instructionListAST & inOperand6,
+                                                      const class GALGAS_location & inOperand7
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST add_operation (const GALGAS_functionDeclarationListAST & inOperand,
@@ -2197,43 +2200,47 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
                                                        class GALGAS_lstringlist constinArgument1,
-                                                       class GALGAS_funcFormalArgumentList constinArgument2,
-                                                       class GALGAS_lstring constinArgument3,
+                                                       class GALGAS_lstringlist constinArgument2,
+                                                       class GALGAS_funcFormalArgumentList constinArgument3,
                                                        class GALGAS_lstring constinArgument4,
-                                                       class GALGAS_instructionListAST constinArgument5,
-                                                       class GALGAS_location constinArgument6,
-                                                       class GALGAS_uint constinArgument7,
+                                                       class GALGAS_lstring constinArgument5,
+                                                       class GALGAS_instructionListAST constinArgument6,
+                                                       class GALGAS_location constinArgument7,
+                                                       class GALGAS_uint constinArgument8,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_lstringlist & outArgument1,
-                                                  class GALGAS_funcFormalArgumentList & outArgument2,
-                                                  class GALGAS_lstring & outArgument3,
+                                                  class GALGAS_lstringlist & outArgument2,
+                                                  class GALGAS_funcFormalArgumentList & outArgument3,
                                                   class GALGAS_lstring & outArgument4,
-                                                  class GALGAS_instructionListAST & outArgument5,
-                                                  class GALGAS_location & outArgument6,
+                                                  class GALGAS_lstring & outArgument5,
+                                                  class GALGAS_instructionListAST & outArgument6,
+                                                  class GALGAS_location & outArgument7,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
                                                  class GALGAS_lstringlist & outArgument1,
-                                                 class GALGAS_funcFormalArgumentList & outArgument2,
-                                                 class GALGAS_lstring & outArgument3,
+                                                 class GALGAS_lstringlist & outArgument2,
+                                                 class GALGAS_funcFormalArgumentList & outArgument3,
                                                  class GALGAS_lstring & outArgument4,
-                                                 class GALGAS_instructionListAST & outArgument5,
-                                                 class GALGAS_location & outArgument6,
+                                                 class GALGAS_lstring & outArgument5,
+                                                 class GALGAS_instructionListAST & outArgument6,
+                                                 class GALGAS_location & outArgument7,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
                                                        class GALGAS_lstringlist & outArgument1,
-                                                       class GALGAS_funcFormalArgumentList & outArgument2,
-                                                       class GALGAS_lstring & outArgument3,
+                                                       class GALGAS_lstringlist & outArgument2,
+                                                       class GALGAS_funcFormalArgumentList & outArgument3,
                                                        class GALGAS_lstring & outArgument4,
-                                                       class GALGAS_instructionListAST & outArgument5,
-                                                       class GALGAS_location & outArgument6,
-                                                       class GALGAS_uint constinArgument7,
+                                                       class GALGAS_lstring & outArgument5,
+                                                       class GALGAS_instructionListAST & outArgument6,
+                                                       class GALGAS_location & outArgument7,
+                                                       class GALGAS_uint constinArgument8,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -2241,21 +2248,23 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
                                                class GALGAS_lstringlist & outArgument1,
-                                               class GALGAS_funcFormalArgumentList & outArgument2,
-                                               class GALGAS_lstring & outArgument3,
+                                               class GALGAS_lstringlist & outArgument2,
+                                               class GALGAS_funcFormalArgumentList & outArgument3,
                                                class GALGAS_lstring & outArgument4,
-                                               class GALGAS_instructionListAST & outArgument5,
-                                               class GALGAS_location & outArgument6,
+                                               class GALGAS_lstring & outArgument5,
+                                               class GALGAS_instructionListAST & outArgument6,
+                                               class GALGAS_location & outArgument7,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
                                               class GALGAS_lstringlist & outArgument1,
-                                              class GALGAS_funcFormalArgumentList & outArgument2,
-                                              class GALGAS_lstring & outArgument3,
+                                              class GALGAS_lstringlist & outArgument2,
+                                              class GALGAS_funcFormalArgumentList & outArgument3,
                                               class GALGAS_lstring & outArgument4,
-                                              class GALGAS_instructionListAST & outArgument5,
-                                              class GALGAS_location & outArgument6,
+                                              class GALGAS_lstring & outArgument5,
+                                              class GALGAS_instructionListAST & outArgument6,
+                                              class GALGAS_location & outArgument7,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -2269,6 +2278,10 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_funcFormalArgumentList getter_mFuncFormalArgumentListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                        C_Compiler * inCompiler
                                                                                                        COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mFunctionAttributeListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mFunctionModeListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                       C_Compiler * inCompiler
@@ -2322,6 +2335,7 @@ class cEnumerator_functionDeclarationListAST : public cGenericAbstractEnumerator
 //--- Current element access
   public : class GALGAS_lstring current_mFunctionName (LOCATION_ARGS) const ;
   public : class GALGAS_lstringlist current_mFunctionModeList (LOCATION_ARGS) const ;
+  public : class GALGAS_lstringlist current_mFunctionAttributeList (LOCATION_ARGS) const ;
   public : class GALGAS_funcFormalArgumentList current_mFuncFormalArgumentList (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mResultTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mResultVarName (LOCATION_ARGS) const ;
@@ -2496,6 +2510,7 @@ class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_mFunctionName ;
   public : GALGAS_lstringlist mAttribute_mFunctionModeList ;
+  public : GALGAS_lstringlist mAttribute_mFunctionAttributeList ;
   public : GALGAS_funcFormalArgumentList mAttribute_mFuncFormalArgumentList ;
   public : GALGAS_lstring mAttribute_mResultTypeName ;
   public : GALGAS_lstring mAttribute_mResultVarName ;
@@ -2519,6 +2534,7 @@ class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_functionDeclarationListAST_2D_element (const GALGAS_lstring & in_mFunctionName,
                                                          const GALGAS_lstringlist & in_mFunctionModeList,
+                                                         const GALGAS_lstringlist & in_mFunctionAttributeList,
                                                          const GALGAS_funcFormalArgumentList & in_mFuncFormalArgumentList,
                                                          const GALGAS_lstring & in_mResultTypeName,
                                                          const GALGAS_lstring & in_mResultVarName,
@@ -2538,11 +2554,12 @@ class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_functionDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                 const class GALGAS_lstringlist & inOperand1,
-                                                                                const class GALGAS_funcFormalArgumentList & inOperand2,
-                                                                                const class GALGAS_lstring & inOperand3,
+                                                                                const class GALGAS_lstringlist & inOperand2,
+                                                                                const class GALGAS_funcFormalArgumentList & inOperand3,
                                                                                 const class GALGAS_lstring & inOperand4,
-                                                                                const class GALGAS_instructionListAST & inOperand5,
-                                                                                const class GALGAS_location & inOperand6
+                                                                                const class GALGAS_lstring & inOperand5,
+                                                                                const class GALGAS_instructionListAST & inOperand6,
+                                                                                const class GALGAS_location & inOperand7
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2560,6 +2577,8 @@ class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfFuncLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_funcFormalArgumentList getter_mFuncFormalArgumentList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mFunctionAttributeList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mFunctionModeList (LOCATION_ARGS) const ;
 
@@ -4102,6 +4121,8 @@ class cParser_common_5F_syntax {
   protected : virtual int32_t select_common_5F_syntax_52 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_common_5F_syntax_53 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_common_5F_syntax_54 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;

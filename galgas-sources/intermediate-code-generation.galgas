@@ -81,6 +81,7 @@ map @functionMapIR {
   @instructionListIR mInstructionGenerationList
   @unifiedTypeMap-proxy mResultType
   @string mResultVarName
+  @bool mWarnIfUnused
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }
