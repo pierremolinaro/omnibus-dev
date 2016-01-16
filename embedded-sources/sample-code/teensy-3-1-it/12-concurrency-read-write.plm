@@ -32,6 +32,12 @@ proc userSystickHandler `isr () {
 
 //------------------------------------------------*
 
+func maFonction `user (?a:a $uint27 ?b $uint27) -> $uint27 {
+  result = a +% b
+}
+
+//------------------------------------------------*
+
 proc setup `user () {
 }
 
@@ -40,6 +46,8 @@ proc setup `user () {
 proc loop `user () {
   gValue1 +%= 1
   gValue2 +%= 1
+  let y $uint27 = 123
+  let x = maFonction (!a:y !456)
   if gIsCounting and (millis () > 5_000) then
     gIsCounting = false
     printUnsigned (!gValue1)

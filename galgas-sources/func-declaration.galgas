@@ -16,7 +16,6 @@ list @functionDeclarationListAST {
   @lstringlist mFunctionAttributeList
   @funcFormalArgumentList mFuncFormalArgumentList
   @lstring mResultTypeName
-  @lstring mResultVarName
   @instructionListAST mInstructionList
   @location mEndOfFuncLocation
 }
@@ -58,7 +57,6 @@ syntax extension common_syntax {
     end
     $)$
     $->$
-    $identifier$ ?let resultVarName
     $typeName$ ?let resultTypeName
     ${$
     @labelMap labelMap = {}
@@ -70,7 +68,6 @@ syntax extension common_syntax {
       !funcAttributeList
       !funcFormalArgumentList
       !resultTypeName
-      !resultVarName
       !instructionList
       !.here
   }
@@ -179,12 +176,13 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !globalsAreConstant:true
   )
 #--- Add 'result" variable
+  let resultVarName = @lstring.new {!"result" !mResultTypeName.location}
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mResultTypeName}
   [!?variableMap insertOutputFormalArgument
-    !mResultVarName
+    !resultVarName
     !resultType
     !true
-    !.localValue {!type:resultType !name:mResultVarName.string}
+    !.localValue {!type:resultType !name:resultVarName.string}
     !true
     !{}
     !true
@@ -234,7 +232,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !formalArguments
     !instructionGenerationList
     !resultType
-    !mResultVarName.string
+    !resultVarName.string
     !warnIfUnused
   ]  
 }

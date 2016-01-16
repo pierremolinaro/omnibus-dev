@@ -111,7 +111,7 @@ rule '$' {
   case 'a'->'z' | 'A'->'Z' | '0'->'9' :
     repeat
       enterCharacterIntoString (!?tokenString !*)
-    while 'a'->'z' | 'A'->'Z'| '0'->'9' :
+    while 'a'->'z' | 'A'->'Z'| '0'->'9' | '_' :
     end
   default
     error typeError

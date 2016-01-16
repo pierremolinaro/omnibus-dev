@@ -119,7 +119,7 @@ La syntaxe des différents arguments formels et de leur paramètre effectif est 
 
 
 
-\section{Procédure}
+\section{Procédures}
 
 
 \subsectionLabel{Déclaration d'une procédure}{declarationProcedure}\index{Procedure@Procédure}
@@ -223,7 +223,7 @@ La déclaration \plm+required proc+ permet de signifier au compilateur qu'une pr
 
 Cette déclaration est la suivante :
 \begin{PLM}
-required proc nom `mode1 `mode2 @attribut1 @attribut2 (arguments_formels)
+required proc nom `mode @attribut (arguments_formels)
 \end{PLM}
 
 Elle consiste à la déclaration de l'en-tête d'une procédure (voir \refSubsectionPage{declarationProcedure}), précédée par le mot réservée \plm+required+.
@@ -247,7 +247,68 @@ Ceci impose au programme utilisateur de définir ces deux procédures.
 
 \section{Fonctions}
 
-\colorbox{red}{À définir}
+\subsectionLabel{Déclaration d'une fonction}{declarationFonction}\index{Fonction}
+
+La déclaration d'une fonction est la suivante :
+\begin{PLM}
+func nom `mode @attribut (arguments_formels) -> $type {
+  liste_instructions
+}
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la fonction ;
+  \item \plm=`mode= est la liste non vide de l'ensemble des modes associés à la procédure ;
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la procédure ;
+  \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels (uniquement en entrée) ;
+  \item \plm=@type= est le type de la valeur renvoyée.
+\end{itemize}
+
+Contraire à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=@type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
+Par exemple :
+
+\begin{PLM}
+func maFonction `user @noWarningIfUnused () -> $uint32 {
+  result = 6
+}
+\end{PLM}
+
+Ceci définit la fonction \plm=maFonction=, sans argument, appelable uniquement en mode \plm=`user= ; l'attribut \plm=@noWarningIfUnused= signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
+
+\begin{PLM}
+func autreFonction `user (?arg:a $uint27 ?b $uint27) -> $uint27 {
+  result = a +% b
+}
+\end{PLM}
+
+Ceci définit la fonction \plm=autreFonction=, avec deux arguments, sans attribut, appelable uniquement en mode \plm=`user=.
+
+
+\subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributFonctionNoWarningIfUnused}\index{"@noWarningIfUnused}
+
+L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
+
+\subsectionLabel{Fonctions et variables globales}{fonctionEtVariableGlobale}
+
+Les fonctions peuvent accéder aux variables globales en lecture, mais ne peuvent pas les modifier.
+
+L'accès en lecture à une variable globale est autorisé par la variable qui nomme la fonction parmi les routines autorisées :
+
+\begin{PLM}
+var gGlobalVar $uint56 {
+  ...
+  func getGlobalVar
+}
+
+func getGlobalVar `user () -> $uint56 {
+  result = getGlobalVar
+}
+\end{PLM}
+
+
+
+
+
 
 
 
@@ -257,7 +318,7 @@ Ceci impose au programme utilisateur de définir ces deux procédures.
 
 \section{Routines utiles}
 
-Le compilateur élimine les procédures qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=panic=. Les procédures et fonctions inatteignables sont éliminées, avec ou sans message d'alerte (\refSubsectionPage{attributNoWarningIfUnused}).
+Le compilateur élimine les routines qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=panic=. Les procédures et fonctions inatteignables sont éliminées, avec ou sans message d'alerte (\refSubsectionPage{attributNoWarningIfUnused}).
 
 
 
