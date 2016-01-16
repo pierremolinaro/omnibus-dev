@@ -274,7 +274,7 @@ method @globalVarDeclarationList-element semanticAnalysis
 method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal global "
   ioLLVMcode += [mType llvmTypeName] + " "
-  let initialString = [mInitialValue string]
+  let initialString = [mInitialValue llvmName]
   if initialString == "" then
     ioLLVMcode += "zeroinitializer"
   else

@@ -23,7 +23,7 @@ override method @extractValueIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mSource.mType llvmTypeName]
-  ioLLVMcode += "  " + mTarget.mValue + " = extractvalue " + llvmType + " " + mSource.mValue + ", " + mIndex + "\n"
+  ioLLVMcode += "  " + [mTarget.mValue llvmName] + " = extractvalue " + llvmType + " " + [mSource.mValue llvmName] + ", " + mIndex + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

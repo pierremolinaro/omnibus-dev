@@ -125,7 +125,8 @@ override method @truncateInstructionIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let operandType = [mOperand.mType llvmTypeName]
-  ioLLVMcode += "  " + mTarget.mValue + " = trunc " + operandType + " " + mOperand.mValue + " to " + [mTarget.mType llvmTypeName] + "\n"
+  ioLLVMcode += "  " + [mTarget.mValue llvmName] + " = trunc " + operandType + " " + [mOperand.mValue llvmName]
+     + " to " + [mTarget.mType llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

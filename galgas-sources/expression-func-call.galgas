@@ -107,10 +107,19 @@ override method @functionCallInExpressionAST analyzeExpression
         !?instructionListIR:ioInstructionGenerationList
         ?result:@operandIR argumentIR
       ]
-      argumentList += !argumentIR
-      if [argumentIR.mType key] != [formal.mArgumentType key] then
-        error actual.mSelector : "the actual parameter has the " + [argumentIR.mType key]
-         + ", but the formal argument has the " + [formal.mArgumentType key] + " type"
+      if [argumentIR.mType key] == [formal.mArgumentType key] then
+        argumentList += !argumentIR
+      elsif [[argumentIR.mType kind] isLiteralInteger] && [[formal.mArgumentType kind] isInteger] then
+        [argumentIR.mValue literalInteger ?value:let @bigint value]
+        [[formal.mArgumentType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+        if (min <= value) && (value <= max) then
+          argumentList += !.new {!formal.mArgumentType !argumentIR.mValue}
+        else
+          error actual.mSelector: "the literal integer cannot fit in an $" + [formal.mArgumentType key]
+        end
+      else
+        error actual.mSelector : "the actual parameter has the $" + [argumentIR.mType key]
+         + ", but the formal argument has the $" + [formal.mArgumentType key] + " type"
       end
     between 
       s += ", "
@@ -142,10 +151,10 @@ override method @functionCallIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult.mValue string] + " = call " + [mResult.mType llvmTypeName]
+  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName]
   ioLLVMcode += " @" + mangledNameForFunction (!name:mFunctionName) + " ("
   for (argument) in mArgumentList
-    do ioLLVMcode += [argument.mType llvmTypeName] + " " + [argument.mValue string]
+    do ioLLVMcode += [argument.mType llvmTypeName] + " " + [argument.mValue llvmName]
     between ioLLVMcode += ", "
   end
   ioLLVMcode += ")\n"

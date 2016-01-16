@@ -25,7 +25,7 @@ override method @storeVolatileIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
-  ioLLVMcode += "  store volatile " + llvmType + " " + mSourceValue.mValue + ", " + llvmType
+  ioLLVMcode += "  store volatile " + llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType
          + "* inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
 }
 

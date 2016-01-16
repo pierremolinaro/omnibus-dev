@@ -23,7 +23,7 @@ override method @loadRegisterIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + mTargetValue.mValue + " = load volatile " + llvmType + ", " + llvmType
+  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
          + "* inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
 }
 

@@ -639,7 +639,7 @@ C_galgas_function_descriptor functionDescriptor_boolTypeName ("boolTypeName",
 static GALGAS_string onceFunction_literalIntegerTypeName (C_Compiler * /* inCompiler */
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("literal integer") ;
+  result_outName = GALGAS_string ("literalInteger") ;
 //---
   return result_outName ;
 }
@@ -8681,12 +8681,6 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-it
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "func maFonction `user (\?a:a $uint27 \?b $uint27) -> $uint27 {\n"
-  "  result = a +% b\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
   "proc setup `user () {\n"
   "}\n"
   "\n"
@@ -8695,8 +8689,6 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-it
   "proc loop `user () {\n"
   "  gValue1 +%= 1\n"
   "  gValue2 +%= 1\n"
-  "  let y $uint27 = 123\n"
-  "  let x = maFonction (!a:y !456)\n"
   "  if gIsCounting and (millis () > 5_000) then\n"
   "    gIsCounting = false\n"
   "    printUnsigned (!gValue1)\n"
@@ -8711,7 +8703,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "12-concurrency-read-write.plm",
   "plm",
   true, // Text file
-  1155, // Text length
+  965, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 

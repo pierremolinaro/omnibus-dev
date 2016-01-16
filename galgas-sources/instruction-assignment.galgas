@@ -127,7 +127,7 @@ override method @assignmentInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR sourceOperand
   ]
-  comment += " = " + sourceOperand.mValue 
+  comment += " = " + [sourceOperand.mValue llvmName]
   checkAssignmentCompatibility (
     !source:sourceOperand
     !targetType:targetType

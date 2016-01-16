@@ -23,7 +23,7 @@ override method @loadGlobalVariableIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + mTargetValue.mValue + " = load "
+  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
   if mIsVolatile then
     ioLLVMcode += "volatile "
   end
