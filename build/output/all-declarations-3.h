@@ -510,8 +510,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
   public : GALGAS_constructorMap mAttribute_mConstructorMap ;
   public : GALGAS_modeMap mAttribute_mModeMap ;
-  public : GALGAS_incDecOperatorMap mAttribute_mIncOperatorMap ;
-  public : GALGAS_incDecOperatorMap mAttribute_mDecOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mEqualOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mNonEqualOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mStrictInfOperatorMap ;
@@ -569,8 +567,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_globalVariableMap & in_mGlobalVariableMap,
                                    const GALGAS_constructorMap & in_mConstructorMap,
                                    const GALGAS_modeMap & in_mModeMap,
-                                   const GALGAS_incDecOperatorMap & in_mIncOperatorMap,
-                                   const GALGAS_incDecOperatorMap & in_mDecOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mEqualOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mNonEqualOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mStrictInfOperatorMap,
@@ -624,8 +620,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_globalVariableMap & inOperand13,
                                                           const class GALGAS_constructorMap & inOperand14,
                                                           const class GALGAS_modeMap & inOperand15,
-                                                          const class GALGAS_incDecOperatorMap & inOperand16,
-                                                          const class GALGAS_incDecOperatorMap & inOperand17,
+                                                          const class GALGAS_infixOperatorMap & inOperand16,
+                                                          const class GALGAS_infixOperatorMap & inOperand17,
                                                           const class GALGAS_infixOperatorMap & inOperand18,
                                                           const class GALGAS_infixOperatorMap & inOperand19,
                                                           const class GALGAS_infixOperatorMap & inOperand20,
@@ -646,11 +642,9 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand35,
                                                           const class GALGAS_infixOperatorMap & inOperand36,
                                                           const class GALGAS_infixOperatorMap & inOperand37,
-                                                          const class GALGAS_infixOperatorMap & inOperand38,
-                                                          const class GALGAS_infixOperatorMap & inOperand39,
-                                                          const class GALGAS_prefixOperatorMap & inOperand40,
-                                                          const class GALGAS_prefixOperatorMap & inOperand41,
-                                                          const class GALGAS_prefixOperatorMap & inOperand42
+                                                          const class GALGAS_prefixOperatorMap & inOperand38,
+                                                          const class GALGAS_prefixOperatorMap & inOperand39,
+                                                          const class GALGAS_prefixOperatorMap & inOperand40
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -677,8 +671,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_constructorMap getter_mConstructorMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap getter_mDecOperatorMap (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mDivNoOvfOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mDivOperatorMap (LOCATION_ARGS) const ;
@@ -698,8 +690,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMap getter_mGlobalConstantMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMap getter_mGlobalVariableMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap getter_mIncOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mInfEqualOperatorMap (LOCATION_ARGS) const ;
 

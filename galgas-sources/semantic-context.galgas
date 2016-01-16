@@ -185,8 +185,6 @@ struct @semanticContext {
   @globalVariableMap mGlobalVariableMap
   @constructorMap mConstructorMap
   @modeMap mModeMap
-  @incDecOperatorMap mIncOperatorMap            # ++, &++
-  @incDecOperatorMap mDecOperatorMap            # --, &--
   @infixOperatorMap mEqualOperatorMap           # ==
   @infixOperatorMap mNonEqualOperatorMap        # !=
   @infixOperatorMap mStrictInfOperatorMap       # <
