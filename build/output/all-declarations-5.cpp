@@ -14790,7 +14790,6 @@ mAttribute_mFunctionModeList (),
 mAttribute_mFunctionAttributeList (),
 mAttribute_mFuncFormalArgumentList (),
 mAttribute_mResultTypeName (),
-mAttribute_mResultVarName (),
 mAttribute_mInstructionList (),
 mAttribute_mEndOfFuncLocation () {
 }
@@ -14807,17 +14806,15 @@ GALGAS_functionDeclarationListAST_2D_element::GALGAS_functionDeclarationListAST_
                                                                                             const GALGAS_lstringlist & inOperand2,
                                                                                             const GALGAS_funcFormalArgumentList & inOperand3,
                                                                                             const GALGAS_lstring & inOperand4,
-                                                                                            const GALGAS_lstring & inOperand5,
-                                                                                            const GALGAS_instructionListAST & inOperand6,
-                                                                                            const GALGAS_location & inOperand7) :
+                                                                                            const GALGAS_instructionListAST & inOperand5,
+                                                                                            const GALGAS_location & inOperand6) :
 mAttribute_mFunctionName (inOperand0),
 mAttribute_mFunctionModeList (inOperand1),
 mAttribute_mFunctionAttributeList (inOperand2),
 mAttribute_mFuncFormalArgumentList (inOperand3),
 mAttribute_mResultTypeName (inOperand4),
-mAttribute_mResultVarName (inOperand5),
-mAttribute_mInstructionList (inOperand6),
-mAttribute_mEndOfFuncLocation (inOperand7) {
+mAttribute_mInstructionList (inOperand5),
+mAttribute_mEndOfFuncLocation (inOperand6) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14827,7 +14824,6 @@ GALGAS_functionDeclarationListAST_2D_element GALGAS_functionDeclarationListAST_2
                                                        GALGAS_lstringlist::constructor_emptyList (HERE),
                                                        GALGAS_lstringlist::constructor_emptyList (HERE),
                                                        GALGAS_funcFormalArgumentList::constructor_emptyList (HERE),
-                                                       GALGAS_lstring::constructor_default (HERE),
                                                        GALGAS_lstring::constructor_default (HERE),
                                                        GALGAS_instructionListAST::constructor_emptyList (HERE),
                                                        GALGAS_location::constructor_nowhere (HERE)) ;
@@ -14840,13 +14836,12 @@ GALGAS_functionDeclarationListAST_2D_element GALGAS_functionDeclarationListAST_2
                                                                                                             const GALGAS_lstringlist & inOperand2,
                                                                                                             const GALGAS_funcFormalArgumentList & inOperand3,
                                                                                                             const GALGAS_lstring & inOperand4,
-                                                                                                            const GALGAS_lstring & inOperand5,
-                                                                                                            const GALGAS_instructionListAST & inOperand6,
-                                                                                                            const GALGAS_location & inOperand7 
+                                                                                                            const GALGAS_instructionListAST & inOperand5,
+                                                                                                            const GALGAS_location & inOperand6 
                                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_functionDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
-    result = GALGAS_functionDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
+    result = GALGAS_functionDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
   }
   return result ;
 }
@@ -14871,9 +14866,6 @@ typeComparisonResult GALGAS_functionDeclarationListAST_2D_element::objectCompare
     result = mAttribute_mResultTypeName.objectCompare (inOperand.mAttribute_mResultTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mResultVarName.objectCompare (inOperand.mAttribute_mResultVarName) ;
-  }
-  if (result == kOperandEqual) {
     result = mAttribute_mInstructionList.objectCompare (inOperand.mAttribute_mInstructionList) ;
   }
   if (result == kOperandEqual) {
@@ -14885,7 +14877,7 @@ typeComparisonResult GALGAS_functionDeclarationListAST_2D_element::objectCompare
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_functionDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mFunctionName.isValid () && mAttribute_mFunctionModeList.isValid () && mAttribute_mFunctionAttributeList.isValid () && mAttribute_mFuncFormalArgumentList.isValid () && mAttribute_mResultTypeName.isValid () && mAttribute_mResultVarName.isValid () && mAttribute_mInstructionList.isValid () && mAttribute_mEndOfFuncLocation.isValid () ;
+  return mAttribute_mFunctionName.isValid () && mAttribute_mFunctionModeList.isValid () && mAttribute_mFunctionAttributeList.isValid () && mAttribute_mFuncFormalArgumentList.isValid () && mAttribute_mResultTypeName.isValid () && mAttribute_mInstructionList.isValid () && mAttribute_mEndOfFuncLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14896,7 +14888,6 @@ void GALGAS_functionDeclarationListAST_2D_element::drop (void) {
   mAttribute_mFunctionAttributeList.drop () ;
   mAttribute_mFuncFormalArgumentList.drop () ;
   mAttribute_mResultTypeName.drop () ;
-  mAttribute_mResultVarName.drop () ;
   mAttribute_mInstructionList.drop () ;
   mAttribute_mEndOfFuncLocation.drop () ;
 }
@@ -14918,8 +14909,6 @@ void GALGAS_functionDeclarationListAST_2D_element::description (C_String & ioStr
     mAttribute_mFuncFormalArgumentList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mResultTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mResultVarName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -14956,12 +14945,6 @@ GALGAS_funcFormalArgumentList GALGAS_functionDeclarationListAST_2D_element::gett
 
 GALGAS_lstring GALGAS_functionDeclarationListAST_2D_element::getter_mResultTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResultTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_functionDeclarationListAST_2D_element::getter_mResultVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
