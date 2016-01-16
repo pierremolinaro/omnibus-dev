@@ -142,7 +142,7 @@ override method @methodCallInstructionAST analyze
   let receiverTypeProcedureMap = [[receiverExpression mType] procedureMap]
   [receiverTypeProcedureMap searchKey
     !.new {!procMangledName !mMethodName.location}
-    ?let calledProcIsMutating
+    ?let unused calledProcIsMutating
     ?let unused procedureModeMap
     ?let @procedureSignature calledProcSignature
     ?* # weak
