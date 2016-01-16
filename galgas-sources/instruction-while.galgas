@@ -131,7 +131,6 @@ override method @whileInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  ioLLVMcode += ";--- while (" + mTestExpression.mValue + ") {\n"
   let labelTest = "while." + mLabelIndex + ".test"
   let labelLoop = "while." + mLabelIndex + ".loop"
   let labelEnd  = "while." + mLabelIndex + ".end"

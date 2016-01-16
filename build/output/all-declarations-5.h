@@ -199,17 +199,6 @@ void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Category setter '@instructionListIR appendComment'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendComment (class GALGAS_instructionListIR & ioObject,
-                                     const class GALGAS_string constin_inComment,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                  Category setter '@instructionListIR appendAlloca'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

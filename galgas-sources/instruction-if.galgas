@@ -188,7 +188,6 @@ override method @ifInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  ioLLVMcode += ";--- if (" + mTestVariable.mValue + ") {\n"
   let labelTrue = "if." + [mLocation locationIndex] + ".true"
   let labelFalse = "if." + [mLocation locationIndex] + ".false"
   let labelEnd = "if." + [mLocation locationIndex] + ".end"

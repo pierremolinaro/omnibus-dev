@@ -140,8 +140,8 @@ override method @prefixOperatorExpressionAST analyzeExpression
   #--- Temp var
     getNewTempVariable (!resultType !?ioTemporaries ?outResult)
   #--- Comment
-    var comment = [outResult.mValue string] + " = " + commentOperator + expressionResult.mValue
-    [!?ioInstructionGenerationList appendComment !comment]
+#    var comment = [outResult.mValue string] + " = " + commentOperator + expressionResult.mValue
+#    [!?ioInstructionGenerationList appendComment !comment]
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult.mValue

@@ -110,7 +110,7 @@ override method @varInstructionWithAssignmentAST analyze
     !false # Is not constant
   ]
 #--- Code generation
-  [!?ioInstructionGenerationList appendComment !"var " + mVarName.string + " = " + expressionResult.mValue]
+#  [!?ioInstructionGenerationList appendComment !"var " + mVarName.string + " = " + expressionResult.mValue]
   [!?ioInstructionGenerationList appendAlloca
     !mVarName.string
     !targetType
@@ -148,7 +148,7 @@ override method @varInstructionAST analyze
     !false # Is not constant
   ]
 #--- Code generation
-  [!?ioInstructionGenerationList appendComment !"var " + mVarName.string]
+#  [!?ioInstructionGenerationList appendComment !"var " + mVarName.string]
   [!?ioInstructionGenerationList appendAlloca
     !mVarName.string
     !targetType
