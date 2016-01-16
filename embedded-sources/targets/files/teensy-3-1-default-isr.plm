@@ -90,7 +90,7 @@ proc systickHandler `isr () {
   userSystickHandler ()
 }
 
-func millis `user () -> result $uint32 {
+func millis `user @noWarningIfUnused () -> result $uint32 {
   result = gCompteur
 }
 

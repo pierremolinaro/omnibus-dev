@@ -13,6 +13,7 @@ list @funcFormalArgumentList {
 list @functionDeclarationListAST {
   @lstring mFunctionName
   @lstringlist mFunctionModeList
+  @lstringlist mFunctionAttributeList
   @funcFormalArgumentList mFuncFormalArgumentList
   @lstring mResultTypeName
   @lstring mResultVarName
@@ -37,6 +38,12 @@ syntax extension common_syntax {
       funcModeList += !funcMode
     while
     end
+    @lstringlist funcAttributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      funcAttributeList += !attribute
+    end
     @funcFormalArgumentList funcFormalArgumentList = {}
     $($
     repeat
@@ -60,6 +67,7 @@ syntax extension common_syntax {
     ioAST.mFunctionListAST +=
       !funcName
       !funcModeList
+      !funcAttributeList
       !funcFormalArgumentList
       !resultTypeName
       !resultVarName
@@ -152,6 +160,18 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     [inContext.mModeMap searchKey !mode.mValue]
     functionModeSet += !mode.mValue.string
   end
+#--- Check attributes
+  @bool warnIfUnused = true
+  for (attribute) in mFunctionAttributeList do
+    if attribute.string == noWarningIfUnusedAttribute () then
+      if not warnIfUnused then
+        error attribute : "duplicated attribute"
+      end
+      warnIfUnused = false
+    else
+      error attribute : "unknown attribute"
+    end
+  end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
     !routineMangledName:mangledNameForFunction (!name:mFunctionName.string)
@@ -215,6 +235,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !instructionGenerationList
     !resultType
     !mResultVarName.string
+    !warnIfUnused
   ]  
 }
 

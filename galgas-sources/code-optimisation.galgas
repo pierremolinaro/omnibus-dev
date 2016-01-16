@@ -59,6 +59,7 @@ proc codeOptimisation
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let initialProcedureMap = ioIntermediateCodeStruct.mProcedureMapIR
+  let initialFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
   @uint pass = 0
   @bool optimizing = true
   loop ([ioIntermediateCodeStruct.mProcedureMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
@@ -134,6 +135,12 @@ proc codeOptimisation
   for () in initialProcedureMap do
     if (not [ioIntermediateCodeStruct.mProcedureMapIR hasKey !lkey.string]) && mWarnIfUnused then
       warning lkey: "unused procedure; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
+    end
+  end
+#--- Warn on unused function
+  for () in initialFunctionMap do
+    if (not [ioIntermediateCodeStruct.mFunctionMapIR hasKey !lkey.string]) && mWarnIfUnused then
+      warning lkey: "unused function; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
     end
   end
 }
@@ -230,6 +237,7 @@ private proc suppressInaccessibleSubprograms
           !function.mInstructionGenerationList
           !function.mResultType
           !function.mResultVarName
+          !function.mWarnIfUnused
         ]        
         [function enterAccessibleEntities !?outAccessibleEntities]
         exploreProceduresAndFunctions = true
@@ -240,6 +248,7 @@ private proc suppressInaccessibleSubprograms
           !function.mInstructionGenerationList
           !function.mResultType
           !function.mResultVarName
+          !function.mWarnIfUnused
         ]        
       end
     end

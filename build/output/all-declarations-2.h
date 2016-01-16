@@ -3341,6 +3341,7 @@ class GALGAS_functionMapIR : public AC_GALGAS_map {
                                                       const class GALGAS_instructionListIR & inOperand2,
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                       const class GALGAS_string & inOperand4,
+                                                      const class GALGAS_bool & inOperand5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -3350,6 +3351,7 @@ class GALGAS_functionMapIR : public AC_GALGAS_map {
                                                    class GALGAS_instructionListIR constinArgument2,
                                                    class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
                                                    class GALGAS_string constinArgument4,
+                                                   class GALGAS_bool constinArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3373,6 +3375,11 @@ class GALGAS_functionMapIR : public AC_GALGAS_map {
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMWarnIfUnusedForKey (class GALGAS_bool constinArgument0,
+                                                                class GALGAS_string constinArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
@@ -3380,6 +3387,7 @@ class GALGAS_functionMapIR : public AC_GALGAS_map {
                                                    class GALGAS_instructionListIR & outArgument2,
                                                    class GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
                                                    class GALGAS_string & outArgument4,
+                                                   class GALGAS_bool & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -3401,6 +3409,10 @@ class GALGAS_functionMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mResultVarNameForKey (const class GALGAS_string & constinOperand0,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnusedForKey (const class GALGAS_string & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_functionMapIR getter_overriddenMap (C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const ;
@@ -3432,6 +3444,7 @@ class cEnumerator_functionMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_instructionListIR current_mInstructionGenerationList (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mResultType (LOCATION_ARGS) const ;
   public : class GALGAS_string current_mResultVarName (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_functionMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -3452,13 +3465,15 @@ class cMapElement_functionMapIR : public cMapElement {
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mResultType ;
   public : GALGAS_string mAttribute_mResultVarName ;
+  public : GALGAS_bool mAttribute_mWarnIfUnused ;
 
 //--- Constructor
   public : cMapElement_functionMapIR (const GALGAS_lstring & inKey,
                                       const GALGAS_funcFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
                                       const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                       const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType,
-                                      const GALGAS_string & in_mResultVarName
+                                      const GALGAS_string & in_mResultVarName,
+                                      const GALGAS_bool & in_mWarnIfUnused
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -3487,6 +3502,7 @@ class GALGAS_functionMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mResultType ;
   public : GALGAS_string mAttribute_mResultVarName ;
+  public : GALGAS_bool mAttribute_mWarnIfUnused ;
 
 
 //--------------------------------- Accessors
@@ -3507,7 +3523,8 @@ class GALGAS_functionMapIR_2D_element : public AC_GALGAS_root {
                                             const GALGAS_funcFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
                                             const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType,
-                                            const GALGAS_string & in_mResultVarName) ;
+                                            const GALGAS_string & in_mResultVarName,
+                                            const GALGAS_bool & in_mWarnIfUnused) ;
 
 //-- Start of generic part --*
 
@@ -3524,7 +3541,8 @@ class GALGAS_functionMapIR_2D_element : public AC_GALGAS_root {
                                                                    const class GALGAS_funcFormalArgumentListForGeneration & inOperand1,
                                                                    const class GALGAS_instructionListIR & inOperand2,
                                                                    const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                                   const class GALGAS_string & inOperand4
+                                                                   const class GALGAS_string & inOperand4,
+                                                                   const class GALGAS_bool & inOperand5
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -3548,6 +3566,8 @@ class GALGAS_functionMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mResultType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mResultVarName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -4133,6 +4153,8 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_52 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_53 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_54 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
