@@ -57,23 +57,17 @@ override method @functionCallInExpressionAST analyzeExpression
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResultValueName
+  !result:@operandIR outResult
 {
   [inContext.mFunctionMap searchKey
     !mFunctionVarName
     ?let functionModeSet
     ?let formalParameterList
-    ?outExpressionType
+    ?let functionResultType
   ]
-#--- Mangled name
-  var mangledName = mFunctionVarName.string
-  for actual in mParameterList do
-    mangledName += "?" + actual.mSelector + ":"
-  end
 #--- Check mode
   checkMode (
     !requiredModes:inModeSet
@@ -83,10 +77,10 @@ override method @functionCallInExpressionAST analyzeExpression
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
     !inRoutineNameForInvocationGraph
-    !.new {!"func " + mangledName !mFunctionVarName.location}
+    !.new {!mangledNameForFunction (!name:mFunctionVarName.string) !mFunctionVarName.location}
   ]
 #---
-  @variableListIR variableList = {}
+  @operandIRlist argumentList = {}
   var s = mangledNameForFunction (!name:mFunctionVarName.string) + " ("
   if [formalParameterList length] != [mParameterList length] then
     error mFunctionVarName : "this function declares " + [formalParameterList length] 
@@ -111,12 +105,11 @@ override method @functionCallInExpressionAST analyzeExpression
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?instructionListIR:ioInstructionGenerationList
-        ?expressionType:let argumentExpressionType
-        ?result:@variableKindIR resultValueName
+        ?result:@operandIR argumentIR
       ]
-      variableList += !resultValueName
-      if [argumentExpressionType key] != [formal.mArgumentType key] then
-        error actual.mSelector : "the actual parameter has the " + [argumentExpressionType key]
+      argumentList += !argumentIR
+      if [argumentIR.mType key] != [formal.mArgumentType key] then
+        error actual.mSelector : "the actual parameter has the " + [argumentIR.mType key]
          + ", but the formal argument has the " + [formal.mArgumentType key] + " type"
       end
     between 
@@ -124,47 +117,44 @@ override method @functionCallInExpressionAST analyzeExpression
     end
   end
   s += ")"
-#---
-  getNewTempVariable (!?ioTemporaries ?outResultValueName)
+#--- New LLVM variable for function call result
+  getNewTempVariable (!functionResultType !?ioTemporaries ?outResult)
 #--- Generate code
   ioInstructionGenerationList += !@functionCallIR.new {
-    !outExpressionType
+    !outResult
     !mFunctionVarName.string
-    !outResultValueName
-    !variableList
+    !argumentList
   }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @functionCallIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
+  @operandIR mResult
   @string mFunctionName
-  @variableKindIR mTempConstantTarget
-  @variableListIR mVariableList
+  @operandIRlist mArgumentList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @functionCallIR llvmInstructionCode ?!@string ioLLVMcode {
-  ioLLVMcode += "const " + mangledNameForType (!name:[mTargetType key]) + " "
-  ioLLVMcode += [mTempConstantTarget mangledName] + " = "
-  ioLLVMcode += mangledNameForFunction (!name:mFunctionName) + " ("
-  for (variable) in mVariableList
-  do ioLLVMcode += [variable mangledName]
-  between ioLLVMcode += ", "
+override method @functionCallIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + [mResult.mValue string] + " = call " + [mResult.mType llvmTypeName]
+  ioLLVMcode += " @" + mangledNameForFunction (!name:mFunctionName) + " ("
+  for (argument) in mArgumentList
+    do ioLLVMcode += [argument.mType llvmTypeName] + " " + [argument.mValue string]
+    between ioLLVMcode += ", "
   end
-  ioLLVMcode += ") ;\n"
+  ioLLVMcode += ")\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionCallIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mFunctionSet += !mFunctionName
-  [mTempConstantTarget enterAccessibleEntities !?ioAccessibleEntities]
-  for (variable) in mVariableList do
-    [variable enterAccessibleEntities !?ioAccessibleEntities]
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -171,6 +171,14 @@ method @procedureDeclarationListAST-element enterInPrecedenceGraph
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @procedureSignature {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @string mSelector
+  @unifiedTypeMap-proxy mType
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 map @procedureMap {
   @bool mMutating
   @modeMap mProcedureModeMap

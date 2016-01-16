@@ -16,7 +16,7 @@ var gValue2 $uint32 = 0 {
 
 //------------------------------------------------*
 
-var gCount $bool = true {
+var gIsCounting $bool = true {
   @rw proc loop
   proc userSystickHandler
 }
@@ -24,7 +24,7 @@ var gCount $bool = true {
 //------------------------------------------------*
 
 proc userSystickHandler `isr () {
-  if gCount then
+  if gIsCounting then
     gValue1 +%= 1
     gValue2 +%= 1
   end
@@ -40,8 +40,8 @@ proc setup `user () {
 proc loop `user () {
   gValue1 +%= 1
   gValue2 +%= 1
-  if gCount and (gValue1 > 100_000_000) then
-    gCount = false
+  if gIsCounting and (millis () > 5_000) then
+    gIsCounting = false
     printUnsigned (!gValue1)
     goto (!line:1 !column:0)
     printUnsigned (!gValue2)
