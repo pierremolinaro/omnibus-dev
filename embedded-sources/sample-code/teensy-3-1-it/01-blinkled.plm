@@ -3,8 +3,6 @@ target "teensy-3-1-it"
 //------------------------------------------------*
 
 proc setup `user () {
-  PORTC_PCR5 = PORTC_PCR5::mux (1)
-  GPIOC_PDDR |= (1 << 5)
 }
 
 //------------------------------------------------*
@@ -18,10 +16,10 @@ var gDelai $uint32 = 0 {
 proc loop `user () {
   gDelai +%= 1
   if gDelai == 1_000_000 then
-    GPIOC_PSOR = 1 << 5 // Allumer la led
+    ledOn (!LED_TEENSY) // Allumer la led
   elsif gDelai == 2_000_000 then
     gDelai = 0
-    GPIOC_PCOR = 1 << 5 // Éteindre la led
+    ledOff (!LED_TEENSY)  // Éteindre la led
   end  
 }
 

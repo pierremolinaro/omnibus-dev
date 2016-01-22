@@ -8138,8 +8138,6 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "proc setup `user () {\n"
-  "  PORTC_PCR5 = PORTC_PCR5::mux (1)\n"
-  "  GPIOC_PDDR |= (1 << 5)\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -8153,10 +8151,10 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-it\
   "proc loop `user () {\n"
   "  gDelai +%= 1\n"
   "  if gDelai == 1_000_000 then\n"
-  "    GPIOC_PSOR = 1 << 5 // Allumer la led\n"
+  "    ledOn (!LED_TEENSY) // Allumer la led\n"
   "  elsif gDelai == 2_000_000 then\n"
   "    gDelai = 0\n"
-  "    GPIOC_PCOR = 1 << 5 // \xC3""\x89""teindre la led\n"
+  "    ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
   "  end  \n"
   "}\n"
   "\n"
@@ -8166,7 +8164,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkled.plm",
   "plm",
   true, // Text file
-  574, // Text length
+  516, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
