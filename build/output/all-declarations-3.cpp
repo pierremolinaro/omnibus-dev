@@ -14114,41 +14114,6 @@ void routine_enterLiteralIntegerOperators (const GALGAS_lstring constinArgument_
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Routine 'enterStaticStringOperators'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterStaticStringOperators (GALGAS_lstring inArgument_inBooleanTypeName,
-                                         GALGAS_semanticContext & ioArgument_ioContext,
-                                         C_Compiler * inCompiler
-                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy var_selfTypeProxy ;
-  {
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, inArgument_inBooleanTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("type-static-string.galgas", 66)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mEqualOperatorMap.setter_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 68)).add_operation (inArgument_inBooleanTypeName.getter_string (SOURCE_FILE ("type-static-string.galgas", 68)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 68)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-static-string.galgas", 68)), var_selfTypeProxy, GALGAS_infixObjectObjectOperatorDescription::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-static-string.galgas", 70))  COMMA_SOURCE_FILE ("type-static-string.galgas", 70)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 67)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.setter_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 73)).add_operation (inArgument_inBooleanTypeName.getter_string (SOURCE_FILE ("type-static-string.galgas", 73)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 73)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-static-string.galgas", 73)), var_selfTypeProxy, GALGAS_infixObjectObjectOperatorDescription::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-static-string.galgas", 75))  COMMA_SOURCE_FILE ("type-static-string.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 72)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.setter_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 78)).add_operation (inArgument_inBooleanTypeName.getter_string (SOURCE_FILE ("type-static-string.galgas", 78)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 78)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-static-string.galgas", 78)), var_selfTypeProxy, GALGAS_infixObjectObjectOperatorDescription::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-static-string.galgas", 80))  COMMA_SOURCE_FILE ("type-static-string.galgas", 80)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 77)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.setter_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 83)).add_operation (inArgument_inBooleanTypeName.getter_string (SOURCE_FILE ("type-static-string.galgas", 83)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 83)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-static-string.galgas", 83)), var_selfTypeProxy, GALGAS_infixObjectObjectOperatorDescription::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-static-string.galgas", 85))  COMMA_SOURCE_FILE ("type-static-string.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 82)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.setter_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 88)).add_operation (inArgument_inBooleanTypeName.getter_string (SOURCE_FILE ("type-static-string.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 88)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-static-string.galgas", 88)), var_selfTypeProxy, GALGAS_infixObjectObjectOperatorDescription::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-static-string.galgas", 90))  COMMA_SOURCE_FILE ("type-static-string.galgas", 90)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 87)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.setter_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 93)).add_operation (inArgument_inBooleanTypeName.getter_string (SOURCE_FILE ("type-static-string.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 93)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-static-string.galgas", 93)), var_selfTypeProxy, GALGAS_infixObjectObjectOperatorDescription::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-static-string.galgas", 95))  COMMA_SOURCE_FILE ("type-static-string.galgas", 95)), inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 92)) ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                            Once function 'panicModeName'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15081,4 +15046,49 @@ C_galgas_function_descriptor functionDescriptor_combineTypeNamesForInfixOperator
                                                                                   & kTypeDescriptor_GALGAS_lstring,
                                                                                   2,
                                                                                   functionArgs_combineTypeNamesForInfixOperator) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Routine 'checkAssignmentCompatibility'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_checkAssignmentCompatibility (const GALGAS_operandIR constinArgument_inSourceValue,
+                                           const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inTargetType,
+                                           const GALGAS_location constinArgument_inErrorLocation,
+                                           C_Compiler * inCompiler
+                                           COMMA_UNUSED_LOCATION_ARGS) {
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inTargetType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-analysis.galgas", 12)))).boolEnum () ;
+  if (kBoolTrue == test_0) {
+  }else if (kBoolFalse == test_0) {
+    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inTargetType.objectCompare (constinArgument_inSourceValue.mAttribute_mType)).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      GALGAS_bool test_2 = constinArgument_inSourceValue.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 15)).getter_isLiteralInteger (SOURCE_FILE ("semantic-analysis.galgas", 15)) ;
+      if (kBoolTrue == test_2.boolEnum ()) {
+        test_2 = constinArgument_inTargetType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 15)).getter_isInteger (SOURCE_FILE ("semantic-analysis.galgas", 15)) ;
+      }
+      const enumGalgasBool test_3 = test_2.boolEnum () ;
+      if (kBoolTrue == test_3) {
+        GALGAS_bigint var_value ;
+        constinArgument_inSourceValue.mAttribute_mValue.method_literalInteger (var_value, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 16)) ;
+        GALGAS_bigint var_minTarget ;
+        GALGAS_bigint var_maxTarget ;
+        GALGAS_bool joker_1107 ; // Joker input parameter
+        GALGAS_uint joker_1119 ; // Joker input parameter
+        constinArgument_inTargetType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 17)).method_integer (var_minTarget, var_maxTarget, joker_1107, joker_1119, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 17)) ;
+        GALGAS_bool test_4 = GALGAS_bool (kIsStrictSup, var_minTarget.objectCompare (var_value)) ;
+        if (kBoolTrue != test_4.boolEnum ()) {
+          test_4 = GALGAS_bool (kIsStrictInf, var_maxTarget.objectCompare (var_value)) ;
+        }
+        const enumGalgasBool test_5 = test_4.boolEnum () ;
+        if (kBoolTrue == test_5) {
+          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("literal integer too large")  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 19)) ;
+        }
+      }else if (kBoolFalse == test_3) {
+        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (constinArgument_inTargetType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)).add_operation (constinArgument_inSourceValue.mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23))  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 22)) ;
+      }
+    }
+  }
+}
+
 

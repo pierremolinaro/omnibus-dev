@@ -11,18 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'checkAssignmentCompatibility'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_checkAssignmentCompatibility (const class GALGAS_operandIR constinArgument0,
-                                           const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
-                                           const class GALGAS_location constinArgument2,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                             Routine 'semanticAnalysis'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

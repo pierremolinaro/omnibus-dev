@@ -799,7 +799,7 @@ void categoryMethod_checkBinaryOperationWith (const GALGAS_infixOperatorMap inOb
     const GALGAS_infixOperatorMap temp_2 = inObject ;
     temp_2.method_searchKey (var_lkey, outArgument_outResultType, outArgument_outOperation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 82)) ;
   }else if (kBoolFalse == test_1) {
-    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("infix operation between '").add_operation (constinArgument_inLeftType.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (GALGAS_string (" and "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (constinArgument_inRightType.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (GALGAS_string ("' is not defined"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 84)) ;
+    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("infix operation between $").add_operation (constinArgument_inLeftType.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (GALGAS_string (" and $"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (constinArgument_inRightType.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (GALGAS_string (" is not defined"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 84)) ;
     outArgument_outResultType.drop () ; // Release error dropped variable
     outArgument_outOperation.drop () ; // Release error dropped variable
   }
@@ -12610,9 +12610,6 @@ static void categoryMethod_literalStringDeclaration_enterInContext (const cPtr_a
   }
   {
   ioArgument_ioContext.mAttribute_mTypeMap.setter_insertKey (object->mAttribute_mLiteralStringTypeName, GALGAS_typeKind::constructor_literalString (SOURCE_FILE ("type-static-string.galgas", 45)), GALGAS_typedConstantMap::constructor_emptyMap (SOURCE_FILE ("type-static-string.galgas", 46)), GALGAS_procedureMap::constructor_emptyMap (SOURCE_FILE ("type-static-string.galgas", 47)), GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (true), var_uint_38_Type, inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 43)) ;
-  }
-  {
-  routine_enterStaticStringOperators (object->mAttribute_mLiteralStringTypeName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-static-string.galgas", 54)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*

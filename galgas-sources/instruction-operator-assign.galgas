@@ -127,6 +127,8 @@ override method @operatorAssignInstructionAST analyze
     error mTargetVarName : "routine has no access right on the this variable"
   end
 #--- Check operator is available for type
+  let noPanicGeneration = [option plm_options.noPanicGeneration value]
+  let panicMode = [inModeSet hasKey !panicModeName ()]
   @infixOperatorMap operatorMap
   switch mOperator
   case bitWiseAndAssign :
@@ -136,23 +138,38 @@ override method @operatorAssignInstructionAST analyze
   case bitWiseXorAssign :
     operatorMap = inContext.mXorOperatorMap
   case addAssign :
-    operatorMap = inContext.mAddOperatorMap
+    if panicMode then
+      error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+    end
+    operatorMap = if noPanicGeneration then inContext.mAddNoOvfOperatorMap else inContext.mAddOperatorMap end
   case addModuloAssign :
     operatorMap = inContext.mAddNoOvfOperatorMap
   case subAssign :
-    operatorMap = inContext.mSubOperatorMap
+    if panicMode then
+      error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+    end
+    operatorMap = if noPanicGeneration then inContext.mSubNoOvfOperatorMap else inContext.mSubOperatorMap end
   case subModuloAssign :
     operatorMap = inContext.mSubNoOvfOperatorMap
   case mulAssign :
-    operatorMap = inContext.mMulOperatorMap
+    if panicMode then
+      error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+    end
+    operatorMap = if noPanicGeneration then inContext.mMulNoOvfOperatorMap else inContext.mMulOperatorMap end
   case mulModuloAssign :
     operatorMap = inContext.mMulNoOvfOperatorMap
   case divAssign :
-    operatorMap = inContext.mDivOperatorMap
+    if panicMode then
+      error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+    end
+    operatorMap = if noPanicGeneration then inContext.mDivNoOvfOperatorMap else inContext.mDivOperatorMap end
   case divZeroAssign :
     operatorMap = inContext.mDivNoOvfOperatorMap
   case modAssign :
-    operatorMap = inContext.mModOperatorMap
+    if panicMode then
+      error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+    end
+    operatorMap = if noPanicGeneration then inContext.mModNoOvfOperatorMap else inContext.mModOperatorMap end
   case modZeroAssign :
     operatorMap = inContext.mModNoOvfOperatorMap
   end

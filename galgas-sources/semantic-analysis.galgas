@@ -20,7 +20,7 @@ proc checkAssignmentCompatibility
       end
     else
       error inErrorLocation
-      : "object of type " + [inTargetType key] + " cannot be assigned from expression of type " + [inSourceValue.mType key]
+      : "object of type $" + [inTargetType key] + " cannot be assigned from expression of type $" + [inSourceValue.mType key]
     end
   end
 }

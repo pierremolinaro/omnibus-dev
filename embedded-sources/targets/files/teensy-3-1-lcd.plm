@@ -257,23 +257,6 @@ proc goto `user @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8
 
 //-----------------------------------------------------------------------------*
 
-//void printString (const char * inString) {
-//  if (NULL != inString) {
-//    while ('\0' != *inString) {
-//      writeData (*inString) ;
-//      inString += 1 ;
-//    }
-//  }
-//}
-
-//-----------------------------------------------------------------------------*
-
-//void printChar (const char inChar) {
-//  writeData (inChar) ;
-//}
-
-//-----------------------------------------------------------------------------*
-
 proc clearScreen `user @noWarningIfUnused () {
   write8bitCommand_inUserMode (!0x01)
 }
