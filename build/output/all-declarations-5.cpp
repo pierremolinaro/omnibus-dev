@@ -11068,6 +11068,68 @@ GALGAS_location callCategoryGetter_location (const cPtr_abstractDeclaration * in
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Abstract category method '@abstractDeclaration addExtension'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_addExtension> gCategoryMethodTable_abstractDeclaration_addExtension ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_addExtension (const int32_t inClassIndex,
+                                       categoryMethodSignature_abstractDeclaration_addExtension inMethod) {
+  gCategoryMethodTable_abstractDeclaration_addExtension.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_abstractDeclaration_addExtension (void) {
+  gCategoryMethodTable_abstractDeclaration_addExtension.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractDeclaration_addExtension (NULL,
+                                                             freeCategoryMethod_abstractDeclaration_addExtension) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_addExtension (const cPtr_abstractDeclaration * inObject,
+                                      GALGAS_extensionDeclarationListAST & io_ioExtensionDeclarationListAST,
+                                      GALGAS_abstractDeclaration & out_outNewDeclaration,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+  out_outNewDeclaration.drop () ;
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_abstractDeclaration_addExtension f = NULL ;
+    if (classIndex < gCategoryMethodTable_abstractDeclaration_addExtension.count ()) {
+      f = gCategoryMethodTable_abstractDeclaration_addExtension (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_addExtension.count ()) {
+           f = gCategoryMethodTable_abstractDeclaration_addExtension (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_abstractDeclaration_addExtension.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioExtensionDeclarationListAST, out_outNewDeclaration, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Abstract category method '@expressionAST addDependenceEdgeForStaticExpression'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11955,7 +12017,6 @@ C_PrologueEpilogue gMethod_abstractDeclaration_enterInContext (NULL,
 
 void callCategoryMethod_enterInContext (const cPtr_abstractDeclaration * inObject,
                                         const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
-                                        const GALGAS_extensionDeclarationListAST constin_inExtensionDeclarationListAST,
                                         GALGAS_semanticContext & io_ioContext,
                                         GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                         C_Compiler * inCompiler
@@ -11983,7 +12044,7 @@ void callCategoryMethod_enterInContext (const cPtr_abstractDeclaration * inObjec
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
     }else{
-      f (inObject, constin_inProcedureListAST, constin_inExtensionDeclarationListAST, io_ioContext, io_ioGlobalLiteralStringMap, inCompiler COMMA_THERE) ;
+      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioGlobalLiteralStringMap, inCompiler COMMA_THERE) ;
     }
   }
 }
@@ -12077,7 +12138,6 @@ C_PrologueEpilogue gMethod_abstractDeclaration_semanticAnalysis (NULL,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void callCategoryMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObject,
-                                          const GALGAS_extensionDeclarationListAST constin_inExtensionDeclarationListAST,
                                           const GALGAS_semanticContext constin_inContext,
                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                           GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
@@ -12106,7 +12166,7 @@ void callCategoryMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObj
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
     }else{
-      f (inObject, constin_inExtensionDeclarationListAST, constin_inContext, io_ioTemporaries, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
+      f (inObject, constin_inContext, io_ioTemporaries, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
     }
   }
 }
@@ -14990,68 +15050,4 @@ GALGAS_exceptionClauseListAST_2D_element GALGAS_exceptionClauseListAST_2D_elemen
   }
   return result ;
 }
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Category method '@exceptionClauseListAST-element exceptionSemanticAnalysis'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_exceptionSemanticAnalysis (const GALGAS_exceptionClauseListAST_2D_element inObject,
-                                               const GALGAS_semanticContext constinArgument_inContext,
-                                               GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                               GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                               C_Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = constinArgument_inContext.mAttribute_mModeMap.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 103)) COMMA_SOURCE_FILE ("exception.galgas", 103)).operator_not (SOURCE_FILE ("exception.galgas", 103)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    GALGAS_location location_1 (inObject.mAttribute_mExceptionClauseName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("the `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 104)).add_operation (GALGAS_string (" mode should be defined in order to use an exception clause"), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 104))  COMMA_SOURCE_FILE ("exception.galgas", 104)) ;
-  }
-  GALGAS_lstring var_routineNameForInvocationGraph = GALGAS_lstring::constructor_new (GALGAS_string ("exception ").add_operation (inObject.mAttribute_mExceptionClauseName.getter_string (SOURCE_FILE ("exception.galgas", 107)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 107)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 107)).add_operation (inObject.mAttribute_mPriority.getter_string (SOURCE_FILE ("exception.galgas", 107)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 107)), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 106)) ;
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (var_routineNameForInvocationGraph.mAttribute_string, constinArgument_inContext, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 111)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_StaticStringType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, function_staticStringTypeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 117)).getter_nowhere (SOURCE_FILE ("exception.galgas", 117)), inCompiler  COMMA_SOURCE_FILE ("exception.galgas", 117)) ;
-  GALGAS_lstring var_codeArg = GALGAS_lstring::constructor_new (GALGAS_string ("CODE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 118)) ;
-  {
-  var_variableMap.setter_insertUsedConstantInputFormalArgument (var_codeArg, constinArgument_inContext.mAttribute_mExceptionCodeType, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (constinArgument_inContext.mAttribute_mExceptionCodeType, var_codeArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 123)), constinArgument_inContext.mAttribute_mExceptionCodeType.getter_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 124)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 125)), GALGAS_bool (false), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 119)) ;
-  }
-  GALGAS_lstring var_fileArg = GALGAS_lstring::constructor_new (GALGAS_string ("FILE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 129)) ;
-  {
-  var_variableMap.setter_insertUsedConstantInputFormalArgument (var_fileArg, var_StaticStringType, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (var_StaticStringType, var_fileArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 134)), var_StaticStringType.getter_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 135)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 136)), GALGAS_bool (false), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 130)) ;
-  }
-  GALGAS_lstring var_lineArg = GALGAS_lstring::constructor_new (GALGAS_string ("LINE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 140)) ;
-  {
-  var_variableMap.setter_insertUsedConstantInputFormalArgument (var_lineArg, constinArgument_inContext.mAttribute_mExceptionLineType, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (constinArgument_inContext.mAttribute_mExceptionLineType, var_lineArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 145)), constinArgument_inContext.mAttribute_mExceptionLineType.getter_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 146)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 147)), GALGAS_bool (false), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 141)) ;
-  }
-  const enumGalgasBool test_2 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("exception.galgas", 152)).operator_not (SOURCE_FILE ("exception.galgas", 152)).boolEnum () ;
-  if (kBoolTrue == test_2) {
-    {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph, var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 153)) ;
-    }
-  }
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("exception.galgas", 159)) ;
-  GALGAS_stringset temp_3 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 163)) ;
-  temp_3.addAssign_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 163))  COMMA_SOURCE_FILE ("exception.galgas", 163)) ;
-  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mExceptionInstructionList, var_routineNameForInvocationGraph, constinArgument_inContext, temp_3, GALGAS_bool (false), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 160)) ;
-  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfExceptionInstructions, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 171)) ;
-  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, inObject.mAttribute_mExceptionClauseName.mAttribute_string.objectCompare (GALGAS_string ("setup"))).boolEnum () ;
-  if (kBoolTrue == test_4) {
-    {
-    ioArgument_ioTemporaries.mAttribute_mExceptionSetupRoutinePriorityMap.setter_insertSetupKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.getter_string (SOURCE_FILE ("exception.galgas", 174)), inObject.mAttribute_mLocationPriority  COMMA_SOURCE_FILE ("exception.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 174)) ;
-    }
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR.plusAssign_operation(var_instructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("exception.galgas", 175)) ;
-  }else if (kBoolFalse == test_4) {
-    const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, inObject.mAttribute_mExceptionClauseName.mAttribute_string.objectCompare (GALGAS_string ("loop"))).boolEnum () ;
-    if (kBoolTrue == test_5) {
-      {
-      ioArgument_ioTemporaries.mAttribute_mExceptionLoopRoutinePriorityMap.setter_insertLoopKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.getter_string (SOURCE_FILE ("exception.galgas", 177)), inObject.mAttribute_mLocationPriority  COMMA_SOURCE_FILE ("exception.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 177)) ;
-      }
-      ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR.plusAssign_operation(var_instructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("exception.galgas", 178)) ;
-    }else if (kBoolFalse == test_5) {
-      GALGAS_location location_6 (inObject.mAttribute_mExceptionClauseName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_6, GALGAS_string ("exception routine name should be \"setup\" or \"loop\"")  COMMA_SOURCE_FILE ("exception.galgas", 180)) ;
-    }
-  }
-}
-
 

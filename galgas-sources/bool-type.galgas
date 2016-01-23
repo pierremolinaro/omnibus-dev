@@ -14,6 +14,17 @@ override getter @booleanDeclaration location -> @location outLocation {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @booleanDeclaration addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                    *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -35,7 +46,6 @@ override getter @booleanDeclaration keyRepresentation -> @string outRepresentati
 
 override method @booleanDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -131,7 +141,6 @@ override method @booleanDeclaration initAnalysis ?!context:@semanticContext unus
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanDeclaration semanticAnalysis
-  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

@@ -55,10 +55,9 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef void (*categoryMethodSignature_abstractDeclaration_semanticAnalysis) (const class cPtr_abstractDeclaration * inObject,
-                                                                              const class GALGAS_extensionDeclarationListAST constinArgument0,
-                                                                              const class GALGAS_semanticContext constinArgument1,
-                                                                              class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                                                              class GALGAS_intermediateCodeStruct & ioArgument3,
+                                                                              const class GALGAS_semanticContext constinArgument0,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                                                              class GALGAS_intermediateCodeStruct & ioArgument2,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -70,7 +69,6 @@ void enterCategoryMethod_semanticAnalysis (const int32_t inClassIndex,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void callCategoryMethod_semanticAnalysis (const class cPtr_abstractDeclaration * inObject,
-                                          const GALGAS_extensionDeclarationListAST constin_inExtensionDeclarationListAST,
                                           const GALGAS_semanticContext constin_inContext,
                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                           GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
@@ -1005,6 +1003,31 @@ void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
                                    class GALGAS_stringset & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Abstract category method '@abstractDeclaration addExtension'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractDeclaration_addExtension) (const class cPtr_abstractDeclaration * inObject,
+                                                                          class GALGAS_extensionDeclarationListAST & ioArgument0,
+                                                                          class GALGAS_abstractDeclaration & outArgument1,
+                                                                          class C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_addExtension (const int32_t inClassIndex,
+                                       categoryMethodSignature_abstractDeclaration_addExtension inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_addExtension (const class cPtr_abstractDeclaration * inObject,
+                                      GALGAS_extensionDeclarationListAST & io_ioExtensionDeclarationListAST,
+                                      GALGAS_abstractDeclaration & out_outNewDeclaration,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

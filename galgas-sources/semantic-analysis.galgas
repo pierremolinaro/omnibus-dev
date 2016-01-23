@@ -28,7 +28,6 @@ proc checkAssignmentCompatibility
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractDeclaration semanticAnalysis
-  ?extensionList:let @extensionDeclarationListAST inExtensionDeclarationListAST
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -69,7 +68,6 @@ proc semanticAnalysis
   @semanticTemporariesStruct temporaries = .default
   for (declaration) in inAST.mDeclarationList do
     [declaration semanticAnalysis
-      !extensionList:inAST.mExtensionDeclarationListAST
       !context:inSemanticContext
       !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
