@@ -81,6 +81,7 @@ map @enumConstantMap {
 
 override method @enumerationDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -166,6 +167,7 @@ override method @enumerationDeclaration initAnalysis ?!context:@semanticContext 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @enumerationDeclaration semanticAnalysis
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

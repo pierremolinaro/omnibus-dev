@@ -78,6 +78,7 @@ abstract method @expressionAST addDependenceEdgeForStaticExpression
 
 override method @globalConstantDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
@@ -131,6 +132,7 @@ override method @globalConstantDeclaration initAnalysis ?!context:@semanticConte
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @globalConstantDeclaration semanticAnalysis
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct

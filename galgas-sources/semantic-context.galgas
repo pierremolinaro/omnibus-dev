@@ -217,6 +217,7 @@ struct @semanticContext {
 
 abstract method @abstractDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?extensionList:let @extensionDeclarationListAST inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
@@ -254,6 +255,7 @@ proc buildSemanticContext
   for (declaration) in inDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inAST.mProcedureListAST
+      !extensionList:inAST.mExtensionDeclarationListAST
       !?context:outSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]

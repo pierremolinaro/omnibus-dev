@@ -53,6 +53,7 @@ override getter @pointerSizeDeclaration keyRepresentation -> @string outRepresen
 
 override method @pointerSizeDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -68,6 +69,7 @@ override method @pointerSizeDeclaration initAnalysis ?!context:@semanticContext 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @pointerSizeDeclaration semanticAnalysis
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

@@ -35,6 +35,7 @@ override getter @literalStringDeclaration keyRepresentation -> @string outRepres
 
 override method @literalStringDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -105,6 +106,7 @@ override method @literalStringDeclaration initAnalysis ?!context:@semanticContex
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringDeclaration semanticAnalysis
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
