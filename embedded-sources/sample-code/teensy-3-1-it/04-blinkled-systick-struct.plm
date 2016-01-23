@@ -5,8 +5,6 @@ target "teensy-3-1-it"
 struct $point {
   var x $uint32 = 200
   var y $uint32 = 500
-
-//  mutating proc setX `user (?x:inX $uint32) { x = inX }
 }
 
 struct $point3 {
@@ -33,10 +31,6 @@ proc loop `user () {
   waitMS (!p.p.x)
   p.p.y = 340
   var q = $point ()
-//  [q setX !x:230]
-//  zz = zzz.p.x
-//  zzz.p.x = zz
-//  zzz = $point3 ()
   ledOn (!LED_TEENSY) // Allumer la led
   waitMS (!p.p.y)
   ledOff (!LED_TEENSY)  // Éteindre la led

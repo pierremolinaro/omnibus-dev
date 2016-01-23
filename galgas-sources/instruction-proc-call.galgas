@@ -69,8 +69,13 @@ syntax extension common_syntax {
       effectiveParameterList += !.outputInput{!name:effectiveParameterName} !selector
     while
       $?$ ?let selector
-      $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.input{!name:effectiveParameterName} !selector
+      select
+        $identifier$ ?let effectiveParameterName
+        effectiveParameterList += !.input{!name:effectiveParameterName} !selector
+      or
+        $self$
+        effectiveParameterList += !.input{!name:.new {!"self" !.here}} !selector
+      end
     end
     $)$
     ioInstructionList += !@procCallInstructionAST.new {
