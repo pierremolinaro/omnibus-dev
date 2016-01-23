@@ -61,6 +61,7 @@ override getter @modeDeclaration keyRepresentation -> @string outRepresentation 
 
 override method @modeDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -76,6 +77,7 @@ override method @modeDeclaration initAnalysis ?!context:@semanticContext unused 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @modeDeclaration semanticAnalysis
+  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

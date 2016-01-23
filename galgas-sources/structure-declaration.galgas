@@ -128,6 +128,7 @@ map @propertyMap {
 
 override method @structureDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?extensionList:let @extensionDeclarationListAST inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -153,7 +154,13 @@ override method @structureDeclaration enterInContext
   end
 #--- Procedures
   @procedureMap procedureMap = {}
-  for procedure in mProcedureDeclarationListAST do
+  var procedureDeclarationListAST = mProcedureDeclarationListAST
+  for (typeName proceduresDefinedInExtension) in inExtensionDeclarationListAST do
+    if mStructureName.string == typeName.string then
+      procedureDeclarationListAST += proceduresDefinedInExtension
+    end
+  end
+  for procedure in procedureDeclarationListAST do
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
       [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
@@ -235,6 +242,7 @@ override method @structureDeclaration initAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration semanticAnalysis
+  ?extensionList:let @extensionDeclarationListAST inExtensionDeclarationListAST
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -251,7 +259,13 @@ override method @structureDeclaration semanticAnalysis
   case literalString : propertyMap = {}
   end
 #--- Analyze procedures
-  for procedure in mProcedureDeclarationListAST do
+  var procedureDeclarationListAST = mProcedureDeclarationListAST
+  for (typeName proceduresDefinedInExtension) in inExtensionDeclarationListAST do
+    if mStructureName.string == typeName.string then
+      procedureDeclarationListAST += proceduresDefinedInExtension
+    end
+  end
+  for procedure in procedureDeclarationListAST do
   #--- Enter subprogram invocation graph
     let procMangledName = "proc " + mStructureName + "." + procedure.mProcedureName
     let procNameForInvocationGraph = @lstring.new {!procMangledName !procedure.mProcedureName.location}

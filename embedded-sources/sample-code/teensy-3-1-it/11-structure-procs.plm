@@ -15,8 +15,10 @@ struct $MyStruct {
   mutating proc setX `user (?inX $int32) {
     self.x = inX + 8
   }
+}
+
+extension $MyStruct {
   mutating proc reset `user () {
-    self = $MyStruct ()
     azert (?self)
   }
 }

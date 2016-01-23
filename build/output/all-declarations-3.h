@@ -342,6 +342,8 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_55 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_56 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_57 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1625,8 +1627,9 @@ void routine_buildSemanticContext (const class GALGAS_declarationListAST constin
 
 typedef void (*categoryMethodSignature_abstractDeclaration_enterInContext) (const class cPtr_abstractDeclaration * inObject,
                                                                             const class GALGAS_procedureDeclarationListAST constinArgument0,
-                                                                            class GALGAS_semanticContext & ioArgument1,
-                                                                            class GALGAS_staticStringMap & ioArgument2,
+                                                                            const class GALGAS_extensionDeclarationListAST constinArgument1,
+                                                                            class GALGAS_semanticContext & ioArgument2,
+                                                                            class GALGAS_staticStringMap & ioArgument3,
                                                                             class C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) ;
 
@@ -1639,6 +1642,7 @@ void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
 
 void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * inObject,
                                         const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                        const GALGAS_extensionDeclarationListAST constin_inExtensionDeclarationListAST,
                                         GALGAS_semanticContext & io_ioContext,
                                         GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                         C_Compiler * inCompiler
@@ -1722,29 +1726,5 @@ void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListA
                                     class GALGAS_semanticContext & io_ioContext,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'solveInferredType'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument0,
-                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument1,
-                                                                 const class GALGAS_location & constinArgument2,
-                                                                 class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Routine 'checkAssignmentCompatibility'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_checkAssignmentCompatibility (const class GALGAS_operandIR constinArgument0,
-                                           const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
-                                           const class GALGAS_location constinArgument2,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 #endif
