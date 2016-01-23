@@ -47,14 +47,21 @@ syntax extension common_syntax {
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
     @lstring receiverName
     @lstring procName
-    $identifier$ ?let x
     select
-      procName = x
-      receiverName = ["" nowhere]
-    or
+      $self$
+      receiverName = .new {!"self" !.here}
       $.$
-      receiverName = x
       $identifier$ ?procName
+    or
+      $identifier$ ?let x
+      select
+        procName = x
+        receiverName = ["" nowhere]
+      or
+        $.$
+        receiverName = x
+        $identifier$ ?procName
+      end
     end
     @procEffectiveParameterListAST effectiveParameterList = {}
     $($

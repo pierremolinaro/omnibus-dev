@@ -10,10 +10,21 @@ struct $MyStruct {
   }
   proc getX `user (!outX $int32) {
     outX = self.x +% 3
+    self.setX (!123)
   }
   mutating proc setX `user (?inX $int32) {
     self.x = inX + 8
   }
+  mutating proc reset `user () {
+    self = $MyStruct ()
+    azert (?self)
+  }
+}
+
+//------------------------------------------------*
+
+proc azert `user (!p $MyStruct) {
+  p = $MyStruct ()
 }
 
 //------------------------------------------------*
@@ -28,6 +39,7 @@ proc loop `user () {
   s.nop ()
   var x $int32 ; s.getX (?x)
   s.setX (!999)
+  s.reset ()
 }
 
 //------------------------------------------------*
