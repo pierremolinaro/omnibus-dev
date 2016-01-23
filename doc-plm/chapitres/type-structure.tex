@@ -5,7 +5,7 @@
 
 
 
-\chapter{Les types structurés}
+\chapter{Les types structure}
 
 
 \section{Déclaration d'un type structure}
@@ -21,6 +21,17 @@ struct $point {
 
 Dans la version actuelle de PLM, tous les champs doivent être initialisés.
 
+Déclarer un type structure définit implicitement un initialiseur sans argument, qu'il faut appeler lorsque l'on initialise une variable ou une constante. Par exemple :
+\begin{PLM}
+var pt $point = $point ()
+\end{PLM}
+
+Et l'annotation de type peut être omise :
+\begin{PLM}
+var pt = $point ()
+\end{PLM}
+
+Tout type acceptable pour un champ. Par exemple : 
 \begin{PLM}
 struct $point3D {
   var p $point = $point ()
@@ -28,8 +39,102 @@ struct $point3D {
 }
 \end{PLM}
 
-\section{Code engendré}
+\section{Procédure de structure}
 
-PLM engendre une structure C pour chaque structure PLM déclarée.
+Il existe deux sortes de procédure de structure :
+\begin{itemize}
+  \item les procédures constantes (\plm!proc!), \refSubsectionTitlePage{procConstStructure} ;
+  \item les procédures mutables (\plm!mutating proc!), \refSubsectionTitlePage{procMutableStructure}.
+\end{itemize}
+
+
+\subsectionLabel{Procédure constante}{procConstStructure}
+
+Un type structure peut définir des procédures grâce à la construction \plm!proc! :
+
+\begin{PLM}
+struct $point {
+  var x $int32 = 0
+  var y $int32 = 0
+  
+  proc `user getX (!outX $uint32) {
+    outX = self.x
+  }
+}
+\end{PLM}
+
+Trois remarques :
+\begin{itemize}
+  \item une telle procédure ne peut pas modifier l'objet auquel il s'applique (pour le faire, il faut définir une \plm!mutating proc!) ;
+  \item l'accès aux variables globales n'est pas possible : il faut appeler une procédure qui effectue l'accès ;
+  \item préfixer l'accès à un champ par \plm!self.! est obligatoire. 
+\end{itemize}
+
+
+
+
+\subsectionLabel{Procédure mutable}{procMutableStructure}
+
+Si on veut modifier un champ, il faut déclarer la procédure de structure avec le qualificatif \plm!mutating! :
+
+\begin{PLM}
+struct $point {
+  var x $int32 = 0
+  var y $int32 = 0
+  
+  mutating proc `user setX (?inX $uint32) {
+    self.x = inX
+  }
+}
+\end{PLM}
+
+L'accès aux variables globales n'est pas possible, et préfixer l'accès à un champ par \plm!self.! est obligatoire. 
+
+Il est possible de modifier l'objet courant en affectant \plm!self! :
+
+\begin{PLM}
+struct $point {
+  var x $int32 = 0
+  var y $int32 = 0
+  
+  mutating proc reset `user () {
+    self = $point ()
+  }
+}
+\end{PLM}
+
+Ou encore :
+
+\begin{PLM}
+struct $point {
+  var x $int32 = 0
+  var y $int32 = 0
+  
+  mutating proc reset `user () {
+    newPoint (?self)
+  }
+}
+
+proc `user newPoint (!p $point) {
+  p = $point ()
+}
+\end{PLM}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Visibilité des champs et des méthodes}
+
+Dans la version actuelle, les champs et les méthodes sont publiques.
 
 

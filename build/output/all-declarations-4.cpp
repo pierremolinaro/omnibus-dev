@@ -8188,8 +8188,6 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-it\
   "struct $point {\n"
   "  var x $uint32 = 200\n"
   "  var y $uint32 = 500\n"
-  "\n"
-  "//  mutating proc setX `user (\?x:inX $uint32) { x = inX }\n"
   "}\n"
   "\n"
   "struct $point3 {\n"
@@ -8216,10 +8214,6 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-it\
   "  waitMS (!p.p.x)\n"
   "  p.p.y = 340\n"
   "  var q = $point ()\n"
-  "//  [q setX !x:230]\n"
-  "//  zz = zzz.p.x\n"
-  "//  zzz.p.x = zz\n"
-  "//  zzz = $point3 ()\n"
   "  ledOn (!LED_TEENSY) // Allumer la led\n"
   "  waitMS (!p.p.y)\n"
   "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
@@ -8231,7 +8225,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "04-blinkled-systick-struct.plm",
   "plm",
   true, // Text file
-  816, // Text length
+  682, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -8288,19 +8282,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-it\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "var x = \"Hello !\" {\n"
-  "  @rw proc setup\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
   "proc setup `user () {\n"
-  "  x = \"Toto\"\n"
-  "  if x == \"Toto\" then\n"
-  "    for c in x do\n"
-  "      writeData_inUserMode (!c)\n"
-  "    end\n"
-  "  end\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -8334,7 +8316,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "06-blinkled-lcd.plm",
   "plm",
   true, // Text file
-  792, // Text length
+  600, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -8567,6 +8549,16 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "  mutating proc setX `user (\?inX $int32) {\n"
   "    self.x = inX + 8\n"
   "  }\n"
+  "  mutating proc reset `user () {\n"
+  "    self = $MyStruct ()\n"
+  "    azert (\?self)\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc azert `user (!p $MyStruct) {\n"
+  "  p = $MyStruct ()\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -8589,7 +8581,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "11-structure-procs.plm",
   "plm",
   true, // Text file
-  581, // Text length
+  769, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
