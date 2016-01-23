@@ -71,6 +71,32 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @structureDeclaration addExtension
+  ?!@extensionDeclarationListAST ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  @structureDeclaration newDeclaration = self
+  let currentExtensionDeclarationListAST = ioExtensionDeclarationListAST
+  ioExtensionDeclarationListAST = {}
+  for (typeName proceduresDefinedInExtension) in currentExtensionDeclarationListAST do
+    if mStructureName.string == typeName.string then
+      newDeclaration = .new {
+        ![newDeclaration mStructureName]
+        ![newDeclaration mAttributeList]
+        ![newDeclaration mStructureFieldListAST]
+        ![newDeclaration mProcedureDeclarationListAST] + proceduresDefinedInExtension
+      }
+    else
+      ioExtensionDeclarationListAST += !typeName !proceduresDefinedInExtension
+    end
+  end
+  outNewDeclaration = newDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -128,7 +154,6 @@ map @propertyMap {
 
 override method @structureDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?extensionList:let @extensionDeclarationListAST inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -154,13 +179,7 @@ override method @structureDeclaration enterInContext
   end
 #--- Procedures
   @procedureMap procedureMap = {}
-  var procedureDeclarationListAST = mProcedureDeclarationListAST
-  for (typeName proceduresDefinedInExtension) in inExtensionDeclarationListAST do
-    if mStructureName.string == typeName.string then
-      procedureDeclarationListAST += proceduresDefinedInExtension
-    end
-  end
-  for procedure in procedureDeclarationListAST do
+  for procedure in mProcedureDeclarationListAST do
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
       [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
@@ -242,7 +261,6 @@ override method @structureDeclaration initAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration semanticAnalysis
-  ?extensionList:let @extensionDeclarationListAST inExtensionDeclarationListAST
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -259,13 +277,7 @@ override method @structureDeclaration semanticAnalysis
   case literalString : propertyMap = {}
   end
 #--- Analyze procedures
-  var procedureDeclarationListAST = mProcedureDeclarationListAST
-  for (typeName proceduresDefinedInExtension) in inExtensionDeclarationListAST do
-    if mStructureName.string == typeName.string then
-      procedureDeclarationListAST += proceduresDefinedInExtension
-    end
-  end
-  for procedure in procedureDeclarationListAST do
+  for procedure in mProcedureDeclarationListAST do
   #--- Enter subprogram invocation graph
     let procMangledName = "proc " + mStructureName + "." + procedure.mProcedureName
     let procNameForInvocationGraph = @lstring.new {!procMangledName !procedure.mProcedureName.location}

@@ -1,0 +1,43 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @extensionDeclarationListAST {
+  @lstring mTypeName
+  @procedureDeclarationListAST mProcedureDeclarationListAST
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $extension$
+    $typeName$ ?let typeName
+    ${$
+    @procedureDeclarationListAST procedureDeclarationListAST = {}
+    repeat
+    while
+      <procedure> !?procedureDeclarationListAST
+    while
+      $;$
+    end
+    $}$
+    ioAST.mExtensionDeclarationListAST += !typeName !procedureDeclarationListAST
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract method @abstractDeclaration addExtension
+  ?!@extensionDeclarationListAST ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

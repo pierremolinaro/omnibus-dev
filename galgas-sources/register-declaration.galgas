@@ -98,6 +98,17 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @registerDeclaration addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                    *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -152,7 +163,6 @@ map @registerMap {
 
 override method @registerDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -234,7 +244,6 @@ override method @registerDeclaration initAnalysis ?!context:@semanticContext unu
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerDeclaration semanticAnalysis
-  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct

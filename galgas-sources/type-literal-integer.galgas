@@ -12,6 +12,17 @@ override getter @literalIntegerDeclaration location -> @location outLocation {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @literalIntegerDeclaration addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                    *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -35,7 +46,6 @@ override getter @literalIntegerDeclaration keyRepresentation -> @string outRepre
 
 override method @literalIntegerDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -197,7 +207,6 @@ override method @literalIntegerDeclaration initAnalysis ?!context:@semanticConte
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalIntegerDeclaration semanticAnalysis
-  ?extensionList:let @extensionDeclarationListAST unused inExtensionDeclarationListAST
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

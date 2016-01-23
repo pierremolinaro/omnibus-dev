@@ -89,6 +89,15 @@ private proc compileProject
   )
 #--- Add Predefined types
   addPredefinedTypes (!?declarationList:ast.mDeclarationList)
+#--- Add type extensions
+  let declarationList = ast.mDeclarationList
+  var @declarationListAST newDeclarationList = {}
+  var extensionDeclarationListAST = ast.mExtensionDeclarationListAST
+  for (declaration) in declarationList do
+    [declaration addExtension !?extensionDeclarationListAST ?let newDeclaration]
+    newDeclarationList += !newDeclaration
+  end
+  ast.mDeclarationList = newDeclarationList
 #--- Ordered declaration list
   buildOrderedDeclarationList (
     !ast:ast
