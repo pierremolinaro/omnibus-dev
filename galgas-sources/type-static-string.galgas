@@ -51,50 +51,50 @@ override method @literalStringDeclaration enterInContext
     !enumerationType:uint8Type
   ]
 #--- Enter operators
-  enterStaticStringOperators (
-    !integerTypeName:mLiteralStringTypeName
-    !?context:ioContext
-  )
+#  enterStaticStringOperators (
+#    !integerTypeName:mLiteralStringTypeName
+#    !?context:ioContext
+#  )
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc enterStaticStringOperators
-  ?integerTypeName:@lstring inBooleanTypeName
-  ?!context:@semanticContext ioContext
-{
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBooleanTypeName ?let selfTypeProxy]
-  [!?ioContext.mEqualOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
-  ]
-  [!?ioContext.mNonEqualOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
-  ]
-  [!?ioContext.mStrictInfOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
-  ]
-  [!?ioContext.mInfEqualOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
-  ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
-  ]
-  [!?ioContext.mSupEqualOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
-  ] 
-}
+#proc enterStaticStringOperators
+#  ?integerTypeName:@lstring inBooleanTypeName
+#  ?!context:@semanticContext ioContext
+#{
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBooleanTypeName ?let selfTypeProxy]
+#  [!?ioContext.mEqualOperatorMap insertKey
+#    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
+#  ]
+#  [!?ioContext.mNonEqualOperatorMap insertKey
+#    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
+#  ]
+#  [!?ioContext.mStrictInfOperatorMap insertKey
+#    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
+#  ]
+#  [!?ioContext.mInfEqualOperatorMap insertKey
+#    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
+#  ]
+#  [!?ioContext.mStrictSupOperatorMap insertKey
+#    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
+#  ]
+#  [!?ioContext.mSupEqualOperatorMap insertKey
+#    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
+#  ] 
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                   *

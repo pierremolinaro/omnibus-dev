@@ -82,7 +82,7 @@ method @infixOperatorMap checkBinaryOperationWith
     [self searchKey !lkey ?outResultType ?outOperation]
   else
     error inOperatorLocation
-      : "infix operation between '" + [inLeftType key] + " and " + [inRightType key] + "' is not defined"
+      : "infix operation between $" + [inLeftType key] + " and $" + [inRightType key] + " is not defined"
       : outResultType, outOperation
   end
 }
