@@ -147,7 +147,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   switch [expressionResult.mType kind]
   case enumeration (*) :
     error mExpressionLocation: "an unsigned integer expression is required here" : outResult
-  case structure (* * *) :
+  case structure (* *) :
     error mExpressionLocation: "an unsigned integer expression is required here" : outResult
   case boolset, boolean :
     error mExpressionLocation: "an unsigned integer expression is required here" : outResult

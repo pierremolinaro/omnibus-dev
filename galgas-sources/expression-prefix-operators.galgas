@@ -89,7 +89,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case boolset : error .nowhere : "internal error" : leftOperand
     case literalString : error .nowhere : "internal error" : leftOperand
     case enumeration (*) :  error .nowhere : "internal error" : leftOperand
-    case structure (* * *) :  error .nowhere : "internal error" : leftOperand
+    case structure (* *) :  error .nowhere : "internal error" : leftOperand
     case literalInteger :  error .nowhere : "internal error" : leftOperand
     case integer (* * * @uint bitCount) :
       leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:(1G << bitCount) - 1G}}
@@ -193,7 +193,7 @@ override method @prefixOperatorExpressionIR llvmInstructionCode
       error mOperatorLocation: "Internal Error" : minValue
     case enumeration (*) :
       error mOperatorLocation: "Internal Error" : minValue
-    case structure (* * *) :
+    case structure (* *) :
       error mOperatorLocation: "Internal Error" : minValue
     case integer (@bigint min * * *) :
       minValue = min
