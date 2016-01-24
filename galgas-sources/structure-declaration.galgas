@@ -370,8 +370,8 @@ override method @structureDeclaration semanticAnalysis
 proc declareLLVMstructureTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   for () in inTypeMap do
     if [kind isStructure] then
-      [kind structure ?name:let name ?propertyMap:* ?propertyList:let propertyList ?procedureMap:*]
-      ioLLVMcode += "%" + name + " = type {"
+      [kind structure ?name:* ?propertyMap:* ?propertyList:let propertyList ?procedureMap:*]
+      ioLLVMcode += llvmTypeName + " = type {"
       for () in propertyList
         do ioLLVMcode += [mType llvmTypeName]
         between ioLLVMcode += ", "
