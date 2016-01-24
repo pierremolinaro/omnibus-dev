@@ -253,8 +253,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : static GALGAS_typeKind constructor_literalString (LOCATION_ARGS) ;
 
   public : static GALGAS_typeKind constructor_structure (const class GALGAS_propertyMap & inOperand0,
-                                                         const class GALGAS_propertyList & inOperand1,
-                                                         const class GALGAS_procedureMap & inOperand2
+                                                         const class GALGAS_propertyList & inOperand1
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -279,7 +278,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyMap & outArgument0,
                                                    class GALGAS_propertyList & outArgument1,
-                                                   class GALGAS_procedureMap & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -336,12 +334,10 @@ class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues 
 class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
   public : const GALGAS_propertyMap mAssociatedValue0 ;
   public : const GALGAS_propertyList mAssociatedValue1 ;
-  public : const GALGAS_procedureMap mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyMap & inAssociatedValue0,
-                                                     const GALGAS_propertyList & inAssociatedValue1,
-                                                     const GALGAS_procedureMap & inAssociatedValue2
+                                                     const GALGAS_propertyList & inAssociatedValue1
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

@@ -135,17 +135,7 @@ override method @procCallInstructionAST analyze
     let @operandIR receiverVariable = [variableKind address]
     procCallEffectiveParameterListIR += !.outputInput !["" nowhere] !receiverVariable 
     procedureMangledName += [type key] + "."
-    @procedureMap procedureMap
-    switch [type kind]
-    case structure (* * procMap) : procedureMap = procMap
-    case enumeration (*) : procedureMap = {}
-    case integer (* * * *) : procedureMap = {}
-    case literalInteger : procedureMap = {}
-    case boolean : procedureMap = {}
-    case boolset : procedureMap = {}
-    case literalString : procedureMap = {}
-    end
-    [procedureMap searchKey
+    [[type procedureMap] searchKey
       !mProcName
       ?*
       ?procedureModeMap
