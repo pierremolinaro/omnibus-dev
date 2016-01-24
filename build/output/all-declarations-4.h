@@ -11,6 +11,18 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         Routine 'getNewTempObjectInMemory'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_getNewTempObjectInMemory (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                       class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                       class GALGAS_objectInMemoryIR & outArgument2,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Routine 'buildOrderedDeclarationList'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

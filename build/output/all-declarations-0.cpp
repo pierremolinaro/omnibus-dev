@@ -3726,7 +3726,8 @@ class cCollectionElement_extensionDeclarationListAST : public cCollectionElement
 //--- Constructor
   public : cCollectionElement_extensionDeclarationListAST (const GALGAS_lstring & in_mTypeName,
                                                            const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
-                                                           const GALGAS_structureFieldListAST & in_mFieldList
+                                                           const GALGAS_structureFieldListAST & in_mFieldList,
+                                                           const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST
                                                            COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -3746,10 +3747,11 @@ class cCollectionElement_extensionDeclarationListAST : public cCollectionElement
 
 cCollectionElement_extensionDeclarationListAST::cCollectionElement_extensionDeclarationListAST (const GALGAS_lstring & in_mTypeName,
                                                                                                 const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
-                                                                                                const GALGAS_structureFieldListAST & in_mFieldList
+                                                                                                const GALGAS_structureFieldListAST & in_mFieldList,
+                                                                                                const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST
                                                                                                 COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mTypeName, in_mProcedureDeclarationListAST, in_mFieldList) {
+mObject (in_mTypeName, in_mProcedureDeclarationListAST, in_mFieldList, in_mFunctionDeclarationListAST) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3762,7 +3764,7 @@ bool cCollectionElement_extensionDeclarationListAST::isValid (void) const {
 
 cCollectionElement * cCollectionElement_extensionDeclarationListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_extensionDeclarationListAST (mObject.mAttribute_mTypeName, mObject.mAttribute_mProcedureDeclarationListAST, mObject.mAttribute_mFieldList COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_extensionDeclarationListAST (mObject.mAttribute_mTypeName, mObject.mAttribute_mProcedureDeclarationListAST, mObject.mAttribute_mFieldList, mObject.mAttribute_mFunctionDeclarationListAST COMMA_HERE)) ;
   return result ;
 }
 
@@ -3781,6 +3783,10 @@ void cCollectionElement_extensionDeclarationListAST::description (C_String & ioS
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mFieldList" ":" ;
   mObject.mAttribute_mFieldList.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mFunctionDeclarationListAST" ":" ;
+  mObject.mAttribute_mFunctionDeclarationListAST.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3818,13 +3824,14 @@ GALGAS_extensionDeclarationListAST GALGAS_extensionDeclarationListAST::construct
 
 GALGAS_extensionDeclarationListAST GALGAS_extensionDeclarationListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                                   const GALGAS_procedureDeclarationListAST & inOperand1,
-                                                                                                  const GALGAS_structureFieldListAST & inOperand2
+                                                                                                  const GALGAS_structureFieldListAST & inOperand2,
+                                                                                                  const GALGAS_functionDeclarationListAST & inOperand3
                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_extensionDeclarationListAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_extensionDeclarationListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
+    GALGAS_extensionDeclarationListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -3835,12 +3842,14 @@ GALGAS_extensionDeclarationListAST GALGAS_extensionDeclarationListAST::construct
 void GALGAS_extensionDeclarationListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                     const GALGAS_lstring & in_mTypeName,
                                                                     const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
-                                                                    const GALGAS_structureFieldListAST & in_mFieldList
+                                                                    const GALGAS_structureFieldListAST & in_mFieldList,
+                                                                    const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST
                                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement_extensionDeclarationListAST * p = NULL ;
   macroMyNew (p, cCollectionElement_extensionDeclarationListAST (in_mTypeName,
                                                                  in_mProcedureDeclarationListAST,
-                                                                 in_mFieldList COMMA_THERE)) ;
+                                                                 in_mFieldList,
+                                                                 in_mFunctionDeclarationListAST COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -3849,11 +3858,12 @@ void GALGAS_extensionDeclarationListAST::makeAttributesFromObjects (capCollectio
 
 void GALGAS_extensionDeclarationListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                               const GALGAS_procedureDeclarationListAST & inOperand1,
-                                                              const GALGAS_structureFieldListAST & inOperand2
+                                                              const GALGAS_structureFieldListAST & inOperand2,
+                                                              const GALGAS_functionDeclarationListAST & inOperand3
                                                               COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extensionDeclarationListAST (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_extensionDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3866,12 +3876,13 @@ void GALGAS_extensionDeclarationListAST::addAssign_operation (const GALGAS_lstri
 void GALGAS_extensionDeclarationListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                                const GALGAS_procedureDeclarationListAST inOperand1,
                                                                const GALGAS_structureFieldListAST inOperand2,
+                                                               const GALGAS_functionDeclarationListAST inOperand3,
                                                                const GALGAS_uint inInsertionIndex,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extensionDeclarationListAST (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_extensionDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3884,6 +3895,7 @@ void GALGAS_extensionDeclarationListAST::setter_insertAtIndex (const GALGAS_lstr
 void GALGAS_extensionDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                                GALGAS_procedureDeclarationListAST & outOperand1,
                                                                GALGAS_structureFieldListAST & outOperand2,
+                                                               GALGAS_functionDeclarationListAST & outOperand3,
                                                                const GALGAS_uint inRemoveIndex,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) {
@@ -3895,11 +3907,13 @@ void GALGAS_extensionDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & 
       outOperand0.drop () ;
       outOperand1.drop () ;
       outOperand2.drop () ;
+      outOperand3.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
       outOperand0 = p->mObject.mAttribute_mTypeName ;
       outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
       outOperand2 = p->mObject.mAttribute_mFieldList ;
+      outOperand3 = p->mObject.mAttribute_mFunctionDeclarationListAST ;
     }
   }
 }
@@ -3909,6 +3923,7 @@ void GALGAS_extensionDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & 
 void GALGAS_extensionDeclarationListAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                                           GALGAS_procedureDeclarationListAST & outOperand1,
                                                           GALGAS_structureFieldListAST & outOperand2,
+                                                          GALGAS_functionDeclarationListAST & outOperand3,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -3918,11 +3933,13 @@ void GALGAS_extensionDeclarationListAST::setter_popFirst (GALGAS_lstring & outOp
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
+    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
     outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
     outOperand2 = p->mObject.mAttribute_mFieldList ;
+    outOperand3 = p->mObject.mAttribute_mFunctionDeclarationListAST ;
   }
 }
 
@@ -3931,6 +3948,7 @@ void GALGAS_extensionDeclarationListAST::setter_popFirst (GALGAS_lstring & outOp
 void GALGAS_extensionDeclarationListAST::setter_popLast (GALGAS_lstring & outOperand0,
                                                          GALGAS_procedureDeclarationListAST & outOperand1,
                                                          GALGAS_structureFieldListAST & outOperand2,
+                                                         GALGAS_functionDeclarationListAST & outOperand3,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -3940,11 +3958,13 @@ void GALGAS_extensionDeclarationListAST::setter_popLast (GALGAS_lstring & outOpe
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
+    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
     outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
     outOperand2 = p->mObject.mAttribute_mFieldList ;
+    outOperand3 = p->mObject.mAttribute_mFunctionDeclarationListAST ;
   }
 }
 
@@ -3953,6 +3973,7 @@ void GALGAS_extensionDeclarationListAST::setter_popLast (GALGAS_lstring & outOpe
 void GALGAS_extensionDeclarationListAST::method_first (GALGAS_lstring & outOperand0,
                                                        GALGAS_procedureDeclarationListAST & outOperand1,
                                                        GALGAS_structureFieldListAST & outOperand2,
+                                                       GALGAS_functionDeclarationListAST & outOperand3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -3962,11 +3983,13 @@ void GALGAS_extensionDeclarationListAST::method_first (GALGAS_lstring & outOpera
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
+    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
     outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
     outOperand2 = p->mObject.mAttribute_mFieldList ;
+    outOperand3 = p->mObject.mAttribute_mFunctionDeclarationListAST ;
   }
 }
 
@@ -3975,6 +3998,7 @@ void GALGAS_extensionDeclarationListAST::method_first (GALGAS_lstring & outOpera
 void GALGAS_extensionDeclarationListAST::method_last (GALGAS_lstring & outOperand0,
                                                       GALGAS_procedureDeclarationListAST & outOperand1,
                                                       GALGAS_structureFieldListAST & outOperand2,
+                                                      GALGAS_functionDeclarationListAST & outOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -3984,11 +4008,13 @@ void GALGAS_extensionDeclarationListAST::method_last (GALGAS_lstring & outOperan
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
+    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
     outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
     outOperand2 = p->mObject.mAttribute_mFieldList ;
+    outOperand3 = p->mObject.mAttribute_mFunctionDeclarationListAST ;
   }
 }
 
@@ -4088,6 +4114,21 @@ GALGAS_structureFieldListAST GALGAS_extensionDeclarationListAST::getter_mFieldLi
   return result ;
 }
 
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_functionDeclarationListAST GALGAS_extensionDeclarationListAST::getter_mFunctionDeclarationListASTAtIndex (const GALGAS_uint & inIndex,
+                                                                                                                 C_Compiler * inCompiler
+                                                                                                                 COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_extensionDeclarationListAST * p = (cCollectionElement_extensionDeclarationListAST *) attributes.ptr () ;
+  GALGAS_functionDeclarationListAST result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
+    result = p->mObject.mAttribute_mFunctionDeclarationListAST ;
+  }
+  return result ;
+}
+
 
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4129,6 +4170,14 @@ GALGAS_structureFieldListAST cEnumerator_extensionDeclarationListAST::current_mF
   const cCollectionElement_extensionDeclarationListAST * p = (const cCollectionElement_extensionDeclarationListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
   return p->mObject.mAttribute_mFieldList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_functionDeclarationListAST cEnumerator_extensionDeclarationListAST::current_mFunctionDeclarationListAST (LOCATION_ARGS) const {
+  const cCollectionElement_extensionDeclarationListAST * p = (const cCollectionElement_extensionDeclarationListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
+  return p->mObject.mAttribute_mFunctionDeclarationListAST ;
 }
 
 
@@ -7668,69 +7717,78 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_start_5F_symbol_i0_parse (C
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i1_ (GALGAS_ast & ioArgument_ioAST,
                                                                       C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_extension) COMMA_SOURCE_FILE ("extension-declaration.galgas", 20)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_extension) COMMA_SOURCE_FILE ("extension-declaration.galgas", 21)) ;
   GALGAS_lstring var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 21)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 22)) ;
-  GALGAS_procedureDeclarationListAST var_procedureDeclarationListAST = GALGAS_procedureDeclarationListAST::constructor_emptyList (SOURCE_FILE ("extension-declaration.galgas", 23)) ;
-  GALGAS_structureFieldListAST var_fieldList = GALGAS_structureFieldListAST::constructor_emptyList (SOURCE_FILE ("extension-declaration.galgas", 24)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 22)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 23)) ;
+  GALGAS_procedureDeclarationListAST var_procedureDeclarationListAST = GALGAS_procedureDeclarationListAST::constructor_emptyList (SOURCE_FILE ("extension-declaration.galgas", 24)) ;
+  GALGAS_structureFieldListAST var_fieldList = GALGAS_structureFieldListAST::constructor_emptyList (SOURCE_FILE ("extension-declaration.galgas", 25)) ;
+  GALGAS_functionDeclarationListAST var_functionDeclarationListAST = GALGAS_functionDeclarationListAST::constructor_emptyList (SOURCE_FILE ("extension-declaration.galgas", 26)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_1 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("extension-declaration.galgas", 27)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("extension-declaration.galgas", 29)) ;
       GALGAS_lstring var_fieldName = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("extension-declaration.galgas", 28)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("extension-declaration.galgas", 30)) ;
       GALGAS_lstring var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 29)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 30)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 31)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 32)) ;
       GALGAS_expressionAST var_initExpression ;
       nt_expression_ (var_initExpression, inCompiler) ;
-      var_fieldList.addAssign_operation (var_fieldName, var_typeName, var_initExpression  COMMA_SOURCE_FILE ("extension-declaration.galgas", 32)) ;
+      var_fieldList.addAssign_operation (var_fieldName, var_typeName, var_initExpression  COMMA_SOURCE_FILE ("extension-declaration.galgas", 34)) ;
     } break ;
     case 3: {
       nt_procedure_ (var_procedureDeclarationListAST, inCompiler) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 36)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("extension-declaration.galgas", 38)) ;
+      nt_function_5F_declaration_ (var_functionDeclarationListAST, inCompiler) ;
+    } break ;
+    case 5: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 41)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 38)) ;
-  ioArgument_ioAST.mAttribute_mExtensionDeclarationListAST.addAssign_operation (var_typeName, var_procedureDeclarationListAST, var_fieldList  COMMA_SOURCE_FILE ("extension-declaration.galgas", 39)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 43)) ;
+  ioArgument_ioAST.mAttribute_mExtensionDeclarationListAST.addAssign_operation (var_typeName, var_procedureDeclarationListAST, var_fieldList, var_functionDeclarationListAST  COMMA_SOURCE_FILE ("extension-declaration.galgas", 44)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i1_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_extension) COMMA_SOURCE_FILE ("extension-declaration.galgas", 20)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 21)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 22)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_extension) COMMA_SOURCE_FILE ("extension-declaration.galgas", 21)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 22)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 23)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_1 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("extension-declaration.galgas", 27)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("extension-declaration.galgas", 28)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 29)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 30)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("extension-declaration.galgas", 29)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("extension-declaration.galgas", 30)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 31)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 32)) ;
       nt_expression_parse (inCompiler) ;
     } break ;
     case 3: {
       nt_procedure_parse (inCompiler) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 36)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("extension-declaration.galgas", 38)) ;
+      nt_function_5F_declaration_parse (inCompiler) ;
+    } break ;
+    case 5: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 41)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 38)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 43)) ;
   inCompiler->resetTemplateString () ;
 }
 

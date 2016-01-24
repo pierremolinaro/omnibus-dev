@@ -86,17 +86,17 @@ override method @structureDeclaration addExtension
   @structureDeclaration newDeclaration = self
   let currentExtensionDeclarationListAST = ioExtensionDeclarationListAST
   ioExtensionDeclarationListAST = {}
-  for (typeName proceduresDefinedInExtension fieldList) in currentExtensionDeclarationListAST do
+  for (typeName procedures fieldList functions) in currentExtensionDeclarationListAST do
     if mStructureName.string == typeName.string then
       newDeclaration = .new {
         ![newDeclaration mStructureName]
         ![newDeclaration mAttributeList]
         ![newDeclaration mStructureFieldListAST] + fieldList
-        ![newDeclaration mProcedureDeclarationListAST] + proceduresDefinedInExtension
-        ![newDeclaration mFunctionDeclarationListAST]
+        ![newDeclaration mProcedureDeclarationListAST] + procedures
+        ![newDeclaration mFunctionDeclarationListAST] + functions
       }
     else
-      ioExtensionDeclarationListAST += !typeName !proceduresDefinedInExtension !fieldList
+      ioExtensionDeclarationListAST += !typeName !procedures !fieldList !functions
     end
   end
   outNewDeclaration = newDeclaration
