@@ -39,7 +39,13 @@ struct $point3D {
 }
 \end{PLM}
 
-\section{Procédure de structure}
+
+
+
+
+
+
+\section{Procédures}
 
 Il existe deux sortes de procédure de structure :
 \begin{itemize}
@@ -126,7 +132,55 @@ proc `user newPoint (!p $point) {
 
 
 
+\section{Fonctions}
 
+Une fonction de structure est constante, c'est-à-dire qu'elle ne peut pas modifier l'objet sur lequel elle s'applique.
+
+Dans la version actuelle, les variables globales sont aussi inaccessibles.
+
+Voici un exemple de fonction de structure :
+
+\begin{PLM}
+struct $point {
+  var x $int32 = 0
+  var y $int32 = 0
+  
+  func `user getX (?x $int32) -> $int32 {
+    result = self.x + x
+  }
+}
+\end{PLM}
+
+Comme pour les procédures de structures, l'usage de \plm!self! est obligatoire pour accéder aux champs. La variable \plm!result! est implicitement déclarée du type renvoyé par la fonction (ici \plm!$int32!).
+
+
+
+
+
+
+
+
+
+
+\section{Extensions}
+
+Pour tout type de structure, un nombre quelconque d'extensions peut être défini. Une extension déclare champs, procédures et fonctions.
+
+Voici un exemple d'extension qui déclare un champ, une fonction et une procédure.
+
+\begin{PLM}
+extension $point {
+  var z $int32 = 0
+  
+  func `user getZ () -> $int32 {
+    result = self.z
+  }
+  
+  mutating proc `user setZ (?z $int32) {
+    self.z = z
+  }
+}
+\end{PLM}
 
 
 

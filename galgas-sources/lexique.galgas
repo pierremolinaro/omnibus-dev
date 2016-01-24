@@ -1,7 +1,6 @@
 lexique plm_lexique {
 
 @string tokenString
-@bigint bigInteger
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   Identifiers and keywords                                                                                           *
@@ -149,43 +148,47 @@ rule '`' {
 #   Literal integers                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#! Hex integers
+#! Literal integers
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-rule "0x" {
+style integerStyle -> "Integer Constants"
+@bigint bigInteger
+$integer$ !bigInteger style integerStyle error message "a literal integer"
+
+message internalError : "internal error"
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+rule "0b" {
   repeat
-  while '0'->'9' :
-    enterCharacterIntoString (!?tokenString !* )
-  while 'a'->'f' :
-    enterCharacterIntoString (!?tokenString !* )
-  while 'A'->'F' :
-    enterCharacterIntoString (!?tokenString !* )
+  while '0'->'1' :
+    enterBinaryDigitIntoBigInt (!* !?bigInteger error internalError)
   while '_' :
   end
-  convertHexStringIntoBigInt (!tokenString !?bigInteger error internalError )
   send $integer$
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#! Literal decimal integers
+rule "0x" {
+  repeat
+  while '0'->'9' | 'a'->'f' | 'A'->'F' :
+    enterHexDigitIntoBigInt (!* !?bigInteger error internalError)
+  while '_' :
+  end
+  send $integer$
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-style integerStyle -> "Integer Constants"
-$integer$ !bigInteger style integerStyle error message "a literal integer"
-
-message internalError : "internal error"
-
 rule '0'->'9' {
-  enterCharacterIntoString (!?tokenString !*)
+  enterDecimalDigitIntoBigInt (!* !?bigInteger error internalError)
   repeat
   while '0'->'9' :
-    enterCharacterIntoString (!?tokenString !*)
+    enterDecimalDigitIntoBigInt (!* !?bigInteger error internalError)
   while '_' :
   end
-  convertDecimalStringIntoBigInt (!tokenString !?bigInteger error internalError)
   send $integer$
 }
 

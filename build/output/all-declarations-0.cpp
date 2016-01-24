@@ -692,6 +692,13 @@ static const utf32 kUnicodeString_plm_5F_lexique__2F__3D_ [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$_30_b$'
+static const utf32 kUnicodeString_plm_5F_lexique__30_b [] = {
+  TO_UNICODE ('0'),
+  TO_UNICODE ('b'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$_30_x$'
 static const utf32 kUnicodeString_plm_5F_lexique__30_x [] = {
   TO_UNICODE ('0'),
@@ -2054,35 +2061,41 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
         }
         token.mTokenCode = kToken_modeName ;
         enterToken (token) ;
-      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__30_x, 2, true)) {
+      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__30_b, 2, true)) {
         do {
-          if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
-            ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-          }else if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f'))) {
-            ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-          }else if (testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
-            ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
+          if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('1'))) {
+            ::scanner_routine_enterBinaryDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_internalError) ;
           }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
           }else{
             mLoop = false ;
           }
         }while (mLoop) ;
         mLoop = true ;
-        ::scanner_routine_convertHexStringIntoBigInt (*this, token.mLexicalAttribute_tokenString, token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_internalError) ;
+        token.mTokenCode = kToken_integer ;
+        enterToken (token) ;
+      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__30_x, 2, true)) {
+        do {
+          if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
+            ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_internalError) ;
+          }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
+          }else{
+            mLoop = false ;
+          }
+        }while (mLoop) ;
+        mLoop = true ;
         token.mTokenCode = kToken_integer ;
         enterToken (token) ;
       }else if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
-        ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
+        ::scanner_routine_enterDecimalDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_internalError) ;
         do {
           if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
-            ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
+            ::scanner_routine_enterDecimalDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_internalError) ;
           }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
           }else{
             mLoop = false ;
           }
         }while (mLoop) ;
         mLoop = true ;
-        ::scanner_routine_convertDecimalStringIntoBigInt (*this, token.mLexicalAttribute_tokenString, token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_internalError) ;
         token.mTokenCode = kToken_integer ;
         enterToken (token) ;
       }else if (testForInputUTF32Char (TO_UNICODE ('\"'))) {
