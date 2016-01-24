@@ -122,6 +122,7 @@ override method @integerDeclaration enterInContext
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
     !typedConstantMap:{}
     !procedureMap:{}
+    !functionMap:{}
     !copiable:true
     !equatable:true
     !comparable:true

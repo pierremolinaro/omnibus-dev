@@ -57,6 +57,7 @@ override method @literalStringDeclaration enterInContext
     !kind:.literalString
     !typedConstantMap:{}
     !procedureMap:{}
+    !functionMap:{}
     !copiable:true
     !equatable:true
     !comparable:true

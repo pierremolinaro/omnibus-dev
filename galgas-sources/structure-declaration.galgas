@@ -7,6 +7,7 @@ class @structureDeclaration : @abstractDeclaration {
   @lstringlist mAttributeList
   @structureFieldListAST mStructureFieldListAST
   @procedureDeclarationListAST mProcedureDeclarationListAST
+  @functionDeclarationListAST mFunctionDeclarationListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -35,14 +36,15 @@ syntax extension common_syntax {
     $struct$
     $typeName$ ?let structureName
     @lstringlist attributeList = {}
-    @procedureDeclarationListAST procedureDeclarationListAST = {}
     repeat
     while
       $attribute$ ?let attribute
       attributeList += !attribute
     end 
     ${$
+    @procedureDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
+    @functionDeclarationListAST functionDeclarationListAST = {}
     repeat
     while
       $var$
@@ -52,8 +54,10 @@ syntax extension common_syntax {
       <expression> ?let initExpression
       fieldList += !fieldName !typeName !initExpression
     while
-      <procedure>
-        !?procedureDeclarationListAST
+      <procedure> !?procedureDeclarationListAST
+    while
+      $func$
+      <function_declaration> !?functionDeclarationListAST
     while
       $;$
     end
@@ -63,6 +67,7 @@ syntax extension common_syntax {
       !attributeList
       !fieldList
       !procedureDeclarationListAST
+      !functionDeclarationListAST
     }
   }
 
@@ -88,6 +93,7 @@ override method @structureDeclaration addExtension
         ![newDeclaration mAttributeList]
         ![newDeclaration mStructureFieldListAST] + fieldList
         ![newDeclaration mProcedureDeclarationListAST] + proceduresDefinedInExtension
+        ![newDeclaration mFunctionDeclarationListAST]
       }
     else
       ioExtensionDeclarationListAST += !typeName !proceduresDefinedInExtension !fieldList
@@ -119,21 +125,6 @@ override getter @structureDeclaration keyRepresentation -> @string outRepresenta
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @procedureDeclarationListAST-element getMangledName -> @string outMangledName {
-  outMangledName = mProcedureName.string
-  for (formalArgument selector * *) in mProcFormalArgumentList do
-    outMangledName += " "
-    switch formalArgument
-    case input : outMangledName += "?"
-    case output : outMangledName += "!"
-    case inputOutput : outMangledName += "?!"
-    end
-    outMangledName += selector.string
-  end
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @propertyList {
@@ -199,6 +190,29 @@ override method @structureDeclaration enterInContext
       !false # not weak
     ]
   end
+#--- Functions
+  @functionMap functionMap = {}
+  for function in mFunctionDeclarationListAST do
+    @funcSignature signature = {}
+    for (selector formalArgumentTypeName *) in function.mFuncFormalArgumentList do
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+      signature += !selector !typeProxy
+    end
+  #--- Mode map
+    @modeMap functionModeMap = {}
+    for () in function.mFunctionModeList do
+      [!?functionModeMap insertKey !mValue] ;
+    end
+  #--- Result type
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !function.mResultTypeName ?let resultType]
+  #--- Enter in context
+    [!?functionMap insertKey
+      !function.mFunctionName
+      !functionModeMap
+      !signature
+      !resultType
+    ]
+  end
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
@@ -206,6 +220,7 @@ override method @structureDeclaration enterInContext
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !typedConstantMap:{}
     !procedureMap:procedureMap
+    !functionMap:functionMap
     !copiable:copiable
     !equatable:false
     !comparable:false
@@ -350,15 +365,129 @@ override method @structureDeclaration semanticAnalysis
       !?generatedCode:instructionGenerationList
     ]
     [variableMap checkAutomatonStates !procedure.mEndOfProcLocation]
+  #--- Check attributes
+    @bool warnIfUnused = true
+    for (attribute) in procedure.mProcedureAttributeList do
+      if attribute.string == noWarningIfUnusedAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicated attribute"
+        end
+        warnIfUnused = false
+      else
+        error attribute : "unknown attribute"
+      end
+    end
   #--- Enter in map
     [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
       !.new {!mStructureName.string + "." + procedure.mProcedureName !procedure.mProcedureName.location}
       !formalArguments
       !instructionGenerationList
       !false # [ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
-      !false # warnIfUnused
+      !warnIfUnused
       !false
       !false
+    ]  
+  end
+#--- Analyze functions
+  for function in mFunctionDeclarationListAST do
+  #--- Check modes
+    @stringset functionModeSet = {}
+    for mode in function.mFunctionModeList do
+      [inContext.mModeMap searchKey !mode.mValue]
+      functionModeSet += !mode.mValue.string
+    end
+  #--- Check attributes
+    @bool warnIfUnused = true
+    for (attribute) in function.mFunctionAttributeList do
+      if attribute.string == noWarningIfUnusedAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicated attribute"
+        end
+        warnIfUnused = false
+      else
+        error attribute : "unknown attribute"
+      end
+    end
+  #--- Variable map
+    @variableMap variableMap = initialVariableMap (
+      !routineMangledName:mangledNameForFunction (!name:function.mFunctionName.string)
+      !context:inContext
+      !globalsAreConstant:true
+    )
+  #--- Add "self" variable to variable map
+    [!?variableMap insertUsedLocalConstant
+      !.new {!"self" !.here}
+      !structureType
+      !true # mReadAccessAllowed
+      !.localValue {!type:structureType !name:"self"}
+      !true # copiable
+      !{} # fieldMap
+      !false # mCanBeUsedAsInputParameter
+      !true # mIsConstant
+    ]
+  #--- Add 'result" variable
+    let resultVarName = @lstring.new {!"result" !function.mResultTypeName.location}
+    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !function.mResultTypeName}
+    [!?variableMap insertOutputFormalArgument
+      !resultVarName
+      !resultType
+      !true
+      !.localValue {!type:resultType !name:resultVarName.string}
+      !true
+      !{}
+      !true
+      !false # Is not constant
+    ]
+  #--- Analyse formal arguments
+    @procFormalArgumentListForGeneration formalArguments = {}
+    formalArguments += !.inputOutput !structureType !mangledNameForLocalVariable (!"self")
+    for (* formalArgumentTypeName formalArgumentName) in function.mFuncFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
+      [!?variableMap insertConstantInputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !true
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
+        ![typeProxy copiable]
+        !{}
+        !false
+        !true # Is constant
+      ]
+      formalArguments += !.input !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+    end
+  #---
+    let routineNameForInvocationGraph = @lstring.new{
+      !"func " + mStructureName + "." + function.mFunctionName.string
+      !function.mFunctionName.location
+    }
+    if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+      [!?ioTemporaries.mSubprogramInvocationGraph addNode
+        !routineNameForInvocationGraph
+        !routineNameForInvocationGraph
+      ]
+    end
+  #--- Analyze instruction list
+    @instructionListIR instructionGenerationList = {}
+    [function.mInstructionList analyzeRoutineInstructionList
+      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !context:inContext
+      !modes:functionModeSet
+      !allowException:not [functionModeSet hasKey !panicModeName ()]
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?variableMap:variableMap
+      !?generatedCode:instructionGenerationList
+    ]
+  #---
+    [variableMap checkAutomatonStates !function.mEndOfFuncLocation]
+  #--- Code generation
+    [!?ioIntermediateCodeStruct.mFunctionMapIR insertKey
+      !.new {!mStructureName.string + "." + function.mFunctionName !function.mFunctionName.location}
+      !formalArguments
+      !instructionGenerationList
+      !resultType
+      !resultVarName.string
+      !warnIfUnused
     ]  
   end
 }

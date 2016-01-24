@@ -118,6 +118,7 @@ override method @enumerationDeclaration enterInContext
     !kind:.enumeration {!constantMap:enumConstantMap}
     !typedConstantMap:constructorMap
     !procedureMap:{} # Procedure map
+    !functionMap:{}
     !copiable:copiable
     !equatable:true
     !comparable:true

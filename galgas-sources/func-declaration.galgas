@@ -30,6 +30,12 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $func$
+    <function_declaration> !?ioAST.mFunctionListAST
+  }
+  
+  #·····················································································································
+
+  rule <function_declaration> ?!@functionDeclarationListAST ioFunctionDeclarationListAST {
     $identifier$ ?let funcName
     @lstringlist funcModeList = {}
     repeat
@@ -62,7 +68,7 @@ syntax extension common_syntax {
     @labelMap labelMap = {}
     <instructionList> ?let instructionList !?labelMap
     $}$
-    ioAST.mFunctionListAST +=
+    ioFunctionDeclarationListAST +=
       !funcName
       !funcModeList
       !funcAttributeList
@@ -139,13 +145,6 @@ method @functionDeclarationListAST-element enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @funcFormalArgumentListForGeneration {
-  @unifiedTypeMap-proxy mFormalArgumentType
-  @string mFormalArgumentName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @functionDeclarationListAST-element functionSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -189,7 +188,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !false # Is not constant
   ]
 #--- Analyse formal arguments
-  @funcFormalArgumentListForGeneration formalArguments = {}
+  @procFormalArgumentListForGeneration formalArguments = {}
   for (* formalArgumentTypeName formalArgumentName) in mFuncFormalArgumentList do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
     [!?variableMap insertConstantInputFormalArgument
@@ -202,10 +201,10 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       !false
       !true # Is constant
     ]
-    formalArguments += !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+    formalArguments += !.input !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
   end
 #---
-  let routineNameForInvocationGraph = @lstring.new{!mangledNameForFunction (!name:mFunctionName.string) !mFunctionName.location}
+  let routineNameForInvocationGraph = @lstring.new{!"func " + mFunctionName !mFunctionName.location}
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph
@@ -241,11 +240,6 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#  @funcFormalArgumentListForGeneration mFormalArgumentListForGeneration
-#  @instructionListIR mInstructionGenerationList
-#  @unifiedTypeMap-proxy mResultType
-#  @string mResultVarName
-
 method @functionMapIR-element implementationCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
@@ -257,7 +251,14 @@ method @functionMapIR-element implementationCodeGeneration
   ioLLVMcode += " @" + mangledNameForFunction (!name:lkey.string) + " ("
   for () in mFormalArgumentListForGeneration
   do
-    ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    end
   between
     ioLLVMcode += ", "
   end
@@ -267,11 +268,14 @@ method @functionMapIR-element implementationCodeGeneration
   ioLLVMcode += "  " + resultMangledName + " = alloca " + [mResultType llvmTypeName] + "\n"
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do
-    let llvmType = [mFormalArgumentType llvmTypeName]
-    ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
-    ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmTypeName]
+      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+    case output, inputOutput :
+    end
   end
- 
 #--- Instruction list
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
 #--- Epilog
