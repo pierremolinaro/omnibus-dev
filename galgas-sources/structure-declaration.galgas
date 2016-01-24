@@ -203,7 +203,7 @@ override method @structureDeclaration enterInContext
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
     !llvmTypeName:"%struct." + mStructureName.string
-    !kind:.structure {!name:"struct." + mStructureName.string !propertyMap:propertyMap !propertyList:propertyList !procedureMap:procedureMap}
+    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList !procedureMap:procedureMap}
     !typedConstantMap:{}
     !procedureMap:procedureMap
     !copiable:copiable
@@ -273,7 +273,7 @@ override method @structureDeclaration semanticAnalysis
   let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
   @propertyMap propertyMap
   switch [structureType kind]
-  case structure (* propMap * *) : propertyMap = propMap
+  case structure (propMap * *) : propertyMap = propMap
   case enumeration (*) : propertyMap = {}
   case integer (* * * *) : propertyMap = {}
   case literalInteger : propertyMap = {}
@@ -370,7 +370,7 @@ override method @structureDeclaration semanticAnalysis
 proc declareLLVMstructureTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   for () in inTypeMap do
     if [kind isStructure] then
-      [kind structure ?name:* ?propertyMap:* ?propertyList:let propertyList ?procedureMap:*]
+      [kind structure ?propertyMap:* ?propertyList:let propertyList ?procedureMap:*]
       ioLLVMcode += llvmTypeName + " = type {"
       for () in propertyList
         do ioLLVMcode += [mType llvmTypeName]

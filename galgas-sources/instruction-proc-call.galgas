@@ -137,7 +137,7 @@ override method @procCallInstructionAST analyze
     procedureMangledName += [type key] + "."
     @procedureMap procedureMap
     switch [type kind]
-    case structure (* * * procMap) : procedureMap = procMap
+    case structure (* * procMap) : procedureMap = procMap
     case enumeration (*) : procedureMap = {}
     case integer (* * * *) : procedureMap = {}
     case literalInteger : procedureMap = {}
