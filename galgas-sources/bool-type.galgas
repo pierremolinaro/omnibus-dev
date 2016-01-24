@@ -62,6 +62,7 @@ override method @booleanDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mBooleanTypeName
+    !llvmTypeName:"i1"
     !kind:.boolean
     !typedConstantMap:{}
     !procedureMap:{} # Procedure map

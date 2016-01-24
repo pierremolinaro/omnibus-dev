@@ -202,6 +202,7 @@ override method @structureDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
+    !llvmTypeName:"%struct." + mStructureName.string
     !kind:.structure {!name:"struct." + mStructureName.string !propertyMap:propertyMap !propertyList:propertyList !procedureMap:procedureMap}
     !typedConstantMap:{}
     !procedureMap:procedureMap

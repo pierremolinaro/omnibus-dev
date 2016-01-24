@@ -130,6 +130,7 @@ proc checkMode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sharedmap @unifiedTypeMap %selectors {
+  @string llvmTypeName # For Example: i23, %struct.toto
   @typeKind kind
   @typedConstantMap typedConstantMap
   @procedureMap procedureMap
@@ -144,17 +145,17 @@ sharedmap @unifiedTypeMap %selectors {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMap-proxy llvmTypeName -> @string outResult {
-  switch [self  kind]
-  case boolean : outResult = "i1"
-  case boolset : outResult = "<<boolset>>"
-  case enumeration (@enumConstantMap constantMap) : outResult = "i" + [[constantMap count] - 1 significantBitCount]
-  case structure (@string name @propertyMap unused propertyMap * *) :  outResult = "%" + name
-  case integer (* * @bool unused unsigned @uint bitCount) : outResult = "i" + bitCount
-  case literalString :  outResult = "i8*"
-  case literalInteger : outResult = "<<literalInteger>>"
-  end
-}
+#getter @unifiedTypeMap-proxy llvmTypeName -> @string outResult {
+#  switch [self  kind]
+#  case boolean : outResult = "i1"
+#  case boolset : outResult = "<<boolset>>"
+#  case enumeration (@enumConstantMap constantMap) : outResult = "i" + [[constantMap count] - 1 significantBitCount]
+#  case structure (@string name @propertyMap unused propertyMap * *) :  outResult = "%" + name
+#  case integer (* * @bool unused unsigned @uint bitCount) : outResult = "i" + bitCount
+#  case literalString :  outResult = "i8*"
+#  case literalInteger : outResult = "<<literalInteger>>"
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

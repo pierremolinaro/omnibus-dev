@@ -114,6 +114,7 @@ override method @enumerationDeclaration enterInContext
   end
   [!?ioContext.mTypeMap insertKey
     !lkey:mEnumerationName
+    !llvmTypeName:"i" + [[enumConstantMap count] - 1 significantBitCount]
     !kind:.enumeration {!constantMap:enumConstantMap}
     !typedConstantMap:constructorMap
     !procedureMap:{} # Procedure map
