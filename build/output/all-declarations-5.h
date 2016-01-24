@@ -143,7 +143,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_functionCallIR constructor_new (const class GALGAS_operandIR & inOperand0,
                                                          const class GALGAS_string & inOperand1,
-                                                         const class GALGAS_operandIRlist & inOperand2
+                                                         const class GALGAS_operandIRList & inOperand2
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -155,7 +155,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIRlist getter_mArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIRList getter_mArgumentList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mFunctionName (LOCATION_ARGS) const ;
 
@@ -182,12 +182,12 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_operandIR mAttribute_mResult ;
   public : GALGAS_string mAttribute_mFunctionName ;
-  public : GALGAS_operandIRlist mAttribute_mArgumentList ;
+  public : GALGAS_operandIRList mAttribute_mArgumentList ;
 
 //--- Constructor
   public : cPtr_functionCallIR (const GALGAS_operandIR & in_mResult,
                                 const GALGAS_string & in_mFunctionName,
-                                const GALGAS_operandIRlist & in_mArgumentList
+                                const GALGAS_operandIRList & in_mArgumentList
                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -196,7 +196,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mFunctionName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIRlist getter_mArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIRList getter_mArgumentList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

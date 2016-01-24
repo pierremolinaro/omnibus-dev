@@ -98,6 +98,10 @@ private proc compileProject
     newDeclarationList += !newDeclaration
   end
   ast.mDeclarationList = newDeclarationList
+#--- Raise an error for every unhandled extension
+  for (typeName * *) in extensionDeclarationListAST do
+    error typeName : "this type is not defined or does not support extension"
+  end
 #--- Ordered declaration list
   buildOrderedDeclarationList (
     !ast:ast
@@ -132,6 +136,7 @@ private proc compileProject
           !eof:inEndOfSourceFile
           !intermediateCode:intermediateCodeStruct
           !typeMap:semanticContext.mTypeMap
+#          !typeInitialierMap:semanticContext.mTypeInitializerMap
           !target:inTargetName
           !exceptionCodeType:semanticContext.mExceptionCodeType
           !exceptionLineType:semanticContext.mExceptionLineType

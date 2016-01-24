@@ -80,7 +80,7 @@ override method @functionCallInExpressionAST analyzeExpression
     !.new {!mangledNameForFunction (!name:mFunctionVarName.string) !mFunctionVarName.location}
   ]
 #---
-  @operandIRlist argumentList = {}
+  @operandIRList argumentList = {}
   var s = mangledNameForFunction (!name:mFunctionVarName.string) + " ("
   if [formalParameterList length] != [mParameterList length] then
     error mFunctionVarName : "this function declares " + [formalParameterList length] 
@@ -141,7 +141,7 @@ override method @functionCallInExpressionAST analyzeExpression
 class @functionCallIR : @abstractInstructionIR {
   @operandIR mResult
   @string mFunctionName
-  @operandIRlist mArgumentList
+  @operandIRList mArgumentList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

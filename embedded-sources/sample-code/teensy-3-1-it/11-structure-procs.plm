@@ -18,6 +18,7 @@ struct $MyStruct {
 }
 
 extension $MyStruct {
+  var z $uint8 = 14
   mutating proc reset `user () {
     azert (?self)
   }

@@ -81,16 +81,16 @@ override method @structureDeclaration addExtension
   @structureDeclaration newDeclaration = self
   let currentExtensionDeclarationListAST = ioExtensionDeclarationListAST
   ioExtensionDeclarationListAST = {}
-  for (typeName proceduresDefinedInExtension) in currentExtensionDeclarationListAST do
+  for (typeName proceduresDefinedInExtension fieldList) in currentExtensionDeclarationListAST do
     if mStructureName.string == typeName.string then
       newDeclaration = .new {
         ![newDeclaration mStructureName]
         ![newDeclaration mAttributeList]
-        ![newDeclaration mStructureFieldListAST]
+        ![newDeclaration mStructureFieldListAST] + fieldList
         ![newDeclaration mProcedureDeclarationListAST] + proceduresDefinedInExtension
       }
     else
-      ioExtensionDeclarationListAST += !typeName !proceduresDefinedInExtension
+      ioExtensionDeclarationListAST += !typeName !proceduresDefinedInExtension !fieldList
     end
   end
   outNewDeclaration = newDeclaration
@@ -202,7 +202,7 @@ override method @structureDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
-    !kind:.structure {!name:mStructureName.string !propertyMap:propertyMap !propertyList:propertyList !procedureMap:procedureMap}
+    !kind:.structure {!name:"struct." + mStructureName.string !propertyMap:propertyMap !propertyList:propertyList !procedureMap:procedureMap}
     !typedConstantMap:{}
     !procedureMap:procedureMap
     !copiable:copiable
@@ -254,6 +254,10 @@ override method @structureDeclaration initAnalysis
     operandIRList += !.new {!type !expressionIR.mValue}
   end
   [!?ioContext.mConstructorMap insertKey !mStructureName !operandIRList]
+#--- Add to type initializer map
+#  @initializerMap initializerMap = {}
+#  [!?initializerMap insertKey !["" nowhere] !operandIRList] # Implicit initializer
+#  [!?ioContext.mTypeInitializerMap insertKey !mStructureName !"struct." + mStructureName !initializerMap]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -362,7 +366,7 @@ override method @structureDeclaration semanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
+proc declareLLVMstructureTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   for () in inTypeMap do
     if [kind isStructure] then
       [kind structure ?name:let name ?propertyMap:* ?propertyList:let propertyList ?procedureMap:*]
@@ -371,10 +375,29 @@ proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
         do ioLLVMcode += [mType llvmTypeName]
         between ioLLVMcode += ", "
       end
-      ioLLVMcode += "}\n"
+      ioLLVMcode += "}\n\n"
     end
   end
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#proc declareLLVMstructureInitRoutines ?let @typeInitializerMap inTypeInitializerMap ?!@string ioLLVMcode {
+#  for (* llvmTypeName initializerMap) in inTypeInitializerMap do
+#    for (initializerName propertyList) in initializerMap do
+#      ioLLVMcode += "define internal %" + llvmTypeName + " @" + llvmTypeName + "." + initializerName + " () nounwind {\n"
+#      var s = "undef"
+#      for () in propertyList do (idx)
+#        let target = "%result." + idx
+#        ioLLVMcode += "  " + target + " = insertvalue %" + llvmTypeName + " " + s
+#        ioLLVMcode += ", " + [mOperand.mType llvmTypeName] + " " + [mOperand.mValue llvmName] + ", " + idx + "\n"
+#        s = target
+#      end
+#      ioLLVMcode += "  ret %" + llvmTypeName + " " + s + "\n"
+#      ioLLVMcode += "}\n\n"
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

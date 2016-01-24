@@ -100,6 +100,7 @@ proc codeGeneration
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?typeMap:let @unifiedTypeMap inTypeMap
+#  ?typeInitialierMap:let @typeInitializerMap inTypeInitializerMap
   ?target:let @lstring inTargetName
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
@@ -123,6 +124,7 @@ proc codeGeneration
     !eof:inEndOfSourceFileLocation
     !intermediateCode:inIntermediateCodeStruct
     !typeMap:inTypeMap
+#    !typeInitialierMap:inTypeInitializerMap
     !target:inTargetName
     !exceptionCodeType:inExceptionCodeType
     !exceptionLineType:inExceptionLineType
@@ -145,6 +147,7 @@ proc generateLLVMfile
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?typeMap:let @unifiedTypeMap inTypeMap
+#  ?typeInitialierMap:let @typeInitializerMap inTypeInitializerMap
   ?target:let @lstring inTargetName
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
@@ -173,11 +176,13 @@ proc generateLLVMfile
      !from:inTargetName.string + "/target.ll"
   )
   llvmCode += "\n"
-#----------------------------------------- Structure types
+#----------------------------------------- Structure types declaration
   llvmCode += llvmTitleComment (!"Structure types")
-  declareLLVMstructures (!inTypeMap !?llvmCode)
-  llvmCode += "\n"
-#----------------------------------------- Global constants
+  declareLLVMstructureTypes (!inTypeMap !?llvmCode)
+#----------------------------------------- Structure type initialization
+#  llvmCode += llvmTitleComment (!"Structure initializations")
+#  declareLLVMstructureInitRoutines (!inTypeInitializerMap !?llvmCode)
+##----------------------------------------- Global constants
   for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap
     before llvmCode += llvmTitleComment (!"Global constants")
     do [globalConstant generateLLVM !?llvmCode]

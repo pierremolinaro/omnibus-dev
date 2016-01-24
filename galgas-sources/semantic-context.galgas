@@ -112,6 +112,23 @@ proc checkMode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+#map @initializerMap {
+#  @operandIRList mInitialValueList
+#  insert insertKey error message "the '%K' initializer is already declared in %L"
+#  search searchKey error message "there is no '%K' initializer"
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#map @typeInitializerMap {
+#  @string mLLVMTypeName
+#  @initializerMap mInitializerMap
+#  insert insertKey error message "the '$%K' type is already declared in %L"
+#  search searchKey error message "there is no '$%K' type"
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 sharedmap @unifiedTypeMap %selectors {
   @typeKind kind
   @typedConstantMap typedConstantMap
@@ -176,6 +193,7 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mExceptionCodeType
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
+#  @typeInitializerMap mTypeInitializerMap
   @procedureMap mProcedureMap
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
