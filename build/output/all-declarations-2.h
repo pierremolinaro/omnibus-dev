@@ -1462,13 +1462,14 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_typeKind constinArgument1,
-                                                   class GALGAS_typedConstantMap constinArgument2,
-                                                   class GALGAS_procedureMap constinArgument3,
-                                                   class GALGAS_bool constinArgument4,
+                                                   class GALGAS_string constinArgument1,
+                                                   class GALGAS_typeKind constinArgument2,
+                                                   class GALGAS_typedConstantMap constinArgument3,
+                                                   class GALGAS_procedureMap constinArgument4,
                                                    class GALGAS_bool constinArgument5,
                                                    class GALGAS_bool constinArgument6,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
+                                                   class GALGAS_bool constinArgument7,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument8,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -1497,6 +1498,11 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setLlvmTypeNameForKey (class GALGAS_string constinArgument0,
+                                                               class GALGAS_string constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
   public : VIRTUAL_IN_DEBUG void setter_setProcedureMapForKey (class GALGAS_procedureMap constinArgument0,
                                                                class GALGAS_string constinArgument1,
                                                                C_Compiler * inCompiler
@@ -1510,13 +1516,14 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_typeKind & outArgument1,
-                                                   class GALGAS_typedConstantMap & outArgument2,
-                                                   class GALGAS_procedureMap & outArgument3,
-                                                   class GALGAS_bool & outArgument4,
+                                                   class GALGAS_string & outArgument1,
+                                                   class GALGAS_typeKind & outArgument2,
+                                                   class GALGAS_typedConstantMap & outArgument3,
+                                                   class GALGAS_procedureMap & outArgument4,
                                                    class GALGAS_bool & outArgument5,
                                                    class GALGAS_bool & outArgument6,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument7,
+                                                   class GALGAS_bool & outArgument7,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument8,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -1542,6 +1549,10 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
   public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_kindForKey (const class GALGAS_string & constinOperand0,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_llvmTypeNameForKey (const class GALGAS_string & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMap getter_procedureMapForKey (const class GALGAS_string & constinOperand0,
                                                                                  C_Compiler * inCompiler
@@ -1574,6 +1585,7 @@ class cEnumerator_unifiedTypeMap : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_string current_llvmTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_typeKind current_kind (LOCATION_ARGS) const ;
   public : class GALGAS_typedConstantMap current_typedConstantMap (LOCATION_ARGS) const ;
   public : class GALGAS_procedureMap current_procedureMap (LOCATION_ARGS) const ;
@@ -1595,6 +1607,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMap ;
 
 class cMapElement_unifiedTypeMap : public cMapElement {
 //--- Map attributes
+  public : GALGAS_string mAttribute_llvmTypeName ;
   public : GALGAS_typeKind mAttribute_kind ;
   public : GALGAS_typedConstantMap mAttribute_typedConstantMap ;
   public : GALGAS_procedureMap mAttribute_procedureMap ;
@@ -1605,6 +1618,7 @@ class cMapElement_unifiedTypeMap : public cMapElement {
 
 //--- Constructor
   public : cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
+                                       const GALGAS_string & in_llvmTypeName,
                                        const GALGAS_typeKind & in_kind,
                                        const GALGAS_typedConstantMap & in_typedConstantMap,
                                        const GALGAS_procedureMap & in_procedureMap,
