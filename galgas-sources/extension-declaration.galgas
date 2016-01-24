@@ -6,6 +6,7 @@ list @extensionDeclarationListAST {
   @lstring mTypeName
   @procedureDeclarationListAST mProcedureDeclarationListAST
   @structureFieldListAST mFieldList
+  @functionDeclarationListAST mFunctionDeclarationListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -22,6 +23,7 @@ syntax extension common_syntax {
     ${$
     @procedureDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
+    @functionDeclarationListAST functionDeclarationListAST = {}
     repeat
     while
       $var$
@@ -33,10 +35,13 @@ syntax extension common_syntax {
     while
       <procedure> !?procedureDeclarationListAST
     while
+      $func$
+      <function_declaration> !?functionDeclarationListAST
+    while
       $;$
     end
     $}$
-    ioAST.mExtensionDeclarationListAST += !typeName !procedureDeclarationListAST !fieldList
+    ioAST.mExtensionDeclarationListAST += !typeName !procedureDeclarationListAST !fieldList !functionDeclarationListAST
   }
 
   #·····················································································································

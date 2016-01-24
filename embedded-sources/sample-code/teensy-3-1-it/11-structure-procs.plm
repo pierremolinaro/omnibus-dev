@@ -16,15 +16,21 @@ struct $MyStruct {
     self.x = inX + 8
   }
   
-  func azert `user (?x $int32) -> $int32 {
-    result = self.x +% x
-  }
 }
 
 extension $MyStruct {
   var z $uint8 = 14
+}
+
+extension $MyStruct {
   mutating proc reset `user () {
     azert (?self)
+  }
+}
+
+extension $MyStruct {
+  func azert `user (?x $int32) -> $int32 {
+    result = self.x +% x
   }
 }
 
