@@ -11,6 +11,225 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        Routine 'buildOrderedDeclarationList'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildOrderedDeclarationList (class GALGAS_ast inArgument0,
+                                          class GALGAS_location inArgument1,
+                                          class GALGAS_declarationListAST & outArgument2,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Abstract category getter '@abstractDeclaration keyRepresentation'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef class GALGAS_string (*categoryGetterSignature_abstractDeclaration_keyRepresentation) (const class cPtr_abstractDeclaration * inObject,
+                                                                                              class C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryGetter_keyRepresentation (const int32_t inClassIndex,
+                                            categoryGetterSignature_abstractDeclaration_keyRepresentation inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string callCategoryGetter_keyRepresentation (const class cPtr_abstractDeclaration * inObject,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Abstract category getter '@abstractDeclaration location'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef class GALGAS_location (*categoryGetterSignature_abstractDeclaration_location) (const class cPtr_abstractDeclaration * inObject,
+                                                                                       class C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryGetter_location (const int32_t inClassIndex,
+                                   categoryGetterSignature_abstractDeclaration_location inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_location callCategoryGetter_location (const class cPtr_abstractDeclaration * inObject,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Abstract category method '@abstractDeclaration enterInPrecedenceGraph'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph) (const class cPtr_abstractDeclaration * inObject,
+                                                                                    class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
+                                                                                    class C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterInPrecedenceGraph (const int32_t inClassIndex,
+                                                 categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterInPrecedenceGraph (const class cPtr_abstractDeclaration * inObject,
+                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                    Category method '@procedureDeclarationListAST-element enterInPrecedenceGraph'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInPrecedenceGraph (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
+                                            class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                 Routine 'checkMode'                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_checkMode (const class GALGAS_stringset constinArgument0,
+                        const class GALGAS_stringset constinArgument1,
+                        const class GALGAS_location constinArgument2,
+                        class C_Compiler * inCompiler
+                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Routine 'buildSemanticContext'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
+                                   const class GALGAS_ast constinArgument1,
+                                   class GALGAS_staticStringMap & ioArgument2,
+                                   class GALGAS_semanticContext & outArgument3,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Abstract category method '@abstractDeclaration enterInContext'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractDeclaration_enterInContext) (const class cPtr_abstractDeclaration * inObject,
+                                                                            const class GALGAS_procedureDeclarationListAST constinArgument0,
+                                                                            class GALGAS_semanticContext & ioArgument1,
+                                                                            class GALGAS_staticStringMap & ioArgument2,
+                                                                            class C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
+                                         categoryMethodSignature_abstractDeclaration_enterInContext inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * inObject,
+                                        const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                        GALGAS_semanticContext & io_ioContext,
+                                        GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Abstract category method '@abstractDeclaration initAnalysis'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractDeclaration_initAnalysis) (const class cPtr_abstractDeclaration * inObject,
+                                                                          class GALGAS_semanticContext & ioArgument0,
+                                                                          class C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_initAnalysis (const int32_t inClassIndex,
+                                       categoryMethodSignature_abstractDeclaration_initAnalysis inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_initAnalysis (const class cPtr_abstractDeclaration * inObject,
+                                      GALGAS_semanticContext & io_ioContext,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Category method '@exceptionClauseListAST-element enterInContext'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_exceptionClauseListAST_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Category method '@functionDeclarationListAST-element enterInContext'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAST_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category method '@globalVarDeclarationList-element enterInContext'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_globalVarDeclarationList_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Category method '@initList-element enterInContext'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_initList_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Category method '@procedureDeclarationListAST-element enterInContext'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Function 'solveInferredType'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1820,186 +2039,6 @@ class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mTarget (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                   @extendIR class                                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_extendIR : public GALGAS_abstractInstructionIR {
-//--- Constructor
-  public : GALGAS_extendIR (void) ;
-
-//---
-  public : inline const class cPtr_extendIR * ptr (void) const { return (const cPtr_extendIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_extendIR (const cPtr_extendIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_extendIR extractObject (const GALGAS_object & inObject,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_extendIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                   const class GALGAS_operandIR & inOperand1
-                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_extendIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mResult (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mSource (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_extendIR class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Pointer class for @extendIR class                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_extendIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_operandIR mAttribute_mResult ;
-  public : GALGAS_operandIR mAttribute_mSource ;
-
-//--- Constructor
-  public : cPtr_extendIR (const GALGAS_operandIR & in_mResult,
-                          const GALGAS_operandIR & in_mSource
-                          COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mSource (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @extractValueIR class                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_extractValueIR : public GALGAS_abstractInstructionIR {
-//--- Constructor
-  public : GALGAS_extractValueIR (void) ;
-
-//---
-  public : inline const class cPtr_extractValueIR * ptr (void) const { return (const cPtr_extractValueIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_extractValueIR (const cPtr_extractValueIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_extractValueIR extractObject (const GALGAS_object & inObject,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_extractValueIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                         const class GALGAS_operandIR & inOperand1,
-                                                         const class GALGAS_uint & inOperand2
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_extractValueIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mIndex (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mSource (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mTarget (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_extractValueIR class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extractValueIR ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Pointer class for @extractValueIR class                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_extractValueIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_operandIR mAttribute_mTarget ;
-  public : GALGAS_operandIR mAttribute_mSource ;
-  public : GALGAS_uint mAttribute_mIndex ;
-
-//--- Constructor
-  public : cPtr_extractValueIR (const GALGAS_operandIR & in_mTarget,
-                                const GALGAS_operandIR & in_mSource,
-                                const GALGAS_uint & in_mIndex
-                                COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mSource (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mIndex (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

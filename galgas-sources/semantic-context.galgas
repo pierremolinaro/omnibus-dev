@@ -134,6 +134,7 @@ sharedmap @unifiedTypeMap %selectors {
   @typeKind kind
   @typedConstantMap typedConstantMap
   @procedureMap procedureMap
+  @functionMap functionMap
   @bool copiable
   @bool equatable
   @bool comparable

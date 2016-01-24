@@ -77,7 +77,7 @@ map @procedureMapIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @functionMapIR {
-  @funcFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
   @instructionListIR mInstructionGenerationList
   @unifiedTypeMap-proxy mResultType
   @string mResultVarName

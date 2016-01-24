@@ -23,8 +23,8 @@ override method @getElementPtrIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [[mSource type] llvmTypeName]
-  ioLLVMcode += "  " + [mTarget name] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + "* " + [mSource name] + ", i32 0, i32 " + mIndex + "\n"
+  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + "* " + [mSource llvmName] + ", i32 0, i32 " + mIndex + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

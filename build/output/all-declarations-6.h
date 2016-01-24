@@ -80,6 +80,16 @@ class GALGAS_bool extensionGetter_isStatic (const class GALGAS_valueIR & inObjec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Category getter '@objectInMemoryIR llvmName' (as function)                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_llvmName (const class GALGAS_objectInMemoryIR & inObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                               Category getter '@objectInMemoryIR name' (as function)                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -215,16 +225,6 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_objectInMemoryIR
 class GALGAS_string extensionGetter_mangledName (const class GALGAS_objectInMemoryIR & inObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                 Category getter '@procedureDeclarationListAST-element getMangledName' (as function)                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_getMangledName (const class GALGAS_procedureDeclarationListAST_2D_element & inObject,
-                                                    class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

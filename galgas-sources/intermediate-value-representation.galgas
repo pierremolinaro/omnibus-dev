@@ -75,7 +75,7 @@ enum @objectInMemoryIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @objectInMemoryIR name -> @string outName {
+getter @objectInMemoryIR llvmName -> @string outName {
   switch self
   case register (* @lstring name *) :
     error name : "@objectInMemoryIR name" : outName
@@ -85,6 +85,26 @@ getter @objectInMemoryIR name -> @string outName {
     outName = "%" + mangledNameForLocalVariable (!name)
   case globalConstant (*  @string name) :
     outName = "%" + name
+  case fieldAccess (@unifiedTypeMap-proxy unused objectType
+                    @string unused objectName
+                    @unifiedTypeMap-proxy unused fielfType
+                    @uint unused fieldIndex) :
+    error .nowhere : "@objectInMemoryIR name" : outName
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @objectInMemoryIR name -> @string outName {
+  switch self
+  case register (* @lstring name *) :
+    outName = name.string
+  case globalVariable (* @string name *) :
+    outName = name
+  case localValue (* @string name) :
+    outName = name
+  case globalConstant (*  @string name) :
+    outName = name
   case fieldAccess (@unifiedTypeMap-proxy unused objectType
                     @string unused objectName
                     @unifiedTypeMap-proxy unused fielfType

@@ -10,7 +10,8 @@ list @functionCallEffectiveParameterList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @functionCallInExpressionAST : @expressionAST {
-  @lstring mFunctionVarName
+  @lstring mReceiverName
+  @lstring mFunctionName
   @functionCallEffectiveParameterList mParameterList
 }
 
@@ -21,7 +22,24 @@ class @functionCallInExpressionAST : @expressionAST {
 syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
-    $identifier$ ?let functionName
+    @lstring receiverName
+    @lstring functionName
+    select
+      $self$
+      receiverName = .new {!"self" !.here}
+      $.$
+      $identifier$ ?functionName
+    or
+      $identifier$ ?let x
+      select
+        functionName = x
+        receiverName = ["" nowhere]
+      or
+        $.$
+        receiverName = x
+        $identifier$ ?functionName
+      end
+    end
     $($
     @functionCallEffectiveParameterList parameterList = {}
     repeat
@@ -31,13 +49,13 @@ syntax extension common_syntax {
       parameterList += !selector !expression
     end
     $)$
-    outExpression = @functionCallInExpressionAST.new {!functionName !parameterList}
+    outExpression = @functionCallInExpressionAST.new {!receiverName !functionName !parameterList}
   }
 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionCallInExpressionAST addDependenceEdgeForStaticExpression
@@ -47,7 +65,7 @@ override method @functionCallInExpressionAST addDependenceEdgeForStaticExpressio
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                           *
+#  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionCallInExpressionAST analyzeExpression
@@ -62,31 +80,56 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
-  [inContext.mFunctionMap searchKey
-    !mFunctionVarName
-    ?let functionModeSet
-    ?let formalParameterList
-    ?let functionResultType
+#--- Search proc in proc map
+  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  @modeMap functionModeMap
+  @funcSignature functionSignature
+  @unifiedTypeMap-proxy functionResultType
+  @string functionMangledName = ""
+  if mReceiverName.string != "" then
+    [!?ioVariableMap searchForReadAccess
+      !mReceiverName
+      ?let type
+      ?*
+      ?@objectInMemoryIR variableKind
+      ?4*
+    ]
+  #--- Load variable
+    effectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] 
+    functionMangledName += [type key] + "."
+    [[type functionMap] searchKey
+      !mFunctionName
+      ?functionModeMap
+      ?functionSignature
+      ?functionResultType
+    ]
+  else
+    [inContext.mFunctionMap searchKey
+      !mFunctionName
+      ?functionModeMap
+      ?functionSignature
+      ?functionResultType
+    ]
+  end
+  functionMangledName += mFunctionName.string
+#--- Enter in invocation graph
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge
+    !inRoutineNameForInvocationGraph
+    !.new {!"func " + functionMangledName !mFunctionName.location}
   ]
 #--- Check mode
   checkMode (
     !requiredModes:inModeSet
-    !possibleModes:[functionModeSet keySet]
-    !error:mFunctionVarName.location
+    !possibleModes:[functionModeMap keySet]
+    !error:mFunctionName.location
   )
-#--- Enter in invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge
-    !inRoutineNameForInvocationGraph
-    !.new {!mangledNameForFunction (!name:mFunctionVarName.string) !mFunctionVarName.location}
-  ]
 #---
-  @operandIRList argumentList = {}
-  var s = mangledNameForFunction (!name:mFunctionVarName.string) + " ("
-  if [formalParameterList length] != [mParameterList length] then
-    error mFunctionVarName : "this function declares " + [formalParameterList length] 
+  var s = mangledNameForFunction (!name:mFunctionName.string) + " ("
+  if [functionSignature length] != [mParameterList length] then
+    error mFunctionName : "this function declares " + [functionSignature length] 
       + " formal parameters, the call names " + [mParameterList length] + " effective arguments"
   else
-    for formal in formalParameterList, actual in mParameterList
+    for formal in functionSignature, actual in mParameterList
     do
       if actual.mSelector.string != formal.mFormalSelector.string then
         var s = "!"
@@ -108,12 +151,15 @@ override method @functionCallInExpressionAST analyzeExpression
         ?result:@operandIR argumentIR
       ]
       if [argumentIR.mType key] == [formal.mArgumentType key] then
-        argumentList += !argumentIR
+        effectiveParameterListIR +=
+          !.output
+          !formal.mFormalSelector
+          !argumentIR
       elsif [[argumentIR.mType kind] isLiteralInteger] && [[formal.mArgumentType kind] isInteger] then
         [argumentIR.mValue literalInteger ?value:let @bigint value]
         [[formal.mArgumentType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
         if (min <= value) && (value <= max) then
-          argumentList += !.new {!formal.mArgumentType !argumentIR.mValue}
+          effectiveParameterListIR += !.output !formal.mFormalSelector !.new {!formal.mArgumentType !argumentIR.mValue}
         else
           error actual.mSelector: "the literal integer cannot fit in an $" + [formal.mArgumentType key]
         end
@@ -131,8 +177,8 @@ override method @functionCallInExpressionAST analyzeExpression
 #--- Generate code
   ioInstructionGenerationList += !@functionCallIR.new {
     !outResult
-    !mFunctionVarName.string
-    !argumentList
+    !functionMangledName
+    !effectiveParameterListIR
   }
 }
 
@@ -141,7 +187,7 @@ override method @functionCallInExpressionAST analyzeExpression
 class @functionCallIR : @abstractInstructionIR {
   @operandIR mResult
   @string mFunctionName
-  @operandIRList mArgumentList
+  @procCallEffectiveParameterListIR mArgumentList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -153,9 +199,17 @@ override method @functionCallIR llvmInstructionCode
 {
   ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName]
   ioLLVMcode += " @" + mangledNameForFunction (!name:mFunctionName) + " ("
-  for (argument) in mArgumentList
-    do ioLLVMcode += [argument.mType llvmTypeName] + " " + [argument.mValue llvmName]
-    between ioLLVMcode += ", "
+  for () in mArgumentList do
+    switch mEffectiveParameterPassingMode
+    case input:
+      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+    case output:
+      ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+    case outputInput:
+      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+    end
+  between
+    ioLLVMcode += ", "
   end
   ioLLVMcode += ")\n"
 }

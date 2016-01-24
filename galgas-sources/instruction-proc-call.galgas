@@ -132,8 +132,7 @@ override method @procCallInstructionAST analyze
       ?4*
     ]
   #--- Load variable
-    let @operandIR receiverVariable = [variableKind address]
-    procCallEffectiveParameterListIR += !.outputInput !["" nowhere] !receiverVariable 
+    procCallEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] 
     procedureMangledName += [type key] + "."
     [[type procedureMap] searchKey
       !mProcName
