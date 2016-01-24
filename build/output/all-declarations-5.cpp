@@ -318,7 +318,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_functionCallIR GALGAS_functionCallIR::constructor_new (const GALGAS_operandIR & inAttribute_mResult,
                                                               const GALGAS_string & inAttribute_mFunctionName,
-                                                              const GALGAS_operandIRlist & inAttribute_mArgumentList
+                                                              const GALGAS_operandIRList & inAttribute_mArgumentList
                                                               COMMA_LOCATION_ARGS) {
   GALGAS_functionCallIR result ;
   if (inAttribute_mResult.isValid () && inAttribute_mFunctionName.isValid () && inAttribute_mArgumentList.isValid ()) {
@@ -365,8 +365,8 @@ GALGAS_string cPtr_functionCallIR::getter_mFunctionName (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIRlist GALGAS_functionCallIR::getter_mArgumentList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIRlist result ;
+GALGAS_operandIRList GALGAS_functionCallIR::getter_mArgumentList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_operandIRList result ;
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
@@ -377,7 +377,7 @@ GALGAS_operandIRlist GALGAS_functionCallIR::getter_mArgumentList (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIRlist cPtr_functionCallIR::getter_mArgumentList (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIRList cPtr_functionCallIR::getter_mArgumentList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mArgumentList ;
 }
 
@@ -387,7 +387,7 @@ GALGAS_operandIRlist cPtr_functionCallIR::getter_mArgumentList (UNUSED_LOCATION_
 
 cPtr_functionCallIR::cPtr_functionCallIR (const GALGAS_operandIR & in_mResult,
                                           const GALGAS_string & in_mFunctionName,
-                                          const GALGAS_operandIRlist & in_mArgumentList
+                                          const GALGAS_operandIRList & in_mArgumentList
                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mResult (in_mResult),

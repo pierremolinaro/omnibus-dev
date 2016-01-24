@@ -3725,7 +3725,8 @@ class cCollectionElement_extensionDeclarationListAST : public cCollectionElement
 
 //--- Constructor
   public : cCollectionElement_extensionDeclarationListAST (const GALGAS_lstring & in_mTypeName,
-                                                           const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST
+                                                           const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
+                                                           const GALGAS_structureFieldListAST & in_mFieldList
                                                            COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -3744,10 +3745,11 @@ class cCollectionElement_extensionDeclarationListAST : public cCollectionElement
 //---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_extensionDeclarationListAST::cCollectionElement_extensionDeclarationListAST (const GALGAS_lstring & in_mTypeName,
-                                                                                                const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST
+                                                                                                const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
+                                                                                                const GALGAS_structureFieldListAST & in_mFieldList
                                                                                                 COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mTypeName, in_mProcedureDeclarationListAST) {
+mObject (in_mTypeName, in_mProcedureDeclarationListAST, in_mFieldList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3760,7 +3762,7 @@ bool cCollectionElement_extensionDeclarationListAST::isValid (void) const {
 
 cCollectionElement * cCollectionElement_extensionDeclarationListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_extensionDeclarationListAST (mObject.mAttribute_mTypeName, mObject.mAttribute_mProcedureDeclarationListAST COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_extensionDeclarationListAST (mObject.mAttribute_mTypeName, mObject.mAttribute_mProcedureDeclarationListAST, mObject.mAttribute_mFieldList COMMA_HERE)) ;
   return result ;
 }
 
@@ -3775,6 +3777,10 @@ void cCollectionElement_extensionDeclarationListAST::description (C_String & ioS
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mProcedureDeclarationListAST" ":" ;
   mObject.mAttribute_mProcedureDeclarationListAST.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mFieldList" ":" ;
+  mObject.mAttribute_mFieldList.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3811,13 +3817,14 @@ GALGAS_extensionDeclarationListAST GALGAS_extensionDeclarationListAST::construct
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_extensionDeclarationListAST GALGAS_extensionDeclarationListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                                  const GALGAS_procedureDeclarationListAST & inOperand1
+                                                                                                  const GALGAS_procedureDeclarationListAST & inOperand1,
+                                                                                                  const GALGAS_structureFieldListAST & inOperand2
                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_extensionDeclarationListAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_extensionDeclarationListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
+    GALGAS_extensionDeclarationListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -3827,11 +3834,13 @@ GALGAS_extensionDeclarationListAST GALGAS_extensionDeclarationListAST::construct
 
 void GALGAS_extensionDeclarationListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                     const GALGAS_lstring & in_mTypeName,
-                                                                    const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST
+                                                                    const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
+                                                                    const GALGAS_structureFieldListAST & in_mFieldList
                                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement_extensionDeclarationListAST * p = NULL ;
   macroMyNew (p, cCollectionElement_extensionDeclarationListAST (in_mTypeName,
-                                                                 in_mProcedureDeclarationListAST COMMA_THERE)) ;
+                                                                 in_mProcedureDeclarationListAST,
+                                                                 in_mFieldList COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -3839,11 +3848,12 @@ void GALGAS_extensionDeclarationListAST::makeAttributesFromObjects (capCollectio
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_extensionDeclarationListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                                              const GALGAS_procedureDeclarationListAST & inOperand1
+                                                              const GALGAS_procedureDeclarationListAST & inOperand1,
+                                                              const GALGAS_structureFieldListAST & inOperand2
                                                               COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extensionDeclarationListAST (inOperand0, inOperand1 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_extensionDeclarationListAST (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3855,12 +3865,13 @@ void GALGAS_extensionDeclarationListAST::addAssign_operation (const GALGAS_lstri
 
 void GALGAS_extensionDeclarationListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                                const GALGAS_procedureDeclarationListAST inOperand1,
+                                                               const GALGAS_structureFieldListAST inOperand2,
                                                                const GALGAS_uint inInsertionIndex,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_extensionDeclarationListAST (inOperand0, inOperand1 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_extensionDeclarationListAST (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3872,6 +3883,7 @@ void GALGAS_extensionDeclarationListAST::setter_insertAtIndex (const GALGAS_lstr
 
 void GALGAS_extensionDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                                GALGAS_procedureDeclarationListAST & outOperand1,
+                                                               GALGAS_structureFieldListAST & outOperand2,
                                                                const GALGAS_uint inRemoveIndex,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) {
@@ -3882,10 +3894,12 @@ void GALGAS_extensionDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & 
     if (NULL == p) {
       outOperand0.drop () ;
       outOperand1.drop () ;
+      outOperand2.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
       outOperand0 = p->mObject.mAttribute_mTypeName ;
       outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
+      outOperand2 = p->mObject.mAttribute_mFieldList ;
     }
   }
 }
@@ -3894,6 +3908,7 @@ void GALGAS_extensionDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & 
 
 void GALGAS_extensionDeclarationListAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                                           GALGAS_procedureDeclarationListAST & outOperand1,
+                                                          GALGAS_structureFieldListAST & outOperand2,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -3902,10 +3917,12 @@ void GALGAS_extensionDeclarationListAST::setter_popFirst (GALGAS_lstring & outOp
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
+    outOperand2.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
     outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
+    outOperand2 = p->mObject.mAttribute_mFieldList ;
   }
 }
 
@@ -3913,6 +3930,7 @@ void GALGAS_extensionDeclarationListAST::setter_popFirst (GALGAS_lstring & outOp
 
 void GALGAS_extensionDeclarationListAST::setter_popLast (GALGAS_lstring & outOperand0,
                                                          GALGAS_procedureDeclarationListAST & outOperand1,
+                                                         GALGAS_structureFieldListAST & outOperand2,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -3921,10 +3939,12 @@ void GALGAS_extensionDeclarationListAST::setter_popLast (GALGAS_lstring & outOpe
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
+    outOperand2.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
     outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
+    outOperand2 = p->mObject.mAttribute_mFieldList ;
   }
 }
 
@@ -3932,6 +3952,7 @@ void GALGAS_extensionDeclarationListAST::setter_popLast (GALGAS_lstring & outOpe
 
 void GALGAS_extensionDeclarationListAST::method_first (GALGAS_lstring & outOperand0,
                                                        GALGAS_procedureDeclarationListAST & outOperand1,
+                                                       GALGAS_structureFieldListAST & outOperand2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -3940,10 +3961,12 @@ void GALGAS_extensionDeclarationListAST::method_first (GALGAS_lstring & outOpera
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
+    outOperand2.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
     outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
+    outOperand2 = p->mObject.mAttribute_mFieldList ;
   }
 }
 
@@ -3951,6 +3974,7 @@ void GALGAS_extensionDeclarationListAST::method_first (GALGAS_lstring & outOpera
 
 void GALGAS_extensionDeclarationListAST::method_last (GALGAS_lstring & outOperand0,
                                                       GALGAS_procedureDeclarationListAST & outOperand1,
+                                                      GALGAS_structureFieldListAST & outOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -3959,10 +3983,12 @@ void GALGAS_extensionDeclarationListAST::method_last (GALGAS_lstring & outOperan
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
+    outOperand2.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
     outOperand1 = p->mObject.mAttribute_mProcedureDeclarationListAST ;
+    outOperand2 = p->mObject.mAttribute_mFieldList ;
   }
 }
 
@@ -4047,6 +4073,21 @@ GALGAS_procedureDeclarationListAST GALGAS_extensionDeclarationListAST::getter_mP
   return result ;
 }
 
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_structureFieldListAST GALGAS_extensionDeclarationListAST::getter_mFieldListAtIndex (const GALGAS_uint & inIndex,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_extensionDeclarationListAST * p = (cCollectionElement_extensionDeclarationListAST *) attributes.ptr () ;
+  GALGAS_structureFieldListAST result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
+    result = p->mObject.mAttribute_mFieldList ;
+  }
+  return result ;
+}
+
 
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4080,6 +4121,14 @@ GALGAS_procedureDeclarationListAST cEnumerator_extensionDeclarationListAST::curr
   const cCollectionElement_extensionDeclarationListAST * p = (const cCollectionElement_extensionDeclarationListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
   return p->mObject.mAttribute_mProcedureDeclarationListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_structureFieldListAST cEnumerator_extensionDeclarationListAST::current_mFieldList (LOCATION_ARGS) const {
+  const cCollectionElement_extensionDeclarationListAST * p = (const cCollectionElement_extensionDeclarationListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_extensionDeclarationListAST) ;
+  return p->mObject.mAttribute_mFieldList ;
 }
 
 
@@ -7619,50 +7668,69 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_start_5F_symbol_i0_parse (C
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i1_ (GALGAS_ast & ioArgument_ioAST,
                                                                       C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_extension) COMMA_SOURCE_FILE ("extension-declaration.galgas", 19)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_extension) COMMA_SOURCE_FILE ("extension-declaration.galgas", 20)) ;
   GALGAS_lstring var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 20)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 21)) ;
-  GALGAS_procedureDeclarationListAST var_procedureDeclarationListAST = GALGAS_procedureDeclarationListAST::constructor_emptyList (SOURCE_FILE ("extension-declaration.galgas", 22)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 21)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 22)) ;
+  GALGAS_procedureDeclarationListAST var_procedureDeclarationListAST = GALGAS_procedureDeclarationListAST::constructor_emptyList (SOURCE_FILE ("extension-declaration.galgas", 23)) ;
+  GALGAS_structureFieldListAST var_fieldList = GALGAS_structureFieldListAST::constructor_emptyList (SOURCE_FILE ("extension-declaration.galgas", 24)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_1 (inCompiler)) {
     case 2: {
-      nt_procedure_ (var_procedureDeclarationListAST, inCompiler) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("extension-declaration.galgas", 27)) ;
+      GALGAS_lstring var_fieldName = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("extension-declaration.galgas", 28)) ;
+      GALGAS_lstring var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 29)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 30)) ;
+      GALGAS_expressionAST var_initExpression ;
+      nt_expression_ (var_initExpression, inCompiler) ;
+      var_fieldList.addAssign_operation (var_fieldName, var_typeName, var_initExpression  COMMA_SOURCE_FILE ("extension-declaration.galgas", 32)) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 27)) ;
+      nt_procedure_ (var_procedureDeclarationListAST, inCompiler) ;
+    } break ;
+    case 4: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 36)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 29)) ;
-  ioArgument_ioAST.mAttribute_mExtensionDeclarationListAST.addAssign_operation (var_typeName, var_procedureDeclarationListAST  COMMA_SOURCE_FILE ("extension-declaration.galgas", 30)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 38)) ;
+  ioArgument_ioAST.mAttribute_mExtensionDeclarationListAST.addAssign_operation (var_typeName, var_procedureDeclarationListAST, var_fieldList  COMMA_SOURCE_FILE ("extension-declaration.galgas", 39)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i1_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_extension) COMMA_SOURCE_FILE ("extension-declaration.galgas", 19)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 20)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 21)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_extension) COMMA_SOURCE_FILE ("extension-declaration.galgas", 20)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 21)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 22)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_1 (inCompiler)) {
     case 2: {
-      nt_procedure_parse (inCompiler) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("extension-declaration.galgas", 27)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("extension-declaration.galgas", 28)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("extension-declaration.galgas", 29)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 30)) ;
+      nt_expression_parse (inCompiler) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 27)) ;
+      nt_procedure_parse (inCompiler) ;
+    } break ;
+    case 4: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3B_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 36)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 29)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("extension-declaration.galgas", 38)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -10872,264 +10940,6 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_enumConstantMap::cMapElement_enumConstantMap (const GALGAS_lstring & inKey,
-                                                          const GALGAS_uint & in_mIndex
-                                                          COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mAttribute_mIndex (in_mIndex) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cMapElement_enumConstantMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mIndex.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement * cMapElement_enumConstantMap::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_enumConstantMap (mAttribute_lkey, mAttribute_mIndex COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cMapElement_enumConstantMap::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mIndex" ":" ;
-  mAttribute_mIndex.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cMapElement_enumConstantMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_enumConstantMap * operand = (cMapElement_enumConstantMap *) inOperand ;
-  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mIndex.objectCompare (operand->mAttribute_mIndex) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap::GALGAS_enumConstantMap (void) :
-AC_GALGAS_map () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap::GALGAS_enumConstantMap (const GALGAS_enumConstantMap & inSource) :
-AC_GALGAS_map (inSource) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap & GALGAS_enumConstantMap::operator = (const GALGAS_enumConstantMap & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
-  return * this ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap GALGAS_enumConstantMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_enumConstantMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap GALGAS_enumConstantMap::constructor_mapWithMapToOverride (const GALGAS_enumConstantMap & inMapToOverride
-                                                                                 COMMA_LOCATION_ARGS) {
-  GALGAS_enumConstantMap result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap GALGAS_enumConstantMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_enumConstantMap result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_enumConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                  const GALGAS_uint & inArgument0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  cMapElement_enumConstantMap * p = NULL ;
-  macroMyNew (p, cMapElement_enumConstantMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@enumConstantMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_enumConstantMap::setter_insertKey (GALGAS_lstring inKey,
-                                               GALGAS_uint inArgument0,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
-  cMapElement_enumConstantMap * p = NULL ;
-  macroMyNew (p, cMapElement_enumConstantMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' constant is already declared" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_enumConstantMap_searchKey = "there is no '%K' constant" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_enumConstantMap::method_searchKey (GALGAS_lstring inKey,
-                                               GALGAS_uint & outArgument0,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const {
-  const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) performSearch (inKey,
-                                                                                                 inCompiler,
-                                                                                                 kSearchErrorMessage_enumConstantMap_searchKey
-                                                                                                 COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_enumConstantMap) ;
-    outArgument0 = p->mAttribute_mIndex ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_enumConstantMap::getter_mIndexForKey (const GALGAS_string & inKey,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) attributes ;
-  GALGAS_uint result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_enumConstantMap) ;
-    result = p->mAttribute_mIndex ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_enumConstantMap::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_enumConstantMap * p = (cMapElement_enumConstantMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_enumConstantMap) ;
-    p->mAttribute_mIndex = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_enumConstantMap * GALGAS_enumConstantMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                         const GALGAS_string & inKey
-                                                                                         COMMA_LOCATION_ARGS) {
-  cMapElement_enumConstantMap * result = (cMapElement_enumConstantMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_enumConstantMap) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_enumConstantMap::cEnumerator_enumConstantMap (const GALGAS_enumConstantMap & inEnumeratedObject,
-                                                          const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator () {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap_2D_element cEnumerator_enumConstantMap::current (LOCATION_ARGS) const {
-  const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_enumConstantMap) ;
-  return GALGAS_enumConstantMap_2D_element (p->mAttribute_lkey, p->mAttribute_mIndex) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_enumConstantMap::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint cEnumerator_enumConstantMap::current_mIndex (LOCATION_ARGS) const {
-  const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_enumConstantMap) ;
-  return p->mAttribute_mIndex ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @enumConstantMap type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_enumConstantMap ("enumConstantMap",
-                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_enumConstantMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_enumConstantMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_enumConstantMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_enumConstantMap (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap GALGAS_enumConstantMap::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_enumConstantMap result ;
-  const GALGAS_enumConstantMap * p = (const GALGAS_enumConstantMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_enumConstantMap *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("enumConstantMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                 Class for element of '@structureFieldListAST' list                                  *
 //                                                                                                                     *
@@ -11587,6 +11397,264 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::extractObject (const 
       result = *p ;
     }else{
       inCompiler->castError ("structureFieldListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_enumConstantMap::cMapElement_enumConstantMap (const GALGAS_lstring & inKey,
+                                                          const GALGAS_uint & in_mIndex
+                                                          COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mAttribute_mIndex (in_mIndex) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_enumConstantMap::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mIndex.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_enumConstantMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_enumConstantMap (mAttribute_lkey, mAttribute_mIndex COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_enumConstantMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIndex" ":" ;
+  mAttribute_mIndex.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_enumConstantMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_enumConstantMap * operand = (cMapElement_enumConstantMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mIndex.objectCompare (operand->mAttribute_mIndex) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumConstantMap::GALGAS_enumConstantMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumConstantMap::GALGAS_enumConstantMap (const GALGAS_enumConstantMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumConstantMap & GALGAS_enumConstantMap::operator = (const GALGAS_enumConstantMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumConstantMap GALGAS_enumConstantMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_enumConstantMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumConstantMap GALGAS_enumConstantMap::constructor_mapWithMapToOverride (const GALGAS_enumConstantMap & inMapToOverride
+                                                                                 COMMA_LOCATION_ARGS) {
+  GALGAS_enumConstantMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumConstantMap GALGAS_enumConstantMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const {
+  GALGAS_enumConstantMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_enumConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                  const GALGAS_uint & inArgument0,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  cMapElement_enumConstantMap * p = NULL ;
+  macroMyNew (p, cMapElement_enumConstantMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@enumConstantMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_enumConstantMap::setter_insertKey (GALGAS_lstring inKey,
+                                               GALGAS_uint inArgument0,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
+  cMapElement_enumConstantMap * p = NULL ;
+  macroMyNew (p, cMapElement_enumConstantMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "the '%K' constant is already declared" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_enumConstantMap_searchKey = "there is no '%K' constant" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_enumConstantMap::method_searchKey (GALGAS_lstring inKey,
+                                               GALGAS_uint & outArgument0,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const {
+  const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) performSearch (inKey,
+                                                                                                 inCompiler,
+                                                                                                 kSearchErrorMessage_enumConstantMap_searchKey
+                                                                                                 COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_enumConstantMap) ;
+    outArgument0 = p->mAttribute_mIndex ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_enumConstantMap::getter_mIndexForKey (const GALGAS_string & inKey,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) attributes ;
+  GALGAS_uint result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_enumConstantMap) ;
+    result = p->mAttribute_mIndex ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_enumConstantMap::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
+                                                     GALGAS_string inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_enumConstantMap * p = (cMapElement_enumConstantMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_enumConstantMap) ;
+    p->mAttribute_mIndex = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_enumConstantMap * GALGAS_enumConstantMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                         const GALGAS_string & inKey
+                                                                                         COMMA_LOCATION_ARGS) {
+  cMapElement_enumConstantMap * result = (cMapElement_enumConstantMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_enumConstantMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_enumConstantMap::cEnumerator_enumConstantMap (const GALGAS_enumConstantMap & inEnumeratedObject,
+                                                          const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumConstantMap_2D_element cEnumerator_enumConstantMap::current (LOCATION_ARGS) const {
+  const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_enumConstantMap) ;
+  return GALGAS_enumConstantMap_2D_element (p->mAttribute_lkey, p->mAttribute_mIndex) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_enumConstantMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cEnumerator_enumConstantMap::current_mIndex (LOCATION_ARGS) const {
+  const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_enumConstantMap) ;
+  return p->mAttribute_mIndex ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @enumConstantMap type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_enumConstantMap ("enumConstantMap",
+                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_enumConstantMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_enumConstantMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_enumConstantMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_enumConstantMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumConstantMap GALGAS_enumConstantMap::extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_enumConstantMap result ;
+  const GALGAS_enumConstantMap * p = (const GALGAS_enumConstantMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_enumConstantMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("enumConstantMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
