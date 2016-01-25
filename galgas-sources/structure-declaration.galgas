@@ -409,7 +409,7 @@ override method @structureDeclaration semanticAnalysis
     end
   #--- Variable map
     @variableMap variableMap = initialVariableMap (
-      !routineNameForInvocation:llvmNameForFunction (!name:function.mFunctionName.string)
+      !routineNameForInvocation:funcNameForInvocationGraph (!structureType !function.mFunctionName).string
       !context:inContext
       !globalsAreConstant:true
     )

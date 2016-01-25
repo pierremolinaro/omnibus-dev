@@ -79,12 +79,8 @@ override method @assignmentInstructionAST analyze
     ?@unifiedTypeMap-proxy targetType
     ?*
     ?@objectInMemoryIR target
-    ?3*
-    ?let isConstant
+    ?4*
   ]
-  if isConstant then
-    error mTargetVarName : "a constant cannot be modified"
-  end
 #--- Analyze field list
   for (fieldName) in mFieldList do
     switch [targetType kind]
@@ -136,8 +132,12 @@ override method @assignmentInstructionAST analyze
     ?let accessIsAllowed
     ?*
     ?let isCopiable
-    ?3*
+    ?2*
+    ?let isConstant
   ]
+  if isConstant then
+    error mTargetVarName : "a constant cannot be modified"
+  end
   if not accessIsAllowed then
     error mTargetVarName : "routine has no access right on the this variable"
   end
