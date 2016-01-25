@@ -47,10 +47,10 @@ void enterOptions (NSMutableArray * ioBoolOptionArray,
   enterOptionsFor_plm_5F_options (ioBoolOptionArray, ioUIntOptionArray, ioStringOptionArray, ioStringListOptionArray) ;
   OC_GGS_CommandLineOption * option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"galgas_cli_options"
-    identifier:@"quiet_output"
-    commandChar:'q'
-    commandString:@"quiet"
-    comment:@"Quiet output"
+    identifier:@"verbose_output"
+    commandChar:'v'
+    commandString:@"verbose"
+    comment:@"Verbose output"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
