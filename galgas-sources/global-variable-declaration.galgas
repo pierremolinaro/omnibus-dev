@@ -120,13 +120,6 @@ map @allowedRoutineMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @allowedFunctionMap {
-  insert insertKey error message "the '%K' function is already declared in %L"
-  search searchKey error message "there is no '%K'"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @globalVarDeclarationList-element enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -168,17 +161,15 @@ method @globalVarDeclarationList-element enterInContext
   )
   @stringset executionModes = {}
 #--- Check allowed function are defined
-  @allowedRoutineMap allowedProcedureMap = {}
-  @allowedFunctionMap allowedFunctionMap = {}
+  @allowedRoutineMap allowedRoutineMap = {}
   for () in mAllowedFunctionList do
     [ioContext.mFunctionMap searchKey !mValue ?3*]
-    [!?allowedFunctionMap insertKey !.new{!llvmNameForFunction (!name:mValue.string) !mValue.location}]
-    [!?allowedProcedureMap insertKey !funcNameForInvocationGraph (!.null !mValue) !false]
+    [!?allowedRoutineMap insertKey !funcNameForInvocationGraph (!.null !mValue) !false]
   end
 #--- Check allowed init routines are defined
   for () in mAllowedInitList do
     [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
-    [!?allowedProcedureMap insertKey !initNameForInvocationGraph (!mInitPriority) !mHasWriteAccess]
+    [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!mInitPriority) !mHasWriteAccess]
   end
 #--- Check allowed exception routines are defined
   for () in mAllowedExceptionList do
@@ -195,7 +186,7 @@ method @globalVarDeclarationList-element enterInContext
     else
       error mExceptionName : "exception routine name should be \"setup\" or \"loop\""
     end
-    [!?allowedProcedureMap insertKey
+    [!?allowedRoutineMap insertKey
       !exceptionNameForInvocationGraph (!mExceptionName.string !mExceptionPriority)
       !mHasWriteAccess
     ]
@@ -212,8 +203,8 @@ method @globalVarDeclarationList-element enterInContext
     for () in procedureModeMap do
       executionModes += !lkey.string
     end
-    [!?allowedProcedureMap insertKey
-       !.new {!"proc " + mProcName.string !mProcName.location}
+    [!?allowedRoutineMap insertKey
+       !procNameForInvocationGraph (!.null !mProcName)
        !mHasWriteAccess
     ]
   end
@@ -221,8 +212,7 @@ method @globalVarDeclarationList-element enterInContext
     !mVarName
     !if variableType == .null then expressionResult.mType else variableType end
     !executionModes
-    !allowedProcedureMap
-    !allowedFunctionMap
+    !allowedRoutineMap
     !expressionResult.mValue
     !false # Is not constant
   ]
@@ -242,7 +232,6 @@ method @globalVarDeclarationList-element semanticAnalysis
     ?let inferredType
     ?let executionModeSet
     ?let unused allowedProcedureMap
-    ?let unused allowedFunctionMap
     ?let expressionGeneratedCode
     ?let unused isConstant
   ]

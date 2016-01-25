@@ -112,7 +112,7 @@ method @initList-element initSemanticAnalysis
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:routineNameForInvocationGraph.string
+    !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !globalsAreConstant:false
   )
