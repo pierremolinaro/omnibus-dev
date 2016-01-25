@@ -23,60 +23,60 @@ target triple = "thumbv7em-none--eabi"
 ;--- ARM Core System Handler Vectors
   [15  x void()*] [
     void()* @ResetISR, ; 1
-    void()* @proc_NMIHandler, ; 2
-    void()* @proc_HardFaultHandler, ; 3
-    void()* @proc_MemManageHandler, ; 4
-    void()* @proc_BusFaultHandler, ; 5
-    void()* @proc_UsageFaultHandler, ; 6
+    void()* @!PROC!NMIHandler, ; 2
+    void()* @!PROC!HardFaultHandler, ; 3
+    void()* @!PROC!MemManageHandler, ; 4
+    void()* @!PROC!BusFaultHandler, ; 5
+    void()* @!PROC!UsageFaultHandler, ; 6
     void()* null, ; 7, reserved
     void()* null, ; 8, reserved
     void()* null, ; 9, reserved
     void()* null, ; 10, reserved
-    void()* @proc_svcHandler, ; 11
-    void()* @proc_DebugMonitorHandler, ; 12
+    void()* @!PROC!svcHandler, ; 11
+    void()* @!PROC!DebugMonitorHandler, ; 12
     void()* null, ; 13, reserved
-    void()* @proc_PendSVHandler, ; 14
-    void()* @proc_systickHandler  ; 15
+    void()* @!PROC!PendSVHandler, ; 14
+    void()* @!PROC!systickHandler  ; 15
   ],
 ;--- Non-Core Vectors
   [240  x void()*] [
-    void()* @proc_DMAChannel0TranfertCompleteHandler, ; 16
-    void()* @proc_DMAChannel1TranfertCompleteHandler, ; 17
-    void()* @proc_DMAChannel2TranfertCompleteHandler, ; 18
-    void()* @proc_DMAChannel3TranfertCompleteHandler, ; 19
-    void()* @proc_DMAChannel4TranfertCompleteHandler, ; 20
-    void()* @proc_DMAChannel5TranfertCompleteHandler, ; 21
-    void()* @proc_DMAChannel6TranfertCompleteHandler, ; 22
-    void()* @proc_DMAChannel7TranfertCompleteHandler, ; 23
-    void()* @proc_DMAChannel8TranfertCompleteHandler, ; 24
-    void()* @proc_DMAChannel9TranfertCompleteHandler, ; 25
-    void()* @proc_DMAChannel10TranfertCompleteHandler, ; 26
-    void()* @proc_DMAChannel11TranfertCompleteHandler, ; 27
-    void()* @proc_DMAChannel12TranfertCompleteHandler, ; 28
-    void()* @proc_DMAChannel13TranfertCompleteHandler, ; 29
-    void()* @proc_DMAChannel14TranfertCompleteHandler, ; 30
-    void()* @proc_DMAChannel15TranfertCompleteHandler, ; 31
-    void()* @proc_DMAErrorHandler, ; 32
+    void()* @!PROC!DMAChannel0TranfertCompleteHandler, ; 16
+    void()* @!PROC!DMAChannel1TranfertCompleteHandler, ; 17
+    void()* @!PROC!DMAChannel2TranfertCompleteHandler, ; 18
+    void()* @!PROC!DMAChannel3TranfertCompleteHandler, ; 19
+    void()* @!PROC!DMAChannel4TranfertCompleteHandler, ; 20
+    void()* @!PROC!DMAChannel5TranfertCompleteHandler, ; 21
+    void()* @!PROC!DMAChannel6TranfertCompleteHandler, ; 22
+    void()* @!PROC!DMAChannel7TranfertCompleteHandler, ; 23
+    void()* @!PROC!DMAChannel8TranfertCompleteHandler, ; 24
+    void()* @!PROC!DMAChannel9TranfertCompleteHandler, ; 25
+    void()* @!PROC!DMAChannel10TranfertCompleteHandler, ; 26
+    void()* @!PROC!DMAChannel11TranfertCompleteHandler, ; 27
+    void()* @!PROC!DMAChannel12TranfertCompleteHandler, ; 28
+    void()* @!PROC!DMAChannel13TranfertCompleteHandler, ; 29
+    void()* @!PROC!DMAChannel14TranfertCompleteHandler, ; 30
+    void()* @!PROC!DMAChannel15TranfertCompleteHandler, ; 31
+    void()* @!PROC!DMAErrorHandler, ; 32
     void()* null, ; 33
-    void()* @proc_flashMemoryCommandCompleteHandler, ; 34
-    void()* @proc_flashMemoryReadCollisionHandler, ; 35
-    void()* @proc_modeControllerHandler, ; 36
-    void()* @proc_LLWUHandler, ; 37
-    void()* @proc_WDOGEWMHandler, ; 38
+    void()* @!PROC!flashMemoryCommandCompleteHandler, ; 34
+    void()* @!PROC!flashMemoryReadCollisionHandler, ; 35
+    void()* @!PROC!modeControllerHandler, ; 36
+    void()* @!PROC!LLWUHandler, ; 37
+    void()* @!PROC!WDOGEWMHandler, ; 38
     void()* null, ; 39
-    void()* @proc_I2C0Handler, ; 40
-    void()* @proc_I2C1Handler, ; 41
-    void()* @proc_SPI0Handler, ; 42
-    void()* @proc_SPI1Handler, ; 43
+    void()* @!PROC!I2C0Handler, ; 40
+    void()* @!PROC!I2C1Handler, ; 41
+    void()* @!PROC!SPI0Handler, ; 42
+    void()* @!PROC!SPI1Handler, ; 43
     void()* null, ; 44
-    void()* @proc_CAN0MessageBufferHandler, ; 45
-    void()* @proc_CAN0BusOffHandler, ; 46
-    void()* @proc_CAN0ErrorHandler, ; 47
-    void()* @proc_CAN0TransmitWarningHandler, ; 48
-    void()* @proc_CAN0ReceiveWarningHandler, ; 49
-    void()* @proc_CAN0WakeUpHandler, ; 50
-    void()* @proc_I2S0TransmitHandler, ; 51
-    void()* @proc_I2S0ReceiveHandler, ; 52
+    void()* @!PROC!CAN0MessageBufferHandler, ; 45
+    void()* @!PROC!CAN0BusOffHandler, ; 46
+    void()* @!PROC!CAN0ErrorHandler, ; 47
+    void()* @!PROC!CAN0TransmitWarningHandler, ; 48
+    void()* @!PROC!CAN0ReceiveWarningHandler, ; 49
+    void()* @!PROC!CAN0WakeUpHandler, ; 50
+    void()* @!PROC!I2S0TransmitHandler, ; 51
+    void()* @!PROC!I2S0ReceiveHandler, ; 52
     void()* null, ; 53
     void()* null, ; 54
     void()* null, ; 55
@@ -84,57 +84,57 @@ target triple = "thumbv7em-none--eabi"
     void()* null, ; 57
     void()* null, ; 58
     void()* null, ; 59
-    void()* @proc_UART0LONHandler, ; 60
-    void()* @proc_UART0StatusHandler, ; 61
-    void()* @proc_UART0ErrorHandler, ; 62
-    void()* @proc_UART1StatusHandler, ; 63
-    void()* @proc_UART1ErrorHandler, ; 64
-    void()* @proc_UART2StatusHandler, ; 65
-    void()* @proc_UART2ErrorHandler, ; 66
+    void()* @!PROC!UART0LONHandler, ; 60
+    void()* @!PROC!UART0StatusHandler, ; 61
+    void()* @!PROC!UART0ErrorHandler, ; 62
+    void()* @!PROC!UART1StatusHandler, ; 63
+    void()* @!PROC!UART1ErrorHandler, ; 64
+    void()* @!PROC!UART2StatusHandler, ; 65
+    void()* @!PROC!UART2ErrorHandler, ; 66
     void()* null, ; 67
     void()* null, ; 68
     void()* null, ; 69
     void()* null, ; 70
     void()* null, ; 71
     void()* null, ; 72
-    void()* @proc_ADC0Handler, ; 73
-    void()* @proc_ADC1Handler, ; 74
-    void()* @proc_CMP0Handler, ; 75
-    void()* @proc_CMP1Handler, ; 76
-    void()* @proc_CMP2Handler, ; 77
-    void()* @proc_FMT0Handler, ; 78
-    void()* @proc_FMT1Handler, ; 79
-    void()* @proc_FMT2Handler, ; 80
-    void()* @proc_CMTHandler, ; 81
-    void()* @proc_RTCAlarmHandler, ; 82
-    void()* @proc_RTCSecondHandler, ; 83
-    void()* @proc_PITChannel0Handler, ; 84
-    void()* @proc_PITChannel1Handler, ; 85
-    void()* @proc_PITChannel2Handler, ; 86
-    void()* @proc_PITChannel3Handler, ; 87
-    void()* @proc_PDBHandler, ; 88
-    void()* @proc_USBOTGHandler, ; 89
-    void()* @proc_USBChargerDetectHandler, ; 90
+    void()* @!PROC!ADC0Handler, ; 73
+    void()* @!PROC!ADC1Handler, ; 74
+    void()* @!PROC!CMP0Handler, ; 75
+    void()* @!PROC!CMP1Handler, ; 76
+    void()* @!PROC!CMP2Handler, ; 77
+    void()* @!PROC!FMT0Handler, ; 78
+    void()* @!PROC!FMT1Handler, ; 79
+    void()* @!PROC!FMT2Handler, ; 80
+    void()* @!PROC!CMTHandler, ; 81
+    void()* @!PROC!RTCAlarmHandler, ; 82
+    void()* @!PROC!RTCSecondHandler, ; 83
+    void()* @!PROC!PITChannel0Handler, ; 84
+    void()* @!PROC!PITChannel1Handler, ; 85
+    void()* @!PROC!PITChannel2Handler, ; 86
+    void()* @!PROC!PITChannel3Handler, ; 87
+    void()* @!PROC!PDBHandler, ; 88
+    void()* @!PROC!USBOTGHandler, ; 89
+    void()* @!PROC!USBChargerDetectHandler, ; 90
     void()* null, ; 91
     void()* null, ; 92
     void()* null, ; 93
     void()* null, ; 94
     void()* null, ; 95
     void()* null, ; 96
-    void()* @proc_DAC0Handler, ; 97
+    void()* @!PROC!DAC0Handler, ; 97
     void()* null, ; 98
-    void()* @proc_TSIHandler, ; 99
-    void()* @proc_MCGHandler, ; 100
-    void()* @proc_lowPowerTimerHandler, ; 101
+    void()* @!PROC!TSIHandler, ; 99
+    void()* @!PROC!MCGHandler, ; 100
+    void()* @!PROC!lowPowerTimerHandler, ; 101
     void()* null, ; 102
-    void()* @proc_pinDetectPortAHandler, ; 103
-    void()* @proc_pinDetectPortBHandler, ; 104
-    void()* @proc_pinDetectPortCHandler, ; 105
-    void()* @proc_pinDetectPortDHandler, ; 106
-    void()* @proc_pinDetectPortEHandler, ; 107
+    void()* @!PROC!pinDetectPortAHandler, ; 103
+    void()* @!PROC!pinDetectPortBHandler, ; 104
+    void()* @!PROC!pinDetectPortCHandler, ; 105
+    void()* @!PROC!pinDetectPortDHandler, ; 106
+    void()* @!PROC!pinDetectPortEHandler, ; 107
     void()* null, ; 108
     void()* null, ; 109
-    void()* @proc_softwareInterruptHandler, ; 110
+    void()* @!PROC!softwareInterruptHandler, ; 110
     void()* null, ; 111
     void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, ; 112 à 119
     void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, ; 120 à 127
@@ -259,9 +259,9 @@ define internal void @ResetISR () nounwind noreturn naked {
 ;  msr control, r0
   call void asm sideeffect "msr CONTROL, $0", "r"(i32 1) nounwind
 ;---
-  call void @proc_setup ()
+  call void @!PROC!setup ()
   br label %loop
 loop:
-  call void @proc_loop ()
+  call void @!PROC!loop ()
   br label %loop
 }

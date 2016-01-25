@@ -1338,13 +1338,13 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Function 'mangledNameForLocalVariable'                                        *
+//                                         Function 'llvmNameForLocalVariable'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_mangledNameForLocalVariable (class GALGAS_string inArgument0,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForLocalVariable (class GALGAS_string inArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -163,7 +163,7 @@ override method @globalConstantDeclaration semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalConstantMapIR-element generateLLVM ?!@string ioLLVMcode {
-  ioLLVMcode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal constant "
+  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal constant "
   ioLLVMcode += [mType llvmTypeName] + " " +  [mSourceExpression llvmName] + "\n"
 }
 

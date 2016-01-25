@@ -577,43 +577,43 @@ class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'mangledNameForFunction'                                          *
+//                                           Function 'llvmNameForFunction'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_mangledNameForFunction (class GALGAS_string inArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForFunction (class GALGAS_string inArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Function 'mangledNameForProcedure'                                          *
+//                                           Function 'llvmNameForProcedure'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_mangledNameForProcedure (class GALGAS_string inArgument0,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForProcedure (class GALGAS_string inArgument0,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Function 'mangledNameForGlobalVariable'                                       *
+//                                        Function 'llvmNameForGlobalVariable'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_mangledNameForGlobalVariable (class GALGAS_string inArgument0,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForGlobalVariable (class GALGAS_string inArgument0,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'mangledNameForRegister'                                          *
+//                                           Function 'llvmNameForRegister'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_mangledNameForRegister (class GALGAS_string inArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForRegister (class GALGAS_string inArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

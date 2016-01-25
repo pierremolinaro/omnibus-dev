@@ -29,7 +29,7 @@ override method @storeGlobalVariableIR llvmInstructionCode
   if mIsVolatile then
     ioLLVMcode += "volatile "
   end
-  ioLLVMcode += llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType + "* @" + mangledNameForGlobalVariable (!mGlobalVarName) + "\n"
+  ioLLVMcode += llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType + "* @" + llvmNameForGlobalVariable (!mGlobalVarName) + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

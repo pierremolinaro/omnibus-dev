@@ -170,7 +170,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:mangledNameForFunction (!name:mFunctionName.string)
+    !routineMangledName:llvmNameForFunction (!name:mFunctionName.string)
     !context:inContext
     !globalsAreConstant:true
   )
@@ -201,7 +201,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       !false
       !true # Is constant
     ]
-    formalArguments += !.input !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+    formalArguments += !.input !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
   end
 #---
   let routineNameForInvocationGraph = @lstring.new{!"func " + mFunctionName !mFunctionName.location}
@@ -248,7 +248,7 @@ method @functionMapIR-element implementationCodeGeneration
   ioLLVMcode += llvmTitleComment (!"func " + lkey)
   ioLLVMcode += "define internal "
   ioLLVMcode += [mResultType llvmTypeName]
-  ioLLVMcode += " @" + mangledNameForFunction (!name:lkey.string) + " ("
+  ioLLVMcode += " @" + llvmNameForFunction (!name:lkey.string) + " ("
   for () in mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
@@ -264,7 +264,7 @@ method @functionMapIR-element implementationCodeGeneration
   end
   ioLLVMcode += ") nounwind {\n"
 #--- Store result in memory
-  let resultMangledName = "%" + mangledNameForLocalVariable (!mResultVarName)
+  let resultMangledName = "%" + llvmNameForLocalVariable (!mResultVarName)
   ioLLVMcode += "  " + resultMangledName + " = alloca " + [mResultType llvmTypeName] + "\n"
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do

@@ -7,13 +7,13 @@
 getter @objectInMemoryIR mangledName -> @string outResult {
   switch self
   case register (* @lstring name *) :
-    outResult = mangledNameForRegister (!name:name.string)
+    outResult = llvmNameForRegister (!name:name.string)
   case globalVariable (* @string name *) :
-    outResult = mangledNameForGlobalVariable (!name)
+    outResult = llvmNameForGlobalVariable (!name)
   case localValue (* @string name) :
-    outResult = mangledNameForLocalVariable (!name)
+    outResult = llvmNameForLocalVariable (!name)
   case globalConstant (* @string name) :
-    outResult = mangledNameForGlobalVariable (!name)
+    outResult = llvmNameForGlobalVariable (!name)
   case fieldAccess (@unifiedTypeMap-proxy unused objectType
                     @string unused objectName
                     @unifiedTypeMap-proxy unused fielfType
@@ -164,17 +164,18 @@ proc generateLLVMfile
   var asCode = ""
 #----------------------------------------- Include assembler specific file
   asCode += asTitleComment (!"Target specific code")
-  asCode += getTargetTextFile (
+  asCode +=  getTargetTextFile (
      !currentDir:inCurrentDirectory
      !from:inTargetName.string + "/target.s"
   )
   asCode += "\n"
 #----------------------------------------- Include LLVM specific file
   llvmCode += llvmTitleComment (!"Target specific code")
-  llvmCode += getTargetTextFile (
+  let targetLLVMcode = getTargetTextFile (
      !currentDir:inCurrentDirectory
      !from:inTargetName.string + "/target.ll"
   )
+  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!"")]
   llvmCode += "\n"
 #----------------------------------------- Structure types declaration
   llvmCode += llvmTitleComment (!"Structure types")
@@ -230,18 +231,18 @@ proc generateLLVMfile
     llvmCode += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
     llvmCode += "i8* %in.FILE) nounwind noreturn {\n"
   #--- First argument: line
-    llvmCode += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca "
+    llvmCode += "  %" + llvmNameForLocalVariable (!"LINE") + " = alloca "
     llvmCode += generationContext.mExceptionLineLLVMType + "\n"
     llvmCode += "  store " + generationContext.mExceptionLineLLVMType + " %in.LINE, "
-    llvmCode += generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
+    llvmCode += generationContext.mExceptionLineLLVMType + "* %" + llvmNameForLocalVariable (!"LINE") + "\n"
   #--- Second argument : code
-    llvmCode += "  %" + mangledNameForLocalVariable (!"CODE")
+    llvmCode += "  %" + llvmNameForLocalVariable (!"CODE")
     llvmCode += " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
     llvmCode += "  store " + generationContext.mExceptionCodeLLVMType + " %in.CODE, "
-    llvmCode += generationContext.mExceptionCodeLLVMType + "* %" + mangledNameForLocalVariable (!"CODE") + "\n"
+    llvmCode += generationContext.mExceptionCodeLLVMType + "* %" + llvmNameForLocalVariable (!"CODE") + "\n"
   #--- Third argument : file    
-    llvmCode += "  %" + mangledNameForLocalVariable (!"FILE") + " = alloca i8*\n"
-    llvmCode += "  store i8* %in.FILE, i8** %" + mangledNameForLocalVariable (!"FILE") + "\n"
+    llvmCode += "  %" + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
+    llvmCode += "  store i8* %in.FILE, i8** %" + llvmNameForLocalVariable (!"FILE") + "\n"
     [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode
       !?llvmCode
       !generationContext

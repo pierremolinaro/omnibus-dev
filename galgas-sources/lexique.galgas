@@ -160,24 +160,46 @@ message internalError : "internal error"
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+message binaryDigitError : "0b should be followed by a binary digit"
+
 rule "0b" {
   repeat
-  while '0'->'1' :
-    enterBinaryDigitIntoBigInt (!* !?bigInteger error internalError)
   while '_' :
   end
-  send $integer$
+  select
+  case '0'->'1' :
+    enterBinaryDigitIntoBigInt (!* !?bigInteger error internalError)
+    repeat
+    while '0'->'1' :
+      enterBinaryDigitIntoBigInt (!* !?bigInteger error internalError)
+    while '_' :
+    end
+    send $integer$
+  default
+    error binaryDigitError
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+message hexDigitError : "0x should be followed by a hexadecimal digit"
+
 rule "0x" {
   repeat
-  while '0'->'9' | 'a'->'f' | 'A'->'F' :
-    enterHexDigitIntoBigInt (!* !?bigInteger error internalError)
   while '_' :
   end
-  send $integer$
+  select
+  case '0'->'9' | 'a'->'f' | 'A'->'F' :
+    enterHexDigitIntoBigInt (!* !?bigInteger error internalError)
+    repeat
+    while '0'->'9' | 'a'->'f' | 'A'->'F' :
+      enterHexDigitIntoBigInt (!* !?bigInteger error internalError)
+    while '_' :
+    end
+    send $integer$
+  default
+    error hexDigitError
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -202,7 +224,6 @@ rule '0'->'9' {
 
 style stringStyle -> "Literal Strings"
 $literal_string$ ! tokenString style stringStyle %nonAtomicSelection error message "a literal character string \"...\""
-
 
 message incorrectStringEnd : "string does not end with '\"'"
 

@@ -79,7 +79,7 @@ Il n'y a aucune restriction pour l'\plm=expression= : elle peut nommer constante
 
 \section {Instruction d'affectation}
 
-L'instruction d'affectation est la suivante :
+L'instruction d'affectation se présente sous plusieurs formes ; la plus simple est la suivante :
 
 \begin{PLM}
 nom = expression
@@ -91,8 +91,11 @@ Où :
   \item \plm=expression= est l'expression qui fournit la valeur.
 \end{itemize}
 
+Dans une procédure mutable de structure (\refSubsectionPage{procMutableStructure}), il est possible d'affecter l'objet courant :
 
-
+\begin{PLM}
+self = expression
+\end{PLM}
 
 
 

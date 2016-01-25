@@ -124,7 +124,7 @@ override method @functionCallInExpressionAST analyzeExpression
     !error:mFunctionName.location
   )
 #---
-  var s = mangledNameForFunction (!name:mFunctionName.string) + " ("
+  var s = llvmNameForFunction (!name:mFunctionName.string) + " ("
   if [functionSignature length] != [mParameterList length] then
     error mFunctionName : "this function declares " + [functionSignature length] 
       + " formal parameters, the call names " + [mParameterList length] + " effective arguments"
@@ -198,7 +198,7 @@ override method @functionCallIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName]
-  ioLLVMcode += " @" + mangledNameForFunction (!name:mFunctionName) + " ("
+  ioLLVMcode += " @" + llvmNameForFunction (!name:mFunctionName) + " ("
   for () in mArgumentList do
     switch mEffectiveParameterPassingMode
     case input:

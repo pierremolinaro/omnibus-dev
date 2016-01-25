@@ -138,7 +138,7 @@ override method @forInstructionIR llvmInstructionCode
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
-  ioLLVMcode += "  %" + mangledNameForLocalVariable (!mVarName) + " = alloca " + elementTypeName + "\n"
+  ioLLVMcode += "  %" + llvmNameForLocalVariable (!mVarName) + " = alloca " + elementTypeName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
   
 #--- Test
@@ -152,7 +152,7 @@ override method @forInstructionIR llvmInstructionCode
 #--- Loop  
   ioLLVMcode += loopLabel + ":\n"
   ioLLVMcode += "  store " + elementTypeName + " %" + currentVar + ", "
-  ioLLVMcode +=  elementTypeName + "* %" + mangledNameForLocalVariable (!mVarName) + "\n"
+  ioLLVMcode +=  elementTypeName + "* %" + llvmNameForLocalVariable (!mVarName) + "\n"
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  %" + ptrVar + ".next = getelementptr inbounds " + elementTypeName + ", "
   ioLLVMcode += elementTypeName + "* %" + ptrVar + ", i32 1\n"
