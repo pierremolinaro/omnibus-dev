@@ -80,9 +80,9 @@ getter @objectInMemoryIR llvmName -> @string outName {
   case register (* @lstring name *) :
     error name : "@objectInMemoryIR name" : outName
   case globalVariable (* @string name *) :
-    outName = "@" + mangledNameForGlobalVariable (!name)
+    outName = "@" + llvmNameForGlobalVariable (!name)
   case localValue (* @string name) :
-    outName = "%" + mangledNameForLocalVariable (!name)
+    outName = "%" + llvmNameForLocalVariable (!name)
   case globalConstant (*  @string name) :
     outName = "%" + name
   case fieldAccess (@unifiedTypeMap-proxy unused objectType
@@ -142,7 +142,7 @@ getter @objectInMemoryIR address -> @operandIR outOperand {
   case globalVariable (* * *) :
     error .nowhere : "@objectInMemoryIR address" : outOperand
   case localValue (@unifiedTypeMap-proxy type @string name) :
-    outOperand  = .new {!type !.llvmLocalObject {!name:mangledNameForLocalVariable (!name)}}
+    outOperand  = .new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name)}}
   case globalConstant (* *) :
     error .nowhere : "@objectInMemoryIR address" : outOperand
   case fieldAccess (@unifiedTypeMap-proxy unused objectType

@@ -21,7 +21,7 @@ override method @allocaConstantIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mVariableType llvmTypeName]
-  ioLLVMcode += "  %" + mangledNameForLocalVariable (!mLocalVariableName) + " = alloca " + llvmType + "\n"
+  ioLLVMcode += "  %" + llvmNameForLocalVariable (!mLocalVariableName) + " = alloca " + llvmType + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

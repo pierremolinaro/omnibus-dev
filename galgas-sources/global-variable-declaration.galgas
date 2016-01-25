@@ -171,7 +171,7 @@ method @globalVarDeclarationList-element enterInContext
   @allowedFunctionMap allowedFunctionMap = {}
   for () in mAllowedFunctionList do
     [ioContext.mFunctionMap searchKey !mValue ?3*]
-    [!?allowedFunctionMap insertKey !.new{!mangledNameForFunction (!name:mValue.string) !mValue.location}]
+    [!?allowedFunctionMap insertKey !.new{!llvmNameForFunction (!name:mValue.string) !mValue.location}]
   end
 #--- Check allowed init routines are defined
   @allowedRoutineMap allowedProcedureMap = {}
@@ -272,7 +272,7 @@ method @globalVarDeclarationList-element semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
-  ioLLVMcode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal global "
+  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal global "
   ioLLVMcode += [mType llvmTypeName] + " "
   let initialString = [mInitialValue llvmName]
   if initialString == "" then

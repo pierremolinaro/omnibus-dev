@@ -205,26 +205,50 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       mTokenCode = plm_lexique_1_modeName ;
     }else if (scanningOk && ([self testForInputString:@"0b" advance:YES])) {
       do {
-        if (scanningOk && ([self testForInputFromChar:48 toChar:49])) {
-          scanner_cocoa_routine_enterBinaryDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
-        }else if (scanningOk && ([self testForInputChar:95])) {
+        if (scanningOk && ([self testForInputChar:95])) {
         }else{
           mLoop = NO ;
         }
       }while (mLoop && scanningOk) ;
       mLoop = YES ;
-      mTokenCode = plm_lexique_1_integer ;
+      if (scanningOk && ([self testForInputFromChar:48 toChar:49])) {
+        scanner_cocoa_routine_enterBinaryDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
+        do {
+          if (scanningOk && ([self testForInputFromChar:48 toChar:49])) {
+            scanner_cocoa_routine_enterBinaryDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
+          }else if (scanningOk && ([self testForInputChar:95])) {
+          }else{
+            mLoop = NO ;
+          }
+        }while (mLoop && scanningOk) ;
+        mLoop = YES ;
+        mTokenCode = plm_lexique_1_integer ;
+      }else{
+        scanningOk = NO ;
+      }
     }else if (scanningOk && ([self testForInputString:@"0x" advance:YES])) {
       do {
-        if (scanningOk && ([self testForInputFromChar:48 toChar:57] || [self testForInputFromChar:97 toChar:102] || [self testForInputFromChar:65 toChar:70])) {
-          scanner_cocoa_routine_enterHexDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
-        }else if (scanningOk && ([self testForInputChar:95])) {
+        if (scanningOk && ([self testForInputChar:95])) {
         }else{
           mLoop = NO ;
         }
       }while (mLoop && scanningOk) ;
       mLoop = YES ;
-      mTokenCode = plm_lexique_1_integer ;
+      if (scanningOk && ([self testForInputFromChar:48 toChar:57] || [self testForInputFromChar:97 toChar:102] || [self testForInputFromChar:65 toChar:70])) {
+        scanner_cocoa_routine_enterHexDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
+        do {
+          if (scanningOk && ([self testForInputFromChar:48 toChar:57] || [self testForInputFromChar:97 toChar:102] || [self testForInputFromChar:65 toChar:70])) {
+            scanner_cocoa_routine_enterHexDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
+          }else if (scanningOk && ([self testForInputChar:95])) {
+          }else{
+            mLoop = NO ;
+          }
+        }while (mLoop && scanningOk) ;
+        mLoop = YES ;
+        mTokenCode = plm_lexique_1_integer ;
+      }else{
+        scanningOk = NO ;
+      }
     }else if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
       scanner_cocoa_routine_enterDecimalDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
       do {

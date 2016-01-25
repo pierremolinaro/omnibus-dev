@@ -24,7 +24,7 @@ override method @storeLocalVariableIR llvmInstructionCode
 {
   let llvmType = [mTargetVarType llvmTypeName]
   ioLLVMcode += "  store "
-  ioLLVMcode += llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"
+  ioLLVMcode += llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType + "* %" + llvmNameForLocalVariable (!mLocalVarName) + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

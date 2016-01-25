@@ -285,7 +285,7 @@ proc enterFormalArguments
         !true
         !true # Is constant
       ]
-      ioFormalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     case inputOutput :
       [!?ioVariableMap insertInputOutputFormalArgument
         !formalArgumentName
@@ -297,7 +297,7 @@ proc enterFormalArguments
         !true
         !false # Is not constant
       ]
-      ioFormalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     case output :
       [!?ioVariableMap insertOutputFormalArgument
         !formalArgumentName
@@ -309,7 +309,7 @@ proc enterFormalArguments
         !true
         !false # Is not constant
       ]
-      ioFormalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     end
   end
 }
@@ -441,7 +441,7 @@ method @procedureMapIR-element llvmCodeGeneration
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let procName = mangledNameForProcedure (!lkey.string)
+  let procName = llvmNameForProcedure (!lkey.string)
   if [option plm_options.noPanicGeneration value] && mNullOnNoException then
   #--- Generate in assembly code routine pointer as NULL value
     ioAssemblerCode += asSeparatorLine ()

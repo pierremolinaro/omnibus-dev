@@ -56,32 +56,32 @@ func %once literalIntegerTypeName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mangledNameForFunction ?name:@string inName -> @string outName {
+func llvmNameForFunction ?name:@string inName -> @string outName {
   outName = "func." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mangledNameForProcedure ?@string inName -> @string outName {
-  outName = "proc_" + inName
+func llvmNameForProcedure ?@string inName -> @string outName {
+  outName = "proc." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mangledNameForLocalVariable ?@string inName -> @string outName {
-  outName = "var_" + inName
+func llvmNameForLocalVariable ?@string inName -> @string outName {
+  outName = "var." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mangledNameForGlobalVariable ?@string inName -> @string outName {
-  outName = "gvar_" + inName
+func llvmNameForGlobalVariable ?@string inName -> @string outName {
+  outName = "gvar." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mangledNameForRegister ?name:@string inName -> @string outName {
-  outName = "register_" + inName
+func llvmNameForRegister ?name:@string inName -> @string outName {
+  outName = "register." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

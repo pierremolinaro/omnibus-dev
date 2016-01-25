@@ -345,7 +345,7 @@ override method @structureDeclaration semanticAnalysis
     end
   #--- Analyse formal arguments
     @procFormalArgumentListForGeneration formalArguments = {}
-    formalArguments += !.inputOutput !structureType !mangledNameForLocalVariable (!"self")
+    formalArguments += !.inputOutput !structureType !llvmNameForLocalVariable (!"self")
     enterFormalArguments (
       !context:inContext
       !procedure.mProcFormalArgumentList
@@ -410,7 +410,7 @@ override method @structureDeclaration semanticAnalysis
     end
   #--- Variable map
     @variableMap variableMap = initialVariableMap (
-      !routineMangledName:mangledNameForFunction (!name:function.mFunctionName.string)
+      !routineMangledName:llvmNameForFunction (!name:function.mFunctionName.string)
       !context:inContext
       !globalsAreConstant:true
     )
@@ -440,7 +440,7 @@ override method @structureDeclaration semanticAnalysis
     ]
   #--- Analyse formal arguments
     @procFormalArgumentListForGeneration formalArguments = {}
-    formalArguments += !.inputOutput !structureType !mangledNameForLocalVariable (!"self")
+    formalArguments += !.inputOutput !structureType !llvmNameForLocalVariable (!"self")
     for (* formalArgumentTypeName formalArgumentName) in function.mFuncFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
       [!?variableMap insertConstantInputFormalArgument
@@ -453,7 +453,7 @@ override method @structureDeclaration semanticAnalysis
         !false
         !true # Is constant
       ]
-      formalArguments += !.input !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
+      formalArguments += !.input !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     end
   #---
     let routineNameForInvocationGraph = @lstring.new{
