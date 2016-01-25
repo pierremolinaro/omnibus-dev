@@ -13,7 +13,7 @@ sortedlist @exceptionClauseListAST {
   @lstring mExceptionClauseName
   @instructionListAST mExceptionInstructionList
   @location mEndOfExceptionInstructions
-  @bigint mPriority
+  @lbigint mPriority
   @location mLocationPriority
 }{
   mPriority <
@@ -41,7 +41,7 @@ syntax extension common_syntax {
       !exceptionClauseName
       !instructionList
       !endOfInstructionList
-      !priority.bigint
+      !priority
       !priority.location
   }
 
@@ -103,10 +103,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   if not [inContext.mModeMap hasKey !panicModeName ()] then
     error mExceptionClauseName : "the `" + panicModeName () + " mode should be defined in order to use an exception clause"
   end
-  let routineNameForInvocationGraph = @lstring.new  {
-    !"exception " + mExceptionClauseName + " " + mPriority
-    !mExceptionClauseName.location
-  }
+  let routineNameForInvocationGraph = exceptionNameForInvocationGraph (!mExceptionClauseName.string !mPriority)
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
     !routineMangledName:routineNameForInvocationGraph.string

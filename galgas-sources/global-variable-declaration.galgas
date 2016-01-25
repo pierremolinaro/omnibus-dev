@@ -168,19 +168,17 @@ method @globalVarDeclarationList-element enterInContext
   )
   @stringset executionModes = {}
 #--- Check allowed function are defined
+  @allowedRoutineMap allowedProcedureMap = {}
   @allowedFunctionMap allowedFunctionMap = {}
   for () in mAllowedFunctionList do
     [ioContext.mFunctionMap searchKey !mValue ?3*]
     [!?allowedFunctionMap insertKey !.new{!llvmNameForFunction (!name:mValue.string) !mValue.location}]
+    [!?allowedProcedureMap insertKey !funcNameForInvocationGraph (!.null !mValue) !false]
   end
 #--- Check allowed init routines are defined
-  @allowedRoutineMap allowedProcedureMap = {}
   for () in mAllowedInitList do
     [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
-    [!?allowedProcedureMap insertKey
-       !.new {!"init " + [mInitPriority.bigint string] !mInitPriority.location}
-       !mHasWriteAccess
-    ]
+    [!?allowedProcedureMap insertKey !initNameForInvocationGraph (!mInitPriority) !mHasWriteAccess]
   end
 #--- Check allowed exception routines are defined
   for () in mAllowedExceptionList do
@@ -198,22 +196,12 @@ method @globalVarDeclarationList-element enterInContext
       error mExceptionName : "exception routine name should be \"setup\" or \"loop\""
     end
     [!?allowedProcedureMap insertKey
-      !.new {!"exception " + mExceptionName + " " + [mExceptionPriority.bigint string] !mExceptionName.location}
+      !exceptionNameForInvocationGraph (!mExceptionName.string !mExceptionPriority)
       !mHasWriteAccess
     ]
   end
 #--- Check allowed procedures are defined
   for () in mAllowedProcList do
-#    var allowedProcMangledName = mProcName.string
-#    for () in mProcFormalArgumentList do
-#      switch mFormalArgumentPassingMode
-#      case input : allowedProcMangledName += "?"
-#      case output : allowedProcMangledName += "!"
-#      case inputOutput : allowedProcMangledName += "?!"
-#      end
-#      allowedProcMangledName += mSelector.string + ":"
-#    end
-#    let allowedProcMangledNameWithLocation = @lstring.new {!allowedProcMangledName !mProcName.location}
     [ioContext.mProcedureMap searchKey
       !mProcName
       ?*

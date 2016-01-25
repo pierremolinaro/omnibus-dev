@@ -122,19 +122,18 @@ override method @procCallInstructionAST analyze
   @procCallEffectiveParameterListIR procCallEffectiveParameterListIR = {}
   @procedureSignature procSignature
   @modeMap procedureModeMap
-  @string procedureMangledName = ""
+  @unifiedTypeMap-proxy receiverType
   if mReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
       !mReceiverName
-      ?let type
+      ?receiverType
       ?*
       ?@objectInMemoryIR variableKind
       ?4*
     ]
   #--- Load variable
     procCallEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] 
-    procedureMangledName += [type key] + "."
-    [[type procedureMap] searchKey
+    [[receiverType procedureMap] searchKey
       !mProcName
       ?*
       ?procedureModeMap
@@ -149,12 +148,12 @@ override method @procCallInstructionAST analyze
       ?procSignature
       ?*
     ]
+    receiverType = .null
   end
-  procedureMangledName += mProcName.string
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
     !inRoutineNameForInvocationGraph
-    !.new {!"proc " + procedureMangledName !mProcName.location}
+    !procNameForInvocationGraph (!receiverType !mProcName)
   ]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}
@@ -255,7 +254,7 @@ override method @procCallInstructionAST analyze
   end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
-    !procedureMangledName
+    !if receiverType == .null then "" else [receiverType key] + "." end + mProcName
     !procCallEffectiveParameterListIR
   }
 }
