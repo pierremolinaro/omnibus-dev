@@ -106,7 +106,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   let routineNameForInvocationGraph = exceptionNameForInvocationGraph (!mExceptionClauseName.string !mPriority)
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:routineNameForInvocationGraph.string
+    !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !globalsAreConstant:false
   )

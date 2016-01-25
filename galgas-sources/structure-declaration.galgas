@@ -313,9 +313,8 @@ override method @structureDeclaration semanticAnalysis
       procedureModeSet += !mode.mValue.string
     end
   #--- Variable map
-    let procMangledName = "proc " + mStructureName + "." + procedure.mProcedureName
     @variableMap variableMap = initialVariableMap (
-      !routineMangledName:procMangledName
+      !routineNameForInvocation:procNameForInvocationGraph (!structureType !procedure.mProcedureName).string
       !context:inContext
       !globalsAreConstant:false
     )
@@ -410,7 +409,7 @@ override method @structureDeclaration semanticAnalysis
     end
   #--- Variable map
     @variableMap variableMap = initialVariableMap (
-      !routineMangledName:llvmNameForFunction (!name:function.mFunctionName.string)
+      !routineNameForInvocation:llvmNameForFunction (!name:function.mFunctionName.string)
       !context:inContext
       !globalsAreConstant:true
     )

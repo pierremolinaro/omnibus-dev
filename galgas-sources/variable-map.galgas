@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func initialVariableMap
-  ?routineMangledName:let @string inMangledName
+  ?routineNameForInvocation:let @string inRoutineNameForInvocation
   ?context:let @semanticContext inContext
   ?globalsAreConstant:@bool inGlobalsAreConstant
   -> @variableMap outVariableMap
@@ -52,14 +52,11 @@ func initialVariableMap
     ]
   end
 #--- Add global variables
-  for (variableName variableType modeSet allowedProcedureMap allowedFunctionMap * isConstant) in inContext.mGlobalVariableMap do
+  for (variableName variableType modeSet allowedProcedureMap * isConstant) in inContext.mGlobalVariableMap do
     var writeAccess = false
-    var allowedAccess = [allowedFunctionMap hasKey !inMangledName]
-    if not allowedAccess then
-      allowedAccess = [allowedProcedureMap hasKey !inMangledName] || [allowedFunctionMap hasKey !inMangledName]
-      if allowedAccess then
-        writeAccess = [allowedProcedureMap mHasWriteAccessForKey !inMangledName]
-      end
+    var allowedAccess = [allowedProcedureMap hasKey !inRoutineNameForInvocation]
+    if allowedAccess then
+      writeAccess = [allowedProcedureMap mHasWriteAccessForKey !inRoutineNameForInvocation]
     end
     if inGlobalsAreConstant || not writeAccess then
       [!?outVariableMap insertUsedLocalConstant

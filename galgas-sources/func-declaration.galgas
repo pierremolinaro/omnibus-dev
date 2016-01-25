@@ -170,7 +170,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:llvmNameForFunction (!name:mFunctionName.string)
+    !routineNameForInvocation:funcNameForInvocationGraph (!.null !mFunctionName).string
     !context:inContext
     !globalsAreConstant:true
   )

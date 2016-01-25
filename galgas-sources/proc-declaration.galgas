@@ -355,7 +355,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:"proc " + mProcedureName
+    !routineNameForInvocation:procNameForInvocationGraph (!.null !mProcedureName).string
     !context:inContext
     !globalsAreConstant:false
   )

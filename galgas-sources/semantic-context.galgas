@@ -75,8 +75,7 @@ map @globalConstantMap {
 map @globalVariableMap {
   @unifiedTypeMap-proxy mVariableType
   @stringset mExecutionModeSet
-  @allowedRoutineMap mAllowedProcedureMap
-  @allowedFunctionMap mAllowedFunctionMap
+  @allowedRoutineMap mAllowedRoutineMap
   @valueIR mInitialValue
   @bool mIsConstant
   insert insertKey error message "the '%K' global variable is already declared in %L"
