@@ -85,10 +85,8 @@ override method @assignmentInstructionAST analyze
   if isConstant then
     error mTargetVarName : "a constant cannot be modified"
   end
-  var comment = mTargetVarName.string
 #--- Analyze field list
   for (fieldName) in mFieldList do
-    comment += "." + mangledNameForProperty (!name:fieldName.string)
     switch [targetType kind]
     case boolean :
       error fieldName : "a boolean does not have fields"
@@ -99,7 +97,6 @@ override method @assignmentInstructionAST analyze
     case enumeration (*) :
       error fieldName : "an enumeration does not have fields"
     case structure (@propertyMap propertyMap *) :
-      comment += "." + fieldName
       [propertyMap searchKey !fieldName ?targetType ?let idx]
       getNewTempObjectInMemory (!targetType !?ioTemporaries ?let result)
       [!?ioInstructionGenerationList appendGetElementPtr
@@ -127,7 +124,6 @@ override method @assignmentInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR sourceOperand
   ]
-  comment += " = " + [sourceOperand.mValue llvmName]
   checkAssignmentCompatibility (
     !source:sourceOperand
     !targetType:targetType
@@ -148,8 +144,6 @@ override method @assignmentInstructionAST analyze
   if not isCopiable then
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
-#--- Code generation
-#  [!?ioInstructionGenerationList appendComment !comment]
   [target storeInMemory
     !value:sourceOperand
     !?instructionListIR:ioInstructionGenerationList

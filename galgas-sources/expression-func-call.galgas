@@ -85,19 +85,18 @@ override method @functionCallInExpressionAST analyzeExpression
   @modeMap functionModeMap
   @funcSignature functionSignature
   @unifiedTypeMap-proxy functionResultType
-  @string functionMangledName = ""
+  @unifiedTypeMap-proxy receiverType
   if mReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
       !mReceiverName
-      ?let type
+      ?receiverType
       ?*
       ?@objectInMemoryIR variableKind
       ?4*
     ]
   #--- Load variable
     effectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] 
-    functionMangledName += [type key] + "."
-    [[type functionMap] searchKey
+    [[receiverType functionMap] searchKey
       !mFunctionName
       ?functionModeMap
       ?functionSignature
@@ -110,12 +109,12 @@ override method @functionCallInExpressionAST analyzeExpression
       ?functionSignature
       ?functionResultType
     ]
+    receiverType = .null
   end
-  functionMangledName += mFunctionName.string
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
     !inRoutineNameForInvocationGraph
-    !.new {!"func " + functionMangledName !mFunctionName.location}
+    !funcNameForInvocationGraph (!receiverType !mFunctionName)
   ]
 #--- Check mode
   checkMode (
@@ -177,7 +176,7 @@ override method @functionCallInExpressionAST analyzeExpression
 #--- Generate code
   ioInstructionGenerationList += !@functionCallIR.new {
     !outResult
-    !functionMangledName
+    !if receiverType == .null then "" else [receiverType key] + "." end + mFunctionName
     !effectiveParameterListIR
   }
 }

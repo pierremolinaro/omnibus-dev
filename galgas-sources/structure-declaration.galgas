@@ -299,8 +299,7 @@ override method @structureDeclaration semanticAnalysis
 #--- Analyze procedures
   for procedure in mProcedureDeclarationListAST do
   #--- Enter subprogram invocation graph
-    let procMangledName = "proc " + mStructureName + "." + procedure.mProcedureName
-    let procNameForInvocationGraph = @lstring.new {!procMangledName !procedure.mProcedureName.location}
+    let procNameForInvocationGraph = procNameForInvocationGraph (!structureType !procedure.mProcedureName)
     if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
       [!?ioTemporaries.mSubprogramInvocationGraph addNode
         !procNameForInvocationGraph
@@ -314,6 +313,7 @@ override method @structureDeclaration semanticAnalysis
       procedureModeSet += !mode.mValue.string
     end
   #--- Variable map
+    let procMangledName = "proc " + mStructureName + "." + procedure.mProcedureName
     @variableMap variableMap = initialVariableMap (
       !routineMangledName:procMangledName
       !context:inContext
@@ -456,10 +456,7 @@ override method @structureDeclaration semanticAnalysis
       formalArguments += !.input !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     end
   #---
-    let routineNameForInvocationGraph = @lstring.new{
-      !"func " + mStructureName + "." + function.mFunctionName.string
-      !function.mFunctionName.location
-    }
+    let routineNameForInvocationGraph = funcNameForInvocationGraph (!structureType !function.mFunctionName)
     if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
       [!?ioTemporaries.mSubprogramInvocationGraph addNode
         !routineNameForInvocationGraph

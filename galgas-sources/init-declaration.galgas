@@ -94,15 +94,10 @@ method @initList-element initSemanticAnalysis
   [!?ioTemporaries.mInitRoutinePriorityMap insertKey !.new{![mPriority string] !mPriority.location}]
 #--- Check "requiredBy" routines are defined
   for (procName procFormalArgumentList) in mRequiredByProcList do
-#    let procMangledName = mangledName (
-#      !forProcedureKind:.standAloneProc
-#      !procedureName:procName
-#      !formalArgumentList:procFormalArgumentList
-#    )
     [inContext.mProcedureMap searchKey !procName ?4*]
   end
 #---
-  let routineNameForInvocationGraph = @lstring.new  {!"init " + mPriority.bigint !mPriority.location}
+  let routineNameForInvocationGraph = initNameForInvocationGraph (!mPriority)
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph
@@ -111,7 +106,7 @@ method @initList-element initSemanticAnalysis
   end
   for (procName procFormalArgumentList) in mRequiredByProcList do
     [!?ioTemporaries.mSubprogramInvocationGraph addEdge
-      !.new {!"proc " + procName.string !procName.location}
+      !procNameForInvocationGraph (!.null !procName)
       !routineNameForInvocationGraph
     ]
   end

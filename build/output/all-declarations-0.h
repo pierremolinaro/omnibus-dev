@@ -3539,7 +3539,7 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
   public : static GALGAS_exceptionClauseListAST constructor_sortedListWithValue (const class GALGAS_lstring & inOperand0,
                                                                                  const class GALGAS_instructionListAST & inOperand1,
                                                                                  const class GALGAS_location & inOperand2,
-                                                                                 const class GALGAS_bigint & inOperand3,
+                                                                                 const class GALGAS_lbigint & inOperand3,
                                                                                  const class GALGAS_location & inOperand4
                                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -3552,7 +3552,7 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_instructionListAST & inOperand1,
                                                       const class GALGAS_location & inOperand2,
-                                                      const class GALGAS_bigint & inOperand3,
+                                                      const class GALGAS_lbigint & inOperand3,
                                                       const class GALGAS_location & inOperand4
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -3560,7 +3560,7 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG void setter_popGreatest (class GALGAS_lstring & outArgument0,
                                                      class GALGAS_instructionListAST & outArgument1,
                                                      class GALGAS_location & outArgument2,
-                                                     class GALGAS_bigint & outArgument3,
+                                                     class GALGAS_lbigint & outArgument3,
                                                      class GALGAS_location & outArgument4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
@@ -3568,7 +3568,7 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG void setter_popSmallest (class GALGAS_lstring & outArgument0,
                                                      class GALGAS_instructionListAST & outArgument1,
                                                      class GALGAS_location & outArgument2,
-                                                     class GALGAS_bigint & outArgument3,
+                                                     class GALGAS_lbigint & outArgument3,
                                                      class GALGAS_location & outArgument4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
@@ -3578,7 +3578,7 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG void method_greatest (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_instructionListAST & outArgument1,
                                                   class GALGAS_location & outArgument2,
-                                                  class GALGAS_bigint & outArgument3,
+                                                  class GALGAS_lbigint & outArgument3,
                                                   class GALGAS_location & outArgument4,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
@@ -3586,7 +3586,7 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG void method_smallest (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_instructionListAST & outArgument1,
                                                   class GALGAS_location & outArgument2,
-                                                  class GALGAS_bigint & outArgument3,
+                                                  class GALGAS_lbigint & outArgument3,
                                                   class GALGAS_location & outArgument4,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
@@ -3615,7 +3615,7 @@ class cEnumerator_exceptionClauseListAST : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_mExceptionClauseName (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListAST current_mExceptionInstructionList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfExceptionInstructions (LOCATION_ARGS) const ;
-  public : class GALGAS_bigint current_mPriority (LOCATION_ARGS) const ;
+  public : class GALGAS_lbigint current_mPriority (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mLocationPriority (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_exceptionClauseListAST_2D_element current (LOCATION_ARGS) const ;
@@ -3636,7 +3636,7 @@ class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
   public : GALGAS_lstring mAttribute_mExceptionClauseName ;
   public : GALGAS_instructionListAST mAttribute_mExceptionInstructionList ;
   public : GALGAS_location mAttribute_mEndOfExceptionInstructions ;
-  public : GALGAS_bigint mAttribute_mPriority ;
+  public : GALGAS_lbigint mAttribute_mPriority ;
   public : GALGAS_location mAttribute_mLocationPriority ;
 
 
@@ -3657,7 +3657,7 @@ class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
   public : GALGAS_exceptionClauseListAST_2D_element (const GALGAS_lstring & in_mExceptionClauseName,
                                                      const GALGAS_instructionListAST & in_mExceptionInstructionList,
                                                      const GALGAS_location & in_mEndOfExceptionInstructions,
-                                                     const GALGAS_bigint & in_mPriority,
+                                                     const GALGAS_lbigint & in_mPriority,
                                                      const GALGAS_location & in_mLocationPriority) ;
 
 //-- Start of generic part --*
@@ -3674,7 +3674,7 @@ class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
   public : static GALGAS_exceptionClauseListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                             const class GALGAS_instructionListAST & inOperand1,
                                                                             const class GALGAS_location & inOperand2,
-                                                                            const class GALGAS_bigint & inOperand3,
+                                                                            const class GALGAS_lbigint & inOperand3,
                                                                             const class GALGAS_location & inOperand4
                                                                             COMMA_LOCATION_ARGS) ;
 
@@ -3698,7 +3698,7 @@ class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocationPriority (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mPriority (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

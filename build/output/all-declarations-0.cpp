@@ -6913,7 +6913,7 @@ class cSortedListElement_exceptionClauseListAST : public cSortedListElement {
   public : cSortedListElement_exceptionClauseListAST (const GALGAS_lstring & in_mExceptionClauseName,
                                                       const GALGAS_instructionListAST & in_mExceptionInstructionList,
                                                       const GALGAS_location & in_mEndOfExceptionInstructions,
-                                                      const GALGAS_bigint & in_mPriority,
+                                                      const GALGAS_lbigint & in_mPriority,
                                                       const GALGAS_location & in_mLocationPriority
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -6938,7 +6938,7 @@ class cSortedListElement_exceptionClauseListAST : public cSortedListElement {
 cSortedListElement_exceptionClauseListAST::cSortedListElement_exceptionClauseListAST (const GALGAS_lstring & in_mExceptionClauseName,
                                                                                       const GALGAS_instructionListAST & in_mExceptionInstructionList,
                                                                                       const GALGAS_location & in_mEndOfExceptionInstructions,
-                                                                                      const GALGAS_bigint & in_mPriority,
+                                                                                      const GALGAS_lbigint & in_mPriority,
                                                                                       const GALGAS_location & in_mLocationPriority
                                                                                       COMMA_LOCATION_ARGS) :
 cSortedListElement (THERE),
@@ -7023,7 +7023,7 @@ GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_emptySo
 GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_sortedListWithValue (const GALGAS_lstring & inOperand0,
                                                                                               const GALGAS_instructionListAST & inOperand1,
                                                                                               const GALGAS_location & inOperand2,
-                                                                                              const GALGAS_bigint & inOperand3,
+                                                                                              const GALGAS_lbigint & inOperand3,
                                                                                               const GALGAS_location & inOperand4
                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_exceptionClauseListAST result = constructor_emptySortedList (THERE) ;
@@ -7041,7 +7041,7 @@ GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_sortedL
 void GALGAS_exceptionClauseListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                          const GALGAS_instructionListAST & inOperand1,
                                                          const GALGAS_location & inOperand2,
-                                                         const GALGAS_bigint & inOperand3,
+                                                         const GALGAS_lbigint & inOperand3,
                                                          const GALGAS_location & inOperand4
                                                          COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -7069,7 +7069,7 @@ void GALGAS_exceptionClauseListAST::plusAssign_operation (const GALGAS_exception
 void GALGAS_exceptionClauseListAST::setter_popSmallest (GALGAS_lstring & outOperand0,
                                                         GALGAS_instructionListAST & outOperand1,
                                                         GALGAS_location & outOperand2,
-                                                        GALGAS_bigint & outOperand3,
+                                                        GALGAS_lbigint & outOperand3,
                                                         GALGAS_location & outOperand4,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
@@ -7097,7 +7097,7 @@ void GALGAS_exceptionClauseListAST::setter_popSmallest (GALGAS_lstring & outOper
 void GALGAS_exceptionClauseListAST::setter_popGreatest (GALGAS_lstring & outOperand0,
                                                         GALGAS_instructionListAST & outOperand1,
                                                         GALGAS_location & outOperand2,
-                                                        GALGAS_bigint & outOperand3,
+                                                        GALGAS_lbigint & outOperand3,
                                                         GALGAS_location & outOperand4,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
@@ -7125,7 +7125,7 @@ void GALGAS_exceptionClauseListAST::setter_popGreatest (GALGAS_lstring & outOper
 void GALGAS_exceptionClauseListAST::method_smallest (GALGAS_lstring & outOperand0,
                                                      GALGAS_instructionListAST & outOperand1,
                                                      GALGAS_location & outOperand2,
-                                                     GALGAS_bigint & outOperand3,
+                                                     GALGAS_lbigint & outOperand3,
                                                      GALGAS_location & outOperand4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
@@ -7153,7 +7153,7 @@ void GALGAS_exceptionClauseListAST::method_smallest (GALGAS_lstring & outOperand
 void GALGAS_exceptionClauseListAST::method_greatest (GALGAS_lstring & outOperand0,
                                                      GALGAS_instructionListAST & outOperand1,
                                                      GALGAS_location & outOperand2,
-                                                     GALGAS_bigint & outOperand3,
+                                                     GALGAS_lbigint & outOperand3,
                                                      GALGAS_location & outOperand4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
@@ -7218,7 +7218,7 @@ GALGAS_location cEnumerator_exceptionClauseListAST::current_mEndOfExceptionInstr
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cEnumerator_exceptionClauseListAST::current_mPriority (LOCATION_ARGS) const {
+GALGAS_lbigint cEnumerator_exceptionClauseListAST::current_mPriority (LOCATION_ARGS) const {
   const cSortedListElement_exceptionClauseListAST * p = (const cSortedListElement_exceptionClauseListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
   return p->mObject.mAttribute_mPriority ;
@@ -8305,7 +8305,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i8_ (GALGAS_ast
   nt_instructionList_ (var_instructionList, var_labelMap, inCompiler) ;
   GALGAS_location var_endOfInstructionList = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("exception.galgas", 38)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("exception.galgas", 39)) ;
-  ioArgument_ioAST.mAttribute_mExceptionClauses.addAssign_operation (var_exceptionClauseName, var_instructionList, var_endOfInstructionList, var_priority.mAttribute_bigint, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 40)) ;
+  ioArgument_ioAST.mAttribute_mExceptionClauses.addAssign_operation (var_exceptionClauseName, var_instructionList, var_endOfInstructionList, var_priority, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 40)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

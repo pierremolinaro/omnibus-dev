@@ -204,7 +204,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     formalArguments += !.input !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
   end
 #---
-  let routineNameForInvocationGraph = @lstring.new{!"func " + mFunctionName !mFunctionName.location}
+  let routineNameForInvocationGraph = funcNameForInvocationGraph (!.null !mFunctionName)
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph

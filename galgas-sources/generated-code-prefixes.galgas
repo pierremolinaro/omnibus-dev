@@ -2,26 +2,44 @@
 #  CODE GENERATION PREFIXES                                                                                            *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mangledNameForProperty ?name:@string inName -> @string outName {
-  outName = "property_" + inName
+func procNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
+  var s = "proc"
+  if inReceiverType != .null then
+    s += " $" + [inReceiverType key]
+  end
+  s += " " + inName
+  outName = .new {!s !inName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once receiverName -> @string outName {
-  outName = "receiver"
+func funcNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
+  var s = "func"
+  if inReceiverType != .null then
+    s += " $" + [inReceiverType key]
+  end
+  s += " " + inName
+  outName = .new {!s !inName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once receiverPtrName -> @string outName {
-  outName = "receiverPtr"
+func initNameForInvocationGraph ?@lbigint inPriority -> @lstring outName {
+  let s = "init " + inPriority.bigint
+  outName = .new {!s !inPriority.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func exceptionNameForInvocationGraph ?@string inName ?@lbigint inPriority -> @lstring outName {
+  let s = "exception . " + inName + " " + inPriority.bigint
+  outName = .new {!s !inPriority.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func mangledNameForType ?name:@string inName -> @string outPrefix {
-  outPrefix = "type_" + inName
+  outPrefix = "type." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

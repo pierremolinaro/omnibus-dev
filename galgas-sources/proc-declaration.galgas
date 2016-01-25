@@ -368,7 +368,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  let procNameForInvocationGraph = @lstring.new {!"proc " + mProcedureName !mProcedureName.location}
+  let procNameForInvocationGraph = procNameForInvocationGraph (!.null !mProcedureName)
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !procNameForInvocationGraph
