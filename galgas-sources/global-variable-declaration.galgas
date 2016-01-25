@@ -10,6 +10,13 @@ list @allowedProcList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @allowedFunctionList {
+  @lstring mReceiverTypeName
+  @lstring mFuncName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @allowedInitList {
   @bool mHasWriteAccess
   @lbigint mInitPriority
@@ -32,7 +39,7 @@ list @globalVarDeclarationList {
   @allowedProcList mAllowedProcList
   @allowedInitList mAllowedInitList
   @allowedExceptionList mAllowedExceptionList
-  @lstringlist mAllowedFunctionList
+  @allowedFunctionList mAllowedFunctionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,7 +63,7 @@ syntax extension common_syntax {
     <expression> ?let @expressionAST expression
     @allowedProcList allowedProcList = {}
     @allowedInitList allowedInitList = {}
-    @lstringlist allowedFunctionList = {}
+    @allowedFunctionList allowedFunctionList = {}
     @allowedExceptionList allowedExceptionList = {}
     ${$
     repeat
@@ -82,11 +89,17 @@ syntax extension common_syntax {
         allowedProcList += !hasWriteAccess !typeName !procName
       or
         $func$
+        @lstring typeName
+        select
+          typeName = ["" nowhere]
+        or
+          $typeName$ ?typeName
+        end
         $identifier$ ?let funcName
         if hasWriteAccess then
           error funcName : "a function cannot write a global variable"
         end
-        allowedFunctionList += !funcName
+        allowedFunctionList += !typeName !funcName
       or
         $init$
         $integer$ ?let @lbigint priority
@@ -169,9 +182,16 @@ method @globalVarDeclarationList-element enterInContext
   @stringset executionModes = {}
 #--- Check allowed function are defined
   @allowedRoutineMap allowedRoutineMap = {}
-  for () in mAllowedFunctionList do
-    [ioContext.mFunctionMap searchKey !mValue ?3*]
-    [!?allowedRoutineMap insertKey !funcNameForInvocationGraph (!.null !mValue) !false]
+  for (typeName funcName) in mAllowedFunctionList do
+    @unifiedTypeMap-proxy receiverType
+    if typeName.string == "" then
+      [ioContext.mFunctionMap searchKey !funcName ?3*]
+      receiverType = .null
+    else
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?receiverType]
+      [[receiverType functionMap] searchKey !funcName ?3*]
+    end
+    [!?allowedRoutineMap insertKey !funcNameForInvocationGraph (!receiverType !funcName) !false]
   end
 #--- Check allowed init routines are defined
   for () in mAllowedInitList do

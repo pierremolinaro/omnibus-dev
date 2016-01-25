@@ -10,6 +10,23 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            Routine 'getNewTempVariable'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_getNewTempVariable (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inType,
+                                 GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                 GALGAS_operandIR & outArgument_outTempVariable,
+                                 C_Compiler * inCompiler
+                                 COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outTempVariable.drop () ; // Release 'out' argument
+  outArgument_outTempVariable = GALGAS_operandIR::constructor_new (constinArgument_inType, GALGAS_valueIR::constructor_llvmLocalObject (GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("variable-map.galgas", 116)), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 116))  COMMA_SOURCE_FILE ("variable-map.galgas", 116))  COMMA_SOURCE_FILE ("variable-map.galgas", 116)) ;
+  ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("variable-map.galgas", 117)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                         Routine 'getNewTempObjectInMemory'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8964,7 +8981,8 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "//------------------------------------------------*\n"
   "\n"
   "var gVar $int32 = 0 {\n"
-  "  proc $MyStruct getX\n"
+  "  @rw proc $MyStruct getX\n"
+  "  func $MyStruct readX\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -8984,6 +9002,9 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "    self.x = inX + 8\n"
   "  }\n"
   "  \n"
+  "  func readX `user () -> $int32 {\n"
+  "    result = self.x +% gVar\n"
+  "  }\n"
   "}\n"
   "\n"
   "extension $MyStruct {\n"
@@ -9030,7 +9051,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "11-structure-procs.plm",
   "plm",
   true, // Text file
-  1085, // Text length
+  1178, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 

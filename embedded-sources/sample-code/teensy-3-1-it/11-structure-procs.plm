@@ -3,7 +3,8 @@ target "teensy-3-1-it"
 //------------------------------------------------*
 
 var gVar $int32 = 0 {
-  proc $MyStruct getX
+  @rw proc $MyStruct getX
+  func $MyStruct readX
 }
 
 //------------------------------------------------*
@@ -23,6 +24,9 @@ struct $MyStruct {
     self.x = inX + 8
   }
   
+  func readX `user @noWarningIfUnused () -> $int32 {
+    result = self.x +% gVar
+  }
 }
 
 extension $MyStruct {
