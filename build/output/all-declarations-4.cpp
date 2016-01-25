@@ -8963,6 +8963,12 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "\n"
   "//------------------------------------------------*\n"
   "\n"
+  "var gVar $int32 = 0 {\n"
+  "  proc $MyStruct getX\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
   "struct $MyStruct {\n"
   "  var x $int32 = 9\n"
   "  var y $int32 = 90\n"
@@ -8971,6 +8977,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it
   "  }\n"
   "  proc getX `user (!outX $int32) {\n"
   "    outX = self.x +% 3\n"
+  "    gVar = outX\n"
   "    self.setX (!123)\n"
   "  }\n"
   "  mutating proc setX `user (\?inX $int32) {\n"
@@ -9023,7 +9030,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "11-structure-procs.plm",
   "plm",
   true, // Text file
-  969, // Text length
+  1085, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 

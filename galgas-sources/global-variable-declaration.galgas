@@ -4,6 +4,7 @@
 
 list @allowedProcList {
   @bool mHasWriteAccess
+  @lstring mReceiverTypeName
   @lstring mProcName
 }
 
@@ -71,8 +72,14 @@ syntax extension common_syntax {
       end
       select
         $proc$
+        @lstring typeName
+        select
+          typeName = ["" nowhere]
+        or
+          $typeName$ ?typeName
+        end
         $identifier$ ?let procName
-        allowedProcList += !hasWriteAccess !procName
+        allowedProcList += !hasWriteAccess !typeName !procName
       or
         $func$
         $identifier$ ?let funcName
@@ -192,22 +199,37 @@ method @globalVarDeclarationList-element enterInContext
     ]
   end
 #--- Check allowed procedures are defined
-  for () in mAllowedProcList do
-    [ioContext.mProcedureMap searchKey
-      !mProcName
-      ?*
-      ?let procedureModeMap
-      ?let unused signature
-      ?*
-    ]
-    for () in procedureModeMap do
-      executionModes += !lkey.string
+  for procedure in mAllowedProcList do
+    @unifiedTypeMap-proxy receiverType
+    if procedure.mReceiverTypeName.string == "" then
+      receiverType = .null
+      [ioContext.mProcedureMap searchKey
+        !procedure.mProcName
+        ?*
+        ?let procedureModeMap
+        ?2*
+      ]
+      for () in procedureModeMap do
+        executionModes += !lkey.string
+      end
+    else
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !procedure.mReceiverTypeName ?receiverType]
+      [[receiverType procedureMap] searchKey
+        !procedure.mProcName
+        ?*
+        ?let procedureModeMap
+        ?2*
+      ]
+      for () in procedureModeMap do
+        executionModes += !lkey.string
+      end
     end
     [!?allowedRoutineMap insertKey
-       !procNameForInvocationGraph (!.null !mProcName)
-       !mHasWriteAccess
+       !procNameForInvocationGraph (!receiverType !procedure.mProcName)
+       !procedure.mHasWriteAccess
     ]
   end
+#--- Enter variable in globale variable map
   [!?ioContext.mGlobalVariableMap insertKey
     !mVarName
     !if variableType == .null then expressionResult.mType else variableType end

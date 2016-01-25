@@ -1059,6 +1059,7 @@ class GALGAS_allowedProcList : public AC_GALGAS_list {
 //--------------------------------- Element constructor used by listmap
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_bool & in_mHasWriteAccess,
+                                                  const class GALGAS_lstring & in_mReceiverTypeName,
                                                   const class GALGAS_lstring & in_mProcName
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -1076,7 +1077,8 @@ class GALGAS_allowedProcList : public AC_GALGAS_list {
   public : static GALGAS_allowedProcList constructor_emptyList (LOCATION_ARGS) ;
 
   public : static GALGAS_allowedProcList constructor_listWithValue (const class GALGAS_bool & inOperand0,
-                                                                    const class GALGAS_lstring & inOperand1
+                                                                    const class GALGAS_lstring & inOperand1,
+                                                                    const class GALGAS_lstring & inOperand2
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -1086,7 +1088,8 @@ class GALGAS_allowedProcList : public AC_GALGAS_list {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_bool & inOperand0,
-                                                      const class GALGAS_lstring & inOperand1
+                                                      const class GALGAS_lstring & inOperand1,
+                                                      const class GALGAS_lstring & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_allowedProcList add_operation (const GALGAS_allowedProcList & inOperand,
@@ -1097,23 +1100,27 @@ class GALGAS_allowedProcList : public AC_GALGAS_list {
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_bool constinArgument0,
                                                        class GALGAS_lstring constinArgument1,
-                                                       class GALGAS_uint constinArgument2,
+                                                       class GALGAS_lstring constinArgument2,
+                                                       class GALGAS_uint constinArgument3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_bool & outArgument0,
                                                   class GALGAS_lstring & outArgument1,
+                                                  class GALGAS_lstring & outArgument2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_bool & outArgument0,
                                                  class GALGAS_lstring & outArgument1,
+                                                 class GALGAS_lstring & outArgument2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_bool & outArgument0,
                                                        class GALGAS_lstring & outArgument1,
-                                                       class GALGAS_uint constinArgument2,
+                                                       class GALGAS_lstring & outArgument2,
+                                                       class GALGAS_uint constinArgument3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -1121,11 +1128,13 @@ class GALGAS_allowedProcList : public AC_GALGAS_list {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_bool & outArgument0,
                                                class GALGAS_lstring & outArgument1,
+                                               class GALGAS_lstring & outArgument2,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_bool & outArgument0,
                                               class GALGAS_lstring & outArgument1,
+                                              class GALGAS_lstring & outArgument2,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -1139,6 +1148,10 @@ class GALGAS_allowedProcList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mProcNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_allowedProcList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                   C_Compiler * inCompiler
@@ -1171,6 +1184,7 @@ class cEnumerator_allowedProcList : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_bool current_mHasWriteAccess (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mReceiverTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mProcName (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_allowedProcList_2D_element current (LOCATION_ARGS) const ;
@@ -4527,6 +4541,8 @@ class cParser_common_5F_syntax {
   protected : virtual int32_t select_common_5F_syntax_58 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_common_5F_syntax_59 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_common_5F_syntax_60 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;
@@ -10202,6 +10218,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyMap_2D_elem
 class GALGAS_allowedProcList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_bool mAttribute_mHasWriteAccess ;
+  public : GALGAS_lstring mAttribute_mReceiverTypeName ;
   public : GALGAS_lstring mAttribute_mProcName ;
 
 
@@ -10220,6 +10237,7 @@ class GALGAS_allowedProcList_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_allowedProcList_2D_element (const GALGAS_bool & in_mHasWriteAccess,
+                                              const GALGAS_lstring & in_mReceiverTypeName,
                                               const GALGAS_lstring & in_mProcName) ;
 
 //-- Start of generic part --*
@@ -10234,7 +10252,8 @@ class GALGAS_allowedProcList_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_allowedProcList_2D_element constructor_new (const class GALGAS_bool & inOperand0,
-                                                                     const class GALGAS_lstring & inOperand1
+                                                                     const class GALGAS_lstring & inOperand1,
+                                                                     const class GALGAS_lstring & inOperand2
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -10252,6 +10271,8 @@ class GALGAS_allowedProcList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHasWriteAccess (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mProcName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -10613,227 +10634,5 @@ class GALGAS_allowedRoutineMap_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allowedRoutineMap_2D_element ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @llvmBinaryOperation enum                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public : GALGAS_llvmBinaryOperation (void) ;
-
-//--------------------------------- Enumeration
-  public : typedef enum {
-    kNotBuilt,
-    kEnum_addNoOVF,
-    kEnum_subNoOVF,
-    kEnum_mulNoOVF,
-    kEnum_udivNoOVF,
-    kEnum_sdivNoOVF,
-    kEnum_uremNoOVF,
-    kEnum_sremNoOVF,
-    kEnum_uaddOVF,
-    kEnum_saddOVF,
-    kEnum_usubOVF,
-    kEnum_ssubOVF,
-    kEnum_umulOVF,
-    kEnum_smulOVF,
-    kEnum_udivOVF,
-    kEnum_sdivOVF,
-    kEnum_uremOVF,
-    kEnum_sremOVF,
-    kEnum_and,
-    kEnum_ior,
-    kEnum_xor,
-    kEnum_shl,
-    kEnum_ashr,
-    kEnum_lshr,
-    kEnum_icmp_5F_eq,
-    kEnum_icmp_5F_ne,
-    kEnum_icmp_5F_ult,
-    kEnum_icmp_5F_ule,
-    kEnum_icmp_5F_ugt,
-    kEnum_icmp_5F_uge,
-    kEnum_icmp_5F_slt,
-    kEnum_icmp_5F_sle,
-    kEnum_icmp_5F_sgt,
-    kEnum_icmp_5F_sge
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private : enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
-  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
-  public : inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_llvmBinaryOperation extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_llvmBinaryOperation constructor_addNoOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_and (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_ashr (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_eq (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_ne (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_sge (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_sgt (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_sle (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_slt (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_uge (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_ugt (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_ule (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_icmp_5F_ult (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_ior (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_lshr (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_mulNoOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_saddOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_sdivNoOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_sdivOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_shl (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_smulOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_sremNoOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_sremOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_ssubOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_subNoOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_uaddOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_udivNoOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_udivOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_umulOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_uremNoOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_uremOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_usubOVF (LOCATION_ARGS) ;
-
-  public : static GALGAS_llvmBinaryOperation constructor_xor (LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_llvmBinaryOperation & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAddNoOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAnd (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAshr (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_eq (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_ne (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_sge (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_sgt (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_sle (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_slt (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_uge (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_ugt (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_ule (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIcmp_5F_ult (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIor (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLshr (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulNoOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSaddOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSdivNoOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSdivOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isShl (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSmulOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSremNoOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSremOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSsubOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubNoOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUaddOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUdivNoOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUdivOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUmulOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUremNoOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUremOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUsubOVF (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isXor (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_llvmBinaryOperation class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmBinaryOperation ;
 
 #endif
