@@ -117,7 +117,7 @@ proc semanticAnalysis
 #--- Print procedure invocation graph
   if (@uint.errorCount == 0) && [option plm_options.writeRoutineInvocationGraphFile value] then
     let s = [temporaries.mSubprogramInvocationGraph graphviz]
-    let filePath = [inSourceFile stringByDeletingPathExtension] + ".subprogramInvocation.dot"
+    let filePath = [inSourceFile stringByDeletingPathExtension] + ".routineInvocation.dot"
     [s writeToFileWhenDifferentContents !filePath ?*]
   end
 #--- Check procedure invocation graph

@@ -72,7 +72,7 @@ struct $point {
 Trois remarques :
 \begin{itemize}
   \item une telle procédure ne peut pas modifier l'objet auquel il s'applique (pour le faire, il faut définir une \plm!mutating proc!) ;
-  \item l'accès aux variables globales n'est pas possible : il faut appeler une procédure qui effectue l'accès ;
+  \item l'accès à une variable globale est possible si cette dernière déclare la procédure comme routine autorisée (\refSectionPage{DecRoutinesAutoriseesVarGlobale}) ; l'accès peut être en lecture (par défaut), ou en lecture / écriture (attribut \plm!@rw!) ;
   \item préfixer l'accès à un champ par \plm!self.! est obligatoire. 
 \end{itemize}
 
@@ -94,7 +94,7 @@ struct $point {
 }
 \end{PLM}
 
-L'accès aux variables globales n'est pas possible, et préfixer l'accès à un champ par \plm!self.! est obligatoire. 
+L'accès à une variable globale est possible si cette dernière déclare la procédure comme routine autorisée (\refSectionPage{DecRoutinesAutoriseesVarGlobale}) ; l'accès peut être en lecture (par défaut), ou en lecture / écriture (attribut \plm!@rm!). Préfixer l'accès à un champ par \plm!self.! est obligatoire. 
 
 Il est possible de modifier l'objet courant en affectant \plm!self! :
 
