@@ -319,11 +319,11 @@ private proc enterAliasPrefixOperator
   if [ioInfixOperatorMap hasKey !inAliasedTypeName.string] then
     [ioInfixOperatorMap searchKey
       !inAliasedTypeName
-      ?@unifiedTypeMap-proxy resultType
+#      ?@unifiedTypeMap-proxy resultType
     ]
     [!?ioInfixOperatorMap insertKey
       !inNewTypeName
-      !resultType
+#      !resultType
     ]
   end
 }

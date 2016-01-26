@@ -13001,365 +13001,6 @@ GALGAS_registerBitSlice GALGAS_registerBitSlice::extractObject (const GALGAS_obj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_valueIR_literalInteger::cEnumAssociatedValues_valueIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
-                                                                                            COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_valueIR_literalInteger::description (C_String & ioString,
-                                                                const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_valueIR_literalInteger::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_valueIR_literalInteger * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_literalInteger *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_valueIR_llvmLocalObject::cEnumAssociatedValues_valueIR_llvmLocalObject (const GALGAS_string & inAssociatedValue0
-                                                                                              COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_valueIR_llvmLocalObject::description (C_String & ioString,
-                                                                 const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_valueIR_llvmLocalObject::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_valueIR_llvmLocalObject * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_llvmLocalObject *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_valueIR_llvmStructureConstant::cEnumAssociatedValues_valueIR_llvmStructureConstant (const GALGAS_operandIRList & inAssociatedValue0
-                                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_valueIR_llvmStructureConstant::description (C_String & ioString,
-                                                                       const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_valueIR_llvmStructureConstant::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_valueIR_llvmStructureConstant * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_llvmStructureConstant *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_valueIR_literalString::cEnumAssociatedValues_valueIR_literalString (const GALGAS_uint & inAssociatedValue0,
-                                                                                          const GALGAS_uint & inAssociatedValue1
-                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_valueIR_literalString::description (C_String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_valueIR_literalString::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_valueIR_literalString * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_literalString *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valueIR::GALGAS_valueIR (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valueIR GALGAS_valueIR::constructor_literalInteger (const GALGAS_bigint & inAssociatedValue0
-                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_valueIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_literalInteger ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_valueIR_literalInteger (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valueIR GALGAS_valueIR::constructor_llvmLocalObject (const GALGAS_string & inAssociatedValue0
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_valueIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_llvmLocalObject ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_valueIR_llvmLocalObject (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valueIR GALGAS_valueIR::constructor_llvmStructureConstant (const GALGAS_operandIRList & inAssociatedValue0
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_valueIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_llvmStructureConstant ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_valueIR_llvmStructureConstant (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valueIR GALGAS_valueIR::constructor_literalString (const GALGAS_uint & inAssociatedValue0,
-                                                          const GALGAS_uint & inAssociatedValue1
-                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_valueIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_literalString ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_valueIR_literalString (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_valueIR::method_literalInteger (GALGAS_bigint & outAssociatedValue0,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_literalInteger) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @valueIR literalInteger invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_valueIR_literalInteger * ptr = (const cEnumAssociatedValues_valueIR_literalInteger *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_valueIR::method_llvmLocalObject (GALGAS_string & outAssociatedValue0,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_llvmLocalObject) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @valueIR llvmLocalObject invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_valueIR_llvmLocalObject * ptr = (const cEnumAssociatedValues_valueIR_llvmLocalObject *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_valueIR::method_llvmStructureConstant (GALGAS_operandIRList & outAssociatedValue0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_llvmStructureConstant) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @valueIR llvmStructureConstant invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_valueIR_llvmStructureConstant * ptr = (const cEnumAssociatedValues_valueIR_llvmStructureConstant *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_valueIR::method_literalString (GALGAS_uint & outAssociatedValue0,
-                                           GALGAS_uint & outAssociatedValue1,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_literalString) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @valueIR literalString invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_valueIR_literalString * ptr = (const cEnumAssociatedValues_valueIR_literalString *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_valueIR [5] = {
-  "(not built)",
-  "literalInteger",
-  "llvmLocalObject",
-  "llvmStructureConstant",
-  "literalString"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_valueIR::getter_isLiteralInteger (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalInteger == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_valueIR::getter_isLlvmLocalObject (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmLocalObject == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_valueIR::getter_isLlvmStructureConstant (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmStructureConstant == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_valueIR::getter_isLiteralString (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalString == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_valueIR::description (C_String & ioString,
-                                  const int32_t inIndentation) const {
-  ioString << "<enum @valueIR: " << gEnumNameArrayFor_valueIR [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_valueIR::objectCompare (const GALGAS_valueIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                    @valueIR type                                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_valueIR ("valueIR",
-                                NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_valueIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_valueIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_valueIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_valueIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valueIR GALGAS_valueIR::extractObject (const GALGAS_object & inObject,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  GALGAS_valueIR result ;
-  const GALGAS_valueIR * p = (const GALGAS_valueIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_valueIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("valueIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input::cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input (const GALGAS_lstring & inAssociatedValue0
                                                                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -14157,6 +13798,365 @@ GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::extractObject (const GALGAS_obj
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_valueIR_literalInteger::cEnumAssociatedValues_valueIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
+                                                                                            COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_valueIR_literalInteger::description (C_String & ioString,
+                                                                const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_valueIR_literalInteger::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_valueIR_literalInteger * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_literalInteger *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_valueIR_llvmLocalObject::cEnumAssociatedValues_valueIR_llvmLocalObject (const GALGAS_string & inAssociatedValue0
+                                                                                              COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_valueIR_llvmLocalObject::description (C_String & ioString,
+                                                                 const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_valueIR_llvmLocalObject::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_valueIR_llvmLocalObject * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_llvmLocalObject *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_valueIR_llvmStructureConstant::cEnumAssociatedValues_valueIR_llvmStructureConstant (const GALGAS_operandIRList & inAssociatedValue0
+                                                                                                          COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_valueIR_llvmStructureConstant::description (C_String & ioString,
+                                                                       const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_valueIR_llvmStructureConstant::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_valueIR_llvmStructureConstant * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_llvmStructureConstant *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_valueIR_literalString::cEnumAssociatedValues_valueIR_literalString (const GALGAS_uint & inAssociatedValue0,
+                                                                                          const GALGAS_uint & inAssociatedValue1
+                                                                                          COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_valueIR_literalString::description (C_String & ioString,
+                                                               const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_valueIR_literalString::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_valueIR_literalString * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_literalString *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR::GALGAS_valueIR (void) :
+mAssociatedValues (),
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_valueIR::constructor_literalInteger (const GALGAS_bigint & inAssociatedValue0
+                                                           COMMA_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_literalInteger ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_valueIR_literalInteger (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_valueIR::constructor_llvmLocalObject (const GALGAS_string & inAssociatedValue0
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_llvmLocalObject ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_valueIR_llvmLocalObject (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_valueIR::constructor_llvmStructureConstant (const GALGAS_operandIRList & inAssociatedValue0
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_llvmStructureConstant ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_valueIR_llvmStructureConstant (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_valueIR::constructor_literalString (const GALGAS_uint & inAssociatedValue0,
+                                                          const GALGAS_uint & inAssociatedValue1
+                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_literalString ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_valueIR_literalString (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_valueIR::method_literalInteger (GALGAS_bigint & outAssociatedValue0,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_literalInteger) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @valueIR literalInteger invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_valueIR_literalInteger * ptr = (const cEnumAssociatedValues_valueIR_literalInteger *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_valueIR::method_llvmLocalObject (GALGAS_string & outAssociatedValue0,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_llvmLocalObject) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @valueIR llvmLocalObject invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_valueIR_llvmLocalObject * ptr = (const cEnumAssociatedValues_valueIR_llvmLocalObject *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_valueIR::method_llvmStructureConstant (GALGAS_operandIRList & outAssociatedValue0,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_llvmStructureConstant) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @valueIR llvmStructureConstant invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_valueIR_llvmStructureConstant * ptr = (const cEnumAssociatedValues_valueIR_llvmStructureConstant *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_valueIR::method_literalString (GALGAS_uint & outAssociatedValue0,
+                                           GALGAS_uint & outAssociatedValue1,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_literalString) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @valueIR literalString invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_valueIR_literalString * ptr = (const cEnumAssociatedValues_valueIR_literalString *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_valueIR [5] = {
+  "(not built)",
+  "literalInteger",
+  "llvmLocalObject",
+  "llvmStructureConstant",
+  "literalString"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_valueIR::getter_isLiteralInteger (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalInteger == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_valueIR::getter_isLlvmLocalObject (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmLocalObject == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_valueIR::getter_isLlvmStructureConstant (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmStructureConstant == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_valueIR::getter_isLiteralString (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalString == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_valueIR::description (C_String & ioString,
+                                  const int32_t inIndentation) const {
+  ioString << "<enum @valueIR: " << gEnumNameArrayFor_valueIR [mEnum] ;
+  mAssociatedValues.description (ioString, inIndentation) ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_valueIR::objectCompare (const GALGAS_valueIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                    @valueIR type                                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_valueIR ("valueIR",
+                                NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_valueIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_valueIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_valueIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_valueIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_valueIR::extractObject (const GALGAS_object & inObject,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  const GALGAS_valueIR * p = (const GALGAS_valueIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_valueIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("valueIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               Bool options                                                                          *
 //                                                                                                                     *
@@ -14331,7 +14331,7 @@ void routine_enterBooleanOperators (GALGAS_lstring inArgument_inBooleanTypeName,
   ioArgument_ioContext.mAttribute_mBooleanXorOperatorMap.setter_insertKey (var_boolBoolOp, var_selfTypeProxy, GALGAS_infixObjectObjectOperatorDescription::constructor_new (GALGAS_llvmBinaryOperation::constructor_xor (SOURCE_FILE ("bool-type.galgas", 129))  COMMA_SOURCE_FILE ("bool-type.galgas", 129)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 126)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mNotOperatorMap.setter_insertKey (inArgument_inBooleanTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 131)) ;
+  ioArgument_ioContext.mAttribute_mNotOperatorMap.setter_insertKey (inArgument_inBooleanTypeName, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 131)) ;
   }
 }
 
@@ -14485,10 +14485,9 @@ void routine_enterAliasPrefixOperator (GALGAS_prefixOperatorMap & ioArgument_ioI
                                        COMMA_UNUSED_LOCATION_ARGS) {
   const enumGalgasBool test_0 = ioArgument_ioInfixOperatorMap.getter_hasKey (constinArgument_inAliasedTypeName.mAttribute_string COMMA_SOURCE_FILE ("type-alias.galgas", 319)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_unifiedTypeMap_2D_proxy var_resultType ;
-    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inAliasedTypeName, var_resultType, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 320)) ;
+    ioArgument_ioInfixOperatorMap.method_searchKey (constinArgument_inAliasedTypeName, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 320)) ;
     {
-    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inNewTypeName, var_resultType, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 324)) ;
+    ioArgument_ioInfixOperatorMap.setter_insertKey (constinArgument_inNewTypeName, inCompiler COMMA_SOURCE_FILE ("type-alias.galgas", 324)) ;
     }
   }
 }
@@ -14613,13 +14612,13 @@ void routine_enter_5F_integer_5F_integer_5F_operators (const GALGAS_lstring cons
     ioArgument_ioContext.mAttribute_mXorOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_infixObjectObjectOperatorDescription::constructor_new (GALGAS_llvmBinaryOperation::constructor_xor (SOURCE_FILE ("type-integer.galgas", 226))  COMMA_SOURCE_FILE ("type-integer.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 223)) ;
     }
     {
-    ioArgument_ioContext.mAttribute_mUnsignedComplementOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 228)) ;
+    ioArgument_ioContext.mAttribute_mUnsignedComplementOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 228)) ;
     }
   }
   const enumGalgasBool test_9 = constinArgument_inIsSigned.boolEnum () ;
   if (kBoolTrue == test_9) {
     {
-    ioArgument_ioContext.mAttribute_mUnaryMinusOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 235)) ;
+    ioArgument_ioContext.mAttribute_mUnaryMinusOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 235)) ;
     }
   }
   {
@@ -15099,10 +15098,10 @@ void routine_enterLiteralIntegerOperators (const GALGAS_lstring constinArgument_
   ioArgument_ioContext.mAttribute_mXorOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_literalIntegerInfixOperator::constructor_xor (SOURCE_FILE ("type-literal-integer.galgas", 128))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 125)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mUnsignedComplementOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 130)) ;
+  ioArgument_ioContext.mAttribute_mUnsignedComplementOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 130)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mUnaryMinusOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 135)) ;
+  ioArgument_ioContext.mAttribute_mUnaryMinusOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 135)) ;
   }
   {
   ioArgument_ioContext.mAttribute_mAddOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_literalIntegerInfixOperator::constructor_add (SOURCE_FILE ("type-literal-integer.galgas", 143))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 140)) ;

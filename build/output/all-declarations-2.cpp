@@ -793,127 +793,105 @@ GALGAS_typeKind GALGAS_typeKind::extractObject (const GALGAS_object & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_incDecOperatorMap::cMapElement_incDecOperatorMap (const GALGAS_lstring & inKey,
-                                                              const GALGAS_llvmBinaryOperation & in_mOperationOvfCheck,
-                                                              const GALGAS_llvmBinaryOperation & in_mOperationNoOvf
+cMapElement_prefixOperatorMap::cMapElement_prefixOperatorMap (const GALGAS_lstring & inKey
                                                               COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mAttribute_mOperationOvfCheck (in_mOperationOvfCheck),
-mAttribute_mOperationNoOvf (in_mOperationNoOvf) {
+cMapElement (inKey COMMA_THERE) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cMapElement_incDecOperatorMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mOperationOvfCheck.isValid () && mAttribute_mOperationNoOvf.isValid () ;
+bool cMapElement_prefixOperatorMap::isValid (void) const {
+  return mAttribute_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement * cMapElement_incDecOperatorMap::copy (void) {
+cMapElement * cMapElement_prefixOperatorMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_incDecOperatorMap (mAttribute_lkey, mAttribute_mOperationOvfCheck, mAttribute_mOperationNoOvf COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_prefixOperatorMap (mAttribute_lkey COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_incDecOperatorMap::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mOperationOvfCheck" ":" ;
-  mAttribute_mOperationOvfCheck.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mOperationNoOvf" ":" ;
-  mAttribute_mOperationNoOvf.description (ioString, inIndentation) ;
+void cMapElement_prefixOperatorMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cMapElement_incDecOperatorMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_incDecOperatorMap * operand = (cMapElement_incDecOperatorMap *) inOperand ;
+typeComparisonResult cMapElement_prefixOperatorMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_prefixOperatorMap * operand = (cMapElement_prefixOperatorMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperationOvfCheck.objectCompare (operand->mAttribute_mOperationOvfCheck) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperationNoOvf.objectCompare (operand->mAttribute_mOperationNoOvf) ;
-  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap::GALGAS_incDecOperatorMap (void) :
+GALGAS_prefixOperatorMap::GALGAS_prefixOperatorMap (void) :
 AC_GALGAS_map () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap::GALGAS_incDecOperatorMap (const GALGAS_incDecOperatorMap & inSource) :
+GALGAS_prefixOperatorMap::GALGAS_prefixOperatorMap (const GALGAS_prefixOperatorMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap & GALGAS_incDecOperatorMap::operator = (const GALGAS_incDecOperatorMap & inSource) {
+GALGAS_prefixOperatorMap & GALGAS_prefixOperatorMap::operator = (const GALGAS_prefixOperatorMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_incDecOperatorMap result ;
+GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_prefixOperatorMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::constructor_mapWithMapToOverride (const GALGAS_incDecOperatorMap & inMapToOverride
+GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::constructor_mapWithMapToOverride (const GALGAS_prefixOperatorMap & inMapToOverride
                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_incDecOperatorMap result ;
+  GALGAS_prefixOperatorMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::getter_overriddenMap (C_Compiler * inCompiler
+GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_incDecOperatorMap result ;
+  GALGAS_prefixOperatorMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_incDecOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                    const GALGAS_llvmBinaryOperation & inArgument0,
-                                                    const GALGAS_llvmBinaryOperation & inArgument1,
+void GALGAS_prefixOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_incDecOperatorMap * p = NULL ;
-  macroMyNew (p, cMapElement_incDecOperatorMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  cMapElement_prefixOperatorMap * p = NULL ;
+  macroMyNew (p, cMapElement_prefixOperatorMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@incDecOperatorMap insert error: '%K' already in map" ;
+  const char * kInsertErrorMessage = "@prefixOperatorMap insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_incDecOperatorMap::setter_insertKey (GALGAS_lstring inKey,
-                                                 GALGAS_llvmBinaryOperation inArgument0,
-                                                 GALGAS_llvmBinaryOperation inArgument1,
+void GALGAS_prefixOperatorMap::setter_insertKey (GALGAS_lstring inKey,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
-  cMapElement_incDecOperatorMap * p = NULL ;
-  macroMyNew (p, cMapElement_incDecOperatorMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  cMapElement_prefixOperatorMap * p = NULL ;
+  macroMyNew (p, cMapElement_prefixOperatorMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -924,100 +902,36 @@ void GALGAS_incDecOperatorMap::setter_insertKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_incDecOperatorMap_searchKey = "** internal error **" ;
+const char * kSearchErrorMessage_prefixOperatorMap_searchKey = "prefix operation is not defined for $%K type" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_incDecOperatorMap::method_searchKey (GALGAS_lstring inKey,
-                                                 GALGAS_llvmBinaryOperation & outArgument0,
-                                                 GALGAS_llvmBinaryOperation & outArgument1,
+void GALGAS_prefixOperatorMap::method_searchKey (GALGAS_lstring inKey,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
-  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) performSearch (inKey,
+  const cMapElement_prefixOperatorMap * p = (const cMapElement_prefixOperatorMap *) performSearch (inKey,
                                                                                                      inCompiler,
-                                                                                                     kSearchErrorMessage_incDecOperatorMap_searchKey
+                                                                                                     kSearchErrorMessage_prefixOperatorMap_searchKey
                                                                                                      COMMA_THERE) ;
   if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
   }else{
-    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
-    outArgument0 = p->mAttribute_mOperationOvfCheck ;
-    outArgument1 = p->mAttribute_mOperationNoOvf ;
+    macroValidSharedObject (p, cMapElement_prefixOperatorMap) ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation GALGAS_incDecOperatorMap::getter_mOperationOvfCheckForKey (const GALGAS_string & inKey,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) attributes ;
-  GALGAS_llvmBinaryOperation result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
-    result = p->mAttribute_mOperationOvfCheck ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_incDecOperatorMap::getter_mOperationNoOvfForKey (const GALGAS_string & inKey,
-                                                                                   C_Compiler * inCompiler
-                                                                                   COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) attributes ;
-  GALGAS_llvmBinaryOperation result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
-    result = p->mAttribute_mOperationNoOvf ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_incDecOperatorMap::setter_setMOperationOvfCheckForKey (GALGAS_llvmBinaryOperation inAttributeValue,
-                                                                   GALGAS_string inKey,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_incDecOperatorMap * p = (cMapElement_incDecOperatorMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
-    p->mAttribute_mOperationOvfCheck = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_incDecOperatorMap::setter_setMOperationNoOvfForKey (GALGAS_llvmBinaryOperation inAttributeValue,
-                                                                GALGAS_string inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_incDecOperatorMap * p = (cMapElement_incDecOperatorMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
-    p->mAttribute_mOperationNoOvf = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_incDecOperatorMap * GALGAS_incDecOperatorMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+cMapElement_prefixOperatorMap * GALGAS_prefixOperatorMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                              const GALGAS_string & inKey
                                                                                              COMMA_LOCATION_ARGS) {
-  cMapElement_incDecOperatorMap * result = (cMapElement_incDecOperatorMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_incDecOperatorMap) ;
+  cMapElement_prefixOperatorMap * result = (cMapElement_prefixOperatorMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_prefixOperatorMap) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_incDecOperatorMap::cEnumerator_incDecOperatorMap (const GALGAS_incDecOperatorMap & inEnumeratedObject,
+cEnumerator_prefixOperatorMap::cEnumerator_prefixOperatorMap (const GALGAS_prefixOperatorMap & inEnumeratedObject,
                                                               const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
@@ -1025,76 +939,60 @@ cGenericAbstractEnumerator () {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap_2D_element cEnumerator_incDecOperatorMap::current (LOCATION_ARGS) const {
-  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
-  return GALGAS_incDecOperatorMap_2D_element (p->mAttribute_lkey, p->mAttribute_mOperationOvfCheck, p->mAttribute_mOperationNoOvf) ;
+GALGAS_prefixOperatorMap_2D_element cEnumerator_prefixOperatorMap::current (LOCATION_ARGS) const {
+  const cMapElement_prefixOperatorMap * p = (const cMapElement_prefixOperatorMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_prefixOperatorMap) ;
+  return GALGAS_prefixOperatorMap_2D_element (p->mAttribute_lkey) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_incDecOperatorMap::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_prefixOperatorMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
 }
 
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation cEnumerator_incDecOperatorMap::current_mOperationOvfCheck (LOCATION_ARGS) const {
-  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
-  return p->mAttribute_mOperationOvfCheck ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation cEnumerator_incDecOperatorMap::current_mOperationNoOvf (LOCATION_ARGS) const {
-  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
-  return p->mAttribute_mOperationNoOvf ;
-}
-
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @incDecOperatorMap type                                               *
+//                                               @prefixOperatorMap type                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_incDecOperatorMap ("incDecOperatorMap",
+kTypeDescriptor_GALGAS_prefixOperatorMap ("prefixOperatorMap",
                                           NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_incDecOperatorMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_incDecOperatorMap ;
+const C_galgas_type_descriptor * GALGAS_prefixOperatorMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_prefixOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_incDecOperatorMap::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_prefixOperatorMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_incDecOperatorMap (*this)) ;
+    macroMyNew (result, GALGAS_prefixOperatorMap (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::extractObject (const GALGAS_object & inObject,
+GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::extractObject (const GALGAS_object & inObject,
                                                                   C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_incDecOperatorMap result ;
-  const GALGAS_incDecOperatorMap * p = (const GALGAS_incDecOperatorMap *) inObject.embeddedObject () ;
+  GALGAS_prefixOperatorMap result ;
+  const GALGAS_prefixOperatorMap * p = (const GALGAS_prefixOperatorMap *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_incDecOperatorMap *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_prefixOperatorMap *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("incDecOperatorMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("prefixOperatorMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

@@ -9,65 +9,6 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category method '@globalVarDeclarationList-element semanticAnalysis'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_semanticAnalysis (const GALGAS_globalVarDeclarationList_2D_element inObject,
-                                      const GALGAS_semanticContext constinArgument_inContext,
-                                      GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                      C_Compiler * inCompiler
-                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy var_inferredType ;
-  GALGAS_stringset var_executionModeSet ;
-  GALGAS_allowedRoutineMap var_allowedProcedureMap ;
-  GALGAS_valueIR var_expressionGeneratedCode ;
-  GALGAS_bool var_isConstant ;
-  constinArgument_inContext.mAttribute_mGlobalVariableMap.method_searchKey (inObject.mAttribute_mVarName, var_inferredType, var_executionModeSet, var_allowedProcedureMap, var_expressionGeneratedCode, var_isConstant, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 272)) ;
-  {
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalVariableMap.setter_insertKey (inObject.mAttribute_mVarName, var_inferredType, GALGAS_bool (kIsStrictSup, var_executionModeSet.getter_count (SOURCE_FILE ("global-variable-declaration.galgas", 283)).objectCompare (GALGAS_uint ((uint32_t) 1U))), var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 280)) ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category method '@bootList-element bootSemanticAnalysis'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_bootSemanticAnalysis (const GALGAS_bootList_2D_element inObject,
-                                          const GALGAS_semanticContext constinArgument_inContext,
-                                          GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                          GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                          C_Compiler * inCompiler
-                                          COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = constinArgument_inContext.mAttribute_mModeMap.getter_hasKey (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 58)) COMMA_SOURCE_FILE ("boot-declaration.galgas", 58)).operator_not (SOURCE_FILE ("boot-declaration.galgas", 58)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (inObject.mAttribute_mBootLocation, GALGAS_string ("the `").add_operation (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 59)), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 59)).add_operation (GALGAS_string (" mode should be defined in order to use boot routines"), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 59))  COMMA_SOURCE_FILE ("boot-declaration.galgas", 59)) ;
-  }
-  {
-  ioArgument_ioTemporaries.mAttribute_mBootRoutinePriorityMap.setter_insertKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.getter_string (SOURCE_FILE ("boot-declaration.galgas", 61)), inObject.mAttribute_mPriorityLocation  COMMA_SOURCE_FILE ("boot-declaration.galgas", 61)), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 61)) ;
-  }
-  GALGAS_lstring var_routineNameForInvocationGraph = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (inObject.mAttribute_mPriority.getter_string (SOURCE_FILE ("boot-declaration.galgas", 63)), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 63)), inObject.mAttribute_mPriorityLocation  COMMA_SOURCE_FILE ("boot-declaration.galgas", 63)) ;
-  const enumGalgasBool test_1 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("boot-declaration.galgas", 64)).operator_not (SOURCE_FILE ("boot-declaration.galgas", 64)).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph, var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 65)) ;
-    }
-  }
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (var_routineNameForInvocationGraph.mAttribute_string, constinArgument_inContext, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 71)) ;
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("boot-declaration.galgas", 77)) ;
-  GALGAS_stringset temp_2 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("boot-declaration.galgas", 81)) ;
-  temp_2.addAssign_operation (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 81))  COMMA_SOURCE_FILE ("boot-declaration.galgas", 81)) ;
-  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mInstructionList, var_routineNameForInvocationGraph, constinArgument_inContext, temp_2, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 78)) ;
-  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfBootLocation, inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 89)) ;
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mBootList.addAssign_operation (inObject.mAttribute_mBootLocation, var_instructionGenerationList, inObject.mAttribute_mEndOfBootLocation  COMMA_SOURCE_FILE ("boot-declaration.galgas", 91)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initList_2D_element::GALGAS_initList_2D_element (void) :
 mAttribute_mInitLocation (),
@@ -1777,32 +1718,6 @@ void categoryMethod_checkBinaryOperationWith (const GALGAS_infixOperatorMap inOb
     inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("infix operation between $").add_operation (constinArgument_inLeftType.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (GALGAS_string (" and $"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (constinArgument_inRightType.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)).add_operation (GALGAS_string (" is not defined"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 84)) ;
     outArgument_outResultType.drop () ; // Release error dropped variable
     outArgument_outOperation.drop () ; // Release error dropped variable
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Category method '@prefixOperatorMap checkWith'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_checkWith (const GALGAS_prefixOperatorMap inObject,
-                               const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inType,
-                               const GALGAS_location constinArgument_inOperatorLocation,
-                               GALGAS_unifiedTypeMap_2D_proxy & outArgument_outResultType,
-                               C_Compiler * inCompiler
-                               COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outResultType.drop () ; // Release 'out' argument
-  GALGAS_lstring var_lkey = GALGAS_lstring::constructor_new (constinArgument_inType.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 40)), constinArgument_inOperatorLocation  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 40)) ;
-  const GALGAS_prefixOperatorMap temp_0 = inObject ;
-  const enumGalgasBool test_1 = temp_0.getter_hasKey (var_lkey.mAttribute_string COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 41)).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    const GALGAS_prefixOperatorMap temp_2 = inObject ;
-    temp_2.method_searchKey (var_lkey, outArgument_outResultType, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 42)) ;
-  }else if (kBoolFalse == test_1) {
-    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("prefix operation is not defined for '").add_operation (constinArgument_inType.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 45)), inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 45)).add_operation (GALGAS_string (" type"), inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 45))  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 44)) ;
-    outArgument_outResultType.drop () ; // Release error dropped variable
   }
 }
 
@@ -8818,155 +8733,8 @@ GALGAS_infixOperatorMap_2D_element GALGAS_infixOperatorMap_2D_element::extractOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecOperatorMap_2D_element::GALGAS_incDecOperatorMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mOperationOvfCheck (),
-mAttribute_mOperationNoOvf () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecOperatorMap_2D_element::~ GALGAS_incDecOperatorMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecOperatorMap_2D_element::GALGAS_incDecOperatorMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                                          const GALGAS_llvmBinaryOperation & inOperand1,
-                                                                          const GALGAS_llvmBinaryOperation & inOperand2) :
-mAttribute_lkey (inOperand0),
-mAttribute_mOperationOvfCheck (inOperand1),
-mAttribute_mOperationNoOvf (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecOperatorMap_2D_element GALGAS_incDecOperatorMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                          const GALGAS_llvmBinaryOperation & inOperand1,
-                                                                                          const GALGAS_llvmBinaryOperation & inOperand2 
-                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_incDecOperatorMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_incDecOperatorMap_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_incDecOperatorMap_2D_element::objectCompare (const GALGAS_incDecOperatorMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mOperationOvfCheck.objectCompare (inOperand.mAttribute_mOperationOvfCheck) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mOperationNoOvf.objectCompare (inOperand.mAttribute_mOperationNoOvf) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_incDecOperatorMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mOperationOvfCheck.isValid () && mAttribute_mOperationNoOvf.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_incDecOperatorMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mOperationOvfCheck.drop () ;
-  mAttribute_mOperationNoOvf.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_incDecOperatorMap_2D_element::description (C_String & ioString,
-                                                       const int32_t inIndentation) const {
-  ioString << "<struct @incDecOperatorMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mOperationOvfCheck.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mOperationNoOvf.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_incDecOperatorMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_incDecOperatorMap_2D_element::getter_mOperationOvfCheck (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperationOvfCheck ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_incDecOperatorMap_2D_element::getter_mOperationNoOvf (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperationNoOvf ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @incDecOperatorMap-element type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_incDecOperatorMap_2D_element ("incDecOperatorMap-element",
-                                                     NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_incDecOperatorMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_incDecOperatorMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_incDecOperatorMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_incDecOperatorMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecOperatorMap_2D_element GALGAS_incDecOperatorMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_incDecOperatorMap_2D_element result ;
-  const GALGAS_incDecOperatorMap_2D_element * p = (const GALGAS_incDecOperatorMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_incDecOperatorMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("incDecOperatorMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_prefixOperatorMap_2D_element::GALGAS_prefixOperatorMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mResultType () {
+mAttribute_lkey () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8976,27 +8744,23 @@ GALGAS_prefixOperatorMap_2D_element::~ GALGAS_prefixOperatorMap_2D_element (void
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_prefixOperatorMap_2D_element::GALGAS_prefixOperatorMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                                          const GALGAS_unifiedTypeMap_2D_proxy & inOperand1) :
-mAttribute_lkey (inOperand0),
-mAttribute_mResultType (inOperand1) {
+GALGAS_prefixOperatorMap_2D_element::GALGAS_prefixOperatorMap_2D_element (const GALGAS_lstring & inOperand0) :
+mAttribute_lkey (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_prefixOperatorMap_2D_element GALGAS_prefixOperatorMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_prefixOperatorMap_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                              GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)) ;
+  return GALGAS_prefixOperatorMap_2D_element (GALGAS_lstring::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_prefixOperatorMap_2D_element GALGAS_prefixOperatorMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                          const GALGAS_unifiedTypeMap_2D_proxy & inOperand1 
+GALGAS_prefixOperatorMap_2D_element GALGAS_prefixOperatorMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0 
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_prefixOperatorMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_prefixOperatorMap_2D_element (inOperand0, inOperand1) ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_prefixOperatorMap_2D_element (inOperand0) ;
   }
   return result ;
 }
@@ -9008,23 +8772,19 @@ typeComparisonResult GALGAS_prefixOperatorMap_2D_element::objectCompare (const G
   if (result == kOperandEqual) {
     result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
   }
-  if (result == kOperandEqual) {
-    result = mAttribute_mResultType.objectCompare (inOperand.mAttribute_mResultType) ;
-  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_prefixOperatorMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mResultType.isValid () ;
+  return mAttribute_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_prefixOperatorMap_2D_element::drop (void) {
   mAttribute_lkey.drop () ;
-  mAttribute_mResultType.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9036,8 +8796,6 @@ void GALGAS_prefixOperatorMap_2D_element::description (C_String & ioString,
     ioString << " not built" ;
   }else{
     mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mResultType.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -9046,12 +8804,6 @@ void GALGAS_prefixOperatorMap_2D_element::description (C_String & ioString,
 
 GALGAS_lstring GALGAS_prefixOperatorMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
   return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_prefixOperatorMap_2D_element::getter_mResultType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultType ;
 }
 
 
@@ -13051,4 +12803,141 @@ static void defineCategoryMethod_typeAliasDeclaration_enterInContext (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_typeAliasDeclaration_enterInContext (defineCategoryMethod_typeAliasDeclaration_enterInContext, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Overriding category method '@typeAliasDeclaration initAnalysis'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_typeAliasDeclaration_initAnalysis (const cPtr_abstractDeclaration * /* inObject */,
+                                                              GALGAS_semanticContext & /* ioArgument_ioContext */,
+                                                              C_Compiler * /* inCompiler */
+                                                              COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_typeAliasDeclaration_initAnalysis (void) {
+  enterCategoryMethod_initAnalysis (kTypeDescriptor_GALGAS_typeAliasDeclaration.mSlotID,
+                                    categoryMethod_typeAliasDeclaration_initAnalysis) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_typeAliasDeclaration_initAnalysis (defineCategoryMethod_typeAliasDeclaration_initAnalysis, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Overriding category method '@typeAliasDeclaration semanticAnalysis'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_typeAliasDeclaration_semanticAnalysis (const cPtr_abstractDeclaration * /* inObject */,
+                                                                  const GALGAS_semanticContext /* constinArgument_inContext */,
+                                                                  GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
+                                                                  GALGAS_intermediateCodeStruct & /* ioArgument_ioIntermediateCodeStruct */,
+                                                                  C_Compiler * /* inCompiler */
+                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_typeAliasDeclaration_semanticAnalysis (void) {
+  enterCategoryMethod_semanticAnalysis (kTypeDescriptor_GALGAS_typeAliasDeclaration.mSlotID,
+                                        categoryMethod_typeAliasDeclaration_semanticAnalysis) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_typeAliasDeclaration_semanticAnalysis (defineCategoryMethod_typeAliasDeclaration_semanticAnalysis, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Overriding category getter '@globalConstantDeclaration location'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_location extensionGetter_globalConstantDeclaration_location (const cPtr_abstractDeclaration * inObject,
+                                                                           C_Compiler * /* inCompiler */
+                                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_location result_outLocation ; // Returned variable
+  const cPtr_globalConstantDeclaration * object = (const cPtr_globalConstantDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_globalConstantDeclaration) ;
+  result_outLocation = object->mAttribute_mConstantName.mAttribute_location ;
+//---
+  return result_outLocation ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryGetter_globalConstantDeclaration_location (void) {
+  enterCategoryGetter_location (kTypeDescriptor_GALGAS_globalConstantDeclaration.mSlotID,
+                                extensionGetter_globalConstantDeclaration_location) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_globalConstantDeclaration_location (defineCategoryGetter_globalConstantDeclaration_location, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Overriding category method '@globalConstantDeclaration addExtension'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_globalConstantDeclaration_addExtension (const cPtr_abstractDeclaration * inObject,
+                                                                   GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
+                                                                   GALGAS_abstractDeclaration & outArgument_outNewDeclaration,
+                                                                   C_Compiler * /* inCompiler */
+                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_globalConstantDeclaration * object = (const cPtr_globalConstantDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_globalConstantDeclaration) ;
+  const GALGAS_globalConstantDeclaration temp_0 = object ;
+  outArgument_outNewDeclaration = temp_0 ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_globalConstantDeclaration_addExtension (void) {
+  enterCategoryMethod_addExtension (kTypeDescriptor_GALGAS_globalConstantDeclaration.mSlotID,
+                                    categoryMethod_globalConstantDeclaration_addExtension) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_globalConstantDeclaration_addExtension (defineCategoryMethod_globalConstantDeclaration_addExtension, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                   Overriding category method '@globalConstantDeclaration enterInPrecedenceGraph'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_globalConstantDeclaration_enterInPrecedenceGraph (const cPtr_abstractDeclaration * inObject,
+                                                                             GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_globalConstantDeclaration * object = (const cPtr_globalConstantDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_globalConstantDeclaration) ;
+  {
+  const GALGAS_globalConstantDeclaration temp_0 = object ;
+  ioArgument_ioGraph.setter_addNode (object->mAttribute_mConstantName, temp_0, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 65)) ;
+  }
+  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, object->mAttribute_mTypeName.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    {
+    ioArgument_ioGraph.setter_addEdge (object->mAttribute_mConstantName, object->mAttribute_mTypeName COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 67)) ;
+    }
+  }
+  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), object->mAttribute_mConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 69)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_globalConstantDeclaration_enterInPrecedenceGraph (void) {
+  enterCategoryMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_globalConstantDeclaration.mSlotID,
+                                              categoryMethod_globalConstantDeclaration_enterInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_globalConstantDeclaration_enterInPrecedenceGraph (defineCategoryMethod_globalConstantDeclaration_enterInPrecedenceGraph, NULL) ;
 
