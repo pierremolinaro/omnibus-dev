@@ -133,6 +133,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"writeTypeDependencyGraphFile"
+    commandChar:116
+    commandString:@"type-dependency-graph"
+    comment:@"Write type dependency graph file"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"extractEmbeddedSampleFile"
     commandChar:120
     commandString:@"extract-embedded-sample-code"

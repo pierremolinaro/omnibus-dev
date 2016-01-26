@@ -14078,6 +14078,12 @@ C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile (
                                          "routine-invocation-graph",
                                          "Write routine invocation graph file") ;
 
+C_BoolCommandLineOption gOption_plm_5F_options_writeTypeDependencyGraphFile ("plm_options",
+                                         "writeTypeDependencyGraphFile",
+                                         116,
+                                         "type-dependency-graph",
+                                         "Write type dependency graph file") ;
+
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               UInt options                                                                          *

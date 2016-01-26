@@ -568,6 +568,8 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ;
 
+extern C_BoolCommandLineOption gOption_plm_5F_options_writeTypeDependencyGraphFile ;
+
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               UInt options                                                                          *
