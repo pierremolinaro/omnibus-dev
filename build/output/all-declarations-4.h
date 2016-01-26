@@ -149,24 +149,24 @@ void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Abstract category getter '@abstractDeclaration keyRepresentation'                          *
+//                 Abstract category getter '@abstractDeclaration keyRepresentationForErrorSignaling'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef class GALGAS_string (*categoryGetterSignature_abstractDeclaration_keyRepresentation) (const class cPtr_abstractDeclaration * inObject,
-                                                                                              class C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_string (*categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling) (const class cPtr_abstractDeclaration * inObject,
+                                                                                                               class C_Compiler * inCompiler
+                                                                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryGetter_keyRepresentation (const int32_t inClassIndex,
-                                            categoryGetterSignature_abstractDeclaration_keyRepresentation inMethod) ;
+void enterCategoryGetter_keyRepresentationForErrorSignaling (const int32_t inClassIndex,
+                                                             categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string callCategoryGetter_keyRepresentation (const class cPtr_abstractDeclaration * inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+class GALGAS_string callCategoryGetter_keyRepresentationForErrorSignaling (const class cPtr_abstractDeclaration * inObject,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

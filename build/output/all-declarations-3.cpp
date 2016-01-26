@@ -14448,26 +14448,26 @@ void routine_declareLLVMstructureTypes (const GALGAS_unifiedTypeMap constinArgum
                                         GALGAS_string & ioArgument_ioLLVMcode,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_unifiedTypeMap enumerator_19330 (constinArgument_inTypeMap, kEnumeration_up) ;
-  while (enumerator_19330.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = enumerator_19330.current_kind (HERE).getter_isStructure (SOURCE_FILE ("type-structure-declaration.galgas", 497)).boolEnum () ;
+  cEnumerator_unifiedTypeMap enumerator_19348 (constinArgument_inTypeMap, kEnumeration_up) ;
+  while (enumerator_19348.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = enumerator_19348.current_kind (HERE).getter_isStructure (SOURCE_FILE ("type-structure-declaration.galgas", 497)).boolEnum () ;
     if (kBoolTrue == test_0) {
       GALGAS_propertyList var_propertyList ;
-      GALGAS_propertyMap joker_19400 ; // Joker input parameter
-      enumerator_19330.current_kind (HERE).method_structure (joker_19400, var_propertyList, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 498)) ;
-      ioArgument_ioLLVMcode.plusAssign_operation(enumerator_19330.current_llvmTypeName (HERE).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 499)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 499)) ;
-      cEnumerator_propertyList enumerator_19509 (var_propertyList, kEnumeration_up) ;
-      while (enumerator_19509.hasCurrentObject ()) {
-        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_19509.current_mType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 501)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 501)) ;
-        if (enumerator_19509.hasNextObject ()) {
+      GALGAS_propertyMap joker_19418 ; // Joker input parameter
+      enumerator_19348.current_kind (HERE).method_structure (joker_19418, var_propertyList, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 498)) ;
+      ioArgument_ioLLVMcode.plusAssign_operation(enumerator_19348.current_llvmTypeName (HERE).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 499)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 499)) ;
+      cEnumerator_propertyList enumerator_19527 (var_propertyList, kEnumeration_up) ;
+      while (enumerator_19527.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_19527.current_mType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 501)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 501)) ;
+        if (enumerator_19527.hasNextObject ()) {
           ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 502)) ;
         }
-        enumerator_19509.gotoNextObject () ;
+        enumerator_19527.gotoNextObject () ;
       }
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
         "\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 504)) ;
     }
-    enumerator_19330.gotoNextObject () ;
+    enumerator_19348.gotoNextObject () ;
   }
 }
 

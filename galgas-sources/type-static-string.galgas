@@ -36,7 +36,7 @@ override method @literalStringDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalStringDeclaration keyRepresentation -> @string outRepresentation {
+override getter @literalStringDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "literal string " + mLiteralStringTypeName 
 }
 

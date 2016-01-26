@@ -121,7 +121,7 @@ override method @registerDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @registerDeclaration keyRepresentation -> @string outRepresentation {
+override getter @registerDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "register " + [mRegisterDeclarationList mRegisterNameAtIndex !0]
 }
 

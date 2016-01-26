@@ -36,7 +36,7 @@ override method @literalIntegerDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalIntegerDeclaration keyRepresentation -> @string outRepresentation {
+override getter @literalIntegerDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = literalIntegerTypeName () 
 }
 

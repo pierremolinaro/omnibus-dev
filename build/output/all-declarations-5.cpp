@@ -12789,54 +12789,54 @@ void callCategoryMethod_enterInPrecedenceGraph (const cPtr_abstractDeclaration *
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Abstract category getter '@abstractDeclaration keyRepresentation'                          *
+//                 Abstract category getter '@abstractDeclaration keyRepresentationForErrorSignaling'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static TC_UniqueArray <categoryGetterSignature_abstractDeclaration_keyRepresentation> gCategoryGetterTable_abstractDeclaration_keyRepresentation ;
+static TC_UniqueArray <categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling> gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryGetter_keyRepresentation (const int32_t inClassIndex,
-                                            categoryGetterSignature_abstractDeclaration_keyRepresentation inGetter) {
-  gCategoryGetterTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
+void enterCategoryGetter_keyRepresentationForErrorSignaling (const int32_t inClassIndex,
+                                                             categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling inGetter) {
+  gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void freeCategoryGetter_abstractDeclaration_keyRepresentation (void) {
-  gCategoryGetterTable_abstractDeclaration_keyRepresentation.free () ;
+static void freeCategoryGetter_abstractDeclaration_keyRepresentationForErrorSignaling (void) {
+  gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.free () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gGetter_abstractDeclaration_keyRepresentation (NULL,
-                                                                  freeCategoryGetter_abstractDeclaration_keyRepresentation) ;
+C_PrologueEpilogue gGetter_abstractDeclaration_keyRepresentationForErrorSignaling (NULL,
+                                                                                   freeCategoryGetter_abstractDeclaration_keyRepresentationForErrorSignaling) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string callCategoryGetter_keyRepresentation (const cPtr_abstractDeclaration * inObject,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+GALGAS_string callCategoryGetter_keyRepresentationForErrorSignaling (const cPtr_abstractDeclaration * inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_string result ;
 //--- Find Reader
   if (NULL != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
     const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
     const int32_t classIndex = info->mSlotID ;
-    categoryGetterSignature_abstractDeclaration_keyRepresentation f = NULL ;
-    if (classIndex < gCategoryGetterTable_abstractDeclaration_keyRepresentation.count ()) {
-      f = gCategoryGetterTable_abstractDeclaration_keyRepresentation (classIndex COMMA_HERE) ;
+    categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling f = NULL ;
+    if (classIndex < gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.count ()) {
+      f = gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling (classIndex COMMA_HERE) ;
     }
     if (NULL == f) {
        const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
        while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryGetterTable_abstractDeclaration_keyRepresentation.count ()) {
-           f = gCategoryGetterTable_abstractDeclaration_keyRepresentation (p->mSlotID COMMA_HERE) ;
+         if (p->mSlotID < gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.count ()) {
+           f = gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling (p->mSlotID COMMA_HERE) ;
          }
          p = p->mSuperclassDescriptor ;
        }
-       gCategoryGetterTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+       gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
     }
     if (NULL == f) {
       fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;

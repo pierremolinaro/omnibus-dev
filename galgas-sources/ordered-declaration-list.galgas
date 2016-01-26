@@ -1,7 +1,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#                                                                                                                      *
-#    B U I L D    O R D E R E D    D E C L A R A T I O N    L I S T                                                    *
-#                                                                                                                      *
+#                                                                                                                       
+#    B U I L D    O R D E R E D    D E C L A R A T I O N    L I S T                                                     
+#                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 graph @semanticTypePrecedenceGraph (@declarationListAST) {
@@ -14,7 +14,7 @@ abstract method @abstractDeclaration enterInPrecedenceGraph ?!@semanticTypePrece
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract getter @abstractDeclaration keyRepresentation -> @string outRepresentation
+abstract getter @abstractDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -56,11 +56,11 @@ proc buildOrderedDeclarationList
             + [unsortedSemanticDeclarationListAST length]
             + " declarations are involved in circular definition:"
       for () in  unsortedSemanticDeclarationListAST do
-        s += "\n-  " + [mDeclaration keyRepresentation]
+        s += "\n-  " + [mDeclaration keyRepresentationForErrorSignaling]
       end
       error inEndOfSourceFile : s
       for () in  unsortedSemanticDeclarationListAST do
-        error [mDeclaration location] : "the " + [mDeclaration keyRepresentation] + " is declared here"
+        error [mDeclaration location] : "the " + [mDeclaration keyRepresentationForErrorSignaling] + " is declared here"
       end
     end
   end

@@ -54,7 +54,7 @@ override method @pointerSizeDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @pointerSizeDeclaration keyRepresentation -> @string outRepresentation {
+override getter @pointerSizeDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "pointer size " + mSize.bigint
 }
 

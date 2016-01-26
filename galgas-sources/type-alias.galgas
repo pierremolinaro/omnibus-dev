@@ -60,8 +60,8 @@ override method @typeAliasDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @typeAliasDeclaration keyRepresentation -> @string outRepresentation {
-  outRepresentation = "typealias " + mNewTypeName 
+override getter @typeAliasDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "typealias $" + mNewTypeName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
