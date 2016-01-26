@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                 *
+#  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @prefixOperator {
@@ -18,7 +18,7 @@ class @prefixOperatorExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpression
@@ -29,7 +29,7 @@ override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpressio
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                           *
+#  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @prefixOperatorExpressionAST analyzeExpression
@@ -87,7 +87,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     if [inModeSet hasKey !panicModeName ()] then
       error mOperatorLocation
-        : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
       binaryOperator = .subNoOVF
