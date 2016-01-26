@@ -1023,6 +1023,34 @@ void routine_declareLLVMstructureTypes (const class GALGAS_unifiedTypeMap consti
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         Routine 'enterAliasPrefixOperator'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterAliasPrefixOperator (class GALGAS_prefixOperatorMap & ioArgument0,
+                                       const class GALGAS_lstring constinArgument1,
+                                       const class GALGAS_lstring constinArgument2,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'enterAliasInfixOperator'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterAliasInfixOperator (class GALGAS_infixOperatorMap & ioArgument0,
+                                      const class GALGAS_lstring constinArgument1,
+                                      const class GALGAS_lstring constinArgument2,
+                                      const class GALGAS_lstring constinArgument3,
+                                      const class GALGAS_lstring constinArgument4,
+                                      const class GALGAS_lstring constinArgument5,
+                                      const class GALGAS_lstring constinArgument6,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      Routine 'enter_integer_integer_operators'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1376,17 +1404,5 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
                                                             const class GALGAS_location & constinArgument3,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'initialVariableMap'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_variableMap function_initialVariableMap (const class GALGAS_string & constinArgument0,
-                                                      const class GALGAS_semanticContext & constinArgument1,
-                                                      class GALGAS_bool inArgument2,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
 
 #endif

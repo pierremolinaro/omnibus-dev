@@ -128,19 +128,19 @@ override method @integerDeclaration enterInContext
     !comparable:true
     !enumerationType:.null # Not enumerable
   ]
-#--- Enter integer <-> integer infix operators
+#--- Enter integer <-> integer operators
   enter_integer_integer_operators (
     !integerTypeName:integerTypeName
     !signed:mIsSigned
     !?context:ioContext
   )
-#--- Enter integer <-> literal infix operators
+#--- Enter integer <-> literal operators
   enter_integer_literal_operators (
     !integerTypeName:integerTypeName
     !signed:mIsSigned
     !?context:ioContext
   )
-#--- Enter literal <-> integer infix operators
+#--- Enter literal <-> integer operators
   enter_literal_integer_operators (
     !integerTypeName:integerTypeName
     !signed:mIsSigned

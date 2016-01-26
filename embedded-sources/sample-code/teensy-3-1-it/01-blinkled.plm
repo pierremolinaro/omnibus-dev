@@ -5,21 +5,22 @@ target "teensy-3-1-it"
 proc setup `user () {
 }
 
-typealias $u : $uint32
+typealias $u : $int32
 
 //------------------------------------------------*
 
-var gDelai $uint32  = 0 {
+var gDelai $u = 0 {
   @rw proc loop
 }
 
 //------------------------------------------------*
 
 proc loop `user () {
+  gDelai +%= gDelai
   gDelai +%= 1
   if gDelai == 1_000_000 then
     ledOn (!LED_TEENSY) // Allumer la led
-  elsif gDelai == 2_000_000 then
+  elsif 2_000_000 == gDelai then
     gDelai = 0
     ledOff (!LED_TEENSY)  // Éteindre la led
   end  
