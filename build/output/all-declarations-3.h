@@ -1389,14 +1389,4 @@ class GALGAS_variableMap function_initialVariableMap (const class GALGAS_string 
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Function 'variableMapWithConstants'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_variableMap function_variableMapWithConstants (const class GALGAS_semanticContext & constinArgument0,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
 #endif

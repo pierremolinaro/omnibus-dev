@@ -1,0 +1,124 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @typeAliasDeclaration : @abstractDeclaration {
+  @lstring mNewTypeName
+  @lstring mAliasedTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @typeAliasDeclaration location -> @location outLocation {
+  outLocation = mNewTypeName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $typealias$
+    $typeName$ ?let newTypeName
+    $:$
+    $typeName$ ?let aliasedTypeName
+    ioAST.mDeclarationList += !@typeAliasDeclaration.new {
+      !newTypeName
+      !aliasedTypeName
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeAliasDeclaration addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeAliasDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mNewTypeName !self]
+  [!?ioGraph addEdge !mNewTypeName !mAliasedTypeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @typeAliasDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "typealias " + mNewTypeName 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeAliasDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+#--- Enter in type map
+  [ioContext.mTypeMap searchKey
+    !lkey:mAliasedTypeName
+    ?llvmTypeName:let llvmTypeMane
+    ?kind:let kind
+    ?typedConstantMap:let typedConstantMap
+    ?procedureMap:let procedureMap
+    ?functionMap:let functionMap
+    ?copiable:let copiable
+    ?equatable:let equatable
+    ?comparable:let comparable
+    ?enumerationType:let enumerationType
+  ]
+#--- Enter in type map
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mNewTypeName
+    !llvmTypeName:llvmTypeMane
+    !kind:kind
+    !typedConstantMap:typedConstantMap
+    !procedureMap:procedureMap
+    !functionMap:functionMap
+    !copiable:copiable
+    !equatable:equatable
+    !comparable:comparable
+    !enumerationType:enumerationType
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  INIT ANALYSIS                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeAliasDeclaration initAnalysis
+  ?!context:@semanticContext unused ioContext
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeAliasDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

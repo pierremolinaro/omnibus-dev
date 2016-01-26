@@ -30,14 +30,11 @@ project (1:0:0) -> "plm" {
 #--- Mode
   "galgas-sources/mode-declaration.galgas"
 
-#--- Extension
-  "galgas-sources/extension-declaration.galgas"
-
-#--- Enumeration
-  "galgas-sources/enumeration-declaration.galgas"
-
-#--- Structure
-  "galgas-sources/structure-declaration.galgas"
+#--- Type declaration
+  "galgas-sources/type-enumeration-declaration.galgas"
+  "galgas-sources/type-structure-declaration.galgas"
+  "galgas-sources/type-alias.galgas"
+  "galgas-sources/type-extension-declaration.galgas"
 
 #--- Global declarations
   "galgas-sources/global-variable-declaration.galgas"

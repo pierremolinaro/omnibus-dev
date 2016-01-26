@@ -5,9 +5,11 @@ target "teensy-3-1-it"
 proc setup `user () {
 }
 
+typealias $u : $uint32
+
 //------------------------------------------------*
 
-var gDelai $uint32 = 0 {
+var gDelai $uint32  = 0 {
   @rw proc loop
 }
 
