@@ -119,8 +119,8 @@ override method @structureDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @structureDeclaration keyRepresentation -> @string outRepresentation {
-  outRepresentation = "struct " + mStructureName 
+override getter @structureDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "struct $" + mStructureName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

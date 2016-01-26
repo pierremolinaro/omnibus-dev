@@ -74,8 +74,8 @@ override method @enumerationDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @enumerationDeclaration keyRepresentation -> @string outRepresentation {
-  outRepresentation = "enum " + mEnumerationName 
+override getter @enumerationDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "enum $" + mEnumerationName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

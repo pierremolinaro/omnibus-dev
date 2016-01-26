@@ -36,8 +36,8 @@ override method @booleanDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @booleanDeclaration keyRepresentation -> @string outRepresentation {
-  outRepresentation = "bool " + mBooleanTypeName 
+override getter @booleanDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "bool $" + mBooleanTypeName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

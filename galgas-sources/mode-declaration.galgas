@@ -61,7 +61,7 @@ override method @modeDeclaration enterInPrecedenceGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @modeDeclaration keyRepresentation -> @string outRepresentation {
+override getter @modeDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "mode " + mModeName 
 }
 
