@@ -130,7 +130,7 @@ private proc enterBooleanOperators
   ]
   [!?ioContext.mNotOperatorMap insertKey
     !inBooleanTypeName
-    !selfTypeProxy
+#    !selfTypeProxy
   ]
 }
 

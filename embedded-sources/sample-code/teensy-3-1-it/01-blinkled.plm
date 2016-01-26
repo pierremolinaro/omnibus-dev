@@ -16,7 +16,6 @@ var gDelai $u = 0 {
 //------------------------------------------------*
 
 proc loop `user () {
-  gDelai +%= gDelai
   gDelai +%= 1
   if gDelai == 1_000_000 then
     ledOn (!LED_TEENSY) // Allumer la led

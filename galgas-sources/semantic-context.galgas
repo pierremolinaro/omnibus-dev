@@ -25,19 +25,10 @@ map @infixOperatorMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @incDecOperatorMap {
-  @llvmBinaryOperation mOperationOvfCheck
-  @llvmBinaryOperation mOperationNoOvf
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @prefixOperatorMap {
-  @unifiedTypeMap-proxy mResultType
+#  @unifiedTypeMap-proxy mResultType
   insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
+  search searchKey error message "prefix operation is not defined for $%K type"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

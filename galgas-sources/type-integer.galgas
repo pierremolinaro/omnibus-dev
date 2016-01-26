@@ -227,14 +227,14 @@ private proc enter_integer_integer_operators
     ]
     [!?ioContext.mUnsignedComplementOperatorMap insertKey
       !inIntegerTypeName
-      !selfTypeProxy
+#      !selfTypeProxy
     ]
   end
 #--- Negate operator (for signed integers)
   if inIsSigned then
     [!?ioContext.mUnaryMinusOperatorMap insertKey
       !inIntegerTypeName
-      !selfTypeProxy
+#      !selfTypeProxy
     ]
   end
 #--- Arithmetic operators

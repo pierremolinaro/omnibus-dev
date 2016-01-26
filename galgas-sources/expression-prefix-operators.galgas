@@ -32,23 +32,6 @@ override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpressio
 #  SEMANTICS                                                                                                           *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @prefixOperatorMap checkWith
-  ?type:let @unifiedTypeMap-proxy inType
-  ?operatorLocation:let @location inOperatorLocation
-  !resultType: @unifiedTypeMap-proxy outResultType
-{
-  let lkey = @lstring.new {![inType key] !inOperatorLocation}
-  if [self hasKey !lkey.string] then
-    [self searchKey !lkey ?outResultType]
-  else
-    error inOperatorLocation
-      : "prefix operation is not defined for '" + [inType key] + " type"
-      : outResultType
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @prefixOperatorExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -75,15 +58,13 @@ override method @prefixOperatorExpressionAST analyzeExpression
     ?result:let @operandIR expressionResult
   ]
 #--- Check expression type accepts prefix operator
-  @prefixOperatorMap operatorMap
+  @prefixOperatorMap prefixOperatorMap
   @llvmBinaryOperation binaryOperator
-  @string commentOperator
   @operandIR leftOperand
   switch mOp 
   case unsignedComplement :
-    operatorMap = inContext.mUnsignedComplementOperatorMap
+    prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
     binaryOperator = .xor
-    commentOperator = "~"
     switch [expressionResult.mType kind]
     case boolean : error .nowhere : "internal error" : leftOperand
     case boolset : error .nowhere : "internal error" : leftOperand
@@ -95,17 +76,15 @@ override method @prefixOperatorExpressionAST analyzeExpression
       leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:(1G << bitCount) - 1G}}
     end
   case notOperator :
-    operatorMap = inContext.mNotOperatorMap
+    prefixOperatorMap = inContext.mNotOperatorMap
     binaryOperator = .xor
-    commentOperator = "!"
     leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:1G}}
   case minusNoOvf :
-    operatorMap = inContext.mUnaryMinusOperatorMap
+    prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     binaryOperator = .subNoOVF
-    commentOperator = "-"
     leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
   case minus :
-    operatorMap = inContext.mUnaryMinusOperatorMap
+    prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     if [inModeSet hasKey !panicModeName ()] then
       error mOperatorLocation
         : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
@@ -113,18 +92,14 @@ override method @prefixOperatorExpressionAST analyzeExpression
     if [option plm_options.noPanicGeneration value] then
       binaryOperator = .subNoOVF
       leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
-      commentOperator = "-"
     else
       binaryOperator = .ssubOVF
       leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
-      commentOperator = "-OVF "
     end
   end
-  [operatorMap checkWith
-    !type:expressionResult.mType
-    !operatorLocation:mOperatorLocation
-    ?resultType:let resultType
-  ]
+#--- Check operator
+  [prefixOperatorMap searchKey !.new {![expressionResult.mType key] !mOperatorLocation}]
+  let resultType = expressionResult.mType
 #---
   if [expressionResult.mValue isLiteralInteger] then
     [expressionResult.mValue literalInteger ?value:let @bigint value]
@@ -139,9 +114,6 @@ override method @prefixOperatorExpressionAST analyzeExpression
   else
   #--- Temp var
     getNewTempVariable (!resultType !?ioTemporaries ?outResult)
-  #--- Comment
-#    var comment = [outResult.mValue string] + " = " + commentOperator + expressionResult.mValue
-#    [!?ioInstructionGenerationList appendComment !comment]
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult.mValue
@@ -152,70 +124,6 @@ override method @prefixOperatorExpressionAST analyzeExpression
       !expressionResult.mValue
     ]      
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                     *
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @prefixOperatorExpressionIR
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-enum @prefixOperatorIR {
-  case prefix (@string prefixOperator)
-  case prefixMinusOvf (@uint code)
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @prefixOperatorExpressionIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @valueIR mResult
-  @valueIR mOperand
-  @prefixOperatorIR mOperator
-  @location mOperatorLocation
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @prefixOperatorExpressionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  switch mOperator 
-  case prefix (@string prefixOperator) :
-    ioLLVMcode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult llvmName]
-    ioLLVMcode += " = " + prefixOperator + " " + [mOperand llvmName] + " ;\n"
-  case prefixMinusOvf (@uint code) :
-    @bigint minValue
-    switch [mTargetType kind]
-    case boolean, boolset, literalString :
-      error mOperatorLocation: "Internal Error" : minValue
-    case enumeration (*) :
-      error mOperatorLocation: "Internal Error" : minValue
-    case structure (* *) :
-      error mOperatorLocation: "Internal Error" : minValue
-    case integer (@bigint min * * *) :
-      minValue = min
-    case literalInteger :
-      minValue = 0G # TODO
-    end
-    let ovfVar = "ovf" + [mOperatorLocation locationIndex]
-    ioLLVMcode += "const bool " + ovfVar + " = " + [mOperand llvmName] + " == " + minValue + " ;\n"
-    ioLLVMcode += "if (" + ovfVar + ") {\n"
-    ioLLVMcode += "  raise_exception (" + code
-       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
-       + ", " + [mOperatorLocation line] + ") ;\n"
-    ioLLVMcode += "}\n" 
-    ioLLVMcode += mangledNameForType (!name:[mTargetType key]) + " " + [mResult llvmName]
-       + " = - " + [mOperand llvmName] + " ;\n"
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @prefixOperatorExpressionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
-#  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

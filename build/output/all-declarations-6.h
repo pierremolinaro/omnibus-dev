@@ -26,19 +26,6 @@ void categoryMethod_checkBinaryOperationWith (const class GALGAS_infixOperatorMa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Category method '@prefixOperatorMap checkWith'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_checkWith (const class GALGAS_prefixOperatorMap inObject,
-                               const class GALGAS_unifiedTypeMap_2D_proxy constin_inType,
-                               const class GALGAS_location constin_inOperatorLocation,
-                               class GALGAS_unifiedTypeMap_2D_proxy & out_outResultType,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //         Category getter '@procEffectiveParameterPassingModeAST passingModeForActualSelector' (as function)          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
