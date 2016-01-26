@@ -130,9 +130,10 @@ void routine_getNewTempObjectInMemory (const class GALGAS_unifiedTypeMap_2D_prox
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_buildOrderedDeclarationList (class GALGAS_ast inArgument0,
-                                          class GALGAS_location inArgument1,
-                                          class GALGAS_declarationListAST & outArgument2,
+void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument0,
+                                          const class GALGAS_string constinArgument1,
+                                          const class GALGAS_location constinArgument2,
+                                          class GALGAS_declarationListAST & outArgument3,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 

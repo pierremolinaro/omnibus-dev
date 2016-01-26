@@ -105,6 +105,7 @@ private proc compileProject
 #--- Ordered declaration list
   buildOrderedDeclarationList (
     !ast:ast
+    !sourceFile:inSourceFile.string
     !endOfSourceFile:inEndOfSourceFile
     ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
   )

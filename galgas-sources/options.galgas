@@ -5,6 +5,7 @@ option plm_options {
   @bool performFlashing: 'f', "flash-target" -> "After successful compilation, flash target"
 
   @bool writeRoutineInvocationGraphFile : 'i', "routine-invocation-graph" -> "Write routine invocation graph file"
+  @bool writeTypeDependencyGraphFile : 't', "type-dependency-graph" -> "Write type dependency graph file"
   @bool doNotDetectRecursiveCalls : 'r', "do-not-detect-recursive-calls" -> "Do not detect recursive calls"
 
   @bool listEmbeddedSampleFiles : 'l', "list-embedded-samples" -> "List embedded sample files"

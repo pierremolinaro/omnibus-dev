@@ -19,17 +19,24 @@ abstract getter @abstractDeclaration keyRepresentation -> @string outRepresentat
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildOrderedDeclarationList
-  ?ast:@ast inAST
-  ?endOfSourceFile:@location inEndOfSourceFile
+  ?ast:let @ast inAST
+  ?sourceFile:let @string inSourceFile
+  ?endOfSourceFile:let @location inEndOfSourceFile
   !orderedDeclarationList:@declarationListAST outDeclarationListAST
 {
 #--- Build precedence graph
   @semanticTypePrecedenceGraph precedenceGraph = .emptyGraph
   for () in inAST.mDeclarationList do
-    [mDeclaration enterInPrecedenceGraph !?precedenceGraph] ;
+    [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
   end
   for procedure in inAST.mProcedureListAST do
-    [procedure enterInPrecedenceGraph !?precedenceGraph] ;
+    [procedure enterInPrecedenceGraph !?precedenceGraph]
+  end
+#---  Write precedence graph file ?
+  if (@uint.errorCount == 0) && [option plm_options.writeTypeDependencyGraphFile value] then
+    let s = [precedenceGraph graphviz]
+    let filePath = inSourceFile + ".typeDependency.dot"
+    [s writeToFileWhenDifferentContents !filePath ?*]
   end
 #---
   outDeclarationListAST = {}
