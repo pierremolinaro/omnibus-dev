@@ -166,28 +166,28 @@ proc enterGlobalConstantsInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc generateGlobalConstantLLVMCode
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  for (constantName constantValue) in inContext.mGlobalConstantMap do
-    [!?ioIntermediateCodeStruct.mGlobalConstantMap insertKey
-      !constantName
-      !constantValue.mType
-      !constantValue.mValue
-    ]
-  end
-
-}
+#proc generateGlobalConstantLLVMCode
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  for (constantName constantValue) in inContext.mGlobalConstantMap do
+#    [!?ioIntermediateCodeStruct.mGlobalConstantMap insertKey
+#      !constantName
+#      !constantValue.mType
+#      !constantValue.mValue
+#    ]
+#  end
+#
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @globalConstantMapIR-element generateLLVM ?!@string ioLLVMcode {
-  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal constant "
-  ioLLVMcode += [mType llvmTypeName] + " " +  [mSourceExpression llvmName] + "\n"
-}
+#method @globalConstantMapIR-element generateLLVM ?!@string unused ioLLVMcode {
+#  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal constant "
+#  ioLLVMcode += [mType llvmTypeName] + " " +  [mSourceExpression llvmName] + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

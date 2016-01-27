@@ -14665,27 +14665,6 @@ void routine_enterGlobalConstantsInContext (const GALGAS_globalConstantDeclarati
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'generateGlobalConstantLLVMCode'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_generateGlobalConstantLLVMCode (const GALGAS_semanticContext constinArgument_inContext,
-                                             GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
-                                             GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                             C_Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_globalConstantMap enumerator_7557 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
-  while (enumerator_7557.hasCurrentObject ()) {
-    {
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap.setter_insertKey (enumerator_7557.current_lkey (HERE), enumerator_7557.current_mValue (HERE).mAttribute_mType, enumerator_7557.current_mValue (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 175)) ;
-    }
-    enumerator_7557.gotoNextObject () ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Routine 'enter_integer_integer_operators'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

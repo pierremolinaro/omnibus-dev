@@ -184,11 +184,11 @@ proc generateLLVMfile
 #  llvmCode += llvmTitleComment (!"Structure initializations")
 #  declareLLVMstructureInitRoutines (!inTypeInitializerMap !?llvmCode)
 ##----------------------------------------- Global constants
-  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap
-    before llvmCode += llvmTitleComment (!"Global constants")
-    do [globalConstant generateLLVM !?llvmCode]
-    after llvmCode += "\n"
-  end
+#  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap
+#    before llvmCode += llvmTitleComment (!"Global constants")
+#    do [globalConstant generateLLVM !?llvmCode]
+#    after llvmCode += "\n"
+#  end
 #----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
     before llvmCode += llvmTitleComment (!"Global variables")
