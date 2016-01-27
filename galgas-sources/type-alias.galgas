@@ -106,6 +106,8 @@ override method @typeAliasDeclaration enterInContext
   let aliasLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mAliasedTypeName.string !staticIntegerTypeName ())
   let literalIntegerNewInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mNewTypeName.string)
   let literalIntegerAliasInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mAliasedTypeName.string)
+  let newTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mNewTypeName}
+  let oldTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mAliasedTypeName}
   enterAliasInfixOperator (
     !?ioContext.mEqualOperatorMap
     !newNewInfixKey
@@ -114,6 +116,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mNonEqualOperatorMap
@@ -123,6 +127,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mStrictInfOperatorMap
@@ -132,6 +138,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mInfEqualOperatorMap
@@ -141,6 +149,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mStrictSupOperatorMap
@@ -150,6 +160,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mSupEqualOperatorMap
@@ -159,6 +171,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mAndOperatorMap
@@ -168,6 +182,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mOrOperatorMap
@@ -177,6 +193,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mXorOperatorMap
@@ -186,6 +204,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mBooleanXorOperatorMap
@@ -195,6 +215,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mAddOperatorMap
@@ -204,6 +226,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mAddNoOvfOperatorMap
@@ -213,6 +237,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mSubOperatorMap
@@ -222,7 +248,9 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
-  )
+     !newTypeProxy
+    !oldTypeProxy
+ )
   enterAliasInfixOperator (
     !?ioContext.mSubNoOvfOperatorMap
     !newNewInfixKey
@@ -231,6 +259,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mMulOperatorMap
@@ -240,6 +270,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mMulNoOvfOperatorMap
@@ -249,6 +281,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mDivOperatorMap
@@ -258,6 +292,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mDivNoOvfOperatorMap
@@ -267,6 +303,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mModOperatorMap
@@ -276,6 +314,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mModNoOvfOperatorMap
@@ -285,6 +325,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mLeftShiftOperatorMap
@@ -294,6 +336,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasInfixOperator (
     !?ioContext.mRightShiftOperatorMap
@@ -303,6 +347,8 @@ override method @typeAliasDeclaration enterInContext
     !aliasLiteralIntegerInfixKey
     !literalIntegerNewInfixKey
     !literalIntegerAliasInfixKey
+    !newTypeProxy
+    !oldTypeProxy
   )
   enterAliasPrefixOperator (!?ioContext.mUnaryMinusOperatorMap !mNewTypeName !mAliasedTypeName)
   enterAliasPrefixOperator (!?ioContext.mNotOperatorMap !mNewTypeName !mAliasedTypeName)
@@ -338,13 +384,18 @@ private proc enterAliasInfixOperator
   ?let @lstring inAliasedLiteralIntegerInfixKey
   ?let @lstring inLiteralIntegerNewInfixKey
   ?let @lstring inLiteralIntegerAliasInfixKey
+  ?let @unifiedTypeMap-proxy inNewTypeProxy
+  ?let @unifiedTypeMap-proxy inOldTypeProxy
 {
   if [ioInfixOperatorMap hasKey !inAliasedAliasedInfixKey.string] then
     [ioInfixOperatorMap searchKey
       !inAliasedAliasedInfixKey
-      ?let @unifiedTypeMap-proxy resultType
+      ?@unifiedTypeMap-proxy resultType
       ?let @infixOperatorDescription operation
     ]
+    if resultType == inOldTypeProxy then
+      resultType = inNewTypeProxy
+    end
     [!?ioInfixOperatorMap insertKey
       !inNewNewInfixKey
       !resultType
@@ -354,9 +405,12 @@ private proc enterAliasInfixOperator
   if [ioInfixOperatorMap hasKey !inAliasedLiteralIntegerInfixKey.string] then
     [ioInfixOperatorMap searchKey
       !inAliasedLiteralIntegerInfixKey
-      ?let @unifiedTypeMap-proxy resultType
+      ?@unifiedTypeMap-proxy resultType
       ?let @infixOperatorDescription operation
     ]
+    if resultType == inOldTypeProxy then
+      resultType = inNewTypeProxy
+    end
     [!?ioInfixOperatorMap insertKey
       !inNewLiteralIntegerInfixKey
       !resultType
@@ -366,9 +420,12 @@ private proc enterAliasInfixOperator
   if [ioInfixOperatorMap hasKey !inLiteralIntegerAliasInfixKey.string] then
     [ioInfixOperatorMap searchKey
       !inLiteralIntegerAliasInfixKey
-      ?let @unifiedTypeMap-proxy resultType
+      ?@unifiedTypeMap-proxy resultType
       ?let @infixOperatorDescription operation
     ]
+    if resultType == inOldTypeProxy then
+      resultType = inNewTypeProxy
+    end
     [!?ioInfixOperatorMap insertKey
       !inLiteralIntegerNewInfixKey
       !resultType

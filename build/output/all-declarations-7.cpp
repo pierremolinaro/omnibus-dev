@@ -604,7 +604,7 @@ static void categoryMethod_literalIntegerDeclaration_enterInContext (const cPtr_
                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring var_integerTypeName = function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 52)).getter_nowhere (SOURCE_FILE ("type-literal-integer.galgas", 52)) ;
   {
-  ioArgument_ioContext.mAttribute_mTypeMap.setter_insertKey (var_integerTypeName, GALGAS_string ("<<literal integer>>"), GALGAS_typeKind::constructor_literalInteger (SOURCE_FILE ("type-literal-integer.galgas", 57)), GALGAS_typedConstantMap::constructor_emptyMap (SOURCE_FILE ("type-literal-integer.galgas", 58)), GALGAS_procedureMap::constructor_emptyMap (SOURCE_FILE ("type-literal-integer.galgas", 59)), GALGAS_functionMap::constructor_emptyMap (SOURCE_FILE ("type-literal-integer.galgas", 60)), GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (true), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-literal-integer.galgas", 64)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 54)) ;
+  ioArgument_ioContext.mAttribute_mTypeMap.setter_insertKey (var_integerTypeName, GALGAS_string ("<<literal integer>>"), GALGAS_typeKind::constructor_staticInteger (SOURCE_FILE ("type-literal-integer.galgas", 57)), GALGAS_typedConstantMap::constructor_emptyMap (SOURCE_FILE ("type-literal-integer.galgas", 58)), GALGAS_procedureMap::constructor_emptyMap (SOURCE_FILE ("type-literal-integer.galgas", 59)), GALGAS_functionMap::constructor_emptyMap (SOURCE_FILE ("type-literal-integer.galgas", 60)), GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (true), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-literal-integer.galgas", 64)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 54)) ;
   }
   {
   routine_enterLiteralIntegerOperators (var_integerTypeName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 67)) ;
@@ -1310,7 +1310,7 @@ static void categoryMethod_registerDeclaration_semanticAnalysis (const cPtr_abst
       inCompiler->emitSemanticError (location_9, GALGAS_string ("an enumeration type is not valid for a register")  COMMA_SOURCE_FILE ("register-declaration.galgas", 276)) ;
     }
     break ;
-  case GALGAS_typeKind::kEnum_literalInteger:
+  case GALGAS_typeKind::kEnum_staticInteger:
     {
       GALGAS_location location_10 (object->mAttribute_mRegisterTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
       inCompiler->emitSemanticError (location_10, GALGAS_string ("a literal integer type is not valid for a register")  COMMA_SOURCE_FILE ("register-declaration.galgas", 277)) ;
@@ -1318,17 +1318,17 @@ static void categoryMethod_registerDeclaration_semanticAnalysis (const cPtr_abst
     break ;
   }
   GALGAS_bigint var_maxAddress = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("register-declaration.galgas", 280)).left_shift_operation (constinArgument_inContext.mAttribute_mPointerSize COMMA_SOURCE_FILE ("register-declaration.galgas", 280)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("register-declaration.galgas", 280)), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 280)) ;
-  cEnumerator_registerDeclarationList enumerator_11084 (object->mAttribute_mRegisterDeclarationList, kEnumeration_up) ;
-  while (enumerator_11084.hasCurrentObject ()) {
-    const enumGalgasBool test_11 = GALGAS_bool (kIsStrictSup, enumerator_11084.current_mRegisterAddress (HERE).mAttribute_bigint.objectCompare (var_maxAddress)).boolEnum () ;
+  cEnumerator_registerDeclarationList enumerator_11083 (object->mAttribute_mRegisterDeclarationList, kEnumeration_up) ;
+  while (enumerator_11083.hasCurrentObject ()) {
+    const enumGalgasBool test_11 = GALGAS_bool (kIsStrictSup, enumerator_11083.current_mRegisterAddress (HERE).mAttribute_bigint.objectCompare (var_maxAddress)).boolEnum () ;
     if (kBoolTrue == test_11) {
-      GALGAS_location location_12 (enumerator_11084.current_mRegisterAddress (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+      GALGAS_location location_12 (enumerator_11083.current_mRegisterAddress (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
       inCompiler->emitSemanticError (location_12, GALGAS_string ("register address should be lower or equal to ").add_operation (var_maxAddress.getter_hexString (SOURCE_FILE ("register-declaration.galgas", 283)), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 283))  COMMA_SOURCE_FILE ("register-declaration.galgas", 283)) ;
     }
     {
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap.setter_insertKey (enumerator_11084.current_mRegisterName (HERE), object->mAttribute_mRegisterTypeName.mAttribute_string, enumerator_11084.current_mRegisterAddress (HERE).mAttribute_bigint, inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 286)) ;
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap.setter_insertKey (enumerator_11083.current_mRegisterName (HERE), object->mAttribute_mRegisterTypeName.mAttribute_string, enumerator_11083.current_mRegisterAddress (HERE).mAttribute_bigint, inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 286)) ;
     }
-    enumerator_11084.gotoNextObject () ;
+    enumerator_11083.gotoNextObject () ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2238,7 +2238,7 @@ static void categoryMethod_prefixOperatorExpressionAST_analyzeExpression (const 
           var_leftOperand.drop () ; // Release error dropped variable
         }
         break ;
-      case GALGAS_typeKind::kEnum_literalInteger:
+      case GALGAS_typeKind::kEnum_staticInteger:
         {
           inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("expression-prefix-operators.galgas", 74)), GALGAS_string ("internal error")  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 74)) ;
           var_leftOperand.drop () ; // Release error dropped variable
@@ -2246,8 +2246,8 @@ static void categoryMethod_prefixOperatorExpressionAST_analyzeExpression (const 
         break ;
       case GALGAS_typeKind::kEnum_integer:
         {
-          const cEnumAssociatedValues_typeKind_integer * extractPtr_3649 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 68)).unsafePointer ()) ;
-          const GALGAS_uint extractedValue_bitCount = extractPtr_3649->mAssociatedValue3 ;
+          const cEnumAssociatedValues_typeKind_integer * extractPtr_3648 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 68)).unsafePointer ()) ;
+          const GALGAS_uint extractedValue_bitCount = extractPtr_3648->mAssociatedValue3 ;
           var_leftOperand = GALGAS_operandIR::constructor_new (constinArgument_inContext.mAttribute_mLiteralIntegerType, GALGAS_valueIR::constructor_literalInteger (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 76)).left_shift_operation (extractedValue_bitCount COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 76)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 76)), inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 76))  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 76))  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 76)) ;
         }
         break ;
@@ -2576,27 +2576,27 @@ static void categoryMethod_varInExpressionAST_analyzeExpression (const cPtr_expr
   GALGAS_objectInMemoryIR var_variableKind ;
   GALGAS_registerBitSliceAccessMap var_registerBitSliceMap ;
   {
-  GALGAS_bool joker_3625 ; // Joker input parameter
-  GALGAS_bool joker_3684_2 ; // Joker input parameter
-  GALGAS_bool joker_3684_1 ; // Joker input parameter
-  ioArgument_ioVariableMap.setter_searchForReadAccess (object->mAttribute_mSourceVarName, var_variableType, var_accessIsAllowed, var_variableKind, joker_3625, var_registerBitSliceMap, joker_3684_2, joker_3684_1, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 77)) ;
+  GALGAS_bool joker_3645 ; // Joker input parameter
+  GALGAS_bool joker_3704_2 ; // Joker input parameter
+  GALGAS_bool joker_3704_1 ; // Joker input parameter
+  ioArgument_ioVariableMap.setter_searchForReadAccess (object->mAttribute_mSourceVarName, var_variableType, var_accessIsAllowed, var_variableKind, joker_3645, var_registerBitSliceMap, joker_3704_2, joker_3704_1, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 77)) ;
   }
   const enumGalgasBool test_0 = var_accessIsAllowed.operator_not (SOURCE_FILE ("expression-var.galgas", 86)).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (object->mAttribute_mSourceVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("routine has no access right on the this variable")  COMMA_SOURCE_FILE ("expression-var.galgas", 87)) ;
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("routine has no access right on this variable")  COMMA_SOURCE_FILE ("expression-var.galgas", 87)) ;
   }
   categoryMethod_loadFromMemory (var_variableKind, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 90)) ;
   GALGAS_unifiedTypeMap_2D_proxy var_expressionType = function_solveInferredType (constinArgument_inOptionalTargetType, var_variableType, object->mAttribute_mSourceVarName.mAttribute_location, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 96)) ;
-  cEnumerator_lstringlist enumerator_4196 (object->mAttribute_mFieldNameList, kEnumeration_up) ;
-  while (enumerator_4196.hasCurrentObject ()) {
+  cEnumerator_lstringlist enumerator_4212 (object->mAttribute_mFieldNameList, kEnumeration_up) ;
+  while (enumerator_4212.hasCurrentObject ()) {
     const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, var_registerBitSliceMap.getter_count (SOURCE_FILE ("expression-var.galgas", 103)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_2) {
       GALGAS_llvmBinaryOperation var_accessOperator ;
       GALGAS_bigint var_accessRightOperand ;
       GALGAS_registerBitSliceAccessMap var_submap ;
       GALGAS_unifiedTypeMap_2D_proxy var_newResultType ;
-      var_registerBitSliceMap.method_searchKey (enumerator_4196.current_mValue (HERE), var_accessOperator, var_accessRightOperand, var_submap, var_newResultType, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 104)) ;
+      var_registerBitSliceMap.method_searchKey (enumerator_4212.current_mValue (HERE), var_accessOperator, var_accessRightOperand, var_submap, var_newResultType, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 104)) ;
       GALGAS_operandIR var_newResultingVariable ;
       {
       routine_getNewTempVariable (var_newResultType, ioArgument_ioTemporaries, var_newResultingVariable, inCompiler  COMMA_SOURCE_FILE ("expression-var.galgas", 112)) ;
@@ -2612,41 +2612,41 @@ static void categoryMethod_varInExpressionAST_analyzeExpression (const cPtr_expr
         break ;
       case GALGAS_typeKind::kEnum_boolean:
         {
-          GALGAS_location location_3 (enumerator_4196.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_3 (enumerator_4212.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_3, GALGAS_string ("a boolean does not handle field access")  COMMA_SOURCE_FILE ("expression-var.galgas", 126)) ;
         }
         break ;
-      case GALGAS_typeKind::kEnum_literalInteger:
+      case GALGAS_typeKind::kEnum_staticInteger:
         {
-          GALGAS_location location_4 (enumerator_4196.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_4 (enumerator_4212.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_4, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("expression-var.galgas", 128)) ;
         }
         break ;
       case GALGAS_typeKind::kEnum_boolset:
         {
-          GALGAS_location location_5 (enumerator_4196.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_5 (enumerator_4212.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_5, GALGAS_string ("a boolset does not handle field access")  COMMA_SOURCE_FILE ("expression-var.galgas", 130)) ;
         }
         break ;
       case GALGAS_typeKind::kEnum_literalString:
         {
-          GALGAS_location location_6 (enumerator_4196.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_6 (enumerator_4212.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_6, GALGAS_string ("a literal string does not handle field access")  COMMA_SOURCE_FILE ("expression-var.galgas", 132)) ;
         }
         break ;
       case GALGAS_typeKind::kEnum_enumeration:
         {
-          GALGAS_location location_7 (enumerator_4196.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_7 (enumerator_4212.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_7, GALGAS_string ("an enumeration does not handle field access")  COMMA_SOURCE_FILE ("expression-var.galgas", 134)) ;
         }
         break ;
       case GALGAS_typeKind::kEnum_structure:
         {
-          const cEnumAssociatedValues_typeKind_structure * extractPtr_5802 = (const cEnumAssociatedValues_typeKind_structure *) (outArgument_outResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 124)).unsafePointer ()) ;
-          const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_5802->mAssociatedValue0 ;
+          const cEnumAssociatedValues_typeKind_structure * extractPtr_5817 = (const cEnumAssociatedValues_typeKind_structure *) (outArgument_outResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 124)).unsafePointer ()) ;
+          const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_5817->mAssociatedValue0 ;
           GALGAS_unifiedTypeMap_2D_proxy var_type ;
           GALGAS_uint var_idx ;
-          extractedValue_propertyMap.method_searchKey (enumerator_4196.current_mValue (HERE), var_type, var_idx, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 136)) ;
+          extractedValue_propertyMap.method_searchKey (enumerator_4212.current_mValue (HERE), var_type, var_idx, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 136)) ;
           GALGAS_operandIR var_newResultingVariable ;
           {
           routine_getNewTempVariable (var_type, ioArgument_ioTemporaries, var_newResultingVariable, inCompiler  COMMA_SOURCE_FILE ("expression-var.galgas", 137)) ;
@@ -2659,13 +2659,13 @@ static void categoryMethod_varInExpressionAST_analyzeExpression (const cPtr_expr
         break ;
       case GALGAS_typeKind::kEnum_integer:
         {
-          GALGAS_location location_8 (enumerator_4196.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_8 (enumerator_4212.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_8, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("expression-var.galgas", 145)) ;
         }
         break ;
       }
     }
-    enumerator_4196.gotoNextObject () ;
+    enumerator_4212.gotoNextObject () ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2783,7 +2783,7 @@ static void categoryMethod_functionCallInExpressionAST_analyzeExpression (const 
       if (kBoolTrue == test_6) {
         var_effectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_output (SOURCE_FILE ("expression-func-call.galgas", 157)), enumerator_5002.current (HERE).mAttribute_mFormalSelector, var_argumentIR  COMMA_SOURCE_FILE ("expression-func-call.galgas", 156)) ;
       }else if (kBoolFalse == test_6) {
-        GALGAS_bool test_7 = var_argumentIR.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 160)).getter_isLiteralInteger (SOURCE_FILE ("expression-func-call.galgas", 160)) ;
+        GALGAS_bool test_7 = var_argumentIR.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 160)).getter_isStaticInteger (SOURCE_FILE ("expression-func-call.galgas", 160)) ;
         if (kBoolTrue == test_7.boolEnum ()) {
           test_7 = enumerator_5002.current (HERE).mAttribute_mArgumentType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 160)).getter_isInteger (SOURCE_FILE ("expression-func-call.galgas", 160)) ;
         }
@@ -2793,9 +2793,9 @@ static void categoryMethod_functionCallInExpressionAST_analyzeExpression (const 
           var_argumentIR.mAttribute_mValue.method_literalInteger (var_value, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 161)) ;
           GALGAS_bigint var_min ;
           GALGAS_bigint var_max ;
-          GALGAS_bool joker_6238 ; // Joker input parameter
-          GALGAS_uint joker_6250 ; // Joker input parameter
-          enumerator_5002.current (HERE).mAttribute_mArgumentType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 162)).method_integer (var_min, var_max, joker_6238, joker_6250, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 162)) ;
+          GALGAS_bool joker_6237 ; // Joker input parameter
+          GALGAS_uint joker_6249 ; // Joker input parameter
+          enumerator_5002.current (HERE).mAttribute_mArgumentType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 162)).method_integer (var_min, var_max, joker_6237, joker_6249, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 162)) ;
           GALGAS_bool test_9 = GALGAS_bool (kIsInfOrEqual, var_min.objectCompare (var_value)) ;
           if (kBoolTrue == test_9.boolEnum ()) {
             test_9 = GALGAS_bool (kIsInfOrEqual, var_value.objectCompare (var_max)) ;
@@ -2859,31 +2859,31 @@ static void categoryMethod_functionCallIR_llvmInstructionCode (const cPtr_abstra
   macroValidSharedObject (object, cPtr_functionCallIR) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mResult.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 202)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 202)).add_operation (GALGAS_string (" = call "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 202)).add_operation (object->mAttribute_mResult.mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 202)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 202)), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 202)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" @").add_operation (function_llvmNameForFunction (object->mAttribute_mFunctionName, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 203)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 203)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 203)), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 203)) ;
-  cEnumerator_procCallEffectiveParameterListIR enumerator_7893 (object->mAttribute_mArgumentList, kEnumeration_up) ;
-  while (enumerator_7893.hasCurrentObject ()) {
-    switch (enumerator_7893.current_mEffectiveParameterPassingMode (HERE).enumValue ()) {
+  cEnumerator_procCallEffectiveParameterListIR enumerator_7892 (object->mAttribute_mArgumentList, kEnumeration_up) ;
+  while (enumerator_7892.hasCurrentObject ()) {
+    switch (enumerator_7892.current_mEffectiveParameterPassingMode (HERE).enumValue ()) {
     case GALGAS_procEffectiveParameterPassingModeIR::kNotBuilt:
       break ;
     case GALGAS_procEffectiveParameterPassingModeIR::kEnum_input:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_7893.current_mParameter (HERE).mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)).add_operation (extensionGetter_llvmName (enumerator_7893.current_mParameter (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_7892.current_mParameter (HERE).mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)).add_operation (extensionGetter_llvmName (enumerator_7892.current_mParameter (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 207)) ;
       }
       break ;
     case GALGAS_procEffectiveParameterPassingModeIR::kEnum_output:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_7893.current_mParameter (HERE).mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)).add_operation (extensionGetter_llvmName (enumerator_7893.current_mParameter (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_7892.current_mParameter (HERE).mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)).add_operation (extensionGetter_llvmName (enumerator_7892.current_mParameter (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 209)) ;
       }
       break ;
     case GALGAS_procEffectiveParameterPassingModeIR::kEnum_outputInput:
       {
-        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_7893.current_mParameter (HERE).mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)).add_operation (extensionGetter_llvmName (enumerator_7893.current_mParameter (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(enumerator_7892.current_mParameter (HERE).mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)).add_operation (extensionGetter_llvmName (enumerator_7892.current_mParameter (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 211)) ;
       }
       break ;
     }
-    if (enumerator_7893.hasNextObject ()) {
+    if (enumerator_7892.hasNextObject ()) {
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 214)) ;
     }
-    enumerator_7893.gotoNextObject () ;
+    enumerator_7892.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 216)) ;
 }
@@ -3077,7 +3077,7 @@ static void categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (
       outArgument_outResult.drop () ; // Release error dropped variable
     }
     break ;
-  case GALGAS_typeKind::kEnum_literalInteger:
+  case GALGAS_typeKind::kEnum_staticInteger:
     {
       GALGAS_bigint var_value ;
       var_expressionResult.mAttribute_mValue.method_literalInteger (var_value, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 157)) ;
@@ -3098,11 +3098,11 @@ static void categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_7667 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 147)).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_min = extractPtr_7667->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_max = extractPtr_7667->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_7667->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_7667->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_7666 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 147)).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_min = extractPtr_7666->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_max = extractPtr_7666->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_7666->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_7666->mAssociatedValue3 ;
       const enumGalgasBool test_4 = extractedValue_unsigned.operator_not (SOURCE_FILE ("expression-cst-registre.galgas", 166)).boolEnum () ;
       if (kBoolTrue == test_4) {
         inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 167)) ;
@@ -3485,7 +3485,7 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
         inCompiler->emitSemanticError (location_4, GALGAS_string ("an integer does not have fields")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 105)) ;
       }
       break ;
-    case GALGAS_typeKind::kEnum_literalInteger:
+    case GALGAS_typeKind::kEnum_staticInteger:
       {
         GALGAS_location location_5 (enumerator_3229.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_5, GALGAS_string ("an integer does not have fields")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 107)) ;
@@ -3503,11 +3503,11 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
   GALGAS_bool var_isCopiable ;
   GALGAS_bool var_isConstant ;
   {
-  GALGAS_unifiedTypeMap_2D_proxy joker_4777 ; // Joker input parameter
-  GALGAS_objectInMemoryIR joker_4809 ; // Joker input parameter
-  GALGAS_registerBitSliceAccessMap joker_4836_2 ; // Joker input parameter
-  GALGAS_bool joker_4836_1 ; // Joker input parameter
-  ioArgument_ioVariableMap.setter_searchForWriteAccess (object->mAttribute_mTargetVarName, joker_4777, var_accessIsAllowed, joker_4809, var_isCopiable, joker_4836_2, joker_4836_1, var_isConstant, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 129)) ;
+  GALGAS_unifiedTypeMap_2D_proxy joker_4776 ; // Joker input parameter
+  GALGAS_objectInMemoryIR joker_4808 ; // Joker input parameter
+  GALGAS_registerBitSliceAccessMap joker_4835_2 ; // Joker input parameter
+  GALGAS_bool joker_4835_1 ; // Joker input parameter
+  ioArgument_ioVariableMap.setter_searchForWriteAccess (object->mAttribute_mTargetVarName, joker_4776, var_accessIsAllowed, joker_4808, var_isCopiable, joker_4835_2, joker_4835_1, var_isConstant, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 129)) ;
   }
   const enumGalgasBool test_6 = var_isConstant.boolEnum () ;
   if (kBoolTrue == test_6) {

@@ -103,7 +103,7 @@ override method @assignmentInstructionAST analyze
       target = result
     case integer (* * * *) :  
       error fieldName : "an integer does not have fields"
-    case literalInteger :  
+    case staticInteger :  
       error fieldName : "an integer does not have fields"
     end
   end

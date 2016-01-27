@@ -54,7 +54,7 @@ override method @literalIntegerDeclaration enterInContext
   [!?ioContext.mTypeMap insertKey
     !lkey:integerTypeName
     !llvmTypeName:"<<literal integer>>"
-    !kind:.literalInteger
+    !kind:.staticInteger
     !typedConstantMap:{}
     !procedureMap:{}
     !functionMap:{}

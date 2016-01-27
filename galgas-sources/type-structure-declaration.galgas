@@ -291,7 +291,7 @@ override method @structureDeclaration semanticAnalysis
   case structure (propMap *) : propertyMap = propMap
   case enumeration (*) : propertyMap = {}
   case integer (* * * *) : propertyMap = {}
-  case literalInteger : propertyMap = {}
+  case staticInteger : propertyMap = {}
   case boolean : propertyMap = {}
   case boolset : propertyMap = {}
   case literalString : propertyMap = {}
