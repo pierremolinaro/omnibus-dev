@@ -102,11 +102,11 @@ proc semanticAnalysis
     ]
   end
 #--- Generate global constants
-  generateGlobalConstantLLVMCode (
-    !context:inSemanticContext
-    !?temporary:temporaries
-    !?intermediateCode:outIntermediateCodeStruct
-  )
+#  generateGlobalConstantLLVMCode (
+#    !context:inSemanticContext
+#    !?temporary:temporaries
+#    !?intermediateCode:outIntermediateCodeStruct
+#  )
 #--- Generate panic clauses
   for exception in inAST.mExceptionClauses do
     [exception exceptionSemanticAnalysis
