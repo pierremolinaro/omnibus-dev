@@ -22,6 +22,7 @@ struct @ast {
   @declarationListAST mDeclarationList
   @extensionDeclarationListAST mExtensionDeclarationListAST
   @globalConstantDeclarationListAST mGlobalConstantDeclarationListAST
+  @controlRegisterDeclarationListAST mControlRegisterDeclarationListAST
   @procedureDeclarationListAST mProcedureListAST
   @requiredProcedureDeclarationListAST mRequiredProcList
   @functionDeclarationListAST mFunctionListAST

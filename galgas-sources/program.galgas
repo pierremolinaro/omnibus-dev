@@ -200,6 +200,7 @@ private proc addTargetSpecificFiles
   ioAST.mDeclarationList = ast.mDeclarationList + ioAST.mDeclarationList
   ioAST.mGlobalVarDeclarationList = ast.mGlobalVarDeclarationList + ioAST.mGlobalVarDeclarationList
   ioAST.mGlobalConstantDeclarationListAST = ast.mGlobalConstantDeclarationListAST + ioAST.mGlobalConstantDeclarationListAST
+  ioAST.mControlRegisterDeclarationListAST = ast.mControlRegisterDeclarationListAST + ioAST.mControlRegisterDeclarationListAST
   ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
   ioAST.mProcedureListAST = ast.mProcedureListAST + ioAST.mProcedureListAST
   ioAST.mRequiredProcList = ast.mRequiredProcList + ioAST.mRequiredProcList

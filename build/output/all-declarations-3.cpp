@@ -12776,16 +12776,16 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::extractObject (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_registerBitSlice_unusedBits::cEnumAssociatedValues_registerBitSlice_unusedBits (const GALGAS_lbigint & inAssociatedValue0
-                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_controlRegisterBitSlice_unusedBits::cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (const GALGAS_lbigint & inAssociatedValue0
+                                                                                                                    COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_registerBitSlice_unusedBits::description (C_String & ioString,
-                                                                     const int32_t inIndentation) const {
+void cEnumAssociatedValues_controlRegisterBitSlice_unusedBits::description (C_String & ioString,
+                                                                            const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   ioString << ")" ;
@@ -12793,8 +12793,8 @@ void cEnumAssociatedValues_registerBitSlice_unusedBits::description (C_String & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_registerBitSlice_unusedBits::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_registerBitSlice_unusedBits * ptr = dynamic_cast<const cEnumAssociatedValues_registerBitSlice_unusedBits *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_controlRegisterBitSlice_unusedBits::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits * ptr = dynamic_cast<const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -12805,9 +12805,9 @@ typeComparisonResult cEnumAssociatedValues_registerBitSlice_unusedBits::compare 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_registerBitSlice_namedBit::cEnumAssociatedValues_registerBitSlice_namedBit (const GALGAS_lstring & inAssociatedValue0,
-                                                                                                  const GALGAS_lbigint & inAssociatedValue1
-                                                                                                  COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_controlRegisterBitSlice_namedBit::cEnumAssociatedValues_controlRegisterBitSlice_namedBit (const GALGAS_lstring & inAssociatedValue0,
+                                                                                                                const GALGAS_lbigint & inAssociatedValue1
+                                                                                                                COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
@@ -12815,8 +12815,8 @@ mAssociatedValue1 (inAssociatedValue1) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_registerBitSlice_namedBit::description (C_String & ioString,
-                                                                   const int32_t inIndentation) const {
+void cEnumAssociatedValues_controlRegisterBitSlice_namedBit::description (C_String & ioString,
+                                                                          const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
@@ -12825,8 +12825,8 @@ void cEnumAssociatedValues_registerBitSlice_namedBit::description (C_String & io
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_registerBitSlice_namedBit::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_registerBitSlice_namedBit * ptr = dynamic_cast<const cEnumAssociatedValues_registerBitSlice_namedBit *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_controlRegisterBitSlice_namedBit::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * ptr = dynamic_cast<const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -12840,20 +12840,20 @@ typeComparisonResult cEnumAssociatedValues_registerBitSlice_namedBit::compare (c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSlice::GALGAS_registerBitSlice (void) :
+GALGAS_controlRegisterBitSlice::GALGAS_controlRegisterBitSlice (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_unusedBits (const GALGAS_lbigint & inAssociatedValue0
-                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_registerBitSlice result ;
+GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::constructor_unusedBits (const GALGAS_lbigint & inAssociatedValue0
+                                                                                       COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSlice result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_unusedBits ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_registerBitSlice_unusedBits (inAssociatedValue0 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -12862,14 +12862,14 @@ GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_unusedBits (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_namedBit (const GALGAS_lstring & inAssociatedValue0,
-                                                                       const GALGAS_lbigint & inAssociatedValue1
-                                                                       COMMA_LOCATION_ARGS) {
-  GALGAS_registerBitSlice result ;
+GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::constructor_namedBit (const GALGAS_lstring & inAssociatedValue0,
+                                                                                     const GALGAS_lbigint & inAssociatedValue1
+                                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSlice result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_namedBit ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_registerBitSlice_namedBit (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_controlRegisterBitSlice_namedBit (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -12878,34 +12878,34 @@ GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_namedBit (const GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSlice::method_unusedBits (GALGAS_lbigint & outAssociatedValue0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterBitSlice::method_unusedBits (GALGAS_lbigint & outAssociatedValue0,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_unusedBits) {
     outAssociatedValue0.drop () ;
     C_String s ;
-    s << "method @registerBitSlice unusedBits invoked with an invalid enum value" ;
+    s << "method @controlRegisterBitSlice unusedBits invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_registerBitSlice_unusedBits * ptr = (const cEnumAssociatedValues_registerBitSlice_unusedBits *) unsafePointer () ;
+    const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits * ptr = (const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSlice::method_namedBit (GALGAS_lstring & outAssociatedValue0,
-                                               GALGAS_lbigint & outAssociatedValue1,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterBitSlice::method_namedBit (GALGAS_lstring & outAssociatedValue0,
+                                                      GALGAS_lbigint & outAssociatedValue1,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_namedBit) {
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     C_String s ;
-    s << "method @registerBitSlice namedBit invoked with an invalid enum value" ;
+    s << "method @controlRegisterBitSlice namedBit invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_registerBitSlice_namedBit * ptr = (const cEnumAssociatedValues_registerBitSlice_namedBit *) unsafePointer () ;
+    const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * ptr = (const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -12913,7 +12913,7 @@ void GALGAS_registerBitSlice::method_namedBit (GALGAS_lstring & outAssociatedVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_registerBitSlice [3] = {
+static const char * gEnumNameArrayFor_controlRegisterBitSlice [3] = {
   "(not built)",
   "unusedBits",
   "namedBit"
@@ -12921,28 +12921,28 @@ static const char * gEnumNameArrayFor_registerBitSlice [3] = {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_registerBitSlice::getter_isUnusedBits (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_controlRegisterBitSlice::getter_isUnusedBits (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_unusedBits == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_registerBitSlice::getter_isNamedBit (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_controlRegisterBitSlice::getter_isNamedBit (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_namedBit == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSlice::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "<enum @registerBitSlice: " << gEnumNameArrayFor_registerBitSlice [mEnum] ;
+void GALGAS_controlRegisterBitSlice::description (C_String & ioString,
+                                                  const int32_t inIndentation) const {
+  ioString << "<enum @controlRegisterBitSlice: " << gEnumNameArrayFor_controlRegisterBitSlice [mEnum] ;
   mAssociatedValues.description (ioString, inIndentation) ;
   ioString << ">" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult GALGAS_registerBitSlice::objectCompare (const GALGAS_registerBitSlice & inOperand) const {
+typeComparisonResult GALGAS_controlRegisterBitSlice::objectCompare (const GALGAS_controlRegisterBitSlice & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
@@ -12958,42 +12958,42 @@ typeComparisonResult GALGAS_registerBitSlice::objectCompare (const GALGAS_regist
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @registerBitSlice type                                                *
+//                                            @controlRegisterBitSlice type                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerBitSlice ("registerBitSlice",
-                                         NULL) ;
+kTypeDescriptor_GALGAS_controlRegisterBitSlice ("controlRegisterBitSlice",
+                                                NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_registerBitSlice::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerBitSlice ;
+const C_galgas_type_descriptor * GALGAS_controlRegisterBitSlice::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterBitSlice ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_registerBitSlice::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_controlRegisterBitSlice::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_registerBitSlice (*this)) ;
+    macroMyNew (result, GALGAS_controlRegisterBitSlice (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSlice GALGAS_registerBitSlice::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_registerBitSlice result ;
-  const GALGAS_registerBitSlice * p = (const GALGAS_registerBitSlice *) inObject.embeddedObject () ;
+GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::extractObject (const GALGAS_object & inObject,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSlice result ;
+  const GALGAS_controlRegisterBitSlice * p = (const GALGAS_controlRegisterBitSlice *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerBitSlice *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSlice *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("registerBitSlice", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("controlRegisterBitSlice", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

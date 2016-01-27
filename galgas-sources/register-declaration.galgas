@@ -2,7 +2,7 @@
 #  AST                                                                                                                 *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @registerDeclarationList {
+list @controlRegisterNameList {
   @lstring mRegisterName
   @lstringlist mAttributeList
   @lbigint mRegisterAddress
@@ -10,29 +10,23 @@ list @registerDeclarationList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @registerDeclaration : @abstractDeclaration {
-  @registerDeclarationList mRegisterDeclarationList
+list @controlRegisterDeclarationListAST {
+  @controlRegisterNameList mRegisterNameList
   @lstring mRegisterTypeName
-  @registerBitSliceList mRegisterBitSliceList
+  @controlRegisterBitSliceList mRegisterBitSliceList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @registerBitSliceList {
-  @registerBitSlice mRegisterBitSlice
+list @controlRegisterBitSliceList {
+  @controlRegisterBitSlice mRegisterBitSlice
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @registerBitSlice {
+enum @controlRegisterBitSlice {
   case unusedBits (@lbigint count)
   case namedBit (@lstring name @lbigint count)
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @registerDeclaration location -> @location outLocation {
-  outLocation = mRegisterTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -45,7 +39,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $register$
-    @registerDeclarationList registerDeclarationList = {}
+    @controlRegisterNameList registerDeclarationList = {}
     repeat
       $identifier$ ?let registerName
       @lstringlist attributeList = {}
@@ -60,12 +54,12 @@ syntax extension common_syntax {
     while
     end
     $typeName$ ?let registerTypeName
-    @registerBitSliceList registerBitSliceList = {}
+    @controlRegisterBitSliceList registerBitSliceList = {}
     select
     or
       ${$
       repeat
-        @registerBitSlice registerBitSlice
+        @controlRegisterBitSlice registerBitSlice
         select
           $integer$ ?let @lbigint unusedBitCount
           registerBitSlice = .unusedBits {!count:unusedBitCount}
@@ -86,43 +80,14 @@ syntax extension common_syntax {
       end
       $}$
     end
-    ioAST.mDeclarationList += !@registerDeclaration.new {
+    ioAST.mControlRegisterDeclarationListAST +=
       !registerDeclarationList
       !registerTypeName
       !registerBitSliceList
-    }
   }
 
   #·····················································································································
 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @registerDeclaration addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                    *
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @registerDeclaration enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addNode ![mRegisterDeclarationList mRegisterNameAtIndex !0] !self]
-  [!?ioGraph addEdge ![mRegisterDeclarationList mRegisterNameAtIndex !0] !mRegisterTypeName]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @registerDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "register " + [mRegisterDeclarationList mRegisterNameAtIndex !0]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -161,77 +126,78 @@ map @registerMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+proc enterControlRegistersInContext
+  ?let @controlRegisterDeclarationListAST inRegisterDeclarationListAST
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#---
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRegisterTypeName ?let registerType]
-#--- Build bit slice map
-  @registerFieldMap registerFieldMap = {}
-  @registerBitSliceAccessMap registerBitSliceMap = {}
-  if [mRegisterBitSliceList length] > 0 then
-    @uint shiftCount = 0
-    for > () in mRegisterBitSliceList do
-      switch mRegisterBitSlice
-      case unusedBits (@lbigint count) :
-        shiftCount = shiftCount + [count.bigint uint]
-      case namedBit (@lstring name @lbigint count) :
-        let bitCount = [count.bigint uint]
-        [!?registerFieldMap insertKey
-          !name
-          !shiftCount
-          !bitCount
-        ]
-        @registerBitSliceAccessMap registerSubMap = {}
-        [!?registerSubMap insertKey
-          !.new{!"shift" !name.location}
-          !.lshr
-          ![shiftCount bigint]
-          !{}
-          !registerType
-        ]
-        [!?registerSubMap insertKey
-          !.new{!"bool" !name.location}
-          !.icmp_ne
-          !0G
-          !{}
-          !ioContext.mBooleanType
-        ]
-        let mask = ((1G << bitCount) - 1G) << shiftCount
-        [!?registerBitSliceMap insertKey
-          !name
-          !.and
-          !mask
-          !registerSubMap
-          !registerType
-        ]
-        shiftCount = shiftCount + bitCount
+  for (registerNameList registerTypeName registerBitSliceList) in inRegisterDeclarationListAST do
+  #---
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !registerTypeName ?let registerType]
+  #--- Build bit slice map
+    @registerFieldMap registerFieldMap = {}
+    @registerBitSliceAccessMap registerBitSliceMap = {}
+    if [registerBitSliceList length] > 0 then
+      @uint shiftCount = 0
+      for > () in registerBitSliceList do
+        switch mRegisterBitSlice
+        case unusedBits (@lbigint count) :
+          shiftCount = shiftCount + [count.bigint uint]
+        case namedBit (@lstring name @lbigint count) :
+          let bitCount = [count.bigint uint]
+          [!?registerFieldMap insertKey
+            !name
+            !shiftCount
+            !bitCount
+          ]
+          @registerBitSliceAccessMap registerSubMap = {}
+          [!?registerSubMap insertKey
+            !.new{!"shift" !name.location}
+            !.lshr
+            ![shiftCount bigint]
+            !{}
+            !registerType
+          ]
+          [!?registerSubMap insertKey
+            !.new{!"bool" !name.location}
+            !.icmp_ne
+            !0G
+            !{}
+            !ioContext.mBooleanType
+          ]
+          let mask = ((1G << bitCount) - 1G) << shiftCount
+          [!?registerBitSliceMap insertKey
+            !name
+            !.and
+            !mask
+            !registerSubMap
+            !registerType
+          ]
+          shiftCount = shiftCount + bitCount
+        end
       end
     end
-  end
-#---  
-  for () in mRegisterDeclarationList do
-  #--- Analyze attributes
-    var isReadOnly = false
-    for (att) in mAttributeList do
-      if att.string != "ro" then
-        error att : "only @ro attribute (read only) is accepted here"
-      elsif isReadOnly then
-        error att : "duplicated attribute"
-      else
-        isReadOnly = true
+  #---  
+    for () in registerNameList do
+    #--- Analyze attributes
+      var isReadOnly = false
+      for (att) in mAttributeList do
+        if att.string != "ro" then
+          error att : "only @ro attribute (read only) is accepted here"
+        elsif isReadOnly then
+          error att : "duplicated attribute"
+        else
+          isReadOnly = true
+        end
       end
+      [!?ioContext.mRegisterMap insertKey
+        !mRegisterName
+        !registerType
+        !isReadOnly
+        !registerBitSliceMap
+        !registerFieldMap
+        !mRegisterAddress.bigint
+      ]
     end
-    [!?ioContext.mRegisterMap insertKey
-      !mRegisterName
-      !registerType
-      !isReadOnly
-      !registerBitSliceMap
-      !registerFieldMap
-      !mRegisterAddress.bigint
-    ]
   end
 }
 
@@ -239,59 +205,55 @@ override method @registerDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @registerDeclaration semanticAnalysis
+proc controlRegistersSemanticAnalysis
+  ?let @controlRegisterDeclarationListAST inRegisterDeclarationListAST
   ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Check type
-  let registerType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mRegisterTypeName}
-  switch [registerType kind]
-  case boolean : error mRegisterTypeName : "a boolean type is not valid for a register"
-  case boolset : error mRegisterTypeName : "a boolset type is not valid for a register"
-  case integer (* * @bool unsigned @uint size) :
-    if [mRegisterBitSliceList length] > 0 then
-      if not unsigned then
-        error mRegisterTypeName:"the register type should be unsigned in order to define bit slices"
-      end
-      @uint shiftCount = 0
-      for > () in mRegisterBitSliceList do
-        switch mRegisterBitSlice
-        case unusedBits (@lbigint count) :
-          shiftCount = shiftCount + [count.bigint uint]
-        case namedBit (* @lbigint count) :
-          shiftCount = shiftCount + [count.bigint uint]
+  for (registerNameList registerTypeName registerBitSliceList) in inRegisterDeclarationListAST do
+  #--- Check type
+    let registerType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !registerTypeName}
+    switch [registerType kind]
+    case boolean : error registerTypeName : "a boolean type is not valid for a register"
+    case boolset : error registerTypeName : "a boolset type is not valid for a register"
+    case integer (* * @bool unsigned @uint size) :
+      if [registerBitSliceList length] > 0 then
+        if not unsigned then
+          error registerTypeName:"the register type should be unsigned in order to define bit slices"
+        end
+        @uint shiftCount = 0
+        for > () in registerBitSliceList do
+          switch mRegisterBitSlice
+          case unusedBits (@lbigint count) :
+            shiftCount = shiftCount + [count.bigint uint]
+          case namedBit (* @lbigint count) :
+            shiftCount = shiftCount + [count.bigint uint]
+          end
+        end
+        if size != shiftCount then
+          error registerTypeName : "total bit slice count is " + shiftCount + " (should be " + size + ")"
         end
       end
-      if size != shiftCount then
-        error mRegisterTypeName : "total bit slice count is " + shiftCount + " (should be " + size + ")"
+    case literalString : error registerTypeName : "a literal string type is not valid for a register"
+    case structure (* *) : error registerTypeName : "a structure type is not valid for a register"
+    case enumeration (*) : error registerTypeName : "an enumeration type is not valid for a register"
+    case staticInteger : error registerTypeName : "a literal integer type is not valid for a register"
+    end
+  #--- Check address value
+    let @bigint maxAddress = (1G << inContext.mPointerSize) - 1G
+    for () in registerNameList do
+      if mRegisterAddress.bigint > maxAddress then
+        error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]
       end
+    #---
+      [!?ioIntermediateCodeStruct.mRegisterMap insertKey
+        !mRegisterName
+        !registerTypeName.string
+        !mRegisterAddress.bigint
+      ]
     end
-  case literalString : error mRegisterTypeName : "a literal string type is not valid for a register"
-  case structure (* *) : error mRegisterTypeName : "a structure type is not valid for a register"
-  case enumeration (*) : error mRegisterTypeName : "an enumeration type is not valid for a register"
-  case staticInteger : error mRegisterTypeName : "a literal integer type is not valid for a register"
-  end
-#--- Check address value
-  let @bigint maxAddress = (1G << inContext.mPointerSize) - 1G
-  for () in mRegisterDeclarationList do
-    if mRegisterAddress.bigint > maxAddress then
-      error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]
-    end
-  #---
-    [!?ioIntermediateCodeStruct.mRegisterMap insertKey
-      !mRegisterName
-      !mRegisterTypeName.string
-      !mRegisterAddress.bigint
-    ]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-
 
