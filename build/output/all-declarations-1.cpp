@@ -10,6 +10,834 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                  Class for element of '@allowedFunctionList' list                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cCollectionElement_allowedFunctionList : public cCollectionElement {
+  public : GALGAS_allowedFunctionList_2D_element mObject ;
+
+//--- Constructor
+  public : cCollectionElement_allowedFunctionList (const GALGAS_lstring & in_mReceiverTypeName,
+                                                   const GALGAS_lstring & in_mFuncName
+                                                   COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cCollectionElement * copy (void) ;
+
+//--- Description
+  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement_allowedFunctionList::cCollectionElement_allowedFunctionList (const GALGAS_lstring & in_mReceiverTypeName,
+                                                                                const GALGAS_lstring & in_mFuncName
+                                                                                COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (in_mReceiverTypeName, in_mFuncName) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cCollectionElement_allowedFunctionList::isValid (void) const {
+  return mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement * cCollectionElement_allowedFunctionList::copy (void) {
+  cCollectionElement * result = NULL ;
+  macroMyNew (result, cCollectionElement_allowedFunctionList (mObject.mAttribute_mReceiverTypeName, mObject.mAttribute_mFuncName COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cCollectionElement_allowedFunctionList::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mReceiverTypeName" ":" ;
+  mObject.mAttribute_mReceiverTypeName.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mFuncName" ":" ;
+  mObject.mAttribute_mFuncName.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cCollectionElement_allowedFunctionList::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_allowedFunctionList * operand = (cCollectionElement_allowedFunctionList *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_allowedFunctionList) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList::GALGAS_allowedFunctionList (void) :
+AC_GALGAS_list () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList::GALGAS_allowedFunctionList (cSharedList * inSharedListPtr) :
+AC_GALGAS_list (inSharedListPtr) {
+  if (NULL == inSharedListPtr) {
+    createNewEmptyList (HERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList GALGAS_allowedFunctionList::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_allowedFunctionList result ;
+  result.createNewEmptyList (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList GALGAS_allowedFunctionList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                                  const GALGAS_lstring & inOperand1
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_allowedFunctionList result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result.createNewEmptyList (THERE) ;
+    capCollectionElement attributes ;
+    GALGAS_allowedFunctionList::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
+    result.addObject (attributes) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                            const GALGAS_lstring & in_mReceiverTypeName,
+                                                            const GALGAS_lstring & in_mFuncName
+                                                            COMMA_LOCATION_ARGS) {
+  cCollectionElement_allowedFunctionList * p = NULL ;
+  macroMyNew (p, cCollectionElement_allowedFunctionList (in_mReceiverTypeName,
+                                                         in_mFuncName COMMA_THERE)) ;
+  outAttributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::addAssign_operation (const GALGAS_lstring & inOperand0,
+                                                      const GALGAS_lstring & inOperand1
+                                                      COMMA_LOCATION_ARGS) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_allowedFunctionList (inOperand0, inOperand1 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    addObject (attributes) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                       const GALGAS_lstring inOperand1,
+                                                       const GALGAS_uint inInsertionIndex,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_allowedFunctionList (inOperand0, inOperand1 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    addObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                       GALGAS_lstring & outOperand1,
+                                                       const GALGAS_uint inRemoveIndex,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  if (isValid () && inRemoveIndex.isValid ()) {
+    capCollectionElement attributes ;
+    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+    cCollectionElement_allowedFunctionList * p = (cCollectionElement_allowedFunctionList *) attributes.ptr () ;
+    if (NULL == p) {
+      outOperand0.drop () ;
+      outOperand1.drop () ;
+    }else{
+      macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+      outOperand0 = p->mObject.mAttribute_mReceiverTypeName ;
+      outOperand1 = p->mObject.mAttribute_mFuncName ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                  GALGAS_lstring & outOperand1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedFunctionList * p = (cCollectionElement_allowedFunctionList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+    outOperand0 = p->mObject.mAttribute_mReceiverTypeName ;
+    outOperand1 = p->mObject.mAttribute_mFuncName ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::setter_popLast (GALGAS_lstring & outOperand0,
+                                                 GALGAS_lstring & outOperand1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedFunctionList * p = (cCollectionElement_allowedFunctionList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+    outOperand0 = p->mObject.mAttribute_mReceiverTypeName ;
+    outOperand1 = p->mObject.mAttribute_mFuncName ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::method_first (GALGAS_lstring & outOperand0,
+                                               GALGAS_lstring & outOperand1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedFunctionList * p = (cCollectionElement_allowedFunctionList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+    outOperand0 = p->mObject.mAttribute_mReceiverTypeName ;
+    outOperand1 = p->mObject.mAttribute_mFuncName ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::method_last (GALGAS_lstring & outOperand0,
+                                              GALGAS_lstring & outOperand1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedFunctionList * p = (cCollectionElement_allowedFunctionList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+    outOperand0 = p->mObject.mAttribute_mReceiverTypeName ;
+    outOperand1 = p->mObject.mAttribute_mFuncName ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList GALGAS_allowedFunctionList::add_operation (const GALGAS_allowedFunctionList & inOperand,
+                                                                      C_Compiler * /* inCompiler */
+                                                                      COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_allowedFunctionList result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList GALGAS_allowedFunctionList::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedFunctionList result = GALGAS_allowedFunctionList::constructor_emptyList (THERE) ;
+  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList GALGAS_allowedFunctionList::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedFunctionList result = GALGAS_allowedFunctionList::constructor_emptyList (THERE) ;
+  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList GALGAS_allowedFunctionList::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedFunctionList result = GALGAS_allowedFunctionList::constructor_emptyList (THERE) ;
+  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedFunctionList::plusAssign_operation (const GALGAS_allowedFunctionList inOperand,
+                                                       C_Compiler * /* inCompiler */
+                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  appendList (inOperand) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_allowedFunctionList::getter_mReceiverTypeNameAtIndex (const GALGAS_uint & inIndex,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedFunctionList * p = (cCollectionElement_allowedFunctionList *) attributes.ptr () ;
+  GALGAS_lstring result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+    result = p->mObject.mAttribute_mReceiverTypeName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_allowedFunctionList::getter_mFuncNameAtIndex (const GALGAS_uint & inIndex,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedFunctionList * p = (cCollectionElement_allowedFunctionList *) attributes.ptr () ;
+  GALGAS_lstring result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+    result = p->mObject.mAttribute_mFuncName ;
+  }
+  return result ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_allowedFunctionList::cEnumerator_allowedFunctionList (const GALGAS_allowedFunctionList & inEnumeratedObject,
+                                                                  const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList_2D_element cEnumerator_allowedFunctionList::current (LOCATION_ARGS) const {
+  const cCollectionElement_allowedFunctionList * p = (const cCollectionElement_allowedFunctionList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+  return p->mObject ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_allowedFunctionList::current_mReceiverTypeName (LOCATION_ARGS) const {
+  const cCollectionElement_allowedFunctionList * p = (const cCollectionElement_allowedFunctionList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+  return p->mObject.mAttribute_mReceiverTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_allowedFunctionList::current_mFuncName (LOCATION_ARGS) const {
+  const cCollectionElement_allowedFunctionList * p = (const cCollectionElement_allowedFunctionList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedFunctionList) ;
+  return p->mObject.mAttribute_mFuncName ;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @allowedFunctionList type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_allowedFunctionList ("allowedFunctionList",
+                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_allowedFunctionList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_allowedFunctionList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_allowedFunctionList::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_allowedFunctionList (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedFunctionList GALGAS_allowedFunctionList::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_allowedFunctionList result ;
+  const GALGAS_allowedFunctionList * p = (const GALGAS_allowedFunctionList *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_allowedFunctionList *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("allowedFunctionList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Class for element of '@allowedInitList' list                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cCollectionElement_allowedInitList : public cCollectionElement {
+  public : GALGAS_allowedInitList_2D_element mObject ;
+
+//--- Constructor
+  public : cCollectionElement_allowedInitList (const GALGAS_bool & in_mHasWriteAccess,
+                                               const GALGAS_lbigint & in_mInitPriority
+                                               COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cCollectionElement * copy (void) ;
+
+//--- Description
+  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement_allowedInitList::cCollectionElement_allowedInitList (const GALGAS_bool & in_mHasWriteAccess,
+                                                                        const GALGAS_lbigint & in_mInitPriority
+                                                                        COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (in_mHasWriteAccess, in_mInitPriority) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cCollectionElement_allowedInitList::isValid (void) const {
+  return mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement * cCollectionElement_allowedInitList::copy (void) {
+  cCollectionElement * result = NULL ;
+  macroMyNew (result, cCollectionElement_allowedInitList (mObject.mAttribute_mHasWriteAccess, mObject.mAttribute_mInitPriority COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cCollectionElement_allowedInitList::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mHasWriteAccess" ":" ;
+  mObject.mAttribute_mHasWriteAccess.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mInitPriority" ":" ;
+  mObject.mAttribute_mInitPriority.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cCollectionElement_allowedInitList::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_allowedInitList * operand = (cCollectionElement_allowedInitList *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_allowedInitList) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList::GALGAS_allowedInitList (void) :
+AC_GALGAS_list () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList::GALGAS_allowedInitList (cSharedList * inSharedListPtr) :
+AC_GALGAS_list (inSharedListPtr) {
+  if (NULL == inSharedListPtr) {
+    createNewEmptyList (HERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList GALGAS_allowedInitList::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_allowedInitList result ;
+  result.createNewEmptyList (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList GALGAS_allowedInitList::constructor_listWithValue (const GALGAS_bool & inOperand0,
+                                                                          const GALGAS_lbigint & inOperand1
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_allowedInitList result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result.createNewEmptyList (THERE) ;
+    capCollectionElement attributes ;
+    GALGAS_allowedInitList::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
+    result.addObject (attributes) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                        const GALGAS_bool & in_mHasWriteAccess,
+                                                        const GALGAS_lbigint & in_mInitPriority
+                                                        COMMA_LOCATION_ARGS) {
+  cCollectionElement_allowedInitList * p = NULL ;
+  macroMyNew (p, cCollectionElement_allowedInitList (in_mHasWriteAccess,
+                                                     in_mInitPriority COMMA_THERE)) ;
+  outAttributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::addAssign_operation (const GALGAS_bool & inOperand0,
+                                                  const GALGAS_lbigint & inOperand1
+                                                  COMMA_LOCATION_ARGS) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_allowedInitList (inOperand0, inOperand1 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    addObject (attributes) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::setter_insertAtIndex (const GALGAS_bool inOperand0,
+                                                   const GALGAS_lbigint inOperand1,
+                                                   const GALGAS_uint inInsertionIndex,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_allowedInitList (inOperand0, inOperand1 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    addObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::setter_removeAtIndex (GALGAS_bool & outOperand0,
+                                                   GALGAS_lbigint & outOperand1,
+                                                   const GALGAS_uint inRemoveIndex,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
+  if (isValid () && inRemoveIndex.isValid ()) {
+    capCollectionElement attributes ;
+    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+    cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
+    if (NULL == p) {
+      outOperand0.drop () ;
+      outOperand1.drop () ;
+    }else{
+      macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+      outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
+      outOperand1 = p->mObject.mAttribute_mInitPriority ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::setter_popFirst (GALGAS_bool & outOperand0,
+                                              GALGAS_lbigint & outOperand1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
+    outOperand1 = p->mObject.mAttribute_mInitPriority ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::setter_popLast (GALGAS_bool & outOperand0,
+                                             GALGAS_lbigint & outOperand1,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
+    outOperand1 = p->mObject.mAttribute_mInitPriority ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::method_first (GALGAS_bool & outOperand0,
+                                           GALGAS_lbigint & outOperand1,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
+    outOperand1 = p->mObject.mAttribute_mInitPriority ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::method_last (GALGAS_bool & outOperand0,
+                                          GALGAS_lbigint & outOperand1,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
+    outOperand1 = p->mObject.mAttribute_mInitPriority ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList GALGAS_allowedInitList::add_operation (const GALGAS_allowedInitList & inOperand,
+                                                              C_Compiler * /* inCompiler */
+                                                              COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_allowedInitList result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedInitList result = GALGAS_allowedInitList::constructor_emptyList (THERE) ;
+  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedInitList result = GALGAS_allowedInitList::constructor_emptyList (THERE) ;
+  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedInitList result = GALGAS_allowedInitList::constructor_emptyList (THERE) ;
+  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedInitList::plusAssign_operation (const GALGAS_allowedInitList inOperand,
+                                                   C_Compiler * /* inCompiler */
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  appendList (inOperand) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_allowedInitList::getter_mHasWriteAccessAtIndex (const GALGAS_uint & inIndex,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+    result = p->mObject.mAttribute_mHasWriteAccess ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint GALGAS_allowedInitList::getter_mInitPriorityAtIndex (const GALGAS_uint & inIndex,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
+  GALGAS_lbigint result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+    result = p->mObject.mAttribute_mInitPriority ;
+  }
+  return result ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_allowedInitList::cEnumerator_allowedInitList (const GALGAS_allowedInitList & inEnumeratedObject,
+                                                          const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList_2D_element cEnumerator_allowedInitList::current (LOCATION_ARGS) const {
+  const cCollectionElement_allowedInitList * p = (const cCollectionElement_allowedInitList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+  return p->mObject ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_allowedInitList::current_mHasWriteAccess (LOCATION_ARGS) const {
+  const cCollectionElement_allowedInitList * p = (const cCollectionElement_allowedInitList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+  return p->mObject.mAttribute_mHasWriteAccess ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint cEnumerator_allowedInitList::current_mInitPriority (LOCATION_ARGS) const {
+  const cCollectionElement_allowedInitList * p = (const cCollectionElement_allowedInitList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
+  return p->mObject.mAttribute_mInitPriority ;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @allowedInitList type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_allowedInitList ("allowedInitList",
+                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_allowedInitList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_allowedInitList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_allowedInitList::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_allowedInitList (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedInitList GALGAS_allowedInitList::extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_allowedInitList result ;
+  const GALGAS_allowedInitList * p = (const GALGAS_allowedInitList *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_allowedInitList *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("allowedInitList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                  Class for element of '@allowedExceptionList' list                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8554,15 +9382,15 @@ GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::extractObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Class for element of '@registerDeclarationList' list                                 *
+//                                Class for element of '@controlRegisterNameList' list                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cCollectionElement_registerDeclarationList : public cCollectionElement {
-  public : GALGAS_registerDeclarationList_2D_element mObject ;
+class cCollectionElement_controlRegisterNameList : public cCollectionElement {
+  public : GALGAS_controlRegisterNameList_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_registerDeclarationList (const GALGAS_lstring & in_mRegisterName,
+  public : cCollectionElement_controlRegisterNameList (const GALGAS_lstring & in_mRegisterName,
                                                        const GALGAS_lstringlist & in_mAttributeList,
                                                        const GALGAS_lbigint & in_mRegisterAddress
                                                        COMMA_LOCATION_ARGS) ;
@@ -8582,7 +9410,7 @@ class cCollectionElement_registerDeclarationList : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_registerDeclarationList::cCollectionElement_registerDeclarationList (const GALGAS_lstring & in_mRegisterName,
+cCollectionElement_controlRegisterNameList::cCollectionElement_controlRegisterNameList (const GALGAS_lstring & in_mRegisterName,
                                                                                         const GALGAS_lstringlist & in_mAttributeList,
                                                                                         const GALGAS_lbigint & in_mRegisterAddress
                                                                                         COMMA_LOCATION_ARGS) :
@@ -8592,21 +9420,21 @@ mObject (in_mRegisterName, in_mAttributeList, in_mRegisterAddress) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cCollectionElement_registerDeclarationList::isValid (void) const {
+bool cCollectionElement_controlRegisterNameList::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement * cCollectionElement_registerDeclarationList::copy (void) {
+cCollectionElement * cCollectionElement_controlRegisterNameList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_registerDeclarationList (mObject.mAttribute_mRegisterName, mObject.mAttribute_mAttributeList, mObject.mAttribute_mRegisterAddress COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_controlRegisterNameList (mObject.mAttribute_mRegisterName, mObject.mAttribute_mAttributeList, mObject.mAttribute_mRegisterAddress COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cCollectionElement_registerDeclarationList::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_controlRegisterNameList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRegisterName" ":" ;
@@ -8623,21 +9451,21 @@ void cCollectionElement_registerDeclarationList::description (C_String & ioStrin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cCollectionElement_registerDeclarationList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_registerDeclarationList * operand = (cCollectionElement_registerDeclarationList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_registerDeclarationList) ;
+typeComparisonResult cCollectionElement_controlRegisterNameList::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_controlRegisterNameList * operand = (cCollectionElement_controlRegisterNameList *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_controlRegisterNameList) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList::GALGAS_registerDeclarationList (void) :
+GALGAS_controlRegisterNameList::GALGAS_controlRegisterNameList (void) :
 AC_GALGAS_list () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList::GALGAS_registerDeclarationList (cSharedList * inSharedListPtr) :
+GALGAS_controlRegisterNameList::GALGAS_controlRegisterNameList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
   if (NULL == inSharedListPtr) {
     createNewEmptyList (HERE) ;
@@ -8646,23 +9474,23 @@ AC_GALGAS_list (inSharedListPtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList GALGAS_registerDeclarationList::constructor_emptyList (LOCATION_ARGS) {
-  GALGAS_registerDeclarationList result ;
+GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_controlRegisterNameList result ;
   result.createNewEmptyList (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList GALGAS_registerDeclarationList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
+GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                           const GALGAS_lstringlist & inOperand1,
                                                                                           const GALGAS_lbigint & inOperand2
                                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_registerDeclarationList result ;
+  GALGAS_controlRegisterNameList result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_registerDeclarationList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
+    GALGAS_controlRegisterNameList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -8670,13 +9498,13 @@ GALGAS_registerDeclarationList GALGAS_registerDeclarationList::constructor_listW
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::makeAttributesFromObjects (capCollectionElement & outAttributes,
+void GALGAS_controlRegisterNameList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                 const GALGAS_lstring & in_mRegisterName,
                                                                 const GALGAS_lstringlist & in_mAttributeList,
                                                                 const GALGAS_lbigint & in_mRegisterAddress
                                                                 COMMA_LOCATION_ARGS) {
-  cCollectionElement_registerDeclarationList * p = NULL ;
-  macroMyNew (p, cCollectionElement_registerDeclarationList (in_mRegisterName,
+  cCollectionElement_controlRegisterNameList * p = NULL ;
+  macroMyNew (p, cCollectionElement_controlRegisterNameList (in_mRegisterName,
                                                              in_mAttributeList,
                                                              in_mRegisterAddress COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -8685,13 +9513,13 @@ void GALGAS_registerDeclarationList::makeAttributesFromObjects (capCollectionEle
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::addAssign_operation (const GALGAS_lstring & inOperand0,
+void GALGAS_controlRegisterNameList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                           const GALGAS_lstringlist & inOperand1,
                                                           const GALGAS_lbigint & inOperand2
                                                           COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_registerDeclarationList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_controlRegisterNameList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -8701,7 +9529,7 @@ void GALGAS_registerDeclarationList::addAssign_operation (const GALGAS_lstring &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+void GALGAS_controlRegisterNameList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                            const GALGAS_lstringlist inOperand1,
                                                            const GALGAS_lbigint inOperand2,
                                                            const GALGAS_uint inInsertionIndex,
@@ -8709,7 +9537,7 @@ void GALGAS_registerDeclarationList::setter_insertAtIndex (const GALGAS_lstring 
                                                            COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_registerDeclarationList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_controlRegisterNameList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -8719,7 +9547,7 @@ void GALGAS_registerDeclarationList::setter_insertAtIndex (const GALGAS_lstring 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+void GALGAS_controlRegisterNameList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                            GALGAS_lstringlist & outOperand1,
                                                            GALGAS_lbigint & outOperand2,
                                                            const GALGAS_uint inRemoveIndex,
@@ -8728,13 +9556,13 @@ void GALGAS_registerDeclarationList::setter_removeAtIndex (GALGAS_lstring & outO
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
+    cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
       outOperand1.drop () ;
       outOperand2.drop () ;
     }else{
-      macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+      macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
       outOperand0 = p->mObject.mAttribute_mRegisterName ;
       outOperand1 = p->mObject.mAttribute_mAttributeList ;
       outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
@@ -8744,20 +9572,20 @@ void GALGAS_registerDeclarationList::setter_removeAtIndex (GALGAS_lstring & outO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::setter_popFirst (GALGAS_lstring & outOperand0,
+void GALGAS_controlRegisterNameList::setter_popFirst (GALGAS_lstring & outOperand0,
                                                       GALGAS_lstringlist & outOperand1,
                                                       GALGAS_lbigint & outOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterName ;
     outOperand1 = p->mObject.mAttribute_mAttributeList ;
     outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
@@ -8766,20 +9594,20 @@ void GALGAS_registerDeclarationList::setter_popFirst (GALGAS_lstring & outOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::setter_popLast (GALGAS_lstring & outOperand0,
+void GALGAS_controlRegisterNameList::setter_popLast (GALGAS_lstring & outOperand0,
                                                      GALGAS_lstringlist & outOperand1,
                                                      GALGAS_lbigint & outOperand2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterName ;
     outOperand1 = p->mObject.mAttribute_mAttributeList ;
     outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
@@ -8788,20 +9616,20 @@ void GALGAS_registerDeclarationList::setter_popLast (GALGAS_lstring & outOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::method_first (GALGAS_lstring & outOperand0,
+void GALGAS_controlRegisterNameList::method_first (GALGAS_lstring & outOperand0,
                                                    GALGAS_lstringlist & outOperand1,
                                                    GALGAS_lbigint & outOperand2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterName ;
     outOperand1 = p->mObject.mAttribute_mAttributeList ;
     outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
@@ -8810,20 +9638,20 @@ void GALGAS_registerDeclarationList::method_first (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::method_last (GALGAS_lstring & outOperand0,
+void GALGAS_controlRegisterNameList::method_last (GALGAS_lstring & outOperand0,
                                                   GALGAS_lstringlist & outOperand1,
                                                   GALGAS_lbigint & outOperand2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterName ;
     outOperand1 = p->mObject.mAttribute_mAttributeList ;
     outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
@@ -8832,10 +9660,10 @@ void GALGAS_registerDeclarationList::method_last (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList GALGAS_registerDeclarationList::add_operation (const GALGAS_registerDeclarationList & inOperand,
+GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::add_operation (const GALGAS_controlRegisterNameList & inOperand,
                                                                               C_Compiler * /* inCompiler */
                                                                               COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_registerDeclarationList result ;
+  GALGAS_controlRegisterNameList result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -8845,37 +9673,37 @@ GALGAS_registerDeclarationList GALGAS_registerDeclarationList::add_operation (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList GALGAS_registerDeclarationList::getter_subListWithRange (const GALGAS_range & inRange,
+GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                         C_Compiler * inCompiler
                                                                                         COMMA_LOCATION_ARGS) const {
-  GALGAS_registerDeclarationList result = GALGAS_registerDeclarationList::constructor_emptyList (THERE) ;
+  GALGAS_controlRegisterNameList result = GALGAS_controlRegisterNameList::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList GALGAS_registerDeclarationList::getter_subListFromIndex (const GALGAS_uint & inIndex,
+GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                         C_Compiler * inCompiler
                                                                                         COMMA_LOCATION_ARGS) const {
-  GALGAS_registerDeclarationList result = GALGAS_registerDeclarationList::constructor_emptyList (THERE) ;
+  GALGAS_controlRegisterNameList result = GALGAS_controlRegisterNameList::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList GALGAS_registerDeclarationList::getter_subListToIndex (const GALGAS_uint & inIndex,
+GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                       C_Compiler * inCompiler
                                                                                       COMMA_LOCATION_ARGS) const {
-  GALGAS_registerDeclarationList result = GALGAS_registerDeclarationList::constructor_emptyList (THERE) ;
+  GALGAS_controlRegisterNameList result = GALGAS_controlRegisterNameList::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerDeclarationList::plusAssign_operation (const GALGAS_registerDeclarationList inOperand,
+void GALGAS_controlRegisterNameList::plusAssign_operation (const GALGAS_controlRegisterNameList inOperand,
                                                            C_Compiler * /* inCompiler */
                                                            COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
@@ -8883,14 +9711,14 @@ void GALGAS_registerDeclarationList::plusAssign_operation (const GALGAS_register
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerDeclarationList::getter_mRegisterNameAtIndex (const GALGAS_uint & inIndex,
+GALGAS_lstring GALGAS_controlRegisterNameList::getter_mRegisterNameAtIndex (const GALGAS_uint & inIndex,
                                                                             C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     result = p->mObject.mAttribute_mRegisterName ;
   }
   return result ;
@@ -8898,14 +9726,14 @@ GALGAS_lstring GALGAS_registerDeclarationList::getter_mRegisterNameAtIndex (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_registerDeclarationList::getter_mAttributeListAtIndex (const GALGAS_uint & inIndex,
+GALGAS_lstringlist GALGAS_controlRegisterNameList::getter_mAttributeListAtIndex (const GALGAS_uint & inIndex,
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
   GALGAS_lstringlist result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     result = p->mObject.mAttribute_mAttributeList ;
   }
   return result ;
@@ -8913,14 +9741,14 @@ GALGAS_lstringlist GALGAS_registerDeclarationList::getter_mAttributeListAtIndex 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_registerDeclarationList::getter_mRegisterAddressAtIndex (const GALGAS_uint & inIndex,
+GALGAS_lbigint GALGAS_controlRegisterNameList::getter_mRegisterAddressAtIndex (const GALGAS_uint & inIndex,
                                                                                C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
   GALGAS_lbigint result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     result = p->mObject.mAttribute_mRegisterAddress ;
   }
   return result ;
@@ -8930,7 +9758,7 @@ GALGAS_lbigint GALGAS_registerDeclarationList::getter_mRegisterAddressAtIndex (c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_registerDeclarationList::cEnumerator_registerDeclarationList (const GALGAS_registerDeclarationList & inEnumeratedObject,
+cEnumerator_controlRegisterNameList::cEnumerator_controlRegisterNameList (const GALGAS_controlRegisterNameList & inEnumeratedObject,
                                                                           const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
@@ -8938,34 +9766,34 @@ cGenericAbstractEnumerator () {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList_2D_element cEnumerator_registerDeclarationList::current (LOCATION_ARGS) const {
-  const cCollectionElement_registerDeclarationList * p = (const cCollectionElement_registerDeclarationList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+GALGAS_controlRegisterNameList_2D_element cEnumerator_controlRegisterNameList::current (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
   return p->mObject ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_registerDeclarationList::current_mRegisterName (LOCATION_ARGS) const {
-  const cCollectionElement_registerDeclarationList * p = (const cCollectionElement_registerDeclarationList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+GALGAS_lstring cEnumerator_controlRegisterNameList::current_mRegisterName (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
   return p->mObject.mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist cEnumerator_registerDeclarationList::current_mAttributeList (LOCATION_ARGS) const {
-  const cCollectionElement_registerDeclarationList * p = (const cCollectionElement_registerDeclarationList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+GALGAS_lstringlist cEnumerator_controlRegisterNameList::current_mAttributeList (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
   return p->mObject.mAttribute_mAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cEnumerator_registerDeclarationList::current_mRegisterAddress (LOCATION_ARGS) const {
-  const cCollectionElement_registerDeclarationList * p = (const cCollectionElement_registerDeclarationList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
+GALGAS_lbigint cEnumerator_controlRegisterNameList::current_mRegisterAddress (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
   return p->mObject.mAttribute_mRegisterAddress ;
 }
 
@@ -8974,42 +9802,42 @@ GALGAS_lbigint cEnumerator_registerDeclarationList::current_mRegisterAddress (LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            @registerDeclarationList type                                            *
+//                                            @controlRegisterNameList type                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerDeclarationList ("registerDeclarationList",
+kTypeDescriptor_GALGAS_controlRegisterNameList ("controlRegisterNameList",
                                                 NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_registerDeclarationList::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerDeclarationList ;
+const C_galgas_type_descriptor * GALGAS_controlRegisterNameList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterNameList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_registerDeclarationList::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_controlRegisterNameList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_registerDeclarationList (*this)) ;
+    macroMyNew (result, GALGAS_controlRegisterNameList (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList GALGAS_registerDeclarationList::extractObject (const GALGAS_object & inObject,
+GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::extractObject (const GALGAS_object & inObject,
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) {
-  GALGAS_registerDeclarationList result ;
-  const GALGAS_registerDeclarationList * p = (const GALGAS_registerDeclarationList *) inObject.embeddedObject () ;
+  GALGAS_controlRegisterNameList result ;
+  const GALGAS_controlRegisterNameList * p = (const GALGAS_controlRegisterNameList *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerDeclarationList *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_controlRegisterNameList *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("registerDeclarationList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("controlRegisterNameList", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -9017,16 +9845,16 @@ GALGAS_registerDeclarationList GALGAS_registerDeclarationList::extractObject (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Class for element of '@registerBitSliceList' list                                  *
+//                              Class for element of '@controlRegisterBitSliceList' list                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cCollectionElement_registerBitSliceList : public cCollectionElement {
-  public : GALGAS_registerBitSliceList_2D_element mObject ;
+class cCollectionElement_controlRegisterBitSliceList : public cCollectionElement {
+  public : GALGAS_controlRegisterBitSliceList_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_registerBitSliceList (const GALGAS_registerBitSlice & in_mRegisterBitSlice
-                                                    COMMA_LOCATION_ARGS) ;
+  public : cCollectionElement_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -9043,29 +9871,29 @@ class cCollectionElement_registerBitSliceList : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_registerBitSliceList::cCollectionElement_registerBitSliceList (const GALGAS_registerBitSlice & in_mRegisterBitSlice
-                                                                                  COMMA_LOCATION_ARGS) :
+cCollectionElement_controlRegisterBitSliceList::cCollectionElement_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
+                                                                                                COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mRegisterBitSlice) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cCollectionElement_registerBitSliceList::isValid (void) const {
+bool cCollectionElement_controlRegisterBitSliceList::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement * cCollectionElement_registerBitSliceList::copy (void) {
+cCollectionElement * cCollectionElement_controlRegisterBitSliceList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_registerBitSliceList (mObject.mAttribute_mRegisterBitSlice COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_controlRegisterBitSliceList (mObject.mAttribute_mRegisterBitSlice COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cCollectionElement_registerBitSliceList::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_controlRegisterBitSliceList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRegisterBitSlice" ":" ;
@@ -9074,21 +9902,21 @@ void cCollectionElement_registerBitSliceList::description (C_String & ioString, 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cCollectionElement_registerBitSliceList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_registerBitSliceList * operand = (cCollectionElement_registerBitSliceList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_registerBitSliceList) ;
+typeComparisonResult cCollectionElement_controlRegisterBitSliceList::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_controlRegisterBitSliceList * operand = (cCollectionElement_controlRegisterBitSliceList *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_controlRegisterBitSliceList) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList::GALGAS_registerBitSliceList (void) :
+GALGAS_controlRegisterBitSliceList::GALGAS_controlRegisterBitSliceList (void) :
 AC_GALGAS_list () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList::GALGAS_registerBitSliceList (cSharedList * inSharedListPtr) :
+GALGAS_controlRegisterBitSliceList::GALGAS_controlRegisterBitSliceList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
   if (NULL == inSharedListPtr) {
     createNewEmptyList (HERE) ;
@@ -9097,21 +9925,21 @@ AC_GALGAS_list (inSharedListPtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList GALGAS_registerBitSliceList::constructor_emptyList (LOCATION_ARGS) {
-  GALGAS_registerBitSliceList result ;
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSliceList result ;
   result.createNewEmptyList (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList GALGAS_registerBitSliceList::constructor_listWithValue (const GALGAS_registerBitSlice & inOperand0
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_registerBitSliceList result ;
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::constructor_listWithValue (const GALGAS_controlRegisterBitSlice & inOperand0
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSliceList result ;
   if (inOperand0.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_registerBitSliceList::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
+    GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -9119,22 +9947,22 @@ GALGAS_registerBitSliceList GALGAS_registerBitSliceList::constructor_listWithVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                             const GALGAS_registerBitSlice & in_mRegisterBitSlice
-                                                             COMMA_LOCATION_ARGS) {
-  cCollectionElement_registerBitSliceList * p = NULL ;
-  macroMyNew (p, cCollectionElement_registerBitSliceList (in_mRegisterBitSlice COMMA_THERE)) ;
+void GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                                    const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
+                                                                    COMMA_LOCATION_ARGS) {
+  cCollectionElement_controlRegisterBitSliceList * p = NULL ;
+  macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (in_mRegisterBitSlice COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::addAssign_operation (const GALGAS_registerBitSlice & inOperand0
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_controlRegisterBitSliceList::addAssign_operation (const GALGAS_controlRegisterBitSlice & inOperand0
+                                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_registerBitSliceList (inOperand0 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inOperand0 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -9144,13 +9972,13 @@ void GALGAS_registerBitSliceList::addAssign_operation (const GALGAS_registerBitS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::setter_insertAtIndex (const GALGAS_registerBitSlice inOperand0,
-                                                        const GALGAS_uint inInsertionIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_controlRegisterBitSliceList::setter_insertAtIndex (const GALGAS_controlRegisterBitSlice inOperand0,
+                                                               const GALGAS_uint inInsertionIndex,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_registerBitSliceList (inOperand0 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inOperand0 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -9160,18 +9988,18 @@ void GALGAS_registerBitSliceList::setter_insertAtIndex (const GALGAS_registerBit
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::setter_removeAtIndex (GALGAS_registerBitSlice & outOperand0,
-                                                        const GALGAS_uint inRemoveIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_controlRegisterBitSliceList::setter_removeAtIndex (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                               const GALGAS_uint inRemoveIndex,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+    cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
     }else{
-      macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+      macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
       outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
     }
   }
@@ -9179,74 +10007,74 @@ void GALGAS_registerBitSliceList::setter_removeAtIndex (GALGAS_registerBitSlice 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::setter_popFirst (GALGAS_registerBitSlice & outOperand0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_controlRegisterBitSliceList::setter_popFirst (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::setter_popLast (GALGAS_registerBitSlice & outOperand0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
+void GALGAS_controlRegisterBitSliceList::setter_popLast (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::method_first (GALGAS_registerBitSlice & outOperand0,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterBitSliceList::method_first (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::method_last (GALGAS_registerBitSlice & outOperand0,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterBitSliceList::method_last (GALGAS_controlRegisterBitSlice & outOperand0,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList GALGAS_registerBitSliceList::add_operation (const GALGAS_registerBitSliceList & inOperand,
-                                                                        C_Compiler * /* inCompiler */
-                                                                        COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_registerBitSliceList result ;
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::add_operation (const GALGAS_controlRegisterBitSliceList & inOperand,
+                                                                                      C_Compiler * /* inCompiler */
+                                                                                      COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_controlRegisterBitSliceList result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -9256,52 +10084,52 @@ GALGAS_registerBitSliceList GALGAS_registerBitSliceList::add_operation (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList GALGAS_registerBitSliceList::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_registerBitSliceList result = GALGAS_registerBitSliceList::constructor_emptyList (THERE) ;
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList GALGAS_registerBitSliceList::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_registerBitSliceList result = GALGAS_registerBitSliceList::constructor_emptyList (THERE) ;
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) const {
+  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList GALGAS_registerBitSliceList::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) const {
-  GALGAS_registerBitSliceList result = GALGAS_registerBitSliceList::constructor_emptyList (THERE) ;
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_controlRegisterBitSliceList result = GALGAS_controlRegisterBitSliceList::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceList::plusAssign_operation (const GALGAS_registerBitSliceList inOperand,
-                                                        C_Compiler * /* inCompiler */
-                                                        COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_controlRegisterBitSliceList::plusAssign_operation (const GALGAS_controlRegisterBitSliceList inOperand,
+                                                               C_Compiler * /* inCompiler */
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSlice GALGAS_registerBitSliceList::getter_mRegisterBitSliceAtIndex (const GALGAS_uint & inIndex,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
+GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSliceList::getter_mRegisterBitSliceAtIndex (const GALGAS_uint & inIndex,
+                                                                                                    C_Compiler * inCompiler
+                                                                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
-  GALGAS_registerBitSlice result ;
+  cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
+  GALGAS_controlRegisterBitSlice result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
     result = p->mObject.mAttribute_mRegisterBitSlice ;
   }
   return result ;
@@ -9311,26 +10139,26 @@ GALGAS_registerBitSlice GALGAS_registerBitSliceList::getter_mRegisterBitSliceAtI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_registerBitSliceList::cEnumerator_registerBitSliceList (const GALGAS_registerBitSliceList & inEnumeratedObject,
-                                                                    const typeEnumerationOrder inOrder) :
+cEnumerator_controlRegisterBitSliceList::cEnumerator_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSliceList & inEnumeratedObject,
+                                                                                  const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList_2D_element cEnumerator_registerBitSliceList::current (LOCATION_ARGS) const {
-  const cCollectionElement_registerBitSliceList * p = (const cCollectionElement_registerBitSliceList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+GALGAS_controlRegisterBitSliceList_2D_element cEnumerator_controlRegisterBitSliceList::current (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterBitSliceList * p = (const cCollectionElement_controlRegisterBitSliceList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
   return p->mObject ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSlice cEnumerator_registerBitSliceList::current_mRegisterBitSlice (LOCATION_ARGS) const {
-  const cCollectionElement_registerBitSliceList * p = (const cCollectionElement_registerBitSliceList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+GALGAS_controlRegisterBitSlice cEnumerator_controlRegisterBitSliceList::current_mRegisterBitSlice (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterBitSliceList * p = (const cCollectionElement_controlRegisterBitSliceList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
   return p->mObject.mAttribute_mRegisterBitSlice ;
 }
 
@@ -9339,42 +10167,42 @@ GALGAS_registerBitSlice cEnumerator_registerBitSliceList::current_mRegisterBitSl
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             @registerBitSliceList type                                              *
+//                                          @controlRegisterBitSliceList type                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerBitSliceList ("registerBitSliceList",
-                                             NULL) ;
+kTypeDescriptor_GALGAS_controlRegisterBitSliceList ("controlRegisterBitSliceList",
+                                                    NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_registerBitSliceList::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerBitSliceList ;
+const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterBitSliceList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_registerBitSliceList::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_controlRegisterBitSliceList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_registerBitSliceList (*this)) ;
+    macroMyNew (result, GALGAS_controlRegisterBitSliceList (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList GALGAS_registerBitSliceList::extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_registerBitSliceList result ;
-  const GALGAS_registerBitSliceList * p = (const GALGAS_registerBitSliceList *) inObject.embeddedObject () ;
+GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_controlRegisterBitSliceList result ;
+  const GALGAS_controlRegisterBitSliceList * p = (const GALGAS_controlRegisterBitSliceList *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerBitSliceList *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSliceList *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("registerBitSliceList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("controlRegisterBitSliceList", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

@@ -278,6 +278,11 @@ proc buildSemanticContext
    !?staticStringMap:ioGlobalLiteralStringMap
    !?context: outSemanticContext
   )
+#--- Enter control registers in context
+  enterControlRegistersInContext (
+   !inAST.mControlRegisterDeclarationListAST
+   !?context: outSemanticContext
+  )
 #--- Enter procedures in context
   for procedure in inAST.mProcedureListAST do
     [procedure enterInContext !?context: outSemanticContext]
