@@ -208,7 +208,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
     kEnum_enumeration,
     kEnum_structure,
     kEnum_integer,
-    kEnum_literalInteger
+    kEnum_staticInteger
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -248,9 +248,9 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                        const class GALGAS_uint & inOperand3
                                                        COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_typeKind constructor_literalInteger (LOCATION_ARGS) ;
-
   public : static GALGAS_typeKind constructor_literalString (LOCATION_ARGS) ;
+
+  public : static GALGAS_typeKind constructor_staticInteger (LOCATION_ARGS) ;
 
   public : static GALGAS_typeKind constructor_structure (const class GALGAS_propertyMap & inOperand0,
                                                          const class GALGAS_propertyList & inOperand1
@@ -292,9 +292,9 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInteger (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralInteger (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticInteger (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructure (LOCATION_ARGS) const ;
 

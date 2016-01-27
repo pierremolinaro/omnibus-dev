@@ -6,6 +6,7 @@ proc setup `user () {
 }
 
 newtype $u : $int32
+let bound = 1000 * 1000
 
 //------------------------------------------------*
 
@@ -17,9 +18,9 @@ var gDelai $u = 0 {
 
 proc loop `user () {
   gDelai +%= 1
-  if gDelai == 1_000_000 then
+  if gDelai == bound then
     ledOn (!LED_TEENSY) // Allumer la led
-  elsif 2_000_000 == gDelai then
+  elsif (bound * 2) == gDelai then
     gDelai = 0
     ledOff (!LED_TEENSY)  // Éteindre la led
   end  

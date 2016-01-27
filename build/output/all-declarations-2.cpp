@@ -602,9 +602,9 @@ GALGAS_typeKind GALGAS_typeKind::constructor_integer (const GALGAS_bigint & inAs
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typeKind GALGAS_typeKind::constructor_literalInteger (UNUSED_LOCATION_ARGS) {
+GALGAS_typeKind GALGAS_typeKind::constructor_staticInteger (UNUSED_LOCATION_ARGS) {
   GALGAS_typeKind result ;
-  result.mEnum = kEnum_literalInteger ;
+  result.mEnum = kEnum_staticInteger ;
   return result ;
 }
 
@@ -678,7 +678,7 @@ static const char * gEnumNameArrayFor_typeKind [8] = {
   "enumeration",
   "structure",
   "integer",
-  "literalInteger"
+  "staticInteger"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -719,8 +719,8 @@ GALGAS_bool GALGAS_typeKind::getter_isInteger (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_typeKind::getter_isLiteralInteger (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalInteger == mEnum) ;
+GALGAS_bool GALGAS_typeKind::getter_isStaticInteger (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_staticInteger == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

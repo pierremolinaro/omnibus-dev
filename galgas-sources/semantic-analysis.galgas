@@ -12,7 +12,7 @@ proc checkAssignmentCompatibility
   if inTargetType == .null then
     # Ok
   elsif inTargetType != inSourceValue.mType then
-    if [[inSourceValue.mType kind] isLiteralInteger] && [[inTargetType kind] isInteger] then
+    if [[inSourceValue.mType kind] isStaticInteger] && [[inTargetType kind] isInteger] then
       [inSourceValue.mValue literalInteger ?value:let value]
       [[inTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
       if (minTarget > value) || (maxTarget < value) then

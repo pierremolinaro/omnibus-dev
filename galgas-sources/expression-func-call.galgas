@@ -157,7 +157,7 @@ override method @functionCallInExpressionAST analyzeExpression
           !.output
           !formal.mFormalSelector
           !argumentIR
-      elsif [[argumentIR.mType kind] isLiteralInteger] && [[formal.mArgumentType kind] isInteger] then
+      elsif [[argumentIR.mType kind] isStaticInteger] && [[formal.mArgumentType kind] isInteger] then
         [argumentIR.mValue literalInteger ?value:let @bigint value]
         [[formal.mArgumentType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
         if (min <= value) && (value <= max) then

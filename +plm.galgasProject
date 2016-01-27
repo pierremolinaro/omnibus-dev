@@ -47,10 +47,6 @@ project (1:0:0) -> "plm" {
 #--- Static string
   "galgas-sources/type-static-string.galgas"
 
-#--- New Type
-##  "galgas-sources/newtype-syntax.galgas"
-##  "galgas-sources/newtype-semantics.galgas"
-
 #--- Boot and init
   "galgas-sources/boot-declaration.galgas"
   "galgas-sources/init-declaration.galgas"

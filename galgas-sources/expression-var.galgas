@@ -73,7 +73,7 @@ override method @varInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
-#--- Search variable
+#--- Search variable, constant, register
   [!?ioVariableMap searchForReadAccess
     !mSourceVarName
     ?let @unifiedTypeMap-proxy variableType
@@ -84,7 +84,7 @@ override method @varInExpressionAST analyzeExpression
     ?2*
   ]
   if not accessIsAllowed then
-    error mSourceVarName : "routine has no access right on the this variable"
+    error mSourceVarName : "routine has no access right on this variable"
   end
 #--- Load variable
   [variableKind loadFromMemory
@@ -124,7 +124,7 @@ override method @varInExpressionAST analyzeExpression
       switch [outResult.mType kind]
         case boolean :
           error field : "a boolean does not handle field access"
-        case literalInteger :
+        case staticInteger :
           error field : "an integer does not handle field access"
         case boolset :
           error field : "a boolset does not handle field access"

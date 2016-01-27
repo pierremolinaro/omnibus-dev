@@ -112,18 +112,18 @@ proc enterGlobalConstantsInContext
   @variableMap variableMap = .emptyMap
   for (constantName constantTypeName sourceExpression) in inOrderedConstantDeclarationList do
   #--- Get destination type
-    @unifiedTypeMap-proxy constantType
+    @unifiedTypeMap-proxy annotationType
     if constantTypeName.string == "" then
-      constantType = .null
+      annotationType = .null
     else
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !constantTypeName ?constantType]
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !constantTypeName ?annotationType]
     end
   #--- Analyze source expression
     @semanticTemporariesStruct temporaries = .default
     @instructionListIR instructionGenerationList = {}
     [sourceExpression analyzeExpression
        !routineNameForInvocationGraph:["compiler" nowhere]
-       !optionalTargetType:constantType
+       !optionalTargetType:annotationType
        !context:ioContext
        !modes:{}
        !allowException:true
@@ -136,9 +136,11 @@ proc enterGlobalConstantsInContext
   #--- Check assignment compatibility
     checkAssignmentCompatibility (
       !source:expressionResult
-      !targetType:constantType
+      !targetType:annotationType
       !errorLocation:constantName.location
     )
+  #--- Constant type
+    let constantType = if annotationType == .null then expressionResult.mType else annotationType end
   #--- Check source expression is statically comtuted
     if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
       error constantName : "source expression cannot be statically computed"
@@ -146,7 +148,7 @@ proc enterGlobalConstantsInContext
   #--- Enter in context
     [!?ioContext.mGlobalConstantMap insertKey
       !constantName
-      !.new {!if constantType == .null then expressionResult.mType else constantType end !expressionResult.mValue}
+      !.new {!constantType !expressionResult.mValue}
     ]
   #--- Enter in constant variable map
     [!?variableMap insertUsedLocalConstant

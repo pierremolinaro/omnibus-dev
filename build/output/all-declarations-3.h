@@ -1046,6 +1046,8 @@ void routine_enterAliasInfixOperator (class GALGAS_infixOperatorMap & ioArgument
                                       const class GALGAS_lstring constinArgument4,
                                       const class GALGAS_lstring constinArgument5,
                                       const class GALGAS_lstring constinArgument6,
+                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
+                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument8,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 

@@ -11,7 +11,7 @@ enum @typeKind {
   case enumeration (@enumConstantMap constantMap)
   case structure (@propertyMap propertyMap @propertyList propertyList)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
-  case literalInteger
+  case staticInteger
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

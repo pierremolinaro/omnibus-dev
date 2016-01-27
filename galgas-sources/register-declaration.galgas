@@ -274,7 +274,7 @@ override method @registerDeclaration semanticAnalysis
   case literalString : error mRegisterTypeName : "a literal string type is not valid for a register"
   case structure (* *) : error mRegisterTypeName : "a structure type is not valid for a register"
   case enumeration (*) : error mRegisterTypeName : "an enumeration type is not valid for a register"
-  case literalInteger : error mRegisterTypeName : "a literal integer type is not valid for a register"
+  case staticInteger : error mRegisterTypeName : "a literal integer type is not valid for a register"
   end
 #--- Check address value
   let @bigint maxAddress = (1G << inContext.mPointerSize) - 1G
