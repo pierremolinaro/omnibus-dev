@@ -52,7 +52,7 @@ syntax extension common_syntax {
 
 override method @varInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  ?!@constantPrecedenceGraph ioGraph
 {
   [!?ioGraph addEdge !inConstantName !mSourceVarName]
 }
@@ -139,8 +139,8 @@ override method @varInExpressionAST analyzeExpression
             !newResultingVariable
             !outResult
             !idx
-           ]
-           outResult = newResultingVariable 
+          ]
+          outResult = newResultingVariable 
         case integer (* * * *) :
           error field : "an integer does not handle field access"
       end    

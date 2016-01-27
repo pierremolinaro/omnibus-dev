@@ -50,7 +50,7 @@ class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
 
 override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  ?!@constantPrecedenceGraph ioGraph
 {
   [mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
@@ -60,7 +60,7 @@ override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
 
 override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  ?!@constantPrecedenceGraph ioGraph
 {
   [mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]

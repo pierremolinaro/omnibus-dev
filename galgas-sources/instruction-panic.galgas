@@ -62,7 +62,7 @@ override method @throwInstructionAST analyze
 #--- Expression is static ?
   if ([unusedInstructionListIR length] > 0)
      || not [result.mValue isLiteralInteger]
-     || ([result.mType key] != literalIntegerTypeName ()) then
+     || ([result.mType key] != staticIntegerTypeName ()) then
     error mThrowLocation : "throw expression should be a literal integer"
   else
     [[inContext.mExceptionCodeType kind] integer ?min:let min ?max:let max ?unsigned:* ?bitCount:*]

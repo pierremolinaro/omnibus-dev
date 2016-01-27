@@ -109,11 +109,19 @@ private proc compileProject
     !endOfSourceFile:inEndOfSourceFile
     ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
   )
+#--- Build ordered global constant declaration list
+  buildOrderedConstantDeclarationList (
+    !ast.mGlobalConstantDeclarationListAST
+    !inSourceFile.string
+    !inEndOfSourceFile
+    ?let @globalConstantDeclarationListAST orderedConstantDeclarationList
+  )
 #--- Semantic context
   if @uint.errorCount == 0 then
     @staticStringMap globalLiteralStringMap = {}
     buildSemanticContext (
       !orderedDeclarationList:orderedDeclarationListAST
+      !orderedConstantDeclarationList:orderedConstantDeclarationList
       !ast:ast
       !?staticStringMap:globalLiteralStringMap
       ?context:let @semanticContext semanticContext
@@ -191,6 +199,8 @@ private proc addTargetSpecificFiles
   end
   ioAST.mDeclarationList = ast.mDeclarationList + ioAST.mDeclarationList
   ioAST.mGlobalVarDeclarationList = ast.mGlobalVarDeclarationList + ioAST.mGlobalVarDeclarationList
+  ioAST.mGlobalConstantDeclarationListAST = ast.mGlobalConstantDeclarationListAST + ioAST.mGlobalConstantDeclarationListAST
+  ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
   ioAST.mProcedureListAST = ast.mProcedureListAST + ioAST.mProcedureListAST
   ioAST.mRequiredProcList = ast.mRequiredProcList + ioAST.mRequiredProcList
   ioAST.mFunctionListAST = ast.mFunctionListAST + ioAST.mFunctionListAST

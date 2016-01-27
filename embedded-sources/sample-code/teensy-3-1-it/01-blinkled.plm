@@ -5,7 +5,7 @@ target "teensy-3-1-it"
 proc setup `user () {
 }
 
-typealias $u : $int32
+newtype $u : $int32
 
 //------------------------------------------------*
 

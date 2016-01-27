@@ -16,15 +16,6 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   OC_GGS_CommandLineOption * option ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
-    identifier:@"compileOnly"
-    commandChar:99
-    commandString:@"no-c-compilation"
-    comment:@"Do not compile generated LLVM code"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
     identifier:@"doNotDetectRecursiveCalls"
     commandChar:114
     commandString:@"do-not-detect-recursive-calls"
@@ -119,6 +110,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:102
     commandString:@"flash-target"
     comment:@"After successful compilation, flash target"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"writeGlobalConstantDependencyGraphFile"
+    commandChar:99
+    commandString:@"global-constant-dependency-graph"
+    comment:@"Write global constant dependency graph file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

@@ -55,8 +55,7 @@ setter @staticStringMap findOrAddStaticString ?@string inString !@uint outIndex 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalConstantMap {
-  @unifiedTypeMap-proxy mConstantType
-  @valueIR mExpressionCode
+  @operandIR mValue
   insert insertKey error message "the '%K' constant is already declared in %L"
   search searchKey error message "there is no '%K' constant"
 }
@@ -225,6 +224,7 @@ abstract method @abstractDeclaration initAnalysis
 
 proc buildSemanticContext
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
+  ?orderedConstantDeclarationList:let @globalConstantDeclarationListAST inOrderedConstantDeclarationList
   ?ast:let @ast inAST
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   !context:@semanticContext outSemanticContext
@@ -272,11 +272,17 @@ proc buildSemanticContext
       !exceptionLineTypeName
     }
   end
-#---
+#--- Enter global constants in context
+  enterGlobalConstantsInContext (
+   !orderedConstantDeclarationList:inOrderedConstantDeclarationList
+   !?staticStringMap:ioGlobalLiteralStringMap
+   !?context: outSemanticContext
+  )
+#--- Enter procedures in context
   for procedure in inAST.mProcedureListAST do
     [procedure enterInContext !?context: outSemanticContext]
   end
-#---
+#--- enter functions in context
   for function in inAST.mFunctionListAST do
     [function enterInContext !?context: outSemanticContext]
   end

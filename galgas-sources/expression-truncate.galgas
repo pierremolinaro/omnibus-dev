@@ -39,7 +39,7 @@ syntax extension common_syntax {
 
 override method @truncateExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  ?!@constantPrecedenceGraph ioGraph
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }

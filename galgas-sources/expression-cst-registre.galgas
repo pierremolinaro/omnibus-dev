@@ -47,19 +47,19 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  ?let @lstring unused inConstantName
+  ?!@constantPrecedenceGraph unused ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mRegisterName]
+#  [!?ioGraph addEdge !inConstantName !mRegisterName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  ?let @lstring unused inConstantName
+  ?!@constantPrecedenceGraph unused ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mRegisterName]
+#  [!?ioGraph addEdge !inConstantName !mRegisterName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
