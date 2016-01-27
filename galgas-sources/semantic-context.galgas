@@ -225,6 +225,7 @@ abstract method @abstractDeclaration initAnalysis
 proc buildSemanticContext
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
   ?orderedConstantDeclarationList:let @globalConstantDeclarationListAST inOrderedConstantDeclarationList
+  ?sourceFile:let @lstring inSourceFile
   ?ast:let @ast inAST
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   !context:@semanticContext outSemanticContext
@@ -275,6 +276,7 @@ proc buildSemanticContext
 #--- Enter global constants in context
   enterGlobalConstantsInContext (
    !orderedConstantDeclarationList:inOrderedConstantDeclarationList
+   !sourceFile:inSourceFile
    !?staticStringMap:ioGlobalLiteralStringMap
    !?context: outSemanticContext
   )

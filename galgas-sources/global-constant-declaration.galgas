@@ -106,6 +106,7 @@ proc buildOrderedConstantDeclarationList
 
 proc enterGlobalConstantsInContext
   ?orderedConstantDeclarationList:let @globalConstantDeclarationListAST inOrderedConstantDeclarationList
+  ?sourceFile:let @lstring inSourceFile
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!context:@semanticContext ioContext
 {
@@ -141,6 +142,7 @@ proc enterGlobalConstantsInContext
     )
   #--- Constant type
     let constantType = if annotationType == .null then expressionResult.mType else annotationType end
+    let result = @operandIR.new {!constantType !expressionResult.mValue}
   #--- Check source expression is statically comtuted
     if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
       error constantName : "source expression cannot be statically computed"
@@ -148,20 +150,64 @@ proc enterGlobalConstantsInContext
   #--- Enter in context
     [!?ioContext.mGlobalConstantMap insertKey
       !constantName
-      !.new {!constantType !expressionResult.mValue}
+      !result
     ]
   #--- Enter in constant variable map
     [!?variableMap insertUsedLocalConstant
       !constantName
       !constantType
       !true
-      !.globalConstant{!value:expressionResult !name:constantName.string}
+      !.globalConstant{!value:result !name:constantName.string}
       !true
       !{}
       !false # Cannot be used as input parameter
       !true # Is constant
     ]
   end
+#------------------------------------ Build an HTML file that contains all declared constants
+  let @string typeDumpFilePath = inSourceFile.string + "global-constants.html"
+  if [option plm_options.writeGlobalConstantHTMLDumpFile value] then
+    @stringset firstLetterSet = {}
+    for () in ioContext.mGlobalConstantMap do
+      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
+    end
+    @string tableOfTypeString = ""
+    @char currentFirstLetter = ' '
+    for () type_ in ioContext.mGlobalConstantMap do
+      if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
+        currentFirstLetter = [type_lkey.string characterAtIndex !0]
+        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
+      end
+      tableOfTypeString += linkForGlobalConstant (!type_lkey.string) + "<br>"
+    end
+    let @string typeDumpString = [filewrapper constantDumpGenerationTemplate.dump
+      ![inSourceFile lastPathComponent]
+      !ioContext.mGlobalConstantMap
+      !firstLetterSet
+      !tableOfTypeString
+    ]
+    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+  else
+    [@string deleteFileIfExists !typeDumpFilePath]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
+}{
+}{
+  template dump "globalConstantDump.html.galgasTemplate"
+    ?@string PROJECT_NAME
+    ?@globalConstantMap GLOBAL_CONSTANT_MAP
+    ?@stringset FIRST_LETTER_SET
+    ?@string TABLE_OF_TYPES_STRING
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func linkForGlobalConstant ?let @string inConstantName -> @string outResult {
+  outResult = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

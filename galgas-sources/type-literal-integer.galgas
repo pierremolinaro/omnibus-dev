@@ -84,32 +84,32 @@ private proc enterLiteralIntegerOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.equal}
+    !@literal_literal_integerInfixOperation.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.nonEqual}
+    !@literal_literal_integerInfixOperation.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.strictInf}
+    !@literal_literal_integerInfixOperation.new {!.icmp_slt}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.infEqual}
+    !@literal_literal_integerInfixOperation.new {!.icmp_sle}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.strictSup}
+    !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.supEqual}
+    !@literal_literal_integerInfixOperation.new {!.icmp_sge}
   ]
 #--- Bit Wise operators (for unsigned integers)
   [!?ioContext.mAndOperatorMap insertKey
@@ -140,63 +140,63 @@ private proc enterLiteralIntegerOperators
   [!?ioContext.mAddOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.add}
+    !@literal_literal_integerInfixOperation.new {!.saddOVF}
   ]
   [!?ioContext.mAddNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.add}
+    !@literal_literal_integerInfixOperation.new {!.addNoOVF}
   ]
   [!?ioContext.mSubOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.sub}
+    !@literal_literal_integerInfixOperation.new {!.ssubOVF}
   ]
   [!?ioContext.mSubNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.sub}
+    !@literal_literal_integerInfixOperation.new {!.subNoOVF}
   ]
   [!?ioContext.mMulOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.mul}
+    !@literal_literal_integerInfixOperation.new {!.smulOVF}
   ]
   [!?ioContext.mMulNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.mul}
+    !@literal_literal_integerInfixOperation.new {!.mulNoOVF}
   ]
   [!?ioContext.mDivOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.div}
+    !@literal_literal_integerInfixOperation.new {!.sdivOVF}
   ]
   [!?ioContext.mDivNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.div}
+    !@literal_literal_integerInfixOperation.new {!.sdivNoOVF}
   ]
   [!?ioContext.mModOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.rem}
+    !@literal_literal_integerInfixOperation.new {!.sremOVF}
   ]
   [!?ioContext.mModNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.rem}
+    !@literal_literal_integerInfixOperation.new {!.sremNoOVF}
   ]
 #--- Shift operators
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.leftShift}
+    !@literal_literal_integerInfixOperation.new {!.shl}
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.rightShift}
+    !@literal_literal_integerInfixOperation.new {!.lshr}
   ]
 }
 
@@ -219,28 +219,28 @@ override method @literalIntegerDeclaration semanticAnalysis
 #  INFIX OPERATIONS                                                                                                    *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @literalIntegerInfixOperator {
-  case equal
-  case nonEqual
-  case strictInf
-  case strictSup
-  case infEqual
-  case supEqual
-  case and
-  case ior
-  case xor
-  case add
-  case sub
-  case mul
-  case div
-  case rem
-  case leftShift
-  case rightShift
-}
+#enum @literalIntegerInfixOperator {
+#  case equal
+#  case nonEqual
+#  case strictInf
+#  case strictSup
+#  case infEqual
+#  case supEqual
+#  case and
+#  case ior
+#  case xor
+#  case add
+#  case sub
+#  case mul
+#  case div
+#  case rem
+#  case leftShift
+#  case rightShift
+#}
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literal_literal_integerInfixOperation : @infixOperatorDescription {
-  @literalIntegerInfixOperator mOperator
+#  @literalIntegerInfixOperator mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -256,25 +256,25 @@ override method @literal_literal_integerInfixOperation generateInfixOperatorCode
 {
   [inLeftOperand.mValue  literalInteger ?value:let @bigint leftValue]
   [inRightOperand.mValue literalInteger ?value:let @bigint rightValue]
-  @bigint result
-  switch mOperator 
-  case equal : result = [leftValue == rightValue bigint]
-  case nonEqual : result = [leftValue != rightValue bigint]
-  case strictInf : result = [leftValue < rightValue bigint]
-  case infEqual : result = [leftValue <= rightValue bigint]
-  case strictSup : result = [leftValue > rightValue bigint]
-  case supEqual : result = [leftValue >= rightValue bigint]
-  case and : result = leftValue & rightValue
-  case ior : result = leftValue | rightValue
-  case xor : result = leftValue ^ rightValue
-  case add : result = leftValue + rightValue
-  case sub : result = leftValue - rightValue
-  case mul : result = leftValue * rightValue
-  case div : result = leftValue / rightValue
-  case rem : result = leftValue mod rightValue
-  case leftShift  : result = leftValue << [rightValue uint]
-  case rightShift : result = leftValue >> [rightValue uint]
-  end
+  let result = [self performStaticOperation !leftValue !rightValue]
+#  switch mOperator 
+#  case equal : result = [leftValue == rightValue bigint]
+#  case nonEqual : result = [leftValue != rightValue bigint]
+#  case strictInf : result = [leftValue < rightValue bigint]
+#  case infEqual : result = [leftValue <= rightValue bigint]
+#  case strictSup : result = [leftValue > rightValue bigint]
+#  case supEqual : result = [leftValue >= rightValue bigint]
+#  case and : result = leftValue & rightValue
+#  case ior : result = leftValue | rightValue
+#  case xor : result = leftValue ^ rightValue
+#  case add : result = leftValue + rightValue
+#  case sub : result = leftValue - rightValue
+#  case mul : result = leftValue * rightValue
+#  case div : result = leftValue / rightValue
+#  case rem : result = leftValue mod rightValue
+#  case leftShift  : result = leftValue << [rightValue uint]
+#  case rightShift : result = leftValue >> [rightValue uint]
+#  end
   outResult = .new {!inResultType !.literalInteger {!value:result}}
 }
 

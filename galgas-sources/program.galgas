@@ -122,6 +122,7 @@ private proc compileProject
     buildSemanticContext (
       !orderedDeclarationList:orderedDeclarationListAST
       !orderedConstantDeclarationList:orderedConstantDeclarationList
+      !sourceFile:inSourceFile
       !ast:ast
       !?staticStringMap:globalLiteralStringMap
       ?context:let @semanticContext semanticContext
