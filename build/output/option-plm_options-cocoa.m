@@ -124,6 +124,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"writeGlobalConstantHTMLDumpFile"
+    commandChar:0
+    commandString:@"global-constant-map"
+    comment:@"Write global constant map in an HTML file"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"writeRoutineInvocationGraphFile"
     commandChar:105
     commandString:@"routine-invocation-graph"

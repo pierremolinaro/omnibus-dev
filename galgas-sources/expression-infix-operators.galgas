@@ -308,6 +308,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @infixOperatorDescription {
+  @llvmBinaryOperation mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -320,5 +321,54 @@ abstract method @infixOperatorDescription generateInfixOperatorCode
   ?let @operandIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
   !@operandIR outResultValue
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @infixOperatorDescription performStaticOperation
+  ?let @bigint inLeft
+  ?let @bigint inRight
+  -> @bigint outResult
+{
+  switch mOperator
+  case addNoOVF : outResult = inLeft + inRight
+  case subNoOVF : outResult = inLeft - inRight
+  case mulNoOVF : outResult = inLeft * inRight
+  case udivNoOVF : outResult = inLeft / inRight
+  case sdivNoOVF : outResult = inLeft / inRight
+  case uremNoOVF : outResult = inLeft mod inRight
+  case sremNoOVF : outResult = inLeft mod inRight
+
+  case uaddOVF : outResult = inLeft + inRight
+  case saddOVF : outResult = inLeft + inRight
+  case usubOVF : outResult = inLeft - inRight
+  case ssubOVF : outResult = inLeft - inRight
+  case umulOVF : outResult = inLeft * inRight
+  case smulOVF : outResult = inLeft * inRight
+  case udivOVF : outResult = inLeft / inRight
+  case sdivOVF : outResult = inLeft / inRight
+  case uremOVF : outResult = inLeft mod inRight
+  case sremOVF : outResult = inLeft mod inRight
+
+  case and : outResult = inLeft & inRight
+  case ior : outResult = inLeft | inRight
+  case xor : outResult = inLeft ^ inRight
+  case shl : outResult = inLeft << [inRight uint]
+  case ashr : outResult = inLeft >> [inRight uint]
+  case lshr : outResult = inLeft >> [inRight uint]
+  
+  case icmp_eq : outResult = [inLeft == inRight bigint]
+  case icmp_ne : outResult = [inLeft != inRight bigint]
+  case icmp_ult : outResult = [inLeft < inRight bigint]
+  case icmp_ule : outResult = [inLeft <= inRight bigint]
+  case icmp_ugt : outResult = [inLeft > inRight bigint]
+  case icmp_uge : outResult = [inLeft >= inRight bigint]
+  case icmp_slt : outResult = [inLeft < inRight bigint]
+  case icmp_sle : outResult = [inLeft <= inRight bigint]
+  case icmp_sgt : outResult = [inLeft > inRight bigint]
+  case icmp_sge : outResult = [inLeft >= inRight bigint]
+
+
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

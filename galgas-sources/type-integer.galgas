@@ -304,7 +304,6 @@ private proc enter_integer_integer_operators
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
-  @llvmBinaryOperation mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -318,16 +317,23 @@ override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
   ?let @unifiedTypeMap-proxy inResultType
   !@operandIR outResult
 {
-  getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
-#--- Generate code
-  [!?ioInstructionGenerationList appendBinaryOperation
-    !outResult.mValue
-    !inLeftOperand.mType
-    !inOperatorLocation
-    !inLeftOperand.mValue
-    !mOperator
-    !inRightOperand.mValue
-  ]
+  if [inLeftOperand.mValue isLiteralInteger] && [inRightOperand.mValue isLiteralInteger] then
+    [inLeftOperand.mValue  literalInteger ?value:let @bigint left]
+    [inRightOperand.mValue literalInteger ?value:let @bigint right]
+    let resultValue = [self performStaticOperation !left !right]
+    outResult = .new {!inResultType !.literalInteger {!value:resultValue}}
+  else
+    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+  #--- Generate code
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !outResult.mValue
+      !inLeftOperand.mType
+      !inOperatorLocation
+      !inLeftOperand.mValue
+      !mOperator
+      !inRightOperand.mValue
+    ]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -460,7 +466,6 @@ private proc enter_integer_literal_operators
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @integerObject_literal_infixOperator : @infixOperatorDescription {
-  @llvmBinaryOperation mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -497,7 +502,6 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @integerObject_literal_divisionOperator : @infixOperatorDescription {
-  @llvmBinaryOperation mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -663,7 +667,7 @@ private proc enter_literal_integer_operators
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literal_integerObject_infixOperator : @infixOperatorDescription {
-  @llvmBinaryOperation mOperator
+#  @llvmBinaryOperation mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
