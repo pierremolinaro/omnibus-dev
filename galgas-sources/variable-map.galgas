@@ -39,12 +39,12 @@ func initialVariableMap
     end
   end
 #--- Add global constants
-  for (constantName constantType expressionCode) in inContext.mGlobalConstantMap do
+  for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedLocalConstant
       !constantName
-      !constantType
+      !constantValue.mType
       !true
-      !.globalConstant{!type:constantType !name:constantName.string}
+      !.globalConstant{!value:constantValue !name:constantName.string}
       !true
       !{}
       !false # Cannot be used as input parameter
@@ -92,12 +92,12 @@ func variableMapWithConstants
 {
   outVariableMap = .emptyMap
 #--- Add global constants
-  for (constantName constantType expressionCode) in inContext.mGlobalConstantMap do
+  for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedLocalConstant
       !constantName
-      !constantType
+      !constantValue.mType
       !true
-      !.globalConstant{!type:constantType !name:constantName.string}
+      !.globalConstant{!value:constantValue !name:constantName.string}
       !true
       !{}
       !false

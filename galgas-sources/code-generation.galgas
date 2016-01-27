@@ -301,7 +301,7 @@ proc generateLLVMfile
   asCode += asSeparatorLine ()
   [asCode writeToFileWhenDifferentContents !sourceDirectory + "/src.s" ?*]
 #----------------------------------------- Perform compilation
-  if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
+  if (@uint.errorCount == 0) then # && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end
     let fullScript = "python " + inProductDirectory + "/" + script + ".py"
     @sint result = [fullScript system]

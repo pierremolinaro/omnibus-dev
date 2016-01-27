@@ -22,7 +22,7 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $typealias$
+    $newtype$
     $typeName$ ?let newTypeName
     $:$
     $typeName$ ?let aliasedTypeName
@@ -102,10 +102,10 @@ override method @typeAliasDeclaration enterInContext
 #--- Enter infix operators
   let newNewInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !mNewTypeName.string)
   let aliasAliasInfixKey = combineTypeNamesForInfixOperator (!mAliasedTypeName.string !mAliasedTypeName.string)
-  let newLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !literalIntegerTypeName ())
-  let aliasLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mAliasedTypeName.string !literalIntegerTypeName ())
-  let literalIntegerNewInfixKey = combineTypeNamesForInfixOperator (!literalIntegerTypeName ()!mNewTypeName.string)
-  let literalIntegerAliasInfixKey = combineTypeNamesForInfixOperator (!literalIntegerTypeName ()!mAliasedTypeName.string)
+  let newLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !staticIntegerTypeName ())
+  let aliasLiteralIntegerInfixKey = combineTypeNamesForInfixOperator (!mAliasedTypeName.string !staticIntegerTypeName ())
+  let literalIntegerNewInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mNewTypeName.string)
+  let literalIntegerAliasInfixKey = combineTypeNamesForInfixOperator (!staticIntegerTypeName ()!mAliasedTypeName.string)
   enterAliasInfixOperator (
     !?ioContext.mEqualOperatorMap
     !newNewInfixKey

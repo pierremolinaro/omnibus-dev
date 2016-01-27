@@ -8,7 +8,6 @@ method @objectInMemoryIR loadFromMemory
   switch self
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-#    [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadVolatileRegister
       !outResultingValue
       !name.string
@@ -16,7 +15,6 @@ method @objectInMemoryIR loadFromMemory
     ]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-#    [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadGlobalVariable
       !outResultingValue
       !name
@@ -24,19 +22,18 @@ method @objectInMemoryIR loadFromMemory
     ]
   case localValue (@unifiedTypeMap-proxy type @string name) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-#    [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadLocalVariable
       !outResultingValue
       !name
     ]
-  case globalConstant (@unifiedTypeMap-proxy type @string name) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-#    [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
-    [!?ioInstructionGenerationList appendLoadGlobalVariable
-      !outResultingValue
-      !name
-      !volatile:false
-    ]
+  case globalConstant (@operandIR value @string unused name) :
+    outResultingValue = value
+#    getNewTempVariable (!value.mType !?ioTemporaries ?outResultingValue)
+#    [!?ioInstructionGenerationList appendLoadGlobalVariable
+#      !outResultingValue
+#      !name
+#      !volatile:false
+#    ]
   case fieldAccess (@unifiedTypeMap-proxy unused objectType
                     @string unused objectName
                     @unifiedTypeMap-proxy unused fieldType

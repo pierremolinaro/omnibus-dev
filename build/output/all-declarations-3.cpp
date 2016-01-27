@@ -136,7 +136,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, SHIFT (3)
 , C_Lexique_plm_5F_lexique::kToken_var, SHIFT (4)
 , C_Lexique_plm_5F_lexique::kToken_func, SHIFT (5)
-, C_Lexique_plm_5F_lexique::kToken_typealias, SHIFT (6)
+, C_Lexique_plm_5F_lexique::kToken_newtype, SHIFT (6)
 , C_Lexique_plm_5F_lexique::kToken_extension, SHIFT (7)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_init, SHIFT (8)
@@ -216,7 +216,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, SHIFT (3)
 , C_Lexique_plm_5F_lexique::kToken_var, SHIFT (4)
 , C_Lexique_plm_5F_lexique::kToken_func, SHIFT (5)
-, C_Lexique_plm_5F_lexique::kToken_typealias, SHIFT (6)
+, C_Lexique_plm_5F_lexique::kToken_newtype, SHIFT (6)
 , C_Lexique_plm_5F_lexique::kToken_extension, SHIFT (7)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_init, SHIFT (8)
@@ -238,7 +238,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, SHIFT (3)
 , C_Lexique_plm_5F_lexique::kToken_var, SHIFT (4)
 , C_Lexique_plm_5F_lexique::kToken_func, SHIFT (5)
-, C_Lexique_plm_5F_lexique::kToken_typealias, SHIFT (6)
+, C_Lexique_plm_5F_lexique::kToken_newtype, SHIFT (6)
 , C_Lexique_plm_5F_lexique::kToken_extension, SHIFT (7)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_init, SHIFT (8)
@@ -269,7 +269,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, SHIFT (3)
 , C_Lexique_plm_5F_lexique::kToken_var, SHIFT (4)
 , C_Lexique_plm_5F_lexique::kToken_func, SHIFT (5)
-, C_Lexique_plm_5F_lexique::kToken_typealias, SHIFT (6)
+, C_Lexique_plm_5F_lexique::kToken_newtype, SHIFT (6)
 , C_Lexique_plm_5F_lexique::kToken_extension, SHIFT (7)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_init, SHIFT (8)
@@ -305,7 +305,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (11)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (11)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (11)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (11)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (11)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (11)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (11)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (11)
@@ -348,7 +348,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (16)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (16)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (16)
@@ -374,7 +374,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (66)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (66)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (66)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (66)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (66)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (66)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (66)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (66)
@@ -396,7 +396,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (67)
@@ -764,7 +764,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (3)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (3)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (3)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (3)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (3)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (3)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (3)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (3)
@@ -865,7 +865,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (68)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (68)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (68)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (68)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (68)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (68)
@@ -887,7 +887,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (69)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (69)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (69)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (69)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (69)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (69)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (69)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (69)
@@ -1112,7 +1112,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (42)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (42)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (42)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (42)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (42)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (42)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (42)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (42)
@@ -1184,7 +1184,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (173)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (173)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (173)
@@ -1255,7 +1255,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (41)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (41)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (41)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (41)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (41)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (41)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (41)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (41)
@@ -1467,7 +1467,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (43)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (43)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (43)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (43)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (43)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (43)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (43)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (43)
@@ -1535,7 +1535,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (44)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (44)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (44)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (44)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (44)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (44)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (44)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (44)
@@ -1603,7 +1603,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (175)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (175)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (175)
@@ -1690,7 +1690,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (18)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (18)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (18)
@@ -1734,7 +1734,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (136)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (136)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (136)
@@ -1779,7 +1779,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (138)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (138)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (138)
@@ -1825,7 +1825,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (140)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (140)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (140)
@@ -1872,7 +1872,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (142)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (142)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (142)
@@ -1920,7 +1920,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (144)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (144)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (144)
@@ -1969,7 +1969,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (146)
@@ -2019,7 +2019,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (148)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (148)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (148)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (148)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (148)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (148)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (148)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (148)
@@ -2071,7 +2071,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (151)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (151)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (151)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (151)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (151)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (151)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (151)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (151)
@@ -2127,7 +2127,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (156)
@@ -2185,7 +2185,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (159)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (159)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (159)
@@ -2247,7 +2247,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (164)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (164)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (164)
@@ -2315,7 +2315,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (30)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (30)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (30)
@@ -2517,7 +2517,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (13)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (13)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (13)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (13)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (13)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (13)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (13)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (13)
@@ -2610,7 +2610,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (4)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (4)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (4)
@@ -2663,7 +2663,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (10)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (10)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (10)
@@ -2685,7 +2685,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (6)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (6)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (6)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (6)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (6)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (6)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (6)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (6)
@@ -2707,7 +2707,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (7)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (7)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (7)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (7)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (7)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (7)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (7)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (7)
@@ -2809,7 +2809,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (45)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (45)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (45)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (45)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (45)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (45)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (45)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (45)
@@ -2883,7 +2883,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (33)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (33)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (33)
@@ -2951,7 +2951,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (34)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (34)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (34)
@@ -3019,7 +3019,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (31)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (31)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (31)
@@ -3087,7 +3087,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (32)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (32)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (32)
@@ -3167,7 +3167,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (46)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (46)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (46)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (46)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (46)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (46)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (46)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (46)
@@ -3253,7 +3253,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (19)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (19)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (19)
@@ -3315,7 +3315,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (20)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (20)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (20)
@@ -3378,7 +3378,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (21)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (21)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (21)
@@ -3442,7 +3442,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (22)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (22)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (22)
@@ -3507,7 +3507,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (23)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (23)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (23)
@@ -3573,7 +3573,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (24)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (24)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (24)
@@ -3658,7 +3658,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (25)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (25)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (25)
@@ -3780,7 +3780,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (26)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (26)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (26)
@@ -3868,7 +3868,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (27)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (27)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (27)
@@ -3996,7 +3996,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (28)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (28)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (28)
@@ -4162,7 +4162,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (29)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (29)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (29)
@@ -4349,7 +4349,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (2)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (2)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (2)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (2)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (2)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (2)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (2)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (2)
@@ -4409,7 +4409,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (8)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (8)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (8)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (8)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (8)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (8)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (8)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (8)
@@ -4487,7 +4487,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (39)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (39)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (39)
@@ -4555,7 +4555,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (173)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (173)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (173)
@@ -4625,7 +4625,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (48)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (48)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (48)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (48)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (48)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (48)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (48)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (48)
@@ -4694,7 +4694,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (35)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (35)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (35)
@@ -4771,7 +4771,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (175)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (175)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (175)
@@ -4841,7 +4841,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (136)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (136)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (136)
@@ -4886,7 +4886,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (138)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (138)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (138)
@@ -4932,7 +4932,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (140)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (140)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (140)
@@ -4979,7 +4979,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (142)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (142)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (142)
@@ -5027,7 +5027,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (144)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (144)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (144)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (144)
@@ -5076,7 +5076,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (146)
@@ -5126,7 +5126,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (149)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (149)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (149)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (149)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (149)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (149)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (149)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (149)
@@ -5176,7 +5176,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (150)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (150)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (150)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (150)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (150)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (150)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (150)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (150)
@@ -5226,7 +5226,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (152)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (152)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (152)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (152)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (152)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (152)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (152)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (152)
@@ -5278,7 +5278,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (153)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (153)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (153)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (153)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (153)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (153)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (153)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (153)
@@ -5330,7 +5330,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (154)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (154)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (154)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (154)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (154)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (154)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (154)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (154)
@@ -5382,7 +5382,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (155)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (155)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (155)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (155)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (155)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (155)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (155)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (155)
@@ -5434,7 +5434,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (156)
@@ -5492,7 +5492,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (156)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (156)
@@ -5550,7 +5550,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (159)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (159)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (159)
@@ -5612,7 +5612,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (159)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (159)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (159)
@@ -5674,7 +5674,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (159)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (159)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (159)
@@ -5736,7 +5736,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (159)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (159)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (159)
@@ -5798,7 +5798,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (164)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (164)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (164)
@@ -5866,7 +5866,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (164)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (164)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (164)
@@ -5934,7 +5934,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (164)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (164)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (164)
@@ -6002,7 +6002,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (164)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (164)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (164)
@@ -6070,7 +6070,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (164)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (164)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (164)
@@ -6138,7 +6138,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (164)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (164)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (164)
@@ -6206,7 +6206,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (40)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (40)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (40)
@@ -6481,7 +6481,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (1)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (1)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (1)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (1)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (1)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (1)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (1)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (1)
@@ -6555,7 +6555,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (15)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (15)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (15)
@@ -6581,7 +6581,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (9)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (9)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (9)
@@ -6607,7 +6607,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (128)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (128)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (128)
@@ -6658,7 +6658,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (174)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (174)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (174)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (174)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (174)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (174)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (174)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (174)
@@ -6744,7 +6744,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (36)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (36)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (36)
@@ -6812,7 +6812,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (37)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (37)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (37)
@@ -6880,7 +6880,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (38)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (38)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (38)
@@ -6951,7 +6951,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (176)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (176)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (176)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (176)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (176)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (176)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (176)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (176)
@@ -7019,7 +7019,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (137)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (137)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (137)
@@ -7063,7 +7063,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (139)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (139)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (139)
@@ -7108,7 +7108,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (141)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (141)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (141)
@@ -7154,7 +7154,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (143)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (143)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (143)
@@ -7201,7 +7201,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (145)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (145)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (145)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (145)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (145)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (145)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (145)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (145)
@@ -7249,7 +7249,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (147)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (147)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (147)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (147)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (147)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (147)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (147)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (147)
@@ -7298,7 +7298,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (157)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (157)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (157)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (157)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (157)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (157)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (157)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (157)
@@ -7354,7 +7354,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (158)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (158)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (158)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (158)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (158)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (158)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (158)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (158)
@@ -7410,7 +7410,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (160)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (160)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (160)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (160)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (160)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (160)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (160)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (160)
@@ -7468,7 +7468,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (161)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (161)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (161)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (161)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (161)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (161)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (161)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (161)
@@ -7526,7 +7526,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (162)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (162)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (162)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (162)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (162)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (162)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (162)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (162)
@@ -7584,7 +7584,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (163)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (163)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (163)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (163)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (163)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (163)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (163)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (163)
@@ -7642,7 +7642,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (165)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (165)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (165)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (165)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (165)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (165)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (165)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (165)
@@ -7704,7 +7704,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (166)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (166)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (166)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (166)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (166)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (166)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (166)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (166)
@@ -7766,7 +7766,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (167)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (167)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (167)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (167)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (167)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (167)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (167)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (167)
@@ -7828,7 +7828,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (168)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (168)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (168)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (168)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (168)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (168)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (168)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (168)
@@ -7890,7 +7890,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (169)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (169)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (169)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (169)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (169)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (169)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (169)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (169)
@@ -7952,7 +7952,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (170)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (170)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (170)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (170)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (170)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (170)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (170)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (170)
@@ -8018,7 +8018,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (47)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (47)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (47)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (47)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (47)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (47)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (47)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (47)
@@ -8215,7 +8215,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (14)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (14)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (14)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (14)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (14)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (14)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (14)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (14)
@@ -8323,7 +8323,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (17)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (17)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (17)
@@ -8349,7 +8349,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (173)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (173)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (173)
@@ -8421,7 +8421,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (175)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (175)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (175)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (175)
@@ -8641,7 +8641,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (49)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (49)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (49)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (49)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (49)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (49)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (49)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (49)
@@ -8850,7 +8850,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (5)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (5)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (5)
@@ -8945,7 +8945,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_struct, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (129)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (129)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (129)
@@ -8979,7 +8979,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (12)
-, C_Lexique_plm_5F_lexique::kToken_typealias, REDUCE (12)
+, C_Lexique_plm_5F_lexique::kToken_newtype, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_extension, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (12)
@@ -13293,512 +13293,6 @@ GALGAS_procEffectiveParameterPassingModeAST GALGAS_procEffectiveParameterPassing
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectInMemoryIR_register::cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                  const GALGAS_lstring & inAssociatedValue1,
-                                                                                                  const GALGAS_bigint & inAssociatedValue2
-                                                                                                  COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectInMemoryIR_register::description (C_String & ioString,
-                                                                   const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_register::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectInMemoryIR_register * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_register *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_objectInMemoryIR_globalVariable::cEnumAssociatedValues_objectInMemoryIR_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                              const GALGAS_string & inAssociatedValue1,
-                                                                                                              const GALGAS_bool & inAssociatedValue2
-                                                                                                              COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectInMemoryIR_globalVariable::description (C_String & ioString,
-                                                                         const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalVariable::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectInMemoryIR_globalVariable * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_globalVariable *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_objectInMemoryIR_localValue::cEnumAssociatedValues_objectInMemoryIR_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                      const GALGAS_string & inAssociatedValue1
-                                                                                                      COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectInMemoryIR_localValue::description (C_String & ioString,
-                                                                     const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_localValue::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectInMemoryIR_localValue * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_localValue *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_objectInMemoryIR_globalConstant::cEnumAssociatedValues_objectInMemoryIR_globalConstant (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                              const GALGAS_string & inAssociatedValue1
-                                                                                                              COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectInMemoryIR_globalConstant::description (C_String & ioString,
-                                                                         const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalConstant::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectInMemoryIR_globalConstant * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_globalConstant *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_objectInMemoryIR_fieldAccess::cEnumAssociatedValues_objectInMemoryIR_fieldAccess (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                        const GALGAS_string & inAssociatedValue1,
-                                                                                                        const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
-                                                                                                        const GALGAS_uint & inAssociatedValue3
-                                                                                                        COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectInMemoryIR_fieldAccess::description (C_String & ioString,
-                                                                      const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_fieldAccess::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectInMemoryIR_fieldAccess * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_fieldAccess *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR::GALGAS_objectInMemoryIR (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                       const GALGAS_lstring & inAssociatedValue1,
-                                                                       const GALGAS_bigint & inAssociatedValue2
-                                                                       COMMA_LOCATION_ARGS) {
-  GALGAS_objectInMemoryIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_register ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_register (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                             const GALGAS_string & inAssociatedValue1,
-                                                                             const GALGAS_bool & inAssociatedValue2
-                                                                             COMMA_LOCATION_ARGS) {
-  GALGAS_objectInMemoryIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_globalVariable ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_globalVariable (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                         const GALGAS_string & inAssociatedValue1
-                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_objectInMemoryIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_localValue ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_localValue (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalConstant (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                             const GALGAS_string & inAssociatedValue1
-                                                                             COMMA_LOCATION_ARGS) {
-  GALGAS_objectInMemoryIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_globalConstant ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_globalConstant (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_fieldAccess (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                          const GALGAS_string & inAssociatedValue1,
-                                                                          const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
-                                                                          const GALGAS_uint & inAssociatedValue3
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_objectInMemoryIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
-    result.mEnum = kEnum_fieldAccess ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_fieldAccess (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_objectInMemoryIR::method_register (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                               GALGAS_lstring & outAssociatedValue1,
-                                               GALGAS_bigint & outAssociatedValue2,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_register) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    C_String s ;
-    s << "method @objectInMemoryIR register invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectInMemoryIR_register * ptr = (const cEnumAssociatedValues_objectInMemoryIR_register *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_objectInMemoryIR::method_globalVariable (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                     GALGAS_string & outAssociatedValue1,
-                                                     GALGAS_bool & outAssociatedValue2,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_globalVariable) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    C_String s ;
-    s << "method @objectInMemoryIR globalVariable invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectInMemoryIR_globalVariable * ptr = (const cEnumAssociatedValues_objectInMemoryIR_globalVariable *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_objectInMemoryIR::method_localValue (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                 GALGAS_string & outAssociatedValue1,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_localValue) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @objectInMemoryIR localValue invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectInMemoryIR_localValue * ptr = (const cEnumAssociatedValues_objectInMemoryIR_localValue *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_objectInMemoryIR::method_globalConstant (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                     GALGAS_string & outAssociatedValue1,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_globalConstant) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @objectInMemoryIR globalConstant invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectInMemoryIR_globalConstant * ptr = (const cEnumAssociatedValues_objectInMemoryIR_globalConstant *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_objectInMemoryIR::method_fieldAccess (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                  GALGAS_string & outAssociatedValue1,
-                                                  GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue2,
-                                                  GALGAS_uint & outAssociatedValue3,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_fieldAccess) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
-    C_String s ;
-    s << "method @objectInMemoryIR fieldAccess invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectInMemoryIR_fieldAccess * ptr = (const cEnumAssociatedValues_objectInMemoryIR_fieldAccess *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_objectInMemoryIR [6] = {
-  "(not built)",
-  "register",
-  "globalVariable",
-  "localValue",
-  "globalConstant",
-  "fieldAccess"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectInMemoryIR::getter_isRegister (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_register == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectInMemoryIR::getter_isGlobalVariable (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalVariable == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectInMemoryIR::getter_isLocalValue (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_localValue == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectInMemoryIR::getter_isGlobalConstant (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalConstant == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectInMemoryIR::getter_isFieldAccess (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_fieldAccess == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_objectInMemoryIR::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "<enum @objectInMemoryIR: " << gEnumNameArrayFor_objectInMemoryIR [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_objectInMemoryIR::objectCompare (const GALGAS_objectInMemoryIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @objectInMemoryIR type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_objectInMemoryIR ("objectInMemoryIR",
-                                         NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_objectInMemoryIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_objectInMemoryIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_objectInMemoryIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_objectInMemoryIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_objectInMemoryIR result ;
-  const GALGAS_objectInMemoryIR * p = (const GALGAS_objectInMemoryIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_objectInMemoryIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("objectInMemoryIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 cEnumAssociatedValues_valueIR_literalInteger::cEnumAssociatedValues_valueIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
                                                                                             COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -14157,16 +13651,516 @@ GALGAS_valueIR GALGAS_valueIR::extractObject (const GALGAS_object & inObject,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_objectInMemoryIR_register::cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                                                  const GALGAS_lstring & inAssociatedValue1,
+                                                                                                  const GALGAS_bigint & inAssociatedValue2
+                                                                                                  COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_objectInMemoryIR_register::description (C_String & ioString,
+                                                                   const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_register::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectInMemoryIR_register * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_register *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_objectInMemoryIR_globalVariable::cEnumAssociatedValues_objectInMemoryIR_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                                                              const GALGAS_string & inAssociatedValue1,
+                                                                                                              const GALGAS_bool & inAssociatedValue2
+                                                                                                              COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_objectInMemoryIR_globalVariable::description (C_String & ioString,
+                                                                         const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalVariable::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectInMemoryIR_globalVariable * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_globalVariable *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_objectInMemoryIR_localValue::cEnumAssociatedValues_objectInMemoryIR_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                                                      const GALGAS_string & inAssociatedValue1
+                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_objectInMemoryIR_localValue::description (C_String & ioString,
+                                                                     const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_localValue::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectInMemoryIR_localValue * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_localValue *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_objectInMemoryIR_globalConstant::cEnumAssociatedValues_objectInMemoryIR_globalConstant (const GALGAS_operandIR & inAssociatedValue0,
+                                                                                                              const GALGAS_string & inAssociatedValue1
+                                                                                                              COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_objectInMemoryIR_globalConstant::description (C_String & ioString,
+                                                                         const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalConstant::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectInMemoryIR_globalConstant * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_globalConstant *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_objectInMemoryIR_fieldAccess::cEnumAssociatedValues_objectInMemoryIR_fieldAccess (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                                                        const GALGAS_string & inAssociatedValue1,
+                                                                                                        const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
+                                                                                                        const GALGAS_uint & inAssociatedValue3
+                                                                                                        COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1),
+mAssociatedValue2 (inAssociatedValue2),
+mAssociatedValue3 (inAssociatedValue3) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_objectInMemoryIR_fieldAccess::description (C_String & ioString,
+                                                                      const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  mAssociatedValue2.description (ioString, inIndentation) ;
+  mAssociatedValue3.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_fieldAccess::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_objectInMemoryIR_fieldAccess * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_fieldAccess *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR::GALGAS_objectInMemoryIR (void) :
+mAssociatedValues (),
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                       const GALGAS_lstring & inAssociatedValue1,
+                                                                       const GALGAS_bigint & inAssociatedValue2
+                                                                       COMMA_LOCATION_ARGS) {
+  GALGAS_objectInMemoryIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
+    result.mEnum = kEnum_register ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_register (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                             const GALGAS_string & inAssociatedValue1,
+                                                                             const GALGAS_bool & inAssociatedValue2
+                                                                             COMMA_LOCATION_ARGS) {
+  GALGAS_objectInMemoryIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
+    result.mEnum = kEnum_globalVariable ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_globalVariable (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                         const GALGAS_string & inAssociatedValue1
+                                                                         COMMA_LOCATION_ARGS) {
+  GALGAS_objectInMemoryIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_localValue ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_localValue (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalConstant (const GALGAS_operandIR & inAssociatedValue0,
+                                                                             const GALGAS_string & inAssociatedValue1
+                                                                             COMMA_LOCATION_ARGS) {
+  GALGAS_objectInMemoryIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_globalConstant ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_globalConstant (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_fieldAccess (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                          const GALGAS_string & inAssociatedValue1,
+                                                                          const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
+                                                                          const GALGAS_uint & inAssociatedValue3
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_objectInMemoryIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
+    result.mEnum = kEnum_fieldAccess ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_fieldAccess (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_objectInMemoryIR::method_register (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
+                                               GALGAS_lstring & outAssociatedValue1,
+                                               GALGAS_bigint & outAssociatedValue2,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_register) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
+    C_String s ;
+    s << "method @objectInMemoryIR register invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_objectInMemoryIR_register * ptr = (const cEnumAssociatedValues_objectInMemoryIR_register *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_objectInMemoryIR::method_globalVariable (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
+                                                     GALGAS_string & outAssociatedValue1,
+                                                     GALGAS_bool & outAssociatedValue2,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_globalVariable) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
+    C_String s ;
+    s << "method @objectInMemoryIR globalVariable invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_objectInMemoryIR_globalVariable * ptr = (const cEnumAssociatedValues_objectInMemoryIR_globalVariable *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_objectInMemoryIR::method_localValue (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
+                                                 GALGAS_string & outAssociatedValue1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_localValue) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @objectInMemoryIR localValue invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_objectInMemoryIR_localValue * ptr = (const cEnumAssociatedValues_objectInMemoryIR_localValue *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_objectInMemoryIR::method_globalConstant (GALGAS_operandIR & outAssociatedValue0,
+                                                     GALGAS_string & outAssociatedValue1,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_globalConstant) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @objectInMemoryIR globalConstant invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_objectInMemoryIR_globalConstant * ptr = (const cEnumAssociatedValues_objectInMemoryIR_globalConstant *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_objectInMemoryIR::method_fieldAccess (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
+                                                  GALGAS_string & outAssociatedValue1,
+                                                  GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue2,
+                                                  GALGAS_uint & outAssociatedValue3,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_fieldAccess) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    outAssociatedValue2.drop () ;
+    outAssociatedValue3.drop () ;
+    C_String s ;
+    s << "method @objectInMemoryIR fieldAccess invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_objectInMemoryIR_fieldAccess * ptr = (const cEnumAssociatedValues_objectInMemoryIR_fieldAccess *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
+    outAssociatedValue3 = ptr->mAssociatedValue3 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_objectInMemoryIR [6] = {
+  "(not built)",
+  "register",
+  "globalVariable",
+  "localValue",
+  "globalConstant",
+  "fieldAccess"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_objectInMemoryIR::getter_isRegister (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_register == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_objectInMemoryIR::getter_isGlobalVariable (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalVariable == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_objectInMemoryIR::getter_isLocalValue (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_localValue == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_objectInMemoryIR::getter_isGlobalConstant (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalConstant == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_objectInMemoryIR::getter_isFieldAccess (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_fieldAccess == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_objectInMemoryIR::description (C_String & ioString,
+                                           const int32_t inIndentation) const {
+  ioString << "<enum @objectInMemoryIR: " << gEnumNameArrayFor_objectInMemoryIR [mEnum] ;
+  mAssociatedValues.description (ioString, inIndentation) ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_objectInMemoryIR::objectCompare (const GALGAS_objectInMemoryIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @objectInMemoryIR type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_objectInMemoryIR ("objectInMemoryIR",
+                                         NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_objectInMemoryIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_objectInMemoryIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_objectInMemoryIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_objectInMemoryIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_objectInMemoryIR result ;
+  const GALGAS_objectInMemoryIR * p = (const GALGAS_objectInMemoryIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_objectInMemoryIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("objectInMemoryIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               Bool options                                                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
-
-C_BoolCommandLineOption gOption_plm_5F_options_compileOnly ("plm_options",
-                                         "compileOnly",
-                                         99,
-                                         "no-c-compilation",
-                                         "Do not compile generated LLVM code") ;
 
 C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ("plm_options",
                                          "doNotDetectRecursiveCalls",
@@ -14233,6 +14227,12 @@ C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ("plm_options",
                                          102,
                                          "flash-target",
                                          "After successful compilation, flash target") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_writeGlobalConstantDependencyGraphFile ("plm_options",
+                                         "writeGlobalConstantDependencyGraphFile",
+                                         99,
+                                         "global-constant-dependency-graph",
+                                         "Write global constant dependency graph file") ;
 
 C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ("plm_options",
                                          "writeRoutineInvocationGraphFile",
@@ -14540,6 +14540,152 @@ void routine_enterAliasInfixOperator (GALGAS_infixOperatorMap & ioArgument_ioInf
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                    Routine 'buildOrderedConstantDeclarationList'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildOrderedConstantDeclarationList (const GALGAS_globalConstantDeclarationListAST constinArgument_inUnorderedConstantDeclarationList,
+                                                  const GALGAS_string constinArgument_inSourceFile,
+                                                  const GALGAS_location constinArgument_inEndOfSourceFile,
+                                                  GALGAS_globalConstantDeclarationListAST & outArgument_outOrderedConstantDeclarationList,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outOrderedConstantDeclarationList.drop () ; // Release 'out' argument
+  GALGAS_constantPrecedenceGraph var_constantPrecedenceGraph = GALGAS_constantPrecedenceGraph::constructor_emptyGraph (SOURCE_FILE ("global-constant-declaration.galgas", 62)) ;
+  cEnumerator_globalConstantDeclarationListAST enumerator_2828 (constinArgument_inUnorderedConstantDeclarationList, kEnumeration_up) ;
+  while (enumerator_2828.hasCurrentObject ()) {
+    {
+    var_constantPrecedenceGraph.setter_addNode (enumerator_2828.current_mConstantName (HERE), enumerator_2828.current_mConstantName (HERE), enumerator_2828.current_mTypeName (HERE), enumerator_2828.current_mSourceExpression (HERE), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 65)) ;
+    }
+    callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) enumerator_2828.current_mSourceExpression (HERE).ptr (), enumerator_2828.current_mConstantName (HERE), var_constantPrecedenceGraph, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 66)) ;
+    enumerator_2828.gotoNextObject () ;
+  }
+  GALGAS_bool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("global-constant-declaration.galgas", 69)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  if (kBoolTrue == test_0.boolEnum ()) {
+    test_0 = GALGAS_bool (gOption_plm_5F_options_writeGlobalConstantDependencyGraphFile.getter_value ()) ;
+  }
+  const enumGalgasBool test_1 = test_0.boolEnum () ;
+  if (kBoolTrue == test_1) {
+    GALGAS_string var_s = var_constantPrecedenceGraph.getter_graphviz (SOURCE_FILE ("global-constant-declaration.galgas", 70)) ;
+    GALGAS_string var_filePath = constinArgument_inSourceFile.add_operation (GALGAS_string (".globalConstantDependency.dot"), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 71)) ;
+    GALGAS_bool joker_3337 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_3337, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 72)) ;
+  }
+  outArgument_outOrderedConstantDeclarationList = GALGAS_globalConstantDeclarationListAST::constructor_emptyList (SOURCE_FILE ("global-constant-declaration.galgas", 75)) ;
+  const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, var_constantPrecedenceGraph.getter_undefinedNodeCount (SOURCE_FILE ("global-constant-declaration.galgas", 76)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    cEnumerator_lstringlist enumerator_3556 (var_constantPrecedenceGraph.getter_undefinedNodeReferenceList (SOURCE_FILE ("global-constant-declaration.galgas", 77)), kEnumeration_up) ;
+    while (enumerator_3556.hasCurrentObject ()) {
+      GALGAS_location location_3 (enumerator_3556.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+      inCompiler->emitSemanticError (location_3, GALGAS_string ("the '").add_operation (enumerator_3556.current_mValue (HERE).getter_string (SOURCE_FILE ("global-constant-declaration.galgas", 78)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 78)).add_operation (GALGAS_string ("' constant is not defined"), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 78))  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 78)) ;
+      enumerator_3556.gotoNextObject () ;
+    }
+  }else if (kBoolFalse == test_2) {
+    GALGAS_globalConstantDeclarationListAST var_unsortedSemanticDeclarationListAST ;
+    GALGAS_lstringlist joker_3736 ; // Joker input parameter
+    GALGAS_lstringlist joker_3825 ; // Joker input parameter
+    var_constantPrecedenceGraph.method_topologicalSort (outArgument_outOrderedConstantDeclarationList, joker_3736, var_unsortedSemanticDeclarationListAST, joker_3825, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 81)) ;
+    const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("global-constant-declaration.galgas", 87)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      GALGAS_string var_s = GALGAS_string ("semantic analysis not performed, ").add_operation (var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("global-constant-declaration.galgas", 89)).getter_string (SOURCE_FILE ("global-constant-declaration.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 88)).add_operation (GALGAS_string (" constants are involved in circular definition:"), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 89)) ;
+      cEnumerator_globalConstantDeclarationListAST enumerator_4116 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
+      while (enumerator_4116.hasCurrentObject ()) {
+        var_s.plusAssign_operation(GALGAS_string ("\n"
+          "-  ").add_operation (enumerator_4116.current_mConstantName (HERE).getter_string (SOURCE_FILE ("global-constant-declaration.galgas", 92)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 92)), inCompiler  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 92)) ;
+        enumerator_4116.gotoNextObject () ;
+      }
+      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 94)) ;
+      cEnumerator_globalConstantDeclarationListAST enumerator_4252 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
+      while (enumerator_4252.hasCurrentObject ()) {
+        GALGAS_location location_5 (enumerator_4252.current_mConstantName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_5, GALGAS_string ("the ").add_operation (enumerator_4252.current_mConstantName (HERE).getter_string (SOURCE_FILE ("global-constant-declaration.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 96)).add_operation (GALGAS_string (" constant is declared here"), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 96))  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 96)) ;
+        enumerator_4252.gotoNextObject () ;
+      }
+    }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Routine 'enterGlobalConstantsInContext'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterGlobalConstantsInContext (const GALGAS_globalConstantDeclarationListAST constinArgument_inOrderedConstantDeclarationList,
+                                            GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                            GALGAS_semanticContext & ioArgument_ioContext,
+                                            C_Compiler * inCompiler
+                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_variableMap var_variableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("global-constant-declaration.galgas", 112)) ;
+  cEnumerator_globalConstantDeclarationListAST enumerator_5146 (constinArgument_inOrderedConstantDeclarationList, kEnumeration_up) ;
+  while (enumerator_5146.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_constantType ;
+    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_5146.current_mTypeName (HERE).mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      var_constantType = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("global-constant-declaration.galgas", 117)) ;
+    }else if (kBoolFalse == test_0) {
+      {
+      GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_5146.current_mTypeName (HERE), var_constantType COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 119)) ;
+      }
+    }
+    GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("global-constant-declaration.galgas", 122)) ;
+    GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("global-constant-declaration.galgas", 123)) ;
+    GALGAS_operandIR var_expressionResult ;
+    callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) enumerator_5146.current_mSourceExpression (HERE).ptr (), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("global-constant-declaration.galgas", 125)), var_constantType, ioArgument_ioContext, GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("global-constant-declaration.galgas", 128)), GALGAS_bool (true), var_temporaries, ioArgument_ioGlobalLiteralStringMap, var_variableMap, var_instructionGenerationList, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 124)) ;
+    {
+    routine_checkAssignmentCompatibility (var_expressionResult, var_constantType, enumerator_5146.current_mConstantName (HERE).mAttribute_location, inCompiler  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 137)) ;
+    }
+    GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList.getter_length (SOURCE_FILE ("global-constant-declaration.galgas", 143)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+    if (kBoolTrue != test_1.boolEnum ()) {
+      test_1 = extensionGetter_isStatic (var_expressionResult.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 143)).operator_not (SOURCE_FILE ("global-constant-declaration.galgas", 143)) ;
+    }
+    const enumGalgasBool test_2 = test_1.boolEnum () ;
+    if (kBoolTrue == test_2) {
+      GALGAS_location location_3 (enumerator_5146.current_mConstantName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+      inCompiler->emitSemanticError (location_3, GALGAS_string ("source expression cannot be statically computed")  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 144)) ;
+    }
+    {
+    GALGAS_unifiedTypeMap_2D_proxy temp_4 ;
+    const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, var_constantType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("global-constant-declaration.galgas", 149)))).boolEnum () ;
+    if (kBoolTrue == test_5) {
+      temp_4 = var_expressionResult.mAttribute_mType ;
+    }else if (kBoolFalse == test_5) {
+      temp_4 = var_constantType ;
+    }
+    ioArgument_ioContext.mAttribute_mGlobalConstantMap.setter_insertKey (enumerator_5146.current_mConstantName (HERE), GALGAS_operandIR::constructor_new (temp_4, var_expressionResult.mAttribute_mValue  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 147)) ;
+    }
+    {
+    var_variableMap.setter_insertUsedLocalConstant (enumerator_5146.current_mConstantName (HERE), var_constantType, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_globalConstant (var_expressionResult, enumerator_5146.current_mConstantName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 156)), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("global-constant-declaration.galgas", 158)), GALGAS_bool (false), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 152)) ;
+    }
+    enumerator_5146.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'generateGlobalConstantLLVMCode'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_generateGlobalConstantLLVMCode (const GALGAS_semanticContext constinArgument_inContext,
+                                             GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
+                                             GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
+                                             C_Compiler * inCompiler
+                                             COMMA_UNUSED_LOCATION_ARGS) {
+  cEnumerator_globalConstantMap enumerator_7557 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  while (enumerator_7557.hasCurrentObject ()) {
+    {
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap.setter_insertKey (enumerator_7557.current_lkey (HERE), enumerator_7557.current_mValue (HERE).mAttribute_mType, enumerator_7557.current_mValue (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 175)) ;
+    }
+    enumerator_7557.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      Routine 'enter_integer_integer_operators'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14731,7 +14877,7 @@ void routine_enter_5F_integer_5F_literal_5F_operators (const GALGAS_lstring cons
   {
   GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, constinArgument_inIntegerTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("type-integer.galgas", 345)) ;
   }
-  GALGAS_lstring var_intLiteralOp = function_combineTypeNamesForInfixOperator (constinArgument_inIntegerTypeName.mAttribute_string, function_literalIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 347)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 347)) ;
+  GALGAS_lstring var_intLiteralOp = function_combineTypeNamesForInfixOperator (constinArgument_inIntegerTypeName.mAttribute_string, function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 347)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 347)) ;
   {
   ioArgument_ioContext.mAttribute_mEqualOperatorMap.setter_insertKey (var_intLiteralOp, ioArgument_ioContext.mAttribute_mBooleanType, GALGAS_integerObject_5F_literal_5F_infixOperator::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-integer.galgas", 351))  COMMA_SOURCE_FILE ("type-integer.galgas", 351)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 348)) ;
   }
@@ -14900,7 +15046,7 @@ void routine_enter_5F_literal_5F_integer_5F_operators (const GALGAS_lstring cons
   {
   GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, constinArgument_inIntegerTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("type-integer.galgas", 548)) ;
   }
-  GALGAS_lstring var_intLiteralOp = function_combineTypeNamesForInfixOperator (function_literalIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 550)), constinArgument_inIntegerTypeName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 550)) ;
+  GALGAS_lstring var_intLiteralOp = function_combineTypeNamesForInfixOperator (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 550)), constinArgument_inIntegerTypeName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 550)) ;
   {
   ioArgument_ioContext.mAttribute_mEqualOperatorMap.setter_insertKey (var_intLiteralOp, ioArgument_ioContext.mAttribute_mBooleanType, GALGAS_literal_5F_integerObject_5F_infixOperator::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-integer.galgas", 554))  COMMA_SOURCE_FILE ("type-integer.galgas", 554)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 551)) ;
   }
@@ -15335,227 +15481,4 @@ void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
   }
 }
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'getInfixOperatorMap'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator & constinArgument_inOp,
-                                                      const GALGAS_semanticContext & constinArgument_inContext,
-                                                      const GALGAS_stringset & constinArgument_inModeSet,
-                                                      const GALGAS_location & constinArgument_inOperatorLocation,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_infixOperatorMap result_outOperatorMap ; // Returned variable
-  switch (constinArgument_inOp.enumValue ()) {
-  case GALGAS_infixOperator::kNotBuilt:
-    break ;
-  case GALGAS_infixOperator::kEnum_equal:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mEqualOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_nonEqual:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mNonEqualOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_strictInf:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mStrictInfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_infEqual:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mInfEqualOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_strictSup:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mStrictSupOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_supEqual:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mSupEqualOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_andOp:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mAndOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_orOp:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mOrOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_xorOp:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mXorOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_booleanXorOp:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mBooleanXorOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_addOp:
-    {
-      const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 184)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 184)).boolEnum () ;
-      if (kBoolTrue == test_0) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 185)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 185)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 185))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 185)) ;
-      }
-      const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mAddNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_1) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mAddOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_addOpNoOvf:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mAddNoOvfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_subOp:
-    {
-      const enumGalgasBool test_2 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 195)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 195)).boolEnum () ;
-      if (kBoolTrue == test_2) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 196)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 196)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 196))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 196)) ;
-      }
-      const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
-      if (kBoolTrue == test_3) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mSubNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_3) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mSubOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_subOpNoOvf:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mSubOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_mulOp:
-    {
-      const enumGalgasBool test_4 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 206)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 206)).boolEnum () ;
-      if (kBoolTrue == test_4) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207)) ;
-      }
-      const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
-      if (kBoolTrue == test_5) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mMulNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_5) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mMulOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_mulOpNoOvf:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mMulNoOvfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_divOp:
-    {
-      const enumGalgasBool test_6 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 217)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 217)).boolEnum () ;
-      if (kBoolTrue == test_6) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 218)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 218)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 218))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 218)) ;
-      }
-      const enumGalgasBool test_7 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
-      if (kBoolTrue == test_7) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mDivNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_7) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mDivOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_divOpNoOvf:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mDivNoOvfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_modOp:
-    {
-      const enumGalgasBool test_8 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 228)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 228)).boolEnum () ;
-      if (kBoolTrue == test_8) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229)) ;
-      }
-      const enumGalgasBool test_9 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
-      if (kBoolTrue == test_9) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mModNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_9) {
-        result_outOperatorMap = constinArgument_inContext.mAttribute_mModOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_modOpNoOvf:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mModNoOvfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_leftShiftOp:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mLeftShiftOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_rightShiftOp:
-    {
-      result_outOperatorMap = constinArgument_inContext.mAttribute_mRightShiftOperatorMap ;
-    }
-    break ;
-  }
-//---
-  return result_outOperatorMap ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_getInfixOperatorMap [5] = {
-  & kTypeDescriptor_GALGAS_infixOperator,
-  & kTypeDescriptor_GALGAS_semanticContext,
-  & kTypeDescriptor_GALGAS_stringset,
-  & kTypeDescriptor_GALGAS_location,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_getInfixOperatorMap (C_Compiler * inCompiler,
-                                                                    const cObjectArray & inEffectiveParameterArray,
-                                                                    const GALGAS_location & /* §§ inErrorLocation */
-                                                                    COMMA_LOCATION_ARGS) {
-  const GALGAS_infixOperator operand0 = GALGAS_infixOperator::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                                             inCompiler
-                                                                             COMMA_THERE) ;
-  const GALGAS_semanticContext operand1 = GALGAS_semanticContext::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
-                                                                                 inCompiler
-                                                                                 COMMA_THERE) ;
-  const GALGAS_stringset operand2 = GALGAS_stringset::extractObject (inEffectiveParameterArray.objectAtIndex (2 COMMA_HERE),
-                                                                     inCompiler
-                                                                     COMMA_THERE) ;
-  const GALGAS_location operand3 = GALGAS_location::extractObject (inEffectiveParameterArray.objectAtIndex (3 COMMA_HERE),
-                                                                   inCompiler
-                                                                   COMMA_THERE) ;
-  return function_getInfixOperatorMap (operand0,
-                                       operand1,
-                                       operand2,
-                                       operand3,
-                                       inCompiler
-                                       COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_getInfixOperatorMap ("getInfixOperatorMap",
-                                                                     functionWithGenericHeader_getInfixOperatorMap,
-                                                                     & kTypeDescriptor_GALGAS_infixOperatorMap,
-                                                                     4,
-                                                                     functionArgs_getInfixOperatorMap) ;
 

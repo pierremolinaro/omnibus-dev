@@ -29,15 +29,15 @@ override method @literalIntegerDeclaration addExtension
 override method @literalIntegerDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let literalIntegerTypeName = [literalIntegerTypeName () nowhere]
-  [!?ioGraph addNode !literalIntegerTypeName !self]
-  [!?ioGraph addEdge !literalIntegerTypeName ![boolTypeName () nowhere]]
+  let staticIntegerTypeName = [staticIntegerTypeName () nowhere]
+  [!?ioGraph addNode !staticIntegerTypeName !self]
+  [!?ioGraph addEdge !staticIntegerTypeName ![boolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @literalIntegerDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = literalIntegerTypeName () 
+  outRepresentation = staticIntegerTypeName () 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -49,7 +49,7 @@ override method @literalIntegerDeclaration enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  let integerTypeName = [literalIntegerTypeName () nowhere]
+  let integerTypeName = [staticIntegerTypeName () nowhere]
  #---
   [!?ioContext.mTypeMap insertKey
     !lkey:integerTypeName

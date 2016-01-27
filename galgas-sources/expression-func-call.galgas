@@ -59,9 +59,12 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionCallInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
+  ?let @lstring inConstantName
+  ?!@constantPrecedenceGraph ioGraph
 {
+  for () in mParameterList do
+    [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

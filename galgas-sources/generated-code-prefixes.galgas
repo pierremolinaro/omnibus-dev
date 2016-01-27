@@ -68,8 +68,8 @@ func %once boolTypeName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once literalIntegerTypeName -> @string outName {
-  outName = "literalInteger"
+func %once staticIntegerTypeName -> @string outName {
+  outName = "staticInt"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

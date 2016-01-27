@@ -42,7 +42,7 @@ proc buildOrderedDeclarationList
   outDeclarationListAST = {}
   if [precedenceGraph undefinedNodeCount] > 0 then
     for () in  [precedenceGraph undefinedNodeReferenceList] do
-      error mValue : "the '" + mValue + "' type is not defined"
+      error mValue : "the $" + mValue + " type is not defined"
     end
   else
     [precedenceGraph topologicalSort

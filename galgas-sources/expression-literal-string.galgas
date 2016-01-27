@@ -24,10 +24,10 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  ?let @lstring unused inConstantName
+  ?!@constantPrecedenceGraph unused ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !.new {!staticStringTypeName () !inConstantName.location}]
+#  [!?ioGraph addEdge !inConstantName !.new {!staticStringTypeName () !inConstantName.location}]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

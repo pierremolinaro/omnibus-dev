@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                 *
+#  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @integerDeclaration : @abstractDeclaration {
@@ -20,7 +20,7 @@ getter @integerDeclaration typeName -> @string outName {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                              *
+#  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension plm_target_specific_syntax {
@@ -77,7 +77,7 @@ override method @integerDeclaration addExtension
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                    *
+#  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclaration enterInPrecedenceGraph
@@ -86,7 +86,7 @@ override method @integerDeclaration enterInPrecedenceGraph
   let integerTypeName = [[self typeName] nowhere]
   [!?ioGraph addNode !integerTypeName !self]
   [!?ioGraph addEdge !integerTypeName ![boolTypeName () nowhere]]
-  [!?ioGraph addEdge !integerTypeName ![literalIntegerTypeName () nowhere]]
+  [!?ioGraph addEdge !integerTypeName ![staticIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -344,7 +344,7 @@ private proc enter_integer_literal_operators
 #--- Infix operators
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
 #--- Comparison infix operator
-  let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !literalIntegerTypeName ())
+  let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !staticIntegerTypeName ())
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
     !ioContext.mBooleanType
@@ -547,7 +547,7 @@ private proc enter_literal_integer_operators
 #--- Infix operators
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
 #--- Comparison infix operator
-  let intLiteralOp = combineTypeNamesForInfixOperator (!literalIntegerTypeName () !inIntegerTypeName.string)
+  let intLiteralOp = combineTypeNamesForInfixOperator (!staticIntegerTypeName () !inIntegerTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
     !ioContext.mBooleanType

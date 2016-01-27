@@ -68,7 +68,7 @@ enum @objectInMemoryIR {
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
   case localValue (@unifiedTypeMap-proxy type @string name)
-  case globalConstant (@unifiedTypeMap-proxy type  @string name)
+  case globalConstant (@operandIR value  @string name)
 
   case fieldAccess (@unifiedTypeMap-proxy objectType @string objectName @unifiedTypeMap-proxy fielfType @uint fieldIndex)
 }
@@ -123,8 +123,8 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
     outType = type
   case localValue (@unifiedTypeMap-proxy type *) :
     outType = type
-  case globalConstant (@unifiedTypeMap-proxy type *) :
-    outType = type
+  case globalConstant (@operandIR value *) :
+    outType = value.mType
   case fieldAccess (@unifiedTypeMap-proxy unused objectType
                     @string unused objectName
                     @unifiedTypeMap-proxy unused fielfType
