@@ -74,10 +74,6 @@ override method @pointerSizeDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @pointerSizeDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @pointerSizeDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries

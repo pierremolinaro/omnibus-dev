@@ -152,11 +152,6 @@ override method @integerDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclaration initAnalysis ?!context:@semanticContext unused ioContext {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @integerDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries

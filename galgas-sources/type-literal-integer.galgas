@@ -204,10 +204,6 @@ private proc enterLiteralIntegerOperators
 #  SEMANTIC ANALYSIS                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @literalIntegerDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries

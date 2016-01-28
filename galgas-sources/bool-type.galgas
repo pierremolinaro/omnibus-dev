@@ -139,10 +139,6 @@ private proc enterBooleanOperators
 #  SEMANTIC ANALYSIS                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @booleanDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
