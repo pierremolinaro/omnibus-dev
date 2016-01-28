@@ -58,7 +58,8 @@ syntax extension common_syntax {
 override method @boolsetDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mBoolsetName !self]
+  let boolsetTypeName = @lstring.new {!"$" + mBoolsetName !mBoolsetName.location}
+  [!?ioGraph addNode !boolsetTypeName !self]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

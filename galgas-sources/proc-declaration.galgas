@@ -163,7 +163,8 @@ method @procedureDeclarationListAST-element enterInPrecedenceGraph
 {
 #--- Enter only stand alone procedures
   for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
-    [!?ioGraph noteNode !formalArgumentTypeName]
+    let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+    [!?ioGraph noteNode !typeName]
   end
 }
 

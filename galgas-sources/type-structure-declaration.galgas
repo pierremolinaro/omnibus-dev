@@ -109,10 +109,12 @@ override method @structureDeclaration addExtension
 override method @structureDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mStructureName !self]
+  let structureTypeName = @lstring.new {!"$" + mStructureName !mStructureName.location}
+  [!?ioGraph addNode !structureTypeName !self]
   for (* fieldTypeName *) in mStructureFieldListAST do
     if fieldTypeName.string != "" then
-      [!?ioGraph addEdge !mStructureName !fieldTypeName]
+      let typeName = @lstring.new {!"$" + fieldTypeName !fieldTypeName.location}
+      [!?ioGraph addEdge !structureTypeName !typeName]
     end
   end
 }

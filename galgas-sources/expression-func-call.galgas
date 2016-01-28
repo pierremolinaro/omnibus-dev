@@ -60,7 +60,7 @@ syntax extension common_syntax {
 
 override method @functionCallInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
-  ?!@constantPrecedenceGraph ioGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
   for () in mParameterList do
     [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]

@@ -30,7 +30,7 @@ syntax extension common_syntax {
 
 override method @literalBooleanInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
-  ?!@constantPrecedenceGraph unused ioGraph
+  ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 }
 

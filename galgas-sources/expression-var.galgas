@@ -52,7 +52,7 @@ syntax extension common_syntax {
 
 override method @varInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
-  ?!@constantPrecedenceGraph ioGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addEdge !inConstantName !mSourceVarName]
 }

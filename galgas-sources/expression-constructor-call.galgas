@@ -34,7 +34,7 @@ syntax extension common_syntax {
 
 override method @constructorCall addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
-  ?!@constantPrecedenceGraph unused ioGraph
+  ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 #  if mOptionalTypeName.string != "" then
 #    [!?ioGraph addEdge !inConstantName !mOptionalTypeName]

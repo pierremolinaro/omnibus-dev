@@ -25,7 +25,7 @@ syntax extension common_syntax {
 
 override method @literalStringInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
-  ?!@constantPrecedenceGraph unused ioGraph
+  ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 #  [!?ioGraph addEdge !inConstantName !.new {!staticStringTypeName () !inConstantName.location}]
 }

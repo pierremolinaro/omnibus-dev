@@ -83,10 +83,10 @@ override method @integerDeclaration addExtension
 override method @integerDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let integerTypeName = [[self typeName] nowhere]
+  let integerTypeName = ["$" + [self typeName] nowhere]
   [!?ioGraph addNode !integerTypeName !self]
-  [!?ioGraph addEdge !integerTypeName ![boolTypeName () nowhere]]
-  [!?ioGraph addEdge !integerTypeName ![staticIntegerTypeName () nowhere]]
+  [!?ioGraph addEdge !integerTypeName !["$" + boolTypeName () nowhere]]
+  [!?ioGraph addEdge !integerTypeName !["$" + staticIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
