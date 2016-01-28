@@ -48,7 +48,7 @@ syntax extension common_syntax {
 
 override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
-  ?!@constantPrecedenceGraph unused ioGraph
+  ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 #  [!?ioGraph addEdge !inConstantName !mRegisterName]
 }
@@ -57,7 +57,7 @@ override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpre
 
 override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
-  ?!@constantPrecedenceGraph unused ioGraph
+  ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 #  [!?ioGraph addEdge !inConstantName !mRegisterName]
 }

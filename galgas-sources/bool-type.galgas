@@ -31,7 +31,8 @@ override method @booleanDeclaration addExtension
 override method @booleanDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mBooleanTypeName !self]
+  let boolTypeName = @lstring.new {!"$" + mBooleanTypeName !mBooleanTypeName.location}
+  [!?ioGraph addNode !boolTypeName !self]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -107,6 +107,16 @@ class GALGAS_string extensionGetter_name (const class GALGAS_valueIR & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                  Category getter '@valueIR isStatic' (as function)                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_isStatic (const class GALGAS_valueIR & inObject,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                         Category method '@binaryOperationIR enterCodeForOverflowOperation'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

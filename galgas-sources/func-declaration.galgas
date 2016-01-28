@@ -90,9 +90,11 @@ method @functionDeclarationListAST-element enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   for (* formalArgumentTypeName *) in mFuncFormalArgumentList do
-    [!?ioGraph noteNode !formalArgumentTypeName]
+    let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+    [!?ioGraph noteNode !typeName]
   end
-  [!?ioGraph noteNode !mResultTypeName]
+  let resultTypeName = @lstring.new {!"$" + mResultTypeName !mResultTypeName.location}
+  [!?ioGraph noteNode !resultTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

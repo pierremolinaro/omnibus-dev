@@ -12460,7 +12460,7 @@ C_PrologueEpilogue gMethod_expressionAST_addDependenceEdgeForStaticExpression (N
 
 void callCategoryMethod_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
                                                               const GALGAS_lstring constin_inConstantName,
-                                                              GALGAS_constantPrecedenceGraph & io_ioGraph,
+                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
@@ -15082,7 +15082,6 @@ GALGAS_ast::GALGAS_ast (void) :
 mAttribute_mGlobalVarDeclarationList (),
 mAttribute_mDeclarationList (),
 mAttribute_mExtensionDeclarationListAST (),
-mAttribute_mGlobalConstantDeclarationListAST (),
 mAttribute_mControlRegisterDeclarationListAST (),
 mAttribute_mProcedureListAST (),
 mAttribute_mRequiredProcList (),
@@ -15104,29 +15103,27 @@ GALGAS_ast::~ GALGAS_ast (void) {
 GALGAS_ast::GALGAS_ast (const GALGAS_globalVarDeclarationList & inOperand0,
                         const GALGAS_declarationListAST & inOperand1,
                         const GALGAS_extensionDeclarationListAST & inOperand2,
-                        const GALGAS_globalConstantDeclarationListAST & inOperand3,
-                        const GALGAS_controlRegisterDeclarationListAST & inOperand4,
-                        const GALGAS_procedureDeclarationListAST & inOperand5,
-                        const GALGAS_requiredProcedureDeclarationListAST & inOperand6,
-                        const GALGAS_functionDeclarationListAST & inOperand7,
-                        const GALGAS_lstringlist & inOperand8,
-                        const GALGAS_bootList & inOperand9,
-                        const GALGAS_initList & inOperand10,
-                        const GALGAS_exceptionClauseListAST & inOperand11,
-                        const GALGAS_exceptionTypesAST & inOperand12) :
+                        const GALGAS_controlRegisterDeclarationListAST & inOperand3,
+                        const GALGAS_procedureDeclarationListAST & inOperand4,
+                        const GALGAS_requiredProcedureDeclarationListAST & inOperand5,
+                        const GALGAS_functionDeclarationListAST & inOperand6,
+                        const GALGAS_lstringlist & inOperand7,
+                        const GALGAS_bootList & inOperand8,
+                        const GALGAS_initList & inOperand9,
+                        const GALGAS_exceptionClauseListAST & inOperand10,
+                        const GALGAS_exceptionTypesAST & inOperand11) :
 mAttribute_mGlobalVarDeclarationList (inOperand0),
 mAttribute_mDeclarationList (inOperand1),
 mAttribute_mExtensionDeclarationListAST (inOperand2),
-mAttribute_mGlobalConstantDeclarationListAST (inOperand3),
-mAttribute_mControlRegisterDeclarationListAST (inOperand4),
-mAttribute_mProcedureListAST (inOperand5),
-mAttribute_mRequiredProcList (inOperand6),
-mAttribute_mFunctionListAST (inOperand7),
-mAttribute_mTargetList (inOperand8),
-mAttribute_mBootList (inOperand9),
-mAttribute_mInitList (inOperand10),
-mAttribute_mExceptionClauses (inOperand11),
-mAttribute_mExceptionTypes (inOperand12) {
+mAttribute_mControlRegisterDeclarationListAST (inOperand3),
+mAttribute_mProcedureListAST (inOperand4),
+mAttribute_mRequiredProcList (inOperand5),
+mAttribute_mFunctionListAST (inOperand6),
+mAttribute_mTargetList (inOperand7),
+mAttribute_mBootList (inOperand8),
+mAttribute_mInitList (inOperand9),
+mAttribute_mExceptionClauses (inOperand10),
+mAttribute_mExceptionTypes (inOperand11) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15135,7 +15132,6 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_ast (GALGAS_globalVarDeclarationList::constructor_emptyList (HERE),
                      GALGAS_declarationListAST::constructor_emptyList (HERE),
                      GALGAS_extensionDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_globalConstantDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_controlRegisterDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_procedureDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_requiredProcedureDeclarationListAST::constructor_emptyList (HERE),
@@ -15152,20 +15148,19 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
 GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_globalVarDeclarationList & inOperand0,
                                         const GALGAS_declarationListAST & inOperand1,
                                         const GALGAS_extensionDeclarationListAST & inOperand2,
-                                        const GALGAS_globalConstantDeclarationListAST & inOperand3,
-                                        const GALGAS_controlRegisterDeclarationListAST & inOperand4,
-                                        const GALGAS_procedureDeclarationListAST & inOperand5,
-                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand6,
-                                        const GALGAS_functionDeclarationListAST & inOperand7,
-                                        const GALGAS_lstringlist & inOperand8,
-                                        const GALGAS_bootList & inOperand9,
-                                        const GALGAS_initList & inOperand10,
-                                        const GALGAS_exceptionClauseListAST & inOperand11,
-                                        const GALGAS_exceptionTypesAST & inOperand12 
+                                        const GALGAS_controlRegisterDeclarationListAST & inOperand3,
+                                        const GALGAS_procedureDeclarationListAST & inOperand4,
+                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand5,
+                                        const GALGAS_functionDeclarationListAST & inOperand6,
+                                        const GALGAS_lstringlist & inOperand7,
+                                        const GALGAS_bootList & inOperand8,
+                                        const GALGAS_initList & inOperand9,
+                                        const GALGAS_exceptionClauseListAST & inOperand10,
+                                        const GALGAS_exceptionTypesAST & inOperand11 
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
+    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
   }
   return result ;
 }
@@ -15182,9 +15177,6 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
   }
   if (result == kOperandEqual) {
     result = mAttribute_mExtensionDeclarationListAST.objectCompare (inOperand.mAttribute_mExtensionDeclarationListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantDeclarationListAST.objectCompare (inOperand.mAttribute_mGlobalConstantDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mControlRegisterDeclarationListAST.objectCompare (inOperand.mAttribute_mControlRegisterDeclarationListAST) ;
@@ -15219,7 +15211,7 @@ typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) co
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_ast::isValid (void) const {
-  return mAttribute_mGlobalVarDeclarationList.isValid () && mAttribute_mDeclarationList.isValid () && mAttribute_mExtensionDeclarationListAST.isValid () && mAttribute_mGlobalConstantDeclarationListAST.isValid () && mAttribute_mControlRegisterDeclarationListAST.isValid () && mAttribute_mProcedureListAST.isValid () && mAttribute_mRequiredProcList.isValid () && mAttribute_mFunctionListAST.isValid () && mAttribute_mTargetList.isValid () && mAttribute_mBootList.isValid () && mAttribute_mInitList.isValid () && mAttribute_mExceptionClauses.isValid () && mAttribute_mExceptionTypes.isValid () ;
+  return mAttribute_mGlobalVarDeclarationList.isValid () && mAttribute_mDeclarationList.isValid () && mAttribute_mExtensionDeclarationListAST.isValid () && mAttribute_mControlRegisterDeclarationListAST.isValid () && mAttribute_mProcedureListAST.isValid () && mAttribute_mRequiredProcList.isValid () && mAttribute_mFunctionListAST.isValid () && mAttribute_mTargetList.isValid () && mAttribute_mBootList.isValid () && mAttribute_mInitList.isValid () && mAttribute_mExceptionClauses.isValid () && mAttribute_mExceptionTypes.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15228,7 +15220,6 @@ void GALGAS_ast::drop (void) {
   mAttribute_mGlobalVarDeclarationList.drop () ;
   mAttribute_mDeclarationList.drop () ;
   mAttribute_mExtensionDeclarationListAST.drop () ;
-  mAttribute_mGlobalConstantDeclarationListAST.drop () ;
   mAttribute_mControlRegisterDeclarationListAST.drop () ;
   mAttribute_mProcedureListAST.drop () ;
   mAttribute_mRequiredProcList.drop () ;
@@ -15253,8 +15244,6 @@ void GALGAS_ast::description (C_String & ioString,
     mAttribute_mDeclarationList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mExtensionDeclarationListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalConstantDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mControlRegisterDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -15293,12 +15282,6 @@ GALGAS_declarationListAST GALGAS_ast::getter_mDeclarationList (UNUSED_LOCATION_A
 
 GALGAS_extensionDeclarationListAST GALGAS_ast::getter_mExtensionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExtensionDeclarationListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalConstantDeclarationListAST GALGAS_ast::getter_mGlobalConstantDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantDeclarationListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

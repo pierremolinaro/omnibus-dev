@@ -224,7 +224,6 @@ abstract method @abstractDeclaration initAnalysis
 
 proc buildSemanticContext
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
-  ?orderedConstantDeclarationList:let @globalConstantDeclarationListAST inOrderedConstantDeclarationList
   ?sourceFile:let @lstring inSourceFile
   ?ast:let @ast inAST
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -273,13 +272,19 @@ proc buildSemanticContext
       !exceptionLineTypeName
     }
   end
-#--- Enter global constants in context
-  enterGlobalConstantsInContext (
-   !orderedConstantDeclarationList:inOrderedConstantDeclarationList
-   !sourceFile:inSourceFile
-   !?staticStringMap:ioGlobalLiteralStringMap
-   !?context: outSemanticContext
+#--- Build an HTML containing all glogal constants
+  buildGlobalConstantMapHTMLFile (
+    !outSemanticContext.mGlobalConstantMap
+    !sourceFile:inSourceFile
   )
+
+#--- Enter global constants in context
+#  enterGlobalConstantsInContext (
+#   !orderedConstantDeclarationList:inOrderedConstantDeclarationList
+#   !sourceFile:inSourceFile
+#   !?staticStringMap:ioGlobalLiteralStringMap
+#   !?context: outSemanticContext
+#  )
 #--- Enter control registers in context
   enterControlRegistersInContext (
    !inAST.mControlRegisterDeclarationListAST

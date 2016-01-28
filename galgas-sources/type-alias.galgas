@@ -54,8 +54,10 @@ override method @typeAliasDeclaration addExtension
 override method @typeAliasDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mNewTypeName !self]
-  [!?ioGraph addEdge !mNewTypeName !mAliasedTypeName]
+  let newTypeName = @lstring.new {!"$" + mNewTypeName !mNewTypeName.location}
+  let aliasedTypeName = @lstring.new {!"$" + mAliasedTypeName !mAliasedTypeName.location}
+  [!?ioGraph addNode !newTypeName !self]
+  [!?ioGraph addEdge !newTypeName !aliasedTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

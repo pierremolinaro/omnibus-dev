@@ -19,7 +19,8 @@ struct $AZER {
   var y $uint6 = 34
 }
 
-//let TOTO $AZER = $AZER ()
+//let TOTO = $AZER ()
+
 //------------------------------------------------*
 
 proc loop `user () {

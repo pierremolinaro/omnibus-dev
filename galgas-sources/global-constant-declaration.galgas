@@ -2,10 +2,16 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @globalConstantDeclarationListAST {
+class @globalConstantDeclaration : @abstractDeclaration {
   @lstring mConstantName
-  @lstring mTypeName
+  @lstring mConstantTypeName
   @expressionAST mSourceExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @globalConstantDeclaration location -> @location outLocation {
+  outLocation = mConstantName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -27,10 +33,11 @@ syntax extension common_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    ioAST.mGlobalConstantDeclarationListAST +=
+    ioAST.mDeclarationList += !@globalConstantDeclaration.new {
       !constantName
       !typeName
       !expression
+    }
   }
 
   #·····················································································································
@@ -38,142 +45,171 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
+#  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-graph @constantPrecedenceGraph (@globalConstantDeclarationListAST) {
-  insert addNode error message "the '%K' symbol is already declared at %L"
+override method @globalConstantDeclaration addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @expressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
-  ?!@constantPrecedenceGraph ioGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc buildOrderedConstantDeclarationList
-  ?let @globalConstantDeclarationListAST inUnorderedConstantDeclarationList
-  ?let @string inSourceFile
-  ?let @location inEndOfSourceFile
-  !@globalConstantDeclarationListAST outOrderedConstantDeclarationList
+override method @globalConstantDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
-  @constantPrecedenceGraph constantPrecedenceGraph = .emptyGraph
-#--- Enter constant declarations in dependence graph
-  for (constantName typeName sourceExpression) in inUnorderedConstantDeclarationList do
-    [!?constantPrecedenceGraph addNode !constantName !constantName !typeName !sourceExpression]
-    [sourceExpression addDependenceEdgeForStaticExpression !constantName !?constantPrecedenceGraph]
+#--- Add 'constant name' node
+  [!?ioGraph addNode !mConstantName !self]
+#--- Add dependency from constant type name
+  if mConstantTypeName.string != "" then
+    let typeName = @lstring.new {!"$" + mConstantTypeName !mConstantTypeName.location}
+    [!?ioGraph addEdge !mConstantName !typeName]
   end
-#---  Write precedence graph file ?
-  if (@uint.errorCount == 0) && [option plm_options.writeGlobalConstantDependencyGraphFile value] then
-    let s = [constantPrecedenceGraph graphviz]
-    let filePath = inSourceFile + ".globalConstantDependency.dot"
-    [s writeToFileWhenDifferentContents !filePath ?*]
-  end
-#--- Get ordered constant declaration list
-  outOrderedConstantDeclarationList = {}
-  if [constantPrecedenceGraph undefinedNodeCount] > 0 then
-    for () in  [constantPrecedenceGraph undefinedNodeReferenceList] do
-      error mValue : "the '" + mValue + "' constant is not defined"
-    end
-  else
-    [constantPrecedenceGraph topologicalSort
-      ?outOrderedConstantDeclarationList
-      ?*
-      ?let @globalConstantDeclarationListAST unsortedSemanticDeclarationListAST
-      ?*
-    ]
-    if [unsortedSemanticDeclarationListAST length] > 0 then
-      var s = "semantic analysis not performed, "
-            + [unsortedSemanticDeclarationListAST length]
-            + " constants are involved in circular definition:"
-      for () in  unsortedSemanticDeclarationListAST do
-        s += "\n-  " + mConstantName
-      end
-      error inEndOfSourceFile : s
-      for () in  unsortedSemanticDeclarationListAST do
-        error mConstantName : "the " + mConstantName + " constant is declared here"
-      end
-    end
-  end
-#  log outOrderedConstantDeclarationList
+#--- Add dependency from source expression
+  [mSourceExpression addDependenceEdgeForStaticExpression !mConstantName !?ioGraph]
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#proc buildOrderedConstantDeclarationList
+#  ?let @globalConstantDeclarationListAST inUnorderedConstantDeclarationList
+#  ?let @string inSourceFile
+#  ?let @location inEndOfSourceFile
+#  !@globalConstantDeclarationListAST outOrderedConstantDeclarationList
+#{
+#  @semanticTypePrecedenceGraph constantPrecedenceGraph = .emptyGraph
+##--- Enter constant declarations in dependence graph
+#  for (constantName typeName sourceExpression) in inUnorderedConstantDeclarationList do
+#    [!?constantPrecedenceGraph addNode !constantName !constantName !typeName !sourceExpression]
+#    [sourceExpression addDependenceEdgeForStaticExpression !constantName !?constantPrecedenceGraph]
+#  end
+##---  Write precedence graph file ?
+#  if (@uint.errorCount == 0) && [option plm_options.writeGlobalConstantDependencyGraphFile value] then
+#    let s = [constantPrecedenceGraph graphviz]
+#    let filePath = inSourceFile + ".globalConstantDependency.dot"
+#    [s writeToFileWhenDifferentContents !filePath ?*]
+#  end
+##--- Get ordered constant declaration list
+#  outOrderedConstantDeclarationList = {}
+#  if [constantPrecedenceGraph undefinedNodeCount] > 0 then
+#    for () in  [constantPrecedenceGraph undefinedNodeReferenceList] do
+#      error mValue : "the '" + mValue + "' constant is not defined"
+#    end
+#  else
+#    [constantPrecedenceGraph topologicalSort
+#      ?outOrderedConstantDeclarationList
+#      ?*
+#      ?let @globalConstantDeclarationListAST unsortedSemanticDeclarationListAST
+#      ?*
+#    ]
+#    if [unsortedSemanticDeclarationListAST length] > 0 then
+#      var s = "semantic analysis not performed, "
+#            + [unsortedSemanticDeclarationListAST length]
+#            + " constants are involved in circular definition:"
+#      for () in  unsortedSemanticDeclarationListAST do
+#        s += "\n-  " + mConstantName
+#      end
+#      error inEndOfSourceFile : s
+#      for () in  unsortedSemanticDeclarationListAST do
+#        error mConstantName : "the " + mConstantName + " constant is declared here"
+#      end
+#    end
+#  end
+##  log outOrderedConstantDeclarationList
+#}
   
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @globalConstantDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "global constant " + mConstantName 
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc enterGlobalConstantsInContext
-  ?orderedConstantDeclarationList:let @globalConstantDeclarationListAST inOrderedConstantDeclarationList
-  ?sourceFile:let @lstring inSourceFile
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+override method @globalConstantDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
-  @variableMap variableMap = .emptyMap
-  for (constantName constantTypeName sourceExpression) in inOrderedConstantDeclarationList do
-  #--- Get destination type
-    @unifiedTypeMap-proxy annotationType
-    if constantTypeName.string == "" then
-      annotationType = .null
-    else
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !constantTypeName ?annotationType]
-    end
-  #--- Analyze source expression
-    @semanticTemporariesStruct temporaries = .default
-    @instructionListIR instructionGenerationList = {}
-    [sourceExpression analyzeExpression
-       !routineNameForInvocationGraph:["compiler" nowhere]
-       !optionalTargetType:annotationType
-       !context:ioContext
-       !modes:{}
-       !allowException:true
-       !?temporary:temporaries
-       !?staticStringMap:ioGlobalLiteralStringMap
-       !?variableMap:variableMap
-       !?instructionListIR:instructionGenerationList
-       ?result:let @operandIR expressionResult
-    ]
-  #--- Check assignment compatibility
-    checkAssignmentCompatibility (
-      !source:expressionResult
-      !targetType:annotationType
-      !errorLocation:constantName.location
-    )
-  #--- Constant type
-    let constantType = if annotationType == .null then expressionResult.mType else annotationType end
-    let result = @operandIR.new {!constantType !expressionResult.mValue}
-  #--- Check source expression is statically comtuted
-    if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
-      error constantName : "source expression cannot be statically computed"
-    end
-  #--- Enter in context
-    [!?ioContext.mGlobalConstantMap insertKey
-      !constantName
-      !result
-    ]
-  #--- Enter in constant variable map
-    [!?variableMap insertUsedLocalConstant
-      !constantName
-      !constantType
-      !true
-      !.globalConstant{!value:result !name:constantName.string}
-      !true
-      !{}
-      !false # Cannot be used as input parameter
-      !true # Is constant
-    ]
+  var variableMap = initialVariableMap (
+    !routineNameForInvocation:"compiler" # inRoutineNameForInvocation
+    !context:ioContext
+    !globalsAreConstant:true # Any value, there is no defined global variable at this stage
+  )
+#--- Get destination type
+  @unifiedTypeMap-proxy annotationType
+  if mConstantTypeName.string == "" then
+    annotationType = .null
+  else
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mConstantTypeName ?annotationType]
   end
+#--- Analyze source expression
+  @semanticTemporariesStruct temporaries = .default
+  @instructionListIR instructionGenerationList = {}
+  [mSourceExpression analyzeExpression
+     !routineNameForInvocationGraph:["compiler" nowhere]
+     !optionalTargetType:annotationType
+     !context:ioContext
+     !modes:{}
+     !allowException:true
+     !?temporary:temporaries
+     !?staticStringMap:ioGlobalLiteralStringMap
+     !?variableMap:variableMap
+     !?instructionListIR:instructionGenerationList
+     ?result:let @operandIR expressionResult
+  ]
+#--- Check assignment compatibility
+  checkAssignmentCompatibility (
+    !source:expressionResult
+    !targetType:annotationType
+    !errorLocation:mConstantName.location
+  )
+#--- Constant type
+  let constantType = if annotationType == .null then expressionResult.mType else annotationType end
+  let result = @operandIR.new {!constantType !expressionResult.mValue}
+#--- Check source expression is statically comtuted
+  if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
+    error mConstantName : "source expression cannot be statically computed"
+  end
+#--- Enter in context
+  [!?ioContext.mGlobalConstantMap insertKey
+    !mConstantName
+    !result
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  BUILD HTML FILE                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc buildGlobalConstantMapHTMLFile
+  ?@globalConstantMap inGlobalConstantMap
+  ?sourceFile:let @lstring inSourceFile
+{
 #------------------------------------ Build an HTML file that contains all declared constants
   let @string typeDumpFilePath = inSourceFile.string + "global-constants.html"
   if [option plm_options.writeGlobalConstantHTMLDumpFile value] then
     @stringset firstLetterSet = {}
-    for () in ioContext.mGlobalConstantMap do
+    for () in inGlobalConstantMap do
       firstLetterSet += ![[lkey.string characterAtIndex!0] string]
     end
     @string tableOfTypeString = ""
     @char currentFirstLetter = ' '
-    for () type_ in ioContext.mGlobalConstantMap do
+    for () type_ in inGlobalConstantMap do
       if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
         currentFirstLetter = [type_lkey.string characterAtIndex !0]
         tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
@@ -182,7 +218,7 @@ proc enterGlobalConstantsInContext
     end
     let @string typeDumpString = [filewrapper constantDumpGenerationTemplate.dump
       ![inSourceFile lastPathComponent]
-      !ioContext.mGlobalConstantMap
+      !inGlobalConstantMap
       !firstLetterSet
       !tableOfTypeString
     ]
@@ -210,6 +246,22 @@ func linkForGlobalConstant ?let @string inConstantName -> @string outResult {
   outResult = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  INIT ANALYSIS                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override  method @globalConstantDeclaration initAnalysis ?!context:@semanticContext unused ioContext {}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @globalConstantDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

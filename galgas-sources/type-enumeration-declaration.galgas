@@ -69,7 +69,8 @@ override method @enumerationDeclaration addExtension
 override method @enumerationDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mEnumerationName !self]
+  let typeName = @lstring.new {!"$" + mEnumerationName !mEnumerationName.location}
+  [!?ioGraph addNode !typeName !self]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

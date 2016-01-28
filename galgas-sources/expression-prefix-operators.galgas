@@ -23,7 +23,7 @@ class @prefixOperatorExpressionAST : @expressionAST {
 
 override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
-  ?!@constantPrecedenceGraph ioGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
