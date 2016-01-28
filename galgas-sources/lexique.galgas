@@ -50,13 +50,11 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "required",
   "requiredBy",
   "self",
-  "signedIntegerType",
   "struct",
   "target",
   "then",
   "true",
   "truncate",
-  "unsignedIntegerType",
   "var",
   "while",
   "xor"

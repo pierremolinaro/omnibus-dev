@@ -231,15 +231,11 @@ proc buildSemanticContext
   [!?outSemanticContext.mModeMap insertKey ![panicModeName () nowhere]]
 #--- Enter init routines
   for initRoutine in inAST.mInitList do
-    [initRoutine enterInContext
-      !?context:outSemanticContext
-    ]
+    [initRoutine enterInContext !?context:outSemanticContext]
   end
 #--- Enter exception routines
   for execptionRoutine in inAST.mExceptionClauses do
-    [execptionRoutine enterInContext
-      !?context:outSemanticContext
-    ]
+    [execptionRoutine enterInContext !?context:outSemanticContext]
   end
 #---
   for (declaration) in inDeclarationListAST do

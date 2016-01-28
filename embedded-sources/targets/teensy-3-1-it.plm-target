@@ -1,7 +1,4 @@
 
-signedIntegerType 1 -> 128
-unsignedIntegerType 1 -> 128
-
 pointerSize 32
 
 panic proc : $int32 $uint32

@@ -77,7 +77,7 @@ override method @booleanDeclaration enterInContext
   if ioContext.mBooleanType != .null then
     error mBooleanTypeName : "Boolean type already defined"
   end
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mBooleanTypeName ?let boolType]
+  let boolType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mBooleanTypeName}
   ioContext.mBooleanType = boolType
 #--- Enter boolean operators
   enterBooleanOperators (
@@ -92,7 +92,7 @@ private proc enterBooleanOperators
   ?boolTypeName:@lstring inBooleanTypeName
   ?!context:@semanticContext ioContext
 {
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBooleanTypeName ?let selfTypeProxy]
+  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inBooleanTypeName}
   let boolBoolOp = combineTypeNamesForInfixOperator (!inBooleanTypeName.string !inBooleanTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
     !boolBoolOp

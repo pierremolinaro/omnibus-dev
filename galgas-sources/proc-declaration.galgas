@@ -161,7 +161,6 @@ syntax extension common_syntax {
 method @procedureDeclarationListAST-element enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-#--- Enter only stand alone procedures
   for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
     let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
     [!?ioGraph noteNode !typeName]
@@ -199,7 +198,7 @@ method @procedureDeclarationListAST-element enterInContext
 #--- Signature
   @procedureSignature signature = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
     signature += !formalArgumentPassingMode !selector.string !typeProxy
   end
 #--- Mode map

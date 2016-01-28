@@ -124,7 +124,7 @@ method @functionDeclarationListAST-element enterInContext
 #--- Signature
   @funcSignature signature = {}
   for (selector formalArgumentTypeName *) in mFuncFormalArgumentList do
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
     signature += !selector !typeProxy
   end
 #--- Mode map
@@ -133,7 +133,7 @@ method @functionDeclarationListAST-element enterInContext
     [!?functionModeMap insertKey !mValue] ;
   end
 #--- Result type
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
+  let resultType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mResultTypeName}
 #--- Enter in context
   [!?ioContext.mFunctionMap insertKey
     !mFunctionName

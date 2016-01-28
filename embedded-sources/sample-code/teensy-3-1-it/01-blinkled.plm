@@ -19,7 +19,7 @@ struct $AZER {
   var y $uint6 = 34
 }
 
-let TOTO = $AZER ()
+// let TOTO = $AZER ()
 
 //------------------------------------------------*
 

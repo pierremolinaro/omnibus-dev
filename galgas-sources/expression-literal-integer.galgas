@@ -24,9 +24,10 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalIntegerInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
+  [!?ioGraph addEdge !inConstantName !["$" + staticIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

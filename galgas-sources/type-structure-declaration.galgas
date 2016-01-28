@@ -167,7 +167,7 @@ override method @structureDeclaration enterInContext
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   for () in mStructureFieldListAST do
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mFieldTypeName ?let fieldTypeNameProxy]
+    let fieldTypeNameProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mFieldTypeName}
     propertyList += !mFieldName.string !fieldTypeNameProxy
     [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy ![propertyMap count]]
   end
@@ -176,7 +176,7 @@ override method @structureDeclaration enterInContext
   for procedure in mProcedureDeclarationListAST do
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
   #--- Check modes
@@ -198,7 +198,7 @@ override method @structureDeclaration enterInContext
   for function in mFunctionDeclarationListAST do
     @funcSignature signature = {}
     for (selector formalArgumentTypeName *) in function.mFuncFormalArgumentList do
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !selector !typeProxy
     end
   #--- Mode map
@@ -207,7 +207,7 @@ override method @structureDeclaration enterInContext
       [!?functionModeMap insertKey !mValue] ;
     end
   #--- Result type
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !function.mResultTypeName ?let resultType]
+    let resultType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !function.mResultTypeName}
   #--- Enter in context
     [!?functionMap insertKey
       !function.mFunctionName

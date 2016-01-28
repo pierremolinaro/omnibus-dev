@@ -20,52 +20,6 @@ getter @integerDeclaration typeName -> @string outName {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-syntax extension plm_target_specific_syntax {
-
-  #·····················································································································
-
-  rule <declaration> ?!@ast ioAST {
-    $signedIntegerType$
-    $integer$ ?let @lbigint lowerBound
-    $->$
-    $integer$ ?let @lbigint upperBound
-    if lowerBound.bigint > upperBound.bigint then
-      error upperBound : "upper bound is lower than lower bound"
-    elsif upperBound.bigint > 1024G then
-      error upperBound : "upper bound is too large (should be <= 1024)"
-    else
-      for i in [lowerBound.bigint uint] ... [upperBound.bigint uint] do
-        ioAST.mDeclarationList += !@integerDeclaration.new {!true !i}
-      end
-    end
-  }
-
-  #·····················································································································
-
-  rule <declaration> ?!@ast ioAST {
-    $unsignedIntegerType$
-    $integer$ ?let @lbigint lowerBound
-    $->$
-    $integer$ ?let @lbigint upperBound
-    if lowerBound.bigint > upperBound.bigint then
-      error upperBound : "upper bound is lower than lower bound"
-    elsif upperBound.bigint > 1024G then
-      error upperBound : "upper bound is too large (should be <= 1024)"
-    else
-      for i in [lowerBound.bigint uint] ... [upperBound.bigint uint] do
-        ioAST.mDeclarationList += !@integerDeclaration.new {!false !i}
-      end
-    end
-  }
-
-  #·····················································································································
-
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -85,8 +39,9 @@ override method @integerDeclaration enterInPrecedenceGraph
 {
   let integerTypeName = ["$" + [self typeName] nowhere]
   [!?ioGraph addNode !integerTypeName !self]
-  [!?ioGraph addEdge !integerTypeName !["$" + boolTypeName () nowhere]]
   [!?ioGraph addEdge !integerTypeName !["$" + staticIntegerTypeName () nowhere]]
+#--- An edge to $bool is useless, as static integer type has an edge to $bool
+#  [!?ioGraph addEdge !integerTypeName !["$" + boolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -170,7 +125,7 @@ private proc enter_integer_integer_operators
   ?signed:let @bool inIsSigned
   ?!context:@semanticContext ioContext
 {
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
+  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
 #--- Comparison infix operator
   let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
@@ -343,7 +298,7 @@ private proc enter_integer_literal_operators
   ?!context:@semanticContext ioContext
 {
 #--- Infix operators
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
+  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
 #--- Comparison infix operator
   let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !staticIntegerTypeName ())
   [!?ioContext.mEqualOperatorMap insertKey
@@ -544,7 +499,7 @@ private proc enter_literal_integer_operators
   ?!context:@semanticContext ioContext
 {
 #--- Infix operators
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
+  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
 #--- Comparison infix operator
   let intLiteralOp = combineTypeNamesForInfixOperator (!staticIntegerTypeName () !inIntegerTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey

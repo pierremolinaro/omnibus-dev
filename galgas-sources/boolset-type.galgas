@@ -126,7 +126,7 @@ proc enterBoolsetOperators
   ?mask:let @uint inMask
   ?!context:@semanticContext ioContext
 {
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBoolsetTypeName ?let selfTypeProxy]
+  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inBoolsetTypeName}
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !ioContext.mBooleanType
