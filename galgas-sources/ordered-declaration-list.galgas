@@ -29,20 +29,13 @@ proc buildOrderedDeclarationList
   for () in inAST.mDeclarationList do
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
   end
-  for procedure in inAST.mProcedureListAST do
-    [procedure enterInPrecedenceGraph !?precedenceGraph]
-  end
-  for function in inAST.mFunctionListAST do
-    [function enterInPrecedenceGraph !?precedenceGraph]
-  end
-  noteControlRegisterTypesInPrecedenceGraph (
-    !inAST.mControlRegisterDeclarationListAST
-    !?precedenceGraph
-  )
-  noteGlobalVariableTypesInPrecedenceGraph (
-    !inAST.mGlobalVarDeclarationList
-    !?precedenceGraph
-  )
+  [inAST.mBootList noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mInitList noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mExceptionClauses noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mProcedureListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mFunctionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mGlobalVarDeclarationList noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed $uintXX and $intXX types
   for () in [precedenceGraph undefinedNodeKeyList] do
 #    log "UNDEFINED " : mValue
@@ -59,17 +52,17 @@ proc buildOrderedDeclarationList
       end
     end
   end
-#---  Write precedence graph file ?
+#------------------------------------------  Write precedence graph file ?
   if (@uint.errorCount == 0) && [option plm_options.writeTypeDependencyGraphFile value] then
     let s = [precedenceGraph graphviz]
-    let filePath = inSourceFile + ".typeDependency.dot"
+    let filePath = inSourceFile + ".declarationDependency.dot"
     [s writeToFileWhenDifferentContents !filePath ?*]
   end
-#---
+#------------------------------------------  Get ordered declaration list
   outDeclarationListAST = {}
   if [precedenceGraph undefinedNodeCount] > 0 then
     for () in  [precedenceGraph undefinedNodeReferenceList] do
-      error mValue : "the $" + mValue + " type is not defined"
+      error mValue : mValue.string + " is not defined"
     end
   else
     [precedenceGraph topologicalSort

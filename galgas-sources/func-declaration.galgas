@@ -83,23 +83,23 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                    *
+#  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionDeclarationListAST-element enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  for (* formalArgumentTypeName *) in mFuncFormalArgumentList do
-    let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-    [!?ioGraph noteNode !typeName]
+method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* formalArgumentTypeName *) in mFuncFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+    let resultTypeName = @lstring.new {!"$" + mResultTypeName !mResultTypeName.location}
+    [!?ioGraph noteNode !resultTypeName]
+    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
-  let resultTypeName = @lstring.new {!"$" + mResultTypeName !mResultTypeName.location}
-  [!?ioGraph noteNode !resultTypeName]
-  [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                    *
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @funcSignature {
@@ -119,29 +119,29 @@ map @functionMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionDeclarationListAST-element enterInContext
-  ?!context:@semanticContext ioContext
-{
-#--- Signature
-  @funcSignature signature = {}
-  for (selector formalArgumentTypeName *) in mFuncFormalArgumentList do
-    let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-    signature += !selector !typeProxy
+method @functionDeclarationListAST enterInContext ?!context:@semanticContext ioContext {
+  for () in self do
+  #--- Signature
+    @funcSignature signature = {}
+    for (selector formalArgumentTypeName *) in mFuncFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      signature += !selector !typeProxy
+    end
+  #--- Mode map
+    @modeMap functionModeMap = {}
+    for () in mFunctionModeList do
+      [!?functionModeMap insertKey !mValue] ;
+    end
+  #--- Result type
+    let resultType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mResultTypeName}
+  #--- Enter in context
+    [!?ioContext.mFunctionMap insertKey
+      !mFunctionName
+      !functionModeMap
+      !signature
+      !resultType
+    ]
   end
-#--- Mode map
-  @modeMap functionModeMap = {}
-  for () in mFunctionModeList do
-    [!?functionModeMap insertKey !mValue] ;
-  end
-#--- Result type
-  let resultType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mResultTypeName}
-#--- Enter in context
-  [!?ioContext.mFunctionMap insertKey
-    !mFunctionName
-    !functionModeMap
-    !signature
-    !resultType
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

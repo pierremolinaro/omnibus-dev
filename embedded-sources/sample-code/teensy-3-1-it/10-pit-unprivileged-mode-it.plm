@@ -4,8 +4,8 @@ target "teensy-3-1-it"
 
 init 100_000 {
   SIM_SCGC6 |= SIM_SCGC6_PIT
- // NVIC_ISER2 = 1 << ((84 - 16) & 31)
-  NVIC_ISER = 1 << (84 - 16)
+  NVIC_ISER2 = 1 << ((84 - 16) & 31)
+//  NVIC_ISER = 1 << (84 - 16)
   AICS0_PARCG = 0
 }
 

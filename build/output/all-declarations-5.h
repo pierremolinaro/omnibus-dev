@@ -2437,6 +2437,17 @@ class GALGAS_string callCategoryGetter_typeName (const cPtr_integerDeclaration *
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                   Category method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteInstructionListTypesInPrecedenceGraph (const class GALGAS_instructionListAST inObject,
+                                                               class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //         Category getter '@procFormalArgumentPassingMode requiredActualPassingModeForSelector' (as function)         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2531,17 +2542,6 @@ void enterCategoryMethod_noteInstructionTypesInPrecedenceGraph (const int32_t in
 void callCategoryMethod_noteInstructionTypesInPrecedenceGraph (const class cPtr_instructionAST * inObject,
                                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                                C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Category method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_noteInstructionListTypesInPrecedenceGraph (const class GALGAS_instructionListAST inObject,
-                                                               class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                               class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
