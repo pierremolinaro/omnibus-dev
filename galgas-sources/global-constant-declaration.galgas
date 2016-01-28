@@ -80,57 +80,6 @@ override method @globalConstantDeclaration enterInPrecedenceGraph
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#proc buildOrderedConstantDeclarationList
-#  ?let @globalConstantDeclarationListAST inUnorderedConstantDeclarationList
-#  ?let @string inSourceFile
-#  ?let @location inEndOfSourceFile
-#  !@globalConstantDeclarationListAST outOrderedConstantDeclarationList
-#{
-#  @semanticTypePrecedenceGraph constantPrecedenceGraph = .emptyGraph
-##--- Enter constant declarations in dependence graph
-#  for (constantName typeName sourceExpression) in inUnorderedConstantDeclarationList do
-#    [!?constantPrecedenceGraph addNode !constantName !constantName !typeName !sourceExpression]
-#    [sourceExpression addDependenceEdgeForStaticExpression !constantName !?constantPrecedenceGraph]
-#  end
-##---  Write precedence graph file ?
-#  if (@uint.errorCount == 0) && [option plm_options.writeGlobalConstantDependencyGraphFile value] then
-#    let s = [constantPrecedenceGraph graphviz]
-#    let filePath = inSourceFile + ".globalConstantDependency.dot"
-#    [s writeToFileWhenDifferentContents !filePath ?*]
-#  end
-##--- Get ordered constant declaration list
-#  outOrderedConstantDeclarationList = {}
-#  if [constantPrecedenceGraph undefinedNodeCount] > 0 then
-#    for () in  [constantPrecedenceGraph undefinedNodeReferenceList] do
-#      error mValue : "the '" + mValue + "' constant is not defined"
-#    end
-#  else
-#    [constantPrecedenceGraph topologicalSort
-#      ?outOrderedConstantDeclarationList
-#      ?*
-#      ?let @globalConstantDeclarationListAST unsortedSemanticDeclarationListAST
-#      ?*
-#    ]
-#    if [unsortedSemanticDeclarationListAST length] > 0 then
-#      var s = "semantic analysis not performed, "
-#            + [unsortedSemanticDeclarationListAST length]
-#            + " constants are involved in circular definition:"
-#      for () in  unsortedSemanticDeclarationListAST do
-#        s += "\n-  " + mConstantName
-#      end
-#      error inEndOfSourceFile : s
-#      for () in  unsortedSemanticDeclarationListAST do
-#        error mConstantName : "the " + mConstantName + " constant is declared here"
-#      end
-#    end
-#  end
-##  log outOrderedConstantDeclarationList
-#}
-  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @globalConstantDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "global constant " + mConstantName 
@@ -249,10 +198,6 @@ func linkForGlobalConstant ?let @string inConstantName -> @string outResult {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  INIT ANALYSIS                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override  method @globalConstantDeclaration initAnalysis ?!context:@semanticContext unused ioContext {}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -262,32 +207,5 @@ override method @globalConstantDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#proc generateGlobalConstantLLVMCode
-#  ?context:let @semanticContext inContext
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-#  for (constantName constantValue) in inContext.mGlobalConstantMap do
-#    [!?ioIntermediateCodeStruct.mGlobalConstantMap insertKey
-#      !constantName
-#      !constantValue.mType
-#      !constantValue.mValue
-#    ]
-#  end
-#
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#method @globalConstantMapIR-element generateLLVM ?!@string unused ioLLVMcode {
-#  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal constant "
-#  ioLLVMcode += [mType llvmTypeName] + " " +  [mSourceExpression llvmName] + "\n"
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

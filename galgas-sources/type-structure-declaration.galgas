@@ -111,10 +111,11 @@ override method @structureDeclaration enterInPrecedenceGraph
 {
   let structureTypeName = @lstring.new {!"$" + mStructureName !mStructureName.location}
   [!?ioGraph addNode !structureTypeName !self]
-  for (* fieldTypeName *) in mStructureFieldListAST do
+  for (* fieldTypeName initExpression) in mStructureFieldListAST do
     if fieldTypeName.string != "" then
       let typeName = @lstring.new {!"$" + fieldTypeName !fieldTypeName.location}
       [!?ioGraph addEdge !structureTypeName !typeName]
+      [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
     end
   end
 }
@@ -228,15 +229,7 @@ override method @structureDeclaration enterInContext
     !comparable:false
     !enumerationType:.null # Not enumerable
   ]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INIT ANALYSIS                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @structureDeclaration initAnalysis
-  ?!context:@semanticContext ioContext
-{
+#--- Enter init value in context
   @staticStringMap globalLiteralStringMap = {} # Unused here
   @operandIRList operandIRList = {}
   for () in mStructureFieldListAST do
@@ -272,10 +265,6 @@ override method @structureDeclaration initAnalysis
     operandIRList += !.new {!type !expressionIR.mValue}
   end
   [!?ioContext.mConstructorMap insertKey !mStructureName !operandIRList]
-#--- Add to type initializer map
-#  @initializerMap initializerMap = {}
-#  [!?initializerMap insertKey !["" nowhere] !operandIRList] # Implicit initializer
-#  [!?ioContext.mTypeInitializerMap insertKey !mStructureName !"struct." + mStructureName !initializerMap]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

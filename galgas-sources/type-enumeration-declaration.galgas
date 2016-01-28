@@ -175,10 +175,6 @@ proc enterEnumerationOperators
 #  SEMANTIC ANALYSIS                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enumerationDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @enumerationDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries

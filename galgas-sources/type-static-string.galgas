@@ -114,10 +114,6 @@ override method @literalStringDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @literalStringDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
