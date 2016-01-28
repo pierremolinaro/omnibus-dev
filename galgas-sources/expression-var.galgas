@@ -57,6 +57,13 @@ override method @varInExpressionAST addDependenceEdgeForStaticExpression
   [!?ioGraph addEdge !inConstantName !mSourceVarName]
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @varInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+}
+
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

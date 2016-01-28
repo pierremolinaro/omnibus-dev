@@ -5665,7 +5665,7 @@ class GALGAS_constructorCall : public GALGAS_expressionAST {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mErrorLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -5686,11 +5686,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorCall ;
 
 class cPtr_constructorCall : public cPtr_expressionAST {
 //--- Attributes
-  public : GALGAS_lstring mAttribute_mOptionalTypeName ;
+  public : GALGAS_lstring mAttribute_mTypeName ;
   public : GALGAS_location mAttribute_mErrorLocation ;
 
 //--- Constructor
-  public : cPtr_constructorCall (const GALGAS_lstring & in_mOptionalTypeName,
+  public : cPtr_constructorCall (const GALGAS_lstring & in_mTypeName,
                                  const GALGAS_location & in_mErrorLocation
                                  COMMA_LOCATION_ARGS) ;
 
@@ -5698,7 +5698,7 @@ class cPtr_constructorCall : public cPtr_expressionAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mErrorLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

@@ -42,6 +42,18 @@ override method @truncateExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

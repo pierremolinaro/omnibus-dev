@@ -32,12 +32,22 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCall addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
-#  if mOptionalTypeName.string != "" then
-#    [!?ioGraph addEdge !inConstantName !mOptionalTypeName]
-#  end
+  if mOptionalTypeName.string != "" then
+    [!?ioGraph addEdge !inConstantName !mOptionalTypeName]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typedConstantCall noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  if mOptionalTypeName.string != "" then
+    [!?ioGraph noteNode !mOptionalTypeName]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

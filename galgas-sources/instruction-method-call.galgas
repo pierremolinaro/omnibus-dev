@@ -48,6 +48,22 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @methodCallInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mReceiverExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  for () in mEffectiveParameterList do
+    switch mEffectiveParameterKind
+    case input (*):
+    case output (expression *) :
+      [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case outputInput (*) :
+    end 
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                           *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

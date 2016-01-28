@@ -36,19 +36,18 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-#  rule <instruction> ?!@instructionListAST ioInstructionList {
-#    $let$
-#    $identifier$ ?let varName
-#    $:$
-#    $identifier$ ?let typeName
-#    ioInstructionList += !@varInstructionAST.new {
-#      !varName
-#      !typeName
-#    }
-#  }
+}
 
-  #·····················································································································
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  if mOptionalTypeName.string != "" then
+    let typeName = @lstring.new {!"$" + mOptionalTypeName !mOptionalTypeName.location}
+    [!?ioGraph noteNode !typeName]
+  end
+  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

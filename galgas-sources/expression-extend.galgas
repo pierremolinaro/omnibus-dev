@@ -38,10 +38,22 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
-#  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
