@@ -1054,17 +1054,6 @@ void routine_enterAliasInfixOperator (class GALGAS_infixOperatorMap & ioArgument
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Routine 'noteGlobalVariableTypesInPrecedenceGraph'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_noteGlobalVariableTypesInPrecedenceGraph (const class GALGAS_globalVarDeclarationList constinArgument0,
-                                                       class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1454,17 +1443,6 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
                                       const class GALGAS_location constinArgument2,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Routine 'noteControlRegisterTypesInPrecedenceGraph'                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_noteControlRegisterTypesInPrecedenceGraph (const class GALGAS_controlRegisterDeclarationListAST constinArgument0,
-                                                        class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

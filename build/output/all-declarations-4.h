@@ -329,25 +329,80 @@ void callCategoryMethod_enterInPrecedenceGraph (const class cPtr_abstractDeclara
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Category method '@functionDeclarationListAST-element enterInPrecedenceGraph'                     *
+//                               Category method '@bootList noteTypesInPrecedenceGraph'                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInPrecedenceGraph (const class GALGAS_functionDeclarationListAST_2D_element inObject,
-                                            class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_bootList inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Category method '@procedureDeclarationListAST-element enterInPrecedenceGraph'                    *
+//                   Category method '@controlRegisterDeclarationListAST noteTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInPrecedenceGraph (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
-                                            class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_controlRegisterDeclarationListAST inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Category method '@exceptionClauseListAST noteTypesInPrecedenceGraph'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_exceptionClauseListAST inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Category method '@functionDeclarationListAST noteTypesInPrecedenceGraph'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_functionDeclarationListAST inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Category method '@globalVarDeclarationList noteTypesInPrecedenceGraph'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_globalVarDeclarationList inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Category method '@initList noteTypesInPrecedenceGraph'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_initList inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Category method '@procedureDeclarationListAST noteTypesInPrecedenceGraph'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_procedureDeclarationListAST inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -415,11 +470,11 @@ void categoryMethod_enterInContext (const class GALGAS_exceptionClauseListAST_2D
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Category method '@functionDeclarationListAST-element enterInContext'                         *
+//                            Category method '@functionDeclarationListAST enterInContext'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAST_2D_element inObject,
+void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAST inObject,
                                     class GALGAS_semanticContext & io_ioContext,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;

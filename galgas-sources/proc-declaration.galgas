@@ -158,14 +158,14 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureDeclarationListAST-element enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
-    let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-    [!?ioGraph noteNode !typeName]
+method @procedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
-  [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

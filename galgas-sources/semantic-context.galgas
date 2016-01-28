@@ -285,10 +285,7 @@ proc buildSemanticContext
   for procedure in inAST.mProcedureListAST do
     [procedure enterInContext !?context: outSemanticContext]
   end
-#--- enter functions in context
-  for function in inAST.mFunctionListAST do
-    [function enterInContext !?context: outSemanticContext]
-  end
+  [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
 #--- Check required procs mode
   if @uint.errorCount == 0 then
     for requiredProc in inAST.mRequiredProcList do

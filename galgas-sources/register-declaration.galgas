@@ -126,11 +126,8 @@ map @registerMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc noteControlRegisterTypesInPrecedenceGraph
-  ?let @controlRegisterDeclarationListAST inRegisterDeclarationListAST
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  for (* registerTypeName *) in inRegisterDeclarationListAST do
+method @controlRegisterDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (* registerTypeName *) in self do
     let typeName = @lstring.new {!"$" + registerTypeName !registerTypeName.location}
     [!?ioGraph noteNode !typeName]
   end

@@ -132,11 +132,8 @@ syntax extension common_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc noteGlobalVariableTypesInPrecedenceGraph
-  ?let @globalVarDeclarationList inGlobalVariableDeclarationListAST
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  for (globalVariableTypeName 6*) in inGlobalVariableDeclarationListAST do
+method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (globalVariableTypeName 6*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]

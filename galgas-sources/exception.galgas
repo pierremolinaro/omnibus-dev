@@ -61,6 +61,16 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                    *
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @exceptionClauseListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    [mExceptionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                    *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

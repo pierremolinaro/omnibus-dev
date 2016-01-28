@@ -447,86 +447,77 @@ void routine_buildOrderedDeclarationList (const GALGAS_ast constinArgument_inAST
     callCategoryMethod_enterInPrecedenceGraph ((const cPtr_abstractDeclaration *) enumerator_1683.current_mDeclaration (HERE).ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 30)) ;
     enumerator_1683.gotoNextObject () ;
   }
-  cEnumerator_procedureDeclarationListAST enumerator_1795 (constinArgument_inAST.mAttribute_mProcedureListAST, kEnumeration_up) ;
-  while (enumerator_1795.hasCurrentObject ()) {
-    categoryMethod_enterInPrecedenceGraph (enumerator_1795.current (HERE), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 33)) ;
-    enumerator_1795.gotoNextObject () ;
-  }
-  cEnumerator_functionDeclarationListAST enumerator_1902 (constinArgument_inAST.mAttribute_mFunctionListAST, kEnumeration_up) ;
-  while (enumerator_1902.hasCurrentObject ()) {
-    categoryMethod_enterInPrecedenceGraph (enumerator_1902.current (HERE), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 36)) ;
-    enumerator_1902.gotoNextObject () ;
-  }
-  {
-  routine_noteControlRegisterTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mControlRegisterDeclarationListAST, var_precedenceGraph, inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 38)) ;
-  }
-  {
-  routine_noteGlobalVariableTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, var_precedenceGraph, inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 42)) ;
-  }
-  cEnumerator_stringlist enumerator_2321 (var_precedenceGraph.getter_undefinedNodeKeyList (SOURCE_FILE ("ordered-declaration-list.galgas", 47)), kEnumeration_up) ;
-  while (enumerator_2321.hasCurrentObject ()) {
-    GALGAS_stringlist var_split = enumerator_2321.current_mValue (HERE).getter_componentsSeparatedByString (GALGAS_string ("int") COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 49)) ;
-    GALGAS_bool test_0 = GALGAS_bool (kIsEqual, var_split.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 50)).objectCompare (GALGAS_uint ((uint32_t) 2U))) ;
+  categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mBootList, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 32)) ;
+  categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mInitList, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 33)) ;
+  categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mExceptionClauses, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 34)) ;
+  categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mProcedureListAST, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 35)) ;
+  categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mFunctionListAST, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 36)) ;
+  categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mControlRegisterDeclarationListAST, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 37)) ;
+  categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 38)) ;
+  cEnumerator_stringlist enumerator_2399 (var_precedenceGraph.getter_undefinedNodeKeyList (SOURCE_FILE ("ordered-declaration-list.galgas", 40)), kEnumeration_up) ;
+  while (enumerator_2399.hasCurrentObject ()) {
+    GALGAS_stringlist var_split = enumerator_2399.current_mValue (HERE).getter_componentsSeparatedByString (GALGAS_string ("int") COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 42)) ;
+    GALGAS_bool test_0 = GALGAS_bool (kIsEqual, var_split.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 43)).objectCompare (GALGAS_uint ((uint32_t) 2U))) ;
     if (kBoolTrue == test_0.boolEnum ()) {
-      test_0 = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 50)).getter_isDecimalUnsignedNumber (SOURCE_FILE ("ordered-declaration-list.galgas", 50)) ;
+      test_0 = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 43)).getter_isDecimalUnsignedNumber (SOURCE_FILE ("ordered-declaration-list.galgas", 43)) ;
     }
     const enumGalgasBool test_1 = test_0.boolEnum () ;
     if (kBoolTrue == test_1) {
-      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 51)).objectCompare (GALGAS_string ("$u"))).boolEnum () ;
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 44)).objectCompare (GALGAS_string ("$u"))).boolEnum () ;
       if (kBoolTrue == test_2) {
-        GALGAS_uint var_n = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 52)).getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 52)) ;
-        GALGAS_integerDeclaration var_declaration = GALGAS_integerDeclaration::constructor_new (GALGAS_bool (false), var_n  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 53)) ;
-        callCategoryMethod_enterInPrecedenceGraph ((const cPtr_integerDeclaration *) var_declaration.ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 54)) ;
+        GALGAS_uint var_n = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 45)).getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 45)) ;
+        GALGAS_integerDeclaration var_declaration = GALGAS_integerDeclaration::constructor_new (GALGAS_bool (false), var_n  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 46)) ;
+        callCategoryMethod_enterInPrecedenceGraph ((const cPtr_integerDeclaration *) var_declaration.ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 47)) ;
       }else if (kBoolFalse == test_2) {
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 55)).objectCompare (GALGAS_string ("$"))).boolEnum () ;
+        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 48)).objectCompare (GALGAS_string ("$"))).boolEnum () ;
         if (kBoolTrue == test_3) {
-          GALGAS_uint var_n = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 56)).getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 56)) ;
-          GALGAS_integerDeclaration var_declaration = GALGAS_integerDeclaration::constructor_new (GALGAS_bool (true), var_n  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)) ;
-          callCategoryMethod_enterInPrecedenceGraph ((const cPtr_integerDeclaration *) var_declaration.ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 58)) ;
+          GALGAS_uint var_n = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 49)).getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 49)) ;
+          GALGAS_integerDeclaration var_declaration = GALGAS_integerDeclaration::constructor_new (GALGAS_bool (true), var_n  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 50)) ;
+          callCategoryMethod_enterInPrecedenceGraph ((const cPtr_integerDeclaration *) var_declaration.ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 51)) ;
         }
       }
     }
-    enumerator_2321.gotoNextObject () ;
+    enumerator_2399.gotoNextObject () ;
   }
-  GALGAS_bool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("ordered-declaration-list.galgas", 63)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  GALGAS_bool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("ordered-declaration-list.galgas", 56)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue == test_4.boolEnum ()) {
     test_4 = GALGAS_bool (gOption_plm_5F_options_writeTypeDependencyGraphFile.getter_value ()) ;
   }
   const enumGalgasBool test_5 = test_4.boolEnum () ;
   if (kBoolTrue == test_5) {
-    GALGAS_string var_s = var_precedenceGraph.getter_graphviz (SOURCE_FILE ("ordered-declaration-list.galgas", 64)) ;
-    GALGAS_string var_filePath = constinArgument_inSourceFile.add_operation (GALGAS_string (".typeDependency.dot"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 65)) ;
-    GALGAS_bool joker_3278 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_3278, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 66)) ;
+    GALGAS_string var_s = var_precedenceGraph.getter_graphviz (SOURCE_FILE ("ordered-declaration-list.galgas", 57)) ;
+    GALGAS_string var_filePath = constinArgument_inSourceFile.add_operation (GALGAS_string (".declarationDependency.dot"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 58)) ;
+    GALGAS_bool joker_3402 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_3402, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 59)) ;
   }
-  outArgument_outDeclarationListAST = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("ordered-declaration-list.galgas", 69)) ;
-  const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_precedenceGraph.getter_undefinedNodeCount (SOURCE_FILE ("ordered-declaration-list.galgas", 70)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  outArgument_outDeclarationListAST = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("ordered-declaration-list.galgas", 62)) ;
+  const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_precedenceGraph.getter_undefinedNodeCount (SOURCE_FILE ("ordered-declaration-list.galgas", 63)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_6) {
-    cEnumerator_lstringlist enumerator_3431 (var_precedenceGraph.getter_undefinedNodeReferenceList (SOURCE_FILE ("ordered-declaration-list.galgas", 71)), kEnumeration_up) ;
-    while (enumerator_3431.hasCurrentObject ()) {
-      GALGAS_location location_7 (enumerator_3431.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_7, GALGAS_string ("the $").add_operation (enumerator_3431.current_mValue (HERE).getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 72)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 72)).add_operation (GALGAS_string (" type is not defined"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 72))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 72)) ;
-      enumerator_3431.gotoNextObject () ;
+    cEnumerator_lstringlist enumerator_3624 (var_precedenceGraph.getter_undefinedNodeReferenceList (SOURCE_FILE ("ordered-declaration-list.galgas", 64)), kEnumeration_up) ;
+    while (enumerator_3624.hasCurrentObject ()) {
+      GALGAS_location location_7 (enumerator_3624.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+      inCompiler->emitSemanticError (location_7, enumerator_3624.current_mValue (HERE).mAttribute_string.add_operation (GALGAS_string (" is not defined"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 65))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 65)) ;
+      enumerator_3624.gotoNextObject () ;
     }
   }else if (kBoolFalse == test_6) {
     GALGAS_declarationListAST var_unsortedSemanticDeclarationListAST ;
-    GALGAS_lstringlist joker_3586 ; // Joker input parameter
-    GALGAS_lstringlist joker_3661 ; // Joker input parameter
-    var_precedenceGraph.method_topologicalSort (outArgument_outDeclarationListAST, joker_3586, var_unsortedSemanticDeclarationListAST, joker_3661, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 75)) ;
-    const enumGalgasBool test_8 = GALGAS_bool (kIsStrictSup, var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 82)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    GALGAS_lstringlist joker_3771 ; // Joker input parameter
+    GALGAS_lstringlist joker_3846 ; // Joker input parameter
+    var_precedenceGraph.method_topologicalSort (outArgument_outDeclarationListAST, joker_3771, var_unsortedSemanticDeclarationListAST, joker_3846, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 68)) ;
+    const enumGalgasBool test_8 = GALGAS_bool (kIsStrictSup, var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 75)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_8) {
-      GALGAS_string var_s = GALGAS_string ("semantic analysis not performed, ").add_operation (var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 84)).getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 83)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 83)).add_operation (GALGAS_string (" declarations are involved in circular definition:"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 84)) ;
-      cEnumerator_declarationListAST enumerator_3986 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
-      while (enumerator_3986.hasCurrentObject ()) {
+      GALGAS_string var_s = GALGAS_string ("semantic analysis not performed, ").add_operation (var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 77)).getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 76)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 76)).add_operation (GALGAS_string (" declarations are involved in circular definition:"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 77)) ;
+      cEnumerator_declarationListAST enumerator_4171 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
+      while (enumerator_4171.hasCurrentObject ()) {
         var_s.plusAssign_operation(GALGAS_string ("\n"
-          "-  ").add_operation (callCategoryGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclaration *) enumerator_3986.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 87)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 87)), inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 87)) ;
-        enumerator_3986.gotoNextObject () ;
+          "-  ").add_operation (callCategoryGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclaration *) enumerator_4171.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 80)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 80)), inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 80)) ;
+        enumerator_4171.gotoNextObject () ;
       }
-      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 89)) ;
-      cEnumerator_declarationListAST enumerator_4158 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
-      while (enumerator_4158.hasCurrentObject ()) {
-        inCompiler->emitSemanticError (callCategoryGetter_location ((const cPtr_abstractDeclaration *) enumerator_4158.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 91)), GALGAS_string ("the ").add_operation (callCategoryGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclaration *) enumerator_4158.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 91)).add_operation (GALGAS_string (" is declared here"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 91))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 91)) ;
-        enumerator_4158.gotoNextObject () ;
+      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 82)) ;
+      cEnumerator_declarationListAST enumerator_4343 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
+      while (enumerator_4343.hasCurrentObject ()) {
+        inCompiler->emitSemanticError (callCategoryGetter_location ((const cPtr_abstractDeclaration *) enumerator_4343.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 84)), GALGAS_string ("the ").add_operation (callCategoryGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclaration *) enumerator_4343.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 84)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 84)).add_operation (GALGAS_string (" is declared here"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 84))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 84)) ;
+        enumerator_4343.gotoNextObject () ;
       }
     }
   }
@@ -637,29 +628,25 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
     categoryMethod_enterInContext (enumerator_11296.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 286)) ;
     enumerator_11296.gotoNextObject () ;
   }
-  cEnumerator_functionDeclarationListAST enumerator_11439 (constinArgument_inAST.mAttribute_mFunctionListAST, kEnumeration_up) ;
-  while (enumerator_11439.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_11439.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 290)) ;
-    enumerator_11439.gotoNextObject () ;
-  }
-  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 293)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  categoryMethod_enterInContext (constinArgument_inAST.mAttribute_mFunctionListAST, outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 288)) ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 290)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    cEnumerator_requiredProcedureDeclarationListAST enumerator_11619 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
-    while (enumerator_11619.hasCurrentObject ()) {
-      cEnumerator_lstringlist enumerator_11674 (enumerator_11619.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
-      while (enumerator_11674.hasCurrentObject ()) {
-        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_11674.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 296)) ;
-        enumerator_11674.gotoNextObject () ;
+    cEnumerator_requiredProcedureDeclarationListAST enumerator_11549 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
+    while (enumerator_11549.hasCurrentObject ()) {
+      cEnumerator_lstringlist enumerator_11604 (enumerator_11549.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
+      while (enumerator_11604.hasCurrentObject ()) {
+        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_11604.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 293)) ;
+        enumerator_11604.gotoNextObject () ;
       }
-      enumerator_11619.gotoNextObject () ;
+      enumerator_11549.gotoNextObject () ;
     }
   }
-  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 301)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 298)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
-    cEnumerator_globalVarDeclarationList enumerator_11874 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
-    while (enumerator_11874.hasCurrentObject ()) {
-      categoryMethod_enterInContext (enumerator_11874.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 303)) ;
-      enumerator_11874.gotoNextObject () ;
+    cEnumerator_globalVarDeclarationList enumerator_11804 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
+    while (enumerator_11804.hasCurrentObject ()) {
+      categoryMethod_enterInContext (enumerator_11804.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 300)) ;
+      enumerator_11804.gotoNextObject () ;
     }
   }
 }
@@ -677,11 +664,11 @@ GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const GALGAS_unifiedT
                                                            C_Compiler * inCompiler
                                                            COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_unifiedTypeMap_2D_proxy result_outType ; // Returned variable
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inSourceType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-context.galgas", 319)))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inSourceType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-context.galgas", 316)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inTargetType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-context.galgas", 320)))).boolEnum () ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inTargetType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-context.galgas", 317)))).boolEnum () ;
     if (kBoolTrue == test_1) {
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("Cannot infer type")  COMMA_SOURCE_FILE ("semantic-context.galgas", 321)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("Cannot infer type")  COMMA_SOURCE_FILE ("semantic-context.galgas", 318)) ;
       result_outType.drop () ; // Release error dropped variable
     }else if (kBoolFalse == test_1) {
       result_outType = constinArgument_inTargetType ;
@@ -746,7 +733,7 @@ GALGAS_lstring function_combineTypeNamesForInfixOperator (const GALGAS_string & 
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("{").add_operation (constinArgument_inLeftTypeName, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 333)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 333)).add_operation (constinArgument_inRightTypeName, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 333)).add_operation (GALGAS_string ("}"), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 333)).getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 333)) ;
+  result_outResult = GALGAS_string ("{").add_operation (constinArgument_inLeftTypeName, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 330)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 330)).add_operation (constinArgument_inRightTypeName, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 330)).add_operation (GALGAS_string ("}"), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 330)).getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 330)) ;
 //---
   return result_outResult ;
 }
@@ -5801,15 +5788,13 @@ const char * gWrapperFileContent_3_targetTemplates = "\n"
   "register NVIC_ISER1  at 0xE000_E104 $uint32\n"
   "register NVIC_ISER2  at 0xE000_E108 $uint32\n"
   "\n"
-  "register NVIC_ISER at 0xE000_E100 $uint96\n"
+  "//register NVIC_ISER at 0xE000_E100 $uint96\n"
+  "\n"
+  "\n"
   "//register NVIC_DISABLE_IRQ(n) (*((volatile $uint32_t *)0xE000E180 + (n >> 5)) = (1 << (n & 31)))\n"
   "//register NVIC_SET_PENDING(n) (*((volatile $uint32_t *)0xE000E200 + (n >> 5)) = (1 << (n & 31)))\n"
   "//register NVIC_CLEAR_PENDING(n) (*((volatile $uint32_t *)0xE000E280 + (n >> 5)) = (1 << (n & 31)))\n"
-  "//\n"
-  "//register NVIC_ISER0   0xE000E100\n"
-  "//register NVIC_ISER1   0xE000E104\n"
-  "//register NVIC_ICER0   0xE000E180\n"
-  "//register NVIC_ICER1   0xE000E184\n"
+  "\n"
   "//\n"
   "//// 0 = highest priority\n"
   "//// Cortex-M4: 0,16,32,48,64,80,96,112,128,144,160,176,192,208,224,240\n"
@@ -5943,7 +5928,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  134487, // Text length
+  134349, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
@@ -9355,8 +9340,8 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-it\
   "\n"
   "init 100_000 {\n"
   "  SIM_SCGC6 |= SIM_SCGC6_PIT\n"
-  " // NVIC_ISER2 = 1 << ((84 - 16) & 31)\n"
-  "  NVIC_ISER = 1 << (84 - 16)\n"
+  "  NVIC_ISER2 = 1 << ((84 - 16) & 31)\n"
+  "//  NVIC_ISER = 1 << (84 - 16)\n"
   "  AICS0_PARCG = 0\n"
   "}\n"
   "\n"
