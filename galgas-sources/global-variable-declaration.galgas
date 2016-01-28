@@ -129,7 +129,23 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                    *
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc noteGlobalVariableTypesInPrecedenceGraph
+  ?let @globalVarDeclarationList inGlobalVariableDeclarationListAST
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for (globalVariableTypeName 6*) in inGlobalVariableDeclarationListAST do
+    if globalVariableTypeName.string != "" then
+      let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @allowedRoutineMap {
@@ -149,7 +165,7 @@ method @globalVarDeclarationList-element enterInContext
   if mTypeName.string == "" then
     variableType = .null
   else
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTypeName ?variableType]
+    variableType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mTypeName}
   end
 #--- Analyze source expression
   @semanticTemporariesStruct temporaries = .default
@@ -188,7 +204,7 @@ method @globalVarDeclarationList-element enterInContext
       [ioContext.mFunctionMap searchKey !funcName ?3*]
       receiverType = .null
     else
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?receiverType]
+      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !typeName}
       [[receiverType functionMap] searchKey !funcName ?3*]
     end
     [!?allowedRoutineMap insertKey !funcNameForInvocationGraph (!receiverType !funcName) !false]
@@ -233,7 +249,7 @@ method @globalVarDeclarationList-element enterInContext
         executionModes += !lkey.string
       end
     else
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !procedure.mReceiverTypeName ?receiverType]
+      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReceiverTypeName}
       [[receiverType procedureMap] searchKey
         !procedure.mProcName
         ?*

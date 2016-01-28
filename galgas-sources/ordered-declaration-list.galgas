@@ -24,13 +24,40 @@ proc buildOrderedDeclarationList
   ?endOfSourceFile:let @location inEndOfSourceFile
   !orderedDeclarationList:@declarationListAST outDeclarationListAST
 {
-#--- Build precedence graph
+#-------------------------------------- Build precedence graph
   @semanticTypePrecedenceGraph precedenceGraph = .emptyGraph
   for () in inAST.mDeclarationList do
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
   end
   for procedure in inAST.mProcedureListAST do
     [procedure enterInPrecedenceGraph !?precedenceGraph]
+  end
+  for function in inAST.mFunctionListAST do
+    [function enterInPrecedenceGraph !?precedenceGraph]
+  end
+  noteControlRegisterTypesInPrecedenceGraph (
+    !inAST.mControlRegisterDeclarationListAST
+    !?precedenceGraph
+  )
+  noteGlobalVariableTypesInPrecedenceGraph (
+    !inAST.mGlobalVarDeclarationList
+    !?precedenceGraph
+  )
+#--------------------------------------- Add needed $uintXX and $intXX types
+  for () in [precedenceGraph undefinedNodeKeyList] do
+#    log "UNDEFINED " : mValue
+    let split = [mValue componentsSeparatedByString !"int"]
+    if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
+      if [split mValueAtIndex !0] == "$u" then
+        let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
+        let declaration = @integerDeclaration.new {!false !n}
+        [declaration enterInPrecedenceGraph !?precedenceGraph]
+      elsif [split mValueAtIndex !0] == "$" then
+        let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
+        let declaration = @integerDeclaration.new {!true !n}
+        [declaration enterInPrecedenceGraph !?precedenceGraph]
+      end
+    end
   end
 #---  Write precedence graph file ?
   if (@uint.errorCount == 0) && [option plm_options.writeTypeDependencyGraphFile value] then
@@ -51,6 +78,7 @@ proc buildOrderedDeclarationList
       ?let @declarationListAST unsortedSemanticDeclarationListAST
       ?*
     ]
+#    log outDeclarationListAST
     if [unsortedSemanticDeclarationListAST length] > 0 then
       var s = "semantic analysis not performed, "
             + [unsortedSemanticDeclarationListAST length]

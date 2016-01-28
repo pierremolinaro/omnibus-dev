@@ -50,7 +50,7 @@ override method @literalStringDeclaration enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["uint8" nowhere] ?let uint8Type]
+  let uint8Type = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !["uint8" nowhere]}
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mLiteralStringTypeName
@@ -77,7 +77,7 @@ override method @literalStringDeclaration enterInContext
 #  ?integerTypeName:@lstring inBooleanTypeName
 #  ?!context:@semanticContext ioContext
 #{
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBooleanTypeName ?let selfTypeProxy]
+#  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!?ioContext.mTypeMap !inBooleanTypeName}
 #  [!?ioContext.mEqualOperatorMap insertKey
 #    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
 #    !selfTypeProxy

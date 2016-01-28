@@ -71,6 +71,7 @@ override method @enumerationDeclaration enterInPrecedenceGraph
 {
   let typeName = @lstring.new {!"$" + mEnumerationName !mEnumerationName.location}
   [!?ioGraph addNode !typeName !self]
+  [!?ioGraph addEdge !typeName !["$" + boolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -109,13 +109,6 @@ private proc compileProject
     !endOfSourceFile:inEndOfSourceFile
     ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
   )
-#--- Build ordered global constant declaration list
-#  buildOrderedConstantDeclarationList (
-#    !ast.mGlobalConstantDeclarationListAST
-#    !inSourceFile.string
-#    !inEndOfSourceFile
-#    ?let @globalConstantDeclarationListAST orderedConstantDeclarationList
-#  )
 #--- Semantic context
   if @uint.errorCount == 0 then
     @staticStringMap globalLiteralStringMap = {}

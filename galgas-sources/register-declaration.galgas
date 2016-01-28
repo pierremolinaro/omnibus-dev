@@ -126,13 +126,25 @@ map @registerMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+proc noteControlRegisterTypesInPrecedenceGraph
+  ?let @controlRegisterDeclarationListAST inRegisterDeclarationListAST
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for (* registerTypeName *) in inRegisterDeclarationListAST do
+    let typeName = @lstring.new {!"$" + registerTypeName !registerTypeName.location}
+    [!?ioGraph noteNode !typeName]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 proc enterControlRegistersInContext
   ?let @controlRegisterDeclarationListAST inRegisterDeclarationListAST
   ?!context:@semanticContext ioContext
 {
   for (registerNameList registerTypeName registerBitSliceList) in inRegisterDeclarationListAST do
   #---
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !registerTypeName ?let registerType]
+    let registerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !registerTypeName}
   #--- Build bit slice map
     @registerFieldMap registerFieldMap = {}
     @registerBitSliceAccessMap registerBitSliceMap = {}
