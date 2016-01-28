@@ -15173,38 +15173,38 @@ void routine_enterFormalArguments (const GALGAS_semanticContext constinArgument_
                                    GALGAS_procFormalArgumentListForGeneration & ioArgument_ioFormalArguments,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_procFormalArgumentList enumerator_9810 (constinArgument_inFormalArgumentPassingMode, kEnumeration_up) ;
-  while (enumerator_9810.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, enumerator_9810.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("proc-declaration.galgas", 275)) ;
-    switch (enumerator_9810.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
+  cEnumerator_procFormalArgumentList enumerator_9883 (constinArgument_inFormalArgumentPassingMode, kEnumeration_up) ;
+  while (enumerator_9883.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, enumerator_9883.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("proc-declaration.galgas", 276)) ;
+    switch (enumerator_9883.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
         {
-        ioArgument_ioVariableMap.setter_insertConstantInputFormalArgument (enumerator_9810.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (var_typeProxy, enumerator_9810.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 282)), var_typeProxy.getter_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 283)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 284)), GALGAS_bool (true), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 278)) ;
+        ioArgument_ioVariableMap.setter_insertConstantInputFormalArgument (enumerator_9883.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (var_typeProxy, enumerator_9883.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 283)), var_typeProxy.getter_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 284)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 285)), GALGAS_bool (true), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 279)) ;
         }
-        ioArgument_ioFormalArguments.addAssign_operation (enumerator_9810.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_llvmNameForLocalVariable (enumerator_9810.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 288))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 288)) ;
+        ioArgument_ioFormalArguments.addAssign_operation (enumerator_9883.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_llvmNameForLocalVariable (enumerator_9883.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 289))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 289)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
       {
         {
-        ioArgument_ioVariableMap.setter_insertInputOutputFormalArgument (enumerator_9810.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (var_typeProxy, enumerator_9810.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 294)), var_typeProxy.getter_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 295)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 296)), GALGAS_bool (true), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 290)) ;
+        ioArgument_ioVariableMap.setter_insertInputOutputFormalArgument (enumerator_9883.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (var_typeProxy, enumerator_9883.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 295)), var_typeProxy.getter_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 296)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 297)), GALGAS_bool (true), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 291)) ;
         }
-        ioArgument_ioFormalArguments.addAssign_operation (enumerator_9810.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_llvmNameForLocalVariable (enumerator_9810.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 300))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 300)) ;
+        ioArgument_ioFormalArguments.addAssign_operation (enumerator_9883.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_llvmNameForLocalVariable (enumerator_9883.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 301))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 301)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
       {
         {
-        ioArgument_ioVariableMap.setter_insertOutputFormalArgument (enumerator_9810.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (var_typeProxy, enumerator_9810.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 306)), var_typeProxy.getter_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 307)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 308)), GALGAS_bool (true), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 302)) ;
+        ioArgument_ioVariableMap.setter_insertOutputFormalArgument (enumerator_9883.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (var_typeProxy, enumerator_9883.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 307)), var_typeProxy.getter_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 308)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 309)), GALGAS_bool (true), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 303)) ;
         }
-        ioArgument_ioFormalArguments.addAssign_operation (enumerator_9810.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_llvmNameForLocalVariable (enumerator_9810.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 312))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 312)) ;
+        ioArgument_ioFormalArguments.addAssign_operation (enumerator_9883.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_llvmNameForLocalVariable (enumerator_9883.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 313))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 313)) ;
       }
       break ;
     }
-    enumerator_9810.gotoNextObject () ;
+    enumerator_9883.gotoNextObject () ;
   }
 }
 

@@ -29,6 +29,14 @@ override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpressio
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

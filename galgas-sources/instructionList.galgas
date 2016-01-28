@@ -34,7 +34,23 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                           *
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract method @instructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @instructionListAST noteInstructionListTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for () in self do
+    [mInstruction noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @instructionAST analyze

@@ -42,6 +42,15 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  [mIteratedExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                           *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

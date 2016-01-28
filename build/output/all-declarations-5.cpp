@@ -5515,7 +5515,7 @@ typeComparisonResult cPtr_constructorCall::dynamicObjectCompare (const acPtr_cla
   const cPtr_constructorCall * p = (const cPtr_constructorCall *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_constructorCall) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mOptionalTypeName.objectCompare (p->mAttribute_mOptionalTypeName) ;
+    result = mAttribute_mTypeName.objectCompare (p->mAttribute_mTypeName) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mErrorLocation.objectCompare (p->mAttribute_mErrorLocation) ;
@@ -5565,32 +5565,32 @@ GALGAS_expressionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_constructorCall GALGAS_constructorCall::constructor_new (const GALGAS_lstring & inAttribute_mOptionalTypeName,
+GALGAS_constructorCall GALGAS_constructorCall::constructor_new (const GALGAS_lstring & inAttribute_mTypeName,
                                                                 const GALGAS_location & inAttribute_mErrorLocation
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_constructorCall result ;
-  if (inAttribute_mOptionalTypeName.isValid () && inAttribute_mErrorLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_constructorCall (inAttribute_mOptionalTypeName, inAttribute_mErrorLocation COMMA_THERE)) ;
+  if (inAttribute_mTypeName.isValid () && inAttribute_mErrorLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_constructorCall (inAttribute_mTypeName, inAttribute_mErrorLocation COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_constructorCall::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_constructorCall::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_constructorCall * p = (const cPtr_constructorCall *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_constructorCall) ;
-    result = p->mAttribute_mOptionalTypeName ;
+    result = p->mAttribute_mTypeName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_constructorCall::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOptionalTypeName ;
+GALGAS_lstring cPtr_constructorCall::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5615,11 +5615,11 @@ GALGAS_location cPtr_constructorCall::getter_mErrorLocation (UNUSED_LOCATION_ARG
 //                                      Pointer class for @constructorCall class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_constructorCall::cPtr_constructorCall (const GALGAS_lstring & in_mOptionalTypeName,
+cPtr_constructorCall::cPtr_constructorCall (const GALGAS_lstring & in_mTypeName,
                                             const GALGAS_location & in_mErrorLocation
                                             COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
-mAttribute_mOptionalTypeName (in_mOptionalTypeName),
+mAttribute_mTypeName (in_mTypeName),
 mAttribute_mErrorLocation (in_mErrorLocation) {
 }
 
@@ -5632,7 +5632,7 @@ const C_galgas_type_descriptor * cPtr_constructorCall::classDescriptor (void) co
 void cPtr_constructorCall::description (C_String & ioString,
                                         const int32_t inIndentation) const {
   ioString << "[@constructorCall:" ;
-  mAttribute_mOptionalTypeName.description (ioString, inIndentation+1) ;
+  mAttribute_mTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mErrorLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -5642,7 +5642,7 @@ void cPtr_constructorCall::description (C_String & ioString,
 
 acPtr_class * cPtr_constructorCall::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_constructorCall (mAttribute_mOptionalTypeName, mAttribute_mErrorLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_constructorCall (mAttribute_mTypeName, mAttribute_mErrorLocation COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -12589,6 +12589,66 @@ GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                   Abstract category method '@expressionAST noteExpressionTypesInPrecedenceGraph'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph> gCategoryMethodTable_expressionAST_noteExpressionTypesInPrecedenceGraph ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_noteExpressionTypesInPrecedenceGraph (const int32_t inClassIndex,
+                                                               categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph inMethod) {
+  gCategoryMethodTable_expressionAST_noteExpressionTypesInPrecedenceGraph.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_expressionAST_noteExpressionTypesInPrecedenceGraph (void) {
+  gCategoryMethodTable_expressionAST_noteExpressionTypesInPrecedenceGraph.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_expressionAST_noteExpressionTypesInPrecedenceGraph (NULL,
+                                                                               freeCategoryMethod_expressionAST_noteExpressionTypesInPrecedenceGraph) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_noteExpressionTypesInPrecedenceGraph (const cPtr_expressionAST * inObject,
+                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_expressionAST) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph f = NULL ;
+    if (classIndex < gCategoryMethodTable_expressionAST_noteExpressionTypesInPrecedenceGraph.count ()) {
+      f = gCategoryMethodTable_expressionAST_noteExpressionTypesInPrecedenceGraph (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_expressionAST_noteExpressionTypesInPrecedenceGraph.count ()) {
+           f = gCategoryMethodTable_expressionAST_noteExpressionTypesInPrecedenceGraph (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_expressionAST_noteExpressionTypesInPrecedenceGraph.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioGraph, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                             Abstract category method '@expressionAST analyzeExpression'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12656,6 +12716,85 @@ void callCategoryMethod_analyzeExpression (const cPtr_expressionAST * inObject,
     }
   }
 }
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                  Abstract category method '@instructionAST noteInstructionTypesInPrecedenceGraph'                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_instructionAST_noteInstructionTypesInPrecedenceGraph> gCategoryMethodTable_instructionAST_noteInstructionTypesInPrecedenceGraph ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_noteInstructionTypesInPrecedenceGraph (const int32_t inClassIndex,
+                                                                categoryMethodSignature_instructionAST_noteInstructionTypesInPrecedenceGraph inMethod) {
+  gCategoryMethodTable_instructionAST_noteInstructionTypesInPrecedenceGraph.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_instructionAST_noteInstructionTypesInPrecedenceGraph (void) {
+  gCategoryMethodTable_instructionAST_noteInstructionTypesInPrecedenceGraph.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_instructionAST_noteInstructionTypesInPrecedenceGraph (NULL,
+                                                                                 freeCategoryMethod_instructionAST_noteInstructionTypesInPrecedenceGraph) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_noteInstructionTypesInPrecedenceGraph (const cPtr_instructionAST * inObject,
+                                                               GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_instructionAST) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_instructionAST_noteInstructionTypesInPrecedenceGraph f = NULL ;
+    if (classIndex < gCategoryMethodTable_instructionAST_noteInstructionTypesInPrecedenceGraph.count ()) {
+      f = gCategoryMethodTable_instructionAST_noteInstructionTypesInPrecedenceGraph (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_instructionAST_noteInstructionTypesInPrecedenceGraph.count ()) {
+           f = gCategoryMethodTable_instructionAST_noteInstructionTypesInPrecedenceGraph (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_instructionAST_noteInstructionTypesInPrecedenceGraph.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioGraph, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                   Category method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteInstructionListTypesInPrecedenceGraph (const GALGAS_instructionListAST inObject,
+                                                               GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_instructionListAST temp_0 = inObject ;
+  cEnumerator_instructionListAST enumerator_2177 (temp_0, kEnumeration_up) ;
+  while (enumerator_2177.hasCurrentObject ()) {
+    callCategoryMethod_noteInstructionTypesInPrecedenceGraph ((const cPtr_instructionAST *) enumerator_2177.current_mInstruction (HERE).ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 48)) ;
+    enumerator_2177.gotoNextObject () ;
+  }
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -12743,16 +12882,16 @@ void categoryMethod_analyzeBranchInstructionList (const GALGAS_instructionListAS
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   {
-  ioArgument_ioVariableMap.setter_openBranch (inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 64)) ;
+  ioArgument_ioVariableMap.setter_openBranch (inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 80)) ;
   }
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_3018 (temp_0, kEnumeration_up) ;
-  while (enumerator_3018.hasCurrentObject ()) {
-    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_3018.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 66)) ;
-    enumerator_3018.gotoNextObject () ;
+  cEnumerator_instructionListAST enumerator_3822 (temp_0, kEnumeration_up) ;
+  while (enumerator_3822.hasCurrentObject ()) {
+    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_3822.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 82)) ;
+    enumerator_3822.gotoNextObject () ;
   }
   {
-  ioArgument_ioVariableMap.setter_closeBranch (inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 78)) ;
+  ioArgument_ioVariableMap.setter_closeBranch (inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 94)) ;
   }
 }
 
@@ -12775,10 +12914,10 @@ void categoryMethod_analyzeRoutineInstructionList (const GALGAS_instructionListA
                                                    C_Compiler * inCompiler
                                                    COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_4084 (temp_0, kEnumeration_up) ;
-  while (enumerator_4084.hasCurrentObject ()) {
-    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_4084.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 94)) ;
-    enumerator_4084.gotoNextObject () ;
+  cEnumerator_instructionListAST enumerator_4888 (temp_0, kEnumeration_up) ;
+  while (enumerator_4888.hasCurrentObject ()) {
+    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_4888.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 110)) ;
+    enumerator_4888.gotoNextObject () ;
   }
 }
 
@@ -12796,10 +12935,10 @@ void categoryMethod_instructionListLLVMCode (const GALGAS_instructionListIR inOb
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_4994 (temp_0, kEnumeration_up) ;
-  while (enumerator_4994.hasCurrentObject ()) {
-    callCategoryMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_4994.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 117)) ;
-    enumerator_4994.gotoNextObject () ;
+  cEnumerator_instructionListIR enumerator_5798 (temp_0, kEnumeration_up) ;
+  while (enumerator_5798.hasCurrentObject ()) {
+    callCategoryMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_5798.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 133)) ;
+    enumerator_5798.gotoNextObject () ;
   }
 }
 
@@ -15261,27 +15400,4 @@ GALGAS_globalVarDeclarationList_2D_element GALGAS_globalVarDeclarationList_2D_el
   }
   return result ;
 }
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category method '@globalVarDeclarationList-element semanticAnalysis'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_semanticAnalysis (const GALGAS_globalVarDeclarationList_2D_element inObject,
-                                      const GALGAS_semanticContext constinArgument_inContext,
-                                      GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                      C_Compiler * inCompiler
-                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy var_inferredType ;
-  GALGAS_stringset var_executionModeSet ;
-  GALGAS_allowedRoutineMap var_allowedProcedureMap ;
-  GALGAS_valueIR var_expressionGeneratedCode ;
-  GALGAS_bool var_isConstant ;
-  constinArgument_inContext.mAttribute_mGlobalVariableMap.method_searchKey (inObject.mAttribute_mVarName, var_inferredType, var_executionModeSet, var_allowedProcedureMap, var_expressionGeneratedCode, var_isConstant, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 288)) ;
-  {
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalVariableMap.setter_insertKey (inObject.mAttribute_mVarName, var_inferredType, GALGAS_bool (kIsStrictSup, var_executionModeSet.getter_count (SOURCE_FILE ("global-variable-declaration.galgas", 299)).objectCompare (GALGAS_uint ((uint32_t) 1U))), var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 296)) ;
-  }
-}
-
 

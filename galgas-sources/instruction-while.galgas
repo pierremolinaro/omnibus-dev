@@ -55,6 +55,15 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mWhileInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  [mTestExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                           *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -58,6 +58,25 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  if mOptionalTypeName.string != "" then
+    let typeName = @lstring.new {!"$" + mOptionalTypeName !mOptionalTypeName.location}
+    [!?ioGraph noteNode !typeName]
+  end
+  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                           *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -110,7 +129,6 @@ override method @varInstructionWithAssignmentAST analyze
     !false # Is not constant
   ]
 #--- Code generation
-#  [!?ioInstructionGenerationList appendComment !"var " + mVarName.string + " = " + expressionResult.mValue]
   [!?ioInstructionGenerationList appendAlloca
     !mVarName.string
     !targetType

@@ -34,7 +34,7 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertExpressionAST addDependenceEdgeForStaticExpression
@@ -42,6 +42,18 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

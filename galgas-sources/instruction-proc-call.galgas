@@ -97,6 +97,21 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @procCallInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in mEffectiveParameterList do
+    switch mEffectiveParameterKind
+    case input (*):
+    case output (expression *) :
+      [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case outputInput (*) :
+    end 
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

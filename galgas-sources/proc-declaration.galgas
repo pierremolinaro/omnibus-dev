@@ -165,6 +165,7 @@ method @procedureDeclarationListAST-element enterInPrecedenceGraph
     let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
     [!?ioGraph noteNode !typeName]
   end
+  [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

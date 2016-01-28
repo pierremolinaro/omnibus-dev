@@ -95,6 +95,7 @@ method @functionDeclarationListAST-element enterInPrecedenceGraph
   end
   let resultTypeName = @lstring.new {!"$" + mResultTypeName !mResultTypeName.location}
   [!?ioGraph noteNode !resultTypeName]
+  [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

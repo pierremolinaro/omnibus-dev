@@ -76,9 +76,9 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_addOp:
     {
-      const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 190)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 190)).boolEnum () ;
+      const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 206)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 206)).boolEnum () ;
       if (kBoolTrue == test_0) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 191)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 191)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 191))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 191)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207)) ;
       }
       const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_1) {
@@ -95,9 +95,9 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_subOp:
     {
-      const enumGalgasBool test_2 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 201)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 201)).boolEnum () ;
+      const enumGalgasBool test_2 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 217)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 217)).boolEnum () ;
       if (kBoolTrue == test_2) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 202)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 202)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 202))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 202)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 218)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 218)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 218))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 218)) ;
       }
       const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_3) {
@@ -114,9 +114,9 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_mulOp:
     {
-      const enumGalgasBool test_4 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 212)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 212)).boolEnum () ;
+      const enumGalgasBool test_4 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 228)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 228)).boolEnum () ;
       if (kBoolTrue == test_4) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229)) ;
       }
       const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_5) {
@@ -133,9 +133,9 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_divOp:
     {
-      const enumGalgasBool test_6 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 223)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 223)).boolEnum () ;
+      const enumGalgasBool test_6 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 239)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 239)).boolEnum () ;
       if (kBoolTrue == test_6) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 240)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 240)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 240))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 240)) ;
       }
       const enumGalgasBool test_7 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_7) {
@@ -152,9 +152,9 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_modOp:
     {
-      const enumGalgasBool test_8 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 234)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 234)).boolEnum () ;
+      const enumGalgasBool test_8 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 250)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 250)).boolEnum () ;
       if (kBoolTrue == test_8) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 235)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 235))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 235)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 251)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 251)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 251))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 251)) ;
       }
       const enumGalgasBool test_9 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_9) {

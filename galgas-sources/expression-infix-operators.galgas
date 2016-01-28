@@ -67,6 +67,22 @@ override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeFo
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @infixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                           *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

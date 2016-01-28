@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @constructorCall : @expressionAST {
-  @lstring mOptionalTypeName
+  @lstring mTypeName
   @location mErrorLocation
 }
 
@@ -34,11 +34,19 @@ syntax extension common_syntax {
 
 override method @constructorCall addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
 {
-#  if mOptionalTypeName.string != "" then
-#    [!?ioGraph addEdge !inConstantName !mOptionalTypeName]
-#  end
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+  [!?ioGraph noteNode !typeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -59,10 +67,10 @@ override method @constructorCall analyzeExpression
 {
 #--- Analyze constructor source type
   @unifiedTypeMap-proxy resultType
-  if mOptionalTypeName.string == "" then
+  if mTypeName.string == "" then
     resultType = inOptionalTargetType
   else
-    resultType = .searchKey {!inContext.mTypeMap !mOptionalTypeName}
+    resultType = .searchKey {!inContext.mTypeMap !mTypeName}
   end
   if resultType == .null then
     error mErrorLocation : "cannot infer type" : outResult
