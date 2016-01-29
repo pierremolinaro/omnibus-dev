@@ -82,20 +82,20 @@ override method @letInstructionWithAssignmentAST analyze
     ?result:let @operandIR expressionResult
   ]
 #--- Declare local constant
-  checkAssignmentCompatibility (
+  let result = checkAssignmentCompatibility (
     !source:expressionResult
-    !targetType:targetType
+    !targetAnnotationType:targetType
     !errorLocation:mVarName.location
+    !staticTypeAllowed:true
   )
 #--- Declare local constant
-  let constantType = if targetType == .null then expressionResult.mType else targetType end
-  let localConstant = @objectInMemoryIR.localValue {!type:constantType !name:mVarName.string}
+  let localConstant = @objectInMemoryIR.localValue {!type:result.mType !name:mVarName.string}
   [!?ioVariableMap insertLocalConstant
     !mVarName
-    !constantType
+    !result.mType
     !true
     !localConstant
-    ![constantType copiable]
+    ![result.mType copiable]
     !{}
     !true
     !true # Is Constant
@@ -103,7 +103,7 @@ override method @letInstructionWithAssignmentAST analyze
 #--- Generate code
   [!?ioInstructionGenerationList appendAlloca
     !mVarName.string
-    !constantType
+    !result.mType
   ]
   [localConstant storeInMemory
     !value:expressionResult

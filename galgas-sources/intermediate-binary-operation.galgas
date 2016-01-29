@@ -165,7 +165,7 @@ override method @binaryOperationIR llvmInstructionCode
   case usubOVF :
     [self enterCodeForOverflowOperation
       !"usub"
-      !11
+      !13
       !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
@@ -173,7 +173,7 @@ override method @binaryOperationIR llvmInstructionCode
   case ssubOVF :
     [self enterCodeForOverflowOperation
       !"ssub"
-      !11
+      !13
       !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
@@ -181,7 +181,7 @@ override method @binaryOperationIR llvmInstructionCode
   case umulOVF :
     [self enterCodeForOverflowOperation
       !"umul"
-      !12
+      !33
       !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
@@ -189,7 +189,7 @@ override method @binaryOperationIR llvmInstructionCode
   case smulOVF :
     [self enterCodeForOverflowOperation
       !"smul"
-      !12
+      !33
       !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
@@ -197,7 +197,7 @@ override method @binaryOperationIR llvmInstructionCode
   case udivOVF :
     [self enterCodeForDivisionWithZeroDivisorException
       !"udiv"
-      !13
+      !39
       !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
@@ -205,7 +205,7 @@ override method @binaryOperationIR llvmInstructionCode
   case sdivOVF :
     [self enterCodeForDivisionWithZeroDivisorException
       !"sdiv"
-      !13
+      !39
       !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
@@ -213,7 +213,7 @@ override method @binaryOperationIR llvmInstructionCode
   case uremOVF :
     [self enterCodeForDivisionWithZeroDivisorException
       !"urem"
-      !14
+      !44
       !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
@@ -221,7 +221,7 @@ override method @binaryOperationIR llvmInstructionCode
   case sremOVF :
     [self enterCodeForDivisionWithZeroDivisorException
       !"srem"
-      !14
+      !44
       !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds

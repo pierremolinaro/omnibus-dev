@@ -122,15 +122,13 @@ override method @globalConstantDeclaration enterInContext
      ?result:let @operandIR expressionResult
   ]
 #--- Check assignment compatibility
-  checkAssignmentCompatibility (
+  let result = checkAssignmentCompatibility (
     !source:expressionResult
-    !targetType:annotationType
+    !targetAnnotationType:annotationType
     !errorLocation:mConstantName.location
+    !staticTypeAllowed:true
   )
-#--- Constant type
-  let constantType = if annotationType == .null then expressionResult.mType else annotationType end
-  let result = @operandIR.new {!constantType !expressionResult.mValue}
-#--- Check source expression is statically comtuted
+  drop annotationType
   if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end

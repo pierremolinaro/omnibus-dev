@@ -212,16 +212,17 @@ override method @procCallInstructionAST analyze
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @operandIR expressionResult
       ]
-      checkAssignmentCompatibility (
+      let result = checkAssignmentCompatibility (
         !source:expressionResult
-        !targetType:formal_mType
+        !targetAnnotationType:formal_mType
         !errorLocation:endOfExp
+        !staticTypeAllowed:false
       )
       parameterList += !mEffectiveParameterKind !mSelector !formal_mType
       procCallEffectiveParameterListIR += 
         !.output
         !mSelector
-        !.new {!formal_mType !expressionResult.mValue}
+        !result
     case outputInput (@lstring name) :
       [!?ioVariableMap searchForReadWriteAccess
         !name

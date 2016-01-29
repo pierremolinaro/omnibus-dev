@@ -14,6 +14,93 @@
 
 
 
+typeComparisonResult GALGAS_abstractExpressionIR::objectCompare (const GALGAS_abstractExpressionIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_abstractExpressionIR::GALGAS_abstractExpressionIR (void) :
+AC_GALGAS_class () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_abstractExpressionIR::GALGAS_abstractExpressionIR (const cPtr_abstractExpressionIR * inSourcePtr) :
+AC_GALGAS_class (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractExpressionIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                    Pointer class for @abstractExpressionIR class                                    *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_abstractExpressionIR::cPtr_abstractExpressionIR (LOCATION_ARGS) :
+acPtr_class (THERE) {
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @abstractExpressionIR type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_abstractExpressionIR ("abstractExpressionIR",
+                                             NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_abstractExpressionIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_abstractExpressionIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_abstractExpressionIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_abstractExpressionIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_abstractExpressionIR GALGAS_abstractExpressionIR::extractObject (const GALGAS_object & inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_abstractExpressionIR result ;
+  const GALGAS_abstractExpressionIR * p = (const GALGAS_abstractExpressionIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_abstractExpressionIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("abstractExpressionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+
 typeComparisonResult GALGAS_abstractInstructionIR::objectCompare (const GALGAS_abstractInstructionIR & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
@@ -15078,313 +15165,6 @@ GALGAS_instructionListIR_2D_element GALGAS_instructionListIR_2D_element::extract
       result = *p ;
     }else{
       inCompiler->castError ("instructionListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast::GALGAS_ast (void) :
-mAttribute_mGlobalVarDeclarationList (),
-mAttribute_mDeclarationList (),
-mAttribute_mExtensionDeclarationListAST (),
-mAttribute_mControlRegisterDeclarationListAST (),
-mAttribute_mProcedureListAST (),
-mAttribute_mRequiredProcList (),
-mAttribute_mFunctionListAST (),
-mAttribute_mTargetList (),
-mAttribute_mBootList (),
-mAttribute_mInitList (),
-mAttribute_mExceptionClauses (),
-mAttribute_mExceptionTypes () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast::~ GALGAS_ast (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast::GALGAS_ast (const GALGAS_globalVarDeclarationList & inOperand0,
-                        const GALGAS_declarationListAST & inOperand1,
-                        const GALGAS_extensionDeclarationListAST & inOperand2,
-                        const GALGAS_controlRegisterDeclarationListAST & inOperand3,
-                        const GALGAS_procedureDeclarationListAST & inOperand4,
-                        const GALGAS_requiredProcedureDeclarationListAST & inOperand5,
-                        const GALGAS_functionDeclarationListAST & inOperand6,
-                        const GALGAS_lstringlist & inOperand7,
-                        const GALGAS_bootList & inOperand8,
-                        const GALGAS_initList & inOperand9,
-                        const GALGAS_exceptionClauseListAST & inOperand10,
-                        const GALGAS_exceptionTypesAST & inOperand11) :
-mAttribute_mGlobalVarDeclarationList (inOperand0),
-mAttribute_mDeclarationList (inOperand1),
-mAttribute_mExtensionDeclarationListAST (inOperand2),
-mAttribute_mControlRegisterDeclarationListAST (inOperand3),
-mAttribute_mProcedureListAST (inOperand4),
-mAttribute_mRequiredProcList (inOperand5),
-mAttribute_mFunctionListAST (inOperand6),
-mAttribute_mTargetList (inOperand7),
-mAttribute_mBootList (inOperand8),
-mAttribute_mInitList (inOperand9),
-mAttribute_mExceptionClauses (inOperand10),
-mAttribute_mExceptionTypes (inOperand11) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_ast (GALGAS_globalVarDeclarationList::constructor_emptyList (HERE),
-                     GALGAS_declarationListAST::constructor_emptyList (HERE),
-                     GALGAS_extensionDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_controlRegisterDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_procedureDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_requiredProcedureDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_lstringlist::constructor_emptyList (HERE),
-                     GALGAS_bootList::constructor_emptySortedList (HERE),
-                     GALGAS_initList::constructor_emptySortedList (HERE),
-                     GALGAS_exceptionClauseListAST::constructor_emptySortedList (HERE),
-                     GALGAS_exceptionTypesAST::constructor_emptyList (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_globalVarDeclarationList & inOperand0,
-                                        const GALGAS_declarationListAST & inOperand1,
-                                        const GALGAS_extensionDeclarationListAST & inOperand2,
-                                        const GALGAS_controlRegisterDeclarationListAST & inOperand3,
-                                        const GALGAS_procedureDeclarationListAST & inOperand4,
-                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand5,
-                                        const GALGAS_functionDeclarationListAST & inOperand6,
-                                        const GALGAS_lstringlist & inOperand7,
-                                        const GALGAS_bootList & inOperand8,
-                                        const GALGAS_initList & inOperand9,
-                                        const GALGAS_exceptionClauseListAST & inOperand10,
-                                        const GALGAS_exceptionTypesAST & inOperand11 
-                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVarDeclarationList.objectCompare (inOperand.mAttribute_mGlobalVarDeclarationList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mDeclarationList.objectCompare (inOperand.mAttribute_mDeclarationList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExtensionDeclarationListAST.objectCompare (inOperand.mAttribute_mExtensionDeclarationListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mControlRegisterDeclarationListAST.objectCompare (inOperand.mAttribute_mControlRegisterDeclarationListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureListAST.objectCompare (inOperand.mAttribute_mProcedureListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRequiredProcList.objectCompare (inOperand.mAttribute_mRequiredProcList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionListAST.objectCompare (inOperand.mAttribute_mFunctionListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTargetList.objectCompare (inOperand.mAttribute_mTargetList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBootList.objectCompare (inOperand.mAttribute_mBootList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitList.objectCompare (inOperand.mAttribute_mInitList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionClauses.objectCompare (inOperand.mAttribute_mExceptionClauses) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionTypes.objectCompare (inOperand.mAttribute_mExceptionTypes) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_ast::isValid (void) const {
-  return mAttribute_mGlobalVarDeclarationList.isValid () && mAttribute_mDeclarationList.isValid () && mAttribute_mExtensionDeclarationListAST.isValid () && mAttribute_mControlRegisterDeclarationListAST.isValid () && mAttribute_mProcedureListAST.isValid () && mAttribute_mRequiredProcList.isValid () && mAttribute_mFunctionListAST.isValid () && mAttribute_mTargetList.isValid () && mAttribute_mBootList.isValid () && mAttribute_mInitList.isValid () && mAttribute_mExceptionClauses.isValid () && mAttribute_mExceptionTypes.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_ast::drop (void) {
-  mAttribute_mGlobalVarDeclarationList.drop () ;
-  mAttribute_mDeclarationList.drop () ;
-  mAttribute_mExtensionDeclarationListAST.drop () ;
-  mAttribute_mControlRegisterDeclarationListAST.drop () ;
-  mAttribute_mProcedureListAST.drop () ;
-  mAttribute_mRequiredProcList.drop () ;
-  mAttribute_mFunctionListAST.drop () ;
-  mAttribute_mTargetList.drop () ;
-  mAttribute_mBootList.drop () ;
-  mAttribute_mInitList.drop () ;
-  mAttribute_mExceptionClauses.drop () ;
-  mAttribute_mExceptionTypes.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_ast::description (C_String & ioString,
-                              const int32_t inIndentation) const {
-  ioString << "<struct @ast:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mGlobalVarDeclarationList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mDeclarationList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExtensionDeclarationListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mControlRegisterDeclarationListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRequiredProcList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTargetList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBootList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInitList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionClauses.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionTypes.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalVarDeclarationList GALGAS_ast::getter_mGlobalVarDeclarationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVarDeclarationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_declarationListAST GALGAS_ast::getter_mDeclarationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDeclarationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_extensionDeclarationListAST GALGAS_ast::getter_mExtensionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExtensionDeclarationListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterDeclarationListAST GALGAS_ast::getter_mControlRegisterDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mControlRegisterDeclarationListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureDeclarationListAST GALGAS_ast::getter_mProcedureListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_requiredProcedureDeclarationListAST GALGAS_ast::getter_mRequiredProcList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRequiredProcList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionDeclarationListAST GALGAS_ast::getter_mFunctionListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_ast::getter_mTargetList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootList GALGAS_ast::getter_mBootList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBootList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initList GALGAS_ast::getter_mInitList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST GALGAS_ast::getter_mExceptionClauses (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionClauses ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionTypesAST GALGAS_ast::getter_mExceptionTypes (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionTypes ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                      @ast type                                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_ast ("ast",
-                            NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_ast::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_ast ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_ast::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_ast (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast GALGAS_ast::extractObject (const GALGAS_object & inObject,
-                                      C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) {
-  GALGAS_ast result ;
-  const GALGAS_ast * p = (const GALGAS_ast *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_ast *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("ast", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
