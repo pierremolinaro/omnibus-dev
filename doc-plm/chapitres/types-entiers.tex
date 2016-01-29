@@ -5,31 +5,29 @@
 
 
 
-\chapter{Les types entiers}
+\chapterLabel{Les types entiers}{chapitreTypesEntiers}
 
-Les types entiers sont pas définis par la configuration de la cible (voir \refChapterPage{chapitreConfCible}).
-
-À titre d'exemple, la cible \texttt{teensy-3-1-it} définit les types :
+Sont définis implicitement les types entiers signés et non signés d'une taille variant entre $1$ bit et $32768$ bits, et sont notés :
 \begin{itemize}
-  \item les types entiers non signés de 1 à 128 bits (\plm!$uint1! à \plm!$uint128!) ;
-  \item les types entiers signés de 1 à 128 bits (\plm!$int1! à \plm!$int128!).
+  \item \plm!$uint1! à \plm!$uint32768! pour les types entiers non signés de $1$ à $32768$ bits ;
+  \item \plm!$int1! à \plm!$int32768! pour les types entiers signés de $1$ à $32768$ bits.
 \end{itemize}
 
-
+PLM définit aussi le type \plm!$staticInt!, qui est le type de toute constante entière littérale. Mais ce type est aussi applicable à des constantes entières \emph{statiques}, c'est-à-dire dont la valeur est calculée à la compilation. Ce type est décrit au \refChapterPage{chapitreTypeEntierStatique}.
 
 \section{Constante littérale entière}
 
 Le langage accepte des constantes littérales entières d'une taille quelconque. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
 
 \begin{PLM}
-var v $int8 = 128  // Erreur de compilation :
-                   // 128 non représentable par un entier signé 8 bits
+var v $int8 = 128  // Erreur de compilation : 128 non
+                   // représentable par un entier signé 8 bits
 var v $int8 = -128 // Ok
 \end{PLM}
 
-Une constante littérale entière n'a pas de type défini, aussi seule l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
+Une constante littérale entière a pour type \plm!$staticInt!, or ce type n'est pas acceptable pour une variable. Par exemple, si on écrit :
 \begin{PLM}
-var v = 28 // Erreur, le type ne peut pas être inféré
+var v = 28 // Erreur, le type $staticInt n'est pas valide pour une variable
 \end{PLM}
 
 Dans ce cas, il faut que la déclaration contienne l'annotation de type :
@@ -55,9 +53,9 @@ Il y a trois types de conversion entre objets de type entier :
 Les conversions qui sont toujours possibles sont exprimées par le mot réservé \plm=extend=. Par exemple :
 \begin{PLM}
 let v $uint8 = ...
-let x $uint9 = extend v to $uint9
-let y $int9 =  extend v to $int9
-let z $int10 = extend y to $int10
+let x $uint9 = extend v : $uint9
+let y $int9 =  extend v : $int9
+let z $int10 = extend y : $int10
 \end{PLM}
 
 D'une manière générale :
