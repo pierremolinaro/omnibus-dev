@@ -224,8 +224,9 @@ override method @registerIntegerConstantInExpressionIR llvmInstructionCode
     ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + [mResult.mValue llvmName]
             + " = (" + [mExpressionValue.mValue llvmName] + " & " + mMaxBound + ") << " + mBitShift + "\n" 
   else
+    let errorCode = 8
     ioLLVMcode += "if (" + [mExpressionValue.mValue llvmName] + " > " + mMaxBound + ") {\n"
-    ioLLVMcode += "  raise_exception (4, "
+    ioLLVMcode += "  raise_exception (" + errorCode + ", "
        + [[[mInstructionLocation file] lastPathComponent] utf8Representation]
        + ", " + [mInstructionLocation line] + ") ;\n"
     ioLLVMcode += "}\n" 

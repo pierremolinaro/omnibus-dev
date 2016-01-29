@@ -33,11 +33,11 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCall addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
+  ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
-  [!?ioGraph noteNode !typeName]
+  [!?ioGraph addEdge !inConstantName !typeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -50,7 +50,7 @@ override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanti
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                           *
+#  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCall analyzeExpression

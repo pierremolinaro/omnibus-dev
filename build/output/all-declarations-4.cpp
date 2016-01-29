@@ -777,48 +777,112 @@ C_galgas_function_descriptor functionDescriptor_combineTypeNamesForInfixOperator
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'checkAssignmentCompatibility'                                        *
+//                                       Function 'checkAssignmentCompatibility'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_checkAssignmentCompatibility (const GALGAS_operandIR constinArgument_inSourceValue,
-                                           const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inTargetType,
-                                           const GALGAS_location constinArgument_inErrorLocation,
-                                           C_Compiler * inCompiler
-                                           COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inTargetType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-analysis.galgas", 12)))).boolEnum () ;
+GALGAS_operandIR function_checkAssignmentCompatibility (const GALGAS_operandIR & constinArgument_inSourceValue,
+                                                        const GALGAS_unifiedTypeMap_2D_proxy & constinArgument_inTargetAnnotationType,
+                                                        const GALGAS_location & constinArgument_inErrorLocation,
+                                                        const GALGAS_bool & constinArgument_inStaticTypeAllowed,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_operandIR result_outResult ; // Returned variable
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inTargetAnnotationType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-analysis.galgas", 14)))).boolEnum () ;
   if (kBoolTrue == test_0) {
+    result_outResult = constinArgument_inSourceValue ;
   }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inTargetType.objectCompare (constinArgument_inSourceValue.mAttribute_mType)).boolEnum () ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inTargetAnnotationType.objectCompare (constinArgument_inSourceValue.mAttribute_mType)).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_bool test_2 = constinArgument_inSourceValue.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 15)).getter_isStaticInteger (SOURCE_FILE ("semantic-analysis.galgas", 15)) ;
+      GALGAS_bool test_2 = constinArgument_inSourceValue.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 17)).getter_isStaticInteger (SOURCE_FILE ("semantic-analysis.galgas", 17)) ;
       if (kBoolTrue == test_2.boolEnum ()) {
-        test_2 = constinArgument_inTargetType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 15)).getter_isInteger (SOURCE_FILE ("semantic-analysis.galgas", 15)) ;
+        test_2 = constinArgument_inTargetAnnotationType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 17)).getter_isInteger (SOURCE_FILE ("semantic-analysis.galgas", 17)) ;
       }
       const enumGalgasBool test_3 = test_2.boolEnum () ;
       if (kBoolTrue == test_3) {
         GALGAS_bigint var_value ;
-        constinArgument_inSourceValue.mAttribute_mValue.method_literalInteger (var_value, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 16)) ;
+        constinArgument_inSourceValue.mAttribute_mValue.method_literalInteger (var_value, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 18)) ;
         GALGAS_bigint var_minTarget ;
         GALGAS_bigint var_maxTarget ;
-        GALGAS_bool joker_1106 ; // Joker input parameter
-        GALGAS_uint joker_1118 ; // Joker input parameter
-        constinArgument_inTargetType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 17)).method_integer (var_minTarget, var_maxTarget, joker_1106, joker_1118, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 17)) ;
-        GALGAS_bool test_4 = GALGAS_bool (kIsStrictSup, var_minTarget.objectCompare (var_value)) ;
+        GALGAS_bool joker_1264 ; // Joker input parameter
+        GALGAS_uint joker_1276 ; // Joker input parameter
+        constinArgument_inTargetAnnotationType.getter_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 19)).method_integer (var_minTarget, var_maxTarget, joker_1264, joker_1276, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 19)) ;
+        GALGAS_bool test_4 = GALGAS_bool (kIsStrictInf, var_value.objectCompare (var_minTarget)) ;
         if (kBoolTrue != test_4.boolEnum ()) {
           test_4 = GALGAS_bool (kIsStrictInf, var_maxTarget.objectCompare (var_value)) ;
         }
         const enumGalgasBool test_5 = test_4.boolEnum () ;
         if (kBoolTrue == test_5) {
-          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("literal integer too large")  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 19)) ;
+          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("literal integer too large")  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 21)) ;
+          result_outResult.drop () ; // Release error dropped variable
+        }else if (kBoolFalse == test_5) {
+          result_outResult = GALGAS_operandIR::constructor_new (constinArgument_inTargetAnnotationType, constinArgument_inSourceValue.mAttribute_mValue  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)) ;
         }
       }else if (kBoolFalse == test_3) {
-        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (constinArgument_inTargetType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)).add_operation (constinArgument_inSourceValue.mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 23))  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 22)) ;
+        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("object of type $").add_operation (constinArgument_inTargetAnnotationType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 27)).add_operation (GALGAS_string (" cannot be assigned from expression of type $"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 27)).add_operation (constinArgument_inSourceValue.mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 27))  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 26)) ;
+        result_outResult.drop () ; // Release error dropped variable
       }
+    }else if (kBoolFalse == test_1) {
+      result_outResult = constinArgument_inSourceValue ;
     }
   }
+  const enumGalgasBool test_6 = constinArgument_inStaticTypeAllowed.operator_not (SOURCE_FILE ("semantic-analysis.galgas", 33)).boolEnum () ;
+  if (kBoolTrue == test_6) {
+    const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, result_outResult.mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 34)).objectCompare (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 34)))).boolEnum () ;
+    if (kBoolTrue == test_7) {
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("the $").add_operation (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 35)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 35)).add_operation (GALGAS_string (" static type is not allowed here"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 35))  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 35)) ;
+    }
+  }
+//---
+  return result_outResult ;
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_checkAssignmentCompatibility [5] = {
+  & kTypeDescriptor_GALGAS_operandIR,
+  & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
+  & kTypeDescriptor_GALGAS_location,
+  & kTypeDescriptor_GALGAS_bool,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_checkAssignmentCompatibility (C_Compiler * inCompiler,
+                                                                             const cObjectArray & inEffectiveParameterArray,
+                                                                             const GALGAS_location & /* §§ inErrorLocation */
+                                                                             COMMA_LOCATION_ARGS) {
+  const GALGAS_operandIR operand0 = GALGAS_operandIR::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                                     inCompiler
+                                                                     COMMA_THERE) ;
+  const GALGAS_unifiedTypeMap_2D_proxy operand1 = GALGAS_unifiedTypeMap_2D_proxy::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                                                                 inCompiler
+                                                                                                 COMMA_THERE) ;
+  const GALGAS_location operand2 = GALGAS_location::extractObject (inEffectiveParameterArray.objectAtIndex (2 COMMA_HERE),
+                                                                   inCompiler
+                                                                   COMMA_THERE) ;
+  const GALGAS_bool operand3 = GALGAS_bool::extractObject (inEffectiveParameterArray.objectAtIndex (3 COMMA_HERE),
+                                                           inCompiler
+                                                           COMMA_THERE) ;
+  return function_checkAssignmentCompatibility (operand0,
+                                                operand1,
+                                                operand2,
+                                                operand3,
+                                                inCompiler
+                                                COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_checkAssignmentCompatibility ("checkAssignmentCompatibility",
+                                                                              functionWithGenericHeader_checkAssignmentCompatibility,
+                                                                              & kTypeDescriptor_GALGAS_operandIR,
+                                                                              4,
+                                                                              functionArgs_checkAssignmentCompatibility) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -835,97 +899,97 @@ void routine_semanticAnalysis (const GALGAS_string constinArgument_inSourceFile,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outIntermediateCodeStruct.drop () ; // Release 'out' argument
-  outArgument_outIntermediateCodeStruct = GALGAS_intermediateCodeStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 56)) ;
+  outArgument_outIntermediateCodeStruct = GALGAS_intermediateCodeStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 68)) ;
   outArgument_outIntermediateCodeStruct.mAttribute_mStaticStringMap = constinArgument_inGlobalLiteralStringMap ;
-  cEnumerator_requiredProcedureDeclarationListAST enumerator_2843 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
-  while (enumerator_2843.hasCurrentObject ()) {
-    outArgument_outIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.addAssign_operation (enumerator_2843.current (HERE).mAttribute_mRequiredProcedureName.mAttribute_string  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 59)) ;
-    enumerator_2843.gotoNextObject () ;
+  cEnumerator_requiredProcedureDeclarationListAST enumerator_3373 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
+  while (enumerator_3373.hasCurrentObject ()) {
+    outArgument_outIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.addAssign_operation (enumerator_3373.current (HERE).mAttribute_mRequiredProcedureName.mAttribute_string  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 71)) ;
+    enumerator_3373.gotoNextObject () ;
   }
-  cEnumerator_globalVarDeclarationList enumerator_3025 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
-  while (enumerator_3025.hasCurrentObject ()) {
-    categoryMethod_semanticAnalysis (enumerator_3025.current (HERE), constinArgument_inSemanticContext, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 63)) ;
-    enumerator_3025.gotoNextObject () ;
-  }
-  {
-  routine_controlRegistersSemanticAnalysis (constinArgument_inAST.mAttribute_mControlRegisterDeclarationListAST, constinArgument_inSemanticContext, outArgument_outIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 69)) ;
-  }
-  GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 75)) ;
-  cEnumerator_declarationListAST enumerator_3450 (constinArgument_inAST.mAttribute_mDeclarationList, kEnumeration_up) ;
-  while (enumerator_3450.hasCurrentObject ()) {
-    callCategoryMethod_semanticAnalysis ((const cPtr_abstractDeclaration *) enumerator_3450.current_mDeclaration (HERE).ptr (), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 77)) ;
-    enumerator_3450.gotoNextObject () ;
-  }
-  cEnumerator_procedureDeclarationListAST enumerator_3657 (constinArgument_inAST.mAttribute_mProcedureListAST, kEnumeration_up) ;
-  while (enumerator_3657.hasCurrentObject ()) {
-    categoryMethod_procedureSemanticAnalysis (enumerator_3657.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 84)) ;
-    enumerator_3657.gotoNextObject () ;
-  }
-  cEnumerator_functionDeclarationListAST enumerator_3868 (constinArgument_inAST.mAttribute_mFunctionListAST, kEnumeration_up) ;
-  while (enumerator_3868.hasCurrentObject ()) {
-    categoryMethod_functionSemanticAnalysis (enumerator_3868.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 91)) ;
-    enumerator_3868.gotoNextObject () ;
-  }
-  cEnumerator_bootList enumerator_4066 (constinArgument_inAST.mAttribute_mBootList, kEnumeration_up) ;
-  while (enumerator_4066.hasCurrentObject ()) {
-    categoryMethod_bootSemanticAnalysis (enumerator_4066.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 98)) ;
-    enumerator_4066.gotoNextObject () ;
-  }
-  cEnumerator_initList enumerator_4256 (constinArgument_inAST.mAttribute_mInitList, kEnumeration_up) ;
-  while (enumerator_4256.hasCurrentObject ()) {
-    categoryMethod_initSemanticAnalysis (enumerator_4256.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 105)) ;
-    enumerator_4256.gotoNextObject () ;
-  }
-  cEnumerator_exceptionClauseListAST enumerator_4670 (constinArgument_inAST.mAttribute_mExceptionClauses, kEnumeration_up) ;
-  while (enumerator_4670.hasCurrentObject ()) {
-    categoryMethod_exceptionSemanticAnalysis (enumerator_4670.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 119)) ;
-    enumerator_4670.gotoNextObject () ;
+  cEnumerator_globalVarDeclarationList enumerator_3555 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
+  while (enumerator_3555.hasCurrentObject ()) {
+    categoryMethod_semanticAnalysis (enumerator_3555.current (HERE), constinArgument_inSemanticContext, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 75)) ;
+    enumerator_3555.gotoNextObject () ;
   }
   {
-  routine_checkRequiredProcedures (constinArgument_inAST, constinArgument_inSemanticContext, constinArgument_inEndOfSourceFile, inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 126)) ;
+  routine_controlRegistersSemanticAnalysis (constinArgument_inAST.mAttribute_mControlRegisterDeclarationListAST, constinArgument_inSemanticContext, outArgument_outIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 81)) ;
   }
-  GALGAS_bool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-analysis.galgas", 132)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 87)) ;
+  cEnumerator_declarationListAST enumerator_3980 (constinArgument_inAST.mAttribute_mDeclarationList, kEnumeration_up) ;
+  while (enumerator_3980.hasCurrentObject ()) {
+    callCategoryMethod_semanticAnalysis ((const cPtr_abstractDeclaration *) enumerator_3980.current_mDeclaration (HERE).ptr (), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 89)) ;
+    enumerator_3980.gotoNextObject () ;
+  }
+  cEnumerator_procedureDeclarationListAST enumerator_4187 (constinArgument_inAST.mAttribute_mProcedureListAST, kEnumeration_up) ;
+  while (enumerator_4187.hasCurrentObject ()) {
+    categoryMethod_procedureSemanticAnalysis (enumerator_4187.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 96)) ;
+    enumerator_4187.gotoNextObject () ;
+  }
+  cEnumerator_functionDeclarationListAST enumerator_4398 (constinArgument_inAST.mAttribute_mFunctionListAST, kEnumeration_up) ;
+  while (enumerator_4398.hasCurrentObject ()) {
+    categoryMethod_functionSemanticAnalysis (enumerator_4398.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 103)) ;
+    enumerator_4398.gotoNextObject () ;
+  }
+  cEnumerator_bootList enumerator_4596 (constinArgument_inAST.mAttribute_mBootList, kEnumeration_up) ;
+  while (enumerator_4596.hasCurrentObject ()) {
+    categoryMethod_bootSemanticAnalysis (enumerator_4596.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 110)) ;
+    enumerator_4596.gotoNextObject () ;
+  }
+  cEnumerator_initList enumerator_4786 (constinArgument_inAST.mAttribute_mInitList, kEnumeration_up) ;
+  while (enumerator_4786.hasCurrentObject ()) {
+    categoryMethod_initSemanticAnalysis (enumerator_4786.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 117)) ;
+    enumerator_4786.gotoNextObject () ;
+  }
+  cEnumerator_exceptionClauseListAST enumerator_5200 (constinArgument_inAST.mAttribute_mExceptionClauses, kEnumeration_up) ;
+  while (enumerator_5200.hasCurrentObject ()) {
+    categoryMethod_exceptionSemanticAnalysis (enumerator_5200.current (HERE), constinArgument_inSemanticContext, var_temporaries, outArgument_outIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 131)) ;
+    enumerator_5200.gotoNextObject () ;
+  }
+  {
+  routine_checkRequiredProcedures (constinArgument_inAST, constinArgument_inSemanticContext, constinArgument_inEndOfSourceFile, inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 138)) ;
+  }
+  GALGAS_bool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-analysis.galgas", 144)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue == test_0.boolEnum ()) {
     test_0 = GALGAS_bool (gOption_plm_5F_options_writeRoutineInvocationGraphFile.getter_value ()) ;
   }
   const enumGalgasBool test_1 = test_0.boolEnum () ;
   if (kBoolTrue == test_1) {
-    GALGAS_string var_s = var_temporaries.mAttribute_mSubprogramInvocationGraph.getter_graphviz (SOURCE_FILE ("semantic-analysis.galgas", 133)) ;
-    GALGAS_string var_filePath = constinArgument_inSourceFile.getter_stringByDeletingPathExtension (SOURCE_FILE ("semantic-analysis.galgas", 134)).add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 134)) ;
-    GALGAS_bool joker_5338 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_5338, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 135)) ;
+    GALGAS_string var_s = var_temporaries.mAttribute_mSubprogramInvocationGraph.getter_graphviz (SOURCE_FILE ("semantic-analysis.galgas", 145)) ;
+    GALGAS_string var_filePath = constinArgument_inSourceFile.getter_stringByDeletingPathExtension (SOURCE_FILE ("semantic-analysis.galgas", 146)).add_operation (GALGAS_string (".routineInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 146)) ;
+    GALGAS_bool joker_5868 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_5868, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 147)) ;
   }
-  GALGAS_bool test_2 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-analysis.galgas", 138)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  GALGAS_bool test_2 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-analysis.galgas", 150)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue == test_2.boolEnum ()) {
-    test_2 = GALGAS_bool (gOption_plm_5F_options_doNotDetectRecursiveCalls.getter_value ()).operator_not (SOURCE_FILE ("semantic-analysis.galgas", 138)) ;
+    test_2 = GALGAS_bool (gOption_plm_5F_options_doNotDetectRecursiveCalls.getter_value ()).operator_not (SOURCE_FILE ("semantic-analysis.galgas", 150)) ;
   }
   const enumGalgasBool test_3 = test_2.boolEnum () ;
   if (kBoolTrue == test_3) {
-    GALGAS_stringlist var_undefinedNodeKeyList = var_temporaries.mAttribute_mSubprogramInvocationGraph.getter_undefinedNodeKeyList (SOURCE_FILE ("semantic-analysis.galgas", 139)) ;
-    const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_undefinedNodeKeyList.getter_length (SOURCE_FILE ("semantic-analysis.galgas", 140)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    GALGAS_stringlist var_undefinedNodeKeyList = var_temporaries.mAttribute_mSubprogramInvocationGraph.getter_undefinedNodeKeyList (SOURCE_FILE ("semantic-analysis.galgas", 151)) ;
+    const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_undefinedNodeKeyList.getter_length (SOURCE_FILE ("semantic-analysis.galgas", 152)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_4) {
       GALGAS_string var_s = GALGAS_string ("subprogram invocation graph error, undefined nodes:") ;
-      cEnumerator_stringlist enumerator_5729 (var_undefinedNodeKeyList, kEnumeration_up) ;
-      while (enumerator_5729.hasCurrentObject ()) {
+      cEnumerator_stringlist enumerator_6259 (var_undefinedNodeKeyList, kEnumeration_up) ;
+      while (enumerator_6259.hasCurrentObject ()) {
         var_s.plusAssign_operation(GALGAS_string ("\n"
-          " - ").add_operation (enumerator_5729.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 143)), inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 143)) ;
-        enumerator_5729.gotoNextObject () ;
+          " - ").add_operation (enumerator_6259.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 155)), inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 155)) ;
+        enumerator_6259.gotoNextObject () ;
       }
-      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 145)) ;
+      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 157)) ;
     }else if (kBoolFalse == test_4) {
       GALGAS_lstringlist var_unsortedInformationList ;
       GALGAS_lstringlist var_unsortedLKeyList ;
-      var_temporaries.mAttribute_mSubprogramInvocationGraph.method_circularities (var_unsortedInformationList, var_unsortedLKeyList COMMA_SOURCE_FILE ("semantic-analysis.galgas", 147)) ;
-      const enumGalgasBool test_5 = GALGAS_bool (kIsStrictSup, var_unsortedLKeyList.getter_length (SOURCE_FILE ("semantic-analysis.galgas", 151)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      var_temporaries.mAttribute_mSubprogramInvocationGraph.method_circularities (var_unsortedInformationList, var_unsortedLKeyList COMMA_SOURCE_FILE ("semantic-analysis.galgas", 159)) ;
+      const enumGalgasBool test_5 = GALGAS_bool (kIsStrictSup, var_unsortedLKeyList.getter_length (SOURCE_FILE ("semantic-analysis.galgas", 163)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
       if (kBoolTrue == test_5) {
         GALGAS_string var_s = GALGAS_string ("the following routines are recursive:") ;
-        cEnumerator_lstringlist enumerator_6126 (var_unsortedLKeyList, kEnumeration_up) ;
-        while (enumerator_6126.hasCurrentObject ()) {
+        cEnumerator_lstringlist enumerator_6656 (var_unsortedLKeyList, kEnumeration_up) ;
+        while (enumerator_6656.hasCurrentObject ()) {
           var_s.plusAssign_operation(GALGAS_string ("\n"
-            " - ").add_operation (enumerator_6126.current_mValue (HERE).getter_string (SOURCE_FILE ("semantic-analysis.galgas", 154)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 154)), inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 154)) ;
-          enumerator_6126.gotoNextObject () ;
+            " - ").add_operation (enumerator_6656.current_mValue (HERE).getter_string (SOURCE_FILE ("semantic-analysis.galgas", 166)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 166)), inCompiler  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 166)) ;
+          enumerator_6656.gotoNextObject () ;
         }
-        inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 156)) ;
+        inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 168)) ;
       }
     }
   }
@@ -6014,7 +6078,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc NMIHandler `isr ()\n"
   "\n"
   "proc NMIHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -2\n"
+  "  panic 2\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6022,7 +6086,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc HardFaultHandler `isr ()\n"
   "\n"
   "proc HardFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -3\n"
+  "  panic 3\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6030,7 +6094,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc MemManageHandler `isr ()\n"
   "\n"
   "proc MemManageHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -4\n"
+  "  panic 4\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6038,7 +6102,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc BusFaultHandler `isr ()\n"
   "\n"
   "proc BusFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -5\n"
+  "  panic 5\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6046,7 +6110,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc UsageFaultHandler `isr ()\n"
   "\n"
   "proc UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -6\n"
+  "  panic 6\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6054,7 +6118,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc svcHandler `isr ()\n"
   "\n"
   "proc svcHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -11\n"
+  "  panic 11\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6062,7 +6126,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DebugMonitorHandler `isr ()\n"
   "\n"
   "proc DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -12\n"
+  "  panic 12\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6070,7 +6134,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc PendSVHandler `isr ()\n"
   "\n"
   "proc PendSVHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -14\n"
+  "  panic 14\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6119,7 +6183,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel0TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -16\n"
+  "  panic 16\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6127,7 +6191,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel1TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -17\n"
+  "  panic 17\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6135,7 +6199,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel2TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -18\n"
+  "  panic 18\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6143,7 +6207,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel3TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -19\n"
+  "  panic 19\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6151,7 +6215,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel4TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -20\n"
+  "  panic 20\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6159,7 +6223,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel5TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -21\n"
+  "  panic 21\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6167,7 +6231,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel6TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -22\n"
+  "  panic 22\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6175,7 +6239,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel7TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -23\n"
+  "  panic 23\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6183,7 +6247,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel8TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -24\n"
+  "  panic 24\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6191,7 +6255,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel9TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -25\n"
+  "  panic 25\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6199,7 +6263,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel10TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -26\n"
+  "  panic 26\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6207,7 +6271,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel11TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -27\n"
+  "  panic 27\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6215,7 +6279,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel12TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -28\n"
+  "  panic 28\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6223,7 +6287,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel13TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -29\n"
+  "  panic 29\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6231,7 +6295,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel14TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -30\n"
+  "  panic 30\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6239,7 +6303,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAChannel15TranfertCompleteHandler `isr ()\n"
   "\n"
   "proc DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -31\n"
+  "  panic 31\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6247,7 +6311,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DMAErrorHandler `isr ()\n"
   "\n"
   "proc DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -32\n"
+  "  panic 32\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6255,7 +6319,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc flashMemoryCommandCompleteHandler `isr ()\n"
   "\n"
   "proc flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -34\n"
+  "  panic 34\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6263,7 +6327,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc flashMemoryReadCollisionHandler `isr ()\n"
   "\n"
   "proc flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -35\n"
+  "  panic 35\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6271,7 +6335,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc modeControllerHandler `isr ()\n"
   "\n"
   "proc modeControllerHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -36\n"
+  "  panic 36\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6279,7 +6343,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc LLWUHandler `isr ()\n"
   "\n"
   "proc LLWUHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -37\n"
+  "  panic 37\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6287,7 +6351,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc WDOGEWMHandler `isr ()\n"
   "\n"
   "proc WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -38\n"
+  "  panic 38\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6295,7 +6359,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc I2C0Handler `isr ()\n"
   "\n"
   "proc I2C0Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -40\n"
+  "  panic 40\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6303,7 +6367,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc I2C1Handler `isr ()\n"
   "\n"
   "proc I2C1Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -41\n"
+  "  panic 41\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6311,7 +6375,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc SPI0Handler `isr ()\n"
   "\n"
   "proc SPI0Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -42\n"
+  "  panic 42\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6319,7 +6383,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc SPI1Handler `isr ()\n"
   "\n"
   "proc SPI1Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -43\n"
+  "  panic 43\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6327,7 +6391,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CAN0MessageBufferHandler `isr ()\n"
   "\n"
   "proc CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -45\n"
+  "  panic 45\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6335,7 +6399,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CAN0BusOffHandler `isr ()\n"
   "\n"
   "proc CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -46\n"
+  "  panic 46\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6343,7 +6407,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CAN0ErrorHandler `isr ()\n"
   "\n"
   "proc CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -47\n"
+  "  panic 47\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6351,7 +6415,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CAN0TransmitWarningHandler `isr ()\n"
   "\n"
   "proc CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -48\n"
+  "  panic 48\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6359,7 +6423,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CAN0ReceiveWarningHandler `isr ()\n"
   "\n"
   "proc CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -49\n"
+  "  panic 49\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6367,7 +6431,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CAN0WakeUpHandler `isr ()\n"
   "\n"
   "proc CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -50\n"
+  "  panic 50\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6375,7 +6439,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc I2S0TransmitHandler `isr ()\n"
   "\n"
   "proc I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -51\n"
+  "  panic 51\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6383,7 +6447,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc I2S0ReceiveHandler `isr ()\n"
   "\n"
   "proc I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -52\n"
+  "  panic 52\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6391,7 +6455,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc UART0LONHandler `isr ()\n"
   "\n"
   "proc UART0LONHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -60\n"
+  "  panic 60\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6399,7 +6463,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc UART0StatusHandler `isr ()\n"
   "\n"
   "proc UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -61\n"
+  "  panic 61\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6407,7 +6471,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc UART0ErrorHandler `isr ()\n"
   "\n"
   "proc UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -62\n"
+  "  panic 62\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6415,7 +6479,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc UART1StatusHandler `isr ()\n"
   "\n"
   "proc UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -63\n"
+  "  panic 63\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6423,7 +6487,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc UART1ErrorHandler `isr ()\n"
   "\n"
   "proc UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -64\n"
+  "  panic 64\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6431,7 +6495,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc UART2StatusHandler `isr ()\n"
   "\n"
   "proc UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -64\n"
+  "  panic 64\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6439,7 +6503,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc UART2ErrorHandler `isr ()\n"
   "\n"
   "proc UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -65\n"
+  "  panic 65\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6447,7 +6511,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc ADC0Handler `isr ()\n"
   "\n"
   "proc ADC0Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -73\n"
+  "  panic 73\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6455,7 +6519,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc ADC1Handler `isr ()\n"
   "\n"
   "proc ADC1Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -74\n"
+  "  panic 74\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6463,7 +6527,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CMP0Handler `isr ()\n"
   "\n"
   "proc CMP0Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -75\n"
+  "  panic 75\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6471,7 +6535,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CMP1Handler `isr ()\n"
   "\n"
   "proc CMP1Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -76\n"
+  "  panic 76\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6479,7 +6543,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CMP2Handler `isr ()\n"
   "\n"
   "proc CMP2Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -77\n"
+  "  panic 77\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6487,7 +6551,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc FMT0Handler `isr ()\n"
   "\n"
   "proc FMT0Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -78\n"
+  "  panic 78\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6495,7 +6559,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc FMT1Handler `isr ()\n"
   "\n"
   "proc FMT1Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -79\n"
+  "  panic 79\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6503,7 +6567,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc FMT2Handler `isr ()\n"
   "\n"
   "proc FMT2Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -80\n"
+  "  panic 80\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6511,7 +6575,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc CMTHandler `isr ()\n"
   "\n"
   "proc CMTHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -81\n"
+  "  panic 81\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6519,7 +6583,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc RTCAlarmHandler `isr ()\n"
   "\n"
   "proc RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -82\n"
+  "  panic 82\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6527,7 +6591,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc RTCSecondHandler `isr ()\n"
   "\n"
   "proc RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -83\n"
+  "  panic 83\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6535,7 +6599,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc PITChannel0Handler `isr ()\n"
   "\n"
   "proc PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -84\n"
+  "  panic 84\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6543,7 +6607,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc PITChannel1Handler `isr ()\n"
   "\n"
   "proc PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -85\n"
+  "  panic 85\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6551,7 +6615,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc PITChannel2Handler `isr ()\n"
   "\n"
   "proc PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -86\n"
+  "  panic 86\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6559,7 +6623,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc PITChannel3Handler `isr ()\n"
   "\n"
   "proc PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -87\n"
+  "  panic 87\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6567,7 +6631,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc PDBHandler `isr ()\n"
   "\n"
   "proc PDBHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -88\n"
+  "  panic 88\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6575,7 +6639,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc USBOTGHandler `isr ()\n"
   "\n"
   "proc USBOTGHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -89\n"
+  "  panic 89\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6583,7 +6647,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc USBChargerDetectHandler `isr ()\n"
   "\n"
   "proc USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -90\n"
+  "  panic 90\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6591,7 +6655,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc DAC0Handler `isr ()\n"
   "\n"
   "proc DAC0Handler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -97\n"
+  "  panic 97\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6599,7 +6663,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc TSIHandler `isr ()\n"
   "\n"
   "proc TSIHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -99\n"
+  "  panic 99\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6607,7 +6671,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc MCGHandler `isr ()\n"
   "\n"
   "proc MCGHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -100\n"
+  "  panic 100\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6615,7 +6679,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc lowPowerTimerHandler `isr ()\n"
   "\n"
   "proc lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -101\n"
+  "  panic 101\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6623,7 +6687,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc pinDetectPortAHandler `isr ()\n"
   "\n"
   "proc pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -103\n"
+  "  panic 103\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6631,7 +6695,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc pinDetectPortBHandler `isr ()\n"
   "\n"
   "proc pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -104\n"
+  "  panic 104\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6639,7 +6703,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc pinDetectPortCHandler `isr ()\n"
   "\n"
   "proc pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -105\n"
+  "  panic 105\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6647,7 +6711,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc pinDetectPortDHandler `isr ()\n"
   "\n"
   "proc pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -106\n"
+  "  panic 106\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6655,7 +6719,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc pinDetectPortEHandler `isr ()\n"
   "\n"
   "proc pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -107\n"
+  "  panic 107\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -6663,7 +6727,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "required proc softwareInterruptHandler `isr ()\n"
   "\n"
   "proc softwareInterruptHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic -110\n"
+  "  panic 110\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
@@ -6672,7 +6736,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "teensy-3-1-default-isr.plm",
   "plm",
   true, // Text file
-  16898, // Text length
+  16821, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -8937,13 +9001,6 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-it\
   "  @rw proc loop\n"
   "}\n"
   "\n"
-  "struct $AZER {\n"
-  "  var x $int8 = 89\n"
-  "  var y $uint6 = 34\n"
-  "}\n"
-  "\n"
-  "// let TOTO = $AZER ()\n"
-  "\n"
   "//------------------------------------------------*\n"
   "\n"
   "proc loop `user () {\n"
@@ -8962,7 +9019,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkled.plm",
   "plm",
   true, // Text file
-  635, // Text length
+  554, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -11532,93 +11589,6 @@ GALGAS_typeAliasDeclaration GALGAS_typeAliasDeclaration::extractObject (const GA
       result = *p ;
     }else{
       inCompiler->castError ("typeAliasDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-
-typeComparisonResult GALGAS_abstractExpressionIR::objectCompare (const GALGAS_abstractExpressionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractExpressionIR::GALGAS_abstractExpressionIR (void) :
-AC_GALGAS_class () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractExpressionIR::GALGAS_abstractExpressionIR (const cPtr_abstractExpressionIR * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractExpressionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @abstractExpressionIR class                                    *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_abstractExpressionIR::cPtr_abstractExpressionIR (LOCATION_ARGS) :
-acPtr_class (THERE) {
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @abstractExpressionIR type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_abstractExpressionIR ("abstractExpressionIR",
-                                             NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_abstractExpressionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_abstractExpressionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_abstractExpressionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_abstractExpressionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractExpressionIR GALGAS_abstractExpressionIR::extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_abstractExpressionIR result ;
-  const GALGAS_abstractExpressionIR * p = (const GALGAS_abstractExpressionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_abstractExpressionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("abstractExpressionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

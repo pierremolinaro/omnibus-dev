@@ -158,11 +158,11 @@ method @globalVarDeclarationList-element enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
 #--- Get destination type
-  @unifiedTypeMap-proxy variableType
+  @unifiedTypeMap-proxy variableAnnotationType
   if mTypeName.string == "" then
-    variableType = .null
+    variableAnnotationType = .null
   else
-    variableType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mTypeName}
+    variableAnnotationType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mTypeName}
   end
 #--- Analyze source expression
   @semanticTemporariesStruct temporaries = .default
@@ -170,7 +170,7 @@ method @globalVarDeclarationList-element enterInContext
   @variableMap variableMap = variableMapWithConstants (!context:ioContext)
   [mSourceExpression analyzeExpression
      !routineNameForInvocationGraph:["compiler" nowhere]
-     !optionalTargetType:variableType
+     !optionalTargetType:variableAnnotationType
      !context:ioContext
      !modes:{}
      !allowException:true
@@ -184,13 +184,14 @@ method @globalVarDeclarationList-element enterInContext
     error mVarName : "source expression cannot be statically computed"
   end
 #--- Check variable type and expression type
-  if variableType == .null && [[expressionResult.mType kind] isStaticInteger] then
+  if variableAnnotationType == .null && [[expressionResult.mType kind] isStaticInteger] then
     error mVarName : "cannot infer type"
   end
-  checkAssignmentCompatibility (
+  let result = checkAssignmentCompatibility (
     !source:expressionResult
-    !targetType:variableType
+    !targetAnnotationType:variableAnnotationType
     !errorLocation:mVarName.location
+    !staticTypeAllowed:false
   )
   @stringset executionModes = {}
 #--- Check allowed function are defined
@@ -265,10 +266,10 @@ method @globalVarDeclarationList-element enterInContext
 #--- Enter variable in globale variable map
   [!?ioContext.mGlobalVariableMap insertKey
     !mVarName
-    !if variableType == .null then expressionResult.mType else variableType end
+    !result.mType
     !executionModes
     !allowedRoutineMap
-    !expressionResult.mValue
+    !result.mValue
     !false # Is not constant
   ]
 }

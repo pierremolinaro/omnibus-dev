@@ -111,19 +111,21 @@ override method @varInstructionWithAssignmentAST analyze
   if targetType == .null then
     targetType = expressionResult.mType
   end
-  checkAssignmentCompatibility (
+  let result = checkAssignmentCompatibility (
     !source:expressionResult
-    !targetType:targetType
+    !targetAnnotationType:targetType
     !errorLocation:mVarName.location
+    !staticTypeAllowed:false
   )
+  drop expressionResult, targetType
 #--- Declare local variable
-  let targetVar = @objectInMemoryIR.localValue {!type:targetType !name:mVarName.string}
+  let targetVar = @objectInMemoryIR.localValue {!type:result.mType !name:mVarName.string}
   [!?ioVariableMap insertDefinedLocalVariable
     !mVarName
-    !targetType
+    !result.mType
     !true
     !targetVar
-    ![targetType copiable]
+    ![result.mType copiable]
     !{}
     !true
     !false # Is not constant
@@ -131,12 +133,12 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Code generation
   [!?ioInstructionGenerationList appendAlloca
     !mVarName.string
-    !targetType
+    !result.mType
   ]
   [!?ioInstructionGenerationList appendStoreLocalVariable
     !mVarName.string
-    !targetType
-    !expressionResult
+    !result.mType
+    !result
   ]
 }
 

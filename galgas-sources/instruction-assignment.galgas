@@ -128,10 +128,11 @@ override method @assignmentInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR sourceOperand
   ]
-  checkAssignmentCompatibility (
+  let result = checkAssignmentCompatibility (
     !source:sourceOperand
-    !targetType:targetType
+    !targetAnnotationType:targetType
     !errorLocation:mTargetVarName.location
+    !staticTypeAllowed:false
   )
 #--- Write local variable
   [!?ioVariableMap searchForWriteAccess
@@ -153,7 +154,7 @@ override method @assignmentInstructionAST analyze
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
   [target storeInMemory
-    !value:sourceOperand
+    !value:result
     !?instructionListIR:ioInstructionGenerationList
   ]
 }

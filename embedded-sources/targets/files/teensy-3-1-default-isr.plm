@@ -3,7 +3,7 @@
 required proc NMIHandler `isr ()
 
 proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -2
+  panic 2
 }
 
 //-----------------------------------------------------------------------------*
@@ -11,7 +11,7 @@ proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
 required proc HardFaultHandler `isr ()
 
 proc HardFaultHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -3
+  panic 3
 }
 
 //-----------------------------------------------------------------------------*
@@ -19,7 +19,7 @@ proc HardFaultHandler `isr @nullWhenPanicDisabled @weak () {
 required proc MemManageHandler `isr ()
 
 proc MemManageHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -4
+  panic 4
 }
 
 //-----------------------------------------------------------------------------*
@@ -27,7 +27,7 @@ proc MemManageHandler `isr @nullWhenPanicDisabled @weak () {
 required proc BusFaultHandler `isr ()
 
 proc BusFaultHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -5
+  panic 5
 }
 
 //-----------------------------------------------------------------------------*
@@ -35,7 +35,7 @@ proc BusFaultHandler `isr @nullWhenPanicDisabled @weak () {
 required proc UsageFaultHandler `isr ()
 
 proc UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -6
+  panic 6
 }
 
 //-----------------------------------------------------------------------------*
@@ -43,7 +43,7 @@ proc UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {
 required proc svcHandler `isr ()
 
 proc svcHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -11
+  panic 11
 }
 
 //-----------------------------------------------------------------------------*
@@ -51,7 +51,7 @@ proc svcHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DebugMonitorHandler `isr ()
 
 proc DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -12
+  panic 12
 }
 
 //-----------------------------------------------------------------------------*
@@ -59,7 +59,7 @@ proc DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {
 required proc PendSVHandler `isr ()
 
 proc PendSVHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -14
+  panic 14
 }
 
 //-----------------------------------------------------------------------------*
@@ -108,7 +108,7 @@ proc waitMS `user `init @noWarningIfUnused (?inDuration $uint32) {
 required proc DMAChannel0TranfertCompleteHandler `isr ()
 
 proc DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -16
+  panic 16
 }
 
 //-----------------------------------------------------------------------------*
@@ -116,7 +116,7 @@ proc DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel1TranfertCompleteHandler `isr ()
 
 proc DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -17
+  panic 17
 }
 
 //-----------------------------------------------------------------------------*
@@ -124,7 +124,7 @@ proc DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel2TranfertCompleteHandler `isr ()
 
 proc DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -18
+  panic 18
 }
 
 //-----------------------------------------------------------------------------*
@@ -132,7 +132,7 @@ proc DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel3TranfertCompleteHandler `isr ()
 
 proc DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -19
+  panic 19
 }
 
 //-----------------------------------------------------------------------------*
@@ -140,7 +140,7 @@ proc DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel4TranfertCompleteHandler `isr ()
 
 proc DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -20
+  panic 20
 }
 
 //-----------------------------------------------------------------------------*
@@ -148,7 +148,7 @@ proc DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel5TranfertCompleteHandler `isr ()
 
 proc DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -21
+  panic 21
 }
 
 //-----------------------------------------------------------------------------*
@@ -156,7 +156,7 @@ proc DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel6TranfertCompleteHandler `isr ()
 
 proc DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -22
+  panic 22
 }
 
 //-----------------------------------------------------------------------------*
@@ -164,7 +164,7 @@ proc DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel7TranfertCompleteHandler `isr ()
 
 proc DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -23
+  panic 23
 }
 
 //-----------------------------------------------------------------------------*
@@ -172,7 +172,7 @@ proc DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel8TranfertCompleteHandler `isr ()
 
 proc DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -24
+  panic 24
 }
 
 //-----------------------------------------------------------------------------*
@@ -180,7 +180,7 @@ proc DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel9TranfertCompleteHandler `isr ()
 
 proc DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -25
+  panic 25
 }
 
 //-----------------------------------------------------------------------------*
@@ -188,7 +188,7 @@ proc DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel10TranfertCompleteHandler `isr ()
 
 proc DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -26
+  panic 26
 }
 
 //-----------------------------------------------------------------------------*
@@ -196,7 +196,7 @@ proc DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel11TranfertCompleteHandler `isr ()
 
 proc DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -27
+  panic 27
 }
 
 //-----------------------------------------------------------------------------*
@@ -204,7 +204,7 @@ proc DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel12TranfertCompleteHandler `isr ()
 
 proc DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -28
+  panic 28
 }
 
 //-----------------------------------------------------------------------------*
@@ -212,7 +212,7 @@ proc DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel13TranfertCompleteHandler `isr ()
 
 proc DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -29
+  panic 29
 }
 
 //-----------------------------------------------------------------------------*
@@ -220,7 +220,7 @@ proc DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel14TranfertCompleteHandler `isr ()
 
 proc DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -30
+  panic 30
 }
 
 //-----------------------------------------------------------------------------*
@@ -228,7 +228,7 @@ proc DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAChannel15TranfertCompleteHandler `isr ()
 
 proc DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -31
+  panic 31
 }
 
 //-----------------------------------------------------------------------------*
@@ -236,7 +236,7 @@ proc DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DMAErrorHandler `isr ()
 
 proc DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -32
+  panic 32
 }
 
 //-----------------------------------------------------------------------------*
@@ -244,7 +244,7 @@ proc DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {
 required proc flashMemoryCommandCompleteHandler `isr ()
 
 proc flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -34
+  panic 34
 }
 
 //-----------------------------------------------------------------------------*
@@ -252,7 +252,7 @@ proc flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {
 required proc flashMemoryReadCollisionHandler `isr ()
 
 proc flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -35
+  panic 35
 }
 
 //-----------------------------------------------------------------------------*
@@ -260,7 +260,7 @@ proc flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {
 required proc modeControllerHandler `isr ()
 
 proc modeControllerHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -36
+  panic 36
 }
 
 //-----------------------------------------------------------------------------*
@@ -268,7 +268,7 @@ proc modeControllerHandler `isr @nullWhenPanicDisabled @weak () {
 required proc LLWUHandler `isr ()
 
 proc LLWUHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -37
+  panic 37
 }
 
 //-----------------------------------------------------------------------------*
@@ -276,7 +276,7 @@ proc LLWUHandler `isr @nullWhenPanicDisabled @weak () {
 required proc WDOGEWMHandler `isr ()
 
 proc WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -38
+  panic 38
 }
 
 //-----------------------------------------------------------------------------*
@@ -284,7 +284,7 @@ proc WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {
 required proc I2C0Handler `isr ()
 
 proc I2C0Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -40
+  panic 40
 }
 
 //-----------------------------------------------------------------------------*
@@ -292,7 +292,7 @@ proc I2C0Handler `isr @nullWhenPanicDisabled @weak () {
 required proc I2C1Handler `isr ()
 
 proc I2C1Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -41
+  panic 41
 }
 
 //-----------------------------------------------------------------------------*
@@ -300,7 +300,7 @@ proc I2C1Handler `isr @nullWhenPanicDisabled @weak () {
 required proc SPI0Handler `isr ()
 
 proc SPI0Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -42
+  panic 42
 }
 
 //-----------------------------------------------------------------------------*
@@ -308,7 +308,7 @@ proc SPI0Handler `isr @nullWhenPanicDisabled @weak () {
 required proc SPI1Handler `isr ()
 
 proc SPI1Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -43
+  panic 43
 }
 
 //-----------------------------------------------------------------------------*
@@ -316,7 +316,7 @@ proc SPI1Handler `isr @nullWhenPanicDisabled @weak () {
 required proc CAN0MessageBufferHandler `isr ()
 
 proc CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -45
+  panic 45
 }
 
 //-----------------------------------------------------------------------------*
@@ -324,7 +324,7 @@ proc CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {
 required proc CAN0BusOffHandler `isr ()
 
 proc CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -46
+  panic 46
 }
 
 //-----------------------------------------------------------------------------*
@@ -332,7 +332,7 @@ proc CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {
 required proc CAN0ErrorHandler `isr ()
 
 proc CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -47
+  panic 47
 }
 
 //-----------------------------------------------------------------------------*
@@ -340,7 +340,7 @@ proc CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
 required proc CAN0TransmitWarningHandler `isr ()
 
 proc CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -48
+  panic 48
 }
 
 //-----------------------------------------------------------------------------*
@@ -348,7 +348,7 @@ proc CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {
 required proc CAN0ReceiveWarningHandler `isr ()
 
 proc CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -49
+  panic 49
 }
 
 //-----------------------------------------------------------------------------*
@@ -356,7 +356,7 @@ proc CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {
 required proc CAN0WakeUpHandler `isr ()
 
 proc CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -50
+  panic 50
 }
 
 //-----------------------------------------------------------------------------*
@@ -364,7 +364,7 @@ proc CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {
 required proc I2S0TransmitHandler `isr ()
 
 proc I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -51
+  panic 51
 }
 
 //-----------------------------------------------------------------------------*
@@ -372,7 +372,7 @@ proc I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {
 required proc I2S0ReceiveHandler `isr ()
 
 proc I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -52
+  panic 52
 }
 
 //-----------------------------------------------------------------------------*
@@ -380,7 +380,7 @@ proc I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {
 required proc UART0LONHandler `isr ()
 
 proc UART0LONHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -60
+  panic 60
 }
 
 //-----------------------------------------------------------------------------*
@@ -388,7 +388,7 @@ proc UART0LONHandler `isr @nullWhenPanicDisabled @weak () {
 required proc UART0StatusHandler `isr ()
 
 proc UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -61
+  panic 61
 }
 
 //-----------------------------------------------------------------------------*
@@ -396,7 +396,7 @@ proc UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {
 required proc UART0ErrorHandler `isr ()
 
 proc UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -62
+  panic 62
 }
 
 //-----------------------------------------------------------------------------*
@@ -404,7 +404,7 @@ proc UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
 required proc UART1StatusHandler `isr ()
 
 proc UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -63
+  panic 63
 }
 
 //-----------------------------------------------------------------------------*
@@ -412,7 +412,7 @@ proc UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {
 required proc UART1ErrorHandler `isr ()
 
 proc UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -64
+  panic 64
 }
 
 //-----------------------------------------------------------------------------*
@@ -420,7 +420,7 @@ proc UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {
 required proc UART2StatusHandler `isr ()
 
 proc UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -64
+  panic 64
 }
 
 //-----------------------------------------------------------------------------*
@@ -428,7 +428,7 @@ proc UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {
 required proc UART2ErrorHandler `isr ()
 
 proc UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -65
+  panic 65
 }
 
 //-----------------------------------------------------------------------------*
@@ -436,7 +436,7 @@ proc UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {
 required proc ADC0Handler `isr ()
 
 proc ADC0Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -73
+  panic 73
 }
 
 //-----------------------------------------------------------------------------*
@@ -444,7 +444,7 @@ proc ADC0Handler `isr @nullWhenPanicDisabled @weak () {
 required proc ADC1Handler `isr ()
 
 proc ADC1Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -74
+  panic 74
 }
 
 //-----------------------------------------------------------------------------*
@@ -452,7 +452,7 @@ proc ADC1Handler `isr @nullWhenPanicDisabled @weak () {
 required proc CMP0Handler `isr ()
 
 proc CMP0Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -75
+  panic 75
 }
 
 //-----------------------------------------------------------------------------*
@@ -460,7 +460,7 @@ proc CMP0Handler `isr @nullWhenPanicDisabled @weak () {
 required proc CMP1Handler `isr ()
 
 proc CMP1Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -76
+  panic 76
 }
 
 //-----------------------------------------------------------------------------*
@@ -468,7 +468,7 @@ proc CMP1Handler `isr @nullWhenPanicDisabled @weak () {
 required proc CMP2Handler `isr ()
 
 proc CMP2Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -77
+  panic 77
 }
 
 //-----------------------------------------------------------------------------*
@@ -476,7 +476,7 @@ proc CMP2Handler `isr @nullWhenPanicDisabled @weak () {
 required proc FMT0Handler `isr ()
 
 proc FMT0Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -78
+  panic 78
 }
 
 //-----------------------------------------------------------------------------*
@@ -484,7 +484,7 @@ proc FMT0Handler `isr @nullWhenPanicDisabled @weak () {
 required proc FMT1Handler `isr ()
 
 proc FMT1Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -79
+  panic 79
 }
 
 //-----------------------------------------------------------------------------*
@@ -492,7 +492,7 @@ proc FMT1Handler `isr @nullWhenPanicDisabled @weak () {
 required proc FMT2Handler `isr ()
 
 proc FMT2Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -80
+  panic 80
 }
 
 //-----------------------------------------------------------------------------*
@@ -500,7 +500,7 @@ proc FMT2Handler `isr @nullWhenPanicDisabled @weak () {
 required proc CMTHandler `isr ()
 
 proc CMTHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -81
+  panic 81
 }
 
 //-----------------------------------------------------------------------------*
@@ -508,7 +508,7 @@ proc CMTHandler `isr @nullWhenPanicDisabled @weak () {
 required proc RTCAlarmHandler `isr ()
 
 proc RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -82
+  panic 82
 }
 
 //-----------------------------------------------------------------------------*
@@ -516,7 +516,7 @@ proc RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {
 required proc RTCSecondHandler `isr ()
 
 proc RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -83
+  panic 83
 }
 
 //-----------------------------------------------------------------------------*
@@ -524,7 +524,7 @@ proc RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {
 required proc PITChannel0Handler `isr ()
 
 proc PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -84
+  panic 84
 }
 
 //-----------------------------------------------------------------------------*
@@ -532,7 +532,7 @@ proc PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {
 required proc PITChannel1Handler `isr ()
 
 proc PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -85
+  panic 85
 }
 
 //-----------------------------------------------------------------------------*
@@ -540,7 +540,7 @@ proc PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {
 required proc PITChannel2Handler `isr ()
 
 proc PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -86
+  panic 86
 }
 
 //-----------------------------------------------------------------------------*
@@ -548,7 +548,7 @@ proc PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {
 required proc PITChannel3Handler `isr ()
 
 proc PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -87
+  panic 87
 }
 
 //-----------------------------------------------------------------------------*
@@ -556,7 +556,7 @@ proc PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {
 required proc PDBHandler `isr ()
 
 proc PDBHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -88
+  panic 88
 }
 
 //-----------------------------------------------------------------------------*
@@ -564,7 +564,7 @@ proc PDBHandler `isr @nullWhenPanicDisabled @weak () {
 required proc USBOTGHandler `isr ()
 
 proc USBOTGHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -89
+  panic 89
 }
 
 //-----------------------------------------------------------------------------*
@@ -572,7 +572,7 @@ proc USBOTGHandler `isr @nullWhenPanicDisabled @weak () {
 required proc USBChargerDetectHandler `isr ()
 
 proc USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -90
+  panic 90
 }
 
 //-----------------------------------------------------------------------------*
@@ -580,7 +580,7 @@ proc USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {
 required proc DAC0Handler `isr ()
 
 proc DAC0Handler `isr @nullWhenPanicDisabled @weak () {
-  panic -97
+  panic 97
 }
 
 //-----------------------------------------------------------------------------*
@@ -588,7 +588,7 @@ proc DAC0Handler `isr @nullWhenPanicDisabled @weak () {
 required proc TSIHandler `isr ()
 
 proc TSIHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -99
+  panic 99
 }
 
 //-----------------------------------------------------------------------------*
@@ -596,7 +596,7 @@ proc TSIHandler `isr @nullWhenPanicDisabled @weak () {
 required proc MCGHandler `isr ()
 
 proc MCGHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -100
+  panic 100
 }
 
 //-----------------------------------------------------------------------------*
@@ -604,7 +604,7 @@ proc MCGHandler `isr @nullWhenPanicDisabled @weak () {
 required proc lowPowerTimerHandler `isr ()
 
 proc lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -101
+  panic 101
 }
 
 //-----------------------------------------------------------------------------*
@@ -612,7 +612,7 @@ proc lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {
 required proc pinDetectPortAHandler `isr ()
 
 proc pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -103
+  panic 103
 }
 
 //-----------------------------------------------------------------------------*
@@ -620,7 +620,7 @@ proc pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {
 required proc pinDetectPortBHandler `isr ()
 
 proc pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -104
+  panic 104
 }
 
 //-----------------------------------------------------------------------------*
@@ -628,7 +628,7 @@ proc pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {
 required proc pinDetectPortCHandler `isr ()
 
 proc pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -105
+  panic 105
 }
 
 //-----------------------------------------------------------------------------*
@@ -636,7 +636,7 @@ proc pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {
 required proc pinDetectPortDHandler `isr ()
 
 proc pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -106
+  panic 106
 }
 
 //-----------------------------------------------------------------------------*
@@ -644,7 +644,7 @@ proc pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {
 required proc pinDetectPortEHandler `isr ()
 
 proc pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -107
+  panic 107
 }
 
 //-----------------------------------------------------------------------------*
@@ -652,7 +652,7 @@ proc pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {
 required proc softwareInterruptHandler `isr ()
 
 proc softwareInterruptHandler `isr @nullWhenPanicDisabled @weak () {
-  panic -110
+  panic 110
 }
 
 //-----------------------------------------------------------------------------*

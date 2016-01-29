@@ -14,13 +14,6 @@ var gDelai $u = 0 {
   @rw proc loop
 }
 
-struct $AZER {
-  var x $int8 = 89
-  var y $uint6 = 34
-}
-
-// let TOTO = $AZER ()
-
 //------------------------------------------------*
 
 proc loop `user () {
