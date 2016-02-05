@@ -3751,21 +3751,25 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    make.addRule (rule)\n"
   "  #--- Assembling\n"
   "    asObject = objectDir + \"/opt.\" + source + \".s.o\"\n"
-  "    rule = makefile.Rule ([asObject], \"Assembling \" + asSource)\n"
+  "    listingFile = objectDir + \"/opt.\" + source + \".s.list\"\n"
+  "    rule = makefile.Rule ([asObject, listingFile], \"Assembling \" + asSource)\n"
   "    rule.mDependences.append (asSource)\n"
   "    rule.mCommand += asAssembler\n"
   "    rule.mCommand += [asSource]\n"
   "    rule.mCommand += [\"-o\", asObject]\n"
+  "    rule.mCommand += [\"-aln=\" + listingFile]\n"
   "    make.addRule (rule)\n"
   "    objectList.append (asObject)\n"
   "  #---------------------------------------------- Add assembler files compile rule\n"
   "  for source in assemblerSourceList:\n"
   "    object = objectDir + \"/\" + source + \".o\"\n"
-  "    rule = makefile.Rule ([object], \"Assembling \" + source)\n"
+  "    listingFile = objectDir + \"/opt.\" + source + \".list\"\n"
+  "    rule = makefile.Rule ([object, listingFile], \"Assembling \" + source)\n"
   "    rule.mDependences.append (\"sources/\" + source)\n"
   "    rule.mCommand += asAssembler\n"
   "    rule.mCommand += [\"sources/\" + source]\n"
   "    rule.mCommand += [\"-o\", object]\n"
+  "    rule.mCommand += [\"-aln=\" + listingFile]\n"
   "    make.addRule (rule)\n"
   "    objectList.append (object)\n"
   "  #---------------------------------------------- Add linker rule\n"
@@ -3828,7 +3832,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  9623, // Text length
+  9855, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 

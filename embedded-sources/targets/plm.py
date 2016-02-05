@@ -139,21 +139,25 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     make.addRule (rule)
   #--- Assembling
     asObject = objectDir + "/opt." + source + ".s.o"
-    rule = makefile.Rule ([asObject], "Assembling " + asSource)
+    listingFile = objectDir + "/opt." + source + ".s.list"
+    rule = makefile.Rule ([asObject, listingFile], "Assembling " + asSource)
     rule.mDependences.append (asSource)
     rule.mCommand += asAssembler
     rule.mCommand += [asSource]
     rule.mCommand += ["-o", asObject]
+    rule.mCommand += ["-aln=" + listingFile]
     make.addRule (rule)
     objectList.append (asObject)
   #---------------------------------------------- Add assembler files compile rule
   for source in assemblerSourceList:
     object = objectDir + "/" + source + ".o"
-    rule = makefile.Rule ([object], "Assembling " + source)
+    listingFile = objectDir + "/opt." + source + ".list"
+    rule = makefile.Rule ([object, listingFile], "Assembling " + source)
     rule.mDependences.append ("sources/" + source)
     rule.mCommand += asAssembler
     rule.mCommand += ["sources/" + source]
     rule.mCommand += ["-o", object]
+    rule.mCommand += ["-aln=" + listingFile]
     make.addRule (rule)
     objectList.append (object)
   #---------------------------------------------- Add linker rule
