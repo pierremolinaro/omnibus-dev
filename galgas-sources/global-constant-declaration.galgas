@@ -1,4 +1,4 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+ #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -128,8 +128,8 @@ override method @globalConstantDeclaration enterInContext
     !errorLocation:mConstantName.location
     !staticTypeAllowed:true
   )
-  drop annotationType
-  if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
+  drop annotationType, expressionResult
+  if ([instructionGenerationList length] > 0) || not [result.mValue isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end
 #--- Enter in context
