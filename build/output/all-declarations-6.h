@@ -26,66 +26,6 @@ void categoryMethod_checkBinaryOperationWith (const class GALGAS_infixOperatorMa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Abstract category method '@infixOperatorDescription generateInfixOperatorCode'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_infixOperatorDescription_generateInfixOperatorCode) (const class cPtr_infixOperatorDescription * inObject,
-                                                                                            class GALGAS_semanticTemporariesStruct & ioArgument0,
-                                                                                            class GALGAS_instructionListIR & ioArgument1,
-                                                                                            const class GALGAS_operandIR constinArgument2,
-                                                                                            const class GALGAS_location constinArgument3,
-                                                                                            const class GALGAS_operandIR constinArgument4,
-                                                                                            const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
-                                                                                            class GALGAS_operandIR & outArgument6,
-                                                                                            class C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_generateInfixOperatorCode (const int32_t inClassIndex,
-                                                    categoryMethodSignature_infixOperatorDescription_generateInfixOperatorCode inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_generateInfixOperatorCode (const class cPtr_infixOperatorDescription * inObject,
-                                                   GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                   GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                   const GALGAS_operandIR constin_inLeftOperand,
-                                                   const GALGAS_location constin_inOperatorLocation,
-                                                   const GALGAS_operandIR constin_inRightOperand,
-                                                   const GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                   GALGAS_operandIR & out_outResultValue,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category getter '@infixOperatorDescription performStaticOperation'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef class GALGAS_bigint (*categoryGetterSignature_infixOperatorDescription_performStaticOperation) (const class cPtr_infixOperatorDescription * inObject,
-                                                                                                        const class GALGAS_bigint & constinArgument0,
-                                                                                                        const class GALGAS_bigint & constinArgument1,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryGetter_performStaticOperation (const int32_t inClassIndex,
-                                                 categoryGetterSignature_infixOperatorDescription_performStaticOperation inGetter) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint callCategoryGetter_performStaticOperation (const cPtr_infixOperatorDescription * inObject,
-                                                               const GALGAS_bigint & constin_inLeft,
-                                                               const GALGAS_bigint & constin_inRight,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //         Category getter '@procEffectiveParameterPassingModeAST passingModeForActualSelector' (as function)          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

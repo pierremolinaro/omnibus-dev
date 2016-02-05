@@ -90,7 +90,7 @@ override method @forInstructionAST analyze
     !true # Read access ok
     !.localValue {!type:iteratedElementType !name:mVarName.string}
     !true # copiable
-    !@registerBitSliceAccessMap{}
+    !{}
     !false # mCanBeUsedAsInputParameter
     !true # mIsConstant
   ]

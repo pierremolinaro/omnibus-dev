@@ -104,7 +104,7 @@ override method @methodCallInstructionAST analyze
         ?let @bool unused readAccessAllowed
         ?let @objectInMemoryIR unused variableKind
         ?let @bool isCopiable
-        ?let @registerBitSliceAccessMap unused fieldMap
+        ?let @controlRegisterBitSliceAccessMap unused fieldMap
         ?let @bool canBeUsedAsInputParameter
         ?let @bool isConstant
       ]
@@ -142,7 +142,7 @@ override method @methodCallInstructionAST analyze
         ?let @bool unused readAccessAllowed
         ?let @objectInMemoryIR unused variableKind
         ?let @bool unused isCopiable
-        ?let @registerBitSliceAccessMap unused fieldMap
+        ?let @controlRegisterBitSliceAccessMap unused fieldMap
         ?let @bool unused canBeUsedAsInputParameter
         ?let @bool isConstant
       ]

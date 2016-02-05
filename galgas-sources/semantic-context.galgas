@@ -176,7 +176,7 @@ struct @semanticContext {
   @initRoutineMap mInitRoutineMap
   @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
   @exceptionRoutinePriorityMap mExceptionLoopRoutinePriorityMap 
-  @registerMap mRegisterMap
+  @controlRegisterMap mControlRegisterMap
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
   @constructorMap mConstructorMap
@@ -269,17 +269,14 @@ proc buildSemanticContext
     !sourceFile:inSourceFile
   )
 
-#--- Enter global constants in context
-#  enterGlobalConstantsInContext (
-#   !orderedConstantDeclarationList:inOrderedConstantDeclarationList
-#   !sourceFile:inSourceFile
-#   !?staticStringMap:ioGlobalLiteralStringMap
-#   !?context: outSemanticContext
-#  )
 #--- Enter control registers in context
   enterControlRegistersInContext (
    !inAST.mControlRegisterDeclarationListAST
    !?context: outSemanticContext
+  )
+  buildControlRegisterMapHTMLFile (
+    !outSemanticContext.mControlRegisterMap
+    !sourceFile:inSourceFile
   )
 #--- Enter procedures in context
   for procedure in inAST.mProcedureListAST do

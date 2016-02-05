@@ -7,6 +7,7 @@ option plm_options {
   @bool writeTypeDependencyGraphFile : 't', "type-dependency-graph" -> "Write type dependency graph file"
   @bool writeGlobalConstantDependencyGraphFile : 'c', "global-constant-dependency-graph" -> "Write global constant dependency graph file"
   @bool writeGlobalConstantHTMLDumpFile : '\0', "global-constant-map" -> "Write global constant map in an HTML file"
+  @bool writeControlRegisterHTMLDumpFile : '\0', "control-register-map" -> "Write control register map in an HTML file"
   @bool doNotDetectRecursiveCalls : 'r', "do-not-detect-recursive-calls" -> "Do not detect recursive calls"
 
   @bool listEmbeddedSampleFiles : 'l', "list-embedded-samples" -> "List embedded sample files"

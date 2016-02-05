@@ -39,6 +39,7 @@ project (1:0:0) -> "plm" {
 #--- Global declarations
   "galgas-sources/global-variable-declaration.galgas"
   "galgas-sources/global-constant-declaration.galgas"
+  "galgas-sources/register-declaration.galgas"
 
 #--- Integer
   "galgas-sources/type-integer.galgas"
@@ -60,9 +61,6 @@ project (1:0:0) -> "plm" {
 #--- proc
   "galgas-sources/proc-declaration.galgas"
   "galgas-sources/required-proc-declaration.galgas"
-
-#--- Registers
-  "galgas-sources/register-declaration.galgas"
 
 #--- Expression
   "galgas-sources/expression-operator-priority.galgas"

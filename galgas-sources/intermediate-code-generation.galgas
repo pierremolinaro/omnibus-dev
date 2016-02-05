@@ -7,7 +7,7 @@
 
 struct @intermediateCodeStruct {
   @staticStringMap mStaticStringMap
-  @registerMapIR mRegisterMap
+  @controlRegisterMapIR mControlRegisterMap
   @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap
   @procedureMapIR mProcedureMapIR
@@ -21,7 +21,7 @@ struct @intermediateCodeStruct {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @registerMapIR {
+map @controlRegisterMapIR {
   @string mRegisterTypeName
   @bigint mRegisterAddress
   insert insertKey error message "** internal error **"

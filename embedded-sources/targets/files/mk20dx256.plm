@@ -208,10 +208,10 @@ register PORTE_ISFR   at 0x4004D0A0 $uint32 // Interrupt Status Flag Register
 register SIM_SOPT1    at 0x40047000 $uint32 // System Options Register 1
 register SIM_SOPT1CFG at 0x40047004 $uint32 // SOPT1 Configuration Register
 register SIM_SOPT2    at 0x40048004 $uint32 // System Options Register 2
-register SIM_SOPT2_USBSRC at 0x00040000  $uint32 // 0=USB_CLKIN, 1=FFL/PLL 
-register SIM_SOPT2_PLLFLLSEL at 0x00010000  $uint32 // 0=FLL, 1=PLL
-register SIM_SOPT2_TRACECLKSEL at 0x00001000  $uint32 // 0=MCGOUTCLK, 1=CPU
-register SIM_SOPT2_PTD7PAD at 0x00000800  $uint32 // 0=normal, 1=double drive PTD7
+let SIM_SOPT2_USBSRC      $uint32 = 0x40000  // 0=USB_CLKIN, 1=FFL/PLL 
+let SIM_SOPT2_PLLFLLSEL   $uint32 = 0x10000 // 0=FLL, 1=PLL
+let SIM_SOPT2_TRACECLKSEL $uint32 = 0x1000  // 0=MCGOUTCLK, 1=CPU
+let SIM_SOPT2_PTD7PAD     $uint32 = 0x800  // 0=normal, 1=double drive PTD7
 //register $uint32 SIM_SOPT2_CLKOUTSEL(n)   (((n) & 7) << 5) // Selects the clock to output on the CLKOUT pin.
 let SIM_SOPT2_RTCCLKOUTSEL $uint32 = 0x00000010  // RTC clock out select
 register SIM_SOPT4   at 0x4004800C $uint32 // System Options Register 4
