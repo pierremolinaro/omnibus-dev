@@ -87,7 +87,7 @@ override method @varInExpressionAST analyzeExpression
     ?let accessIsAllowed
     ?@objectInMemoryIR variableKind
     ?*
-    ?@registerBitSliceAccessMap registerBitSliceMap
+    ?@controlRegisterBitSliceAccessMap registerBitSliceMap
     ?2*
   ]
   if not accessIsAllowed then

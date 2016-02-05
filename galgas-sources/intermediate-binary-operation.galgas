@@ -94,7 +94,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ioLLVMcode += labelName + ".noovf:\n"
   ioLLVMcode += "  " + [mTarget llvmName] + " = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 0\n"
   ioGenerationAdds.mIntrinsicsDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
-     + llvmType + " (" + llvmType + " %a, " + llvmType + " %b) nounwind readnone"
+     + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

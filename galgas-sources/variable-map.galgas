@@ -13,7 +13,7 @@ func initialVariableMap
 #--- Add registers
   outVariableMap = .emptyMap
   @procFormalArgumentListForGeneration formalArguments = {}
-  for () in inContext.mRegisterMap do
+  for () in inContext.mControlRegisterMap do
     if mIsReadOnly || inGlobalsAreConstant then
       [!?outVariableMap insertUsedLocalConstant
         !lkey
@@ -135,7 +135,7 @@ sharedmap @variableMap {
   @bool mReadAccessAllowed
   @objectInMemoryIR mVariableKind
   @bool copiable
-  @registerBitSliceAccessMap fieldMap
+  @controlRegisterBitSliceAccessMap fieldMap
   @bool mCanBeUsedAsInputParameter
   @bool mIsConstant
 

@@ -94,7 +94,14 @@ syntax extension common_syntax {
 #  ENTER IN CONTEXT                                                                                                    *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @registerFieldMap {
+list @controlRegisterFieldList { # Used for displaying in HTML file
+  @uint mFieldBitCount
+  @string mFieldName # "—" if unused
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @controlRegisterFieldMap {
   @uint mBitIndex
   @uint mBitCount
   insert insertKey error message "the '%K' register slice has been already declared"
@@ -103,10 +110,10 @@ map @registerFieldMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @registerBitSliceAccessMap {
+map @controlRegisterBitSliceAccessMap {
   @llvmBinaryOperation mAccessOperator
   @bigint mAccessRightOperand
-  @registerBitSliceAccessMap mSubMap
+  @controlRegisterBitSliceAccessMap mSubMap
   @unifiedTypeMap-proxy mResultType
   insert insertKey error message "the '%K' register slice has been already declared"
   search searchKey error message "the '%K' register slice is not declared"
@@ -114,12 +121,14 @@ map @registerBitSliceAccessMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @registerMap {
+map @controlRegisterMap {
   @unifiedTypeMap-proxy mType
   @bool mIsReadOnly
-  @registerBitSliceAccessMap mRegisterFieldAccessMap
-  @registerFieldMap mRegisterFieldMap
+  @controlRegisterBitSliceAccessMap mRegisterFieldAccessMap
+  @controlRegisterFieldMap mRegisterFieldMap
   @bigint mAddress
+  @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
+  @uint mRegisterBitCount
   insert insertKey error message "the '%K' register has been already declared in %L"
   search searchKey error message "** internal error **"
 }
@@ -142,23 +151,43 @@ proc enterControlRegistersInContext
   for (registerNameList registerTypeName registerBitSliceList) in inRegisterDeclarationListAST do
   #---
     let registerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !registerTypeName}
+    @uint registerBitCount
+    switch [registerType kind]
+    case integer (*** bitCount):
+      registerBitCount = bitCount
+    case boolean :
+      error registerTypeName : "a register should be an $intXX or an $uintXX" :registerBitCount
+    case boolset :
+      error registerTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    case enumeration (*) :
+      error registerTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    case literalString :
+      error registerTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    case staticInteger :
+      error registerTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    case structure (**) :
+      error registerTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    end
   #--- Build bit slice map
-    @registerFieldMap registerFieldMap = {}
-    @registerBitSliceAccessMap registerBitSliceMap = {}
+    @controlRegisterFieldMap registerFieldMap = {}
+    @controlRegisterBitSliceAccessMap registerBitSliceMap = {}
+    @controlRegisterFieldList controlRegisterFieldList = {} # Used for HTML file
     if [registerBitSliceList length] > 0 then
       @uint shiftCount = 0
       for > () in registerBitSliceList do
         switch mRegisterBitSlice
         case unusedBits (@lbigint count) :
           shiftCount = shiftCount + [count.bigint uint]
+          controlRegisterFieldList += ![count.bigint uint] ! "—"
         case namedBit (@lstring name @lbigint count) :
           let bitCount = [count.bigint uint]
+          controlRegisterFieldList += !bitCount !name.string
           [!?registerFieldMap insertKey
             !name
             !shiftCount
             !bitCount
           ]
-          @registerBitSliceAccessMap registerSubMap = {}
+          @controlRegisterBitSliceAccessMap registerSubMap = {}
           [!?registerSubMap insertKey
             !.new{!"shift" !name.location}
             !.lshr
@@ -198,20 +227,22 @@ proc enterControlRegistersInContext
           isReadOnly = true
         end
       end
-      [!?ioContext.mRegisterMap insertKey
+      [!?ioContext.mControlRegisterMap insertKey
         !mRegisterName
         !registerType
         !isReadOnly
         !registerBitSliceMap
         !registerFieldMap
         !mRegisterAddress.bigint
+        !controlRegisterFieldList
+        !registerBitCount
       ]
     end
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                   *
+#  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc controlRegistersSemanticAnalysis
@@ -255,12 +286,75 @@ proc controlRegistersSemanticAnalysis
         error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]
       end
     #---
-      [!?ioIntermediateCodeStruct.mRegisterMap insertKey
+      [!?ioIntermediateCodeStruct.mControlRegisterMap insertKey
         !mRegisterName
         !registerTypeName.string
         !mRegisterAddress.bigint
       ]
     end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  BUILD HTML FILE                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc buildControlRegisterMapHTMLFile
+  ?let @controlRegisterMap inControlRegisterMap
+  ?sourceFile:let @lstring inSourceFile
+{
+#------------------------------------ Build an HTML file that contains all declared constants
+  let @string typeDumpFilePath = inSourceFile.string + ".control-registers.html"
+  if [option plm_options.writeControlRegisterHTMLDumpFile value] then
+    @stringset firstLetterSet = {}
+    for () in inControlRegisterMap do
+      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
+    end
+    @string tableOfTypeString = ""
+    @char currentFirstLetter = ' '
+    for () type_ in inControlRegisterMap do
+      if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
+        currentFirstLetter = [type_lkey.string characterAtIndex !0]
+        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
+      end
+      tableOfTypeString += linkForControlRegister (!type_lkey.string) + "<br>"
+    end
+    let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dump
+      ![inSourceFile lastPathComponent]
+      !inControlRegisterMap
+      !firstLetterSet
+      !tableOfTypeString
+    ]
+    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+  else
+    [@string deleteFileIfExists !typeDumpFilePath]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" {
+}{
+}{
+  template dump "controlRegisterDump.html.galgasTemplate"
+    ?@string PROJECT_NAME
+    ?@controlRegisterMap CONTROL_REGISTER_MAP
+    ?@stringset FIRST_LETTER_SET
+    ?@string TABLE_OF_TYPES_STRING
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private func linkForControlRegister ?let @string inControlRegisterName -> @string outResult {
+  outResult = "<a class=\"header_link\" href=\"#" + inControlRegisterName + "\">" + inControlRegisterName + "</a>"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func fieldIndexColumns ?let @uint inBitCount -> @string outResult {
+  outResult = ""
+  for > x in 0 ..< inBitCount do
+    outResult += "<td class=\"fields\">" + x + "</td>"
   end
 }
 

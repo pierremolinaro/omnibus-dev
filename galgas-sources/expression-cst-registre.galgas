@@ -91,13 +91,14 @@ override method @registerConstantInExpressionAST analyzeExpression
   !result:@operandIR outResult
 {
 #--- Search variable
-  [inContext.mRegisterMap searchKey
+  [inContext.mControlRegisterMap searchKey
     !mRegisterName
     ?let type
     ?let unused readOnly
-    ?let @registerBitSliceAccessMap unused registerBitSliceMap
-    ?let @registerFieldMap registerFieldMap
+    ?let @controlRegisterBitSliceAccessMap unused registerBitSliceMap
+    ?let @controlRegisterFieldMap registerFieldMap
     ?let @bigint unused registerAddress
+    ?2*
   ]
 #--- Field
   [registerFieldMap searchKey
@@ -124,13 +125,14 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   !result:@operandIR outResult
 {
 #--- Search variable
-  [inContext.mRegisterMap searchKey
+  [inContext.mControlRegisterMap searchKey
     !mRegisterName
     ?let type
     ?let unused readOnly
-    ?let @registerBitSliceAccessMap unused registerBitSliceMap
-    ?let @registerFieldMap registerFieldMap
+    ?let @controlRegisterBitSliceAccessMap unused registerBitSliceMap
+    ?let @controlRegisterFieldMap registerFieldMap
     ?let @bigint unused registerAddress
+    ?2*
   ]
 #--- Field
   [registerFieldMap searchKey

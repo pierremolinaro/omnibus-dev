@@ -115,6 +115,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"writeControlRegisterHTMLDumpFile"
+    commandChar:0
+    commandString:@"control-register-map"
+    comment:@"Write control register map in an HTML file"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"writeGlobalConstantDependencyGraphFile"
     commandChar:99
     commandString:@"global-constant-dependency-graph"
