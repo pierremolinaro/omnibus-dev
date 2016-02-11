@@ -307,6 +307,7 @@ override method @structureDeclaration semanticAnalysis
     @variableMap variableMap = initialVariableMap (
       !routineNameForInvocation:procNameForInvocationGraph (!structureType !procedure.mProcedureName).string
       !context:inContext
+      !userMode:[procedureModeSet hasKey !"user"]
       !globalsAreConstant:false
     )
   #--- Add "self" to variable map
@@ -402,6 +403,7 @@ override method @structureDeclaration semanticAnalysis
     @variableMap variableMap = initialVariableMap (
       !routineNameForInvocation:funcNameForInvocationGraph (!structureType !function.mFunctionName).string
       !context:inContext
+      !userMode:[functionModeSet hasKey !"user"]
       !globalsAreConstant:true
     )
   #--- Add "self" variable to variable map

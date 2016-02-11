@@ -204,6 +204,22 @@ register SYST_CALIB @ro at 0xE000_E01C $uint32
 Toute tentative de faire figurer ce registre dans une construction qui provoque une écriture de celui-ci entraîne l'apparition d'une erreur de compilation.
 
 
+
+
+
+
+\sectionLabel{Attribut \texttt{@user}}{attributUser}\index{"@user}
+La déclaration d'un registre accepte l'attribut \plm+@user+, qui signifie qu'il est accessible en mode \plm!`user!. Par défaut, un registre de contrôle n'est pas accessible en mode  \plm!`user!. Par exemple :
+\begin{PLM}
+register GPIOE_PSOR @user at 0x400FF104 $uint32
+\end{PLM}
+
+
+
+
+
+
+
 \section{Déclaration de plusieurs registres}
 
 Il est possible de regrouper les déclarations de registres partageant la même décomposition de leur champs. Par exemple, pour les registres \texttt{PORT$n$\_PCR$m$} du \texttt{mk20dx256} (seule la déclaration de deux premiers registres est montrée) :

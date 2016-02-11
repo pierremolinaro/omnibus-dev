@@ -6,11 +6,15 @@ proc setup `user () {
 }
 
 newtype $u : $int32
-let bound = 1000 * 1000
+let bound = 1000 * 1000 * 10
 
 //------------------------------------------------*
 
 var gDelai $u = 0 {
+  @rw proc loop
+}
+
+var gVar $uint32 = 0 {
   @rw proc loop
 }
 
@@ -23,6 +27,11 @@ proc loop `user () {
   elsif (bound * 2) == gDelai then
     gDelai = 0
     ledOff (!LED_TEENSY)  // Éteindre la led
+    gVar +%= 1
+    goto (!line:0 !column:0)
+    printUnsigned (!gVar)
+    goto (!line:1 !column:0)
+    printUnsigned (!gVar !% 20)
   end  
 }
 

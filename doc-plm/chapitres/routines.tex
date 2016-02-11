@@ -36,7 +36,7 @@ boot priorite {
   liste_instructions
 }
 \end{PLM}
-Où \plm=priorite= est la priorité de la routine. C'est une constante entière entre $0$ et $2^{64}-1$. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
+Où \plm=priorite= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
 
 Les routines \plm=boot= s'exécutent dans le mode \plm=`boot=.\index{\`boot}
 
@@ -60,7 +60,7 @@ init priorite {
   liste_instructions
 }
 \end{PLM}
-Où \plm=priorite= est la priorité de la routine. C'est une constante entière entre $0$ et $2^{64}-1$. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
+Où \plm=priorite= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
 
 Les routines \plm=init= s'exécutent dans le mode \plm=`init=.\index{\`init}
 
@@ -154,6 +154,13 @@ proc goto `user @noWarningIfUnused (
 \end{PLM}
 
 Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=`user=, avec deux arguments formels en entrée. L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+
+
+
+
+\subsectionLabel{Procédures et registres de contrôle}{procEtRegistresContrôles}
+
+Si la procédure est déclarée avec le mode \plm!`user!, seuls les registres de contrôle déclarés \plm!@user! sont accessibles. Sinon, tous les registres de contrôle sont accessibles.
 
 
 
@@ -264,7 +271,7 @@ Où :
   \item \plm=@type= est le type de la valeur renvoyée.
 \end{itemize}
 
-Contraire à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=@type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
+Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=@type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
 Par exemple :
 
 \begin{PLM}
@@ -288,6 +295,8 @@ Ceci définit la fonction \plm=autreFonction=, avec deux arguments, sans attribu
 
 L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
 
+
+
 \subsectionLabel{Fonctions et variables globales}{fonctionEtVariableGlobale}
 
 Les fonctions peuvent accéder aux variables globales en lecture, mais ne peuvent pas les modifier.
@@ -305,6 +314,15 @@ func getGlobalVar `user () -> $uint56 {
 }
 \end{PLM}
 
+
+
+
+\subsectionLabel{Fonctions et registres de contrôle}{fonctionEtRegistresContrôles}
+
+Dans tous les cas, seul l'accès en lecture à un registre de contrôle peut être autorisé.
+
+
+Si la fonction est déclarée avec le mode \plm!`user!, seuls les registres de contrôle déclarés \plm!@user! sont accessibles en lecture. Sinon, tous les registres de contrôle sont accessibles en lecture.
 
 
 

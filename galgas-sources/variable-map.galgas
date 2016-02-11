@@ -7,6 +7,7 @@
 func initialVariableMap
   ?routineNameForInvocation:let @string inRoutineNameForInvocation
   ?context:let @semanticContext inContext
+  ?userMode:let @bool inAcceptUserMode
   ?globalsAreConstant:@bool inGlobalsAreConstant
   -> @variableMap outVariableMap
 {
@@ -14,7 +15,18 @@ func initialVariableMap
   outVariableMap = .emptyMap
   @procFormalArgumentListForGeneration formalArguments = {}
   for () in inContext.mControlRegisterMap do
-    if mIsReadOnly || inGlobalsAreConstant then
+    if inAcceptUserMode && not mIsAccessibleInUserMode then
+      [!?outVariableMap insertInaccessibleControlRegister
+        !lkey
+        !mType
+        !true
+        !.register {!type:mType !name:lkey !address:mAddress}
+        !true
+        !mRegisterFieldAccessMap
+        !false # Cannot be used as input parameter
+        !true # Is constant
+      ]
+    elsif mIsReadOnly || inGlobalsAreConstant then
       [!?outVariableMap insertUsedLocalConstant
         !lkey
         !mType
@@ -138,6 +150,15 @@ sharedmap @variableMap {
   @controlRegisterBitSliceAccessMap fieldMap
   @bool mCanBeUsedAsInputParameter
   @bool mIsConstant
+
+#--- Inaccessible control register
+  state inaccessibleControlRegister {
+    neutralAccess   -> inaccessibleControlRegister
+    readAccess      -> inaccessibleControlRegister error "the control register is inaccessible"
+    writeAccess     -> inaccessibleControlRegister error "the control register is inaccessible"
+    readWriteAccess -> inaccessibleControlRegister error "the control register is inaccessible"
+    dropAccess      -> inaccessibleControlRegister error "the control register is inaccessible"
+  }
 
 #--- Used global variable
   state globalVariable {
@@ -337,7 +358,10 @@ sharedmap @variableMap {
   }
 
 #--- Insert methods 
-  insert insertGlobalVariable state globalVariable error message "redefinition of '%K' global variable (previous declaration was in %L)"
+  insert insertInaccessibleControlRegister state inaccessibleControlRegister
+     error message "redefinition of '%K' global variable (previous declaration was in %L)"
+  insert insertGlobalVariable state globalVariable
+    error message "redefinition of '%K' global variable (previous declaration was in %L)"
   insert insertMutableAttribute state currentInstanceAttributeInModifier error message "redefinition of '%K' attribute (previous declaration was in %L)"
   insert insertNonMutableAttribute state currentInstanceAttribute error message "redefinition of '%K' attribute (previous declaration was in %L)"
   insert insertUndefinedLocalVariable state undefinedLocalVariable error message "redefinition of '%K' variable (previous declaration was in %L)"

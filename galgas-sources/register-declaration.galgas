@@ -124,6 +124,7 @@ map @controlRegisterBitSliceAccessMap {
 map @controlRegisterMap {
   @unifiedTypeMap-proxy mType
   @bool mIsReadOnly
+  @bool mIsAccessibleInUserMode
   @controlRegisterBitSliceAccessMap mRegisterFieldAccessMap
   @controlRegisterFieldMap mRegisterFieldMap
   @bigint mAddress
@@ -218,19 +219,29 @@ proc enterControlRegistersInContext
     for () in registerNameList do
     #--- Analyze attributes
       var isReadOnly = false
+      var isAccessibleInUserMode = false
       for (att) in mAttributeList do
-        if att.string != "ro" then
-          error att : "only @ro attribute (read only) is accepted here"
-        elsif isReadOnly then
-          error att : "duplicated attribute"
+        if att.string == "ro" then
+          if isReadOnly then
+            error att : "duplicated attribute"
+          else
+            isReadOnly = true
+          end
+        elsif att.string == "user" then
+          if isAccessibleInUserMode then
+            error att : "duplicated attribute"
+          else
+            isAccessibleInUserMode = true
+          end
         else
-          isReadOnly = true
+          error att : "only @ro attribute (read only) and @user (accessible un `user mode) are accepted here"
         end
       end
       [!?ioContext.mControlRegisterMap insertKey
         !mRegisterName
         !registerType
         !isReadOnly
+        !isAccessibleInUserMode
         !registerBitSliceMap
         !registerFieldMap
         !mRegisterAddress.bigint

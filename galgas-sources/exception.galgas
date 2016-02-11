@@ -118,6 +118,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
+    !userMode:false
     !globalsAreConstant:false
   )
 #--- Insert predefined input arguments

@@ -162,7 +162,8 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
 
 class GALGAS_variableMap function_initialVariableMap (const class GALGAS_string & constinArgument0,
                                                       const class GALGAS_semanticContext & constinArgument1,
-                                                      class GALGAS_bool inArgument2,
+                                                      const class GALGAS_bool & constinArgument2,
+                                                      class GALGAS_bool inArgument3,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
