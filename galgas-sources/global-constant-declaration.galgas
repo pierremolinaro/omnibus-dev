@@ -97,6 +97,7 @@ override method @globalConstantDeclaration enterInContext
   var variableMap = initialVariableMap (
     !routineNameForInvocation:"compiler" # inRoutineNameForInvocation
     !context:ioContext
+    !userMode:false
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
   )
 #--- Get destination type

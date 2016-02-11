@@ -358,6 +358,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:procNameForInvocationGraph (!.null !mProcedureName).string
     !context:inContext
+    !userMode:[procedureModeSet hasKey !"user"]
     !globalsAreConstant:false
   )
 #--- Analyse formal arguments

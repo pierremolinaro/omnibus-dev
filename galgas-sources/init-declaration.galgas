@@ -124,6 +124,7 @@ method @initList-element initSemanticAnalysis
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
+    !userMode:false
     !globalsAreConstant:false
   )
 #--- Analyze instruction list

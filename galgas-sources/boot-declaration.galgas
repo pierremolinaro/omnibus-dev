@@ -81,6 +81,7 @@ method @bootList-element bootSemanticAnalysis
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
+    !userMode:false
     !globalsAreConstant:false
   )
 #--- Analyze instruction list
