@@ -236,6 +236,7 @@ method @procedureDeclarationListAST-element enterInContext
         !signature
         !weakProcedure
       ]
+      [!?ioContext.mRoutineMap insertKey !mProcedureName]
     end
   else
     [!?ioContext.mProcedureMap insertKey
@@ -245,6 +246,7 @@ method @procedureDeclarationListAST-element enterInContext
       !signature
       !weakProcedure
     ]
+    [!?ioContext.mRoutineMap insertKey !mProcedureName]
   end
 }
 

@@ -25,6 +25,7 @@ struct @ast {
   @procedureDeclarationListAST mProcedureListAST
   @requiredProcedureDeclarationListAST mRequiredProcList
   @functionDeclarationListAST mFunctionListAST
+  @sectionDeclarationListAST mSectionListAST
   @lstringlist mTargetList
   @bootList mBootList
   @initList mInitList

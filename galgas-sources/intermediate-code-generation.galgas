@@ -11,6 +11,7 @@ struct @intermediateCodeStruct {
   @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap
   @procedureMapIR mProcedureMapIR
+  @sectionMapIR mSectionMapIR
   @functionMapIR mFunctionMapIR
   @stringset mRequiredProcedureSet
   @bootListIR mBootList

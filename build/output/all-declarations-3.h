@@ -199,6 +199,14 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
                                                  GALGAS_bool & outArgument4,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'section' non terminal
+//--- 'parse' label
+  public : virtual void nt_section_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_section_ (GALGAS_sectionDeclarationListAST & ioArgument0,
+                                     C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'start_symbol' non terminal
 //--- 'parse' label
   public : virtual void nt_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -360,6 +368,10 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_60 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_61 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_62 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_63 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -742,6 +754,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionLineType ;
   public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
   public : GALGAS_procedureMap mAttribute_mProcedureMap ;
+  public : GALGAS_sectionMap mAttribute_mSectionMap ;
+  public : GALGAS_routineMap mAttribute_mRoutineMap ;
   public : GALGAS_functionMap mAttribute_mFunctionMap ;
   public : GALGAS_initRoutineMap mAttribute_mInitRoutineMap ;
   public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionSetupRoutinePriorityMap ;
@@ -799,6 +813,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionLineType,
                                    const GALGAS_unifiedTypeMap & in_mTypeMap,
                                    const GALGAS_procedureMap & in_mProcedureMap,
+                                   const GALGAS_sectionMap & in_mSectionMap,
+                                   const GALGAS_routineMap & in_mRoutineMap,
                                    const GALGAS_functionMap & in_mFunctionMap,
                                    const GALGAS_initRoutineMap & in_mInitRoutineMap,
                                    const GALGAS_exceptionRoutinePriorityMap & in_mExceptionSetupRoutinePriorityMap,
@@ -852,17 +868,17 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
                                                           const class GALGAS_unifiedTypeMap & inOperand5,
                                                           const class GALGAS_procedureMap & inOperand6,
-                                                          const class GALGAS_functionMap & inOperand7,
-                                                          const class GALGAS_initRoutineMap & inOperand8,
-                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand9,
-                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand10,
-                                                          const class GALGAS_controlRegisterMap & inOperand11,
-                                                          const class GALGAS_globalConstantMap & inOperand12,
-                                                          const class GALGAS_globalVariableMap & inOperand13,
-                                                          const class GALGAS_constructorMap & inOperand14,
-                                                          const class GALGAS_modeMap & inOperand15,
-                                                          const class GALGAS_infixOperatorMap & inOperand16,
-                                                          const class GALGAS_infixOperatorMap & inOperand17,
+                                                          const class GALGAS_sectionMap & inOperand7,
+                                                          const class GALGAS_routineMap & inOperand8,
+                                                          const class GALGAS_functionMap & inOperand9,
+                                                          const class GALGAS_initRoutineMap & inOperand10,
+                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand11,
+                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand12,
+                                                          const class GALGAS_controlRegisterMap & inOperand13,
+                                                          const class GALGAS_globalConstantMap & inOperand14,
+                                                          const class GALGAS_globalVariableMap & inOperand15,
+                                                          const class GALGAS_constructorMap & inOperand16,
+                                                          const class GALGAS_modeMap & inOperand17,
                                                           const class GALGAS_infixOperatorMap & inOperand18,
                                                           const class GALGAS_infixOperatorMap & inOperand19,
                                                           const class GALGAS_infixOperatorMap & inOperand20,
@@ -883,9 +899,11 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand35,
                                                           const class GALGAS_infixOperatorMap & inOperand36,
                                                           const class GALGAS_infixOperatorMap & inOperand37,
-                                                          const class GALGAS_prefixOperatorMap & inOperand38,
-                                                          const class GALGAS_prefixOperatorMap & inOperand39,
-                                                          const class GALGAS_prefixOperatorMap & inOperand40
+                                                          const class GALGAS_infixOperatorMap & inOperand38,
+                                                          const class GALGAS_infixOperatorMap & inOperand39,
+                                                          const class GALGAS_prefixOperatorMap & inOperand40,
+                                                          const class GALGAS_prefixOperatorMap & inOperand41,
+                                                          const class GALGAS_prefixOperatorMap & inOperand42
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -963,6 +981,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMap getter_mProcedureMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mRightShiftOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineMap getter_mRoutineMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_sectionMap getter_mSectionMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mStrictInfOperatorMap (LOCATION_ARGS) const ;
 
@@ -1151,6 +1173,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_globalVariableMapIR mAttribute_mGlobalVariableMap ;
   public : GALGAS_globalConstantMapIR mAttribute_mGlobalConstantMap ;
   public : GALGAS_procedureMapIR mAttribute_mProcedureMapIR ;
+  public : GALGAS_sectionMapIR mAttribute_mSectionMapIR ;
   public : GALGAS_functionMapIR mAttribute_mFunctionMapIR ;
   public : GALGAS_stringset mAttribute_mRequiredProcedureSet ;
   public : GALGAS_bootListIR mAttribute_mBootList ;
@@ -1178,6 +1201,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_globalVariableMapIR & in_mGlobalVariableMap,
                                           const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
                                           const GALGAS_procedureMapIR & in_mProcedureMapIR,
+                                          const GALGAS_sectionMapIR & in_mSectionMapIR,
                                           const GALGAS_functionMapIR & in_mFunctionMapIR,
                                           const GALGAS_stringset & in_mRequiredProcedureSet,
                                           const GALGAS_bootListIR & in_mBootList,
@@ -1201,12 +1225,13 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_globalVariableMapIR & inOperand2,
                                                                  const class GALGAS_globalConstantMapIR & inOperand3,
                                                                  const class GALGAS_procedureMapIR & inOperand4,
-                                                                 const class GALGAS_functionMapIR & inOperand5,
-                                                                 const class GALGAS_stringset & inOperand6,
-                                                                 const class GALGAS_bootListIR & inOperand7,
-                                                                 const class GALGAS_initListIR & inOperand8,
-                                                                 const class GALGAS_instructionListIR & inOperand9,
-                                                                 const class GALGAS_instructionListIR & inOperand10
+                                                                 const class GALGAS_sectionMapIR & inOperand5,
+                                                                 const class GALGAS_functionMapIR & inOperand6,
+                                                                 const class GALGAS_stringset & inOperand7,
+                                                                 const class GALGAS_bootListIR & inOperand8,
+                                                                 const class GALGAS_initListIR & inOperand9,
+                                                                 const class GALGAS_instructionListIR & inOperand10,
+                                                                 const class GALGAS_instructionListIR & inOperand11
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1240,6 +1265,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMapIR getter_mProcedureMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mRequiredProcedureSet (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_sectionMapIR getter_mSectionMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticStringMap getter_mStaticStringMap (LOCATION_ARGS) const ;
 
@@ -1424,94 +1451,5 @@ class cPtr_integerObject_5F_literal_5F_infixOperator : public cPtr_infixOperator
 
 class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Routine 'enter_literal_integer_operators'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enter_5F_literal_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
-                                                       const class GALGAS_bool constinArgument1,
-                                                       class GALGAS_semanticContext & ioArgument2,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  @literal_5F_integerObject_5F_infixOperator class                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_literal_5F_integerObject_5F_infixOperator : public GALGAS_infixOperatorDescription {
-//--- Constructor
-  public : GALGAS_literal_5F_integerObject_5F_infixOperator (void) ;
-
-//---
-  public : inline const class cPtr_literal_5F_integerObject_5F_infixOperator * ptr (void) const { return (const cPtr_literal_5F_integerObject_5F_infixOperator *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_literal_5F_integerObject_5F_infixOperator (const cPtr_literal_5F_integerObject_5F_infixOperator * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_literal_5F_integerObject_5F_infixOperator extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_literal_5F_integerObject_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_literal_5F_integerObject_5F_infixOperator & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_literal_5F_integerObject_5F_infixOperator class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literal_5F_integerObject_5F_infixOperator ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Pointer class for @literal_integerObject_infixOperator class                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_literal_5F_integerObject_5F_infixOperator : public cPtr_infixOperatorDescription {
-//--- Attributes
-
-//--- Constructor
-  public : cPtr_literal_5F_integerObject_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
 
 #endif

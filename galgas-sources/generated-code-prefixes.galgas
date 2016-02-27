@@ -13,6 +13,17 @@ func procNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func sectionNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
+  var s = "section"
+  if inReceiverType != .null then
+    s += " $" + [inReceiverType key]
+  end
+  s += " " + inName
+  outName = .new {!s !inName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func funcNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
   var s = "func"
   if inReceiverType != .null then
@@ -86,6 +97,12 @@ func llvmNameForProcedure ?@string inName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func llvmNameForSection ?@string inName -> @string outName {
+  outName = "proc." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func llvmNameForLocalVariable ?@string inName -> @string outName {
   outName = "var." + inName
 }
@@ -118,6 +135,12 @@ func %once weakAttribute -> @string outResult {
 
 func %once nullWhenPanicDisabledAttribute -> @string outResult {
   outResult = "nullWhenPanicDisabled"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once sectionModeName -> @string outResult {
+  outResult = "section"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
