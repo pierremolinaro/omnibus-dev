@@ -207,9 +207,7 @@ proc generateLLVMfile
     [procedure llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
   end
 #----------------------------------------- Sections
-  for section in inIntermediateCodeStruct.mSectionMapIR do
-    [section llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
-  end
+  [inIntermediateCodeStruct.mSectionMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
     [function implementationCodeGeneration !?llvmCode !generationContext !?generationAdds]

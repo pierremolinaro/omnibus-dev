@@ -139,6 +139,7 @@ override method @procCallInstructionAST analyze
   @modeMap procedureModeMap
   @unifiedTypeMap-proxy receiverType
   @lstring routineNameForInvocationGraph
+  @bool isSection
   if mReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
       !mReceiverName
@@ -157,6 +158,7 @@ override method @procCallInstructionAST analyze
       ?*
     ]
     routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
+    isSection = false
   elsif [inContext.mProcedureMap hasKey !mProcName.string] then
     [inContext.mProcedureMap searchKey
       !mProcName
@@ -167,6 +169,7 @@ override method @procCallInstructionAST analyze
     ]
     receiverType = .null
     routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
+    isSection = false
   elsif [inContext.mSectionMap hasKey !mProcName.string] then
     [inContext.mSectionMap searchKey
       !mProcName
@@ -176,8 +179,11 @@ override method @procCallInstructionAST analyze
     procedureModeMap = {!["user" nowhere]}
     receiverType = .null
     routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mProcName)
+    isSection = true
   else
-    error mProcName :"undefined proc or section" : receiverType, procedureModeMap, procSignature, routineNameForInvocationGraph
+    error mProcName
+      :"undefined proc or section"
+      : isSection, receiverType, procedureModeMap, procSignature, routineNameForInvocationGraph
   end
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
@@ -285,6 +291,7 @@ override method @procCallInstructionAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !if receiverType == .null then "" else [receiverType key] + "." end + mProcName
+    !isSection
     !procCallEffectiveParameterListIR
   }
 }
@@ -311,6 +318,7 @@ list @procCallEffectiveParameterListIR {
 
 class @procCallInstructionIR : @abstractInstructionIR {
   @string mProcName
+  @bool mIsSection # true:section, false:proc
   @procCallEffectiveParameterListIR mParameters
 }
 
@@ -321,7 +329,9 @@ override method @procCallInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  call void @" + llvmNameForProcedure (!mProcName) + " ("
+  ioLLVMcode += "  call void @"
+  ioLLVMcode += if mIsSection then llvmNameForSectionImplementation(!mProcName) else llvmNameForProcedure (!mProcName) end
+  ioLLVMcode += " ("
   for () in mParameters do
     switch mEffectiveParameterPassingMode
     case input:

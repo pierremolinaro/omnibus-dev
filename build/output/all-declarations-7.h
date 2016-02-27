@@ -11,6 +11,31 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 Category method '@objectInMemoryIR loadFromMemory'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject,
+                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                    class GALGAS_operandIR & out_outResultingValue,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Category method '@objectInMemoryIR storeInMemory'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
+                                   class GALGAS_operandIR in_inValue,
+                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                             Category method '@objectInMemoryIR enterAccessibleEntities'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
