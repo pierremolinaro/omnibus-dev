@@ -1,0 +1,224 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @sectionDeclarationListAST {
+  @lstring mSectionName
+  @bool mMutating
+  @lstringlist mSectionAttributeList
+  @procFormalArgumentList mSectionFormalArgumentList
+  @instructionListAST mSectionInstructionList
+  @location mEndOfSectionLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <section> ?!@sectionDeclarationListAST ioSectionListAST {
+    @bool mutating
+    select
+      mutating = false
+    or
+      $mutating$
+      mutating = true
+    end
+    $section$
+    $identifier$ ?let sectionName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    <procedure_formal_arguments> ?formalArguments:let sectionFormalArgumentList
+    ${$
+    @labelMap labelMap = {}
+    <instructionList> ?let instructionList !?labelMap
+    $}$
+    ioSectionListAST +=
+      !sectionName
+      !mutating
+      !attributeList
+      !sectionFormalArgumentList
+      !instructionList
+      !.here
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+    [mSectionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @sectionMap {
+  @bool mMutating
+  @procedureSignature mSignature
+
+  insert insertKey error message "the '%K' section is already declared in %L"
+  search searchKey error message "there is no '%K' section"
+  remove removeKey error message "there is no '%K' section"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionDeclarationListAST-element enterInContext
+  ?!context:@semanticContext ioContext
+{
+#--- Signature
+  @procedureSignature signature = {}
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in mSectionFormalArgumentList do
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+    signature += !formalArgumentPassingMode !selector.string !typeProxy
+  end
+#--- Enter in context
+  [!?ioContext.mSectionMap insertKey
+    !mSectionName
+    !mMutating
+    !signature
+  ]
+  [!?ioContext.mRoutineMap insertKey !mSectionName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionDeclarationListAST-element sectionSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Attributes
+  var warnIfUnused = true
+  for (attribute) in mSectionAttributeList do
+    if attribute.string == noWarningIfUnusedAttribute () then
+      if not warnIfUnused then
+        error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+      end
+      warnIfUnused = false    
+    else
+      error attribute : "unknown attribute; available attribut is @" + noWarningIfUnusedAttribute ()
+    end
+  end
+#--- Variable map
+  let sectionNameForInvocationGraph = sectionNameForInvocationGraph (!.null !mSectionName)
+  @variableMap variableMap = initialVariableMap (
+    !routineNameForInvocation:sectionNameForInvocationGraph.string
+    !context:inContext
+    !userMode:false
+    !globalsAreConstant:false
+  )
+#--- Analyse formal arguments
+  @procFormalArgumentListForGeneration formalArguments = {}
+  enterFormalArguments (
+    !context:inContext
+    !mSectionFormalArgumentList
+    !?variableMap
+    !?formalArguments
+  )
+#--- Enter subprogram invocation graph
+  [!?ioTemporaries.mSubprogramInvocationGraph addNode
+    !sectionNameForInvocationGraph
+    !mSectionName
+  ]
+#--- Analyze instruction list
+  @instructionListIR instructionGenerationList = {}
+  [mSectionInstructionList analyzeRoutineInstructionList
+    !routineNameForInvocationGraph:sectionNameForInvocationGraph
+    !context:inContext
+    !modes:{!sectionModeName ()}
+    !allowException:true
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?variableMap:variableMap
+    !?generatedCode:instructionGenerationList
+  ]
+#---
+  [variableMap checkAutomatonStates !mEndOfSectionLocation]
+#--- Code generation
+  [!?ioIntermediateCodeStruct.mSectionMapIR insertKey
+    !mSectionName
+    !formalArguments
+    !instructionGenerationList
+    !warnIfUnused
+  ]  
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @sectionMapIR {
+  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @instructionListIR mInstructionGenerationList
+  @bool mWarnIfUnused
+  insert insertKey error message "** internal error **"
+#  search searchKey error message "** internal error **"
+#  remove removeKey error message "** internal error **"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionMapIR-element llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string unused ioAssemblerCode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let sectionName = llvmNameForSection (!lkey.string)
+  ioLLVMcode += llvmTitleComment (!"section " + sectionName)
+  ioLLVMcode += "define internal void @" + sectionName + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    end
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ") nounwind {\n"
+#--- Store input arguments in memory
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmTypeName]
+      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+    case output, inputOutput :
+    end
+  end
+#--- Instruction list
+  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#--- Epilog
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

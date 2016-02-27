@@ -163,6 +163,12 @@ map @constructorMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @routineMap {
+  insert insertKey error message "a routine with the same name is already declared in %L"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 struct @semanticContext {
   @uint mPointerSize # in bit count
   @unifiedTypeMap-proxy mBooleanType
@@ -170,8 +176,9 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mExceptionCodeType
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
-#  @typeInitializerMap mTypeInitializerMap
   @procedureMap mProcedureMap
+  @sectionMap mSectionMap
+  @routineMap mRoutineMap
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
   @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
@@ -278,9 +285,12 @@ proc buildSemanticContext
     !outSemanticContext.mControlRegisterMap
     !sourceFile:inSourceFile
   )
-#--- Enter procedures in context
+#--- Enter procedures, functions, section in context
   for procedure in inAST.mProcedureListAST do
     [procedure enterInContext !?context: outSemanticContext]
+  end
+  for section in inAST.mSectionListAST do
+    [section enterInContext !?context: outSemanticContext]
   end
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
 #--- Check required procs mode

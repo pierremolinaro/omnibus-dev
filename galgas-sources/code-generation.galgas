@@ -180,15 +180,6 @@ proc generateLLVMfile
 #----------------------------------------- Structure types declaration
   llvmCode += llvmTitleComment (!"Structure types")
   declareLLVMstructureTypes (!inTypeMap !?llvmCode)
-#----------------------------------------- Structure type initialization
-#  llvmCode += llvmTitleComment (!"Structure initializations")
-#  declareLLVMstructureInitRoutines (!inTypeInitializerMap !?llvmCode)
-##----------------------------------------- Global constants
-#  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap
-#    before llvmCode += llvmTitleComment (!"Global constants")
-#    do [globalConstant generateLLVM !?llvmCode]
-#    after llvmCode += "\n"
-#  end
 #----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
     before llvmCode += llvmTitleComment (!"Global variables")
@@ -214,6 +205,10 @@ proc generateLLVMfile
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     [procedure llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
+  end
+#----------------------------------------- Sections
+  for section in inIntermediateCodeStruct.mSectionMapIR do
+    [section llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
   end
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do

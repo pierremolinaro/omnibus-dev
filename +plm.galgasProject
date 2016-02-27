@@ -48,19 +48,16 @@ project (1:0:0) -> "plm" {
 #--- Static string
   "galgas-sources/type-static-string.galgas"
 
-#--- Boot and init
-  "galgas-sources/boot-declaration.galgas"
-  "galgas-sources/init-declaration.galgas"
-
 #--- Exception
   "galgas-sources/exception.galgas"
 
-#--- func
-  "galgas-sources/func-declaration.galgas"
-
-#--- proc
+#--- Routines
+  "galgas-sources/boot-declaration.galgas"
+  "galgas-sources/init-declaration.galgas"
   "galgas-sources/proc-declaration.galgas"
+  "galgas-sources/func-declaration.galgas"
   "galgas-sources/required-proc-declaration.galgas"
+  "galgas-sources/section-declaration.galgas"
 
 #--- Expression
   "galgas-sources/expression-operator-priority.galgas"

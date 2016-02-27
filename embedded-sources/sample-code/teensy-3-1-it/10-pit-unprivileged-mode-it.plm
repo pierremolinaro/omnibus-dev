@@ -11,11 +11,23 @@ init 100_000 {
 
 //------------------------------------------------*
 
-proc setup `user () {
+section setupPIT () {
   PIT_MCR = 0
   PIT_LDVAL0 = 200000
   PIT_TCTRL0 = 3 // Interrupt, enabled
 }
+
+proc setup `user () {
+  setupPIT ()
+}
+
+//------------------------------------------------*
+
+//proc setup `user () {
+//  PIT_MCR = 0
+//  PIT_LDVAL0 = 200000
+//  PIT_TCTRL0 = 3 // Interrupt, enabled
+//}
 
 //------------------------------------------------*
 

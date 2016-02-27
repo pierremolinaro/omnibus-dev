@@ -138,6 +138,7 @@ override method @procCallInstructionAST analyze
   @procedureSignature procSignature
   @modeMap procedureModeMap
   @unifiedTypeMap-proxy receiverType
+  @lstring routineNameForInvocationGraph
   if mReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
       !mReceiverName
@@ -155,7 +156,8 @@ override method @procCallInstructionAST analyze
       ?procSignature
       ?*
     ]
-  else
+    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
+  elsif [inContext.mProcedureMap hasKey !mProcName.string] then
     [inContext.mProcedureMap searchKey
       !mProcName
       ?*
@@ -164,11 +166,23 @@ override method @procCallInstructionAST analyze
       ?*
     ]
     receiverType = .null
+    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
+  elsif [inContext.mSectionMap hasKey !mProcName.string] then
+    [inContext.mSectionMap searchKey
+      !mProcName
+      ?*
+      ?procSignature
+    ]
+    procedureModeMap = {!["user" nowhere]}
+    receiverType = .null
+    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mProcName)
+  else
+    error mProcName :"undefined proc or section" : receiverType, procedureModeMap, procSignature, routineNameForInvocationGraph
   end
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
     !inRoutineNameForInvocationGraph
-    !procNameForInvocationGraph (!receiverType !mProcName)
+    !routineNameForInvocationGraph
   ]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}
