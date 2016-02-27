@@ -97,8 +97,14 @@ func llvmNameForProcedure ?@string inName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSection ?@string inName -> @string outName {
-  outName = "proc." + inName
+func llvmNameForSectionCall ?@string inName -> @string outName {
+  outName = "section.call." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForSectionImplementation ?@string inName -> @string outName {
+  outName = "section.implementation." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

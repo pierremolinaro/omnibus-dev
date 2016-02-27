@@ -12,6 +12,190 @@
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_integerDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_integerDeclaration * p = (const cPtr_integerDeclaration *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_integerDeclaration) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mIsSigned.objectCompare (p->mAttribute_mIsSigned) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mSize.objectCompare (p->mAttribute_mSize) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_integerDeclaration::objectCompare (const GALGAS_integerDeclaration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerDeclaration::GALGAS_integerDeclaration (void) :
+GALGAS_abstractDeclaration () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerDeclaration GALGAS_integerDeclaration::constructor_default (LOCATION_ARGS) {
+  return GALGAS_integerDeclaration::constructor_new (GALGAS_bool::constructor_default (HERE),
+                                                     GALGAS_uint::constructor_default (HERE)
+                                                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerDeclaration::GALGAS_integerDeclaration (const cPtr_integerDeclaration * inSourcePtr) :
+GALGAS_abstractDeclaration (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_integerDeclaration) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerDeclaration GALGAS_integerDeclaration::constructor_new (const GALGAS_bool & inAttribute_mIsSigned,
+                                                                      const GALGAS_uint & inAttribute_mSize
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_integerDeclaration result ;
+  if (inAttribute_mIsSigned.isValid () && inAttribute_mSize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_integerDeclaration (inAttribute_mIsSigned, inAttribute_mSize COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_integerDeclaration::getter_mIsSigned (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_integerDeclaration * p = (const cPtr_integerDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_integerDeclaration) ;
+    result = p->mAttribute_mIsSigned ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cPtr_integerDeclaration::getter_mIsSigned (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIsSigned ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_integerDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) const {
+  GALGAS_uint result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_integerDeclaration * p = (const cPtr_integerDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_integerDeclaration) ;
+    result = p->mAttribute_mSize ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cPtr_integerDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSize ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                     Pointer class for @integerDeclaration class                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_integerDeclaration::cPtr_integerDeclaration (const GALGAS_bool & in_mIsSigned,
+                                                  const GALGAS_uint & in_mSize
+                                                  COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclaration (THERE),
+mAttribute_mIsSigned (in_mIsSigned),
+mAttribute_mSize (in_mSize) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_integerDeclaration::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_integerDeclaration ;
+}
+
+void cPtr_integerDeclaration::description (C_String & ioString,
+                                           const int32_t inIndentation) const {
+  ioString << "[@integerDeclaration:" ;
+  mAttribute_mIsSigned.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mSize.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_integerDeclaration::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_integerDeclaration (mAttribute_mIsSigned, mAttribute_mSize COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @integerDeclaration type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_integerDeclaration ("integerDeclaration",
+                                           & kTypeDescriptor_GALGAS_abstractDeclaration) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_integerDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_integerDeclaration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_integerDeclaration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_integerDeclaration (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerDeclaration GALGAS_integerDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_integerDeclaration result ;
+  const GALGAS_integerDeclaration * p = (const GALGAS_integerDeclaration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_integerDeclaration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("integerDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_literalIntegerDeclaration::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
   return kOperandEqual ;
 }
@@ -4127,6 +4311,9 @@ typeComparisonResult cPtr_procCallInstructionIR::dynamicObjectCompare (const acP
     result = mAttribute_mProcName.objectCompare (p->mAttribute_mProcName) ;
   }
   if (kOperandEqual == result) {
+    result = mAttribute_mIsSection.objectCompare (p->mAttribute_mIsSection) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mParameters.objectCompare (p->mAttribute_mParameters) ;
   }
   return result ;
@@ -4161,6 +4348,7 @@ GALGAS_abstractInstructionIR () {
 
 GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_default (LOCATION_ARGS) {
   return GALGAS_procCallInstructionIR::constructor_new (GALGAS_string::constructor_default (HERE),
+                                                        GALGAS_bool::constructor_default (HERE),
                                                         GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (HERE)
                                                         COMMA_THERE) ;
 }
@@ -4175,11 +4363,12 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_new (const GALGAS_string & inAttribute_mProcName,
+                                                                            const GALGAS_bool & inAttribute_mIsSection,
                                                                             const GALGAS_procCallEffectiveParameterListIR & inAttribute_mParameters
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_procCallInstructionIR result ;
-  if (inAttribute_mProcName.isValid () && inAttribute_mParameters.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionIR (inAttribute_mProcName, inAttribute_mParameters COMMA_THERE)) ;
+  if (inAttribute_mProcName.isValid () && inAttribute_mIsSection.isValid () && inAttribute_mParameters.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionIR (inAttribute_mProcName, inAttribute_mIsSection, inAttribute_mParameters COMMA_THERE)) ;
   }
   return result ;
 }
@@ -4200,6 +4389,24 @@ GALGAS_string GALGAS_procCallInstructionIR::getter_mProcName (UNUSED_LOCATION_AR
 
 GALGAS_string cPtr_procCallInstructionIR::getter_mProcName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mProcName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_procCallInstructionIR::getter_mIsSection (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_procCallInstructionIR) ;
+    result = p->mAttribute_mIsSection ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cPtr_procCallInstructionIR::getter_mIsSection (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIsSection ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4225,10 +4432,12 @@ GALGAS_procCallEffectiveParameterListIR cPtr_procCallInstructionIR::getter_mPara
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_procCallInstructionIR::cPtr_procCallInstructionIR (const GALGAS_string & in_mProcName,
+                                                        const GALGAS_bool & in_mIsSection,
                                                         const GALGAS_procCallEffectiveParameterListIR & in_mParameters
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mProcName (in_mProcName),
+mAttribute_mIsSection (in_mIsSection),
 mAttribute_mParameters (in_mParameters) {
 }
 
@@ -4243,6 +4452,8 @@ void cPtr_procCallInstructionIR::description (C_String & ioString,
   ioString << "[@procCallInstructionIR:" ;
   mAttribute_mProcName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mAttribute_mIsSection.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mParameters.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
@@ -4251,7 +4462,7 @@ void cPtr_procCallInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_procCallInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_procCallInstructionIR (mAttribute_mProcName, mAttribute_mParameters COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_procCallInstructionIR (mAttribute_mProcName, mAttribute_mIsSection, mAttribute_mParameters COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -13947,6 +14158,28 @@ void categoryMethod_noteTypesInPrecedenceGraph (const GALGAS_sectionDeclarationL
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 Category method '@sectionMapIR llvmCodeGeneration'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_llvmCodeGeneration (const GALGAS_sectionMapIR inObject,
+                                        GALGAS_string & ioArgument_ioLLVMcode,
+                                        GALGAS_string & ioArgument_ioAssemblerCode,
+                                        const GALGAS_generationContext constinArgument_inGenerationContext,
+                                        GALGAS_generationAdds & ioArgument_ioGenerationAdds,
+                                        C_Compiler * inCompiler
+                                        COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_sectionMapIR temp_0 = inObject ;
+  cEnumerator_sectionMapIR enumerator_7498 (temp_0, kEnumeration_up) ;
+  while (enumerator_7498.hasCurrentObject ()) {
+    categoryMethod_llvmCodeGeneration (enumerator_7498.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 190)) ;
+    enumerator_7498.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Abstract category method '@expressionAST noteExpressionTypesInPrecedenceGraph'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15096,88 +15329,4 @@ GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::extractObject
   }
   return result ;
 }
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category method '@instructionListIR appendAlloca'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendAlloca (GALGAS_instructionListIR & ioObject,
-                                    const GALGAS_string constinArgument_inLocalVariableName,
-                                    const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inTargetVarType,
-                                    C_Compiler * /* inCompiler */
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_allocaConstantIR::constructor_new (constinArgument_inLocalVariableName, constinArgument_inTargetVarType  COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 6)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Category method '@instructionListIR appendExtractValue'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendExtractValue (GALGAS_instructionListIR & ioObject,
-                                          const GALGAS_operandIR constinArgument_inTarget,
-                                          const GALGAS_operandIR constinArgument_inSource,
-                                          const GALGAS_uint constinArgument_inIndex,
-                                          C_Compiler * /* inCompiler */
-                                          COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_extractValueIR::constructor_new (constinArgument_inTarget, constinArgument_inSource, constinArgument_inIndex  COMMA_SOURCE_FILE ("intermediate-extract-value.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-extract-value.galgas", 7)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category method '@instructionListIR appendExtend'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendExtend (GALGAS_instructionListIR & ioObject,
-                                    const GALGAS_operandIR constinArgument_inResult,
-                                    const GALGAS_operandIR constinArgument_inSource,
-                                    C_Compiler * /* inCompiler */
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_extendIR::constructor_new (constinArgument_inResult, constinArgument_inSource  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 6)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Category method '@instructionListIR appendBinaryOperation'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendBinaryOperation (GALGAS_instructionListIR & ioObject,
-                                             const GALGAS_valueIR constinArgument_inTarget,
-                                             const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inOperandType,
-                                             const GALGAS_location constinArgument_inLocation,
-                                             const GALGAS_valueIR constinArgument_inLeft,
-                                             const GALGAS_llvmBinaryOperation constinArgument_inOperation,
-                                             const GALGAS_valueIR constinArgument_inRight,
-                                             C_Compiler * /* inCompiler */
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_binaryOperationIR::constructor_new (constinArgument_inTarget, constinArgument_inOperandType, constinArgument_inLeft, constinArgument_inOperation, constinArgument_inRight, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 51))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 51)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category method '@instructionListIR appendShortCircuitAndOperation'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendShortCircuitAndOperation (GALGAS_instructionListIR & ioObject,
-                                                      const GALGAS_operandIR constinArgument_inTargetOperand,
-                                                      const GALGAS_operandIR constinArgument_inLeftOperand,
-                                                      const GALGAS_instructionListIR constinArgument_inLeftInstructionList,
-                                                      const GALGAS_operandIR constinArgument_inRightOperand,
-                                                      const GALGAS_instructionListIR constinArgument_inRightInstructionList,
-                                                      const GALGAS_location constinArgument_inLocation,
-                                                      C_Compiler * /* inCompiler */
-                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_shortCircuitAndOperationIR::constructor_new (constinArgument_inTargetOperand, constinArgument_inLeftOperand, constinArgument_inLeftInstructionList, constinArgument_inRightOperand, constinArgument_inRightInstructionList, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11))  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11)) ;
-}
-
 

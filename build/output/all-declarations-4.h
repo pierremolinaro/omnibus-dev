@@ -1027,13 +1027,23 @@ class GALGAS_string function_llvmNameForProcedure (class GALGAS_string inArgumen
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Function 'llvmNameForSection'                                            *
+//                                          Function 'llvmNameForSectionCall'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForSection (class GALGAS_string inArgument0,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForSectionCall (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForSectionImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSectionImplementation (class GALGAS_string inArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1391,11 +1401,11 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_ele
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category method '@sectionMapIR-element llvmCodeGeneration'                              *
+//                                 Category method '@sectionMapIR llvmCodeGeneration'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_llvmCodeGeneration (const class GALGAS_sectionMapIR_2D_element inObject,
+void categoryMethod_llvmCodeGeneration (const class GALGAS_sectionMapIR inObject,
                                         class GALGAS_string & io_ioLLVMcode,
                                         class GALGAS_string & io_ioAssemblerCode,
                                         const class GALGAS_generationContext constin_inGenerationContext,

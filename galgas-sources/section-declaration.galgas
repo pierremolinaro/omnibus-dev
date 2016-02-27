@@ -180,15 +180,28 @@ map @sectionMapIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+method @sectionMapIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string ioAssemblerCode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  for section in self do
+    [section llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @sectionMapIR-element llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?!@string unused ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let sectionName = llvmNameForSection (!lkey.string)
-  ioLLVMcode += llvmTitleComment (!"section " + sectionName)
-  ioLLVMcode += "define internal void @" + sectionName + " ("
+  let sectionImplementationName = llvmNameForSectionImplementation (!lkey.string)
+  ioLLVMcode += llvmTitleComment (!"section " + sectionImplementationName)
+  ioLLVMcode += "define internal void @" + sectionImplementationName + " ("
   for () in mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
