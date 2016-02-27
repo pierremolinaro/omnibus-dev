@@ -99,13 +99,11 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
-  for section in inAST.mSectionListAST do
-    [section sectionSemanticAnalysis
-      !context:inSemanticContext
-      !?temporary:temporaries
-      !?intermediateCode:outIntermediateCodeStruct
-    ]
-  end
+  [inAST.mSectionListAST sectionSemanticAnalysis
+    !context:inSemanticContext
+    !?temporary:temporaries
+    !?intermediateCode:outIntermediateCodeStruct
+  ]
   for function in inAST.mFunctionListAST do
     [function functionSemanticAnalysis
       !context:inSemanticContext

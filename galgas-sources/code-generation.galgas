@@ -105,6 +105,7 @@ proc codeGeneration
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
+  ?proceduresThatShouldNotBeGenerated:let @stringset inProceduresThatShouldNotBeGenerated
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
 #--- Create source directory (if does not exist)
@@ -129,6 +130,7 @@ proc codeGeneration
     !exceptionCodeType:inExceptionCodeType
     !exceptionLineType:inExceptionLineType
     !sourceFileSet:inSourceFileAbsolutePathSet
+    !proceduresThatShouldNotBeGenerated:inProceduresThatShouldNotBeGenerated
   )
 }
 
@@ -137,11 +139,12 @@ proc codeGeneration
 struct @generationContext {
   @string mExceptionCodeLLVMType
   @string mExceptionLineLLVMType
+  @stringset mProceduresThatShouldNotBeGenerated
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc generateLLVMfile
+private proc generateLLVMfile
   ?currentDir:let @string inCurrentDirectory
   ?productDir:let @string inProductDirectory
   ?eof:let @location inEndOfSourceFileLocation
@@ -152,12 +155,14 @@ proc generateLLVMfile
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
+  ?proceduresThatShouldNotBeGenerated:let @stringset inProceduresThatShouldNotBeGenerated
 {
   @generationAdds generationAdds = .default
   generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
   let @generationContext generationContext = .new {
     ![inExceptionCodeType llvmTypeName]
     ![inExceptionLineType llvmTypeName]
+    !inProceduresThatShouldNotBeGenerated
   }
   let sourceDirectory = inProductDirectory + "/sources"
   var llvmCode = ""
@@ -203,22 +208,26 @@ proc generateLLVMfile
     !?generationAdds
   ]
 #----------------------------------------- Procedures
-  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    [procedure llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
-  end
+  [inIntermediateCodeStruct.mProcedureMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
 #----------------------------------------- Sections
-  [inIntermediateCodeStruct.mSectionMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
+  [inIntermediateCodeStruct.mSectionMapIR llvmCodeGeneration
+    !getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName.string + "/section.s")
+    !?llvmCode
+    !?asCode
+    !generationContext
+    !?generationAdds
+  ]
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
     [function implementationCodeGeneration !?llvmCode !generationContext !?generationAdds]
   end
-#----------------------------------------- Exception
+#----------------------------------------- Panic
   if not [option plm_options.noPanicGeneration value] then
     llvmCode += getTargetTextFile (
        !currentDir:inCurrentDirectory
        !from:inTargetName.string + "/target-exception.ll"
     )
-    llvmCode += llvmTitleComment (!"Raise Exception internal")
+    llvmCode += llvmTitleComment (!"Raise Panic internal")
     llvmCode += "define internal void @raise_exception_internal ("
     llvmCode += generationContext.mExceptionLineLLVMType + " %in.LINE, "
     llvmCode += generationContext.mExceptionCodeLLVMType + " %in.CODE, "

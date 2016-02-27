@@ -330,7 +330,7 @@ override method @procCallInstructionIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  call void @"
-  ioLLVMcode += if mIsSection then llvmNameForSectionImplementation(!mProcName) else llvmNameForProcedure (!mProcName) end
+  ioLLVMcode += if mIsSection then llvmNameForSectionCall (!mProcName) else llvmNameForProcedure (!mProcName) end
   ioLLVMcode += " ("
   for () in mParameters do
     switch mEffectiveParameterPassingMode
