@@ -165,6 +165,7 @@ map @constructorMap {
 
 map @routineMap {
   insert insertKey error message "a routine with the same name is already declared in %L"
+  remove removeKey error message "there is no '%K' section"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -177,8 +178,9 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
   @procedureMap mProcedureMap
+  @stringset mProceduresThatShouldNotBeGenerated
   @sectionMap mSectionMap
-  @routineMap mRoutineMap
+  @routineMap mSubProgramMap
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
   @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
@@ -289,9 +291,7 @@ proc buildSemanticContext
   for procedure in inAST.mProcedureListAST do
     [procedure enterInContext !?context: outSemanticContext]
   end
-  for section in inAST.mSectionListAST do
-    [section enterInContext !?context: outSemanticContext]
-  end
+  [inAST.mSectionListAST enterInContext !?context: outSemanticContext]
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
 #--- Check required procs mode
   if @uint.errorCount == 0 then

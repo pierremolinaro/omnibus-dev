@@ -82,9 +82,18 @@ map @sectionMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionDeclarationListAST-element enterInContext
-  ?!context:@semanticContext ioContext
-{
+method @sectionDeclarationListAST enterInContext ?!context:@semanticContext ioContext {
+  for section in self do
+    [section enterInContext !?context:ioContext]
+  end
+  if [self length] > 0 then
+    ioContext.mProceduresThatShouldNotBeGenerated += !"HardFaultHandler"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionDeclarationListAST-element enterInContext ?!context:@semanticContext ioContext {
 #--- Signature
   @procedureSignature signature = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in mSectionFormalArgumentList do
@@ -97,11 +106,27 @@ method @sectionDeclarationListAST-element enterInContext
     !mMutating
     !signature
   ]
-  [!?ioContext.mRoutineMap insertKey !mSectionName]
+  [!?ioContext.mSubProgramMap insertKey !mSectionName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionDeclarationListAST sectionSemanticAnalysis
+  ?context:let @semanticContext inSemanticContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for section in self do
+    [section sectionSemanticAnalysis
+      !context:inSemanticContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    ]
+  end
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @sectionDeclarationListAST-element sectionSemanticAnalysis
@@ -180,14 +205,31 @@ map @sectionMapIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionMapIR llvmCodeGeneration 
+method @sectionMapIR llvmCodeGeneration
+  ?let @string inSectionAssemblyCode
   ?!@string ioLLVMcode
   ?!@string ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   for section in self do
-    [section llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
+    [section llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  end
+#--- Generation section handler ?
+  if [self count] > 0 then
+    for section in self do (idx)
+      let name = llvmNameForSectionCall (!section.lkey.string)
+      ioAssemblerCode += "  .global " + name + "\n"
+      ioAssemblerCode += "  .type " + name + ", %function\n\n"
+      ioAssemblerCode += name + ":\n"
+      ioAssemblerCode += "    udf " + idx + "\n"
+      ioAssemblerCode += "    bx  lr\n\n"
+    end
+    ioAssemblerCode += "__udf_dispatcher_table:\n"
+    for section in self do (idx)
+      ioAssemblerCode += "  .word " + llvmNameForSectionImplementation (!section.lkey.string) + " @ " + idx + "\n"
+    end
+    ioAssemblerCode += [inSectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!"")]
   end
 }
 
@@ -195,13 +237,27 @@ method @sectionMapIR llvmCodeGeneration
 
 method @sectionMapIR-element llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string unused ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   let sectionImplementationName = llvmNameForSectionImplementation (!lkey.string)
-  ioLLVMcode += llvmTitleComment (!"section " + sectionImplementationName)
-  ioLLVMcode += "define internal void @" + sectionImplementationName + " ("
+  ioLLVMcode += llvmTitleComment (!sectionImplementationName)
+  ioLLVMcode += "declare void @" + llvmNameForSectionCall (!lkey.string) + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    end
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ") nounwind \n\n"
+  ioLLVMcode += "define void @" + sectionImplementationName + " ("
   for () in mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind

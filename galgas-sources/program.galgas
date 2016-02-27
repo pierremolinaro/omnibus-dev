@@ -143,6 +143,7 @@ private proc compileProject
           !exceptionCodeType:semanticContext.mExceptionCodeType
           !exceptionLineType:semanticContext.mExceptionLineType
           !sourceFileSet:sourceFileAbsolutePathSet
+          !proceduresThatShouldNotBeGenerated:semanticContext.mProceduresThatShouldNotBeGenerated
         )
       end
     end

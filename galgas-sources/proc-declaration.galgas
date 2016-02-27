@@ -236,7 +236,7 @@ method @procedureDeclarationListAST-element enterInContext
         !signature
         !weakProcedure
       ]
-      [!?ioContext.mRoutineMap insertKey !mProcedureName]
+      [!?ioContext.mSubProgramMap insertKey !mProcedureName]
     end
   else
     [!?ioContext.mProcedureMap insertKey
@@ -246,7 +246,7 @@ method @procedureDeclarationListAST-element enterInContext
       !signature
       !weakProcedure
     ]
-    [!?ioContext.mRoutineMap insertKey !mProcedureName]
+    [!?ioContext.mSubProgramMap insertKey !mProcedureName]
   end
 }
 
@@ -437,6 +437,48 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @procedureMapIR llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?!@string ioAssemblerCode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  for procedure in self do
+    if [inGenerationContext.mProceduresThatShouldNotBeGenerated hasKey !procedure.lkey.string] then
+      [procedure llvmPrototypeGeneration !?ioLLVMcode]
+    else
+      [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @procedureMapIR-element llvmPrototypeGeneration 
+  ?!@string ioLLVMcode
+{
+  let procName = llvmNameForProcedure (!lkey.string)
+  #--- In LLVM, declare routine as extern
+  ioLLVMcode += llvmTitleComment (!"proc " + procName)
+  ioLLVMcode += "declare void @" + procName + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    end
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ") nounwind ; defined in assembly code\n\n"
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @procedureMapIR-element llvmCodeGeneration 

@@ -2545,13 +2545,36 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_sectionDeclar
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                         Category method '@sectionDeclarationListAST-element enterInContext'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_sectionDeclarationListAST_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                    Category method '@sectionDeclarationListAST-element sectionSemanticAnalysis'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_sectionSemanticAnalysis (const class GALGAS_sectionDeclarationListAST_2D_element inObject,
+                                             const class GALGAS_semanticContext constin_inContext,
+                                             class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                             class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                             Category method '@sectionMapIR-element llvmCodeGeneration'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_llvmCodeGeneration (const class GALGAS_sectionMapIR_2D_element inObject,
                                         class GALGAS_string & io_ioLLVMcode,
-                                        class GALGAS_string & io_ioAssemblerCode,
                                         const class GALGAS_generationContext constin_inGenerationContext,
                                         class GALGAS_generationAdds & io_ioGenerationAdds,
                                         class C_Compiler * inCompiler

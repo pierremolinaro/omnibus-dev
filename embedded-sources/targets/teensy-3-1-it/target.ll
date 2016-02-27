@@ -267,7 +267,7 @@ define internal void @ResetISR () nounwind noreturn naked {
 ;--- set unprivileged user mode, user mode uses PSP
 ;  mov r0, #3
 ;  msr control, r0
-  call void asm sideeffect "msr CONTROL, $0", "r"(i32 3) nounwind
+  call void asm sideeffect "msr control, $0", "r"(i32 3) nounwind
 ;---
   call void @!PROC!setup ()
   br label %loop

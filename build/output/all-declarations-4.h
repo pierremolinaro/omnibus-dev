@@ -737,11 +737,11 @@ void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Category method '@sectionDeclarationListAST-element enterInContext'                         *
+//                             Category method '@sectionDeclarationListAST enterInContext'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_sectionDeclarationListAST_2D_element inObject,
+void categoryMethod_enterInContext (const class GALGAS_sectionDeclarationListAST inObject,
                                     class GALGAS_semanticContext & io_ioContext,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
@@ -892,12 +892,12 @@ void categoryMethod_procedureSemanticAnalysis (const class GALGAS_procedureDecla
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Category method '@sectionDeclarationListAST-element sectionSemanticAnalysis'                     *
+//                        Category method '@sectionDeclarationListAST sectionSemanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_sectionSemanticAnalysis (const class GALGAS_sectionDeclarationListAST_2D_element inObject,
-                                             const class GALGAS_semanticContext constin_inContext,
+void categoryMethod_sectionSemanticAnalysis (const class GALGAS_sectionDeclarationListAST inObject,
+                                             const class GALGAS_semanticContext constin_inSemanticContext,
                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                              class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                              class C_Compiler * inCompiler
@@ -1290,6 +1290,7 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
                              const class GALGAS_stringset constinArgument8,
+                             const class GALGAS_stringset constinArgument9,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -1308,6 +1309,7 @@ void routine_generateLLVMfile (const class GALGAS_string constinArgument0,
                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
                                const class GALGAS_stringset constinArgument8,
+                               const class GALGAS_stringset constinArgument9,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -1387,11 +1389,11 @@ void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category method '@procedureMapIR-element llvmCodeGeneration'                             *
+//                                Category method '@procedureMapIR llvmCodeGeneration'                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_element inObject,
+void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR inObject,
                                         class GALGAS_string & io_ioLLVMcode,
                                         class GALGAS_string & io_ioAssemblerCode,
                                         const class GALGAS_generationContext constin_inGenerationContext,
@@ -1406,6 +1408,7 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_ele
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_llvmCodeGeneration (const class GALGAS_sectionMapIR inObject,
+                                        const class GALGAS_string constin_inSectionAssemblyCode,
                                         class GALGAS_string & io_ioLLVMcode,
                                         class GALGAS_string & io_ioAssemblerCode,
                                         const class GALGAS_generationContext constin_inGenerationContext,
@@ -1506,6 +1509,7 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_string mAttribute_mExceptionCodeLLVMType ;
   public : GALGAS_string mAttribute_mExceptionLineLLVMType ;
+  public : GALGAS_stringset mAttribute_mProceduresThatShouldNotBeGenerated ;
 
 
 //--------------------------------- Accessors
@@ -1523,7 +1527,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_generationContext (const GALGAS_string & in_mExceptionCodeLLVMType,
-                                     const GALGAS_string & in_mExceptionLineLLVMType) ;
+                                     const GALGAS_string & in_mExceptionLineLLVMType,
+                                     const GALGAS_stringset & in_mProceduresThatShouldNotBeGenerated) ;
 
 //-- Start of generic part --*
 
@@ -1537,7 +1542,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_generationContext constructor_new (const class GALGAS_string & inOperand0,
-                                                            const class GALGAS_string & inOperand1
+                                                            const class GALGAS_string & inOperand1,
+                                                            const class GALGAS_stringset & inOperand2
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1555,6 +1561,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mExceptionCodeLLVMType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mExceptionLineLLVMType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mProceduresThatShouldNotBeGenerated (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1591,6 +1599,7 @@ extern const char * gWrapperFileContent_14_targetTemplates ;
 extern const char * gWrapperFileContent_15_targetTemplates ;
 extern const char * gWrapperFileContent_16_targetTemplates ;
 extern const char * gWrapperFileContent_17_targetTemplates ;
+extern const char * gWrapperFileContent_18_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1615,6 +1624,7 @@ extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
