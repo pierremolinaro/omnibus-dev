@@ -10,6 +10,14 @@ list @allowedProcList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @allowedSectionList {
+  @bool mHasWriteAccess
+  @lstring mReceiverTypeName
+  @lstring mSectionName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @allowedFunctionList {
   @lstring mReceiverTypeName
   @lstring mFuncName
@@ -40,6 +48,7 @@ list @globalVarDeclarationList {
   @allowedInitList mAllowedInitList
   @allowedExceptionList mAllowedExceptionList
   @allowedFunctionList mAllowedFunctionList
+  @allowedSectionList mAllowedSectionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -65,6 +74,7 @@ syntax extension common_syntax {
     @allowedInitList allowedInitList = {}
     @allowedFunctionList allowedFunctionList = {}
     @allowedExceptionList allowedExceptionList = {}
+    @allowedSectionList allowedSectionList = {}
     ${$
     repeat
       @bool hasWriteAccess
@@ -78,6 +88,16 @@ syntax extension common_syntax {
         hasWriteAccess = true
       end
       select
+        $section$
+        @lstring typeName
+        select
+          typeName = ["" nowhere]
+        or
+          $typeName$ ?typeName
+        end
+        $identifier$ ?let sectionName
+        allowedSectionList += !hasWriteAccess !typeName !sectionName
+      or
         $proc$
         @lstring typeName
         select
@@ -122,6 +142,7 @@ syntax extension common_syntax {
       !allowedInitList
       !allowedExceptionList
       !allowedFunctionList
+      !allowedSectionList
   }
 
   #·····················································································································
@@ -133,7 +154,7 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (globalVariableTypeName 6*) in self do
+  for (globalVariableTypeName 7*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]
@@ -261,6 +282,27 @@ method @globalVarDeclarationList-element enterInContext
     [!?allowedRoutineMap insertKey
        !procNameForInvocationGraph (!receiverType !procedure.mProcName)
        !procedure.mHasWriteAccess
+    ]
+  end
+#--- Check allowed sections are defined
+  for section in mAllowedSectionList do
+    @unifiedTypeMap-proxy receiverType
+#    if section.mReceiverTypeName.string == "" then
+      receiverType = .null
+      [ioContext.mSectionMap searchKey
+        !section.mSectionName
+        ?2*
+      ]
+#    else
+#      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !section.mReceiverTypeName}
+#      [[receiverType sectionMap] searchKey
+#        !section.mSectionName
+#        ?2*
+#      ]
+#    end
+    [!?allowedRoutineMap insertKey
+       !sectionNameForInvocationGraph (!receiverType !section.mSectionName)
+       !section.mHasWriteAccess
     ]
   end
 #--- Enter variable in globale variable map
