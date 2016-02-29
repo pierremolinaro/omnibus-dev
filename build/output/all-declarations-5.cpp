@@ -12,6 +12,208 @@
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_globalConstantDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_globalConstantDeclaration * p = (const cPtr_globalConstantDeclaration *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_globalConstantDeclaration) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mConstantName.objectCompare (p->mAttribute_mConstantName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mConstantTypeName.objectCompare (p->mAttribute_mConstantTypeName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_globalConstantDeclaration::objectCompare (const GALGAS_globalConstantDeclaration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantDeclaration::GALGAS_globalConstantDeclaration (void) :
+GALGAS_abstractDeclaration () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantDeclaration::GALGAS_globalConstantDeclaration (const cPtr_globalConstantDeclaration * inSourcePtr) :
+GALGAS_abstractDeclaration (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_globalConstantDeclaration) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantDeclaration GALGAS_globalConstantDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mConstantName,
+                                                                                    const GALGAS_lstring & inAttribute_mConstantTypeName,
+                                                                                    const GALGAS_expressionAST & inAttribute_mSourceExpression
+                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_globalConstantDeclaration result ;
+  if (inAttribute_mConstantName.isValid () && inAttribute_mConstantTypeName.isValid () && inAttribute_mSourceExpression.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_globalConstantDeclaration (inAttribute_mConstantName, inAttribute_mConstantTypeName, inAttribute_mSourceExpression COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_globalConstantDeclaration::getter_mConstantName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_globalConstantDeclaration * p = (const cPtr_globalConstantDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_globalConstantDeclaration) ;
+    result = p->mAttribute_mConstantName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_globalConstantDeclaration::getter_mConstantName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mConstantName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_globalConstantDeclaration::getter_mConstantTypeName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_globalConstantDeclaration * p = (const cPtr_globalConstantDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_globalConstantDeclaration) ;
+    result = p->mAttribute_mConstantTypeName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_globalConstantDeclaration::getter_mConstantTypeName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mConstantTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST GALGAS_globalConstantDeclaration::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_expressionAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_globalConstantDeclaration * p = (const cPtr_globalConstantDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_globalConstantDeclaration) ;
+    result = p->mAttribute_mSourceExpression ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST cPtr_globalConstantDeclaration::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSourceExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                 Pointer class for @globalConstantDeclaration class                                  *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_globalConstantDeclaration::cPtr_globalConstantDeclaration (const GALGAS_lstring & in_mConstantName,
+                                                                const GALGAS_lstring & in_mConstantTypeName,
+                                                                const GALGAS_expressionAST & in_mSourceExpression
+                                                                COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclaration (THERE),
+mAttribute_mConstantName (in_mConstantName),
+mAttribute_mConstantTypeName (in_mConstantTypeName),
+mAttribute_mSourceExpression (in_mSourceExpression) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_globalConstantDeclaration::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_globalConstantDeclaration ;
+}
+
+void cPtr_globalConstantDeclaration::description (C_String & ioString,
+                                                  const int32_t inIndentation) const {
+  ioString << "[@globalConstantDeclaration:" ;
+  mAttribute_mConstantName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mConstantTypeName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_globalConstantDeclaration::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_globalConstantDeclaration (mAttribute_mConstantName, mAttribute_mConstantTypeName, mAttribute_mSourceExpression COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @globalConstantDeclaration type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_globalConstantDeclaration ("globalConstantDeclaration",
+                                                  & kTypeDescriptor_GALGAS_abstractDeclaration) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_globalConstantDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_globalConstantDeclaration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_globalConstantDeclaration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_globalConstantDeclaration (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantDeclaration GALGAS_globalConstantDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_globalConstantDeclaration result ;
+  const GALGAS_globalConstantDeclaration * p = (const GALGAS_globalConstantDeclaration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_globalConstantDeclaration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("globalConstantDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_integerDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_integerDeclaration * p = (const cPtr_integerDeclaration *) inOperandPtr ;
@@ -13959,21 +14161,21 @@ void categoryMethod_generateLLVMinitCode (const GALGAS_initListIR inObject,
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Init"), inCompiler COMMA_SOURCE_FILE ("init-declaration.galgas", 171)), inCompiler  COMMA_SOURCE_FILE ("init-declaration.galgas", 171)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @init () nounwind {\n"), inCompiler  COMMA_SOURCE_FILE ("init-declaration.galgas", 172)) ;
   const GALGAS_initListIR temp_0 = inObject ;
-  cEnumerator_initListIR enumerator_7025 (temp_0, kEnumeration_up) ;
-  while (enumerator_7025.hasCurrentObject ()) {
+  cEnumerator_initListIR enumerator_7043 (temp_0, kEnumeration_up) ;
+  while (enumerator_7043.hasCurrentObject ()) {
     GALGAS_bool var_generate ;
-    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_7025.current (HERE).mAttribute_mInitRequiredByProcList.getter_length (SOURCE_FILE ("init-declaration.galgas", 175)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_7043.current (HERE).mAttribute_mInitRequiredByProcList.getter_length (SOURCE_FILE ("init-declaration.galgas", 175)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_1) {
       var_generate = GALGAS_bool (true) ;
     }else if (kBoolFalse == test_1) {
       var_generate = GALGAS_bool (false) ;
-      cEnumerator_initRequiredByProcList enumerator_7212 (enumerator_7025.current (HERE).mAttribute_mInitRequiredByProcList, kEnumeration_up) ;
+      cEnumerator_initRequiredByProcList enumerator_7230 (enumerator_7043.current (HERE).mAttribute_mInitRequiredByProcList, kEnumeration_up) ;
       bool bool_2 = var_generate.operator_not (SOURCE_FILE ("init-declaration.galgas", 179)).isValidAndTrue () ;
-      if (enumerator_7212.hasCurrentObject () && bool_2) {
-        while (enumerator_7212.hasCurrentObject () && bool_2) {
-          var_generate = constinArgument_inProcedureMapIR.getter_hasKey (enumerator_7212.current_mProcName (HERE).mAttribute_string COMMA_SOURCE_FILE ("init-declaration.galgas", 180)) ;
-          enumerator_7212.gotoNextObject () ;
-          if (enumerator_7212.hasCurrentObject ()) {
+      if (enumerator_7230.hasCurrentObject () && bool_2) {
+        while (enumerator_7230.hasCurrentObject () && bool_2) {
+          var_generate = constinArgument_inProcedureMapIR.getter_hasKey (enumerator_7230.current_mProcName (HERE).mAttribute_string COMMA_SOURCE_FILE ("init-declaration.galgas", 180)) ;
+          enumerator_7230.gotoNextObject () ;
+          if (enumerator_7230.hasCurrentObject ()) {
             bool_2 = var_generate.operator_not (SOURCE_FILE ("init-declaration.galgas", 179)).isValidAndTrue () ;
           }
         }
@@ -13981,9 +14183,9 @@ void categoryMethod_generateLLVMinitCode (const GALGAS_initListIR inObject,
     }
     const enumGalgasBool test_3 = var_generate.boolEnum () ;
     if (kBoolTrue == test_3) {
-      categoryMethod_instructionListLLVMCode (enumerator_7025.current (HERE).mAttribute_mInstructionListIR, ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("init-declaration.galgas", 184)) ;
+      categoryMethod_instructionListLLVMCode (enumerator_7043.current (HERE).mAttribute_mInstructionListIR, ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("init-declaration.galgas", 184)) ;
     }
-    enumerator_7025.gotoNextObject () ;
+    enumerator_7043.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";---\n"), inCompiler  COMMA_SOURCE_FILE ("init-declaration.galgas", 187)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("init-declaration.galgas", 188)) ;
@@ -15047,156 +15249,5 @@ GALGAS_string callCategoryGetter_keyRepresentationForErrorSignaling (const cPtr_
     }
   }
   return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category method '@staticStringMap findOrAddStaticString'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_findOrAddStaticString (GALGAS_staticStringMap & ioObject,
-                                             GALGAS_string inArgument_inString,
-                                             GALGAS_uint & outArgument_outIndex,
-                                             C_Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outIndex.drop () ; // Release 'out' argument
-  const GALGAS_staticStringMap temp_0 = ioObject ;
-  const enumGalgasBool test_1 = temp_0.getter_hasKey (inArgument_inString COMMA_SOURCE_FILE ("semantic-context.galgas", 47)).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    const GALGAS_staticStringMap temp_2 = ioObject ;
-    temp_2.method_searchKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 48)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 48)) ;
-  }else if (kBoolFalse == test_1) {
-    const GALGAS_staticStringMap temp_3 = ioObject ;
-    outArgument_outIndex = temp_3.getter_count (SOURCE_FILE ("semantic-context.galgas", 50)) ;
-    {
-    ioObject.setter_insertKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 51)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 51)) ;
-    }
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Abstract category method '@abstractDeclaration enterInContext'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_enterInContext> gCategoryMethodTable_abstractDeclaration_enterInContext ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
-                                         categoryMethodSignature_abstractDeclaration_enterInContext inMethod) {
-  gCategoryMethodTable_abstractDeclaration_enterInContext.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_abstractDeclaration_enterInContext (void) {
-  gCategoryMethodTable_abstractDeclaration_enterInContext.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractDeclaration_enterInContext (NULL,
-                                                               freeCategoryMethod_abstractDeclaration_enterInContext) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_enterInContext (const cPtr_abstractDeclaration * inObject,
-                                        const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
-                                        GALGAS_semanticContext & io_ioContext,
-                                        GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_abstractDeclaration_enterInContext f = NULL ;
-    if (classIndex < gCategoryMethodTable_abstractDeclaration_enterInContext.count ()) {
-      f = gCategoryMethodTable_abstractDeclaration_enterInContext (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_enterInContext.count ()) {
-           f = gCategoryMethodTable_abstractDeclaration_enterInContext (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_abstractDeclaration_enterInContext.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioGlobalLiteralStringMap, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Abstract category method '@abstractDeclaration semanticAnalysis'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_semanticAnalysis> gCategoryMethodTable_abstractDeclaration_semanticAnalysis ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_semanticAnalysis (const int32_t inClassIndex,
-                                           categoryMethodSignature_abstractDeclaration_semanticAnalysis inMethod) {
-  gCategoryMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_abstractDeclaration_semanticAnalysis (void) {
-  gCategoryMethodTable_abstractDeclaration_semanticAnalysis.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractDeclaration_semanticAnalysis (NULL,
-                                                                 freeCategoryMethod_abstractDeclaration_semanticAnalysis) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObject,
-                                          const GALGAS_semanticContext constin_inContext,
-                                          GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                          GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_abstractDeclaration_semanticAnalysis f = NULL ;
-    if (classIndex < gCategoryMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
-      f = gCategoryMethodTable_abstractDeclaration_semanticAnalysis (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
-           f = gCategoryMethodTable_abstractDeclaration_semanticAnalysis (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, constin_inContext, io_ioTemporaries, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
-    }
-  }
 }
 

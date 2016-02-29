@@ -227,7 +227,7 @@ proc enterControlRegistersInContext
           else
             isReadOnly = true
           end
-        elsif att.string == "user" then
+        elsif att.string == userModeName () then
           if isAccessibleInUserMode then
             error att : "duplicated attribute"
           else

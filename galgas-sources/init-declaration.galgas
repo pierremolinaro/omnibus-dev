@@ -98,8 +98,8 @@ method @initList-element initSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  if not [inContext.mModeMap hasKey !"init"] then
-    error mInitLocation : "the $init mode should be defined in order to use init routines"
+  if not [inContext.mModeMap hasKey !initModeName ()] then
+    error mInitLocation : "the `init mode should be defined in order to use init routines"
   end
   [!?ioTemporaries.mInitRoutinePriorityMap insertKey !.new{![mPriority string] !mPriority.location}]
 #--- Check "requiredBy" routines are defined
@@ -132,7 +132,7 @@ method @initList-element initSemanticAnalysis
   [mInstructionList analyzeRoutineInstructionList
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !modes:{!"init"}
+    !modes:{!initModeName ()}
     !allowException:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap

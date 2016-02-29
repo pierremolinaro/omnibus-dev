@@ -175,7 +175,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:funcNameForInvocationGraph (!.null !mFunctionName).string
     !context:inContext
-    !userMode:[functionModeSet hasKey !"user"]
+    !userMode:[functionModeSet hasKey !userModeName ()]
     !globalsAreConstant:true
   )
 #--- Add 'result" variable

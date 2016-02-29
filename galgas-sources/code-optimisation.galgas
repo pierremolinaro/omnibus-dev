@@ -8,6 +8,7 @@ struct @accessibleEntities {
   @stringset mAccessibleRegisterSet
   @stringset mProcedureSet
   @stringset mFunctionSet
+  @stringset mSectionSet
   @stringset mGlobalVariableSet
 }
 
@@ -50,6 +51,12 @@ method @procedureMapIR-element enterAccessibleEntities ?!@accessibleEntities ioA
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
 }
 
@@ -193,9 +200,11 @@ private proc suppressInaccessibleSubprograms
     [ioIntermediateCodeStruct.mExceptionSetupInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
     [ioIntermediateCodeStruct.mExceptionLoopInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
   end
-#--- Explore procedures and functions
-  @functionMapIR accessibleFunctionMap = {}
+#--- Explore procedures, functions and sections
+  @functionMapIR accessibleFunctionMap  = {}
   @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
+  @sectionMapIR  accessibleSectionMap   = {}
+  @sectionMapIR  nonExploredSectionMap  = ioIntermediateCodeStruct.mSectionMapIR
   var exploreProceduresAndFunctions = true
   loop ([ioIntermediateCodeStruct.mProcedureMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
   while exploreProceduresAndFunctions do
@@ -252,6 +261,27 @@ private proc suppressInaccessibleSubprograms
         ]        
       end
     end
+    let @sectionMapIR exNonExploredSectionMap = nonExploredSectionMap
+    nonExploredSectionMap = {}
+    for section in exNonExploredSectionMap do
+      if [outAccessibleEntities.mSectionSet hasKey !section.lkey.string] then
+        [!?accessibleSectionMap insertKey
+          !section.lkey
+          !section.mFormalArgumentListForGeneration
+          !section.mInstructionGenerationList
+          !section.mWarnIfUnused
+        ]        
+        [section enterAccessibleEntities !?outAccessibleEntities]
+        exploreProceduresAndFunctions = true
+      else
+        [!?nonExploredSectionMap insertKey
+          !section.lkey
+          !section.mFormalArgumentListForGeneration
+          !section.mInstructionGenerationList
+          !section.mWarnIfUnused
+        ]        
+      end
+    end
   end
   if ioIntermediateCodeStruct.mProcedureMapIR != accessibleProcedureMap then
     ioIntermediateCodeStruct.mProcedureMapIR = accessibleProcedureMap
@@ -259,6 +289,10 @@ private proc suppressInaccessibleSubprograms
   end
   if ioIntermediateCodeStruct.mFunctionMapIR != accessibleFunctionMap then
     ioIntermediateCodeStruct.mFunctionMapIR = accessibleFunctionMap
+    ioOptimizing = true
+  end
+  if ioIntermediateCodeStruct.mSectionMapIR != accessibleSectionMap then
+    ioIntermediateCodeStruct.mSectionMapIR = accessibleSectionMap
     ioOptimizing = true
   end
 }

@@ -176,7 +176,7 @@ override method @procCallInstructionAST analyze
       ?*
       ?procSignature
     ]
-    procedureModeMap = {!["user" nowhere]}
+    procedureModeMap = {![userModeName () nowhere]}
     receiverType = .null
     routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mProcName)
     isSection = true
@@ -350,7 +350,11 @@ override method @procCallInstructionIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  ioAccessibleEntities.mProcedureSet += !mProcName
+  if mIsSection then 
+    ioAccessibleEntities.mSectionSet += !mProcName
+  else
+    ioAccessibleEntities.mProcedureSet += !mProcName
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
