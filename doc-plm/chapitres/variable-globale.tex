@@ -86,6 +86,7 @@ Dans la déclaration d'une variable globale, \plm=en_tetes_routines_autorisees= 
   \item une routine d'initialisation (\plm!init!) ;
   \item une procédure (\plm!proc!) ;
   \item une fonction (\plm!func!) ;
+  \item une section (\plm!section!) ;
   \item une routine de panique (\plm!proc panic!) ;
   \item une procédure de type (\plm!proc!) ;
   \item une fonction de type (\plm!func!).
@@ -102,6 +103,7 @@ Le compilateur interdit l'accès des routines \plm+boot+ aux variables globales\
   \plm=init priorite= & Routine d'initialisation de priorité \plm=priorite= & Nécessite \plm!@rw! \\
   \plm=proc nom= & Procédure \plm!nom! & Nécessite \plm!@rw! \\
   \plm=func nom= & Fonction \plm!nom! & Jamais \\
+  \plm=section nom= & Section \plm!nom! & Nécessite \plm!@rw! \\
   \plm=proc panic nom prorite= & Routine de panique \plm!nom! de priorité \plm=priorite= & Nécessite \plm!@rw! \\
   \plm=proc $type nom= & Procédure \plm!nom! du type \plm!$type! & Nécessite \plm!@rw! \\
   \plm=func $type nom= & Fonction \plm!nom! du type \plm!$type! & Jamais \\

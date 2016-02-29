@@ -326,15 +326,13 @@ Dans tous les cas, seul l'accès en lecture à un registre de contrôle peut êt
 Si la fonction est déclarée avec le mode \plm!`user!, seuls les registres de contrôle déclarés \plm!@user! sont accessibles en lecture. Sinon, tous les registres de contrôle sont accessibles en lecture.
 
 
-\sectionLabel{Section}{declarationSection}\index{section}
+\sectionLabel{Sections}{declarationSection}\index{section}
 
-Une \emph{section} est une procédure qui est exécutée par le processeur en mode privilégié. Une section peut ainsi accéder à des registres de contrôles inaccessibles en mode \plm!`user!.
+Une \emph{section} est une procédure qui est exécutée par le processeur en mode privilégié, le mode PLM qui correspond est \plm!`section!. Une section peut ainsi accéder à des registres de contrôles inaccessibles en mode \plm!`user!.
 
-Une section est appelable :
-\begin{itemize}
-  \item en mode \plm!`user! : l'appel s'effectue à travers une instruction qui provoque un appel système et donc permet l'exécution avec le processeur en mode privilégié ; le mode PLM qui correspond est \plm!`section! ;
-  \item en mode \plm!`section! : l'appel est un simple appel de routine.
-\end{itemize}
+Une section est appelable uniquement à partir de fonctions ou de procédures en mode \plm!`user!.
+
+Techniquement, l'appel s'effectue à travers une instruction telle que \emph{Service Call} qui provoque un appel système et donc permet l'exécution avec le processeur en mode privilégié.
 
 
 
@@ -369,6 +367,12 @@ Où :
   \item \plm=nom= est le nom de la section ;
   \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la section ; actuellement, seul l'attribut \plm!@noWarningIfUnused! est défini (\refSubsectionPage{attributNoWarningIfUnusedSection}).
 \end{itemize}
+
+
+
+\subsectionLabel{Sections et variables globales}{sectionEtVariablesGlobales}
+
+Pour pouvoir être utilisée dans une section, une variable globale doit déclarer cette section parmi les routines autorisées (\refSectionPage{DecRoutinesAutoriseesVarGlobale}).
 
 
 

@@ -13715,16 +13715,16 @@ void categoryMethod_noteTypesInPrecedenceGraph (const GALGAS_globalVarDeclaratio
                                                 C_Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_globalVarDeclarationList temp_0 = inObject ;
-  cEnumerator_globalVarDeclarationList enumerator_4536 (temp_0, kEnumeration_up) ;
-  while (enumerator_4536.hasCurrentObject ()) {
-    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_4536.current_mTypeName (HERE).mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  cEnumerator_globalVarDeclarationList enumerator_5144 (temp_0, kEnumeration_up) ;
+  while (enumerator_5144.hasCurrentObject ()) {
+    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_5144.current_mTypeName (HERE).mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_lstring var_typeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_4536.current_mTypeName (HERE).getter_string (SOURCE_FILE ("global-variable-declaration.galgas", 138)), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 138)), enumerator_4536.current_mTypeName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 138)) ;
+      GALGAS_lstring var_typeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_5144.current_mTypeName (HERE).getter_string (SOURCE_FILE ("global-variable-declaration.galgas", 159)), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 159)), enumerator_5144.current_mTypeName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 159)) ;
       {
-      ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 139)) ;
+      ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 160)) ;
       }
     }
-    enumerator_4536.gotoNextObject () ;
+    enumerator_5144.gotoNextObject () ;
   }
 }
 

@@ -10249,6 +10249,16 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-it\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
+  "var gVar $uint32 = 0 {\n"
+  "  @rw section truc\n"
+  "}\n"
+  "\n"
+  "section truc () {\n"
+  "\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
   "section setupPIT () {\n"
   "  PIT_MCR = 0\n"
   "  PIT_LDVAL0 = 200000\n"
@@ -10286,7 +10296,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "09-pit-unprivileged-mode.plm",
   "plm",
   true, // Text file
-  797, // Text length
+  917, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
