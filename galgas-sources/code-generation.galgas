@@ -211,7 +211,8 @@ private proc generateLLVMfile
   [inIntermediateCodeStruct.mProcedureMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
 #----------------------------------------- Sections
   [inIntermediateCodeStruct.mSectionMapIR llvmCodeGeneration
-    !getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName.string + "/section.s")
+    !inCurrentDirectory
+    !inTargetName.string
     !?llvmCode
     !?asCode
     !generationContext

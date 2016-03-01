@@ -11,6 +11,51 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                         Category method '@instructionListAST analyzeRoutineInstructionList'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
+                                                   const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
+                                                   const class GALGAS_semanticContext constin_inContext,
+                                                   const class GALGAS_stringset constin_inModeSet,
+                                                   const class GALGAS_bool constin_inAllowExceptions,
+                                                   class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                   class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                   class GALGAS_variableMap & io_ioVariableMap,
+                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Abstract category method '@abstractInstructionIR llvmInstructionCode'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractInstructionIR_llvmInstructionCode) (const class cPtr_abstractInstructionIR * inObject,
+                                                                                   class GALGAS_string & ioArgument0,
+                                                                                   const class GALGAS_generationContext constinArgument1,
+                                                                                   class GALGAS_generationAdds & ioArgument2,
+                                                                                   class C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_llvmInstructionCode (const int32_t inClassIndex,
+                                              categoryMethodSignature_abstractInstructionIR_llvmInstructionCode inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructionIR * inObject,
+                                             GALGAS_string & io_ioLLVMcode,
+                                             const GALGAS_generationContext constin_inGenerationContext,
+                                             GALGAS_generationAdds & io_ioGenerationAdds,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                  Category setter '@instructionListIR appendAlloca'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

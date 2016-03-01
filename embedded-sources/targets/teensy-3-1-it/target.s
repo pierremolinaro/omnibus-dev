@@ -27,4 +27,3 @@ ResetISR:
   isb
 @--- Background task : infinite loop
   b  user.code
-

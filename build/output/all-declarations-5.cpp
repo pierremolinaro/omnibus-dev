@@ -12,6 +12,190 @@
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_enumerationDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_enumerationDeclaration * p = (const cPtr_enumerationDeclaration *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_enumerationDeclaration) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mEnumerationName.objectCompare (p->mAttribute_mEnumerationName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mCaseNameList.objectCompare (p->mAttribute_mCaseNameList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_enumerationDeclaration::objectCompare (const GALGAS_enumerationDeclaration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumerationDeclaration::GALGAS_enumerationDeclaration (void) :
+GALGAS_abstractDeclaration () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumerationDeclaration GALGAS_enumerationDeclaration::constructor_default (LOCATION_ARGS) {
+  return GALGAS_enumerationDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                         GALGAS_lstringlist::constructor_emptyList (HERE)
+                                                         COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumerationDeclaration::GALGAS_enumerationDeclaration (const cPtr_enumerationDeclaration * inSourcePtr) :
+GALGAS_abstractDeclaration (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_enumerationDeclaration) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumerationDeclaration GALGAS_enumerationDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mEnumerationName,
+                                                                              const GALGAS_lstringlist & inAttribute_mCaseNameList
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_enumerationDeclaration result ;
+  if (inAttribute_mEnumerationName.isValid () && inAttribute_mCaseNameList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_enumerationDeclaration (inAttribute_mEnumerationName, inAttribute_mCaseNameList COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_enumerationDeclaration::getter_mEnumerationName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_enumerationDeclaration * p = (const cPtr_enumerationDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_enumerationDeclaration) ;
+    result = p->mAttribute_mEnumerationName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_enumerationDeclaration::getter_mEnumerationName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mEnumerationName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_enumerationDeclaration * p = (const cPtr_enumerationDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_enumerationDeclaration) ;
+    result = p->mAttribute_mCaseNameList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist cPtr_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mCaseNameList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                   Pointer class for @enumerationDeclaration class                                   *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_enumerationDeclaration::cPtr_enumerationDeclaration (const GALGAS_lstring & in_mEnumerationName,
+                                                          const GALGAS_lstringlist & in_mCaseNameList
+                                                          COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclaration (THERE),
+mAttribute_mEnumerationName (in_mEnumerationName),
+mAttribute_mCaseNameList (in_mCaseNameList) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_enumerationDeclaration::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_enumerationDeclaration ;
+}
+
+void cPtr_enumerationDeclaration::description (C_String & ioString,
+                                               const int32_t inIndentation) const {
+  ioString << "[@enumerationDeclaration:" ;
+  mAttribute_mEnumerationName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mCaseNameList.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_enumerationDeclaration::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_enumerationDeclaration (mAttribute_mEnumerationName, mAttribute_mCaseNameList COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @enumerationDeclaration type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_enumerationDeclaration ("enumerationDeclaration",
+                                               & kTypeDescriptor_GALGAS_abstractDeclaration) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_enumerationDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_enumerationDeclaration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_enumerationDeclaration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_enumerationDeclaration (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_enumerationDeclaration GALGAS_enumerationDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_enumerationDeclaration result ;
+  const GALGAS_enumerationDeclaration * p = (const GALGAS_enumerationDeclaration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_enumerationDeclaration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("enumerationDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_globalConstantDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_globalConstantDeclaration * p = (const cPtr_globalConstantDeclaration *) inOperandPtr ;
@@ -14410,7 +14594,8 @@ void categoryMethod_sectionSemanticAnalysis (const GALGAS_sectionDeclarationList
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_llvmCodeGeneration (const GALGAS_sectionMapIR inObject,
-                                        const GALGAS_string constinArgument_inSectionAssemblyCode,
+                                        const GALGAS_string constinArgument_inCurrentDirectory,
+                                        const GALGAS_string constinArgument_inTargetName,
                                         GALGAS_string & ioArgument_ioLLVMcode,
                                         GALGAS_string & ioArgument_ioAssemblerCode,
                                         const GALGAS_generationContext constinArgument_inGenerationContext,
@@ -14418,39 +14603,41 @@ void categoryMethod_llvmCodeGeneration (const GALGAS_sectionMapIR inObject,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_sectionMapIR temp_0 = inObject ;
-  cEnumerator_sectionMapIR enumerator_8484 (temp_0, kEnumeration_up) ;
-  while (enumerator_8484.hasCurrentObject ()) {
-    categoryMethod_llvmCodeGeneration (enumerator_8484.current (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 216)) ;
-    enumerator_8484.gotoNextObject () ;
+  cEnumerator_sectionMapIR enumerator_8395 (temp_0, kEnumeration_up) ;
+  while (enumerator_8395.hasCurrentObject ()) {
+    categoryMethod_llvmCodeGeneration (enumerator_8395.current (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 215)) ;
+    enumerator_8395.gotoNextObject () ;
   }
   const GALGAS_sectionMapIR temp_1 = inObject ;
-  const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, temp_1.getter_count (SOURCE_FILE ("section-declaration.galgas", 219)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, temp_1.getter_count (SOURCE_FILE ("section-declaration.galgas", 218)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_2) {
     const GALGAS_sectionMapIR temp_3 = inObject ;
-    cEnumerator_sectionMapIR enumerator_8664 (temp_3, kEnumeration_up) ;
-    GALGAS_uint index_8648 ((uint32_t) 0) ;
-    while (enumerator_8664.hasCurrentObject ()) {
-      GALGAS_string var_name = function_llvmNameForSectionCall (enumerator_8664.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 221)) ;
-      ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("  .global ").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 222)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 222)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 222)) ;
-      ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("  .type ").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 223)).add_operation (GALGAS_string (", %function\n"
-        "\n"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 223)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 223)) ;
-      ioArgument_ioAssemblerCode.plusAssign_operation(var_name.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 224)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 224)) ;
-      ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("    udf ").add_operation (index_8648.getter_string (SOURCE_FILE ("section-declaration.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 225)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 225)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 225)) ;
-      ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("    bx  lr\n"
-        "\n"), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 226)) ;
-      enumerator_8664.gotoNextObject () ;
-      index_8648.increment_operation (inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 220)) ;
+    cEnumerator_sectionMapIR enumerator_8575 (temp_3, kEnumeration_up) ;
+    GALGAS_uint index_8559 ((uint32_t) 0) ;
+    while (enumerator_8575.hasCurrentObject ()) {
+      GALGAS_string var_name = function_llvmNameForSectionCall (enumerator_8575.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 220)) ;
+      GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-entry.s"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 221)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 221)) ;
+      var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), var_name, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 222)) ;
+      var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_8559.getter_string (SOURCE_FILE ("section-declaration.galgas", 223)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 223)) ;
+      ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 224)) ;
+      enumerator_8575.gotoNextObject () ;
+      index_8559.increment_operation (inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 219)) ;
     }
-    ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("__udf_dispatcher_table:\n"), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 228)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 226)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 226)) ;
     const GALGAS_sectionMapIR temp_4 = inObject ;
-    cEnumerator_sectionMapIR enumerator_9063 (temp_4, kEnumeration_up) ;
-    GALGAS_uint index_9047 ((uint32_t) 0) ;
-    while (enumerator_9063.hasCurrentObject ()) {
-      ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("  .word ").add_operation (function_llvmNameForSectionImplementation (enumerator_9063.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)).add_operation (GALGAS_string (" @ "), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)).add_operation (index_9047.getter_string (SOURCE_FILE ("section-declaration.galgas", 230)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 230)) ;
-      enumerator_9063.gotoNextObject () ;
-      index_9047.increment_operation (inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 229)) ;
+    cEnumerator_sectionMapIR enumerator_9069 (temp_4, kEnumeration_up) ;
+    GALGAS_uint index_9053 ((uint32_t) 0) ;
+    while (enumerator_9069.hasCurrentObject ()) {
+      GALGAS_string var_name = function_llvmNameForSectionImplementation (enumerator_9069.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 229)) ;
+      GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)) ;
+      var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), var_name, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 231)) ;
+      var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_9053.getter_string (SOURCE_FILE ("section-declaration.galgas", 232)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 232)) ;
+      ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 233)) ;
+      enumerator_9069.gotoNextObject () ;
+      index_9053.increment_operation (inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 227)) ;
     }
-    ioArgument_ioAssemblerCode.plusAssign_operation(constinArgument_inSectionAssemblyCode.getter_stringByReplacingStringByString (GALGAS_string ("!PROC!"), function_llvmNameForProcedure (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 232)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 232)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 232)) ;
+    GALGAS_string var_sectionAssemblyCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-code.s"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 235)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_sectionAssemblyCode.getter_stringByReplacingStringByString (GALGAS_string ("!PROC!"), function_llvmNameForProcedure (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 236)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 236)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 236)) ;
   }
 }
 
@@ -15083,171 +15270,4 @@ void categoryMethod_analyzeBranchInstructionList (const GALGAS_instructionListAS
   }
 }
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category method '@instructionListAST analyzeRoutineInstructionList'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_analyzeRoutineInstructionList (const GALGAS_instructionListAST inObject,
-                                                   const GALGAS_lstring constinArgument_inRoutineNameForInvocationGraph,
-                                                   const GALGAS_semanticContext constinArgument_inContext,
-                                                   const GALGAS_stringset constinArgument_inModeSet,
-                                                   const GALGAS_bool constinArgument_inAllowExceptions,
-                                                   GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                   GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                   GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                   GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_4888 (temp_0, kEnumeration_up) ;
-  while (enumerator_4888.hasCurrentObject ()) {
-    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_4888.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 110)) ;
-    enumerator_4888.gotoNextObject () ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Category method '@instructionListIR instructionListLLVMCode'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_instructionListLLVMCode (const GALGAS_instructionListIR inObject,
-                                             GALGAS_string & ioArgument_ioLLVMcode,
-                                             const GALGAS_generationContext constinArgument_inGenerationContext,
-                                             GALGAS_generationAdds & ioArgument_ioGenerationAdds,
-                                             C_Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_5798 (temp_0, kEnumeration_up) ;
-  while (enumerator_5798.hasCurrentObject ()) {
-    callCategoryMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_5798.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 133)) ;
-    enumerator_5798.gotoNextObject () ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                       Abstract category method '@abstractDeclaration enterInPrecedenceGraph'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph> gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_enterInPrecedenceGraph (const int32_t inClassIndex,
-                                                 categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph inMethod) {
-  gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_abstractDeclaration_enterInPrecedenceGraph (void) {
-  gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractDeclaration_enterInPrecedenceGraph (NULL,
-                                                                       freeCategoryMethod_abstractDeclaration_enterInPrecedenceGraph) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_enterInPrecedenceGraph (const cPtr_abstractDeclaration * inObject,
-                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph f = NULL ;
-    if (classIndex < gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.count ()) {
-      f = gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.count ()) {
-           f = gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, io_ioGraph, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                 Abstract category getter '@abstractDeclaration keyRepresentationForErrorSignaling'                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling> gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryGetter_keyRepresentationForErrorSignaling (const int32_t inClassIndex,
-                                                             categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling inGetter) {
-  gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryGetter_abstractDeclaration_keyRepresentationForErrorSignaling (void) {
-  gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gGetter_abstractDeclaration_keyRepresentationForErrorSignaling (NULL,
-                                                                                   freeCategoryGetter_abstractDeclaration_keyRepresentationForErrorSignaling) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string callCategoryGetter_keyRepresentationForErrorSignaling (const cPtr_abstractDeclaration * inObject,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) {
-  GALGAS_string result ;
-//--- Find Reader
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling f = NULL ;
-    if (classIndex < gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.count ()) {
-      f = gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.count ()) {
-           f = gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryGetterTable_abstractDeclaration_keyRepresentationForErrorSignaling.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      result = f (inObject, inCompiler COMMA_THERE) ;
-    }
-  }
-  return result ;
-}
 
