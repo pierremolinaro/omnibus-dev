@@ -246,32 +246,28 @@ copyCompleted:
 }
 
 ;----------------------------------------------------------------------------------------------------------------------*
-;   ResetISR                                                                                                           *
+;   configuration.on.boot                                                                                              *
 ;----------------------------------------------------------------------------------------------------------------------*
 
-@user_stack = global [256 x i32] zeroinitializer
+declare void @ResetISR () nounwind
 
-define internal void @ResetISR () nounwind noreturn naked {
+define void @configuration.on.boot () nounwind {
   call void @boot ()
   call void @clearBSS ()
   call void @copyData ()
   call void @init ()
-;--- 
-;  ldr r0, =user_stack + 1024
-;  msr psp, r0
-  %addressOfEndOfUserStack = getelementptr inbounds [256 x i32], [256 x i32]* @user_stack, i32 0, i32 256
-  %endOfUserStack = ptrtoint i32* %addressOfEndOfUserStack to i32
-  call void asm sideeffect "msr psp, $0", "r"(i32 %endOfUserStack) nounwind
-;  isb
-  call void asm sideeffect "isb", ""() nounwind
-;--- set unprivileged user mode, user mode uses PSP
-;  mov r0, #3
-;  msr control, r0
-  call void asm sideeffect "msr control, $0", "r"(i32 3) nounwind
-;---
-  call void @!PROC!setup ()
-  br label %loop
+  ret  void
+}
+
+;----------------------------------------------------------------------------------------------------------------------*
+;   user.code                                                                                                          *
+;----------------------------------------------------------------------------------------------------------------------*
+
+define void @user.code () nounwind naked noreturn {
+  call void @proc.setup ()
+  br   label %loop
+
 loop:
-  call void @!PROC!loop ()
-  br label %loop
+  call void @proc.loop ()
+  br   label %loop
 }
