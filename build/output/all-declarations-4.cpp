@@ -9133,41 +9133,37 @@ const char * gWrapperFileContent_17_targetTemplates = "target datalayout = \"e-m
   "}\n"
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
-  ";   ResetISR                                                                                                           *\n"
+  ";   configuration.on.boot                                                                                              *\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "@user_stack = global [256 x i32] zeroinitializer\n"
+  "declare void @ResetISR () nounwind\n"
   "\n"
-  "define internal void @ResetISR () nounwind noreturn naked {\n"
+  "define void @configuration.on.boot () nounwind {\n"
   "  call void @boot ()\n"
   "  call void @clearBSS ()\n"
   "  call void @copyData ()\n"
   "  call void @init ()\n"
-  ";--- \n"
-  ";  ldr r0, =user_stack + 1024\n"
-  ";  msr psp, r0\n"
-  "  %addressOfEndOfUserStack = getelementptr inbounds [256 x i32], [256 x i32]* @user_stack, i32 0, i32 256\n"
-  "  %endOfUserStack = ptrtoint i32* %addressOfEndOfUserStack to i32\n"
-  "  call void asm sideeffect \"msr psp, $0\", \"r\"(i32 %endOfUserStack) nounwind\n"
-  ";  isb\n"
-  "  call void asm sideeffect \"isb\", \"\"() nounwind\n"
-  ";--- set unprivileged user mode, user mode uses PSP\n"
-  ";  mov r0, #3\n"
-  ";  msr control, r0\n"
-  "  call void asm sideeffect \"msr control, $0\", \"r\"(i32 3) nounwind\n"
-  ";---\n"
-  "  call void @!PROC!setup ()\n"
-  "  br label %loop\n"
+  "  ret  void\n"
+  "}\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";   user.code                                                                                                          *\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "define void @user.code () nounwind naked noreturn {\n"
+  "  call void @proc.setup ()\n"
+  "  br   label %loop\n"
+  "\n"
   "loop:\n"
-  "  call void @!PROC!loop ()\n"
-  "  br label %loop\n"
+  "  call void @proc.loop ()\n"
+  "  br   label %loop\n"
   "}\n" ;
 
 const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
-  12491, // Text length
+  12390, // Text length
   gWrapperFileContent_17_targetTemplates
 ) ;
 
@@ -9175,13 +9171,40 @@ const cRegularFileWrapper gWrapperFile_17_targetTemplates (
 
 const char * gWrapperFileContent_18_targetTemplates = "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
-  "\t.thumb\n" ;
+  "\t.thumb\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 R E S E T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .lcomm user_stack, 1024\n"
+  "\n"
+  "  .global ResetISR\n"
+  "  .type ResetISR, %function\n"
+  "  .global user.code\n"
+  "  .type user.code, %function\n"
+  "\n"
+  "ResetISR:\n"
+  "@--- Init micro controller\n"
+  "  bl configuration.on.boot\n"
+  "@--- set PSP\n"
+  "  ldr r0, =user_stack + 1024\n"
+  "  msr psp, r0\n"
+  "@--- Set CONTROL register\n"
+  "  mov r0, #3\n"
+  "  msr control, r0\n"
+  "  isb\n"
+  "@--- Background task : infinite loop\n"
+  "  b  user.code\n"
+  "\n" ;
 
 const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "target.s",
   "s",
   true, // Text file
-  41, // Text length
+  1008, // Text length
   gWrapperFileContent_18_targetTemplates
 ) ;
 
@@ -10249,16 +10272,6 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-it\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "var gVar $uint32 = 0 {\n"
-  "  @rw section truc\n"
-  "}\n"
-  "\n"
-  "section truc () {\n"
-  "\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
   "section setupPIT () {\n"
   "  PIT_MCR = 0\n"
   "  PIT_LDVAL0 = 200000\n"
@@ -10296,7 +10309,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "09-pit-unprivileged-mode.plm",
   "plm",
   true, // Text file
-  917, // Text length
+  797, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
