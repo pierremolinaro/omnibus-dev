@@ -199,14 +199,13 @@ map @sectionMapIR {
   @instructionListIR mInstructionGenerationList
   @bool mWarnIfUnused
   insert insertKey error message "** internal error **"
-#  search searchKey error message "** internal error **"
-#  remove removeKey error message "** internal error **"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @sectionMapIR llvmCodeGeneration
-  ?let @string inSectionAssemblyCode
+  ?let @string inCurrentDirectory
+  ?let @string inTargetName
   ?!@string ioLLVMcode
   ?!@string ioAssemblerCode
   ?let @generationContext inGenerationContext
@@ -219,17 +218,22 @@ method @sectionMapIR llvmCodeGeneration
   if [self count] > 0 then
     for section in self do (idx)
       let name = llvmNameForSectionCall (!section.lkey.string)
-      ioAssemblerCode += "  .global " + name + "\n"
-      ioAssemblerCode += "  .type " + name + ", %function\n\n"
-      ioAssemblerCode += name + ":\n"
-      ioAssemblerCode += "    udf " + idx + "\n"
-      ioAssemblerCode += "    bx  lr\n\n"
+      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
+      s = [s stringByReplacingStringByString !"!ENTRY!" !name]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
     end
-    ioAssemblerCode += "__udf_dispatcher_table:\n"
+    ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
     for section in self do (idx)
-      ioAssemblerCode += "  .word " + llvmNameForSectionImplementation (!section.lkey.string) + " @ " + idx + "\n"
+#      ioAssemblerCode += "  .word " + llvmNameForSectionImplementation (!section.lkey.string) + " @ " + idx + "\n"
+      let name = llvmNameForSectionImplementation (!section.lkey.string)
+      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
+      s = [s stringByReplacingStringByString !"!ENTRY!" !name]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
     end
-    ioAssemblerCode += [inSectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!"")]
+    let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
+    ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!"")]
   end
 }
 

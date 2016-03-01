@@ -1513,7 +1513,8 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR inObje
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_llvmCodeGeneration (const class GALGAS_sectionMapIR inObject,
-                                        const class GALGAS_string constin_inSectionAssemblyCode,
+                                        const class GALGAS_string constin_inCurrentDirectory,
+                                        const class GALGAS_string constin_inTargetName,
                                         class GALGAS_string & io_ioLLVMcode,
                                         class GALGAS_string & io_ioAssemblerCode,
                                         const class GALGAS_generationContext constin_inGenerationContext,
@@ -1705,6 +1706,9 @@ extern const char * gWrapperFileContent_15_targetTemplates ;
 extern const char * gWrapperFileContent_16_targetTemplates ;
 extern const char * gWrapperFileContent_17_targetTemplates ;
 extern const char * gWrapperFileContent_18_targetTemplates ;
+extern const char * gWrapperFileContent_19_targetTemplates ;
+extern const char * gWrapperFileContent_20_targetTemplates ;
+extern const char * gWrapperFileContent_21_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1730,6 +1734,9 @@ extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_20_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_21_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
