@@ -99,7 +99,13 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
+  
   [inAST.mSectionListAST sectionSemanticAnalysis
+    !context:inSemanticContext
+    !?temporary:temporaries
+    !?intermediateCode:outIntermediateCodeStruct
+  ]
+  [inAST.mExternProcList externProcedureSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct

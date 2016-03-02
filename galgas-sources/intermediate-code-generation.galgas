@@ -13,6 +13,7 @@ struct @intermediateCodeStruct {
   @procedureMapIR mProcedureMapIR
   @sectionMapIR mSectionMapIR
   @functionMapIR mFunctionMapIR
+  @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
   @bootListIR mBootList
   @initListIR mInitList

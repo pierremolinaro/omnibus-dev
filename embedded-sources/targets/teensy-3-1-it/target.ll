@@ -273,21 +273,6 @@ define void @configuration.on.boot () nounwind {
 ;--- Create task 
 declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind
 
-
-;--- Blocking running task
-declare void @kernel_blockRunningTaskInList (i32* %ioWaitingList) nounwind
-
-declare void @kernel_blockRunningTaskInDeadlineList (i32 %inDeadlineMS) nounwind
-
-declare void @kernel_blockRunningTaskInListAndDeadlineList (i32* %ioWaitingList, i32 %inDeadlineMS) nounwind
-
-
-;--- Make task Ready
-declare void @kernel_makeTaskReadyFromWaitingList (i32* nocapture readonly %ioWaitingList) nounwind
-
-declare void @kernel_tasksWithEarlierDateBecomeReady (i32 %inCurrentDate) nounwind
-
-
 ;----------------------------------------------------------------------------------------------------------------------*
 ;   task 0                                                                                                          *
 ;----------------------------------------------------------------------------------------------------------------------*

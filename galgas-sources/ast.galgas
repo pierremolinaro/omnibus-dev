@@ -24,6 +24,7 @@ struct @ast {
   @controlRegisterDeclarationListAST mControlRegisterDeclarationListAST
   @procedureDeclarationListAST mProcedureListAST
   @requiredProcedureDeclarationListAST mRequiredProcList
+  @externProcedureDeclarationListAST mExternProcList
   @functionDeclarationListAST mFunctionListAST
   @sectionDeclarationListAST mSectionListAST
   @lstringlist mTargetList

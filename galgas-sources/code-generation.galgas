@@ -209,6 +209,8 @@ private proc generateLLVMfile
   ]
 #----------------------------------------- Procedures
   [inIntermediateCodeStruct.mProcedureMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
+#----------------------------------------- Extern procedures
+  [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
 #----------------------------------------- Sections
   [inIntermediateCodeStruct.mSectionMapIR llvmCodeGeneration
     !inCurrentDirectory
