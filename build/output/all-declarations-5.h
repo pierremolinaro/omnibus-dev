@@ -11,6 +11,51 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          Filewrapper 'embeddedSampleCode'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const char * gWrapperFileContent_0_embeddedSampleCode ;
+extern const char * gWrapperFileContent_1_embeddedSampleCode ;
+extern const char * gWrapperFileContent_2_embeddedSampleCode ;
+extern const char * gWrapperFileContent_3_embeddedSampleCode ;
+extern const char * gWrapperFileContent_4_embeddedSampleCode ;
+extern const char * gWrapperFileContent_5_embeddedSampleCode ;
+extern const char * gWrapperFileContent_6_embeddedSampleCode ;
+extern const char * gWrapperFileContent_7_embeddedSampleCode ;
+extern const char * gWrapperFileContent_8_embeddedSampleCode ;
+extern const char * gWrapperFileContent_9_embeddedSampleCode ;
+extern const char * gWrapperFileContent_10_embeddedSampleCode ;
+extern const char * gWrapperFileContent_11_embeddedSampleCode ;
+extern const char * gWrapperFileContent_12_embeddedSampleCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode ;
+extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;
+extern const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             @abstractExpressionIR class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2579,208 +2624,5 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_sectionMapIR_2D_eleme
                                         class GALGAS_generationAdds & io_ioGenerationAdds,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Abstract category method '@expressionAST noteExpressionTypesInPrecedenceGraph'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph) (const class cPtr_expressionAST * inObject,
-                                                                                            class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
-                                                                                            class C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_noteExpressionTypesInPrecedenceGraph (const int32_t inClassIndex,
-                                                               categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_noteExpressionTypesInPrecedenceGraph (const class cPtr_expressionAST * inObject,
-                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Abstract category method '@expressionAST analyzeExpression'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
-                                                                         const class GALGAS_lstring constinArgument0,
-                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
-                                                                         const class GALGAS_semanticContext constinArgument2,
-                                                                         const class GALGAS_stringset constinArgument3,
-                                                                         const class GALGAS_bool constinArgument4,
-                                                                         class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                         class GALGAS_staticStringMap & ioArgument6,
-                                                                         class GALGAS_variableMap & ioArgument7,
-                                                                         class GALGAS_instructionListIR & ioArgument8,
-                                                                         class GALGAS_operandIR & outArgument9,
-                                                                         class C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_analyzeExpression (const int32_t inClassIndex,
-                                            categoryMethodSignature_expressionAST_analyzeExpression inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
-                                           const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
-                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
-                                           const GALGAS_semanticContext constin_inContext,
-                                           const GALGAS_stringset constin_inModes,
-                                           const GALGAS_bool constin_inAllowExceptions,
-                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                           GALGAS_variableMap & io_ioVariableMap,
-                                           GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                           GALGAS_operandIR & out_outResult,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Abstract category method '@infixOperatorDescription generateInfixOperatorCode'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_infixOperatorDescription_generateInfixOperatorCode) (const class cPtr_infixOperatorDescription * inObject,
-                                                                                            class GALGAS_semanticTemporariesStruct & ioArgument0,
-                                                                                            class GALGAS_instructionListIR & ioArgument1,
-                                                                                            const class GALGAS_operandIR constinArgument2,
-                                                                                            const class GALGAS_location constinArgument3,
-                                                                                            const class GALGAS_operandIR constinArgument4,
-                                                                                            const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
-                                                                                            class GALGAS_operandIR & outArgument6,
-                                                                                            class C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_generateInfixOperatorCode (const int32_t inClassIndex,
-                                                    categoryMethodSignature_infixOperatorDescription_generateInfixOperatorCode inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_generateInfixOperatorCode (const class cPtr_infixOperatorDescription * inObject,
-                                                   GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                   GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                   const GALGAS_operandIR constin_inLeftOperand,
-                                                   const GALGAS_location constin_inOperatorLocation,
-                                                   const GALGAS_operandIR constin_inRightOperand,
-                                                   const GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                   GALGAS_operandIR & out_outResultValue,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category getter '@infixOperatorDescription performStaticOperation'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef class GALGAS_bigint (*categoryGetterSignature_infixOperatorDescription_performStaticOperation) (const class cPtr_infixOperatorDescription * inObject,
-                                                                                                        const class GALGAS_bigint & constinArgument0,
-                                                                                                        const class GALGAS_bigint & constinArgument1,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryGetter_performStaticOperation (const int32_t inClassIndex,
-                                                 categoryGetterSignature_infixOperatorDescription_performStaticOperation inGetter) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint callCategoryGetter_performStaticOperation (const cPtr_infixOperatorDescription * inObject,
-                                                               const GALGAS_bigint & constin_inLeft,
-                                                               const GALGAS_bigint & constin_inRight,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                  Abstract category method '@instructionAST noteInstructionTypesInPrecedenceGraph'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_instructionAST_noteInstructionTypesInPrecedenceGraph) (const class cPtr_instructionAST * inObject,
-                                                                                              class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
-                                                                                              class C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_noteInstructionTypesInPrecedenceGraph (const int32_t inClassIndex,
-                                                                categoryMethodSignature_instructionAST_noteInstructionTypesInPrecedenceGraph inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_noteInstructionTypesInPrecedenceGraph (const class cPtr_instructionAST * inObject,
-                                                               GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Abstract category method '@instructionAST analyze'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_instructionAST_analyze) (const class cPtr_instructionAST * inObject,
-                                                                const class GALGAS_lstring constinArgument0,
-                                                                const class GALGAS_semanticContext constinArgument1,
-                                                                const class GALGAS_stringset constinArgument2,
-                                                                const class GALGAS_bool constinArgument3,
-                                                                class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                                                class GALGAS_staticStringMap & ioArgument5,
-                                                                class GALGAS_variableMap & ioArgument6,
-                                                                class GALGAS_instructionListIR & ioArgument7,
-                                                                class C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_analyze (const int32_t inClassIndex,
-                                  categoryMethodSignature_instructionAST_analyze inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
-                                 const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
-                                 const GALGAS_semanticContext constin_inContext,
-                                 const GALGAS_stringset constin_inModeSet,
-                                 const GALGAS_bool constin_inAllowExceptions,
-                                 GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                 GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                 GALGAS_variableMap & io_ioVariableMap,
-                                 GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                 C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category method '@instructionListAST analyzeBranchInstructionList'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instructionListAST inObject,
-                                                  const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
-                                                  class GALGAS_location in_inEndOfInstructionList,
-                                                  const class GALGAS_semanticContext constin_inContext,
-                                                  const class GALGAS_stringset constin_inModeSet,
-                                                  const class GALGAS_bool constin_inAllowExceptions,
-                                                  class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                  class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                  class GALGAS_variableMap & io_ioVariableMap,
-                                                  class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 
 #endif

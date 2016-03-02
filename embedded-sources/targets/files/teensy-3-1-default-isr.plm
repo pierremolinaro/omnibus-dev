@@ -40,11 +40,11 @@ proc UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {
 
 //-----------------------------------------------------------------------------*
 
-required proc svcHandler `isr ()
-
-proc svcHandler `isr @nullWhenPanicDisabled @weak () {
-  panic 11
-}
+//required proc svcHandler `isr ()
+//
+//proc svcHandler `isr @nullWhenPanicDisabled @weak () {
+//  panic 11
+//}
 
 //-----------------------------------------------------------------------------*
 
@@ -85,7 +85,7 @@ proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
 
 required proc systickHandler `isr ()
 
-proc systickHandler `isr () {
+proc systickHandler `isr @global () {
   gCompteur +%= 1
   userSystickHandler ()
 }

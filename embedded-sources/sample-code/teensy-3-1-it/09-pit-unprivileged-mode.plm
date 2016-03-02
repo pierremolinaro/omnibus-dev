@@ -29,9 +29,9 @@ section getPIT (!outValue $uint32) {
 
 proc loop `user () {
   waitMS (!250)
-  ledOn (!LED_TEENSY) // Allumer la led
+  ledOn (!LED_L1) // Allumer la led
   waitMS (!250)
-  ledOff (!LED_TEENSY)  // Éteindre la led
+  ledOff (!LED_L1)  // Éteindre la led
   goto (!line:1 !column:0)
   printSpaces (!10)
   goto (!line:1 !column:0)

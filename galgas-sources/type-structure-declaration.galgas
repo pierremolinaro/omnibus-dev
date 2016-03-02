@@ -377,6 +377,7 @@ override method @structureDeclaration semanticAnalysis
       !warnIfUnused
       !false
       !false
+      !false
     ]  
   end
 #--- Analyze functions

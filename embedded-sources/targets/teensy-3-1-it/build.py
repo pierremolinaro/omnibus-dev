@@ -65,7 +65,7 @@ def LLVMLinkercompiler ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def CLANGcompiler ():
-  return [toolDir () + "/bin/clang", "--target=armv7-none--eabi", "-mcpu=cortex-m4"]
+  return [toolDir () + "/bin/clang", "--target=armv7-none--eabi", "-mcpu=cortex-m4", "-Oz", "-fomit-frame-pointer"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *

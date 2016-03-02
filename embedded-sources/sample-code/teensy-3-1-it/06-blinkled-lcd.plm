@@ -20,9 +20,9 @@ var gCount $uint32 = 0 {
 
 proc loop `user () {
   waitMS (!250)
-  ledOn (!LED_TEENSY) // Allumer la led
+  ledOn (!LED_L1) // Allumer la led
   waitMS (!250)
-  ledOff (!LED_TEENSY)  // Éteindre la led
+  ledOff (!LED_L1)  // Éteindre la led
   toggle = not toggle
   if toggle then
     gCount += 1

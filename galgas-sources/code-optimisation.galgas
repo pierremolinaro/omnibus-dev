@@ -173,6 +173,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mWarnIfUnused
         !procedure.mWeak
         !procedure.mNullOnNoException
+        !procedure.mGlobal
       ]        
       [procedure enterAccessibleEntities !?outAccessibleEntities]
       outAccessibleEntities.mProcedureSet += !procedure.lkey.string
@@ -185,6 +186,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mWarnIfUnused
         !procedure.mWeak
         !procedure.mNullOnNoException
+        !procedure.mGlobal
       ]        
     end
   end
@@ -221,6 +223,7 @@ private proc suppressInaccessibleSubprograms
           !procedure.mWarnIfUnused
           !procedure.mWeak
           !procedure.mNullOnNoException
+          !procedure.mGlobal
         ]        
         [procedure enterAccessibleEntities !?outAccessibleEntities]
         exploreProceduresAndFunctions = true
@@ -233,7 +236,8 @@ private proc suppressInaccessibleSubprograms
           !procedure.mWarnIfUnused
           !procedure.mWeak
           !procedure.mNullOnNoException
-       ]        
+          !procedure.mGlobal
+      ]        
       end
     end
     let @functionMapIR exNonExploredFunctionMap = nonExploredFunctionMap

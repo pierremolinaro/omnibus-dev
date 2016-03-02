@@ -23,10 +23,10 @@ var led = $ledState.on {
 proc loop `user () {
   waitMS (!250)
   if led == .off then
-    ledOn (!LED_TEENSY) // Allumer la led
+    ledOn (!LED_L1) // Allumer la led
     led = .on
   else
-    ledOff (!LED_TEENSY)  // Éteindre la led
+    ledOff (!LED_L1)  // Éteindre la led
     led = .off
   end
 }

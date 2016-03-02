@@ -133,6 +133,12 @@ func %once noWarningIfUnusedAttribute -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once globalAttribute -> @string outResult {
+  outResult = "global"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func %once weakAttribute -> @string outResult {
   outResult = "weak"
 }

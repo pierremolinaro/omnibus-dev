@@ -4666,6 +4666,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                       const class GALGAS_bool & inOperand4,
                                                       const class GALGAS_bool & inOperand5,
                                                       const class GALGAS_bool & inOperand6,
+                                                      const class GALGAS_bool & inOperand7,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -4677,6 +4678,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                    class GALGAS_bool constinArgument4,
                                                    class GALGAS_bool constinArgument5,
                                                    class GALGAS_bool constinArgument6,
+                                                   class GALGAS_bool constinArgument7,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -4687,6 +4689,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                    class GALGAS_bool & outArgument4,
                                                    class GALGAS_bool & outArgument5,
                                                    class GALGAS_bool & outArgument6,
+                                                   class GALGAS_bool & outArgument7,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -4694,6 +4697,11 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                                                    class GALGAS_string constinArgument1,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGlobalForKey (class GALGAS_bool constinArgument0,
+                                                          class GALGAS_string constinArgument1,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMInstructionGenerationListForKey (class GALGAS_instructionListIR constinArgument0,
                                                                              class GALGAS_string constinArgument1,
@@ -4729,6 +4737,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                    class GALGAS_bool & outArgument4,
                                                    class GALGAS_bool & outArgument5,
                                                    class GALGAS_bool & outArgument6,
+                                                   class GALGAS_bool & outArgument7,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -4738,6 +4747,10 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentListForGeneration getter_mFormalArgumentListForGenerationForKey (const class GALGAS_string & constinOperand0,
                                                                                                                             C_Compiler * inCompiler
                                                                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGlobalForKey (const class GALGAS_string & constinOperand0,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationListForKey (const class GALGAS_string & constinOperand0,
                                                                                                     C_Compiler * inCompiler
@@ -4791,6 +4804,7 @@ class cEnumerator_procedureMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWeak (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mNullOnNoException (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mGlobal (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_procedureMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -4813,6 +4827,7 @@ class cMapElement_procedureMapIR : public cMapElement {
   public : GALGAS_bool mAttribute_mWarnIfUnused ;
   public : GALGAS_bool mAttribute_mWeak ;
   public : GALGAS_bool mAttribute_mNullOnNoException ;
+  public : GALGAS_bool mAttribute_mGlobal ;
 
 //--- Constructor
   public : cMapElement_procedureMapIR (const GALGAS_lstring & inKey,
@@ -4821,7 +4836,8 @@ class cMapElement_procedureMapIR : public cMapElement {
                                        const GALGAS_bool & in_mIsRequired,
                                        const GALGAS_bool & in_mWarnIfUnused,
                                        const GALGAS_bool & in_mWeak,
-                                       const GALGAS_bool & in_mNullOnNoException
+                                       const GALGAS_bool & in_mNullOnNoException,
+                                       const GALGAS_bool & in_mGlobal
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -4852,6 +4868,7 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_bool mAttribute_mWarnIfUnused ;
   public : GALGAS_bool mAttribute_mWeak ;
   public : GALGAS_bool mAttribute_mNullOnNoException ;
+  public : GALGAS_bool mAttribute_mGlobal ;
 
 
 //--------------------------------- Accessors
@@ -4874,7 +4891,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
                                              const GALGAS_bool & in_mIsRequired,
                                              const GALGAS_bool & in_mWarnIfUnused,
                                              const GALGAS_bool & in_mWeak,
-                                             const GALGAS_bool & in_mNullOnNoException) ;
+                                             const GALGAS_bool & in_mNullOnNoException,
+                                             const GALGAS_bool & in_mGlobal) ;
 
 //-- Start of generic part --*
 
@@ -4893,7 +4911,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
                                                                     const class GALGAS_bool & inOperand3,
                                                                     const class GALGAS_bool & inOperand4,
                                                                     const class GALGAS_bool & inOperand5,
-                                                                    const class GALGAS_bool & inOperand6
+                                                                    const class GALGAS_bool & inOperand6,
+                                                                    const class GALGAS_bool & inOperand7
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4911,6 +4930,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentListForGeneration getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGlobal (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
 

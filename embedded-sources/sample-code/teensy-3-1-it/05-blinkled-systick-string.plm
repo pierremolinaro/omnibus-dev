@@ -26,11 +26,11 @@ proc loop `user () {
   var r $staticString
   waitMS (!250)
   zzzz (!"toto" ?r)
-  ledOn (!LED_TEENSY) // Allumer la led
+  ledOn (!LED_L1) // Allumer la led
   var rr $staticString
   waitMS (!250)
   zzzz (!"tata" ?rr)
-  ledOff (!LED_TEENSY)  // Éteindre la led
+  ledOff (!LED_L1)  // Éteindre la led
 }
 
 //------------------------------------------------*
