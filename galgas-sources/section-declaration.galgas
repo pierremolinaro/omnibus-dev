@@ -225,7 +225,6 @@ method @sectionMapIR llvmCodeGeneration
     end
     ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
     for section in self do (idx)
-#      ioAssemblerCode += "  .word " + llvmNameForSectionImplementation (!section.lkey.string) + " @ " + idx + "\n"
       let name = llvmNameForSectionImplementation (!section.lkey.string)
       var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
       s = [s stringByReplacingStringByString !"!ENTRY!" !name]

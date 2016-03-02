@@ -3471,7 +3471,10 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
   var_asCode.plusAssign_operation(function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 304)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 304)) ;
   GALGAS_bool joker_14092 ; // Joker input parameter
   var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 305)), joker_14092, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 305)) ;
-  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 307)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  GALGAS_string var_cCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 309)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 307)) ;
+  GALGAS_bool joker_14340 ; // Joker input parameter
+  var_cCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 311)), joker_14340, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 311)) ;
+  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 313)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
     GALGAS_string temp_5 ;
     const enumGalgasBool test_6 = GALGAS_bool (gOption_plm_5F_options_performFlashing.getter_value ()).boolEnum () ;
@@ -3481,11 +3484,11 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
       temp_5 = GALGAS_string ("build") ;
     }
     GALGAS_string var_script = temp_5 ;
-    GALGAS_string var_fullScript = GALGAS_string ("python ").add_operation (constinArgument_inProductDirectory, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 309)).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 309)).add_operation (var_script, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 309)).add_operation (GALGAS_string (".py"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 309)) ;
-    GALGAS_sint var_result = var_fullScript.getter_system (SOURCE_FILE ("code-generation.galgas", 310)) ;
+    GALGAS_string var_fullScript = GALGAS_string ("python ").add_operation (constinArgument_inProductDirectory, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 315)).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 315)).add_operation (var_script, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 315)).add_operation (GALGAS_string (".py"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 315)) ;
+    GALGAS_sint var_result = var_fullScript.getter_system (SOURCE_FILE ("code-generation.galgas", 316)) ;
     const enumGalgasBool test_7 = GALGAS_bool (kIsNotEqual, var_result.objectCompare (GALGAS_sint ((int32_t) 0L))).boolEnum () ;
     if (kBoolTrue == test_7) {
-      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFileLocation, GALGAS_string ("error during LLVM compilation or flashing")  COMMA_SOURCE_FILE ("code-generation.galgas", 312)) ;
+      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFileLocation, GALGAS_string ("error during LLVM compilation or flashing")  COMMA_SOURCE_FILE ("code-generation.galgas", 318)) ;
     }
   }
 }
@@ -4514,6 +4517,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "                 asAssembler, \\\n"
   "                 productDir, linker, linkerLibraries, objcopy, \\\n"
   "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget, \\\n"
+  "                 CLANGcompiler, CsourceList, LLVMLinkerCompiler, \\\n"
   "                 currentFile) :\n"
   "  #--- Get max parallel jobs as first argument\n"
   "  goal = \"all\"\n"
@@ -4542,16 +4546,49 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "  #print \"Product directory: \" + scriptDir\n"
   "  #--- Build python makefile\n"
   "  make = makefile.Make (goal, maxParallelJobs == 1) # Display command utility tool if sequential build\n"
+  "  #---------------------------------------------- Add C files compile rule\n"
+  "  llvmSourceFileList = []\n"
+  "  for source in CsourceList:\n"
+  "  #--- Compile C --> LLVM\n"
+  "    llvmSource = objectDir + \"/\" + source + \".ll\"\n"
+  "    rule = makefile.Rule ([llvmSource], \"Compiling \" + source)\n"
+  "    rule.mDependences.append (\"sources/\" + source)\n"
+  "    rule.mDependences.append (currentFile)\n"
+  "    rule.mCommand += CLANGcompiler\n"
+  "    rule.mCommand += [\"-emit-llvm\", \"-S\"]\n"
+  "    rule.mCommand += [\"sources/\" + source]\n"
+  "    rule.mCommand += [\"-o\", llvmSource]\n"
+  "    make.addRule (rule)\n"
+  "    llvmSourceFileList.append (source + \".ll\")\n"
+  "  #---------------------------------------------- LLVM Linking\n"
+  "  llvmLinkedSource = objectDir + \"/all.ll\"\n"
+  "  title = \"LLVM Link\"\n"
+  "  for source in LLVMsourceList:\n"
+  "    title += \" sources/\" + source\n"
+  "  for source in llvmSourceFileList:\n"
+  "    title += \" \" + objectDir + \"/\" + source\n"
+  "  rule = makefile.Rule ([llvmLinkedSource], title)\n"
+  "  rule.mCommand += LLVMLinkerCompiler\n"
+  "  rule.mDependences.append (currentFile)\n"
+  "  for source in LLVMsourceList:\n"
+  "    rule.mCommand += [\"sources/\" + source]\n"
+  "    rule.mDependences.append (\"sources/\" + source)\n"
+  "  for source in llvmSourceFileList:\n"
+  "    rule.mCommand += [objectDir + \"/\" + source]\n"
+  "    rule.mDependences.append (objectDir + \"/\" + source)\n"
+  "  rule.mCommand += [\"-o\", llvmLinkedSource]\n"
+  "  make.addRule (rule)\n"
+  "  LLVMsourceList = [\"all.ll\"]\n"
   "  #---------------------------------------------- Add LLVM files compile rule\n"
   "  objectList = []\n"
   "  for source in LLVMsourceList:\n"
   "  #--- Optimize LLVM source\n"
   "    optimizedSource = objectDir + \"/opt.\" + source\n"
   "    rule = makefile.Rule ([optimizedSource], \"Optimizing \" + source)\n"
-  "    rule.mDependences.append (\"sources/\" + source)\n"
+  "    rule.mDependences.append (objectDir + \"/\" + source)\n"
   "    rule.mDependences.append (currentFile)\n"
   "    rule.mCommand += llvmOptimizerCompiler\n"
-  "    rule.mCommand += [\"sources/\" + source]\n"
+  "    rule.mCommand += [objectDir + \"/\" + source]\n"
   "    rule.mCommand += [\"-o\", optimizedSource]\n"
   "    make.addRule (rule)\n"
   "  #--- Compile optimized LLVM source\n"
@@ -4645,7 +4682,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  9855, // Text length
+  11292, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -8294,7 +8331,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.7.1-binutils-2.25.1-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.7.1-binutils-2.26-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -8313,6 +8350,24 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "def LLCcompiler ():\n"
   "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   LLVM Linker invocation                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def LLVMLinkercompiler ():\n"
+  "  return [toolDir () + \"/bin/llvm-link\", \"-S\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   CLANG Compiler invocation                                                                                          *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CLANGcompiler ():\n"
+  "  return [toolDir () + \"/bin/clang\", \"--target=armv7-none--eabi\", \"-mcpu=cortex-m4\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -8380,6 +8435,15 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   C Source files                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CsourceList ():\n"
+  "  return [\"src.c\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#   LLVM Source files                                                                                                  *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -8435,6 +8499,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "                 asAssembler (), productDir (), \\\n"
   "                 linker (), linkerLibraries (), \\\n"
   "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \\\n"
+  "                 CLANGcompiler (), CsourceList (), LLVMLinkercompiler (), \\\n"
   "                 currentFile)\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
@@ -8443,7 +8508,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  12249, // Text length
+  14364, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 
@@ -8935,9 +9000,21 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   gWrapperFileContent_19_targetTemplates
 ) ;
 
+//--- File 'teensy-3-1-it/target.c'
+
+const char * gWrapperFileContent_20_targetTemplates = "\n" ;
+
+const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+  "target.c",
+  "c",
+  true, // Text file
+  1, // Text length
+  gWrapperFileContent_20_targetTemplates
+) ;
+
 //--- File 'teensy-3-1-it/target.ll'
 
-const char * gWrapperFileContent_20_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_21_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
@@ -9211,17 +9288,17 @@ const char * gWrapperFileContent_20_targetTemplates = "target datalayout = \"e-m
   "  br   label %loop\n"
   "}\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
   12390, // Text length
-  gWrapperFileContent_20_targetTemplates
+  gWrapperFileContent_21_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-it/target.s'
 
-const char * gWrapperFileContent_21_targetTemplates = "\t.syntax unified\n"
+const char * gWrapperFileContent_22_targetTemplates = "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
   "\t.thumb\n"
   "\n"
@@ -9251,17 +9328,17 @@ const char * gWrapperFileContent_21_targetTemplates = "\t.syntax unified\n"
   "@--- Background task : infinite loop\n"
   "  b  user.code\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+const cRegularFileWrapper gWrapperFile_22_targetTemplates (
   "target.s",
   "s",
   true, // Text file
   1007, // Text length
-  gWrapperFileContent_21_targetTemplates
+  gWrapperFileContent_22_targetTemplates
 ) ;
 
 //--- All files of 'teensy-3-1-it' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [15] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [16] = {
   & gWrapperFile_8_targetTemplates,
   & gWrapperFile_9_targetTemplates,
   & gWrapperFile_10_targetTemplates,
@@ -9276,6 +9353,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [15] = {
   & gWrapperFile_19_targetTemplates,
   & gWrapperFile_20_targetTemplates,
   & gWrapperFile_21_targetTemplates,
+  & gWrapperFile_22_targetTemplates,
   NULL
 } ;
 
@@ -9289,7 +9367,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
   "teensy-3-1-it",
-  14,
+  15,
   gWrapperAllFiles_targetTemplates_2,
   0,
   gWrapperAllDirectories_targetTemplates_2

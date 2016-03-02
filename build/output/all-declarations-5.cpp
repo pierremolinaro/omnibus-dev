@@ -14628,16 +14628,16 @@ void categoryMethod_llvmCodeGeneration (const GALGAS_sectionMapIR inObject,
     cEnumerator_sectionMapIR enumerator_9069 (temp_4, kEnumeration_up) ;
     GALGAS_uint index_9053 ((uint32_t) 0) ;
     while (enumerator_9069.hasCurrentObject ()) {
-      GALGAS_string var_name = function_llvmNameForSectionImplementation (enumerator_9069.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 229)) ;
-      GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)) ;
-      var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), var_name, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 231)) ;
-      var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_9053.getter_string (SOURCE_FILE ("section-declaration.galgas", 232)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 232)) ;
-      ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 233)) ;
+      GALGAS_string var_name = function_llvmNameForSectionImplementation (enumerator_9069.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 228)) ;
+      GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 229)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 229)) ;
+      var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), var_name, inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 230)) ;
+      var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_9053.getter_string (SOURCE_FILE ("section-declaration.galgas", 231)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 231)) ;
+      ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 232)) ;
       enumerator_9069.gotoNextObject () ;
       index_9053.increment_operation (inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 227)) ;
     }
-    GALGAS_string var_sectionAssemblyCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-code.s"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 235)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_sectionAssemblyCode.getter_stringByReplacingStringByString (GALGAS_string ("!PROC!"), function_llvmNameForProcedure (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 236)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 236)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 236)) ;
+    GALGAS_string var_sectionAssemblyCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-code.s"), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 234)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 234)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_sectionAssemblyCode.getter_stringByReplacingStringByString (GALGAS_string ("!PROC!"), function_llvmNameForProcedure (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("section-declaration.galgas", 235)), inCompiler  COMMA_SOURCE_FILE ("section-declaration.galgas", 235)) ;
   }
 }
 

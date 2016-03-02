@@ -303,6 +303,12 @@ private proc generateLLVMfile
 #----------------------------------------- Write assembler file
   asCode += asSeparatorLine ()
   [asCode writeToFileWhenDifferentContents !sourceDirectory + "/src.s" ?*]
+#----------------------------------------- Write C file
+  let cCode = getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/target.c"
+  )
+  [cCode writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
 #----------------------------------------- Perform compilation
   if (@uint.errorCount == 0) then # && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end

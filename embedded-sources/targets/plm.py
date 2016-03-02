@@ -89,6 +89,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
                  asAssembler, \
                  productDir, linker, linkerLibraries, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget, \
+                 CLANGcompiler, CsourceList, LLVMLinkerCompiler, \
                  currentFile) :
   #--- Get max parallel jobs as first argument
   goal = "all"
@@ -117,16 +118,49 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   #print "Product directory: " + scriptDir
   #--- Build python makefile
   make = makefile.Make (goal, maxParallelJobs == 1) # Display command utility tool if sequential build
+  #---------------------------------------------- Add C files compile rule
+  llvmSourceFileList = []
+  for source in CsourceList:
+  #--- Compile C --> LLVM
+    llvmSource = objectDir + "/" + source + ".ll"
+    rule = makefile.Rule ([llvmSource], "Compiling " + source)
+    rule.mDependences.append ("sources/" + source)
+    rule.mDependences.append (currentFile)
+    rule.mCommand += CLANGcompiler
+    rule.mCommand += ["-emit-llvm", "-S"]
+    rule.mCommand += ["sources/" + source]
+    rule.mCommand += ["-o", llvmSource]
+    make.addRule (rule)
+    llvmSourceFileList.append (source + ".ll")
+  #---------------------------------------------- LLVM Linking
+  llvmLinkedSource = objectDir + "/all.ll"
+  title = "LLVM Link"
+  for source in LLVMsourceList:
+    title += " sources/" + source
+  for source in llvmSourceFileList:
+    title += " " + objectDir + "/" + source
+  rule = makefile.Rule ([llvmLinkedSource], title)
+  rule.mCommand += LLVMLinkerCompiler
+  rule.mDependences.append (currentFile)
+  for source in LLVMsourceList:
+    rule.mCommand += ["sources/" + source]
+    rule.mDependences.append ("sources/" + source)
+  for source in llvmSourceFileList:
+    rule.mCommand += [objectDir + "/" + source]
+    rule.mDependences.append (objectDir + "/" + source)
+  rule.mCommand += ["-o", llvmLinkedSource]
+  make.addRule (rule)
+  LLVMsourceList = ["all.ll"]
   #---------------------------------------------- Add LLVM files compile rule
   objectList = []
   for source in LLVMsourceList:
   #--- Optimize LLVM source
     optimizedSource = objectDir + "/opt." + source
     rule = makefile.Rule ([optimizedSource], "Optimizing " + source)
-    rule.mDependences.append ("sources/" + source)
+    rule.mDependences.append (objectDir + "/" + source)
     rule.mDependences.append (currentFile)
     rule.mCommand += llvmOptimizerCompiler
-    rule.mCommand += ["sources/" + source]
+    rule.mCommand += [objectDir + "/" + source]
     rule.mCommand += ["-o", optimizedSource]
     make.addRule (rule)
   #--- Compile optimized LLVM source
