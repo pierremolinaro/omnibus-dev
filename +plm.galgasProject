@@ -59,6 +59,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/required-proc-declaration.galgas"
   "galgas-sources/extern-proc-declaration.galgas"
   "galgas-sources/section-declaration.galgas"
+  "galgas-sources/service-declaration.galgas"
 
 #--- Expression
   "galgas-sources/expression-operator-priority.galgas"

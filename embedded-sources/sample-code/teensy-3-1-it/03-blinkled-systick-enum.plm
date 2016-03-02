@@ -21,7 +21,7 @@ var led = $ledState.on {
 //------------------------------------------------*
 
 proc loop `user () {
-  waitMS (!250)
+  waitDuringMS (!delay:250)
   if led == .off then
     ledOn (!LED_L1) // Allumer la led
     led = .on

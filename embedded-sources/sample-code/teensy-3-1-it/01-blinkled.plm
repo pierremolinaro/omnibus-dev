@@ -2,17 +2,16 @@ target "teensy-3-1-it"
 
 //------------------------------------------------*
 
-proc setup `user () {
+proc userSystickHandler `isr () {
+  kernel_tasksWithEarlierDateBecomeReady (!millis ())
 }
-
-newtype $u : $int32
-let bound = 1000 * 1000 * 10
 
 //------------------------------------------------*
 
-var gDelai $u = 0 {
-  @rw proc loop
+proc setup `user () {
 }
+
+//------------------------------------------------*
 
 var gVar $uint32 = 0 {
   @rw proc loop
@@ -21,18 +20,14 @@ var gVar $uint32 = 0 {
 //------------------------------------------------*
 
 proc loop `user () {
-  gDelai +%= 1
-  if gDelai == bound then
-    ledOn (!LED_L1) // Allumer la led
-  elsif (bound * 2) == gDelai then
-    gDelai = 0
-    ledOff (!LED_L1)  // Éteindre la led
-    gVar +%= 1
-    goto (!line:0 !column:0)
-    printUnsigned (!gVar)
-    goto (!line:1 !column:0)
-    printUnsigned (!gVar !% 20)
-  end  
+  waitUntilMS (!deadline:gVar)
+  ledOn (!LED_L1) // Allumer la led
+  gVar +%= 500
+  waitUntilMS (!deadline:gVar)
+  ledOff (!LED_L1) // Allumer la led
+  gVar +%= 500
+  goto (!line:0 !column:0)
+  printUnsigned (!millis ())
 }
 
 //------------------------------------------------*

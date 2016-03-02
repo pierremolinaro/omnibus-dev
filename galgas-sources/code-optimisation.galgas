@@ -9,6 +9,7 @@ struct @accessibleEntities {
   @stringset mProcedureSet
   @stringset mFunctionSet
   @stringset mSectionSet
+  @stringset mServiceSet
   @stringset mGlobalVariableSet
 }
 
@@ -57,6 +58,12 @@ method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAc
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @sectionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @serviceMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
 }
 
@@ -207,9 +214,14 @@ private proc suppressInaccessibleSubprograms
   @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
   @sectionMapIR  accessibleSectionMap   = {}
   @sectionMapIR  nonExploredSectionMap  = ioIntermediateCodeStruct.mSectionMapIR
+  @serviceMapIR  accessibleServiceMap   = {}
+  @serviceMapIR  nonExploredServiceMap  = ioIntermediateCodeStruct.mServiceMapIR
   var exploreProceduresAndFunctions = true
-  loop ([ioIntermediateCodeStruct.mProcedureMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
-  while exploreProceduresAndFunctions do
+  let bound = [ioIntermediateCodeStruct.mProcedureMapIR count]
+    + [ioIntermediateCodeStruct.mFunctionMapIR count]
+    + [ioIntermediateCodeStruct.mSectionMapIR count]
+    + [ioIntermediateCodeStruct.mServiceMapIR count]
+  loop (bound + 1) while exploreProceduresAndFunctions do
     exploreProceduresAndFunctions = false
     let @procedureMapIR exNonExploredProcedureMap = nonExploredProcedureMap
     nonExploredProcedureMap = {}
@@ -286,6 +298,27 @@ private proc suppressInaccessibleSubprograms
         ]        
       end
     end
+    let @serviceMapIR exNonExploredServiceMap = nonExploredServiceMap
+    nonExploredServiceMap = {}
+    for service in exNonExploredServiceMap do
+      if [outAccessibleEntities.mServiceSet hasKey !service.lkey.string] then
+        [!?accessibleServiceMap insertKey
+          !service.lkey
+          !service.mFormalArgumentListForGeneration
+          !service.mInstructionGenerationList
+          !service.mWarnIfUnused
+        ]        
+        [service enterAccessibleEntities !?outAccessibleEntities]
+        exploreProceduresAndFunctions = true
+      else
+        [!?nonExploredServiceMap insertKey
+          !service.lkey
+          !service.mFormalArgumentListForGeneration
+          !service.mInstructionGenerationList
+          !service.mWarnIfUnused
+        ]        
+      end
+    end
   end
   if ioIntermediateCodeStruct.mProcedureMapIR != accessibleProcedureMap then
     ioIntermediateCodeStruct.mProcedureMapIR = accessibleProcedureMap
@@ -297,6 +330,10 @@ private proc suppressInaccessibleSubprograms
   end
   if ioIntermediateCodeStruct.mSectionMapIR != accessibleSectionMap then
     ioIntermediateCodeStruct.mSectionMapIR = accessibleSectionMap
+    ioOptimizing = true
+  end
+  if ioIntermediateCodeStruct.mServiceMapIR != accessibleServiceMap then
+    ioIntermediateCodeStruct.mServiceMapIR = accessibleServiceMap
     ioOptimizing = true
   end
 }

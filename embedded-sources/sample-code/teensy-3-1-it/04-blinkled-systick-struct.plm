@@ -28,11 +28,11 @@ proc setup `user () {
 
 proc loop `user () {
   var p = $point3 ()
-  waitMS (!p.p.x)
+  waitDuringMS (!delay:p.p.x)
   p.p.y = 340
   var q = $point ()
   ledOn (!LED_L1) // Allumer la led
-  waitMS (!p.p.y)
+  waitDuringMS (!delay:p.p.y)
   ledOff (!LED_L1)  // Éteindre la led
 }
 

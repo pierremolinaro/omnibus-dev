@@ -205,32 +205,32 @@ proc programLcd4BitDataBusOutput_inUserMode `user @noWarningIfUnused (?inValue $
 //-----------------------------------------------------------------------------*
 
 proc write8bitCommand_inUserMode `user @noWarningIfUnused (?inCommand $uint8) {
-  waitMS (!1) ;
+  waitDuringMS (!delay:1) ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;
   driveHighE () ;
-  waitMS (!1) ;
+  waitDuringMS (!delay:1) ;
   driveLowE () ;
-  waitMS (!1) ;
+  waitDuringMS (!delay:1) ;
   programLcd4BitDataBusOutput_inUserMode (!inCommand) ;
   driveHighE () ;
-  waitMS (!1) ;
+  waitDuringMS (!delay:1) ;
   driveLowE () ;
 }
 
 //-----------------------------------------------------------------------------*
 
 proc writeData_inUserMode `user @noWarningIfUnused (?inData $uint8) {
-  waitMS (!1) ;
+  waitDuringMS (!delay:1) ;
   driveHighRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;
   driveHighE () ;
-  waitMS (!1) ;
+  waitDuringMS (!delay:1) ;
   driveLowE () ;
-  waitMS (!1) ;
+  waitDuringMS (!delay:1) ;
   programLcd4BitDataBusOutput_inUserMode (!inData) ;
   driveHighE () ;
-  waitMS (!1) ;
+  waitDuringMS (!delay:1) ;
   driveLowE () ;
 }
 
@@ -483,7 +483,6 @@ proc printStringInExceptionMode `panic @noWarningIfUnused (?inString $staticStri
     writeDataInExceptionMode (!c)
   end
 }
-
 
 //-----------------------------------------------------------------------------*
 

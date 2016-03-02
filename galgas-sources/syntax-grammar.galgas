@@ -18,6 +18,8 @@ syntax common_syntax (plm_lexique) {
     while
       <section> !?ioAst.mSectionListAST
     while
+      <service> !?ioAst.mServiceListAST
+    while
       $import$
       $literal_string$ ?let importedFile
       outImportedFileList += !importedFile

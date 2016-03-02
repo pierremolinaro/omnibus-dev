@@ -27,6 +27,7 @@ struct @ast {
   @externProcedureDeclarationListAST mExternProcList
   @functionDeclarationListAST mFunctionListAST
   @sectionDeclarationListAST mSectionListAST
+  @serviceDeclarationListAST mServiceListAST 
   @lstringlist mTargetList
   @bootList mBootList
   @initList mInitList

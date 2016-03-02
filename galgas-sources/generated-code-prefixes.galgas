@@ -24,6 +24,17 @@ func sectionNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstri
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func serviceNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
+  var s = "service"
+  if inReceiverType != .null then
+    s += " $" + [inReceiverType key]
+  end
+  s += " " + inName
+  outName = .new {!s !inName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func funcNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
   var s = "func"
   if inReceiverType != .null then
@@ -105,6 +116,18 @@ func llvmNameForSectionCall ?@string inName -> @string outName {
 
 func llvmNameForSectionImplementation ?@string inName -> @string outName {
   outName = "section.implementation." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForServiceImplementation ?@string inName -> @string outName {
+  outName = "service.implementation." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForServiceCall ?@string inName -> @string outName {
+  outName = "service.call." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
