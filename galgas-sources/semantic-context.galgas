@@ -180,6 +180,7 @@ struct @semanticContext {
   @procedureMap mProcedureMap
   @stringset mProceduresThatShouldNotBeGenerated
   @sectionMap mSectionMap
+  @serviceMap mServiceMap
   @routineMap mSubProgramMap
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
@@ -239,6 +240,9 @@ proc buildSemanticContext
   [!?outSemanticContext.mModeMap insertKey ![initModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![panicModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![sectionModeName () nowhere]]
+  [!?outSemanticContext.mModeMap insertKey ![kernelModeName () nowhere]]
+  [!?outSemanticContext.mModeMap insertKey ![isrModeName () nowhere]]
+  [!?outSemanticContext.mModeMap insertKey ![userModeName () nowhere]]
 #--- Enter init routines
   for initRoutine in inAST.mInitList do
     [initRoutine enterInContext !?context:outSemanticContext]
@@ -288,13 +292,14 @@ proc buildSemanticContext
     !outSemanticContext.mControlRegisterMap
     !sourceFile:inSourceFile
   )
-#--- Enter procedures, functions, section in context
+#--- Enter procedures, functions, sections, services in context
   for procedure in inAST.mProcedureListAST do
     [procedure enterInContext !?context: outSemanticContext]
   end
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !?context: outSemanticContext]
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
+  [inAST.mServiceListAST enterInContext !?context: outSemanticContext]
 #--- Check required procs mode
   if @uint.errorCount == 0 then
     for requiredProc in inAST.mRequiredProcList do

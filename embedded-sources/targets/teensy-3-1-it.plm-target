@@ -3,12 +3,10 @@ pointerSize 32
 
 panic proc : $int32 $uint32
 
-mode `isr
-mode `user
-
 import "files/mk20dx256.plm"
 import "files/teensy-3-1-boot.plm"
 import "files/teensy-3-1-default-isr.plm"
+import "files/teensy-3-1-xtr.plm"
 import "files/teensy-3-1-leds.plm"
 import "files/teensy-3-1-lcd.plm"
 

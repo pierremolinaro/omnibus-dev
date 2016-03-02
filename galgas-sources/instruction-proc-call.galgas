@@ -139,7 +139,7 @@ override method @procCallInstructionAST analyze
   @modeMap procedureModeMap
   @unifiedTypeMap-proxy receiverType
   @lstring routineNameForInvocationGraph
-  @bool isSection
+  @routineKindIR routineKind
   if mReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
       !mReceiverName
@@ -158,7 +158,7 @@ override method @procCallInstructionAST analyze
       ?*
     ]
     routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
-    isSection = false
+    routineKind = .procedure
   elsif [inContext.mProcedureMap hasKey !mProcName.string] then
     [inContext.mProcedureMap searchKey
       !mProcName
@@ -169,7 +169,7 @@ override method @procCallInstructionAST analyze
     ]
     receiverType = .null
     routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
-    isSection = false
+    routineKind = .procedure
   elsif [inContext.mSectionMap hasKey !mProcName.string] then
     [inContext.mSectionMap searchKey
       !mProcName
@@ -179,11 +179,21 @@ override method @procCallInstructionAST analyze
     procedureModeMap = {![userModeName () nowhere]}
     receiverType = .null
     routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mProcName)
-    isSection = true
+    routineKind = .section
+  elsif [inContext.mServiceMap hasKey !mProcName.string] then
+    [inContext.mServiceMap searchKey
+      !mProcName
+      ?*
+      ?procSignature
+    ]
+    procedureModeMap = {![userModeName () nowhere]}
+    receiverType = .null
+    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mProcName)
+    routineKind = .service
   else
     error mProcName
       :"undefined proc or section"
-      : isSection, receiverType, procedureModeMap, procSignature, routineNameForInvocationGraph
+      : routineKind, receiverType, procedureModeMap, procSignature, routineNameForInvocationGraph
   end
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
@@ -291,7 +301,7 @@ override method @procCallInstructionAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !if receiverType == .null then "" else [receiverType key] + "." end + mProcName
-    !isSection
+    !routineKind
     !procCallEffectiveParameterListIR
   }
 }
@@ -316,9 +326,17 @@ list @procCallEffectiveParameterListIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @routineKindIR {
+  case procedure
+  case service
+  case section
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 class @procCallInstructionIR : @abstractInstructionIR {
   @string mProcName
-  @bool mIsSection # true:section, false:proc
+  @routineKindIR mKind
   @procCallEffectiveParameterListIR mParameters
 }
 
@@ -330,7 +348,11 @@ override method @procCallInstructionIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  call void @"
-  ioLLVMcode += if mIsSection then llvmNameForSectionCall (!mProcName) else llvmNameForProcedure (!mProcName) end
+  switch mKind 
+  case procedure : ioLLVMcode += llvmNameForProcedure (!mProcName)
+  case service : ioLLVMcode += llvmNameForServiceCall (!mProcName)
+  case section : ioLLVMcode += llvmNameForSectionCall (!mProcName)
+  end
   ioLLVMcode += " ("
   for () in mParameters do
     switch mEffectiveParameterPassingMode
@@ -350,10 +372,10 @@ override method @procCallInstructionIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  if mIsSection then 
-    ioAccessibleEntities.mSectionSet += !mProcName
-  else
-    ioAccessibleEntities.mProcedureSet += !mProcName
+  switch mKind 
+  case procedure : ioAccessibleEntities.mProcedureSet += !mProcName
+  case service : ioAccessibleEntities.mServiceSet += !mProcName
+  case section : ioAccessibleEntities.mSectionSet += !mProcName
   end
 }
 

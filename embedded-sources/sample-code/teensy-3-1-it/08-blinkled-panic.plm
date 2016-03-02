@@ -18,9 +18,9 @@ var gCount $uint3 = 0 {
 //------------------------------------------------*
 
 proc loop `user () {
-  waitMS (!250)
+  waitDuringMS (!delay:250)
   ledOn (!LED_L1) // Allumer la led
-  waitMS (!250)
+  waitDuringMS (!delay:250)
   ledOff (!LED_L1)  // Éteindre la led
   toggle = not toggle
   if toggle then

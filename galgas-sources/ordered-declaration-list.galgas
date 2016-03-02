@@ -35,11 +35,12 @@ proc buildOrderedDeclarationList
   [inAST.mProcedureListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternProcList noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mFunctionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mSectionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mServiceListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGlobalVarDeclarationList noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed $uintXX and $intXX types
   for () in [precedenceGraph undefinedNodeKeyList] do
-#    log "UNDEFINED " : mValue
     let split = [mValue componentsSeparatedByString !"int"]
     if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
       if [split mValueAtIndex !0] == "$u" then

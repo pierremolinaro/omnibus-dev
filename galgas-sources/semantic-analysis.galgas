@@ -99,8 +99,12 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
-  
   [inAST.mSectionListAST sectionSemanticAnalysis
+    !context:inSemanticContext
+    !?temporary:temporaries
+    !?intermediateCode:outIntermediateCodeStruct
+  ]
+  [inAST.mServiceListAST serviceSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct

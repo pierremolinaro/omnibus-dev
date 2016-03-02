@@ -1,32 +1,55 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                 *
+#  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @externProcedureDeclarationListAST {
+list @serviceDeclarationListAST {
+  @lstring mServiceName
+  @lstring mServiceMode
   @bool mMutating
-  @lstring mExternProcedureName
-  @lstringlist mProcedureModeList
-  @procFormalArgumentList mProcFormalArgumentList
-  @location mEndOfProcLocation
+  @lstringlist mServiceAttributeList
+  @procFormalArgumentList mServiceFormalArgumentList
+  @instructionListAST mServiceInstructionList
+  @location mEndOfServiceLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                              *
+#  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
-    $extern$
-    <procedure_header>
-      ?procModes:let requiredModeList
-      ?name:let procName
-      ?attributes:let unused attributeList
-      ?formalArguments:let procFormalArgumentList
-      ?mutating:let mutating
-    ioAST.mExternProcList += !mutating !procName !requiredModeList !procFormalArgumentList !.here
+  rule <service> ?!@serviceDeclarationListAST ioServiceListAST {
+    @bool mutating
+    select
+      mutating = false
+    or
+      $mutating$
+      mutating = true
+    end
+    $service$
+    $identifier$ ?let serviceName
+    $modeName$ ?let modeName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    <procedure_formal_arguments> ?formalArguments:let serviceFormalArgumentList
+    ${$
+    @labelMap labelMap = {}
+    <instructionList> ?let instructionList !?labelMap
+    $}$
+    ioServiceListAST +=
+      !serviceName
+      !modeName
+      !mutating
+      !attributeList
+      !serviceFormalArgumentList
+      !instructionList
+      !.here
   }
 
   #·····················································································································
@@ -37,65 +60,67 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @serviceDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
-    for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
+    for (* * formalArgumentTypeName *) in mServiceFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
+    [mServiceInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   ENTER IN CONTEXT                                                                                                    
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST enterExternProcInContext
-  ?!context:@semanticContext ioContext
-{
-  for externProcedure in self do
-    [externProcedure enterExternProcInContext !?context:ioContext]
+map @serviceMap {
+  @bool mMutating
+  @procedureSignature mSignature
+
+  insert insertKey error message "the '%K' service is already declared in %L"
+  search searchKey error message "there is no '%K' service"
+  remove removeKey error message "there is no '%K' service"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @serviceDeclarationListAST enterInContext ?!context:@semanticContext ioContext {
+  for service in self do
+    [service enterInContext !?context:ioContext]
   end
 }
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST-element enterExternProcInContext
-  ?!context:@semanticContext ioContext
-{
+method @serviceDeclarationListAST-element enterInContext ?!context:@semanticContext ioContext {
 #--- Signature
   @procedureSignature signature = {}
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in mServiceFormalArgumentList do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
     signature += !formalArgumentPassingMode !selector.string !typeProxy
   end
-#--- Mode map
-  @modeMap procedureModeMap = {}
-  for () in mProcedureModeList do
-    [!?procedureModeMap insertKey !mValue] ;
-  end
 #--- Enter in context
-  [!?ioContext.mProcedureMap insertKey
-    !mExternProcedureName
-    !false # not mutating
-    !procedureModeMap
+  [!?ioContext.mServiceMap insertKey
+    !mServiceName
+    !mMutating
     !signature
-    !false # Not weak
   ]
-  [!?ioContext.mSubProgramMap insertKey !mExternProcedureName]
+  [!?ioContext.mSubProgramMap insertKey !mServiceName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST externProcedureSemanticAnalysis
-  ?context:let @semanticContext inContext
+method @serviceDeclarationListAST serviceSemanticAnalysis
+  ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for externProc in self do
-    [externProc externProcedureSemanticAnalysis
-      !context:inContext
+  for service in self do
+    [service serviceSemanticAnalysis
+      !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
     ]
@@ -104,43 +129,68 @@ method @externProcedureDeclarationListAST externProcedureSemanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysis
+method @serviceDeclarationListAST-element serviceSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Check modes
-  @stringset procedureModeSet = {}
-  for mode in mProcedureModeList do
-    [inContext.mModeMap searchKey !mode.mValue]
-    procedureModeSet += !mode.mValue.string
+#--- Attributes
+  var warnIfUnused = true
+  for (attribute) in mServiceAttributeList do
+    if attribute.string == noWarningIfUnusedAttribute () then
+      if not warnIfUnused then
+        error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+      end
+      warnIfUnused = false    
+    else
+      error attribute : "unknown attribute; available attribut is @" + noWarningIfUnusedAttribute ()
+    end
   end
 #--- Variable map
+  let serviceNameForInvocationGraph = serviceNameForInvocationGraph (!.null !mServiceName)
   @variableMap variableMap = initialVariableMap (
-    !routineNameForInvocation:procNameForInvocationGraph (!.null !mExternProcedureName).string
+    !routineNameForInvocation:serviceNameForInvocationGraph.string
     !context:inContext
-    !userMode:[procedureModeSet hasKey !userModeName ()]
+    !userMode:false
     !globalsAreConstant:false
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
   enterFormalArguments (
     !context:inContext
-    !mProcFormalArgumentList
+    !mServiceFormalArgumentList
     !?variableMap
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  let procNameForInvocationGraph = procNameForInvocationGraph (!.null !mExternProcedureName)
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !procNameForInvocationGraph
-      !mExternProcedureName
-    ]
+  [!?ioTemporaries.mSubprogramInvocationGraph addNode
+    !serviceNameForInvocationGraph
+    !mServiceName
+  ]
+#--- Check mode
+  if (mServiceMode.string != kernelModeName ()) && (mServiceMode.string != isrModeName ()) then
+    error mServiceMode : "the mode should be `" + kernelModeName () + " or `" + isrModeName ()
   end
-  [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
-    !mExternProcedureName
+#--- Analyze instruction list
+  @instructionListIR instructionGenerationList = {}
+  [mServiceInstructionList analyzeRoutineInstructionList
+    !routineNameForInvocationGraph:serviceNameForInvocationGraph
+    !context:inContext
+    !modes:{!mServiceMode.string}
+    !allowException:true
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?variableMap:variableMap
+    !?generatedCode:instructionGenerationList
+  ]
+#---
+  [variableMap checkAutomatonStates !mEndOfServiceLocation]
+#--- Code generation
+  [!?ioIntermediateCodeStruct.mServiceMapIR insertKey
+    !mServiceName
     !formalArguments
+    !instructionGenerationList
+    !warnIfUnused
   ]  
 }
 
@@ -148,25 +198,54 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @externProcedureMapIR {
+map @serviceMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @instructionListIR mInstructionGenerationList
+  @bool mWarnIfUnused
   insert insertKey error message "** internal error **"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
-  for externProc in self do
-    [externProc llvmPrototypeGeneration !?ioLLVMcode]
+method @serviceMapIR llvmCodeGeneration
+  ?let @string inCurrentDirectory
+  ?let @string inTargetName
+  ?!@string ioLLVMcode
+  ?!@string ioAssemblerCode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  for service in self do
+    [service llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  end
+#--- Generate service entries
+  for service in self do (idx)
+    let name = llvmNameForServiceCall (!service.lkey.string)
+    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-entry.s")
+    s = [s stringByReplacingStringByString !"!ENTRY!" !name]
+    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+    ioAssemblerCode += s
+  end
+  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-header.s")
+  for service in self do (idx)
+    let name = llvmNameForServiceImplementation (!service.lkey.string)
+    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-entry.s")
+    s = [s stringByReplacingStringByString !"!ENTRY!" !name]
+    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+    ioAssemblerCode += s
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
-  let procName = llvmNameForProcedure (!lkey.string)
-  ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
-  ioLLVMcode += "declare void @" + procName + " ("
+method @serviceMapIR-element llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let serviceImplementationName = llvmNameForServiceImplementation (!lkey.string)
+  ioLLVMcode += llvmTitleComment (!serviceImplementationName)
+  ioLLVMcode += "declare void @" + llvmNameForServiceCall (!lkey.string) + " ("
   for () in mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
@@ -180,7 +259,38 @@ method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMco
   between
     ioLLVMcode += ", "
   end
-  ioLLVMcode += ") nounwind ; defined in C\n\n"
+  ioLLVMcode += ") nounwind \n\n"
+  ioLLVMcode += "define void @" + serviceImplementationName + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    end
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ") nounwind {\n"
+#--- Store input arguments in memory
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmTypeName]
+      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+    case output, inputOutput :
+    end
+  end
+#--- Instruction list
+  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#--- Epilog
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

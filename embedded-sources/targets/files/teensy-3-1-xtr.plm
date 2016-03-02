@@ -1,0 +1,81 @@
+
+//--- Block running task
+extern proc kernel_blockRunningTaskInList `kernel (?!ioWaitingList $uint32)
+
+extern proc kernel_blockRunningTaskInDeadlineList `kernel (?inDeadlineMS $uint32) 
+
+extern proc kernel_blockRunningTaskInListAndDeadlineList `kernel (
+  ?!ioWaitingList $uint32
+  ?inDeadlineMS $uint32)
+
+//--- Make task Ready
+extern proc kernel_makeTaskReadyFromWaitingList `isr (?!ioWaitingList $uint32)
+
+extern proc kernel_tasksWithEarlierDateBecomeReady `isr (?inCurrentDate $uint32)
+
+//-----------------------------------------------------------------------------*
+
+init 0 { // Configure Systick interrupt every ms
+  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
+  SYST_CVR = 0
+  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
+}
+
+//-----------------------------------------------------------------------------*
+
+var gUptimeMS $uint32 = 0 {
+  @rw proc systickHandler
+  proc busyWaitingDuringMS
+  func millis
+}
+
+//-----------------------------------------------------------------------------*
+
+proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
+  let deadline = gUptimeMS + inDuration
+  while gUptimeMS < deadline do
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc systickHandler `isr ()
+
+proc systickHandler `isr @global () {
+  gUptimeMS +%= 1
+  kernel_tasksWithEarlierDateBecomeReady (!millis ())
+  userSystickHandler ()
+}
+
+proc userSystickHandler `isr @weak () {
+}
+
+//-----------------------------------------------------------------------------*
+
+service waitUntilMS `kernel @noWarningIfUnused (?deadline: inDate $uint32) {
+  if inDate > millis () then
+    kernel_blockRunningTaskInDeadlineList (!inDate)
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc waitDuringMS `user @noWarningIfUnused (?delay: inDelay $uint32) {
+  waitUntilMS (!deadline:millis () + inDelay)
+}
+
+//-----------------------------------------------------------------------------*
+
+func millis `isr `kernel `user @noWarningIfUnused () -> $uint32 {
+  result = gUptimeMS
+}
+
+//-----------------------------------------------------------------------------*
+
+//proc waitMS `user `init @noWarningIfUnused (?inDuration $uint32) {
+//  let deadline = gUptimeMS + inDuration
+//  while gUptimeMS < deadline do
+//  end
+//}
+
+//-----------------------------------------------------------------------------*

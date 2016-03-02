@@ -1,20 +1,4 @@
 
-//--- Block running task
-extern proc kernel_blockRunningTaskInList `isr (?!ioWaitingList $uint32)
-
-extern proc kernel_blockRunningTaskInDeadlineList `isr (?inDeadlineMS $uint32) 
-
-extern proc kernel_blockRunningTaskInListAndDeadlineList `isr (
-  ?!ioWaitingList $uint32
-  ?inDeadlineMS $uint32)
-
-//--- Make task Ready
-extern proc kernel_makeTaskReadyFromWaitingList `isr (?!ioWaitingList $uint32)
-
-extern proc kernel_tasksWithEarlierDateBecomeReady `isr (?inCurrentDate $uint32)
-
-//-----------------------------------------------------------------------------*
-
 required proc NMIHandler `isr ()
 
 proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
@@ -75,47 +59,6 @@ required proc PendSVHandler `isr ()
 
 proc PendSVHandler `isr @nullWhenPanicDisabled @weak () {
   panic 14
-}
-
-//-----------------------------------------------------------------------------*
-
-init 0 { // Configure Systick interrupt every ms
-  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
-  SYST_CVR = 0
-  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
-}
-
-var gCompteur $uint32 = 0 {
-  @rw proc systickHandler
-  proc waitMS
-  proc busyWaitingDuringMS
-  func millis
-}
-
-proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
-  let deadline = gCompteur + inDuration
-  while gCompteur < deadline do
-  end
-}
-
-required proc systickHandler `isr ()
-
-proc systickHandler `isr @global () {
-  gCompteur +%= 1
-  userSystickHandler ()
-}
-
-func millis `user @noWarningIfUnused () -> $uint32 {
-  result = gCompteur
-}
-
-proc userSystickHandler `isr @weak () {
-}
-
-proc waitMS `user `init @noWarningIfUnused (?inDuration $uint32) {
-  let deadline = gCompteur + inDuration
-  while gCompteur < deadline do
-  end
 }
 
 //-----------------------------------------------------------------------------*
