@@ -1,0 +1,185 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                 *
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @externProcedureDeclarationListAST {
+  @bool mMutating
+  @lstring mExternProcedureName
+  @lstringlist mProcedureModeList
+  @procFormalArgumentList mProcFormalArgumentList
+  @location mEndOfProcLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                              *
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $extern$
+    <procedure_header>
+      ?procModes:let requiredModeList
+      ?name:let procName
+      ?attributes:let unused attributeList
+      ?formalArguments:let procFormalArgumentList
+      ?mutating:let mutating
+    ioAST.mExternProcList += !mutating !procName !requiredModeList !procFormalArgumentList !.here
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   ENTER IN CONTEXT                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureDeclarationListAST enterExternProcInContext
+  ?!context:@semanticContext ioContext
+{
+  for externProcedure in self do
+    [externProcedure enterExternProcInContext !?context:ioContext]
+  end
+}
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureDeclarationListAST-element enterExternProcInContext
+  ?!context:@semanticContext ioContext
+{
+#--- Signature
+  @procedureSignature signature = {}
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+    signature += !formalArgumentPassingMode !selector.string !typeProxy
+  end
+#--- Mode map
+  @modeMap procedureModeMap = {}
+  for () in mProcedureModeList do
+    [!?procedureModeMap insertKey !mValue] ;
+  end
+#--- Enter in context
+  [!?ioContext.mProcedureMap insertKey
+    !mExternProcedureName
+    !false # not mutating
+    !procedureModeMap
+    !signature
+    !false # Not weak
+  ]
+  [!?ioContext.mSubProgramMap insertKey !mExternProcedureName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureDeclarationListAST externProcedureSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for externProc in self do
+    [externProc externProcedureSemanticAnalysis
+      !context:inContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Check modes
+  @stringset procedureModeSet = {}
+  for mode in mProcedureModeList do
+    [inContext.mModeMap searchKey !mode.mValue]
+    procedureModeSet += !mode.mValue.string
+  end
+#--- Variable map
+  @variableMap variableMap = initialVariableMap (
+    !routineNameForInvocation:procNameForInvocationGraph (!.null !mExternProcedureName).string
+    !context:inContext
+    !userMode:[procedureModeSet hasKey !userModeName ()]
+    !globalsAreConstant:false
+  )
+#--- Analyse formal arguments
+  @procFormalArgumentListForGeneration formalArguments = {}
+  enterFormalArguments (
+    !context:inContext
+    !mProcFormalArgumentList
+    !?variableMap
+    !?formalArguments
+  )
+#--- Enter subprogram invocation graph
+  let procNameForInvocationGraph = procNameForInvocationGraph (!.null !mExternProcedureName)
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !procNameForInvocationGraph
+      !mExternProcedureName
+    ]
+  end
+  [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
+    !mExternProcedureName
+    !formalArguments
+  ]  
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @externProcedureMapIR {
+  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  insert insertKey error message "** internal error **"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
+  for externProc in self do
+    [externProc llvmPrototypeGeneration !?ioLLVMcode]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
+  ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
+  ioLLVMcode += "declare void @" + lkey + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    end
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ") nounwind ; defined in C\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

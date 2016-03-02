@@ -1,3 +1,18 @@
+
+//--- Block running task
+extern proc kernel_blockRunningTaskInList `isr (?!ioWaitingList $uint32)
+
+extern proc kernel_blockRunningTaskInDeadlineList `isr (?inDeadlineMS $uint32) 
+
+extern proc kernel_blockRunningTaskInListAndDeadlineList `isr (
+  ?!ioWaitingList $uint32
+  ?inDeadlineMS $uint32)
+
+//--- Make task Ready
+extern proc kernel_makeTaskReadyFromWaitingList `isr (?!ioWaitingList $uint32)
+
+extern proc kernel_tasksWithEarlierDateBecomeReady `isr (?inCurrentDate $uint32)
+
 //-----------------------------------------------------------------------------*
 
 required proc NMIHandler `isr ()

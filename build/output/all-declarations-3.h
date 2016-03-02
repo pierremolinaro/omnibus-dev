@@ -1209,6 +1209,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_procedureMapIR mAttribute_mProcedureMapIR ;
   public : GALGAS_sectionMapIR mAttribute_mSectionMapIR ;
   public : GALGAS_functionMapIR mAttribute_mFunctionMapIR ;
+  public : GALGAS_externProcedureMapIR mAttribute_mExternProcedureMapIR ;
   public : GALGAS_stringset mAttribute_mRequiredProcedureSet ;
   public : GALGAS_bootListIR mAttribute_mBootList ;
   public : GALGAS_initListIR mAttribute_mInitList ;
@@ -1237,6 +1238,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_procedureMapIR & in_mProcedureMapIR,
                                           const GALGAS_sectionMapIR & in_mSectionMapIR,
                                           const GALGAS_functionMapIR & in_mFunctionMapIR,
+                                          const GALGAS_externProcedureMapIR & in_mExternProcedureMapIR,
                                           const GALGAS_stringset & in_mRequiredProcedureSet,
                                           const GALGAS_bootListIR & in_mBootList,
                                           const GALGAS_initListIR & in_mInitList,
@@ -1261,11 +1263,12 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_procedureMapIR & inOperand4,
                                                                  const class GALGAS_sectionMapIR & inOperand5,
                                                                  const class GALGAS_functionMapIR & inOperand6,
-                                                                 const class GALGAS_stringset & inOperand7,
-                                                                 const class GALGAS_bootListIR & inOperand8,
-                                                                 const class GALGAS_initListIR & inOperand9,
-                                                                 const class GALGAS_instructionListIR & inOperand10,
-                                                                 const class GALGAS_instructionListIR & inOperand11
+                                                                 const class GALGAS_externProcedureMapIR & inOperand7,
+                                                                 const class GALGAS_stringset & inOperand8,
+                                                                 const class GALGAS_bootListIR & inOperand9,
+                                                                 const class GALGAS_initListIR & inOperand10,
+                                                                 const class GALGAS_instructionListIR & inOperand11,
+                                                                 const class GALGAS_instructionListIR & inOperand12
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1287,6 +1290,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mExceptionLoopInstructionListIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mExceptionSetupInstructionListIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureMapIR getter_mExternProcedureMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_functionMapIR getter_mFunctionMapIR (LOCATION_ARGS) const ;
 
