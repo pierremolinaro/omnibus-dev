@@ -31,9 +31,9 @@ proc loop `user () {
   waitMS (!p.p.x)
   p.p.y = 340
   var q = $point ()
-  ledOn (!LED_TEENSY) // Allumer la led
+  ledOn (!LED_L1) // Allumer la led
   waitMS (!p.p.y)
-  ledOff (!LED_TEENSY)  // Éteindre la led
+  ledOff (!LED_L1)  // Éteindre la led
 }
 
 //------------------------------------------------*

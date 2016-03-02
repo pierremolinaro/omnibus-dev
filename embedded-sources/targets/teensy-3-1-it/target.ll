@@ -18,11 +18,15 @@ target triple = "thumbv7em-none--eabi"
 
 ;----------------------------------------------------------------------------------------------------------------------*
 
+declare void @as_resetHandler () nounwind
+declare void @as_svcHandler () nounwind
+declare void @as_systickHandler () nounwind
+
 @startup = constant %vectorStructSeq {
   i32* @__system_stack_end,
 ;--- ARM Core System Handler Vectors
   [15  x void()*] [
-    void()* @ResetISR, ; 1
+    void()* @as_resetHandler, ; 1
     void()* @!PROC!NMIHandler, ; 2
     void()* @!PROC!HardFaultHandler, ; 3
     void()* @!PROC!MemManageHandler, ; 4
@@ -32,11 +36,11 @@ target triple = "thumbv7em-none--eabi"
     void()* null, ; 8, reserved
     void()* null, ; 9, reserved
     void()* null, ; 10, reserved
-    void()* @!PROC!svcHandler, ; 11
+    void()* @as_svcHandler, ; 11
     void()* @!PROC!DebugMonitorHandler, ; 12
     void()* null, ; 13, reserved
     void()* @!PROC!PendSVHandler, ; 14
-    void()* @!PROC!systickHandler  ; 15
+    void()* @as_systickHandler  ; 15
   ],
 ;--- Non-Core Vectors
   [240  x void()*] [
@@ -249,18 +253,43 @@ copyCompleted:
 ;   configuration.on.boot                                                                                              *
 ;----------------------------------------------------------------------------------------------------------------------*
 
-declare void @ResetISR () nounwind
+@stack0 = global [256 x i32] zeroinitializer
 
 define void @configuration.on.boot () nounwind {
   call void @boot ()
   call void @clearBSS ()
   call void @copyData ()
   call void @init ()
+;--- Create task 0
+  %stack0.address = getelementptr inbounds [256 x i32], [256 x i32]* @stack0, i32 0, i32 0
+  call void @kernel_create_task (i32 0, i32* %stack0.address, i32 1024, void ()* @user.code)
   ret  void
 }
 
 ;----------------------------------------------------------------------------------------------------------------------*
-;   user.code                                                                                                          *
+;   Real time Kernel interface                                                                                         *
+;----------------------------------------------------------------------------------------------------------------------*
+
+;--- Create task 
+declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind
+
+
+;--- Blocking running task
+declare void @kernel_blockRunningTaskInList (i32* %ioWaitingList) nounwind
+
+declare void @kernel_blockRunningTaskInDeadlineList (i32 %inDeadlineMS) nounwind
+
+declare void @kernel_blockRunningTaskInListAndDeadlineList (i32* %ioWaitingList, i32 %inDeadlineMS) nounwind
+
+
+;--- Make task Ready
+declare void @kernel_makeTaskReadyFromWaitingList (i32* nocapture readonly %ioWaitingList) nounwind
+
+declare void @kernel_tasksWithEarlierDateBecomeReady (i32 %inCurrentDate) nounwind
+
+
+;----------------------------------------------------------------------------------------------------------------------*
+;   task 0                                                                                                          *
 ;----------------------------------------------------------------------------------------------------------------------*
 
 define void @user.code () nounwind naked noreturn {

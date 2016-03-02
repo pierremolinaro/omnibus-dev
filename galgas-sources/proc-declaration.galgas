@@ -332,6 +332,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   end
 #--- Attributes
   var warnIfUnused = true
+  var globalProcedure = false
   var weakProcedure = false
   var nullOnNoException = false
   for (attribute) in mProcedureAttributeList do
@@ -340,6 +341,11 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
       end
       warnIfUnused = false    
+    elsif attribute.string == globalAttribute () then
+      if globalProcedure then
+        error attribute : "duplicate @" + globalAttribute () + " attribute"
+      end
+      globalProcedure = true    
     elsif attribute.string == weakAttribute () then
       if weakProcedure then
         error attribute : "duplicate @" + weakAttribute () + " attribute"
@@ -354,6 +360,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       error attribute : "unknown attribute; available attributes are @"
         + noWarningIfUnusedAttribute ()
         + ", @" + weakAttribute ()
+        + ", @" + globalAttribute ()
     end
   end
 #--- Variable map
@@ -401,7 +408,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     elsif weakProcedure && weak then
       error mProcedureName : "this weak procedure overrides a weak procedure"
     elsif (not weakProcedure) && weak then
-      [!?ioIntermediateCodeStruct.mProcedureMapIR removeKey !mProcedureName ?6*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mProcedureMapIR removeKey !mProcedureName ?7*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
         !mProcedureName
         !formalArguments
@@ -410,6 +417,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !warnIfUnused
         !weakProcedure
         !nullOnNoException
+        !globalProcedure
       ]  
     else # (not weakProcedure) && (not weak)
       [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey # Raises a redefinition error
@@ -420,6 +428,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !warnIfUnused
         !weakProcedure
         !nullOnNoException
+        !globalProcedure
       ]
     end
   else
@@ -431,6 +440,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       !warnIfUnused
       !weakProcedure
       !nullOnNoException
+      !globalProcedure
     ]  
   end
 }
@@ -512,7 +522,11 @@ method @procedureMapIR-element llvmCodeGeneration
     ioLLVMcode += ") nounwind ; NULL in assembly code\n\n"
   else
     ioLLVMcode += llvmTitleComment (!"proc " + procName)
-    ioLLVMcode += "define internal void @" + procName + " ("
+    ioLLVMcode += "define"
+    if not mGlobal then
+      ioLLVMcode += " internal"
+    end
+    ioLLVMcode += " void @" + procName + " ("
     for () in mFormalArgumentListForGeneration
     do
       switch mFormalArgumentKind

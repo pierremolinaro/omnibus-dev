@@ -2663,6 +2663,76 @@ C_galgas_function_descriptor functionDescriptor_noWarningIfUnusedAttribute ("noW
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Once function 'globalAttribute'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_globalAttribute (C_Compiler * /* inCompiler */
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("global") ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_globalAttribute = false ;
+static GALGAS_string gOnceFunctionResult_globalAttribute ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_globalAttribute) {
+    gOnceFunctionResult_globalAttribute = onceFunction_globalAttribute (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_globalAttribute = true ;
+  }
+  return gOnceFunctionResult_globalAttribute ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_globalAttribute (void) {
+  gOnceFunctionResult_globalAttribute.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_globalAttribute (NULL,
+                                                             releaseOnceFunctionResult_globalAttribute) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_globalAttribute [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_globalAttribute (C_Compiler * inCompiler,
+                                                                const cObjectArray & /* inEffectiveParameterArray */,
+                                                                const GALGAS_location & /* inErrorLocation */
+                                                                COMMA_LOCATION_ARGS) {
+  return function_globalAttribute (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_globalAttribute ("globalAttribute",
+                                                                 functionWithGenericHeader_globalAttribute,
+                                                                 & kTypeDescriptor_GALGAS_string,
+                                                                 0,
+                                                                 functionArgs_globalAttribute) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Once function 'weakAttribute'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2939,105 +3009,105 @@ void routine_suppressInaccessibleSubprograms (GALGAS_intermediateCodeStruct & io
     const enumGalgasBool test_0 = enumerator_7624.current (HERE).mAttribute_mIsRequired.boolEnum () ;
     if (kBoolTrue == test_0) {
       {
-      var_accessibleProcedureMap.setter_insertKey (enumerator_7624.current (HERE).mAttribute_lkey, enumerator_7624.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_7624.current (HERE).mAttribute_mInstructionGenerationList, enumerator_7624.current (HERE).mAttribute_mIsRequired, enumerator_7624.current (HERE).mAttribute_mWarnIfUnused, enumerator_7624.current (HERE).mAttribute_mWeak, enumerator_7624.current (HERE).mAttribute_mNullOnNoException, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 168)) ;
+      var_accessibleProcedureMap.setter_insertKey (enumerator_7624.current (HERE).mAttribute_lkey, enumerator_7624.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_7624.current (HERE).mAttribute_mInstructionGenerationList, enumerator_7624.current (HERE).mAttribute_mIsRequired, enumerator_7624.current (HERE).mAttribute_mWarnIfUnused, enumerator_7624.current (HERE).mAttribute_mWeak, enumerator_7624.current (HERE).mAttribute_mNullOnNoException, enumerator_7624.current (HERE).mAttribute_mGlobal, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 168)) ;
       }
-      categoryMethod_enterAccessibleEntities (enumerator_7624.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 177)) ;
-      outArgument_outAccessibleEntities.mAttribute_mProcedureSet.addAssign_operation (enumerator_7624.current (HERE).mAttribute_lkey.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 178)) ;
+      categoryMethod_enterAccessibleEntities (enumerator_7624.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 178)) ;
+      outArgument_outAccessibleEntities.mAttribute_mProcedureSet.addAssign_operation (enumerator_7624.current (HERE).mAttribute_lkey.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 179)) ;
     }else if (kBoolFalse == test_0) {
       {
-      var_nonExploredProcedureMap.setter_insertKey (enumerator_7624.current (HERE).mAttribute_lkey, enumerator_7624.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_7624.current (HERE).mAttribute_mInstructionGenerationList, enumerator_7624.current (HERE).mAttribute_mIsRequired, enumerator_7624.current (HERE).mAttribute_mWarnIfUnused, enumerator_7624.current (HERE).mAttribute_mWeak, enumerator_7624.current (HERE).mAttribute_mNullOnNoException, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 180)) ;
+      var_nonExploredProcedureMap.setter_insertKey (enumerator_7624.current (HERE).mAttribute_lkey, enumerator_7624.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_7624.current (HERE).mAttribute_mInstructionGenerationList, enumerator_7624.current (HERE).mAttribute_mIsRequired, enumerator_7624.current (HERE).mAttribute_mWarnIfUnused, enumerator_7624.current (HERE).mAttribute_mWeak, enumerator_7624.current (HERE).mAttribute_mNullOnNoException, enumerator_7624.current (HERE).mAttribute_mGlobal, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 181)) ;
       }
     }
     enumerator_7624.gotoNextObject () ;
   }
-  cEnumerator_bootListIR enumerator_8515 (ioArgument_ioIntermediateCodeStruct.mAttribute_mBootList, kEnumeration_up) ;
-  while (enumerator_8515.hasCurrentObject ()) {
-    categoryMethod_enterAccessibleEntities (enumerator_8515.current (HERE).mAttribute_mInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 193)) ;
-    enumerator_8515.gotoNextObject () ;
+  cEnumerator_bootListIR enumerator_8569 (ioArgument_ioIntermediateCodeStruct.mAttribute_mBootList, kEnumeration_up) ;
+  while (enumerator_8569.hasCurrentObject ()) {
+    categoryMethod_enterAccessibleEntities (enumerator_8569.current (HERE).mAttribute_mInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 195)) ;
+    enumerator_8569.gotoNextObject () ;
   }
-  cEnumerator_initListIR enumerator_8651 (ioArgument_ioIntermediateCodeStruct.mAttribute_mInitList, kEnumeration_up) ;
-  while (enumerator_8651.hasCurrentObject ()) {
-    categoryMethod_enterAccessibleEntities (enumerator_8651.current (HERE).mAttribute_mInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 196)) ;
-    enumerator_8651.gotoNextObject () ;
+  cEnumerator_initListIR enumerator_8705 (ioArgument_ioIntermediateCodeStruct.mAttribute_mInitList, kEnumeration_up) ;
+  while (enumerator_8705.hasCurrentObject ()) {
+    categoryMethod_enterAccessibleEntities (enumerator_8705.current (HERE).mAttribute_mInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 198)) ;
+    enumerator_8705.gotoNextObject () ;
   }
-  const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).operator_not (SOURCE_FILE ("code-optimisation.galgas", 199)).boolEnum () ;
+  const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).operator_not (SOURCE_FILE ("code-optimisation.galgas", 201)).boolEnum () ;
   if (kBoolTrue == test_1) {
-    categoryMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 200)) ;
-    categoryMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 201)) ;
+    categoryMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 202)) ;
+    categoryMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 203)) ;
   }
-  GALGAS_functionMapIR var_accessibleFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 204)) ;
+  GALGAS_functionMapIR var_accessibleFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 206)) ;
   GALGAS_functionMapIR var_nonExploredFunctionMap = ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR ;
-  GALGAS_sectionMapIR var_accessibleSectionMap = GALGAS_sectionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 206)) ;
+  GALGAS_sectionMapIR var_accessibleSectionMap = GALGAS_sectionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 208)) ;
   GALGAS_sectionMapIR var_nonExploredSectionMap = ioArgument_ioIntermediateCodeStruct.mAttribute_mSectionMapIR ;
   GALGAS_bool var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
-  if (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 209)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 209)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 209)).isValid ()) {
-    uint32_t variant_9432 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 209)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 209)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 209)).uintValue () ;
-    bool loop_9432 = true ;
-    while (loop_9432) {
-      loop_9432 = var_exploreProceduresAndFunctions.isValid () ;
-      if (loop_9432) {
-        loop_9432 = var_exploreProceduresAndFunctions.boolValue () ;
+  if (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 211)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 211)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 211)).isValid ()) {
+    uint32_t variant_9486 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 211)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 211)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 211)).uintValue () ;
+    bool loop_9486 = true ;
+    while (loop_9486) {
+      loop_9486 = var_exploreProceduresAndFunctions.isValid () ;
+      if (loop_9486) {
+        loop_9486 = var_exploreProceduresAndFunctions.boolValue () ;
       }
-      if (loop_9432 && (0 == variant_9432)) {
-        loop_9432 = false ;
-        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 209)) ;
+      if (loop_9486 && (0 == variant_9486)) {
+        loop_9486 = false ;
+        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 211)) ;
       }
-      if (loop_9432) {
-        variant_9432 -- ;
+      if (loop_9486) {
+        variant_9486 -- ;
         var_exploreProceduresAndFunctions = GALGAS_bool (false) ;
         GALGAS_procedureMapIR var_exNonExploredProcedureMap = var_nonExploredProcedureMap ;
-        var_nonExploredProcedureMap = GALGAS_procedureMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 213)) ;
-        cEnumerator_procedureMapIR enumerator_9776 (var_exNonExploredProcedureMap, kEnumeration_up) ;
-        while (enumerator_9776.hasCurrentObject ()) {
-          const enumGalgasBool test_2 = outArgument_outAccessibleEntities.mAttribute_mProcedureSet.getter_hasKey (enumerator_9776.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 215)).boolEnum () ;
+        var_nonExploredProcedureMap = GALGAS_procedureMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 215)) ;
+        cEnumerator_procedureMapIR enumerator_9830 (var_exNonExploredProcedureMap, kEnumeration_up) ;
+        while (enumerator_9830.hasCurrentObject ()) {
+          const enumGalgasBool test_2 = outArgument_outAccessibleEntities.mAttribute_mProcedureSet.getter_hasKey (enumerator_9830.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 217)).boolEnum () ;
           if (kBoolTrue == test_2) {
             {
-            var_accessibleProcedureMap.setter_insertKey (enumerator_9776.current (HERE).mAttribute_lkey, enumerator_9776.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_9776.current (HERE).mAttribute_mInstructionGenerationList, enumerator_9776.current (HERE).mAttribute_mIsRequired, enumerator_9776.current (HERE).mAttribute_mWarnIfUnused, enumerator_9776.current (HERE).mAttribute_mWeak, enumerator_9776.current (HERE).mAttribute_mNullOnNoException, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 216)) ;
+            var_accessibleProcedureMap.setter_insertKey (enumerator_9830.current (HERE).mAttribute_lkey, enumerator_9830.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_9830.current (HERE).mAttribute_mInstructionGenerationList, enumerator_9830.current (HERE).mAttribute_mIsRequired, enumerator_9830.current (HERE).mAttribute_mWarnIfUnused, enumerator_9830.current (HERE).mAttribute_mWeak, enumerator_9830.current (HERE).mAttribute_mNullOnNoException, enumerator_9830.current (HERE).mAttribute_mGlobal, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 218)) ;
             }
-            categoryMethod_enterAccessibleEntities (enumerator_9776.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 225)) ;
+            categoryMethod_enterAccessibleEntities (enumerator_9830.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 228)) ;
             var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
           }else if (kBoolFalse == test_2) {
             {
-            var_nonExploredProcedureMap.setter_insertKey (enumerator_9776.current (HERE).mAttribute_lkey, enumerator_9776.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_9776.current (HERE).mAttribute_mInstructionGenerationList, enumerator_9776.current (HERE).mAttribute_mIsRequired, enumerator_9776.current (HERE).mAttribute_mWarnIfUnused, enumerator_9776.current (HERE).mAttribute_mWeak, enumerator_9776.current (HERE).mAttribute_mNullOnNoException, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 228)) ;
+            var_nonExploredProcedureMap.setter_insertKey (enumerator_9830.current (HERE).mAttribute_lkey, enumerator_9830.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_9830.current (HERE).mAttribute_mInstructionGenerationList, enumerator_9830.current (HERE).mAttribute_mIsRequired, enumerator_9830.current (HERE).mAttribute_mWarnIfUnused, enumerator_9830.current (HERE).mAttribute_mWeak, enumerator_9830.current (HERE).mAttribute_mNullOnNoException, enumerator_9830.current (HERE).mAttribute_mGlobal, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 231)) ;
             }
           }
-          enumerator_9776.gotoNextObject () ;
+          enumerator_9830.gotoNextObject () ;
         }
         GALGAS_functionMapIR var_exNonExploredFunctionMap = var_nonExploredFunctionMap ;
-        var_nonExploredFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 240)) ;
-        cEnumerator_functionMapIR enumerator_10803 (var_exNonExploredFunctionMap, kEnumeration_up) ;
-        while (enumerator_10803.hasCurrentObject ()) {
-          const enumGalgasBool test_3 = outArgument_outAccessibleEntities.mAttribute_mFunctionSet.getter_hasKey (enumerator_10803.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 242)).boolEnum () ;
+        var_nonExploredFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 244)) ;
+        cEnumerator_functionMapIR enumerator_10914 (var_exNonExploredFunctionMap, kEnumeration_up) ;
+        while (enumerator_10914.hasCurrentObject ()) {
+          const enumGalgasBool test_3 = outArgument_outAccessibleEntities.mAttribute_mFunctionSet.getter_hasKey (enumerator_10914.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 246)).boolEnum () ;
           if (kBoolTrue == test_3) {
             {
-            var_accessibleFunctionMap.setter_insertKey (enumerator_10803.current (HERE).mAttribute_lkey, enumerator_10803.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_10803.current (HERE).mAttribute_mInstructionGenerationList, enumerator_10803.current (HERE).mAttribute_mResultType, enumerator_10803.current (HERE).mAttribute_mResultVarName, enumerator_10803.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 243)) ;
+            var_accessibleFunctionMap.setter_insertKey (enumerator_10914.current (HERE).mAttribute_lkey, enumerator_10914.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_10914.current (HERE).mAttribute_mInstructionGenerationList, enumerator_10914.current (HERE).mAttribute_mResultType, enumerator_10914.current (HERE).mAttribute_mResultVarName, enumerator_10914.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 247)) ;
             }
-            categoryMethod_enterAccessibleEntities (enumerator_10803.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 251)) ;
+            categoryMethod_enterAccessibleEntities (enumerator_10914.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 255)) ;
             var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
           }else if (kBoolFalse == test_3) {
             {
-            var_nonExploredFunctionMap.setter_insertKey (enumerator_10803.current (HERE).mAttribute_lkey, enumerator_10803.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_10803.current (HERE).mAttribute_mInstructionGenerationList, enumerator_10803.current (HERE).mAttribute_mResultType, enumerator_10803.current (HERE).mAttribute_mResultVarName, enumerator_10803.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 254)) ;
+            var_nonExploredFunctionMap.setter_insertKey (enumerator_10914.current (HERE).mAttribute_lkey, enumerator_10914.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_10914.current (HERE).mAttribute_mInstructionGenerationList, enumerator_10914.current (HERE).mAttribute_mResultType, enumerator_10914.current (HERE).mAttribute_mResultVarName, enumerator_10914.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 258)) ;
             }
           }
-          enumerator_10803.gotoNextObject () ;
+          enumerator_10914.gotoNextObject () ;
         }
         GALGAS_sectionMapIR var_exNonExploredSectionMap = var_nonExploredSectionMap ;
-        var_nonExploredSectionMap = GALGAS_sectionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 265)) ;
-        cEnumerator_sectionMapIR enumerator_11746 (var_exNonExploredSectionMap, kEnumeration_up) ;
-        while (enumerator_11746.hasCurrentObject ()) {
-          const enumGalgasBool test_4 = outArgument_outAccessibleEntities.mAttribute_mSectionSet.getter_hasKey (enumerator_11746.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 267)).boolEnum () ;
+        var_nonExploredSectionMap = GALGAS_sectionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 269)) ;
+        cEnumerator_sectionMapIR enumerator_11857 (var_exNonExploredSectionMap, kEnumeration_up) ;
+        while (enumerator_11857.hasCurrentObject ()) {
+          const enumGalgasBool test_4 = outArgument_outAccessibleEntities.mAttribute_mSectionSet.getter_hasKey (enumerator_11857.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 271)).boolEnum () ;
           if (kBoolTrue == test_4) {
             {
-            var_accessibleSectionMap.setter_insertKey (enumerator_11746.current (HERE).mAttribute_lkey, enumerator_11746.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_11746.current (HERE).mAttribute_mInstructionGenerationList, enumerator_11746.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 268)) ;
+            var_accessibleSectionMap.setter_insertKey (enumerator_11857.current (HERE).mAttribute_lkey, enumerator_11857.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_11857.current (HERE).mAttribute_mInstructionGenerationList, enumerator_11857.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 272)) ;
             }
-            categoryMethod_enterAccessibleEntities (enumerator_11746.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 274)) ;
+            categoryMethod_enterAccessibleEntities (enumerator_11857.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 278)) ;
             var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
           }else if (kBoolFalse == test_4) {
             {
-            var_nonExploredSectionMap.setter_insertKey (enumerator_11746.current (HERE).mAttribute_lkey, enumerator_11746.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_11746.current (HERE).mAttribute_mInstructionGenerationList, enumerator_11746.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 277)) ;
+            var_nonExploredSectionMap.setter_insertKey (enumerator_11857.current (HERE).mAttribute_lkey, enumerator_11857.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_11857.current (HERE).mAttribute_mInstructionGenerationList, enumerator_11857.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 281)) ;
             }
           }
-          enumerator_11746.gotoNextObject () ;
+          enumerator_11857.gotoNextObject () ;
         }
       }
     }
@@ -6969,11 +7039,11 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc svcHandler `isr ()\n"
-  "\n"
-  "proc svcHandler `isr @nullWhenPanicDisabled @weak () {\n"
-  "  panic 11\n"
-  "}\n"
+  "//required proc svcHandler `isr ()\n"
+  "//\n"
+  "//proc svcHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "//  panic 11\n"
+  "//}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -7014,7 +7084,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc systickHandler `isr ()\n"
   "\n"
-  "proc systickHandler `isr () {\n"
+  "proc systickHandler `isr @global () {\n"
   "  gCompteur +%= 1\n"
   "  userSystickHandler ()\n"
   "}\n"
@@ -7590,7 +7660,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "teensy-3-1-default-isr.plm",
   "plm",
   true, // Text file
-  16821, // Text length
+  16839, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -8100,9 +8170,9 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "panic proc loop 0 {\n"
   "  waitMSInExceptionMode (!duration:50)\n"
-  "  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
+  "  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)\n"
   "  waitMSInExceptionMode (!duration:50)\n"
-  "  ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
+  "  ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -8112,7 +8182,7 @@ const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  15988, // Text length
+  15962, // Text length
   gWrapperFileContent_6_targetTemplates
 ) ;
 
@@ -8155,9 +8225,8 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "let LED_L2 $uint32 = (1 << 2)\n"
   "let LED_L3 $uint32 = (1 << 3)\n"
   "let LED_L4 $uint32 = (1 << 4)\n"
-  "let LED_TEENSY $uint32 = (1 << 5)\n"
   "\n"
-  "let ALL_LEDS = LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY\n"
+  "let ALL_LEDS = LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4\n"
   " \n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -8181,10 +8250,6 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "//--- Led L4\n"
   "  if ((inLeds & LED_L4) != 0) then\n"
   "    GPIOD_PSOR = 1 << 2 ;\n"
-  "  end\n"
-  "//--- Led Teensy\n"
-  "  if ((inLeds & LED_TEENSY) != 0) then\n"
-  "    GPIOC_PSOR = 1 << 5 ;\n"
   "  end\n"
   "}\n"
   "\n"
@@ -8211,10 +8276,6 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "  if ((inLeds & LED_L4) != 0) then\n"
   "    GPIOD_PCOR = 1 << 2 ;\n"
   "  end\n"
-  "//--- Led Teensy\n"
-  "  if ((inLeds & LED_TEENSY) != 0) then\n"
-  "    GPIOC_PCOR = 1 << 5 ;\n"
-  "  end\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
@@ -8223,7 +8284,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "teensy-3-1-leds.plm",
   "plm",
   true, // Text file
-  2494, // Text length
+  2271, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 
@@ -8367,7 +8428,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def CLANGcompiler ():\n"
-  "  return [toolDir () + \"/bin/clang\", \"--target=armv7-none--eabi\", \"-mcpu=cortex-m4\"]\n"
+  "  return [toolDir () + \"/bin/clang\", \"--target=armv7-none--eabi\", \"-mcpu=cortex-m4\", \"-Oz\", \"-fomit-frame-pointer\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -8508,7 +8569,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  14364, // Text length
+  14395, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 
@@ -9002,13 +9063,278 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
 
 //--- File 'teensy-3-1-it/target.c'
 
-const char * gWrapperFileContent_20_targetTemplates = "\n" ;
+const char * gWrapperFileContent_20_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#define TASK_COUNT (2)\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef unsigned task_list ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//                                                                                                                     *\n"
+  "//   T A S K    R O U T I N E    T Y P E                                                                               *\n"
+  "//                                                                                                                     *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef void (* routineTaskType) (void) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "/*static unsigned countLeadingZeros (const unsigned inValue) {\n"
+  "  unsigned result = 0 ;\n"
+  "  unsigned w = inValue ;\n"
+  "  while ((w & 1) == 0) {\n"
+  "    result ++ ;\n"
+  "    w >>= 1 ;\n"
+  "  }\n"
+  "  return result ;\n"
+  "}*/\n"
+  "\n"
+  "unsigned countLeadingZeros (const unsigned inValue) {\n"
+  "  unsigned reversedValue ;\n"
+  "  __asm__ (\"rbit %0, %1\" : \"=r\" (reversedValue) : \"r\" (inValue)) ;\n"
+  "  unsigned result ;\n"
+  "  __asm__ (\"clz %0, %1\" : \"=r\" (result) : \"r\" (reversedValue)) ;\n"
+  "  return result ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//                C O R T E X    M 4    S T A C K E D    R E G I S T E R S                                             *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//                                                                                                                     *\n"
+  "//                   |                            |                                                                    *\n"
+  "//         PSP+32 -> |----------------------------| \\                                                                  *\n"
+  "//                   | xPSR                       |  |                                                                 *\n"
+  "//         PSP+28 -> |----------------------------|  |                                                                 *\n"
+  "//                   | PC (after SVC instruction) |  |                                                                 *\n"
+  "//         PSP+24 -> |----------------------------|  |                                                                 *\n"
+  "//                   | LR                         |  |                                                                 *\n"
+  "//         PSP+20 -> |----------------------------|  |                                                                 *\n"
+  "//                   | R12                        |  |  Saved by interrupt response                                    *\n"
+  "//         PSP+16 -> |----------------------------|  |                                                                 *\n"
+  "//                   | R3                         |  |                                                                 *\n"
+  "//         PSP+12 -> |----------------------------|  |                                                                 *\n"
+  "//                   | R2                         |  |                                                                 *\n"
+  "//         PSP+8  -> |----------------------------|  |                                                                 *\n"
+  "//                   | R1                         |  |                                                                 *\n"
+  "//         PSP+4  -> |----------------------------|  |                                                                 *\n"
+  "//                   | R0                         |  |                                                                 *\n"
+  "//         PSP    -> |----------------------------| /                                                                  *\n"
+  "//                                                                                                                     *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct {\n"
+  "  unsigned mR4 ;\n"
+  "  unsigned mR5 ;\n"
+  "  unsigned mR6 ;\n"
+  "  unsigned mR7 ;\n"
+  "  unsigned mR8 ;\n"
+  "  unsigned mR9 ;\n"
+  "  unsigned mR10 ;\n"
+  "  unsigned mR11 ;\n"
+  "  unsigned mSP_USR ;\n"
+  "  unsigned mLR_RETURN_CODE ;\n"
+  "} task_context ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_set_return_code (task_context * inTaskContext,\n"
+  "                                    const unsigned inReturnCode) {\n"
+  "  unsigned * ptr = (unsigned *) inTaskContext->mSP_USR ;\n"
+  "  *ptr = inReturnCode ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_set_task_context (task_context * inTaskContext,\n"
+  "                                     const unsigned inStackPointerInitialValue,\n"
+  "                                     routineTaskType inTaskRoutine) {\n"
+  "//--- Initialize LR\n"
+  "  inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ;\n"
+  "//--- Initialize SP\n"
+  "  inTaskContext->mSP_USR = inStackPointerInitialValue - 32 ; // 8 stacked registers\n"
+  "  unsigned * ptr = (unsigned *) inTaskContext->mSP_USR ;\n"
+  "//--- Initialize PC\n"
+  "  ptr += 6 ; // +24\n"
+  "  *ptr = (unsigned) inTaskRoutine ;\n"
+  "//--- Initialize CPSR\n"
+  "  ptr ++ ; // +28\n"
+  "  *ptr = 1 << 24 ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   T A S K    C O N T R O L    B L O C K                                                                             *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct task_control_block {\n"
+  "//--- Context buffer\n"
+  "  task_context mTaskContext ;\n"
+  "//--- This field is used for deadline waiting\n"
+  "  unsigned mDate ;\n"
+  "//---\n"
+  "  task_list * mWaitingList ;\n"
+  "//--- Stack buffer parameters\n"
+  "  unsigned * mStackBufferAddress ;\n"
+  "  unsigned mStackBufferSize ; // In bytes\n"
+  "} task_control_block ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static task_control_block gTaskDescriptorArray [TASK_COUNT] ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   S C H E D U L E R                                                                                                 *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "task_context * gRunningTaskContextSaveAddress ; // Shared with assembly code (arm_context.s)\n"
+  "static unsigned gRunningTaskIndex ; // Not significant if gRunningTaskContextSaveAddress == NULL\n"
+  "static task_list gReadyTaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static unsigned kernel_runningTaskIndex (void) {\n"
+  "  return gRunningTaskIndex ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_makeTaskReady (const unsigned inTaskIndex) {\n"
+  "  gReadyTaskList |= 1 << inTaskIndex ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_makeNoTaskRunning (void) {\n"
+  "  gRunningTaskContextSaveAddress = (task_context *) 0 ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_selectTaskToRun (void) ;\n"
+  "\n"
+  "void kernel_selectTaskToRun (void) {\n"
+  "  if (((task_context *) 0) != gRunningTaskContextSaveAddress) {\n"
+  "    gReadyTaskList |= 1 << gRunningTaskIndex ;\n"
+  "    gRunningTaskContextSaveAddress = (task_context *) 0 ;\n"
+  "  }\n"
+  "  if (gReadyTaskList != 0) {\n"
+  "    gRunningTaskIndex = countLeadingZeros (gReadyTaskList) ;\n"
+  "    gReadyTaskList &= ~ (1 << gRunningTaskIndex) ;\n"
+  "    gRunningTaskContextSaveAddress = & (gTaskDescriptorArray [gRunningTaskIndex].mTaskContext) ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   kernel_create_task                                                                                                *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_create_task (const unsigned inTaskIndex,\n"
+  "                         unsigned * inStackBufferAddress,\n"
+  "                         unsigned inStackBufferSize,\n"
+  "                         routineTaskType inTaskRoutine) ;\n"
+  "\n"
+  "void kernel_create_task (const unsigned inTaskIndex,\n"
+  "                         unsigned * inStackBufferAddress,\n"
+  "                         unsigned inStackBufferSize,\n"
+  "                         routineTaskType inTaskRoutine) {\n"
+  "  task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
+  "  taskDescriptorPtr->mWaitingList = (task_list *) 0 ;\n"
+  "//--- Store stack parameters\n"
+  "  taskDescriptorPtr->mStackBufferAddress = inStackBufferAddress ;\n"
+  "  taskDescriptorPtr->mStackBufferSize = inStackBufferSize ;\n"
+  "//--- Stack Pointer initial value\n"
+  "  const unsigned spInitialValue = ((unsigned) taskDescriptorPtr->mStackBufferAddress) + taskDescriptorPtr->mStackBufferSize ;\n"
+  "//--- Initialize Context\n"
+  "  kernel_set_task_context (& (taskDescriptorPtr->mTaskContext),\n"
+  "                           spInitialValue,\n"
+  "                           inTaskRoutine) ;\n"
+  "//--- Make task ready\n"
+  "  kernel_makeTaskReady (inTaskIndex) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   L I S T    M A N A G E M E N T                                                                                    *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static task_list gDeadlineWaitingTaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  B L O C K I N G    R U N N I N G    T A S K                                                                        *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_blockRunningTaskInList (task_list * ioWaitingList) {\n"
+  "  const unsigned currentTaskIndex = kernel_runningTaskIndex () ;\n"
+  "  *ioWaitingList |= 1 << currentTaskIndex ;\n"
+  "  task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [currentTaskIndex] ;\n"
+  "  taskDescriptorPtr->mWaitingList = ioWaitingList ;\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_blockRunningTaskInDeadlineList (const unsigned inDeadlineMS) {\n"
+  "  const unsigned currentTaskIndex = kernel_runningTaskIndex () ;\n"
+  "  task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [currentTaskIndex] ;\n"
+  "  gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;\n"
+  "  taskDescriptorPtr->mDate = inDeadlineMS ;\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, const unsigned inDeadlineMS) {\n"
+  "  const unsigned currentTaskIndex = kernel_runningTaskIndex () ;\n"
+  "  task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [currentTaskIndex] ;\n"
+  "  *ioWaitingList |= 1 << currentTaskIndex ;\n"
+  "  taskDescriptorPtr->mWaitingList = ioWaitingList ;\n"
+  "  gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;\n"
+  "  taskDescriptorPtr->mDate = inDeadlineMS ;\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) {\n"
+  "  const unsigned taskIndex = countLeadingZeros (* ioWaitingList) ;\n"
+  "  task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;\n"
+  "  kernel_set_return_code (& taskDescriptorPtr->mTaskContext, 1) ;\n"
+  "  gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;\n"
+  "  *(taskDescriptorPtr->mWaitingList) &= ~ (1 << taskIndex) ;\n"
+  "  taskDescriptorPtr->mWaitingList = (task_list *) 0 ;\n"
+  "  kernel_makeTaskReady (taskIndex) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) {\n"
+  "  unsigned w = gDeadlineWaitingTaskList ;\n"
+  "  while (w > 0) {\n"
+  "    const unsigned taskIndex = countLeadingZeros (w) ;\n"
+  "    w &= ~ (1 << taskIndex) ;\n"
+  "    task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;\n"
+  "    if (inCurrentDate >= taskDescriptorPtr->mDate) {\n"
+  "      gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;\n"
+  "      if (taskDescriptorPtr->mWaitingList != (task_list *) 0) {\n"
+  "        *(taskDescriptorPtr->mWaitingList) &= ~ (1 << taskIndex) ;\n"
+  "        taskDescriptorPtr->mWaitingList = (task_list *) 0 ;\n"
+  "      }\n"
+  "      kernel_set_return_code (& taskDescriptorPtr->mTaskContext, 0) ;\n"
+  "      kernel_makeTaskReady (taskIndex) ;\n"
+  "    }\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n" ;
 
 const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  1, // Text length
+  13967, // Text length
   gWrapperFileContent_20_targetTemplates
 ) ;
 
@@ -9034,11 +9360,15 @@ const char * gWrapperFileContent_21_targetTemplates = "target datalayout = \"e-m
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
+  "declare void @as_resetHandler () nounwind\n"
+  "declare void @as_svcHandler () nounwind\n"
+  "declare void @as_systickHandler () nounwind\n"
+  "\n"
   "@startup = constant %vectorStructSeq {\n"
   "  i32* @__system_stack_end,\n"
   ";--- ARM Core System Handler Vectors\n"
   "  [15  x void()*] [\n"
-  "    void()* @ResetISR, ; 1\n"
+  "    void()* @as_resetHandler, ; 1\n"
   "    void()* @!PROC!NMIHandler, ; 2\n"
   "    void()* @!PROC!HardFaultHandler, ; 3\n"
   "    void()* @!PROC!MemManageHandler, ; 4\n"
@@ -9048,11 +9378,11 @@ const char * gWrapperFileContent_21_targetTemplates = "target datalayout = \"e-m
   "    void()* null, ; 8, reserved\n"
   "    void()* null, ; 9, reserved\n"
   "    void()* null, ; 10, reserved\n"
-  "    void()* @!PROC!svcHandler, ; 11\n"
+  "    void()* @as_svcHandler, ; 11\n"
   "    void()* @!PROC!DebugMonitorHandler, ; 12\n"
   "    void()* null, ; 13, reserved\n"
   "    void()* @!PROC!PendSVHandler, ; 14\n"
-  "    void()* @!PROC!systickHandler  ; 15\n"
+  "    void()* @as_systickHandler  ; 15\n"
   "  ],\n"
   ";--- Non-Core Vectors\n"
   "  [240  x void()*] [\n"
@@ -9265,18 +9595,43 @@ const char * gWrapperFileContent_21_targetTemplates = "target datalayout = \"e-m
   ";   configuration.on.boot                                                                                              *\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "declare void @ResetISR () nounwind\n"
+  "@stack0 = global [256 x i32] zeroinitializer\n"
   "\n"
   "define void @configuration.on.boot () nounwind {\n"
   "  call void @boot ()\n"
   "  call void @clearBSS ()\n"
   "  call void @copyData ()\n"
   "  call void @init ()\n"
+  ";--- Create task 0\n"
+  "  %stack0.address = getelementptr inbounds [256 x i32], [256 x i32]* @stack0, i32 0, i32 0\n"
+  "  call void @kernel_create_task (i32 0, i32* %stack0.address, i32 1024, void ()* @user.code)\n"
   "  ret  void\n"
   "}\n"
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
-  ";   user.code                                                                                                          *\n"
+  ";   Real time Kernel interface                                                                                         *\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  ";--- Create task \n"
+  "declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n"
+  "\n"
+  "\n"
+  ";--- Blocking running task\n"
+  "declare void @kernel_blockRunningTaskInList (i32* %ioWaitingList) nounwind\n"
+  "\n"
+  "declare void @kernel_blockRunningTaskInDeadlineList (i32 %inDeadlineMS) nounwind\n"
+  "\n"
+  "declare void @kernel_blockRunningTaskInListAndDeadlineList (i32* %ioWaitingList, i32 %inDeadlineMS) nounwind\n"
+  "\n"
+  "\n"
+  ";--- Make task Ready\n"
+  "declare void @kernel_makeTaskReadyFromWaitingList (i32* nocapture readonly %ioWaitingList) nounwind\n"
+  "\n"
+  "declare void @kernel_tasksWithEarlierDateBecomeReady (i32 %inCurrentDate) nounwind\n"
+  "\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";   task 0                                                                                                          *\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "define void @user.code () nounwind naked noreturn {\n"
@@ -9292,7 +9647,7 @@ const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
-  12390, // Text length
+  13753, // Text length
   gWrapperFileContent_21_targetTemplates
 ) ;
 
@@ -9304,35 +9659,263 @@ const char * gWrapperFileContent_22_targetTemplates = "\t.syntax unified\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
+  "@       A C T I V I T Y    L E D                                                                                       *\n"
+  "@                                                                                                                      *\n"
+  "@  Activity led is led 13 on Teensy board (bit 5 of port C, led is on when this bit is high)                           *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  GPIOC_PSOR = 0x400FF084\n"
+  "  GPIOC_PCOR = 0x400FF088\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@  ACTIVITY LED ON        When this macro is used, we can only use R4 and R5 registers.                                *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "  .macro ACTIVITY_LED_ON\n"
+  "    ldr   r4, =GPIOC_PSOR\n"
+  "    movs  r5, # 1 << 5\n"
+  "    str   r5, [r4]\n"
+  "  .endm\n"
+  "  \n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@  ACTIVITY LED OFF        When this macro is used, we can use any register.                                           *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .macro ACTIVITY_LED_OFF\n"
+  "    ldr   r4, =GPIOC_PCOR\n"
+  "    movs  r5, # 1 << 5\n"
+  "    str   r5, [r4]\n"
+  "  .endm\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S V C    I N S T R U C T I O N                                                                       *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@   15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0                                                                    *\n"
+  "@   -----------------------------------------------                                                                    *\n"
+  "@    1  1  0  1  1  1  1  1  n  n  n  n  n  n  n  n                                                                    *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "@  .global waitUntilMS\n"
+  "@  .type waitUntilMS, %function\n"
+  "\n"
+  "@waitUntilMS:\n"
+  "@  svc #1\n"
+  "@  bx  lr\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .type __direct_return_for_null_service, %function\n"
+  "\n"
+  "__svc_dispatcher_table:\n"
+  "  .word __direct_return_for_null_service @ 0\n"
+  "@  .word kernel_waitUntilMS  @ 1\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S V C    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                    |                            |                                                                    *\n"
+  "@          PSP+32 -> |----------------------------| \\ \n"
+  "@                    | xPSR                       |  |\n"
+  "@          PSP+28 -> |----------------------------|  |\n"
+  "@                    | PC (after SVC instruction) |  |\n"
+  "@          PSP+24 -> |----------------------------|  |\n"
+  "@                    | LR                         |  |\n"
+  "@          PSP+20 -> |----------------------------|  |\n"
+  "@                    | R12                        |  |  Saved by interrupt response\n"
+  "@          PSP+16 -> |----------------------------|  |\n"
+  "@                    | R3                         |  |\n"
+  "@          PSP+12 -> |----------------------------|  |\n"
+  "@                    | R2                         |  |\n"
+  "@          PSP+8  -> |----------------------------|  |\n"
+  "@                    | R1                         |  |\n"
+  "@          PSP+4  -> |----------------------------|  |\n"
+  "@                    | R0                         |  |\n"
+  "@          PSP    -> |----------------------------| /\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                                            *---------------------*\n"
+  "@                                            | LR return code      | +36 [ 9]\n"
+  "@                                            *---------------------*\n"
+  "@                                            | R13 (PSP)           | +32 [ 8]\n"
+  "@                                            *---------------------*\n"
+  "@                                            | R11                 | +28 [ 7]\n"
+  "@                                            *---------------------*\n"
+  "@                                            | R10                 | +24 [ 6]\n"
+  "@                                            *---------------------*\n"
+  "@                                            | R9                  | +20 [ 5]\n"
+  "@                                            *---------------------*\n"
+  "@                                            | R8                  | +16 [ 4]\n"
+  "@                                            *---------------------*\n"
+  "@                                            | R7                  | +12 [ 3]\n"
+  "@                                            *---------------------*\n"
+  "@                                            | R6                  | + 8 [ 2]\n"
+  "@                                            *---------------------*\n"
+  "@                                            | R5                  | + 4 [ 1]\n"
+  "@  *--------------------------------*        *---------------------*\n"
+  "@  | gRunningTaskContextSaveAddress +------> | R4                  | + 0 [ 0]\n"
+  "@  *--------------------------------*        *---------------------*\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  ".global backgroundTaskContext\n"
+  ".lcomm backgroundTaskContext, 4\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global as_svcHandler\n"
+  "  .type as_svcHandler, %function\n"
+  "\n"
+  "as_svcHandler:\n"
+  "@----------------------------------------- Save preserved registers\n"
+  "  push  {r4, r5, lr}\n"
+  "@----------------------------------------- R5 <- thread SP\n"
+  "  mrs   r5, psp\n"
+  "@----------------------------------------- R4 <- Address of SVC instruction\n"
+  "  ldr   r4, [r5, #24]    @ 24 : 6 stacked registers before saved PC\n"
+  "@----------------------------------------- R12 <- bits 0-7 of SVC instruction\n"
+  "  ldrb  r12, [r4, #-2]   @ R12 is service call index\n"
+  "@----------------------------------------- R4 <- address of dispatcher table\n"
+  "  ldr   r4, =__svc_dispatcher_table\n"
+  "@----------------------------------------- R12 <- address of routine to call\n"
+  "  ldr   r12, [r4, r12, lsl #2]   @ R12 = R4 + (R12 << 2)\n"
+  "@----------------------------------------- R4 <- calling task context\n"
+  "  ldr   r4, =gRunningTaskContextSaveAddress\n"
+  "  ldr   r4, [r4]\n"
+  "@----------------------------------------- Call service routine\n"
+  "  blx   r12         @ R4:calling task context address, R5:thread PSP\n"
+  "@----------------------------------------- Set return code (from R0 to R3) in stacked registers\n"
+  "  stmia r5!, {r0, r1, r2, r3}\n"
+  "@--- Continues in sequence to _handle_context_switch\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 H A N D L E    C O N T E X T    S W I T C H    ( D O U B L E    S T A C K    M O D E )               *\n"
+  "@                                                                                                                      *\n"
+  "@  On entry:                                                                                                           *\n"
+  "@    - R4 contains the runnning task save context address,                                                             *\n"
+  "@    - R5 can be freely used,                                                                                          *\n"
+  "@    - R4, R5 and LR of running task have been pushed on handler task.                                                 *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "_handle_context_switch:\n"
+  "@----------------------------------------- Select task to run\n"
+  "  bl    kernel_selectTaskToRun\n"
+  "@----------------------------------------- R0 <- calling task context, R1 <- new task context\n"
+  "  ldr   r1, =gRunningTaskContextSaveAddress\n"
+  "  mov   r0, r4\n"
+  "  ldr   r1, [r1]\n"
+  "@----------------------------------------- Restore preserved registers\n"
+  "  pop   {r4, r5, lr}\n"
+  "@----------------------------------------- Task context did change \?\n"
+  "  cmp   r0, r1  @ R0:old task context, R1:new task context\n"
+  "  it    eq  @ if equal, no context change, perform a return from exception\n"
+  "  bxeq  lr\n"
+  "@----------------------------------------- Save context of preempted task (if any)\n"
+  "  cbz   r0, __perform_restore_context @ if old context is NULL, no context to save\n"
+  "@--- Save registers r4 to r11, PSP, LR\n"
+  "  mrs     r12, psp\n"
+  "  stmia   r0, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}\n"
+  "@----------------------------------------- Restore context of activated task (if any)\n"
+  "__perform_restore_context:\n"
+  "  cbz    r1, __no_context_to_restore\n"
+  "  ldmia  r1, {r4, r5, r6, r7, r8, r9, r10, r11, r12, lr}\n"
+  "  msr    psp, r12\n"
+  "__direct_return_for_null_service: \n"
+  "  bx     lr\n"
+  "@----------------------------------------- No context to restore\n"
+  "__no_context_to_restore:\n"
+  "@--- Restore PSP of background task\n"
+  "  ldr  r0, =backgroundTaskContext\n"
+  "  ldr  r0, [r0]\n"
+  "  msr  psp, r0\n"
+  "@--- Return from exception\n"
+  "  ldr  r1, =0xFFFFFFFD\n"
+  "  bx   r1\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S Y S T I C K    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                            *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global as_systickHandler\n"
+  "  .type as_systickHandler, %function\n"
+  "\n"
+  "as_systickHandler:\n"
+  "@----------------------------------------- Save preserved registers\n"
+  "  push  {r4, r5, lr}\n"
+  "@----------------------------------------- Activity led On (macro that uses only R4 and R5)\n"
+  "  ACTIVITY_LED_ON\n"
+  "@----------------------------------------- R4 <- running task context\n"
+  "  ldr   r4, =gRunningTaskContextSaveAddress\n"
+  "  ldr   r4, [r4]\n"
+  "@----------------------------------------- Call Systick handler (C routine)\n"
+  "  bl    proc.systickHandler\n"
+  "@----------------------------------------- Test backgroundTaskContext to check if init passed\n"
+  "  ldr   r5, =backgroundTaskContext\n"
+  "  ldr   r5, [r5]\n"
+  "  cmp   r5, #0\n"
+  "  bne   _handle_context_switch\n"
+  "@----------------------------------------- Still in init : return\n"
+  "  pop   {r4, r5, pc}\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
   "@                 R E S E T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                *\n"
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "  .lcomm user_stack, 1024\n"
+  ".lcomm backgroundTaskStack, 32\n"
   "\n"
-  "  .global ResetISR\n"
-  "  .type ResetISR, %function\n"
-  "  .global user.code\n"
-  "  .type user.code, %function\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "ResetISR:\n"
+  "  .global as_resetHandler\n"
+  "  .type as_resetHandler, %function\n"
+  "\n"
+  "as_resetHandler:\n"
   "@--- Init micro controller\n"
   "  bl configuration.on.boot\n"
-  "@--- set PSP\n"
-  "  ldr r0, =user_stack + 1024\n"
+  "@--- Set PSP\n"
+  "  ldr r0, =backgroundTaskStack + 32\n"
   "  msr psp, r0\n"
   "@--- Set CONTROL register\n"
-  "  mov r0, #3\n"
-  "  msr control, r0\n"
+  "  movs r2, #3\n"
+  "  msr  control, r2\n"
   "  isb\n"
+  "@--- Set background task context\n"
+  "  subs r0, #32\n"
+  "  ldr  r1, =backgroundTaskContext\n"
+  "  str  r0, [r1]\n"
+  "@--- Start real-time kernel\n"
+  "  svc  #0\n"
   "@--- Background task : infinite loop\n"
-  "  b  user.code\n" ;
+  "infiniteLoop:\n"
+  "  ACTIVITY_LED_OFF\n"
+  "  wfi\n"
+  "  b  infiniteLoop\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_22_targetTemplates (
   "target.s",
   "s",
   true, // Text file
-  1007, // Text length
+  14795, // Text length
   gWrapperFileContent_22_targetTemplates
 ) ;
 
@@ -9923,1127 +10506,4 @@ void routine_recursiveImportEmbeddedTargetFiles (GALGAS_ast & ioArgument_ioAST,
   }
 }
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Routine 'recursiveImportFiles'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
-                                   GALGAS_string inArgument_inCurrentDirectory,
-                                   GALGAS_lstringlist inArgument_inImportedClauseList,
-                                   GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
-                                   C_Compiler * inCompiler
-                                   COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_11975 (inArgument_inImportedClauseList, kEnumeration_up) ;
-  while (enumerator_11975.hasCurrentObject ()) {
-    GALGAS_string var_absolutePath = enumerator_11975.current_mValue (HERE).mAttribute_string.getter_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 305)) ;
-    const enumGalgasBool test_0 = var_absolutePath.getter_fileExists (SOURCE_FILE ("program.galgas", 306)).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 307)).operator_not (SOURCE_FILE ("program.galgas", 307)).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 308)) ;
-        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.getter_pathExtension (SOURCE_FILE ("program.galgas", 309)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
-        if (kBoolTrue == test_2) {
-          GALGAS_lstringlist var_importedFileList ;
-          var_importedFileList.drop () ;
-          GALGAS_location joker_12478 ; // Joker input parameter
-          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_11975.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 310)), ioArgument_ioAST, var_importedFileList, joker_12478  COMMA_SOURCE_FILE ("program.galgas", 310)) ;
-          {
-          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 314)) ;
-          }
-        }else if (kBoolFalse == test_2) {
-          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.getter_pathExtension (SOURCE_FILE ("program.galgas", 320)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
-          if (kBoolTrue == test_3) {
-            GALGAS_lstringlist var_importedFileList ;
-            var_importedFileList.drop () ;
-            GALGAS_location joker_12957 ; // Joker input parameter
-            cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_11975.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 321)), ioArgument_ioAST, var_importedFileList, joker_12957  COMMA_SOURCE_FILE ("program.galgas", 321)) ;
-            {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 325)) ;
-            }
-          }else if (kBoolFalse == test_3) {
-            GALGAS_location location_4 (enumerator_11975.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
-            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plm-target)")  COMMA_SOURCE_FILE ("program.galgas", 332)) ;
-          }
-        }
-      }
-    }else if (kBoolFalse == test_0) {
-      GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-      const enumGalgasBool test_5 = var_fw.getter_fileExistsAtPath (enumerator_11975.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 337)).boolEnum () ;
-      if (kBoolTrue == test_5) {
-        GALGAS_string var_embeddedPath = GALGAS_string (":").add_operation (enumerator_11975.current_mValue (HERE).getter_string (SOURCE_FILE ("program.galgas", 338)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 338)) ;
-        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.getter_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 339)).operator_not (SOURCE_FILE ("program.galgas", 339)).boolEnum () ;
-        if (kBoolTrue == test_6) {
-          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 340)) ;
-          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, enumerator_11975.current_mValue (HERE).mAttribute_string.getter_pathExtension (SOURCE_FILE ("program.galgas", 341)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
-          if (kBoolTrue == test_7) {
-            GALGAS_lstringlist var_importedFileList ;
-            var_importedFileList.drop () ;
-            GALGAS_location joker_13827 ; // Joker input parameter
-            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.getter_textFileContentsAtPath (enumerator_11975.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 342)), enumerator_11975.current_mValue (HERE).mAttribute_string, ioArgument_ioAST, var_importedFileList, joker_13827  COMMA_SOURCE_FILE ("program.galgas", 342)) ;
-            {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 346)) ;
-            }
-          }else if (kBoolFalse == test_7) {
-            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, enumerator_11975.current_mValue (HERE).mAttribute_string.getter_pathExtension (SOURCE_FILE ("program.galgas", 352)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
-            if (kBoolTrue == test_8) {
-              GALGAS_lstringlist var_importedFileList ;
-              var_importedFileList.drop () ;
-              GALGAS_location joker_14332 ; // Joker input parameter
-              cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.getter_textFileContentsAtPath (enumerator_11975.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 353)), enumerator_11975.current_mValue (HERE).mAttribute_string, ioArgument_ioAST, var_importedFileList, joker_14332  COMMA_SOURCE_FILE ("program.galgas", 353)) ;
-              {
-              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 357)) ;
-              }
-            }else if (kBoolFalse == test_8) {
-              GALGAS_location location_9 (enumerator_11975.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_9, GALGAS_string ("invalid extension (should be .plm or .plm-target)")  COMMA_SOURCE_FILE ("program.galgas", 364)) ;
-            }
-          }
-        }
-      }else if (kBoolFalse == test_5) {
-        GALGAS_location location_10 (enumerator_11975.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_10, GALGAS_string ("cannot find this file in file system and in embedded files")  COMMA_SOURCE_FILE ("program.galgas", 368)) ;
-      }
-    }
-    enumerator_11975.gotoNextObject () ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Filewrapper 'embeddedSampleCode'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-//--- File 'teensy-3-1-it/01-blinkled.plm'
-
-const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "newtype $u : $int32\n"
-  "let bound = 1000 * 1000 * 10\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var gDelai $u = 0 {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "var gVar $uint32 = 0 {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  gDelai +%= 1\n"
-  "  if gDelai == bound then\n"
-  "    ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  elsif (bound * 2) == gDelai then\n"
-  "    gDelai = 0\n"
-  "    ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "    gVar +%= 1\n"
-  "    goto (!line:0 !column:0)\n"
-  "    printUnsigned (!gVar)\n"
-  "    goto (!line:1 !column:0)\n"
-  "    printUnsigned (!gVar !% 20)\n"
-  "  end  \n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
-  "01-blinkled.plm",
-  "plm",
-  true, // Text file
-  732, // Text length
-  gWrapperFileContent_0_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/02-blinkled-systick.plm'
-
-const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  waitMS (!250)\n"
-  "  ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  waitMS (!250)\n"
-  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
-  "02-blinkled-systick.plm",
-  "plm",
-  true, // Text file
-  346, // Text length
-  gWrapperFileContent_1_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/03-blinkled-systick-enum.plm'
-
-const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "enum $ledState {\n"
-  "  case on\n"
-  "  case off\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var led = $ledState.on {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  waitMS (!250)\n"
-  "  if led == .off then\n"
-  "    ledOn (!LED_TEENSY) // Allumer la led\n"
-  "    led = .on\n"
-  "  else\n"
-  "    ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "    led = .off\n"
-  "  end\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
-  "03-blinkled-systick-enum.plm",
-  "plm",
-  true, // Text file
-  589, // Text length
-  gWrapperFileContent_2_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/04-blinkled-systick-struct.plm'
-
-const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "struct $point {\n"
-  "  var x $uint32 = 200\n"
-  "  var y $uint32 = 500\n"
-  "}\n"
-  "\n"
-  "struct $point3 {\n"
-  "  var p $point = $point ()\n"
-  "  var z $int32 = 3\n"
-  "  \n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var zz $int32 = 0 {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  var p = $point3 ()\n"
-  "  waitMS (!p.p.x)\n"
-  "  p.p.y = 340\n"
-  "  var q = $point ()\n"
-  "  ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  waitMS (!p.p.y)\n"
-  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
-  "04-blinkled-systick-struct.plm",
-  "plm",
-  true, // Text file
-  682, // Text length
-  gWrapperFileContent_3_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/05-blinkled-systick-string.plm'
-
-const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "let s $staticString = \"azerty\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var zz $int32 = 0 {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc zzzz `user (\?inS $staticString !outS $staticString) {\n"
-  "  outS = inS\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  var ss = s\n"
-  "  var r $staticString\n"
-  "  waitMS (!250)\n"
-  "  zzzz (!\"toto\" \?r)\n"
-  "  ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  var rr $staticString\n"
-  "  waitMS (!250)\n"
-  "  zzzz (!\"tata\" \?rr)\n"
-  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
-  "05-blinkled-systick-string.plm",
-  "plm",
-  true, // Text file
-  697, // Text length
-  gWrapperFileContent_4_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/06-blinkled-lcd.plm'
-
-const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "  printString (!\"Hello !\")\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var toggle = true {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "var gCount $uint32 = 0 {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  waitMS (!250)\n"
-  "  ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  waitMS (!250)\n"
-  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "  toggle = not toggle\n"
-  "  if toggle then\n"
-  "    gCount += 1\n"
-  "    goto (!line:1 !column:8)\n"
-  "    printUnsigned (!gCount)\n"
-  "  end\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
-  "06-blinkled-lcd.plm",
-  "plm",
-  true, // Text file
-  627, // Text length
-  gWrapperFileContent_5_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/07-blinkled-urem-test.plm'
-
-const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var toggle = true {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "var gCount $uint32 = 0 {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  waitMS (!250)\n"
-  "  ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  waitMS (!250)\n"
-  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "  toggle = not toggle\n"
-  "  if toggle then\n"
-  "    gCount += 1\n"
-  "    goto (!line:1 !column:0)\n"
-  "    printUnsigned (!gCount)\n"
-  "    goto (!line:2 !column:0)\n"
-  "    printUnsignedUsingMod (!gCount)\n"
-  "  end\n"
-  "}\n"
-  "\n"
-  "proc printUnsignedUsingMod `user @noWarningIfUnused (\?inValue $uint32) {\n"
-  "  var divisor $uint32 = 1_000_000_000\n"
-  "  var value = inValue\n"
-  "  var isPrinting = false\n"
-  "  while divisor > 0 do\n"
-  "    if isPrinting or (value >= divisor) then\n"
-  "      let quotient = value / divisor\n"
-  "      writeData_inUserMode (!0x30 + convert quotient : $uint8)\n"
-  "    //  value = value - quotient * divisor\n"
-  "      value = value % divisor\n"
-  "      isPrinting = true\n"
-  "    end\n"
-  "    divisor = divisor / 10\n"
-  "  end\n"
-  "  if not isPrinting then\n"
-  "    writeData_inUserMode (!0x30)\n"
-  "  end\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
-  "07-blinkled-urem-test.plm",
-  "plm",
-  true, // Text file
-  1196, // Text length
-  gWrapperFileContent_6_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/08-blinkled-panic.plm'
-
-const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var toggle = true {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "var gCount $uint3 = 0 {\n"
-  "  @rw proc loop\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  waitMS (!250)\n"
-  "  ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  waitMS (!250)\n"
-  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "  toggle = not toggle\n"
-  "  if toggle then\n"
-  "    gCount += 1 // EXCEPTION AFTER 7s\n"
-  "    goto (!line:1 !column:0)\n"
-  "    printUnsigned (!extend gCount : $uint32)\n"
-  "  end\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
-  "08-blinkled-panic.plm",
-  "plm",
-  true, // Text file
-  638, // Text length
-  gWrapperFileContent_7_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/09-pit-unprivileged-mode.plm'
-
-const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "init 100_000 {\n"
-  "  SIM_SCGC6 |= SIM_SCGC6_PIT\n"
-  "  AICS0_PARCG = 0\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "section setupPIT () {\n"
-  "  PIT_MCR = 0\n"
-  "  PIT_LDVAL0 = 200000\n"
-  "  PIT_TCTRL0 = 1\n"
-  "}\n"
-  "\n"
-  "proc setup `user () {\n"
-  "  setupPIT ()\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "section getPIT (!outValue $uint32) {\n"
-  "  outValue = PIT_CVAL0\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  waitMS (!250)\n"
-  "  ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  waitMS (!250)\n"
-  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "  goto (!line:1 !column:0)\n"
-  "  printSpaces (!10)\n"
-  "  goto (!line:1 !column:0)\n"
-  "  var v $uint32\n"
-  "  getPIT (\?v)\n"
-  "  printUnsigned (!v)\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
-  "09-pit-unprivileged-mode.plm",
-  "plm",
-  true, // Text file
-  797, // Text length
-  gWrapperFileContent_8_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/10-pit-unprivileged-mode-it.plm'
-
-const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "init 100_000 {\n"
-  "  SIM_SCGC6 |= SIM_SCGC6_PIT\n"
-  "  NVIC_ISER2 = 1 << ((84 - 16) & 31)\n"
-  "//  NVIC_ISER = 1 << (84 - 16)\n"
-  "  AICS0_PARCG = 0\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "section setupPIT () {\n"
-  "  PIT_MCR = 0\n"
-  "  PIT_LDVAL0 = 200000\n"
-  "  PIT_TCTRL0 = 3 // Interrupt, enabled\n"
-  "}\n"
-  "\n"
-  "proc setup `user () {\n"
-  "  setupPIT ()\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "//proc setup `user () {\n"
-  "//  PIT_MCR = 0\n"
-  "//  PIT_LDVAL0 = 200000\n"
-  "//  PIT_TCTRL0 = 3 // Interrupt, enabled\n"
-  "//}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var gPITValue $uint32 = 0 {\n"
-  "  proc loop\n"
-  "  @rw proc PITChannel0Handler\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc PITChannel0Handler `isr () {\n"
-  "//--- Acquitter l'interruption\n"
-  "  PIT_TFLG0 = 1\n"
-  "//--- Incr\xC3""\xA9""menter le compteur\n"
-  "  gPITValue += 1\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  waitMS (!250)\n"
-  "  ledOn (!LED_TEENSY) // Allumer la led\n"
-  "  waitMS (!250)\n"
-  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
-  "  goto (!line:1 !column:0)\n"
-  "  printSpaces (!10)\n"
-  "  goto (!line:1 !column:0)\n"
-  "  printUnsigned (!gPITValue)\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
-  "10-pit-unprivileged-mode-it.plm",
-  "plm",
-  true, // Text file
-  1222, // Text length
-  gWrapperFileContent_9_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/11-structure-procs.plm'
-
-const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var gVar $int32 = 0 {\n"
-  "  @rw proc $MyStruct getX\n"
-  "  func $MyStruct readX\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "struct $MyStruct {\n"
-  "  var x $int32 = 9\n"
-  "  var y $int32 = 90\n"
-  "\n"
-  "  proc nop `user () {\n"
-  "  }\n"
-  "  proc getX `user (!outX $int32) {\n"
-  "    outX = self.x +% 3\n"
-  "    gVar = outX\n"
-  "    self.setX (!123)\n"
-  "  }\n"
-  "  mutating proc setX `user (\?inX $int32) {\n"
-  "    self.x = inX + 8\n"
-  "  }\n"
-  "  \n"
-  "  func readX `user @noWarningIfUnused () -> $int32 {\n"
-  "    result = self.x +% gVar\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "extension $MyStruct {\n"
-  "  var z $uint8 = 14\n"
-  "}\n"
-  "\n"
-  "extension $MyStruct {\n"
-  "  mutating proc reset `user () {\n"
-  "    azert (\?self)\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "extension $MyStruct {\n"
-  "  func azert `user (\?x $int32) -> $int32 {\n"
-  "    result = self.x +% x\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc azert `user (!p $MyStruct) {\n"
-  "  p = $MyStruct ()\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  var s = $MyStruct ()\n"
-  "  s.nop ()\n"
-  "  var x $int32 ; s.getX (\?x)\n"
-  "  s.setX (!999)\n"
-  "  s.reset ()\n"
-  "  x = s.azert (!23)\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
-  "11-structure-procs.plm",
-  "plm",
-  true, // Text file
-  1197, // Text length
-  gWrapperFileContent_10_embeddedSampleCode
-) ;
-
-//--- File 'teensy-3-1-it/12-concurrency-read-write.plm'
-
-const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var gValue1 $uint32 = 0 {\n"
-  "  @rw proc loop\n"
-  "  @rw proc userSystickHandler\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var gValue2 $uint32 = 0 {\n"
-  "  @rw proc loop\n"
-  "  @rw proc userSystickHandler\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var gIsCounting $bool = true {\n"
-  "  @rw proc loop\n"
-  "  proc userSystickHandler\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc userSystickHandler `isr () {\n"
-  "  if gIsCounting then\n"
-  "    gValue1 +%= 1\n"
-  "    gValue2 +%= 1\n"
-  "  end\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc setup `user () {\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "proc loop `user () {\n"
-  "  gValue1 +%= 1\n"
-  "  gValue2 +%= 1\n"
-  "  if gIsCounting and (millis () > 5_000) then\n"
-  "    gIsCounting = false\n"
-  "    printUnsigned (!gValue1)\n"
-  "    goto (!line:1 !column:0)\n"
-  "    printUnsigned (!gValue2)\n"
-  "  end\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
-  "12-concurrency-read-write.plm",
-  "plm",
-  true, // Text file
-  965, // Text length
-  gWrapperFileContent_11_embeddedSampleCode
-) ;
-
-//--- All files of 'teensy-3-1-it' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [13] = {
-  & gWrapperFile_0_embeddedSampleCode,
-  & gWrapperFile_1_embeddedSampleCode,
-  & gWrapperFile_2_embeddedSampleCode,
-  & gWrapperFile_3_embeddedSampleCode,
-  & gWrapperFile_4_embeddedSampleCode,
-  & gWrapperFile_5_embeddedSampleCode,
-  & gWrapperFile_6_embeddedSampleCode,
-  & gWrapperFile_7_embeddedSampleCode,
-  & gWrapperFile_8_embeddedSampleCode,
-  & gWrapperFile_9_embeddedSampleCode,
-  & gWrapperFile_10_embeddedSampleCode,
-  & gWrapperFile_11_embeddedSampleCode,
-  NULL
-} ;
-
-//--- All sub-directories of 'teensy-3-1-it' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1] = {
-  NULL
-} ;
-
-//--- Directory 'teensy-3-1-it'
-
-const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
-  "teensy-3-1-it",
-  12,
-  gWrapperAllFiles_embeddedSampleCode_1,
-  0,
-  gWrapperAllDirectories_embeddedSampleCode_1
-) ;
-
-//--- File 'teensy-3-1-xtr/01-blinkled.plm'
-
-const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-xtr\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "task BlinkLed {\n"
-  "  init {\n"
-  "    PORTC_PCR5 = PORTC_PCR5::mux (1)\n"
-  "    GPIOC_PDDR |= (1 << 5)\n"
-  "  }\n"
-  "\n"
-  "  var state : $bool = true\n"
-  "  \n"
-  "  every (!ms:500) {\n"
-  "    if state then\n"
-  "      GPIOC_PSOR = 1 << 5 // Allumer la led\n"
-  "      state = false\n"
-  "    else\n"
-  "      GPIOC_PCOR = 1 << 5 // \xC3""\x89""teindre la led\n"
-  "      static = true\n"
-  "    end  \n"
-  "  }\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
-  "01-blinkled.plm",
-  "plm",
-  true, // Text file
-  445, // Text length
-  gWrapperFileContent_12_embeddedSampleCode
-) ;
-
-//--- All files of 'teensy-3-1-xtr' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [2] = {
-  & gWrapperFile_12_embeddedSampleCode,
-  NULL
-} ;
-
-//--- All sub-directories of 'teensy-3-1-xtr' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'teensy-3-1-xtr'
-
-const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode (
-  "teensy-3-1-xtr",
-  1,
-  gWrapperAllFiles_embeddedSampleCode_2,
-  0,
-  gWrapperAllDirectories_embeddedSampleCode_2
-) ;
-
-//--- All files of '' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_0 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of '' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_0 [3] = {
-  & gWrapperDirectory_1_embeddedSampleCode,
-  & gWrapperDirectory_2_embeddedSampleCode,
-  NULL
-} ;
-
-//--- Directory ''
-
-const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode (
-  "",
-  0,
-  gWrapperAllFiles_embeddedSampleCode_0,
-  2,
-  gWrapperAllDirectories_embeddedSampleCode_0
-) ;
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-
-typeComparisonResult GALGAS_abstractDeclaration::objectCompare (const GALGAS_abstractDeclaration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractDeclaration::GALGAS_abstractDeclaration (void) :
-AC_GALGAS_class () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractDeclaration::GALGAS_abstractDeclaration (const cPtr_abstractDeclaration * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractDeclaration) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @abstractDeclaration class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_abstractDeclaration::cPtr_abstractDeclaration (LOCATION_ARGS) :
-acPtr_class (THERE) {
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @abstractDeclaration type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_abstractDeclaration ("abstractDeclaration",
-                                            NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_abstractDeclaration::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_abstractDeclaration ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_abstractDeclaration::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_abstractDeclaration (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractDeclaration GALGAS_abstractDeclaration::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_abstractDeclaration result ;
-  const GALGAS_abstractDeclaration * p = (const GALGAS_abstractDeclaration *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_abstractDeclaration *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("abstractDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_booleanDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_booleanDeclaration * p = (const cPtr_booleanDeclaration *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_booleanDeclaration) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mBooleanTypeName.objectCompare (p->mAttribute_mBooleanTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mAttributeList.objectCompare (p->mAttribute_mAttributeList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_booleanDeclaration::objectCompare (const GALGAS_booleanDeclaration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_booleanDeclaration::GALGAS_booleanDeclaration (void) :
-GALGAS_abstractDeclaration () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_booleanDeclaration GALGAS_booleanDeclaration::constructor_default (LOCATION_ARGS) {
-  return GALGAS_booleanDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                     GALGAS_lstringlist::constructor_emptyList (HERE)
-                                                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_booleanDeclaration::GALGAS_booleanDeclaration (const cPtr_booleanDeclaration * inSourcePtr) :
-GALGAS_abstractDeclaration (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_booleanDeclaration) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_booleanDeclaration GALGAS_booleanDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mBooleanTypeName,
-                                                                      const GALGAS_lstringlist & inAttribute_mAttributeList
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_booleanDeclaration result ;
-  if (inAttribute_mBooleanTypeName.isValid () && inAttribute_mAttributeList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_booleanDeclaration (inAttribute_mBooleanTypeName, inAttribute_mAttributeList COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_booleanDeclaration::getter_mBooleanTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_booleanDeclaration * p = (const cPtr_booleanDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_booleanDeclaration) ;
-    result = p->mAttribute_mBooleanTypeName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_booleanDeclaration::getter_mBooleanTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBooleanTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_booleanDeclaration::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstringlist result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_booleanDeclaration * p = (const cPtr_booleanDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_booleanDeclaration) ;
-    result = p->mAttribute_mAttributeList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist cPtr_booleanDeclaration::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAttributeList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                     Pointer class for @booleanDeclaration class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_booleanDeclaration::cPtr_booleanDeclaration (const GALGAS_lstring & in_mBooleanTypeName,
-                                                  const GALGAS_lstringlist & in_mAttributeList
-                                                  COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclaration (THERE),
-mAttribute_mBooleanTypeName (in_mBooleanTypeName),
-mAttribute_mAttributeList (in_mAttributeList) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_booleanDeclaration::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_booleanDeclaration ;
-}
-
-void cPtr_booleanDeclaration::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "[@booleanDeclaration:" ;
-  mAttribute_mBooleanTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mAttributeList.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_booleanDeclaration::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_booleanDeclaration (mAttribute_mBooleanTypeName, mAttribute_mAttributeList COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @booleanDeclaration type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_booleanDeclaration ("booleanDeclaration",
-                                           & kTypeDescriptor_GALGAS_abstractDeclaration) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_booleanDeclaration::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_booleanDeclaration ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_booleanDeclaration::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_booleanDeclaration (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_booleanDeclaration GALGAS_booleanDeclaration::extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_booleanDeclaration result ;
-  const GALGAS_booleanDeclaration * p = (const GALGAS_booleanDeclaration *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_booleanDeclaration *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("booleanDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
 

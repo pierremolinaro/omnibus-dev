@@ -23,10 +23,10 @@ var gVar $uint32 = 0 {
 proc loop `user () {
   gDelai +%= 1
   if gDelai == bound then
-    ledOn (!LED_TEENSY) // Allumer la led
+    ledOn (!LED_L1) // Allumer la led
   elsif (bound * 2) == gDelai then
     gDelai = 0
-    ledOff (!LED_TEENSY)  // Éteindre la led
+    ledOff (!LED_L1)  // Éteindre la led
     gVar +%= 1
     goto (!line:0 !column:0)
     printUnsigned (!gVar)
