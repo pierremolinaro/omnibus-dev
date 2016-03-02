@@ -29,7 +29,7 @@ def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
   if SYSTEM_NAME == "Darwin":
     MACHINE = "i386"
-  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.7.1-binutils-2.25.1-libusb-1.0.19")
+  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.7.1-binutils-2.26-libusb-1.0.19")
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -48,6 +48,24 @@ def llvmOptimizerCompiler ():
 
 def LLCcompiler ():
   return [toolDir () + "/bin/llc", "-<<LLC_OPTIMIZATION_OPTION>>"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#   LLVM Linker invocation                                                                                             *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def LLVMLinkercompiler ():
+  return [toolDir () + "/bin/llvm-link", "-S"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#   CLANG Compiler invocation                                                                                          *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def CLANGcompiler ():
+  return [toolDir () + "/bin/clang", "--target=armv7-none--eabi", "-mcpu=cortex-m4"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -115,6 +133,15 @@ def objcopy ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   C Source files                                                                                                     *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def CsourceList ():
+  return ["src.c"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #   LLVM Source files                                                                                                  *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -170,6 +197,7 @@ plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSour
                  asAssembler (), productDir (), \
                  linker (), linkerLibraries (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \
+                 CLANGcompiler (), CsourceList (), LLVMLinkercompiler (), \
                  currentFile)
 
 #----------------------------------------------------------------------------------------------------------------------*
