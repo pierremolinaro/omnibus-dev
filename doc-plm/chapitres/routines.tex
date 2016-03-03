@@ -14,7 +14,8 @@ Le langage définit plusieurs natures de sous-programmes :
   \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales (\refSectionPage{bootRoutine}) ;
   \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales (\refSectionPage{initRoutine}) ;
   \item les \emph{routines de panique}, exécutées lors d'une panique (\refSectionPage{routinePanique}) ;
-  \item les \emph{sections}, qui sont des procédures exécutées en mode privilégié (\refSectionPage{declarationSection}).
+  \item les \emph{sections}, qui sont des procédures exécutées en mode privilégié (\refSectionPage{declarationSection}) ;
+  \item les \emph{services}, qui sont des primitives de l'exécutif (\refSectionPage{declarationService}).
 \end{itemize}
 
 Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} et des \emph{fonctions} par le fait qu'elles n'ont pas d'arguments formels explicites, et qu'elles ne peuvent pas être appelées explicitement.
@@ -201,6 +202,15 @@ Comme cette nouvelle routine a le même nom, les mêmes arguments formels et le 
 
 
 
+\subsectionLabel{Attribut \texttt{@global}}{attributProcGlobale}\index{"@global}
+
+L'attribut \plm+@global+ signifie que la procédure sera visible par le code C et assembleur du projet. Ainsi une procédure écrite en PLM pourra être appelée à partir du code C et du code assembleur.
+
+
+
+
+
+
 \subsectionLabel{Attribut \texttt{@nullWhenPanicDisabled}}{nullWhenPanicDisabled}\index{"@nullWhenPanicDisabled}
 
 L'attribut \plm+@nullWhenPanicDisabled+ signifie que la procédure est éliminée si le projet est compilé avec la panique désactivée (option \OPTION{-{}-no-panic-generation}, \refSectionPage{optionCodeEngendre}). Les références à cette routine sont alors remplacées par la valeur zéro.
@@ -244,6 +254,30 @@ required proc loop `user ()
 \end{PLM}
 
 Ceci impose au programme utilisateur de définir ces deux procédures.
+
+
+
+
+
+
+
+\subsectionLabel{Procédures externes}{defProcedureExterne}
+
+Une procédure externe est une procédure définie en C ou en assembleur et appelable en PLM.
+
+La déclaration d'une procédure externe est la suivante :
+\begin{PLM}
+extern proc nom `mode1 `mode2 (arguments_formels)
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la procédure externe ;
+  \item \plm=`mode1= \plm=`mode2= est la liste non vide de l'ensemble des modes associés à la procédure.
+\end{itemize}
+
+
+
+
 
 
 
@@ -326,6 +360,23 @@ Dans tous les cas, seul l'accès en lecture à un registre de contrôle peut êt
 Si la fonction est déclarée avec le mode \plm!`user!, seuls les registres de contrôle déclarés \plm!@user! sont accessibles en lecture. Sinon, tous les registres de contrôle sont accessibles en lecture.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \sectionLabel{Sections}{declarationSection}\index{section}
 
 Une \emph{section} est une procédure qui est exécutée par le processeur en mode privilégié, le mode PLM qui correspond est \plm!`section!. Une section peut ainsi accéder à des registres de contrôles inaccessibles en mode \plm!`user!.
@@ -333,23 +384,6 @@ Une \emph{section} est une procédure qui est exécutée par le processeur en mo
 Une section est appelable uniquement à partir de fonctions ou de procédures en mode \plm!`user!.
 
 Techniquement, l'appel s'effectue à travers une instruction telle que \emph{Service Call} qui provoque un appel système et donc permet l'exécution avec le processeur en mode privilégié.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -387,6 +421,79 @@ Tous les registres de contrôle sont accessibles dans une section.
 
 
 \subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnusedSection}\index{"@noWarningIfUnused}
+
+L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la section n'est pas utilisée.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Services}{declarationService}\index{service}
+
+Un \emph{service} est une procédure qui définit une primitive de l'exécutif\footnote{Le processeur l'exécute en mode privilégié.}.
+
+Un service est appelable à partir des tâches, c'est-à-dire de routines dans le mode \plm!`user!.
+
+Un service déclare le mode logiciel dans lequel il s'exécute :
+\begin{itemize}
+  \item \plm!`isr!, il est aussi appelable à partir d'une routine d'interruption  ;
+  \item \plm!`kernel!, il n'est pas appelable à partir d'une routine d'interruption.
+\end{itemize}
+
+
+Techniquement, l'appel s'effectue à travers une instruction telle que \emph{Service Call} qui provoque un appel système et donc permet l'exécution avec le processeur en mode privilégié.
+
+
+
+\subsection{Déclaration d'un service}
+
+
+La déclaration d'une section est la suivante :
+\begin{PLM}
+service nom `mode @attribut1 @attribut2 (arguments_formels) {
+  liste_instructions
+}
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la section ;
+  \item \plm=`mode= est le mode logiciel, qui est soit \plm!`isr!, soit \plm!`kernel! ;
+  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés service ; actuellement, seul l'attribut \plm!@noWarningIfUnused! est défini (\refSubsectionPage{attributNoWarningIfUnusedService}).
+\end{itemize}
+
+
+
+\subsectionLabel{Services et variables globales}{servicesEtVariablesGlobales}
+
+Pour pouvoir être utilisée dans un service, une variable globale doit déclarer ce service parmi les routines autorisées (\refSectionPage{DecRoutinesAutoriseesVarGlobale}).
+
+
+
+\subsectionLabel{Services et registres de contrôle}{servicesEtRegistresContrôles}
+
+Tous les registres de contrôle sont accessibles dans un service.
+
+
+
+
+
+
+
+\subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnusedService}\index{"@noWarningIfUnused}
 
 L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la section n'est pas utilisée.
 

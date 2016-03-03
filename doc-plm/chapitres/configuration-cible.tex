@@ -140,9 +140,6 @@ pointerSize 32
 
 panic : $int32 $uint32
 
-mode `isr
-mode `user
-
 import "files/mk20dx256.plm"
 import "files/boot-teensy-3-1-it.plm"
 
@@ -166,22 +163,19 @@ init 0 { // Configure Systick interrupt every ms
 
 {\bf Ligne 3.} Déclaration des types entier relatifs à la panique (\refSectionPage{typePanique}). Le premier type définit le type du code de la panique (\plm+$int32+, dont un code peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+$uint32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
 
-{\bf Lignes 5 et 6.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`panic= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
-
-
-{\bf Lignes 8 et 9.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1-it.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.
+{\bf Lignes 5 et 6.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1-it.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.
 
 
 
-{\bf Lignes 11 à 13.} Déclaration des procédures requises (\refSubsectionPage{procedureRequise}). Ces déclarations ont une double signification :
+{\bf Lignes 8 à 10.} Déclaration des procédures requises (\refSubsectionPage{procedureRequise}). Ces déclarations ont une double signification :
 \begin{itemize}
   \item d'abord, que les procédures citées doivent être définies soit dans la cible (c'est le cas de \texttt{systickHandler}), soit dans le code utilisateur (ici \texttt{01-blinkled.plm}) : c'est le cas des procédures \texttt{setup} et \texttt{loop} ;
   \item ensuite, le compilateur calcule le graphe des appels des routines, afin de supprimer les routines inutilisées ; les procédures requises sont les racines du graphe d'accessibilité.
 \end{itemize}
 
-{\bf Lignes 15 et 16.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=`isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
+{\bf Lignes 12 et 13.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=`isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
 
-{\bf Lignes 18 à 22.} Définition de la routine \plm=init 0= (\refSectionPage{initRoutine}). Le code de cette routine configure le \emph{SysTick Timer} de façon qu'une interruption \emph{SysTick} survienne toutes les millisecondes. Comme cette routine porte le numéro $0$, on est sûr qu'elle soit la première à être exécutée.
+{\bf Lignes 15 à 19.} Définition de la routine \plm=init 0= (\refSectionPage{initRoutine}). Le code de cette routine configure le \emph{SysTick Timer} de façon qu'une interruption \emph{SysTick} survienne toutes les millisecondes. Comme cette routine porte le numéro $0$, on est sûr qu'elle soit la première à être exécutée.
 
 
 
