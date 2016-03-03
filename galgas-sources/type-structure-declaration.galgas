@@ -286,6 +286,7 @@ override method @structureDeclaration semanticAnalysis
   case boolean : propertyMap = {}
   case boolset : propertyMap = {}
   case literalString : propertyMap = {}
+  case opaque : propertyMap = {}
   end
 #--- Analyze procedures
   for procedure in mProcedureDeclarationListAST do

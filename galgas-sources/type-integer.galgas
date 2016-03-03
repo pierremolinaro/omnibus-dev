@@ -40,8 +40,6 @@ override method @integerDeclaration enterInPrecedenceGraph
   let integerTypeName = ["$" + [self typeName] nowhere]
   [!?ioGraph addNode !integerTypeName !self]
   [!?ioGraph addEdge !integerTypeName !["$" + staticIntegerTypeName () nowhere]]
-#--- An edge to $bool is useless, as static integer type has an edge to $bool
-#  [!?ioGraph addEdge !integerTypeName !["$" + boolTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

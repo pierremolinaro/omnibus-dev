@@ -1,0 +1,103 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @opaqueTypeDeclaration : @abstractDeclaration {
+  @lstring mOpaqueTypeName
+  @lbigint mSize
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @opaqueTypeDeclaration location -> @location outLocation {
+  outLocation = mOpaqueTypeName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $opaqueType$
+    $typeName$ ?let opaqueTypeName
+    $:$
+    $integer$ ?let size
+    ioAST.mDeclarationList += !@opaqueTypeDeclaration.new {!opaqueTypeName !size}
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @opaqueTypeDeclaration addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                    *
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @opaqueTypeDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let typeName = @lstring.new {!"$" + mOpaqueTypeName !mOpaqueTypeName.location}
+  [!?ioGraph addNode !typeName !self]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @opaqueTypeDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "opaqueType $" + mOpaqueTypeName 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                    *
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @opaqueTypeDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+#---
+  if mSize.bigint == 0G then
+    error mSize : "the opaque type size should be > 0"
+  end
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mOpaqueTypeName
+    !llvmTypeName:"i" + mSize.bigint
+    !kind:.opaque
+    !typedConstantMap:{}
+    !procedureMap:{}
+    !functionMap:{}
+    !copiable:false
+    !equatable:false
+    !comparable:false
+    !enumerationType:.null # Not enumerable
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @opaqueTypeDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

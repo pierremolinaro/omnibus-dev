@@ -18,9 +18,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/syntax-grammar.galgas"
   "galgas-sources/cocoa.galgas"
 
-#--- Bool
-  "galgas-sources/bool-type.galgas"
-
 #--- Pointer
   "galgas-sources/pointer-size.galgas"
 
@@ -28,22 +25,20 @@ project (1:0:0) -> "plm" {
 ##  "galgas-sources/boolset-type.galgas"
 
 #--- Type declaration
+  "galgas-sources/bool-type.galgas"
   "galgas-sources/type-enumeration-declaration.galgas"
   "galgas-sources/type-structure-declaration.galgas"
   "galgas-sources/type-alias.galgas"
   "galgas-sources/type-extension-declaration.galgas"
+  "galgas-sources/type-integer.galgas"
+  "galgas-sources/type-literal-integer.galgas"
+  "galgas-sources/type-static-string.galgas"
+  "galgas-sources/type-opaque-declaration.galgas"
 
 #--- Global declarations
   "galgas-sources/global-variable-declaration.galgas"
   "galgas-sources/global-constant-declaration.galgas"
   "galgas-sources/register-declaration.galgas"
-
-#--- Integer
-  "galgas-sources/type-integer.galgas"
-  "galgas-sources/type-literal-integer.galgas"
-
-#--- Static string
-  "galgas-sources/type-static-string.galgas"
 
 #--- Exception
   "galgas-sources/exception.galgas"
