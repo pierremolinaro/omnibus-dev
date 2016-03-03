@@ -1,15 +1,17 @@
 
+opaqueType $taskList : 32
+
 //--- Block running task
-extern proc kernel_blockRunningTaskInList `kernel (?!ioWaitingList $uint32)
+extern proc kernel_blockRunningTaskInList `kernel (?!ioWaitingList $taskList)
 
 extern proc kernel_blockRunningTaskInDeadlineList `kernel (?inDeadlineMS $uint32) 
 
 extern proc kernel_blockRunningTaskInListAndDeadlineList `kernel (
-  ?!ioWaitingList $uint32
+  ?!ioWaitingList $taskList
   ?inDeadlineMS $uint32)
 
 //--- Make task Ready
-extern proc kernel_makeTaskReadyFromWaitingList `isr (?!ioWaitingList $uint32)
+extern proc kernel_makeTaskReadyFromWaitingList `isr (?!ioWaitingList $taskList)
 
 extern proc kernel_tasksWithEarlierDateBecomeReady `isr (?inCurrentDate $uint32)
 

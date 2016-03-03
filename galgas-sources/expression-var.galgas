@@ -129,6 +129,8 @@ override method @varInExpressionAST analyzeExpression
       registerBitSliceMap = submap
     else
       switch [outResult.mType kind]
+        case opaque :
+          error field : "an opaque type does not handle field access"
         case boolean :
           error field : "a boolean does not handle field access"
         case staticInteger :

@@ -12,6 +12,7 @@ enum @typeKind {
   case structure (@propertyMap propertyMap @propertyList propertyList)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
+  case opaque
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -26,7 +27,6 @@ map @infixOperatorMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @prefixOperatorMap {
-#  @unifiedTypeMap-proxy mResultType
   insert insertKey error message "** internal error **"
   search searchKey error message "prefix operation is not defined for $%K type"
 }
