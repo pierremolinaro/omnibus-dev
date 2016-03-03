@@ -76,7 +76,10 @@ override method @constructorCall analyzeExpression
     error mErrorLocation : "cannot infer type" : outResult
   else
     [inContext.mConstructorMap searchKey ![[resultType key] nowhere] ?let initValue]
-    outResult = .new {!resultType !.llvmStructureConstant {!values:initValue}}
+    switch initValue
+    case simple (value) : outResult = .new {!resultType !.literalInteger {!value:value}}
+    case structure (values) : outResult = .new {!resultType !.llvmStructureConstant {!values:values}}
+    end
   end
 }
 

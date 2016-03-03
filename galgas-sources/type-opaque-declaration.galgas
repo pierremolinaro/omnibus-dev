@@ -45,7 +45,7 @@ override method @opaqueTypeDeclaration addExtension
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                    *
+#  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @opaqueTypeDeclaration enterInPrecedenceGraph
@@ -53,6 +53,7 @@ override method @opaqueTypeDeclaration enterInPrecedenceGraph
 {
   let typeName = @lstring.new {!"$" + mOpaqueTypeName !mOpaqueTypeName.location}
   [!?ioGraph addNode !typeName !self]
+  [!?ioGraph addEdge !typeName !["$" + staticIntegerTypeName () nowhere]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -62,7 +63,7 @@ override getter @opaqueTypeDeclaration keyRepresentationForErrorSignaling -> @st
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                    *
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @opaqueTypeDeclaration enterInContext
@@ -86,6 +87,8 @@ override method @opaqueTypeDeclaration enterInContext
     !comparable:false
     !enumerationType:.null # Not enumerable
   ]
+#--- Constructor
+  [!?ioContext.mConstructorMap insertKey !mOpaqueTypeName !.simple {!value:0G}]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
