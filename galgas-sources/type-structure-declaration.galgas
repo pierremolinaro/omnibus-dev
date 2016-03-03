@@ -264,7 +264,7 @@ override method @structureDeclaration enterInContext
     end
     operandIRList += !.new {!type !expressionIR.mValue}
   end
-  [!?ioContext.mConstructorMap insertKey !mStructureName !operandIRList]
+  [!?ioContext.mConstructorMap insertKey !mStructureName !.structure{!values:operandIRList}]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

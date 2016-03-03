@@ -155,8 +155,15 @@ list @operandIRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @constructorValue {
+  case simple (@bigint value)
+  case structure (@operandIRList values)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 map @constructorMap {
-  @operandIRList mInitValues
+  @constructorValue mInitValue
   insert insertKey error message "-- internal error --"
   search searchKey error message "-- internal error --"
 }
