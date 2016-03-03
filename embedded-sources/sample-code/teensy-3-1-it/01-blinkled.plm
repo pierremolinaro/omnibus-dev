@@ -2,12 +2,6 @@ target "teensy-3-1-it"
 
 //------------------------------------------------*
 
-proc userSystickHandler `isr () {
-  kernel_tasksWithEarlierDateBecomeReady (!millis ())
-}
-
-//------------------------------------------------*
-
 proc setup `user () {
 }
 
