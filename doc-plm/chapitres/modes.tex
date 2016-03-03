@@ -61,9 +61,9 @@ proc routineAppelante `user `isr () {
 L'appel de \plm+uneRoutine+ est invalide, car l'ensemble des modes de la routine appelée \plm+uneRoutine+ est \{\plm+`isr+\} et ne contient pas l'ensemble des modes de la routine appelante \plm+routineAppelante+ qui est \{\plm+`isr+, \plm+`user+\}. En effet, la routine appelante \plm+routineAppelante+ peut elle-même être appelée à partir d'une routine dont le mode est \plm+`user+ : autoriser l'appel de \plm+uneRoutine+ aurait pour conséquence de pouvoir appeler de manière indirecte une routine dont le mode associé est \plm+`isr+ à partir d'une routine dont le mode est \plm+`user+.
 
 
-\sectionLabel{Modes prédéfinis}{modesPredefinis}
+\sectionLabel{Modes définis par le compilateur}{modesPredefinis}
 
-Le compilateur prédéfinit trois modes d'exécution (\refTableauPage{ModeExecutionPredefinis}).
+Le compilateur définit six modes d'exécution (\refTableauPage{ModeExecutionPredefinis}). Il n'est pas possible d'en définir de nouveaux.
 
 
 
@@ -76,8 +76,11 @@ Le compilateur prédéfinit trois modes d'exécution (\refTableauPage{ModeExecut
   \plm=`boot= & Routines exécutées au démarrage & \refSectionPage{bootRoutine} \\
   \plm=`init= & Routines d'initialisation & \refSectionPage{initRoutine} \\
   \plm=`panic= & Routines de panique & \refSectionPage{routinePanique} \\
+  \plm=`kernel= & Routines du noyau de l'exécutif temps-réel &  \\
+  \plm=`isr= & Routines d'interruption &  \\
+  \plm=`section= & Sections critiques &  \\
 \end{tabular}
-\caption{Modes d'exécution prédéfinis}
+\caption{Modes d'exécution définis par le compilateur}
 \labelTableau{ModeExecutionPredefinis}
 \ligne
 \end{table}
