@@ -1,0 +1,29 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+
+
+\chapter{Les types opaque}
+
+Un \emph{type opaque} est un type dont la définition est externe à PLM, dans le code C associé. Les objets de ce type ne peuvent pas être copiés, ni comparés, et leur contenu est inaccessible. 
+
+\section{Déclaration d'un type opaque}
+
+La déclaration d'un type opaque est introduite par le mot réservé \plm!opaqueType! :
+
+\begin{PLM}
+opaqueType MonTypeOpaque : 32
+\end{PLM}
+
+Le nombre associé (ici \plm!32!) est le nombre de bits nécessaires pour représenter un objet de ce type.
+
+
+
+
+
+
+
+
+
