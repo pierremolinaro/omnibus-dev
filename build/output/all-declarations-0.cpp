@@ -16,6 +16,7 @@
 
 #include "strings/unicode_character_cpp.h"
 #include "galgas2/scanner_actions.h"
+#include "galgas2/cLexiqueIntrospection.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2620,6 +2621,19 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("!%=") COMMA_THERE) ;
   return result ;
 }
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void getKeywordLists_plm_5F_lexique (TC_UniqueArray <C_String> & ioList) {
+  ioList.addObject ("plm_5F_lexique:delimitorsList") ;
+  ioList.addObject ("plm_5F_lexique:keyWordList") ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static cLexiqueIntrospection lexiqueIntrospection_plm_5F_lexique
+__attribute__ ((used))
+__attribute__ ((unused)) (getKeywordLists_plm_5F_lexique) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   S T Y L E   I N D E X    F O R    T E R M I N A L                                                                 *
