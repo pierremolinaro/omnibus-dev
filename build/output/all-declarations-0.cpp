@@ -200,6 +200,9 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_panic = "the 'panic' keyw
 //--- Syntax error message for terminal '$pointerSize$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_pointerSize = "the 'pointerSize' keyword" ;
 
+//--- Syntax error message for terminal '$priority$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_priority = "the 'priority' keyword" ;
+
 //--- Syntax error message for terminal '$proc$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_proc = "the 'proc' keyword" ;
 
@@ -224,8 +227,14 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_service = "the 'service' 
 //--- Syntax error message for terminal '$struct$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_struct = "the 'struct' keyword" ;
 
+//--- Syntax error message for terminal '$stackSize$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_stackSize = "the 'stackSize' keyword" ;
+
 //--- Syntax error message for terminal '$target$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_target = "the 'target' keyword" ;
+
+//--- Syntax error message for terminal '$task$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_task = "the 'task' keyword" ;
 
 //--- Syntax error message for terminal '$then$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_then = "the 'then' keyword" ;
@@ -394,7 +403,7 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__21__25__3D_ = "the '!%='
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const char * syntaxErrorMessageArray [106] = {kEndOfSourceLexicalErrorMessage,
+  static const char * syntaxErrorMessageArray [109] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_typeName,
@@ -437,6 +446,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_or,
     gSyntaxErrorMessage_plm_5F_lexique_panic,
     gSyntaxErrorMessage_plm_5F_lexique_pointerSize,
+    gSyntaxErrorMessage_plm_5F_lexique_priority,
     gSyntaxErrorMessage_plm_5F_lexique_proc,
     gSyntaxErrorMessage_plm_5F_lexique_register,
     gSyntaxErrorMessage_plm_5F_lexique_required,
@@ -445,7 +455,9 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_self,
     gSyntaxErrorMessage_plm_5F_lexique_service,
     gSyntaxErrorMessage_plm_5F_lexique_struct,
+    gSyntaxErrorMessage_plm_5F_lexique_stackSize,
     gSyntaxErrorMessage_plm_5F_lexique_target,
+    gSyntaxErrorMessage_plm_5F_lexique_task,
     gSyntaxErrorMessage_plm_5F_lexique_then,
     gSyntaxErrorMessage_plm_5F_lexique_true,
     gSyntaxErrorMessage_plm_5F_lexique_truncate,
@@ -1123,6 +1135,19 @@ static const utf32 kUnicodeString_plm_5F_lexique_pointerSize [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$priority$'
+static const utf32 kUnicodeString_plm_5F_lexique_priority [] = {
+  TO_UNICODE ('p'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('y'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$proc$'
 static const utf32 kUnicodeString_plm_5F_lexique_proc [] = {
   TO_UNICODE ('p'),
@@ -1206,6 +1231,20 @@ static const utf32 kUnicodeString_plm_5F_lexique_service [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$stackSize$'
+static const utf32 kUnicodeString_plm_5F_lexique_stackSize [] = {
+  TO_UNICODE ('s'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('c'),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('S'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('z'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$struct$'
 static const utf32 kUnicodeString_plm_5F_lexique_struct [] = {
   TO_UNICODE ('s'),
@@ -1225,6 +1264,15 @@ static const utf32 kUnicodeString_plm_5F_lexique_target [] = {
   TO_UNICODE ('g'),
   TO_UNICODE ('e'),
   TO_UNICODE ('t'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$task$'
+static const utf32 kUnicodeString_plm_5F_lexique_task [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('s'),
+  TO_UNICODE ('k'),
   TO_UNICODE (0)
 } ;
 
@@ -1381,7 +1429,7 @@ int16_t C_Lexique_plm_5F_lexique::search_into_delimitorsList (const C_String & i
 //             Key words table 'keyWordList'                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int32_t ktable_size_plm_5F_lexique_keyWordList = 46 ;
+static const int32_t ktable_size_plm_5F_lexique_keyWordList = 49 ;
 
 static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [ktable_size_plm_5F_lexique_keyWordList] = {
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_at, 2, C_Lexique_plm_5F_lexique::kToken_at),
@@ -1404,6 +1452,7 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_init, 4, C_Lexique_plm_5F_lexique::kToken_init),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_proc, 4, C_Lexique_plm_5F_lexique::kToken_proc),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_self, 4, C_Lexique_plm_5F_lexique::kToken_self),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_task, 4, C_Lexique_plm_5F_lexique::kToken_task),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_then, 4, C_Lexique_plm_5F_lexique::kToken_then),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_true, 4, C_Lexique_plm_5F_lexique::kToken_true),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_check, 5, C_Lexique_plm_5F_lexique::kToken_check),
@@ -1423,10 +1472,12 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_section, 7, C_Lexique_plm_5F_lexique::kToken_section),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_service, 7, C_Lexique_plm_5F_lexique::kToken_service),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_mutating, 8, C_Lexique_plm_5F_lexique::kToken_mutating),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_priority, 8, C_Lexique_plm_5F_lexique::kToken_priority),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_register, 8, C_Lexique_plm_5F_lexique::kToken_register),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_required, 8, C_Lexique_plm_5F_lexique::kToken_required),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_truncate, 8, C_Lexique_plm_5F_lexique::kToken_truncate),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_extension, 9, C_Lexique_plm_5F_lexique::kToken_extension),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_stackSize, 9, C_Lexique_plm_5F_lexique::kToken_stackSize),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_opaqueType, 10, C_Lexique_plm_5F_lexique::kToken_opaqueType),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_requiredBy, 10, C_Lexique_plm_5F_lexique::kToken_requiredBy),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_pointerSize, 11, C_Lexique_plm_5F_lexique::kToken_pointerSize)
@@ -1681,6 +1732,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("pointerSize") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken_priority:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("priority") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken_proc:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("proc") ;
@@ -1721,9 +1777,19 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("struct") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken_stackSize:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("stackSize") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken_target:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("target") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_task:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("task") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_then:
@@ -2556,6 +2622,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("or") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("panic") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("pointerSize") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("priority") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("proc") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("register") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("required") COMMA_THERE) ;
@@ -2564,7 +2631,9 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("self") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("service") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("struct") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("stackSize") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("target") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("task") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("then") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("true") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("truncate") COMMA_THERE) ;
@@ -2707,6 +2776,7 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.addObject ("init") ;
     ioList.addObject ("proc") ;
     ioList.addObject ("self") ;
+    ioList.addObject ("task") ;
     ioList.addObject ("then") ;
     ioList.addObject ("true") ;
     ioList.addObject ("check") ;
@@ -2726,10 +2796,12 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.addObject ("section") ;
     ioList.addObject ("service") ;
     ioList.addObject ("mutating") ;
+    ioList.addObject ("priority") ;
     ioList.addObject ("register") ;
     ioList.addObject ("required") ;
     ioList.addObject ("truncate") ;
     ioList.addObject ("extension") ;
+    ioList.addObject ("stackSize") ;
     ioList.addObject ("opaqueType") ;
     ioList.addObject ("requiredBy") ;
     ioList.addObject ("pointerSize") ;
@@ -2747,7 +2819,7 @@ __attribute__ ((unused)) (getKeywordLists_plm_5F_lexique, getKeywordsForIdentifi
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [106] = {0,
+  static const uint32_t kTerminalSymbolStyles [109] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_typeName */,
@@ -2790,6 +2862,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_or */,
     1 /* plm_lexique_1_panic */,
     1 /* plm_lexique_1_pointerSize */,
+    1 /* plm_lexique_1_priority */,
     1 /* plm_lexique_1_proc */,
     1 /* plm_lexique_1_register */,
     1 /* plm_lexique_1_required */,
@@ -2798,7 +2871,9 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_self */,
     1 /* plm_lexique_1_service */,
     1 /* plm_lexique_1_struct */,
+    1 /* plm_lexique_1_stackSize */,
     1 /* plm_lexique_1_target */,
+    1 /* plm_lexique_1_task */,
     1 /* plm_lexique_1_then */,
     1 /* plm_lexique_1_true */,
     1 /* plm_lexique_1_truncate */,

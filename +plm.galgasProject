@@ -25,7 +25,7 @@ project (1:0:0) -> "plm" {
 ##  "galgas-sources/boolset-type.galgas"
 
 #--- Type declaration
-  "galgas-sources/bool-type.galgas"
+  "galgas-sources/type-bool.galgas"
   "galgas-sources/type-enumeration-declaration.galgas"
   "galgas-sources/type-structure-declaration.galgas"
   "galgas-sources/type-alias.galgas"
