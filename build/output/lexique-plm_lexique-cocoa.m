@@ -79,7 +79,7 @@
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [46] = {
+static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [49] = {
   {"at", plm_lexique_1_at},
   {"do", plm_lexique_1_do},
   {"if", plm_lexique_1_if},
@@ -100,6 +100,7 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"init", plm_lexique_1_init},
   {"proc", plm_lexique_1_proc},
   {"self", plm_lexique_1_self},
+  {"task", plm_lexique_1_task},
   {"then", plm_lexique_1_then},
   {"true", plm_lexique_1_true},
   {"check", plm_lexique_1_check},
@@ -119,17 +120,19 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"section", plm_lexique_1_section},
   {"service", plm_lexique_1_service},
   {"mutating", plm_lexique_1_mutating},
+  {"priority", plm_lexique_1_priority},
   {"register", plm_lexique_1_register},
   {"required", plm_lexique_1_required},
   {"truncate", plm_lexique_1_truncate},
   {"extension", plm_lexique_1_extension},
+  {"stackSize", plm_lexique_1_stackSize},
   {"opaqueType", plm_lexique_1_opaqueType},
   {"requiredBy", plm_lexique_1_requiredBy},
   {"pointerSize", plm_lexique_1_pointerSize}
 } ;
 
 static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedString) {
-  return searchStringInTable (inSearchedString, ktable_for_plm_5F_lexique_keyWordList, 46) ;
+  return searchStringInTable (inSearchedString, ktable_for_plm_5F_lexique_keyWordList, 49) ;
 }
 
 
@@ -491,7 +494,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) terminalVocabularyCount {
-  return 105 ;
+  return 108 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -521,7 +524,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) styleIndexForTerminal: (NSInteger) inTerminal {
-  static const NSUInteger kTerminalSymbolStyles [106] = {0,
+  static const NSUInteger kTerminalSymbolStyles [109] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_typeName */,
@@ -564,6 +567,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_or */,
     1 /* plm_lexique_1_panic */,
     1 /* plm_lexique_1_pointerSize */,
+    1 /* plm_lexique_1_priority */,
     1 /* plm_lexique_1_proc */,
     1 /* plm_lexique_1_register */,
     1 /* plm_lexique_1_required */,
@@ -572,7 +576,9 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_self */,
     1 /* plm_lexique_1_service */,
     1 /* plm_lexique_1_struct */,
+    1 /* plm_lexique_1_stackSize */,
     1 /* plm_lexique_1_target */,
+    1 /* plm_lexique_1_task */,
     1 /* plm_lexique_1_then */,
     1 /* plm_lexique_1_true */,
     1 /* plm_lexique_1_truncate */,
@@ -638,7 +644,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (BOOL) atomicSelectionForToken: (NSUInteger) inTokenIndex {
-  static const BOOL kTerminalAtomicSelection [106] = {NO,
+  static const BOOL kTerminalAtomicSelection [109] = {NO,
     YES /* plm_lexique_1_identifier */,
     YES /* plm_lexique_1_attribute */,
     YES /* plm_lexique_1_typeName */,
@@ -681,6 +687,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_or */,
     YES /* plm_lexique_1_panic */,
     YES /* plm_lexique_1_pointerSize */,
+    YES /* plm_lexique_1_priority */,
     YES /* plm_lexique_1_proc */,
     YES /* plm_lexique_1_register */,
     YES /* plm_lexique_1_required */,
@@ -689,7 +696,9 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_self */,
     YES /* plm_lexique_1_service */,
     YES /* plm_lexique_1_struct */,
+    YES /* plm_lexique_1_stackSize */,
     YES /* plm_lexique_1_target */,
+    YES /* plm_lexique_1_task */,
     YES /* plm_lexique_1_then */,
     YES /* plm_lexique_1_true */,
     YES /* plm_lexique_1_truncate */,
