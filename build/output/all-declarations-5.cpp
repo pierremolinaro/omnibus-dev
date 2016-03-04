@@ -654,7 +654,6 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-it\
   "  gVar +%= 500\n"
   "  goto (!line:0 !column:0)\n"
   "  printUnsigned (!millis ())\n"
-  "  var u = $taskList ()\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n" ;
@@ -663,7 +662,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkled.plm",
   "plm",
   true, // Text file
-  570, // Text length
+  547, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
