@@ -2625,15 +2625,122 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void getKeywordLists_plm_5F_lexique (TC_UniqueArray <C_String> & ioList) {
-  ioList.addObject ("plm_5F_lexique:delimitorsList") ;
-  ioList.addObject ("plm_5F_lexique:keyWordList") ;
+  ioList.addObject ("plm_lexique:delimitorsList") ;
+  ioList.addObject ("plm_lexique:keyWordList") ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifier,
+                                                     bool & ioFound,
+                                                     TC_UniqueArray <C_String> & ioList) {
+  if (inIdentifier == "plm_lexique:delimitorsList") {
+    ioFound = true ;
+    ioList.addObject ("%") ;
+    ioList.addObject ("&") ;
+    ioList.addObject ("(") ;
+    ioList.addObject (")") ;
+    ioList.addObject ("*") ;
+    ioList.addObject ("+") ;
+    ioList.addObject (",") ;
+    ioList.addObject ("-") ;
+    ioList.addObject (".") ;
+    ioList.addObject ("/") ;
+    ioList.addObject (":") ;
+    ioList.addObject (";") ;
+    ioList.addObject ("<") ;
+    ioList.addObject ("=") ;
+    ioList.addObject (">") ;
+    ioList.addObject ("[") ;
+    ioList.addObject ("]") ;
+    ioList.addObject ("^") ;
+    ioList.addObject ("{") ;
+    ioList.addObject ("|") ;
+    ioList.addObject ("}") ;
+    ioList.addObject ("~") ;
+    ioList.addObject ("!%") ;
+    ioList.addObject ("!/") ;
+    ioList.addObject ("!=") ;
+    ioList.addObject ("%=") ;
+    ioList.addObject ("&=") ;
+    ioList.addObject ("*%") ;
+    ioList.addObject ("*=") ;
+    ioList.addObject ("+%") ;
+    ioList.addObject ("+=") ;
+    ioList.addObject ("-%") ;
+    ioList.addObject ("-=") ;
+    ioList.addObject ("->") ;
+    ioList.addObject ("/=") ;
+    ioList.addObject ("::") ;
+    ioList.addObject ("<<") ;
+    ioList.addObject ("<=") ;
+    ioList.addObject ("==") ;
+    ioList.addObject (">=") ;
+    ioList.addObject (">>") ;
+    ioList.addObject ("^=") ;
+    ioList.addObject ("|=") ;
+    ioList.addObject ("!%=") ;
+    ioList.addObject ("!/=") ;
+    ioList.addObject ("*%=") ;
+    ioList.addObject ("+%=") ;
+    ioList.addObject ("-%=") ;
+  }
+  if (inIdentifier == "plm_lexique:keyWordList") {
+    ioFound = true ;
+    ioList.addObject ("at") ;
+    ioList.addObject ("do") ;
+    ioList.addObject ("if") ;
+    ioList.addObject ("in") ;
+    ioList.addObject ("or") ;
+    ioList.addObject ("and") ;
+    ioList.addObject ("end") ;
+    ioList.addObject ("for") ;
+    ioList.addObject ("let") ;
+    ioList.addObject ("not") ;
+    ioList.addObject ("var") ;
+    ioList.addObject ("xor") ;
+    ioList.addObject ("boot") ;
+    ioList.addObject ("case") ;
+    ioList.addObject ("else") ;
+    ioList.addObject ("enum") ;
+    ioList.addObject ("func") ;
+    ioList.addObject ("init") ;
+    ioList.addObject ("proc") ;
+    ioList.addObject ("self") ;
+    ioList.addObject ("then") ;
+    ioList.addObject ("true") ;
+    ioList.addObject ("check") ;
+    ioList.addObject ("elsif") ;
+    ioList.addObject ("false") ;
+    ioList.addObject ("panic") ;
+    ioList.addObject ("while") ;
+    ioList.addObject ("assert") ;
+    ioList.addObject ("extend") ;
+    ioList.addObject ("extern") ;
+    ioList.addObject ("import") ;
+    ioList.addObject ("struct") ;
+    ioList.addObject ("target") ;
+    ioList.addObject ("boolset") ;
+    ioList.addObject ("convert") ;
+    ioList.addObject ("newtype") ;
+    ioList.addObject ("section") ;
+    ioList.addObject ("service") ;
+    ioList.addObject ("mutating") ;
+    ioList.addObject ("register") ;
+    ioList.addObject ("required") ;
+    ioList.addObject ("truncate") ;
+    ioList.addObject ("extension") ;
+    ioList.addObject ("opaqueType") ;
+    ioList.addObject ("requiredBy") ;
+    ioList.addObject ("pointerSize") ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 static cLexiqueIntrospection lexiqueIntrospection_plm_5F_lexique
 __attribute__ ((used))
-__attribute__ ((unused)) (getKeywordLists_plm_5F_lexique) ;
+__attribute__ ((unused)) (getKeywordLists_plm_5F_lexique, getKeywordsForIdentifier_plm_5F_lexique) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   S T Y L E   I N D E X    F O R    T E R M I N A L                                                                 *
@@ -13666,26 +13773,6 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i69_parse (C_Le
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 27)) ;
   nt_instructionList_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 30)) ;
-  inCompiler->resetTemplateString () ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cParser_plm_5F_specific_5F_syntax::rule_plm_5F_specific_5F_syntax_declaration_i0_ (GALGAS_ast & ioArgument_ioAST,
-                                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_target) COMMA_SOURCE_FILE ("target-generation.galgas", 10)) ;
-  GALGAS_lstring var_targetName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("target-generation.galgas", 11)) ;
-  ioArgument_ioAST.mAttribute_mTargetList.addAssign_operation (var_targetName  COMMA_SOURCE_FILE ("target-generation.galgas", 12)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cParser_plm_5F_specific_5F_syntax::rule_plm_5F_specific_5F_syntax_declaration_i0_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_target) COMMA_SOURCE_FILE ("target-generation.galgas", 10)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("target-generation.galgas", 11)) ;
   inCompiler->resetTemplateString () ;
 }
 

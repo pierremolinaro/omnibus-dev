@@ -11,6 +11,35 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   Parser class 'plm_specific_syntax' declaration                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cParser_plm_5F_specific_5F_syntax {
+//--- Virtual destructor
+  public : virtual ~ cParser_plm_5F_specific_5F_syntax (void) {}
+
+//--- Non terminal declarations
+  protected : virtual void nt_declaration_ (class GALGAS_ast & ioArgument0,
+                                            class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+
+//--- Rule declarations
+  protected : void rule_plm_5F_specific_5F_syntax_declaration_i0_ (GALGAS_ast & ioArgument0,
+                                                                   C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_specific_5F_syntax_declaration_i0_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+
+
+//--- Select methods
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                Parser class 'plm_target_specific_syntax' declaration                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
