@@ -54,22 +54,17 @@ proc azert `user (!p $MyStruct) {
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-}
-
-//------------------------------------------------*
-
-proc setup `user () {
-}
-
-//------------------------------------------------*
-
-proc loop `user () {
-  var s = $MyStruct ()
-  s.nop ()
-  var x $int32 ; s.getX (?x)
-  s.setX (!999)
-  s.reset ()
-  x = s.azert (!23)
+  proc setup {
+  }
+  
+  proc loop {
+    var s = $MyStruct ()
+    s.nop ()
+    var x $int32 ; s.getX (?x)
+    s.setX (!999)
+    s.reset ()
+    x = s.azert (!23)
+  }
 }
 
 //------------------------------------------------*

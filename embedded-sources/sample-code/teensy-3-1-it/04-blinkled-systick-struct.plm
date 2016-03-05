@@ -15,30 +15,21 @@ struct $point3 {
 
 //------------------------------------------------*
 
-var zz $int32 = 0 {
-  @rw proc loop
-}
-
-//------------------------------------------------*
-
 task T priority 12 stackSize 512 {
-}
+  var zz $int32 = 0
 
-//------------------------------------------------*
-
-proc setup `user () {
-}
-
-//------------------------------------------------*
-
-proc loop `user () {
-  var p = $point3 ()
-  waitDuringMS (!delay:p.p.x)
-  p.p.y = 340
-  var q = $point ()
-  ledOn (!LED_L1) // Allumer la led
-  waitDuringMS (!delay:p.p.y)
-  ledOff (!LED_L1)  // Éteindre la led
+  proc setup {
+  }
+  
+  proc loop {
+    var p = $point3 ()
+    waitDuringMS (!delay:p.p.x)
+    p.p.y = 340
+    var q = $point ()
+    ledOn (!LED_L1) // Allumer la led
+    waitDuringMS (!delay:p.p.y)
+    ledOff (!LED_L1)  // Éteindre la led
+  }
 }
 
 //------------------------------------------------*

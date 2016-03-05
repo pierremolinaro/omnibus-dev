@@ -15,9 +15,6 @@ section setupPIT () {
   PIT_TCTRL0 = 1
 }
 
-proc setup `user () {
-  setupPIT ()
-}
 
 //------------------------------------------------*
 
@@ -28,21 +25,22 @@ section getPIT (!outValue $uint32) {
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-}
-
-//------------------------------------------------*
-
-proc loop `user () {
-  waitDuringMS (!delay:250)
-  ledOn (!LED_L1) // Allumer la led
-  waitDuringMS (!delay:250)
-  ledOff (!LED_L1)  // Éteindre la led
-  goto (!line:1 !column:0)
-  printSpaces (!10)
-  goto (!line:1 !column:0)
-  var v $uint32
-  getPIT (?v)
-  printUnsigned (!v)
+  proc setup {
+    setupPIT ()
+  }
+  
+  proc loop {
+    waitDuringMS (!delay:250)
+    ledOn (!LED_L1) // Allumer la led
+    waitDuringMS (!delay:250)
+    ledOff (!LED_L1)  // Éteindre la led
+    goto (!line:1 !column:0)
+    printSpaces (!10)
+    goto (!line:1 !column:0)
+    var v $uint32
+    getPIT (?v)
+    printUnsigned (!v)
+  }
 }
 
 //------------------------------------------------*

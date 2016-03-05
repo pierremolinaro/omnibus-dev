@@ -2,19 +2,83 @@ target "teensy-3-1-it"
 
 //------------------------------------------------*
 
-task T priority 12 stackSize 512 {
+task T1 priority 12 stackSize 512 {
   var gCompteur $uint32 = 0
   proc setup {
   }
   proc loop {
     waitUntilMS (!deadline:gCompteur)
-    ledOn (!LED_L1) // Allumer la led
+    ledOn (!LED_L0)
     gCompteur +%= 500
     waitUntilMS (!deadline:gCompteur)
-    ledOff (!LED_L1) // Allumer la led
+    ledOff (!LED_L0)
     gCompteur +%= 500
     goto (!line:0 !column:0)
     printUnsigned (!millis ())
+  }
+}
+
+//------------------------------------------------*
+
+task T2 priority 10 stackSize 512 {
+  var gCompteur $uint32 = 0
+  proc setup {
+  }
+  proc loop {
+    waitUntilMS (!deadline:gCompteur)
+    ledOn (!LED_L1)
+    gCompteur +%= 499
+    waitUntilMS (!deadline:gCompteur)
+    ledOff (!LED_L1)
+    gCompteur +%= 499
+  }
+}
+
+//------------------------------------------------*
+
+task T3 priority 7 stackSize 512 {
+  var gCompteur $uint32 = 0
+  proc setup {
+  }
+  proc loop {
+    waitUntilMS (!deadline:gCompteur)
+    ledOn (!LED_L2)
+    gCompteur +%= 498
+    waitUntilMS (!deadline:gCompteur)
+    ledOff (!LED_L2)
+    gCompteur +%= 498
+  }
+}
+
+//------------------------------------------------*
+
+task T4 priority 1 stackSize 512 {
+  var gCompteur $uint32 = 0
+  proc setup {
+  }
+  proc loop {
+    waitUntilMS (!deadline:gCompteur)
+    ledOn (!LED_L3)
+    gCompteur +%= 497
+    waitUntilMS (!deadline:gCompteur)
+    ledOff (!LED_L3)
+    gCompteur +%= 497
+  }
+}
+
+//------------------------------------------------*
+
+task T5 priority 3 stackSize 512 {
+  var gCompteur $uint32 = 0
+  proc setup {
+  }
+  proc loop {
+    waitUntilMS (!deadline:gCompteur)
+    ledOn (!LED_L4)
+    gCompteur +%= 496
+    waitUntilMS (!deadline:gCompteur)
+    ledOff (!LED_L4)
+    gCompteur +%= 496
   }
 }
 

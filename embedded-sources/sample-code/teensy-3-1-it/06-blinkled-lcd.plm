@@ -2,38 +2,26 @@ target "teensy-3-1-it"
 
 //------------------------------------------------*
 
-proc setup `user () {
-  printString (!"Hello !")
-}
-
-//------------------------------------------------*
-
-var toggle = true {
-  @rw proc loop
-}
-
-var gCount $uint32 = 0 {
-  @rw proc loop
-}
-
-//------------------------------------------------*
-
 task T priority 12 stackSize 512 {
-}
-
-//------------------------------------------------*
-
-proc loop `user () {
-  waitDuringMS (!delay:250)
-  ledOn (!LED_L1) // Allumer la led
-  waitDuringMS (!delay:250)
-  ledOff (!LED_L1)  // Éteindre la led
-  toggle = not toggle
-  if toggle then
-    gCount += 1
-    goto (!line:1 !column:8)
-    printUnsigned (!gCount)
-  end
+  var toggle $bool = true
+  var gCount $uint32 = 0
+  
+  proc setup {
+    printString (!"Hello !")
+  }
+  
+  proc loop {
+    waitDuringMS (!delay:250)
+    ledOn (!LED_L1) // Allumer la led
+    waitDuringMS (!delay:250)
+    ledOff (!LED_L1)  // Éteindre la led
+    toggle = not toggle
+    if toggle then
+      gCount += 1
+      goto (!line:1 !column:8)
+      printUnsigned (!gCount)
+    end
+  }
 }
 
 //------------------------------------------------*
