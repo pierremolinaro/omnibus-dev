@@ -9,31 +9,22 @@ enum $ledState {
 
 //------------------------------------------------*
 
-proc setup `user () {
-}
-
-//------------------------------------------------*
-
-var led = $ledState.on {
-  @rw proc loop
-}
-
-//------------------------------------------------*
-
 task T priority 12 stackSize 512 {
-}
+  var led $ledState = $ledState.on
 
-//------------------------------------------------*
-
-proc loop `user () {
-  waitDuringMS (!delay:250)
-  if led == .off then
-    ledOn (!LED_L1) // Allumer la led
-    led = .on
-  else
-    ledOff (!LED_L1)  // Éteindre la led
-    led = .off
-  end
+  proc setup {
+  }
+  
+  proc loop {
+    waitDuringMS (!delay:250)
+    if led == .off then
+      ledOn (!LED_L1) // Allumer la led
+      led = .on
+    else
+      ledOff (!LED_L1)  // Éteindre la led
+      led = .off
+    end
+  }
 }
 
 //------------------------------------------------*

@@ -33,24 +33,19 @@ proc userSystickHandler `isr () {
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-}
 
-//------------------------------------------------*
-
-proc setup `user () {
-}
-
-//------------------------------------------------*
-
-proc loop `user () {
-  gValue1 +%= 1
-  gValue2 +%= 1
-  if gIsCounting and (millis () > 5_000) then
-    gIsCounting = false
-    printUnsigned (!gValue1)
-    goto (!line:1 !column:0)
-    printUnsigned (!gValue2)
-  end
+  proc setup {
+  }
+  proc loop  {
+    gValue1 +%= 1
+    gValue2 +%= 1
+    if gIsCounting and (millis () > 5_000) then
+      gIsCounting = false
+      printUnsigned (!gValue1)
+      goto (!line:1 !column:0)
+      printUnsigned (!gValue2)
+    end
+  }
 }
 
 //------------------------------------------------*

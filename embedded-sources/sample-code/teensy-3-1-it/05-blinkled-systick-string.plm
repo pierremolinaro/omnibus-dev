@@ -4,18 +4,23 @@ let s $staticString = "azerty"
 
 //------------------------------------------------*
 
-var zz $int32 = 0 {
-  @rw proc loop
-}
-
-//------------------------------------------------*
-
 task T priority 12 stackSize 512 {
-}
+  var zz $int32 = 0
 
-//------------------------------------------------*
-
-proc setup `user () {
+  proc setup {
+  }
+  
+  proc loop {
+    var ss = s
+    var r $staticString
+    waitDuringMS (!delay:250)
+    zzzz (!"toto" ?r)
+    ledOn (!LED_L1) // Allumer la led
+    var rr $staticString
+    waitDuringMS (!delay:250)
+    zzzz (!"tata" ?rr)
+    ledOff (!LED_L1)  // Éteindre la led
+  }
 }
 
 //------------------------------------------------*
@@ -24,18 +29,5 @@ proc zzzz `user (?inS $staticString !outS $staticString) {
   outS = inS
 }
 
-//------------------------------------------------*
-
-proc loop `user () {
-  var ss = s
-  var r $staticString
-  waitDuringMS (!delay:250)
-  zzzz (!"toto" ?r)
-  ledOn (!LED_L1) // Allumer la led
-  var rr $staticString
-  waitDuringMS (!delay:250)
-  zzzz (!"tata" ?rr)
-  ledOff (!LED_L1)  // Éteindre la led
-}
 
 //------------------------------------------------*

@@ -74,7 +74,6 @@ proc buildOrderedDeclarationList
       ?let @declarationListAST unsortedSemanticDeclarationListAST
       ?*
     ]
-#    log outDeclarationListAST
     if [unsortedSemanticDeclarationListAST length] > 0 then
       var s = "semantic analysis not performed, "
             + [unsortedSemanticDeclarationListAST length]

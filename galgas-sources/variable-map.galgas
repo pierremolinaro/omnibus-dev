@@ -162,7 +162,7 @@ func initialVariableMapForTaskRoutine
         !.new {![name pathExtension] !name.location}
         !type
         !true
-        !.taskVariable {!type:type !taskName:inTaskName !name:name.string}
+        !.taskVariable {!type:type !taskName:inTaskName !name:[name.string pathExtension]}
         !true
         !{}
         !false # Cannot be used as input parameter

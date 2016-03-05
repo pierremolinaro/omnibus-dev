@@ -3,20 +3,15 @@ target "teensy-3-1-it"
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-}
-
-//------------------------------------------------*
-
-proc setup `user () {
-}
-
-//------------------------------------------------*
-
-proc loop `user () {
-  waitDuringMS (!delay:250)
-  ledOn (!LED_L1) // Allumer la led
-  waitDuringMS (!delay:250)
-  ledOff (!LED_L1)  // Éteindre la led
+  proc setup {
+  }
+  
+  proc loop {
+    waitDuringMS (!delay:250)
+    ledOn (!LED_L1) // Allumer la led
+    waitDuringMS (!delay:250)
+    ledOff (!LED_L1)  // Éteindre la led
+  }
 }
 
 //------------------------------------------------*
