@@ -3,7 +3,7 @@ target "teensy-3-1-it"
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-  var toggle $bool = true
+  var toggle = true
   var gCount $uint3 = 0
 
   proc setup {

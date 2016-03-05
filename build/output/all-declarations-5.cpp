@@ -768,7 +768,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
-  "  var led $ledState = $ledState.on\n"
+  "  var led = $ledState.on\n"
   "\n"
   "  proc setup {\n"
   "  }\n"
@@ -791,7 +791,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-blinkled-systick-enum.plm",
   "plm",
   true, // Text file
-  524, // Text length
+  514, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -988,7 +988,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
-  "  var toggle $bool = true\n"
+  "  var toggle = true\n"
   "  var gCount $uint3 = 0\n"
   "\n"
   "  proc setup {\n"
@@ -1014,7 +1014,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "08-blinkled-panic.plm",
   "plm",
   true, // Text file
-  524, // Text length
+  518, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1325,63 +1325,6 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   gWrapperAllDirectories_embeddedSampleCode_1
 ) ;
 
-//--- File 'teensy-3-1-xtr/01-blinkled.plm'
-
-const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-xtr\"\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "task BlinkLed {\n"
-  "  init {\n"
-  "    PORTC_PCR5 = PORTC_PCR5::mux (1)\n"
-  "    GPIOC_PDDR |= (1 << 5)\n"
-  "  }\n"
-  "\n"
-  "  var state : $bool = true\n"
-  "  \n"
-  "  every (!ms:500) {\n"
-  "    if state then\n"
-  "      GPIOC_PSOR = 1 << 5 // Allumer la led\n"
-  "      state = false\n"
-  "    else\n"
-  "      GPIOC_PCOR = 1 << 5 // \xC3""\x89""teindre la led\n"
-  "      static = true\n"
-  "    end  \n"
-  "  }\n"
-  "\n"
-  "//------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
-  "01-blinkled.plm",
-  "plm",
-  true, // Text file
-  445, // Text length
-  gWrapperFileContent_12_embeddedSampleCode
-) ;
-
-//--- All files of 'teensy-3-1-xtr' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [2] = {
-  & gWrapperFile_12_embeddedSampleCode,
-  NULL
-} ;
-
-//--- All sub-directories of 'teensy-3-1-xtr' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'teensy-3-1-xtr'
-
-const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode (
-  "teensy-3-1-xtr",
-  1,
-  gWrapperAllFiles_embeddedSampleCode_2,
-  0,
-  gWrapperAllDirectories_embeddedSampleCode_2
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_0 [1] = {
@@ -1390,9 +1333,8 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_0 [1] = {
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_0 [3] = {
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_0 [2] = {
   & gWrapperDirectory_1_embeddedSampleCode,
-  & gWrapperDirectory_2_embeddedSampleCode,
   NULL
 } ;
 
@@ -1402,7 +1344,7 @@ const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode (
   "",
   0,
   gWrapperAllFiles_embeddedSampleCode_0,
-  2,
+  1,
   gWrapperAllDirectories_embeddedSampleCode_0
 ) ;
 
@@ -15603,5 +15545,286 @@ GALGAS_whileInstructionAST GALGAS_whileInstructionAST::extractObject (const GALG
     }  
   }
   return result ;
+}
+
+#include "project_header.h"
+#include "command_line_interface/F_mainForLIBPM.h"
+#include "command_line_interface/F_Analyze_CLI_Options.h"
+#include "utilities/F_DisplayException.h"
+#include "galgas2/C_galgas_CLI_Options.h"
+#include "galgas2/F_verbose_output.h"
+#include "galgas2/cLexiqueIntrospection.h"
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      print_tool_help_message                                                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void print_tool_help_message (void) {
+  co << "Compiled with GALGAS revision NUMERO_REVISION_GALGAS\n" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * kSourceFileExtensions [] = {
+  "plm-target",
+  "plm",
+  NULL
+} ;    
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * kSourceFileHelpMessages [] = {
+  "a target definition text file with the .plm-target extension",
+  "a source text file with the .plm extension",
+  NULL
+} ;    
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * projectVersionString (void) {
+  return "1.0.0" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                  Routine 'before'                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void routine_before (C_Compiler * inCompiler
+                            COMMA_UNUSED_LOCATION_ARGS) {
+  {
+    GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_listEmbeddedTargets.getter_value ()).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      GALGAS_stringlist var_embeddedFiles = var_fw.getter_allTextFilePathes (SOURCE_FILE ("target-generation.galgas", 26)) ;
+      inCompiler->printMessage (GALGAS_string ("Embedded targets:\n")  COMMA_SOURCE_FILE ("target-generation.galgas", 27)) ;
+      cEnumerator_stringlist enumerator_1371 (var_embeddedFiles, kEnumeration_up) ;
+      while (enumerator_1371.hasCurrentObject ()) {
+        const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_1371.current_mValue (HERE).getter_pathExtension (SOURCE_FILE ("target-generation.galgas", 29)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+        if (kBoolTrue == test_1) {
+          inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_1371.current_mValue (HERE).getter_lastPathComponent (SOURCE_FILE ("target-generation.galgas", 30)).getter_stringByDeletingPathExtension (SOURCE_FILE ("target-generation.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 30)).add_operation (GALGAS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("target-generation.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 30))  COMMA_SOURCE_FILE ("target-generation.galgas", 30)) ;
+        }
+        enumerator_1371.gotoNextObject () ;
+      }
+    }
+    GALGAS_string var_path = GALGAS_string (gOption_plm_5F_options_extractEmbeddedTargets.getter_value ()) ;
+    const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_path.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    if (kBoolTrue == test_2) {
+      GALGAS_stringlist var_embeddedFiles = var_fw.getter_allTextFilePathes (SOURCE_FILE ("target-generation.galgas", 36)) ;
+      cEnumerator_stringlist enumerator_1690 (var_embeddedFiles, kEnumeration_up) ;
+      while (enumerator_1690.hasCurrentObject ()) {
+        GALGAS_string var_filePath = var_path.add_operation (enumerator_1690.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 38)) ;
+        inCompiler->printMessage (GALGAS_string ("  ").add_operation (var_filePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 39)).add_operation (GALGAS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("target-generation.galgas", 39)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 39))  COMMA_SOURCE_FILE ("target-generation.galgas", 39)) ;
+        GALGAS_string var_dir = var_filePath.getter_stringByDeletingLastPathComponent (SOURCE_FILE ("target-generation.galgas", 40)) ;
+        var_dir.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 41)) ;
+        GALGAS_string var_text = var_fw.getter_textFileContentsAtPath (enumerator_1690.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 42)) ;
+        GALGAS_bool joker_1962 ; // Joker input parameter
+        var_text.method_writeToFileWhenDifferentContents (var_filePath, joker_1962, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 43)) ;
+        enumerator_1690.gotoNextObject () ;
+      }
+    }
+  }
+  {
+    GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_embeddedSampleCode) ;
+    const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_listEmbeddedSampleFiles.getter_value ()).boolEnum () ;
+    if (kBoolTrue == test_3) {
+      GALGAS_stringlist var_files = var_fw.getter_allTextFilePathes (SOURCE_FILE ("embedded-sample-code.galgas", 16)) ;
+      inCompiler->printMessage (GALGAS_string ("Embedded sample code:\n")  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 17)) ;
+      cEnumerator_stringlist enumerator_796 (var_files, kEnumeration_up) ;
+      while (enumerator_796.hasCurrentObject ()) {
+        inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_796.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)).add_operation (GALGAS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19))  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)) ;
+        enumerator_796.gotoNextObject () ;
+      }
+    }
+    GALGAS_string var_path = GALGAS_string (gOption_plm_5F_options_extractEmbeddedSampleFile.getter_value ()) ;
+    const enumGalgasBool test_4 = GALGAS_bool (kIsNotEqual, var_path.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      const enumGalgasBool test_5 = var_fw.getter_fileExistsAtPath (var_path, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 24)).boolEnum () ;
+      if (kBoolTrue == test_5) {
+        GALGAS_string var_text = var_fw.getter_textFileContentsAtPath (var_path, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 25)) ;
+        GALGAS_string var_sourceName = var_path.getter_lastPathComponent (SOURCE_FILE ("embedded-sample-code.galgas", 26)) ;
+        GALGAS_bool joker_1128 ; // Joker input parameter
+        var_text.method_writeToFileWhenDifferentContents (var_sourceName, joker_1128, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 27)) ;
+      }else if (kBoolFalse == test_5) {
+        GALGAS_location location_6 (GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("embedded-sample-code.galgas", 29)).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_6, GALGAS_string ("there is no '").add_operation (var_path, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)).add_operation (GALGAS_string ("' embedded file"), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29))  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)) ;
+      }
+    }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                   Routine 'after'                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void routine_after (C_Compiler * /* inCompiler */
+                           COMMA_UNUSED_LOCATION_ARGS) {
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               Routine 'programRule_0'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void routine_programRule_5F__30_ (const GALGAS_lstring /* constinArgument_inSourceFile */,
+                                         C_Compiler * /* inCompiler */
+                                         COMMA_UNUSED_LOCATION_ARGS) {
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               Routine 'programRule_1'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void routine_programRule_5F__31_ (const GALGAS_lstring constinArgument_inSourceFile,
+                                         C_Compiler * inCompiler
+                                         COMMA_UNUSED_LOCATION_ARGS) {
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_galgas_5F_builtin_5F_options_mode.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).operator_and (GALGAS_bool (gOption_galgas_5F_builtin_5F_options_outputConcreteSyntaxTree.getter_value ()).operator_not (SOURCE_FILE ("program.galgas", 16)) COMMA_SOURCE_FILE ("program.galgas", 16)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    {
+    routine_importFilesAndCompile (constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 17)) ;
+    }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      M A I N    F O R    L I B P M                                                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+int mainForLIBPM (int inArgc, const char * inArgv []) {
+//--- Analyze Command Line Options
+  TC_UniqueArray <C_String> sourceFilesArray ;
+  F_Analyze_CLI_Options (inArgc, inArgv,
+                         sourceFilesArray,
+                         kSourceFileExtensions,
+                         kSourceFileHelpMessages,
+                         print_tool_help_message) ;
+//---
+  int returnCode = 0 ; // No error
+//--- Set Execution mode
+  C_String executionModeOptionErrorMessage ;
+  setExecutionMode (executionModeOptionErrorMessage) ;
+  if (executionModeOptionErrorMessage.length () > 0) {
+    co << executionModeOptionErrorMessage ;
+    returnCode = 1 ;
+  }else{
+  //--- Common lexique object
+    C_Compiler * commonLexique = NULL ;
+    macroMyNew (commonLexique, C_Compiler (NULL, "", "" COMMA_HERE)) ;
+    try{
+      routine_before (commonLexique COMMA_HERE) ;
+      cLexiqueIntrospection::handleGetKeywordListOption (commonLexique) ;
+      const bool verboseOptionOn = verboseOutput () ;
+      for (int32_t i=0 ; i<sourceFilesArray.count () ; i++) {
+        if (gOption_galgas_5F_builtin_5F_options_trace.mValue) {
+          enableTraceWithPath (sourceFilesArray (i COMMA_HERE)) ;
+        }
+        const C_String fileExtension = sourceFilesArray (i COMMA_HERE).pathExtension () ;
+        const GALGAS_string sfp = GALGAS_string (sourceFilesArray (i COMMA_HERE)) ;
+        const GALGAS_location location = commonLexique->here () ;
+        const GALGAS_lstring sourceFilePath (sfp, location) ;
+        int r = 0 ;
+        if (fileExtension == "plm-target") {
+          switch (executionMode ()) {
+          case kExecutionModeNormal :
+            routine_programRule_5F__30_ (sourceFilePath, commonLexique COMMA_HERE) ;
+            break ;
+          case kExecutionModeLexicalAnalysisOnly :
+            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeSyntaxAnalysisOnly :
+            cGrammar_plm_5F_target_5F_grammar::performOnlySyntaxAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeIndexing :
+            cGrammar_plm_5F_target_5F_grammar::performIndexing (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeLatex :
+            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          }
+        }else if (fileExtension == "plm") {
+          switch (executionMode ()) {
+          case kExecutionModeNormal :
+            routine_programRule_5F__31_ (sourceFilePath, commonLexique COMMA_HERE) ;
+            break ;
+          case kExecutionModeLexicalAnalysisOnly :
+            cGrammar_plm_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeSyntaxAnalysisOnly :
+            cGrammar_plm_5F_grammar::performOnlySyntaxAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeIndexing :
+            cGrammar_plm_5F_grammar::performIndexing (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          case kExecutionModeLatex :
+            cGrammar_plm_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            break ;
+          }
+        }else{
+          printf ("*** Error: unhandled extension for file '%s' ***\n", sourceFilesArray (i COMMA_HERE).cString (HERE)) ;
+          r = 1 ;
+        }
+        if (r != 0) {
+          returnCode = r ;
+        }
+        closeTrace () ;
+      }
+    //--- Error or warnings ?
+      if (totalErrorCount () > 0) {
+        returnCode = 1 ; // Error code
+      }else if (totalWarningCount () > 0) {
+        if (gOption_galgas_5F_builtin_5F_options_treat_5F_warnings_5F_as_5F_error.mValue) {
+          returnCode = 1 ; // Error code
+          if (verboseOptionOn) {
+            printf ("** Note: warnings are treated as errors. **\n") ;
+          }
+        }
+      }
+    //--- Epilogue
+      routine_after (commonLexique COMMA_HERE) ;
+    //--- Display error and warnings count
+      if (verboseOptionOn || (totalWarningCount () > 0) || (totalErrorCount () > 0)) {
+        C_String message ;
+        if (totalWarningCount () == 0) {
+          message << "No warning" ;
+        }else if (totalWarningCount () == 1) {
+          message << "1 warning" ;
+        }else{
+          message << cStringWithSigned (totalWarningCount ()) << " warnings" ;
+        }
+        message << ", " ;
+        if (totalErrorCount () == 0) {
+          message << "no error" ;
+        }else if (totalErrorCount () == 1) {
+          message << "1 error" ;
+        }else{
+          message << cStringWithSigned (totalErrorCount ()) << " errors" ;
+        }
+        message << ".\n" ;
+        ggs_printMessage (message COMMA_HERE) ;
+      }
+    }catch (const ::std:: exception & e) {
+      F_default_display_exception (e) ;
+      returnCode = 1 ; // Error code
+    }catch (...) {
+      printf ("**** Unknow exception ****\n") ;
+      throw ;
+    }
+    macroDetachSharedObject (commonLexique) ;
+  }
+  return returnCode ;
 }
 
