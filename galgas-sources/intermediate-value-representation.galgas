@@ -67,6 +67,7 @@ getter @valueIR isStatic -> @bool outResult {
 enum @objectInMemoryIR {
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
+  case taskVariable (@unifiedTypeMap-proxy type @string taskName @string name)
   case localValue (@unifiedTypeMap-proxy type @string name)
   case globalConstant (@operandIR value  @string name)
 
@@ -81,6 +82,8 @@ getter @objectInMemoryIR llvmName -> @string outName {
     error name : "@objectInMemoryIR name" : outName
   case globalVariable (* @string name *) :
     outName = "@" + llvmNameForGlobalVariable (!name)
+  case taskVariable (* @string taskName @string name) :
+    outName = llvmNameForTaskVariable (!taskName !name)
   case localValue (* @string name) :
     outName = "%" + llvmNameForLocalVariable (!name)
   case globalConstant (*  @string name) :
@@ -100,6 +103,8 @@ getter @objectInMemoryIR name -> @string outName {
   case register (* @lstring name *) :
     outName = name.string
   case globalVariable (* @string name *) :
+    outName = name
+  case taskVariable (* * @string name) :
     outName = name
   case localValue (* @string name) :
     outName = name
@@ -121,6 +126,8 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
     outType = type
   case globalVariable (@unifiedTypeMap-proxy type * *) :
     outType = type
+  case taskVariable (@unifiedTypeMap-proxy type * *) :
+    outType = type
   case localValue (@unifiedTypeMap-proxy type *) :
     outType = type
   case globalConstant (@operandIR value *) :
@@ -140,6 +147,8 @@ getter @objectInMemoryIR address -> @operandIR outOperand {
   case register (* * *) :
     error .nowhere : "@objectInMemoryIR address" : outOperand
   case globalVariable (* * *) :
+    error .nowhere : "@objectInMemoryIR address" : outOperand
+  case taskVariable (* * *) :
     error .nowhere : "@objectInMemoryIR address" : outOperand
   case localValue (@unifiedTypeMap-proxy type @string name) :
     outOperand  = .new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name)}}

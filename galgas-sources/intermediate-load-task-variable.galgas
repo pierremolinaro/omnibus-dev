@@ -1,0 +1,37 @@
+
+setter @instructionListIR appendLoadTaskVariable
+  ?let @operandIR inTargetValue
+  ?let @string inTaskName
+  ?let @string inVariableName
+{
+  self += !@loadTaskVariableIR.new {!inTargetValue !inTaskName !inVariableName}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @loadTaskVariableIR : @abstractInstructionIR {
+  @operandIR mTargetValue
+  @string mTaskName
+  @string mVarName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @loadTaskVariableIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mTargetValue.mType llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
+  ioLLVMcode += llvmType + ", " + llvmType + "* " + llvmNameForTaskVariable (!mTaskName !mVarName) + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @loadTaskVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mTaskVariableSet += !mTaskName + "." + mVarName
+}
+
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -507,6 +507,26 @@ class cEnumAssociatedValues_objectInMemoryIR_globalVariable : public cEnumAssoci
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+class cEnumAssociatedValues_objectInMemoryIR_taskVariable : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+  public : const GALGAS_string mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectInMemoryIR_taskVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                const GALGAS_string & inAssociatedValue1,
+                                                                const GALGAS_string & inAssociatedValue2
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_taskVariable (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 class cEnumAssociatedValues_objectInMemoryIR_localValue : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
   public : const GALGAS_string mAssociatedValue1 ;
@@ -809,6 +829,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_prefixOperatorMap mAttribute_mNotOperatorMap ;
   public : GALGAS_prefixOperatorMap mAttribute_mUnsignedComplementOperatorMap ;
   public : GALGAS_taskMap mAttribute_mTaskMap ;
+  public : GALGAS_taskVariableMap mAttribute_mTaskVariableMap ;
 
 
 //--------------------------------- Accessors
@@ -870,7 +891,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_prefixOperatorMap & in_mUnaryMinusOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mNotOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mUnsignedComplementOperatorMap,
-                                   const GALGAS_taskMap & in_mTaskMap) ;
+                                   const GALGAS_taskMap & in_mTaskMap,
+                                   const GALGAS_taskVariableMap & in_mTaskVariableMap) ;
 
 //-- Start of generic part --*
 
@@ -928,7 +950,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_prefixOperatorMap & inOperand42,
                                                           const class GALGAS_prefixOperatorMap & inOperand43,
                                                           const class GALGAS_prefixOperatorMap & inOperand44,
-                                                          const class GALGAS_taskMap & inOperand45
+                                                          const class GALGAS_taskMap & inOperand45,
+                                                          const class GALGAS_taskVariableMap & inOperand46
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1026,6 +1049,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSupEqualOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskMap getter_mTaskMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_taskVariableMap getter_mTaskVariableMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap getter_mTypeMap (LOCATION_ARGS) const ;
 

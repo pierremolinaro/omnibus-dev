@@ -18,9 +18,11 @@ struct @intermediateCodeStruct {
   @stringset mRequiredProcedureSet
   @bootListIR mBootList
   @initListIR mInitList
-  @instructionListIR mExceptionSetupInstructionListIR
-  @instructionListIR mExceptionLoopInstructionListIR
-  @taskListIR mTaskListIR
+  @instructionListIR mPanicSetupInstructionListIR
+  @instructionListIR mPanicLoopInstructionListIR
+  @taskMapIR mTaskMapIR
+  @taskVariableMap mTaskVariableMap
+  @taskProcedureMapIR mTaskProcedureMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

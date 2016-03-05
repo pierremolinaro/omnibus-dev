@@ -2,32 +2,21 @@ target "teensy-3-1-it"
 
 //------------------------------------------------*
 
-proc setup `user () {
-}
-
-//------------------------------------------------*
-
-var gVar $uint32 = 0 {
-  @rw proc loop
-}
-
-//------------------------------------------------*
-
 task T priority 12 stackSize 512 {
   var gCompteur $uint32 = 0
+  proc setup {
+  }
+  proc loop {
+    waitUntilMS (!deadline:gCompteur)
+    ledOn (!LED_L1) // Allumer la led
+    gCompteur +%= 500
+    waitUntilMS (!deadline:gCompteur)
+    ledOff (!LED_L1) // Allumer la led
+    gCompteur +%= 500
+    goto (!line:0 !column:0)
+    printUnsigned (!millis ())
+  }
 }
 
-//------------------------------------------------*
-
-proc loop `user () {
-  waitUntilMS (!deadline:gVar)
-  ledOn (!LED_L1) // Allumer la led
-  gVar +%= 500
-  waitUntilMS (!deadline:gVar)
-  ledOff (!LED_L1) // Allumer la led
-  gVar +%= 500
-  goto (!line:0 !column:0)
-  printUnsigned (!millis ())
-}
 
 //------------------------------------------------*

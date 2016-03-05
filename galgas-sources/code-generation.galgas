@@ -10,6 +10,8 @@ getter @objectInMemoryIR mangledName -> @string outResult {
     outResult = llvmNameForRegister (!name:name.string)
   case globalVariable (* @string name *) :
     outResult = llvmNameForGlobalVariable (!name)
+  case taskVariable (* @string taskName @string name) :
+    outResult = llvmNameForTaskVariable (!taskName !name)
   case localValue (* @string name) :
     outResult = llvmNameForLocalVariable (!name)
   case globalConstant (* @string name) :
@@ -140,6 +142,8 @@ struct @generationContext {
   @string mExceptionCodeLLVMType
   @string mExceptionLineLLVMType
   @stringset mProceduresThatShouldNotBeGenerated
+  @taskVariableMap mTaskVariableMap
+  @taskProcedureMapIR mTaskProcedureMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -163,6 +167,8 @@ private proc generateLLVMfile
     ![inExceptionCodeType llvmTypeName]
     ![inExceptionLineType llvmTypeName]
     !inProceduresThatShouldNotBeGenerated
+    !inIntermediateCodeStruct.mTaskVariableMap
+    !inIntermediateCodeStruct.mTaskProcedureMap
   }
   let sourceDirectory = inProductDirectory + "/sources"
   var llvmCode = ""
@@ -257,14 +263,14 @@ private proc generateLLVMfile
   #--- Third argument : file    
     llvmCode += "  %" + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
     llvmCode += "  store i8* %in.FILE, i8** %" + llvmNameForLocalVariable (!"FILE") + "\n"
-    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode
+    [inIntermediateCodeStruct.mPanicSetupInstructionListIR instructionListLLVMCode
       !?llvmCode
       !generationContext
       !?generationAdds
     ]
     llvmCode += "  br label %exception.loop\n\n"
     llvmCode += "exception.loop:\n"
-    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode
+    [inIntermediateCodeStruct.mPanicLoopInstructionListIR instructionListLLVMCode
       !?llvmCode
       !generationContext
       !?generationAdds
@@ -287,7 +293,7 @@ private proc generateLLVMfile
     end
   end
 #----------------------------------------- tasks
-  [inIntermediateCodeStruct.mTaskListIR generateCode !?llvmCode]
+  [inIntermediateCodeStruct.mTaskMapIR generateCode !?llvmCode !generationContext !?generationAdds]
 #----------------------------------------- Intrinsics
   if [generationAdds.mIntrinsicsDeclarationSet count] > 0 then
     llvmCode += llvmTitleComment (!"LLVM intrinsics")
@@ -321,7 +327,7 @@ private proc generateLLVMfile
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/target.c"
   )
-  let s = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskListIR length] string]]
+  let s = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
   [s writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
 #----------------------------------------- Perform compilation
   if (@uint.errorCount == 0) then # && not [option plm_options.compileOnly value] then

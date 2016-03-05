@@ -59,14 +59,25 @@ void callCategoryMethod_noteExpressionTypesInPrecedenceGraph (const class cPtr_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                   Category method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteInstructionListTypesInPrecedenceGraph (const class GALGAS_instructionListAST inObject,
+                                                               class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Category method '@taskVarListAST-element enterInContext'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_enterInContext (const class GALGAS_taskVarListAST_2D_element inObject,
+                                    const class GALGAS_string constin_inTaskName,
                                     class GALGAS_semanticContext & io_ioContext,
                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                    class GALGAS_taskVariableMap & io_ioTaskVariableMap,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
@@ -82,17 +93,6 @@ void categoryMethod_semanticAnalysis (const class GALGAS_taskList_2D_element inO
                                       class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Category method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_noteInstructionListTypesInPrecedenceGraph (const class GALGAS_instructionListAST inObject,
-                                                               class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -499,6 +499,19 @@ void categoryModifier_appendLoadLocalVariable (class GALGAS_instructionListIR & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Category setter '@instructionListIR appendLoadTaskVariable'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendLoadTaskVariable (class GALGAS_instructionListIR & ioObject,
+                                              const class GALGAS_operandIR constin_inTargetValue,
+                                              const class GALGAS_string constin_inTaskName,
+                                              const class GALGAS_string constin_inVariableName,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Category setter '@instructionListIR appendStoreVolatileRegister'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -524,6 +537,20 @@ void categoryModifier_appendStoreGlobalVariable (class GALGAS_instructionListIR 
                                                  const class GALGAS_bool constin_inIsVolatile,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Category setter '@instructionListIR appendStoreTaskVariable'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendStoreTaskVariable (class GALGAS_instructionListIR & ioObject,
+                                               const class GALGAS_string constin_inTaskName,
+                                               const class GALGAS_string constin_inVarName,
+                                               const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
+                                               const class GALGAS_operandIR constin_inSourceValue,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

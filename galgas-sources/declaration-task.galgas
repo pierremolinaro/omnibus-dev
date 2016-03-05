@@ -7,6 +7,7 @@ list @taskList {
   @lbigint mPriority
   @lbigint mStackSize
   @taskVarListAST mVarList
+  @taskProcListAST mTaskProcList
   @location mEndOfTaskDeclaration
 }
 
@@ -16,6 +17,14 @@ list @taskVarListAST {
   @lstring mVarName
   @lstring mVarTypeName
   @expressionAST mVarInitExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @taskProcListAST {
+  @lstring mProcName
+  @instructionListAST mInstructionList
+  @location mEndOfProcDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -35,6 +44,7 @@ syntax extension common_syntax {
     $integer$ ?let @lbigint stackSize
     ${$
     @taskVarListAST taskVarList = {}
+    @taskProcListAST taskProcList = {}
     repeat
     while
       $var$
@@ -43,6 +53,14 @@ syntax extension common_syntax {
       $=$
       <expression> ?let initExpression
       taskVarList += !varName !typeName !initExpression
+    while
+      $proc$
+      $identifier$ ?let procName
+      ${$
+      <instructionList> ?let instructionList !?*
+      let endOfProc = @location.here
+      $}$
+      taskProcList += !procName !instructionList !endOfProc
     end
     let endOfTask = @location.here
     $}$
@@ -51,6 +69,7 @@ syntax extension common_syntax {
       !priority
       !stackSize
       !taskVarList
+      !taskProcList
       !endOfTask
   }
 
@@ -71,6 +90,9 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
         [!?ioGraph noteNode !typeName]
       end
     end
+    for procedure in mTaskProcList do
+      [procedure.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    end
   end
 }
 
@@ -87,8 +109,15 @@ map @taskVariableMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @taskProcedureMap {
+  insert insertKey error message "the '%K' proc is already declared in %L"
+  search searchKey error message "there is no '%K' proc"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 map @taskMap {
-  @taskVariableMap mTaskVariableMap
+  @taskProcedureMap mTaskProcedureMap
   insert insertKey error message "the '%K' task is already declared in %L"
   search searchKey error message "there is no '%K' task"
 }
@@ -100,20 +129,29 @@ method @taskList enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   for task in self do
-    @taskVariableMap taskVariableMap = {}
     for variable in task.mVarList do
-      [variable enterInContext !?context:ioContext !?staticStringMap:ioGlobalLiteralStringMap !?taskVariableMap]
+      [variable enterInContext !taskName:task.mTaskName.string !?context:ioContext !?staticStringMap:ioGlobalLiteralStringMap]
     end
-    [!?ioContext.mTaskMap insertKey !task.mTaskName !taskVariableMap]
+    @taskProcedureMap taskProcedureMap = {}
+    for procedure in task.mTaskProcList do
+      [!?taskProcedureMap insertKey !procedure.mProcName]
+    end
+    if not [taskProcedureMap hasKey !"setup"] then
+      error task.mEndOfTaskDeclaration : "a task should declare an 'setup' procedure"
+    end
+    if not [taskProcedureMap hasKey !"loop"] then
+      error task.mEndOfTaskDeclaration : "a task should declare an 'loop' procedure"
+    end
+    [!?ioContext.mTaskMap insertKey !task.mTaskName !taskProcedureMap]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @taskVarListAST-element enterInContext
+  ?taskName:let @string inTaskName
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!@taskVariableMap ioTaskVariableMap
 {
 #--- Get destination type
   @unifiedTypeMap-proxy variableAnnotationType
@@ -152,8 +190,8 @@ method @taskVarListAST-element enterInContext
     !staticTypeAllowed:false
   )
 #--- Enter variable in task variable map
-  [!?ioTaskVariableMap insertKey
-    !mVarName
+  [!?ioContext.mTaskVariableMap insertKey
+    !.new{!inTaskName + "." + mVarName !mVarName.location}
     !result.mType
     !result.mValue
   ]
@@ -187,7 +225,7 @@ method @taskList semanticAnalysis
 
 method @taskList-element semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check stack size is >= 64, and a multiple of 8
@@ -195,18 +233,137 @@ method @taskList-element semanticAnalysis
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
     error mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
-#--- Analyze variable declaration
-  let taskVariableMap = [inContext.mTaskMap mTaskVariableMapForKey !mTaskName.string]
+#--- Analyze task procedures
+  @taskProcedureMapIR taskProcedureMapIR = {}
+  for procedure in mTaskProcList do
+    [procedure taskProcedureSemanticAnalysis
+      !mTaskName.string
+      !context:inContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    ]
+  end
 #--- Generate task
-  ioIntermediateCodeStruct.mTaskListIR +=
-    !mTaskName.string
+  [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
+    !mTaskName
     !mPriority.bigint
     !mStackSize.bigint
-    !taskVariableMap
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @taskProcListAST-element taskProcedureSemanticAnalysis
+  ?let @string inTaskName
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Attributes
+#  var warnIfUnused = true
+#  var globalProcedure = false
+#  var weakProcedure = false
+#  var nullOnNoException = false
+#  for (attribute) in mProcedureAttributeList do
+#    if attribute.string == noWarningIfUnusedAttribute () then
+#      if not warnIfUnused then
+#        error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+#      end
+#      warnIfUnused = false    
+#    elsif attribute.string == globalAttribute () then
+#      if globalProcedure then
+#        error attribute : "duplicate @" + globalAttribute () + " attribute"
+#      end
+#      globalProcedure = true    
+#    elsif attribute.string == weakAttribute () then
+#      if weakProcedure then
+#        error attribute : "duplicate @" + weakAttribute () + " attribute"
+#      end
+#      weakProcedure = true    
+#    elsif attribute.string == nullWhenPanicDisabledAttribute () then
+#      if nullOnNoException then
+#        error attribute : "duplicate @" + nullWhenPanicDisabledAttribute () + " attribute"
+#      end
+#      nullOnNoException = true    
+#    else
+#      error attribute : "unknown attribute; available attributes are @"
+#        + noWarningIfUnusedAttribute ()
+#        + ", @" + weakAttribute ()
+#        + ", @" + globalAttribute ()
+#    end
+#  end
+#--- Variable map
+  @variableMap variableMap = initialVariableMapForTaskRoutine (
+    !taskName:inTaskName
+    !context:inContext
+  )
+#--- Analyse formal arguments
+  @procFormalArgumentListForGeneration formalArguments = {}
+#  enterFormalArguments (
+#    !context:inContext
+#    !mProcFormalArgumentList
+#    !?variableMap
+#    !?formalArguments
+#  )
+#--- Enter subprogram invocation graph
+  let procNameForInvocationGraph = taskProcNameForInvocationGraph (!inTaskName !mProcName)
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !procNameForInvocationGraph
+      !mProcName
+    ]
+  end
+#--- Analyze instruction list
+  @instructionListIR instructionGenerationList = {}
+  [mInstructionList analyzeRoutineInstructionList
+    !routineNameForInvocationGraph:procNameForInvocationGraph
+    !context:inContext
+    !modes:{!userModeName ()}
+    !allowException:true
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?variableMap:variableMap
+    !?generatedCode:instructionGenerationList
+  ]
+#---
+  [variableMap checkAutomatonStates !mEndOfProcDeclaration]
+#--- Code generation
+  [!?ioIntermediateCodeStruct.mTaskProcedureMap insertKey
+    !.new{!inTaskName + "." + mProcName !mProcName.location}
+#    !formalArguments
+    !instructionGenerationList
+#    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+    !true # warnIfUnused
+#    !weakProcedure
+#    !nullOnNoException
+#    !globalProcedure
+  ]  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @taskProcedureMapIR {
+#  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @instructionListIR mInstructionGenerationList
+#  @bool mIsRequired
+  @bool mWarnIfUnused
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+  remove removeKey error message "** internal error **"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @taskMapIR {
+  @bigint mPriority
+  @bigint mStackSize
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+  remove removeKey error message "** internal error **"
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sortedlist @taskListIR {
@@ -214,16 +371,43 @@ sortedlist @taskListIR {
   @bigint mPriority
   @bigint mStackSize
   @taskVariableMap mTaskVariableMap
+  @taskProcedureMapIR mTaskProcedureMapIR
 }{
   mPriority <
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskListIR generateCode ?!@string ioLLVMcode {
-  ioLLVMcode += llvmTitleComment (!"Task declaration")
-#--- Declare stacks and task variables
+method @taskMapIR generateCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+#--- Build ordered task list
+  @taskListIR orderedTaskList = {}
   for task in self do
+    @taskVariableMap taskVariableMap = {}
+    for (name type initValue) in inGenerationContext.mTaskVariableMap do
+      if task.lkey.string == [name stringByDeletingPathExtension] then
+        [!?taskVariableMap insertKey !.new{![name pathExtension] !name.location} !type !initValue]
+      end
+    end
+    @taskProcedureMapIR taskProcedureMapIR = {}
+    for (name instructionList warnUnused) in inGenerationContext.mTaskProcedureMap do
+      if task.lkey.string == [name stringByDeletingPathExtension] then
+        [!?taskProcedureMapIR insertKey !.new{![name pathExtension] !name.location} !instructionList !warnUnused]
+      end
+    end
+    orderedTaskList +=
+      !task.lkey.string
+      !task.mPriority
+      !task.mStackSize
+      !taskVariableMap
+      !taskProcedureMapIR
+  end
+#--- Declare stacks and task variables
+  for task in orderedTaskList do
+    ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     for variable in task.mTaskVariableMap do
       ioLLVMcode += llvmNameForTaskVariable (!task.mTaskName !variable.lkey.string)
@@ -238,12 +422,28 @@ method @taskListIR generateCode ?!@string ioLLVMcode {
       ioLLVMcode += "\n"
     end
     ioLLVMcode += "\n"
+    for procedure in task.mTaskProcedureMapIR do
+      ioLLVMcode += llvmSeparatorLine ()
+      ioLLVMcode += "\n"
+      ioLLVMcode += "define internal void " + taskProcedureName (!task.mTaskName !procedure.lkey.string) + " () nounwind {\n"
+      [procedure.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+      ioLLVMcode += "  ret void\n"
+      ioLLVMcode += "}\n\n"
+    end
+    ioLLVMcode += llvmSeparatorLine ()
+    ioLLVMcode += "\n"
+    ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " () nounwind noreturn naked {\n"
+    ioLLVMcode += "  call void " + taskProcedureName (!task.mTaskName !"setup") + " ()\n"
+    ioLLVMcode += "  br label %loop\n"
+    ioLLVMcode += "loop:\n"
+    ioLLVMcode += "  call void " + taskProcedureName (!task.mTaskName !"loop") + " ()\n"
+    ioLLVMcode += "  br label %loop\n"
+    ioLLVMcode += "}\n\n"
   end
-  ioLLVMcode += llvmSeparatorLine ()
-  ioLLVMcode += "\n"
 #--- Start tasks
+  ioLLVMcode += llvmTitleComment (!"Start tasks")
   ioLLVMcode += "define internal void @start.tasks () nounwind {\n"
-  for task in self do (idx)
+  for task in orderedTaskList do (idx)
     ioLLVMcode += "  " + stackAddressForTask (!task.mTaskName)
     ioLLVMcode += " = getelementptr inbounds [" + (task.mStackSize / 4) + " x i32], "
     ioLLVMcode += "[" + (task.mStackSize / 4) + " x i32]* " + stackNameForTask (!task.mTaskName)
@@ -252,22 +452,10 @@ method @taskListIR generateCode ?!@string ioLLVMcode {
     ioLLVMcode += "i32 " + idx
     ioLLVMcode += ", i32* " + stackAddressForTask (!task.mTaskName)
     ioLLVMcode += ", i32 " + task.mStackSize
-    ioLLVMcode += ", void ()* " + routineNameForTask (!task.mTaskName) + ")\n"
+    ioLLVMcode += ", void ()* " + mainRoutineNameForTask (!task.mTaskName) + ")\n"
   end
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
-#--- Task code
-  for task in self do
-    ioLLVMcode += llvmSeparatorLine ()
-    ioLLVMcode += "\n"
-    ioLLVMcode += "define internal void " + routineNameForTask (!task.mTaskName) + " () nounwind noreturn naked {\n"
-    ioLLVMcode += "  call void @" + llvmNameForProcedure (!"setup") + " ()\n"
-    ioLLVMcode += "  br label %loop\n"
-    ioLLVMcode += "loop:\n"
-    ioLLVMcode += "  call void @" + llvmNameForProcedure (!"loop") + " ()\n"
-    ioLLVMcode += "  br label %loop\n"
-    ioLLVMcode += "}\n\n"
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
