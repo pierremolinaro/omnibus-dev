@@ -647,6 +647,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
+  "  var gCompteur $uint32 = 0\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -668,7 +669,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkled.plm",
   "plm",
   true, // Text file
-  638, // Text length
+  666, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 

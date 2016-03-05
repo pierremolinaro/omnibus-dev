@@ -307,7 +307,7 @@ proc buildSemanticContext
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
   [inAST.mServiceListAST enterInContext !?context: outSemanticContext]
 #--- Enter tasks
-  [inAST.mTaskList enterInContext !?context: outSemanticContext]
+  [inAST.mTaskList enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
 #--- Check required procs mode
   if @uint.errorCount == 0 then
     for requiredProc in inAST.mRequiredProcList do

@@ -230,3 +230,9 @@ func routineNameForTask ?let @string inTaskName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func llvmNameForTaskVariable ?@string inTaskName ?@string inVarName -> @string outName {
+  outName = "@task.var." + inTaskName + "." + inVarName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

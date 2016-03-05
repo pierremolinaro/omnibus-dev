@@ -6,7 +6,16 @@ list @taskList {
   @lstring mTaskName
   @lbigint mPriority
   @lbigint mStackSize
+  @taskVarListAST mVarList
   @location mEndOfTaskDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @taskVarListAST {
+  @lstring mVarName
+  @lstring mVarTypeName
+  @expressionAST mVarInitExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -25,12 +34,23 @@ syntax extension common_syntax {
     $stackSize$
     $integer$ ?let @lbigint stackSize
     ${$
+    @taskVarListAST taskVarList = {}
+    repeat
+    while
+      $var$
+      $identifier$ ?let varName
+      $typeName$ ?let typeName
+      $=$
+      <expression> ?let initExpression
+      taskVarList += !varName !typeName !initExpression
+    end
     let endOfTask = @location.here
     $}$
     ioAST.mTaskList +=
       !taskName
       !priority
       !stackSize
+      !taskVarList
       !endOfTask
   }
 
@@ -42,27 +62,101 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
-#  for () in self do
-#    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-#  end
-#}
+method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for variable in mVarList do
+      [variable.mVarInitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+      if variable.mVarTypeName.string != "" then
+        let typeName = @lstring.new {!"$" + variable.mVarTypeName !variable.mVarTypeName.location}
+        [!?ioGraph noteNode !typeName]
+      end
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @taskVariableMap {
+  @unifiedTypeMap-proxy mType
+  @valueIR mInitialValue
+  insert insertKey error message "the '%K' task variable is already declared in %L"
+  search searchKey error message "there is no '%K' task variable"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 map @taskMap {
+  @taskVariableMap mTaskVariableMap
   insert insertKey error message "the '%K' task is already declared in %L"
   search searchKey error message "there is no '%K' task"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskList enterInContext ?!context:@semanticContext ioContext {
+method @taskList enterInContext
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+{
   for task in self do
-    [!?ioContext.mTaskMap insertKey !task.mTaskName]
+    @taskVariableMap taskVariableMap = {}
+    for variable in task.mVarList do
+      [variable enterInContext !?context:ioContext !?staticStringMap:ioGlobalLiteralStringMap !?taskVariableMap]
+    end
+    [!?ioContext.mTaskMap insertKey !task.mTaskName !taskVariableMap]
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @taskVarListAST-element enterInContext
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!@taskVariableMap ioTaskVariableMap
+{
+#--- Get destination type
+  @unifiedTypeMap-proxy variableAnnotationType
+  if mVarTypeName.string == "" then
+    variableAnnotationType = .null
+  else
+    variableAnnotationType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mVarTypeName}
+  end
+#--- Analyze source expression
+  @semanticTemporariesStruct temporaries = .default
+  @instructionListIR instructionGenerationList = {}
+  @variableMap variableMap = variableMapWithConstants (!context:ioContext)
+  [mVarInitExpression analyzeExpression
+     !routineNameForInvocationGraph:["compiler" nowhere]
+     !optionalTargetType:variableAnnotationType
+     !context:ioContext
+     !modes:{}
+     !allowException:true
+     !?temporary:temporaries
+     !?staticStringMap:ioGlobalLiteralStringMap
+     !?variableMap:variableMap
+     !?instructionListIR:instructionGenerationList
+     ?result:let @operandIR expressionResult
+  ]
+  if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
+    error mVarName : "source expression cannot be statically computed"
+  end
+#--- Check variable type and expression type
+  if variableAnnotationType == .null && [[expressionResult.mType kind] isStaticInteger] then
+    error mVarName : "cannot infer type"
+  end
+  let result = checkAssignmentCompatibility (
+    !source:expressionResult
+    !targetAnnotationType:variableAnnotationType
+    !errorLocation:mVarName.location
+    !staticTypeAllowed:false
+  )
+#--- Enter variable in task variable map
+  [!?ioTaskVariableMap insertKey
+    !mVarName
+    !result.mType
+    !result.mValue
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -92,7 +186,7 @@ method @taskList semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @taskList-element semanticAnalysis
-  ?context:let @semanticContext unused inContext
+  ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -101,11 +195,14 @@ method @taskList-element semanticAnalysis
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
     error mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
+#--- Analyze variable declaration
+  let taskVariableMap = [inContext.mTaskMap mTaskVariableMapForKey !mTaskName.string]
 #--- Generate task
   ioIntermediateCodeStruct.mTaskListIR +=
     !mTaskName.string
     !mPriority.bigint
     !mStackSize.bigint
+    !taskVariableMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -116,6 +213,7 @@ sortedlist @taskListIR {
   @string mTaskName
   @bigint mPriority
   @bigint mStackSize
+  @taskVariableMap mTaskVariableMap
 }{
   mPriority <
 }
@@ -124,11 +222,23 @@ sortedlist @taskListIR {
 
 method @taskListIR generateCode ?!@string ioLLVMcode {
   ioLLVMcode += llvmTitleComment (!"Task declaration")
-#--- Declare stacks
+#--- Declare stacks and task variables
   for task in self do
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
+    for variable in task.mTaskVariableMap do
+      ioLLVMcode += llvmNameForTaskVariable (!task.mTaskName !variable.lkey.string)
+      ioLLVMcode += " = internal global "
+      ioLLVMcode += [variable.mType llvmTypeName] + " "
+      let initialString = [variable.mInitialValue llvmName]
+      if initialString == "" then
+        ioLLVMcode += "zeroinitializer"
+      else
+        ioLLVMcode += initialString
+      end
+      ioLLVMcode += "\n"
+    end
+    ioLLVMcode += "\n"
   end
-  ioLLVMcode += "\n"
   ioLLVMcode += llvmSeparatorLine ()
   ioLLVMcode += "\n"
 #--- Start tasks
