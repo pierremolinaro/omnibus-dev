@@ -40,6 +40,13 @@ func %once isrModeName -> @string outResult {
 #  CODE GENERATION PREFIXES                                                                                            *
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func taskProcNameForInvocationGraph ?@string inTaskName ?@lstring inProcName -> @lstring outName {
+  let s = "taskproc " + inTaskName + " " + inProcName
+  outName = .new {!s !inProcName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func procNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
   var s = "proc"
   if inReceiverType != .null then
@@ -224,8 +231,14 @@ func stackAddressForTask ?let @string inTaskName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func routineNameForTask ?let @string inTaskName -> @string outResult {
-  outResult = "@task.routine." + inTaskName
+func mainRoutineNameForTask ?let @string inTaskName -> @string outResult {
+  outResult = "@task.main." + inTaskName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func taskProcedureName ?let @string inTaskName  ?let @string inProcName -> @string outResult {
+  outResult = "@task.proc." + inTaskName + "." + inProcName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

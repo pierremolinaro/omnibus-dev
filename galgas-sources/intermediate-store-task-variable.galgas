@@ -1,0 +1,39 @@
+
+setter @instructionListIR appendStoreTaskVariable
+  ?let @string inTaskName
+  ?let @string inVarName
+  ?let @unifiedTypeMap-proxy inTargetVarType
+  ?let @operandIR inSourceValue
+{
+  self += !@storeTaskVariableIR.new {!inTaskName !inVarName !inTargetVarType !inSourceValue}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @storeTaskVariableIR : @abstractInstructionIR {
+  @string mTaskName
+  @string mVarName
+  @unifiedTypeMap-proxy mTargetVarType
+  @operandIR mSourceValue
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @storeTaskVariableIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mTargetVarType llvmTypeName]
+  ioLLVMcode += "  store "
+  ioLLVMcode += llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType + "* "
+  ioLLVMcode += llvmNameForTaskVariable (!mTaskName !mVarName) + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @storeTaskVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mTaskVariableSet += !mTaskName + "." + mVarName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -223,7 +223,9 @@ struct @semanticContext {
   @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
   @prefixOperatorMap mNotOperatorMap            # not
   @prefixOperatorMap mUnsignedComplementOperatorMap # ~
+#--- Tasks
   @taskMap mTaskMap
+  @taskVariableMap mTaskVariableMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

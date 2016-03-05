@@ -180,10 +180,10 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
 #--- Code generation
   if mExceptionClauseName.string == "setup" then
     [!?ioTemporaries.mExceptionSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
-    ioIntermediateCodeStruct.mExceptionSetupInstructionListIR += instructionGenerationList
+    ioIntermediateCodeStruct.mPanicSetupInstructionListIR += instructionGenerationList
   elsif mExceptionClauseName.string == "loop" then
     [!?ioTemporaries.mExceptionLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
-    ioIntermediateCodeStruct.mExceptionLoopInstructionListIR += instructionGenerationList
+    ioIntermediateCodeStruct.mPanicLoopInstructionListIR += instructionGenerationList
   else
     error mExceptionClauseName : "exception routine name should be \"setup\" or \"loop\""
   end
