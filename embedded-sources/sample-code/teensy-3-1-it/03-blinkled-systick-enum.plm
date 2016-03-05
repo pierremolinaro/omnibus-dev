@@ -10,7 +10,7 @@ enum $ledState {
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-  var led $ledState = $ledState.on
+  var led = $ledState.on
 
   proc setup {
   }

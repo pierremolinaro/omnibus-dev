@@ -49,7 +49,12 @@ syntax extension common_syntax {
     while
       $var$
       $identifier$ ?let varName
-      $typeName$ ?let typeName
+      @lstring typeName
+      select
+        typeName = ["" nowhere]
+      or
+        $typeName$ ?typeName
+      end
       $=$
       <expression> ?let initExpression
       taskVarList += !varName !typeName !initExpression

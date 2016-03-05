@@ -427,7 +427,6 @@ extern const char * gWrapperFileContent_8_embeddedSampleCode ;
 extern const char * gWrapperFileContent_9_embeddedSampleCode ;
 extern const char * gWrapperFileContent_10_embeddedSampleCode ;
 extern const char * gWrapperFileContent_11_embeddedSampleCode ;
-extern const char * gWrapperFileContent_12_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -446,13 +445,11 @@ extern const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode ;
-extern const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode ;
 extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;
-extern const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
