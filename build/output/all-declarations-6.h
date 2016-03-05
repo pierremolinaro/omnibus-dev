@@ -36,6 +36,42 @@ void callCategoryMethod_addDependenceEdgeForStaticExpression (const class cPtr_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                   Abstract category method '@expressionAST noteExpressionTypesInPrecedenceGraph'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph) (const class cPtr_expressionAST * inObject,
+                                                                                            class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
+                                                                                            class C_Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_noteExpressionTypesInPrecedenceGraph (const int32_t inClassIndex,
+                                                               categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_noteExpressionTypesInPrecedenceGraph (const class cPtr_expressionAST * inObject,
+                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Category method '@taskVarListAST-element enterInContext'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_taskVarListAST_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                    class GALGAS_taskVariableMap & io_ioTaskVariableMap,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                Category method '@taskList-element semanticAnalysis'                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -188,29 +224,6 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_serviceMapIR_2D_eleme
                                         class GALGAS_generationAdds & io_ioGenerationAdds,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Abstract category method '@expressionAST noteExpressionTypesInPrecedenceGraph'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph) (const class cPtr_expressionAST * inObject,
-                                                                                            class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
-                                                                                            class C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_noteExpressionTypesInPrecedenceGraph (const int32_t inClassIndex,
-                                                               categoryMethodSignature_expressionAST_noteExpressionTypesInPrecedenceGraph inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_noteExpressionTypesInPrecedenceGraph (const class cPtr_expressionAST * inObject,
-                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -727,6 +740,46 @@ class GALGAS_bool extensionGetter_isStatic (const class GALGAS_valueIR & inObjec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Category getter '@objectInMemoryIR llvmName' (as function)                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_llvmName (const class GALGAS_objectInMemoryIR & inObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Category getter '@objectInMemoryIR name' (as function)                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_name (const class GALGAS_objectInMemoryIR & inObject,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Category getter '@objectInMemoryIR type' (as function)                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_objectInMemoryIR & inObject,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Category getter '@objectInMemoryIR address' (as function)                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_operandIR extensionGetter_address (const class GALGAS_objectInMemoryIR & inObject,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                         Category method '@binaryOperationIR enterCodeForOverflowOperation'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -786,5 +839,51 @@ void callCategoryMethod_enterCodeForDivisionWithZeroDivisorException (const clas
                                                                       GALGAS_generationAdds & io_ioGenerationAdds,
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Category method '@objectInMemoryIR loadFromMemory'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject,
+                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                    class GALGAS_operandIR & out_outResultingValue,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Category method '@objectInMemoryIR storeInMemory'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
+                                   class GALGAS_operandIR in_inValue,
+                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Category method '@objectInMemoryIR enterAccessibleEntities'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterAccessibleEntities (const class GALGAS_objectInMemoryIR inObject,
+                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Category getter '@objectInMemoryIR mangledName' (as function)                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_mangledName (const class GALGAS_objectInMemoryIR & inObject,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 #endif

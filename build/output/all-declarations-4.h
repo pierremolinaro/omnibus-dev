@@ -774,6 +774,17 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_serviceDeclar
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Category method '@taskList noteTypesInPrecedenceGraph'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_taskList inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                                 Routine 'checkMode'                                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -967,6 +978,7 @@ void categoryMethod_enterInContext (const class GALGAS_serviceDeclarationListAST
 
 void categoryMethod_enterInContext (const class GALGAS_taskList inObject,
                                     class GALGAS_semanticContext & io_ioContext,
+                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
@@ -1424,6 +1436,17 @@ class GALGAS_string function_stackAddressForTask (const class GALGAS_string & co
 class GALGAS_string function_routineNameForTask (const class GALGAS_string & constinArgument0,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Function 'llvmNameForTaskVariable'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForTaskVariable (class GALGAS_string inArgument0,
+                                                      class GALGAS_string inArgument1,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
