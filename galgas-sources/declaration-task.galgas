@@ -1,0 +1,164 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @taskList {
+  @lstring mTaskName
+  @lbigint mPriority
+  @lbigint mStackSize
+  @location mEndOfTaskDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $task$
+    $identifier$ ?let taskName
+    $priority$
+    $integer$ ?let @lbigint priority
+    $stackSize$
+    $integer$ ?let @lbigint stackSize
+    ${$
+    let endOfTask = @location.here
+    $}$
+    ioAST.mTaskList +=
+      !taskName
+      !priority
+      !stackSize
+      !endOfTask
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+#  for () in self do
+#    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+#  end
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @taskMap {
+  insert insertKey error message "the '%K' task is already declared in %L"
+  search searchKey error message "there is no '%K' task"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @taskList enterInContext ?!context:@semanticContext ioContext {
+  for task in self do
+    [!?ioContext.mTaskMap insertKey !task.mTaskName]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @taskList semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  @stringset prioritySet = {}
+  for task in self do
+    [task semanticAnalysis
+      !context:inContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    ]
+    let priorityString = [task.mPriority.bigint string]
+    if [prioritySet hasKey !priorityString] then
+      error task.mPriority : "duplicate priority"
+    end
+    prioritySet += !priorityString
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @taskList-element semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Check stack size is >= 64, and a multiple of 8
+  let stackSize = mStackSize.bigint
+  if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
+    error mStackSize : "stack size should be a multiple of 8, and >= 64"
+  end
+#--- Generate task
+  ioIntermediateCodeStruct.mTaskListIR +=
+    !mTaskName.string
+    !mPriority.bigint
+    !mStackSize.bigint
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sortedlist @taskListIR {
+  @string mTaskName
+  @bigint mPriority
+  @bigint mStackSize
+}{
+  mPriority <
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @taskListIR generateCode ?!@string ioLLVMcode {
+  ioLLVMcode += llvmTitleComment (!"Task declaration")
+#--- Declare stacks
+  for task in self do
+    ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
+  end
+  ioLLVMcode += "\n"
+  ioLLVMcode += llvmSeparatorLine ()
+  ioLLVMcode += "\n"
+#--- Start tasks
+  ioLLVMcode += "define internal void @start.tasks () nounwind {\n"
+  for task in self do (idx)
+    ioLLVMcode += "  " + stackAddressForTask (!task.mTaskName)
+    ioLLVMcode += " = getelementptr inbounds [" + (task.mStackSize / 4) + " x i32], "
+    ioLLVMcode += "[" + (task.mStackSize / 4) + " x i32]* " + stackNameForTask (!task.mTaskName)
+    ioLLVMcode += ", i32 0, i32 0\n"
+    ioLLVMcode += "  call void @kernel_create_task ("
+    ioLLVMcode += "i32 " + idx
+    ioLLVMcode += ", i32* " + stackAddressForTask (!task.mTaskName)
+    ioLLVMcode += ", i32 " + task.mStackSize
+    ioLLVMcode += ", void ()* " + routineNameForTask (!task.mTaskName) + ")\n"
+  end
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+#--- Task code
+  for task in self do
+    ioLLVMcode += llvmSeparatorLine ()
+    ioLLVMcode += "\n"
+    ioLLVMcode += "define internal void " + routineNameForTask (!task.mTaskName) + " () nounwind noreturn naked {\n"
+    ioLLVMcode += "  call void @" + llvmNameForProcedure (!"setup") + " ()\n"
+    ioLLVMcode += "  br label %loop\n"
+    ioLLVMcode += "loop:\n"
+    ioLLVMcode += "  call void @" + llvmNameForProcedure (!"loop") + " ()\n"
+    ioLLVMcode += "  br label %loop\n"
+    ioLLVMcode += "}\n\n"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

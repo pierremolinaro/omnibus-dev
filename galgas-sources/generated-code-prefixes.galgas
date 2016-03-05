@@ -212,3 +212,21 @@ func %once nullWhenPanicDisabledAttribute -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func stackNameForTask ?let @string inTaskName -> @string outResult {
+  outResult = "@task.stack." + inTaskName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func stackAddressForTask ?let @string inTaskName -> @string outResult {
+  outResult = "%task.stack.address." + inTaskName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func routineNameForTask ?let @string inTaskName -> @string outResult {
+  outResult = "@task.routine." + inTaskName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

@@ -20,6 +20,7 @@ struct @intermediateCodeStruct {
   @initListIR mInitList
   @instructionListIR mExceptionSetupInstructionListIR
   @instructionListIR mExceptionLoopInstructionListIR
+  @taskListIR mTaskListIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

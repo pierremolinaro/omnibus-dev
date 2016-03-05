@@ -13,6 +13,11 @@ var gVar $uint32 = 0 {
 
 //------------------------------------------------*
 
+task T priority 12 stackSize 512 {
+}
+
+//------------------------------------------------*
+
 proc loop `user () {
   waitUntilMS (!deadline:gVar)
   ledOn (!LED_L1) // Allumer la led

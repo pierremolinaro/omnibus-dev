@@ -20,6 +20,11 @@ var led = $ledState.on {
 
 //------------------------------------------------*
 
+task T priority 12 stackSize 512 {
+}
+
+//------------------------------------------------*
+
 proc loop `user () {
   waitDuringMS (!delay:250)
   if led == .off then

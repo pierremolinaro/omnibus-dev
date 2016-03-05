@@ -32,6 +32,11 @@ proc userSystickHandler `isr () {
 
 //------------------------------------------------*
 
+task T priority 12 stackSize 512 {
+}
+
+//------------------------------------------------*
+
 proc setup `user () {
 }
 
