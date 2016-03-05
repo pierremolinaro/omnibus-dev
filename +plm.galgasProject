@@ -24,7 +24,7 @@ project (1:0:0) -> "plm" {
 #--- Boolset
 ##  "galgas-sources/boolset-type.galgas"
 
-#--- Type declaration
+#--- Type declarations
   "galgas-sources/type-bool.galgas"
   "galgas-sources/type-enumeration-declaration.galgas"
   "galgas-sources/type-structure-declaration.galgas"
@@ -36,22 +36,25 @@ project (1:0:0) -> "plm" {
   "galgas-sources/type-opaque-declaration.galgas"
 
 #--- Global declarations
-  "galgas-sources/global-variable-declaration.galgas"
-  "galgas-sources/global-constant-declaration.galgas"
-  "galgas-sources/register-declaration.galgas"
+  "galgas-sources/declaration-global-variable.galgas"
+  "galgas-sources/declaration-global-constant.galgas"
+  "galgas-sources/declaration-control-register.galgas"
 
-#--- Exception
-  "galgas-sources/exception.galgas"
+#--- Tasks
+  "galgas-sources/declaration-task.galgas"
+
+#--- Panic
+  "galgas-sources/panic.galgas"
 
 #--- Routines
-  "galgas-sources/boot-declaration.galgas"
-  "galgas-sources/init-declaration.galgas"
-  "galgas-sources/proc-declaration.galgas"
-  "galgas-sources/func-declaration.galgas"
-  "galgas-sources/required-proc-declaration.galgas"
-  "galgas-sources/extern-proc-declaration.galgas"
-  "galgas-sources/section-declaration.galgas"
-  "galgas-sources/service-declaration.galgas"
+  "galgas-sources/declaration-boot.galgas"
+  "galgas-sources/declaration-init.galgas"
+  "galgas-sources/declaration-proc.galgas"
+  "galgas-sources/declaration-func.galgas"
+  "galgas-sources/declaration-required-proc.galgas"
+  "galgas-sources/declaration-extern-proc.galgas"
+  "galgas-sources/declaration-section.galgas"
+  "galgas-sources/declaration-service.galgas"
 
 #--- Expression
   "galgas-sources/expression-operator-priority.galgas"

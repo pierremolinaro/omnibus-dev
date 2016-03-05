@@ -36,6 +36,19 @@ void callCategoryMethod_addDependenceEdgeForStaticExpression (const class cPtr_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                Category method '@taskList-element semanticAnalysis'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_semanticAnalysis (const class GALGAS_taskList_2D_element inObject,
+                                      const class GALGAS_semanticContext constin_inContext,
+                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                      class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Category method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -55,6 +68,17 @@ class GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const 
                                                                           class GALGAS_string inArgument0,
                                                                           class C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Category method '@procedureDeclarationListAST-element enterInContext'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

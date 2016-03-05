@@ -33,6 +33,7 @@ struct @ast {
   @initList mInitList
   @exceptionClauseListAST mExceptionClauses
   @exceptionTypesAST mExceptionTypes
+  @taskList mTaskList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

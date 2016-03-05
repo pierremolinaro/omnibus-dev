@@ -223,6 +223,7 @@ struct @semanticContext {
   @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
   @prefixOperatorMap mNotOperatorMap            # not
   @prefixOperatorMap mUnsignedComplementOperatorMap # ~
+  @taskMap mTaskMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -300,13 +301,13 @@ proc buildSemanticContext
     !sourceFile:inSourceFile
   )
 #--- Enter procedures, functions, sections, services in context
-  for procedure in inAST.mProcedureListAST do
-    [procedure enterInContext !?context: outSemanticContext]
-  end
+  [inAST.mProcedureListAST enterInContext !?context: outSemanticContext]
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !?context: outSemanticContext]
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
   [inAST.mServiceListAST enterInContext !?context: outSemanticContext]
+#--- Enter tasks
+  [inAST.mTaskList enterInContext !?context: outSemanticContext]
 #--- Check required procs mode
   if @uint.errorCount == 0 then
     for requiredProc in inAST.mRequiredProcList do

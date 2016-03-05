@@ -286,6 +286,8 @@ private proc generateLLVMfile
       llvmCode += "}\n\n"
     end
   end
+#----------------------------------------- tasks
+  [inIntermediateCodeStruct.mTaskListIR generateCode !?llvmCode]
 #----------------------------------------- Intrinsics
   if [generationAdds.mIntrinsicsDeclarationSet count] > 0 then
     llvmCode += llvmTitleComment (!"LLVM intrinsics")
@@ -319,7 +321,8 @@ private proc generateLLVMfile
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/target.c"
   )
-  [cCode writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
+  let s = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskListIR length] string]]
+  [s writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
 #----------------------------------------- Perform compilation
   if (@uint.errorCount == 0) then # && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end

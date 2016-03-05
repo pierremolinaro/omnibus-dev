@@ -193,9 +193,15 @@ map @procedureMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureDeclarationListAST-element enterInContext
-  ?!context:@semanticContext ioContext
-{
+method @procedureDeclarationListAST enterInContext ?!context:@semanticContext ioContext {
+  for procedure in self do
+    [procedure enterInContext !?context:ioContext]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @procedureDeclarationListAST-element enterInContext ?!context:@semanticContext ioContext {
 #--- Signature
   @procedureSignature signature = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do

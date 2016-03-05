@@ -253,16 +253,12 @@ copyCompleted:
 ;   configuration.on.boot                                                                                              *
 ;----------------------------------------------------------------------------------------------------------------------*
 
-@stack0 = global [256 x i32] zeroinitializer
-
 define void @configuration.on.boot () nounwind {
   call void @boot ()
   call void @clearBSS ()
   call void @copyData ()
   call void @init ()
-;--- Create task 0
-  %stack0.address = getelementptr inbounds [256 x i32], [256 x i32]* @stack0, i32 0, i32 0
-  call void @kernel_create_task (i32 0, i32* %stack0.address, i32 1024, void ()* @user.code)
+  call void @start.tasks ()
   ret  void
 }
 
@@ -272,16 +268,3 @@ define void @configuration.on.boot () nounwind {
 
 ;--- Create task 
 declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind
-
-;----------------------------------------------------------------------------------------------------------------------*
-;   task 0                                                                                                          *
-;----------------------------------------------------------------------------------------------------------------------*
-
-define void @user.code () nounwind naked noreturn {
-  call void @proc.setup ()
-  br   label %loop
-
-loop:
-  call void @proc.loop ()
-  br   label %loop
-}
