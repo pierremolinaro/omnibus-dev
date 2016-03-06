@@ -538,8 +538,8 @@ method @structureDeclaration procedureSemanticAnalysis
       end
     end
   #--- Enter in map
-    [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
-      !.new {!mStructureName.string + "." + procedure.mProcedureName !procedure.mProcedureName.location}
+    [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+      !.new {!"$" + mStructureName.string + "." + procedure.mProcedureName !procedure.mProcedureName.location}
       !formalArguments
       !instructionGenerationList
       !false # [ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
@@ -547,28 +547,10 @@ method @structureDeclaration procedureSemanticAnalysis
       !false
       !false
       !false
+      !.procedure
     ]  
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#proc declareLLVMstructureInitRoutines ?let @typeInitializerMap inTypeInitializerMap ?!@string ioLLVMcode {
-#  for (* llvmTypeName initializerMap) in inTypeInitializerMap do
-#    for (initializerName propertyList) in initializerMap do
-#      ioLLVMcode += "define internal %" + llvmTypeName + " @" + llvmTypeName + "." + initializerName + " () nounwind {\n"
-#      var s = "undef"
-#      for () in propertyList do (idx)
-#        let target = "%result." + idx
-#        ioLLVMcode += "  " + target + " = insertvalue %" + llvmTypeName + " " + s
-#        ioLLVMcode += ", " + [mOperand.mType llvmTypeName] + " " + [mOperand.mValue llvmName] + ", " + idx + "\n"
-#        s = target
-#      end
-#      ioLLVMcode += "  ret %" + llvmTypeName + " " + s + "\n"
-#      ioLLVMcode += "}\n\n"
-#    end
-#  end
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

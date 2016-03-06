@@ -644,31 +644,6 @@ class GALGAS_string callCategoryGetter_typeName (const cPtr_integerDeclaration *
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category method '@procedureMapIR-element llvmCodeGeneration'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_element inObject,
-                                        class GALGAS_string & io_ioLLVMcode,
-                                        class GALGAS_string & io_ioAssemblerCode,
-                                        const class GALGAS_generationContext constin_inGenerationContext,
-                                        class GALGAS_generationAdds & io_ioGenerationAdds,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Category method '@procedureMapIR-element llvmPrototypeGeneration'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_llvmPrototypeGeneration (const class GALGAS_procedureMapIR_2D_element inObject,
-                                             class GALGAS_string & io_ioLLVMcode,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                            Category method '@infixOperatorMap checkBinaryOperationWith'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -752,20 +727,6 @@ class GALGAS_string extensionGetter_passingModeForActualSelector (const class GA
                                                                   class GALGAS_lstring inArgument0,
                                                                   class C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Category method '@routineMapIR llvmCodeGeneration'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                        class GALGAS_string & io_ioLLVMcode,
-                                        class GALGAS_string & io_ioAssemblerCode,
-                                        const class GALGAS_generationContext constin_inGenerationContext,
-                                        class GALGAS_generationAdds & io_ioGenerationAdds,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

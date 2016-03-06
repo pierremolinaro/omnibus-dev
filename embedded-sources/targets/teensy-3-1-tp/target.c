@@ -198,7 +198,7 @@ static task_list gDeadlineWaitingTaskList ;
 //  B L O C K I N G    R U N N I N G    T A S K                                                                        *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_blockRunningTaskInList (task_list * ioWaitingList) asm ("proc.kernel_blockRunningTaskInList") ;
+void kernel_blockRunningTaskInList (task_list * ioWaitingList) asm ("proc..kernel_blockRunningTaskInList") ;
 void kernel_blockRunningTaskInList (task_list * ioWaitingList) {
   const unsigned currentTaskIndex = kernel_runningTaskIndex () ;
   *ioWaitingList |= 1 << currentTaskIndex ;
@@ -209,7 +209,7 @@ void kernel_blockRunningTaskInList (task_list * ioWaitingList) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_blockRunningTaskInDeadlineList (const unsigned inDeadlineMS) asm ("proc.kernel_blockRunningTaskInDeadlineList") ;
+void kernel_blockRunningTaskInDeadlineList (const unsigned inDeadlineMS) asm ("proc..kernel_blockRunningTaskInDeadlineList") ;
 void kernel_blockRunningTaskInDeadlineList (const unsigned inDeadlineMS) {
   const unsigned currentTaskIndex = kernel_runningTaskIndex () ;
   task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [currentTaskIndex] ;
@@ -221,7 +221,7 @@ void kernel_blockRunningTaskInDeadlineList (const unsigned inDeadlineMS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, const unsigned inDeadlineMS)
-  asm ("proc.kernel_blockRunningTaskInListAndDeadlineList") ;
+  asm ("proc..kernel_blockRunningTaskInListAndDeadlineList") ;
 
 void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, const unsigned inDeadlineMS) {
   const unsigned currentTaskIndex = kernel_runningTaskIndex () ;
@@ -237,7 +237,7 @@ void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, co
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) asm ("proc.kernel_makeTaskReadyFromWaitingList") ;
+void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) asm ("proc..kernel_makeTaskReadyFromWaitingList") ;
 void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) {
   const unsigned taskIndex = countLeadingZeros (* ioWaitingList) ;
   task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;
@@ -250,7 +250,7 @@ void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) asm ("proc.kernel_tasksWithEarlierDateBecomeReady") ;
+void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) asm ("proc..kernel_tasksWithEarlierDateBecomeReady") ;
 void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
   while (w > 0) {

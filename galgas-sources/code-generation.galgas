@@ -186,7 +186,7 @@ private proc generateLLVMfile
      !currentDir:inCurrentDirectory
      !from:inTargetName.string + "/target.ll"
   )
-  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!"")]
+  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
   llvmCode += "\n"
 #----------------------------------------- Structure types declaration
   declareLLVMTypes (!inTypeMap !?llvmCode)
@@ -208,12 +208,12 @@ private proc generateLLVMfile
 #----------------------------------------- Init
   [inIntermediateCodeStruct.mInitList generateLLVMinitCode
     !?llvmCode
-    !inIntermediateCodeStruct.mProcedureMapIR
+    !inIntermediateCodeStruct.mRoutineMapIR
     !generationContext
     !?generationAdds
   ]
 #----------------------------------------- Procedures
-  [inIntermediateCodeStruct.mProcedureMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
+  [inIntermediateCodeStruct.mRoutineMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
 #----------------------------------------- Sections

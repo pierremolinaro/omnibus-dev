@@ -179,7 +179,7 @@ as_systickHandler:
   ldr   r4, =gRunningTaskContextSaveAddress
   ldr   r4, [r4]
 @----------------------------------------- Call Systick handler (C routine)
-  bl    proc.systickHandler
+  bl    proc..systickHandler
 @----------------------------------------- Test backgroundTaskContext to check if init passed
   ldr   r5, =backgroundTaskContext
   ldr   r5, [r5]
@@ -222,5 +222,3 @@ infiniteLoop:
   ACTIVITY_LED_OFF
   wfi
   b  infiniteLoop
-
-@----------------------------------------------------------------------------------------------------------------------*
