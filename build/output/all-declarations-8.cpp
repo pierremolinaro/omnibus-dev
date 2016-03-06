@@ -10,6 +10,32 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//          Overriding category method '@literalBooleanInExpressionAST addDependenceEdgeForStaticExpression'           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * /* inObject */,
+                                                                                               const GALGAS_lstring constinArgument_inConstantName,
+                                                                                               GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                               C_Compiler * inCompiler
+                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  {
+  ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, GALGAS_string ("$").add_operation (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("expression-true-false.galgas", 35)), inCompiler COMMA_SOURCE_FILE ("expression-true-false.galgas", 35)).getter_nowhere (SOURCE_FILE ("expression-true-false.galgas", 35)) COMMA_SOURCE_FILE ("expression-true-false.galgas", 35)) ;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression (void) {
+  enterCategoryMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_literalBooleanInExpressionAST.mSlotID,
+                                                            categoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression (defineCategoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //          Overriding category method '@literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGraph'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

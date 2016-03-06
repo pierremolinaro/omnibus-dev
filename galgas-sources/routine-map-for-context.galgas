@@ -52,6 +52,18 @@ method @serviceDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrec
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+    [mSectionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -78,8 +90,8 @@ method @procedureDeclarationListAST enterInContext
     end
   #--- Enter in context
     let lkey = @lstring.new {!inReceiverTypeName + "." + procedure.mProcedureName !procedure.mProcedureName.location}
-    if [ioContext.mProcedureMap hasKey !procedure.mProcedureName.string] then
-      let weak = [ioContext.mProcedureMap mWeakProcedureForKey !procedure.mProcedureName.string]
+    if [ioContext.mRoutineMapForContext hasKey !procedure.mProcedureName.string] then
+      let weak = [ioContext.mRoutineMapForContext mWeakForKey !lkey.string]
       if weakProcedure && not weak then
         # redefined weak procedure is ignored
       elsif weakProcedure && weak then
@@ -103,7 +115,6 @@ method @procedureDeclarationListAST enterInContext
           !.procedure
           !weakProcedure
         ]
-        [!?ioContext.mSubProgramMap insertKey !procedure.mProcedureName]
       end
     else
       [!?ioContext.mRoutineMapForContext insertKey
@@ -114,7 +125,6 @@ method @procedureDeclarationListAST enterInContext
         !.procedure
         !weakProcedure
       ]
-      [!?ioContext.mSubProgramMap insertKey !procedure.mProcedureName]
     end
   end
 }
@@ -133,7 +143,6 @@ method @serviceDeclarationListAST enterInContext
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
   #--- Enter in context
-    [!?ioContext.mSubProgramMap insertKey !service.mServiceName]
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
       !service.mMutating
@@ -142,6 +151,34 @@ method @serviceDeclarationListAST enterInContext
       !.service
       !false # Not weak
     ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionDeclarationListAST enterInContext
+  ?receiverType:let @string inReceiverTypeName
+  ?!context:@semanticContext ioContext
+{
+  for section in self do
+  #--- Signature
+    @procedureSignature signature = {}
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in section.mSectionFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      signature += !formalArgumentPassingMode !selector.string !typeProxy
+    end
+  #--- Enter in context
+    [!?ioContext.mRoutineMapForContext insertKey
+      !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
+      !section.mMutating
+      !@modeMap {![userModeName () nowhere]}
+      !signature
+      !.section
+      !false # Not weak
+    ]
+  end
+  if [self length] > 0 then
+    ioContext.mProceduresThatShouldNotBeGenerated += !"HardFaultHandler"
   end
 }
 

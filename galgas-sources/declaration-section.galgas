@@ -54,20 +54,6 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @sectionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
-    [mSectionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -78,35 +64,6 @@ map @sectionMap {
   insert insertKey error message "the '%K' section is already declared in %L"
   search searchKey error message "there is no '%K' section"
   remove removeKey error message "there is no '%K' section"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @sectionDeclarationListAST enterInContext ?!context:@semanticContext ioContext {
-  for section in self do
-    [section enterInContext !?context:ioContext]
-  end
-  if [self length] > 0 then
-    ioContext.mProceduresThatShouldNotBeGenerated += !"HardFaultHandler"
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @sectionDeclarationListAST-element enterInContext ?!context:@semanticContext ioContext {
-#--- Signature
-  @procedureSignature signature = {}
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in mSectionFormalArgumentList do
-    let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-    signature += !formalArgumentPassingMode !selector.string !typeProxy
-  end
-#--- Enter in context
-  [!?ioContext.mSectionMap insertKey
-    !mSectionName
-    !mMutating
-    !signature
-  ]
-  [!?ioContext.mSubProgramMap insertKey !mSectionName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

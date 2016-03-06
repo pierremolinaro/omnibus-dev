@@ -142,17 +142,6 @@ void categoryMethod_llvmPrototypeGeneration (const class GALGAS_externProcedureM
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Category method '@sectionDeclarationListAST-element enterInContext'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterInContext (const class GALGAS_sectionDeclarationListAST_2D_element inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                    Category method '@sectionDeclarationListAST-element sectionSemanticAnalysis'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
