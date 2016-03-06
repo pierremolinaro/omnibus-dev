@@ -104,7 +104,8 @@ method @initList-element initSemanticAnalysis
   [!?ioTemporaries.mInitRoutinePriorityMap insertKey !.new{![mPriority string] !mPriority.location}]
 #--- Check "requiredBy" routines are defined
   for (procName procFormalArgumentList) in mRequiredByProcList do
-    [inContext.mProcedureMap searchKey !procName ?4*]
+    let lkey = @lstring.new {!"." + procName !procName.location}
+    [inContext.mRoutineMapForContext searchKey !lkey ?5*]
   end
 #---
   let routineNameForInvocationGraph = initNameForInvocationGraph (!mPriority)

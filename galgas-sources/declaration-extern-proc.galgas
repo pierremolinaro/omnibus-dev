@@ -74,14 +74,14 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     [!?procedureModeMap insertKey !mValue] ;
   end
 #--- Enter in context
-  [!?ioContext.mProcedureMap insertKey
-    !mExternProcedureName
+  [!?ioContext.mRoutineMapForContext insertKey
+    !@lstring.new {!"." + mExternProcedureName !mExternProcedureName.location}
     !false # not mutating
     !procedureModeMap
     !signature
+    !.procedure
     !false # Not weak
   ]
-  [!?ioContext.mSubProgramMap insertKey !mExternProcedureName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

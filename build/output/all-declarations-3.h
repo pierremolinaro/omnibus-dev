@@ -806,10 +806,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionLineType ;
   public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
   public : GALGAS_routineMapForContext mAttribute_mRoutineMapForContext ;
-  public : GALGAS_procedureMap mAttribute_mProcedureMap ;
   public : GALGAS_stringset mAttribute_mProceduresThatShouldNotBeGenerated ;
-  public : GALGAS_sectionMap mAttribute_mSectionMap ;
-  public : GALGAS_routineMap mAttribute_mSubProgramMap ;
   public : GALGAS_functionMap mAttribute_mFunctionMap ;
   public : GALGAS_initRoutineMap mAttribute_mInitRoutineMap ;
   public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionSetupRoutinePriorityMap ;
@@ -869,10 +866,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionLineType,
                                    const GALGAS_unifiedTypeMap & in_mTypeMap,
                                    const GALGAS_routineMapForContext & in_mRoutineMapForContext,
-                                   const GALGAS_procedureMap & in_mProcedureMap,
                                    const GALGAS_stringset & in_mProceduresThatShouldNotBeGenerated,
-                                   const GALGAS_sectionMap & in_mSectionMap,
-                                   const GALGAS_routineMap & in_mSubProgramMap,
                                    const GALGAS_functionMap & in_mFunctionMap,
                                    const GALGAS_initRoutineMap & in_mInitRoutineMap,
                                    const GALGAS_exceptionRoutinePriorityMap & in_mExceptionSetupRoutinePriorityMap,
@@ -928,19 +922,19 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
                                                           const class GALGAS_unifiedTypeMap & inOperand5,
                                                           const class GALGAS_routineMapForContext & inOperand6,
-                                                          const class GALGAS_procedureMap & inOperand7,
-                                                          const class GALGAS_stringset & inOperand8,
-                                                          const class GALGAS_sectionMap & inOperand9,
-                                                          const class GALGAS_routineMap & inOperand10,
-                                                          const class GALGAS_functionMap & inOperand11,
-                                                          const class GALGAS_initRoutineMap & inOperand12,
-                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand13,
-                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand14,
-                                                          const class GALGAS_controlRegisterMap & inOperand15,
-                                                          const class GALGAS_globalConstantMap & inOperand16,
-                                                          const class GALGAS_globalVariableMap & inOperand17,
-                                                          const class GALGAS_constructorMap & inOperand18,
-                                                          const class GALGAS_modeMap & inOperand19,
+                                                          const class GALGAS_stringset & inOperand7,
+                                                          const class GALGAS_functionMap & inOperand8,
+                                                          const class GALGAS_initRoutineMap & inOperand9,
+                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand10,
+                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand11,
+                                                          const class GALGAS_controlRegisterMap & inOperand12,
+                                                          const class GALGAS_globalConstantMap & inOperand13,
+                                                          const class GALGAS_globalVariableMap & inOperand14,
+                                                          const class GALGAS_constructorMap & inOperand15,
+                                                          const class GALGAS_modeMap & inOperand16,
+                                                          const class GALGAS_infixOperatorMap & inOperand17,
+                                                          const class GALGAS_infixOperatorMap & inOperand18,
+                                                          const class GALGAS_infixOperatorMap & inOperand19,
                                                           const class GALGAS_infixOperatorMap & inOperand20,
                                                           const class GALGAS_infixOperatorMap & inOperand21,
                                                           const class GALGAS_infixOperatorMap & inOperand22,
@@ -960,14 +954,11 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand36,
                                                           const class GALGAS_infixOperatorMap & inOperand37,
                                                           const class GALGAS_infixOperatorMap & inOperand38,
-                                                          const class GALGAS_infixOperatorMap & inOperand39,
-                                                          const class GALGAS_infixOperatorMap & inOperand40,
-                                                          const class GALGAS_infixOperatorMap & inOperand41,
-                                                          const class GALGAS_prefixOperatorMap & inOperand42,
-                                                          const class GALGAS_prefixOperatorMap & inOperand43,
-                                                          const class GALGAS_prefixOperatorMap & inOperand44,
-                                                          const class GALGAS_taskMap & inOperand45,
-                                                          const class GALGAS_taskVariableMap & inOperand46
+                                                          const class GALGAS_prefixOperatorMap & inOperand39,
+                                                          const class GALGAS_prefixOperatorMap & inOperand40,
+                                                          const class GALGAS_prefixOperatorMap & inOperand41,
+                                                          const class GALGAS_taskMap & inOperand42,
+                                                          const class GALGAS_taskVariableMap & inOperand43
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1042,15 +1033,11 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPointerSize (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_procedureMap getter_mProcedureMap (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mProceduresThatShouldNotBeGenerated (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mRightShiftOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapForContext getter_mRoutineMapForContext (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_sectionMap getter_mSectionMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mStrictInfOperatorMap (LOCATION_ARGS) const ;
 
@@ -1059,8 +1046,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSubNoOvfOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSubOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineMap getter_mSubProgramMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSupEqualOperatorMap (LOCATION_ARGS) const ;
 

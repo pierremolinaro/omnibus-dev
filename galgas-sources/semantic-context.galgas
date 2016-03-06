@@ -184,10 +184,8 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
-  @procedureMap mProcedureMap
+#  @procedureMap mProcedureMap
   @stringset mProceduresThatShouldNotBeGenerated
-  @sectionMap mSectionMap
-  @routineMap mSubProgramMap
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
   @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
@@ -304,7 +302,7 @@ proc buildSemanticContext
 #--- Enter procedures, functions, sections, services in context
   [inAST.mProcedureListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
-  [inAST.mSectionListAST enterInContext !?context: outSemanticContext]
+  [inAST.mSectionListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
   [inAST.mServiceListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #--- Enter tasks
