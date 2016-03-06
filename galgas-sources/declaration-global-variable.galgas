@@ -260,6 +260,7 @@ method @globalVarDeclarationList-element enterInContext
       ?let procedureModeMap
       ?*
       ?let routineKind
+      ?*
     ]
     for () in procedureModeMap do
       executionModes += !lkey.string

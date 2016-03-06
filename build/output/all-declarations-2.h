@@ -3236,6 +3236,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                       const class GALGAS_modeMap & inOperand2,
                                                       const class GALGAS_procedureSignature & inOperand3,
                                                       const class GALGAS_routineKind & inOperand4,
+                                                      const class GALGAS_bool & inOperand5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -3245,6 +3246,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_modeMap constinArgument2,
                                                    class GALGAS_procedureSignature constinArgument3,
                                                    class GALGAS_routineKind constinArgument4,
+                                                   class GALGAS_bool constinArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3253,6 +3255,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_modeMap & outArgument2,
                                                    class GALGAS_procedureSignature & outArgument3,
                                                    class GALGAS_routineKind & outArgument4,
+                                                   class GALGAS_bool & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3276,6 +3279,11 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMWeakForKey (class GALGAS_bool constinArgument0,
+                                                        class GALGAS_string constinArgument1,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
@@ -3283,6 +3291,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_modeMap & outArgument2,
                                                    class GALGAS_procedureSignature & outArgument3,
                                                    class GALGAS_routineKind & outArgument4,
+                                                   class GALGAS_bool & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -3304,6 +3313,10 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureSignature getter_mSignatureForKey (const class GALGAS_string & constinOperand0,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWeakForKey (const class GALGAS_string & constinOperand0,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapForContext getter_overriddenMap (C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
@@ -3335,6 +3348,7 @@ class cEnumerator_routineMapForContext : public cGenericAbstractEnumerator {
   public : class GALGAS_modeMap current_mModeMap (LOCATION_ARGS) const ;
   public : class GALGAS_procedureSignature current_mSignature (LOCATION_ARGS) const ;
   public : class GALGAS_routineKind current_mRoutineKind (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mWeak (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_routineMapForContext_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -3355,13 +3369,15 @@ class cMapElement_routineMapForContext : public cMapElement {
   public : GALGAS_modeMap mAttribute_mModeMap ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
   public : GALGAS_routineKind mAttribute_mRoutineKind ;
+  public : GALGAS_bool mAttribute_mWeak ;
 
 //--- Constructor
   public : cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
                                              const GALGAS_bool & in_mMutating,
                                              const GALGAS_modeMap & in_mModeMap,
                                              const GALGAS_procedureSignature & in_mSignature,
-                                             const GALGAS_routineKind & in_mRoutineKind
+                                             const GALGAS_routineKind & in_mRoutineKind,
+                                             const GALGAS_bool & in_mWeak
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -3390,6 +3406,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
   public : GALGAS_modeMap mAttribute_mModeMap ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
   public : GALGAS_routineKind mAttribute_mRoutineKind ;
+  public : GALGAS_bool mAttribute_mWeak ;
 
 
 //--------------------------------- Accessors
@@ -3407,7 +3424,8 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
                                                    const GALGAS_bool & in_mMutating,
                                                    const GALGAS_modeMap & in_mModeMap,
                                                    const GALGAS_procedureSignature & in_mSignature,
-                                                   const GALGAS_routineKind & in_mRoutineKind) ;
+                                                   const GALGAS_routineKind & in_mRoutineKind,
+                                                   const GALGAS_bool & in_mWeak) ;
 
 //-- Start of generic part --*
 
@@ -3424,7 +3442,8 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
                                                                           const class GALGAS_bool & inOperand1,
                                                                           const class GALGAS_modeMap & inOperand2,
                                                                           const class GALGAS_procedureSignature & inOperand3,
-                                                                          const class GALGAS_routineKind & inOperand4
+                                                                          const class GALGAS_routineKind & inOperand4,
+                                                                          const class GALGAS_bool & inOperand5
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -3448,6 +3467,8 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mRoutineKind (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureSignature getter_mSignature (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWeak (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

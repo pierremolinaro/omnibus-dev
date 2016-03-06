@@ -7524,26 +7524,28 @@ cMapElement_routineMapForContext::cMapElement_routineMapForContext (const GALGAS
                                                                     const GALGAS_bool & in_mMutating,
                                                                     const GALGAS_modeMap & in_mModeMap,
                                                                     const GALGAS_procedureSignature & in_mSignature,
-                                                                    const GALGAS_routineKind & in_mRoutineKind
+                                                                    const GALGAS_routineKind & in_mRoutineKind,
+                                                                    const GALGAS_bool & in_mWeak
                                                                     COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mMutating (in_mMutating),
 mAttribute_mModeMap (in_mModeMap),
 mAttribute_mSignature (in_mSignature),
-mAttribute_mRoutineKind (in_mRoutineKind) {
+mAttribute_mRoutineKind (in_mRoutineKind),
+mAttribute_mWeak (in_mWeak) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_routineMapForContext::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mMutating.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mSignature.isValid () && mAttribute_mRoutineKind.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mMutating.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mSignature.isValid () && mAttribute_mRoutineKind.isValid () && mAttribute_mWeak.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_routineMapForContext::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_routineMapForContext (mAttribute_lkey, mAttribute_mMutating, mAttribute_mModeMap, mAttribute_mSignature, mAttribute_mRoutineKind COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_routineMapForContext (mAttribute_lkey, mAttribute_mMutating, mAttribute_mModeMap, mAttribute_mSignature, mAttribute_mRoutineKind, mAttribute_mWeak COMMA_HERE)) ;
   return result ;
 }
 
@@ -7566,6 +7568,10 @@ void cMapElement_routineMapForContext::description (C_String & ioString, const i
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRoutineKind" ":" ;
   mAttribute_mRoutineKind.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mWeak" ":" ;
+  mAttribute_mWeak.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7584,6 +7590,9 @@ typeComparisonResult cMapElement_routineMapForContext::compare (const cCollectio
   }
   if (kOperandEqual == result) {
     result = mAttribute_mRoutineKind.objectCompare (operand->mAttribute_mRoutineKind) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mWeak.objectCompare (operand->mAttribute_mWeak) ;
   }
   return result ;
 }
@@ -7640,10 +7649,11 @@ void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & in
                                                        const GALGAS_modeMap & inArgument1,
                                                        const GALGAS_procedureSignature & inArgument2,
                                                        const GALGAS_routineKind & inArgument3,
+                                                       const GALGAS_bool & inArgument4,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   cMapElement_routineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -7659,10 +7669,11 @@ void GALGAS_routineMapForContext::setter_insertKey (GALGAS_lstring inKey,
                                                     GALGAS_modeMap inArgument1,
                                                     GALGAS_procedureSignature inArgument2,
                                                     GALGAS_routineKind inArgument3,
+                                                    GALGAS_bool inArgument4,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   cMapElement_routineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -7682,6 +7693,7 @@ void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
                                                     GALGAS_modeMap & outArgument1,
                                                     GALGAS_procedureSignature & outArgument2,
                                                     GALGAS_routineKind & outArgument3,
+                                                    GALGAS_bool & outArgument4,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) performSearch (inKey,
@@ -7693,12 +7705,14 @@ void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
     outArgument1.drop () ;
     outArgument2.drop () ;
     outArgument3.drop () ;
+    outArgument4.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_routineMapForContext) ;
     outArgument0 = p->mAttribute_mMutating ;
     outArgument1 = p->mAttribute_mModeMap ;
     outArgument2 = p->mAttribute_mSignature ;
     outArgument3 = p->mAttribute_mRoutineKind ;
+    outArgument4 = p->mAttribute_mWeak ;
   }
 }
 
@@ -7709,6 +7723,7 @@ void GALGAS_routineMapForContext::setter_removeKey (GALGAS_lstring inKey,
                                                     GALGAS_modeMap & outArgument1,
                                                     GALGAS_procedureSignature & outArgument2,
                                                     GALGAS_routineKind & outArgument3,
+                                                    GALGAS_bool & outArgument4,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   const char * kRemoveErrorMessage = "there is no '%K' routine" ;
@@ -7721,6 +7736,7 @@ void GALGAS_routineMapForContext::setter_removeKey (GALGAS_lstring inKey,
     outArgument1 = p->mAttribute_mModeMap ;
     outArgument2 = p->mAttribute_mSignature ;
     outArgument3 = p->mAttribute_mRoutineKind ;
+    outArgument4 = p->mAttribute_mWeak ;
   }
 }
 
@@ -7786,6 +7802,21 @@ GALGAS_routineKind GALGAS_routineMapForContext::getter_mRoutineKindForKey (const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_routineMapForContext::getter_mWeakForKey (const GALGAS_string & inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
+    result = p->mAttribute_mWeak ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_routineMapForContext::setter_setMMutatingForKey (GALGAS_bool inAttributeValue,
                                                              GALGAS_string inKey,
                                                              C_Compiler * inCompiler
@@ -7842,6 +7873,20 @@ void GALGAS_routineMapForContext::setter_setMRoutineKindForKey (GALGAS_routineKi
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_routineMapForContext::setter_setMWeakForKey (GALGAS_bool inAttributeValue,
+                                                         GALGAS_string inKey,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
+    p->mAttribute_mWeak = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_routineMapForContext * GALGAS_routineMapForContext::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                                    const GALGAS_string & inKey
                                                                                                    COMMA_LOCATION_ARGS) {
@@ -7863,7 +7908,7 @@ cGenericAbstractEnumerator () {
 GALGAS_routineMapForContext_2D_element cEnumerator_routineMapForContext::current (LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return GALGAS_routineMapForContext_2D_element (p->mAttribute_lkey, p->mAttribute_mMutating, p->mAttribute_mModeMap, p->mAttribute_mSignature, p->mAttribute_mRoutineKind) ;
+  return GALGAS_routineMapForContext_2D_element (p->mAttribute_lkey, p->mAttribute_mMutating, p->mAttribute_mModeMap, p->mAttribute_mSignature, p->mAttribute_mRoutineKind, p->mAttribute_mWeak) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7904,6 +7949,14 @@ GALGAS_routineKind cEnumerator_routineMapForContext::current_mRoutineKind (LOCAT
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapForContext) ;
   return p->mAttribute_mRoutineKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_routineMapForContext::current_mWeak (LOCATION_ARGS) const {
+  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
+  return p->mAttribute_mWeak ;
 }
 
 
