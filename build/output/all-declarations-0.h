@@ -9832,7 +9832,8 @@ class GALGAS_structureDeclaration : public GALGAS_abstractDeclaration {
                                                                const class GALGAS_lstringlist & inOperand1,
                                                                const class GALGAS_structureFieldListAST & inOperand2,
                                                                const class GALGAS_procedureDeclarationListAST & inOperand3,
-                                                               const class GALGAS_functionDeclarationListAST & inOperand4
+                                                               const class GALGAS_functionDeclarationListAST & inOperand4,
+                                                               const class GALGAS_serviceDeclarationListAST & inOperand5
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -9844,11 +9845,13 @@ class GALGAS_structureDeclaration : public GALGAS_abstractDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureDeclarationListAST getter_mProcedureDeclarationListAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_serviceDeclarationListAST getter_mServiceListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_structureFieldListAST getter_mStructureFieldListAST (LOCATION_ARGS) const ;
 
@@ -9874,17 +9877,19 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureDeclaratio
 class cPtr_structureDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mStructureName ;
-  public : GALGAS_lstringlist mAttribute_mAttributeList ;
+  public : GALGAS_lstringlist mAttribute_mAttributeListAST ;
   public : GALGAS_structureFieldListAST mAttribute_mStructureFieldListAST ;
   public : GALGAS_procedureDeclarationListAST mAttribute_mProcedureDeclarationListAST ;
   public : GALGAS_functionDeclarationListAST mAttribute_mFunctionDeclarationListAST ;
+  public : GALGAS_serviceDeclarationListAST mAttribute_mServiceListAST ;
 
 //--- Constructor
   public : cPtr_structureDeclaration (const GALGAS_lstring & in_mStructureName,
-                                      const GALGAS_lstringlist & in_mAttributeList,
+                                      const GALGAS_lstringlist & in_mAttributeListAST,
                                       const GALGAS_structureFieldListAST & in_mStructureFieldListAST,
                                       const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
-                                      const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST
+                                      const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
+                                      const GALGAS_serviceDeclarationListAST & in_mServiceListAST
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -9892,10 +9897,11 @@ class cPtr_structureDeclaration : public cPtr_abstractDeclaration {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStructureName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_structureFieldListAST getter_mStructureFieldListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procedureDeclarationListAST getter_mProcedureDeclarationListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST getter_mFunctionDeclarationListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_serviceDeclarationListAST getter_mServiceListAST (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

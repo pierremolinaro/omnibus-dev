@@ -111,6 +111,7 @@ proc semanticAnalysis
     !?intermediateCode:outIntermediateCodeStruct
   ]
   [inAST.mServiceListAST serviceSemanticAnalysis
+    !receiverType:.null
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
