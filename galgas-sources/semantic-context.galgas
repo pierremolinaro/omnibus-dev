@@ -119,7 +119,7 @@ proc checkMode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sharedmap @unifiedTypeMap %selectors {
-  @string llvmTypeName # For Example: i23, %struct.toto
+  @string llvmTypeName # For Example: i23, %$toto
   @typeKind kind
   @typedConstantMap typedConstantMap
   @procedureMap procedureMap

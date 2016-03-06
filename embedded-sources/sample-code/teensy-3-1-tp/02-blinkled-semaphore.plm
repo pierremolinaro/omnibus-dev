@@ -3,6 +3,7 @@ target "teensy-3-1-tp"
 //------------------------------------------------*
 
 struct $semaphore {
+  var value $uint32 = 0
 
   service P `kernel () {
   

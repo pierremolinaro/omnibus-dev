@@ -268,7 +268,7 @@ method @serviceMapIR-element llvmCodeGeneration
   ioLLVMcode += "declare void @" + llvmNameForServiceCall (!lkey.string) + " ("
   let components = [lkey.string componentsSeparatedByString !"."]
   if [components length] == 2 then
-    ioLLVMcode += "%struct." + [components mValueAtIndex !0] + "* %self"  
+    ioLLVMcode += "%$" + [components mValueAtIndex !0] + "* %self"  
   end
   var first = [components length] != 2
   for () in mFormalArgumentListForGeneration do
