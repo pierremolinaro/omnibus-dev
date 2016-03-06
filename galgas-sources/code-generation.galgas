@@ -189,8 +189,7 @@ private proc generateLLVMfile
   llvmCode += [targetLLVMcode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!"")]
   llvmCode += "\n"
 #----------------------------------------- Structure types declaration
-  llvmCode += llvmTitleComment (!"Structure types")
-  declareLLVMstructureTypes (!inTypeMap !?llvmCode)
+  declareLLVMTypes (!inTypeMap !?llvmCode)
 #----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
     before llvmCode += llvmTitleComment (!"Global variables")
@@ -338,6 +337,38 @@ private proc generateLLVMfile
       error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
     end
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
+  ioLLVMcode += llvmTitleComment (!"Types")
+  for () in inTypeMap do
+    switch kind 
+    case boolean :
+      ioLLVMcode += "%$" + lkey + " = type i1\n"
+    case boolset :
+#      ioLLVMcode += "<<boolset>>"
+    case enumeration (enumConstantMap) :
+      ioLLVMcode += "%$" + lkey + " = type i" + [[enumConstantMap count] - 1 significantBitCount] + "\n"
+    case integer (* * * bitCount) :
+      ioLLVMcode += "%$" + lkey + " = type i" + bitCount + "\n"
+    case structure (* propertyList) :
+      ioLLVMcode += "%$" + lkey + " = type {"
+      for () in propertyList
+        do ioLLVMcode += [mType llvmTypeName]
+        between ioLLVMcode += ", "
+      end
+      ioLLVMcode += "}\n"
+    case literalString : 
+#      ioLLVMcode += "<<literalString>>"
+    case staticInteger : 
+#      ioLLVMcode += "<<staticInteger>>"
+    case opaque (bitCount) :
+      ioLLVMcode += "%$" + lkey + " = type i" + bitCount + "\n"
+    end
+  end
+  ioLLVMcode += "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

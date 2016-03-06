@@ -78,7 +78,7 @@ override method @opaqueTypeDeclaration enterInContext
   [!?ioContext.mTypeMap insertKey
     !lkey:mOpaqueTypeName
     !llvmTypeName:"i" + mSize.bigint
-    !kind:.opaque
+    !kind:.opaque {!bitCount:mSize.bigint}
     !typedConstantMap:{}
     !procedureMap:{}
     !functionMap:{}

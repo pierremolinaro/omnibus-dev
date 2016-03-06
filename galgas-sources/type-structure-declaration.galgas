@@ -322,7 +322,7 @@ override method @structureDeclaration semanticAnalysis
   case boolean : propertyMap = {}
   case boolset : propertyMap = {}
   case literalString : propertyMap = {}
-  case opaque : propertyMap = {}
+  case opaque (*) : propertyMap = {}
   end
 #--- Analyze procedures
   [self procedureSemanticAnalysis
@@ -555,24 +555,6 @@ method @structureDeclaration procedureSemanticAnalysis
       !false
       !false
     ]  
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc declareLLVMstructureTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
-  for () in inTypeMap do
-    if [kind isStructure] then
-      [kind structure ?propertyMap:* ?propertyList:let propertyList]
-      ioLLVMcode += llvmTypeName + " = type {"
-      for () in propertyList
-        do ioLLVMcode += [mType llvmTypeName]
-        between ioLLVMcode += ", "
-      end
-      ioLLVMcode += "}\n\n"
-    end
   end
 }
 

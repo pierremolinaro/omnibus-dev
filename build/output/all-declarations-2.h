@@ -3889,7 +3889,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 
   public : static GALGAS_typeKind constructor_literalString (LOCATION_ARGS) ;
 
-  public : static GALGAS_typeKind constructor_opaque (LOCATION_ARGS) ;
+  public : static GALGAS_typeKind constructor_opaque (const class GALGAS_bigint & inOperand0
+                                                      COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_typeKind constructor_staticInteger (LOCATION_ARGS) ;
 
@@ -3916,6 +3917,10 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                  class GALGAS_uint & outArgument3,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_opaque (class GALGAS_bigint & outArgument0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyMap & outArgument0,
                                                    class GALGAS_propertyList & outArgument1,
@@ -4010,6 +4015,22 @@ class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_typeKind_integer (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKind_opaque : public cEnumAssociatedValues {
+  public : const GALGAS_bigint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_opaque (const GALGAS_bigint & inAssociatedValue0
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_opaque (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
