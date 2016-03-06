@@ -397,7 +397,7 @@ method @taskMapIR generateCode
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     for (mangledName type initValue) in inGenerationContext.mTaskVariableMap do
       if task.mTaskName == [mangledName stringByDeletingPathExtension] then
-        ioLLVMcode += llvmNameForTaskVariable (!task.mTaskName ![mangledName pathExtension])
+        ioLLVMcode += "@" + llvmNameForTaskVariable (!task.mTaskName ![mangledName pathExtension])
         ioLLVMcode += " = internal global "
         ioLLVMcode += [type llvmTypeName] + " "
         let initialString = [initValue llvmName]

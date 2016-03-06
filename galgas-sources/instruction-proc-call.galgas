@@ -148,17 +148,28 @@ override method @procCallInstructionAST analyze
       ?@objectInMemoryIR variableKind
       ?4*
     ]
-  #--- Load variable
-    procCallEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] 
-    [[receiverType procedureMap] searchKey
-      !mProcName
-      ?*
-      ?procedureModeMap
-      ?procSignature
-      ?*
-    ]
-    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
-    routineKind = .procedure
+    procCallEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] #--- add "load receiver" as first argument
+    if [[receiverType procedureMap] hasKey !mProcName.string] then
+      [[receiverType procedureMap] searchKey
+        !mProcName
+        ?*
+        ?procedureModeMap
+        ?procSignature
+        ?*
+      ]
+      routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
+      routineKind = .procedure
+    elsif [inContext.mServiceMap hasKey ![receiverType key] + "." + mProcName] then
+      let mangledProcName = @lstring.new {![receiverType key] + "." + mProcName !mProcName.location}
+      [inContext.mServiceMap searchKey !mangledProcName ?* ?procSignature]
+      procedureModeMap = {![userModeName () nowhere]}
+      routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mProcName)
+      routineKind = .service
+    else
+      error mProcName
+        : "undefined $" + [receiverType key] + "." + mProcName
+        : routineKind, routineNameForInvocationGraph, procSignature, procedureModeMap
+    end
   elsif [inContext.mProcedureMap hasKey !mProcName.string] then
     [inContext.mProcedureMap searchKey
       !mProcName
@@ -181,18 +192,14 @@ override method @procCallInstructionAST analyze
     routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mProcName)
     routineKind = .section
   elsif [inContext.mServiceMap hasKey !mProcName.string] then
-    [inContext.mServiceMap searchKey
-      !mProcName
-      ?*
-      ?procSignature
-    ]
-    procedureModeMap = {![userModeName () nowhere]}
+    [inContext.mServiceMap searchKey !mProcName ?* ?procSignature]
     receiverType = .null
+    procedureModeMap = {![userModeName () nowhere]}
     routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mProcName)
     routineKind = .service
   else
     error mProcName
-      :"undefined proc or section"
+      :"undefined proc, service or section"
       : routineKind, receiverType, procedureModeMap, procSignature, routineNameForInvocationGraph
   end
 #--- Enter in invocation graph

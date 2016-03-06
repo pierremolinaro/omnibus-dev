@@ -307,7 +307,7 @@ proc buildSemanticContext
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !?context: outSemanticContext]
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
-  [inAST.mServiceListAST enterInContext !?context: outSemanticContext]
+  [inAST.mServiceListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #--- Enter tasks
   [inAST.mTaskList enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
 #--- Check required procs mode

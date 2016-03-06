@@ -10,133 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'enterLiteralIntegerOperators'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterLiteralIntegerOperators (const GALGAS_lstring constinArgument_inIntegerTypeName,
-                                           GALGAS_semanticContext & ioArgument_ioContext,
-                                           C_Compiler * inCompiler
-                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring var_intIntOp = function_combineTypeNamesForInfixOperator (constinArgument_inIntegerTypeName.mAttribute_string, constinArgument_inIntegerTypeName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 80)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_selfTypeProxy = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, constinArgument_inIntegerTypeName, inCompiler  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 81)) ;
-  ioArgument_ioContext.mAttribute_mLiteralIntegerType = var_selfTypeProxy ;
-  {
-  ioArgument_ioContext.mAttribute_mEqualOperatorMap.setter_insertKey (var_intIntOp, ioArgument_ioContext.mAttribute_mBooleanType, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (SOURCE_FILE ("type-literal-integer.galgas", 87))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 87)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 84)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.setter_insertKey (var_intIntOp, ioArgument_ioContext.mAttribute_mBooleanType, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_ne (SOURCE_FILE ("type-literal-integer.galgas", 92))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 92)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 89)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.setter_insertKey (var_intIntOp, ioArgument_ioContext.mAttribute_mBooleanType, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_slt (SOURCE_FILE ("type-literal-integer.galgas", 97))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 97)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 94)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.setter_insertKey (var_intIntOp, ioArgument_ioContext.mAttribute_mBooleanType, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_sle (SOURCE_FILE ("type-literal-integer.galgas", 102))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 99)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.setter_insertKey (var_intIntOp, ioArgument_ioContext.mAttribute_mBooleanType, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_sgt (SOURCE_FILE ("type-literal-integer.galgas", 107))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 107)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 104)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.setter_insertKey (var_intIntOp, ioArgument_ioContext.mAttribute_mBooleanType, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_icmp_5F_sge (SOURCE_FILE ("type-literal-integer.galgas", 112))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 112)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 109)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mAndOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_and (SOURCE_FILE ("type-literal-integer.galgas", 118))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 115)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mOrOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_ior (SOURCE_FILE ("type-literal-integer.galgas", 123))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 120)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mXorOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_xor (SOURCE_FILE ("type-literal-integer.galgas", 128))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 125)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mUnsignedComplementOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 130)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mUnaryMinusOperatorMap.setter_insertKey (constinArgument_inIntegerTypeName, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 135)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mAddOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_saddOVF (SOURCE_FILE ("type-literal-integer.galgas", 143))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 140)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mAddNoOvfOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_addNoOVF (SOURCE_FILE ("type-literal-integer.galgas", 148))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 145)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mSubOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_ssubOVF (SOURCE_FILE ("type-literal-integer.galgas", 153))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 150)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mSubNoOvfOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_subNoOVF (SOURCE_FILE ("type-literal-integer.galgas", 158))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 158)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 155)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mMulOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_smulOVF (SOURCE_FILE ("type-literal-integer.galgas", 163))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 163)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 160)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mMulNoOvfOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_mulNoOVF (SOURCE_FILE ("type-literal-integer.galgas", 168))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 168)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 165)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mDivOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_sdivOVF (SOURCE_FILE ("type-literal-integer.galgas", 173))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 173)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 170)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mDivNoOvfOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_sdivNoOVF (SOURCE_FILE ("type-literal-integer.galgas", 178))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 178)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 175)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mModOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_sremOVF (SOURCE_FILE ("type-literal-integer.galgas", 183))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 180)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mModNoOvfOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_sremNoOVF (SOURCE_FILE ("type-literal-integer.galgas", 188))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 188)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 185)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mLeftShiftOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_shl (SOURCE_FILE ("type-literal-integer.galgas", 194))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 191)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mRightShiftOperatorMap.setter_insertKey (var_intIntOp, var_selfTypeProxy, GALGAS_literal_5F_literal_5F_integerInfixOperation::constructor_new (GALGAS_llvmBinaryOperation::constructor_lshr (SOURCE_FILE ("type-literal-integer.galgas", 199))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 199)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 196)) ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_buildGlobalConstantMapHTMLFile (GALGAS_globalConstantMap inArgument_inGlobalConstantMap,
-                                             const GALGAS_lstring constinArgument_inSourceFile,
-                                             C_Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_typeDumpFilePath = constinArgument_inSourceFile.mAttribute_string.add_operation (GALGAS_string (".global-constants.html"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 152)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_writeGlobalConstantHTMLDumpFile.getter_value ()).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    GALGAS_stringset var_firstLetterSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-global-constant.galgas", 154)) ;
-    cEnumerator_globalConstantMap enumerator_6771 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
-    while (enumerator_6771.hasCurrentObject ()) {
-      var_firstLetterSet.addAssign_operation (enumerator_6771.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 156)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 156))  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 156)) ;
-      enumerator_6771.gotoNextObject () ;
-    }
-    GALGAS_string var_tableOfTypeString = GALGAS_string::makeEmptyString () ;
-    GALGAS_char var_currentFirstLetter = GALGAS_char (TO_UNICODE (32)) ;
-    cEnumerator_globalConstantMap enumerator_6959 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
-    while (enumerator_6959.hasCurrentObject ()) {
-      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter.objectCompare (enumerator_6959.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 161)))).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        var_currentFirstLetter = enumerator_6959.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 162)) ;
-        var_tableOfTypeString.plusAssign_operation(GALGAS_string ("<br><a name=\"").add_operation (var_currentFirstLetter.getter_uint (SOURCE_FILE ("declaration-global-constant.galgas", 163)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 163)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 163)).add_operation (GALGAS_string ("\"><b>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 163)).add_operation (var_currentFirstLetter.getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 163)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 163)).add_operation (GALGAS_string ("</b></a><br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 163)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 163)) ;
-      }
-      var_tableOfTypeString.plusAssign_operation(function_linkForGlobalConstant (enumerator_6959.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 165)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 165)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 165)) ;
-      enumerator_6959.gotoNextObject () ;
-    }
-    GALGAS_string var_typeDumpString = GALGAS_string (filewrapperTemplate_constantDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.mAttribute_string.getter_lastPathComponent (SOURCE_FILE ("declaration-global-constant.galgas", 168)), inArgument_inGlobalConstantMap, var_firstLetterSet, var_tableOfTypeString COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 167))) ;
-    GALGAS_bool joker_7599 ; // Joker input parameter
-    var_typeDumpString.method_writeToFileWhenDifferentContents (var_typeDumpFilePath, joker_7599, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 173)) ;
-  }else if (kBoolFalse == test_0) {
-    {
-    GALGAS_string::class_method_deleteFileIfExists (var_typeDumpFilePath, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 175)) ;
-    }
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                    Filewrapper 'constantDumpGenerationTemplate'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1889,26 +1762,26 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
   categoryMethod_enterExternProcInContext (constinArgument_inAST.mAttribute_mExternProcList, outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 307)) ;
   categoryMethod_enterInContext (constinArgument_inAST.mAttribute_mSectionListAST, outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 308)) ;
   categoryMethod_enterInContext (constinArgument_inAST.mAttribute_mFunctionListAST, outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 309)) ;
-  categoryMethod_enterInContext (constinArgument_inAST.mAttribute_mServiceListAST, outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 310)) ;
+  categoryMethod_enterInContext (constinArgument_inAST.mAttribute_mServiceListAST, GALGAS_string::makeEmptyString (), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 310)) ;
   categoryMethod_enterInContext (constinArgument_inAST.mAttribute_mTaskList, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 312)) ;
   const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 314)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    cEnumerator_requiredProcedureDeclarationListAST enumerator_12710 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
-    while (enumerator_12710.hasCurrentObject ()) {
-      cEnumerator_lstringlist enumerator_12765 (enumerator_12710.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
-      while (enumerator_12765.hasCurrentObject ()) {
-        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_12765.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 317)) ;
-        enumerator_12765.gotoNextObject () ;
+    cEnumerator_requiredProcedureDeclarationListAST enumerator_12727 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
+    while (enumerator_12727.hasCurrentObject ()) {
+      cEnumerator_lstringlist enumerator_12782 (enumerator_12727.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
+      while (enumerator_12782.hasCurrentObject ()) {
+        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_12782.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 317)) ;
+        enumerator_12782.gotoNextObject () ;
       }
-      enumerator_12710.gotoNextObject () ;
+      enumerator_12727.gotoNextObject () ;
     }
   }
   const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 322)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
-    cEnumerator_globalVarDeclarationList enumerator_12965 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
-    while (enumerator_12965.hasCurrentObject ()) {
-      categoryMethod_enterInContext (enumerator_12965.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 324)) ;
-      enumerator_12965.gotoNextObject () ;
+    cEnumerator_globalVarDeclarationList enumerator_12982 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
+    while (enumerator_12982.hasCurrentObject ()) {
+      categoryMethod_enterInContext (enumerator_12982.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 324)) ;
+      enumerator_12982.gotoNextObject () ;
     }
   }
 }
@@ -4334,7 +4207,7 @@ GALGAS_string function_llvmNameForTaskVariable (GALGAS_string inArgument_inTaskN
                                                 C_Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("@task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 247)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 247)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 247)) ;
+  result_outName = GALGAS_string ("task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 247)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 247)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 247)) ;
 //---
   return result_outName ;
 }
@@ -6412,7 +6285,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   gWrapperFileContent_1_targetTemplates
 ) ;
 
-//--- File '/teensy-3-1-it.plm-target'
+//--- File '/teensy-3-1-tp.plm-target'
 
 const char * gWrapperFileContent_2_targetTemplates = "\n"
   "pointerSize 32\n"
@@ -6427,7 +6300,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "import \"files/teensy-3-1-lcd.plm\"\n" ;
 
 const cRegularFileWrapper gWrapperFile_2_targetTemplates (
-  "teensy-3-1-it.plm-target",
+  "teensy-3-1-tp.plm-target",
   "plm-target",
   true, // Text file
   255, // Text length
@@ -10018,7 +9891,7 @@ const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
   gWrapperAllDirectories_targetTemplates_1
 ) ;
 
-//--- File 'teensy-3-1-it/build-verbose.py'
+//--- File 'teensy-3-1-tp/build-verbose.py'
 
 const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -10062,7 +9935,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   gWrapperFileContent_9_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/build.py'
+//--- File 'teensy-3-1-tp/build.py'
 
 const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -10276,7 +10149,7 @@ const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   gWrapperFileContent_10_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/clean.py'
+//--- File 'teensy-3-1-tp/clean.py'
 
 const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -10323,7 +10196,7 @@ const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   gWrapperFileContent_11_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/linker.ld'
+//--- File 'teensy-3-1-tp/linker.ld'
 
 const char * gWrapperFileContent_12_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
@@ -10491,7 +10364,7 @@ const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   gWrapperFileContent_12_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/objdump.py'
+//--- File 'teensy-3-1-tp/objdump.py'
 
 const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -10535,7 +10408,7 @@ const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   gWrapperFileContent_13_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/objsize.py'
+//--- File 'teensy-3-1-tp/objsize.py'
 
 const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -10579,7 +10452,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   gWrapperFileContent_14_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/run.py'
+//--- File 'teensy-3-1-tp/run.py'
 
 const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -10626,7 +10499,7 @@ const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   gWrapperFileContent_15_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/section-code.s'
+//--- File 'teensy-3-1-tp/section-code.s'
 
 const char * gWrapperFileContent_16_targetTemplates = "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
@@ -10691,7 +10564,7 @@ const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   gWrapperFileContent_16_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/section-dispatcher-entry.s'
+//--- File 'teensy-3-1-tp/section-dispatcher-entry.s'
 
 const char * gWrapperFileContent_17_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
 
@@ -10703,7 +10576,7 @@ const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   gWrapperFileContent_17_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/section-dispatcher-header.s'
+//--- File 'teensy-3-1-tp/section-dispatcher-header.s'
 
 const char * gWrapperFileContent_18_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
@@ -10721,7 +10594,7 @@ const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   gWrapperFileContent_18_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/section-entry.s'
+//--- File 'teensy-3-1-tp/section-entry.s'
 
 const char * gWrapperFileContent_19_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !ENTRY!\n"
@@ -10743,7 +10616,7 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   gWrapperFileContent_19_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/service-dispatcher-entry.s'
+//--- File 'teensy-3-1-tp/service-dispatcher-entry.s'
 
 const char * gWrapperFileContent_20_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
 
@@ -10755,7 +10628,7 @@ const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   gWrapperFileContent_20_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/service-dispatcher-header.s'
+//--- File 'teensy-3-1-tp/service-dispatcher-header.s'
 
 const char * gWrapperFileContent_21_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
@@ -10776,7 +10649,7 @@ const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   gWrapperFileContent_21_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/service-entry.s'
+//--- File 'teensy-3-1-tp/service-entry.s'
 
 const char * gWrapperFileContent_22_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
@@ -10798,7 +10671,7 @@ const cRegularFileWrapper gWrapperFile_22_targetTemplates (
   gWrapperFileContent_22_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/target-exception.ll'
+//--- File 'teensy-3-1-tp/target-exception.ll'
 
 const char * gWrapperFileContent_23_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -10819,7 +10692,7 @@ const cRegularFileWrapper gWrapperFile_23_targetTemplates (
   gWrapperFileContent_23_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/target.c'
+//--- File 'teensy-3-1-tp/target.c'
 
 const char * gWrapperFileContent_24_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -11103,7 +10976,7 @@ const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   gWrapperFileContent_24_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/target.ll'
+//--- File 'teensy-3-1-tp/target.ll'
 
 const char * gWrapperFileContent_25_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
@@ -11384,7 +11257,7 @@ const cRegularFileWrapper gWrapperFile_25_targetTemplates (
   gWrapperFileContent_25_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-it/target.s'
+//--- File 'teensy-3-1-tp/target.s'
 
 const char * gWrapperFileContent_26_targetTemplates = "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
@@ -11621,7 +11494,7 @@ const cRegularFileWrapper gWrapperFile_26_targetTemplates (
   gWrapperFileContent_26_targetTemplates
 ) ;
 
-//--- All files of 'teensy-3-1-it' directory
+//--- All files of 'teensy-3-1-tp' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [19] = {
   & gWrapperFile_9_targetTemplates,
@@ -11645,16 +11518,16 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [19] = {
   NULL
 } ;
 
-//--- All sub-directories of 'teensy-3-1-it' directory
+//--- All sub-directories of 'teensy-3-1-tp' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [1] = {
   NULL
 } ;
 
-//--- Directory 'teensy-3-1-it'
+//--- Directory 'teensy-3-1-tp'
 
 const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
-  "teensy-3-1-it",
+  "teensy-3-1-tp",
   18,
   gWrapperAllFiles_targetTemplates_2,
   0,
