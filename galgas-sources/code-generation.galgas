@@ -346,13 +346,9 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   for () in inTypeMap do
     switch kind 
     case boolean :
-      ioLLVMcode += "%$" + lkey + " = type i1\n"
     case boolset :
-#      ioLLVMcode += "<<boolset>>"
-    case enumeration (enumConstantMap) :
-      ioLLVMcode += "%$" + lkey + " = type i" + [[enumConstantMap count] - 1 significantBitCount] + "\n"
-    case integer (* * * bitCount) :
-      ioLLVMcode += "%$" + lkey + " = type i" + bitCount + "\n"
+    case enumeration (*) :
+    case integer (* * * *) :
     case structure (* propertyList) :
       ioLLVMcode += "%$" + lkey + " = type {"
       for () in propertyList
@@ -361,11 +357,8 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
       end
       ioLLVMcode += "}\n"
     case literalString : 
-#      ioLLVMcode += "<<literalString>>"
     case staticInteger : 
-#      ioLLVMcode += "<<staticInteger>>"
-    case opaque (bitCount) :
-      ioLLVMcode += "%$" + lkey + " = type i" + bitCount + "\n"
+    case opaque (*) :
     end
   end
   ioLLVMcode += "\n"
