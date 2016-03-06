@@ -203,12 +203,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         + ", @" + globalAttribute ()
     end
   end
-  if weakProcedure then
-    if warnIfUnused then
-      warning mProcedureName : "@" + weakAttribute () + " attribute: @" + noWarningIfUnusedAttribute () + " attribute is ignored"
-    end
-    warnIfUnused = false    
-  end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:procNameForInvocationGraph (!inReceiverType !mProcedureName).string
