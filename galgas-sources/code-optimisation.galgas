@@ -49,7 +49,7 @@ method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccess
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+method @routineMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
 }
 
@@ -82,11 +82,11 @@ method @taskProcedureMapIR-element enterAccessibleEntities ?!@accessibleEntities
 proc codeOptimisation
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let initialProcedureMap = ioIntermediateCodeStruct.mProcedureMapIR
+  let initialProcedureMap = ioIntermediateCodeStruct.mRoutineMapIR
   let initialFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
   @uint pass = 0
   @bool optimizing = true
-  loop ([ioIntermediateCodeStruct.mProcedureMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
+  loop ([ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
   while optimizing do
     optimizing = false
     pass ++
@@ -97,7 +97,7 @@ proc codeOptimisation
       s += "  " + [ioIntermediateCodeStruct.mStaticStringMap count] + " static strings\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
-      s += "  " + [ioIntermediateCodeStruct.mProcedureMapIR count] + " procedures\n"
+      s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routines\n"
       s += "  " + [ioIntermediateCodeStruct.mFunctionMapIR count] + " functions\n"
       message s
     end
@@ -145,7 +145,7 @@ proc codeOptimisation
   end
 #--- Warn on unused procedures
   for () in initialProcedureMap do
-    if (not [ioIntermediateCodeStruct.mProcedureMapIR hasKey !lkey.string]) && mWarnIfUnused then
+    if (not [ioIntermediateCodeStruct.mRoutineMapIR hasKey !lkey.string]) && mWarnIfUnused then
       warning lkey: "unused procedure; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
     end
   end
@@ -165,10 +165,10 @@ private proc suppressInaccessibleSubprograms
   ?!@bool ioOptimizing
 {
   outAccessibleEntities = .default
-  @procedureMapIR accessibleProcedureMap = {}
-  @procedureMapIR nonExploredProcedureMap = {}
+  @routineMapIR accessibleProcedureMap = {}
+  @routineMapIR nonExploredProcedureMap = {}
 #--- First, required procedures
-  for procedure in ioIntermediateCodeStruct.mProcedureMapIR do
+  for procedure in ioIntermediateCodeStruct.mRoutineMapIR do
     if procedure.mIsRequired then
       [!?accessibleProcedureMap insertKey
         !procedure.lkey
@@ -179,6 +179,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mWeak
         !procedure.mNullOnNoException
         !procedure.mGlobal
+        !procedure.mKind
       ]        
       [procedure enterAccessibleEntities !?outAccessibleEntities]
       outAccessibleEntities.mProcedureSet += !procedure.lkey.string
@@ -192,6 +193,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mWeak
         !procedure.mNullOnNoException
         !procedure.mGlobal
+        !procedure.mKind
       ]        
     end
   end
@@ -222,7 +224,7 @@ private proc suppressInaccessibleSubprograms
   @taskProcedureMapIR  accessibleTaskProcMap   = {}
   @taskProcedureMapIR  nonExploredTaskProcMap  = ioIntermediateCodeStruct.mTaskProcedureMap
   var continues = true
-  let bound = [ioIntermediateCodeStruct.mProcedureMapIR count]
+  let bound = [ioIntermediateCodeStruct.mRoutineMapIR count]
     + [ioIntermediateCodeStruct.mFunctionMapIR count]
     + [ioIntermediateCodeStruct.mSectionMapIR count]
     + [ioIntermediateCodeStruct.mServiceMapIR count]
@@ -234,8 +236,8 @@ private proc suppressInaccessibleSubprograms
     exploreServices (!?accessibleServiceMap !?outAccessibleEntities !?nonExploredServiceMap !?continues)
     exploreTaskProcs (!?accessibleTaskProcMap !?outAccessibleEntities !?nonExploredTaskProcMap !?continues)
   end
-  if ioIntermediateCodeStruct.mProcedureMapIR != accessibleProcedureMap then
-    ioIntermediateCodeStruct.mProcedureMapIR = accessibleProcedureMap
+  if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
+    ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
     ioOptimizing = true
   end
   if ioIntermediateCodeStruct.mFunctionMapIR != accessibleFunctionMap then
@@ -259,12 +261,12 @@ private proc suppressInaccessibleSubprograms
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc exploreProcs
-  ?!@procedureMapIR ioAccessibleProcedureMap
+  ?!@routineMapIR ioAccessibleProcedureMap
   ?!@accessibleEntities ioAccessibleEntities
-  ?!@procedureMapIR ioNonExploredProcedureMap
+  ?!@routineMapIR ioNonExploredProcedureMap
   ?!@bool ioContinueExploreRoutines
 {
-  let @procedureMapIR exNonExploredProcedureMap = ioNonExploredProcedureMap
+  let @routineMapIR exNonExploredProcedureMap = ioNonExploredProcedureMap
   ioNonExploredProcedureMap = {}
   for procedure in exNonExploredProcedureMap do
     if [ioAccessibleEntities.mProcedureSet hasKey !procedure.lkey.string] then
@@ -277,6 +279,7 @@ private proc exploreProcs
         !procedure.mWeak
         !procedure.mNullOnNoException
         !procedure.mGlobal
+        !procedure.mKind
       ]        
       [procedure enterAccessibleEntities !?ioAccessibleEntities]
       ioContinueExploreRoutines = true
@@ -290,6 +293,7 @@ private proc exploreProcs
         !procedure.mWeak
         !procedure.mNullOnNoException
         !procedure.mGlobal
+        !procedure.mKind
     ]        
     end
   end

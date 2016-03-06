@@ -11,7 +11,6 @@ struct @intermediateCodeStruct {
   @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap
   @routineMapIR mRoutineMapIR
-  @procedureMapIR mProcedureMapIR
   @sectionMapIR mSectionMapIR
   @serviceMapIR mServiceMapIR
   @functionMapIR mFunctionMapIR
@@ -69,21 +68,6 @@ map @typeMapIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @procedureMapIR {
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionListIR mInstructionGenerationList
-  @bool mIsRequired
-  @bool mWarnIfUnused
-  @bool mWeak
-  @bool mNullOnNoException
-  @bool mGlobal
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
-  remove removeKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @routineMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
   @instructionListIR mInstructionGenerationList
@@ -98,6 +82,22 @@ map @routineMapIR {
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#map @routineMapIR {
+#  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+#  @instructionListIR mInstructionGenerationList
+#  @bool mIsRequired
+#  @bool mWarnIfUnused
+#  @bool mWeak
+#  @bool mNullOnNoException
+#  @bool mGlobal
+#
+#  insert insertKey error message "** internal error **"
+#  search searchKey error message "** internal error **"
+#  remove removeKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

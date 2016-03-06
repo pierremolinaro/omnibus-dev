@@ -54,7 +54,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_globalVariableMapIR mAttribute_mGlobalVariableMap ;
   public : GALGAS_globalConstantMapIR mAttribute_mGlobalConstantMap ;
   public : GALGAS_routineMapIR mAttribute_mRoutineMapIR ;
-  public : GALGAS_procedureMapIR mAttribute_mProcedureMapIR ;
   public : GALGAS_sectionMapIR mAttribute_mSectionMapIR ;
   public : GALGAS_serviceMapIR mAttribute_mServiceMapIR ;
   public : GALGAS_functionMapIR mAttribute_mFunctionMapIR ;
@@ -88,7 +87,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_globalVariableMapIR & in_mGlobalVariableMap,
                                           const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
                                           const GALGAS_routineMapIR & in_mRoutineMapIR,
-                                          const GALGAS_procedureMapIR & in_mProcedureMapIR,
                                           const GALGAS_sectionMapIR & in_mSectionMapIR,
                                           const GALGAS_serviceMapIR & in_mServiceMapIR,
                                           const GALGAS_functionMapIR & in_mFunctionMapIR,
@@ -118,19 +116,18 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_globalVariableMapIR & inOperand2,
                                                                  const class GALGAS_globalConstantMapIR & inOperand3,
                                                                  const class GALGAS_routineMapIR & inOperand4,
-                                                                 const class GALGAS_procedureMapIR & inOperand5,
-                                                                 const class GALGAS_sectionMapIR & inOperand6,
-                                                                 const class GALGAS_serviceMapIR & inOperand7,
-                                                                 const class GALGAS_functionMapIR & inOperand8,
-                                                                 const class GALGAS_externProcedureMapIR & inOperand9,
-                                                                 const class GALGAS_stringset & inOperand10,
-                                                                 const class GALGAS_bootListIR & inOperand11,
-                                                                 const class GALGAS_initListIR & inOperand12,
+                                                                 const class GALGAS_sectionMapIR & inOperand5,
+                                                                 const class GALGAS_serviceMapIR & inOperand6,
+                                                                 const class GALGAS_functionMapIR & inOperand7,
+                                                                 const class GALGAS_externProcedureMapIR & inOperand8,
+                                                                 const class GALGAS_stringset & inOperand9,
+                                                                 const class GALGAS_bootListIR & inOperand10,
+                                                                 const class GALGAS_initListIR & inOperand11,
+                                                                 const class GALGAS_instructionListIR & inOperand12,
                                                                  const class GALGAS_instructionListIR & inOperand13,
-                                                                 const class GALGAS_instructionListIR & inOperand14,
-                                                                 const class GALGAS_taskMapIR & inOperand15,
-                                                                 const class GALGAS_taskVariableMap & inOperand16,
-                                                                 const class GALGAS_taskProcedureMapIR & inOperand17
+                                                                 const class GALGAS_taskMapIR & inOperand14,
+                                                                 const class GALGAS_taskVariableMap & inOperand15,
+                                                                 const class GALGAS_taskProcedureMapIR & inOperand16
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -162,8 +159,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mPanicLoopInstructionListIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mPanicSetupInstructionListIR (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_procedureMapIR getter_mProcedureMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mRequiredProcedureSet (LOCATION_ARGS) const ;
 
@@ -1615,11 +1610,11 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_instructionListI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Category method '@procedureMapIR-element enterAccessibleEntities'                          *
+//                           Category method '@routineMapIR-element enterAccessibleEntities'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterAccessibleEntities (const class GALGAS_procedureMapIR_2D_element inObject,
+void categoryMethod_enterAccessibleEntities (const class GALGAS_routineMapIR_2D_element inObject,
                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
@@ -1643,9 +1638,9 @@ void routine_exploreFunctions (class GALGAS_functionMapIR & ioArgument0,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_exploreProcs (class GALGAS_procedureMapIR & ioArgument0,
+void routine_exploreProcs (class GALGAS_routineMapIR & ioArgument0,
                            class GALGAS_accessibleEntities & ioArgument1,
-                           class GALGAS_procedureMapIR & ioArgument2,
+                           class GALGAS_routineMapIR & ioArgument2,
                            class GALGAS_bool & ioArgument3,
                            class C_Compiler * inCompiler
                            COMMA_LOCATION_ARGS) ;
@@ -1875,7 +1870,7 @@ void categoryMethod_generateLLVM (const class GALGAS_globalVariableMapIR_2D_elem
 
 void categoryMethod_generateLLVMinitCode (const class GALGAS_initListIR inObject,
                                           class GALGAS_string & io_ioLLVMcode,
-                                          const class GALGAS_procedureMapIR constin_inProcedureMapIR,
+                                          const class GALGAS_routineMapIR constin_inProcedureMapIR,
                                           const class GALGAS_generationContext constin_inGenerationContext,
                                           class GALGAS_generationAdds & io_ioGenerationAdds,
                                           class C_Compiler * inCompiler
@@ -1896,11 +1891,11 @@ void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Category method '@procedureMapIR llvmCodeGeneration'                                 *
+//                                 Category method '@routineMapIR llvmCodeGeneration'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR inObject,
+void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObject,
                                         class GALGAS_string & io_ioLLVMcode,
                                         class GALGAS_string & io_ioAssemblerCode,
                                         const class GALGAS_generationContext constin_inGenerationContext,

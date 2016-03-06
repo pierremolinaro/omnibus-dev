@@ -57,19 +57,6 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @serviceMap {
-#  @bool mMutating
-#  @procedureSignature mSignature
-#
-#  insert insertKey error message "the '%K' service is already declared in %L"
-#  search searchKey error message "there is no '%K' service"
-#  remove removeKey error message "there is no '%K' service"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -150,9 +137,9 @@ method @serviceDeclarationListAST-element serviceSemanticAnalysis
   [variableMap checkAutomatonStates !mEndOfServiceLocation]
 #--- Code generation
   let serviceMangledName = if inReceiverType == .null then
-    mServiceName
+    @lstring.new {!"." + mServiceName !mServiceName.location}
   else
-    @lstring.new {![inReceiverType key] + "." + mServiceName !mServiceName.location}
+    @lstring.new {!"$" + [inReceiverType key] + "." + mServiceName !mServiceName.location}
   end
   [!?ioIntermediateCodeStruct.mServiceMapIR insertKey
     !serviceMangledName
@@ -214,11 +201,11 @@ method @serviceMapIR-element llvmCodeGeneration
   let serviceImplementationName = llvmNameForServiceImplementation (!lkey.string)
   ioLLVMcode += llvmTitleComment (!serviceImplementationName)
   ioLLVMcode += "declare void @" + llvmNameForServiceCall (!lkey.string) + " ("
-  let components = [lkey.string componentsSeparatedByString !"."]
-  if [components length] == 2 then
-    ioLLVMcode += "%$" + [components mValueAtIndex !0] + "* %self"  
+  let typeName = [lkey.string stringByDeletingPathExtension]
+  var first = typeName == ""
+  if not first then
+    ioLLVMcode += "%" + typeName + "* %self"  
   end
-  var first = [components length] != 2
   for () in mFormalArgumentListForGeneration do
     if first then first = false else ioLLVMcode += ", " end
     switch mFormalArgumentKind

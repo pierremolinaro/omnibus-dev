@@ -247,16 +247,17 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfProcLocation]
 #--- Code generation
-  if [ioIntermediateCodeStruct.mProcedureMapIR hasKey !mProcedureName.string] then
-    let weak = [ioIntermediateCodeStruct.mProcedureMapIR mWeakForKey !mProcedureName.string]
+  let procName = @lstring.new {!"." + mProcedureName !mProcedureName.location}
+  if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !procName.string] then
+    let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !procName.string]
     if weakProcedure && not weak then
       # redefined weak procedure is ignored
     elsif weakProcedure && weak then
-      error mProcedureName : "this weak procedure overrides a weak procedure"
+      error procName : "this weak procedure overrides a weak procedure"
     elsif (not weakProcedure) && weak then
-      [!?ioIntermediateCodeStruct.mProcedureMapIR removeKey !mProcedureName ?7*] # Remove weak routine
-      [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
-        !mProcedureName
+      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !procName ?8*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+        !procName
         !formalArguments
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
@@ -264,10 +265,11 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !weakProcedure
         !nullOnNoException
         !globalProcedure
+        !.procedure
       ]  
     else # (not weakProcedure) && (not weak)
-      [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey # Raises a redefinition error
-        !mProcedureName
+      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
+        !procName
         !formalArguments
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
@@ -275,11 +277,12 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !weakProcedure
         !nullOnNoException
         !globalProcedure
+        !.procedure
       ]
     end
   else
-    [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
-      !mProcedureName
+    [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+      !procName
       !formalArguments
       !instructionGenerationList
       ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
@@ -287,6 +290,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       !weakProcedure
       !nullOnNoException
       !globalProcedure
+      !.procedure
     ]  
   end
 }
@@ -295,116 +299,116 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureMapIR llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?!@string ioAssemblerCode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  for procedure in self do
-    if [inGenerationContext.mProceduresThatShouldNotBeGenerated hasKey !procedure.lkey.string] then
-      [procedure llvmPrototypeGeneration !?ioLLVMcode]
-    else
-      [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
-    end
-  end
-}
+#method @routineMapIR llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?!@string ioAssemblerCode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  for procedure in self do
+#    if [inGenerationContext.mProceduresThatShouldNotBeGenerated hasKey !procedure.lkey.string] then
+#      [procedure llvmPrototypeGeneration !?ioLLVMcode]
+#    else
+#      [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureMapIR-element llvmPrototypeGeneration 
-  ?!@string ioLLVMcode
-{
-  let procName = llvmNameForProcedure (!lkey.string)
-  #--- In LLVM, declare routine as extern
-  ioLLVMcode += llvmTitleComment (!"proc " + procName)
-  ioLLVMcode += "declare void @" + procName + " ("
-  for () in mFormalArgumentListForGeneration
-  do
-    switch mFormalArgumentKind
-    case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-    case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-   case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-    end
-  between
-    ioLLVMcode += ", "
-  end
-  ioLLVMcode += ") nounwind ; defined in assembly code\n\n"
-}
+#method @routineMapIR-element llvmPrototypeGeneration 
+#  ?!@string ioLLVMcode
+#{
+#  let procName = llvmNameForProcedure (!lkey.string)
+#  #--- In LLVM, declare routine as extern
+#  ioLLVMcode += llvmTitleComment (!"proc " + procName)
+#  ioLLVMcode += "declare void @" + procName + " ("
+#  for () in mFormalArgumentListForGeneration
+#  do
+#    switch mFormalArgumentKind
+#    case input :
+#      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+#    case output :
+#      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+#   case inputOutput :
+#      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+#    end
+#  between
+#    ioLLVMcode += ", "
+#  end
+#  ioLLVMcode += ") nounwind ; defined in assembly code\n\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureMapIR-element llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?!@string ioAssemblerCode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  let procName = llvmNameForProcedure (!lkey.string)
-  if [option plm_options.noPanicGeneration value] && mNullOnNoException then
-  #--- Generate in assembly code routine pointer as NULL value
-    ioAssemblerCode += asSeparatorLine ()
-    ioAssemblerCode += "  .global " + procName + "\n"
-    ioAssemblerCode += "  " + procName + " = 0\n\n"
-  #--- In LLVM, declare routine as extern
-    ioLLVMcode += llvmTitleComment (!"proc " + procName)
-    ioLLVMcode += "declare void @" + procName + " ("
-    for () in mFormalArgumentListForGeneration
-    do
-      switch mFormalArgumentKind
-      case input :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-      case output :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-     case inputOutput :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-      end
-    between
-      ioLLVMcode += ", "
-    end
-    ioLLVMcode += ") nounwind ; NULL in assembly code\n\n"
-  else
-    ioLLVMcode += llvmTitleComment (!"proc " + procName)
-    ioLLVMcode += "define"
-    if not mGlobal then
-      ioLLVMcode += " internal"
-    end
-    ioLLVMcode += " void @" + procName + " ("
-    for () in mFormalArgumentListForGeneration
-    do
-      switch mFormalArgumentKind
-      case input :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-      case output :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-     case inputOutput :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-      end
-    between
-      ioLLVMcode += ", "
-    end
-    ioLLVMcode += ") nounwind {\n"
-  #--- Store input arguments in memory
-    for () in mFormalArgumentListForGeneration do
-      switch mFormalArgumentKind
-      case input :
-        let llvmType = [mFormalArgumentType llvmTypeName]
-        ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
-        ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
-      case output, inputOutput :
-      end
-    end
-   
-  #--- Instruction list
-    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  #--- Epilog
-    ioLLVMcode += "  ret void\n"
-    ioLLVMcode += "}\n\n"
-  end
-}
+#method @routineMapIR-element llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?!@string ioAssemblerCode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  let procName = llvmNameForProcedure (!lkey.string)
+#  if [option plm_options.noPanicGeneration value] && mNullOnNoException then
+#  #--- Generate in assembly code routine pointer as NULL value
+#    ioAssemblerCode += asSeparatorLine ()
+#    ioAssemblerCode += "  .global " + procName + "\n"
+#    ioAssemblerCode += "  " + procName + " = 0\n\n"
+#  #--- In LLVM, declare routine as extern
+#    ioLLVMcode += llvmTitleComment (!"proc " + procName)
+#    ioLLVMcode += "declare void @" + procName + " ("
+#    for () in mFormalArgumentListForGeneration
+#    do
+#      switch mFormalArgumentKind
+#      case input :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+#      case output :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+#     case inputOutput :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+#      end
+#    between
+#      ioLLVMcode += ", "
+#    end
+#    ioLLVMcode += ") nounwind ; NULL in assembly code\n\n"
+#  else
+#    ioLLVMcode += llvmTitleComment (!"proc " + procName)
+#    ioLLVMcode += "define"
+#    if not mGlobal then
+#      ioLLVMcode += " internal"
+#    end
+#    ioLLVMcode += " void @" + procName + " ("
+#    for () in mFormalArgumentListForGeneration
+#    do
+#      switch mFormalArgumentKind
+#      case input :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+#      case output :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+#     case inputOutput :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+#      end
+#    between
+#      ioLLVMcode += ", "
+#    end
+#    ioLLVMcode += ") nounwind {\n"
+#  #--- Store input arguments in memory
+#    for () in mFormalArgumentListForGeneration do
+#      switch mFormalArgumentKind
+#      case input :
+#        let llvmType = [mFormalArgumentType llvmTypeName]
+#        ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+#        ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+#      case output, inputOutput :
+#      end
+#    end
+#   
+#  #--- Instruction list
+#    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#  #--- Epilog
+#    ioLLVMcode += "  ret void\n"
+#    ioLLVMcode += "}\n\n"
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

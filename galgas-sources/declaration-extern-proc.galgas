@@ -164,7 +164,7 @@ method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
-  let procName = llvmNameForProcedure (!lkey.string)
+  let procName = llvmNameForProcedure (!"." + lkey.string)
   ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
   ioLLVMcode += "declare void @" + procName + " ("
   for () in mFormalArgumentListForGeneration

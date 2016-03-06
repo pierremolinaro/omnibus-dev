@@ -165,7 +165,7 @@ list @initListIR {
 
 method @initListIR generateLLVMinitCode
   ?!@string ioLLVMcode
-  ?let @procedureMapIR inProcedureMapIR
+  ?let @routineMapIR inProcedureMapIR
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {

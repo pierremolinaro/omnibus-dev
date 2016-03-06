@@ -139,8 +139,9 @@ method @sectionDeclarationListAST-element sectionSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfSectionLocation]
 #--- Code generation
+  let lkey = @lstring.new {!"." + mSectionName !mSectionName.location}
   [!?ioIntermediateCodeStruct.mSectionMapIR insertKey
-    !mSectionName
+    !lkey
     !formalArguments
     !instructionGenerationList
     !warnIfUnused
@@ -189,7 +190,7 @@ method @sectionMapIR llvmCodeGeneration
       ioAssemblerCode += s
     end
     let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
-    ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!"")]
+    ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
   end
 }
 

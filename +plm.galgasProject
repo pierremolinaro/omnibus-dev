@@ -22,7 +22,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/pointer-size.galgas"
 
 #--- Boolset
-##  "galgas-sources/boolset-type.galgas"
+#  "galgas-sources/boolset-type.galgas"
 
 #--- Type declarations
   "galgas-sources/type-bool.galgas"
