@@ -85,15 +85,22 @@ map @serviceMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @serviceDeclarationListAST enterInContext ?!context:@semanticContext ioContext {
+method @serviceDeclarationListAST enterInContext
+  ?receiverType:let @string inReceiverTypeName
+  ?!context:@semanticContext ioContext
+{
+
   for service in self do
-    [service enterInContext !?context:ioContext]
+    [service enterInContext !receiverType:inReceiverTypeName !?context:ioContext]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @serviceDeclarationListAST-element enterInContext ?!context:@semanticContext ioContext {
+method @serviceDeclarationListAST-element enterInContext
+  ?receiverType:let @string inReceiverTypeName
+  ?!context:@semanticContext ioContext
+{
 #--- Signature
   @procedureSignature signature = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in mServiceFormalArgumentList do
@@ -101,8 +108,13 @@ method @serviceDeclarationListAST-element enterInContext ?!context:@semanticCont
     signature += !formalArgumentPassingMode !selector.string !typeProxy
   end
 #--- Enter in context
+  let mangledServiceName = if inReceiverTypeName == "" then
+    mServiceName
+  else
+    @lstring.new {!inReceiverTypeName + "." + mServiceName !mServiceName.location}
+  end
   [!?ioContext.mServiceMap insertKey
-    !mServiceName
+    !mangledServiceName
     !mMutating
     !signature
   ]
@@ -254,8 +266,13 @@ method @serviceMapIR-element llvmCodeGeneration
   let serviceImplementationName = llvmNameForServiceImplementation (!lkey.string)
   ioLLVMcode += llvmTitleComment (!serviceImplementationName)
   ioLLVMcode += "declare void @" + llvmNameForServiceCall (!lkey.string) + " ("
-  for () in mFormalArgumentListForGeneration
-  do
+  let components = [lkey.string componentsSeparatedByString !"."]
+  if [components length] == 2 then
+    ioLLVMcode += "%struct." + [components mValueAtIndex !0] + "* %self"  
+  end
+  var first = [components length] != 2
+  for () in mFormalArgumentListForGeneration do
+    if first then first = false else ioLLVMcode += ", " end
     switch mFormalArgumentKind
     case input :
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
@@ -264,8 +281,6 @@ method @serviceMapIR-element llvmCodeGeneration
    case inputOutput :
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
     end
-  between
-    ioLLVMcode += ", "
   end
   ioLLVMcode += ") nounwind \n\n"
   ioLLVMcode += "define void @" + serviceImplementationName + " ("

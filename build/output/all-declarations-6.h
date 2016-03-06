@@ -195,6 +195,7 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_sectionMapIR_2D_eleme
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_enterInContext (const class GALGAS_serviceDeclarationListAST_2D_element inObject,
+                                    const class GALGAS_string constin_inReceiverTypeName,
                                     class GALGAS_semanticContext & io_ioContext,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;

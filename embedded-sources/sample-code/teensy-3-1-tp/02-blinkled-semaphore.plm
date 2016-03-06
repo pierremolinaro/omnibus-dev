@@ -1,29 +1,28 @@
-target "teensy-3-1-it"
+target "teensy-3-1-tp"
 
 //------------------------------------------------*
 
-enum $ledState {
-  case on
-  case off
+struct $semaphore {
+
+  service P `kernel () {
+  
+  }
 }
 
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-  var led = $ledState.on
+  var s = $semaphore ()
 
   proc setup {
+    s.P ()
   }
   
   proc loop {
     waitDuringMS (!delay:250)
-    if led == .off then
-      ledOn (!LED_L1) // Allumer la led
-      led = .on
-    else
-      ledOff (!LED_L1)  // Éteindre la led
-      led = .off
-    end
+    ledOn (!LED_L1) // Allumer la led
+    waitDuringMS (!delay:250)
+    ledOff (!LED_L1)  // Éteindre la led
   }
 }
 

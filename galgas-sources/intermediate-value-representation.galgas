@@ -14,6 +14,7 @@ struct @operandIR {
 enum @valueIR {
   case literalInteger  (@bigint value)
   case llvmLocalObject (@string name)
+  case llvmGlobalObject (@string name)
   case llvmStructureConstant (@operandIRList values)
   case literalString  (@uint size @uint index)
 }
@@ -24,6 +25,7 @@ getter @valueIR llvmName -> @string outResult {
   switch self
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = "%" + name
+  case llvmGlobalObject (@string name) : outResult = "@" + name
   case llvmStructureConstant (@operandIRList inValues) :
     outResult = "{"
     for () in inValues
@@ -44,6 +46,7 @@ getter @valueIR name -> @string outResult {
   switch self
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = name
+  case llvmGlobalObject (@string name) : outResult = name
   case llvmStructureConstant (*) : outResult = "{...}"
   case literalString  (* @uint index) : outResult = literalStringName (!index)
   end
@@ -55,6 +58,7 @@ getter @valueIR isStatic -> @bool outResult {
   switch self
   case literalInteger (*) : outResult = true
   case llvmLocalObject (*) : outResult = false
+  case llvmGlobalObject (*) : outResult = false
   case llvmStructureConstant (*) : outResult = true
   case literalString  (* *) : outResult = true
   end
@@ -83,7 +87,7 @@ getter @objectInMemoryIR llvmName -> @string outName {
   case globalVariable (* @string name *) :
     outName = "@" + llvmNameForGlobalVariable (!name)
   case taskVariable (* @string taskName @string name) :
-    outName = llvmNameForTaskVariable (!taskName !name)
+    outName = "@" + llvmNameForTaskVariable (!taskName !name)
   case localValue (* @string name) :
     outName = "%" + llvmNameForLocalVariable (!name)
   case globalConstant (*  @string name) :
@@ -148,8 +152,8 @@ getter @objectInMemoryIR address -> @operandIR outOperand {
     error .nowhere : "@objectInMemoryIR address" : outOperand
   case globalVariable (* * *) :
     error .nowhere : "@objectInMemoryIR address" : outOperand
-  case taskVariable (* * *) :
-    error .nowhere : "@objectInMemoryIR address" : outOperand
+  case taskVariable (@unifiedTypeMap-proxy type @string taskName @string name) :
+    outOperand  = .new {!type !.llvmGlobalObject {!name:llvmNameForTaskVariable (!taskName !name)}}
   case localValue (@unifiedTypeMap-proxy type @string name) :
     outOperand  = .new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name)}}
   case globalConstant (* *) :

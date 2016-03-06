@@ -24,7 +24,7 @@ override method @loadTaskVariableIR llvmInstructionCode
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
   ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
-  ioLLVMcode += llvmType + ", " + llvmType + "* " + llvmNameForTaskVariable (!mTaskName !mVarName) + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + "* @" + llvmNameForTaskVariable (!mTaskName !mVarName) + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

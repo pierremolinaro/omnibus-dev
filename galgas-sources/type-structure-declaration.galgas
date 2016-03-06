@@ -250,6 +250,8 @@ override method @structureDeclaration enterInContext
       !resultType
     ]
   end
+#--- services
+  [mServiceListAST enterInContext !receiverType:mStructureName.string !?context:ioContext]
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName

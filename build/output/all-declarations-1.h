@@ -3253,6 +3253,7 @@ class GALGAS_valueIR : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_literalInteger,
     kEnum_llvmLocalObject,
+    kEnum_llvmGlobalObject,
     kEnum_llvmStructureConstant,
     kEnum_literalString
   } enumeration ;
@@ -3288,6 +3289,9 @@ class GALGAS_valueIR : public AC_GALGAS_root {
                                                             const class GALGAS_uint & inOperand1
                                                             COMMA_LOCATION_ARGS) ;
 
+  public : static GALGAS_valueIR constructor_llvmGlobalObject (const class GALGAS_string & inOperand0
+                                                               COMMA_LOCATION_ARGS) ;
+
   public : static GALGAS_valueIR constructor_llvmLocalObject (const class GALGAS_string & inOperand0
                                                               COMMA_LOCATION_ARGS) ;
 
@@ -3312,6 +3316,10 @@ class GALGAS_valueIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_llvmGlobalObject (class GALGAS_string & outArgument0,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_llvmLocalObject (class GALGAS_string & outArgument0,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const ;
@@ -3326,6 +3334,8 @@ class GALGAS_valueIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralInteger (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmGlobalObject (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmLocalObject (LOCATION_ARGS) const ;
 
