@@ -2,7 +2,18 @@ target "teensy-3-1-it"
 
 //------------------------------------------------*
 
+struct $semaphore {
+
+  service P `kernel () {
+  
+  }
+}
+
+//------------------------------------------------*
+
 task T priority 12 stackSize 512 {
+  var s = $semaphore ()
+
   proc setup {
   }
   

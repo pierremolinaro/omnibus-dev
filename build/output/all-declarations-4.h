@@ -1268,6 +1268,7 @@ void categoryMethod_sectionSemanticAnalysis (const class GALGAS_sectionDeclarati
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_serviceSemanticAnalysis (const class GALGAS_serviceDeclarationListAST inObject,
+                                             class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
                                              const class GALGAS_semanticContext constin_inSemanticContext,
                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                              class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,

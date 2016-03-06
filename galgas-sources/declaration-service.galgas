@@ -114,12 +114,14 @@ method @serviceDeclarationListAST-element enterInContext ?!context:@semanticCont
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @serviceDeclarationListAST serviceSemanticAnalysis
+  ?receiverType:@unifiedTypeMap-proxy inReceiverType
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for service in self do
     [service serviceSemanticAnalysis
+      !receiverType:inReceiverType
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
@@ -130,6 +132,7 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @serviceDeclarationListAST-element serviceSemanticAnalysis
+  ?receiverType:@unifiedTypeMap-proxy inReceiverType
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -143,11 +146,11 @@ method @serviceDeclarationListAST-element serviceSemanticAnalysis
       end
       warnIfUnused = false    
     else
-      error attribute : "unknown attribute; available attribut is @" + noWarningIfUnusedAttribute ()
+      error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
     end
   end
 #--- Variable map
-  let serviceNameForInvocationGraph = serviceNameForInvocationGraph (!.null !mServiceName)
+  let serviceNameForInvocationGraph = serviceNameForInvocationGraph (!inReceiverType !mServiceName)
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:serviceNameForInvocationGraph.string
     !context:inContext
@@ -186,8 +189,13 @@ method @serviceDeclarationListAST-element serviceSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfServiceLocation]
 #--- Code generation
+  let serviceMangledName = if inReceiverType == .null then
+    mServiceName
+  else
+    @lstring.new {![inReceiverType key] + "." + mServiceName !mServiceName.location}
+  end
   [!?ioIntermediateCodeStruct.mServiceMapIR insertKey
-    !mServiceName
+    !serviceMangledName
     !formalArguments
     !instructionGenerationList
     !warnIfUnused
