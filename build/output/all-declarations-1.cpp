@@ -10214,9 +10214,7 @@ class cSortedListElement_taskListIR : public cSortedListElement {
 //--- Constructor
   public : cSortedListElement_taskListIR (const GALGAS_string & in_mTaskName,
                                           const GALGAS_bigint & in_mPriority,
-                                          const GALGAS_bigint & in_mStackSize,
-                                          const GALGAS_taskVariableMap & in_mTaskVariableMap,
-                                          const GALGAS_taskProcedureMapIR & in_mTaskProcedureMapIR
+                                          const GALGAS_bigint & in_mStackSize
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method that checks that all attributes are valid
@@ -10239,12 +10237,10 @@ class cSortedListElement_taskListIR : public cSortedListElement {
 
 cSortedListElement_taskListIR::cSortedListElement_taskListIR (const GALGAS_string & in_mTaskName,
                                                               const GALGAS_bigint & in_mPriority,
-                                                              const GALGAS_bigint & in_mStackSize,
-                                                              const GALGAS_taskVariableMap & in_mTaskVariableMap,
-                                                              const GALGAS_taskProcedureMapIR & in_mTaskProcedureMapIR
+                                                              const GALGAS_bigint & in_mStackSize
                                                               COMMA_LOCATION_ARGS) :
 cSortedListElement (THERE),
-mObject (in_mTaskName, in_mPriority, in_mStackSize, in_mTaskVariableMap, in_mTaskProcedureMapIR) {
+mObject (in_mTaskName, in_mPriority, in_mStackSize) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10257,7 +10253,7 @@ bool cSortedListElement_taskListIR::isValid (void) const {
 
 cSortedListElement * cSortedListElement_taskListIR::copy (void) {
   cSortedListElement * result = NULL ;
-  macroMyNew (result, cSortedListElement_taskListIR (mObject.mAttribute_mTaskName, mObject.mAttribute_mPriority, mObject.mAttribute_mStackSize, mObject.mAttribute_mTaskVariableMap, mObject.mAttribute_mTaskProcedureMapIR COMMA_HERE)) ;
+  macroMyNew (result, cSortedListElement_taskListIR (mObject.mAttribute_mTaskName, mObject.mAttribute_mPriority, mObject.mAttribute_mStackSize COMMA_HERE)) ;
   return result ;
 }
 
@@ -10276,14 +10272,6 @@ void cSortedListElement_taskListIR::description (C_String & ioString, const int3
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mStackSize" ":" ;
   mObject.mAttribute_mStackSize.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mTaskVariableMap" ":" ;
-  mObject.mAttribute_mTaskVariableMap.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mTaskProcedureMapIR" ":" ;
-  mObject.mAttribute_mTaskProcedureMapIR.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10324,13 +10312,11 @@ GALGAS_taskListIR GALGAS_taskListIR::constructor_emptySortedList (LOCATION_ARGS)
 
 GALGAS_taskListIR GALGAS_taskListIR::constructor_sortedListWithValue (const GALGAS_string & inOperand0,
                                                                       const GALGAS_bigint & inOperand1,
-                                                                      const GALGAS_bigint & inOperand2,
-                                                                      const GALGAS_taskVariableMap & inOperand3,
-                                                                      const GALGAS_taskProcedureMapIR & inOperand4
+                                                                      const GALGAS_bigint & inOperand2
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_taskListIR result = constructor_emptySortedList (THERE) ;
   cSortedListElement * p = NULL ;
-  macroMyNew (p, cSortedListElement_taskListIR (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
+  macroMyNew (p, cSortedListElement_taskListIR (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
   capSortedListElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -10342,13 +10328,11 @@ GALGAS_taskListIR GALGAS_taskListIR::constructor_sortedListWithValue (const GALG
 
 void GALGAS_taskListIR::addAssign_operation (const GALGAS_string & inOperand0,
                                              const GALGAS_bigint & inOperand1,
-                                             const GALGAS_bigint & inOperand2,
-                                             const GALGAS_taskVariableMap & inOperand3,
-                                             const GALGAS_taskProcedureMapIR & inOperand4
+                                             const GALGAS_bigint & inOperand2
                                              COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cSortedListElement * p = NULL ;
-    macroMyNew (p, cSortedListElement_taskListIR (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
+    macroMyNew (p, cSortedListElement_taskListIR (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capSortedListElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -10371,8 +10355,6 @@ void GALGAS_taskListIR::plusAssign_operation (const GALGAS_taskListIR inOperand,
 void GALGAS_taskListIR::setter_popSmallest (GALGAS_string & outOperand0,
                                             GALGAS_bigint & outOperand1,
                                             GALGAS_bigint & outOperand2,
-                                            GALGAS_taskVariableMap & outOperand3,
-                                            GALGAS_taskProcedureMapIR & outOperand4,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
@@ -10382,15 +10364,11 @@ void GALGAS_taskListIR::setter_popSmallest (GALGAS_string & outOperand0,
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
-    outOperand3.drop () ;
-    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cSortedListElement_taskListIR) ;
     outOperand0 = p->mObject.mAttribute_mTaskName ;
     outOperand1 = p->mObject.mAttribute_mPriority ;
     outOperand2 = p->mObject.mAttribute_mStackSize ;
-    outOperand3 = p->mObject.mAttribute_mTaskVariableMap ;
-    outOperand4 = p->mObject.mAttribute_mTaskProcedureMapIR ;
   }
 }
 
@@ -10399,8 +10377,6 @@ void GALGAS_taskListIR::setter_popSmallest (GALGAS_string & outOperand0,
 void GALGAS_taskListIR::setter_popGreatest (GALGAS_string & outOperand0,
                                             GALGAS_bigint & outOperand1,
                                             GALGAS_bigint & outOperand2,
-                                            GALGAS_taskVariableMap & outOperand3,
-                                            GALGAS_taskProcedureMapIR & outOperand4,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
@@ -10410,15 +10386,11 @@ void GALGAS_taskListIR::setter_popGreatest (GALGAS_string & outOperand0,
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
-    outOperand3.drop () ;
-    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cSortedListElement_taskListIR) ;
     outOperand0 = p->mObject.mAttribute_mTaskName ;
     outOperand1 = p->mObject.mAttribute_mPriority ;
     outOperand2 = p->mObject.mAttribute_mStackSize ;
-    outOperand3 = p->mObject.mAttribute_mTaskVariableMap ;
-    outOperand4 = p->mObject.mAttribute_mTaskProcedureMapIR ;
   }
 }
 
@@ -10427,8 +10399,6 @@ void GALGAS_taskListIR::setter_popGreatest (GALGAS_string & outOperand0,
 void GALGAS_taskListIR::method_smallest (GALGAS_string & outOperand0,
                                          GALGAS_bigint & outOperand1,
                                          GALGAS_bigint & outOperand2,
-                                         GALGAS_taskVariableMap & outOperand3,
-                                         GALGAS_taskProcedureMapIR & outOperand4,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) const {
   capSortedListElement attributes ;
@@ -10438,15 +10408,11 @@ void GALGAS_taskListIR::method_smallest (GALGAS_string & outOperand0,
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
-    outOperand3.drop () ;
-    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cSortedListElement_taskListIR) ;
     outOperand0 = p->mObject.mAttribute_mTaskName ;
     outOperand1 = p->mObject.mAttribute_mPriority ;
     outOperand2 = p->mObject.mAttribute_mStackSize ;
-    outOperand3 = p->mObject.mAttribute_mTaskVariableMap ;
-    outOperand4 = p->mObject.mAttribute_mTaskProcedureMapIR ;
   }
 }
 
@@ -10455,8 +10421,6 @@ void GALGAS_taskListIR::method_smallest (GALGAS_string & outOperand0,
 void GALGAS_taskListIR::method_greatest (GALGAS_string & outOperand0,
                                          GALGAS_bigint & outOperand1,
                                          GALGAS_bigint & outOperand2,
-                                         GALGAS_taskVariableMap & outOperand3,
-                                         GALGAS_taskProcedureMapIR & outOperand4,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) const {
   capSortedListElement attributes ;
@@ -10466,15 +10430,11 @@ void GALGAS_taskListIR::method_greatest (GALGAS_string & outOperand0,
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
-    outOperand3.drop () ;
-    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cSortedListElement_taskListIR) ;
     outOperand0 = p->mObject.mAttribute_mTaskName ;
     outOperand1 = p->mObject.mAttribute_mPriority ;
     outOperand2 = p->mObject.mAttribute_mStackSize ;
-    outOperand3 = p->mObject.mAttribute_mTaskVariableMap ;
-    outOperand4 = p->mObject.mAttribute_mTaskProcedureMapIR ;
   }
 }
 
@@ -10516,22 +10476,6 @@ GALGAS_bigint cEnumerator_taskListIR::current_mStackSize (LOCATION_ARGS) const {
   const cSortedListElement_taskListIR * p = (const cSortedListElement_taskListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cSortedListElement_taskListIR) ;
   return p->mObject.mAttribute_mStackSize ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskVariableMap cEnumerator_taskListIR::current_mTaskVariableMap (LOCATION_ARGS) const {
-  const cSortedListElement_taskListIR * p = (const cSortedListElement_taskListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_taskListIR) ;
-  return p->mObject.mAttribute_mTaskVariableMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskProcedureMapIR cEnumerator_taskListIR::current_mTaskProcedureMapIR (LOCATION_ARGS) const {
-  const cSortedListElement_taskListIR * p = (const cSortedListElement_taskListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_taskListIR) ;
-  return p->mObject.mAttribute_mTaskProcedureMapIR ;
 }
 
 
@@ -15177,6 +15121,185 @@ GALGAS_procFormalArgumentListForGeneration GALGAS_procFormalArgumentListForGener
       result = *p ;
     }else{
       inCompiler->castError ("procFormalArgumentListForGeneration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         '@subprogramInvocationGraph' graph                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph::GALGAS_subprogramInvocationGraph (void) :
+AC_GALGAS_graph () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::constructor_emptyGraph (LOCATION_ARGS) {
+  GALGAS_subprogramInvocationGraph result ;
+  result.makeNewEmptyGraph (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::setter_addNode (GALGAS_lstring inKey,
+                                                       GALGAS_lstring inArgument_0,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  GALGAS_lstringlist::makeAttributesFromObjects (attributes, inArgument_0 COMMA_THERE) ;
+  const char * kErrorMessage = "the '%K' subprogram is already declared at %L" ;
+  internalAddNode (inKey, kErrorMessage, attributes, inCompiler COMMA_THERE) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_topologicalSort (GALGAS_lstringlist & outSortedList,
+                                                               GALGAS_lstringlist & outSortedKeyList,
+                                                               GALGAS_lstringlist & outUnsortedList,
+                                                               GALGAS_lstringlist & outUnsortedKeyList,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
+  cSharedList * sortedList = NULL ;
+  cSharedList * unsortedList = NULL ;
+  internalTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
+  outSortedList = GALGAS_lstringlist (sortedList) ;
+  outUnsortedList = GALGAS_lstringlist (unsortedList) ;
+  GALGAS_lstringlist::detachSharedList (sortedList) ;
+  GALGAS_lstringlist::detachSharedList (unsortedList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_depthFirstTopologicalSort (GALGAS_lstringlist & outSortedList,
+                                                                         GALGAS_lstringlist & outSortedKeyList,
+                                                                         GALGAS_lstringlist & outUnsortedList,
+                                                                         GALGAS_lstringlist & outUnsortedKeyList,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  cSharedList * sortedList = NULL ;
+  cSharedList * unsortedList = NULL ;
+  internalDepthFirstTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
+  outSortedList = GALGAS_lstringlist (sortedList) ;
+  outUnsortedList = GALGAS_lstringlist (unsortedList) ;
+  GALGAS_lstringlist::detachSharedList (sortedList) ;
+  GALGAS_lstringlist::detachSharedList (unsortedList) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::getter_reversedGraph (LOCATION_ARGS) const {
+  GALGAS_subprogramInvocationGraph result ;
+  result.reversedGraphFromGraph (*this COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_circularities (GALGAS_lstringlist & outInfoList,
+                                                             GALGAS_lstringlist & outKeyList
+                                                             COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalFindCircularities (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+  GALGAS_lstringlist::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_nodesWithNoSuccessor (GALGAS_lstringlist & outInfoList,
+                                                                    GALGAS_lstringlist & outKeyList
+                                                                    COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalNodesWithNoSuccessor (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+  GALGAS_lstringlist::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_nodesWithNoPredecessor (GALGAS_lstringlist & outInfoList,
+                                                                      GALGAS_lstringlist & outKeyList
+                                                                      COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalNodesWithNoPredecessor (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+  GALGAS_lstringlist::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::getter_subgraphFromNodes (const GALGAS_lstringlist & inStartKeyList,
+                                                                                             const GALGAS_stringset & inKeysToExclude,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_subprogramInvocationGraph result ;
+  subGraph (result, inStartKeyList, inKeysToExclude, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_subprogramInvocationGraph::getter_accessibleNodesFromNodes (const GALGAS_lstringlist & inStartKeyList,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  GALGAS_subprogramInvocationGraph resultingGraph ;
+  subGraph (resultingGraph,
+            inStartKeyList,
+            GALGAS_stringset::constructor_emptySet (HERE),
+            inCompiler
+            COMMA_THERE) ;
+  if (resultingGraph.isValid ()) {
+    result = resultingGraph.getter_lkeyList (THERE) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @subprogramInvocationGraph type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_subprogramInvocationGraph ("subprogramInvocationGraph",
+                                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_subprogramInvocationGraph::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_subprogramInvocationGraph ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_subprogramInvocationGraph::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_subprogramInvocationGraph (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_subprogramInvocationGraph result ;
+  const GALGAS_subprogramInvocationGraph * p = (const GALGAS_subprogramInvocationGraph *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_subprogramInvocationGraph *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("subprogramInvocationGraph", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

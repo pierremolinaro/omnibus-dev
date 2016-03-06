@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                 *
+#  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literalStringInExpressionAST : @expressionAST {
@@ -7,7 +7,7 @@ class @literalStringInExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                              *
+#  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
@@ -20,7 +20,7 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringInExpressionAST addDependenceEdgeForStaticExpression
@@ -39,7 +39,7 @@ override method @literalStringInExpressionAST noteExpressionTypesInPrecedenceGra
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                           *
+#  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringInExpressionAST analyzeExpression

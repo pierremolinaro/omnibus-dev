@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                 *
+#  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literalBooleanInExpressionAST : @expressionAST {
@@ -7,7 +7,7 @@ class @literalBooleanInExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                              *
+#  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
@@ -25,7 +25,7 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalBooleanInExpressionAST addDependenceEdgeForStaticExpression
@@ -44,7 +44,7 @@ override method @literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGr
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                           *
+#  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalBooleanInExpressionAST analyzeExpression

@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                    *
+#  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @newtypeDeclaration enterInPrecedenceGraph
@@ -16,7 +16,7 @@ override getter @newtypeDeclaration keyRepresentation -> @string outRepresentati
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                    *
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @newtypeDeclaration enterInContext
@@ -54,7 +54,7 @@ override method @newtypeDeclaration enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                   *
+#  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @newtypeDeclaration semanticAnalysis
@@ -69,7 +69,7 @@ override method @newtypeDeclaration semanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                     *
+#  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @newtypeGeneration : @abstractGeneration {

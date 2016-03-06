@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                 *
+#  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literalIntegerDeclaration : @abstractDeclaration {
@@ -23,7 +23,7 @@ override method @literalIntegerDeclaration addExtension
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                    *
+#  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalIntegerDeclaration enterInPrecedenceGraph
@@ -41,7 +41,7 @@ override getter @literalIntegerDeclaration keyRepresentationForErrorSignaling ->
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                    *
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalIntegerDeclaration enterInContext
@@ -201,7 +201,7 @@ private proc enterLiteralIntegerOperators
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                   *
+#  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalIntegerDeclaration semanticAnalysis
@@ -212,7 +212,7 @@ override method @literalIntegerDeclaration semanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INFIX OPERATIONS                                                                                                    *
+#  INFIX OPERATIONS                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 #enum @literalIntegerInfixOperator {

@@ -49,7 +49,7 @@ override getter @integerDeclaration keyRepresentationForErrorSignaling -> @strin
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                    *
+#  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclaration enterInContext
@@ -102,7 +102,7 @@ override method @integerDeclaration enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                   *
+#  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclaration semanticAnalysis
@@ -113,7 +113,7 @@ override method @integerDeclaration semanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INFIX OPERATION BETWEEN INTEGERS                                                                                    *
+#  INFIX OPERATION BETWEEN INTEGERS                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! object <-> object
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -285,7 +285,7 @@ override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INFIX OPERATION BETWEEN AN INTEGER AND A LITERAL INTEGER                                                            *
+#  INFIX OPERATION BETWEEN AN INTEGER AND A LITERAL INTEGER                                                             
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! object <-> literal integer
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -486,7 +486,7 @@ override method @integerObject_literal_divisionOperator generateInfixOperatorCod
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  INFIX OPERATION BETWEEN A LITERAL INTEGER AND AN INTEGER                                                            *
+#  INFIX OPERATION BETWEEN A LITERAL INTEGER AND AN INTEGER                                                             
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! literal integer <-> object
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
