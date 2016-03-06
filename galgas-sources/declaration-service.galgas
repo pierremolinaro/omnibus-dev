@@ -57,69 +57,17 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @serviceDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    for (* * formalArgumentTypeName *) in mServiceFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
-    [mServiceInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @serviceMap {
-  @bool mMutating
-  @procedureSignature mSignature
-
-  insert insertKey error message "the '%K' service is already declared in %L"
-  search searchKey error message "there is no '%K' service"
-  remove removeKey error message "there is no '%K' service"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @serviceDeclarationListAST enterInContext
-  ?receiverType:let @string inReceiverTypeName
-  ?!context:@semanticContext ioContext
-{
-
-  for service in self do
-    [service enterInContext !receiverType:inReceiverTypeName !?context:ioContext]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @serviceDeclarationListAST-element enterInContext
-  ?receiverType:let @string inReceiverTypeName
-  ?!context:@semanticContext ioContext
-{
-#--- Signature
-  @procedureSignature signature = {}
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in mServiceFormalArgumentList do
-    let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-    signature += !formalArgumentPassingMode !selector.string !typeProxy
-  end
-#--- Enter in context
-  let mangledServiceName = if inReceiverTypeName == "" then
-    mServiceName
-  else
-    @lstring.new {!inReceiverTypeName + "." + mServiceName !mServiceName.location}
-  end
-  [!?ioContext.mServiceMap insertKey
-    !mangledServiceName
-    !mMutating
-    !signature
-  ]
-  [!?ioContext.mSubProgramMap insertKey !mServiceName]
-}
+#map @serviceMap {
+#  @bool mMutating
+#  @procedureSignature mSignature
+#
+#  insert insertKey error message "the '%K' service is already declared in %L"
+#  search searchKey error message "there is no '%K' service"
+#  remove removeKey error message "there is no '%K' service"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

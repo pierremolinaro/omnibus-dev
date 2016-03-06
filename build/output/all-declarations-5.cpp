@@ -6621,7 +6621,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_new (const GALGAS_string & inAttribute_mProcName,
-                                                                            const GALGAS_routineKindIR & inAttribute_mKind,
+                                                                            const GALGAS_routineKindForContext & inAttribute_mKind,
                                                                             const GALGAS_procCallEffectiveParameterListIR & inAttribute_mParameters
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_procCallInstructionIR result ;
@@ -6651,8 +6651,8 @@ GALGAS_string cPtr_procCallInstructionIR::getter_mProcName (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKindIR GALGAS_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
-  GALGAS_routineKindIR result ;
+GALGAS_routineKindForContext GALGAS_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
+  GALGAS_routineKindForContext result ;
   if (NULL != mObjectPtr) {
     const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_procCallInstructionIR) ;
@@ -6663,7 +6663,7 @@ GALGAS_routineKindIR GALGAS_procCallInstructionIR::getter_mKind (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKindIR cPtr_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
+GALGAS_routineKindForContext cPtr_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mKind ;
 }
 
@@ -6690,7 +6690,7 @@ GALGAS_procCallEffectiveParameterListIR cPtr_procCallInstructionIR::getter_mPara
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_procCallInstructionIR::cPtr_procCallInstructionIR (const GALGAS_string & in_mProcName,
-                                                        const GALGAS_routineKindIR & in_mKind,
+                                                        const GALGAS_routineKindForContext & in_mKind,
                                                         const GALGAS_procCallEffectiveParameterListIR & in_mParameters
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
