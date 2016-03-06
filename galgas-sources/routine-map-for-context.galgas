@@ -4,7 +4,7 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @routineKindForContext {
+enum @routineKind {
   case procedure
   case section
   case service
@@ -17,7 +17,7 @@ map @routineMapForContext {
   @bool mMutating
   @modeMap mModeMap
   @procedureSignature mSignature
-  @routineKindForContext mRoutineKind
+  @routineKind mRoutineKind
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"

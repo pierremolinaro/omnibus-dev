@@ -2,18 +2,11 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedProcList {
+list @allowedRoutineList {
   @bool mHasWriteAccess
   @lstring mReceiverTypeName
-  @lstring mProcName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @allowedSectionList {
-  @bool mHasWriteAccess
-  @lstring mReceiverTypeName
-  @lstring mSectionName
+  @lstring mRoutineName
+  @routineKind mKind
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -44,11 +37,10 @@ list @globalVarDeclarationList {
   @lstring mTypeName # Empty string if no type annotation
   @lstring mVarName
   @expressionAST mSourceExpression
-  @allowedProcList mAllowedProcList
+  @allowedRoutineList mAllowedProcList
   @allowedInitList mAllowedInitList
   @allowedExceptionList mAllowedExceptionList
   @allowedFunctionList mAllowedFunctionList
-  @allowedSectionList mAllowedSectionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -70,11 +62,10 @@ syntax extension common_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    @allowedProcList allowedProcList = {}
+    @allowedRoutineList allowedRoutineList = {}
     @allowedInitList allowedInitList = {}
     @allowedFunctionList allowedFunctionList = {}
     @allowedExceptionList allowedExceptionList = {}
-    @allowedSectionList allowedSectionList = {}
     ${$
     repeat
       @bool hasWriteAccess
@@ -96,7 +87,7 @@ syntax extension common_syntax {
           $typeName$ ?typeName
         end
         $identifier$ ?let sectionName
-        allowedSectionList += !hasWriteAccess !typeName !sectionName
+        allowedRoutineList += !hasWriteAccess !typeName !sectionName !.section
       or
         $proc$
         @lstring typeName
@@ -106,7 +97,7 @@ syntax extension common_syntax {
           $typeName$ ?typeName
         end
         $identifier$ ?let procName
-        allowedProcList += !hasWriteAccess !typeName !procName
+        allowedRoutineList += !hasWriteAccess !typeName !procName !.procedure
       or
         $func$
         @lstring typeName
@@ -138,11 +129,10 @@ syntax extension common_syntax {
       !typeName
       !varName
       !expression
-      !allowedProcList
+      !allowedRoutineList
       !allowedInitList
       !allowedExceptionList
       !allowedFunctionList
-      !allowedSectionList
   }
 
   #·····················································································································
@@ -154,7 +144,7 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (globalVariableTypeName 7*) in self do
+  for (globalVariableTypeName 6*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]
@@ -255,54 +245,34 @@ method @globalVarDeclarationList-element enterInContext
   end
 #--- Check allowed procedures are defined
   for procedure in mAllowedProcList do
+    @lstring routineMangledName
     @unifiedTypeMap-proxy receiverType
     if procedure.mReceiverTypeName.string == "" then
+      routineMangledName = .new {!"." + procedure.mRoutineName !procedure.mRoutineName.location}
       receiverType = .null
-      [ioContext.mProcedureMap searchKey
-        !procedure.mProcName
-        ?*
-        ?let procedureModeMap
-        ?2*
-      ]
-      for () in procedureModeMap do
-        executionModes += !lkey.string
-      end
     else
+      routineMangledName = .new {!"$" + procedure.mReceiverTypeName + "." + procedure.mRoutineName !procedure.mRoutineName.location}
       receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReceiverTypeName}
-      [[receiverType procedureMap] searchKey
-        !procedure.mProcName
-        ?*
-        ?let procedureModeMap
-        ?2*
-      ]
-      for () in procedureModeMap do
-        executionModes += !lkey.string
-      end
+    end
+    [ioContext.mRoutineMapForContext searchKey
+      !routineMangledName
+      ?*
+      ?let procedureModeMap
+      ?*
+      ?let routineKind
+    ]
+    for () in procedureModeMap do
+      executionModes += !lkey.string
+    end
+    @lstring routineNameForInvocationGraph
+    switch routineKind
+    case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !procedure.mRoutineName)
+    case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !procedure.mRoutineName)
+    case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     end
     [!?allowedRoutineMap insertKey
-       !procNameForInvocationGraph (!receiverType !procedure.mProcName)
+       !routineNameForInvocationGraph
        !procedure.mHasWriteAccess
-    ]
-  end
-#--- Check allowed sections are defined
-  for section in mAllowedSectionList do
-    @unifiedTypeMap-proxy receiverType
-#    if section.mReceiverTypeName.string == "" then
-      receiverType = .null
-      [ioContext.mSectionMap searchKey
-        !section.mSectionName
-        ?2*
-      ]
-#    else
-#      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !section.mReceiverTypeName}
-#      [[receiverType sectionMap] searchKey
-#        !section.mSectionName
-#        ?2*
-#      ]
-#    end
-    [!?allowedRoutineMap insertKey
-       !sectionNameForInvocationGraph (!receiverType !section.mSectionName)
-       !section.mHasWriteAccess
     ]
   end
 #--- Enter variable in globale variable map

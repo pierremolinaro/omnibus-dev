@@ -80,7 +80,7 @@ override method @opaqueTypeDeclaration enterInContext
     !llvmTypeName:"i" + mSize.bigint
     !kind:.opaque {!bitCount:mSize.bigint}
     !typedConstantMap:{}
-    !procedureMap:{}
+#    !procedureMap:{}
     !functionMap:{}
     !copiable:false
     !equatable:false

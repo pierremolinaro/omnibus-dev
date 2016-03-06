@@ -292,17 +292,9 @@ list @procCallEffectiveParameterListIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @routineKindIR {
-  case procedure
-  case service
-  case section
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 class @procCallInstructionIR : @abstractInstructionIR {
   @string mProcName
-  @routineKindForContext mKind
+  @routineKind mKind
   @procCallEffectiveParameterListIR mParameters
 }
 

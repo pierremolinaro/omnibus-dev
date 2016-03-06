@@ -250,7 +250,7 @@ override method @structureDeclaration enterInContext
     !llvmTypeName:"%$" + mStructureName.string
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !typedConstantMap:{}
-    !procedureMap:procedureMap
+#    !procedureMap:procedureMap
     !functionMap:functionMap
     !copiable:copiable
     !equatable:false

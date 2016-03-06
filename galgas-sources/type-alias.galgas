@@ -81,7 +81,7 @@ override method @typeAliasDeclaration enterInContext
     ?llvmTypeName:let llvmTypeMane
     ?kind:let kind
     ?typedConstantMap:let typedConstantMap
-    ?procedureMap:let procedureMap
+#    ?procedureMap:let procedureMap
     ?functionMap:let functionMap
     ?copiable:let copiable
     ?equatable:let equatable
@@ -94,7 +94,7 @@ override method @typeAliasDeclaration enterInContext
     !llvmTypeName:llvmTypeMane
     !kind:kind
     !typedConstantMap:typedConstantMap
-    !procedureMap:procedureMap
+#    !procedureMap:procedureMap
     !functionMap:functionMap
     !copiable:copiable
     !equatable:equatable
