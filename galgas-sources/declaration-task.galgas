@@ -375,8 +375,6 @@ sortedlist @taskListIR {
   @string mTaskName
   @bigint mPriority
   @bigint mStackSize
-  @taskVariableMap mTaskVariableMap
-  @taskProcedureMapIR mTaskProcedureMapIR
 }{
   mPriority <
 }
@@ -391,49 +389,36 @@ method @taskMapIR generateCode
 #--- Build ordered task list
   @taskListIR orderedTaskList = {}
   for task in self do
-    @taskVariableMap taskVariableMap = {}
-    for (name type initValue) in inGenerationContext.mTaskVariableMap do
-      if task.lkey.string == [name stringByDeletingPathExtension] then
-        [!?taskVariableMap insertKey !.new{![name pathExtension] !name.location} !type !initValue]
-      end
-    end
-    @taskProcedureMapIR taskProcedureMapIR = {}
-    for (name instructionList warnUnused) in inGenerationContext.mTaskProcedureMap do
-      if task.lkey.string == [name stringByDeletingPathExtension] then
-        [!?taskProcedureMapIR insertKey !.new{![name pathExtension] !name.location} !instructionList !warnUnused]
-      end
-    end
-    orderedTaskList +=
-      !task.lkey.string
-      !task.mPriority
-      !task.mStackSize
-      !taskVariableMap
-      !taskProcedureMapIR
+    orderedTaskList += !task.lkey.string !task.mPriority !task.mStackSize
   end
 #--- Declare stacks and task variables
   for task in orderedTaskList do
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
-    for variable in task.mTaskVariableMap do
-      ioLLVMcode += llvmNameForTaskVariable (!task.mTaskName !variable.lkey.string)
-      ioLLVMcode += " = internal global "
-      ioLLVMcode += [variable.mType llvmTypeName] + " "
-      let initialString = [variable.mInitialValue llvmName]
-      if initialString == "" then
-        ioLLVMcode += "zeroinitializer"
-      else
-        ioLLVMcode += initialString
+    for (mangledName type initValue) in inGenerationContext.mTaskVariableMap do
+      if task.mTaskName == [mangledName stringByDeletingPathExtension] then
+        ioLLVMcode += llvmNameForTaskVariable (!task.mTaskName ![mangledName pathExtension])
+        ioLLVMcode += " = internal global "
+        ioLLVMcode += [type llvmTypeName] + " "
+        let initialString = [initValue llvmName]
+        if initialString == "" then
+          ioLLVMcode += "zeroinitializer"
+        else
+          ioLLVMcode += initialString
+        end
+        ioLLVMcode += "\n"
       end
-      ioLLVMcode += "\n"
     end
     ioLLVMcode += "\n"
-    for procedure in task.mTaskProcedureMapIR do
-      ioLLVMcode += llvmSeparatorLine ()
-      ioLLVMcode += "\n"
-      ioLLVMcode += "define internal void " + taskProcedureName (!task.mTaskName !procedure.lkey.string) + " () nounwind {\n"
-      [procedure.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      ioLLVMcode += "  ret void\n"
-      ioLLVMcode += "}\n\n"
+    for (procMangledName instructionList *) in inGenerationContext.mTaskProcedureMap do
+      if task.mTaskName == [procMangledName stringByDeletingPathExtension] then
+        ioLLVMcode += llvmSeparatorLine ()
+        ioLLVMcode += "\n"
+        ioLLVMcode += "define internal void " + taskProcedureName (!task.mTaskName ![procMangledName pathExtension]) + " () nounwind {\n"
+        [instructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+        ioLLVMcode += "  ret void\n"
+        ioLLVMcode += "}\n\n"
+      end
     end
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"

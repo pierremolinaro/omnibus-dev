@@ -1,5 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                 *
+#  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @registerConstantInExpressionAST : @expressionAST {
@@ -17,7 +17,7 @@ class @registerIntegerExpInExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                              *
+#  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
@@ -43,7 +43,7 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpression
@@ -75,7 +75,7 @@ override method @registerIntegerExpInExpressionAST noteExpressionTypesInPreceden
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                           *
+#  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantInExpressionAST analyzeExpression
@@ -202,7 +202,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                     *
+#  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {

@@ -4569,9 +4569,7 @@ class GALGAS_taskListIR : public AC_GALGAS_sortedlist {
 
   public : static GALGAS_taskListIR constructor_sortedListWithValue (const class GALGAS_string & inOperand0,
                                                                      const class GALGAS_bigint & inOperand1,
-                                                                     const class GALGAS_bigint & inOperand2,
-                                                                     const class GALGAS_taskVariableMap & inOperand3,
-                                                                     const class GALGAS_taskProcedureMapIR & inOperand4
+                                                                     const class GALGAS_bigint & inOperand2
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -4582,25 +4580,19 @@ class GALGAS_taskListIR : public AC_GALGAS_sortedlist {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_string & inOperand0,
                                                       const class GALGAS_bigint & inOperand1,
-                                                      const class GALGAS_bigint & inOperand2,
-                                                      const class GALGAS_taskVariableMap & inOperand3,
-                                                      const class GALGAS_taskProcedureMapIR & inOperand4
+                                                      const class GALGAS_bigint & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_popGreatest (class GALGAS_string & outArgument0,
                                                      class GALGAS_bigint & outArgument1,
                                                      class GALGAS_bigint & outArgument2,
-                                                     class GALGAS_taskVariableMap & outArgument3,
-                                                     class GALGAS_taskProcedureMapIR & outArgument4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popSmallest (class GALGAS_string & outArgument0,
                                                      class GALGAS_bigint & outArgument1,
                                                      class GALGAS_bigint & outArgument2,
-                                                     class GALGAS_taskVariableMap & outArgument3,
-                                                     class GALGAS_taskProcedureMapIR & outArgument4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -4609,16 +4601,12 @@ class GALGAS_taskListIR : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG void method_greatest (class GALGAS_string & outArgument0,
                                                   class GALGAS_bigint & outArgument1,
                                                   class GALGAS_bigint & outArgument2,
-                                                  class GALGAS_taskVariableMap & outArgument3,
-                                                  class GALGAS_taskProcedureMapIR & outArgument4,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_smallest (class GALGAS_string & outArgument0,
                                                   class GALGAS_bigint & outArgument1,
                                                   class GALGAS_bigint & outArgument2,
-                                                  class GALGAS_taskVariableMap & outArgument3,
-                                                  class GALGAS_taskProcedureMapIR & outArgument4,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -4646,8 +4634,6 @@ class cEnumerator_taskListIR : public cGenericAbstractEnumerator {
   public : class GALGAS_string current_mTaskName (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mPriority (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mStackSize (LOCATION_ARGS) const ;
-  public : class GALGAS_taskVariableMap current_mTaskVariableMap (LOCATION_ARGS) const ;
-  public : class GALGAS_taskProcedureMapIR current_mTaskProcedureMapIR (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_taskListIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -4667,8 +4653,6 @@ class GALGAS_taskListIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_string mAttribute_mTaskName ;
   public : GALGAS_bigint mAttribute_mPriority ;
   public : GALGAS_bigint mAttribute_mStackSize ;
-  public : GALGAS_taskVariableMap mAttribute_mTaskVariableMap ;
-  public : GALGAS_taskProcedureMapIR mAttribute_mTaskProcedureMapIR ;
 
 
 //--------------------------------- Accessors
@@ -4687,9 +4671,7 @@ class GALGAS_taskListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_taskListIR_2D_element (const GALGAS_string & in_mTaskName,
                                          const GALGAS_bigint & in_mPriority,
-                                         const GALGAS_bigint & in_mStackSize,
-                                         const GALGAS_taskVariableMap & in_mTaskVariableMap,
-                                         const GALGAS_taskProcedureMapIR & in_mTaskProcedureMapIR) ;
+                                         const GALGAS_bigint & in_mStackSize) ;
 
 //-- Start of generic part --*
 
@@ -4704,9 +4686,7 @@ class GALGAS_taskListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_taskListIR_2D_element constructor_new (const class GALGAS_string & inOperand0,
                                                                 const class GALGAS_bigint & inOperand1,
-                                                                const class GALGAS_bigint & inOperand2,
-                                                                const class GALGAS_taskVariableMap & inOperand3,
-                                                                const class GALGAS_taskProcedureMapIR & inOperand4
+                                                                const class GALGAS_bigint & inOperand2
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4726,10 +4706,6 @@ class GALGAS_taskListIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mStackSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mTaskName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_taskProcedureMapIR getter_mTaskProcedureMapIR (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_taskVariableMap getter_mTaskVariableMap (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -7059,5 +7035,88 @@ class GALGAS_procFormalArgumentListForGeneration_2D_element : public AC_GALGAS_r
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentListForGeneration_2D_element ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @subprogramInvocationGraph graph                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_subprogramInvocationGraph : public AC_GALGAS_graph {
+//--------------------------------- Default constructor
+  public : GALGAS_subprogramInvocationGraph (void) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_subprogramInvocationGraph extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_subprogramInvocationGraph constructor_emptyGraph (LOCATION_ARGS) ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_addNode (class GALGAS_lstring inArgument0,
+                                                 class GALGAS_lstring inArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_circularities (class GALGAS_lstringlist & outArgument0,
+                                                       class GALGAS_lstringlist & outArgument1
+                                                       COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_depthFirstTopologicalSort (class GALGAS_lstringlist & outArgument0,
+                                                                   class GALGAS_lstringlist & outArgument1,
+                                                                   class GALGAS_lstringlist & outArgument2,
+                                                                   class GALGAS_lstringlist & outArgument3,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_nodesWithNoPredecessor (class GALGAS_lstringlist & outArgument0,
+                                                                class GALGAS_lstringlist & outArgument1
+                                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_nodesWithNoSuccessor (class GALGAS_lstringlist & outArgument0,
+                                                              class GALGAS_lstringlist & outArgument1
+                                                              COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_topologicalSort (class GALGAS_lstringlist & outArgument0,
+                                                         class GALGAS_lstringlist & outArgument1,
+                                                         class GALGAS_lstringlist & outArgument2,
+                                                         class GALGAS_lstringlist & outArgument3,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_accessibleNodesFromNodes (const class GALGAS_lstringlist & constinOperand0,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_subprogramInvocationGraph getter_reversedGraph (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_subprogramInvocationGraph getter_subgraphFromNodes (const class GALGAS_lstringlist & constinOperand0,
+                                                                                             const class GALGAS_stringset & constinOperand1,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_subprogramInvocationGraph class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_subprogramInvocationGraph ;
 
 #endif
