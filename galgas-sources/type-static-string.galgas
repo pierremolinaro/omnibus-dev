@@ -57,7 +57,7 @@ override method @literalStringDeclaration enterInContext
     !llvmTypeName:"i8*"
     !kind:.literalString
     !typedConstantMap:{}
-    !procedureMap:{}
+#    !procedureMap:{}
     !functionMap:{}
     !copiable:true
     !equatable:true
