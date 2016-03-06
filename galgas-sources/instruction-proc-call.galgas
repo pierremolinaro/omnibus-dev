@@ -135,11 +135,8 @@ override method @procCallInstructionAST analyze
 {
 #--- Search proc in proc map
   @procCallEffectiveParameterListIR procCallEffectiveParameterListIR = {}
-  @procedureSignature procSignature
-  @modeMap procedureModeMap
   @unifiedTypeMap-proxy receiverType
-  @lstring routineNameForInvocationGraph
-  @routineKindIR routineKind
+  @lstring routineMangledName
   if mReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
       !mReceiverName
@@ -148,68 +145,30 @@ override method @procCallInstructionAST analyze
       ?@objectInMemoryIR variableKind
       ?4*
     ]
+    routineMangledName = .new {!"$" + [receiverType key] + "." + mReceiverName !mReceiverName.location}
     procCallEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] #--- add "load receiver" as first argument
-    if [[receiverType procedureMap] hasKey !mProcName.string] then
-      [[receiverType procedureMap] searchKey
-        !mProcName
-        ?*
-        ?procedureModeMap
-        ?procSignature
-        ?*
-      ]
-      routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
-      routineKind = .procedure
-    elsif [inContext.mServiceMap hasKey ![receiverType key] + "." + mProcName] then
-      let mangledProcName = @lstring.new {![receiverType key] + "." + mProcName !mProcName.location}
-      [inContext.mServiceMap searchKey !mangledProcName ?* ?procSignature]
-      procedureModeMap = {![userModeName () nowhere]}
-      routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mProcName)
-      routineKind = .service
-    else
-      error mProcName
-        : "undefined $" + [receiverType key] + "." + mProcName
-        : routineKind, routineNameForInvocationGraph, procSignature, procedureModeMap
-    end
-  elsif [inContext.mProcedureMap hasKey !mProcName.string] then
-    [inContext.mProcedureMap searchKey
-      !mProcName
-      ?*
-      ?procedureModeMap
-      ?procSignature
-      ?*
-    ]
-    receiverType = .null
-    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mProcName)
-    routineKind = .procedure
-  elsif [inContext.mSectionMap hasKey !mProcName.string] then
-    [inContext.mSectionMap searchKey
-      !mProcName
-      ?*
-      ?procSignature
-    ]
-    procedureModeMap = {![userModeName () nowhere]}
-    receiverType = .null
-    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mProcName)
-    routineKind = .section
-  elsif [inContext.mServiceMap hasKey !mProcName.string] then
-    [inContext.mServiceMap searchKey !mProcName ?* ?procSignature]
-    receiverType = .null
-    procedureModeMap = {![userModeName () nowhere]}
-    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mProcName)
-    routineKind = .service
   else
-    error mProcName
-      :"undefined proc, service or section"
-      : routineKind, receiverType, procedureModeMap, procSignature, routineNameForInvocationGraph
+    routineMangledName = .new {!"." + mReceiverName !mReceiverName.location}
+    receiverType = .null
   end
-#--- Enter in invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge
-    !inRoutineNameForInvocationGraph
-    !routineNameForInvocationGraph
+  [inContext.mRoutineMapForContext searchKey
+    !routineMangledName
+    ?let unused mutating
+    ?let modeMap
+    ?let signature
+    ?let routineKind
   ]
+#--- Enter in invocation graph
+  @lstring routineNameForInvocationGraph
+  switch routineKind
+  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mReceiverName)
+  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mReceiverName)
+  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mReceiverName)
+  end
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inRoutineNameForInvocationGraph !routineNameForInvocationGraph]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}
-  for () formal_ in procSignature, () in mEffectiveParameterList do
+  for () formal_ in signature, () in mEffectiveParameterList do
     switch mEffectiveParameterKind 
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
@@ -286,14 +245,14 @@ override method @procCallInstructionAST analyze
 #--- Check mode
   checkMode (
     !requiredModes:inModeSet
-    !possibleModes:[procedureModeMap keySet]
+    !possibleModes:[modeMap keySet]
     !error:mProcName.location
   )
-  if [procSignature length] != [parameterList length] then
-    error mProcName: "this proc requires " + [procSignature length] + " argument(s), this call names "
-      + [procSignature length] + " argument(s)"
+  if [signature length] != [parameterList length] then
+    error mProcName: "this proc requires " + [signature length] + " argument(s), this call names "
+      + [signature length] + " argument(s)"
   else
-    for () formal_ in procSignature, () actual_ in parameterList do
+    for () formal_ in signature, () actual_ in parameterList do
       if [formal_mType key] != [actual_mParameterType key] then
         error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
            "', and is incompatible with the formal type '" + [formal_mType key] + "'"
@@ -307,7 +266,7 @@ override method @procCallInstructionAST analyze
   end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
-    !if receiverType == .null then "" else [receiverType key] + "." end + mProcName
+    !routineMangledName.string
     !routineKind
     !procCallEffectiveParameterListIR
   }
@@ -343,7 +302,7 @@ enum @routineKindIR {
 
 class @procCallInstructionIR : @abstractInstructionIR {
   @string mProcName
-  @routineKindIR mKind
+  @routineKindForContext mKind
   @procCallEffectiveParameterListIR mParameters
 }
 

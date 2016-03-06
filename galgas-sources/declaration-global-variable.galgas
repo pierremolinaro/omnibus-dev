@@ -150,7 +150,7 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
+#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {

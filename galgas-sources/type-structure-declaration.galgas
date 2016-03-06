@@ -112,9 +112,7 @@ override method @structureDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @structureDeclaration enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let structureTypeName = @lstring.new {!"$" + mStructureName !mStructureName.location}
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
@@ -145,13 +143,7 @@ override method @structureDeclaration enterInPrecedenceGraph
     [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 #--- Add structure services
-  for () in mServiceListAST do
-    for (* * formalArgumentTypeName *) in mServiceFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
-    [mServiceInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
+  [mServiceListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -251,7 +243,7 @@ override method @structureDeclaration enterInContext
     ]
   end
 #--- services
-  [mServiceListAST enterInContext !receiverType:mStructureName.string !?context:ioContext]
+  [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
