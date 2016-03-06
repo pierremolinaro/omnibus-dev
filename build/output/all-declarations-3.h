@@ -1100,17 +1100,6 @@ void routine_enterEnumerationOperators (class GALGAS_lstring inArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Routine 'declareLLVMstructureTypes'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_declareLLVMstructureTypes (const class GALGAS_unifiedTypeMap constinArgument0,
-                                        class GALGAS_string & ioArgument1,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                         Routine 'enterAliasPrefixOperator'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

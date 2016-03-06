@@ -372,8 +372,8 @@ static void categoryMethod_varInExpressionAST_analyzeExpression (const cPtr_expr
         break ;
       case GALGAS_typeKind::kEnum_structure:
         {
-          const cEnumAssociatedValues_typeKind_structure * extractPtr_6408 = (const cEnumAssociatedValues_typeKind_structure *) (outArgument_outResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 131)).unsafePointer ()) ;
-          const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_6408->mAssociatedValue0 ;
+          const cEnumAssociatedValues_typeKind_structure * extractPtr_6412 = (const cEnumAssociatedValues_typeKind_structure *) (outArgument_outResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 131)).unsafePointer ()) ;
+          const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_6412->mAssociatedValue0 ;
           GALGAS_unifiedTypeMap_2D_proxy var_type ;
           GALGAS_uint var_idx ;
           extractedValue_propertyMap.method_searchKey (enumerator_4711.current_mValue (HERE), var_type, var_idx, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 145)) ;
@@ -913,11 +913,11 @@ static void categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_8575 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 162)).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_min = extractPtr_8575->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_max = extractPtr_8575->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_8575->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_8575->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_8579 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 162)).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_min = extractPtr_8579->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_max = extractPtr_8579->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_8579->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_8579->mAssociatedValue3 ;
       const enumGalgasBool test_4 = extractedValue_unsigned.operator_not (SOURCE_FILE ("expression-cst-registre.galgas", 183)).boolEnum () ;
       if (kBoolTrue == test_4) {
         inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 184)) ;
@@ -1453,11 +1453,11 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
   GALGAS_bool var_isCopiable ;
   GALGAS_bool var_isConstant ;
   {
-  GALGAS_unifiedTypeMap_2D_proxy joker_5467 ; // Joker input parameter
-  GALGAS_objectInMemoryIR joker_5499 ; // Joker input parameter
-  GALGAS_controlRegisterBitSliceAccessMap joker_5526_2 ; // Joker input parameter
-  GALGAS_bool joker_5526_1 ; // Joker input parameter
-  ioArgument_ioVariableMap.setter_searchForWriteAccess (object->mAttribute_mTargetVarName, joker_5467, var_accessIsAllowed, joker_5499, var_isCopiable, joker_5526_2, joker_5526_1, var_isConstant, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 140)) ;
+  GALGAS_unifiedTypeMap_2D_proxy joker_5471 ; // Joker input parameter
+  GALGAS_objectInMemoryIR joker_5503 ; // Joker input parameter
+  GALGAS_controlRegisterBitSliceAccessMap joker_5530_2 ; // Joker input parameter
+  GALGAS_bool joker_5530_1 ; // Joker input parameter
+  ioArgument_ioVariableMap.setter_searchForWriteAccess (object->mAttribute_mTargetVarName, joker_5471, var_accessIsAllowed, joker_5503, var_isCopiable, joker_5530_2, joker_5530_1, var_isConstant, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 140)) ;
   }
   const enumGalgasBool test_7 = var_isConstant.boolEnum () ;
   if (kBoolTrue == test_7) {

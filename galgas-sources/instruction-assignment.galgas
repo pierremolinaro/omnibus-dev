@@ -113,7 +113,7 @@ override method @assignmentInstructionAST analyze
       error fieldName : "an integer does not have fields"
     case staticInteger :  
       error fieldName : "an integer does not have fields"
-    case opaque :  
+    case opaque (*) :  
       error fieldName : "an opaque type does not have fields"
     end
   end

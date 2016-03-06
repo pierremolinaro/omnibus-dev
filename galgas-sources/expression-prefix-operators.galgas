@@ -74,7 +74,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
     binaryOperator = .xor
     switch [expressionResult.mType kind]
-    case opaque : error .nowhere : "internal error" : leftOperand
+    case opaque (*) : error .nowhere : "internal error" : leftOperand
     case boolean : error .nowhere : "internal error" : leftOperand
     case boolset : error .nowhere : "internal error" : leftOperand
     case literalString : error .nowhere : "internal error" : leftOperand

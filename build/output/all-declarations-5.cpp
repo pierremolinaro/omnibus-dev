@@ -733,6 +733,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//------------------------------------------------*\n"
   "\n"
   "struct $semaphore {\n"
+  "  var value $uint32 = 0\n"
   "\n"
   "  service P `kernel () {\n"
   "  \n"
@@ -762,7 +763,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-blinkled-semaphore.plm",
   "plm",
   true, // Text file
-  491, // Text length
+  515, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
