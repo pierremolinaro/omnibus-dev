@@ -32,7 +32,7 @@ list @procEffectiveParameterListAST {
 
 class @procCallInstructionAST : @instructionAST {
   @lstring mReceiverName
-  @lstring mProcName
+  @lstring mRoutineName
   @procEffectiveParameterListAST mEffectiveParameterList
 }
 
@@ -145,10 +145,10 @@ override method @procCallInstructionAST analyze
       ?@objectInMemoryIR variableKind
       ?4*
     ]
-    routineMangledName = .new {!"$" + [receiverType key] + "." + mReceiverName !mReceiverName.location}
+    routineMangledName = .new {!"$" + [receiverType key] + "." + mRoutineName !mRoutineName.location}
     procCallEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] #--- add "load receiver" as first argument
   else
-    routineMangledName = .new {!"." + mReceiverName !mReceiverName.location}
+    routineMangledName = .new {!"." + mRoutineName !mRoutineName.location}
     receiverType = .null
   end
   [inContext.mRoutineMapForContext searchKey
@@ -162,9 +162,9 @@ override method @procCallInstructionAST analyze
 #--- Enter in invocation graph
   @lstring routineNameForInvocationGraph
   switch routineKind
-  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mReceiverName)
-  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mReceiverName)
-  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mReceiverName)
+  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mRoutineName)
+  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mRoutineName)
+  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mRoutineName)
   end
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inRoutineNameForInvocationGraph !routineNameForInvocationGraph]
 #--- Check parameters
@@ -247,10 +247,10 @@ override method @procCallInstructionAST analyze
   checkMode (
     !requiredModes:inModeSet
     !possibleModes:[modeMap keySet]
-    !error:mProcName.location
+    !error:mRoutineName.location
   )
   if [signature length] != [parameterList length] then
-    error mProcName: "this proc requires " + [signature length] + " argument(s), this call names "
+    error mRoutineName: "this routine requires " + [signature length] + " argument(s), this call names "
       + [signature length] + " argument(s)"
   else
     for () formal_ in signature, () actual_ in parameterList do

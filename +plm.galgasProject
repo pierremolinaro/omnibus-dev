@@ -89,9 +89,10 @@ project (1:0:0) -> "plm" {
 #--- Compilation phases
   "galgas-sources/variable-map.galgas"
   "galgas-sources/ordered-declaration-list.galgas"
-  "galgas-sources/routine-map-for-context.galgas"
-  "galgas-sources/semantic-context.galgas"
+  "galgas-sources/context-routines.galgas"
+  "galgas-sources/context.galgas"
   "galgas-sources/semantic-analysis.galgas"
+  "galgas-sources/semantic-routines.galgas"
 
 #--- Intermediate code
   "galgas-sources/generated-code-prefixes.galgas"

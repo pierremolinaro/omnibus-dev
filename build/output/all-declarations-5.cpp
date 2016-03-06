@@ -14396,7 +14396,7 @@ typeComparisonResult cPtr_procCallInstructionAST::dynamicObjectCompare (const ac
     result = mAttribute_mReceiverName.objectCompare (p->mAttribute_mReceiverName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mProcName.objectCompare (p->mAttribute_mProcName) ;
+    result = mAttribute_mRoutineName.objectCompare (p->mAttribute_mRoutineName) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mEffectiveParameterList.objectCompare (p->mAttribute_mEffectiveParameterList) ;
@@ -14448,12 +14448,12 @@ GALGAS_instructionAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procCallInstructionAST GALGAS_procCallInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mReceiverName,
-                                                                              const GALGAS_lstring & inAttribute_mProcName,
+                                                                              const GALGAS_lstring & inAttribute_mRoutineName,
                                                                               const GALGAS_procEffectiveParameterListAST & inAttribute_mEffectiveParameterList
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_procCallInstructionAST result ;
-  if (inAttribute_mReceiverName.isValid () && inAttribute_mProcName.isValid () && inAttribute_mEffectiveParameterList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionAST (inAttribute_mReceiverName, inAttribute_mProcName, inAttribute_mEffectiveParameterList COMMA_THERE)) ;
+  if (inAttribute_mReceiverName.isValid () && inAttribute_mRoutineName.isValid () && inAttribute_mEffectiveParameterList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionAST (inAttribute_mReceiverName, inAttribute_mRoutineName, inAttribute_mEffectiveParameterList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -14478,20 +14478,20 @@ GALGAS_lstring cPtr_procCallInstructionAST::getter_mReceiverName (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_procCallInstructionAST::getter_mProcName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_procCallInstructionAST::getter_mRoutineName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_procCallInstructionAST) ;
-    result = p->mAttribute_mProcName ;
+    result = p->mAttribute_mRoutineName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_procCallInstructionAST::getter_mProcName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcName ;
+GALGAS_lstring cPtr_procCallInstructionAST::getter_mRoutineName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRoutineName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14517,12 +14517,12 @@ GALGAS_procEffectiveParameterListAST cPtr_procCallInstructionAST::getter_mEffect
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_procCallInstructionAST::cPtr_procCallInstructionAST (const GALGAS_lstring & in_mReceiverName,
-                                                          const GALGAS_lstring & in_mProcName,
+                                                          const GALGAS_lstring & in_mRoutineName,
                                                           const GALGAS_procEffectiveParameterListAST & in_mEffectiveParameterList
                                                           COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (THERE),
 mAttribute_mReceiverName (in_mReceiverName),
-mAttribute_mProcName (in_mProcName),
+mAttribute_mRoutineName (in_mRoutineName),
 mAttribute_mEffectiveParameterList (in_mEffectiveParameterList) {
 }
 
@@ -14537,7 +14537,7 @@ void cPtr_procCallInstructionAST::description (C_String & ioString,
   ioString << "[@procCallInstructionAST:" ;
   mAttribute_mReceiverName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mProcName.description (ioString, inIndentation+1) ;
+  mAttribute_mRoutineName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mEffectiveParameterList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -14547,7 +14547,7 @@ void cPtr_procCallInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_procCallInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_procCallInstructionAST (mAttribute_mReceiverName, mAttribute_mProcName, mAttribute_mEffectiveParameterList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_procCallInstructionAST (mAttribute_mReceiverName, mAttribute_mRoutineName, mAttribute_mEffectiveParameterList COMMA_THERE)) ;
   return ptr ;
 }
 
