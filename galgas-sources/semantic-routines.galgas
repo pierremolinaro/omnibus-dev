@@ -1,172 +1,89 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-enum @procFormalArgumentPassingMode {
-  case input
-  case output
-  case inputOutput
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @procFormalArgumentList {
-  @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @lstring mSelector
-  @lstring mFormalArgumentTypeName
-  @lstring mFormalArgumentName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@string inSelector -> @string outResult {
-  switch self
-  case input : outResult = "!"
-  case output : outResult = "?"
-  case inputOutput : outResult = "!?"
-  end
-  if inSelector != "" then
-    outResult += inSelector + ":"
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @procedureDeclarationListAST {
-  @bool mMutating
-  @lstringlist mProcedureModeList
-  @lstring mProcedureName
-  @lstringlist mProcedureAttributeList
-  @procFormalArgumentList mProcFormalArgumentList
-  @instructionListAST mInstructionList
-  @location mEndOfProcLocation
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @labelMap {
-  insert insertKey error message "the '%K' label is already declared"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-syntax extension common_syntax {
-
-  #·····················································································································
-
-  rule <procedure>
-    ?!@procedureDeclarationListAST ioProcListAST
-  {
-    <procedure_header>
-      ?procModes:let procModeList
-      ?name:let procName
-      ?attributes:let attributeList
-      ?formalArguments:let procFormalArgumentList
-      ?mutating:let mutating
-    ${$
-    @labelMap labelMap = {}
-    <instructionList> ?let instructionList !?labelMap
-    $}$
-    ioProcListAST +=
-      !mutating
-      !procModeList
-      !procName
-      !attributeList
-      !procFormalArgumentList
-      !instructionList
-      !.here
-  }
-
-  #·····················································································································
-
-  rule <procedure_header>
-    !procModes:@lstringlist outProcModeList
-    !name:@lstring outProcName
-    !attributes:@lstringlist outAttributeList
-    !formalArguments:@procFormalArgumentList outProcFormalArgumentList
-    !mutating:@bool outMutating
-  {
-    select
-      outMutating = false
-    or
-      $mutating$
-      outMutating = true
-    end
-    $proc$
-    $identifier$ ?outProcName
-    outProcModeList = {}
-    repeat
-      $modeName$ ?let procMode
-      outProcModeList += !procMode
-    while
-    end
-    outAttributeList = {}
-    repeat
-    while
-      $attribute$ ?let attribute
-      outAttributeList += !attribute
-    end
-    <procedure_formal_arguments> ?formalArguments:outProcFormalArgumentList
-  }
-
-  #·····················································································································
-
-  rule <procedure_formal_arguments>
-    !formalArguments:@procFormalArgumentList outProcFormalArgumentList
-  {
-    outProcFormalArgumentList = {}
-    $($
-    repeat
-    while
-      $!$ ?let selector
-      $identifier$ ?let formalArgumentName
-      $typeName$ ?let formalArgumentTypeName
-      outProcFormalArgumentList +=
-        !@procFormalArgumentPassingMode.output
-        !selector
-        !formalArgumentTypeName
-        !formalArgumentName
-    while
-      $?!$ ?let selector
-      $identifier$ ?let formalArgumentName
-      $typeName$ ?let formalArgumentTypeName
-      outProcFormalArgumentList +=
-        !@procFormalArgumentPassingMode.inputOutput
-        !selector
-        !formalArgumentTypeName
-        !formalArgumentName
-    while
-      $?$ ?let selector
-      $identifier$ ?let formalArgumentName
-      $typeName$ ?let formalArgumentTypeName
-      outProcFormalArgumentList +=
-        !@procFormalArgumentPassingMode.input
-        !selector
-        !formalArgumentTypeName
-        !formalArgumentName
-    end
-    $)$
-  }
-
-  #·····················································································································
-
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureDeclarationListAST-element procedureSemanticAnalysis
+list @procFormalArgumentListForGeneration {
+  @procFormalArgumentPassingMode mFormalArgumentKind
+  @unifiedTypeMap-proxy mFormalArgumentType
+  @string mFormalArgumentName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+graph @subprogramInvocationGraph (@lstringlist) {
+  insert addNode error message "the '%K' subprogram is already declared at %L"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc enterFormalArguments
+  ?context:let @semanticContext inContext
+  ?let @procFormalArgumentList inFormalArgumentPassingMode
+  ?!@variableMap ioVariableMap
+  ?!@procFormalArgumentListForGeneration ioFormalArguments
+{
+  for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
+    switch argumentKind
+    case input :
+      [!?ioVariableMap insertConstantInputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !true
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
+        ![typeProxy copiable]
+        !{}
+        !true
+        !true # Is constant
+      ]
+      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
+    case inputOutput :
+      [!?ioVariableMap insertInputOutputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !true
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
+        ![typeProxy copiable]
+        !{}
+        !true
+        !false # Is not constant
+      ]
+      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
+    case output :
+      [!?ioVariableMap insertOutputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !true
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
+        ![typeProxy copiable]
+        !{}
+        !true
+        !false # Is not constant
+      ]
+      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc routineSemanticAnalysis
   ?receiverType:let @unifiedTypeMap-proxy inReceiverType
+  ?let @bool inMutating
+  ?let @routineKind inRoutineKind
+  ?let @lstringlist inRoutineModeList
+  ?let @lstring inRoutineName
+  ?let @lstringlist inRoutineAttributeList
+  ?let @procFormalArgumentList inRoutineFormalArgumentList
+  ?let @instructionListAST inRoutineInstructionList
+  ?let @location inEndOfRoutineDeclaration
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check modes
   @stringset procedureModeSet = {}
-  for mode in mProcedureModeList do
+  for mode in inRoutineModeList do
     [inContext.mModeMap searchKey !mode.mValue]
     procedureModeSet += !mode.mValue.string
   end
@@ -175,7 +92,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   var globalProcedure = false
   var weakProcedure = false
   var nullOnNoException = false
-  for (attribute) in mProcedureAttributeList do
+  for (attribute) in inRoutineAttributeList do
     if attribute.string == noWarningIfUnusedAttribute () then
       if not warnIfUnused then
         error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
@@ -205,37 +122,42 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   end
   if weakProcedure then
     if warnIfUnused then
-      warning mProcedureName : "@" + weakAttribute () + " attribute: @" + noWarningIfUnusedAttribute () + " attribute is ignored"
+      warning inRoutineName : "@" + weakAttribute () + " attribute: @" + noWarningIfUnusedAttribute () + " attribute is ignored"
     end
     warnIfUnused = false    
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineNameForInvocation:procNameForInvocationGraph (!inReceiverType !mProcedureName).string
+    !routineNameForInvocation:procNameForInvocationGraph (!inReceiverType !inRoutineName).string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
-    !globalsAreConstant:false
+    !globalsAreConstant:not inMutating
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
   enterFormalArguments (
     !context:inContext
-    !mProcFormalArgumentList
+    !inRoutineFormalArgumentList
     !?variableMap
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  let procNameForInvocationGraph = procNameForInvocationGraph (!inReceiverType !mProcedureName)
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
+  @lstring routineNameForInvocationGraph
+  switch inRoutineKind
+  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!inReceiverType !inRoutineName)
+  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inReceiverType !inRoutineName)
+  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inReceiverType !inRoutineName)
+  end
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !procNameForInvocationGraph
-      !mProcedureName
+      !routineNameForInvocationGraph
+      !inRoutineName
     ]
   end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
-  [mInstructionList analyzeRoutineInstructionList
-    !routineNameForInvocationGraph:procNameForInvocationGraph
+  [inRoutineInstructionList analyzeRoutineInstructionList
+    !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:procedureModeSet
     !allowException:not [procedureModeSet hasKey !panicModeName ()]
@@ -245,48 +167,51 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #---
-  [variableMap checkAutomatonStates !mEndOfProcLocation]
+  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
 #--- Code generation
-  if [ioIntermediateCodeStruct.mProcedureMapIR hasKey !mProcedureName.string] then
-    let weak = [ioIntermediateCodeStruct.mProcedureMapIR mWeakForKey !mProcedureName.string]
+  if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !inRoutineName.string] then
+    let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !inRoutineName.string]
     if weakProcedure && not weak then
       # redefined weak procedure is ignored
     elsif weakProcedure && weak then
-      error mProcedureName : "this weak procedure overrides a weak procedure"
+      error inRoutineName : "this weak procedure overrides a weak procedure"
     elsif (not weakProcedure) && weak then
-      [!?ioIntermediateCodeStruct.mProcedureMapIR removeKey !mProcedureName ?7*] # Remove weak routine
-      [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
-        !mProcedureName
+      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !inRoutineName ?8*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+        !inRoutineName
         !formalArguments
         !instructionGenerationList
-        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !inRoutineName.string]
         !warnIfUnused
         !weakProcedure
         !nullOnNoException
         !globalProcedure
+        !inRoutineKind
       ]  
     else # (not weakProcedure) && (not weak)
-      [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey # Raises a redefinition error
-        !mProcedureName
+      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
+        !inRoutineName
         !formalArguments
         !instructionGenerationList
-        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !inRoutineName.string]
         !warnIfUnused
         !weakProcedure
         !nullOnNoException
         !globalProcedure
+        !inRoutineKind
       ]
     end
   else
-    [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
-      !mProcedureName
+    [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+      !inRoutineName
       !formalArguments
       !instructionGenerationList
-      ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+      ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !inRoutineName.string]
       !warnIfUnused
       !weakProcedure
       !nullOnNoException
       !globalProcedure
+      !inRoutineKind
     ]  
   end
 }
@@ -295,7 +220,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureMapIR llvmCodeGeneration 
+method @routineMapIR llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?!@string ioAssemblerCode
   ?let @generationContext inGenerationContext
@@ -312,13 +237,18 @@ method @procedureMapIR llvmCodeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureMapIR-element llvmPrototypeGeneration 
+method @routineMapIR-element llvmPrototypeGeneration 
   ?!@string ioLLVMcode
 {
-  let procName = llvmNameForProcedure (!lkey.string)
+  @string routineName
+  switch mKind
+  case procedure : routineName = llvmNameForProcedure (!lkey.string)
+  case section : routineName = llvmNameForSectionImplementation (!lkey.string)
+  case service : routineName = llvmNameForServiceImplementation (!lkey.string)
+  end
   #--- In LLVM, declare routine as extern
-  ioLLVMcode += llvmTitleComment (!"proc " + procName)
-  ioLLVMcode += "declare void @" + procName + " ("
+  ioLLVMcode += llvmTitleComment (!"proc " + routineName)
+  ioLLVMcode += "declare void @" + routineName + " ("
   for () in mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
@@ -337,21 +267,26 @@ method @procedureMapIR-element llvmPrototypeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureMapIR-element llvmCodeGeneration 
+method @routineMapIR-element llvmCodeGeneration 
   ?!@string ioLLVMcode
   ?!@string ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let procName = llvmNameForProcedure (!lkey.string)
+  @string routineName
+  switch mKind
+  case procedure : routineName = llvmNameForProcedure (!lkey.string)
+  case section : routineName = llvmNameForSectionImplementation (!lkey.string)
+  case service : routineName = llvmNameForServiceImplementation (!lkey.string)
+  end
   if [option plm_options.noPanicGeneration value] && mNullOnNoException then
   #--- Generate in assembly code routine pointer as NULL value
     ioAssemblerCode += asSeparatorLine ()
-    ioAssemblerCode += "  .global " + procName + "\n"
-    ioAssemblerCode += "  " + procName + " = 0\n\n"
+    ioAssemblerCode += "  .global " + routineName + "\n"
+    ioAssemblerCode += "  " + routineName + " = 0\n\n"
   #--- In LLVM, declare routine as extern
-    ioLLVMcode += llvmTitleComment (!"proc " + procName)
-    ioLLVMcode += "declare void @" + procName + " ("
+    ioLLVMcode += llvmTitleComment (!"proc " + routineName)
+    ioLLVMcode += "declare void @" + routineName + " ("
     for () in mFormalArgumentListForGeneration
     do
       switch mFormalArgumentKind
@@ -367,12 +302,12 @@ method @procedureMapIR-element llvmCodeGeneration
     end
     ioLLVMcode += ") nounwind ; NULL in assembly code\n\n"
   else
-    ioLLVMcode += llvmTitleComment (!"proc " + procName)
+    ioLLVMcode += llvmTitleComment (!"proc " + routineName)
     ioLLVMcode += "define"
     if not mGlobal then
       ioLLVMcode += " internal"
     end
-    ioLLVMcode += " void @" + procName + " ("
+    ioLLVMcode += " void @" + routineName + " ("
     for () in mFormalArgumentListForGeneration
     do
       switch mFormalArgumentKind
@@ -407,4 +342,3 @@ method @procedureMapIR-element llvmCodeGeneration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-

@@ -14,7 +14,7 @@
 
 //-----------------------------------------------------------------------------*
 
-proc configurePorts `init () {
+proc configurePorts `init @noWarningIfUnused () {
 //--- D4 (PTB0) is a GPIO (input by default)
   PORTB_PCR0 = (1 << 8) ;
   GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)

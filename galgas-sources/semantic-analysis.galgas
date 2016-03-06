@@ -95,6 +95,7 @@ proc semanticAnalysis
   end
   for procedure in inAST.mProcedureListAST do
     [procedure procedureSemanticAnalysis
+      !receiverType:.null
       !context:inSemanticContext
       !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct

@@ -101,23 +101,6 @@ proc checkMode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @initializerMap {
-#  @operandIRList mInitialValueList
-#  insert insertKey error message "the '%K' initializer is already declared in %L"
-#  search searchKey error message "there is no '%K' initializer"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @typeInitializerMap {
-#  @string mLLVMTypeName
-#  @initializerMap mInitializerMap
-#  insert insertKey error message "the '$%K' type is already declared in %L"
-#  search searchKey error message "there is no '$%K' type"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 sharedmap @unifiedTypeMap %selectors {
   @string llvmTypeName # For Example: i23, %$toto
   @typeKind kind
@@ -169,13 +152,6 @@ map @constructorMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @routineMap {
-  insert insertKey error message "a routine with the same name is already declared in %L"
-  remove removeKey error message "there is no '%K' section"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 struct @semanticContext {
   @uint mPointerSize # in bit count
   @unifiedTypeMap-proxy mBooleanType
@@ -184,7 +160,6 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
-#  @procedureMap mProcedureMap
   @stringset mProceduresThatShouldNotBeGenerated
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap

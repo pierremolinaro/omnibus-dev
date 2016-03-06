@@ -9165,9 +9165,9 @@ class GALGAS_procCallInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_procEffectiveParameterListAST getter_mEffectiveParameterList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mProcName (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -9326,12 +9326,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procEffectiveParame
 class cPtr_procCallInstructionAST : public cPtr_instructionAST {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mReceiverName ;
-  public : GALGAS_lstring mAttribute_mProcName ;
+  public : GALGAS_lstring mAttribute_mRoutineName ;
   public : GALGAS_procEffectiveParameterListAST mAttribute_mEffectiveParameterList ;
 
 //--- Constructor
   public : cPtr_procCallInstructionAST (const GALGAS_lstring & in_mReceiverName,
-                                        const GALGAS_lstring & in_mProcName,
+                                        const GALGAS_lstring & in_mRoutineName,
                                         const GALGAS_procEffectiveParameterListAST & in_mEffectiveParameterList
                                         COMMA_LOCATION_ARGS) ;
 
@@ -9340,7 +9340,7 @@ class cPtr_procCallInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mProcName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRoutineName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procEffectiveParameterListAST getter_mEffectiveParameterList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

@@ -67,6 +67,14 @@ method @sectionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrec
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @procedureSignature {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @string mSelector
+  @unifiedTypeMap-proxy mType
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @procedureDeclarationListAST enterInContext 
   ?receiverType:let @string inReceiverTypeName
   ?!context:@semanticContext ioContext
@@ -104,7 +112,7 @@ method @procedureDeclarationListAST enterInContext
           !procedureModeMap
           !signature
           !.procedure
-          !weakProcedure
+          !false # not weak
         ]
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
@@ -113,7 +121,7 @@ method @procedureDeclarationListAST enterInContext
           !procedureModeMap
           !signature
           !.procedure
-          !weakProcedure
+          !false # not weak
         ]
       end
     else

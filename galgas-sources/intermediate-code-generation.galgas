@@ -10,6 +10,7 @@ struct @intermediateCodeStruct {
   @controlRegisterMapIR mControlRegisterMap
   @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap
+  @routineMapIR mRoutineMapIR
   @procedureMapIR mProcedureMapIR
   @sectionMapIR mSectionMapIR
   @serviceMapIR mServiceMapIR
@@ -76,6 +77,23 @@ map @procedureMapIR {
   @bool mWeak
   @bool mNullOnNoException
   @bool mGlobal
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+  remove removeKey error message "** internal error **"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @routineMapIR {
+  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @instructionListIR mInstructionGenerationList
+  @bool mIsRequired
+  @bool mWarnIfUnused
+  @bool mWeak
+  @bool mNullOnNoException
+  @bool mGlobal
+  @routineKind mKind
+
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
