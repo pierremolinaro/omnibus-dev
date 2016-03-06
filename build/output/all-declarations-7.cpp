@@ -6610,80 +6610,71 @@ void categoryMethod_procedureSemanticAnalysis (const GALGAS_procedureDeclaration
     }
     enumerator_5988.gotoNextObject () ;
   }
-  const enumGalgasBool test_13 = var_weakProcedure.boolEnum () ;
-  if (kBoolTrue == test_13) {
-    const enumGalgasBool test_14 = var_warnIfUnused.boolEnum () ;
-    if (kBoolTrue == test_14) {
-      GALGAS_location location_15 (inObject.mAttribute_mProcedureName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticWarning (location_15, GALGAS_string ("@").add_operation (function_weakAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 208)).add_operation (GALGAS_string (" attribute: @"), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 208)).add_operation (function_noWarningIfUnusedAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 208)).add_operation (GALGAS_string (" attribute is ignored"), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 208))  COMMA_SOURCE_FILE ("declaration-proc.galgas", 208)) ;
-    }
-    var_warnIfUnused = GALGAS_bool (false) ;
-  }
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (function_procNameForInvocationGraph (constinArgument_inReceiverType, inObject.mAttribute_mProcedureName, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 214)).mAttribute_string, constinArgument_inContext, var_procedureModeSet.getter_hasKey (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 216)) COMMA_SOURCE_FILE ("declaration-proc.galgas", 216)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 213)) ;
-  GALGAS_procFormalArgumentListForGeneration var_formalArguments = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("declaration-proc.galgas", 220)) ;
+  GALGAS_variableMap var_variableMap = function_initialVariableMap (function_procNameForInvocationGraph (constinArgument_inReceiverType, inObject.mAttribute_mProcedureName, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 208)).mAttribute_string, constinArgument_inContext, var_procedureModeSet.getter_hasKey (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 210)) COMMA_SOURCE_FILE ("declaration-proc.galgas", 210)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 207)) ;
+  GALGAS_procFormalArgumentListForGeneration var_formalArguments = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("declaration-proc.galgas", 214)) ;
   {
-  routine_enterFormalArguments (constinArgument_inContext, inObject.mAttribute_mProcFormalArgumentList, var_variableMap, var_formalArguments, inCompiler  COMMA_SOURCE_FILE ("declaration-proc.galgas", 221)) ;
+  routine_enterFormalArguments (constinArgument_inContext, inObject.mAttribute_mProcFormalArgumentList, var_variableMap, var_formalArguments, inCompiler  COMMA_SOURCE_FILE ("declaration-proc.galgas", 215)) ;
   }
-  GALGAS_lstring var_procNameForInvocationGraph = function_procNameForInvocationGraph (constinArgument_inReceiverType, inObject.mAttribute_mProcedureName, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 228)) ;
-  const enumGalgasBool test_16 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_procNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 229)).operator_not (SOURCE_FILE ("declaration-proc.galgas", 229)).boolEnum () ;
-  if (kBoolTrue == test_16) {
+  GALGAS_lstring var_procNameForInvocationGraph = function_procNameForInvocationGraph (constinArgument_inReceiverType, inObject.mAttribute_mProcedureName, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 222)) ;
+  const enumGalgasBool test_13 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_procNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 223)).operator_not (SOURCE_FILE ("declaration-proc.galgas", 223)).boolEnum () ;
+  if (kBoolTrue == test_13) {
     {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_procNameForInvocationGraph, inObject.mAttribute_mProcedureName, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 230)) ;
+    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_procNameForInvocationGraph, inObject.mAttribute_mProcedureName, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 224)) ;
     }
   }
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-proc.galgas", 236)) ;
-  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mInstructionList, var_procNameForInvocationGraph, constinArgument_inContext, var_procedureModeSet, var_procedureModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 241)) COMMA_SOURCE_FILE ("declaration-proc.galgas", 241)).operator_not (SOURCE_FILE ("declaration-proc.galgas", 241)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 237)) ;
-  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfProcLocation, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 248)) ;
-  GALGAS_lstring var_procName = GALGAS_lstring::constructor_new (GALGAS_string (".").add_operation (inObject.mAttribute_mProcedureName.getter_string (SOURCE_FILE ("declaration-proc.galgas", 250)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 250)), inObject.mAttribute_mProcedureName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-proc.galgas", 250)) ;
-  const enumGalgasBool test_17 = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_hasKey (var_procName.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 251)).boolEnum () ;
-  if (kBoolTrue == test_17) {
-    GALGAS_bool var_weak = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_mWeakForKey (var_procName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 252)) ;
-    GALGAS_bool test_18 = var_weakProcedure ;
-    if (kBoolTrue == test_18.boolEnum ()) {
-      test_18 = var_weak.operator_not (SOURCE_FILE ("declaration-proc.galgas", 253)) ;
+  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-proc.galgas", 230)) ;
+  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mInstructionList, var_procNameForInvocationGraph, constinArgument_inContext, var_procedureModeSet, var_procedureModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 235)) COMMA_SOURCE_FILE ("declaration-proc.galgas", 235)).operator_not (SOURCE_FILE ("declaration-proc.galgas", 235)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 231)) ;
+  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfProcLocation, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 242)) ;
+  GALGAS_lstring var_procName = GALGAS_lstring::constructor_new (GALGAS_string (".").add_operation (inObject.mAttribute_mProcedureName.getter_string (SOURCE_FILE ("declaration-proc.galgas", 244)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 244)), inObject.mAttribute_mProcedureName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-proc.galgas", 244)) ;
+  const enumGalgasBool test_14 = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_hasKey (var_procName.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 245)).boolEnum () ;
+  if (kBoolTrue == test_14) {
+    GALGAS_bool var_weak = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_mWeakForKey (var_procName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 246)) ;
+    GALGAS_bool test_15 = var_weakProcedure ;
+    if (kBoolTrue == test_15.boolEnum ()) {
+      test_15 = var_weak.operator_not (SOURCE_FILE ("declaration-proc.galgas", 247)) ;
     }
-    const enumGalgasBool test_19 = test_18.boolEnum () ;
-    if (kBoolTrue == test_19) {
-    }else if (kBoolFalse == test_19) {
-      GALGAS_bool test_20 = var_weakProcedure ;
-      if (kBoolTrue == test_20.boolEnum ()) {
-        test_20 = var_weak ;
+    const enumGalgasBool test_16 = test_15.boolEnum () ;
+    if (kBoolTrue == test_16) {
+    }else if (kBoolFalse == test_16) {
+      GALGAS_bool test_17 = var_weakProcedure ;
+      if (kBoolTrue == test_17.boolEnum ()) {
+        test_17 = var_weak ;
       }
-      const enumGalgasBool test_21 = test_20.boolEnum () ;
-      if (kBoolTrue == test_21) {
-        GALGAS_location location_22 (var_procName.getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_22, GALGAS_string ("this weak procedure overrides a weak procedure")  COMMA_SOURCE_FILE ("declaration-proc.galgas", 256)) ;
-      }else if (kBoolFalse == test_21) {
-        GALGAS_bool test_23 = var_weakProcedure.operator_not (SOURCE_FILE ("declaration-proc.galgas", 257)) ;
-        if (kBoolTrue == test_23.boolEnum ()) {
-          test_23 = var_weak ;
+      const enumGalgasBool test_18 = test_17.boolEnum () ;
+      if (kBoolTrue == test_18) {
+        GALGAS_location location_19 (var_procName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_19, GALGAS_string ("this weak procedure overrides a weak procedure")  COMMA_SOURCE_FILE ("declaration-proc.galgas", 250)) ;
+      }else if (kBoolFalse == test_18) {
+        GALGAS_bool test_20 = var_weakProcedure.operator_not (SOURCE_FILE ("declaration-proc.galgas", 251)) ;
+        if (kBoolTrue == test_20.boolEnum ()) {
+          test_20 = var_weak ;
         }
-        const enumGalgasBool test_24 = test_23.boolEnum () ;
-        if (kBoolTrue == test_24) {
+        const enumGalgasBool test_21 = test_20.boolEnum () ;
+        if (kBoolTrue == test_21) {
           {
-          GALGAS_procFormalArgumentListForGeneration joker_9245_8 ; // Joker input parameter
-          GALGAS_instructionListIR joker_9245_7 ; // Joker input parameter
-          GALGAS_bool joker_9245_6 ; // Joker input parameter
-          GALGAS_bool joker_9245_5 ; // Joker input parameter
-          GALGAS_bool joker_9245_4 ; // Joker input parameter
-          GALGAS_bool joker_9245_3 ; // Joker input parameter
-          GALGAS_bool joker_9245_2 ; // Joker input parameter
-          GALGAS_routineKind joker_9245_1 ; // Joker input parameter
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_removeKey (var_procName, joker_9245_8, joker_9245_7, joker_9245_6, joker_9245_5, joker_9245_4, joker_9245_3, joker_9245_2, joker_9245_1, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 258)) ;
+          GALGAS_procFormalArgumentListForGeneration joker_9023_8 ; // Joker input parameter
+          GALGAS_instructionListIR joker_9023_7 ; // Joker input parameter
+          GALGAS_bool joker_9023_6 ; // Joker input parameter
+          GALGAS_bool joker_9023_5 ; // Joker input parameter
+          GALGAS_bool joker_9023_4 ; // Joker input parameter
+          GALGAS_bool joker_9023_3 ; // Joker input parameter
+          GALGAS_bool joker_9023_2 ; // Joker input parameter
+          GALGAS_routineKind joker_9023_1 ; // Joker input parameter
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_removeKey (var_procName, joker_9023_8, joker_9023_7, joker_9023_6, joker_9023_5, joker_9023_4, joker_9023_3, joker_9023_2, joker_9023_1, inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 252)) ;
           }
           {
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_procName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 263)), var_warnIfUnused, var_weakProcedure, var_nullOnNoException, var_globalProcedure, GALGAS_routineKind::constructor_procedure (SOURCE_FILE ("declaration-proc.galgas", 268)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 259)) ;
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_procName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 257)), var_warnIfUnused, var_weakProcedure, var_nullOnNoException, var_globalProcedure, GALGAS_routineKind::constructor_procedure (SOURCE_FILE ("declaration-proc.galgas", 262)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 253)) ;
           }
-        }else if (kBoolFalse == test_24) {
+        }else if (kBoolFalse == test_21) {
           {
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_procName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 275)), var_warnIfUnused, var_weakProcedure, var_nullOnNoException, var_globalProcedure, GALGAS_routineKind::constructor_procedure (SOURCE_FILE ("declaration-proc.galgas", 280)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 271)) ;
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_procName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 269)), var_warnIfUnused, var_weakProcedure, var_nullOnNoException, var_globalProcedure, GALGAS_routineKind::constructor_procedure (SOURCE_FILE ("declaration-proc.galgas", 274)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 265)) ;
           }
         }
       }
     }
-  }else if (kBoolFalse == test_17) {
+  }else if (kBoolFalse == test_14) {
     {
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_procName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 288)), var_warnIfUnused, var_weakProcedure, var_nullOnNoException, var_globalProcedure, GALGAS_routineKind::constructor_procedure (SOURCE_FILE ("declaration-proc.galgas", 293)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 284)) ;
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_procName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("declaration-proc.galgas", 282)), var_warnIfUnused, var_weakProcedure, var_nullOnNoException, var_globalProcedure, GALGAS_routineKind::constructor_procedure (SOURCE_FILE ("declaration-proc.galgas", 287)), inCompiler COMMA_SOURCE_FILE ("declaration-proc.galgas", 278)) ;
     }
   }
 }
@@ -11227,4 +11218,26 @@ static void defineCategoryMethod_varInExpressionAST_addDependenceEdgeForStaticEx
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_varInExpressionAST_addDependenceEdgeForStaticExpression (defineCategoryMethod_varInExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                Overriding category method '@varInExpressionAST noteExpressionTypesInPrecedenceGraph'                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_varInExpressionAST_noteExpressionTypesInPrecedenceGraph (const cPtr_expressionAST * /* inObject */,
+                                                                                    GALGAS_semanticTypePrecedenceGraph & /* ioArgument_ioGraph */,
+                                                                                    C_Compiler * /* inCompiler */
+                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_varInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
+  enterCategoryMethod_noteExpressionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_varInExpressionAST.mSlotID,
+                                                            categoryMethod_varInExpressionAST_noteExpressionTypesInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_varInExpressionAST_noteExpressionTypesInPrecedenceGraph (defineCategoryMethod_varInExpressionAST_noteExpressionTypesInPrecedenceGraph, NULL) ;
 

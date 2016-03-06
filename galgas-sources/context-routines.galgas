@@ -98,7 +98,7 @@ method @procedureDeclarationListAST enterInContext
     end
   #--- Enter in context
     let lkey = @lstring.new {!inReceiverTypeName + "." + procedure.mProcedureName !procedure.mProcedureName.location}
-    if [ioContext.mRoutineMapForContext hasKey !procedure.mProcedureName.string] then
+    if [ioContext.mRoutineMapForContext hasKey !lkey.string] then
       let weak = [ioContext.mRoutineMapForContext mWeakForKey !lkey.string]
       if weakProcedure && not weak then
         # redefined weak procedure is ignored
@@ -112,7 +112,7 @@ method @procedureDeclarationListAST enterInContext
           !procedureModeMap
           !signature
           !.procedure
-          !false # not weak
+          !weakProcedure
         ]
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
@@ -121,7 +121,7 @@ method @procedureDeclarationListAST enterInContext
           !procedureModeMap
           !signature
           !.procedure
-          !false # not weak
+          !weakProcedure
         ]
       end
     else
