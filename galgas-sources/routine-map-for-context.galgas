@@ -18,6 +18,7 @@ map @routineMapForContext {
   @modeMap mModeMap
   @procedureSignature mSignature
   @routineKind mRoutineKind
+  @bool mWeak
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"
@@ -26,6 +27,18 @@ map @routineMapForContext {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @procedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @serviceDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
@@ -42,11 +55,76 @@ method @serviceDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrec
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+method @procedureDeclarationListAST enterInContext 
+  ?receiverType:let @string inReceiverTypeName
+  ?!context:@semanticContext ioContext
+{
+  for procedure in self do
+  #--- Signature
+    @procedureSignature signature = {}
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      signature += !formalArgumentPassingMode !selector.string !typeProxy
+    end
+  #--- Mode map
+    @modeMap procedureModeMap = {}
+    for () in procedure.mProcedureModeList do
+      [!?procedureModeMap insertKey !mValue] ;
+    end
+  #--- Weak procedure ?
+    var weakProcedure = false
+    for (attribute) in procedure.mProcedureAttributeList while not weakProcedure do
+      weakProcedure = attribute.string == weakAttribute ()
+    end
+  #--- Enter in context
+    let lkey = @lstring.new {!inReceiverTypeName + "." + procedure.mProcedureName !procedure.mProcedureName.location}
+    if [ioContext.mProcedureMap hasKey !procedure.mProcedureName.string] then
+      let weak = [ioContext.mProcedureMap mWeakProcedureForKey !procedure.mProcedureName.string]
+      if weakProcedure && not weak then
+        # redefined weak procedure is ignored
+      elsif weakProcedure && weak then
+        error procedure.mProcedureName : "this weak procedure overrides a weak procedure"
+      elsif (not weakProcedure) && weak then
+        [!?ioContext.mRoutineMapForContext removeKey !lkey ?5*] # Remove weak routine
+        [!?ioContext.mRoutineMapForContext insertKey # Insert routine
+          !lkey
+          !false # not mutating
+          !procedureModeMap
+          !signature
+          !.procedure
+          !weakProcedure
+        ]
+      else # (not weakProcedure) && (not weak)
+        [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
+          !lkey
+          !false # not mutating
+          !procedureModeMap
+          !signature
+          !.procedure
+          !weakProcedure
+        ]
+        [!?ioContext.mSubProgramMap insertKey !procedure.mProcedureName]
+      end
+    else
+      [!?ioContext.mRoutineMapForContext insertKey
+        !lkey
+        !false # not mutating
+        !procedureModeMap
+        !signature
+        !.procedure
+        !weakProcedure
+      ]
+      [!?ioContext.mSubProgramMap insertKey !procedure.mProcedureName]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @serviceDeclarationListAST enterInContext
   ?receiverType:let @string inReceiverTypeName
   ?!context:@semanticContext ioContext
 {
-
   for service in self do
   #--- Signature
     @procedureSignature signature = {}
@@ -62,213 +140,9 @@ method @serviceDeclarationListAST enterInContext
       !@modeMap {![userModeName () nowhere]}
       !signature
       !.service
+      !false # Not weak
     ]
   end
 }
-
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#map @infixOperatorMap {
-#  @unifiedTypeMap-proxy mResultType
-#  @infixOperatorDescription mOperation
-#  insert insertKey error message "** internal error **"
-#  search searchKey error message "** internal error **"
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#map @prefixOperatorMap {
-#  insert insertKey error message "** internal error **"
-#  search searchKey error message "prefix operation is not defined for $%K type"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @staticStringMap
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @staticStringMap {
-#  @uint mIndex
-#  insert insertKey error message "-- internal error --"
-#  search searchKey error message "-- internal error --"
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#setter @staticStringMap findOrAddStaticString ?@string inString !@uint outIndex {
-#  if [self hasKey !inString]  then
-#    [self searchKey ![inString nowhere] ?outIndex]
-#  else
-#    outIndex = [self count]
-#    [!?self insertKey ![inString nowhere] !outIndex]
-#  end
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#map @globalConstantMap {
-#  @operandIR mValue
-#  insert insertKey error message "the '%K' constant is already declared in %L"
-#  search searchKey error message "there is no '%K' constant"
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#map @globalVariableMap {
-#  @unifiedTypeMap-proxy mVariableType
-#  @stringset mExecutionModeSet
-#  @allowedRoutineMap mAllowedRoutineMap
-#  @valueIR mInitialValue
-#  @bool mIsConstant
-#  insert insertKey error message "the '%K' global variable is already declared in %L"
-#  search searchKey error message "there is no '%K' global variable"
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#map @modeMap {
-#  insert insertKey error message "the '%%%K' mode is already declared"
-#  search searchKey error message "there is no '%%%K' mode"
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#proc checkMode
-#  ?requiredModes:let @stringset inRequiredModes
-#  ?possibleModes:let @stringset inPossibleModes
-#  ?error:let @location inErrorLocation
-#{
-#  if (inPossibleModes & inRequiredModes) != inRequiredModes  then
-#    let missingModes = inRequiredModes - inPossibleModes
-#    var s = "cannot be accessed in mode"
-#    s += if [missingModes count] > 1 then "s" else "" end
-#    s += ": "
-#    for (m) in missingModes
-#    do  s += "`" + m
-#    between s += ", "
-#    end
-#    error inErrorLocation : s
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#sharedmap @unifiedTypeMap %selectors {
-#  @string llvmTypeName # For Example: i23, %$toto
-#  @typeKind kind
-#  @typedConstantMap typedConstantMap
-#  @procedureMap procedureMap
-#  @functionMap functionMap
-#  @bool copiable
-#  @bool equatable
-#  @bool comparable
-#  @unifiedTypeMap-proxy enumerationType # .null if type is not enumerable
-#
-#  insert insertKey error message "the '%K' type is already declared in %L"
-#  search searchKey error message "there is no '%K' type"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @typedConstantMap {
-#  @valueIR mValue
-#  insert insertKey error message "the '%K' constructor is already declared in %L"
-#  search searchKey error message "there is no '%K' constructor"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#list @typeList {
-#  @unifiedTypeMap-proxy mActualType
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#list @operandIRList {
-#  @operandIR mOperand
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#enum @constructorValue {
-#  case simple (@bigint value)
-#  case structure (@operandIRList values)
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#map @constructorMap {
-#  @constructorValue mInitValue
-#  insert insertKey error message "-- internal error --"
-#  search searchKey error message "-- internal error --"
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#map @routineMap {
-#  insert insertKey error message "a routine with the same name is already declared in %L"
-#  remove removeKey error message "there is no '%K' section"
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#struct @semanticContext {
-#  @uint mPointerSize # in bit count
-#  @unifiedTypeMap-proxy mBooleanType
-#  @unifiedTypeMap-proxy mLiteralIntegerType
-#  @unifiedTypeMap-proxy mExceptionCodeType
-#  @unifiedTypeMap-proxy mExceptionLineType
-#  @unifiedTypeMap mTypeMap
-#  @procedureMap mProcedureMap
-#  @stringset mProceduresThatShouldNotBeGenerated
-#  @sectionMap mSectionMap
-#  @serviceMap mServiceMap
-#  @routineMap mSubProgramMap
-#  @functionMap mFunctionMap
-#  @initRoutineMap mInitRoutineMap
-#  @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
-#  @exceptionRoutinePriorityMap mExceptionLoopRoutinePriorityMap 
-#  @controlRegisterMap mControlRegisterMap
-#  @globalConstantMap mGlobalConstantMap
-#  @globalVariableMap mGlobalVariableMap
-#  @constructorMap mConstructorMap
-#  @modeMap mModeMap
-#  @infixOperatorMap mEqualOperatorMap           # ==
-#  @infixOperatorMap mNonEqualOperatorMap        # !=
-#  @infixOperatorMap mStrictInfOperatorMap       # <
-#  @infixOperatorMap mInfEqualOperatorMap        # <=
-#  @infixOperatorMap mStrictSupOperatorMap       # >
-#  @infixOperatorMap mSupEqualOperatorMap        # >=
-#  @infixOperatorMap mAndOperatorMap             # &
-#  @infixOperatorMap mOrOperatorMap              # |
-#  @infixOperatorMap mXorOperatorMap             # ^
-#  @infixOperatorMap mBooleanXorOperatorMap      # xor
-#  @infixOperatorMap mAddOperatorMap             # +
-#  @infixOperatorMap mAddNoOvfOperatorMap        # &+
-#  @infixOperatorMap mSubOperatorMap             # -
-#  @infixOperatorMap mSubNoOvfOperatorMap        # &-
-#  @infixOperatorMap mMulOperatorMap             # *
-#  @infixOperatorMap mMulNoOvfOperatorMap        # &*
-#  @infixOperatorMap mDivOperatorMap             # /
-#  @infixOperatorMap mDivNoOvfOperatorMap        # &/
-#  @infixOperatorMap mModOperatorMap             # %
-#  @infixOperatorMap mModNoOvfOperatorMap        # &%
-#  @infixOperatorMap mLeftShiftOperatorMap       # <<
-#  @infixOperatorMap mRightShiftOperatorMap      # >>
-#  @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
-#  @prefixOperatorMap mNotOperatorMap            # not
-#  @prefixOperatorMap mUnsignedComplementOperatorMap # ~
-##--- Tasks
-#  @taskMap mTaskMap
-#  @taskVariableMap mTaskVariableMap
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#abstract method @abstractDeclaration enterInContext
-#  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
-#  ?!context:@semanticContext ioContext
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

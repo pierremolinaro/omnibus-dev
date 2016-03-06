@@ -302,7 +302,7 @@ proc buildSemanticContext
     !sourceFile:inSourceFile
   )
 #--- Enter procedures, functions, sections, services in context
-  [inAST.mProcedureListAST enterInContext !?context: outSemanticContext]
+  [inAST.mProcedureListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !?context: outSemanticContext]
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]

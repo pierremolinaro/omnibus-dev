@@ -157,6 +157,7 @@ override method @procCallInstructionAST analyze
     ?let modeMap
     ?let signature
     ?let routineKind
+    ?*
   ]
 #--- Enter in invocation graph
   @lstring routineNameForInvocationGraph
