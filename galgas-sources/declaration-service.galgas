@@ -89,17 +89,20 @@ method @routineMapIR serviceCodeGeneration
   ?!@string ioAssemblerCode
 {
 #--- Generate service entries
-  for service in self do (idx)
+  var idx = 0
+  for service in self do
    if service.mKind == .service then
       let name = llvmNameForServiceCall (!service.lkey.string)
       var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-entry.s")
       s = [s stringByReplacingStringByString !"!ENTRY!" !name]
       s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
       ioAssemblerCode += s
+      idx += 1
     end
   end
   ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-header.s")
-  for service in self do (idx)
+  idx = 0
+  for service in self do
     if service.mKind == .service then
       let serviceImplementationName = llvmNameForServiceImplementation (!service.lkey.string)
       var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-entry.s")
@@ -125,6 +128,7 @@ method @routineMapIR serviceCodeGeneration
         end
       end
       ioLLVMcode += ") nounwind \n\n"
+      idx += 1
     end
   end
   ioAssemblerCode += "\n"

@@ -202,7 +202,6 @@ private proc generateLLVMfile
   for boot in inIntermediateCodeStruct.mBootList do
     [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
   end
-  llvmCode += ";---\n"
   llvmCode += "  ret void\n"
   llvmCode += "}\n\n"
 #----------------------------------------- Init
@@ -217,13 +216,11 @@ private proc generateLLVMfile
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
 #----------------------------------------- Sections
-  [inIntermediateCodeStruct.mSectionMapIR llvmCodeGeneration
+  [inIntermediateCodeStruct.mRoutineMapIR sectionCodeGeneration
     !inCurrentDirectory
     !inTargetName.string
     !?llvmCode
     !?asCode
-    !generationContext
-    !?generationAdds
   ]
 #----------------------------------------- Services
   [inIntermediateCodeStruct.mRoutineMapIR serviceCodeGeneration
