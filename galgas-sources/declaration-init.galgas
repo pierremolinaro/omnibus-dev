@@ -185,7 +185,6 @@ method @initListIR generateLLVMinitCode
       [init.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     end
   end
-  ioLLVMcode += ";---\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }

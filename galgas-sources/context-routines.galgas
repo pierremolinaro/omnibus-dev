@@ -153,7 +153,7 @@ method @serviceDeclarationListAST enterInContext
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
-      !service.mMutating
+      !true # service.mMutating
       !@modeMap {![userModeName () nowhere]}
       !signature
       !.service
@@ -178,7 +178,7 @@ method @sectionDeclarationListAST enterInContext
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
-      !section.mMutating
+      !true # section.mMutating
       !@modeMap {![userModeName () nowhere]}
       !signature
       !.section

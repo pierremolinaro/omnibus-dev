@@ -4,7 +4,6 @@
 
 list @sectionDeclarationListAST {
   @lstring mSectionName
-  @bool mMutating
   @lstringlist mSectionAttributeList
   @procFormalArgumentList mSectionFormalArgumentList
   @instructionListAST mSectionInstructionList
@@ -20,13 +19,6 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <section> ?!@sectionDeclarationListAST ioSectionListAST {
-    @bool mutating
-    select
-      mutating = false
-    or
-      $mutating$
-      mutating = true
-    end
     $section$
     $identifier$ ?let sectionName
     @lstringlist attributeList = {}
@@ -42,7 +34,6 @@ syntax extension common_syntax {
     $}$
     ioSectionListAST +=
       !sectionName
-      !mutating
       !attributeList
       !sectionFormalArgumentList
       !instructionList

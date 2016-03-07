@@ -69,7 +69,7 @@ proc semanticAnalysis
   outIntermediateCodeStruct.mTaskVariableMap = inSemanticContext.mTaskVariableMap
   outIntermediateCodeStruct.mStaticStringMap = inGlobalLiteralStringMap
   for requiredProc in inAST.mRequiredProcList do
-    outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProc.mRequiredProcedureName.string
+    outIntermediateCodeStruct.mRequiredProcedureSet += !"." + requiredProc.mRequiredProcedureName.string
   end 
 #--- Global variables
   for globalVar in inAST.mGlobalVarDeclarationList do
@@ -94,12 +94,19 @@ proc semanticAnalysis
      ]
   end
   for procedure in inAST.mProcedureListAST do
-    [procedure procedureSemanticAnalysis
+    routineSemanticAnalysis (
       !receiverType:.null
+      !.procedure
+      !procedure.mProcedureModeList
+      !procedure.mProcedureName
+      !procedure.mProcedureAttributeList
+      !procedure.mProcFormalArgumentList
+      !procedure.mInstructionList
+      !procedure.mEndOfProcLocation
       !context:inSemanticContext
       !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
-    ]
+    )
   end
   [inAST.mTaskList semanticAnalysis
     !context:inSemanticContext

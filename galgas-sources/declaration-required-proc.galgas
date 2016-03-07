@@ -3,7 +3,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @requiredProcedureDeclarationListAST {
-  @bool mMutating
   @lstring mRequiredProcedureName
   @lstringlist mProcedureModeList
   @procFormalArgumentList mProcFormalArgumentList
@@ -25,8 +24,7 @@ syntax extension common_syntax {
       ?name:let procName
       ?attributes:let unused attributeList
       ?formalArguments:let procFormalArgumentList
-      ?mutating:let mutating
-    ioAST.mRequiredProcList += !mutating !procName !requiredModeList !procFormalArgumentList !.here
+    ioAST.mRequiredProcList += !procName !requiredModeList !procFormalArgumentList !.here
   }
 
   #·····················································································································

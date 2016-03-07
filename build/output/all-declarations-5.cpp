@@ -1184,7 +1184,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-tp
   "    gVar = outX\n"
   "    self.setX (!123)\n"
   "  }\n"
-  "  mutating proc setX `user (\?inX $int32) {\n"
+  "  proc setX `user (\?inX $int32) {\n"
   "    self.x = inX + 8\n"
   "  }\n"
   "  \n"
@@ -1198,7 +1198,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-tp
   "}\n"
   "\n"
   "extension $MyStruct {\n"
-  "  mutating proc reset `user () {\n"
+  "  proc reset `user () {\n"
   "    azert (\?self)\n"
   "  }\n"
   "}\n"
@@ -1237,7 +1237,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "11-structure-procs.plm",
   "plm",
   true, // Text file
-  1185, // Text length
+  1167, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 

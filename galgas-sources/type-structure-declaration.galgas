@@ -480,7 +480,7 @@ method @structureDeclaration procedureSemanticAnalysis
       !globalsAreConstant:false
     )
   #--- Add "self" to variable map
-    if procedure.mMutating then
+#    if procedure.mMutating then
       [!?variableMap insertDefinedLocalVariable
         !.new {!"self" !.here}
         !inStructureType
@@ -491,18 +491,18 @@ method @structureDeclaration procedureSemanticAnalysis
         !true # mCanBeUsedAsInputParameter
         !false # mIsConstant
       ]
-    else
-      [!?variableMap insertUsedLocalConstant
-        !.new {!"self" !.here}
-        !inStructureType
-        !true # mReadAccessAllowed
-        !.localValue {!type:inStructureType !name:"self"}
-        !true # copiable
-        !{} # fieldMap
-        !false # mCanBeUsedAsInputParameter
-        !true # mIsConstant
-      ]
-    end
+#    else
+#      [!?variableMap insertUsedLocalConstant
+#        !.new {!"self" !.here}
+#        !inStructureType
+#        !true # mReadAccessAllowed
+#        !.localValue {!type:inStructureType !name:"self"}
+#        !true # copiable
+#        !{} # fieldMap
+#        !false # mCanBeUsedAsInputParameter
+#        !true # mIsConstant
+#      ]
+#    end
   #--- Analyse formal arguments
     @procFormalArgumentListForGeneration formalArguments = {}
     formalArguments += !.inputOutput !inStructureType !llvmNameForLocalVariable (!"self")
