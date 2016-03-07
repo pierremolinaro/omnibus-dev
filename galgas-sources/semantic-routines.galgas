@@ -205,42 +205,8 @@ method @routineMapIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   for procedure in self do
-    if [inGenerationContext.mProceduresThatShouldNotBeGenerated hasKey !procedure.lkey.string] then
-      [procedure llvmPrototypeGeneration !?ioLLVMcode]
-    else
-      [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
-    end
+    [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @routineMapIR-element llvmPrototypeGeneration 
-  ?!@string ioLLVMcode
-{
-  @string routineName
-  switch mKind
-  case procedure : routineName = llvmNameForProcedure (!lkey.string)
-  case section : routineName = llvmNameForSectionImplementation (!lkey.string)
-  case service : routineName = llvmNameForServiceImplementation (!lkey.string)
-  end
-  #--- In LLVM, declare routine as extern
-  ioLLVMcode += llvmTitleComment (!routineName)
-  ioLLVMcode += "declare void @" + routineName + " ("
-  for () in mFormalArgumentListForGeneration
-  do
-    switch mFormalArgumentKind
-    case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-    case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-   case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-    end
-  between
-    ioLLVMcode += ", "
-  end
-  ioLLVMcode += ") nounwind ; defined in assembly code\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

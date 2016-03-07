@@ -26,10 +26,10 @@
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global !PROC!HardFaultHandler
-  .type !PROC!HardFaultHandler, %function
+  .global as_sectionHandler
+  .type as_sectionHandler, %function
 
-!PROC!HardFaultHandler:
+as_sectionHandler:
 @----------------------------------------- Save preserved registers
   push  {r5, lr}
 @----------------------------------------- R5 <- thread SP

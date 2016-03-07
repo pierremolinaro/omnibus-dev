@@ -21,6 +21,7 @@ target triple = "thumbv7em-none--eabi"
 declare void @as_resetHandler () nounwind
 declare void @as_svcHandler () nounwind
 declare void @as_systickHandler () nounwind
+declare void @as_sectionHandler () nounwind
 
 @startup = constant %vectorStructSeq {
   i32* @__system_stack_end,
@@ -28,7 +29,7 @@ declare void @as_systickHandler () nounwind
   [15  x void()*] [
     void()* @as_resetHandler, ; 1
     void()* @!PROC!NMIHandler, ; 2
-    void()* @!PROC!HardFaultHandler, ; 3
+    void()* @as_sectionHandler, ; 3
     void()* @!PROC!MemManageHandler, ; 4
     void()* @!PROC!BusFaultHandler, ; 5
     void()* @!PROC!UsageFaultHandler, ; 6

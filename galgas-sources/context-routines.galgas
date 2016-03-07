@@ -185,9 +185,6 @@ method @sectionDeclarationListAST enterInContext
       !false # Not weak
     ]
   end
-  if [self length] > 0 then
-    ioContext.mProceduresThatShouldNotBeGenerated += !"HardFaultHandler"
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
