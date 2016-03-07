@@ -635,7 +635,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "task T1 priority 12 stackSize 512 {\n"
+  "task T1 priority 1 stackSize 512 {\n"
   "  var gCompteur $uint32 = 0\n"
   "  proc setup {\n"
   "  }\n"
@@ -653,7 +653,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "task T2 priority 10 stackSize 512 {\n"
+  "task T2 priority 2 stackSize 512 {\n"
   "  var gCompteur $uint32 = 0\n"
   "  proc setup {\n"
   "  }\n"
@@ -669,7 +669,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "task T3 priority 7 stackSize 512 {\n"
+  "task T3 priority 3 stackSize 512 {\n"
   "  var gCompteur $uint32 = 0\n"
   "  proc setup {\n"
   "  }\n"
@@ -685,7 +685,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "task T4 priority 1 stackSize 512 {\n"
+  "task T4 priority 4 stackSize 512 {\n"
   "  var gCompteur $uint32 = 0\n"
   "  proc setup {\n"
   "  }\n"
@@ -701,7 +701,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "task T5 priority 3 stackSize 512 {\n"
+  "task T5 priority 5 stackSize 512 {\n"
   "  var gCompteur $uint32 = 0\n"
   "  proc setup {\n"
   "  }\n"
@@ -715,14 +715,13 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "\n"
   "//------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  1724, // Text length
+  1721, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 

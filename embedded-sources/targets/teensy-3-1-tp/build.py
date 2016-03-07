@@ -47,7 +47,8 @@ def llvmOptimizerCompiler ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def LLCcompiler ():
-  return [toolDir () + "/bin/llc", "-<<LLC_OPTIMIZATION_OPTION>>"]
+  return [toolDir () + "/bin/llc", "-function-sections", "-data-sections", "-<<LLC_OPTIMIZATION_OPTION>>"]
+#  return [toolDir () + "/bin/llc", "-<<LLC_OPTIMIZATION_OPTION>>"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *

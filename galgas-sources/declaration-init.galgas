@@ -178,7 +178,7 @@ method @initListIR generateLLVMinitCode
     else
       generate = false
       for (procName *) in init.mInitRequiredByProcList while not generate do
-        generate = [inProcedureMapIR hasKey !procName.string]
+        generate = [inProcedureMapIR hasKey !"." + procName.string]
       end
     end
     if generate then

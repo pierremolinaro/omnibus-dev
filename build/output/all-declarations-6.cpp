@@ -709,7 +709,7 @@ void categoryMethod_generateLLVMinitCode (const GALGAS_initListIR inObject,
       bool bool_2 = var_generate.operator_not (SOURCE_FILE ("declaration-init.galgas", 180)).isValidAndTrue () ;
       if (enumerator_7297.hasCurrentObject () && bool_2) {
         while (enumerator_7297.hasCurrentObject () && bool_2) {
-          var_generate = constinArgument_inProcedureMapIR.getter_hasKey (enumerator_7297.current_mProcName (HERE).mAttribute_string COMMA_SOURCE_FILE ("declaration-init.galgas", 181)) ;
+          var_generate = constinArgument_inProcedureMapIR.getter_hasKey (GALGAS_string (".").add_operation (enumerator_7297.current_mProcName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 181)) COMMA_SOURCE_FILE ("declaration-init.galgas", 181)) ;
           enumerator_7297.gotoNextObject () ;
           if (enumerator_7297.hasCurrentObject ()) {
             bool_2 = var_generate.operator_not (SOURCE_FILE ("declaration-init.galgas", 180)).isValidAndTrue () ;
@@ -1069,6 +1069,7 @@ void categoryMethod_llvmCodeGeneration (const GALGAS_serviceMapIR inObject,
     enumerator_7141.gotoNextObject () ;
     index_7125.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 185)) ;
   }
+  ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 192)) ;
 }
 
 
