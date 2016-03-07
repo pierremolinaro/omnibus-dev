@@ -5,7 +5,6 @@
 list @serviceDeclarationListAST {
   @lstring mServiceName
   @lstring mServiceMode
-  @bool mMutating
   @lstringlist mServiceAttributeList
   @procFormalArgumentList mServiceFormalArgumentList
   @instructionListAST mServiceInstructionList
@@ -21,13 +20,6 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <service> ?!@serviceDeclarationListAST ioServiceListAST {
-    @bool mutating
-    select
-      mutating = false
-    or
-      $mutating$
-      mutating = true
-    end
     $service$
     $identifier$ ?let serviceName
     $modeName$ ?let modeName
@@ -45,7 +37,6 @@ syntax extension common_syntax {
     ioServiceListAST +=
       !serviceName
       !modeName
-      !mutating
       !attributeList
       !serviceFormalArgumentList
       !instructionList
@@ -141,6 +132,17 @@ method @serviceDeclarationListAST-element serviceSemanticAnalysis
   else
     @lstring.new {!"$" + [inReceiverType key] + "." + mServiceName !mServiceName.location}
   end
+  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+    !serviceMangledName
+    !formalArguments
+    !instructionGenerationList
+    !false # not required
+    !warnIfUnused
+    !false # not weak
+    !false # not nullOnNoException
+    !false # not globalProcedure
+    !.section
+  ]  
   [!?ioIntermediateCodeStruct.mServiceMapIR insertKey
     !serviceMangledName
     !formalArguments

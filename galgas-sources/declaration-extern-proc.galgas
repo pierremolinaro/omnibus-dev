@@ -3,7 +3,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @externProcedureDeclarationListAST {
-  @bool mMutating
   @lstring mExternProcedureName
   @lstringlist mProcedureModeList
   @procFormalArgumentList mProcFormalArgumentList
@@ -25,8 +24,7 @@ syntax extension common_syntax {
       ?name:let procName
       ?attributes:let unused attributeList
       ?formalArguments:let procFormalArgumentList
-      ?mutating:let mutating
-    ioAST.mExternProcList += !mutating !procName !requiredModeList !procFormalArgumentList !.here
+    ioAST.mExternProcList += !procName !requiredModeList !procFormalArgumentList !.here
   }
 
   #·····················································································································

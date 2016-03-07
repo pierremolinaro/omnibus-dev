@@ -20,7 +20,7 @@ struct $MyStruct {
     gVar = outX
     self.setX (!123)
   }
-  mutating proc setX `user (?inX $int32) {
+  proc setX `user (?inX $int32) {
     self.x = inX + 8
   }
   
@@ -34,7 +34,7 @@ extension $MyStruct {
 }
 
 extension $MyStruct {
-  mutating proc reset `user () {
+  proc reset `user () {
     azert (?self)
   }
 }

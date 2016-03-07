@@ -11,26 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'enterControlRegistersInContext'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterControlRegistersInContext (const class GALGAS_controlRegisterDeclarationListAST constinArgument0,
-                                             class GALGAS_semanticContext & ioArgument1,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               Function 'userModeName'                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_userModeName (class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                     Routine 'controlRegistersSemanticAnalysis'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1068,20 +1048,6 @@ void categoryMethod_initSemanticAnalysis (const class GALGAS_initList_2D_element
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Category method '@procedureDeclarationListAST-element procedureSemanticAnalysis'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_procedureSemanticAnalysis (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
-                                               const class GALGAS_unifiedTypeMap_2D_proxy constin_inReceiverType,
-                                               const class GALGAS_semanticContext constin_inContext,
-                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                        Category method '@sectionDeclarationListAST sectionSemanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1122,6 +1088,26 @@ void categoryMethod_semanticAnalysis (const class GALGAS_taskList inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          Routine 'routineSemanticAnalysis'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_routineSemanticAnalysis (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                      const class GALGAS_routineKind constinArgument1,
+                                      const class GALGAS_lstringlist constinArgument2,
+                                      const class GALGAS_lstring constinArgument3,
+                                      const class GALGAS_lstringlist constinArgument4,
+                                      const class GALGAS_procFormalArgumentList constinArgument5,
+                                      const class GALGAS_instructionListAST constinArgument6,
+                                      const class GALGAS_location constinArgument7,
+                                      const class GALGAS_semanticContext constinArgument8,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument9,
+                                      class GALGAS_intermediateCodeStruct & ioArgument10,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Routine 'enterFormalArguments'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1142,27 +1128,6 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
 class GALGAS_string function_llvmNameForLocalVariable (class GALGAS_string inArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Routine 'routineSemanticAnalysis'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_routineSemanticAnalysis (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                      const class GALGAS_bool constinArgument1,
-                                      const class GALGAS_routineKind constinArgument2,
-                                      const class GALGAS_lstringlist constinArgument3,
-                                      const class GALGAS_lstring constinArgument4,
-                                      const class GALGAS_lstringlist constinArgument5,
-                                      const class GALGAS_procFormalArgumentList constinArgument6,
-                                      const class GALGAS_instructionListAST constinArgument7,
-                                      const class GALGAS_location constinArgument8,
-                                      const class GALGAS_semanticContext constinArgument9,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument10,
-                                      class GALGAS_intermediateCodeStruct & ioArgument11,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

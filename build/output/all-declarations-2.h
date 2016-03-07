@@ -7000,7 +7000,6 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
                                                  GALGAS_lstring & outArgument1,
                                                  GALGAS_lstringlist & outArgument2,
                                                  GALGAS_procFormalArgumentList & outArgument3,
-                                                 GALGAS_bool & outArgument4,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'section' non terminal
@@ -7186,12 +7185,6 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_63 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_64 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_65 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_66 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_67 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
