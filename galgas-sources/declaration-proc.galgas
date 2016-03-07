@@ -155,7 +155,6 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for procedure in self do
-  #--- Attributes
     var warnIfUnused = true
     var globalProcedure = false
     var weakProcedure = false
@@ -183,9 +182,7 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
         nullOnNoException = true    
       else
         error attribute : "unknown attribute; available attributes are @"
-          + noWarningIfUnusedAttribute ()
-          + ", @" + weakAttribute ()
-          + ", @" + globalAttribute ()
+          + noWarningIfUnusedAttribute () + ", @" + weakAttribute () + ", @" + globalAttribute ()
       end
     end
     routineSemanticAnalysis (
@@ -200,6 +197,7 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
       !globalProcedure:globalProcedure
       !weakProcedure:weakProcedure
       !nullOnNoException:nullOnNoException
+      !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct

@@ -67,6 +67,14 @@ proc enterFormalArguments
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @accessKind {
+  case noAccess
+  case readAccess # privilegedModeAccess
+  case readWriteAccess # userModeAccess
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 proc routineSemanticAnalysis
   ?receiverType:let @unifiedTypeMap-proxy inReceiverType
   ?let @routineKind inRoutineKind
@@ -79,6 +87,7 @@ proc routineSemanticAnalysis
   ?globalProcedure:let @bool inGlobalProcedure
   ?weakProcedure:let @bool inWeakProcedure
   ?nullOnNoException:let @bool inNullOnNoException
+  ?registerAccess:let @accessKind inRegisterAccessKind
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -90,10 +99,17 @@ proc routineSemanticAnalysis
     procedureModeSet += !mode.mValue.string
   end
 #--- Variable map
+  @lstring routineNameForInvocationGraph
+  switch inRoutineKind
+  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!inReceiverType !inRoutineName)
+  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inReceiverType !inRoutineName)
+  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inReceiverType !inRoutineName)
+  end
   @variableMap variableMap = initialVariableMap (
-    !routineNameForInvocation:procNameForInvocationGraph (!inReceiverType !inRoutineName).string
+    !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
+    !registerAccess:inRegisterAccessKind
     !globalsAreConstant:false
   )
 #--- Analyse formal arguments
@@ -105,12 +121,6 @@ proc routineSemanticAnalysis
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  @lstring routineNameForInvocationGraph
-  switch inRoutineKind
-  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!inReceiverType !inRoutineName)
-  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inReceiverType !inRoutineName)
-  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inReceiverType !inRoutineName)
-  end
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph

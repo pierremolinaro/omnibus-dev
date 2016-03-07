@@ -58,19 +58,30 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for service in self do
+    var warnIfUnused = true
+    for (attribute) in service.mServiceAttributeList do
+      if attribute.string == noWarningIfUnusedAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+        end
+        warnIfUnused = false    
+      else
+        error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
+      end
+    end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.service
       !{!service.mServiceMode}
       !service.mServiceName
- #     !service.mServiceAttributeList + @lstringlist {![globalAttribute () nowhere]}
       !service.mServiceFormalArgumentList
       !service.mServiceInstructionList
       !service.mEndOfServiceLocation
-      !warnIfUnused:true
+      !warnIfUnused:warnIfUnused
       !globalProcedure:true
       !weakProcedure:false
       !nullOnNoException:false
+      !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct

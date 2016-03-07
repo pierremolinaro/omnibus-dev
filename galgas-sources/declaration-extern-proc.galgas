@@ -118,6 +118,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !routineNameForInvocation:procNameForInvocationGraph (!.null !mExternProcedureName).string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
+    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
   )
 #--- Analyse formal arguments

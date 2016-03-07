@@ -949,7 +949,7 @@ class GALGAS_allowedRoutineList_2D_element : public AC_GALGAS_root {
   public : GALGAS_bool mAttribute_mHasWriteAccess ;
   public : GALGAS_lstring mAttribute_mReceiverTypeName ;
   public : GALGAS_lstring mAttribute_mRoutineName ;
-  public : GALGAS_routineKind mAttribute_mKind ;
+  public : GALGAS_routineKind mAttribute_mRoutineKind ;
 
 
 //--------------------------------- Accessors
@@ -966,7 +966,7 @@ class GALGAS_allowedRoutineList_2D_element : public AC_GALGAS_root {
   public : GALGAS_allowedRoutineList_2D_element (const GALGAS_bool & in_mHasWriteAccess,
                                                  const GALGAS_lstring & in_mReceiverTypeName,
                                                  const GALGAS_lstring & in_mRoutineName,
-                                                 const GALGAS_routineKind & in_mKind) ;
+                                                 const GALGAS_routineKind & in_mRoutineKind) ;
 
 //-- Start of generic part --*
 
@@ -999,9 +999,9 @@ class GALGAS_allowedRoutineList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHasWriteAccess (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mKind (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mRoutineKind (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineName (LOCATION_ARGS) const ;
 

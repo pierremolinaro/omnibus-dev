@@ -10853,6 +10853,130 @@ GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::extractObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_accessKind::GALGAS_accessKind (void) :
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessKind GALGAS_accessKind::constructor_noAccess (UNUSED_LOCATION_ARGS) {
+  GALGAS_accessKind result ;
+  result.mEnum = kEnum_noAccess ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessKind GALGAS_accessKind::constructor_readAccess (UNUSED_LOCATION_ARGS) {
+  GALGAS_accessKind result ;
+  result.mEnum = kEnum_readAccess ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessKind GALGAS_accessKind::constructor_readWriteAccess (UNUSED_LOCATION_ARGS) {
+  GALGAS_accessKind result ;
+  result.mEnum = kEnum_readWriteAccess ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_accessKind [4] = {
+  "(not built)",
+  "noAccess",
+  "readAccess",
+  "readWriteAccess"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_accessKind::getter_isNoAccess (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_noAccess == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_accessKind::getter_isReadAccess (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_readAccess == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_accessKind::getter_isReadWriteAccess (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_readWriteAccess == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_accessKind::description (C_String & ioString,
+                                     const int32_t /* inIndentation */) const {
+  ioString << "<enum @accessKind: " << gEnumNameArrayFor_accessKind [mEnum] ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_accessKind::objectCompare (const GALGAS_accessKind & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                  @accessKind type                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_accessKind ("accessKind",
+                                   NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_accessKind::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_accessKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_accessKind::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_accessKind (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessKind GALGAS_accessKind::extractObject (const GALGAS_object & inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_accessKind result ;
+  const GALGAS_accessKind * p = (const GALGAS_accessKind *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_accessKind *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("accessKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_controlRegisterMapIR::cMapElement_controlRegisterMapIR (const GALGAS_lstring & inKey,
                                                                     const GALGAS_string & in_mRegisterTypeName,
                                                                     const GALGAS_bigint & in_mRegisterAddress

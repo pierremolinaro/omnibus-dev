@@ -1505,7 +1505,7 @@ class cCollectionElement_allowedRoutineList : public cCollectionElement {
   public : cCollectionElement_allowedRoutineList (const GALGAS_bool & in_mHasWriteAccess,
                                                   const GALGAS_lstring & in_mReceiverTypeName,
                                                   const GALGAS_lstring & in_mRoutineName,
-                                                  const GALGAS_routineKind & in_mKind
+                                                  const GALGAS_routineKind & in_mRoutineKind
                                                   COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -1526,10 +1526,10 @@ class cCollectionElement_allowedRoutineList : public cCollectionElement {
 cCollectionElement_allowedRoutineList::cCollectionElement_allowedRoutineList (const GALGAS_bool & in_mHasWriteAccess,
                                                                               const GALGAS_lstring & in_mReceiverTypeName,
                                                                               const GALGAS_lstring & in_mRoutineName,
-                                                                              const GALGAS_routineKind & in_mKind
+                                                                              const GALGAS_routineKind & in_mRoutineKind
                                                                               COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mHasWriteAccess, in_mReceiverTypeName, in_mRoutineName, in_mKind) {
+mObject (in_mHasWriteAccess, in_mReceiverTypeName, in_mRoutineName, in_mRoutineKind) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1542,7 +1542,7 @@ bool cCollectionElement_allowedRoutineList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_allowedRoutineList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_allowedRoutineList (mObject.mAttribute_mHasWriteAccess, mObject.mAttribute_mReceiverTypeName, mObject.mAttribute_mRoutineName, mObject.mAttribute_mKind COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_allowedRoutineList (mObject.mAttribute_mHasWriteAccess, mObject.mAttribute_mReceiverTypeName, mObject.mAttribute_mRoutineName, mObject.mAttribute_mRoutineKind COMMA_HERE)) ;
   return result ;
 }
 
@@ -1563,8 +1563,8 @@ void cCollectionElement_allowedRoutineList::description (C_String & ioString, co
   mObject.mAttribute_mRoutineName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mKind" ":" ;
-  mObject.mAttribute_mKind.description (ioString, inIndentation) ;
+  ioString << "mRoutineKind" ":" ;
+  mObject.mAttribute_mRoutineKind.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1621,13 +1621,13 @@ void GALGAS_allowedRoutineList::makeAttributesFromObjects (capCollectionElement 
                                                            const GALGAS_bool & in_mHasWriteAccess,
                                                            const GALGAS_lstring & in_mReceiverTypeName,
                                                            const GALGAS_lstring & in_mRoutineName,
-                                                           const GALGAS_routineKind & in_mKind
+                                                           const GALGAS_routineKind & in_mRoutineKind
                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement_allowedRoutineList * p = NULL ;
   macroMyNew (p, cCollectionElement_allowedRoutineList (in_mHasWriteAccess,
                                                         in_mReceiverTypeName,
                                                         in_mRoutineName,
-                                                        in_mKind COMMA_THERE)) ;
+                                                        in_mRoutineKind COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -1691,7 +1691,7 @@ void GALGAS_allowedRoutineList::setter_removeAtIndex (GALGAS_bool & outOperand0,
       outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
       outOperand1 = p->mObject.mAttribute_mReceiverTypeName ;
       outOperand2 = p->mObject.mAttribute_mRoutineName ;
-      outOperand3 = p->mObject.mAttribute_mKind ;
+      outOperand3 = p->mObject.mAttribute_mRoutineKind ;
     }
   }
 }
@@ -1717,7 +1717,7 @@ void GALGAS_allowedRoutineList::setter_popFirst (GALGAS_bool & outOperand0,
     outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
     outOperand1 = p->mObject.mAttribute_mReceiverTypeName ;
     outOperand2 = p->mObject.mAttribute_mRoutineName ;
-    outOperand3 = p->mObject.mAttribute_mKind ;
+    outOperand3 = p->mObject.mAttribute_mRoutineKind ;
   }
 }
 
@@ -1742,7 +1742,7 @@ void GALGAS_allowedRoutineList::setter_popLast (GALGAS_bool & outOperand0,
     outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
     outOperand1 = p->mObject.mAttribute_mReceiverTypeName ;
     outOperand2 = p->mObject.mAttribute_mRoutineName ;
-    outOperand3 = p->mObject.mAttribute_mKind ;
+    outOperand3 = p->mObject.mAttribute_mRoutineKind ;
   }
 }
 
@@ -1767,7 +1767,7 @@ void GALGAS_allowedRoutineList::method_first (GALGAS_bool & outOperand0,
     outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
     outOperand1 = p->mObject.mAttribute_mReceiverTypeName ;
     outOperand2 = p->mObject.mAttribute_mRoutineName ;
-    outOperand3 = p->mObject.mAttribute_mKind ;
+    outOperand3 = p->mObject.mAttribute_mRoutineKind ;
   }
 }
 
@@ -1792,7 +1792,7 @@ void GALGAS_allowedRoutineList::method_last (GALGAS_bool & outOperand0,
     outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
     outOperand1 = p->mObject.mAttribute_mReceiverTypeName ;
     outOperand2 = p->mObject.mAttribute_mRoutineName ;
-    outOperand3 = p->mObject.mAttribute_mKind ;
+    outOperand3 = p->mObject.mAttribute_mRoutineKind ;
   }
 }
 
@@ -1894,15 +1894,15 @@ GALGAS_lstring GALGAS_allowedRoutineList::getter_mRoutineNameAtIndex (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKind GALGAS_allowedRoutineList::getter_mKindAtIndex (const GALGAS_uint & inIndex,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) const {
+GALGAS_routineKind GALGAS_allowedRoutineList::getter_mRoutineKindAtIndex (const GALGAS_uint & inIndex,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedRoutineList * p = (cCollectionElement_allowedRoutineList *) attributes.ptr () ;
   GALGAS_routineKind result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_allowedRoutineList) ;
-    result = p->mObject.mAttribute_mKind ;
+    result = p->mObject.mAttribute_mRoutineKind ;
   }
   return result ;
 }
@@ -1952,10 +1952,10 @@ GALGAS_lstring cEnumerator_allowedRoutineList::current_mRoutineName (LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKind cEnumerator_allowedRoutineList::current_mKind (LOCATION_ARGS) const {
+GALGAS_routineKind cEnumerator_allowedRoutineList::current_mRoutineKind (LOCATION_ARGS) const {
   const cCollectionElement_allowedRoutineList * p = (const cCollectionElement_allowedRoutineList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_allowedRoutineList) ;
-  return p->mObject.mAttribute_mKind ;
+  return p->mObject.mAttribute_mRoutineKind ;
 }
 
 
@@ -3534,14 +3534,14 @@ void GALGAS_allowedRoutineMap::setter_insertKey (GALGAS_lstring inKey,
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' procedure is already declared in %L" ;
+  const char * kInsertErrorMessage = "the '%K' routine is already declared in %L" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_allowedRoutineMap_searchKey = "there is no '%K'" ;
+const char * kSearchErrorMessage_allowedRoutineMap_searchKey = "there is no '%K' routine" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

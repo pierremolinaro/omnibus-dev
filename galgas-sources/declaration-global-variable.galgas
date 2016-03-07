@@ -6,7 +6,7 @@ list @allowedRoutineList {
   @bool mHasWriteAccess
   @lstring mReceiverTypeName
   @lstring mRoutineName
-  @routineKind mKind
+  @routineKind mRoutineKind
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -158,8 +158,8 @@ method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrece
 
 map @allowedRoutineMap {
   @bool mHasWriteAccess
-  insert insertKey error message "the '%K' procedure is already declared in %L"
-  search searchKey error message "there is no '%K'"
+  insert insertKey error message "the '%K' routine is already declared in %L"
+  search searchKey error message "there is no '%K' routine"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -243,7 +243,7 @@ method @globalVarDeclarationList-element enterInContext
       !mHasWriteAccess
     ]
   end
-#--- Check allowed procedures are defined
+#--- Check allowed routines (procedures, sections, services) are defined
   for procedure in mAllowedProcList do
     @lstring routineMangledName
     @unifiedTypeMap-proxy receiverType
@@ -259,22 +259,19 @@ method @globalVarDeclarationList-element enterInContext
       ?*
       ?let procedureModeMap
       ?*
-      ?let routineKind
+      ?*
       ?*
     ]
     for () in procedureModeMap do
       executionModes += !lkey.string
     end
     @lstring routineNameForInvocationGraph
-    switch routineKind
+    switch procedure.mRoutineKind
     case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     end
-    [!?allowedRoutineMap insertKey
-       !routineNameForInvocationGraph
-       !procedure.mHasWriteAccess
-    ]
+    [!?allowedRoutineMap insertKey !routineNameForInvocationGraph !procedure.mHasWriteAccess]
   end
 #--- Enter variable in globale variable map
   [!?ioContext.mGlobalVariableMap insertKey

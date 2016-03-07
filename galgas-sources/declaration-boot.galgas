@@ -82,6 +82,7 @@ method @bootList-element bootSemanticAnalysis
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !userMode:false
+    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
   )
 #--- Analyze instruction list

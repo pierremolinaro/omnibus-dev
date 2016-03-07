@@ -111,7 +111,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   if not [inContext.mModeMap hasKey !panicModeName ()] then
-    error mExceptionClauseName : "the `" + panicModeName () + " mode should be defined in order to use an exception clause"
+    error mExceptionClauseName : "the `" + panicModeName () + " mode should be defined in order to use a panic clause"
   end
   let routineNameForInvocationGraph = exceptionNameForInvocationGraph (!mExceptionClauseName.string !mPriority)
 #--- Variable map
@@ -119,6 +119,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !userMode:false
+    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
   )
 #--- Insert predefined input arguments
@@ -178,6 +179,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfExceptionInstructions]
 #--- Code generation
+  log mExceptionClauseName
   if mExceptionClauseName.string == "setup" then
     [!?ioTemporaries.mExceptionSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
     ioIntermediateCodeStruct.mPanicSetupInstructionListIR += instructionGenerationList

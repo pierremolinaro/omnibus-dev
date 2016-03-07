@@ -79,6 +79,7 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
       !globalProcedure:true
       !weakProcedure:false
       !nullOnNoException:false
+      !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
