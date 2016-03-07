@@ -93,21 +93,12 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
-  for procedure in inAST.mProcedureListAST do
-    routineSemanticAnalysis (
-      !receiverType:.null
-      !.procedure
-      !procedure.mProcedureModeList
-      !procedure.mProcedureName
-      !procedure.mProcedureAttributeList
-      !procedure.mProcFormalArgumentList
-      !procedure.mInstructionList
-      !procedure.mEndOfProcLocation
-      !context:inSemanticContext
-      !?temporary:temporaries
-      !?intermediateCode:outIntermediateCodeStruct
-    )
-  end
+  [inAST.mProcedureListAST procedureSemanticAnalysis
+    !receiverType:.null
+    !context:inSemanticContext
+    !?temporary:temporaries
+    !?intermediateCode:outIntermediateCodeStruct
+  ]
   [inAST.mTaskList semanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries

@@ -6,10 +6,9 @@
 
 struct @accessibleEntities {
   @stringset mAccessibleRegisterSet
-  @stringset mProcedureSet
+  @stringset mRoutineSet
   @stringset mFunctionSet
   @stringset mSectionSet
-  @stringset mServiceSet
   @stringset mGlobalVariableSet
   @stringset mTaskProcedureSet
   @stringset mTaskVariableSet
@@ -67,9 +66,9 @@ method @sectionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAcc
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @serviceMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
-}
+#method @serviceMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+#  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -182,7 +181,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mKind
       ]        
       [procedure enterAccessibleEntities !?outAccessibleEntities]
-      outAccessibleEntities.mProcedureSet += !procedure.lkey.string
+      outAccessibleEntities.mRoutineSet += !procedure.lkey.string
     else
       [!?nonExploredProcedureMap insertKey
         !procedure.lkey
@@ -219,21 +218,21 @@ private proc suppressInaccessibleSubprograms
   @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
   @sectionMapIR  accessibleSectionMap   = {}
   @sectionMapIR  nonExploredSectionMap  = ioIntermediateCodeStruct.mSectionMapIR
-  @serviceMapIR  accessibleServiceMap   = {}
-  @serviceMapIR  nonExploredServiceMap  = ioIntermediateCodeStruct.mServiceMapIR
+#  @serviceMapIR  accessibleServiceMap   = {}
+#  @serviceMapIR  nonExploredServiceMap  = ioIntermediateCodeStruct.mServiceMapIR
   @taskProcedureMapIR  accessibleTaskProcMap   = {}
   @taskProcedureMapIR  nonExploredTaskProcMap  = ioIntermediateCodeStruct.mTaskProcedureMap
   var continues = true
   let bound = [ioIntermediateCodeStruct.mRoutineMapIR count]
     + [ioIntermediateCodeStruct.mFunctionMapIR count]
     + [ioIntermediateCodeStruct.mSectionMapIR count]
-    + [ioIntermediateCodeStruct.mServiceMapIR count]
+#    + [ioIntermediateCodeStruct.mServiceMapIR count]
   loop (bound + 1) while continues do
     continues = false
     exploreProcs (!?accessibleProcedureMap !?outAccessibleEntities !?nonExploredProcedureMap !?continues)
     exploreFunctions (!?accessibleFunctionMap !?outAccessibleEntities !?nonExploredFunctionMap !?continues)
     exploreSections (!?accessibleSectionMap !?outAccessibleEntities !?nonExploredSectionMap !?continues)
-    exploreServices (!?accessibleServiceMap !?outAccessibleEntities !?nonExploredServiceMap !?continues)
+#    exploreServices (!?accessibleServiceMap !?outAccessibleEntities !?nonExploredServiceMap !?continues)
     exploreTaskProcs (!?accessibleTaskProcMap !?outAccessibleEntities !?nonExploredTaskProcMap !?continues)
   end
   if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
@@ -248,10 +247,10 @@ private proc suppressInaccessibleSubprograms
     ioIntermediateCodeStruct.mSectionMapIR = accessibleSectionMap
     ioOptimizing = true
   end
-  if ioIntermediateCodeStruct.mServiceMapIR != accessibleServiceMap then
-    ioIntermediateCodeStruct.mServiceMapIR = accessibleServiceMap
-    ioOptimizing = true
-  end
+#  if ioIntermediateCodeStruct.mServiceMapIR != accessibleServiceMap then
+#    ioIntermediateCodeStruct.mServiceMapIR = accessibleServiceMap
+#    ioOptimizing = true
+#  end
   if ioIntermediateCodeStruct.mTaskProcedureMap != accessibleTaskProcMap then
     ioIntermediateCodeStruct.mTaskProcedureMap = accessibleTaskProcMap
     ioOptimizing = true
@@ -269,8 +268,8 @@ private proc exploreProcs
   let @routineMapIR exNonExploredProcedureMap = ioNonExploredProcedureMap
   ioNonExploredProcedureMap = {}
   for procedure in exNonExploredProcedureMap do
-    if [ioAccessibleEntities.mProcedureSet hasKey !procedure.lkey.string] then
-      [!?ioAccessibleProcedureMap insertKey
+    if [ioAccessibleEntities.mRoutineSet hasKey !procedure.lkey.string] then
+     [!?ioAccessibleProcedureMap insertKey
         !procedure.lkey
         !procedure.mFormalArgumentListForGeneration
         !procedure.mInstructionGenerationList
@@ -367,34 +366,34 @@ private proc exploreSections
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc exploreServices
-  ?!@serviceMapIR ioAccessibleServiceMap
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@serviceMapIR ioNonExploredServiceMap
-  ?!@bool ioContinueExploreRoutines
-{
-  let @serviceMapIR exNonExploredServiceMap = ioNonExploredServiceMap
-  ioNonExploredServiceMap = {}
-  for service in exNonExploredServiceMap do
-    if [ioAccessibleEntities.mServiceSet hasKey !service.lkey.string] then
-      [!?ioAccessibleServiceMap insertKey
-        !service.lkey
-        !service.mFormalArgumentListForGeneration
-        !service.mInstructionGenerationList
-        !service.mWarnIfUnused
-      ]        
-      [service enterAccessibleEntities !?ioAccessibleEntities]
-      ioContinueExploreRoutines = true
-    else
-      [!?ioNonExploredServiceMap insertKey
-        !service.lkey
-        !service.mFormalArgumentListForGeneration
-        !service.mInstructionGenerationList
-        !service.mWarnIfUnused
-      ]        
-    end
-  end
-}
+#private proc exploreServices
+#  ?!@serviceMapIR ioAccessibleServiceMap
+#  ?!@accessibleEntities ioAccessibleEntities
+#  ?!@serviceMapIR ioNonExploredServiceMap
+#  ?!@bool ioContinueExploreRoutines
+#{
+#  let @serviceMapIR exNonExploredServiceMap = ioNonExploredServiceMap
+#  ioNonExploredServiceMap = {}
+#  for service in exNonExploredServiceMap do
+#    if [ioAccessibleEntities.mServiceSet hasKey !service.lkey.string] then
+#      [!?ioAccessibleServiceMap insertKey
+#        !service.lkey
+#        !service.mFormalArgumentListForGeneration
+#        !service.mInstructionGenerationList
+#        !service.mWarnIfUnused
+#      ]        
+#      [service enterAccessibleEntities !?ioAccessibleEntities]
+#      ioContinueExploreRoutines = true
+#    else
+#      [!?ioNonExploredServiceMap insertKey
+#        !service.lkey
+#        !service.mFormalArgumentListForGeneration
+#        !service.mInstructionGenerationList
+#        !service.mWarnIfUnused
+#      ]        
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

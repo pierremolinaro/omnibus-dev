@@ -145,3 +145,66 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   SEMANTICS                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @procedureDeclarationListAST procedureSemanticAnalysis
+  ?receiverType:@unifiedTypeMap-proxy inReceiverType
+  ?context:let @semanticContext inSemanticContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for procedure in self do
+  #--- Attributes
+    var warnIfUnused = true
+    var globalProcedure = false
+    var weakProcedure = false
+    var nullOnNoException = false
+    for (attribute) in procedure.mProcedureAttributeList do
+      if attribute.string == noWarningIfUnusedAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+        end
+        warnIfUnused = false    
+      elsif attribute.string == globalAttribute () then
+        if globalProcedure then
+          error attribute : "duplicate @" + globalAttribute () + " attribute"
+        end
+        globalProcedure = true    
+      elsif attribute.string == weakAttribute () then
+        if weakProcedure then
+          error attribute : "duplicate @" + weakAttribute () + " attribute"
+        end
+        weakProcedure = true    
+      elsif attribute.string == nullWhenPanicDisabledAttribute () then
+        if nullOnNoException then
+          error attribute : "duplicate @" + nullWhenPanicDisabledAttribute () + " attribute"
+        end
+        nullOnNoException = true    
+      else
+        error attribute : "unknown attribute; available attributes are @"
+          + noWarningIfUnusedAttribute ()
+          + ", @" + weakAttribute ()
+          + ", @" + globalAttribute ()
+      end
+    end
+    routineSemanticAnalysis (
+      !receiverType:inReceiverType
+      !.procedure
+      !procedure.mProcedureModeList
+      !procedure.mProcedureName
+      !procedure.mProcFormalArgumentList
+      !procedure.mInstructionList
+      !procedure.mEndOfProcLocation
+      !warnIfUnused:warnIfUnused
+      !globalProcedure:globalProcedure
+      !weakProcedure:weakProcedure
+      !nullOnNoException:nullOnNoException
+      !context:inSemanticContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    )
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

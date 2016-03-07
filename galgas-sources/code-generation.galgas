@@ -226,13 +226,11 @@ private proc generateLLVMfile
     !?generationAdds
   ]
 #----------------------------------------- Services
-  [inIntermediateCodeStruct.mServiceMapIR llvmCodeGeneration
+  [inIntermediateCodeStruct.mRoutineMapIR serviceCodeGeneration
     !inCurrentDirectory
     !inTargetName.string
     !?llvmCode
     !?asCode
-    !generationContext
-    !?generationAdds
   ]
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do

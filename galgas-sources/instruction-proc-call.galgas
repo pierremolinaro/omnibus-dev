@@ -331,11 +331,7 @@ override method @procCallInstructionIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  switch mKind 
-  case procedure : ioAccessibleEntities.mProcedureSet += !mProcName
-  case service : ioAccessibleEntities.mServiceSet += !mProcName
-  case section : ioAccessibleEntities.mSectionSet += !mProcName
-  end
+  ioAccessibleEntities.mRoutineSet += !mProcName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
