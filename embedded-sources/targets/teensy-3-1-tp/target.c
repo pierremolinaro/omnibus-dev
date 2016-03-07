@@ -16,7 +16,7 @@ typedef void (* routineTaskType) (void) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-/*static unsigned countLeadingZeros (const unsigned inValue) {
+/*static unsigned countTrainingZeros (const unsigned inValue) {
   unsigned result = 0 ;
   unsigned w = inValue ;
   while ((w & 1) == 0) {
@@ -26,7 +26,7 @@ typedef void (* routineTaskType) (void) ;
   return result ;
 }*/
 
-unsigned countLeadingZeros (const unsigned inValue) {
+static unsigned countTrainingZeros (const unsigned inValue) {
   unsigned reversedValue ;
   __asm__ ("rbit %0, %1" : "=r" (reversedValue) : "r" (inValue)) ;
   unsigned result ;
@@ -154,7 +154,7 @@ void kernel_selectTaskToRun (void) {
     gRunningTaskContextSaveAddress = (task_context *) 0 ;
   }
   if (gReadyTaskList != 0) {
-    gRunningTaskIndex = countLeadingZeros (gReadyTaskList) ;
+    gRunningTaskIndex = countTrainingZeros (gReadyTaskList) ;
     gReadyTaskList &= ~ (1 << gRunningTaskIndex) ;
     gRunningTaskContextSaveAddress = & (gTaskDescriptorArray [gRunningTaskIndex].mTaskContext) ;
   }
@@ -239,7 +239,7 @@ void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, co
 
 void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) asm ("proc..kernel_makeTaskReadyFromWaitingList") ;
 void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) {
-  const unsigned taskIndex = countLeadingZeros (* ioWaitingList) ;
+  const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;
   task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;
   kernel_set_return_code (& taskDescriptorPtr->mTaskContext, 1) ;
   gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;
@@ -254,7 +254,7 @@ void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) asm (
 void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
   while (w > 0) {
-    const unsigned taskIndex = countLeadingZeros (w) ;
+    const unsigned taskIndex = countTrainingZeros (w) ;
     w &= ~ (1 << taskIndex) ;
     task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;
     if (inCurrentDate >= taskDescriptorPtr->mDate) {

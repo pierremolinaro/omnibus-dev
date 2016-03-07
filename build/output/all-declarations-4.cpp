@@ -10075,7 +10075,8 @@ const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
+  "  return [toolDir () + \"/bin/llc\", \"-function-sections\", \"-data-sections\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
+  "#  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -10234,7 +10235,7 @@ const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  14395, // Text length
+  14503, // Text length
   gWrapperFileContent_10_targetTemplates
 ) ;
 
@@ -10801,7 +10802,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "/*static unsigned countLeadingZeros (const unsigned inValue) {\n"
+  "/*static unsigned countTrainingZeros (const unsigned inValue) {\n"
   "  unsigned result = 0 ;\n"
   "  unsigned w = inValue ;\n"
   "  while ((w & 1) == 0) {\n"
@@ -10811,7 +10812,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "  return result ;\n"
   "}*/\n"
   "\n"
-  "unsigned countLeadingZeros (const unsigned inValue) {\n"
+  "static unsigned countTrainingZeros (const unsigned inValue) {\n"
   "  unsigned reversedValue ;\n"
   "  __asm__ (\"rbit %0, %1\" : \"=r\" (reversedValue) : \"r\" (inValue)) ;\n"
   "  unsigned result ;\n"
@@ -10939,7 +10940,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "    gRunningTaskContextSaveAddress = (task_context *) 0 ;\n"
   "  }\n"
   "  if (gReadyTaskList != 0) {\n"
-  "    gRunningTaskIndex = countLeadingZeros (gReadyTaskList) ;\n"
+  "    gRunningTaskIndex = countTrainingZeros (gReadyTaskList) ;\n"
   "    gReadyTaskList &= ~ (1 << gRunningTaskIndex) ;\n"
   "    gRunningTaskContextSaveAddress = & (gTaskDescriptorArray [gRunningTaskIndex].mTaskContext) ;\n"
   "  }\n"
@@ -11024,7 +11025,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) asm (\"proc..kernel_makeTaskReadyFromWaitingList\") ;\n"
   "void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) {\n"
-  "  const unsigned taskIndex = countLeadingZeros (* ioWaitingList) ;\n"
+  "  const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;\n"
   "  task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;\n"
   "  kernel_set_return_code (& taskDescriptorPtr->mTaskContext, 1) ;\n"
   "  gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;\n"
@@ -11039,7 +11040,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) {\n"
   "  unsigned w = gDeadlineWaitingTaskList ;\n"
   "  while (w > 0) {\n"
-  "    const unsigned taskIndex = countLeadingZeros (w) ;\n"
+  "    const unsigned taskIndex = countTrainingZeros (w) ;\n"
   "    w &= ~ (1 << taskIndex) ;\n"
   "    task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;\n"
   "    if (inCurrentDate >= taskDescriptorPtr->mDate) {\n"
@@ -11061,7 +11062,7 @@ const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  14635, // Text length
+  14647, // Text length
   gWrapperFileContent_24_targetTemplates
 ) ;
 

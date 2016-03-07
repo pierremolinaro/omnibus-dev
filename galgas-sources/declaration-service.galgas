@@ -189,6 +189,7 @@ method @serviceMapIR llvmCodeGeneration
     s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
     ioAssemblerCode += s
   end
+  ioAssemblerCode += "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
