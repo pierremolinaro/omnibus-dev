@@ -1202,7 +1202,7 @@ class GALGAS_allowedRoutineList : public AC_GALGAS_list {
                                                   const class GALGAS_bool & in_mHasWriteAccess,
                                                   const class GALGAS_lstring & in_mReceiverTypeName,
                                                   const class GALGAS_lstring & in_mRoutineName,
-                                                  const class GALGAS_routineKind & in_mKind
+                                                  const class GALGAS_routineKind & in_mRoutineKind
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -1295,13 +1295,13 @@ class GALGAS_allowedRoutineList : public AC_GALGAS_list {
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mKindAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                   C_Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mRoutineKindAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                              C_Compiler * inCompiler
@@ -1340,7 +1340,7 @@ class cEnumerator_allowedRoutineList : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_mHasWriteAccess (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mReceiverTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mRoutineName (LOCATION_ARGS) const ;
-  public : class GALGAS_routineKind current_mKind (LOCATION_ARGS) const ;
+  public : class GALGAS_routineKind current_mRoutineKind (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_allowedRoutineList_2D_element current (LOCATION_ARGS) const ;
 } ;

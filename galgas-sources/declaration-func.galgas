@@ -176,6 +176,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !routineNameForInvocation:funcNameForInvocationGraph (!.null !mFunctionName).string
     !context:inContext
     !userMode:[functionModeSet hasKey !userModeName ()]
+    !registerAccess:.readWriteAccess
     !globalsAreConstant:true
   )
 #--- Add 'result" variable

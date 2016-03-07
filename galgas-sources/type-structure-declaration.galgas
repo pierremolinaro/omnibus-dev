@@ -372,6 +372,7 @@ method @structureDeclaration functionSemanticAnalysis
       !routineNameForInvocation:funcNameForInvocationGraph (!inStructureType !function.mFunctionName).string
       !context:inContext
       !userMode:[functionModeSet hasKey !"user"]
+      !registerAccess:.readWriteAccess
       !globalsAreConstant:true
     )
   #--- Add "self" variable to variable map
@@ -477,6 +478,7 @@ method @structureDeclaration procedureSemanticAnalysis
       !routineNameForInvocation:procNameForInvocationGraph (!inStructureType !procedure.mProcedureName).string
       !context:inContext
       !userMode:[procedureModeSet hasKey !"user"]
+      !registerAccess:.readWriteAccess
       !globalsAreConstant:false
     )
   #--- Add "self" to variable map

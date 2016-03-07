@@ -8,14 +8,15 @@ func initialVariableMap
   ?routineNameForInvocation:let @string inRoutineNameForInvocation
   ?context:let @semanticContext inContext
   ?userMode:let @bool inAcceptUserMode
+  ?registerAccess:let @accessKind inRegisterAccessKind
   ?globalsAreConstant:@bool inGlobalsAreConstant
   -> @variableMap outVariableMap
 {
-#--- Add registers
+#------------------------------------------------------- Add registers
   outVariableMap = .emptyMap
-  @procFormalArgumentListForGeneration formalArguments = {}
-  for () in inContext.mControlRegisterMap do
-    if inAcceptUserMode && not mIsAccessibleInUserMode then
+  switch inRegisterAccessKind
+  case noAccess :
+    for () in inContext.mControlRegisterMap do
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey
         !mType
@@ -26,18 +27,35 @@ func initialVariableMap
         !false # Cannot be used as input parameter
         !true # Is constant
       ]
-    elsif mIsReadOnly || inGlobalsAreConstant then
-      [!?outVariableMap insertUsedLocalConstant
-        !lkey
-        !mType
-        !true
-        !.register {!type:mType !name:lkey !address:mAddress}
-        !true
-        !mRegisterFieldAccessMap
-        !false # Cannot be used as input parameter
-        !true # Is constant
-      ]
-    else
+    end
+  case readAccess :
+    for () in inContext.mControlRegisterMap do
+      if inAcceptUserMode && not mIsAccessibleInUserMode then
+        [!?outVariableMap insertInaccessibleControlRegister
+          !lkey
+          !mType
+          !true
+          !.register {!type:mType !name:lkey !address:mAddress}
+          !true
+          !mRegisterFieldAccessMap
+          !false # Cannot be used as input parameter
+          !true # Is constant
+        ]
+      elsif mIsReadOnly || inGlobalsAreConstant then
+        [!?outVariableMap insertUsedLocalConstant
+          !lkey
+          !mType
+          !true
+          !.register {!type:mType !name:lkey !address:mAddress}
+          !true
+          !mRegisterFieldAccessMap
+          !false # Cannot be used as input parameter
+          !true # Is constant
+        ]
+      end
+    end
+  case readWriteAccess :
+    for () in inContext.mControlRegisterMap do
       [!?outVariableMap insertDefinedLocalVariable
         !lkey
         !mType
@@ -50,7 +68,7 @@ func initialVariableMap
       ]
     end
   end
-#--- Add global constants
+#------------------------------------------------------- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedLocalConstant
       !constantName
@@ -63,7 +81,7 @@ func initialVariableMap
       !true # Is constant
     ]
   end
-#--- Add global variables
+#------------------------------------------------------- Add global variables
   for (variableName variableType modeSet allowedProcedureMap * isConstant) in inContext.mGlobalVariableMap do
     var writeAccess = false
     var allowedAccess = [allowedProcedureMap hasKey !inRoutineNameForInvocation]

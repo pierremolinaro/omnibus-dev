@@ -126,6 +126,7 @@ method @initList-element initSemanticAnalysis
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !userMode:false
+    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
   )
 #--- Analyze instruction list
