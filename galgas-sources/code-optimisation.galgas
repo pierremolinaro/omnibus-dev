@@ -60,18 +60,6 @@ method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAc
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#method @serviceMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-#  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @taskProcedureMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
 }
@@ -216,23 +204,15 @@ private proc suppressInaccessibleSubprograms
 #--- Explore routines
   @functionMapIR accessibleFunctionMap  = {}
   @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
-  @sectionMapIR  accessibleSectionMap   = {}
-  @sectionMapIR  nonExploredSectionMap  = ioIntermediateCodeStruct.mSectionMapIR
-#  @serviceMapIR  accessibleServiceMap   = {}
-#  @serviceMapIR  nonExploredServiceMap  = ioIntermediateCodeStruct.mServiceMapIR
   @taskProcedureMapIR  accessibleTaskProcMap   = {}
   @taskProcedureMapIR  nonExploredTaskProcMap  = ioIntermediateCodeStruct.mTaskProcedureMap
   var continues = true
   let bound = [ioIntermediateCodeStruct.mRoutineMapIR count]
     + [ioIntermediateCodeStruct.mFunctionMapIR count]
-    + [ioIntermediateCodeStruct.mSectionMapIR count]
-#    + [ioIntermediateCodeStruct.mServiceMapIR count]
   loop (bound + 1) while continues do
     continues = false
     exploreProcs (!?accessibleProcedureMap !?outAccessibleEntities !?nonExploredProcedureMap !?continues)
     exploreFunctions (!?accessibleFunctionMap !?outAccessibleEntities !?nonExploredFunctionMap !?continues)
-    exploreSections (!?accessibleSectionMap !?outAccessibleEntities !?nonExploredSectionMap !?continues)
-#    exploreServices (!?accessibleServiceMap !?outAccessibleEntities !?nonExploredServiceMap !?continues)
     exploreTaskProcs (!?accessibleTaskProcMap !?outAccessibleEntities !?nonExploredTaskProcMap !?continues)
   end
   if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
@@ -243,14 +223,6 @@ private proc suppressInaccessibleSubprograms
     ioIntermediateCodeStruct.mFunctionMapIR = accessibleFunctionMap
     ioOptimizing = true
   end
-  if ioIntermediateCodeStruct.mSectionMapIR != accessibleSectionMap then
-    ioIntermediateCodeStruct.mSectionMapIR = accessibleSectionMap
-    ioOptimizing = true
-  end
-#  if ioIntermediateCodeStruct.mServiceMapIR != accessibleServiceMap then
-#    ioIntermediateCodeStruct.mServiceMapIR = accessibleServiceMap
-#    ioOptimizing = true
-#  end
   if ioIntermediateCodeStruct.mTaskProcedureMap != accessibleTaskProcMap then
     ioIntermediateCodeStruct.mTaskProcedureMap = accessibleTaskProcMap
     ioOptimizing = true
@@ -332,68 +304,6 @@ private proc exploreFunctions
     end
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-private proc exploreSections
-  ?!@sectionMapIR ioAccessibleSectionMap
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@sectionMapIR ioNonExploredSectionMap
-  ?!@bool ioContinueExploreRoutines
-{
-  let @sectionMapIR exNonExploredServiceMap = ioNonExploredSectionMap
-  ioNonExploredSectionMap = {}
-  for section in exNonExploredServiceMap do
-    if [ioAccessibleEntities.mSectionSet hasKey !section.lkey.string] then
-      [!?ioAccessibleSectionMap insertKey
-        !section.lkey
-        !section.mFormalArgumentListForGeneration
-        !section.mInstructionGenerationList
-        !section.mWarnIfUnused
-      ]        
-      [section enterAccessibleEntities !?ioAccessibleEntities]
-      ioContinueExploreRoutines = true
-    else
-      [!?ioNonExploredSectionMap insertKey
-        !section.lkey
-        !section.mFormalArgumentListForGeneration
-        !section.mInstructionGenerationList
-        !section.mWarnIfUnused
-      ]        
-    end
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#private proc exploreServices
-#  ?!@serviceMapIR ioAccessibleServiceMap
-#  ?!@accessibleEntities ioAccessibleEntities
-#  ?!@serviceMapIR ioNonExploredServiceMap
-#  ?!@bool ioContinueExploreRoutines
-#{
-#  let @serviceMapIR exNonExploredServiceMap = ioNonExploredServiceMap
-#  ioNonExploredServiceMap = {}
-#  for service in exNonExploredServiceMap do
-#    if [ioAccessibleEntities.mServiceSet hasKey !service.lkey.string] then
-#      [!?ioAccessibleServiceMap insertKey
-#        !service.lkey
-#        !service.mFormalArgumentListForGeneration
-#        !service.mInstructionGenerationList
-#        !service.mWarnIfUnused
-#      ]        
-#      [service enterAccessibleEntities !?ioAccessibleEntities]
-#      ioContinueExploreRoutines = true
-#    else
-#      [!?ioNonExploredServiceMap insertKey
-#        !service.lkey
-#        !service.mFormalArgumentListForGeneration
-#        !service.mInstructionGenerationList
-#        !service.mWarnIfUnused
-#      ]        
-#    end
-#  end
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

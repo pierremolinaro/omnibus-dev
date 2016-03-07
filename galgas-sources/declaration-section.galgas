@@ -67,178 +67,79 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for section in self do
-    [section sectionSemanticAnalysis
+    routineSemanticAnalysis (
+      !receiverType:.null
+      !.section
+      !{!.new {!sectionModeName () !section.mSectionName.location}}
+      !section.mSectionName
+      !section.mSectionFormalArgumentList
+      !section.mSectionInstructionList
+      !section.mEndOfSectionLocation
+      !warnIfUnused:true
+      !globalProcedure:true
+      !weakProcedure:false
+      !nullOnNoException:false
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
-    ]
+    )
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @sectionDeclarationListAST-element sectionSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#--- Attributes
-  var warnIfUnused = true
-  for (attribute) in mSectionAttributeList do
-    if attribute.string == noWarningIfUnusedAttribute () then
-      if not warnIfUnused then
-        error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
-      end
-      warnIfUnused = false    
-    else
-      error attribute : "unknown attribute; available attribut is @" + noWarningIfUnusedAttribute ()
-    end
-  end
-#--- Variable map
-  let sectionNameForInvocationGraph = sectionNameForInvocationGraph (!.null !mSectionName)
-  @variableMap variableMap = initialVariableMap (
-    !routineNameForInvocation:sectionNameForInvocationGraph.string
-    !context:inContext
-    !userMode:false
-    !globalsAreConstant:false
-  )
-#--- Analyse formal arguments
-  @procFormalArgumentListForGeneration formalArguments = {}
-  enterFormalArguments (
-    !context:inContext
-    !mSectionFormalArgumentList
-    !?variableMap
-    !?formalArguments
-  )
-#--- Enter subprogram invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addNode
-    !sectionNameForInvocationGraph
-    !mSectionName
-  ]
-#--- Analyze instruction list
-  @instructionListIR instructionGenerationList = {}
-  [mSectionInstructionList analyzeRoutineInstructionList
-    !routineNameForInvocationGraph:sectionNameForInvocationGraph
-    !context:inContext
-    !modes:{!sectionModeName ()}
-    !allowException:true
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
-    !?generatedCode:instructionGenerationList
-  ]
-#---
-  [variableMap checkAutomatonStates !mEndOfSectionLocation]
-#--- Code generation
-  let lkey = @lstring.new {!"." + mSectionName !mSectionName.location}
-  [!?ioIntermediateCodeStruct.mSectionMapIR insertKey
-    !lkey
-    !formalArguments
-    !instructionGenerationList
-    !warnIfUnused
-  ]  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @sectionMapIR {
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionListIR mInstructionGenerationList
-  @bool mWarnIfUnused
-  insert insertKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @sectionMapIR llvmCodeGeneration
+method @routineMapIR sectionCodeGeneration
   ?let @string inCurrentDirectory
   ?let @string inTargetName
   ?!@string ioLLVMcode
   ?!@string ioAssemblerCode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
 {
-  for section in self do
-    [section llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  end
 #--- Generation section handler ?
   if [self count] > 0 then
-    for section in self do (idx)
-      let name = llvmNameForSectionCall (!section.lkey.string)
-      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
-      s = [s stringByReplacingStringByString !"!ENTRY!" !name]
-      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-      ioAssemblerCode += s
+    var idx = 0
+    for section in self do
+      if section.mKind == .section then
+        let sectionCallName = llvmNameForSectionCall (!section.lkey.string)
+        var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
+        s = [s stringByReplacingStringByString !"!ENTRY!" !sectionCallName]
+        s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+        ioAssemblerCode += s
+        idx += 1
+        ioLLVMcode += llvmTitleComment (!sectionCallName)
+        ioLLVMcode += "declare void @" + sectionCallName + " ("
+        for () in section.mFormalArgumentListForGeneration
+        do
+          switch mFormalArgumentKind
+          case input :
+            ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+          case output :
+            ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+         case inputOutput :
+            ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+          end
+        between
+          ioLLVMcode += ", "
+        end
+        ioLLVMcode += ") nounwind \n\n"
+      end
     end
     ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
-    for section in self do (idx)
-      let name = llvmNameForSectionImplementation (!section.lkey.string)
-      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
-      s = [s stringByReplacingStringByString !"!ENTRY!" !name]
-      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-      ioAssemblerCode += s
+    idx = 0
+    for section in self do
+      if section.mKind == .section then
+        let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
+        var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
+        s = [s stringByReplacingStringByString !"!ENTRY!" !sectionImplementationName]
+        s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+        ioAssemblerCode += s
+        idx += 1
+      end
     end
     let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
     ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @sectionMapIR-element llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  let sectionImplementationName = llvmNameForSectionImplementation (!lkey.string)
-  ioLLVMcode += llvmTitleComment (!sectionImplementationName)
-  ioLLVMcode += "declare void @" + llvmNameForSectionCall (!lkey.string) + " ("
-  for () in mFormalArgumentListForGeneration
-  do
-    switch mFormalArgumentKind
-    case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-    case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-   case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-    end
-  between
-    ioLLVMcode += ", "
-  end
-  ioLLVMcode += ") nounwind \n\n"
-  ioLLVMcode += "define void @" + sectionImplementationName + " ("
-  for () in mFormalArgumentListForGeneration
-  do
-    switch mFormalArgumentKind
-    case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-    case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-   case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-    end
-  between
-    ioLLVMcode += ", "
-  end
-  ioLLVMcode += ") nounwind {\n"
-#--- Store input arguments in memory
-  for () in mFormalArgumentListForGeneration do
-    switch mFormalArgumentKind
-    case input :
-      let llvmType = [mFormalArgumentType llvmTypeName]
-      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
-      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
-    case output, inputOutput :
-    end
-  end
-#--- Instruction list
-  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#--- Epilog
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
