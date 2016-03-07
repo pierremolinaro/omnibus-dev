@@ -107,7 +107,6 @@ proc codeGeneration
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
-  ?proceduresThatShouldNotBeGenerated:let @stringset inProceduresThatShouldNotBeGenerated
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
 #--- Create source directory (if does not exist)
@@ -132,7 +131,6 @@ proc codeGeneration
     !exceptionCodeType:inExceptionCodeType
     !exceptionLineType:inExceptionLineType
     !sourceFileSet:inSourceFileAbsolutePathSet
-    !proceduresThatShouldNotBeGenerated:inProceduresThatShouldNotBeGenerated
   )
 }
 
@@ -141,7 +139,6 @@ proc codeGeneration
 struct @generationContext {
   @string mExceptionCodeLLVMType
   @string mExceptionLineLLVMType
-  @stringset mProceduresThatShouldNotBeGenerated
   @taskVariableMap mTaskVariableMap
   @taskProcedureMapIR mTaskProcedureMap
 }
@@ -159,14 +156,12 @@ private proc generateLLVMfile
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
-  ?proceduresThatShouldNotBeGenerated:let @stringset inProceduresThatShouldNotBeGenerated
 {
   @generationAdds generationAdds = .default
   generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
   let @generationContext generationContext = .new {
     ![inExceptionCodeType llvmTypeName]
     ![inExceptionLineType llvmTypeName]
-    !inProceduresThatShouldNotBeGenerated
     !inIntermediateCodeStruct.mTaskVariableMap
     !inIntermediateCodeStruct.mTaskProcedureMap
   }

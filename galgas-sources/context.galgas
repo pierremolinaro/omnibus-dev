@@ -160,7 +160,6 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
-  @stringset mProceduresThatShouldNotBeGenerated
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
   @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 

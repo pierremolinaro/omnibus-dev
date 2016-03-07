@@ -303,17 +303,6 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_eleme
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Category method '@routineMapIR-element llvmPrototypeGeneration'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_llvmPrototypeGeneration (const class GALGAS_routineMapIR_2D_element inObject,
-                                             class GALGAS_string & io_ioLLVMcode,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                  Category setter '@instructionListIR appendAlloca'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

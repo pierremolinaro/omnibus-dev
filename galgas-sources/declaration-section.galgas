@@ -97,50 +97,47 @@ method @routineMapIR sectionCodeGeneration
   ?!@string ioLLVMcode
   ?!@string ioAssemblerCode
 {
-#--- Generation section handler ?
-  if [self count] > 0 then
-    var idx = 0
-    for section in self do
-      if section.mKind == .section then
-        let sectionCallName = llvmNameForSectionCall (!section.lkey.string)
-        var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
-        s = [s stringByReplacingStringByString !"!ENTRY!" !sectionCallName]
-        s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-        ioAssemblerCode += s
-        idx += 1
-        ioLLVMcode += llvmTitleComment (!sectionCallName)
-        ioLLVMcode += "declare void @" + sectionCallName + " ("
-        for () in section.mFormalArgumentListForGeneration
-        do
-          switch mFormalArgumentKind
-          case input :
-            ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-          case output :
-            ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-         case inputOutput :
-            ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-          end
-        between
-          ioLLVMcode += ", "
+  var idx = 0
+  for section in self do
+    if section.mKind == .section then
+      let sectionCallName = llvmNameForSectionCall (!section.lkey.string)
+      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
+      s = [s stringByReplacingStringByString !"!ENTRY!" !sectionCallName]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
+      idx += 1
+      ioLLVMcode += llvmTitleComment (!sectionCallName)
+      ioLLVMcode += "declare void @" + sectionCallName + " ("
+      for () in section.mFormalArgumentListForGeneration
+      do
+        switch mFormalArgumentKind
+        case input :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+        case output :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+       case inputOutput :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
         end
-        ioLLVMcode += ") nounwind \n\n"
+      between
+        ioLLVMcode += ", "
       end
+      ioLLVMcode += ") nounwind \n\n"
     end
-    ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
-    idx = 0
-    for section in self do
-      if section.mKind == .section then
-        let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
-        var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
-        s = [s stringByReplacingStringByString !"!ENTRY!" !sectionImplementationName]
-        s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-        ioAssemblerCode += s
-        idx += 1
-      end
-    end
-    let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
-    ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
   end
+  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
+  idx = 0
+  for section in self do
+    if section.mKind == .section then
+      let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
+      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
+      s = [s stringByReplacingStringByString !"!ENTRY!" !sectionImplementationName]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
+      idx += 1
+    end
+  end
+  let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
+  ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

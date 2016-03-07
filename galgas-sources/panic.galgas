@@ -179,7 +179,6 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfExceptionInstructions]
 #--- Code generation
-  log mExceptionClauseName
   if mExceptionClauseName.string == "setup" then
     [!?ioTemporaries.mExceptionSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
     ioIntermediateCodeStruct.mPanicSetupInstructionListIR += instructionGenerationList

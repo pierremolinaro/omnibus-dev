@@ -1702,7 +1702,6 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
                              const class GALGAS_stringset constinArgument8,
-                             const class GALGAS_stringset constinArgument9,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -1721,7 +1720,6 @@ void routine_generateLLVMfile (const class GALGAS_string constinArgument0,
                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
                                const class GALGAS_stringset constinArgument8,
-                               const class GALGAS_stringset constinArgument9,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -1969,7 +1967,6 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_string mAttribute_mExceptionCodeLLVMType ;
   public : GALGAS_string mAttribute_mExceptionLineLLVMType ;
-  public : GALGAS_stringset mAttribute_mProceduresThatShouldNotBeGenerated ;
   public : GALGAS_taskVariableMap mAttribute_mTaskVariableMap ;
   public : GALGAS_taskProcedureMapIR mAttribute_mTaskProcedureMap ;
 
@@ -1990,7 +1987,6 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_generationContext (const GALGAS_string & in_mExceptionCodeLLVMType,
                                      const GALGAS_string & in_mExceptionLineLLVMType,
-                                     const GALGAS_stringset & in_mProceduresThatShouldNotBeGenerated,
                                      const GALGAS_taskVariableMap & in_mTaskVariableMap,
                                      const GALGAS_taskProcedureMapIR & in_mTaskProcedureMap) ;
 
@@ -2007,9 +2003,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_generationContext constructor_new (const class GALGAS_string & inOperand0,
                                                             const class GALGAS_string & inOperand1,
-                                                            const class GALGAS_stringset & inOperand2,
-                                                            const class GALGAS_taskVariableMap & inOperand3,
-                                                            const class GALGAS_taskProcedureMapIR & inOperand4
+                                                            const class GALGAS_taskVariableMap & inOperand2,
+                                                            const class GALGAS_taskProcedureMapIR & inOperand3
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2027,8 +2022,6 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mExceptionCodeLLVMType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mExceptionLineLLVMType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mProceduresThatShouldNotBeGenerated (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskProcedureMapIR getter_mTaskProcedureMap (LOCATION_ARGS) const ;
 

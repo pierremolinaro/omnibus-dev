@@ -7,11 +7,11 @@ proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
 
 //-----------------------------------------------------------------------------*
 
-required proc HardFaultHandler `isr ()
-
-proc HardFaultHandler `isr @nullWhenPanicDisabled @weak () {
-  panic 3
-}
+//required proc HardFaultHandler `isr ()
+//
+//proc HardFaultHandler `isr @nullWhenPanicDisabled @weak () {
+//  panic 3
+//}
 
 //-----------------------------------------------------------------------------*
 
