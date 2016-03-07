@@ -72,10 +72,13 @@ proc routineSemanticAnalysis
   ?let @routineKind inRoutineKind
   ?let @lstringlist inRoutineModeList
   ?let @lstring inRoutineName
-  ?let @lstringlist inRoutineAttributeList
   ?let @procFormalArgumentList inRoutineFormalArgumentList
   ?let @instructionListAST inRoutineInstructionList
   ?let @location inEndOfRoutineDeclaration
+  ?warnIfUnused:let @bool inWarnIfUnused
+  ?globalProcedure:let @bool inGlobalProcedure
+  ?weakProcedure:let @bool inWeakProcedure
+  ?nullOnNoException:let @bool inNullOnNoException
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -85,39 +88,6 @@ proc routineSemanticAnalysis
   for mode in inRoutineModeList do
     [inContext.mModeMap searchKey !mode.mValue]
     procedureModeSet += !mode.mValue.string
-  end
-#--- Attributes
-  var warnIfUnused = true
-  var globalProcedure = false
-  var weakProcedure = false
-  var nullOnNoException = false
-  for (attribute) in inRoutineAttributeList do
-    if attribute.string == noWarningIfUnusedAttribute () then
-      if not warnIfUnused then
-        error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
-      end
-      warnIfUnused = false    
-    elsif attribute.string == globalAttribute () then
-      if globalProcedure then
-        error attribute : "duplicate @" + globalAttribute () + " attribute"
-      end
-      globalProcedure = true    
-    elsif attribute.string == weakAttribute () then
-      if weakProcedure then
-        error attribute : "duplicate @" + weakAttribute () + " attribute"
-      end
-      weakProcedure = true    
-    elsif attribute.string == nullWhenPanicDisabledAttribute () then
-      if nullOnNoException then
-        error attribute : "duplicate @" + nullWhenPanicDisabledAttribute () + " attribute"
-      end
-      nullOnNoException = true    
-    else
-      error attribute : "unknown attribute; available attributes are @"
-        + noWarningIfUnusedAttribute ()
-        + ", @" + weakAttribute ()
-        + ", @" + globalAttribute ()
-    end
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
@@ -169,22 +139,22 @@ proc routineSemanticAnalysis
   end
   if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
     let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]
-    if weakProcedure && not weak then
+    if inWeakProcedure && not weak then
       # redefined weak procedure is ignored
-    elsif weakProcedure && weak then
+    elsif inWeakProcedure && weak then
       error routineMangledName : "this weak procedure overrides a weak procedure"
-    elsif (not weakProcedure) && weak then
+    elsif (not inWeakProcedure) && weak then
       [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?8*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
         !formalArguments
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-        !warnIfUnused
-        !weakProcedure
-        !nullOnNoException
-        !globalProcedure
-        !.procedure
+        !inWarnIfUnused
+        !inWeakProcedure
+        !inNullOnNoException
+        !inGlobalProcedure
+        !inRoutineKind
       ]  
     else # (not weakProcedure) && (not weak)
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
@@ -192,11 +162,11 @@ proc routineSemanticAnalysis
         !formalArguments
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-        !warnIfUnused
-        !weakProcedure
-        !nullOnNoException
-        !globalProcedure
-        !.procedure
+        !inWarnIfUnused
+        !inWeakProcedure
+        !inNullOnNoException
+        !inGlobalProcedure
+        !inRoutineKind
       ]
     end
   else
@@ -205,59 +175,13 @@ proc routineSemanticAnalysis
       !formalArguments
       !instructionGenerationList
       ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-      !warnIfUnused
-      !weakProcedure
-      !nullOnNoException
-      !globalProcedure
-      !.procedure
+      !inWarnIfUnused
+      !inWeakProcedure
+      !inNullOnNoException
+      !inGlobalProcedure
+      !inRoutineKind
     ]  
   end
-
-#  if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
-#    let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]
-#    if weakProcedure && not weak then
-#      # redefined weak procedure is ignored
-#    elsif weakProcedure && weak then
-#      error routineMangledName : "this weak procedure overrides a weak procedure"
-#    elsif (not weakProcedure) && weak then
-#      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?8*] # Remove weak routine
-#      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-#        !routineMangledName
-#        !formalArguments
-#        !instructionGenerationList
-#        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-#        !warnIfUnused
-#        !weakProcedure
-#        !nullOnNoException
-#        !globalProcedure
-#        !inRoutineKind
-#      ]  
-#    else # (not weakProcedure) && (not weak)
-#      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
-#        !routineMangledName
-#        !formalArguments
-#        !instructionGenerationList
-#        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-#        !warnIfUnused
-#        !weakProcedure
-#        !nullOnNoException
-#        !globalProcedure
-#        !inRoutineKind
-#      ]
-#    end
-#  else
-#    [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-#      !routineMangledName
-#      !formalArguments
-#      !instructionGenerationList
-#      ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-#      !warnIfUnused
-#      !weakProcedure
-#      !nullOnNoException
-#      !globalProcedure
-#      !inRoutineKind
-#    ]  
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -291,7 +215,7 @@ method @routineMapIR-element llvmPrototypeGeneration
   case service : routineName = llvmNameForServiceImplementation (!lkey.string)
   end
   #--- In LLVM, declare routine as extern
-  ioLLVMcode += llvmTitleComment (!"proc " + routineName)
+  ioLLVMcode += llvmTitleComment (!routineName)
   ioLLVMcode += "declare void @" + routineName + " ("
   for () in mFormalArgumentListForGeneration
   do

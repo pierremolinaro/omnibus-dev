@@ -58,199 +58,76 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for service in self do
-    [service serviceSemanticAnalysis
+    routineSemanticAnalysis (
       !receiverType:inReceiverType
+      !.service
+      !{!service.mServiceMode}
+      !service.mServiceName
+ #     !service.mServiceAttributeList + @lstringlist {![globalAttribute () nowhere]}
+      !service.mServiceFormalArgumentList
+      !service.mServiceInstructionList
+      !service.mEndOfServiceLocation
+      !warnIfUnused:true
+      !globalProcedure:true
+      !weakProcedure:false
+      !nullOnNoException:false
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
-    ]
+    )
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @serviceDeclarationListAST-element serviceSemanticAnalysis
-  ?receiverType:@unifiedTypeMap-proxy inReceiverType
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#--- Attributes
-  var warnIfUnused = true
-  for (attribute) in mServiceAttributeList do
-    if attribute.string == noWarningIfUnusedAttribute () then
-      if not warnIfUnused then
-        error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
-      end
-      warnIfUnused = false    
-    else
-      error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
-    end
-  end
-#--- Variable map
-  let serviceNameForInvocationGraph = serviceNameForInvocationGraph (!inReceiverType !mServiceName)
-  @variableMap variableMap = initialVariableMap (
-    !routineNameForInvocation:serviceNameForInvocationGraph.string
-    !context:inContext
-    !userMode:false
-    !globalsAreConstant:false
-  )
-#--- Analyse formal arguments
-  @procFormalArgumentListForGeneration formalArguments = {}
-  enterFormalArguments (
-    !context:inContext
-    !mServiceFormalArgumentList
-    !?variableMap
-    !?formalArguments
-  )
-#--- Enter subprogram invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addNode
-    !serviceNameForInvocationGraph
-    !mServiceName
-  ]
-#--- Check mode
-  if (mServiceMode.string != kernelModeName ()) && (mServiceMode.string != isrModeName ()) then
-    error mServiceMode : "the mode should be `" + kernelModeName () + " or `" + isrModeName ()
-  end
-#--- Analyze instruction list
-  @instructionListIR instructionGenerationList = {}
-  [mServiceInstructionList analyzeRoutineInstructionList
-    !routineNameForInvocationGraph:serviceNameForInvocationGraph
-    !context:inContext
-    !modes:{!mServiceMode.string}
-    !allowException:true
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
-    !?generatedCode:instructionGenerationList
-  ]
-#---
-  [variableMap checkAutomatonStates !mEndOfServiceLocation]
-#--- Code generation
-  let serviceMangledName = if inReceiverType == .null then
-    @lstring.new {!"." + mServiceName !mServiceName.location}
-  else
-    @lstring.new {!"$" + [inReceiverType key] + "." + mServiceName !mServiceName.location}
-  end
-  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-    !serviceMangledName
-    !formalArguments
-    !instructionGenerationList
-    !false # not required
-    !warnIfUnused
-    !false # not weak
-    !false # not nullOnNoException
-    !false # not globalProcedure
-    !.section
-  ]  
-  [!?ioIntermediateCodeStruct.mServiceMapIR insertKey
-    !serviceMangledName
-    !formalArguments
-    !instructionGenerationList
-    !warnIfUnused
-  ]  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @serviceMapIR {
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionListIR mInstructionGenerationList
-  @bool mWarnIfUnused
-  insert insertKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @serviceMapIR llvmCodeGeneration
+method @routineMapIR serviceCodeGeneration
   ?let @string inCurrentDirectory
   ?let @string inTargetName
   ?!@string ioLLVMcode
   ?!@string ioAssemblerCode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
 {
-  for service in self do
-    [service llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  end
 #--- Generate service entries
   for service in self do (idx)
-    let name = llvmNameForServiceCall (!service.lkey.string)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-entry.s")
-    s = [s stringByReplacingStringByString !"!ENTRY!" !name]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
+   if service.mKind == .service then
+      let name = llvmNameForServiceCall (!service.lkey.string)
+      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-entry.s")
+      s = [s stringByReplacingStringByString !"!ENTRY!" !name]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
+    end
   end
   ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-header.s")
   for service in self do (idx)
-    let name = llvmNameForServiceImplementation (!service.lkey.string)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-entry.s")
-    s = [s stringByReplacingStringByString !"!ENTRY!" !name]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
+    if service.mKind == .service then
+      let serviceImplementationName = llvmNameForServiceImplementation (!service.lkey.string)
+      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-entry.s")
+      s = [s stringByReplacingStringByString !"!ENTRY!" !serviceImplementationName]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
+      ioLLVMcode += llvmTitleComment (!serviceImplementationName)
+      ioLLVMcode += "declare void @" + llvmNameForServiceCall (!service.lkey.string) + " ("
+      let typeName = [service.lkey.string stringByDeletingPathExtension]
+      var first = typeName == ""
+      if not first then
+        ioLLVMcode += "%" + typeName + "* %self"  
+      end
+      for () in service.mFormalArgumentListForGeneration do
+        if first then first = false else ioLLVMcode += ", " end
+        switch mFormalArgumentKind
+        case input :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+        case output :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+       case inputOutput :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+        end
+      end
+      ioLLVMcode += ") nounwind \n\n"
+    end
   end
   ioAssemblerCode += "\n"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @serviceMapIR-element llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  let serviceImplementationName = llvmNameForServiceImplementation (!lkey.string)
-  ioLLVMcode += llvmTitleComment (!serviceImplementationName)
-  ioLLVMcode += "declare void @" + llvmNameForServiceCall (!lkey.string) + " ("
-  let typeName = [lkey.string stringByDeletingPathExtension]
-  var first = typeName == ""
-  if not first then
-    ioLLVMcode += "%" + typeName + "* %self"  
-  end
-  for () in mFormalArgumentListForGeneration do
-    if first then first = false else ioLLVMcode += ", " end
-    switch mFormalArgumentKind
-    case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-    case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-   case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-    end
-  end
-  ioLLVMcode += ") nounwind \n\n"
-  ioLLVMcode += "define void @" + serviceImplementationName + " ("
-  for () in mFormalArgumentListForGeneration
-  do
-    switch mFormalArgumentKind
-    case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-    case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-   case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-    end
-  between
-    ioLLVMcode += ", "
-  end
-  ioLLVMcode += ") nounwind {\n"
-#--- Store input arguments in memory
-  for () in mFormalArgumentListForGeneration do
-    switch mFormalArgumentKind
-    case input :
-      let llvmType = [mFormalArgumentType llvmTypeName]
-      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
-      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
-    case output, inputOutput :
-    end
-  end
-#--- Instruction list
-  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#--- Epilog
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

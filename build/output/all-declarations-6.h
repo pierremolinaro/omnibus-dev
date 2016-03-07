@@ -168,33 +168,6 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_sectionMapIR_2D_eleme
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Category method '@serviceDeclarationListAST-element serviceSemanticAnalysis'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_serviceSemanticAnalysis (const class GALGAS_serviceDeclarationListAST_2D_element inObject,
-                                             class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
-                                             const class GALGAS_semanticContext constin_inContext,
-                                             class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                             class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Category method '@serviceMapIR-element llvmCodeGeneration'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_llvmCodeGeneration (const class GALGAS_serviceMapIR_2D_element inObject,
-                                        class GALGAS_string & io_ioLLVMcode,
-                                        const class GALGAS_generationContext constin_inGenerationContext,
-                                        class GALGAS_generationAdds & io_ioGenerationAdds,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                             Abstract category method '@expressionAST analyzeExpression'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -338,6 +311,31 @@ void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructio
                                              const GALGAS_generationContext constin_inGenerationContext,
                                              GALGAS_generationAdds & io_ioGenerationAdds,
                                              C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Category method '@routineMapIR-element llvmCodeGeneration'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_element inObject,
+                                        class GALGAS_string & io_ioLLVMcode,
+                                        class GALGAS_string & io_ioAssemblerCode,
+                                        const class GALGAS_generationContext constin_inGenerationContext,
+                                        class GALGAS_generationAdds & io_ioGenerationAdds,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Category method '@routineMapIR-element llvmPrototypeGeneration'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_llvmPrototypeGeneration (const class GALGAS_routineMapIR_2D_element inObject,
+                                             class GALGAS_string & io_ioLLVMcode,
+                                             class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -727,31 +725,6 @@ class GALGAS_string extensionGetter_passingModeForActualSelector (const class GA
                                                                   class GALGAS_lstring inArgument0,
                                                                   class C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Category method '@routineMapIR-element llvmCodeGeneration'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_element inObject,
-                                        class GALGAS_string & io_ioLLVMcode,
-                                        class GALGAS_string & io_ioAssemblerCode,
-                                        const class GALGAS_generationContext constin_inGenerationContext,
-                                        class GALGAS_generationAdds & io_ioGenerationAdds,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Category method '@routineMapIR-element llvmPrototypeGeneration'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_llvmPrototypeGeneration (const class GALGAS_routineMapIR_2D_element inObject,
-                                             class GALGAS_string & io_ioLLVMcode,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

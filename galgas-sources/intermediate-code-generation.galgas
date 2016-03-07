@@ -1,9 +1,8 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #                                                                                                                       
-#    I N T E R M E D I A T E    C O D E    G E N E R A T I O N                                                         *
+#    I N T E R M E D I A T E    C O D E    G E N E R A T I O N                                                          
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @intermediateCodeStruct
 
 struct @intermediateCodeStruct {
   @staticStringMap mStaticStringMap
@@ -12,7 +11,6 @@ struct @intermediateCodeStruct {
   @globalConstantMapIR mGlobalConstantMap
   @routineMapIR mRoutineMapIR
   @sectionMapIR mSectionMapIR
-  @serviceMapIR mServiceMapIR
   @functionMapIR mFunctionMapIR
   @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
@@ -82,22 +80,6 @@ map @routineMapIR {
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @routineMapIR {
-#  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-#  @instructionListIR mInstructionGenerationList
-#  @bool mIsRequired
-#  @bool mWarnIfUnused
-#  @bool mWeak
-#  @bool mNullOnNoException
-#  @bool mGlobal
-#
-#  insert insertKey error message "** internal error **"
-#  search searchKey error message "** internal error **"
-#  remove removeKey error message "** internal error **"
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
