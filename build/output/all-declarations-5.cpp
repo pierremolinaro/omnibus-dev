@@ -725,9 +725,125 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/02-blinkled-semaphore.plm'
+//--- File 'teensy-3-1-tp/02-section-service-duration.plm'
 
 const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "section emptySection () {\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "service emptyService `kernel () {\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "section getSysTick (!outResult $uint32) {\n"
+  "  outResult = SYST_CVR\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "task T priority 0 stackSize 512 {\n"
+  "\n"
+  "  proc setup {\n"
+  "  //--- Compute getSysTick duration\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    var t0 $uint32 getSysTick (\?t0)\n"
+  "    var t1 $uint32 getSysTick (\?t1)\n"
+  "    let systickDuration = t0 - t1\n"
+  "    printUnsigned (!systickDuration)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!t0 - t1)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!t0 - t1)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!t0 - t1)\n"
+  "  //--- Compute emptySection duration\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    emptySection ()\n"
+  "    getSysTick (\?t1)\n"
+  "    goto (!line:1 !column:0)\n"
+  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    emptySection ()\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    emptySection ()\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    emptySection ()\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "  //--- Compute emptyService duration\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    emptyService ()\n"
+  "    getSysTick (\?t1)\n"
+  "    goto (!line:2 !column:0)\n"
+  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    emptyService ()\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    emptyService ()\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    waitDuringMS (!delay:1)\n"
+  "    getSysTick (\?t0)\n"
+  "    emptyService ()\n"
+  "    getSysTick (\?t1)\n"
+  "    printSpaces (!1)\n"
+  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "  }\n"
+  "  \n"
+  "  proc loop {\n"
+  "    waitDuringMS (!delay:250)\n"
+  "    ledOn (!LED_L1) // Allumer la led\n"
+  "    waitDuringMS (!delay:250)\n"
+  "    ledOff (!LED_L1)  // \xC3""\x89""teindre la led\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
+  "02-section-service-duration.plm",
+  "plm",
+  true, // Text file
+  2578, // Text length
+  gWrapperFileContent_1_embeddedSampleCode
+) ;
+
+//--- File 'teensy-3-1-tp/02-semaphore.plm'
+
+const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -758,17 +874,17 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
-  "02-blinkled-semaphore.plm",
+const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
+  "02-semaphore.plm",
   "plm",
   true, // Text file
   515, // Text length
-  gWrapperFileContent_1_embeddedSampleCode
+  gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/03-blinkled-systick-enum.plm'
 
-const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -799,17 +915,17 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "03-blinkled-systick-enum.plm",
   "plm",
   true, // Text file
   514, // Text length
-  gWrapperFileContent_2_embeddedSampleCode
+  gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/04-blinkled-systick-struct.plm'
 
-const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -845,17 +961,17 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "04-blinkled-systick-struct.plm",
   "plm",
   true, // Text file
   617, // Text length
-  gWrapperFileContent_3_embeddedSampleCode
+  gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/05-blinkled-systick-string.plm'
 
-const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "let s $staticString = \"azerty\"\n"
   "\n"
@@ -889,17 +1005,17 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-blinkled-systick-string.plm",
   "plm",
   true, // Text file
   637, // Text length
-  gWrapperFileContent_4_embeddedSampleCode
+  gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/06-blinkled-lcd.plm'
 
-const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -927,17 +1043,17 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "06-blinkled-lcd.plm",
   "plm",
   true, // Text file
   559, // Text length
-  gWrapperFileContent_5_embeddedSampleCode
+  gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/07-blinkled-urem-test.plm'
 
-const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -985,17 +1101,17 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "07-blinkled-urem-test.plm",
   "plm",
   true, // Text file
   1128, // Text length
-  gWrapperFileContent_6_embeddedSampleCode
+  gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/08-blinkled-panic.plm'
 
-const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1022,17 +1138,17 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "08-blinkled-panic.plm",
   "plm",
   true, // Text file
   518, // Text length
-  gWrapperFileContent_7_embeddedSampleCode
+  gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/09-pit-unprivileged-mode.plm'
 
-const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1079,17 +1195,17 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-pit-unprivileged-mode.plm",
   "plm",
   true, // Text file
   865, // Text length
-  gWrapperFileContent_8_embeddedSampleCode
+  gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/10-pit-unprivileged-mode-it.plm'
 
-const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1152,17 +1268,17 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "10-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
   1265, // Text length
-  gWrapperFileContent_9_embeddedSampleCode
+  gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/11-structure-procs.plm'
 
-const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1233,17 +1349,17 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-tp
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "11-structure-procs.plm",
   "plm",
   true, // Text file
   1167, // Text length
-  gWrapperFileContent_10_embeddedSampleCode
+  gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/12-concurrency-read-write.plm'
 
-const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1295,17 +1411,17 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "12-concurrency-read-write.plm",
   "plm",
   true, // Text file
   956, // Text length
-  gWrapperFileContent_11_embeddedSampleCode
+  gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-tp' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [13] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [14] = {
   & gWrapperFile_0_embeddedSampleCode,
   & gWrapperFile_1_embeddedSampleCode,
   & gWrapperFile_2_embeddedSampleCode,
@@ -1318,6 +1434,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [13] = 
   & gWrapperFile_9_embeddedSampleCode,
   & gWrapperFile_10_embeddedSampleCode,
   & gWrapperFile_11_embeddedSampleCode,
+  & gWrapperFile_12_embeddedSampleCode,
   NULL
 } ;
 
@@ -1331,7 +1448,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1]
 
 const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   "teensy-3-1-tp",
-  12,
+  13,
   gWrapperAllFiles_embeddedSampleCode_1,
   0,
   gWrapperAllDirectories_embeddedSampleCode_1

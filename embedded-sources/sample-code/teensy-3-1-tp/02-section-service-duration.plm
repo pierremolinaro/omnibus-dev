@@ -1,0 +1,105 @@
+target "teensy-3-1-tp"
+
+//------------------------------------------------*
+
+section emptySection () {
+}
+
+//------------------------------------------------*
+
+service emptyService `kernel () {
+}
+
+//------------------------------------------------*
+
+section getSysTick (!outResult $uint32) {
+  outResult = SYST_CVR
+}
+
+//------------------------------------------------*
+
+task T priority 0 stackSize 512 {
+
+  proc setup {
+  //--- Compute getSysTick duration
+    waitDuringMS (!delay:1)
+    var t0 $uint32 getSysTick (?t0)
+    var t1 $uint32 getSysTick (?t1)
+    let systickDuration = t0 - t1
+    printUnsigned (!systickDuration)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!t0 - t1)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!t0 - t1)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!t0 - t1)
+  //--- Compute emptySection duration
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    emptySection ()
+    getSysTick (?t1)
+    goto (!line:1 !column:0)
+    printUnsigned (!(t0 - t1) - systickDuration)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    emptySection ()
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!(t0 - t1) - systickDuration)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    emptySection ()
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!(t0 - t1) - systickDuration)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    emptySection ()
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!(t0 - t1) - systickDuration)
+  //--- Compute emptyService duration
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    emptyService ()
+    getSysTick (?t1)
+    goto (!line:2 !column:0)
+    printUnsigned (!(t0 - t1) - systickDuration)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    emptyService ()
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!(t0 - t1) - systickDuration)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    emptyService ()
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!(t0 - t1) - systickDuration)
+    waitDuringMS (!delay:1)
+    getSysTick (?t0)
+    emptyService ()
+    getSysTick (?t1)
+    printSpaces (!1)
+    printUnsigned (!(t0 - t1) - systickDuration)
+  }
+  
+  proc loop {
+    waitDuringMS (!delay:250)
+    ledOn (!LED_L1) // Allumer la led
+    waitDuringMS (!delay:250)
+    ledOff (!LED_L1)  // Éteindre la led
+  }
+}
+
+//------------------------------------------------*
