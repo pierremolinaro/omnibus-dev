@@ -849,19 +849,31 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "struct $semaphore {\n"
   "  var value $uint32 = 0\n"
+  "  var list $taskList = $taskList ()\n"
   "\n"
   "  service P `kernel () {\n"
+  "    if self.value > 0 then\n"
+  "//      self.value -= 1\n"
+  "    else\n"
+  "//      kernel_blockRunningTaskInList (!\?self.list)\n"
+  "    end\n"
+  "  }\n"
+  "\n"
+  "  service V `kernel () {\n"
   "  \n"
   "  }\n"
   "}\n"
   "\n"
+  "//var s = $semaphore () {\n"
+  "//  proc T.setup\n"
+  "//}\n"
+  "\n"
   "//------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
-  "  var s = $semaphore ()\n"
   "\n"
   "  proc setup {\n"
-  "    s.P ()\n"
+  "//    s.P ()\n"
   "  }\n"
   "  \n"
   "  proc loop {\n"
@@ -878,7 +890,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "02-semaphore.plm",
   "plm",
   true, // Text file
-  515, // Text length
+  727, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
