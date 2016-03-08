@@ -4,19 +4,35 @@ target "teensy-3-1-tp"
 
 struct $semaphore {
   var value $uint32 = 0
+  var list $taskList = $taskList ()
 
   service P `kernel () {
-  
+    if self.value > 0 then
+//      self.value -= 1
+    else
+//      kernel_blockRunningTaskInList (!?self.list)
+    end
+  }
+
+  service V `kernel () {
+//    var found $bool
+//    kernel_makeTaskReadyFromWaitingList (!?self.list ? found)
+//    if not found then
+//      self.value += 1
+//    end
   }
 }
+
+//var s = $semaphore () {
+//  proc T.setup
+//}
 
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-  var s = $semaphore ()
 
   proc setup {
-    s.P ()
+//    s.P ()
   }
   
   proc loop {

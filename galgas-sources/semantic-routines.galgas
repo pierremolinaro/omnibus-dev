@@ -112,6 +112,19 @@ proc routineSemanticAnalysis
     !registerAccess:inRegisterAccessKind
     !globalsAreConstant:false
   )
+#--- Add self
+  if inReceiverType != .null then
+    [!?variableMap insertUsedLocalConstant
+      !.new {!"self" !.here}
+      !inReceiverType
+      !true # mReadAccessAllowed
+      !.localValue {!type:inReceiverType !name:"self"}
+      !true # copiable
+      !{} # fieldMap
+      !false # mCanBeUsedAsInputParameter
+      !true # mIsConstant
+    ]
+  end
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
   enterFormalArguments (

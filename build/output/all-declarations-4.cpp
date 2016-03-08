@@ -1853,76 +1853,82 @@ void routine_routineSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy const
     break ;
   }
   GALGAS_variableMap var_variableMap = function_initialVariableMap (var_routineNameForInvocationGraph.mAttribute_string, constinArgument_inContext, var_procedureModeSet.getter_hasKey (function_userModeName (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 111)) COMMA_SOURCE_FILE ("semantic-routines.galgas", 111)), constinArgument_inRegisterAccessKind, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 108)) ;
-  GALGAS_procFormalArgumentListForGeneration var_formalArguments = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 116)) ;
-  {
-  routine_enterFormalArguments (constinArgument_inContext, constinArgument_inRoutineFormalArgumentList, var_variableMap, var_formalArguments, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 117)) ;
-  }
-  const enumGalgasBool test_0 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 124)).operator_not (SOURCE_FILE ("semantic-routines.galgas", 124)).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-routines.galgas", 116)))).boolEnum () ;
   if (kBoolTrue == test_0) {
     {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph, constinArgument_inRoutineName, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 125)) ;
+    var_variableMap.setter_insertUsedLocalConstant (GALGAS_lstring::constructor_new (GALGAS_string ("self"), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 118))  COMMA_SOURCE_FILE ("semantic-routines.galgas", 118)), constinArgument_inReceiverType, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_localValue (constinArgument_inReceiverType, GALGAS_string ("self")  COMMA_SOURCE_FILE ("semantic-routines.galgas", 121)), GALGAS_bool (true), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("semantic-routines.galgas", 123)), GALGAS_bool (false), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 117)) ;
     }
   }
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 131)) ;
-  categoryMethod_analyzeRoutineInstructionList (constinArgument_inRoutineInstructionList, var_routineNameForInvocationGraph, constinArgument_inContext, var_procedureModeSet, var_procedureModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 136)) COMMA_SOURCE_FILE ("semantic-routines.galgas", 136)).operator_not (SOURCE_FILE ("semantic-routines.galgas", 136)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 132)) ;
-  var_variableMap.method_checkAutomatonStates (constinArgument_inEndOfRoutineDeclaration, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 143)) ;
-  GALGAS_lstring temp_1 ;
-  const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, constinArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-routines.galgas", 145)))).boolEnum () ;
-  if (kBoolTrue == test_2) {
-    temp_1 = GALGAS_lstring::constructor_new (GALGAS_string (".").add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("semantic-routines.galgas", 146)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 146)), constinArgument_inRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("semantic-routines.galgas", 146)) ;
-  }else if (kBoolFalse == test_2) {
-    temp_1 = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("semantic-routines.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)), constinArgument_inRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)) ;
+  GALGAS_procFormalArgumentListForGeneration var_formalArguments = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 129)) ;
+  {
+  routine_enterFormalArguments (constinArgument_inContext, constinArgument_inRoutineFormalArgumentList, var_variableMap, var_formalArguments, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 130)) ;
   }
-  GALGAS_lstring var_routineMangledName = temp_1 ;
-  const enumGalgasBool test_3 = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_hasKey (var_routineMangledName.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 150)).boolEnum () ;
-  if (kBoolTrue == test_3) {
-    GALGAS_bool var_weak = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_mWeakForKey (var_routineMangledName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 151)) ;
-    GALGAS_bool test_4 = constinArgument_inWeakProcedure ;
-    if (kBoolTrue == test_4.boolEnum ()) {
-      test_4 = var_weak.operator_not (SOURCE_FILE ("semantic-routines.galgas", 152)) ;
-    }
-    const enumGalgasBool test_5 = test_4.boolEnum () ;
-    if (kBoolTrue == test_5) {
-    }else if (kBoolFalse == test_5) {
-      GALGAS_bool test_6 = constinArgument_inWeakProcedure ;
-      if (kBoolTrue == test_6.boolEnum ()) {
-        test_6 = var_weak ;
-      }
-      const enumGalgasBool test_7 = test_6.boolEnum () ;
-      if (kBoolTrue == test_7) {
-        GALGAS_location location_8 (var_routineMangledName.getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_8, GALGAS_string ("this weak procedure overrides a weak procedure")  COMMA_SOURCE_FILE ("semantic-routines.galgas", 155)) ;
-      }else if (kBoolFalse == test_7) {
-        GALGAS_bool test_9 = constinArgument_inWeakProcedure.operator_not (SOURCE_FILE ("semantic-routines.galgas", 156)) ;
-        if (kBoolTrue == test_9.boolEnum ()) {
-          test_9 = var_weak ;
-        }
-        const enumGalgasBool test_10 = test_9.boolEnum () ;
-        if (kBoolTrue == test_10) {
-          {
-          GALGAS_procFormalArgumentListForGeneration joker_6406_8 ; // Joker input parameter
-          GALGAS_instructionListIR joker_6406_7 ; // Joker input parameter
-          GALGAS_bool joker_6406_6 ; // Joker input parameter
-          GALGAS_bool joker_6406_5 ; // Joker input parameter
-          GALGAS_bool joker_6406_4 ; // Joker input parameter
-          GALGAS_bool joker_6406_3 ; // Joker input parameter
-          GALGAS_bool joker_6406_2 ; // Joker input parameter
-          GALGAS_routineKind joker_6406_1 ; // Joker input parameter
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_removeKey (var_routineMangledName, joker_6406_8, joker_6406_7, joker_6406_6, joker_6406_5, joker_6406_4, joker_6406_3, joker_6406_2, joker_6406_1, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 157)) ;
-          }
-          {
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 162)), constinArgument_inWarnIfUnused, constinArgument_inWeakProcedure, constinArgument_inNullOnNoException, constinArgument_inGlobalProcedure, constinArgument_inRoutineKind, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 158)) ;
-          }
-        }else if (kBoolFalse == test_10) {
-          {
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 174)), constinArgument_inWarnIfUnused, constinArgument_inWeakProcedure, constinArgument_inNullOnNoException, constinArgument_inGlobalProcedure, constinArgument_inRoutineKind, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 170)) ;
-          }
-        }
-      }
-    }
-  }else if (kBoolFalse == test_3) {
+  const enumGalgasBool test_1 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 137)).operator_not (SOURCE_FILE ("semantic-routines.galgas", 137)).boolEnum () ;
+  if (kBoolTrue == test_1) {
     {
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 187)), constinArgument_inWarnIfUnused, constinArgument_inWeakProcedure, constinArgument_inNullOnNoException, constinArgument_inGlobalProcedure, constinArgument_inRoutineKind, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 183)) ;
+    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph, constinArgument_inRoutineName, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 138)) ;
+    }
+  }
+  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 144)) ;
+  categoryMethod_analyzeRoutineInstructionList (constinArgument_inRoutineInstructionList, var_routineNameForInvocationGraph, constinArgument_inContext, var_procedureModeSet, var_procedureModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)) COMMA_SOURCE_FILE ("semantic-routines.galgas", 149)).operator_not (SOURCE_FILE ("semantic-routines.galgas", 149)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 145)) ;
+  var_variableMap.method_checkAutomatonStates (constinArgument_inEndOfRoutineDeclaration, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 156)) ;
+  GALGAS_lstring temp_2 ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, constinArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-routines.galgas", 158)))).boolEnum () ;
+  if (kBoolTrue == test_3) {
+    temp_2 = GALGAS_lstring::constructor_new (GALGAS_string (".").add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("semantic-routines.galgas", 159)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 159)), constinArgument_inRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("semantic-routines.galgas", 159)) ;
+  }else if (kBoolFalse == test_3) {
+    temp_2 = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 161)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 161)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("semantic-routines.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 161)), constinArgument_inRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("semantic-routines.galgas", 161)) ;
+  }
+  GALGAS_lstring var_routineMangledName = temp_2 ;
+  const enumGalgasBool test_4 = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_hasKey (var_routineMangledName.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 163)).boolEnum () ;
+  if (kBoolTrue == test_4) {
+    GALGAS_bool var_weak = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_mWeakForKey (var_routineMangledName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 164)) ;
+    GALGAS_bool test_5 = constinArgument_inWeakProcedure ;
+    if (kBoolTrue == test_5.boolEnum ()) {
+      test_5 = var_weak.operator_not (SOURCE_FILE ("semantic-routines.galgas", 165)) ;
+    }
+    const enumGalgasBool test_6 = test_5.boolEnum () ;
+    if (kBoolTrue == test_6) {
+    }else if (kBoolFalse == test_6) {
+      GALGAS_bool test_7 = constinArgument_inWeakProcedure ;
+      if (kBoolTrue == test_7.boolEnum ()) {
+        test_7 = var_weak ;
+      }
+      const enumGalgasBool test_8 = test_7.boolEnum () ;
+      if (kBoolTrue == test_8) {
+        GALGAS_location location_9 (var_routineMangledName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_9, GALGAS_string ("this weak procedure overrides a weak procedure")  COMMA_SOURCE_FILE ("semantic-routines.galgas", 168)) ;
+      }else if (kBoolFalse == test_8) {
+        GALGAS_bool test_10 = constinArgument_inWeakProcedure.operator_not (SOURCE_FILE ("semantic-routines.galgas", 169)) ;
+        if (kBoolTrue == test_10.boolEnum ()) {
+          test_10 = var_weak ;
+        }
+        const enumGalgasBool test_11 = test_10.boolEnum () ;
+        if (kBoolTrue == test_11) {
+          {
+          GALGAS_procFormalArgumentListForGeneration joker_6760_8 ; // Joker input parameter
+          GALGAS_instructionListIR joker_6760_7 ; // Joker input parameter
+          GALGAS_bool joker_6760_6 ; // Joker input parameter
+          GALGAS_bool joker_6760_5 ; // Joker input parameter
+          GALGAS_bool joker_6760_4 ; // Joker input parameter
+          GALGAS_bool joker_6760_3 ; // Joker input parameter
+          GALGAS_bool joker_6760_2 ; // Joker input parameter
+          GALGAS_routineKind joker_6760_1 ; // Joker input parameter
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_removeKey (var_routineMangledName, joker_6760_8, joker_6760_7, joker_6760_6, joker_6760_5, joker_6760_4, joker_6760_3, joker_6760_2, joker_6760_1, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 170)) ;
+          }
+          {
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 175)), constinArgument_inWarnIfUnused, constinArgument_inWeakProcedure, constinArgument_inNullOnNoException, constinArgument_inGlobalProcedure, constinArgument_inRoutineKind, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 171)) ;
+          }
+        }else if (kBoolFalse == test_11) {
+          {
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 187)), constinArgument_inWarnIfUnused, constinArgument_inWeakProcedure, constinArgument_inNullOnNoException, constinArgument_inGlobalProcedure, constinArgument_inRoutineKind, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 183)) ;
+          }
+        }
+      }
+    }
+  }else if (kBoolFalse == test_4) {
+    {
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 200)), constinArgument_inWarnIfUnused, constinArgument_inWeakProcedure, constinArgument_inNullOnNoException, constinArgument_inGlobalProcedure, constinArgument_inRoutineKind, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 196)) ;
     }
   }
 }
