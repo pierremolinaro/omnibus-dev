@@ -35,6 +35,11 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+#    select
+#    or
+#      $self$
+#      $.$
+#    end
     $identifier$ ?let varName
     @operatorAssignKind operatorAssign
     select

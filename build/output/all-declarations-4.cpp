@@ -9743,7 +9743,7 @@ const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.7.1-binutils-2.26-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.8.0-binutils-2.26-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -9762,7 +9762,6 @@ const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "def LLCcompiler ():\n"
   "  return [toolDir () + \"/bin/llc\", \"-function-sections\", \"-data-sections\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
-  "#  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -9921,7 +9920,7 @@ const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  14503, // Text length
+  14435, // Text length
   gWrapperFileContent_10_targetTemplates
 ) ;
 
