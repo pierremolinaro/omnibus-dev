@@ -29,7 +29,7 @@ def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
   if SYSTEM_NAME == "Darwin":
     MACHINE = "i386"
-  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.7.1-binutils-2.26-libusb-1.0.19")
+  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.8.0-binutils-2.26-libusb-1.0.19")
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -48,7 +48,6 @@ def llvmOptimizerCompiler ():
 
 def LLCcompiler ():
   return [toolDir () + "/bin/llc", "-function-sections", "-data-sections", "-<<LLC_OPTIMIZATION_OPTION>>"]
-#  return [toolDir () + "/bin/llc", "-<<LLC_OPTIMIZATION_OPTION>>"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
