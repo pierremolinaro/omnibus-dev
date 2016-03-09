@@ -853,7 +853,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "  service P `kernel () {\n"
   "    if self.value > 0 then\n"
-  "      self.value -= 1\n"
+  "//      self.value -= 1\n"
   "    else\n"
   "//      kernel_blockRunningTaskInList (!\?self.list)\n"
   "    end\n"
@@ -894,7 +894,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "02-semaphore.plm",
   "plm",
   true, // Text file
-  866, // Text length
+  868, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
