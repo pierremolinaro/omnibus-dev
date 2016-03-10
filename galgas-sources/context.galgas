@@ -106,6 +106,7 @@ sharedmap @unifiedTypeMap %selectors {
   @typeKind kind
   @typedConstantMap typedConstantMap
   @functionMap functionMap
+  @bool instanciable
   @bool copiable
   @bool equatable
   @bool comparable
@@ -148,6 +149,14 @@ map @constructorMap {
   @constructorValue mInitValue
   insert insertKey error message "-- internal error --"
   search searchKey error message "-- internal error --"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @globalTaskVariableList {
+  @string mTaskName
+  @string mTaskTypeName
+  @valueIR mInitialValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -197,6 +206,7 @@ struct @semanticContext {
 #--- Tasks
   @taskMap mTaskMap
   @taskVariableMap mTaskVariableMap
+  @globalTaskVariableList mGlobalTaskVariableList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -197,28 +197,6 @@ override method @structureDeclaration enterInContext
     propertyList += !mFieldName.string !fieldTypeNameProxy
     [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy ![propertyMap count]]
   end
-#--- Procedures
-#  @procedureMap procedureMap = {}
-#  for procedure in mProcedureDeclarationListAST do
-#    @procedureSignature signature = {}
-#    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
-#      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-#      signature += !formalArgumentPassingMode !selector.string !typeProxy
-#    end
-#  #--- Check modes
-#    @modeMap procedureModeMap = {}
-#    for mode in procedure.mProcedureModeList do
-#      [ioContext.mModeMap searchKey !mode.mValue]
-#      [!?procedureModeMap insertKey !mode.mValue]
-#    end
-#    [!?procedureMap insertKey
-#      !procedure.mProcedureName
-#      !procedure.mMutating
-#      !procedureModeMap
-#      !signature
-#      !false # not weak
-#    ]
-#  end
 #--- Functions
   @functionMap functionMap = {}
   for function in mFunctionDeclarationListAST do
@@ -251,8 +229,8 @@ override method @structureDeclaration enterInContext
     !llvmTypeName:"%$" + mStructureName.string
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !typedConstantMap:{}
-#    !procedureMap:procedureMap
     !functionMap:functionMap
+    !instanciable:true
     !copiable:copiable
     !equatable:false
     !comparable:false

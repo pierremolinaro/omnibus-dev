@@ -134,9 +134,35 @@ method @taskList enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   for task in self do
+  #--- task variables
+    @propertyList propertyList = {}
+    @propertyMap propertyMap = {}
+    @operandIRList initialValueList = {}
     for variable in task.mVarList do
-      [variable enterInContext !taskName:task.mTaskName.string !?context:ioContext !?staticStringMap:ioGlobalLiteralStringMap]
+      [variable enterInContext
+        !taskName:task.mTaskName.string
+        !?context:ioContext
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?propertyList
+        !?propertyMap
+        !?initialValueList
+      ]
     end
+  #--- Enter task variable map as structure type in type map
+    [!?ioContext.mTypeMap insertKey
+      !lkey:task.mTaskName
+      !llvmTypeName:"%$" + task.mTaskName.string
+      !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
+      !typedConstantMap:{}
+      !functionMap:{}
+      !instanciable:false
+      !copiable:false
+      !equatable:false
+      !comparable:false
+      !enumerationType:.null # Not enumerable
+    ]
+    ioContext.mGlobalTaskVariableList += !task.mTaskName.string !task.mTaskName.string !.llvmStructureConstant{!values:initialValueList}
+  #--- Task procedures
     @taskProcedureMap taskProcedureMap = {}
     for procedure in task.mTaskProcList do
       [!?taskProcedureMap insertKey !procedure.mProcName]
@@ -157,6 +183,9 @@ method @taskVarListAST-element enterInContext
   ?taskName:let @string inTaskName
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!@propertyList ioPropertyList
+  ?!@propertyMap ioPropertyMap
+  ?!@operandIRList ioInitialValueList
 {
 #--- Get destination type
   @unifiedTypeMap-proxy variableAnnotationType
@@ -194,12 +223,16 @@ method @taskVarListAST-element enterInContext
     !errorLocation:mVarName.location
     !staticTypeAllowed:false
   )
+  drop variableAnnotationType, expressionResult
 #--- Enter variable in task variable map
   [!?ioContext.mTaskVariableMap insertKey
     !.new{!inTaskName + "." + mVarName !mVarName.location}
     !result.mType
     !result.mValue
   ]
+  ioPropertyList += !mVarName.string !result.mType
+  [!?ioPropertyMap insertKey !mVarName !result.mType ![ioPropertyMap count]]
+  ioInitialValueList += !result
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -386,6 +419,21 @@ method @taskMapIR generateCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
+#--- Declare task variables
+  ioLLVMcode += llvmTitleComment (!"Task variables")
+  for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
+    ioLLVMcode += "@" + "task.var." + taskName
+    ioLLVMcode += " = internal global %$"
+    ioLLVMcode += taskTypeName + " "
+    let initialString = [initValueList llvmName]
+    if initialString == "" then
+      ioLLVMcode += "zeroinitializer"
+    else
+      ioLLVMcode += initialString
+    end
+    ioLLVMcode += "\n"
+  end
+  ioLLVMcode += "\n"
 #--- Build ordered task list
   @taskListIR orderedTaskList = {}
   for task in self do

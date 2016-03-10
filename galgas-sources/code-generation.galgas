@@ -141,6 +141,7 @@ struct @generationContext {
   @string mExceptionLineLLVMType
   @taskVariableMap mTaskVariableMap
   @taskProcedureMapIR mTaskProcedureMap
+  @globalTaskVariableList mGlobalTaskVariableList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -151,7 +152,6 @@ private proc generateLLVMfile
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?typeMap:let @unifiedTypeMap inTypeMap
-#  ?typeInitialierMap:let @typeInitializerMap inTypeInitializerMap
   ?target:let @lstring inTargetName
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
@@ -164,6 +164,7 @@ private proc generateLLVMfile
     ![inExceptionLineType llvmTypeName]
     !inIntermediateCodeStruct.mTaskVariableMap
     !inIntermediateCodeStruct.mTaskProcedureMap
+    !inIntermediateCodeStruct.mGlobalTaskVariableList
   }
   let sourceDirectory = inProductDirectory + "/sources"
   var llvmCode = ""

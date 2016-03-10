@@ -386,92 +386,6 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
 //---------------------------------------------------------------------------------------------------------------------*
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          @valueIR enum, associated values                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_valueIR_literalInteger : public cEnumAssociatedValues {
-  public : const GALGAS_bigint mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valueIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
-                                                         COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valueIR_literalInteger (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_valueIR_llvmLocalObject : public cEnumAssociatedValues {
-  public : const GALGAS_string mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valueIR_llvmLocalObject (const GALGAS_string & inAssociatedValue0
-                                                          COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valueIR_llvmLocalObject (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_valueIR_llvmGlobalObject : public cEnumAssociatedValues {
-  public : const GALGAS_string mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valueIR_llvmGlobalObject (const GALGAS_string & inAssociatedValue0
-                                                           COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valueIR_llvmGlobalObject (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_valueIR_llvmStructureConstant : public cEnumAssociatedValues {
-  public : const GALGAS_operandIRList mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valueIR_llvmStructureConstant (const GALGAS_operandIRList & inAssociatedValue0
-                                                                COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valueIR_llvmStructureConstant (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_valueIR_literalString : public cEnumAssociatedValues {
-  public : const GALGAS_uint mAssociatedValue0 ;
-  public : const GALGAS_uint mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_valueIR_literalString (const GALGAS_uint & inAssociatedValue0,
-                                                        const GALGAS_uint & inAssociatedValue1
-                                                        COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_valueIR_literalString (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      @objectInMemoryIR enum, associated values                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -835,6 +749,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_prefixOperatorMap mAttribute_mUnsignedComplementOperatorMap ;
   public : GALGAS_taskMap mAttribute_mTaskMap ;
   public : GALGAS_taskVariableMap mAttribute_mTaskVariableMap ;
+  public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
 
 
 //--------------------------------- Accessors
@@ -893,7 +808,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_prefixOperatorMap & in_mNotOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mUnsignedComplementOperatorMap,
                                    const GALGAS_taskMap & in_mTaskMap,
-                                   const GALGAS_taskVariableMap & in_mTaskVariableMap) ;
+                                   const GALGAS_taskVariableMap & in_mTaskVariableMap,
+                                   const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
 
 //-- Start of generic part --*
 
@@ -948,7 +864,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_prefixOperatorMap & inOperand39,
                                                           const class GALGAS_prefixOperatorMap & inOperand40,
                                                           const class GALGAS_taskMap & inOperand41,
-                                                          const class GALGAS_taskVariableMap & inOperand42
+                                                          const class GALGAS_taskVariableMap & inOperand42,
+                                                          const class GALGAS_globalTaskVariableList & inOperand43
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -994,6 +911,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_functionMap getter_mFunctionMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMap getter_mGlobalConstantMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMap getter_mGlobalVariableMap (LOCATION_ARGS) const ;
 

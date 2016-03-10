@@ -78,6 +78,9 @@ void categoryMethod_enterInContext (const class GALGAS_taskVarListAST_2D_element
                                     const class GALGAS_string constin_inTaskName,
                                     class GALGAS_semanticContext & io_ioContext,
                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                    class GALGAS_propertyList & io_ioPropertyList,
+                                    class GALGAS_propertyMap & io_ioPropertyMap,
+                                    class GALGAS_operandIRList & io_ioInitialValueList,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 

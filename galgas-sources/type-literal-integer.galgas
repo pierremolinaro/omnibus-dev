@@ -56,8 +56,8 @@ override method @literalIntegerDeclaration enterInContext
     !llvmTypeName:"<<literal integer>>"
     !kind:.staticInteger
     !typedConstantMap:{}
-#    !procedureMap:{}
     !functionMap:{}
+    !instanciable:true
     !copiable:true
     !equatable:true
     !comparable:true
