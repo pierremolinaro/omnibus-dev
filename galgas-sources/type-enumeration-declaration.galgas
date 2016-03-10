@@ -119,8 +119,8 @@ override method @enumerationDeclaration enterInContext
     !llvmTypeName:"i" + [[enumConstantMap count] - 1 significantBitCount]
     !kind:.enumeration {!constantMap:enumConstantMap}
     !typedConstantMap:constructorMap
-#    !procedureMap:{} # Procedure map
     !functionMap:{}
+    !instanciable:true
     !copiable:copiable
     !equatable:true
     !comparable:true

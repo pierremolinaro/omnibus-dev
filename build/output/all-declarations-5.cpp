@@ -875,15 +875,18 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
+  "  var t $uint32 = 0\n"
   "\n"
   "  proc setup {\n"
   "//    s.P ()\n"
   "  }\n"
   "  \n"
   "  proc loop {\n"
-  "    waitDuringMS (!delay:250)\n"
+  "    waitUntilMS (!deadline:t)\n"
+  "    t += 250\n"
   "    ledOn (!LED_L1) // Allumer la led\n"
-  "    waitDuringMS (!delay:250)\n"
+  "    waitUntilMS (!deadline:t)\n"
+  "    t += 250\n"
   "    ledOff (!LED_L1)  // \xC3""\x89""teindre la led\n"
   "  }\n"
   "}\n"
@@ -894,7 +897,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "02-semaphore.plm",
   "plm",
   true, // Text file
-  868, // Text length
+  914, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -912,7 +915,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
-  "  var led = $ledState.on\n"
+  "  var led $ledState = $ledState.on\n"
   "\n"
   "  proc setup {\n"
   "  }\n"
@@ -935,7 +938,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "03-blinkled-systick-enum.plm",
   "plm",
   true, // Text file
-  514, // Text length
+  524, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 

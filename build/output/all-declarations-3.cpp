@@ -12928,6 +12928,19 @@ GALGAS_functionMap GALGAS_unifiedTypeMap_2D_proxy::getter_functionMap (C_Compile
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_instanciable (C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) getAttributeListPointer (inCompiler, "instanciable" COMMA_THERE) ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
+    result = p->mAttribute_instanciable;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_copiable (C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) const {
   GALGAS_bool result ;

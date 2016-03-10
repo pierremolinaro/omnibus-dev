@@ -66,8 +66,8 @@ override method @booleanDeclaration enterInContext
     !llvmTypeName:"i1"
     !kind:.boolean
     !typedConstantMap:{}
-#    !procedureMap:{}
     !functionMap:{}
+    !instanciable:true
     !copiable:copiable
     !equatable:true
     !comparable:true

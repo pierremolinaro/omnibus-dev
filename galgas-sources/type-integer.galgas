@@ -74,8 +74,8 @@ override method @integerDeclaration enterInContext
     !llvmTypeName:"i" + mSize
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
     !typedConstantMap:{}
-#    !procedureMap:{}
     !functionMap:{}
+    !instanciable:true
     !copiable:true
     !equatable:true
     !comparable:true

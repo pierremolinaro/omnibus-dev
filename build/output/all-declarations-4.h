@@ -44,6 +44,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_taskMapIR mAttribute_mTaskMapIR ;
   public : GALGAS_taskVariableMap mAttribute_mTaskVariableMap ;
   public : GALGAS_taskProcedureMapIR mAttribute_mTaskProcedureMap ;
+  public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
 
 
 //--------------------------------- Accessors
@@ -74,7 +75,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_instructionListIR & in_mPanicLoopInstructionListIR,
                                           const GALGAS_taskMapIR & in_mTaskMapIR,
                                           const GALGAS_taskVariableMap & in_mTaskVariableMap,
-                                          const GALGAS_taskProcedureMapIR & in_mTaskProcedureMap) ;
+                                          const GALGAS_taskProcedureMapIR & in_mTaskProcedureMap,
+                                          const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
 
 //-- Start of generic part --*
 
@@ -101,7 +103,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_instructionListIR & inOperand11,
                                                                  const class GALGAS_taskMapIR & inOperand12,
                                                                  const class GALGAS_taskVariableMap & inOperand13,
-                                                                 const class GALGAS_taskProcedureMapIR & inOperand14
+                                                                 const class GALGAS_taskProcedureMapIR & inOperand14,
+                                                                 const class GALGAS_globalTaskVariableList & inOperand15
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -125,6 +128,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_functionMapIR getter_mFunctionMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMapIR getter_mGlobalConstantMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMapIR getter_mGlobalVariableMap (LOCATION_ARGS) const ;
 
@@ -1969,6 +1974,7 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : GALGAS_string mAttribute_mExceptionLineLLVMType ;
   public : GALGAS_taskVariableMap mAttribute_mTaskVariableMap ;
   public : GALGAS_taskProcedureMapIR mAttribute_mTaskProcedureMap ;
+  public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
 
 
 //--------------------------------- Accessors
@@ -1988,7 +1994,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : GALGAS_generationContext (const GALGAS_string & in_mExceptionCodeLLVMType,
                                      const GALGAS_string & in_mExceptionLineLLVMType,
                                      const GALGAS_taskVariableMap & in_mTaskVariableMap,
-                                     const GALGAS_taskProcedureMapIR & in_mTaskProcedureMap) ;
+                                     const GALGAS_taskProcedureMapIR & in_mTaskProcedureMap,
+                                     const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
 
 //-- Start of generic part --*
 
@@ -2004,7 +2011,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : static GALGAS_generationContext constructor_new (const class GALGAS_string & inOperand0,
                                                             const class GALGAS_string & inOperand1,
                                                             const class GALGAS_taskVariableMap & inOperand2,
-                                                            const class GALGAS_taskProcedureMapIR & inOperand3
+                                                            const class GALGAS_taskProcedureMapIR & inOperand3,
+                                                            const class GALGAS_globalTaskVariableList & inOperand4
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2022,6 +2030,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mExceptionCodeLLVMType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mExceptionLineLLVMType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskProcedureMapIR getter_mTaskProcedureMap (LOCATION_ARGS) const ;
 
