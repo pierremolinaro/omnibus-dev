@@ -6154,47 +6154,47 @@ GALGAS_operandIR extensionGetter_address (const GALGAS_objectInMemoryIR & inObje
     break ;
   case GALGAS_objectInMemoryIR::kEnum_register:
     {
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-value-representation.galgas", 152)), GALGAS_string ("@objectInMemoryIR address")  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 152)) ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-value-representation.galgas", 152)), GALGAS_string ("@objectInMemoryIR register address")  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 152)) ;
       result_outOperand.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_globalVariable:
     {
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-value-representation.galgas", 154)), GALGAS_string ("@objectInMemoryIR address")  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 154)) ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-value-representation.galgas", 154)), GALGAS_string ("@objectInMemoryIR globalVariable address")  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 154)) ;
       result_outOperand.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_taskVariable:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_taskVariable * extractPtr_6490 = (const cEnumAssociatedValues_objectInMemoryIR_taskVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_6490->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_taskName = extractPtr_6490->mAssociatedValue1 ;
-      const GALGAS_string extractedValue_name = extractPtr_6490->mAssociatedValue2 ;
+      const cEnumAssociatedValues_objectInMemoryIR_taskVariable * extractPtr_6514 = (const cEnumAssociatedValues_objectInMemoryIR_taskVariable *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_6514->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_taskName = extractPtr_6514->mAssociatedValue1 ;
+      const GALGAS_string extractedValue_name = extractPtr_6514->mAssociatedValue2 ;
       result_outOperand = GALGAS_operandIR::constructor_new (extractedValue_type, GALGAS_valueIR::constructor_llvmGlobalObject (function_llvmNameForTaskVariable (extractedValue_taskName, extractedValue_name, inCompiler COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 156))  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 156))  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 156)) ;
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_localValue:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_localValue * extractPtr_6642 = (const cEnumAssociatedValues_objectInMemoryIR_localValue *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_6642->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_6642->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectInMemoryIR_localValue * extractPtr_6666 = (const cEnumAssociatedValues_objectInMemoryIR_localValue *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_6666->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_6666->mAssociatedValue1 ;
       result_outOperand = GALGAS_operandIR::constructor_new (extractedValue_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 158))  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 158))  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 158)) ;
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_globalConstant:
     {
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-value-representation.galgas", 160)), GALGAS_string ("@objectInMemoryIR address")  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 160)) ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-value-representation.galgas", 160)), GALGAS_string ("@objectInMemoryIR globalConstantaddress")  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 160)) ;
       result_outOperand.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_fieldAccess:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_fieldAccess * extractPtr_7008 = (const cEnumAssociatedValues_objectInMemoryIR_fieldAccess *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_objectType = extractPtr_7008->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_objectName = extractPtr_7008->mAssociatedValue1 ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_fielfType = extractPtr_7008->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_fieldIndex = extractPtr_7008->mAssociatedValue3 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-value-representation.galgas", 165)), GALGAS_string ("@objectInMemoryIR address")  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 165)) ;
+      const cEnumAssociatedValues_objectInMemoryIR_fieldAccess * extractPtr_7058 = (const cEnumAssociatedValues_objectInMemoryIR_fieldAccess *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_objectType = extractPtr_7058->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_objectName = extractPtr_7058->mAssociatedValue1 ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_fielfType = extractPtr_7058->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_fieldIndex = extractPtr_7058->mAssociatedValue3 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-value-representation.galgas", 165)), GALGAS_string ("@objectInMemoryIR fieldAccess address")  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 165)) ;
       result_outOperand.drop () ; // Release error dropped variable
     }
     break ;
