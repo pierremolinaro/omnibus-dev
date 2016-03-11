@@ -836,7 +836,7 @@ void categoryMethod_enterInContext (const class GALGAS_initList_2D_element inObj
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListAST inObject,
-                                    const class GALGAS_string constin_inReceiverTypeName,
+                                    const class GALGAS_string constin_inSelfTypeName,
                                     class GALGAS_semanticContext & io_ioContext,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;

@@ -871,7 +871,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "}\n"
   "\n"
   "var s = $semaphore () {\n"
-  "  proc T.setup\n"
+  "  proc $T.setup\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -899,7 +899,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  944, // Text length
+  945, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

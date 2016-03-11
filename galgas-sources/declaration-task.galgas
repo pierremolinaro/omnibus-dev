@@ -7,7 +7,7 @@ list @taskList {
   @lbigint mPriority
   @lbigint mStackSize
   @taskVarListAST mVarList
-  @taskProcListAST mTaskProcList
+  @procedureDeclarationListAST mTaskProcList
   @location mEndOfTaskDeclaration
 }
 
@@ -17,15 +17,6 @@ list @taskVarListAST {
   @lstring mVarName
   @lstring mVarTypeName
   @expressionAST mVarInitExpression
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @taskProcListAST {
-  @lstring mProcName
-  @procFormalArgumentList mFormalArgumentList
-  @instructionListAST mInstructionList
-  @location mEndOfProcDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -45,7 +36,7 @@ syntax extension common_syntax {
     $integer$ ?let @lbigint stackSize
     ${$
     @taskVarListAST taskVarList = {}
-    @taskProcListAST taskProcList = {}
+    @procedureDeclarationListAST taskProcList = {}
     repeat
     while
       $var$
@@ -67,7 +58,7 @@ syntax extension common_syntax {
       <instructionList> ?let instructionList !?*
       let endOfProc = @location.here
       $}$
-      taskProcList += !procName !formalArgumentList !instructionList !endOfProc
+      taskProcList += !{} !procName !{} !formalArgumentList !instructionList !endOfProc
     end
     let endOfTask = @location.here
     $}$
@@ -98,7 +89,7 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
       end
     end
     for procedure in mTaskProcList do
-      [procedure.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+      [procedure.mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
   end
 }
@@ -155,9 +146,10 @@ method @taskList enterInContext
     ]
     ioContext.mGlobalTaskVariableList += !task.mTaskName.string !task.mTaskName.string !.llvmStructureConstant{!values:initialValueList}
   #--- Task procedures
+    [task.mTaskProcList enterInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
     @taskProcedureMap taskProcedureMap = {}
     for procedure in task.mTaskProcList do
-      [!?taskProcedureMap insertKey !procedure.mProcName]
+      [!?taskProcedureMap insertKey !procedure.mProcedureName]
     end
     if not [taskProcedureMap hasKey !"setup"] then
       error task.mEndOfTaskDeclaration : "a task should declare an 'setup' procedure"
@@ -264,11 +256,11 @@ method @taskList-element semanticAnalysis
     routineSemanticAnalysis (
       !receiverType:taskType
       !.procedure
-      !{!.new {!userModeName () !procedure.mProcName.location}}
-      !procedure.mProcName
-      !procedure.mFormalArgumentList
-      !procedure.mInstructionList
-      !procedure.mEndOfProcDeclaration
+      !{!.new {!userModeName () !procedure.mProcedureName.location}}
+      !procedure.mProcedureName
+      !procedure.mProcedureFormalArgumentList
+      !procedure.mProcedureInstructionList
+      !procedure.mEndOfProcedureDeclaration
       !warnIfUnused:true
       !globalProcedure:false
       !weakProcedure:false

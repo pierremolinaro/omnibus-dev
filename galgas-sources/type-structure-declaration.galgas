@@ -126,11 +126,11 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
   end
 #--- Add structure procedures
   for () in mProcedureDeclarationListAST do
-    for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
+    for (* * formalArgumentTypeName *) in mProcedureFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
-    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    [mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 #--- Add structure functions
   for () in mFunctionDeclarationListAST do
@@ -221,7 +221,7 @@ override method @structureDeclaration enterInContext
     ]
   end
 #--- services
-  [mProcedureDeclarationListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
   [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
@@ -490,13 +490,13 @@ method @structureDeclaration procedureSemanticAnalysis
     formalArguments += !.inputOutput !inStructureType !llvmNameForLocalVariable (!"self")
     enterFormalArguments (
       !context:inContext
-      !procedure.mProcFormalArgumentList
+      !procedure.mProcedureFormalArgumentList
       !?variableMap
       !?formalArguments
     )
   #--- Analyze instruction list
     @instructionListIR instructionGenerationList = {}
-    [procedure.mInstructionList analyzeRoutineInstructionList
+    [procedure.mProcedureInstructionList analyzeRoutineInstructionList
       !self:inStructureType
       !routineNameForInvocationGraph:procNameForInvocationGraph
       !context:inContext
@@ -507,7 +507,7 @@ method @structureDeclaration procedureSemanticAnalysis
       !?variableMap:variableMap
       !?generatedCode:instructionGenerationList
     ]
-    [variableMap checkAutomatonStates !procedure.mEndOfProcLocation]
+    [variableMap checkAutomatonStates !procedure.mEndOfProcedureDeclaration]
   #--- Check attributes
     @bool warnIfUnused = true
     for (attribute) in procedure.mProcedureAttributeList do
