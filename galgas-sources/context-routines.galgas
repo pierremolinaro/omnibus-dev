@@ -31,11 +31,11 @@ map @routineMapForContext {
 
 method @procedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
-    for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
+    for (* * formalArgumentTypeName *) in mProcedureFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
-    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    [mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -76,13 +76,13 @@ list @procedureSignature {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @procedureDeclarationListAST enterInContext 
-  ?receiverType:let @string inReceiverTypeName
+  ?selfTypeName:let @string inSelfTypeName
   ?!context:@semanticContext ioContext
 {
   for procedure in self do
   #--- Signature
     @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcedureFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
@@ -97,7 +97,7 @@ method @procedureDeclarationListAST enterInContext
       weakProcedure = attribute.string == weakAttribute ()
     end
   #--- Enter in context
-    let lkey = @lstring.new {!inReceiverTypeName + "." + procedure.mProcedureName !procedure.mProcedureName.location}
+    let lkey = @lstring.new {!inSelfTypeName + "." + procedure.mProcedureName !procedure.mProcedureName.location}
     if [ioContext.mRoutineMapForContext hasKey !lkey.string] then
       let weak = [ioContext.mRoutineMapForContext mWeakForKey !lkey.string]
       if weakProcedure && not weak then

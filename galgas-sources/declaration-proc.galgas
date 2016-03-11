@@ -36,9 +36,9 @@ list @procedureDeclarationListAST {
   @lstringlist mProcedureModeList
   @lstring mProcedureName
   @lstringlist mProcedureAttributeList
-  @procFormalArgumentList mProcFormalArgumentList
-  @instructionListAST mInstructionList
-  @location mEndOfProcLocation
+  @procFormalArgumentList mProcedureFormalArgumentList
+  @instructionListAST mProcedureInstructionList
+  @location mEndOfProcedureDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -188,9 +188,9 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
       !.procedure
       !procedure.mProcedureModeList
       !procedure.mProcedureName
-      !procedure.mProcFormalArgumentList
-      !procedure.mInstructionList
-      !procedure.mEndOfProcLocation
+      !procedure.mProcedureFormalArgumentList
+      !procedure.mProcedureInstructionList
+      !procedure.mEndOfProcedureDeclaration
       !warnIfUnused:warnIfUnused
       !globalProcedure:globalProcedure
       !weakProcedure:weakProcedure
