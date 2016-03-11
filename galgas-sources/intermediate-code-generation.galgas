@@ -19,7 +19,6 @@ struct @intermediateCodeStruct {
   @instructionListIR mPanicLoopInstructionListIR
   @taskMapIR mTaskMapIR
   @taskVariableMap mTaskVariableMap
-  @taskProcedureMapIR mTaskProcedureMap
   @globalTaskVariableList mGlobalTaskVariableList
 }
 

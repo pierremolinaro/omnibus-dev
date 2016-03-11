@@ -237,12 +237,6 @@ func mainRoutineNameForTask ?let @string inTaskName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func taskProcedureName ?let @string inTaskName  ?let @string inProcName -> @string outResult {
-  outResult = "@task.proc." + inTaskName + "." + inProcName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func llvmNameForTaskVariable ?@string inTaskName ?@string inVarName -> @string outName {
   outName = "task.var." + inTaskName + "." + inVarName
 }

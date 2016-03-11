@@ -262,31 +262,23 @@ override method @selfVarOperatorAssignInstructionAST analyze
   if inSelfType == .null then
     error mTargetVarName : "'self' is not available in this context"
   else
-    @unifiedTypeMap-proxy targetType
     switch [inSelfType kind]
     case opaque (*) :
-      error mTargetVarName : "an opaque type does not handle field access" : targetType
+      error mTargetVarName : "an opaque type does not handle field access"
     case boolean :
-      error mTargetVarName : "a boolean does not handle field access" : targetType
+      error mTargetVarName : "a boolean does not handle field access"
     case staticInteger :
-      error mTargetVarName : "an integer does not handle field access" : targetType
+      error mTargetVarName : "an integer does not handle field access"
     case boolset :
-      error mTargetVarName : "a boolset does not handle field access" : targetType
+      error mTargetVarName : "a boolset does not handle field access"
     case literalString :
-      error mTargetVarName : "a literal string does not handle field access" : targetType
+      error mTargetVarName : "a literal string does not handle field access"
     case enumeration (*) :
-      error mTargetVarName : "an enumeration does not handle field access" : targetType
-    case structure (@propertyMap propertyMap *) :
-      [propertyMap searchKey !mTargetVarName ?targetType ?let idx]
-      getNewTempVariable (!targetType !?ioTemporaries ?let result)
-      [!?ioInstructionGenerationList appendExtractValue
-        !target:result
-        !source:result
-        !index:idx
-      ]
+      error mTargetVarName : "an enumeration does not handle field access"
     case integer (* * * *) :
-      error mTargetVarName : "an integer does not handle field access" : targetType
-    end    
+      error mTargetVarName : "an integer does not handle field access"
+    case structure (@propertyMap propertyMap *) :
+      [propertyMap searchKey !mTargetVarName ?let targetType ?let idx]
 #  #--- Get target type
 #    [!?ioVariableMap neutralAccess
 #      !mTargetVarName
@@ -380,25 +372,33 @@ override method @selfVarOperatorAssignInstructionAST analyze
 #    if not isCopiable then
 #      error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
 #    end
-#  #--- Code generation
-#    [targetVariableKind loadFromMemory
-#      !?temporary:ioTemporaries
-#      !?instructionListIR:ioInstructionGenerationList
-#      ?resultingValue:@operandIR variableValue
-#    ]
-#    [binaryOperator generateInfixOperatorCode
-#      !?ioTemporaries
-#      !?ioInstructionGenerationList
-#      !variableValue
-#      !mTargetVarName.location
-#      !sourceValue
-#      !targetType
-#      ?let newResultingValue
-#    ]
-#    [targetVariableKind storeInMemory
-#      !value:newResultingValue
-#      !?instructionListIR:ioInstructionGenerationList
-#    ]
+    #--- Code generation
+      getNewTempObjectInMemory (!targetType !?ioTemporaries ?let fieldAddress)
+      [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+        !fieldAddress
+        !inSelfType
+        !idx
+        !mTargetVarName.string
+      ]        
+      [fieldAddress loadFromMemory
+        !?temporary:ioTemporaries
+        !?instructionListIR:ioInstructionGenerationList
+        ?resultingValue:let targetVariableValue
+      ]
+      [binaryOperator generateInfixOperatorCode
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+        !targetVariableValue
+        !mTargetVarName.location
+        !sourceValue
+        !targetType
+        ?let newResultingValue
+      ]
+      [fieldAddress storeInMemory
+        !value:newResultingValue
+        !?instructionListIR:ioInstructionGenerationList
+      ]
+    end    
   end
 }
 

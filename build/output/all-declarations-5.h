@@ -1289,6 +1289,105 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           @getElementPtrFromSelfIR class                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_getElementPtrFromSelfIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_getElementPtrFromSelfIR (void) ;
+
+//---
+  public : inline const class cPtr_getElementPtrFromSelfIR * ptr (void) const { return (const cPtr_getElementPtrFromSelfIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_getElementPtrFromSelfIR (const cPtr_getElementPtrFromSelfIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_getElementPtrFromSelfIR extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_getElementPtrFromSelfIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
+                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                  const class GALGAS_uint & inOperand2,
+                                                                  const class GALGAS_string & inOperand3
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_getElementPtrFromSelfIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mFieldIndex (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mFieldName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mSelfType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_mTarget (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_getElementPtrFromSelfIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getElementPtrFromSelfIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Pointer class for @getElementPtrFromSelfIR class                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_getElementPtrFromSelfIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_objectInMemoryIR mAttribute_mTarget ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mSelfType ;
+  public : GALGAS_uint mAttribute_mFieldIndex ;
+  public : GALGAS_string mAttribute_mFieldName ;
+
+//--- Constructor
+  public : cPtr_getElementPtrFromSelfIR (const GALGAS_objectInMemoryIR & in_mTarget,
+                                         const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
+                                         const GALGAS_uint & in_mFieldIndex,
+                                         const GALGAS_string & in_mFieldName
+                                         COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mSelfType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mFieldIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mFieldName (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                               @getElementPtrIR class                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
