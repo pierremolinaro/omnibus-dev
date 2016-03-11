@@ -21,15 +21,9 @@ method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessi
     ioAccessibleEntities.mAccessibleRegisterSet += !name.string
   case globalVariable (* @string name *) :
     ioAccessibleEntities.mGlobalVariableSet += !name
-  case taskVariable (* @string taskName @string name) :
-    ioAccessibleEntities.mTaskVariableSet += !taskName + "." + name
   case localValue (* @string unused name) :
   case globalConstant (* @string name) :
     ioAccessibleEntities.mGlobalVariableSet += !name
-  case fieldAccess (@unifiedTypeMap-proxy unused objectType
-                    @string unused objectName
-                    @unifiedTypeMap-proxy unused fielfType
-                    @uint unused fieldIndex) :
   end
 }
 

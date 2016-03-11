@@ -185,6 +185,7 @@ override method @selfRoutineCallInstructionAST analyze
   )
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
+    !"" # Receiver is self
     !routineMangledName.string
     !routineKind
     !effectiveParameterListIR
@@ -223,6 +224,7 @@ override method @standaloneRoutineCallInstructionAST analyze
   )
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
+    !"" # No receiver
     !routineMangledName.string
     !routineKind
     !effectiveParameterListIR
@@ -261,6 +263,7 @@ override method @remoteRoutineCallInstructionAST analyze
   )
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
+    !mReceiverName.string
     !routineMangledName.string
     !routineKind
     !effectiveParameterListIR
@@ -441,6 +444,7 @@ list @procCallEffectiveParameterListIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @procCallInstructionIR : @abstractInstructionIR {
+  @string mGlobalVariableName # Receiver name, "" if not receiver
   @string mProcName
   @routineKind mKind
   @procCallEffectiveParameterListIR mParameters
@@ -479,6 +483,9 @@ override method @procCallInstructionIR llvmInstructionCode
 
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mRoutineSet += !mProcName
+  if mGlobalVariableName != "" then
+    ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

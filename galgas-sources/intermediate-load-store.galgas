@@ -20,13 +20,6 @@ method @objectInMemoryIR loadFromMemory
       !name
       !volatile:isVolatile
     ]
-  case taskVariable (@unifiedTypeMap-proxy type @string taskName @string name) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendLoadTaskVariable
-      !outResultingValue
-      !taskName
-      !name
-    ]
   case localValue (@unifiedTypeMap-proxy type @string name) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendLoadLocalVariable
@@ -35,11 +28,6 @@ method @objectInMemoryIR loadFromMemory
     ]
   case globalConstant (@operandIR value @string unused name) :
     outResultingValue = value
-  case fieldAccess (@unifiedTypeMap-proxy unused objectType
-                    @string unused objectName
-                    @unifiedTypeMap-proxy unused fieldType
-                    @uint unused fieldIndex) :
-    error .nowhere : "@objectInMemoryIR loadFromMemory:fieldAccess" : outResultingValue
   end
 }
 
@@ -54,17 +42,10 @@ method @objectInMemoryIR storeInMemory
     [!?ioInstructionGenerationList appendStoreVolatileRegister !registerName.string !type !address !inValue]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     [!?ioInstructionGenerationList appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
-  case taskVariable (@unifiedTypeMap-proxy type @string taskName @string name) :
-    [!?ioInstructionGenerationList appendStoreTaskVariable !taskName !name !type !inValue]
   case localValue (@unifiedTypeMap-proxy type @string name) :
     [!?ioInstructionGenerationList appendStoreLocalVariable !name !type !inValue]
   case globalConstant (* *) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
-  case fieldAccess (@unifiedTypeMap-proxy unused objectType
-                    @string unused objectName
-                    @unifiedTypeMap-proxy unused fielfType
-                    @uint unused fieldIndex) :
-#     error .nowhere : "<<@objectInMemoryIR storeInMemory localAccess>>"
   end
 }
 

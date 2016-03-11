@@ -8,7 +8,7 @@ struct $semaphore {
 
   service P `kernel () {
     if self.value > 0 then
-//      self.value -= 1
+      self.value -= 1
     else
 //      kernel_blockRunningTaskInList (!?self.list)
     end
@@ -23,7 +23,7 @@ struct $semaphore {
   }
 }
 
-var s = $semaphore () {
+var s $semaphore = $semaphore () {
   proc $T.setup
 }
 

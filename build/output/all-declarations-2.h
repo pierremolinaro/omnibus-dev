@@ -1130,10 +1130,8 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_register,
     kEnum_globalVariable,
-    kEnum_taskVariable,
     kEnum_localValue,
-    kEnum_globalConstant,
-    kEnum_fieldAccess
+    kEnum_globalConstant
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -1160,12 +1158,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_objectInMemoryIR constructor_fieldAccess (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                   const class GALGAS_string & inOperand1,
-                                                                   const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                                   const class GALGAS_uint & inOperand3
-                                                                   COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_objectInMemoryIR constructor_globalConstant (const class GALGAS_operandIR & inOperand0,
                                                                       const class GALGAS_string & inOperand1
                                                                       COMMA_LOCATION_ARGS) ;
@@ -1184,11 +1176,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                                 const class GALGAS_bigint & inOperand2
                                                                 COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_objectInMemoryIR constructor_taskVariable (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                    const class GALGAS_string & inOperand1,
-                                                                    const class GALGAS_string & inOperand2
-                                                                    COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -1198,13 +1185,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_fieldAccess (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                     class GALGAS_string & outArgument1,
-                                                     class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
-                                                     class GALGAS_uint & outArgument3,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_globalConstant (class GALGAS_operandIR & outArgument0,
                                                         class GALGAS_string & outArgument1,
                                                         C_Compiler * inCompiler
@@ -1227,17 +1207,9 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_taskVariable (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                      class GALGAS_string & outArgument1,
-                                                      class GALGAS_string & outArgument2,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFieldAccess (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalVariable (LOCATION_ARGS) const ;
@@ -1245,8 +1217,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegister (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isTaskVariable (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

@@ -13996,47 +13996,6 @@ typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalVariable::comp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectInMemoryIR_taskVariable::cEnumAssociatedValues_objectInMemoryIR_taskVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                          const GALGAS_string & inAssociatedValue1,
-                                                                                                          const GALGAS_string & inAssociatedValue2
-                                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectInMemoryIR_taskVariable::description (C_String & ioString,
-                                                                       const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_taskVariable::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectInMemoryIR_taskVariable * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_taskVariable *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 cEnumAssociatedValues_objectInMemoryIR_localValue::cEnumAssociatedValues_objectInMemoryIR_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                                                       const GALGAS_string & inAssociatedValue1
                                                                                                       COMMA_LOCATION_ARGS) :
@@ -14107,53 +14066,6 @@ typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalConstant::comp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_objectInMemoryIR_fieldAccess::cEnumAssociatedValues_objectInMemoryIR_fieldAccess (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                        const GALGAS_string & inAssociatedValue1,
-                                                                                                        const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
-                                                                                                        const GALGAS_uint & inAssociatedValue3
-                                                                                                        COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_objectInMemoryIR_fieldAccess::description (C_String & ioString,
-                                                                      const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_fieldAccess::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_objectInMemoryIR_fieldAccess * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_fieldAccess *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_objectInMemoryIR::GALGAS_objectInMemoryIR (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
@@ -14195,23 +14107,6 @@ GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalVariable (con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_taskVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                           const GALGAS_string & inAssociatedValue1,
-                                                                           const GALGAS_string & inAssociatedValue2
-                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_objectInMemoryIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_taskVariable ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_taskVariable (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                          const GALGAS_string & inAssociatedValue1
                                                                          COMMA_LOCATION_ARGS) {
@@ -14236,24 +14131,6 @@ GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalConstant (con
     result.mEnum = kEnum_globalConstant ;
     cEnumAssociatedValues * ptr = NULL ;
     macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_globalConstant (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_fieldAccess (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                          const GALGAS_string & inAssociatedValue1,
-                                                                          const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
-                                                                          const GALGAS_uint & inAssociatedValue3
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_objectInMemoryIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
-    result.mEnum = kEnum_fieldAccess ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_objectInMemoryIR_fieldAccess (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -14306,28 +14183,6 @@ void GALGAS_objectInMemoryIR::method_globalVariable (GALGAS_unifiedTypeMap_2D_pr
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_objectInMemoryIR::method_taskVariable (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                   GALGAS_string & outAssociatedValue1,
-                                                   GALGAS_string & outAssociatedValue2,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_taskVariable) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    C_String s ;
-    s << "method @objectInMemoryIR taskVariable invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectInMemoryIR_taskVariable * ptr = (const cEnumAssociatedValues_objectInMemoryIR_taskVariable *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void GALGAS_objectInMemoryIR::method_localValue (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
                                                  GALGAS_string & outAssociatedValue1,
                                                  C_Compiler * inCompiler
@@ -14366,39 +14221,12 @@ void GALGAS_objectInMemoryIR::method_globalConstant (GALGAS_operandIR & outAssoc
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_objectInMemoryIR::method_fieldAccess (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                  GALGAS_string & outAssociatedValue1,
-                                                  GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue2,
-                                                  GALGAS_uint & outAssociatedValue3,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_fieldAccess) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
-    C_String s ;
-    s << "method @objectInMemoryIR fieldAccess invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_objectInMemoryIR_fieldAccess * ptr = (const cEnumAssociatedValues_objectInMemoryIR_fieldAccess *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_objectInMemoryIR [7] = {
+static const char * gEnumNameArrayFor_objectInMemoryIR [5] = {
   "(not built)",
   "register",
   "globalVariable",
-  "taskVariable",
   "localValue",
-  "globalConstant",
-  "fieldAccess"
+  "globalConstant"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14415,12 +14243,6 @@ GALGAS_bool GALGAS_objectInMemoryIR::getter_isGlobalVariable (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_objectInMemoryIR::getter_isTaskVariable (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_taskVariable == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_bool GALGAS_objectInMemoryIR::getter_isLocalValue (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_localValue == mEnum) ;
 }
@@ -14429,12 +14251,6 @@ GALGAS_bool GALGAS_objectInMemoryIR::getter_isLocalValue (UNUSED_LOCATION_ARGS) 
 
 GALGAS_bool GALGAS_objectInMemoryIR::getter_isGlobalConstant (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalConstant == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectInMemoryIR::getter_isFieldAccess (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_fieldAccess == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15799,6 +15615,127 @@ void routine_enterControlRegistersInContext (const GALGAS_controlRegisterDeclara
       enumerator_8554.gotoNextObject () ;
     }
     enumerator_5894.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Routine 'controlRegistersSemanticAnalysis'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_controlRegistersSemanticAnalysis (const GALGAS_controlRegisterDeclarationListAST constinArgument_inRegisterDeclarationListAST,
+                                               const GALGAS_semanticContext constinArgument_inContext,
+                                               GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  cEnumerator_controlRegisterDeclarationListAST enumerator_10216 (constinArgument_inRegisterDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_10216.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_registerType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, enumerator_10216.current_mRegisterTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 268)) ;
+    switch (var_registerType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 269)).enumValue ()) {
+    case GALGAS_typeKind::kNotBuilt:
+      break ;
+    case GALGAS_typeKind::kEnum_boolean:
+      {
+        GALGAS_location location_0 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_0, GALGAS_string ("a boolean type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 270)) ;
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_boolset:
+      {
+        GALGAS_location location_1 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_1, GALGAS_string ("a boolset type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 271)) ;
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_integer:
+      {
+        const cEnumAssociatedValues_typeKind_integer * extractPtr_11286 = (const cEnumAssociatedValues_typeKind_integer *) (var_registerType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 269)).unsafePointer ()) ;
+        const GALGAS_bool extractedValue_unsigned = extractPtr_11286->mAssociatedValue2 ;
+        const GALGAS_uint extractedValue_size = extractPtr_11286->mAssociatedValue3 ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, enumerator_10216.current_mRegisterBitSliceList (HERE).getter_length (SOURCE_FILE ("declaration-control-register.galgas", 273)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+        if (kBoolTrue == test_2) {
+          const enumGalgasBool test_3 = extractedValue_unsigned.operator_not (SOURCE_FILE ("declaration-control-register.galgas", 274)).boolEnum () ;
+          if (kBoolTrue == test_3) {
+            GALGAS_location location_4 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            inCompiler->emitSemanticError (location_4, GALGAS_string ("the register type should be unsigned in order to define bit slices")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 275)) ;
+          }
+          GALGAS_uint var_shiftCount = GALGAS_uint ((uint32_t) 0U) ;
+          cEnumerator_controlRegisterBitSliceList enumerator_10853 (enumerator_10216.current_mRegisterBitSliceList (HERE), kEnumeration_down) ;
+          while (enumerator_10853.hasCurrentObject ()) {
+            switch (enumerator_10853.current_mRegisterBitSlice (HERE).enumValue ()) {
+            case GALGAS_controlRegisterBitSlice::kNotBuilt:
+              break ;
+            case GALGAS_controlRegisterBitSlice::kEnum_unusedBits:
+              {
+                const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits * extractPtr_10994 = (const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *) (enumerator_10853.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
+                const GALGAS_lbigint extractedValue_count = extractPtr_10994->mAssociatedValue0 ;
+                var_shiftCount = var_shiftCount.add_operation (extractedValue_count.mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 281)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 281)) ;
+              }
+              break ;
+            case GALGAS_controlRegisterBitSlice::kEnum_namedBit:
+              {
+                const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * extractPtr_11097 = (const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *) (enumerator_10853.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
+                const GALGAS_lbigint extractedValue_count = extractPtr_11097->mAssociatedValue1 ;
+                var_shiftCount = var_shiftCount.add_operation (extractedValue_count.mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 283)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 283)) ;
+              }
+              break ;
+            }
+            enumerator_10853.gotoNextObject () ;
+          }
+          const enumGalgasBool test_5 = GALGAS_bool (kIsNotEqual, extractedValue_size.objectCompare (var_shiftCount)).boolEnum () ;
+          if (kBoolTrue == test_5) {
+            GALGAS_location location_6 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            inCompiler->emitSemanticError (location_6, GALGAS_string ("total bit slice count is ").add_operation (var_shiftCount.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 287)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287)).add_operation (GALGAS_string (" (should be "), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287)).add_operation (extractedValue_size.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 287)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287)) ;
+          }
+        }
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_literalString:
+      {
+        GALGAS_location location_7 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_7, GALGAS_string ("a literal string type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 290)) ;
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_structure:
+      {
+        GALGAS_location location_8 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_8, GALGAS_string ("a structure type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 291)) ;
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_enumeration:
+      {
+        GALGAS_location location_9 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_9, GALGAS_string ("an enumeration type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 292)) ;
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_staticInteger:
+      {
+        GALGAS_location location_10 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_10, GALGAS_string ("a literal integer type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 293)) ;
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_opaque:
+      {
+        GALGAS_location location_11 (enumerator_10216.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_11, GALGAS_string ("an opaque type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 294)) ;
+      }
+      break ;
+    }
+    GALGAS_bigint var_maxAddress = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)).left_shift_operation (constinArgument_inContext.mAttribute_mPointerSize COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)) ;
+    cEnumerator_controlRegisterNameList enumerator_11915 (enumerator_10216.current_mRegisterNameList (HERE), kEnumeration_up) ;
+    while (enumerator_11915.hasCurrentObject ()) {
+      const enumGalgasBool test_12 = GALGAS_bool (kIsStrictSup, enumerator_11915.current_mRegisterAddress (HERE).mAttribute_bigint.objectCompare (var_maxAddress)).boolEnum () ;
+      if (kBoolTrue == test_12) {
+        GALGAS_location location_13 (enumerator_11915.current_mRegisterAddress (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_13, GALGAS_string ("register address should be lower or equal to ").add_operation (var_maxAddress.getter_hexString (SOURCE_FILE ("declaration-control-register.galgas", 300)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 300))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 300)) ;
+      }
+      {
+      ioArgument_ioIntermediateCodeStruct.mAttribute_mControlRegisterMap.setter_insertKey (enumerator_11915.current_mRegisterName (HERE), enumerator_10216.current_mRegisterTypeName (HERE).mAttribute_string, enumerator_11915.current_mRegisterAddress (HERE).mAttribute_bigint, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 303)) ;
+      }
+      enumerator_11915.gotoNextObject () ;
+    }
+    enumerator_10216.gotoNextObject () ;
   }
 }
 
