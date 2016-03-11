@@ -6625,8 +6625,6 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_59 (C_Lexique_plm_5F_lexique *) = 0 ;
 
-  protected : virtual int32_t select_common_5F_syntax_60 (C_Lexique_plm_5F_lexique *) = 0 ;
-
 
 } ;
 

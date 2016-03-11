@@ -843,7 +843,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/02-semaphore.plm'
+//--- File 'teensy-3-1-tp/03-semaphore.plm'
 
 const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
@@ -870,9 +870,9 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "//var s = $semaphore () {\n"
-  "//  proc T.setup\n"
-  "//}\n"
+  "var s = $semaphore () {\n"
+  "  proc T.setup\n"
+  "}\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -896,10 +896,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
-  "02-semaphore.plm",
+  "03-semaphore.plm",
   "plm",
   true, // Text file
-  950, // Text length
+  944, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
