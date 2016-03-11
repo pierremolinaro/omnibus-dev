@@ -205,7 +205,7 @@ struct @semanticContext {
   @prefixOperatorMap mUnsignedComplementOperatorMap # ~
 #--- Tasks
   @taskMap mTaskMap
-  @taskVariableMap mTaskVariableMap
+#  @taskVariableMap mTaskVariableMap
   @globalTaskVariableList mGlobalTaskVariableList
 }
 

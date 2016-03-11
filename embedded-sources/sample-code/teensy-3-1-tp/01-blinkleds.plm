@@ -3,16 +3,16 @@ target "teensy-3-1-tp"
 //------------------------------------------------*
 
 task T1 priority 1 stackSize 512 {
-  var gCompteur $uint32 = 0
+  var compteur $uint32 = 0
   proc setup () {
   }
   proc loop () {
-    waitUntilMS (!deadline:self.gCompteur)
+    waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L0)
-    self.gCompteur +%= 500
-    waitUntilMS (!deadline:self.gCompteur)
+    self.compteur +%= 500
+    waitUntilMS (!deadline:self.compteur)
     ledOff (!LED_L0)
-    self.gCompteur +%= 500
+    self.compteur +%= 500
     goto (!line:0 !column:0)
     printUnsigned (!millis ())
   }
@@ -21,64 +21,66 @@ task T1 priority 1 stackSize 512 {
 //------------------------------------------------*
 
 task T2 priority 2 stackSize 512 {
-  var gCompteur $uint32 = 0
+  var compteur $uint32 = 0
   proc setup () {
   }
   proc loop () {
-    waitUntilMS (!deadline:self.gCompteur)
+    waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L1)
-    self.gCompteur +%= 499
-    waitUntilMS (!deadline:self.gCompteur)
+    self.compteur +%= 499
+    waitUntilMS (!deadline:self.compteur)
     ledOff (!LED_L1)
-    self.gCompteur +%= 499
+    self.compteur +%= 499
   }
 }
 
 //------------------------------------------------*
 
 task T3 priority 3 stackSize 512 {
-  var gCompteur $uint32 = 0
+  var compteur $uint32 = 0
   proc setup () {
   }
   proc loop () {
-    waitUntilMS (!deadline:self.gCompteur)
+    waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L2)
-    self.gCompteur +%= 498
-    waitUntilMS (!deadline:self.gCompteur)
+    self.compteur +%= 498
+    waitUntilMS (!deadline:self.compteur)
     ledOff (!LED_L2)
-    self.gCompteur +%= 498
+    self.compteur +%= 498
   }
 }
 
 //------------------------------------------------*
 
 task T4 priority 4 stackSize 512 {
-  var gCompteur $uint32 = 0
+  var compteur $uint32 = 0
+
   proc setup () {
   }
+
   proc loop () {
-    waitUntilMS (!deadline:self.gCompteur)
+    waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L3)
-    self.gCompteur +%= 497
-    waitUntilMS (!deadline:self.gCompteur)
+    self.compteur +%= 497
+    waitUntilMS (!deadline:self.compteur)
     ledOff (!LED_L3)
-    self.gCompteur +%= 497
+    self.compteur +%= 497
   }
 }
 
 //------------------------------------------------*
 
 task T5 priority 5 stackSize 512 {
-  var gCompteur $uint32 = 0
+  var compteur $uint32 = 0
   proc setup () {
   }
   proc loop () {
-    waitUntilMS (!deadline:self.gCompteur)
+    waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L4)
-    self.gCompteur +%= 496
-    waitUntilMS (!deadline:self.gCompteur)
+    self.compteur +%= 496
+    waitUntilMS (!deadline:self.compteur)
     ledOff (!LED_L4)
-    self.gCompteur +%= 496
+    self.compteur +%= 496
   }
 }
 

@@ -757,7 +757,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_prefixOperatorMap mAttribute_mNotOperatorMap ;
   public : GALGAS_prefixOperatorMap mAttribute_mUnsignedComplementOperatorMap ;
   public : GALGAS_taskMap mAttribute_mTaskMap ;
-  public : GALGAS_taskVariableMap mAttribute_mTaskVariableMap ;
   public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
 
 
@@ -817,7 +816,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_prefixOperatorMap & in_mNotOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mUnsignedComplementOperatorMap,
                                    const GALGAS_taskMap & in_mTaskMap,
-                                   const GALGAS_taskVariableMap & in_mTaskVariableMap,
                                    const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
 
 //-- Start of generic part --*
@@ -873,8 +871,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_prefixOperatorMap & inOperand39,
                                                           const class GALGAS_prefixOperatorMap & inOperand40,
                                                           const class GALGAS_taskMap & inOperand41,
-                                                          const class GALGAS_taskVariableMap & inOperand42,
-                                                          const class GALGAS_globalTaskVariableList & inOperand43
+                                                          const class GALGAS_globalTaskVariableList & inOperand42
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -966,8 +963,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSupEqualOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskMap getter_mTaskMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_taskVariableMap getter_mTaskVariableMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap getter_mTypeMap (LOCATION_ARGS) const ;
 

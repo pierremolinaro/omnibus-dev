@@ -30,18 +30,18 @@ struct $semaphore {
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-  var t $uint32 = 0
+  var top $uint32 = 0
 
   proc setup () {
 //    s.P ()
   }
   
   proc loop () {
-    waitUntilMS (!deadline:t)
-    t += 250
+    waitUntilMS (!deadline:self.top)
+    self.top += 250
     ledOn (!LED_L1) // Allumer la led
-    waitUntilMS (!deadline:t)
-    t += 250
+    waitUntilMS (!deadline:self.top)
+    self.top += 250
     ledOff (!LED_L1)  // Éteindre la led
   }
 }
