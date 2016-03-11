@@ -85,17 +85,18 @@ syntax extension common_syntax {
           typeName = ["" nowhere]
         or
           $typeName$ ?typeName
+          $.$
         end
         $identifier$ ?let sectionName
         allowedRoutineList += !hasWriteAccess !typeName !sectionName !.section
       or
         $proc$
-        @lstring typeName
-        select
-          typeName = ["" nowhere]
-        or
-          $typeName$ ?typeName
-        end
+        $identifier$ ?let procName
+        allowedRoutineList += !hasWriteAccess !["" nowhere] !procName !.procedure
+      or
+        $proc$
+        $typeName$ ?let typeName
+        $.$
         $identifier$ ?let procName
         allowedRoutineList += !hasWriteAccess !typeName !procName !.procedure
       or
@@ -105,6 +106,7 @@ syntax extension common_syntax {
           typeName = ["" nowhere]
         or
           $typeName$ ?typeName
+          $.$
         end
         $identifier$ ?let funcName
         if hasWriteAccess then

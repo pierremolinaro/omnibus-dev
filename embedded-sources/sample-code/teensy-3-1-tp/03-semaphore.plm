@@ -23,9 +23,9 @@ struct $semaphore {
   }
 }
 
-//var s = $semaphore () {
-//  proc T.setup
-//}
+var s = $semaphore () {
+  proc T.setup
+}
 
 //------------------------------------------------*
 
