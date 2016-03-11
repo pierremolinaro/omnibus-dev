@@ -149,20 +149,20 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
 getter @objectInMemoryIR address -> @operandIR outOperand {
   switch self
   case register (* * *) :
-    error .nowhere : "@objectInMemoryIR address" : outOperand
+    error .nowhere : "@objectInMemoryIR register address" : outOperand
   case globalVariable (* * *) :
-    error .nowhere : "@objectInMemoryIR address" : outOperand
+    error .nowhere : "@objectInMemoryIR globalVariable address" : outOperand
   case taskVariable (@unifiedTypeMap-proxy type @string taskName @string name) :
     outOperand  = .new {!type !.llvmGlobalObject {!name:llvmNameForTaskVariable (!taskName !name)}}
   case localValue (@unifiedTypeMap-proxy type @string name) :
     outOperand  = .new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name)}}
   case globalConstant (* *) :
-    error .nowhere : "@objectInMemoryIR address" : outOperand
+    error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
   case fieldAccess (@unifiedTypeMap-proxy unused objectType
                     @string unused objectName
                     @unifiedTypeMap-proxy unused fielfType
                     @uint unused fieldIndex) :
-    error .nowhere : "@objectInMemoryIR address" : outOperand
+    error .nowhere : "@objectInMemoryIR fieldAccess address" : outOperand
   end
 }
 
