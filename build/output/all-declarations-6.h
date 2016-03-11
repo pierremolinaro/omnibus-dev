@@ -98,17 +98,6 @@ void categoryMethod_semanticAnalysis (const class GALGAS_taskList_2D_element inO
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//         Category getter '@procFormalArgumentPassingMode requiredActualPassingModeForSelector' (as function)         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const class GALGAS_procFormalArgumentPassingMode & inObject,
-                                                                          class GALGAS_string inArgument0,
-                                                                          class C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                Category method '@externProcedureDeclarationListAST-element enterExternProcInContext'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -141,49 +130,6 @@ void categoryMethod_llvmPrototypeGeneration (const class GALGAS_externProcedureM
                                              class GALGAS_string & io_ioLLVMcode,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Abstract category method '@expressionAST analyzeExpression'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
-                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                         const class GALGAS_lstring constinArgument1,
-                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
-                                                                         const class GALGAS_semanticContext constinArgument3,
-                                                                         const class GALGAS_stringset constinArgument4,
-                                                                         const class GALGAS_bool constinArgument5,
-                                                                         class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                                         class GALGAS_staticStringMap & ioArgument7,
-                                                                         class GALGAS_variableMap & ioArgument8,
-                                                                         class GALGAS_instructionListIR & ioArgument9,
-                                                                         class GALGAS_operandIR & outArgument10,
-                                                                         class C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_analyzeExpression (const int32_t inClassIndex,
-                                            categoryMethodSignature_expressionAST_analyzeExpression inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
-                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                           const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
-                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
-                                           const GALGAS_semanticContext constin_inContext,
-                                           const GALGAS_stringset constin_inModes,
-                                           const GALGAS_bool constin_inAllowExceptions,
-                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                           GALGAS_variableMap & io_ioVariableMap,
-                                           GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                           GALGAS_operandIR & out_outResult,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -685,17 +631,6 @@ class GALGAS_bigint callCategoryGetter_performStaticOperation (const cPtr_infixO
                                                                const GALGAS_bigint & constin_inRight,
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//         Category getter '@procEffectiveParameterPassingModeAST passingModeForActualSelector' (as function)          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_passingModeForActualSelector (const class GALGAS_procEffectiveParameterPassingModeAST & inObject,
-                                                                  class GALGAS_lstring inArgument0,
-                                                                  class C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

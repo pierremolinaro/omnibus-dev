@@ -10,19 +10,6 @@ enum @procEffectiveParameterPassingModeAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstring inSelector -> @string outResult {
-  switch self
-  case input (*) : outResult = "?"
-  case output (* *) : outResult = "!"
-  case outputInput (*) : outResult = "!?"
-  end
-  if inSelector.string != "" then
-    outResult += inSelector.string + ":"
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 list @procEffectiveParameterListAST {
   @procEffectiveParameterPassingModeAST mEffectiveParameterKind
   @lstring mSelector
@@ -30,10 +17,27 @@ list @procEffectiveParameterListAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @procCallInstructionAST : @instructionAST {
+abstract class @abstractCallInstructionAST : @instructionAST {
+  @procEffectiveParameterListAST mEffectiveParameterList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @standaloneRoutineCallInstructionAST : @abstractCallInstructionAST {
+  @lstring mRoutineName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @selfRoutineCallInstructionAST : @abstractCallInstructionAST {
+  @lstring mRoutineName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @remoteRoutineCallInstructionAST : @abstractCallInstructionAST {
   @lstring mReceiverName
   @lstring mRoutineName
-  @procEffectiveParameterListAST mEffectiveParameterList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -45,51 +49,66 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-    @lstring receiverName
-    @lstring procName
-    select
-      $self$
-      receiverName = .new {!"self" !.here}
-      $.$
-      $identifier$ ?procName
-    or
-      $identifier$ ?let x
-      select
-        procName = x
-        receiverName = ["" nowhere]
-      or
-        $.$
-        receiverName = x
-        $identifier$ ?procName
-      end
-    end
-    @procEffectiveParameterListAST effectiveParameterList = {}
+    $self$
+    $.$
+    $identifier$ ?let routineName
+    <effective_parameters> ?let effectiveParameterList
+    ioInstructionList += !@selfRoutineCallInstructionAST.new {
+      !effectiveParameterList
+      !routineName
+    }
+  }
+
+  #·····················································································································
+
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    $identifier$ ?let receiverName
+    $.$
+    $identifier$ ?let routineName
+    <effective_parameters> ?let effectiveParameterList
+    ioInstructionList += !@remoteRoutineCallInstructionAST.new {
+      !effectiveParameterList
+      !receiverName
+      !routineName
+    }
+  }
+
+  #·····················································································································
+
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    $identifier$ ?let standaloneRoutineName
+    <effective_parameters> ?let effectiveParameterList
+    ioInstructionList += !@standaloneRoutineCallInstructionAST.new {
+      !effectiveParameterList
+      !standaloneRoutineName
+    }
+  }
+
+  #·····················································································································
+
+  rule <effective_parameters> !@procEffectiveParameterListAST outEffectiveParameterList {
+    outEffectiveParameterList = {}
     $($
     repeat
     while
       $!$ ?let selector
       <expression> ?let expression
-      effectiveParameterList += !.output{!exp:expression !endOfExp:.here} !selector
+      outEffectiveParameterList += !.output{!exp:expression !endOfExp:.here} !selector
     while
       $!?$ ?let selector
       $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.outputInput{!name:effectiveParameterName} !selector
+      outEffectiveParameterList += !.outputInput{!name:effectiveParameterName} !selector
     while
       $?$ ?let selector
       select
         $identifier$ ?let effectiveParameterName
-        effectiveParameterList += !.input{!name:effectiveParameterName} !selector
+        outEffectiveParameterList += !.input{!name:effectiveParameterName} !selector
       or
         $self$
-        effectiveParameterList += !.input{!name:.new {!"self" !.here}} !selector
+        outEffectiveParameterList += !.input{!name:.new {!"self" !.here}} !selector
       end
     end
     $)$
-    ioInstructionList += !@procCallInstructionAST.new {
-      !receiverName
-      !procName
-      !effectiveParameterList
-    }
   }
 
   #·····················································································································
@@ -100,7 +119,7 @@ syntax extension common_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @procCallInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @abstractCallInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in mEffectiveParameterList do
     switch mEffectiveParameterKind
     case input (*):
@@ -115,6 +134,19 @@ override method @procCallInstructionAST noteInstructionTypesInPrecedenceGraph ?!
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstring inSelector -> @string outResult {
+  switch self
+  case input (*) : outResult = "?"
+  case output (* *) : outResult = "!"
+  case outputInput (*) : outResult = "!?"
+  end
+  if inSelector.string != "" then
+    outResult += inSelector.string + ":"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @procEffectiveParameterList {
   @procEffectiveParameterPassingModeAST mEffectiveParameterPassingMode
   @lstring mSelector
@@ -123,54 +155,172 @@ list @procEffectiveParameterList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @procCallInstructionAST analyze
+override method @selfRoutineCallInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
+  ?modes:let @stringset inRequiredModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Search proc in proc map
-  @procCallEffectiveParameterListIR procCallEffectiveParameterListIR = {}
+  analyzeCall (
+    !self:inSelfType
+    !receiverName:.new{![inSelfType key] !mRoutineName.location}
+    !routineName:mRoutineName
+    !effective:mEffectiveParameterList
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:inRequiredModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+    ?routineKind:let @routineKind routineKind
+    ?routineMangledName:let @lstring routineMangledName
+  )
+#--- Code generation
+  ioInstructionGenerationList += !@procCallInstructionIR.new {
+    !routineMangledName.string
+    !routineKind
+    !effectiveParameterListIR
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @standaloneRoutineCallInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inRequiredModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  analyzeCall (
+    !self:inSelfType
+    !receiverName:.new{!"" !mRoutineName.location}
+    !routineName:mRoutineName
+    !effective:mEffectiveParameterList
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:inRequiredModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+    ?routineKind:let @routineKind routineKind
+    ?routineMangledName:let @lstring routineMangledName
+  )
+#--- Code generation
+  ioInstructionGenerationList += !@procCallInstructionIR.new {
+    !routineMangledName.string
+    !routineKind
+    !effectiveParameterListIR
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @remoteRoutineCallInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inRequiredModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  analyzeCall (
+    !self:inSelfType
+    !receiverName:mReceiverName
+    !routineName:mRoutineName
+    !effective:mEffectiveParameterList
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:inRequiredModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+    ?routineKind:let @routineKind routineKind
+    ?routineMangledName:let @lstring routineMangledName
+  )
+#--- Code generation
+  ioInstructionGenerationList += !@procCallInstructionIR.new {
+    !routineMangledName.string
+    !routineKind
+    !effectiveParameterListIR
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc analyzeCall
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?receiverName:let @lstring inReceiverName
+  ?routineName:let @lstring inRoutineName
+  ?effective:let @procEffectiveParameterListAST inEffectiveParameterList
+  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?requiredModeSet:let @stringset inRequiredModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
+  !routineKind:@routineKind outRoutineKind
+  !routineMangledName:@lstring outRoutineMangledName
+{
+  outEffectiveParameterListIR = {}
   @unifiedTypeMap-proxy receiverType
-  @lstring routineMangledName
-  if mReceiverName.string != "" then
+  if inReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
-      !mReceiverName
+      !inReceiverName
       ?receiverType
       ?*
       ?@objectInMemoryIR variableKind
       ?4*
     ]
-    routineMangledName = .new {!"$" + [receiverType key] + "." + mRoutineName !mRoutineName.location}
-    procCallEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] #--- add "load receiver" as first argument
+    outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
+    outEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] #--- add "load receiver" as first argument
   else
-    routineMangledName = .new {!"." + mRoutineName !mRoutineName.location}
+    outRoutineMangledName = .new {!"." + inRoutineName !inRoutineName.location}
     receiverType = .null
   end
   [inContext.mRoutineMapForContext searchKey
-    !routineMangledName
+    !outRoutineMangledName
     ?let unused mutating
     ?let modeMap
-    ?let signature
-    ?let routineKind
+    ?let formalSignature
+    ?outRoutineKind
     ?*
   ]
 #--- Enter in invocation graph
   @lstring routineNameForInvocationGraph
-  switch routineKind
-  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mRoutineName)
-  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mRoutineName)
-  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mRoutineName)
+  switch outRoutineKind
+  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !inRoutineName)
+  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !inRoutineName)
+  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !inRoutineName)
   end
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inRoutineNameForInvocationGraph !routineNameForInvocationGraph]
-#--- Check parameters
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#--- Analyze effective parameters
   @procEffectiveParameterList parameterList = {}
-  for () formal_ in signature, () in mEffectiveParameterList do
+  for () formal_ in formalSignature, () in inEffectiveParameterList do
     switch mEffectiveParameterKind 
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
@@ -193,17 +343,17 @@ override method @procCallInstructionAST analyze
         error name : "the '" + name + "' variable is not copiable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-      procCallEffectiveParameterListIR +=
+      outEffectiveParameterListIR +=
         !.input
         !mSelector
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
-        !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+        !routineNameForInvocationGraph:routineNameForInvocationGraph
         !optionalTargetType:formal_mType
         !context:inContext
-        !modes:inModeSet
+        !modes:inRequiredModeSet
         !allowException:inAllowExceptions
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
@@ -218,7 +368,7 @@ override method @procCallInstructionAST analyze
         !staticTypeAllowed:false
       )
       parameterList += !mEffectiveParameterKind !mSelector !formal_mType
-      procCallEffectiveParameterListIR += 
+      outEffectiveParameterListIR += 
         !.output
         !mSelector
         !result
@@ -239,7 +389,7 @@ override method @procCallInstructionAST analyze
         error name : "routine has no access right on the this variable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-      procCallEffectiveParameterListIR +=
+      outEffectiveParameterListIR +=
         !.outputInput
         !mSelector
         !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
@@ -247,15 +397,16 @@ override method @procCallInstructionAST analyze
   end
 #--- Check mode
   checkMode (
-    !requiredModes:inModeSet
+    !requiredModes:inRequiredModeSet
     !possibleModes:[modeMap keySet]
-    !error:mRoutineName.location
+    !error:inRoutineName.location
   )
-  if [signature length] != [parameterList length] then
-    error mRoutineName: "this routine requires " + [signature length] + " argument(s), this call names "
-      + [signature length] + " argument(s)"
+#--- Check parameters
+  if [formalSignature length] != [parameterList length] then
+    error inRoutineName: "this routine requires " + [formalSignature length] + " argument(s), this call names "
+      + [formalSignature length] + " argument(s)"
   else
-    for () formal_ in signature, () actual_ in parameterList do
+    for () formal_ in formalSignature, () actual_ in parameterList do
       if [formal_mType key] != [actual_mParameterType key] then
         error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
            "', and is incompatible with the formal type '" + [formal_mType key] + "'"
@@ -267,12 +418,6 @@ override method @procCallInstructionAST analyze
       end
     end  
   end
-#--- Code generation
-  ioInstructionGenerationList += !@procCallInstructionIR.new {
-    !routineMangledName.string
-    !routineKind
-    !procCallEffectiveParameterListIR
-  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

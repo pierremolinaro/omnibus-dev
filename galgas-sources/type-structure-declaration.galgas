@@ -439,99 +439,23 @@ method @structureDeclaration procedureSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for procedure in mProcedureDeclarationListAST do
-  #--- Enter subprogram invocation graph
-    let procNameForInvocationGraph = procNameForInvocationGraph (!inStructureType !procedure.mProcedureName)
-    if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
-      [!?ioTemporaries.mSubprogramInvocationGraph addNode
-        !procNameForInvocationGraph
-        !procedure.mProcedureName
-      ]
-    end
-  #--- Check modes
-    @stringset procedureModeSet = {}
-    for mode in procedure.mProcedureModeList do
-      [inContext.mModeMap searchKey !mode.mValue]
-      procedureModeSet += !mode.mValue.string
-    end
-  #--- Variable map
-    @variableMap variableMap = initialVariableMap (
-      !routineNameForInvocation:procNameForInvocationGraph (!inStructureType !procedure.mProcedureName).string
-      !context:inContext
-      !userMode:[procedureModeSet hasKey !"user"]
-      !registerAccess:.readWriteAccess
-      !globalsAreConstant:false
-    )
-  #--- Add "self" to variable map
-#    if procedure.mMutating then
-      [!?variableMap insertDefinedLocalVariable
-        !.new {!"self" !.here}
-        !inStructureType
-        !true # mReadAccessAllowed
-        !.localValue {!type:inStructureType !name:"self"}
-        !true # copiable
-        !{} # fieldMap
-        !true # mCanBeUsedAsInputParameter
-        !false # mIsConstant
-      ]
-#    else
-#      [!?variableMap insertUsedLocalConstant
-#        !.new {!"self" !.here}
-#        !inStructureType
-#        !true # mReadAccessAllowed
-#        !.localValue {!type:inStructureType !name:"self"}
-#        !true # copiable
-#        !{} # fieldMap
-#        !false # mCanBeUsedAsInputParameter
-#        !true # mIsConstant
-#      ]
-#    end
-  #--- Analyse formal arguments
-    @procFormalArgumentListForGeneration formalArguments = {}
-    formalArguments += !.inputOutput !inStructureType !llvmNameForLocalVariable (!"self")
-    enterFormalArguments (
-      !context:inContext
-      !procedure.mProcedureFormalArgumentList
-      !?variableMap
-      !?formalArguments
-    )
-  #--- Analyze instruction list
-    @instructionListIR instructionGenerationList = {}
-    [procedure.mProcedureInstructionList analyzeRoutineInstructionList
-      !self:inStructureType
-      !routineNameForInvocationGraph:procNameForInvocationGraph
-      !context:inContext
-      !modes:procedureModeSet
-      !allowException:not [procedureModeSet hasKey !panicModeName ()]
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
-      !?generatedCode:instructionGenerationList
-    ]
-    [variableMap checkAutomatonStates !procedure.mEndOfProcedureDeclaration]
-  #--- Check attributes
-    @bool warnIfUnused = true
-    for (attribute) in procedure.mProcedureAttributeList do
-      if attribute.string == noWarningIfUnusedAttribute () then
-        if not warnIfUnused then
-          error attribute : "duplicated attribute"
-        end
-        warnIfUnused = false
-      else
-        error attribute : "unknown attribute"
-      end
-    end
-  #--- Enter in map
-    [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-      !.new {!"$" + mStructureName.string + "." + procedure.mProcedureName !procedure.mProcedureName.location}
-      !formalArguments
-      !instructionGenerationList
-      !false # [ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
-      !warnIfUnused
-      !false
-      !false
-      !false
+    routineSemanticAnalysis (
+      !receiverType:inStructureType
       !.procedure
-    ]  
+      !procedure.mProcedureModeList
+      !procedure.mProcedureName
+      !procedure.mProcedureFormalArgumentList
+      !procedure.mProcedureInstructionList
+      !procedure.mEndOfProcedureDeclaration
+      !warnIfUnused:true
+      !globalProcedure:false
+      !weakProcedure:false
+      !nullOnNoException:false
+      !registerAccess:.readWriteAccess
+      !context:inContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    )
   end
 }
 
