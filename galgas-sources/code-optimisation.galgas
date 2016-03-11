@@ -59,12 +59,6 @@ method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAc
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskProcedureMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc codeOptimisation
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {

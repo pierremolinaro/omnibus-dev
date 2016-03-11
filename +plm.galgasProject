@@ -114,6 +114,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-load-store.galgas"
   "galgas-sources/intermediate-load-structure-constant.galgas"
   "galgas-sources/intermediate-get-element-ptr.galgas"
+  "galgas-sources/intermediate-get-element-ptr-from-self.galgas"
   "galgas-sources/code-optimisation.galgas"
   "galgas-sources/code-generation.galgas"
 

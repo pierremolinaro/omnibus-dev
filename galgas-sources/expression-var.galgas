@@ -180,16 +180,22 @@ override method @selfVarInExpressionAST analyzeExpression
       error mSourceVarName : "a literal string does not handle field access" : outResult
     case enumeration (*) :
       error mSourceVarName : "an enumeration does not handle field access" : outResult
-    case structure (@propertyMap propertyMap *) :
-      [propertyMap searchKey !mSourceVarName ?let type ?let idx]
-      getNewTempVariable (!type !?ioTemporaries ?outResult)
-      [!?ioInstructionGenerationList appendExtractValue
-        !target:outResult
-        !source:outResult
-        !index:idx
-      ]
     case integer (* * * *) :
       error mSourceVarName : "an integer does not handle field access" : outResult
+    case structure (@propertyMap propertyMap *) :
+      [propertyMap searchKey !mSourceVarName ?let type ?let idx]
+      getNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
+      [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+        !fieldAddress
+        !inSelfType
+        !idx
+        !mSourceVarName.string
+      ]        
+      [fieldAddress loadFromMemory
+        !?temporary:ioTemporaries
+        !?instructionListIR:ioInstructionGenerationList
+        ?resultingValue:outResult
+      ]
     end    
   end
 }

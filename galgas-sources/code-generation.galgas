@@ -140,7 +140,7 @@ struct @generationContext {
   @string mExceptionCodeLLVMType
   @string mExceptionLineLLVMType
   @taskVariableMap mTaskVariableMap
-  @taskProcedureMapIR mTaskProcedureMap
+#  @taskProcedureMapIR mTaskProcedureMap
   @globalTaskVariableList mGlobalTaskVariableList
 }
 
@@ -163,7 +163,6 @@ private proc generateLLVMfile
     ![inExceptionCodeType llvmTypeName]
     ![inExceptionLineType llvmTypeName]
     !inIntermediateCodeStruct.mTaskVariableMap
-    !inIntermediateCodeStruct.mTaskProcedureMap
     !inIntermediateCodeStruct.mGlobalTaskVariableList
   }
   let sourceDirectory = inProductDirectory + "/sources"

@@ -253,8 +253,18 @@ method @routineMapIR-element llvmCodeGeneration
       ioLLVMcode += " internal"
     end
     ioLLVMcode += " void @" + routineName + " ("
-    for () in mFormalArgumentListForGeneration
-    do
+    let receiverTypeName = [lkey.string stringByDeletingPathExtension]
+    var first = true
+    if receiverTypeName != "" then
+      ioLLVMcode += "%" + receiverTypeName + "* %self"
+      first = false
+    end
+    for () in mFormalArgumentListForGeneration do
+      if first then
+        first = false
+      else
+        ioLLVMcode += ", "
+      end
       switch mFormalArgumentKind
       case input :
         ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
@@ -263,8 +273,6 @@ method @routineMapIR-element llvmCodeGeneration
      case inputOutput :
         ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
       end
-    between
-      ioLLVMcode += ", "
     end
     ioLLVMcode += ") nounwind {\n"
   #--- Store input arguments in memory

@@ -1,34 +1,38 @@
 
-setter @instructionListIR appendExtractValue
-  ?target:let @operandIR inTarget
-  ?source:let @operandIR inSource
-  ?index:let @uint inIndex
+setter @instructionListIR appendGetElementPtrFromSelf
+  ?let @objectInMemoryIR inTarget
+  ?let @unifiedTypeMap-proxy inSelfType
+  ?let @uint inFieldIndex
+  ?let @string inFieldName
 {
-  self += !@extractValueIR.new {!inTarget !inSource !inIndex}
+  self += !@getElementPtrFromSelfIR.new {!inTarget !inSelfType !inFieldIndex !inFieldName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @extractValueIR : @abstractInstructionIR {
-  @operandIR mTarget
-  @operandIR mSource
-  @uint mIndex
+class @getElementPtrFromSelfIR : @abstractInstructionIR {
+  @objectInMemoryIR mTarget
+  @unifiedTypeMap-proxy mSelfType
+  @uint mFieldIndex
+  @string mFieldName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extractValueIR llvmInstructionCode
+override method @getElementPtrFromSelfIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mSource.mType llvmTypeName]
-  ioLLVMcode += "  " + [mTarget.mValue llvmName] + " = extractvalue " + llvmType + " " + [mSource.mValue llvmName] + ", " + mIndex + "\n"
+  let llvmType = [mSelfType llvmTypeName]
+  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + "* %self, i32 0, i32 " + mFieldIndex + " ; " + mFieldName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extractValueIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+override method @getElementPtrFromSelfIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
+
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
