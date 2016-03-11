@@ -275,14 +275,32 @@ method @taskList-element semanticAnalysis
     error mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
 #--- Analyze task procedures
+  let taskType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName}
   @taskProcedureMapIR taskProcedureMapIR = {}
   for procedure in mTaskProcList do
-    [procedure taskProcedureSemanticAnalysis
-      !mTaskName.string
+    routineSemanticAnalysis (
+      !receiverType:taskType
+      !.procedure
+      !{!.new {!userModeName () !procedure.mProcName.location}}
+      !procedure.mProcName
+      !procedure.mFormalArgumentList
+      !procedure.mInstructionList
+      !procedure.mEndOfProcDeclaration
+      !warnIfUnused:true
+      !globalProcedure:false
+      !weakProcedure:false
+      !nullOnNoException:false
+      !registerAccess:.noAccess
       !context:inContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
-    ]
+    )
+#    [procedure taskProcedureSemanticAnalysis
+#      !mTaskName.string
+#      !context:inContext
+#      !?temporary:ioTemporaries
+#      !?intermediateCode:ioIntermediateCodeStruct
+#    ]
   end
 #--- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
@@ -294,93 +312,60 @@ method @taskList-element semanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskProcListAST-element taskProcedureSemanticAnalysis
-  ?let @string inTaskName
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#--- Attributes
-#  var warnIfUnused = true
-#  var globalProcedure = false
-#  var weakProcedure = false
-#  var nullOnNoException = false
-#  for (attribute) in mProcedureAttributeList do
-#    if attribute.string == noWarningIfUnusedAttribute () then
-#      if not warnIfUnused then
-#        error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
-#      end
-#      warnIfUnused = false    
-#    elsif attribute.string == globalAttribute () then
-#      if globalProcedure then
-#        error attribute : "duplicate @" + globalAttribute () + " attribute"
-#      end
-#      globalProcedure = true    
-#    elsif attribute.string == weakAttribute () then
-#      if weakProcedure then
-#        error attribute : "duplicate @" + weakAttribute () + " attribute"
-#      end
-#      weakProcedure = true    
-#    elsif attribute.string == nullWhenPanicDisabledAttribute () then
-#      if nullOnNoException then
-#        error attribute : "duplicate @" + nullWhenPanicDisabledAttribute () + " attribute"
-#      end
-#      nullOnNoException = true    
-#    else
-#      error attribute : "unknown attribute; available attributes are @"
-#        + noWarningIfUnusedAttribute ()
-#        + ", @" + weakAttribute ()
-#        + ", @" + globalAttribute ()
-#    end
-#  end
-#--- Variable map
-  @variableMap variableMap = initialVariableMapForTaskRoutine (
-    !taskName:inTaskName
-    !context:inContext
-  )
-#--- Analyse formal arguments
-  @procFormalArgumentListForGeneration formalArguments = {}
-#  enterFormalArguments (
+#method @taskProcListAST-element taskProcedureSemanticAnalysis
+#  ?let @string inTaskName
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+##--- Variable map
+#  @variableMap variableMap = initialVariableMapForTaskRoutine (
+#    !taskName:inTaskName
 #    !context:inContext
-#    !mProcFormalArgumentList
-#    !?variableMap
-#    !?formalArguments
 #  )
-#--- Enter subprogram invocation graph
-  let procNameForInvocationGraph = taskProcNameForInvocationGraph (!inTaskName !mProcName)
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !procNameForInvocationGraph
-      !mProcName
-    ]
-  end
-#--- Analyze instruction list
-  @instructionListIR instructionGenerationList = {}
-  [mInstructionList analyzeRoutineInstructionList
-    !self:.null
-    !routineNameForInvocationGraph:procNameForInvocationGraph
-    !context:inContext
-    !modes:{!userModeName ()}
-    !allowException:true
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
-    !?generatedCode:instructionGenerationList
-  ]
-#---
-  [variableMap checkAutomatonStates !mEndOfProcDeclaration]
-#--- Code generation
-  [!?ioIntermediateCodeStruct.mTaskProcedureMap insertKey
-    !.new{!inTaskName + "." + mProcName !mProcName.location}
-#    !formalArguments
-    !instructionGenerationList
-#    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
-    !true # warnIfUnused
-#    !weakProcedure
-#    !nullOnNoException
-#    !globalProcedure
-  ]  
-}
+##--- Analyse formal arguments
+#  @procFormalArgumentListForGeneration formalArguments = {}
+##  enterFormalArguments (
+##    !context:inContext
+##    !mProcFormalArgumentList
+##    !?variableMap
+##    !?formalArguments
+##  )
+##--- Enter subprogram invocation graph
+#  let procNameForInvocationGraph = taskProcNameForInvocationGraph (!inTaskName !mProcName)
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !procNameForInvocationGraph
+#      !mProcName
+#    ]
+#  end
+##--- Analyze instruction list
+#  @instructionListIR instructionGenerationList = {}
+#  [mInstructionList analyzeRoutineInstructionList
+#    !self:.null
+#    !routineNameForInvocationGraph:procNameForInvocationGraph
+#    !context:inContext
+#    !modes:{!userModeName ()}
+#    !allowException:true
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#    !?variableMap:variableMap
+#    !?generatedCode:instructionGenerationList
+#  ]
+##---
+#  [variableMap checkAutomatonStates !mEndOfProcDeclaration]
+##--- Code generation
+#  [!?ioIntermediateCodeStruct.mTaskProcedureMap insertKey
+#    !.new{!inTaskName + "." + mProcName !mProcName.location}
+##    !formalArguments
+#    !instructionGenerationList
+##    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+#    !true # warnIfUnused
+##    !weakProcedure
+##    !nullOnNoException
+##    !globalProcedure
+#  ]  
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      

@@ -27,6 +27,14 @@ class @varOperatorAssignInstructionAST : @instructionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @selfVarOperatorAssignInstructionAST : @instructionAST {
+  @lstring mTargetVarName
+  @expressionAST mSourceExpression
+  @operatorAssignKind mOperator
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -84,7 +92,7 @@ syntax extension common_syntax {
     $identifier$ ?let varName
     <op_assign> ?let @operatorAssignKind operatorAssign
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@varOperatorAssignInstructionAST.new {
+    ioInstructionList += !@selfVarOperatorAssignInstructionAST.new {
       !varName
       !expression
       !operatorAssign
@@ -100,6 +108,12 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfVarOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -230,6 +244,162 @@ override method @varOperatorAssignInstructionAST analyze
     !value:newResultingValue
     !?instructionListIR:ioInstructionGenerationList
   ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfVarOperatorAssignInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  if inSelfType == .null then
+    error mTargetVarName : "'self' is not available in this context"
+  else
+    @unifiedTypeMap-proxy targetType
+    switch [inSelfType kind]
+    case opaque (*) :
+      error mTargetVarName : "an opaque type does not handle field access" : targetType
+    case boolean :
+      error mTargetVarName : "a boolean does not handle field access" : targetType
+    case staticInteger :
+      error mTargetVarName : "an integer does not handle field access" : targetType
+    case boolset :
+      error mTargetVarName : "a boolset does not handle field access" : targetType
+    case literalString :
+      error mTargetVarName : "a literal string does not handle field access" : targetType
+    case enumeration (*) :
+      error mTargetVarName : "an enumeration does not handle field access" : targetType
+    case structure (@propertyMap propertyMap *) :
+      [propertyMap searchKey !mTargetVarName ?targetType ?let idx]
+      getNewTempVariable (!targetType !?ioTemporaries ?let result)
+      [!?ioInstructionGenerationList appendExtractValue
+        !target:result
+        !source:result
+        !index:idx
+      ]
+    case integer (* * * *) :
+      error mTargetVarName : "an integer does not handle field access" : targetType
+    end    
+#  #--- Get target type
+#    [!?ioVariableMap neutralAccess
+#      !mTargetVarName
+#      ?let targetType
+#      ?5*
+#      ?let isConstant
+#    ]
+#    if isConstant then
+#      error mTargetVarName : "a constant cannot be modified"
+#    end
+  #--- Analyze source expression
+    [mSourceExpression analyzeExpression
+      !self:inSelfType
+      !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+      !optionalTargetType:targetType
+      !context:inContext
+      !modes:inModeSet
+      !allowException:inAllowExceptions
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?instructionListIR:ioInstructionGenerationList
+      ?result:@operandIR sourceValue
+    ]
+#  #--- Write local variable
+#    [!?ioVariableMap searchForReadWriteAccess
+#      !mTargetVarName
+#      ?*
+#      ?let accessIsAllowed
+#      ?let targetVariableKind
+#      ?let isCopiable
+#      ?3*
+#    ]
+#    if not accessIsAllowed then
+#      error mTargetVarName : "routine has no access right on the this variable"
+#    end
+  #--- Check operator is available for type
+    let noPanicGeneration = [option plm_options.noPanicGeneration value]
+    let panicMode = [inModeSet hasKey !panicModeName ()]
+    @infixOperatorMap operatorMap
+    switch mOperator
+    case bitWiseAndAssign :
+      operatorMap = inContext.mAndOperatorMap
+    case bitWiseOrAssign :
+      operatorMap = inContext.mOrOperatorMap
+    case bitWiseXorAssign :
+      operatorMap = inContext.mXorOperatorMap
+    case addAssign :
+      if panicMode then
+        error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      end
+      operatorMap = if noPanicGeneration then inContext.mAddNoOvfOperatorMap else inContext.mAddOperatorMap end
+    case addModuloAssign :
+      operatorMap = inContext.mAddNoOvfOperatorMap
+    case subAssign :
+      if panicMode then
+        error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      end
+      operatorMap = if noPanicGeneration then inContext.mSubNoOvfOperatorMap else inContext.mSubOperatorMap end
+    case subModuloAssign :
+      operatorMap = inContext.mSubNoOvfOperatorMap
+    case mulAssign :
+      if panicMode then
+        error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      end
+      operatorMap = if noPanicGeneration then inContext.mMulNoOvfOperatorMap else inContext.mMulOperatorMap end
+    case mulModuloAssign :
+      operatorMap = inContext.mMulNoOvfOperatorMap
+    case divAssign :
+      if panicMode then
+        error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      end
+      operatorMap = if noPanicGeneration then inContext.mDivNoOvfOperatorMap else inContext.mDivOperatorMap end
+    case divZeroAssign :
+      operatorMap = inContext.mDivNoOvfOperatorMap
+    case modAssign :
+      if panicMode then
+        error mTargetVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      end
+      operatorMap = if noPanicGeneration then inContext.mModNoOvfOperatorMap else inContext.mModOperatorMap end
+    case modZeroAssign :
+      operatorMap = inContext.mModNoOvfOperatorMap
+    end
+    [operatorMap checkBinaryOperationWith
+      !leftType:targetType
+      !rightType:sourceValue.mType
+      !operatorLocation:mTargetVarName.location
+      ?resultType:*
+      ?op:let @infixOperatorDescription binaryOperator
+    ]
+#    if not isCopiable then
+#      error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
+#    end
+#  #--- Code generation
+#    [targetVariableKind loadFromMemory
+#      !?temporary:ioTemporaries
+#      !?instructionListIR:ioInstructionGenerationList
+#      ?resultingValue:@operandIR variableValue
+#    ]
+#    [binaryOperator generateInfixOperatorCode
+#      !?ioTemporaries
+#      !?ioInstructionGenerationList
+#      !variableValue
+#      !mTargetVarName.location
+#      !sourceValue
+#      !targetType
+#      ?let newResultingValue
+#    ]
+#    [targetVariableKind storeInMemory
+#      !value:newResultingValue
+#      !?instructionListIR:ioInstructionGenerationList
+#    ]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
