@@ -163,7 +163,7 @@ override method @selfVarAssignmentInstructionAST analyze
       error mTargetVarName : "an enumeration does not have fields"
     case structure (@propertyMap propertyMap *) :
       [propertyMap searchKey !mTargetVarName ?targetType ?let idx]
-      getNewTempObjectInMemory (!targetType !?ioTemporaries ?let result)
+      getLocalNameOfNewTempObjectInMemory (!targetType !?ioTemporaries ?let result)
       [!?ioInstructionGenerationList appendGetElementPtr
         !result
         !target

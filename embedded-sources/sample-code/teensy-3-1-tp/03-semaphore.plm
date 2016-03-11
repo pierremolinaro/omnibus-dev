@@ -10,40 +10,56 @@ struct $semaphore {
     if self.value > 0 then
       self.value -= 1
     else
-//      kernel_blockRunningTaskInList (!?self.list)
+      kernel_blockRunningTaskInList (!?self.list)
     end
   }
 
   service V `kernel () {
-//    var found $bool
-//    kernel_makeTaskReadyFromWaitingList (!?self.list ? found)
-//    if not found then
-//      self.value += 1
-//    end
+    var found $bool
+    kernel_makeTaskReadyFromWaitingList (!?self.list ?found)
+    if not found then
+      self.value += 1
+    end
   }
 }
 
-var s $semaphore = $semaphore () {
-  proc $T.setup
+var s = $semaphore () {
+  proc $T1.loop
+  proc $T2.loop
 }
 
 //------------------------------------------------*
 
-task T priority 12 stackSize 512 {
+task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
   proc setup () {
-    s.P ()
-    s.V ()
   }
   
   proc loop () {
     waitUntilMS (!deadline:self.top)
+    s.V ()
     self.top += 250
     ledOn (!LED_L1) // Allumer la led
     waitUntilMS (!deadline:self.top)
+    s.V ()
     self.top += 250
     ledOff (!LED_L1)  // Éteindre la led
+  }
+}
+
+//------------------------------------------------*
+
+task T2 priority 2 stackSize 512 {
+
+  proc setup () {
+  }
+  
+  proc loop () {
+    s.P ()
+    ledOn (!LED_L2) // Allumer la led
+    s.P ()
+    ledOff (!LED_L2)  // Éteindre la led
   }
 }
 

@@ -184,7 +184,7 @@ override method @selfVarInExpressionAST analyzeExpression
       error mSourceVarName : "an integer does not handle field access" : outResult
     case structure (@propertyMap propertyMap *) :
       [propertyMap searchKey !mSourceVarName ?let type ?let idx]
-      getNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
+      getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf
         !fieldAddress
         !inSelfType

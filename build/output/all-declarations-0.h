@@ -6476,8 +6476,6 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_56 (C_Lexique_plm_5F_lexique *) = 0 ;
 
-  protected : virtual int32_t select_common_5F_syntax_57 (C_Lexique_plm_5F_lexique *) = 0 ;
-
 
 } ;
 
@@ -10899,7 +10897,8 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_input,
     kEnum_output,
-    kEnum_outputInput
+    kEnum_outputInput,
+    kEnum_outputInputSelfVariable
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -10936,6 +10935,9 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
   public : static GALGAS_procEffectiveParameterPassingModeAST constructor_outputInput (const class GALGAS_lstring & inOperand0
                                                                                        COMMA_LOCATION_ARGS) ;
 
+  public : static GALGAS_procEffectiveParameterPassingModeAST constructor_outputInputSelfVariable (const class GALGAS_lstring & inOperand0
+                                                                                                   COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -10958,6 +10960,10 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_outputInputSelfVariable (class GALGAS_lstring & outArgument0,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) const ;
+
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
@@ -10966,6 +10972,8 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutput (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutputInput (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutputInputSelfVariable (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -11030,6 +11038,22 @@ class cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInput : p
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInput (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInputSelfVariable : public cEnumAssociatedValues {
+  public : const GALGAS_lstring mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInputSelfVariable (const GALGAS_lstring & inAssociatedValue0
+                                                                                               COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInputSelfVariable (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

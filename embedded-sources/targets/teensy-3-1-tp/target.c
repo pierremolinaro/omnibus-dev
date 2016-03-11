@@ -237,15 +237,20 @@ void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, co
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) asm ("proc..kernel_makeTaskReadyFromWaitingList") ;
-void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList) {
-  const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;
-  task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;
-  kernel_set_return_code (& taskDescriptorPtr->mTaskContext, 1) ;
-  gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;
-  *(taskDescriptorPtr->mWaitingList) &= ~ (1 << taskIndex) ;
-  taskDescriptorPtr->mWaitingList = (task_list *) 0 ;
-  kernel_makeTaskReady (taskIndex) ;
+void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList, unsigned char * outFound)
+ asm ("proc..kernel_makeTaskReadyFromWaitingList") ;
+
+void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList, unsigned char * outFound) {
+  * outFound = (* ioWaitingList) != 0 ;
+  if (* outFound) {
+    const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;
+    task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [taskIndex] ;
+    kernel_set_return_code (& taskDescriptorPtr->mTaskContext, 1) ;
+    gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;
+    *(taskDescriptorPtr->mWaitingList) &= ~ (1 << taskIndex) ;
+    taskDescriptorPtr->mWaitingList = (task_list *) 0 ;
+    kernel_makeTaskReady (taskIndex) ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

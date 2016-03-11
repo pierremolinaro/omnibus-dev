@@ -443,20 +443,6 @@ void categoryModifier_appendGetElementPtr (class GALGAS_instructionListIR & ioOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Category setter '@instructionListIR appendGetElementPtrFromSelf'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendGetElementPtrFromSelf (class GALGAS_instructionListIR & ioObject,
-                                                   const class GALGAS_objectInMemoryIR constin_inTarget,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                                   const class GALGAS_uint constin_inFieldIndex,
-                                                   const class GALGAS_string constin_inFieldName,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                      Abstract category method '@abstractInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
