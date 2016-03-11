@@ -149,7 +149,7 @@ proc getNewTempVariable
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc getNewTempObjectInMemory
+proc getLocalNameOfNewTempObjectInMemory
   ?let @unifiedTypeMap-proxy inType
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectInMemoryIR outTempVariable

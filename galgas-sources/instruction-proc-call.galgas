@@ -6,6 +6,7 @@ enum @procEffectiveParameterPassingModeAST {
   case input (@lstring name)
   case output (@expressionAST exp @location endOfExp)
   case outputInput (@lstring name)
+  case outputInputSelfVariable (@lstring name)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -99,14 +100,15 @@ syntax extension common_syntax {
       $identifier$ ?let effectiveParameterName
       outEffectiveParameterList += !.outputInput{!name:effectiveParameterName} !selector
     while
+      $!?$ ?let selector
+      $self$
+      $.$
+      $identifier$ ?let effectiveParameterName
+      outEffectiveParameterList += !.outputInputSelfVariable{!name:effectiveParameterName} !selector
+    while
       $?$ ?let selector
-      select
-        $identifier$ ?let effectiveParameterName
-        outEffectiveParameterList += !.input{!name:effectiveParameterName} !selector
-      or
-        $self$
-        outEffectiveParameterList += !.input{!name:.new {!"self" !.here}} !selector
-      end
+      $identifier$ ?let effectiveParameterName
+      outEffectiveParameterList += !.input{!name:effectiveParameterName} !selector
     end
     $)$
   }
@@ -123,9 +125,9 @@ override method @abstractCallInstructionAST noteInstructionTypesInPrecedenceGrap
   for () in mEffectiveParameterList do
     switch mEffectiveParameterKind
     case input (*):
-    case output (expression *) :
-      [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case outputInput (*) :
+    case outputInputSelfVariable (*) :
     end 
   end
 }
@@ -139,6 +141,7 @@ getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstr
   case input (*) : outResult = "?"
   case output (* *) : outResult = "!"
   case outputInput (*) : outResult = "!?"
+  case outputInputSelfVariable (*) : outResult = "!?"
   end
   if inSelector.string != "" then
     outResult += inSelector.string + ":"
@@ -323,8 +326,8 @@ private proc analyzeCall
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
 #--- Analyze effective parameters
   @procEffectiveParameterList parameterList = {}
-  for () formal_ in formalSignature, () in inEffectiveParameterList do
-    switch mEffectiveParameterKind 
+  for () formal_ in formalSignature, () effective_ in inEffectiveParameterList do
+    switch effective_mEffectiveParameterKind 
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
         !name
@@ -345,10 +348,10 @@ private proc analyzeCall
       if not isCopiable then
         error name : "the '" + name + "' variable is not copiable"
       end
-      parameterList += !mEffectiveParameterKind !mSelector !type
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       outEffectiveParameterListIR +=
         !.input
-        !mSelector
+        !effective_mSelector
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
@@ -370,13 +373,13 @@ private proc analyzeCall
         !errorLocation:endOfExp
         !staticTypeAllowed:false
       )
-      parameterList += !mEffectiveParameterKind !mSelector !formal_mType
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
       outEffectiveParameterListIR += 
         !.output
-        !mSelector
+        !effective_mSelector
         !result
     case outputInput (@lstring name) :
-      [!?ioVariableMap searchForReadWriteAccess
+     [!?ioVariableMap searchForReadWriteAccess
         !name
         ?let type
         ?let accessIsAllowed
@@ -391,11 +394,46 @@ private proc analyzeCall
       if not accessIsAllowed then
         error name : "routine has no access right on the this variable"
       end
-      parameterList += !mEffectiveParameterKind !mSelector !type
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       outEffectiveParameterListIR +=
         !.outputInput
-        !mSelector
+        !effective_mSelector
         !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
+    case outputInputSelfVariable (@lstring name) :
+      if inSelfType == .null then
+        error name : "'self' is not available in this context" :parameterList, outEffectiveParameterListIR
+      else
+        switch [inSelfType kind]
+        case opaque (*) :
+          error name : "an opaque type does not handle field access" : parameterList, outEffectiveParameterListIR
+        case boolean :
+          error name : "a boolean does not handle field access" : parameterList, outEffectiveParameterListIR
+        case staticInteger :
+          error name : "an integer does not handle field access" : parameterList, outEffectiveParameterListIR
+        case boolset :
+          error name : "a boolset does not handle field access" : parameterList, outEffectiveParameterListIR
+        case literalString :
+          error name : "a literal string does not handle field access" : parameterList, outEffectiveParameterListIR
+        case enumeration (*) :
+          error name : "an enumeration does not handle field access" : parameterList, outEffectiveParameterListIR
+        case integer (* * * *) :
+          error name : "an integer does not handle field access" : parameterList, outEffectiveParameterListIR
+        case structure (@propertyMap propertyMap *) :
+          [propertyMap searchKey !name ?let type ?let idx]
+          getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
+          [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+            !fieldAddress
+            !inSelfType
+            !idx
+            !name.string
+          ]        
+          parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
+          outEffectiveParameterListIR +=
+            !.outputInput
+            !effective_mSelector
+            !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![fieldAddress name])}}
+        end    
+      end
     end
   end
 #--- Check mode
@@ -405,9 +443,9 @@ private proc analyzeCall
     !error:inRoutineName.location
   )
 #--- Check parameters
-  if [formalSignature length] != [parameterList length] then
+  if [formalSignature length] != [inEffectiveParameterList length] then
     error inRoutineName: "this routine requires " + [formalSignature length] + " argument(s), this call names "
-      + [formalSignature length] + " argument(s)"
+      + [inEffectiveParameterList length] + " argument(s)"
   else
     for () formal_ in formalSignature, () actual_ in parameterList do
       if [formal_mType key] != [actual_mParameterType key] then

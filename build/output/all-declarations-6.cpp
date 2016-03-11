@@ -8020,10 +8020,15 @@ GALGAS_string extensionGetter_passingModeForActualSelector (const GALGAS_procEff
       result_outResult = GALGAS_string ("!\?") ;
     }
     break ;
+  case GALGAS_procEffectiveParameterPassingModeAST::kEnum_outputInputSelfVariable:
+    {
+      result_outResult = GALGAS_string ("!\?") ;
+    }
+    break ;
   }
   const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, inArgument_inSelector.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    result_outResult.plusAssign_operation(inArgument_inSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 144)), inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 144)) ;
+    result_outResult.plusAssign_operation(inArgument_inSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 147)), inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 147)) ;
   }
 //---
   return result_outResult ;

@@ -373,7 +373,7 @@ override method @selfVarOperatorAssignInstructionAST analyze
 #      error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
 #    end
     #--- Code generation
-      getNewTempObjectInMemory (!targetType !?ioTemporaries ?let fieldAddress)
+      getLocalNameOfNewTempObjectInMemory (!targetType !?ioTemporaries ?let fieldAddress)
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf
         !fieldAddress
         !inSelfType
