@@ -438,6 +438,18 @@ void routine_getLocalNameOfNewTempObjectInMemory (const class GALGAS_unifiedType
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                  Category setter '@instructionListIR appendAlloca'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendAlloca (class GALGAS_instructionListIR & ioObject,
+                                    const class GALGAS_string constin_inLocalVariableName,
+                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Category setter '@instructionListIR appendGetElementPtrFromSelf'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

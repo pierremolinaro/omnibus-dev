@@ -51,7 +51,12 @@ syntax extension common_syntax {
     while
       $var$
       $identifier$ ?let fieldName
-      $typeName$ ?let typeName
+      @lstring typeName
+      select
+        $typeName$ ?typeName
+      or
+        typeName = ["" nowhere]
+      end
       $=$
       <expression> ?let initExpression
       fieldList += !fieldName !typeName !initExpression
@@ -177,67 +182,9 @@ override method @structureDeclaration enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-#--- Attribute "unique"
-  var copiable = true
-  for (s) in mAttributeListAST do
-    if s.string == "unique" then
-      if not copiable then
-        error s : "duplicated attribute"
-      end
-      copiable = false
-    else
-      error s : "unknown attribute"
-    end
-  end
-#--- Properties
+#---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
-  for () in mStructureFieldListAST do
-    let fieldTypeNameProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mFieldTypeName}
-    propertyList += !mFieldName.string !fieldTypeNameProxy
-    [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy ![propertyMap count]]
-  end
-#--- Functions
-  @functionMap functionMap = {}
-  for function in mFunctionDeclarationListAST do
-    @funcSignature signature = {}
-    for (selector formalArgumentTypeName *) in function.mFuncFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-      signature += !selector !typeProxy
-    end
-  #--- Mode map
-    @modeMap functionModeMap = {}
-    for () in function.mFunctionModeList do
-      [!?functionModeMap insertKey !mValue] ;
-    end
-  #--- Result type
-    let resultType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !function.mResultTypeName}
-  #--- Enter in context
-    [!?functionMap insertKey
-      !function.mFunctionName
-      !functionModeMap
-      !signature
-      !resultType
-    ]
-  end
-#--- services
-  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
-  [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
-#--- Enter in type map
-  [!?ioContext.mTypeMap insertKey
-    !lkey:mStructureName
-    !llvmTypeName:"%$" + mStructureName.string
-    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
-    !typedConstantMap:{}
-    !functionMap:functionMap
-    !instanciable:true
-    !copiable:copiable
-    !equatable:false
-    !comparable:false
-    !enumerationType:.null # Not enumerable
-  ]
-#--- Enter init value in context
-  @staticStringMap globalLiteralStringMap = {} # Unused here
   @operandIRList operandIRList = {}
   for () in mStructureFieldListAST do
   #--- Field type
@@ -256,7 +203,7 @@ override method @structureDeclaration enterInContext
       !modes:{}
       !allowException:false
       !?temporary:temporaries
-      !?staticStringMap:globalLiteralStringMap
+      !?staticStringMap:*
       !?variableMap:*
       !?instructionListIR:initInstructionGenerationList
       ?result:@operandIR expressionIR
@@ -271,8 +218,61 @@ override method @structureDeclaration enterInContext
       type = expressionIR.mType
     end
     operandIRList += !.new {!type !expressionIR.mValue}
+    propertyList += !mFieldName.string !type
+    [!?propertyMap insertKey !mFieldName !type ![propertyMap count]]
   end
   [!?ioContext.mConstructorMap insertKey !mStructureName !.structure{!values:operandIRList}]
+#---------------------------------------- Attribute "unique"
+  var copiable = true
+  for (s) in mAttributeListAST do
+    if s.string == "unique" then
+      if not copiable then
+        error s : "duplicated attribute"
+      end
+      copiable = false
+    else
+      error s : "unknown attribute"
+    end
+  end
+#---------------------------------------- Functions
+  @functionMap functionMap = {}
+  for function in mFunctionDeclarationListAST do
+    @funcSignature signature = {}
+    for (selector formalArgumentTypeName *) in function.mFuncFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      signature += !selector !typeProxy
+    end
+  #--- Mode map
+    @modeMap functionModeMap = {}
+    for () in function.mFunctionModeList do
+      [!?functionModeMap insertKey !mValue]
+    end
+  #--- Result type
+    let resultType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !function.mResultTypeName}
+  #--- Enter in context
+    [!?functionMap insertKey
+      !function.mFunctionName
+      !functionModeMap
+      !signature
+      !resultType
+    ]
+  end
+#---------------------------------------- services and procedures
+  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
+  [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+#---------------------------------------- Enter in type map
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mStructureName
+    !llvmTypeName:"%$" + mStructureName.string
+    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
+    !typedConstantMap:{}
+    !functionMap:functionMap
+    !instanciable:true
+    !copiable:copiable
+    !equatable:false
+    !comparable:false
+    !enumerationType:.null # Not enumerable
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -4,6 +4,7 @@
 
 enum @procEffectiveParameterPassingModeAST {
   case input (@lstring name)
+  case inputWithType (@bool constant @lstring typeName @lstring name)
   case output (@expressionAST exp @location endOfExp)
   case outputInput (@lstring name)
   case outputInputSelfVariable (@lstring name)
@@ -109,6 +110,24 @@ syntax extension common_syntax {
       $?$ ?let selector
       $identifier$ ?let effectiveParameterName
       outEffectiveParameterList += !.input{!name:effectiveParameterName} !selector
+    while
+      $?$ ?let selector
+      @bool constant
+      select
+        $var$
+        constant = false
+      or
+        $let$
+        constant = true
+      end
+      $identifier$ ?let effectiveParameterName
+      @lstring typeName
+      select
+        typeName = ["" nowhere]
+      or
+        $typeName$ ?typeName
+      end
+      outEffectiveParameterList += !.inputWithType{!constant:constant !typeName:typeName !name:effectiveParameterName} !selector
     end
     $)$
   }
@@ -125,6 +144,10 @@ override method @abstractCallInstructionAST noteInstructionTypesInPrecedenceGrap
   for () in mEffectiveParameterList do
     switch mEffectiveParameterKind
     case input (*):
+    case inputWithType (* @lstring typeName *) :
+      if typeName.string != "" then
+        [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+      end
     case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case outputInput (*) :
     case outputInputSelfVariable (*) :
@@ -139,6 +162,7 @@ override method @abstractCallInstructionAST noteInstructionTypesInPrecedenceGrap
 getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstring inSelector -> @string outResult {
   switch self
   case input (*) : outResult = "?"
+  case inputWithType (* * *) : outResult = "?"
   case output (* *) : outResult = "!"
   case outputInput (*) : outResult = "!?"
   case outputInputSelfVariable (*) : outResult = "!?"
@@ -312,7 +336,7 @@ private proc analyzeCall
     !outRoutineMangledName
     ?let unused mutating
     ?let modeMap
-    ?let formalSignature
+    ?let @procedureSignature formalSignature
     ?outRoutineKind
     ?*
   ]
@@ -328,6 +352,42 @@ private proc analyzeCall
   @procEffectiveParameterList parameterList = {}
   for () formal_ in formalSignature, () effective_ in inEffectiveParameterList do
     switch effective_mEffectiveParameterKind 
+    case inputWithType (@bool constant @lstring typeName @lstring name) :
+      let type = if typeName.string == "" then
+        formal_mType
+      else
+        @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName}
+      end
+      let targetVar = @objectInMemoryIR.localValue {!type:type !name:name.string}
+      if constant then
+        [!?ioVariableMap insertLocalConstant
+          !name
+          !type
+          !true
+          !targetVar
+          !true
+          !{}
+          !true
+          !false
+        ]
+      else
+        [!?ioVariableMap insertDefinedLocalVariable
+          !name
+          !type
+          !true
+          !targetVar
+          !true
+          !{}
+          !true
+          !false
+        ]
+      end
+      [!?ioInstructionGenerationList appendAlloca !name.string !type]
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
+      outEffectiveParameterListIR +=
+        !.input
+        !effective_mSelector
+        !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
         !name

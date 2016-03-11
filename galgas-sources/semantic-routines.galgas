@@ -230,7 +230,7 @@ method @routineMapIR-element llvmCodeGeneration
     ioAssemblerCode += "  .global " + routineName + "\n"
     ioAssemblerCode += "  " + routineName + " = 0\n\n"
   #--- In LLVM, declare routine as extern
-    ioLLVMcode += llvmTitleComment (!"proc " + routineName)
+    ioLLVMcode += llvmTitleComment (!routineName)
     ioLLVMcode += "declare void @" + routineName + " ("
     for () in mFormalArgumentListForGeneration
     do
@@ -247,7 +247,7 @@ method @routineMapIR-element llvmCodeGeneration
     end
     ioLLVMcode += ") nounwind ; NULL in assembly code\n\n"
   else
-    ioLLVMcode += llvmTitleComment (!"proc " + routineName)
+    ioLLVMcode += llvmTitleComment (!routineName)
     ioLLVMcode += "define"
     if not mGlobal then
       ioLLVMcode += " internal"
