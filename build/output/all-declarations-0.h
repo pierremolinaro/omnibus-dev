@@ -6476,6 +6476,12 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_56 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_common_5F_syntax_57 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_common_5F_syntax_58 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_common_5F_syntax_59 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -10896,6 +10902,7 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_input,
+    kEnum_inputWithType,
     kEnum_output,
     kEnum_outputInput,
     kEnum_outputInputSelfVariable
@@ -10928,6 +10935,11 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
   public : static GALGAS_procEffectiveParameterPassingModeAST constructor_input (const class GALGAS_lstring & inOperand0
                                                                                  COMMA_LOCATION_ARGS) ;
 
+  public : static GALGAS_procEffectiveParameterPassingModeAST constructor_inputWithType (const class GALGAS_bool & inOperand0,
+                                                                                         const class GALGAS_lstring & inOperand1,
+                                                                                         const class GALGAS_lstring & inOperand2
+                                                                                         COMMA_LOCATION_ARGS) ;
+
   public : static GALGAS_procEffectiveParameterPassingModeAST constructor_output (const class GALGAS_expressionAST & inOperand0,
                                                                                   const class GALGAS_location & inOperand1
                                                                                   COMMA_LOCATION_ARGS) ;
@@ -10951,6 +10963,12 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_inputWithType (class GALGAS_bool & outArgument0,
+                                                       class GALGAS_lstring & outArgument1,
+                                                       class GALGAS_lstring & outArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_output (class GALGAS_expressionAST & outArgument0,
                                                 class GALGAS_location & outArgument1,
                                                 C_Compiler * inCompiler
@@ -10968,6 +10986,8 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInput (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInputWithType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutput (LOCATION_ARGS) const ;
 
@@ -11004,6 +11024,26 @@ class cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input : public 
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_procEffectiveParameterPassingModeAST_inputWithType : public cEnumAssociatedValues {
+  public : const GALGAS_bool mAssociatedValue0 ;
+  public : const GALGAS_lstring mAssociatedValue1 ;
+  public : const GALGAS_lstring mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_procEffectiveParameterPassingModeAST_inputWithType (const GALGAS_bool & inAssociatedValue0,
+                                                                                     const GALGAS_lstring & inAssociatedValue1,
+                                                                                     const GALGAS_lstring & inAssociatedValue2
+                                                                                     COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_procEffectiveParameterPassingModeAST_inputWithType (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

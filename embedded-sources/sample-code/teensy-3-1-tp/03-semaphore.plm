@@ -4,7 +4,7 @@ target "teensy-3-1-tp"
 
 struct $semaphore {
   var value $uint32 = 0
-  var list $taskList = $taskList ()
+  var list = $taskList ()
 
   service P `kernel () {
     if self.value > 0 then
@@ -15,8 +15,7 @@ struct $semaphore {
   }
 
   service V `kernel () {
-    var found $bool
-    kernel_makeTaskReadyFromWaitingList (!?self.list ?found)
+    kernel_makeTaskReadyFromWaitingList (!?self.list ?let found)
     if not found then
       self.value += 1
     end
@@ -40,11 +39,11 @@ task T1 priority 1 stackSize 512 {
     waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 250
-    ledOn (!LED_L1) // Allumer la led
+    ledOn (!LED_L1)
     waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 250
-    ledOff (!LED_L1)  // Éteindre la led
+    ledOff (!LED_L1)
   }
 }
 
@@ -57,9 +56,9 @@ task T2 priority 2 stackSize 512 {
   
   proc loop () {
     s.P ()
-    ledOn (!LED_L2) // Allumer la led
+    ledOn (!LED_L2)
     s.P ()
-    ledOff (!LED_L2)  // Éteindre la led
+    ledOff (!LED_L2)
   }
 }
 

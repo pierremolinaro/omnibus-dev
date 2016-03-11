@@ -133,10 +133,7 @@ override method @varInstructionWithAssignmentAST analyze
     !false # Is not constant
   ]
 #--- Code generation
-  [!?ioInstructionGenerationList appendAlloca
-    !mVarName.string
-    !result.mType
-  ]
+  [!?ioInstructionGenerationList appendAlloca !mVarName.string !result.mType]
   [!?ioInstructionGenerationList appendStoreLocalVariable
     !mVarName.string
     !result.mType
