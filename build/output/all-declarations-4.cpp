@@ -831,6 +831,193 @@ C_galgas_function_descriptor functionDescriptor_getInfixOperatorMap ("getInfixOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                Routine 'analyzeCall'                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeCall (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                          const GALGAS_lstring constinArgument_inReceiverName,
+                          const GALGAS_lstring constinArgument_inRoutineName,
+                          const GALGAS_procEffectiveParameterListAST constinArgument_inEffectiveParameterList,
+                          const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                          const GALGAS_semanticContext constinArgument_inContext,
+                          const GALGAS_stringset constinArgument_inRequiredModeSet,
+                          const GALGAS_bool constinArgument_inAllowExceptions,
+                          GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                          GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                          GALGAS_variableMap & ioArgument_ioVariableMap,
+                          GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                          GALGAS_procCallEffectiveParameterListIR & outArgument_outEffectiveParameterListIR,
+                          GALGAS_routineKind & outArgument_outRoutineKind,
+                          GALGAS_lstring & outArgument_outRoutineMangledName,
+                          C_Compiler * inCompiler
+                          COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outEffectiveParameterListIR.drop () ; // Release 'out' argument
+  outArgument_outRoutineKind.drop () ; // Release 'out' argument
+  outArgument_outRoutineMangledName.drop () ; // Release 'out' argument
+  outArgument_outEffectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("instruction-proc-call.galgas", 289)) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_receiverType ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inReceiverName.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_objectInMemoryIR var_variableKind ;
+    {
+    GALGAS_bool joker_11905 ; // Joker input parameter
+    GALGAS_bool joker_11952_4 ; // Joker input parameter
+    GALGAS_controlRegisterBitSliceAccessMap joker_11952_3 ; // Joker input parameter
+    GALGAS_bool joker_11952_2 ; // Joker input parameter
+    GALGAS_bool joker_11952_1 ; // Joker input parameter
+    ioArgument_ioVariableMap.setter_searchForReadAccess (constinArgument_inReceiverName, var_receiverType, joker_11905, var_variableKind, joker_11952_4, joker_11952_3, joker_11952_2, joker_11952_1, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 292)) ;
+    }
+    outArgument_outRoutineMangledName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (var_receiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 299)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 299)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 299)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 299)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 299)), constinArgument_inRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 299)) ;
+    outArgument_outEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-proc-call.galgas", 300)), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("instruction-proc-call.galgas", 300)), extensionGetter_address (var_variableKind, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 300))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 300)) ;
+  }else if (kBoolFalse == test_0) {
+    outArgument_outRoutineMangledName = GALGAS_lstring::constructor_new (GALGAS_string (".").add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 302)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 302)), constinArgument_inRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 302)) ;
+    var_receiverType = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-proc-call.galgas", 303)) ;
+  }
+  GALGAS_bool var_mutating ;
+  GALGAS_modeMap var_modeMap ;
+  GALGAS_procedureSignature var_formalSignature ;
+  GALGAS_bool joker_12480 ; // Joker input parameter
+  constinArgument_inContext.mAttribute_mRoutineMapForContext.method_searchKey (outArgument_outRoutineMangledName, var_mutating, var_modeMap, var_formalSignature, outArgument_outRoutineKind, joker_12480, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 305)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph ;
+  switch (outArgument_outRoutineKind.enumValue ()) {
+  case GALGAS_routineKind::kNotBuilt:
+    break ;
+  case GALGAS_routineKind::kEnum_procedure:
+    {
+      var_routineNameForInvocationGraph = function_procNameForInvocationGraph (var_receiverType, constinArgument_inRoutineName, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 316)) ;
+    }
+    break ;
+  case GALGAS_routineKind::kEnum_section:
+    {
+      var_routineNameForInvocationGraph = function_sectionNameForInvocationGraph (var_receiverType, constinArgument_inRoutineName, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 317)) ;
+    }
+    break ;
+  case GALGAS_routineKind::kEnum_service:
+    {
+      var_routineNameForInvocationGraph = function_serviceNameForInvocationGraph (var_receiverType, constinArgument_inRoutineName, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 318)) ;
+    }
+    break ;
+  }
+  {
+  ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 320)) ;
+  }
+  GALGAS_procEffectiveParameterList var_parameterList = GALGAS_procEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("instruction-proc-call.galgas", 322)) ;
+  cEnumerator_procedureSignature enumerator_13153 (var_formalSignature, kEnumeration_up) ;
+  cEnumerator_procEffectiveParameterListAST enumerator_13185 (constinArgument_inEffectiveParameterList, kEnumeration_up) ;
+  while (enumerator_13153.hasCurrentObject () && enumerator_13185.hasCurrentObject ()) {
+    switch (enumerator_13185.current_mEffectiveParameterKind (HERE).enumValue ()) {
+    case GALGAS_procEffectiveParameterPassingModeAST::kNotBuilt:
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeAST::kEnum_input:
+      {
+        const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input * extractPtr_14062 = (const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input *) (enumerator_13185.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_14062->mAssociatedValue0 ;
+        GALGAS_unifiedTypeMap_2D_proxy var_type ;
+        GALGAS_bool var_accessIsAllowed ;
+        GALGAS_objectInMemoryIR var_parameterAccess ;
+        GALGAS_bool var_isCopiable ;
+        GALGAS_bool var_canBeUsedAsInputParameter ;
+        {
+        GALGAS_controlRegisterBitSliceAccessMap joker_13432 ; // Joker input parameter
+        GALGAS_bool joker_13482 ; // Joker input parameter
+        ioArgument_ioVariableMap.setter_searchForWriteAccess (extractedValue_name, var_type, var_accessIsAllowed, var_parameterAccess, var_isCopiable, joker_13432, var_canBeUsedAsInputParameter, joker_13482, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 326)) ;
+        }
+        const enumGalgasBool test_1 = var_accessIsAllowed.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 336)).boolEnum () ;
+        if (kBoolTrue == test_1) {
+          GALGAS_location location_2 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
+          inCompiler->emitSemanticError (location_2, GALGAS_string ("routine has no access right on the this variable")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 337)) ;
+        }
+        const enumGalgasBool test_3 = var_canBeUsedAsInputParameter.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 339)).boolEnum () ;
+        if (kBoolTrue == test_3) {
+          GALGAS_location location_4 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
+          inCompiler->emitSemanticError (location_4, GALGAS_string ("this variable cannot be used as input parameter")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 340)) ;
+        }
+        const enumGalgasBool test_5 = var_isCopiable.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 342)).boolEnum () ;
+        if (kBoolTrue == test_5) {
+          GALGAS_location location_6 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
+          inCompiler->emitSemanticError (location_6, GALGAS_string ("the '").add_operation (extractedValue_name.getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 343)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 343)).add_operation (GALGAS_string ("' variable is not copiable"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 343))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 343)) ;
+        }
+        var_parameterList.addAssign_operation (enumerator_13185.current_mEffectiveParameterKind (HERE), enumerator_13185.current_mSelector (HERE), var_type  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 345)) ;
+        outArgument_outEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("instruction-proc-call.galgas", 347)), enumerator_13185.current_mSelector (HERE), GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extractedValue_name.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 349))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 349))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 349))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 346)) ;
+      }
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeAST::kEnum_output:
+      {
+        const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_output * extractPtr_14995 = (const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_output *) (enumerator_13185.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_expression = extractPtr_14995->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfExp = extractPtr_14995->mAssociatedValue1 ;
+        GALGAS_operandIR var_expressionResult ;
+        callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inSelfType, var_routineNameForInvocationGraph, enumerator_13153.current_mType (HERE), constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 351)) ;
+        GALGAS_operandIR var_result = function_checkAssignmentCompatibility (var_expressionResult, enumerator_13153.current_mType (HERE), extractedValue_endOfExp, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 364)) ;
+        var_parameterList.addAssign_operation (enumerator_13185.current_mEffectiveParameterKind (HERE), enumerator_13185.current_mSelector (HERE), enumerator_13153.current_mType (HERE)  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 370)) ;
+        outArgument_outEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_output (SOURCE_FILE ("instruction-proc-call.galgas", 372)), enumerator_13185.current_mSelector (HERE), var_result  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 371)) ;
+      }
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeAST::kEnum_outputInput:
+      {
+        const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInput * extractPtr_15728 = (const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInput *) (enumerator_13185.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_15728->mAssociatedValue0 ;
+        GALGAS_unifiedTypeMap_2D_proxy var_type ;
+        GALGAS_bool var_accessIsAllowed ;
+        GALGAS_objectInMemoryIR var_parameterAccess ;
+        GALGAS_bool var_canBeUsedAsInputParameter ;
+        {
+        GALGAS_bool joker_15189_2 ; // Joker input parameter
+        GALGAS_controlRegisterBitSliceAccessMap joker_15189_1 ; // Joker input parameter
+        GALGAS_bool joker_15240 ; // Joker input parameter
+        ioArgument_ioVariableMap.setter_searchForReadWriteAccess (extractedValue_name, var_type, var_accessIsAllowed, var_parameterAccess, joker_15189_2, joker_15189_1, var_canBeUsedAsInputParameter, joker_15240, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 376)) ;
+        }
+        const enumGalgasBool test_7 = var_canBeUsedAsInputParameter.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 385)).boolEnum () ;
+        if (kBoolTrue == test_7) {
+          GALGAS_location location_8 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
+          inCompiler->emitSemanticError (location_8, GALGAS_string ("this variable cannot be used as output/input parameter")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 386)) ;
+        }
+        const enumGalgasBool test_9 = var_accessIsAllowed.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 388)).boolEnum () ;
+        if (kBoolTrue == test_9) {
+          GALGAS_location location_10 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
+          inCompiler->emitSemanticError (location_10, GALGAS_string ("routine has no access right on the this variable")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 389)) ;
+        }
+        var_parameterList.addAssign_operation (enumerator_13185.current_mEffectiveParameterKind (HERE), enumerator_13185.current_mSelector (HERE), var_type  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 391)) ;
+        outArgument_outEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-proc-call.galgas", 393)), enumerator_13185.current_mSelector (HERE), GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extractedValue_name.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 395))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 395))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 395))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 392)) ;
+      }
+      break ;
+    }
+    enumerator_13153.gotoNextObject () ;
+    enumerator_13185.gotoNextObject () ;
+  }
+  {
+  routine_checkMode (constinArgument_inRequiredModeSet, var_modeMap.getter_keySet (SOURCE_FILE ("instruction-proc-call.galgas", 401)), constinArgument_inRoutineName.mAttribute_location, inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 399)) ;
+  }
+  const enumGalgasBool test_11 = GALGAS_bool (kIsNotEqual, var_formalSignature.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 405)).objectCompare (var_parameterList.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 405)))).boolEnum () ;
+  if (kBoolTrue == test_11) {
+    GALGAS_location location_12 (constinArgument_inRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_12, GALGAS_string ("this routine requires ").add_operation (var_formalSignature.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 406)).getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 406)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 406)).add_operation (GALGAS_string (" argument(s), this call names "), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 406)).add_operation (var_formalSignature.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 407)).getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 406)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 406)).add_operation (GALGAS_string (" argument(s)"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 407))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 406)) ;
+  }else if (kBoolFalse == test_11) {
+    cEnumerator_procedureSignature enumerator_16173 (var_formalSignature, kEnumeration_up) ;
+    cEnumerator_procEffectiveParameterList enumerator_16202 (var_parameterList, kEnumeration_up) ;
+    while (enumerator_16173.hasCurrentObject () && enumerator_16202.hasCurrentObject ()) {
+      const enumGalgasBool test_13 = GALGAS_bool (kIsNotEqual, enumerator_16173.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 410)).objectCompare (enumerator_16202.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 410)))).boolEnum () ;
+      if (kBoolTrue == test_13) {
+        GALGAS_location location_14 (enumerator_16202.current_mSelector (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_14, GALGAS_string ("the actual parameter type is '").add_operation (enumerator_16202.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 411)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 411)).add_operation (GALGAS_string ("', and is incompatible with the formal type '"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 411)).add_operation (enumerator_16173.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 412)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 412)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 412))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 411)) ;
+      }
+      GALGAS_string var_requiredPassingMode = extensionGetter_requiredActualPassingModeForSelector (enumerator_16173.current_mFormalArgumentPassingMode (HERE), enumerator_16173.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 414)) ;
+      GALGAS_string var_testedPassingMode = extensionGetter_passingModeForActualSelector (enumerator_16202.current_mEffectiveParameterPassingMode (HERE), enumerator_16202.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 415)) ;
+      const enumGalgasBool test_15 = GALGAS_bool (kIsNotEqual, var_requiredPassingMode.objectCompare (var_testedPassingMode)).boolEnum () ;
+      if (kBoolTrue == test_15) {
+        GALGAS_location location_16 (enumerator_16202.current_mSelector (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_16, GALGAS_string ("the required selector is '").add_operation (var_requiredPassingMode, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 417)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 417))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 417)) ;
+      }
+      enumerator_16173.gotoNextObject () ;
+      enumerator_16202.gotoNextObject () ;
+    }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Function 'initialVariableMap'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
