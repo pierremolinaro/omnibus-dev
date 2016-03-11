@@ -18,10 +18,10 @@ struct $point3 {
 task T priority 12 stackSize 512 {
   var zz $int32 = 0
 
-  proc setup {
+  proc setup () {
   }
   
-  proc loop {
+  proc loop () {
     var p = $point3 ()
     waitDuringMS (!delay:p.p.x)
     p.p.y = 340

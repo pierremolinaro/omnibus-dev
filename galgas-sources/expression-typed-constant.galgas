@@ -13,6 +13,8 @@ class @typedConstantCall : @expressionAST {
 
 syntax extension common_syntax {
 
+  #·····················································································································
+
   rule <primary> !@expressionAST outExpression {
     @lstring optionalTypeName
     select
@@ -25,6 +27,7 @@ syntax extension common_syntax {
     outExpression = @typedConstantCall.new {!optionalTypeName !constructorName}
   }
 
+  #·····················································································································
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -55,6 +58,7 @@ override method @typedConstantCall noteExpressionTypesInPrecedenceGraph ?!@seman
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCall analyzeExpression
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext

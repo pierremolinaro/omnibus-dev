@@ -20,7 +20,7 @@ enum @operatorAssignKind {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @operatorAssignInstructionAST : @instructionAST {
+class @varOperatorAssignInstructionAST : @instructionAST {
   @lstring mTargetVarName
   @expressionAST mSourceExpression
   @operatorAssignKind mOperator
@@ -34,44 +34,57 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-#    select
-#    or
-#      $self$
-#      $.$
-#    end
-    $identifier$ ?let varName
-    @operatorAssignKind operatorAssign
+  rule <op_assign> !@operatorAssignKind outOp {
     select
       $|=$
-      operatorAssign = .bitWiseOrAssign
+      outOp = .bitWiseOrAssign
     or
       $&=$
-      operatorAssign = .bitWiseAndAssign
+      outOp = .bitWiseAndAssign
     or
       $^=$
-      operatorAssign = .bitWiseXorAssign
+      outOp = .bitWiseXorAssign
     or
       $+=$
-      operatorAssign = .addAssign
+      outOp = .addAssign
     or
       $+%=$
-      operatorAssign = .addModuloAssign
+      outOp = .addModuloAssign
     or
       $-=$
-      operatorAssign = .subAssign
+      outOp = .subAssign
     or
       $-%=$
-      operatorAssign = .subModuloAssign
+      outOp = .subModuloAssign
     or
       $*=$
-      operatorAssign = .mulAssign
+      outOp = .mulAssign
     or
       $*%=$
-      operatorAssign = .mulModuloAssign
+      outOp = .mulModuloAssign
     end
+  }
+
+  #·····················································································································
+
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    $identifier$ ?let varName
+    <op_assign> ?let @operatorAssignKind operatorAssign
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@operatorAssignInstructionAST.new {
+    ioInstructionList += !@varOperatorAssignInstructionAST.new {
+      !varName
+      !expression
+      !operatorAssign
+    }
+  }
+
+  #·····················································································································
+
+  rule <instruction_beginning_by_self> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    $identifier$ ?let varName
+    <op_assign> ?let @operatorAssignKind operatorAssign
+    <expression> ?let @expressionAST expression
+    ioInstructionList += !@varOperatorAssignInstructionAST.new {
       !varName
       !expression
       !operatorAssign
@@ -86,7 +99,7 @@ syntax extension common_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @operatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @varOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -94,7 +107,8 @@ override method @operatorAssignInstructionAST noteInstructionTypesInPrecedenceGr
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @operatorAssignInstructionAST analyze
+override method @varOperatorAssignInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -116,6 +130,7 @@ override method @operatorAssignInstructionAST analyze
   end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext

@@ -219,6 +219,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
+    !self:.null
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:functionModeSet

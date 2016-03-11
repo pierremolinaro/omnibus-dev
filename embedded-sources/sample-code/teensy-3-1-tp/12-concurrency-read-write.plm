@@ -34,9 +34,9 @@ proc userSystickHandler `isr () {
 
 task T priority 12 stackSize 512 {
 
-  proc setup {
+  proc setup () {
   }
-  proc loop  {
+  proc loop ()  {
     gValue1 +%= 1
     gValue2 +%= 1
     if gIsCounting and (millis () > 5_000) then

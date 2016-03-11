@@ -20,7 +20,7 @@ section getSysTick (!outResult $uint32) {
 
 task T priority 0 stackSize 512 {
 
-  proc setup {
+  proc setup () {
   //--- Compute getSysTick duration
     waitDuringMS (!delay:1)
     var t0 $uint32 getSysTick (?t0)
@@ -94,7 +94,7 @@ task T priority 0 stackSize 512 {
     printUnsigned (!(t0 - t1) - systickDuration)
   }
   
-  proc loop {
+  proc loop () {
     waitDuringMS (!delay:250)
     ledOn (!LED_L1) // Allumer la led
     waitDuringMS (!delay:250)

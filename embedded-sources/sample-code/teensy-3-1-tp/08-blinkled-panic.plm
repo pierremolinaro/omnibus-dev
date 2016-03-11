@@ -6,10 +6,10 @@ task T priority 12 stackSize 512 {
   var toggle = true
   var gCount $uint3 = 0
 
-  proc setup {
+  proc setup () {
   }
   
-  proc loop {
+  proc loop () {
     waitDuringMS (!delay:250)
     ledOn (!LED_L1)
     waitDuringMS (!delay:250)

@@ -55,6 +55,7 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @letInstructionWithAssignmentAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -70,6 +71,7 @@ override method @letInstructionWithAssignmentAST analyze
   end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext

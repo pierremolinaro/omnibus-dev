@@ -124,6 +124,7 @@ list @procEffectiveParameterList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procCallInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -198,6 +199,7 @@ override method @procCallInstructionAST analyze
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
+        !self:inSelfType
         !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
         !optionalTargetType:formal_mType
         !context:inContext

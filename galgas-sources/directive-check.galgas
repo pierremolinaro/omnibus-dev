@@ -42,6 +42,7 @@ override method @checkInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @checkInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -54,6 +55,7 @@ override method @checkInstructionAST analyze
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}
   [mExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext

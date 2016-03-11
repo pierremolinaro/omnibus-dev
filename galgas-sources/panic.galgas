@@ -167,6 +167,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [mExceptionInstructionList analyzeRoutineInstructionList
+    !self:.null
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:{!panicModeName ()}

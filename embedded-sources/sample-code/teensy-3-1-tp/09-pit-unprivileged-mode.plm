@@ -25,11 +25,11 @@ section getPIT (!outValue $uint32) {
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
-  proc setup {
+  proc setup () {
     setupPIT ()
   }
   
-  proc loop {
+  proc loop () {
     waitDuringMS (!delay:250)
     ledOn (!LED_L1) // Allumer la led
     waitDuringMS (!delay:250)

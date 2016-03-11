@@ -1,8 +1,8 @@
 
 setter @instructionListIR appendExtractValue
-  ?let @operandIR inTarget
-  ?let @operandIR inSource
-  ?let @uint inIndex
+  ?target:let @operandIR inTarget
+  ?source:let @operandIR inSource
+  ?index:let @uint inIndex
 {
   self += !@extractValueIR.new {!inTarget !inSource !inIndex}
 }

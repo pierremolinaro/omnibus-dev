@@ -7,10 +7,10 @@ let s $staticString = "azerty"
 task T priority 12 stackSize 512 {
   var zz $int32 = 0
 
-  proc setup {
+  proc setup () {
   }
   
-  proc loop {
+  proc loop () {
     var ss = s
     var r $staticString
     waitDuringMS (!delay:250)

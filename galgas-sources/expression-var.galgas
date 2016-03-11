@@ -4,7 +4,19 @@
 
 class @varInExpressionAST : @expressionAST {
   @lstring mSourceVarName
-  @lstringlist mFieldNameList
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @selfVarInExpressionAST : @expressionAST {
+  @lstring mSourceVarName
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @controlRegisterFieldInExpressionAST : @expressionAST {
+  @lstring mRegisterVarName
+  @lstringlist mSliceNameList
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -17,29 +29,30 @@ syntax extension common_syntax {
   
   rule <primary> !@expressionAST outExpression {
     $identifier$ ?let sourceVarName
-    @lstringlist fieldNameList = {}
+    outExpression = @varInExpressionAST.new {!sourceVarName}
+  }
+
+  #·····················································································································
+  
+  rule <primary> !@expressionAST outExpression {
+    $identifier$ ?let controlRegisterName
+    @lstringlist fieldList = {}
     repeat
-    while
       $.$
       $identifier$ ?let fieldName
-      fieldNameList += !fieldName
-    end 
-    outExpression = @varInExpressionAST.new {!sourceVarName !fieldNameList}
+      fieldList += !fieldName
+    while
+    end
+    outExpression = @controlRegisterFieldInExpressionAST.new {!controlRegisterName !fieldList}
   }
 
   #·····················································································································
   
   rule <primary> !@expressionAST outExpression {
     $self$
-    let sourceVarName = @lstring.new {!"self" !.here}
-    @lstringlist fieldNameList = {}
-    repeat
-    while
-      $.$
-      $identifier$ ?let fieldName
-      fieldNameList += !fieldName
-    end 
-    outExpression = @varInExpressionAST.new {!sourceVarName !fieldNameList}
+    $.$
+    $identifier$ ?let sourceVarName
+    outExpression = @selfVarInExpressionAST.new {!sourceVarName}
   }
 
   #·····················································································································
@@ -57,6 +70,24 @@ override method @varInExpressionAST addDependenceEdgeForStaticExpression
   [!?ioGraph addEdge !inConstantName !mSourceVarName]
 }
 
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfVarInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addEdge !inConstantName !mSourceVarName]
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @controlRegisterFieldInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addEdge !inConstantName !mRegisterVarName]
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -64,11 +95,22 @@ override method @varInExpressionAST addDependenceEdgeForStaticExpression
 override method @varInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfVarInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @controlRegisterFieldInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+}
+
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
@@ -105,55 +147,114 @@ override method @varInExpressionAST analyzeExpression
     !sourceType:variableType
     !errorLocation:mSourceVarName.location
   )
-#--- Field ?
-  for (field) in mFieldNameList do
-    if [registerBitSliceMap count] > 0 then # It is a register
-      [registerBitSliceMap searchKey
-        !field
-        ?let @llvmBinaryOperation accessOperator
-        ?let @bigint accessRightOperand
-        ?let submap
-        ?let newResultType
-       ]
-    #--- Temp var
-      getNewTempVariable (!newResultType !?ioTemporaries ?let newResultingVariable)
-      [!?ioInstructionGenerationList appendBinaryOperation
-        !newResultingVariable.mValue
-        !outResult.mType
-        !mSourceVarName.location
-        !outResult.mValue
-        !accessOperator
-        !.literalInteger {!value:accessRightOperand}
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfVarInExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext unused inContext
+  ?modes:let @stringset unused inModeSet
+  ?allowException:let @bool unused inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@operandIR outResult
+{
+  if inSelfType == .null then
+    error mSourceVarName : "'self' is not available in this context" : outResult
+  else
+    switch [inSelfType kind]
+    case opaque (*) :
+      error mSourceVarName : "an opaque type does not handle field access" : outResult
+    case boolean :
+      error mSourceVarName : "a boolean does not handle field access" : outResult
+    case staticInteger :
+      error mSourceVarName : "an integer does not handle field access" : outResult
+    case boolset :
+      error mSourceVarName : "a boolset does not handle field access" : outResult
+    case literalString :
+      error mSourceVarName : "a literal string does not handle field access" : outResult
+    case enumeration (*) :
+      error mSourceVarName : "an enumeration does not handle field access" : outResult
+    case structure (@propertyMap propertyMap *) :
+      [propertyMap searchKey !mSourceVarName ?let type ?let idx]
+      getNewTempVariable (!type !?ioTemporaries ?outResult)
+      [!?ioInstructionGenerationList appendExtractValue
+        !target:outResult
+        !source:outResult
+        !index:idx
       ]
-      outResult = newResultingVariable 
-      registerBitSliceMap = submap
-    else
-      switch [outResult.mType kind]
-        case opaque (*) :
-          error field : "an opaque type does not handle field access"
-        case boolean :
-          error field : "a boolean does not handle field access"
-        case staticInteger :
-          error field : "an integer does not handle field access"
-        case boolset :
-          error field : "a boolset does not handle field access"
-        case literalString :
-          error field : "a literal string does not handle field access"
-        case enumeration (*) :
-          error field : "an enumeration does not handle field access"
-        case structure (@propertyMap propertyMap *) :
-          [propertyMap searchKey !field ?let type ?let idx]
-          getNewTempVariable (!type !?ioTemporaries ?let newResultingVariable)
-          [!?ioInstructionGenerationList appendExtractValue
-            !newResultingVariable
-            !outResult
-            !idx
-          ]
-          outResult = newResultingVariable 
-        case integer (* * * *) :
-          error field : "an integer does not handle field access"
-      end    
-    end
+    case integer (* * * *) :
+      error mSourceVarName : "an integer does not handle field access" : outResult
+    end    
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @controlRegisterFieldInExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext unused inContext
+  ?modes:let @stringset unused inModeSet
+  ?allowException:let @bool unused inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@operandIR outResult
+{
+#--- Search variable, constant, register
+  [!?ioVariableMap searchForReadAccess
+    !mRegisterVarName
+    ?let @unifiedTypeMap-proxy variableType
+    ?let accessIsAllowed
+    ?@objectInMemoryIR variableKind
+    ?*
+    ?@controlRegisterBitSliceAccessMap registerBitSliceMap
+    ?2*
+  ]
+  if not accessIsAllowed then
+    error mRegisterVarName : "routine has no access right on this variable"
+  end
+#--- Load variable
+  [variableKind loadFromMemory
+    !?temporary:ioTemporaries
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultingValue:outResult
+  ]
+#--- Solve inferred type
+  var expressionType = solveInferredType (
+    !targetType:inOptionalTargetType
+    !sourceType:variableType
+    !errorLocation:mRegisterVarName.location
+  )
+#--- Field ?
+  for (field) in mSliceNameList do
+    [registerBitSliceMap searchKey
+      !field
+      ?let @llvmBinaryOperation accessOperator
+      ?let @bigint accessRightOperand
+      ?let submap
+      ?let newResultType
+     ]
+  #--- Temp var
+    getNewTempVariable (!newResultType !?ioTemporaries ?let newResultingVariable)
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !newResultingVariable.mValue
+      !outResult.mType
+      !mRegisterVarName.location
+      !outResult.mValue
+      !accessOperator
+      !.literalInteger {!value:accessRightOperand}
+    ]
+    outResult = newResultingVariable 
+    registerBitSliceMap = submap
   end
 }
 
