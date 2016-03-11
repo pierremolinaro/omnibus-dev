@@ -107,15 +107,6 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @taskVariableMap {
-  @unifiedTypeMap-proxy mType
-  @valueIR mInitialValue
-  insert insertKey error message "the '%K' task variable is already declared in %L"
-  search searchKey error message "there is no '%K' task variable"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @taskProcedureMap {
   insert insertKey error message "the '%K' proc is already declared in %L"
   search searchKey error message "there is no '%K' proc"
@@ -142,7 +133,6 @@ method @taskList enterInContext
     @operandIRList initialValueList = {}
     for variable in task.mVarList do
       [variable enterInContext
-        !taskName:task.mTaskName.string
         !?context:ioContext
         !?staticStringMap:ioGlobalLiteralStringMap
         !?propertyList
@@ -182,7 +172,6 @@ method @taskList enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @taskVarListAST-element enterInContext
-  ?taskName:let @string inTaskName
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!@propertyList ioPropertyList
@@ -227,12 +216,7 @@ method @taskVarListAST-element enterInContext
     !staticTypeAllowed:false
   )
   drop variableAnnotationType, expressionResult
-#--- Enter variable in task variable map
-  [!?ioContext.mTaskVariableMap insertKey
-    !.new{!inTaskName + "." + mVarName !mVarName.location}
-    !result.mType
-    !result.mValue
-  ]
+#--- Enter variable
   ioPropertyList += !mVarName.string !result.mType
   [!?ioPropertyMap insertKey !mVarName !result.mType ![ioPropertyMap count]]
   ioInitialValueList += !result

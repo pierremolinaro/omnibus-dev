@@ -34,5 +34,4 @@ override method @getElementPtrFromSelfIR llvmInstructionCode
 override method @getElementPtrFromSelfIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

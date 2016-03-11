@@ -66,7 +66,6 @@ proc semanticAnalysis
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
 {
   outIntermediateCodeStruct = .default
-  outIntermediateCodeStruct.mTaskVariableMap = inSemanticContext.mTaskVariableMap
   outIntermediateCodeStruct.mStaticStringMap = inGlobalLiteralStringMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
   for requiredProc in inAST.mRequiredProcList do
