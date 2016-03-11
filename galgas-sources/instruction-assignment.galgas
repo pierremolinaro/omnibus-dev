@@ -2,9 +2,15 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @assignmentInstructionAST : @instructionAST {
+class @selfVarAssignmentInstructionAST : @instructionAST {
   @lstring mTargetVarName
-  @lstringlist mFieldList
+  @expressionAST mSourceExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @varAssignmentInstructionAST : @instructionAST {
+  @lstring mTargetVarName
   @expressionAST mSourceExpression
 }
 
@@ -18,39 +24,22 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
-    @lstringlist fieldList = {}
-    repeat
-    while
-      $.$
-      $identifier$ ?let fieldName
-      fieldList += !fieldName
-    end
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@assignmentInstructionAST.new {
+    ioInstructionList += !@varAssignmentInstructionAST.new {
       !varName
-      !fieldList
       !expression
     }
   }
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-    $self$ 
-    let varName = @lstring.new {!"self" !.here}
-    @lstringlist fieldList = {}
-    repeat
-    while
-      $.$
-      $identifier$ ?let fieldName
-      fieldList += !fieldName
-    end
+  rule <instruction_beginning_by_self> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    $identifier$ ?let varName
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@assignmentInstructionAST.new {
+    ioInstructionList += !@selfVarAssignmentInstructionAST.new {
       !varName
-      !fieldList
       !expression
     }
   }
@@ -63,7 +52,13 @@ syntax extension common_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @selfVarAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -71,7 +66,8 @@ override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph 
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assignmentInstructionAST analyze
+override method @varAssignmentInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -89,36 +85,9 @@ override method @assignmentInstructionAST analyze
     ?@objectInMemoryIR target
     ?4*
   ]
-#--- Analyze field list
-  for (fieldName) in mFieldList do
-    switch [targetType kind]
-    case boolean :
-      error fieldName : "a boolean does not have fields"
-    case boolset :
-      error fieldName : "a boolset does not have fields"
-    case literalString :
-      error fieldName : "a static string does not have fields"
-    case enumeration (*) :
-      error fieldName : "an enumeration does not have fields"
-    case structure (@propertyMap propertyMap *) :
-      [propertyMap searchKey !fieldName ?targetType ?let idx]
-      getNewTempObjectInMemory (!targetType !?ioTemporaries ?let result)
-      [!?ioInstructionGenerationList appendGetElementPtr
-        !result
-        !target
-        !idx
-      ]
-      target = result
-    case integer (* * * *) :  
-      error fieldName : "an integer does not have fields"
-    case staticInteger :  
-      error fieldName : "an integer does not have fields"
-    case opaque (*) :  
-      error fieldName : "an opaque type does not have fields"
-    end
-  end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
@@ -155,10 +124,103 @@ override method @assignmentInstructionAST analyze
   if not isCopiable then
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
-  [target storeInMemory
-    !value:result
-    !?instructionListIR:ioInstructionGenerationList
-  ]
+  [target storeInMemory !value:result !?instructionListIR:ioInstructionGenerationList]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfVarAssignmentInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  if inSelfType == .null then
+    error mTargetVarName : "'self' is not available in this context"
+  else
+  #--- Get target type
+    [!?ioVariableMap neutralAccess
+      !mTargetVarName
+      ?@unifiedTypeMap-proxy targetType
+      ?*
+      ?@objectInMemoryIR target
+      ?4*
+    ]
+  #--- Analyze field name
+    switch [inSelfType kind]
+    case boolean :
+      error mTargetVarName : "a boolean does not have fields"
+    case boolset :
+      error mTargetVarName : "a boolset does not have fields"
+    case literalString :
+      error mTargetVarName : "a static string does not have fields"
+    case enumeration (*) :
+      error mTargetVarName : "an enumeration does not have fields"
+    case structure (@propertyMap propertyMap *) :
+      [propertyMap searchKey !mTargetVarName ?targetType ?let idx]
+      getNewTempObjectInMemory (!targetType !?ioTemporaries ?let result)
+      [!?ioInstructionGenerationList appendGetElementPtr
+        !result
+        !target
+        !idx
+      ]
+      target = result
+    case integer (* * * *) :  
+      error mTargetVarName : "an integer does not have fields"
+    case staticInteger :  
+      error mTargetVarName : "an integer does not have fields"
+    case opaque (*) :  
+      error mTargetVarName : "an opaque type does not have fields"
+    end
+  #--- Analyze source expression
+    [mSourceExpression analyzeExpression
+      !self:inSelfType
+      !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+      !optionalTargetType:targetType
+      !context:inContext
+      !modes:inModeSet
+      !allowException:inAllowExceptions
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?instructionListIR:ioInstructionGenerationList
+      ?result:@operandIR sourceOperand
+    ]
+    let result = checkAssignmentCompatibility (
+      !source:sourceOperand
+      !targetAnnotationType:targetType
+      !errorLocation:mTargetVarName.location
+      !staticTypeAllowed:false
+    )
+  #--- Write local variable
+    [!?ioVariableMap searchForWriteAccess
+      !mTargetVarName
+      ?*
+      ?let accessIsAllowed
+      ?*
+      ?let isCopiable
+      ?2*
+      ?let isConstant
+    ]
+    if isConstant then
+      error mTargetVarName : "a constant cannot be modified"
+    end
+    if not accessIsAllowed then
+      error mTargetVarName : "routine has no access right on the this variable"
+    end
+    if not isCopiable then
+      error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
+    end
+    [target storeInMemory
+      !value:result
+      !?instructionListIR:ioInstructionGenerationList
+    ]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

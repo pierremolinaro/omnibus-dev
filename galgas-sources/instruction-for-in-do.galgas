@@ -55,6 +55,7 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -66,6 +67,7 @@ override method @forInstructionAST analyze
 {
 #--- Analyze iterated expression
   [mIteratedExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext
@@ -96,6 +98,7 @@ override method @forInstructionAST analyze
   ]
   @instructionListIR instructionGenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOf_do_instruction
     !context:inContext

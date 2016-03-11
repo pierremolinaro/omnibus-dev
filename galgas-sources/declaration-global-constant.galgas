@@ -112,16 +112,17 @@ override method @globalConstantDeclaration enterInContext
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
   [mSourceExpression analyzeExpression
-     !routineNameForInvocationGraph:["compiler" nowhere]
-     !optionalTargetType:annotationType
-     !context:ioContext
-     !modes:{}
-     !allowException:true
-     !?temporary:temporaries
-     !?staticStringMap:ioGlobalLiteralStringMap
-     !?variableMap:variableMap
-     !?instructionListIR:instructionGenerationList
-     ?result:let @operandIR expressionResult
+    !self:.null
+    !routineNameForInvocationGraph:["compiler" nowhere]
+    !optionalTargetType:annotationType
+    !context:ioContext
+    !modes:{}
+    !allowException:true
+    !?temporary:temporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:variableMap
+    !?instructionListIR:instructionGenerationList
+    ?result:let @operandIR expressionResult
   ]
 #--- Check assignment compatibility
   let result = checkAssignmentCompatibility (

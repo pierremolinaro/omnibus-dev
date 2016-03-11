@@ -76,7 +76,7 @@ enum @accessKind {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc routineSemanticAnalysis
-  ?receiverType:let @unifiedTypeMap-proxy inReceiverType
+  ?receiverType:let @unifiedTypeMap-proxy inSelfType
   ?let @routineKind inRoutineKind
   ?let @lstringlist inRoutineModeList
   ?let @lstring inRoutineName
@@ -101,9 +101,9 @@ proc routineSemanticAnalysis
 #--- Variable map
   @lstring routineNameForInvocationGraph
   switch inRoutineKind
-  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!inReceiverType !inRoutineName)
-  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inReceiverType !inRoutineName)
-  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inReceiverType !inRoutineName)
+  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!inSelfType !inRoutineName)
+  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inSelfType !inRoutineName)
+  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inSelfType !inRoutineName)
   end
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
@@ -112,19 +112,19 @@ proc routineSemanticAnalysis
     !registerAccess:inRegisterAccessKind
     !globalsAreConstant:false
   )
-#--- Add self
-  if inReceiverType != .null then
-    [!?variableMap insertUsedLocalConstant
-      !.new {!"self" !.here}
-      !inReceiverType
-      !true # mReadAccessAllowed
-      !.localValue {!type:inReceiverType !name:"self"}
-      !true # copiable
-      !{} # fieldMap
-      !false # mCanBeUsedAsInputParameter
-      !true # mIsConstant
-    ]
-  end
+##--- Add self
+#  if inReceiverType != .null then
+#    [!?variableMap insertUsedLocalConstant
+#      !.new {!"self" !.here}
+#      !inReceiverType
+#      !true # mReadAccessAllowed
+#      !.localValue {!type:inReceiverType !name:"self"}
+#      !true # copiable
+#      !{} # fieldMap
+#      !false # mCanBeUsedAsInputParameter
+#      !true # mIsConstant
+#    ]
+#  end
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
   enterFormalArguments (
@@ -143,6 +143,7 @@ proc routineSemanticAnalysis
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [inRoutineInstructionList analyzeRoutineInstructionList
+    !self:inSelfType
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:procedureModeSet
@@ -155,10 +156,10 @@ proc routineSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
 #--- Code generation
-  let routineMangledName = if inReceiverType == .null then
+  let routineMangledName = if inSelfType == .null then
     @lstring.new {!"." + inRoutineName !inRoutineName.location}
   else
-    @lstring.new {!"$" + [inReceiverType key] + "." + inRoutineName !inRoutineName.location}
+    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
   end
   if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
     let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]

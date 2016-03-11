@@ -112,6 +112,7 @@ method @infixOperatorMap checkBinaryOperationWith
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @infixOperatorExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -125,6 +126,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 {
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -138,6 +140,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ]
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:leftOperand.mType
     !context:inContext
@@ -267,6 +270,7 @@ private func getInfixOperatorMap
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -281,6 +285,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
 #--- Analyze left expression
   @instructionListIR leftInstructionGenerationList = {}
   [mLeftExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -295,6 +300,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
   [mRightExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:leftOperand.mType
     !context:inContext

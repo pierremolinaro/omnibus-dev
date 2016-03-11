@@ -63,6 +63,7 @@ override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@se
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -76,6 +77,7 @@ override method @convertExpressionAST analyzeExpression
 {
 #--- Analyze expression
   [mExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext

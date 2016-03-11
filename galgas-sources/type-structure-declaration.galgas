@@ -249,6 +249,7 @@ override method @structureDeclaration enterInContext
     @instructionListIR initInstructionGenerationList = {}
     @semanticTemporariesStruct temporaries = .default
     [mInitExpression analyzeExpression
+      !self:.null
       !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
       !optionalTargetType:fieldType
       !context:ioContext
@@ -405,6 +406,7 @@ method @structureDeclaration functionSemanticAnalysis
   #--- Analyze instruction list
     @instructionListIR instructionGenerationList = {}
     [function.mInstructionList analyzeRoutineInstructionList
+      !self:inStructureType
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inContext
       !modes:functionModeSet
@@ -495,6 +497,7 @@ method @structureDeclaration procedureSemanticAnalysis
   #--- Analyze instruction list
     @instructionListIR instructionGenerationList = {}
     [procedure.mInstructionList analyzeRoutineInstructionList
+      !self:inStructureType
       !routineNameForInvocationGraph:procNameForInvocationGraph
       !context:inContext
       !modes:procedureModeSet

@@ -81,6 +81,7 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInstructionWithAssignmentAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModes
@@ -96,6 +97,7 @@ override method @varInstructionWithAssignmentAST analyze
   end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
@@ -145,6 +147,7 @@ override method @varInstructionWithAssignmentAST analyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModes
@@ -168,7 +171,6 @@ override method @varInstructionAST analyze
     !false # Is not constant
   ]
 #--- Code generation
-#  [!?ioInstructionGenerationList appendComment !"var " + mVarName.string]
   [!?ioInstructionGenerationList appendAlloca
     !mVarName.string
     !targetType

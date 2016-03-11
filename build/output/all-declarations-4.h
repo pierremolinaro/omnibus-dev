@@ -1183,6 +1183,7 @@ class GALGAS_lstring function_serviceNameForInvocationGraph (class GALGAS_unifie
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
+                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
                                                    const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
                                                    const class GALGAS_semanticContext constin_inContext,
                                                    const class GALGAS_stringset constin_inModeSet,

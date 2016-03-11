@@ -12,10 +12,10 @@ enum $ledState {
 task T priority 12 stackSize 512 {
   var led $ledState = $ledState.on
 
-  proc setup {
+  proc setup () {
   }
   
-  proc loop {
+  proc loop () {
     waitDuringMS (!delay:250)
     if led == .off then
       ledOn (!LED_L1) // Allumer la led

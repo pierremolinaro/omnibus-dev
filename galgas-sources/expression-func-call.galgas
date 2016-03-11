@@ -21,25 +21,13 @@ class @functionCallInExpressionAST : @expressionAST {
 
 syntax extension common_syntax {
 
+  #·····················································································································
+
   rule <primary> !@expressionAST outExpression {
-    @lstring receiverName
-    @lstring functionName
-    select
-      $self$
-      receiverName = .new {!"self" !.here}
-      $.$
-      $identifier$ ?functionName
-    or
-      $identifier$ ?let x
-      select
-        functionName = x
-        receiverName = ["" nowhere]
-      or
-        $.$
-        receiverName = x
-        $identifier$ ?functionName
-      end
-    end
+    $self$
+    let receiverName = @lstring.new {!"self" !.here}
+    $.$
+    $identifier$ ?let functionName
     $($
     @functionCallEffectiveParameterList parameterList = {}
     repeat
@@ -51,6 +39,34 @@ syntax extension common_syntax {
     $)$
     outExpression = @functionCallInExpressionAST.new {!receiverName !functionName !parameterList}
   }
+
+  #·····················································································································
+
+  rule <primary> !@expressionAST outExpression {
+    @lstring receiverName
+    @lstring functionName
+    $identifier$ ?let x
+#    select
+      functionName = x
+      receiverName = ["" nowhere]
+#    or
+#      $.$
+#      receiverName = x
+#      $identifier$ ?functionName
+#    end
+    $($
+    @functionCallEffectiveParameterList parameterList = {}
+    repeat
+    while
+      $!$ ?let selector
+      <expression> ?let expression
+      parameterList += !selector !expression
+    end
+    $)$
+    outExpression = @functionCallInExpressionAST.new {!receiverName !functionName !parameterList}
+  }
+
+  #·····················································································································
 
 }
 
@@ -82,6 +98,7 @@ override method @functionCallInExpressionAST noteExpressionTypesInPrecedenceGrap
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionCallInExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -151,6 +168,7 @@ override method @functionCallInExpressionAST analyzeExpression
         error actual.mSelector : "required selector: " + s
       end
       [actual.mExpression analyzeExpression
+        !self:inSelfType
         !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
         !optionalTargetType:formal.mArgumentType
         !context:inContext

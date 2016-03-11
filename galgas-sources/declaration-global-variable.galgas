@@ -180,6 +180,7 @@ method @globalVarDeclarationList-element enterInContext
   @instructionListIR instructionGenerationList = {}
   @variableMap variableMap = variableMapWithConstants (!context:ioContext)
   [mSourceExpression analyzeExpression
+     !self:.null
      !routineNameForInvocationGraph:["compiler" nowhere]
      !optionalTargetType:variableAnnotationType
      !context:ioContext

@@ -103,9 +103,7 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <procedure_formal_arguments>
-    !formalArguments:@procFormalArgumentList outProcFormalArgumentList
-  {
+  rule <procedure_formal_arguments> !formalArguments:@procFormalArgumentList outProcFormalArgumentList {
     outProcFormalArgumentList = {}
     $($
     repeat

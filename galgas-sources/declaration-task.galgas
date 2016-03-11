@@ -23,6 +23,7 @@ list @taskVarListAST {
 
 list @taskProcListAST {
   @lstring mProcName
+  @procFormalArgumentList mFormalArgumentList
   @instructionListAST mInstructionList
   @location mEndOfProcDeclaration
 }
@@ -61,11 +62,12 @@ syntax extension common_syntax {
     while
       $proc$
       $identifier$ ?let procName
+      <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList formalArgumentList
       ${$
       <instructionList> ?let instructionList !?*
       let endOfProc = @location.here
       $}$
-      taskProcList += !procName !instructionList !endOfProc
+      taskProcList += !procName !formalArgumentList !instructionList !endOfProc
     end
     let endOfTask = @location.here
     $}$
@@ -199,16 +201,17 @@ method @taskVarListAST-element enterInContext
   @instructionListIR instructionGenerationList = {}
   @variableMap variableMap = variableMapWithConstants (!context:ioContext)
   [mVarInitExpression analyzeExpression
-     !routineNameForInvocationGraph:["compiler" nowhere]
-     !optionalTargetType:variableAnnotationType
-     !context:ioContext
-     !modes:{}
-     !allowException:true
-     !?temporary:temporaries
-     !?staticStringMap:ioGlobalLiteralStringMap
-     !?variableMap:variableMap
-     !?instructionListIR:instructionGenerationList
-     ?result:let @operandIR expressionResult
+    !self:.null
+    !routineNameForInvocationGraph:["compiler" nowhere]
+    !optionalTargetType:variableAnnotationType
+    !context:ioContext
+    !modes:{}
+    !allowException:true
+    !?temporary:temporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:variableMap
+    !?instructionListIR:instructionGenerationList
+    ?result:let @operandIR expressionResult
   ]
   if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
     error mVarName : "source expression cannot be statically computed"
@@ -354,6 +357,7 @@ method @taskProcListAST-element taskProcedureSemanticAnalysis
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
+    !self:.null
     !routineNameForInvocationGraph:procNameForInvocationGraph
     !context:inContext
     !modes:{!userModeName ()}

@@ -114,6 +114,7 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @ifInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -125,6 +126,7 @@ override method @ifInstructionAST analyze
 {
 #--- Analyze test expression
   [mTestExpression analyzeExpression
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext
@@ -147,6 +149,7 @@ override method @ifInstructionAST analyze
 #--- Analyze 'then' instruction list
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOfThenInstructionList
     !context:inContext
@@ -160,6 +163,7 @@ override method @ifInstructionAST analyze
 #--- Analyze 'else' instruction list
   @instructionListIR elseInstructionGenerationList = {}
   [mElseInstructionList analyzeBranchInstructionList
+    !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOfElseInstructionList
     !context:inContext

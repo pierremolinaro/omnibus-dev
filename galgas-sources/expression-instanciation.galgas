@@ -12,12 +12,16 @@ class @instanciationAST : @expressionAST {
 
 syntax extension common_syntax {
 
+  #·····················································································································
+
   rule <primary> !@expressionAST outExpression {
     $typeName$ ?let typeName
     $($
     $)$
     outExpression = @instanciationAST.new {!typeName}
   }
+
+  #·····················································································································
 
 }
 
@@ -37,6 +41,7 @@ override method @instanciationAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @instanciationAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
