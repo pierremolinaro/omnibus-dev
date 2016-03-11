@@ -1489,7 +1489,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : GALGAS_stringset mAttribute_mFunctionSet ;
   public : GALGAS_stringset mAttribute_mSectionSet ;
   public : GALGAS_stringset mAttribute_mGlobalVariableSet ;
-  public : GALGAS_stringset mAttribute_mTaskProcedureSet ;
   public : GALGAS_stringset mAttribute_mTaskVariableSet ;
 
 
@@ -1512,7 +1511,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
                                       const GALGAS_stringset & in_mFunctionSet,
                                       const GALGAS_stringset & in_mSectionSet,
                                       const GALGAS_stringset & in_mGlobalVariableSet,
-                                      const GALGAS_stringset & in_mTaskProcedureSet,
                                       const GALGAS_stringset & in_mTaskVariableSet) ;
 
 //-- Start of generic part --*
@@ -1531,8 +1529,7 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
                                                              const class GALGAS_stringset & inOperand2,
                                                              const class GALGAS_stringset & inOperand3,
                                                              const class GALGAS_stringset & inOperand4,
-                                                             const class GALGAS_stringset & inOperand5,
-                                                             const class GALGAS_stringset & inOperand6
+                                                             const class GALGAS_stringset & inOperand5
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1556,8 +1553,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mRoutineSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mSectionSet (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mTaskProcedureSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mTaskVariableSet (LOCATION_ARGS) const ;
 
@@ -1622,35 +1617,11 @@ void routine_exploreProcs (class GALGAS_routineMapIR & ioArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Routine 'exploreTaskProcs'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_exploreTaskProcs (class GALGAS_taskProcedureMapIR & ioArgument0,
-                               class GALGAS_accessibleEntities & ioArgument1,
-                               class GALGAS_taskProcedureMapIR & ioArgument2,
-                               class GALGAS_bool & ioArgument3,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                          Category method '@functionMapIR-element enterAccessibleEntities'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_enterAccessibleEntities (const class GALGAS_functionMapIR_2D_element inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category method '@taskProcedureMapIR-element enterAccessibleEntities'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const class GALGAS_taskProcedureMapIR_2D_element inObject,
                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
