@@ -71,11 +71,8 @@ getter @valueIR isStatic -> @bool outResult {
 enum @objectInMemoryIR {
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
-  case taskVariable (@unifiedTypeMap-proxy type @string taskName @string name)
   case localValue (@unifiedTypeMap-proxy type @string name)
   case globalConstant (@operandIR value  @string name)
-
-  case fieldAccess (@unifiedTypeMap-proxy objectType @string objectName @unifiedTypeMap-proxy fielfType @uint fieldIndex)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -86,17 +83,10 @@ getter @objectInMemoryIR llvmName -> @string outName {
     error name : "@objectInMemoryIR name" : outName
   case globalVariable (* @string name *) :
     outName = "@" + llvmNameForGlobalVariable (!name)
-  case taskVariable (* @string taskName @string name) :
-    outName = "@" + llvmNameForTaskVariable (!taskName !name)
   case localValue (* @string name) :
     outName = "%" + llvmNameForLocalVariable (!name)
   case globalConstant (*  @string name) :
     outName = "%" + name
-  case fieldAccess (@unifiedTypeMap-proxy unused objectType
-                    @string unused objectName
-                    @unifiedTypeMap-proxy unused fielfType
-                    @uint unused fieldIndex) :
-    error .nowhere : "@objectInMemoryIR name" : outName
   end
 }
 
@@ -108,17 +98,10 @@ getter @objectInMemoryIR name -> @string outName {
     outName = name.string
   case globalVariable (* @string name *) :
     outName = name
-  case taskVariable (* * @string name) :
-    outName = name
   case localValue (* @string name) :
     outName = name
   case globalConstant (*  @string name) :
     outName = name
-  case fieldAccess (@unifiedTypeMap-proxy unused objectType
-                    @string unused objectName
-                    @unifiedTypeMap-proxy unused fielfType
-                    @uint unused fieldIndex) :
-    error .nowhere : "@objectInMemoryIR name" : outName
   end
 }
 
@@ -130,17 +113,10 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
     outType = type
   case globalVariable (@unifiedTypeMap-proxy type * *) :
     outType = type
-  case taskVariable (@unifiedTypeMap-proxy type * *) :
-    outType = type
   case localValue (@unifiedTypeMap-proxy type *) :
     outType = type
   case globalConstant (@operandIR value *) :
     outType = value.mType
-  case fieldAccess (@unifiedTypeMap-proxy unused objectType
-                    @string unused objectName
-                    @unifiedTypeMap-proxy unused fielfType
-                    @uint unused fieldIndex) :
-    error .nowhere : "@objectInMemoryIR name" : outType
   end
 }
 
@@ -150,19 +126,12 @@ getter @objectInMemoryIR address -> @operandIR outOperand {
   switch self
   case register (* * *) :
     error .nowhere : "@objectInMemoryIR register address" : outOperand
-  case globalVariable (* * *) :
-    error .nowhere : "@objectInMemoryIR globalVariable address" : outOperand
-  case taskVariable (@unifiedTypeMap-proxy type @string taskName @string name) :
-    outOperand  = .new {!type !.llvmGlobalObject {!name:llvmNameForTaskVariable (!taskName !name)}}
+  case globalVariable (@unifiedTypeMap-proxy type @string name *) :
+    outOperand  = .new {!type !.llvmGlobalObject {!name:llvmNameForGlobalVariable (!name)}}
   case localValue (@unifiedTypeMap-proxy type @string name) :
     outOperand  = .new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name)}}
   case globalConstant (* *) :
     error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
-  case fieldAccess (@unifiedTypeMap-proxy unused objectType
-                    @string unused objectName
-                    @unifiedTypeMap-proxy unused fielfType
-                    @uint unused fieldIndex) :
-    error .nowhere : "@objectInMemoryIR fieldAccess address" : outOperand
   end
 }
 

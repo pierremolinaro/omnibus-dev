@@ -870,7 +870,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "var s = $semaphore () {\n"
+  "var s $semaphore = $semaphore () {\n"
   "  proc $T.setup\n"
   "}\n"
   "\n"
@@ -900,7 +900,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  954, // Text length
+  965, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -6192,6 +6192,9 @@ typeComparisonResult cPtr_procCallInstructionIR::dynamicObjectCompare (const acP
   const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_procCallInstructionIR) ;
   if (kOperandEqual == result) {
+    result = mAttribute_mGlobalVariableName.objectCompare (p->mAttribute_mGlobalVariableName) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mProcName.objectCompare (p->mAttribute_mProcName) ;
   }
   if (kOperandEqual == result) {
@@ -6237,15 +6240,34 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_new (const GALGAS_string & inAttribute_mProcName,
+GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_new (const GALGAS_string & inAttribute_mGlobalVariableName,
+                                                                            const GALGAS_string & inAttribute_mProcName,
                                                                             const GALGAS_routineKind & inAttribute_mKind,
                                                                             const GALGAS_procCallEffectiveParameterListIR & inAttribute_mParameters
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_procCallInstructionIR result ;
-  if (inAttribute_mProcName.isValid () && inAttribute_mKind.isValid () && inAttribute_mParameters.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionIR (inAttribute_mProcName, inAttribute_mKind, inAttribute_mParameters COMMA_THERE)) ;
+  if (inAttribute_mGlobalVariableName.isValid () && inAttribute_mProcName.isValid () && inAttribute_mKind.isValid () && inAttribute_mParameters.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionIR (inAttribute_mGlobalVariableName, inAttribute_mProcName, inAttribute_mKind, inAttribute_mParameters COMMA_THERE)) ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_procCallInstructionIR::getter_mGlobalVariableName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_procCallInstructionIR) ;
+    result = p->mAttribute_mGlobalVariableName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cPtr_procCallInstructionIR::getter_mGlobalVariableName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGlobalVariableName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6306,11 +6328,13 @@ GALGAS_procCallEffectiveParameterListIR cPtr_procCallInstructionIR::getter_mPara
 //                                   Pointer class for @procCallInstructionIR class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_procCallInstructionIR::cPtr_procCallInstructionIR (const GALGAS_string & in_mProcName,
+cPtr_procCallInstructionIR::cPtr_procCallInstructionIR (const GALGAS_string & in_mGlobalVariableName,
+                                                        const GALGAS_string & in_mProcName,
                                                         const GALGAS_routineKind & in_mKind,
                                                         const GALGAS_procCallEffectiveParameterListIR & in_mParameters
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
+mAttribute_mGlobalVariableName (in_mGlobalVariableName),
 mAttribute_mProcName (in_mProcName),
 mAttribute_mKind (in_mKind),
 mAttribute_mParameters (in_mParameters) {
@@ -6325,6 +6349,8 @@ const C_galgas_type_descriptor * cPtr_procCallInstructionIR::classDescriptor (vo
 void cPtr_procCallInstructionIR::description (C_String & ioString,
                                               const int32_t inIndentation) const {
   ioString << "[@procCallInstructionIR:" ;
+  mAttribute_mGlobalVariableName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mProcName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mKind.description (ioString, inIndentation+1) ;
@@ -6337,7 +6363,7 @@ void cPtr_procCallInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_procCallInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_procCallInstructionIR (mAttribute_mProcName, mAttribute_mKind, mAttribute_mParameters COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_procCallInstructionIR (mAttribute_mGlobalVariableName, mAttribute_mProcName, mAttribute_mKind, mAttribute_mParameters COMMA_THERE)) ;
   return ptr ;
 }
 

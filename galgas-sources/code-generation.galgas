@@ -10,17 +10,10 @@ getter @objectInMemoryIR mangledName -> @string outResult {
     outResult = llvmNameForRegister (!name:name.string)
   case globalVariable (* @string name *) :
     outResult = llvmNameForGlobalVariable (!name)
-  case taskVariable (* @string taskName @string name) :
-    outResult = llvmNameForTaskVariable (!taskName !name)
   case localValue (* @string name) :
     outResult = llvmNameForLocalVariable (!name)
   case globalConstant (* @string name) :
     outResult = llvmNameForGlobalVariable (!name)
-  case fieldAccess (@unifiedTypeMap-proxy unused objectType
-                    @string unused objectName
-                    @unifiedTypeMap-proxy unused fielfType
-                    @uint unused fieldIndex) :
-    outResult = "<<@objectInMemoryIR mangledName:fieldAccess>>"
   end
 }
 

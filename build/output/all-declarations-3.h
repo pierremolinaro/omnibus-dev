@@ -441,26 +441,6 @@ class cEnumAssociatedValues_objectInMemoryIR_globalVariable : public cEnumAssoci
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_objectInMemoryIR_taskVariable : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-  public : const GALGAS_string mAssociatedValue2 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_taskVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                const GALGAS_string & inAssociatedValue1,
-                                                                const GALGAS_string & inAssociatedValue2
-                                                                COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_taskVariable (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 class cEnumAssociatedValues_objectInMemoryIR_localValue : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
   public : const GALGAS_string mAssociatedValue1 ;
@@ -493,28 +473,6 @@ class cEnumAssociatedValues_objectInMemoryIR_globalConstant : public cEnumAssoci
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_globalConstant (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_fieldAccess : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue2 ;
-  public : const GALGAS_uint mAssociatedValue3 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_fieldAccess (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                               const GALGAS_string & inAssociatedValue1,
-                                                               const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
-                                                               const GALGAS_uint & inAssociatedValue3
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_fieldAccess (void) {}
 } ;
 
 
@@ -1393,5 +1351,148 @@ void routine_enterControlRegistersInContext (const class GALGAS_controlRegisterD
 
 class GALGAS_string function_userModeName (class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Routine 'controlRegistersSemanticAnalysis'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_controlRegistersSemanticAnalysis (const class GALGAS_controlRegisterDeclarationListAST constinArgument0,
+                                               const class GALGAS_semanticContext constinArgument1,
+                                               class GALGAS_intermediateCodeStruct & ioArgument2,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @intermediateCodeStruct struct                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_staticStringMap mAttribute_mStaticStringMap ;
+  public : GALGAS_controlRegisterMapIR mAttribute_mControlRegisterMap ;
+  public : GALGAS_globalVariableMapIR mAttribute_mGlobalVariableMap ;
+  public : GALGAS_globalConstantMapIR mAttribute_mGlobalConstantMap ;
+  public : GALGAS_routineMapIR mAttribute_mRoutineMapIR ;
+  public : GALGAS_functionMapIR mAttribute_mFunctionMapIR ;
+  public : GALGAS_externProcedureMapIR mAttribute_mExternProcedureMapIR ;
+  public : GALGAS_stringset mAttribute_mRequiredProcedureSet ;
+  public : GALGAS_bootListIR mAttribute_mBootList ;
+  public : GALGAS_initListIR mAttribute_mInitList ;
+  public : GALGAS_instructionListIR mAttribute_mPanicSetupInstructionListIR ;
+  public : GALGAS_instructionListIR mAttribute_mPanicLoopInstructionListIR ;
+  public : GALGAS_taskMapIR mAttribute_mTaskMapIR ;
+  public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_intermediateCodeStruct constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_intermediateCodeStruct (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_intermediateCodeStruct (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_intermediateCodeStruct (const GALGAS_staticStringMap & in_mStaticStringMap,
+                                          const GALGAS_controlRegisterMapIR & in_mControlRegisterMap,
+                                          const GALGAS_globalVariableMapIR & in_mGlobalVariableMap,
+                                          const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
+                                          const GALGAS_routineMapIR & in_mRoutineMapIR,
+                                          const GALGAS_functionMapIR & in_mFunctionMapIR,
+                                          const GALGAS_externProcedureMapIR & in_mExternProcedureMapIR,
+                                          const GALGAS_stringset & in_mRequiredProcedureSet,
+                                          const GALGAS_bootListIR & in_mBootList,
+                                          const GALGAS_initListIR & in_mInitList,
+                                          const GALGAS_instructionListIR & in_mPanicSetupInstructionListIR,
+                                          const GALGAS_instructionListIR & in_mPanicLoopInstructionListIR,
+                                          const GALGAS_taskMapIR & in_mTaskMapIR,
+                                          const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_intermediateCodeStruct extractObject (const GALGAS_object & inObject,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_intermediateCodeStruct constructor_new (const class GALGAS_staticStringMap & inOperand0,
+                                                                 const class GALGAS_controlRegisterMapIR & inOperand1,
+                                                                 const class GALGAS_globalVariableMapIR & inOperand2,
+                                                                 const class GALGAS_globalConstantMapIR & inOperand3,
+                                                                 const class GALGAS_routineMapIR & inOperand4,
+                                                                 const class GALGAS_functionMapIR & inOperand5,
+                                                                 const class GALGAS_externProcedureMapIR & inOperand6,
+                                                                 const class GALGAS_stringset & inOperand7,
+                                                                 const class GALGAS_bootListIR & inOperand8,
+                                                                 const class GALGAS_initListIR & inOperand9,
+                                                                 const class GALGAS_instructionListIR & inOperand10,
+                                                                 const class GALGAS_instructionListIR & inOperand11,
+                                                                 const class GALGAS_taskMapIR & inOperand12,
+                                                                 const class GALGAS_globalTaskVariableList & inOperand13
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_intermediateCodeStruct & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bootListIR getter_mBootList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterMapIR getter_mControlRegisterMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureMapIR getter_mExternProcedureMapIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_functionMapIR getter_mFunctionMapIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMapIR getter_mGlobalConstantMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMapIR getter_mGlobalVariableMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_initListIR getter_mInitList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mPanicLoopInstructionListIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mPanicSetupInstructionListIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mRequiredProcedureSet (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineMapIR getter_mRoutineMapIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_staticStringMap getter_mStaticStringMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_taskMapIR getter_mTaskMapIR (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_intermediateCodeStruct class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_intermediateCodeStruct ;
 
 #endif
