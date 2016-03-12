@@ -850,7 +850,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//------------------------------------------------*\n"
   "\n"
   "struct $semaphore {\n"
-  "  var value $uint32 = 0\n"
+  "  var value $uint32\n"
   "  var list = $taskList ()\n"
   "\n"
   "  service P `kernel () {\n"
@@ -869,7 +869,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "var s = $semaphore () {\n"
+  "var s = $semaphore (!value: 0) {\n"
   "  proc $T1.loop\n"
   "  proc $T2.loop\n"
   "}\n"
@@ -915,7 +915,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  1092, // Text length
+  1097, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -9005,6 +9005,9 @@ typeComparisonResult cPtr_constructorCall::dynamicObjectCompare (const acPtr_cla
     result = mAttribute_mTypeName.objectCompare (p->mAttribute_mTypeName) ;
   }
   if (kOperandEqual == result) {
+    result = mAttribute_mParameterList.objectCompare (p->mAttribute_mParameterList) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mErrorLocation.objectCompare (p->mAttribute_mErrorLocation) ;
   }
   return result ;
@@ -9039,6 +9042,7 @@ GALGAS_expressionAST () {
 
 GALGAS_constructorCall GALGAS_constructorCall::constructor_default (LOCATION_ARGS) {
   return GALGAS_constructorCall::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                  GALGAS_functionCallEffectiveParameterList::constructor_emptyList (HERE),
                                                   GALGAS_location::constructor_nowhere (HERE)
                                                   COMMA_THERE) ;
 }
@@ -9053,11 +9057,12 @@ GALGAS_expressionAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorCall GALGAS_constructorCall::constructor_new (const GALGAS_lstring & inAttribute_mTypeName,
+                                                                const GALGAS_functionCallEffectiveParameterList & inAttribute_mParameterList,
                                                                 const GALGAS_location & inAttribute_mErrorLocation
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_constructorCall result ;
-  if (inAttribute_mTypeName.isValid () && inAttribute_mErrorLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_constructorCall (inAttribute_mTypeName, inAttribute_mErrorLocation COMMA_THERE)) ;
+  if (inAttribute_mTypeName.isValid () && inAttribute_mParameterList.isValid () && inAttribute_mErrorLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_constructorCall (inAttribute_mTypeName, inAttribute_mParameterList, inAttribute_mErrorLocation COMMA_THERE)) ;
   }
   return result ;
 }
@@ -9078,6 +9083,24 @@ GALGAS_lstring GALGAS_constructorCall::getter_mTypeName (UNUSED_LOCATION_ARGS) c
 
 GALGAS_lstring cPtr_constructorCall::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_functionCallEffectiveParameterList GALGAS_constructorCall::getter_mParameterList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_functionCallEffectiveParameterList result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_constructorCall * p = (const cPtr_constructorCall *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_constructorCall) ;
+    result = p->mAttribute_mParameterList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_functionCallEffectiveParameterList cPtr_constructorCall::getter_mParameterList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mParameterList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9103,10 +9126,12 @@ GALGAS_location cPtr_constructorCall::getter_mErrorLocation (UNUSED_LOCATION_ARG
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_constructorCall::cPtr_constructorCall (const GALGAS_lstring & in_mTypeName,
+                                            const GALGAS_functionCallEffectiveParameterList & in_mParameterList,
                                             const GALGAS_location & in_mErrorLocation
                                             COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mAttribute_mTypeName (in_mTypeName),
+mAttribute_mParameterList (in_mParameterList),
 mAttribute_mErrorLocation (in_mErrorLocation) {
 }
 
@@ -9121,6 +9146,8 @@ void cPtr_constructorCall::description (C_String & ioString,
   ioString << "[@constructorCall:" ;
   mAttribute_mTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mAttribute_mParameterList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mErrorLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
@@ -9129,7 +9156,7 @@ void cPtr_constructorCall::description (C_String & ioString,
 
 acPtr_class * cPtr_constructorCall::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_constructorCall (mAttribute_mTypeName, mAttribute_mErrorLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_constructorCall (mAttribute_mTypeName, mAttribute_mParameterList, mAttribute_mErrorLocation COMMA_THERE)) ;
   return ptr ;
 }
 

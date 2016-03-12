@@ -31,7 +31,7 @@ syntax extension common_syntax {
       $typeName$ ?let typeName
       $=$
       <expression> ?let initExpression
-      fieldList += !fieldName !typeName !initExpression
+      fieldList += !fieldName !typeName !.expression{!initExpression:initExpression}
     while
       <procedure> !?procedureDeclarationListAST
     while
