@@ -3,7 +3,7 @@ target "teensy-3-1-tp"
 //------------------------------------------------*
 
 struct $semaphore {
-  var value $uint32 = 0
+  var value $uint32
   var list = $taskList ()
 
   service P `kernel () {
@@ -22,7 +22,7 @@ struct $semaphore {
   }
 }
 
-var s = $semaphore () {
+var s = $semaphore (!value:0) {
   proc $T1.loop
   proc $T2.loop
 }

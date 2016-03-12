@@ -19,10 +19,17 @@ override getter @structureDeclaration location -> @location outLocation {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @structureVarInit {
+  case expression (@expressionAST initExpression)
+  case noExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @structureFieldListAST {
   @lstring mFieldName
   @lstring mFieldTypeName
-  @expressionAST mInitExpression
+  @structureVarInit mInitialisation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -59,7 +66,12 @@ syntax extension common_syntax {
       end
       $=$
       <expression> ?let initExpression
-      fieldList += !fieldName !typeName !initExpression
+      fieldList += !fieldName !typeName !.expression{!initExpression:initExpression}
+    while
+      $var$
+      $identifier$ ?let fieldName
+      $typeName$ ?let typeName
+      fieldList += !fieldName !typeName !.noExpression
     while
       <procedure> !?procedureDeclarationListAST
     while
@@ -126,7 +138,11 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
     if fieldTypeName.string != "" then
       let typeName = @lstring.new {!"$" + fieldTypeName !fieldTypeName.location}
       [!?ioGraph addEdge !structureTypeName !typeName]
-      [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
+      switch initExpression
+      case noExpression :
+      case expression (initExpression) :
+        [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
+      end
     end
   end
 #--- Add structure procedures
@@ -177,6 +193,14 @@ map @propertyMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @constructorSignature {
+  @string mSelector
+  @unifiedTypeMap-proxy mType
+  @uint mFieldIndex
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 override method @structureDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -185,8 +209,9 @@ override method @structureDeclaration enterInContext
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
-  @operandIRList operandIRList = {}
-  for () in mStructureFieldListAST do
+  @constructorInitialValueMap constructorInitialValueMap = {}
+  @constructorSignature constructorSignature = {}
+  for () in mStructureFieldListAST do (fieldIndex)
   #--- Field type
     let @unifiedTypeMap-proxy fieldType = if mFieldTypeName.string == ""
       then .null
@@ -195,33 +220,44 @@ override method @structureDeclaration enterInContext
   #--- Init expression
     @instructionListIR initInstructionGenerationList = {}
     @semanticTemporariesStruct temporaries = .default
-    [mInitExpression analyzeExpression
-      !self:.null
-      !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
-      !optionalTargetType:fieldType
-      !context:ioContext
-      !modes:{}
-      !allowException:false
-      !?temporary:temporaries
-      !?staticStringMap:*
-      !?variableMap:*
-      !?instructionListIR:initInstructionGenerationList
-      ?result:@operandIR expressionIR
-    ]
-    if not [expressionIR.mValue isStatic] then
-      error mFieldName : "initialization expression cannot be computed statically"
+    switch mInitialisation
+    case expression (initExpression) :
+      [initExpression analyzeExpression
+        !self:.null
+        !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
+        !optionalTargetType:fieldType
+        !context:ioContext
+        !modes:{}
+        !allowException:false
+        !?temporary:temporaries
+        !?staticStringMap:*
+        !?variableMap:*
+        !?instructionListIR:initInstructionGenerationList
+        ?result:@operandIR expressionIR
+      ]
+      if not [expressionIR.mValue isStatic] then
+        error mFieldName : "initialization expression cannot be computed statically"
+      end
+      @unifiedTypeMap-proxy type
+      if fieldType != .null then
+        type = fieldType
+      else
+        type = expressionIR.mType
+      end
+      propertyList += !mFieldName.string !type
+      [!?propertyMap insertKey !mFieldName !type ![propertyMap count]]
+      let initialValue = @operandIR.new {!type !expressionIR.mValue}
+      [!?constructorInitialValueMap insertKey !mFieldName !initialValue !fieldIndex]
+    case noExpression :
+      propertyList += !mFieldName.string !fieldType
+      [!?propertyMap insertKey !mFieldName !fieldType ![propertyMap count]]
+      constructorSignature += !mFieldName.string !fieldType !fieldIndex
     end
-    @unifiedTypeMap-proxy type
-    if fieldType != .null then
-      type = fieldType
-    else
-      type = expressionIR.mType
-    end
-    operandIRList += !.new {!type !expressionIR.mValue}
-    propertyList += !mFieldName.string !type
-    [!?propertyMap insertKey !mFieldName !type ![propertyMap count]]
   end
-  [!?ioContext.mConstructorMap insertKey !mStructureName !.structure{!values:operandIRList}]
+  [!?ioContext.mConstructorMap insertKey
+    !mStructureName
+    !.structure{!constructorSignature:constructorSignature !initialValueMap:constructorInitialValueMap}
+  ]
 #---------------------------------------- Attribute "unique"
   var copiable = true
   for (s) in mAttributeListAST do
@@ -239,8 +275,7 @@ override method @structureDeclaration enterInContext
   for function in mFunctionDeclarationListAST do
     @funcSignature signature = {}
     for (selector formalArgumentTypeName *) in function.mFuncFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-      signature += !selector !typeProxy
+      signature += !selector !.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
     end
   #--- Mode map
     @modeMap functionModeMap = {}

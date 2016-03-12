@@ -138,9 +138,17 @@ list @operandIRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @constructorInitialValueMap { # Key is field name
+  @operandIR mValue
+  @uint mIndex
+  insert insertKey error message "the '%K' field is already declared"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 enum @constructorValue {
   case simple (@bigint value)
-  case structure (@operandIRList values)
+  case structure (@constructorSignature constructorSignature @constructorInitialValueMap initialValueMap)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -4,6 +4,7 @@
 
 class @constructorCall : @expressionAST {
   @lstring mTypeName
+  @functionCallEffectiveParameterList mParameterList
   @location mErrorLocation
 }
 
@@ -20,10 +21,17 @@ syntax extension common_syntax {
 #    or
       $typeName$ ?optionalTypeName
 #    end
-    let errorLocation = @location.here
     $($
+    @functionCallEffectiveParameterList parameterList = {}
+    repeat
+    while
+      $!$ ?let selector
+      <expression> ?let expression
+      parameterList += !selector !expression
+    end
+    let errorLocation = @location.here
     $)$
-    outExpression = @constructorCall.new {!optionalTypeName !errorLocation}
+    outExpression = @constructorCall.new {!optionalTypeName !parameterList !errorLocation}
   }
 
 }
@@ -53,17 +61,27 @@ override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanti
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+sortedlist @sortedOperandIRList {
+  @operandIR mOperand
+  @uint mIndex
+}{
+  mIndex <
+}
+
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 override method @constructorCall analyzeExpression
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
 #--- Analyze constructor source type
@@ -78,8 +96,55 @@ override method @constructorCall analyzeExpression
   else
     [inContext.mConstructorMap searchKey ![[resultType key] nowhere] ?let initValue]
     switch initValue
-    case simple (value) : outResult = .new {!resultType !.literalInteger {!value:value}}
-    case structure (values) : outResult = .new {!resultType !.llvmStructureConstant {!values:values}}
+    case simple (value) :
+      if [mParameterList length] != 0 then
+        error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
+      else
+        outResult = .new {!resultType !.literalInteger {!value:value}}
+      end
+    case structure (constructorSignature initialValueMapAsConst) :
+      var initialValueMap = initialValueMapAsConst
+      if [mParameterList length] != [constructorSignature length] then
+        error mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"
+          + if [constructorSignature length] > 1 then "s" else "" end
+          + " instead of " + [mParameterList length]
+        : outResult
+      else
+        for () formal_ in constructorSignature, () effective_ in mParameterList do
+          if effective_mSelector.string != formal_mSelector  then
+            error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
+          end
+          [effective_mExpression analyzeExpression
+            !self:inSelfType
+            !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+            !optionalTargetType:formal_mType
+            !context:inContext
+            !modes:inModeSet
+            !allowException:inAllowExceptions
+            !?temporary:ioTemporaries
+            !?staticStringMap:ioGlobalLiteralStringMap
+            !?variableMap:ioVariableMap
+            !?instructionListIR:ioInstructionGenerationList
+            ?result:let @operandIR expressionResult
+          ]
+          let result = checkAssignmentCompatibility (
+            !source:expressionResult
+            !targetAnnotationType:formal_mType
+            !errorLocation:effective_mSelector.location
+            !staticTypeAllowed:false
+          )
+          [!?initialValueMap insertKey !effective_mSelector !result !formal_mFieldIndex]
+        end
+        @sortedOperandIRList sortedInitialValueList = {}
+        for (* initialValue index) in initialValueMap do
+          sortedInitialValueList += !initialValue !index
+        end
+        @operandIRList initialValueList = {}
+        for (initialValue *) in sortedInitialValueList do
+          initialValueList += !initialValue
+        end
+        outResult = .new {!resultType !.llvmStructureConstant {!values:initialValueList}}
+      end
     end
   end
 }
