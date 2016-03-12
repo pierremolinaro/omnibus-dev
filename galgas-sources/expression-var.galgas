@@ -124,12 +124,12 @@ override method @varInExpressionAST analyzeExpression
 {
 #--- Search variable, constant, register
   [!?ioVariableMap searchForReadAccess
-    !mSourceVarName
-    ?let @unifiedTypeMap-proxy variableType
-    ?let accessIsAllowed
-    ?@objectInMemoryIR variableKind
-    ?*
-    ?@controlRegisterBitSliceAccessMap registerBitSliceMap
+    !lkey:mSourceVarName
+    ?type:let @unifiedTypeMap-proxy variableType
+    ?readAccessAllowed:let accessIsAllowed
+    ?variableKind:let @objectInMemoryIR variableKind
+    ?1*
+    ?fieldMap:@controlRegisterBitSliceAccessMap registerBitSliceMap
     ?2*
   ]
   if not accessIsAllowed then
@@ -217,12 +217,12 @@ override method @controlRegisterFieldInExpressionAST analyzeExpression
 {
 #--- Search variable, constant, register
   [!?ioVariableMap searchForReadAccess
-    !mRegisterVarName
-    ?let @unifiedTypeMap-proxy variableType
-    ?let accessIsAllowed
-    ?@objectInMemoryIR variableKind
-    ?*
-    ?@controlRegisterBitSliceAccessMap registerBitSliceMap
+    !lkey:mRegisterVarName
+    ?type:let @unifiedTypeMap-proxy variableType
+    ?readAccessAllowed:let accessIsAllowed
+    ?variableKind:@objectInMemoryIR variableKind
+    ?1*
+    ?fieldMap:@controlRegisterBitSliceAccessMap registerBitSliceMap
     ?2*
   ]
   if not accessIsAllowed then

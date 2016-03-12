@@ -201,6 +201,15 @@ list @constructorSignature {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+sortedlist @sortedOperandIRList {
+  @operandIR mOperand
+  @uint mIndex
+}{
+  mIndex <
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 override method @structureDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -209,7 +218,7 @@ override method @structureDeclaration enterInContext
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
-  @constructorInitialValueMap constructorInitialValueMap = {}
+  @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   for () in mStructureFieldListAST do (fieldIndex)
   #--- Field type
@@ -246,8 +255,7 @@ override method @structureDeclaration enterInContext
       end
       propertyList += !mFieldName.string !type
       [!?propertyMap insertKey !mFieldName !type ![propertyMap count]]
-      let initialValue = @operandIR.new {!type !expressionIR.mValue}
-      [!?constructorInitialValueMap insertKey !mFieldName !initialValue !fieldIndex]
+      sortedOperandIRList += !@operandIR.new {!type !expressionIR.mValue} !fieldIndex
     case noExpression :
       propertyList += !mFieldName.string !fieldType
       [!?propertyMap insertKey !mFieldName !fieldType ![propertyMap count]]
@@ -256,16 +264,16 @@ override method @structureDeclaration enterInContext
   end
   [!?ioContext.mConstructorMap insertKey
     !mStructureName
-    !.structure{!constructorSignature:constructorSignature !initialValueMap:constructorInitialValueMap}
+    !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Attribute "unique"
-  var copiable = true
+  var copyable = true
   for (s) in mAttributeListAST do
     if s.string == "unique" then
-      if not copiable then
+      if not copyable then
         error s : "duplicated attribute"
       end
-      copiable = false
+      copyable = false
     else
       error s : "unknown attribute"
     end
@@ -303,7 +311,7 @@ override method @structureDeclaration enterInContext
     !typedConstantMap:{}
     !functionMap:functionMap
     !instanciable:true
-    !copiable:copiable
+    !copyable:copyable
     !equatable:false
     !comparable:false
     !enumerationType:.null # Not enumerable
@@ -391,27 +399,27 @@ method @structureDeclaration functionSemanticAnalysis
     )
   #--- Add "self" variable to variable map
     [!?variableMap insertUsedLocalConstant
-      !.new {!"self" !.here}
-      !inStructureType
-      !true # mReadAccessAllowed
-      !.localValue {!type:inStructureType !name:"self"}
-      !true # copiable
-      !{} # fieldMap
-      !false # mCanBeUsedAsInputParameter
-      !true # mIsConstant
+      !lkey:.new {!"self" !.here}
+      !type:inStructureType
+      !readAccessAllowed:true # mReadAccessAllowed
+      !variableKind:.localValue {!type:inStructureType !name:"self"}
+      !copyable:true # copyable
+      !fieldMap:{} # fieldMap
+      !canBeUsedAsInputParameter:false # mCanBeUsedAsInputParameter
+      !isConstant:true # mIsConstant
     ]
   #--- Add 'result" variable
     let resultVarName = @lstring.new {!"result" !function.mResultTypeName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !function.mResultTypeName}
     [!?variableMap insertOutputFormalArgument
-      !resultVarName
-      !resultType
-      !true
-      !.localValue {!type:resultType !name:resultVarName.string}
-      !true
-      !{}
-      !true
-      !false # Is not constant
+      !lkey:resultVarName
+      !type:resultType
+      !readAccessAllowed:true
+      !variableKind:.localValue {!type:resultType !name:resultVarName.string}
+      !copyable:true
+      !fieldMap:{}
+      !canBeUsedAsInputParameter:true
+      !isConstant:false # Is not constant
     ]
   #--- Analyse formal arguments
     @procFormalArgumentListForGeneration formalArguments = {}
@@ -419,14 +427,14 @@ method @structureDeclaration functionSemanticAnalysis
     for (* formalArgumentTypeName formalArgumentName) in function.mFuncFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
       [!?variableMap insertConstantInputFormalArgument
-        !formalArgumentName
-        !typeProxy
-        !true
-        !.localValue {!type:typeProxy !name:formalArgumentName.string}
-        ![typeProxy copiable]
-        !{}
-        !false
-        !true # Is constant
+        !lkey:formalArgumentName
+        !type:typeProxy
+        !readAccessAllowed:true
+        !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
+        !copyable:[typeProxy copyable]
+        !fieldMap:{}
+        !canBeUsedAsInputParameter:false
+        !isConstant:true # Is constant
       ]
       formalArguments += !.input !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     end

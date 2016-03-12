@@ -83,7 +83,7 @@ override method @typeAliasDeclaration enterInContext
     ?typedConstantMap:let typedConstantMap
     ?functionMap:let functionMap
     ?instanciable:let instanciable
-    ?copiable:let copiable
+    ?copyable:let copyable
     ?equatable:let equatable
     ?comparable:let comparable
     ?enumerationType:let enumerationType
@@ -96,7 +96,7 @@ override method @typeAliasDeclaration enterInContext
     !typedConstantMap:typedConstantMap
     !functionMap:functionMap
     !instanciable:instanciable
-    !copiable:copiable
+    !copyable:copyable
     !equatable:equatable
     !comparable:comparable
     !enumerationType:enumerationType

@@ -134,10 +134,10 @@ override method @varOperatorAssignInstructionAST analyze
 {
 #--- Get target type
   [!?ioVariableMap neutralAccess
-    !mTargetVarName
-    ?let targetType
+    !lkey:mTargetVarName
+    ?type:let targetType
     ?5*
-    ?let isConstant
+    ?isConstant:let isConstant
   ]
   if isConstant then
     error mTargetVarName : "a constant cannot be modified"
@@ -158,11 +158,11 @@ override method @varOperatorAssignInstructionAST analyze
   ]
 #--- Write local variable
   [!?ioVariableMap searchForReadWriteAccess
-    !mTargetVarName
-    ?*
-    ?let accessIsAllowed
-    ?let targetVariableKind
-    ?let isCopiable
+    !lkey:mTargetVarName
+    ?1*
+    ?readAccessAllowed:let accessIsAllowed
+    ?variableKind:let targetVariableKind
+    ?copyable:let isCopyable                                                 
     ?3*
   ]
   if not accessIsAllowed then
@@ -222,8 +222,8 @@ override method @varOperatorAssignInstructionAST analyze
     ?resultType:*
     ?op:let @infixOperatorDescription binaryOperator
   ]
-  if not isCopiable then
-    error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
+  if not isCopyable then
+    error mTargetVarName : "the '" + mTargetVarName + "' variable is not copyable"
   end
 #--- Code generation
   [targetVariableKind loadFromMemory
@@ -309,7 +309,7 @@ override method @selfVarOperatorAssignInstructionAST analyze
 #      ?*
 #      ?let accessIsAllowed
 #      ?let targetVariableKind
-#      ?let isCopiable
+#      ?let isCopyable                                                 
 #      ?3*
 #    ]
 #    if not accessIsAllowed then
@@ -369,8 +369,8 @@ override method @selfVarOperatorAssignInstructionAST analyze
       ?resultType:*
       ?op:let @infixOperatorDescription binaryOperator
     ]
-#    if not isCopiable then
-#      error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
+#    if not isCopyable then
+#      error mTargetVarName : "the '" + mTargetVarName + "' variable is not copyable"
 #    end
     #--- Code generation
       getLocalNameOfNewTempObjectInMemory (!targetType !?ioTemporaries ?let fieldAddress)

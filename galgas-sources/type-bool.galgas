@@ -51,13 +51,13 @@ override method @booleanDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---
-  var copiable = true
+  var copyable = true
   for (s) in mAttributeList do
     if s.string == "unique" then
-      if not copiable then
+      if not copyable then
         error s : "duplicated attribute"
       end
-      copiable = false
+      copyable = false
     end
   end
 #--- Enter in type map
@@ -68,7 +68,7 @@ override method @booleanDeclaration enterInContext
     !typedConstantMap:{}
     !functionMap:{}
     !instanciable:true
-    !copiable:copiable
+    !copyable:copyable
     !equatable:true
     !comparable:true
     !enumerationType:.null # Not enumerable

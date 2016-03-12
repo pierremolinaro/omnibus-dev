@@ -6484,6 +6484,8 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_60 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_common_5F_syntax_61 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -8475,7 +8477,8 @@ class GALGAS_opaqueTypeDeclaration : public GALGAS_abstractDeclaration {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_opaqueTypeDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                const class GALGAS_lbigint & inOperand1
+                                                                const class GALGAS_lstringlist & inOperand1,
+                                                                const class GALGAS_lbigint & inOperand2
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -8487,6 +8490,8 @@ class GALGAS_opaqueTypeDeclaration : public GALGAS_abstractDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSize (LOCATION_ARGS) const ;
@@ -8511,10 +8516,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_opaqueTypeDeclarati
 class cPtr_opaqueTypeDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mOpaqueTypeName ;
+  public : GALGAS_lstringlist mAttribute_mAttributeList ;
   public : GALGAS_lbigint mAttribute_mSize ;
 
 //--- Constructor
   public : cPtr_opaqueTypeDeclaration (const GALGAS_lstring & in_mOpaqueTypeName,
+                                       const GALGAS_lstringlist & in_mAttributeList,
                                        const GALGAS_lbigint & in_mSize
                                        COMMA_LOCATION_ARGS) ;
 
@@ -8523,6 +8530,7 @@ class cPtr_opaqueTypeDeclaration : public cPtr_abstractDeclaration {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mSize (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

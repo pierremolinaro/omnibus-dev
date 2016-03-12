@@ -320,10 +320,10 @@ private proc analyzeCall
   @unifiedTypeMap-proxy receiverType
   if inReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
-      !inReceiverName
-      ?receiverType
-      ?*
-      ?@objectInMemoryIR variableKind
+      !lkey:inReceiverName
+      ?type:receiverType
+      ?1*
+      ?variableKind:@objectInMemoryIR variableKind
       ?4*
     ]
     outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
@@ -361,25 +361,25 @@ private proc analyzeCall
       let targetVar = @objectInMemoryIR.localValue {!type:type !name:name.string}
       if constant then
         [!?ioVariableMap insertLocalConstant
-          !name
-          !type
-          !true
-          !targetVar
-          !true
-          !{}
-          !true
-          !false
+          !lkey:name
+          !type:type
+          !readAccessAllowed:true
+          !variableKind:targetVar
+          !copyable:true
+          !fieldMap:{}
+          !canBeUsedAsInputParameter:true
+          !isConstant:false
         ]
       else
         [!?ioVariableMap insertDefinedLocalVariable
-          !name
-          !type
-          !true
-          !targetVar
-          !true
-          !{}
-          !true
-          !false
+          !lkey:name
+          !type:type
+          !readAccessAllowed:true
+          !variableKind:targetVar
+          !copyable:true
+          !fieldMap:{}
+          !canBeUsedAsInputParameter:true
+          !isConstant:false
         ]
       end
       [!?ioInstructionGenerationList appendAlloca !name.string !type]
@@ -390,14 +390,14 @@ private proc analyzeCall
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
-        !name
-        ?let type
-        ?let accessIsAllowed
-        ?let unused parameterAccess
-        ?let isCopiable
-        ?*
-        ?let canBeUsedAsInputParameter
-        ?*
+        !lkey:name
+        ?type:let type
+        ?readAccessAllowed:let accessIsAllowed
+        ?variableKind:let unused parameterAccess
+        ?copyable:let isCopyable                                                 
+        ?fieldMap:*
+        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
+        ?isConstant:*
       ]
       if not accessIsAllowed then
         error name : "routine has no access right on the this variable"
@@ -405,8 +405,8 @@ private proc analyzeCall
       if not canBeUsedAsInputParameter then
         error name : "this variable cannot be used as input parameter"
       end
-      if not isCopiable then
-        error name : "the '" + name + "' variable is not copiable"
+      if not isCopyable then
+        error name : "the '" + name + "' variable is not copyable"
       end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       outEffectiveParameterListIR +=
@@ -440,13 +440,13 @@ private proc analyzeCall
         !result
     case outputInput (@lstring name) :
      [!?ioVariableMap searchForReadWriteAccess
-        !name
-        ?let type
-        ?let accessIsAllowed
-        ?let unused parameterAccess
+        !lkey:name
+        ?type:let type
+        ?readAccessAllowed:let accessIsAllowed
+        ?variableKind:let unused parameterAccess
         ?2*
-        ?let canBeUsedAsInputParameter
-        ?*
+        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
+        ?isConstant:*
       ]
       if not canBeUsedAsInputParameter then
         error name : "this variable cannot be used as output/input parameter"

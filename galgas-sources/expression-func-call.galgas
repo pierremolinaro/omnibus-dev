@@ -118,10 +118,10 @@ override method @functionCallInExpressionAST analyzeExpression
   @unifiedTypeMap-proxy receiverType
   if mReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
-      !mReceiverName
-      ?receiverType
-      ?*
-      ?@objectInMemoryIR variableKind
+      !lkey:mReceiverName
+      ?type:receiverType
+      ?1*
+      ?variableKind:@objectInMemoryIR variableKind
       ?4*
     ]
   #--- Load variable

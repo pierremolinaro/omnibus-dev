@@ -27,38 +27,38 @@ proc enterFormalArguments
     switch argumentKind
     case input :
       [!?ioVariableMap insertConstantInputFormalArgument
-        !formalArgumentName
-        !typeProxy
-        !true
-        !.localValue {!type:typeProxy !name:formalArgumentName.string}
-        ![typeProxy copiable]
-        !{}
-        !true
-        !true # Is constant
+        !lkey:formalArgumentName
+        !type:typeProxy
+        !readAccessAllowed:true
+        !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
+        !copyable:[typeProxy copyable]
+        !fieldMap:{}
+        !canBeUsedAsInputParameter:true
+        !isConstant:true # Is constant
       ]
       ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     case inputOutput :
       [!?ioVariableMap insertInputOutputFormalArgument
-        !formalArgumentName
-        !typeProxy
-        !true
-        !.localValue {!type:typeProxy !name:formalArgumentName.string}
-        ![typeProxy copiable]
-        !{}
-        !true
-        !false # Is not constant
+        !lkey:formalArgumentName
+        !type:typeProxy
+        !readAccessAllowed:true
+        !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
+        !copyable:[typeProxy copyable]
+        !fieldMap:{}
+        !canBeUsedAsInputParameter:true
+        !isConstant:false # Is not constant
       ]
       ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     case output :
       [!?ioVariableMap insertOutputFormalArgument
-        !formalArgumentName
-        !typeProxy
-        !true
-        !.localValue {!type:typeProxy !name:formalArgumentName.string}
-        ![typeProxy copiable]
-        !{}
-        !true
-        !false # Is not constant
+        !lkey:formalArgumentName
+        !type:typeProxy
+        !readAccessAllowed:true
+        !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
+        !copyable:[typeProxy copyable]
+        !fieldMap:{}
+        !canBeUsedAsInputParameter:true
+        !isConstant:false # Is not constant
       ]
       ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     end

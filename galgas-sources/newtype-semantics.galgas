@@ -29,7 +29,7 @@ override method @newtypeDeclaration enterInContext
     ?kind:let kind
     ?constructorMap:let constructorMap
     ?procedureMap:let procedureMap
-    ?copiable:let copiable
+    ?copyable:let copyable
     ?equatable:let equatable
     ?comparable:let comparable
   ]
@@ -39,7 +39,7 @@ override method @newtypeDeclaration enterInContext
     !kind:kind
     !constructorMap:constructorMap
     !procedureMap:procedureMap
-    !copiable:copiable
+    !copyable:copyable
     !equatable:equatable
     !comparable:comparable
   ]

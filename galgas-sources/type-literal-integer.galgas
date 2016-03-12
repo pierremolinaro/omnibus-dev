@@ -58,7 +58,7 @@ override method @literalIntegerDeclaration enterInContext
     !typedConstantMap:{}
     !functionMap:{}
     !instanciable:true
-    !copiable:true
+    !copyable:true
     !equatable:true
     !comparable:true
     !enumerationType:.null # Not enumerable
