@@ -869,7 +869,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "var s = $semaphore (!value: 0) {\n"
+  "var s = $semaphore (!value:0) {\n"
   "  proc $T1.loop\n"
   "  proc $T2.loop\n"
   "}\n"
@@ -915,7 +915,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  1097, // Text length
+  1096, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -2103,6 +2103,9 @@ typeComparisonResult cPtr_opaqueTypeDeclaration::dynamicObjectCompare (const acP
     result = mAttribute_mOpaqueTypeName.objectCompare (p->mAttribute_mOpaqueTypeName) ;
   }
   if (kOperandEqual == result) {
+    result = mAttribute_mAttributeList.objectCompare (p->mAttribute_mAttributeList) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mSize.objectCompare (p->mAttribute_mSize) ;
   }
   return result ;
@@ -2137,6 +2140,7 @@ GALGAS_abstractDeclaration () {
 
 GALGAS_opaqueTypeDeclaration GALGAS_opaqueTypeDeclaration::constructor_default (LOCATION_ARGS) {
   return GALGAS_opaqueTypeDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                        GALGAS_lstringlist::constructor_emptyList (HERE),
                                                         GALGAS_lbigint::constructor_default (HERE)
                                                         COMMA_THERE) ;
 }
@@ -2151,11 +2155,12 @@ GALGAS_abstractDeclaration (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_opaqueTypeDeclaration GALGAS_opaqueTypeDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mOpaqueTypeName,
+                                                                            const GALGAS_lstringlist & inAttribute_mAttributeList,
                                                                             const GALGAS_lbigint & inAttribute_mSize
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_opaqueTypeDeclaration result ;
-  if (inAttribute_mOpaqueTypeName.isValid () && inAttribute_mSize.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_opaqueTypeDeclaration (inAttribute_mOpaqueTypeName, inAttribute_mSize COMMA_THERE)) ;
+  if (inAttribute_mOpaqueTypeName.isValid () && inAttribute_mAttributeList.isValid () && inAttribute_mSize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_opaqueTypeDeclaration (inAttribute_mOpaqueTypeName, inAttribute_mAttributeList, inAttribute_mSize COMMA_THERE)) ;
   }
   return result ;
 }
@@ -2176,6 +2181,24 @@ GALGAS_lstring GALGAS_opaqueTypeDeclaration::getter_mOpaqueTypeName (UNUSED_LOCA
 
 GALGAS_lstring cPtr_opaqueTypeDeclaration::getter_mOpaqueTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOpaqueTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_opaqueTypeDeclaration::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_opaqueTypeDeclaration * p = (const cPtr_opaqueTypeDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_opaqueTypeDeclaration) ;
+    result = p->mAttribute_mAttributeList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist cPtr_opaqueTypeDeclaration::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2201,10 +2224,12 @@ GALGAS_lbigint cPtr_opaqueTypeDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) c
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_opaqueTypeDeclaration::cPtr_opaqueTypeDeclaration (const GALGAS_lstring & in_mOpaqueTypeName,
+                                                        const GALGAS_lstringlist & in_mAttributeList,
                                                         const GALGAS_lbigint & in_mSize
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclaration (THERE),
 mAttribute_mOpaqueTypeName (in_mOpaqueTypeName),
+mAttribute_mAttributeList (in_mAttributeList),
 mAttribute_mSize (in_mSize) {
 }
 
@@ -2219,6 +2244,8 @@ void cPtr_opaqueTypeDeclaration::description (C_String & ioString,
   ioString << "[@opaqueTypeDeclaration:" ;
   mAttribute_mOpaqueTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mAttribute_mAttributeList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mSize.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
@@ -2227,7 +2254,7 @@ void cPtr_opaqueTypeDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_opaqueTypeDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_opaqueTypeDeclaration (mAttribute_mOpaqueTypeName, mAttribute_mSize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_opaqueTypeDeclaration (mAttribute_mOpaqueTypeName, mAttribute_mAttributeList, mAttribute_mSize COMMA_THERE)) ;
   return ptr ;
 }
 

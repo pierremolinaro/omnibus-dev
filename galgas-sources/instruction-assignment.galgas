@@ -79,10 +79,10 @@ override method @varAssignmentInstructionAST analyze
 {
 #--- Get target type
   [!?ioVariableMap neutralAccess
-    !mTargetVarName
-    ?@unifiedTypeMap-proxy targetType
-    ?*
-    ?@objectInMemoryIR target
+    !lkey:mTargetVarName
+    ?type:@unifiedTypeMap-proxy targetType
+    ?1*
+    ?variableKind:@objectInMemoryIR target
     ?4*
   ]
 #--- Analyze source expression
@@ -107,13 +107,13 @@ override method @varAssignmentInstructionAST analyze
   )
 #--- Write local variable
   [!?ioVariableMap searchForWriteAccess
-    !mTargetVarName
-    ?*
-    ?let accessIsAllowed
-    ?*
-    ?let isCopiable
+    !lkey:mTargetVarName
+    ?1*
+    ?readAccessAllowed:let accessIsAllowed
+    ?1*
+    ?copyable:let isCopyable
     ?2*
-    ?let isConstant
+    ?isConstant:let isConstant
   ]
   if isConstant then
     error mTargetVarName : "a constant cannot be modified"
@@ -121,8 +121,8 @@ override method @varAssignmentInstructionAST analyze
   if not accessIsAllowed then
     error mTargetVarName : "routine has no access right on the this variable"
   end
-  if not isCopiable then
-    error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
+  if not isCopyable then
+    error mTargetVarName : "the '" + mTargetVarName + "' variable is not copyable"
   end
   [target storeInMemory !value:result !?instructionListIR:ioInstructionGenerationList]
 }
@@ -145,10 +145,10 @@ override method @selfVarAssignmentInstructionAST analyze
   else
   #--- Get target type
     [!?ioVariableMap neutralAccess
-      !mTargetVarName
-      ?@unifiedTypeMap-proxy targetType
-      ?*
-      ?@objectInMemoryIR target
+      !lkey:mTargetVarName
+      ?type:@unifiedTypeMap-proxy targetType
+      ?1*
+      ?variableKind:@objectInMemoryIR target
       ?4*
     ]
   #--- Analyze field name
@@ -199,13 +199,13 @@ override method @selfVarAssignmentInstructionAST analyze
     )
   #--- Write local variable
     [!?ioVariableMap searchForWriteAccess
-      !mTargetVarName
-      ?*
-      ?let accessIsAllowed
-      ?*
-      ?let isCopiable
+      !lkey:mTargetVarName
+      ?1*
+      ?readAccessAllowed:let accessIsAllowed
+      ?1*
+      ?copyable:let isCopyable
       ?2*
-      ?let isConstant
+      ?isConstant:let isConstant
     ]
     if isConstant then
       error mTargetVarName : "a constant cannot be modified"
@@ -213,8 +213,8 @@ override method @selfVarAssignmentInstructionAST analyze
     if not accessIsAllowed then
       error mTargetVarName : "routine has no access right on the this variable"
     end
-    if not isCopiable then
-      error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
+    if not isCopyable then
+      error mTargetVarName : "the '" + mTargetVarName + "' variable is not copyable"
     end
     [target storeInMemory
       !value:result

@@ -61,16 +61,6 @@ override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanti
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @sortedOperandIRList {
-  @operandIR mOperand
-  @uint mIndex
-}{
-  mIndex <
-}
-
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @constructorCall analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
@@ -102,8 +92,8 @@ override method @constructorCall analyzeExpression
       else
         outResult = .new {!resultType !.literalInteger {!value:value}}
       end
-    case structure (constructorSignature initialValueMapAsConst) :
-      var initialValueMap = initialValueMapAsConst
+    case structure (constructorSignature sortedOperandList) :
+      var sortedOperandIRList = sortedOperandList
       if [mParameterList length] != [constructorSignature length] then
         error mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"
           + if [constructorSignature length] > 1 then "s" else "" end
@@ -133,14 +123,10 @@ override method @constructorCall analyzeExpression
             !errorLocation:effective_mSelector.location
             !staticTypeAllowed:false
           )
-          [!?initialValueMap insertKey !effective_mSelector !result !formal_mFieldIndex]
-        end
-        @sortedOperandIRList sortedInitialValueList = {}
-        for (* initialValue index) in initialValueMap do
-          sortedInitialValueList += !initialValue !index
+          sortedOperandIRList += !result !formal_mFieldIndex
         end
         @operandIRList initialValueList = {}
-        for (initialValue *) in sortedInitialValueList do
+        for (initialValue *) in sortedOperandIRList do
           initialValueList += !initialValue
         end
         outResult = .new {!resultType !.llvmStructureConstant {!values:initialValueList}}

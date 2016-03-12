@@ -107,7 +107,7 @@ sharedmap @unifiedTypeMap %selectors {
   @typedConstantMap typedConstantMap
   @functionMap functionMap
   @bool instanciable
-  @bool copiable
+  @bool copyable
   @bool equatable
   @bool comparable
   @unifiedTypeMap-proxy enumerationType # .null if type is not enumerable
@@ -138,17 +138,9 @@ list @operandIRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @constructorInitialValueMap { # Key is field name
-  @operandIR mValue
-  @uint mIndex
-  insert insertKey error message "the '%K' field is already declared"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 enum @constructorValue {
   case simple (@bigint value)
-  case structure (@constructorSignature constructorSignature @constructorInitialValueMap initialValueMap)
+  case structure (@constructorSignature constructorSignature @sortedOperandIRList sortedOperandList)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -126,36 +126,36 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
   let codeArg = @lstring.new {!"CODE" !mExceptionClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
-    !codeArg
-    !inContext.mExceptionCodeType
-    !true
-    !.localValue {!type:inContext.mExceptionCodeType !name:codeArg.string}
-    ![inContext.mExceptionCodeType copiable]
-    !{}
-    !false
-    !false
+    !lkey:codeArg
+    !type:inContext.mExceptionCodeType
+    !readAccessAllowed:true
+    !variableKind:.localValue {!type:inContext.mExceptionCodeType !name:codeArg.string}
+    !copyable:[inContext.mExceptionCodeType copyable]
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:false
+    !isConstant:false
   ]
   let fileArg = @lstring.new {!"FILE" !mExceptionClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
-    !fileArg
-    !StaticStringType
-    !true
-    !.localValue {!type:StaticStringType !name:fileArg.string}
-    ![StaticStringType copiable]
-    !{}
-    !false
-    !false
+    !lkey:fileArg
+    !type:StaticStringType
+    !readAccessAllowed:true
+    !variableKind:.localValue {!type:StaticStringType !name:fileArg.string}
+    !copyable:[StaticStringType copyable]
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:false
+    !isConstant:false
   ]
   let lineArg = @lstring.new {!"LINE" !mExceptionClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
-    !lineArg
-    !inContext.mExceptionLineType
-    !true
-    !.localValue {!type:inContext.mExceptionLineType !name:lineArg.string}
-    ![inContext.mExceptionLineType copiable]
-    !{}
-    !false
-    !false
+    !lkey:lineArg
+    !type:inContext.mExceptionLineType
+    !readAccessAllowed:true
+    !variableKind:.localValue {!type:inContext.mExceptionLineType !name:lineArg.string}
+    !copyable:[inContext.mExceptionLineType copyable]
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:false
+    !isConstant:false
   ]
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then

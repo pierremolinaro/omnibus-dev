@@ -183,28 +183,28 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   let resultVarName = @lstring.new {!"result" !mResultTypeName.location}
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mResultTypeName}
   [!?variableMap insertOutputFormalArgument
-    !resultVarName
-    !resultType
-    !true
-    !.localValue {!type:resultType !name:resultVarName.string}
-    !true
-    !{}
-    !true
-    !false # Is not constant
+    !lkey:resultVarName
+    !type:resultType
+    !readAccessAllowed:true
+    !variableKind:.localValue {!type:resultType !name:resultVarName.string}
+    !copyable:true
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:true
+    !isConstant:false # Is not constant
   ]
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
   for (* formalArgumentTypeName formalArgumentName) in mFuncFormalArgumentList do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
     [!?variableMap insertConstantInputFormalArgument
-      !formalArgumentName
-      !typeProxy
-      !true
-      !.localValue {!type:typeProxy !name:formalArgumentName.string}
-      ![typeProxy copiable]
-      !{}
-      !false
-      !true # Is constant
+      !lkey:formalArgumentName
+      !type:typeProxy
+      !readAccessAllowed:true
+      !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
+      !copyable:[typeProxy copyable]
+      !fieldMap:{}
+      !canBeUsedAsInputParameter:false
+      !isConstant:true # Is constant
     ]
     formalArguments += !.input !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
   end

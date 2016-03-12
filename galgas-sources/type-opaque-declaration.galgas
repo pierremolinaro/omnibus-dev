@@ -4,6 +4,7 @@
 
 class @opaqueTypeDeclaration : @abstractDeclaration {
   @lstring mOpaqueTypeName
+  @lstringlist mAttributeList
   @lbigint mSize
 }
 
@@ -24,9 +25,15 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $opaqueType$
     $typeName$ ?let opaqueTypeName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end
     $:$
     $integer$ ?let size
-    ioAST.mDeclarationList += !@opaqueTypeDeclaration.new {!opaqueTypeName !size}
+    ioAST.mDeclarationList += !@opaqueTypeDeclaration.new {!opaqueTypeName !attributeList !size}
   }
 
   #·····················································································································
@@ -72,6 +79,19 @@ override method @opaqueTypeDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---
+  var copyable = false ;
+  for (attribute) in mAttributeList do
+    if attribute.string == "copyable" then
+      if copyable then
+        error attribute : "duplicated attribute"
+      else
+        copyable = true
+      end
+    else
+      error attribute : "only @copyable attribute is allowed here"
+    end
+  end
+#---
   if mSize.bigint == 0G then
     error mSize : "the opaque type size should be > 0"
   end
@@ -82,7 +102,7 @@ override method @opaqueTypeDeclaration enterInContext
     !typedConstantMap:{}
     !functionMap:{}
     !instanciable:false
-    !copiable:false
+    !copyable:copyable
     !equatable:false
     !comparable:false
     !enumerationType:.null # Not enumerable

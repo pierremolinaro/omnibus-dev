@@ -93,14 +93,14 @@ override method @letInstructionWithAssignmentAST analyze
 #--- Declare local constant
   let localConstant = @objectInMemoryIR.localValue {!type:result.mType !name:mVarName.string}
   [!?ioVariableMap insertLocalConstant
-    !mVarName
-    !result.mType
-    !true
-    !localConstant
-    ![result.mType copiable]
-    !{}
-    !true
-    !true # Is Constant
+    !lkey:mVarName
+    !type:result.mType
+    !readAccessAllowed:true
+    !variableKind:localConstant
+    !copyable:[result.mType copyable]
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:true
+    !isConstant:true
   ]
 #--- Generate code
   [!?ioInstructionGenerationList appendAlloca

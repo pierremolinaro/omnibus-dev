@@ -78,13 +78,13 @@ override method @boolsetDeclaration enterInContext
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
 {
 #---
-  var copiable = true
+  var copyable = true
   for (s) in mAttributeList do
     if s.string == "unique" then
-      if not copiable then
+      if not copyable then
         error s : "duplicated attribute"
       end
-      copiable = false
+      copyable = false
     end
   end
   @constructorMap constructorMap = {}
@@ -107,7 +107,7 @@ override method @boolsetDeclaration enterInContext
     !kind:.boolset
     !constructorMap:constructorMap
     !procedureMap:{} # Procedure map
-    !copiable:copiable
+    !copyable:copyable
     !equatable:true
     !comparable:true
   ]

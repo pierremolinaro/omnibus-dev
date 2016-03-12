@@ -18,67 +18,67 @@ func initialVariableMap
   case noAccess :
     for () in inContext.mControlRegisterMap do
       [!?outVariableMap insertInaccessibleControlRegister
-        !lkey
-        !mType
-        !true
-        !.register {!type:mType !name:lkey !address:mAddress}
-        !true
-        !mRegisterFieldAccessMap
-        !false # Cannot be used as input parameter
-        !true # Is constant
+        !lkey:lkey
+        !type:mType
+        !readAccessAllowed:true
+        !variableKind:.register {!type:mType !name:lkey !address:mAddress}
+        !copyable:true
+        !fieldMap:mRegisterFieldAccessMap
+        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+        !isConstant:true # Is constant
       ]
     end
   case readAccess :
     for () in inContext.mControlRegisterMap do
       if inAcceptUserMode && not mIsAccessibleInUserMode then
         [!?outVariableMap insertInaccessibleControlRegister
-          !lkey
-          !mType
-          !true
-          !.register {!type:mType !name:lkey !address:mAddress}
-          !true
-          !mRegisterFieldAccessMap
-          !false # Cannot be used as input parameter
-          !true # Is constant
+          !lkey:lkey
+          !type:mType
+          !readAccessAllowed:true
+          !variableKind:.register {!type:mType !name:lkey !address:mAddress}
+          !copyable:true
+          !fieldMap:mRegisterFieldAccessMap
+          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+          !isConstant:true # Is constant
         ]
       elsif mIsReadOnly || inGlobalsAreConstant then
         [!?outVariableMap insertUsedLocalConstant
-          !lkey
-          !mType
-          !true
-          !.register {!type:mType !name:lkey !address:mAddress}
-          !true
-          !mRegisterFieldAccessMap
-          !false # Cannot be used as input parameter
-          !true # Is constant
+          !lkey:lkey
+          !type:mType
+          !readAccessAllowed:true
+          !variableKind:.register {!type:mType !name:lkey !address:mAddress}
+          !copyable:true
+          !fieldMap:mRegisterFieldAccessMap
+          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+          !isConstant:true # Is constant
         ]
       end
     end
   case readWriteAccess :
     for () in inContext.mControlRegisterMap do
       [!?outVariableMap insertDefinedLocalVariable
-        !lkey
-        !mType
-        !true
-        !.register {!type:mType !name:lkey !address:mAddress}
-        !true
-        !mRegisterFieldAccessMap
-        !false # Cannot be used as input parameter
-        !false # Is not constant
+        !lkey:lkey
+        !type:mType
+        !readAccessAllowed:true
+        !variableKind:.register {!type:mType !name:lkey !address:mAddress}
+        !copyable:true
+        !fieldMap:mRegisterFieldAccessMap
+        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+        !isConstant:false # Is not constant
       ]
     end
   end
 #------------------------------------------------------- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedLocalConstant
-      !constantName
-      !constantValue.mType
-      !true
-      !.globalConstant{!value:constantValue !name:constantName.string}
-      !true
-      !{}
-      !false # Cannot be used as input parameter
-      !true # Is constant
+      !lkey:constantName
+      !type:constantValue.mType
+      !readAccessAllowed:true
+      !variableKind:.globalConstant{!value:constantValue !name:constantName.string}
+      !copyable:true
+      !fieldMap:{}
+      !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+      !isConstant:true # Is constant
     ]
   end
 #------------------------------------------------------- Add global variables
@@ -90,25 +90,25 @@ func initialVariableMap
     end
     if inGlobalsAreConstant || not writeAccess then
       [!?outVariableMap insertUsedLocalConstant
-        !variableName
-        !variableType
-        !allowedAccess
-        !.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
-        !true
-        !{}
-        !false # Cannot be used as input parameter
-        !true # Is constant
+        !lkey:variableName
+        !type:variableType
+        !readAccessAllowed:allowedAccess
+        !variableKind:.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
+        !copyable:true
+        !fieldMap:{}
+        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+        !isConstant:true # Is constant
       ]
     else
       [!?outVariableMap insertGlobalVariable
-        !variableName
-        !variableType
-        !allowedAccess
-        !.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
-        !true
-        !{}
-        !false # Cannot be used as input parameter
-        !isConstant
+        !lkey:variableName
+        !type:variableType
+        !readAccessAllowed:allowedAccess
+        !variableKind:.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
+        !copyable:true
+        !fieldMap:{}
+        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+        !isConstant:isConstant
       ]
     end
   end
@@ -124,14 +124,14 @@ func variableMapWithConstants
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedLocalConstant
-      !constantName
-      !constantValue.mType
-      !true
-      !.globalConstant{!value:constantValue !name:constantName.string}
-      !true
-      !{}
-      !false
-      !true # Is constant
+      !lkey:constantName
+      !type:constantValue.mType
+      !readAccessAllowed:true
+      !variableKind:.globalConstant{!value:constantValue !name:constantName.string}
+      !copyable:true
+      !fieldMap:{}
+      !canBeUsedAsInputParameter:false
+      !isConstant:true # Is constant
     ]
   end
 }
@@ -160,14 +160,14 @@ proc getLocalNameOfNewTempObjectInMemory
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sharedmap @variableMap {
-  @unifiedTypeMap-proxy mType
-  @bool mReadAccessAllowed
-  @objectInMemoryIR mVariableKind
-  @bool copiable
+sharedmap @variableMap %selectors {
+  @unifiedTypeMap-proxy type
+  @bool readAccessAllowed
+  @objectInMemoryIR variableKind
+  @bool copyable
   @controlRegisterBitSliceAccessMap fieldMap
-  @bool mCanBeUsedAsInputParameter
-  @bool mIsConstant
+  @bool canBeUsedAsInputParameter
+  @bool isConstant
 
 #--- Inaccessible control register
   state inaccessibleControlRegister {

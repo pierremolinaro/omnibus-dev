@@ -123,14 +123,14 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Declare local variable
   let targetVar = @objectInMemoryIR.localValue {!type:result.mType !name:mVarName.string}
   [!?ioVariableMap insertDefinedLocalVariable
-    !mVarName
-    !result.mType
-    !true
-    !targetVar
-    ![result.mType copiable]
-    !{}
-    !true
-    !false # Is not constant
+    !lkey:mVarName
+    !type:result.mType
+    !readAccessAllowed:true
+    !variableKind:targetVar
+    !copyable:[result.mType copyable]
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:true
+    !isConstant:false # Is not constant
   ]
 #--- Code generation
   [!?ioInstructionGenerationList appendAlloca !mVarName.string !result.mType]
@@ -158,14 +158,14 @@ override method @varInstructionAST analyze
 #--- Declare local variable
   let targetVar = @objectInMemoryIR.localValue {!type:targetType !name:mVarName.string}
   [!?ioVariableMap insertUndefinedLocalVariable
-    !mVarName
-    !targetType
-    !true
-    !targetVar
-    ![targetType copiable]
-    !{}
-    !true
-    !false # Is not constant
+    !lkey:mVarName
+    !type:targetType
+    !readAccessAllowed:true
+    !variableKind:targetVar
+    !copyable:[targetType copyable]
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:true
+    !isConstant:false # Is not constant
   ]
 #--- Code generation
   [!?ioInstructionGenerationList appendAlloca

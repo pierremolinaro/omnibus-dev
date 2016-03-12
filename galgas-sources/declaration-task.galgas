@@ -139,7 +139,7 @@ method @taskList enterInContext
       !typedConstantMap:{}
       !functionMap:{}
       !instanciable:false
-      !copiable:false
+      !copyable:false
       !equatable:false
       !comparable:false
       !enumerationType:.null # Not enumerable

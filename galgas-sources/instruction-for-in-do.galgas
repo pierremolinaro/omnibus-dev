@@ -87,14 +87,14 @@ override method @forInstructionAST analyze
 #--- Analyze instruction list
   [!?ioVariableMap openOverrideForRepeatBlock]
   [!?ioVariableMap insertUsedLocalConstant
-    !mVarName
-    !iteratedElementType
-    !true # Read access ok
-    !.localValue {!type:iteratedElementType !name:mVarName.string}
-    !true # copiable
-    !{}
-    !false # mCanBeUsedAsInputParameter
-    !true # mIsConstant
+    !lkey:mVarName
+    !type:iteratedElementType
+    !readAccessAllowed:true # Read access ok
+    !variableKind:.localValue {!type:iteratedElementType !name:mVarName.string}
+    !copyable:true
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:false
+    !isConstant:true
   ]
   @instructionListIR instructionGenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
