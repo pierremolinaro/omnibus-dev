@@ -82,7 +82,7 @@ override method @typeAliasDeclaration enterInContext
     ?kind:let kind
     ?typedConstantMap:let typedConstantMap
     ?functionMap:let functionMap
-    ?instanciable:let instanciable
+    ?instantiable:let instanciable
     ?copyable:let copyable
     ?equatable:let equatable
     ?comparable:let comparable
@@ -95,7 +95,7 @@ override method @typeAliasDeclaration enterInContext
     !kind:kind
     !typedConstantMap:typedConstantMap
     !functionMap:functionMap
-    !instanciable:instanciable
+    !instantiable:instanciable
     !copyable:copyable
     !equatable:equatable
     !comparable:comparable

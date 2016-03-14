@@ -155,6 +155,10 @@ override method @varInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
+#---
+  if not [targetType instantiable] then
+    error mVarName : "$" + [targetType key] + " type is not instanciable"
+  end
 #--- Declare local variable
   let targetVar = @objectInMemoryIR.localValue {!type:targetType !name:mVarName.string}
   [!?ioVariableMap insertUndefinedLocalVariable

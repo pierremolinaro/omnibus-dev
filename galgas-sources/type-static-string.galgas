@@ -58,7 +58,7 @@ override method @literalStringDeclaration enterInContext
     !kind:.literalString
     !typedConstantMap:{}
     !functionMap:{}
-    !instanciable:true
+    !instantiable:true
     !copyable:true
     !equatable:true
     !comparable:true

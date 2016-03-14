@@ -80,15 +80,22 @@ override method @opaqueTypeDeclaration enterInContext
 {
 #---
   var copyable = false ;
+  var instantiable = false ;
   for (attribute) in mAttributeList do
-    if attribute.string == "copyable" then
+    if attribute.string == "instantiable" then
+      if instantiable then
+        error attribute : "duplicated attribute"
+      else
+        instantiable = true
+      end
+    elsif attribute.string == "copyable" then
       if copyable then
         error attribute : "duplicated attribute"
       else
         copyable = true
       end
     else
-      error attribute : "only @copyable attribute is allowed here"
+      error attribute : "only @copyable and @instantiable attributes are allowed here"
     end
   end
 #---
@@ -101,7 +108,7 @@ override method @opaqueTypeDeclaration enterInContext
     !kind:.opaque {!bitCount:mSize.bigint}
     !typedConstantMap:{}
     !functionMap:{}
-    !instanciable:false
+    !instantiable:instantiable
     !copyable:copyable
     !equatable:false
     !comparable:false

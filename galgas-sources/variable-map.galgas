@@ -94,7 +94,7 @@ func initialVariableMap
         !type:variableType
         !readAccessAllowed:allowedAccess
         !variableKind:.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
-        !copyable:true
+        !copyable:[variableType copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         !isConstant:true # Is constant
@@ -105,7 +105,7 @@ func initialVariableMap
         !type:variableType
         !readAccessAllowed:allowedAccess
         !variableKind:.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
-        !copyable:true
+        !copyable:[variableType copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         !isConstant:isConstant

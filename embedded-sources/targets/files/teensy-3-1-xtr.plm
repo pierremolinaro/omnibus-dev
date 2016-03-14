@@ -1,5 +1,5 @@
 
-opaqueType $taskList : 32
+opaqueType $taskList @instantiable @copyable : 32
 
 //--- Block running task
 extern proc kernel_blockRunningTaskInList `kernel (?!ioWaitingList $taskList)

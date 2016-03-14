@@ -1430,10 +1430,10 @@ GALGAS_variableMap function_initialVariableMap (const GALGAS_string & constinArg
   cEnumerator_globalVariableMap enumerator_3718 (constinArgument_inContext.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
   while (enumerator_3718.hasCurrentObject ()) {
     GALGAS_bool var_writeAccess = GALGAS_bool (false) ;
-    GALGAS_bool var_allowedAccess = enumerator_3718.current_mAllowedRoutineMap (HERE).getter_hasKey (constinArgument_inRoutineNameForInvocation COMMA_SOURCE_FILE ("variable-map.galgas", 87)) ;
+    GALGAS_bool var_allowedAccess = enumerator_3718.current_allowedRoutineMap (HERE).getter_hasKey (constinArgument_inRoutineNameForInvocation COMMA_SOURCE_FILE ("variable-map.galgas", 87)) ;
     const enumGalgasBool test_4 = var_allowedAccess.boolEnum () ;
     if (kBoolTrue == test_4) {
-      var_writeAccess = enumerator_3718.current_mAllowedRoutineMap (HERE).getter_mHasWriteAccessForKey (constinArgument_inRoutineNameForInvocation, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 89)) ;
+      var_writeAccess = enumerator_3718.current_allowedRoutineMap (HERE).getter_mHasWriteAccessForKey (constinArgument_inRoutineNameForInvocation, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 89)) ;
     }
     GALGAS_bool test_5 = inArgument_inGlobalsAreConstant ;
     if (kBoolTrue != test_5.boolEnum ()) {
@@ -1442,11 +1442,11 @@ GALGAS_variableMap function_initialVariableMap (const GALGAS_string & constinArg
     const enumGalgasBool test_6 = test_5.boolEnum () ;
     if (kBoolTrue == test_6) {
       {
-      result_outVariableMap.setter_insertUsedLocalConstant (enumerator_3718.current_lkey (HERE), enumerator_3718.current_mVariableType (HERE), var_allowedAccess, GALGAS_objectInMemoryIR::constructor_globalVariable (enumerator_3718.current_mVariableType (HERE), enumerator_3718.current_lkey (HERE).mAttribute_string, GALGAS_bool (kIsStrictSup, enumerator_3718.current_mExecutionModeSet (HERE).getter_count (SOURCE_FILE ("variable-map.galgas", 96)).objectCompare (GALGAS_uint ((uint32_t) 1U)))  COMMA_SOURCE_FILE ("variable-map.galgas", 96)), GALGAS_bool (true), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 98)), GALGAS_bool (false), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 92)) ;
+      result_outVariableMap.setter_insertUsedLocalConstant (enumerator_3718.current_lkey (HERE), enumerator_3718.current_type (HERE), var_allowedAccess, GALGAS_objectInMemoryIR::constructor_globalVariable (enumerator_3718.current_type (HERE), enumerator_3718.current_lkey (HERE).mAttribute_string, GALGAS_bool (kIsStrictSup, enumerator_3718.current_executionModeSet (HERE).getter_count (SOURCE_FILE ("variable-map.galgas", 96)).objectCompare (GALGAS_uint ((uint32_t) 1U)))  COMMA_SOURCE_FILE ("variable-map.galgas", 96)), enumerator_3718.current_type (HERE).getter_copyable (inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 97)), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 98)), GALGAS_bool (false), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 92)) ;
       }
     }else if (kBoolFalse == test_6) {
       {
-      result_outVariableMap.setter_insertGlobalVariable (enumerator_3718.current_lkey (HERE), enumerator_3718.current_mVariableType (HERE), var_allowedAccess, GALGAS_objectInMemoryIR::constructor_globalVariable (enumerator_3718.current_mVariableType (HERE), enumerator_3718.current_lkey (HERE).mAttribute_string, GALGAS_bool (kIsStrictSup, enumerator_3718.current_mExecutionModeSet (HERE).getter_count (SOURCE_FILE ("variable-map.galgas", 107)).objectCompare (GALGAS_uint ((uint32_t) 1U)))  COMMA_SOURCE_FILE ("variable-map.galgas", 107)), GALGAS_bool (true), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 109)), GALGAS_bool (false), enumerator_3718.current_mIsConstant (HERE), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 103)) ;
+      result_outVariableMap.setter_insertGlobalVariable (enumerator_3718.current_lkey (HERE), enumerator_3718.current_type (HERE), var_allowedAccess, GALGAS_objectInMemoryIR::constructor_globalVariable (enumerator_3718.current_type (HERE), enumerator_3718.current_lkey (HERE).mAttribute_string, GALGAS_bool (kIsStrictSup, enumerator_3718.current_executionModeSet (HERE).getter_count (SOURCE_FILE ("variable-map.galgas", 107)).objectCompare (GALGAS_uint ((uint32_t) 1U)))  COMMA_SOURCE_FILE ("variable-map.galgas", 107)), enumerator_3718.current_type (HERE).getter_copyable (inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 108)), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 109)), GALGAS_bool (false), enumerator_3718.current_isConstant (HERE), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 103)) ;
       }
     }
     enumerator_3718.gotoNextObject () ;
@@ -1518,12 +1518,12 @@ GALGAS_variableMap function_variableMapWithConstants (const GALGAS_semanticConte
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_variableMap result_outVariableMap ; // Returned variable
   result_outVariableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 123)) ;
-  cEnumerator_globalConstantMap enumerator_5230 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
-  while (enumerator_5230.hasCurrentObject ()) {
+  cEnumerator_globalConstantMap enumerator_5268 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  while (enumerator_5268.hasCurrentObject ()) {
     {
-    result_outVariableMap.setter_insertUsedLocalConstant (enumerator_5230.current_lkey (HERE), enumerator_5230.current_mValue (HERE).mAttribute_mType, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_globalConstant (enumerator_5230.current_mValue (HERE), enumerator_5230.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 130)), GALGAS_bool (true), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 132)), GALGAS_bool (false), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 126)) ;
+    result_outVariableMap.setter_insertUsedLocalConstant (enumerator_5268.current_lkey (HERE), enumerator_5268.current_mValue (HERE).mAttribute_mType, GALGAS_bool (true), GALGAS_objectInMemoryIR::constructor_globalConstant (enumerator_5268.current_mValue (HERE), enumerator_5268.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 130)), GALGAS_bool (true), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 132)), GALGAS_bool (false), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 126)) ;
     }
-    enumerator_5230.gotoNextObject () ;
+    enumerator_5268.gotoNextObject () ;
   }
 //---
   return result_outVariableMap ;
@@ -1719,13 +1719,13 @@ void routine_checkMode (const GALGAS_stringset constinArgument_inRequiredModes,
     }
     var_s.plusAssign_operation(temp_1, inCompiler  COMMA_SOURCE_FILE ("context.galgas", 92)) ;
     var_s.plusAssign_operation(GALGAS_string (": "), inCompiler  COMMA_SOURCE_FILE ("context.galgas", 93)) ;
-    cEnumerator_stringset enumerator_3922 (var_missingModes, kEnumeration_up) ;
-    while (enumerator_3922.hasCurrentObject ()) {
-      var_s.plusAssign_operation(GALGAS_string ("`").add_operation (enumerator_3922.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("context.galgas", 95)), inCompiler  COMMA_SOURCE_FILE ("context.galgas", 95)) ;
-      if (enumerator_3922.hasNextObject ()) {
+    cEnumerator_stringset enumerator_3920 (var_missingModes, kEnumeration_up) ;
+    while (enumerator_3920.hasCurrentObject ()) {
+      var_s.plusAssign_operation(GALGAS_string ("`").add_operation (enumerator_3920.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("context.galgas", 95)), inCompiler  COMMA_SOURCE_FILE ("context.galgas", 95)) ;
+      if (enumerator_3920.hasNextObject ()) {
         var_s.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("context.galgas", 96)) ;
       }
-      enumerator_3922.gotoNextObject () ;
+      enumerator_3920.gotoNextObject () ;
     }
     inCompiler->emitSemanticError (constinArgument_inErrorLocation, var_s  COMMA_SOURCE_FILE ("context.galgas", 98)) ;
   }
@@ -1768,30 +1768,30 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
   {
   outArgument_outSemanticContext.mAttribute_mModeMap.setter_insertKey (function_userModeName (inCompiler COMMA_SOURCE_FILE ("context.galgas", 235)).getter_nowhere (SOURCE_FILE ("context.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("context.galgas", 235)) ;
   }
-  cEnumerator_initList enumerator_9618 (constinArgument_inAST.mAttribute_mInitList, kEnumeration_up) ;
-  while (enumerator_9618.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_9618.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 238)) ;
-    enumerator_9618.gotoNextObject () ;
+  cEnumerator_initList enumerator_9616 (constinArgument_inAST.mAttribute_mInitList, kEnumeration_up) ;
+  while (enumerator_9616.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_9616.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 238)) ;
+    enumerator_9616.gotoNextObject () ;
   }
-  cEnumerator_exceptionClauseListAST enumerator_9769 (constinArgument_inAST.mAttribute_mExceptionClauses, kEnumeration_up) ;
-  while (enumerator_9769.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_9769.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 242)) ;
-    enumerator_9769.gotoNextObject () ;
+  cEnumerator_exceptionClauseListAST enumerator_9767 (constinArgument_inAST.mAttribute_mExceptionClauses, kEnumeration_up) ;
+  while (enumerator_9767.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_9767.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("context.galgas", 242)) ;
+    enumerator_9767.gotoNextObject () ;
   }
-  cEnumerator_declarationListAST enumerator_9894 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
-  while (enumerator_9894.hasCurrentObject ()) {
-    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_9894.current_mDeclaration (HERE).ptr (), constinArgument_inAST.mAttribute_mProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 246)) ;
-    enumerator_9894.gotoNextObject () ;
+  cEnumerator_declarationListAST enumerator_9892 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_9892.hasCurrentObject ()) {
+    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_9892.current_mDeclaration (HERE).ptr (), constinArgument_inAST.mAttribute_mProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 246)) ;
+    enumerator_9892.gotoNextObject () ;
   }
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inAST.mAttribute_mExceptionTypes.getter_length (SOURCE_FILE ("context.galgas", 253)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 254)).getter_location (HERE)) ; // Implicit use of 'location' getter
     inCompiler->emitSemanticError (location_1, GALGAS_string ("exactly one exception type declaration should be provided (found:").add_operation (constinArgument_inAST.mAttribute_mExceptionTypes.getter_length (SOURCE_FILE ("context.galgas", 255)).getter_string (SOURCE_FILE ("context.galgas", 255)), inCompiler COMMA_SOURCE_FILE ("context.galgas", 255)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("context.galgas", 255))  COMMA_SOURCE_FILE ("context.galgas", 254)) ;
-    cEnumerator_exceptionTypesAST enumerator_10326 (constinArgument_inAST.mAttribute_mExceptionTypes, kEnumeration_up) ;
-    while (enumerator_10326.hasCurrentObject ()) {
-      GALGAS_location location_2 (enumerator_10326.current_mExceptionCodeTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+    cEnumerator_exceptionTypesAST enumerator_10324 (constinArgument_inAST.mAttribute_mExceptionTypes, kEnumeration_up) ;
+    while (enumerator_10324.hasCurrentObject ()) {
+      GALGAS_location location_2 (enumerator_10324.current_mExceptionCodeTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
       inCompiler->emitSemanticError (location_2, GALGAS_string ("exception type declaration is here")  COMMA_SOURCE_FILE ("context.galgas", 257)) ;
-      enumerator_10326.gotoNextObject () ;
+      enumerator_10324.gotoNextObject () ;
     }
   }else if (kBoolFalse == test_0) {
     GALGAS_lstring var_exceptionCodeTypeName ;
@@ -1817,22 +1817,22 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
   categoryMethod_enterInContext (constinArgument_inAST.mAttribute_mTaskList, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 292)) ;
   const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("context.galgas", 294)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    cEnumerator_requiredProcedureDeclarationListAST enumerator_11976 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
-    while (enumerator_11976.hasCurrentObject ()) {
-      cEnumerator_lstringlist enumerator_12031 (enumerator_11976.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
-      while (enumerator_12031.hasCurrentObject ()) {
-        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_12031.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("context.galgas", 297)) ;
-        enumerator_12031.gotoNextObject () ;
+    cEnumerator_requiredProcedureDeclarationListAST enumerator_11932 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
+    while (enumerator_11932.hasCurrentObject ()) {
+      cEnumerator_lstringlist enumerator_11987 (enumerator_11932.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
+      while (enumerator_11987.hasCurrentObject ()) {
+        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_11987.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("context.galgas", 297)) ;
+        enumerator_11987.gotoNextObject () ;
       }
-      enumerator_11976.gotoNextObject () ;
+      enumerator_11932.gotoNextObject () ;
     }
   }
   const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("context.galgas", 302)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
-    cEnumerator_globalVarDeclarationList enumerator_12231 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
-    while (enumerator_12231.hasCurrentObject ()) {
-      categoryMethod_enterInContext (enumerator_12231.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 304)) ;
-      enumerator_12231.gotoNextObject () ;
+    cEnumerator_globalVarDeclarationList enumerator_12187 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
+    while (enumerator_12187.hasCurrentObject ()) {
+      categoryMethod_enterInContext (enumerator_12187.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("context.galgas", 304)) ;
+      enumerator_12187.gotoNextObject () ;
     }
   }
 }
@@ -9874,7 +9874,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
 //--- File 'files/teensy-3-1-xtr.plm'
 
 const char * gWrapperFileContent_8_targetTemplates = "\n"
-  "opaqueType $taskList : 32\n"
+  "opaqueType $taskList @instantiable @copyable : 32\n"
   "\n"
   "//--- Block running task\n"
   "extern proc kernel_blockRunningTaskInList `kernel (\?!ioWaitingList $taskList)\n"
@@ -9961,7 +9961,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  2499, // Text length
+  2523, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 

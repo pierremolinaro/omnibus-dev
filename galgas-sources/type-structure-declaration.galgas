@@ -247,16 +247,22 @@ override method @structureDeclaration enterInContext
       if not [expressionIR.mValue isStatic] then
         error mFieldName : "initialization expression cannot be computed statically"
       end
-      @unifiedTypeMap-proxy type
+      @unifiedTypeMap-proxy actualFieldType
       if fieldType != .null then
-        type = fieldType
+        actualFieldType = fieldType
       else
-        type = expressionIR.mType
+        actualFieldType = expressionIR.mType
       end
-      propertyList += !mFieldName.string !type
-      [!?propertyMap insertKey !mFieldName !type ![propertyMap count]]
-      sortedOperandIRList += !@operandIR.new {!type !expressionIR.mValue} !fieldIndex
+      if not [actualFieldType instantiable] then
+        error mFieldName : "$" + [actualFieldType key] + " type is not instanciable"
+      end
+      propertyList += !mFieldName.string !actualFieldType
+      [!?propertyMap insertKey !mFieldName !actualFieldType ![propertyMap count]]
+      sortedOperandIRList += !@operandIR.new {!actualFieldType !expressionIR.mValue} !fieldIndex
     case noExpression :
+      if not [fieldType instantiable] then
+        error mFieldName : "$" + [fieldType key] + " type is not instanciable"
+      end
       propertyList += !mFieldName.string !fieldType
       [!?propertyMap insertKey !mFieldName !fieldType ![propertyMap count]]
       constructorSignature += !mFieldName.string !fieldType !fieldIndex
@@ -310,7 +316,7 @@ override method @structureDeclaration enterInContext
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !typedConstantMap:{}
     !functionMap:functionMap
-    !instanciable:true
+    !instantiable:true
     !copyable:copyable
     !equatable:false
     !comparable:false

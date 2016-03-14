@@ -120,7 +120,7 @@ override method @enumerationDeclaration enterInContext
     !kind:.enumeration {!constantMap:enumConstantMap}
     !typedConstantMap:constructorMap
     !functionMap:{}
-    !instanciable:true
+    !instantiable:true
     !copyable:copyable
     !equatable:true
     !comparable:true
