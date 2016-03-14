@@ -278,12 +278,12 @@ method @globalVarDeclarationList-element enterInContext
   end
 #--- Enter variable in globale variable map
   [!?ioContext.mGlobalVariableMap insertKey
-    !mVarName
-    !result.mType
-    !executionModes
-    !allowedRoutineMap
-    !result.mValue
-    !false # Is not constant
+    !lkey:mVarName
+    !type:result.mType
+    !executionModeSet:executionModes
+    !allowedRoutineMap:allowedRoutineMap
+    !initialValue:result.mValue
+    !isConstant:false # Is not constant
   ]
 }
 
@@ -297,12 +297,12 @@ method @globalVarDeclarationList-element semanticAnalysis
 {
 #--- Code generation
   [inContext.mGlobalVariableMap searchKey
-    !mVarName
-    ?let inferredType
-    ?let executionModeSet
-    ?let unused allowedProcedureMap
-    ?let expressionGeneratedCode
-    ?let unused isConstant
+    !lkey:mVarName
+    ?type:let inferredType
+    ?executionModeSet:let executionModeSet
+    ?allowedRoutineMap:let unused allowedProcedureMap
+    ?initialValue:let expressionGeneratedCode
+    ?isConstant:let unused isConstant
   ]
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
     !mVarName

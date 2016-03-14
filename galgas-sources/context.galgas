@@ -62,12 +62,12 @@ map @globalConstantMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @globalVariableMap {
-  @unifiedTypeMap-proxy mVariableType
-  @stringset mExecutionModeSet
-  @allowedRoutineMap mAllowedRoutineMap
-  @valueIR mInitialValue
-  @bool mIsConstant
+map @globalVariableMap %selectors {
+  @unifiedTypeMap-proxy type
+  @stringset executionModeSet
+  @allowedRoutineMap allowedRoutineMap
+  @valueIR initialValue
+  @bool isConstant
   insert insertKey error message "the '%K' global variable is already declared in %L"
   search searchKey error message "there is no '%K' global variable"
 }
@@ -106,7 +106,7 @@ sharedmap @unifiedTypeMap %selectors {
   @typeKind kind
   @typedConstantMap typedConstantMap
   @functionMap functionMap
-  @bool instanciable
+  @bool instantiable
   @bool copyable
   @bool equatable
   @bool comparable
@@ -258,11 +258,11 @@ proc buildSemanticContext
     end
   else
     [inAST.mExceptionTypes first ?let @lstring exceptionCodeTypeName ?let @lstring exceptionLineTypeName]
-    outSemanticContext.mExceptionCodeType = @unifiedTypeMap-proxy.searchKey {
+    outSemanticContext.mExceptionCodeType = .searchKey {
       !outSemanticContext.mTypeMap
       !exceptionCodeTypeName
     }
-    outSemanticContext.mExceptionLineType = @unifiedTypeMap-proxy.searchKey {
+    outSemanticContext.mExceptionLineType = .searchKey {
       !outSemanticContext.mTypeMap
       !exceptionLineTypeName
     }

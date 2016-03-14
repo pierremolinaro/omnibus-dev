@@ -27,12 +27,20 @@ var s = $semaphore (!value:0) {
   proc $T2.loop
 }
 
+var gL = $taskList () {
+  proc $T1.setup
+}
+
 //------------------------------------------------*
 
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
+  var list = $taskList ()
+
   proc setup () {
+    var list2 = self.list
+    var list3 = gL
   }
   
   proc loop () {

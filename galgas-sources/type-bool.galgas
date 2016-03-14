@@ -67,7 +67,7 @@ override method @booleanDeclaration enterInContext
     !kind:.boolean
     !typedConstantMap:{}
     !functionMap:{}
-    !instanciable:true
+    !instantiable:true
     !copyable:copyable
     !equatable:true
     !comparable:true

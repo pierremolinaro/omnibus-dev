@@ -57,7 +57,7 @@ override method @literalIntegerDeclaration enterInContext
     !kind:.staticInteger
     !typedConstantMap:{}
     !functionMap:{}
-    !instanciable:true
+    !instantiable:true
     !copyable:true
     !equatable:true
     !comparable:true

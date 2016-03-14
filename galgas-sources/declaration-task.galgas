@@ -138,7 +138,7 @@ method @taskList enterInContext
       !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
       !typedConstantMap:{}
       !functionMap:{}
-      !instanciable:false
+      !instantiable:false
       !copyable:false
       !equatable:false
       !comparable:false
@@ -209,6 +209,9 @@ method @taskVarListAST-element enterInContext
   )
   drop variableAnnotationType, expressionResult
 #--- Enter variable
+  if not [result.mType instantiable] then
+    error mVarName : "$" + [result.mType key] + " type is not instanciable"
+  end
   ioPropertyList += !mVarName.string !result.mType
   [!?ioPropertyMap insertKey !mVarName !result.mType ![ioPropertyMap count]]
   ioInitialValueList += !result

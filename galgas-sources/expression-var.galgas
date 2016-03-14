@@ -128,12 +128,15 @@ override method @varInExpressionAST analyzeExpression
     ?type:let @unifiedTypeMap-proxy variableType
     ?readAccessAllowed:let accessIsAllowed
     ?variableKind:let @objectInMemoryIR variableKind
-    ?1*
+    ?copyable:let copyable
     ?fieldMap:@controlRegisterBitSliceAccessMap registerBitSliceMap
     ?2*
   ]
   if not accessIsAllowed then
     error mSourceVarName : "routine has no access right on this variable"
+  end
+  if not copyable then
+    error mSourceVarName : "an object of $" + [variableType key] + " is not copyable"
   end
 #--- Load variable
   [variableKind loadFromMemory
@@ -184,6 +187,9 @@ override method @selfVarInExpressionAST analyzeExpression
       error mSourceVarName : "an integer does not handle field access" : outResult
     case structure (@propertyMap propertyMap *) :
       [propertyMap searchKey !mSourceVarName ?let type ?let idx]
+      if not [type copyable] then
+        error mSourceVarName : "an object of $" + [type key] + " is not copyable"
+      end
       getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf
         !fieldAddress

@@ -90,6 +90,11 @@ override method @letInstructionWithAssignmentAST analyze
     !errorLocation:mVarName.location
     !staticTypeAllowed:true
   )
+  drop targetType, expressionResult
+#---
+  if not [result.mType instantiable] then
+    error mVarName : "$" + [result.mType key] + " type is not instanciable"
+  end
 #--- Declare local constant
   let localConstant = @objectInMemoryIR.localValue {!type:result.mType !name:mVarName.string}
   [!?ioVariableMap insertLocalConstant
@@ -108,7 +113,7 @@ override method @letInstructionWithAssignmentAST analyze
     !result.mType
   ]
   [localConstant storeInMemory
-    !value:expressionResult
+    !value:result
     !?instructionListIR:ioInstructionGenerationList
   ]
 }

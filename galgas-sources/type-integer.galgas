@@ -75,7 +75,7 @@ override method @integerDeclaration enterInContext
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
     !typedConstantMap:{}
     !functionMap:{}
-    !instanciable:true
+    !instantiable:true
     !copyable:true
     !equatable:true
     !comparable:true

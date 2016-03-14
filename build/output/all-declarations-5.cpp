@@ -874,12 +874,20 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  proc $T2.loop\n"
   "}\n"
   "\n"
+  "var gL = $taskList () {\n"
+  "  proc $T1.setup\n"
+  "}\n"
+  "\n"
   "//------------------------------------------------*\n"
   "\n"
   "task T1 priority 1 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
+  "  var list = $taskList ()\n"
+  "\n"
   "  proc setup () {\n"
+  "    var list2 = self.list\n"
+  "    var list3 = gL\n"
   "  }\n"
   "  \n"
   "  proc loop () {\n"
@@ -915,7 +923,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  1096, // Text length
+  1212, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
