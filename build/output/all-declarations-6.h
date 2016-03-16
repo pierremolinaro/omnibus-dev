@@ -659,33 +659,33 @@ void callCategoryMethod_enterCodeForOverflowOperation (const class cPtr_binaryOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Category method '@binaryOperationIR enterCodeForDivisionWithZeroDivisorException'                  *
+//                    Category method '@binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*categoryMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorException) (const class cPtr_binaryOperationIR * inObject,
-                                                                                                        const class GALGAS_string constinArgument0,
-                                                                                                        const class GALGAS_uint constinArgument1,
-                                                                                                        class GALGAS_string & ioArgument2,
-                                                                                                        const class GALGAS_generationContext constinArgument3,
-                                                                                                        class GALGAS_generationAdds & ioArgument4,
-                                                                                                        class C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) ;
+typedef void (*categoryMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic) (const class cPtr_binaryOperationIR * inObject,
+                                                                                                    const class GALGAS_string constinArgument0,
+                                                                                                    const class GALGAS_uint constinArgument1,
+                                                                                                    class GALGAS_string & ioArgument2,
+                                                                                                    const class GALGAS_generationContext constinArgument3,
+                                                                                                    class GALGAS_generationAdds & ioArgument4,
+                                                                                                    class C_Compiler * inCompiler
+                                                                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryMethod_enterCodeForDivisionWithZeroDivisorException (const int32_t inClassIndex,
-                                                                       categoryMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorException inMethod) ;
+void enterCategoryMethod_enterCodeForDivisionWithZeroDivisorPanic (const int32_t inClassIndex,
+                                                                   categoryMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callCategoryMethod_enterCodeForDivisionWithZeroDivisorException (const class cPtr_binaryOperationIR * inObject,
-                                                                      const GALGAS_string constin_inOperation,
-                                                                      const GALGAS_uint constin_inCode,
-                                                                      GALGAS_string & io_ioLLVMcode,
-                                                                      const GALGAS_generationContext constin_inGenerationContext,
-                                                                      GALGAS_generationAdds & io_ioGenerationAdds,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
+void callCategoryMethod_enterCodeForDivisionWithZeroDivisorPanic (const class cPtr_binaryOperationIR * inObject,
+                                                                  const GALGAS_string constin_inOperation,
+                                                                  const GALGAS_uint constin_inCode,
+                                                                  GALGAS_string & io_ioLLVMcode,
+                                                                  const GALGAS_generationContext constin_inGenerationContext,
+                                                                  GALGAS_generationAdds & io_ioGenerationAdds,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 #endif

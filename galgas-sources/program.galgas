@@ -140,8 +140,8 @@ private proc compileProject
           !typeMap:semanticContext.mTypeMap
 #          !typeInitialierMap:semanticContext.mTypeInitializerMap
           !target:inTargetName
-          !exceptionCodeType:semanticContext.mPanicCodeType
-          !exceptionLineType:semanticContext.mPanicLineType
+          !panicCodeType:semanticContext.mPanicCodeType
+          !panicLineType:semanticContext.mPanicLineType
           !sourceFileSet:sourceFileAbsolutePathSet
         )
       end

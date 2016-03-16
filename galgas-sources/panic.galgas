@@ -82,7 +82,7 @@ method @panicClauseListAST-element enterInContext
   elsif mPanicClauseName.string == "loop" then
     [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
   else
-    error mPanicClauseName : "exception routine name should be \"setup\" or \"loop\""
+    error mPanicClauseName : "panic routine name should be \"setup\" or \"loop\""
   end
 }
 
@@ -97,15 +97,15 @@ func %once panicModeName -> @string outResult {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @panicRoutinePriorityMap {
-  insert insertSetupKey error message "an exception setup routine with priority %K has been already declared"
-  insert insertLoopKey error message "an exception loop routine with priority %K has been already declared"
-  search searchSetupKey error message "there is no exception setup routine with priority %K"
-  search searchLoopKey error message "there is no  exception loop routine with priority %K"
+  insert insertSetupKey error message "a panic setup routine with priority %K has been already declared"
+  insert insertLoopKey error message "a panic loop routine with priority %K has been already declared"
+  search searchSetupKey error message "there is no panic setup routine with priority %K"
+  search searchLoopKey error message "there is no panic loop routine with priority %K"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @panicClauseListAST-element exceptionSemanticAnalysis
+method @panicClauseListAST-element panicSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -113,7 +113,7 @@ method @panicClauseListAST-element exceptionSemanticAnalysis
   if not [inContext.mModeMap hasKey !panicModeName ()] then
     error mPanicClauseName : "the `" + panicModeName () + " mode should be defined in order to use a panic clause"
   end
-  let routineNameForInvocationGraph = exceptionNameForInvocationGraph (!mPanicClauseName.string !mPriority)
+  let routineNameForInvocationGraph = panicNameForInvocationGraph (!mPanicClauseName.string !mPriority)
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
@@ -187,7 +187,7 @@ method @panicClauseListAST-element exceptionSemanticAnalysis
     [!?ioTemporaries.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
     ioIntermediateCodeStruct.mPanicLoopInstructionListIR += instructionGenerationList
   else
-    error mPanicClauseName : "exception routine name should be \"setup\" or \"loop\""
+    error mPanicClauseName : "panic routine name should be \"setup\" or \"loop\""
   end
 }
 

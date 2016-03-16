@@ -49,9 +49,9 @@ override method @throwInstructionAST analyze
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Exception allowed ?
+#--- Panic allowed ?
   if [inModeSet hasKey !panicModeName ()] then
-    error mThrowLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+    error mThrowLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR unusedInstructionListIR = {}
@@ -108,9 +108,9 @@ override method @throwInstructionIR llvmInstructionCode
     ![[[mThrowLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
-  ioLLVMcode += "  call void @raise_exception." + staticStringIndex + " ("
-  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mThrowLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + mCode + ")\n"
+  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mThrowLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mCode + ")\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

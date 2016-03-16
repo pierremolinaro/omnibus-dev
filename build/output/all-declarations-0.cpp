@@ -3337,7 +3337,7 @@ class cCollectionElement_globalVarDeclarationList : public cCollectionElement {
                                                         const GALGAS_expressionAST & in_mSourceExpression,
                                                         const GALGAS_allowedRoutineList & in_mAllowedProcList,
                                                         const GALGAS_allowedInitList & in_mAllowedInitList,
-                                                        const GALGAS_allowedExceptionList & in_mAllowedExceptionList,
+                                                        const GALGAS_allowedPanicList & in_mAllowedPanicList,
                                                         const GALGAS_allowedFunctionList & in_mAllowedFunctionList
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -3361,11 +3361,11 @@ cCollectionElement_globalVarDeclarationList::cCollectionElement_globalVarDeclara
                                                                                           const GALGAS_expressionAST & in_mSourceExpression,
                                                                                           const GALGAS_allowedRoutineList & in_mAllowedProcList,
                                                                                           const GALGAS_allowedInitList & in_mAllowedInitList,
-                                                                                          const GALGAS_allowedExceptionList & in_mAllowedExceptionList,
+                                                                                          const GALGAS_allowedPanicList & in_mAllowedPanicList,
                                                                                           const GALGAS_allowedFunctionList & in_mAllowedFunctionList
                                                                                           COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mTypeName, in_mVarName, in_mSourceExpression, in_mAllowedProcList, in_mAllowedInitList, in_mAllowedExceptionList, in_mAllowedFunctionList) {
+mObject (in_mTypeName, in_mVarName, in_mSourceExpression, in_mAllowedProcList, in_mAllowedInitList, in_mAllowedPanicList, in_mAllowedFunctionList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3378,7 +3378,7 @@ bool cCollectionElement_globalVarDeclarationList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_globalVarDeclarationList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_globalVarDeclarationList (mObject.mAttribute_mTypeName, mObject.mAttribute_mVarName, mObject.mAttribute_mSourceExpression, mObject.mAttribute_mAllowedProcList, mObject.mAttribute_mAllowedInitList, mObject.mAttribute_mAllowedExceptionList, mObject.mAttribute_mAllowedFunctionList COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_globalVarDeclarationList (mObject.mAttribute_mTypeName, mObject.mAttribute_mVarName, mObject.mAttribute_mSourceExpression, mObject.mAttribute_mAllowedProcList, mObject.mAttribute_mAllowedInitList, mObject.mAttribute_mAllowedPanicList, mObject.mAttribute_mAllowedFunctionList COMMA_HERE)) ;
   return result ;
 }
 
@@ -3407,8 +3407,8 @@ void cCollectionElement_globalVarDeclarationList::description (C_String & ioStri
   mObject.mAttribute_mAllowedInitList.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mAllowedExceptionList" ":" ;
-  mObject.mAttribute_mAllowedExceptionList.description (ioString, inIndentation) ;
+  ioString << "mAllowedPanicList" ":" ;
+  mObject.mAttribute_mAllowedPanicList.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mAllowedFunctionList" ":" ;
@@ -3453,7 +3453,7 @@ GALGAS_globalVarDeclarationList GALGAS_globalVarDeclarationList::constructor_lis
                                                                                             const GALGAS_expressionAST & inOperand2,
                                                                                             const GALGAS_allowedRoutineList & inOperand3,
                                                                                             const GALGAS_allowedInitList & inOperand4,
-                                                                                            const GALGAS_allowedExceptionList & inOperand5,
+                                                                                            const GALGAS_allowedPanicList & inOperand5,
                                                                                             const GALGAS_allowedFunctionList & inOperand6
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_globalVarDeclarationList result ;
@@ -3474,7 +3474,7 @@ void GALGAS_globalVarDeclarationList::makeAttributesFromObjects (capCollectionEl
                                                                  const GALGAS_expressionAST & in_mSourceExpression,
                                                                  const GALGAS_allowedRoutineList & in_mAllowedProcList,
                                                                  const GALGAS_allowedInitList & in_mAllowedInitList,
-                                                                 const GALGAS_allowedExceptionList & in_mAllowedExceptionList,
+                                                                 const GALGAS_allowedPanicList & in_mAllowedPanicList,
                                                                  const GALGAS_allowedFunctionList & in_mAllowedFunctionList
                                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement_globalVarDeclarationList * p = NULL ;
@@ -3483,7 +3483,7 @@ void GALGAS_globalVarDeclarationList::makeAttributesFromObjects (capCollectionEl
                                                               in_mSourceExpression,
                                                               in_mAllowedProcList,
                                                               in_mAllowedInitList,
-                                                              in_mAllowedExceptionList,
+                                                              in_mAllowedPanicList,
                                                               in_mAllowedFunctionList COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3496,7 +3496,7 @@ void GALGAS_globalVarDeclarationList::addAssign_operation (const GALGAS_lstring 
                                                            const GALGAS_expressionAST & inOperand2,
                                                            const GALGAS_allowedRoutineList & inOperand3,
                                                            const GALGAS_allowedInitList & inOperand4,
-                                                           const GALGAS_allowedExceptionList & inOperand5,
+                                                           const GALGAS_allowedPanicList & inOperand5,
                                                            const GALGAS_allowedFunctionList & inOperand6
                                                            COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
@@ -3516,7 +3516,7 @@ void GALGAS_globalVarDeclarationList::setter_insertAtIndex (const GALGAS_lstring
                                                             const GALGAS_expressionAST inOperand2,
                                                             const GALGAS_allowedRoutineList inOperand3,
                                                             const GALGAS_allowedInitList inOperand4,
-                                                            const GALGAS_allowedExceptionList inOperand5,
+                                                            const GALGAS_allowedPanicList inOperand5,
                                                             const GALGAS_allowedFunctionList inOperand6,
                                                             const GALGAS_uint inInsertionIndex,
                                                             C_Compiler * inCompiler
@@ -3538,7 +3538,7 @@ void GALGAS_globalVarDeclarationList::setter_removeAtIndex (GALGAS_lstring & out
                                                             GALGAS_expressionAST & outOperand2,
                                                             GALGAS_allowedRoutineList & outOperand3,
                                                             GALGAS_allowedInitList & outOperand4,
-                                                            GALGAS_allowedExceptionList & outOperand5,
+                                                            GALGAS_allowedPanicList & outOperand5,
                                                             GALGAS_allowedFunctionList & outOperand6,
                                                             const GALGAS_uint inRemoveIndex,
                                                             C_Compiler * inCompiler
@@ -3562,7 +3562,7 @@ void GALGAS_globalVarDeclarationList::setter_removeAtIndex (GALGAS_lstring & out
       outOperand2 = p->mObject.mAttribute_mSourceExpression ;
       outOperand3 = p->mObject.mAttribute_mAllowedProcList ;
       outOperand4 = p->mObject.mAttribute_mAllowedInitList ;
-      outOperand5 = p->mObject.mAttribute_mAllowedExceptionList ;
+      outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
       outOperand6 = p->mObject.mAttribute_mAllowedFunctionList ;
     }
   }
@@ -3575,7 +3575,7 @@ void GALGAS_globalVarDeclarationList::setter_popFirst (GALGAS_lstring & outOpera
                                                        GALGAS_expressionAST & outOperand2,
                                                        GALGAS_allowedRoutineList & outOperand3,
                                                        GALGAS_allowedInitList & outOperand4,
-                                                       GALGAS_allowedExceptionList & outOperand5,
+                                                       GALGAS_allowedPanicList & outOperand5,
                                                        GALGAS_allowedFunctionList & outOperand6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
@@ -3597,7 +3597,7 @@ void GALGAS_globalVarDeclarationList::setter_popFirst (GALGAS_lstring & outOpera
     outOperand2 = p->mObject.mAttribute_mSourceExpression ;
     outOperand3 = p->mObject.mAttribute_mAllowedProcList ;
     outOperand4 = p->mObject.mAttribute_mAllowedInitList ;
-    outOperand5 = p->mObject.mAttribute_mAllowedExceptionList ;
+    outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
     outOperand6 = p->mObject.mAttribute_mAllowedFunctionList ;
   }
 }
@@ -3609,7 +3609,7 @@ void GALGAS_globalVarDeclarationList::setter_popLast (GALGAS_lstring & outOperan
                                                       GALGAS_expressionAST & outOperand2,
                                                       GALGAS_allowedRoutineList & outOperand3,
                                                       GALGAS_allowedInitList & outOperand4,
-                                                      GALGAS_allowedExceptionList & outOperand5,
+                                                      GALGAS_allowedPanicList & outOperand5,
                                                       GALGAS_allowedFunctionList & outOperand6,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
@@ -3631,7 +3631,7 @@ void GALGAS_globalVarDeclarationList::setter_popLast (GALGAS_lstring & outOperan
     outOperand2 = p->mObject.mAttribute_mSourceExpression ;
     outOperand3 = p->mObject.mAttribute_mAllowedProcList ;
     outOperand4 = p->mObject.mAttribute_mAllowedInitList ;
-    outOperand5 = p->mObject.mAttribute_mAllowedExceptionList ;
+    outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
     outOperand6 = p->mObject.mAttribute_mAllowedFunctionList ;
   }
 }
@@ -3643,7 +3643,7 @@ void GALGAS_globalVarDeclarationList::method_first (GALGAS_lstring & outOperand0
                                                     GALGAS_expressionAST & outOperand2,
                                                     GALGAS_allowedRoutineList & outOperand3,
                                                     GALGAS_allowedInitList & outOperand4,
-                                                    GALGAS_allowedExceptionList & outOperand5,
+                                                    GALGAS_allowedPanicList & outOperand5,
                                                     GALGAS_allowedFunctionList & outOperand6,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
@@ -3665,7 +3665,7 @@ void GALGAS_globalVarDeclarationList::method_first (GALGAS_lstring & outOperand0
     outOperand2 = p->mObject.mAttribute_mSourceExpression ;
     outOperand3 = p->mObject.mAttribute_mAllowedProcList ;
     outOperand4 = p->mObject.mAttribute_mAllowedInitList ;
-    outOperand5 = p->mObject.mAttribute_mAllowedExceptionList ;
+    outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
     outOperand6 = p->mObject.mAttribute_mAllowedFunctionList ;
   }
 }
@@ -3677,7 +3677,7 @@ void GALGAS_globalVarDeclarationList::method_last (GALGAS_lstring & outOperand0,
                                                    GALGAS_expressionAST & outOperand2,
                                                    GALGAS_allowedRoutineList & outOperand3,
                                                    GALGAS_allowedInitList & outOperand4,
-                                                   GALGAS_allowedExceptionList & outOperand5,
+                                                   GALGAS_allowedPanicList & outOperand5,
                                                    GALGAS_allowedFunctionList & outOperand6,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
@@ -3699,7 +3699,7 @@ void GALGAS_globalVarDeclarationList::method_last (GALGAS_lstring & outOperand0,
     outOperand2 = p->mObject.mAttribute_mSourceExpression ;
     outOperand3 = p->mObject.mAttribute_mAllowedProcList ;
     outOperand4 = p->mObject.mAttribute_mAllowedInitList ;
-    outOperand5 = p->mObject.mAttribute_mAllowedExceptionList ;
+    outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
     outOperand6 = p->mObject.mAttribute_mAllowedFunctionList ;
   }
 }
@@ -3832,15 +3832,15 @@ GALGAS_allowedInitList GALGAS_globalVarDeclarationList::getter_mAllowedInitListA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_globalVarDeclarationList::getter_mAllowedExceptionListAtIndex (const GALGAS_uint & inIndex,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_allowedPanicList GALGAS_globalVarDeclarationList::getter_mAllowedPanicListAtIndex (const GALGAS_uint & inIndex,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_globalVarDeclarationList * p = (cCollectionElement_globalVarDeclarationList *) attributes.ptr () ;
-  GALGAS_allowedExceptionList result ;
+  GALGAS_allowedPanicList result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
-    result = p->mObject.mAttribute_mAllowedExceptionList ;
+    result = p->mObject.mAttribute_mAllowedPanicList ;
   }
   return result ;
 }
@@ -3921,10 +3921,10 @@ GALGAS_allowedInitList cEnumerator_globalVarDeclarationList::current_mAllowedIni
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList cEnumerator_globalVarDeclarationList::current_mAllowedExceptionList (LOCATION_ARGS) const {
+GALGAS_allowedPanicList cEnumerator_globalVarDeclarationList::current_mAllowedPanicList (LOCATION_ARGS) const {
   const cCollectionElement_globalVarDeclarationList * p = (const cCollectionElement_globalVarDeclarationList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
-  return p->mObject.mAttribute_mAllowedExceptionList ;
+  return p->mObject.mAttribute_mAllowedPanicList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11065,7 +11065,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i6_ (GALGAS_ast
   GALGAS_allowedRoutineList var_allowedRoutineList = GALGAS_allowedRoutineList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 65)) ;
   GALGAS_allowedInitList var_allowedInitList = GALGAS_allowedInitList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 66)) ;
   GALGAS_allowedFunctionList var_allowedFunctionList = GALGAS_allowedFunctionList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 67)) ;
-  GALGAS_allowedExceptionList var_allowedExceptionList = GALGAS_allowedExceptionList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 68)) ;
+  GALGAS_allowedPanicList var_allowedPanicList = GALGAS_allowedPanicList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 68)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 69)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
@@ -11155,11 +11155,11 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i6_ (GALGAS_ast
     case 6: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 121)) ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_proc) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 122)) ;
-      GALGAS_lstring var_exceptionName = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_panicName = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 123)) ;
       GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 124)) ;
-      var_allowedExceptionList.addAssign_operation (var_hasWriteAccess, var_exceptionName, var_priority  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 125)) ;
+      var_allowedPanicList.addAssign_operation (var_hasWriteAccess, var_panicName, var_priority  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 125)) ;
     } break ;
     default:
       break ;
@@ -11173,7 +11173,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i6_ (GALGAS_ast
     }
   }
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 129)) ;
-  ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList.addAssign_operation (var_typeName, var_varName, var_expression, var_allowedRoutineList, var_allowedInitList, var_allowedExceptionList, var_allowedFunctionList  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 130)) ;
+  ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList.addAssign_operation (var_typeName, var_varName, var_expression, var_allowedRoutineList, var_allowedInitList, var_allowedPanicList, var_allowedFunctionList  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 130)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

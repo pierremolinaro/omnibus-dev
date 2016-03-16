@@ -87,9 +87,9 @@ method @binaryOperationIR enterCodeForOverflowOperation
   let labelName = [mTarget name]
   ioLLVMcode += "  br i1 " + [mTarget llvmName] + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
   ioLLVMcode += labelName + ".ovf:\n"
-  ioLLVMcode += "  call void @raise_exception." + staticStringIndex + " ("
-  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ")\n"
+  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + inCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelName + ".noovf:\n"
   ioLLVMcode += "  " + [mTarget llvmName] + " = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 0\n"
@@ -99,7 +99,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @binaryOperationIR enterCodeForDivisionWithZeroDivisorException 
+method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic 
   ?let @string inOperation
   ?let @uint inCode
   ?!@string ioLLVMcode
@@ -115,9 +115,9 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorException
   let labelName = [mTarget name]
   ioLLVMcode += "  br i1 " + [mRight llvmName] + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
   ioLLVMcode += labelName + ".divideByZero:\n"
-  ioLLVMcode += "  call void @raise_exception." + staticStringIndex + " ("
-  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ")\n"
+  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + inCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelName + ".ok:\n"
   ioLLVMcode += "  " + [mTarget llvmName] + " = " + inOperation + " " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
@@ -195,7 +195,7 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioGenerationAdds
     ]
   case udivOVF :
-    [self enterCodeForDivisionWithZeroDivisorException
+    [self enterCodeForDivisionWithZeroDivisorPanic
       !"udiv"
       !39
       !?ioLLVMcode
@@ -203,7 +203,7 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioGenerationAdds
     ]
   case sdivOVF :
-    [self enterCodeForDivisionWithZeroDivisorException
+    [self enterCodeForDivisionWithZeroDivisorPanic
       !"sdiv"
       !39
       !?ioLLVMcode
@@ -211,7 +211,7 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioGenerationAdds
     ]
   case uremOVF :
-    [self enterCodeForDivisionWithZeroDivisorException
+    [self enterCodeForDivisionWithZeroDivisorPanic
       !"urem"
       !44
       !?ioLLVMcode
@@ -219,7 +219,7 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioGenerationAdds
     ]
   case sremOVF :
-    [self enterCodeForDivisionWithZeroDivisorException
+    [self enterCodeForDivisionWithZeroDivisorPanic
       !"srem"
       !44
       !?ioLLVMcode
