@@ -435,7 +435,7 @@ abstract method @expressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModes
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap

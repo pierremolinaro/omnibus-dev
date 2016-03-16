@@ -981,10 +981,10 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMNullOnNoExceptionForKey (class GALGAS_bool constinArgument0,
-                                                                     class GALGAS_string constinArgument1,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void setter_setMNullOnNoPanicForKey (class GALGAS_bool constinArgument0,
+                                                                 class GALGAS_string constinArgument1,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMWarnIfUnusedForKey (class GALGAS_bool constinArgument0,
                                                                 class GALGAS_string constinArgument1,
@@ -1033,9 +1033,9 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mNullOnNoExceptionForKey (const class GALGAS_string & constinOperand0,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mNullOnNoPanicForKey (const class GALGAS_string & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnusedForKey (const class GALGAS_string & constinOperand0,
                                                                           C_Compiler * inCompiler
@@ -1076,7 +1076,7 @@ class cEnumerator_routineMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_mIsRequired (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWeak (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mNullOnNoException (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mNullOnNoPanic (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mGlobal (LOCATION_ARGS) const ;
   public : class GALGAS_routineKind current_mKind (LOCATION_ARGS) const ;
 //--- Current element access
@@ -1100,7 +1100,7 @@ class cMapElement_routineMapIR : public cMapElement {
   public : GALGAS_bool mAttribute_mIsRequired ;
   public : GALGAS_bool mAttribute_mWarnIfUnused ;
   public : GALGAS_bool mAttribute_mWeak ;
-  public : GALGAS_bool mAttribute_mNullOnNoException ;
+  public : GALGAS_bool mAttribute_mNullOnNoPanic ;
   public : GALGAS_bool mAttribute_mGlobal ;
   public : GALGAS_routineKind mAttribute_mKind ;
 
@@ -1111,7 +1111,7 @@ class cMapElement_routineMapIR : public cMapElement {
                                      const GALGAS_bool & in_mIsRequired,
                                      const GALGAS_bool & in_mWarnIfUnused,
                                      const GALGAS_bool & in_mWeak,
-                                     const GALGAS_bool & in_mNullOnNoException,
+                                     const GALGAS_bool & in_mNullOnNoPanic,
                                      const GALGAS_bool & in_mGlobal,
                                      const GALGAS_routineKind & in_mKind
                                      COMMA_LOCATION_ARGS) ;
@@ -1143,7 +1143,7 @@ class GALGAS_routineMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_bool mAttribute_mIsRequired ;
   public : GALGAS_bool mAttribute_mWarnIfUnused ;
   public : GALGAS_bool mAttribute_mWeak ;
-  public : GALGAS_bool mAttribute_mNullOnNoException ;
+  public : GALGAS_bool mAttribute_mNullOnNoPanic ;
   public : GALGAS_bool mAttribute_mGlobal ;
   public : GALGAS_routineKind mAttribute_mKind ;
 
@@ -1165,7 +1165,7 @@ class GALGAS_routineMapIR_2D_element : public AC_GALGAS_root {
                                            const GALGAS_bool & in_mIsRequired,
                                            const GALGAS_bool & in_mWarnIfUnused,
                                            const GALGAS_bool & in_mWeak,
-                                           const GALGAS_bool & in_mNullOnNoException,
+                                           const GALGAS_bool & in_mNullOnNoPanic,
                                            const GALGAS_bool & in_mGlobal,
                                            const GALGAS_routineKind & in_mKind) ;
 
@@ -1215,7 +1215,7 @@ class GALGAS_routineMapIR_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mKind (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mNullOnNoException (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mNullOnNoPanic (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
 

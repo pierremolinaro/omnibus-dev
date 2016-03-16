@@ -677,14 +677,14 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_uint mAttribute_mPointerSize ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mBooleanType ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mLiteralIntegerType ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionCodeType ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionLineType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mPanicCodeType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mPanicLineType ;
   public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
   public : GALGAS_routineMapForContext mAttribute_mRoutineMapForContext ;
   public : GALGAS_functionMap mAttribute_mFunctionMap ;
   public : GALGAS_initRoutineMap mAttribute_mInitRoutineMap ;
-  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionSetupRoutinePriorityMap ;
-  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionLoopRoutinePriorityMap ;
+  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicSetupRoutinePriorityMap ;
+  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicLoopRoutinePriorityMap ;
   public : GALGAS_controlRegisterMap mAttribute_mControlRegisterMap ;
   public : GALGAS_globalConstantMap mAttribute_mGlobalConstantMap ;
   public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
@@ -736,14 +736,14 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_semanticContext (const GALGAS_uint & in_mPointerSize,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mBooleanType,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mLiteralIntegerType,
-                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionCodeType,
-                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionLineType,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicCodeType,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicLineType,
                                    const GALGAS_unifiedTypeMap & in_mTypeMap,
                                    const GALGAS_routineMapForContext & in_mRoutineMapForContext,
                                    const GALGAS_functionMap & in_mFunctionMap,
                                    const GALGAS_initRoutineMap & in_mInitRoutineMap,
-                                   const GALGAS_exceptionRoutinePriorityMap & in_mExceptionSetupRoutinePriorityMap,
-                                   const GALGAS_exceptionRoutinePriorityMap & in_mExceptionLoopRoutinePriorityMap,
+                                   const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
+                                   const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
                                    const GALGAS_controlRegisterMap & in_mControlRegisterMap,
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalVariableMap & in_mGlobalVariableMap,
@@ -797,8 +797,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_routineMapForContext & inOperand6,
                                                           const class GALGAS_functionMap & inOperand7,
                                                           const class GALGAS_initRoutineMap & inOperand8,
-                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand9,
-                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand10,
+                                                          const class GALGAS_panicRoutinePriorityMap & inOperand9,
+                                                          const class GALGAS_panicRoutinePriorityMap & inOperand10,
                                                           const class GALGAS_controlRegisterMap & inOperand11,
                                                           const class GALGAS_globalConstantMap & inOperand12,
                                                           const class GALGAS_globalVariableMap & inOperand13,
@@ -865,14 +865,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mEqualOperatorMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mExceptionCodeType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mExceptionLineType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_mExceptionLoopRoutinePriorityMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_mExceptionSetupRoutinePriorityMap (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_functionMap getter_mFunctionMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMap getter_mGlobalConstantMap (LOCATION_ARGS) const ;
@@ -904,6 +896,14 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap getter_mNotOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mOrOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mPanicCodeType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mPanicLineType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicLoopRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicSetupRoutinePriorityMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPointerSize (LOCATION_ARGS) const ;
 

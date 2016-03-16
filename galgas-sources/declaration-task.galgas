@@ -214,7 +214,7 @@ method @taskVarListAST-element enterInContext
     !optionalTargetType:variableAnnotationType
     !context:ioContext
     !modes:{}
-    !allowException:true
+    !allowPanic:true
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap

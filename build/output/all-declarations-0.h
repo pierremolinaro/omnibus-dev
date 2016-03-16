@@ -105,6 +105,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_false,
    kToken_for,
    kToken_func,
+   kToken_guard,
    kToken_if,
    kToken_import,
    kToken_in,
@@ -212,7 +213,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 107 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 108 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -4942,13 +4943,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_initList_2D_element
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         @exceptionClauseListAST sorted list                                         *
+//                                           @panicClauseListAST sorted list                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
+class GALGAS_panicClauseListAST : public AC_GALGAS_sortedlist {
 //--------------------------------- Default constructor
-  public : GALGAS_exceptionClauseListAST (void) ;
+  public : GALGAS_panicClauseListAST (void) ;
 
 //-- Start of generic part --*
 
@@ -4956,22 +4957,22 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_exceptionClauseListAST extractObject (const GALGAS_object & inObject,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicClauseListAST extractObject (const GALGAS_object & inObject,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_exceptionClauseListAST constructor_emptySortedList (LOCATION_ARGS) ;
+  public : static GALGAS_panicClauseListAST constructor_emptySortedList (LOCATION_ARGS) ;
 
-  public : static GALGAS_exceptionClauseListAST constructor_sortedListWithValue (const class GALGAS_lstring & inOperand0,
-                                                                                 const class GALGAS_instructionListAST & inOperand1,
-                                                                                 const class GALGAS_location & inOperand2,
-                                                                                 const class GALGAS_lbigint & inOperand3,
-                                                                                 const class GALGAS_location & inOperand4
-                                                                                 COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicClauseListAST constructor_sortedListWithValue (const class GALGAS_lstring & inOperand0,
+                                                                             const class GALGAS_instructionListAST & inOperand1,
+                                                                             const class GALGAS_location & inOperand2,
+                                                                             const class GALGAS_lbigint & inOperand3,
+                                                                             const class GALGAS_location & inOperand4
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_exceptionClauseListAST inOperand,
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_panicClauseListAST inOperand,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -5026,43 +5027,43 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
 //--------------------------------- Friend
 
-  friend class cEnumerator_exceptionClauseListAST ;
+  friend class cEnumerator_panicClauseListAST ;
  
-} ; // End of GALGAS_exceptionClauseListAST class
+} ; // End of GALGAS_panicClauseListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumerator_exceptionClauseListAST : public cGenericAbstractEnumerator {
-  public : cEnumerator_exceptionClauseListAST (const GALGAS_exceptionClauseListAST & inEnumeratedObject,
-                                               const typeEnumerationOrder inOrder) ;
+class cEnumerator_panicClauseListAST : public cGenericAbstractEnumerator {
+  public : cEnumerator_panicClauseListAST (const GALGAS_panicClauseListAST & inEnumeratedObject,
+                                           const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_lstring current_mExceptionClauseName (LOCATION_ARGS) const ;
-  public : class GALGAS_instructionListAST current_mExceptionInstructionList (LOCATION_ARGS) const ;
-  public : class GALGAS_location current_mEndOfExceptionInstructions (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mPanicClauseName (LOCATION_ARGS) const ;
+  public : class GALGAS_instructionListAST current_mPanicInstructionList (LOCATION_ARGS) const ;
+  public : class GALGAS_location current_mEndOfPanicInstructions (LOCATION_ARGS) const ;
   public : class GALGAS_lbigint current_mPriority (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mLocationPriority (LOCATION_ARGS) const ;
 //--- Current element access
-  public : class GALGAS_exceptionClauseListAST_2D_element current (LOCATION_ARGS) const ;
+  public : class GALGAS_panicClauseListAST_2D_element current (LOCATION_ARGS) const ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_exceptionClauseListAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicClauseListAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      @exceptionClauseListAST_2D_element struct                                      *
+//                                        @panicClauseListAST_2D_element struct                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
+class GALGAS_panicClauseListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_mExceptionClauseName ;
-  public : GALGAS_instructionListAST mAttribute_mExceptionInstructionList ;
-  public : GALGAS_location mAttribute_mEndOfExceptionInstructions ;
+  public : GALGAS_lstring mAttribute_mPanicClauseName ;
+  public : GALGAS_instructionListAST mAttribute_mPanicInstructionList ;
+  public : GALGAS_location mAttribute_mEndOfPanicInstructions ;
   public : GALGAS_lbigint mAttribute_mPriority ;
   public : GALGAS_location mAttribute_mLocationPriority ;
 
@@ -5072,20 +5073,20 @@ class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_exceptionClauseListAST_2D_element constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_panicClauseListAST_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_exceptionClauseListAST_2D_element (void) ;
+  public : GALGAS_panicClauseListAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_exceptionClauseListAST_2D_element (void) ;
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_panicClauseListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_exceptionClauseListAST_2D_element (const GALGAS_lstring & in_mExceptionClauseName,
-                                                     const GALGAS_instructionListAST & in_mExceptionInstructionList,
-                                                     const GALGAS_location & in_mEndOfExceptionInstructions,
-                                                     const GALGAS_lbigint & in_mPriority,
-                                                     const GALGAS_location & in_mLocationPriority) ;
+  public : GALGAS_panicClauseListAST_2D_element (const GALGAS_lstring & in_mPanicClauseName,
+                                                 const GALGAS_instructionListAST & in_mPanicInstructionList,
+                                                 const GALGAS_location & in_mEndOfPanicInstructions,
+                                                 const GALGAS_lbigint & in_mPriority,
+                                                 const GALGAS_location & in_mLocationPriority) ;
 
 //-- Start of generic part --*
 
@@ -5093,23 +5094,23 @@ class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_exceptionClauseListAST_2D_element extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicClauseListAST_2D_element extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_exceptionClauseListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                            const class GALGAS_instructionListAST & inOperand1,
-                                                                            const class GALGAS_location & inOperand2,
-                                                                            const class GALGAS_lbigint & inOperand3,
-                                                                            const class GALGAS_location & inOperand4
-                                                                            COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicClauseListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                        const class GALGAS_instructionListAST & inOperand1,
+                                                                        const class GALGAS_location & inOperand2,
+                                                                        const class GALGAS_lbigint & inOperand3,
+                                                                        const class GALGAS_location & inOperand4
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_exceptionClauseListAST_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_panicClauseListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5117,13 +5118,13 @@ class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfExceptionInstructions (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExceptionClauseName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mExceptionInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfPanicInstructions (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocationPriority (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicClauseName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mPanicInstructionList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
 
@@ -5131,30 +5132,30 @@ class GALGAS_exceptionClauseListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_exceptionClauseListAST_2D_element class
+} ; // End of GALGAS_panicClauseListAST_2D_element class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_exceptionClauseListAST_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicClauseListAST_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @exceptionTypesAST list                                               *
+//                                                 @panicTypesAST list                                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_exceptionTypesAST : public AC_GALGAS_list {
+class GALGAS_panicTypesAST : public AC_GALGAS_list {
 //--------------------------------- Default constructor
-  public : GALGAS_exceptionTypesAST (void) ;
+  public : GALGAS_panicTypesAST (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_exceptionTypesAST (cSharedList * inSharedListPtr) ;
+  public : GALGAS_panicTypesAST (cSharedList * inSharedListPtr) ;
 
 //--------------------------------- Element constructor used by listmap
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_lstring & in_mExceptionCodeTypeName,
-                                                  const class GALGAS_lstring & in_mExceptionLineTypeName
+                                                  const class GALGAS_lstring & in_mPanicCodeTypeName,
+                                                  const class GALGAS_lstring & in_mPanicLineTypeName
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -5163,19 +5164,19 @@ class GALGAS_exceptionTypesAST : public AC_GALGAS_list {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_exceptionTypesAST extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicTypesAST extractObject (const GALGAS_object & inObject,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_exceptionTypesAST constructor_emptyList (LOCATION_ARGS) ;
+  public : static GALGAS_panicTypesAST constructor_emptyList (LOCATION_ARGS) ;
 
-  public : static GALGAS_exceptionTypesAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
-                                                                      const class GALGAS_lstring & inOperand1
-                                                                      COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicTypesAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
+                                                                  const class GALGAS_lstring & inOperand1
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_exceptionTypesAST inOperand,
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_panicTypesAST inOperand,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -5184,9 +5185,9 @@ class GALGAS_exceptionTypesAST : public AC_GALGAS_list {
                                                       const class GALGAS_lstring & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
-  public : VIRTUAL_IN_DEBUG GALGAS_exceptionTypesAST add_operation (const GALGAS_exceptionTypesAST & inOperand,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_panicTypesAST add_operation (const GALGAS_panicTypesAST & inOperand,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Setters
@@ -5227,64 +5228,64 @@ class GALGAS_exceptionTypesAST : public AC_GALGAS_list {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExceptionCodeTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicCodeTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExceptionLineTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicLineTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionTypesAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicTypesAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionTypesAST getter_subListToIndex (const class GALGAS_uint & constinOperand0,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicTypesAST getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionTypesAST getter_subListWithRange (const class GALGAS_range & constinOperand0,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicTypesAST getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
 //--------------------------------- Friend
 
-  friend class cEnumerator_exceptionTypesAST ;
+  friend class cEnumerator_panicTypesAST ;
  
-} ; // End of GALGAS_exceptionTypesAST class
+} ; // End of GALGAS_panicTypesAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumerator_exceptionTypesAST : public cGenericAbstractEnumerator {
-  public : cEnumerator_exceptionTypesAST (const GALGAS_exceptionTypesAST & inEnumeratedObject,
-                                          const typeEnumerationOrder inOrder) ;
+class cEnumerator_panicTypesAST : public cGenericAbstractEnumerator {
+  public : cEnumerator_panicTypesAST (const GALGAS_panicTypesAST & inEnumeratedObject,
+                                      const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_lstring current_mExceptionCodeTypeName (LOCATION_ARGS) const ;
-  public : class GALGAS_lstring current_mExceptionLineTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mPanicCodeTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mPanicLineTypeName (LOCATION_ARGS) const ;
 //--- Current element access
-  public : class GALGAS_exceptionTypesAST_2D_element current (LOCATION_ARGS) const ;
+  public : class GALGAS_panicTypesAST_2D_element current (LOCATION_ARGS) const ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_exceptionTypesAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicTypesAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        @exceptionTypesAST_2D_element struct                                         *
+//                                          @panicTypesAST_2D_element struct                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_exceptionTypesAST_2D_element : public AC_GALGAS_root {
+class GALGAS_panicTypesAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_mExceptionCodeTypeName ;
-  public : GALGAS_lstring mAttribute_mExceptionLineTypeName ;
+  public : GALGAS_lstring mAttribute_mPanicCodeTypeName ;
+  public : GALGAS_lstring mAttribute_mPanicLineTypeName ;
 
 
 //--------------------------------- Accessors
@@ -5292,17 +5293,17 @@ class GALGAS_exceptionTypesAST_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_exceptionTypesAST_2D_element constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_panicTypesAST_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_exceptionTypesAST_2D_element (void) ;
+  public : GALGAS_panicTypesAST_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_exceptionTypesAST_2D_element (void) ;
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_panicTypesAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_exceptionTypesAST_2D_element (const GALGAS_lstring & in_mExceptionCodeTypeName,
-                                                const GALGAS_lstring & in_mExceptionLineTypeName) ;
+  public : GALGAS_panicTypesAST_2D_element (const GALGAS_lstring & in_mPanicCodeTypeName,
+                                            const GALGAS_lstring & in_mPanicLineTypeName) ;
 
 //-- Start of generic part --*
 
@@ -5310,20 +5311,20 @@ class GALGAS_exceptionTypesAST_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_exceptionTypesAST_2D_element extractObject (const GALGAS_object & inObject,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicTypesAST_2D_element extractObject (const GALGAS_object & inObject,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_exceptionTypesAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                       const class GALGAS_lstring & inOperand1
-                                                                       COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicTypesAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                   const class GALGAS_lstring & inOperand1
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_exceptionTypesAST_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_panicTypesAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5331,20 +5332,20 @@ class GALGAS_exceptionTypesAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExceptionCodeTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicCodeTypeName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExceptionLineTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicLineTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_exceptionTypesAST_2D_element class
+} ; // End of GALGAS_panicTypesAST_2D_element class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_exceptionTypesAST_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicTypesAST_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -11641,8 +11642,8 @@ class GALGAS_ast : public AC_GALGAS_root {
   public : GALGAS_lstringlist mAttribute_mTargetList ;
   public : GALGAS_bootList mAttribute_mBootList ;
   public : GALGAS_initList mAttribute_mInitList ;
-  public : GALGAS_exceptionClauseListAST mAttribute_mExceptionClauses ;
-  public : GALGAS_exceptionTypesAST mAttribute_mExceptionTypes ;
+  public : GALGAS_panicClauseListAST mAttribute_mPanicClauses ;
+  public : GALGAS_panicTypesAST mAttribute_mPanicTypes ;
   public : GALGAS_taskList mAttribute_mTaskList ;
 
 
@@ -11673,8 +11674,8 @@ class GALGAS_ast : public AC_GALGAS_root {
                        const GALGAS_lstringlist & in_mTargetList,
                        const GALGAS_bootList & in_mBootList,
                        const GALGAS_initList & in_mInitList,
-                       const GALGAS_exceptionClauseListAST & in_mExceptionClauses,
-                       const GALGAS_exceptionTypesAST & in_mExceptionTypes,
+                       const GALGAS_panicClauseListAST & in_mPanicClauses,
+                       const GALGAS_panicTypesAST & in_mPanicTypes,
                        const GALGAS_taskList & in_mTaskList) ;
 
 //-- Start of generic part --*
@@ -11701,8 +11702,8 @@ class GALGAS_ast : public AC_GALGAS_root {
                                               const class GALGAS_lstringlist & inOperand10,
                                               const class GALGAS_bootList & inOperand11,
                                               const class GALGAS_initList & inOperand12,
-                                              const class GALGAS_exceptionClauseListAST & inOperand13,
-                                              const class GALGAS_exceptionTypesAST & inOperand14,
+                                              const class GALGAS_panicClauseListAST & inOperand13,
+                                              const class GALGAS_panicTypesAST & inOperand14,
                                               const class GALGAS_taskList & inOperand15
                                               COMMA_LOCATION_ARGS) ;
 
@@ -11724,10 +11725,6 @@ class GALGAS_ast : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_declarationListAST getter_mDeclarationList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionClauseListAST getter_mExceptionClauses (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionTypesAST getter_mExceptionTypes (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_extensionDeclarationListAST getter_mExtensionDeclarationListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureDeclarationListAST getter_mExternProcList (LOCATION_ARGS) const ;
@@ -11737,6 +11734,10 @@ class GALGAS_ast : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVarDeclarationList getter_mGlobalVarDeclarationList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_initList getter_mInitList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicClauseListAST getter_mPanicClauses (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicTypesAST getter_mPanicTypes (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureDeclarationListAST getter_mProcedureListAST (LOCATION_ARGS) const ;
 

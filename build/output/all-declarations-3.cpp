@@ -15753,26 +15753,26 @@ void routine_buildGlobalConstantMapHTMLFile (GALGAS_globalConstantMap inArgument
   const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_writeGlobalConstantHTMLDumpFile.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_stringset var_firstLetterSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-global-constant.galgas", 156)) ;
-    cEnumerator_globalConstantMap enumerator_6814 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
-    while (enumerator_6814.hasCurrentObject ()) {
-      var_firstLetterSet.addAssign_operation (enumerator_6814.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 158)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 158))  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 158)) ;
-      enumerator_6814.gotoNextObject () ;
+    cEnumerator_globalConstantMap enumerator_6810 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
+    while (enumerator_6810.hasCurrentObject ()) {
+      var_firstLetterSet.addAssign_operation (enumerator_6810.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 158)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 158))  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 158)) ;
+      enumerator_6810.gotoNextObject () ;
     }
     GALGAS_string var_tableOfTypeString = GALGAS_string::makeEmptyString () ;
     GALGAS_char var_currentFirstLetter = GALGAS_char (TO_UNICODE (32)) ;
-    cEnumerator_globalConstantMap enumerator_7002 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
-    while (enumerator_7002.hasCurrentObject ()) {
-      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter.objectCompare (enumerator_7002.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 163)))).boolEnum () ;
+    cEnumerator_globalConstantMap enumerator_6998 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
+    while (enumerator_6998.hasCurrentObject ()) {
+      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter.objectCompare (enumerator_6998.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 163)))).boolEnum () ;
       if (kBoolTrue == test_1) {
-        var_currentFirstLetter = enumerator_7002.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 164)) ;
+        var_currentFirstLetter = enumerator_6998.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 164)) ;
         var_tableOfTypeString.plusAssign_operation(GALGAS_string ("<br><a name=\"").add_operation (var_currentFirstLetter.getter_uint (SOURCE_FILE ("declaration-global-constant.galgas", 165)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 165)).add_operation (GALGAS_string ("\"><b>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 165)).add_operation (var_currentFirstLetter.getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 165)).add_operation (GALGAS_string ("</b></a><br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 165)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 165)) ;
       }
-      var_tableOfTypeString.plusAssign_operation(function_linkForGlobalConstant (enumerator_7002.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 167)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 167)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 167)) ;
-      enumerator_7002.gotoNextObject () ;
+      var_tableOfTypeString.plusAssign_operation(function_linkForGlobalConstant (enumerator_6998.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 167)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 167)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 167)) ;
+      enumerator_6998.gotoNextObject () ;
     }
     GALGAS_string var_typeDumpString = GALGAS_string (filewrapperTemplate_constantDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.mAttribute_string.getter_lastPathComponent (SOURCE_FILE ("declaration-global-constant.galgas", 170)), inArgument_inGlobalConstantMap, var_firstLetterSet, var_tableOfTypeString COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 169))) ;
-    GALGAS_bool joker_7642 ; // Joker input parameter
-    var_typeDumpString.method_writeToFileWhenDifferentContents (var_typeDumpFilePath, joker_7642, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 175)) ;
+    GALGAS_bool joker_7638 ; // Joker input parameter
+    var_typeDumpString.method_writeToFileWhenDifferentContents (var_typeDumpFilePath, joker_7638, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 175)) ;
   }else if (kBoolFalse == test_0) {
     {
     GALGAS_string::class_method_deleteFileIfExists (var_typeDumpFilePath, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)) ;

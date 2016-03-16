@@ -187,7 +187,7 @@ override method @selfRoutineCallInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -201,7 +201,7 @@ override method @selfRoutineCallInstructionAST analyze
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredModeSet:inRequiredModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -226,7 +226,7 @@ override method @standaloneRoutineCallInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -240,7 +240,7 @@ override method @standaloneRoutineCallInstructionAST analyze
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredModeSet:inRequiredModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -265,7 +265,7 @@ override method @remoteRoutineCallInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -279,7 +279,7 @@ override method @remoteRoutineCallInstructionAST analyze
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredModeSet:inRequiredModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -307,7 +307,7 @@ private proc analyzeCall
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?requiredModeSet:let @stringset inRequiredModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -420,7 +420,7 @@ private proc analyzeCall
         !optionalTargetType:formal_mType
         !context:inContext
         !modes:inRequiredModeSet
-        !allowException:inAllowExceptions
+        !allowPanic:inAllowPanic
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap

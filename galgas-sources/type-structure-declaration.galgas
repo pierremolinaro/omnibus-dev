@@ -238,7 +238,7 @@ override method @structureDeclaration enterInContext
         !optionalTargetType:fieldType
         !context:ioContext
         !modes:{}
-        !allowException:false
+        !allowPanic:false
         !?temporary:temporaries
         !?staticStringMap:*
         !?variableMap:*
@@ -467,7 +467,7 @@ method @structureDeclaration functionSemanticAnalysis
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inContext
       !modes:functionModeSet
-      !allowException:not [functionModeSet hasKey !panicModeName ()]
+      !allowPanic:not [functionModeSet hasKey !panicModeName ()]
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap

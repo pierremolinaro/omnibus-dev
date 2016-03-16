@@ -140,8 +140,8 @@ private proc compileProject
           !typeMap:semanticContext.mTypeMap
 #          !typeInitialierMap:semanticContext.mTypeInitializerMap
           !target:inTargetName
-          !exceptionCodeType:semanticContext.mExceptionCodeType
-          !exceptionLineType:semanticContext.mExceptionLineType
+          !exceptionCodeType:semanticContext.mPanicCodeType
+          !exceptionLineType:semanticContext.mPanicLineType
           !sourceFileSet:sourceFileAbsolutePathSet
         )
       end
@@ -203,8 +203,8 @@ private proc addTargetSpecificFiles
   ioAST.mTargetList += ast.mTargetList
   ioAST.mInitList += ast.mInitList
   ioAST.mBootList += ast.mBootList
-  ioAST.mExceptionClauses += ast.mExceptionClauses
-  ioAST.mExceptionTypes = ast.mExceptionTypes + ioAST.mExceptionTypes
+  ioAST.mPanicClauses += ast.mPanicClauses # + ioAST.mPanicClauses
+  ioAST.mPanicTypes = ast.mPanicTypes + ioAST.mPanicTypes
   ioAST.mTaskList = ast.mTaskList + ioAST.mTaskList
 }
 

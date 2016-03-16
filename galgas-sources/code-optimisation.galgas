@@ -151,7 +151,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
         !procedure.mWeak
-        !procedure.mNullOnNoException
+        !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
       ]        
@@ -165,7 +165,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
         !procedure.mWeak
-        !procedure.mNullOnNoException
+        !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
       ]        
@@ -183,7 +183,7 @@ private proc suppressInaccessibleSubprograms
     [task.mInitInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
     outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + ".loop"
   end
-#--- Panic clauses (if exception code is generated)
+#--- Panic clauses (if panic code is generated)
   if not [option plm_options.noPanicGeneration value] then
     [ioIntermediateCodeStruct.mPanicSetupInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
     [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
@@ -228,7 +228,7 @@ private proc exploreProcs
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
         !procedure.mWeak
-        !procedure.mNullOnNoException
+        !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
       ]        
@@ -242,7 +242,7 @@ private proc exploreProcs
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
         !procedure.mWeak
-        !procedure.mNullOnNoException
+        !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
     ]        

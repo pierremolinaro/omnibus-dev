@@ -92,7 +92,7 @@ method @bootList-element bootSemanticAnalysis
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:{!bootModeName ()}
-    !allowException:true
+    !allowPanic:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap

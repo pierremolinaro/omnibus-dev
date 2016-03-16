@@ -187,7 +187,7 @@ method @globalVarDeclarationList-element enterInContext
      !optionalTargetType:variableAnnotationType
      !context:ioContext
      !modes:{}
-     !allowException:true
+     !allowPanic:true
      !?temporary:temporaries
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
@@ -229,12 +229,12 @@ method @globalVarDeclarationList-element enterInContext
 #--- Check allowed exception routines are defined
   for () in mAllowedExceptionList do
     if mExceptionName.string == "setup" then
-      [ioContext.mExceptionSetupRoutinePriorityMap searchSetupKey
+      [ioContext.mPanicSetupRoutinePriorityMap searchSetupKey
         !.new{![mExceptionPriority.bigint string]
         !mExceptionPriority.location}
       ]
     elsif mExceptionName.string == "loop" then
-      [ioContext.mExceptionLoopRoutinePriorityMap searchLoopKey
+      [ioContext.mPanicLoopRoutinePriorityMap searchLoopKey
         !.new{![mExceptionPriority.bigint string]
         !mExceptionPriority.location}
       ]

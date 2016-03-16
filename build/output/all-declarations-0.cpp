@@ -164,6 +164,9 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_for = "the 'for' keyword"
 //--- Syntax error message for terminal '$func$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_func = "the 'func' keyword" ;
 
+//--- Syntax error message for terminal '$guard$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_guard = "the 'guard' keyword" ;
+
 //--- Syntax error message for terminal '$if$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_if = "the 'if' keyword" ;
 
@@ -400,7 +403,7 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__21__25__3D_ = "the '!%='
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const char * syntaxErrorMessageArray [108] = {kEndOfSourceLexicalErrorMessage,
+  static const char * syntaxErrorMessageArray [109] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_typeName,
@@ -431,6 +434,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_false,
     gSyntaxErrorMessage_plm_5F_lexique_for,
     gSyntaxErrorMessage_plm_5F_lexique_func,
+    gSyntaxErrorMessage_plm_5F_lexique_guard,
     gSyntaxErrorMessage_plm_5F_lexique_if,
     gSyntaxErrorMessage_plm_5F_lexique_import,
     gSyntaxErrorMessage_plm_5F_lexique_in,
@@ -1008,6 +1012,16 @@ static const utf32 kUnicodeString_plm_5F_lexique_func [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$guard$'
+static const utf32 kUnicodeString_plm_5F_lexique_guard [] = {
+  TO_UNICODE ('g'),
+  TO_UNICODE ('u'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$if$'
 static const utf32 kUnicodeString_plm_5F_lexique_if [] = {
   TO_UNICODE ('i'),
@@ -1412,7 +1426,7 @@ int16_t C_Lexique_plm_5F_lexique::search_into_delimitorsList (const C_String & i
 //             Key words table 'keyWordList'                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int32_t ktable_size_plm_5F_lexique_keyWordList = 48 ;
+static const int32_t ktable_size_plm_5F_lexique_keyWordList = 49 ;
 
 static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [ktable_size_plm_5F_lexique_keyWordList] = {
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_at, 2, C_Lexique_plm_5F_lexique::kToken_at),
@@ -1441,6 +1455,7 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_check, 5, C_Lexique_plm_5F_lexique::kToken_check),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_elsif, 5, C_Lexique_plm_5F_lexique::kToken_elsif),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_false, 5, C_Lexique_plm_5F_lexique::kToken_false),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_guard, 5, C_Lexique_plm_5F_lexique::kToken_guard),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_panic, 5, C_Lexique_plm_5F_lexique::kToken_panic),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_while, 5, C_Lexique_plm_5F_lexique::kToken_while),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_assert, 6, C_Lexique_plm_5F_lexique::kToken_assert),
@@ -1652,6 +1667,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_func:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("func") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_guard:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("guard") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_if:
@@ -2587,6 +2607,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("false") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("for") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("func") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("guard") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("if") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("import") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("in") COMMA_THERE) ;
@@ -2759,6 +2780,7 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.addObject ("check") ;
     ioList.addObject ("elsif") ;
     ioList.addObject ("false") ;
+    ioList.addObject ("guard") ;
     ioList.addObject ("panic") ;
     ioList.addObject ("while") ;
     ioList.addObject ("assert") ;
@@ -2796,7 +2818,7 @@ __attribute__ ((unused)) (getKeywordLists_plm_5F_lexique, getKeywordsForIdentifi
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [108] = {0,
+  static const uint32_t kTerminalSymbolStyles [109] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_typeName */,
@@ -2827,6 +2849,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_false */,
     1 /* plm_lexique_1_for */,
     1 /* plm_lexique_1_func */,
+    1 /* plm_lexique_1_guard */,
     1 /* plm_lexique_1_if */,
     1 /* plm_lexique_1_import */,
     1 /* plm_lexique_1_in */,
@@ -9153,20 +9176,20 @@ GALGAS_initList GALGAS_initList::extractObject (const GALGAS_object & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Class for element of '@exceptionClauseListAST' sorted list                              *
+//                               Class for element of '@panicClauseListAST' sorted list                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cSortedListElement_exceptionClauseListAST : public cSortedListElement {
-  public : GALGAS_exceptionClauseListAST_2D_element mObject ;
+class cSortedListElement_panicClauseListAST : public cSortedListElement {
+  public : GALGAS_panicClauseListAST_2D_element mObject ;
 
 //--- Constructor
-  public : cSortedListElement_exceptionClauseListAST (const GALGAS_lstring & in_mExceptionClauseName,
-                                                      const GALGAS_instructionListAST & in_mExceptionInstructionList,
-                                                      const GALGAS_location & in_mEndOfExceptionInstructions,
-                                                      const GALGAS_lbigint & in_mPriority,
-                                                      const GALGAS_location & in_mLocationPriority
-                                                      COMMA_LOCATION_ARGS) ;
+  public : cSortedListElement_panicClauseListAST (const GALGAS_lstring & in_mPanicClauseName,
+                                                  const GALGAS_instructionListAST & in_mPanicInstructionList,
+                                                  const GALGAS_location & in_mEndOfPanicInstructions,
+                                                  const GALGAS_lbigint & in_mPriority,
+                                                  const GALGAS_location & in_mLocationPriority
+                                                  COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method that checks that all attributes are valid
   public : virtual bool isValid (void) const ;
@@ -9186,45 +9209,45 @@ class cSortedListElement_exceptionClauseListAST : public cSortedListElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cSortedListElement_exceptionClauseListAST::cSortedListElement_exceptionClauseListAST (const GALGAS_lstring & in_mExceptionClauseName,
-                                                                                      const GALGAS_instructionListAST & in_mExceptionInstructionList,
-                                                                                      const GALGAS_location & in_mEndOfExceptionInstructions,
-                                                                                      const GALGAS_lbigint & in_mPriority,
-                                                                                      const GALGAS_location & in_mLocationPriority
-                                                                                      COMMA_LOCATION_ARGS) :
+cSortedListElement_panicClauseListAST::cSortedListElement_panicClauseListAST (const GALGAS_lstring & in_mPanicClauseName,
+                                                                              const GALGAS_instructionListAST & in_mPanicInstructionList,
+                                                                              const GALGAS_location & in_mEndOfPanicInstructions,
+                                                                              const GALGAS_lbigint & in_mPriority,
+                                                                              const GALGAS_location & in_mLocationPriority
+                                                                              COMMA_LOCATION_ARGS) :
 cSortedListElement (THERE),
-mObject (in_mExceptionClauseName, in_mExceptionInstructionList, in_mEndOfExceptionInstructions, in_mPriority, in_mLocationPriority) {
+mObject (in_mPanicClauseName, in_mPanicInstructionList, in_mEndOfPanicInstructions, in_mPriority, in_mLocationPriority) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cSortedListElement_exceptionClauseListAST::isValid (void) const {
+bool cSortedListElement_panicClauseListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cSortedListElement * cSortedListElement_exceptionClauseListAST::copy (void) {
+cSortedListElement * cSortedListElement_panicClauseListAST::copy (void) {
   cSortedListElement * result = NULL ;
-  macroMyNew (result, cSortedListElement_exceptionClauseListAST (mObject.mAttribute_mExceptionClauseName, mObject.mAttribute_mExceptionInstructionList, mObject.mAttribute_mEndOfExceptionInstructions, mObject.mAttribute_mPriority, mObject.mAttribute_mLocationPriority COMMA_HERE)) ;
+  macroMyNew (result, cSortedListElement_panicClauseListAST (mObject.mAttribute_mPanicClauseName, mObject.mAttribute_mPanicInstructionList, mObject.mAttribute_mEndOfPanicInstructions, mObject.mAttribute_mPriority, mObject.mAttribute_mLocationPriority COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cSortedListElement_exceptionClauseListAST::description (C_String & ioString, const int32_t inIndentation) const {
+void cSortedListElement_panicClauseListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mExceptionClauseName" ":" ;
-  mObject.mAttribute_mExceptionClauseName.description (ioString, inIndentation) ;
+  ioString << "mPanicClauseName" ":" ;
+  mObject.mAttribute_mPanicClauseName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mExceptionInstructionList" ":" ;
-  mObject.mAttribute_mExceptionInstructionList.description (ioString, inIndentation) ;
+  ioString << "mPanicInstructionList" ":" ;
+  mObject.mAttribute_mPanicInstructionList.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mEndOfExceptionInstructions" ":" ;
-  mObject.mAttribute_mEndOfExceptionInstructions.description (ioString, inIndentation) ;
+  ioString << "mEndOfPanicInstructions" ":" ;
+  mObject.mAttribute_mEndOfPanicInstructions.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mPriority" ":" ;
@@ -9237,24 +9260,24 @@ void cSortedListElement_exceptionClauseListAST::description (C_String & ioString
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cSortedListElement_exceptionClauseListAST::compare (const cCollectionElement * inOperand) const {
-  cSortedListElement_exceptionClauseListAST * operand = (cSortedListElement_exceptionClauseListAST *) inOperand ;
-  macroValidSharedObject (operand, cSortedListElement_exceptionClauseListAST) ;
+typeComparisonResult cSortedListElement_panicClauseListAST::compare (const cCollectionElement * inOperand) const {
+  cSortedListElement_panicClauseListAST * operand = (cSortedListElement_panicClauseListAST *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_panicClauseListAST) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionClauseListAST::GALGAS_exceptionClauseListAST (void) :
+GALGAS_panicClauseListAST::GALGAS_panicClauseListAST (void) :
 AC_GALGAS_sortedlist () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cSortedListElement_exceptionClauseListAST::compareForSorting (const cSortedListElement * inOperand) const {
+typeComparisonResult cSortedListElement_panicClauseListAST::compareForSorting (const cSortedListElement * inOperand) const {
   typeComparisonResult result = kOperandEqual ;
-  const cSortedListElement_exceptionClauseListAST * operand = (const cSortedListElement_exceptionClauseListAST *) inOperand ;
-  macroValidSharedObject (operand, cSortedListElement_exceptionClauseListAST) ;
+  const cSortedListElement_panicClauseListAST * operand = (const cSortedListElement_panicClauseListAST *) inOperand ;
+  macroValidSharedObject (operand, cSortedListElement_panicClauseListAST) ;
   if (result == kOperandEqual) {
     result = mObject.mAttribute_mPriority.objectCompare (operand->mObject.mAttribute_mPriority) ;
   }
@@ -9263,23 +9286,23 @@ typeComparisonResult cSortedListElement_exceptionClauseListAST::compareForSortin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_emptySortedList (LOCATION_ARGS) {
-  GALGAS_exceptionClauseListAST result ;
+GALGAS_panicClauseListAST GALGAS_panicClauseListAST::constructor_emptySortedList (LOCATION_ARGS) {
+  GALGAS_panicClauseListAST result ;
   result.createNewEmptySortedList (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_sortedListWithValue (const GALGAS_lstring & inOperand0,
-                                                                                              const GALGAS_instructionListAST & inOperand1,
-                                                                                              const GALGAS_location & inOperand2,
-                                                                                              const GALGAS_lbigint & inOperand3,
-                                                                                              const GALGAS_location & inOperand4
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionClauseListAST result = constructor_emptySortedList (THERE) ;
+GALGAS_panicClauseListAST GALGAS_panicClauseListAST::constructor_sortedListWithValue (const GALGAS_lstring & inOperand0,
+                                                                                      const GALGAS_instructionListAST & inOperand1,
+                                                                                      const GALGAS_location & inOperand2,
+                                                                                      const GALGAS_lbigint & inOperand3,
+                                                                                      const GALGAS_location & inOperand4
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_panicClauseListAST result = constructor_emptySortedList (THERE) ;
   cSortedListElement * p = NULL ;
-  macroMyNew (p, cSortedListElement_exceptionClauseListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
+  macroMyNew (p, cSortedListElement_panicClauseListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
   capSortedListElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -9289,15 +9312,15 @@ GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_sortedL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                                         const GALGAS_instructionListAST & inOperand1,
-                                                         const GALGAS_location & inOperand2,
-                                                         const GALGAS_lbigint & inOperand3,
-                                                         const GALGAS_location & inOperand4
-                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_panicClauseListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
+                                                     const GALGAS_instructionListAST & inOperand1,
+                                                     const GALGAS_location & inOperand2,
+                                                     const GALGAS_lbigint & inOperand3,
+                                                     const GALGAS_location & inOperand4
+                                                     COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cSortedListElement * p = NULL ;
-    macroMyNew (p, cSortedListElement_exceptionClauseListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
+    macroMyNew (p, cSortedListElement_panicClauseListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
     capSortedListElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -9307,9 +9330,9 @@ void GALGAS_exceptionClauseListAST::addAssign_operation (const GALGAS_lstring & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::plusAssign_operation (const GALGAS_exceptionClauseListAST inOperand,
-                                                          C_Compiler * /* inCompiler */
-                                                          COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_panicClauseListAST::plusAssign_operation (const GALGAS_panicClauseListAST inOperand,
+                                                      C_Compiler * /* inCompiler */
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid ()) {
     appendSortedList (inOperand) ;
   }
@@ -9317,16 +9340,16 @@ void GALGAS_exceptionClauseListAST::plusAssign_operation (const GALGAS_exception
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::setter_popSmallest (GALGAS_lstring & outOperand0,
-                                                        GALGAS_instructionListAST & outOperand1,
-                                                        GALGAS_location & outOperand2,
-                                                        GALGAS_lbigint & outOperand3,
-                                                        GALGAS_location & outOperand4,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_panicClauseListAST::setter_popSmallest (GALGAS_lstring & outOperand0,
+                                                    GALGAS_instructionListAST & outOperand1,
+                                                    GALGAS_location & outOperand2,
+                                                    GALGAS_lbigint & outOperand3,
+                                                    GALGAS_location & outOperand4,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_exceptionClauseListAST * p = (cSortedListElement_exceptionClauseListAST *) attributes.ptr () ;
+  cSortedListElement_panicClauseListAST * p = (cSortedListElement_panicClauseListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
@@ -9334,10 +9357,10 @@ void GALGAS_exceptionClauseListAST::setter_popSmallest (GALGAS_lstring & outOper
     outOperand3.drop () ;
     outOperand4.drop () ;
   }else{
-    macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
-    outOperand0 = p->mObject.mAttribute_mExceptionClauseName ;
-    outOperand1 = p->mObject.mAttribute_mExceptionInstructionList ;
-    outOperand2 = p->mObject.mAttribute_mEndOfExceptionInstructions ;
+    macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
+    outOperand0 = p->mObject.mAttribute_mPanicClauseName ;
+    outOperand1 = p->mObject.mAttribute_mPanicInstructionList ;
+    outOperand2 = p->mObject.mAttribute_mEndOfPanicInstructions ;
     outOperand3 = p->mObject.mAttribute_mPriority ;
     outOperand4 = p->mObject.mAttribute_mLocationPriority ;
   }
@@ -9345,16 +9368,16 @@ void GALGAS_exceptionClauseListAST::setter_popSmallest (GALGAS_lstring & outOper
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::setter_popGreatest (GALGAS_lstring & outOperand0,
-                                                        GALGAS_instructionListAST & outOperand1,
-                                                        GALGAS_location & outOperand2,
-                                                        GALGAS_lbigint & outOperand3,
-                                                        GALGAS_location & outOperand4,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_panicClauseListAST::setter_popGreatest (GALGAS_lstring & outOperand0,
+                                                    GALGAS_instructionListAST & outOperand1,
+                                                    GALGAS_location & outOperand2,
+                                                    GALGAS_lbigint & outOperand3,
+                                                    GALGAS_location & outOperand4,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   capSortedListElement attributes ;
   removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_exceptionClauseListAST * p = (cSortedListElement_exceptionClauseListAST *) attributes.ptr () ;
+  cSortedListElement_panicClauseListAST * p = (cSortedListElement_panicClauseListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
@@ -9362,10 +9385,10 @@ void GALGAS_exceptionClauseListAST::setter_popGreatest (GALGAS_lstring & outOper
     outOperand3.drop () ;
     outOperand4.drop () ;
   }else{
-    macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
-    outOperand0 = p->mObject.mAttribute_mExceptionClauseName ;
-    outOperand1 = p->mObject.mAttribute_mExceptionInstructionList ;
-    outOperand2 = p->mObject.mAttribute_mEndOfExceptionInstructions ;
+    macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
+    outOperand0 = p->mObject.mAttribute_mPanicClauseName ;
+    outOperand1 = p->mObject.mAttribute_mPanicInstructionList ;
+    outOperand2 = p->mObject.mAttribute_mEndOfPanicInstructions ;
     outOperand3 = p->mObject.mAttribute_mPriority ;
     outOperand4 = p->mObject.mAttribute_mLocationPriority ;
   }
@@ -9373,16 +9396,16 @@ void GALGAS_exceptionClauseListAST::setter_popGreatest (GALGAS_lstring & outOper
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::method_smallest (GALGAS_lstring & outOperand0,
-                                                     GALGAS_instructionListAST & outOperand1,
-                                                     GALGAS_location & outOperand2,
-                                                     GALGAS_lbigint & outOperand3,
-                                                     GALGAS_location & outOperand4,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
+void GALGAS_panicClauseListAST::method_smallest (GALGAS_lstring & outOperand0,
+                                                 GALGAS_instructionListAST & outOperand1,
+                                                 GALGAS_location & outOperand2,
+                                                 GALGAS_lbigint & outOperand3,
+                                                 GALGAS_location & outOperand4,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
   capSortedListElement attributes ;
   smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_exceptionClauseListAST * p = (cSortedListElement_exceptionClauseListAST *) attributes.ptr () ;
+  cSortedListElement_panicClauseListAST * p = (cSortedListElement_panicClauseListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
@@ -9390,10 +9413,10 @@ void GALGAS_exceptionClauseListAST::method_smallest (GALGAS_lstring & outOperand
     outOperand3.drop () ;
     outOperand4.drop () ;
   }else{
-    macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
-    outOperand0 = p->mObject.mAttribute_mExceptionClauseName ;
-    outOperand1 = p->mObject.mAttribute_mExceptionInstructionList ;
-    outOperand2 = p->mObject.mAttribute_mEndOfExceptionInstructions ;
+    macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
+    outOperand0 = p->mObject.mAttribute_mPanicClauseName ;
+    outOperand1 = p->mObject.mAttribute_mPanicInstructionList ;
+    outOperand2 = p->mObject.mAttribute_mEndOfPanicInstructions ;
     outOperand3 = p->mObject.mAttribute_mPriority ;
     outOperand4 = p->mObject.mAttribute_mLocationPriority ;
   }
@@ -9401,16 +9424,16 @@ void GALGAS_exceptionClauseListAST::method_smallest (GALGAS_lstring & outOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::method_greatest (GALGAS_lstring & outOperand0,
-                                                     GALGAS_instructionListAST & outOperand1,
-                                                     GALGAS_location & outOperand2,
-                                                     GALGAS_lbigint & outOperand3,
-                                                     GALGAS_location & outOperand4,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
+void GALGAS_panicClauseListAST::method_greatest (GALGAS_lstring & outOperand0,
+                                                 GALGAS_instructionListAST & outOperand1,
+                                                 GALGAS_location & outOperand2,
+                                                 GALGAS_lbigint & outOperand3,
+                                                 GALGAS_location & outOperand4,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
   capSortedListElement attributes ;
   greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
-  cSortedListElement_exceptionClauseListAST * p = (cSortedListElement_exceptionClauseListAST *) attributes.ptr () ;
+  cSortedListElement_panicClauseListAST * p = (cSortedListElement_panicClauseListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
@@ -9418,10 +9441,10 @@ void GALGAS_exceptionClauseListAST::method_greatest (GALGAS_lstring & outOperand
     outOperand3.drop () ;
     outOperand4.drop () ;
   }else{
-    macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
-    outOperand0 = p->mObject.mAttribute_mExceptionClauseName ;
-    outOperand1 = p->mObject.mAttribute_mExceptionInstructionList ;
-    outOperand2 = p->mObject.mAttribute_mEndOfExceptionInstructions ;
+    macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
+    outOperand0 = p->mObject.mAttribute_mPanicClauseName ;
+    outOperand1 = p->mObject.mAttribute_mPanicInstructionList ;
+    outOperand2 = p->mObject.mAttribute_mEndOfPanicInstructions ;
     outOperand3 = p->mObject.mAttribute_mPriority ;
     outOperand4 = p->mObject.mAttribute_mLocationPriority ;
   }
@@ -9429,57 +9452,57 @@ void GALGAS_exceptionClauseListAST::method_greatest (GALGAS_lstring & outOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_exceptionClauseListAST::cEnumerator_exceptionClauseListAST (const GALGAS_exceptionClauseListAST & inEnumeratedObject,
-                                                                        const typeEnumerationOrder inOrder) :
+cEnumerator_panicClauseListAST::cEnumerator_panicClauseListAST (const GALGAS_panicClauseListAST & inEnumeratedObject,
+                                                                const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionClauseListAST_2D_element cEnumerator_exceptionClauseListAST::current (LOCATION_ARGS) const {
-  const cSortedListElement_exceptionClauseListAST * p = (const cSortedListElement_exceptionClauseListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
+GALGAS_panicClauseListAST_2D_element cEnumerator_panicClauseListAST::current (LOCATION_ARGS) const {
+  const cSortedListElement_panicClauseListAST * p = (const cSortedListElement_panicClauseListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
   return p->mObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_exceptionClauseListAST::current_mExceptionClauseName (LOCATION_ARGS) const {
-  const cSortedListElement_exceptionClauseListAST * p = (const cSortedListElement_exceptionClauseListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
-  return p->mObject.mAttribute_mExceptionClauseName ;
+GALGAS_lstring cEnumerator_panicClauseListAST::current_mPanicClauseName (LOCATION_ARGS) const {
+  const cSortedListElement_panicClauseListAST * p = (const cSortedListElement_panicClauseListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
+  return p->mObject.mAttribute_mPanicClauseName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST cEnumerator_exceptionClauseListAST::current_mExceptionInstructionList (LOCATION_ARGS) const {
-  const cSortedListElement_exceptionClauseListAST * p = (const cSortedListElement_exceptionClauseListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
-  return p->mObject.mAttribute_mExceptionInstructionList ;
+GALGAS_instructionListAST cEnumerator_panicClauseListAST::current_mPanicInstructionList (LOCATION_ARGS) const {
+  const cSortedListElement_panicClauseListAST * p = (const cSortedListElement_panicClauseListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
+  return p->mObject.mAttribute_mPanicInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cEnumerator_exceptionClauseListAST::current_mEndOfExceptionInstructions (LOCATION_ARGS) const {
-  const cSortedListElement_exceptionClauseListAST * p = (const cSortedListElement_exceptionClauseListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
-  return p->mObject.mAttribute_mEndOfExceptionInstructions ;
+GALGAS_location cEnumerator_panicClauseListAST::current_mEndOfPanicInstructions (LOCATION_ARGS) const {
+  const cSortedListElement_panicClauseListAST * p = (const cSortedListElement_panicClauseListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
+  return p->mObject.mAttribute_mEndOfPanicInstructions ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cEnumerator_exceptionClauseListAST::current_mPriority (LOCATION_ARGS) const {
-  const cSortedListElement_exceptionClauseListAST * p = (const cSortedListElement_exceptionClauseListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
+GALGAS_lbigint cEnumerator_panicClauseListAST::current_mPriority (LOCATION_ARGS) const {
+  const cSortedListElement_panicClauseListAST * p = (const cSortedListElement_panicClauseListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
   return p->mObject.mAttribute_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cEnumerator_exceptionClauseListAST::current_mLocationPriority (LOCATION_ARGS) const {
-  const cSortedListElement_exceptionClauseListAST * p = (const cSortedListElement_exceptionClauseListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
+GALGAS_location cEnumerator_panicClauseListAST::current_mLocationPriority (LOCATION_ARGS) const {
+  const cSortedListElement_panicClauseListAST * p = (const cSortedListElement_panicClauseListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cSortedListElement_panicClauseListAST) ;
   return p->mObject.mAttribute_mLocationPriority ;
 }
 
@@ -9487,42 +9510,42 @@ GALGAS_location cEnumerator_exceptionClauseListAST::current_mLocationPriority (L
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            @exceptionClauseListAST type                                             *
+//                                              @panicClauseListAST type                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_exceptionClauseListAST ("exceptionClauseListAST",
-                                               NULL) ;
+kTypeDescriptor_GALGAS_panicClauseListAST ("panicClauseListAST",
+                                           NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_exceptionClauseListAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_exceptionClauseListAST ;
+const C_galgas_type_descriptor * GALGAS_panicClauseListAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_panicClauseListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_exceptionClauseListAST::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_panicClauseListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_exceptionClauseListAST (*this)) ;
+    macroMyNew (result, GALGAS_panicClauseListAST (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionClauseListAST result ;
-  const GALGAS_exceptionClauseListAST * p = (const GALGAS_exceptionClauseListAST *) inObject.embeddedObject () ;
+GALGAS_panicClauseListAST GALGAS_panicClauseListAST::extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_panicClauseListAST result ;
+  const GALGAS_panicClauseListAST * p = (const GALGAS_panicClauseListAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_exceptionClauseListAST *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_panicClauseListAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("exceptionClauseListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("panicClauseListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -9530,17 +9553,17 @@ GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::extractObject (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Class for element of '@exceptionTypesAST' list                                    *
+//                                     Class for element of '@panicTypesAST' list                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cCollectionElement_exceptionTypesAST : public cCollectionElement {
-  public : GALGAS_exceptionTypesAST_2D_element mObject ;
+class cCollectionElement_panicTypesAST : public cCollectionElement {
+  public : GALGAS_panicTypesAST_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_exceptionTypesAST (const GALGAS_lstring & in_mExceptionCodeTypeName,
-                                                 const GALGAS_lstring & in_mExceptionLineTypeName
-                                                 COMMA_LOCATION_ARGS) ;
+  public : cCollectionElement_panicTypesAST (const GALGAS_lstring & in_mPanicCodeTypeName,
+                                             const GALGAS_lstring & in_mPanicLineTypeName
+                                             COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -9557,57 +9580,57 @@ class cCollectionElement_exceptionTypesAST : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_exceptionTypesAST::cCollectionElement_exceptionTypesAST (const GALGAS_lstring & in_mExceptionCodeTypeName,
-                                                                            const GALGAS_lstring & in_mExceptionLineTypeName
-                                                                            COMMA_LOCATION_ARGS) :
+cCollectionElement_panicTypesAST::cCollectionElement_panicTypesAST (const GALGAS_lstring & in_mPanicCodeTypeName,
+                                                                    const GALGAS_lstring & in_mPanicLineTypeName
+                                                                    COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mExceptionCodeTypeName, in_mExceptionLineTypeName) {
+mObject (in_mPanicCodeTypeName, in_mPanicLineTypeName) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cCollectionElement_exceptionTypesAST::isValid (void) const {
+bool cCollectionElement_panicTypesAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement * cCollectionElement_exceptionTypesAST::copy (void) {
+cCollectionElement * cCollectionElement_panicTypesAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_exceptionTypesAST (mObject.mAttribute_mExceptionCodeTypeName, mObject.mAttribute_mExceptionLineTypeName COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_panicTypesAST (mObject.mAttribute_mPanicCodeTypeName, mObject.mAttribute_mPanicLineTypeName COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cCollectionElement_exceptionTypesAST::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_panicTypesAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mExceptionCodeTypeName" ":" ;
-  mObject.mAttribute_mExceptionCodeTypeName.description (ioString, inIndentation) ;
+  ioString << "mPanicCodeTypeName" ":" ;
+  mObject.mAttribute_mPanicCodeTypeName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mExceptionLineTypeName" ":" ;
-  mObject.mAttribute_mExceptionLineTypeName.description (ioString, inIndentation) ;
+  ioString << "mPanicLineTypeName" ":" ;
+  mObject.mAttribute_mPanicLineTypeName.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cCollectionElement_exceptionTypesAST::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_exceptionTypesAST * operand = (cCollectionElement_exceptionTypesAST *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_exceptionTypesAST) ;
+typeComparisonResult cCollectionElement_panicTypesAST::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_panicTypesAST * operand = (cCollectionElement_panicTypesAST *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_panicTypesAST) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST::GALGAS_exceptionTypesAST (void) :
+GALGAS_panicTypesAST::GALGAS_panicTypesAST (void) :
 AC_GALGAS_list () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST::GALGAS_exceptionTypesAST (cSharedList * inSharedListPtr) :
+GALGAS_panicTypesAST::GALGAS_panicTypesAST (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
   if (NULL == inSharedListPtr) {
     createNewEmptyList (HERE) ;
@@ -9616,22 +9639,22 @@ AC_GALGAS_list (inSharedListPtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::constructor_emptyList (LOCATION_ARGS) {
-  GALGAS_exceptionTypesAST result ;
+GALGAS_panicTypesAST GALGAS_panicTypesAST::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_panicTypesAST result ;
   result.createNewEmptyList (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                              const GALGAS_lstring & inOperand1
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionTypesAST result ;
+GALGAS_panicTypesAST GALGAS_panicTypesAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                      const GALGAS_lstring & inOperand1
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_panicTypesAST result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_exceptionTypesAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
+    GALGAS_panicTypesAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -9639,25 +9662,25 @@ GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::constructor_listWithValue (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                          const GALGAS_lstring & in_mExceptionCodeTypeName,
-                                                          const GALGAS_lstring & in_mExceptionLineTypeName
-                                                          COMMA_LOCATION_ARGS) {
-  cCollectionElement_exceptionTypesAST * p = NULL ;
-  macroMyNew (p, cCollectionElement_exceptionTypesAST (in_mExceptionCodeTypeName,
-                                                       in_mExceptionLineTypeName COMMA_THERE)) ;
+void GALGAS_panicTypesAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                      const GALGAS_lstring & in_mPanicCodeTypeName,
+                                                      const GALGAS_lstring & in_mPanicLineTypeName
+                                                      COMMA_LOCATION_ARGS) {
+  cCollectionElement_panicTypesAST * p = NULL ;
+  macroMyNew (p, cCollectionElement_panicTypesAST (in_mPanicCodeTypeName,
+                                                   in_mPanicLineTypeName COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                                    const GALGAS_lstring & inOperand1
-                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_panicTypesAST::addAssign_operation (const GALGAS_lstring & inOperand0,
+                                                const GALGAS_lstring & inOperand1
+                                                COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_exceptionTypesAST (inOperand0, inOperand1 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_panicTypesAST (inOperand0, inOperand1 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -9667,14 +9690,14 @@ void GALGAS_exceptionTypesAST::addAssign_operation (const GALGAS_lstring & inOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                     const GALGAS_lstring inOperand1,
-                                                     const GALGAS_uint inInsertionIndex,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_panicTypesAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                 const GALGAS_lstring inOperand1,
+                                                 const GALGAS_uint inInsertionIndex,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_exceptionTypesAST (inOperand0, inOperand1 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_panicTypesAST (inOperand0, inOperand1 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -9684,108 +9707,108 @@ void GALGAS_exceptionTypesAST::setter_insertAtIndex (const GALGAS_lstring inOper
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                     GALGAS_lstring & outOperand1,
-                                                     const GALGAS_uint inRemoveIndex,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_panicTypesAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                 GALGAS_lstring & outOperand1,
+                                                 const GALGAS_uint inRemoveIndex,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
+    cCollectionElement_panicTypesAST * p = (cCollectionElement_panicTypesAST *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
       outOperand1.drop () ;
     }else{
-      macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-      outOperand0 = p->mObject.mAttribute_mExceptionCodeTypeName ;
-      outOperand1 = p->mObject.mAttribute_mExceptionLineTypeName ;
+      macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+      outOperand0 = p->mObject.mAttribute_mPanicCodeTypeName ;
+      outOperand1 = p->mObject.mAttribute_mPanicLineTypeName ;
     }
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::setter_popFirst (GALGAS_lstring & outOperand0,
-                                                GALGAS_lstring & outOperand1,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-    outOperand0 = p->mObject.mAttribute_mExceptionCodeTypeName ;
-    outOperand1 = p->mObject.mAttribute_mExceptionLineTypeName ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionTypesAST::setter_popLast (GALGAS_lstring & outOperand0,
-                                               GALGAS_lstring & outOperand1,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-    outOperand0 = p->mObject.mAttribute_mExceptionCodeTypeName ;
-    outOperand1 = p->mObject.mAttribute_mExceptionLineTypeName ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionTypesAST::method_first (GALGAS_lstring & outOperand0,
-                                             GALGAS_lstring & outOperand1,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-    outOperand0 = p->mObject.mAttribute_mExceptionCodeTypeName ;
-    outOperand1 = p->mObject.mAttribute_mExceptionLineTypeName ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionTypesAST::method_last (GALGAS_lstring & outOperand0,
+void GALGAS_panicTypesAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                             GALGAS_lstring & outOperand1,
                                             C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const {
+                                            COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
-  readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_panicTypesAST * p = (cCollectionElement_panicTypesAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-    outOperand0 = p->mObject.mAttribute_mExceptionCodeTypeName ;
-    outOperand1 = p->mObject.mAttribute_mExceptionLineTypeName ;
+    macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+    outOperand0 = p->mObject.mAttribute_mPanicCodeTypeName ;
+    outOperand1 = p->mObject.mAttribute_mPanicLineTypeName ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::add_operation (const GALGAS_exceptionTypesAST & inOperand,
-                                                                  C_Compiler * /* inCompiler */
-                                                                  COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_exceptionTypesAST result ;
+void GALGAS_panicTypesAST::setter_popLast (GALGAS_lstring & outOperand0,
+                                           GALGAS_lstring & outOperand1,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_panicTypesAST * p = (cCollectionElement_panicTypesAST *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+    outOperand0 = p->mObject.mAttribute_mPanicCodeTypeName ;
+    outOperand1 = p->mObject.mAttribute_mPanicLineTypeName ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_panicTypesAST::method_first (GALGAS_lstring & outOperand0,
+                                         GALGAS_lstring & outOperand1,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_panicTypesAST * p = (cCollectionElement_panicTypesAST *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+    outOperand0 = p->mObject.mAttribute_mPanicCodeTypeName ;
+    outOperand1 = p->mObject.mAttribute_mPanicLineTypeName ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_panicTypesAST::method_last (GALGAS_lstring & outOperand0,
+                                        GALGAS_lstring & outOperand1,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_panicTypesAST * p = (cCollectionElement_panicTypesAST *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+    outOperand0 = p->mObject.mAttribute_mPanicCodeTypeName ;
+    outOperand1 = p->mObject.mAttribute_mPanicLineTypeName ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_panicTypesAST GALGAS_panicTypesAST::add_operation (const GALGAS_panicTypesAST & inOperand,
+                                                          C_Compiler * /* inCompiler */
+                                                          COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_panicTypesAST result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -9795,68 +9818,68 @@ GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::add_operation (const GALGAS_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const {
-  GALGAS_exceptionTypesAST result = GALGAS_exceptionTypesAST::constructor_emptyList (THERE) ;
+GALGAS_panicTypesAST GALGAS_panicTypesAST::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
+  GALGAS_panicTypesAST result = GALGAS_panicTypesAST::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const {
-  GALGAS_exceptionTypesAST result = GALGAS_exceptionTypesAST::constructor_emptyList (THERE) ;
+GALGAS_panicTypesAST GALGAS_panicTypesAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
+  GALGAS_panicTypesAST result = GALGAS_panicTypesAST::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_exceptionTypesAST result = GALGAS_exceptionTypesAST::constructor_emptyList (THERE) ;
+GALGAS_panicTypesAST GALGAS_panicTypesAST::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
+  GALGAS_panicTypesAST result = GALGAS_panicTypesAST::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::plusAssign_operation (const GALGAS_exceptionTypesAST inOperand,
-                                                     C_Compiler * /* inCompiler */
-                                                     COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_panicTypesAST::plusAssign_operation (const GALGAS_panicTypesAST inOperand,
+                                                 C_Compiler * /* inCompiler */
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_exceptionTypesAST::getter_mExceptionCodeTypeNameAtIndex (const GALGAS_uint & inIndex,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_panicTypesAST::getter_mPanicCodeTypeNameAtIndex (const GALGAS_uint & inIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
+  cCollectionElement_panicTypesAST * p = (cCollectionElement_panicTypesAST *) attributes.ptr () ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-    result = p->mObject.mAttribute_mExceptionCodeTypeName ;
+    macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+    result = p->mObject.mAttribute_mPanicCodeTypeName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_exceptionTypesAST::getter_mExceptionLineTypeNameAtIndex (const GALGAS_uint & inIndex,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_panicTypesAST::getter_mPanicLineTypeNameAtIndex (const GALGAS_uint & inIndex,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_exceptionTypesAST * p = (cCollectionElement_exceptionTypesAST *) attributes.ptr () ;
+  cCollectionElement_panicTypesAST * p = (cCollectionElement_panicTypesAST *) attributes.ptr () ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-    result = p->mObject.mAttribute_mExceptionLineTypeName ;
+    macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+    result = p->mObject.mAttribute_mPanicLineTypeName ;
   }
   return result ;
 }
@@ -9865,35 +9888,35 @@ GALGAS_lstring GALGAS_exceptionTypesAST::getter_mExceptionLineTypeNameAtIndex (c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_exceptionTypesAST::cEnumerator_exceptionTypesAST (const GALGAS_exceptionTypesAST & inEnumeratedObject,
-                                                              const typeEnumerationOrder inOrder) :
+cEnumerator_panicTypesAST::cEnumerator_panicTypesAST (const GALGAS_panicTypesAST & inEnumeratedObject,
+                                                      const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST_2D_element cEnumerator_exceptionTypesAST::current (LOCATION_ARGS) const {
-  const cCollectionElement_exceptionTypesAST * p = (const cCollectionElement_exceptionTypesAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
+GALGAS_panicTypesAST_2D_element cEnumerator_panicTypesAST::current (LOCATION_ARGS) const {
+  const cCollectionElement_panicTypesAST * p = (const cCollectionElement_panicTypesAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
   return p->mObject ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_exceptionTypesAST::current_mExceptionCodeTypeName (LOCATION_ARGS) const {
-  const cCollectionElement_exceptionTypesAST * p = (const cCollectionElement_exceptionTypesAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-  return p->mObject.mAttribute_mExceptionCodeTypeName ;
+GALGAS_lstring cEnumerator_panicTypesAST::current_mPanicCodeTypeName (LOCATION_ARGS) const {
+  const cCollectionElement_panicTypesAST * p = (const cCollectionElement_panicTypesAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+  return p->mObject.mAttribute_mPanicCodeTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_exceptionTypesAST::current_mExceptionLineTypeName (LOCATION_ARGS) const {
-  const cCollectionElement_exceptionTypesAST * p = (const cCollectionElement_exceptionTypesAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_exceptionTypesAST) ;
-  return p->mObject.mAttribute_mExceptionLineTypeName ;
+GALGAS_lstring cEnumerator_panicTypesAST::current_mPanicLineTypeName (LOCATION_ARGS) const {
+  const cCollectionElement_panicTypesAST * p = (const cCollectionElement_panicTypesAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_panicTypesAST) ;
+  return p->mObject.mAttribute_mPanicLineTypeName ;
 }
 
 
@@ -9901,42 +9924,42 @@ GALGAS_lstring cEnumerator_exceptionTypesAST::current_mExceptionLineTypeName (LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @exceptionTypesAST type                                               *
+//                                                 @panicTypesAST type                                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_exceptionTypesAST ("exceptionTypesAST",
-                                          NULL) ;
+kTypeDescriptor_GALGAS_panicTypesAST ("panicTypesAST",
+                                      NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_exceptionTypesAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_exceptionTypesAST ;
+const C_galgas_type_descriptor * GALGAS_panicTypesAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_panicTypesAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_exceptionTypesAST::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_panicTypesAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_exceptionTypesAST (*this)) ;
+    macroMyNew (result, GALGAS_panicTypesAST (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::extractObject (const GALGAS_object & inObject,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionTypesAST result ;
-  const GALGAS_exceptionTypesAST * p = (const GALGAS_exceptionTypesAST *) inObject.embeddedObject () ;
+GALGAS_panicTypesAST GALGAS_panicTypesAST::extractObject (const GALGAS_object & inObject,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_panicTypesAST result ;
+  const GALGAS_panicTypesAST * p = (const GALGAS_panicTypesAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_exceptionTypesAST *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_panicTypesAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("exceptionTypesAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("panicTypesAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -11590,7 +11613,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i10_ (GALGAS_as
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("panic.galgas", 31)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_proc) COMMA_SOURCE_FILE ("panic.galgas", 32)) ;
-  GALGAS_lstring var_exceptionClauseName = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_panicClauseName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("panic.galgas", 33)) ;
   GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("panic.galgas", 34)) ;
@@ -11600,7 +11623,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i10_ (GALGAS_as
   nt_instructionList_ (var_instructionList, var_labelMap, inCompiler) ;
   GALGAS_location var_endOfInstructionList = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 38)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("panic.galgas", 39)) ;
-  ioArgument_ioAST.mAttribute_mExceptionClauses.addAssign_operation (var_exceptionClauseName, var_instructionList, var_endOfInstructionList, var_priority, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 40)) ;
+  ioArgument_ioAST.mAttribute_mPanicClauses.addAssign_operation (var_panicClauseName, var_instructionList, var_endOfInstructionList, var_priority, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 40)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11623,11 +11646,11 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i11_ (GALGAS_as
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("panic.galgas", 51)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_proc) COMMA_SOURCE_FILE ("panic.galgas", 52)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("panic.galgas", 53)) ;
-  GALGAS_lstring var_exceptionCodeTypeName = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_panicCodeTypeName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("panic.galgas", 54)) ;
-  GALGAS_lstring var_exceptionLineTypeName = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_panicLineTypeName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("panic.galgas", 55)) ;
-  ioArgument_ioAST.mAttribute_mExceptionTypes.addAssign_operation (var_exceptionCodeTypeName, var_exceptionLineTypeName  COMMA_SOURCE_FILE ("panic.galgas", 56)) ;
+  ioArgument_ioAST.mAttribute_mPanicTypes.addAssign_operation (var_panicCodeTypeName, var_panicLineTypeName  COMMA_SOURCE_FILE ("panic.galgas", 56)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

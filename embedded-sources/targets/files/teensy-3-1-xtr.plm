@@ -1,3 +1,6 @@
+//-----------------------------------------------------------------------------*
+//   SYNCHRONIZATION TOOLS ROUTINES                                            *
+//-----------------------------------------------------------------------------*
 
 opaqueType $taskList @instantiable : 32
 
@@ -6,11 +9,6 @@ extern proc blockInList `kernel (?!list:ioWaitingList $taskList)
 
 extern proc blockOnDeadline `kernel (?deadline:inDeadlineMS $uint32) 
 
-extern proc blockInListAndOnDeadline `kernel (
-  ?!list:ioWaitingList $taskList
-  ?deadine:inDeadlineMS $uint32
-)
-
 //--- Make task Ready
 extern proc makeTaskReady `kernel (
   ?!list:ioWaitingList $taskList
@@ -18,6 +16,16 @@ extern proc makeTaskReady `kernel (
 )
 
 extern proc makeTasksReadyFromCurrentDate `isr (?currentDate:inCurrentDate $uint32)
+
+//-----------------------------------------------------------------------------*
+//   GUARD                                                                     *
+//-----------------------------------------------------------------------------*
+
+opaqueType $guardList @instantiable : 32
+
+// extern service guardedWaitUntil (?deadline:inDeadlineMS $uint32)
+
+extern proc tickHandlerForGuardedWaitUntil `isr (?currentDate:inCurrentDate $uint32)
 
 //-----------------------------------------------------------------------------*
 

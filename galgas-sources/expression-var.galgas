@@ -115,7 +115,7 @@ override method @varInExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet
-  ?allowException:let @bool unused inAllowExceptions
+  ?allowPanic:let @bool unused inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -160,7 +160,7 @@ override method @selfVarInExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet
-  ?allowException:let @bool unused inAllowExceptions
+  ?allowPanic:let @bool unused inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
@@ -214,7 +214,7 @@ override method @controlRegisterFieldInExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet
-  ?allowException:let @bool unused inAllowExceptions
+  ?allowPanic:let @bool unused inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap

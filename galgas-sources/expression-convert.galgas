@@ -68,7 +68,7 @@ override method @convertExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -82,7 +82,7 @@ override method @convertExpressionAST analyzeExpression
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -90,7 +90,7 @@ override method @convertExpressionAST analyzeExpression
     ?result:@operandIR expressionResult
   ]
 #--- 
-  if not inAllowExceptions then
+  if not inAllowPanic then
     error mTypeName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze type

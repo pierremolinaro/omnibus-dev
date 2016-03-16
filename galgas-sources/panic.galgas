@@ -2,17 +2,17 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @exceptionTypesAST {
-  @lstring mExceptionCodeTypeName
-  @lstring mExceptionLineTypeName
+list @panicTypesAST {
+  @lstring mPanicCodeTypeName
+  @lstring mPanicLineTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @exceptionClauseListAST {
-  @lstring mExceptionClauseName
-  @instructionListAST mExceptionInstructionList
-  @location mEndOfExceptionInstructions
+sortedlist @panicClauseListAST {
+  @lstring mPanicClauseName
+  @instructionListAST mPanicInstructionList
+  @location mEndOfPanicInstructions
   @lbigint mPriority
   @location mLocationPriority
 }{
@@ -30,15 +30,15 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $panic$
     $proc$
-    $identifier$ ?let exceptionClauseName
+    $identifier$ ?let panicClauseName
     $integer$ ?let priority
     ${$
     @labelMap labelMap = {}
     <instructionList> ?let instructionList !?labelMap
     let endOfInstructionList = @location.here
     $}$
-    ioAST.mExceptionClauses +=
-      !exceptionClauseName
+    ioAST.mPanicClauses +=
+      !panicClauseName
       !instructionList
       !endOfInstructionList
       !priority
@@ -51,9 +51,9 @@ syntax extension common_syntax {
     $panic$
     $proc$
     $:$
-    $typeName$ ?let exceptionCodeTypeName 
-    $typeName$ ?let exceptionLineTypeName
-    ioAST.mExceptionTypes += !exceptionCodeTypeName !exceptionLineTypeName
+    $typeName$ ?let panicCodeTypeName 
+    $typeName$ ?let panicLineTypeName
+    ioAST.mPanicTypes += !panicCodeTypeName !panicLineTypeName
   }
   
   #·····················································································································
@@ -64,9 +64,9 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @exceptionClauseListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @panicClauseListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
-    [mExceptionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    [mPanicInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -74,15 +74,15 @@ method @exceptionClauseListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecede
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @exceptionClauseListAST-element enterInContext
+method @panicClauseListAST-element enterInContext
   ?!context:@semanticContext ioContext
 {
-  if mExceptionClauseName.string == "setup" then
-    [!?ioContext.mExceptionSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
-  elsif mExceptionClauseName.string == "loop" then
-    [!?ioContext.mExceptionLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
+  if mPanicClauseName.string == "setup" then
+    [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
+  elsif mPanicClauseName.string == "loop" then
+    [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
   else
-    error mExceptionClauseName : "exception routine name should be \"setup\" or \"loop\""
+    error mPanicClauseName : "exception routine name should be \"setup\" or \"loop\""
   end
 }
 
@@ -96,7 +96,7 @@ func %once panicModeName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @exceptionRoutinePriorityMap {
+map @panicRoutinePriorityMap {
   insert insertSetupKey error message "an exception setup routine with priority %K has been already declared"
   insert insertLoopKey error message "an exception loop routine with priority %K has been already declared"
   search searchSetupKey error message "there is no exception setup routine with priority %K"
@@ -105,15 +105,15 @@ map @exceptionRoutinePriorityMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @exceptionClauseListAST-element exceptionSemanticAnalysis
+method @panicClauseListAST-element exceptionSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   if not [inContext.mModeMap hasKey !panicModeName ()] then
-    error mExceptionClauseName : "the `" + panicModeName () + " mode should be defined in order to use a panic clause"
+    error mPanicClauseName : "the `" + panicModeName () + " mode should be defined in order to use a panic clause"
   end
-  let routineNameForInvocationGraph = exceptionNameForInvocationGraph (!mExceptionClauseName.string !mPriority)
+  let routineNameForInvocationGraph = exceptionNameForInvocationGraph (!mPanicClauseName.string !mPriority)
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
@@ -124,18 +124,18 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   )
 #--- Insert predefined input arguments
   let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
-  let codeArg = @lstring.new {!"CODE" !mExceptionClauseName.location}
+  let codeArg = @lstring.new {!"CODE" !mPanicClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
     !lkey:codeArg
-    !type:inContext.mExceptionCodeType
+    !type:inContext.mPanicCodeType
     !readAccessAllowed:true
-    !variableKind:.localValue {!type:inContext.mExceptionCodeType !name:codeArg.string}
-    !copyable:[inContext.mExceptionCodeType copyable]
+    !variableKind:.localValue {!type:inContext.mPanicCodeType !name:codeArg.string}
+    !copyable:[inContext.mPanicCodeType copyable]
     !fieldMap:{}
     !canBeUsedAsInputParameter:false
     !isConstant:false
   ]
-  let fileArg = @lstring.new {!"FILE" !mExceptionClauseName.location}
+  let fileArg = @lstring.new {!"FILE" !mPanicClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
     !lkey:fileArg
     !type:StaticStringType
@@ -146,13 +146,13 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !canBeUsedAsInputParameter:false
     !isConstant:false
   ]
-  let lineArg = @lstring.new {!"LINE" !mExceptionClauseName.location}
+  let lineArg = @lstring.new {!"LINE" !mPanicClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
     !lkey:lineArg
-    !type:inContext.mExceptionLineType
+    !type:inContext.mPanicLineType
     !readAccessAllowed:true
-    !variableKind:.localValue {!type:inContext.mExceptionLineType !name:lineArg.string}
-    !copyable:[inContext.mExceptionLineType copyable]
+    !variableKind:.localValue {!type:inContext.mPanicLineType !name:lineArg.string}
+    !copyable:[inContext.mPanicLineType copyable]
     !fieldMap:{}
     !canBeUsedAsInputParameter:false
     !isConstant:false
@@ -166,28 +166,28 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
-  [mExceptionInstructionList analyzeRoutineInstructionList
+  [mPanicInstructionList analyzeRoutineInstructionList
     !self:.null
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:{!panicModeName ()}
-    !allowException:false
+    !allowPanic:false
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
   ]
 #---
-  [variableMap checkAutomatonStates !mEndOfExceptionInstructions]
+  [variableMap checkAutomatonStates !mEndOfPanicInstructions]
 #--- Code generation
-  if mExceptionClauseName.string == "setup" then
-    [!?ioTemporaries.mExceptionSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
+  if mPanicClauseName.string == "setup" then
+    [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
     ioIntermediateCodeStruct.mPanicSetupInstructionListIR += instructionGenerationList
-  elsif mExceptionClauseName.string == "loop" then
-    [!?ioTemporaries.mExceptionLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
+  elsif mPanicClauseName.string == "loop" then
+    [!?ioTemporaries.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
     ioIntermediateCodeStruct.mPanicLoopInstructionListIR += instructionGenerationList
   else
-    error mExceptionClauseName : "exception routine name should be \"setup\" or \"loop\""
+    error mPanicClauseName : "exception routine name should be \"setup\" or \"loop\""
   end
 }
 

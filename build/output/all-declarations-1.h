@@ -4901,29 +4901,29 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSortedListIR_2D
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          @exceptionRoutinePriorityMap map                                           *
+//                                            @panicRoutinePriorityMap map                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cMapElement_exceptionRoutinePriorityMap ;
+class cMapElement_panicRoutinePriorityMap ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_exceptionRoutinePriorityMap_searchSetupKey ;
+extern const char * kSearchErrorMessage_panicRoutinePriorityMap_searchSetupKey ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_exceptionRoutinePriorityMap_searchLoopKey ;
+extern const char * kSearchErrorMessage_panicRoutinePriorityMap_searchLoopKey ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_exceptionRoutinePriorityMap : public AC_GALGAS_map {
+class GALGAS_panicRoutinePriorityMap : public AC_GALGAS_map {
 //--------------------------------- Default constructor
-  public : GALGAS_exceptionRoutinePriorityMap (void) ;
+  public : GALGAS_panicRoutinePriorityMap (void) ;
 
 //--------------------------------- Handle copy
-  public : GALGAS_exceptionRoutinePriorityMap (const GALGAS_exceptionRoutinePriorityMap & inSource) ;
-  public : GALGAS_exceptionRoutinePriorityMap & operator = (const GALGAS_exceptionRoutinePriorityMap & inSource) ;
+  public : GALGAS_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inSource) ;
+  public : GALGAS_panicRoutinePriorityMap & operator = (const GALGAS_panicRoutinePriorityMap & inSource) ;
 
 //-- Start of generic part --*
 
@@ -4931,15 +4931,15 @@ class GALGAS_exceptionRoutinePriorityMap : public AC_GALGAS_map {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_exceptionRoutinePriorityMap extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicRoutinePriorityMap extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_exceptionRoutinePriorityMap constructor_emptyMap (LOCATION_ARGS) ;
+  public : static GALGAS_panicRoutinePriorityMap constructor_emptyMap (LOCATION_ARGS) ;
 
-  public : static GALGAS_exceptionRoutinePriorityMap constructor_mapWithMapToOverride (const class GALGAS_exceptionRoutinePriorityMap & inOperand0
-                                                                                       COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicRoutinePriorityMap constructor_mapWithMapToOverride (const class GALGAS_panicRoutinePriorityMap & inOperand0
+                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -4968,52 +4968,52 @@ class GALGAS_exceptionRoutinePriorityMap : public AC_GALGAS_map {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_overriddenMap (C_Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_overriddenMap (C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_exceptionRoutinePriorityMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                         const GALGAS_string & inKey
-                                                                                                         COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG cMapElement_panicRoutinePriorityMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                     const GALGAS_string & inKey
+                                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Friend
 
-  friend class cEnumerator_exceptionRoutinePriorityMap ;
+  friend class cEnumerator_panicRoutinePriorityMap ;
  
-} ; // End of GALGAS_exceptionRoutinePriorityMap class
+} ; // End of GALGAS_panicRoutinePriorityMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumerator_exceptionRoutinePriorityMap : public cGenericAbstractEnumerator {
-  public : cEnumerator_exceptionRoutinePriorityMap (const GALGAS_exceptionRoutinePriorityMap & inEnumeratedObject,
-                                                    const typeEnumerationOrder inOrder) ;
+class cEnumerator_panicRoutinePriorityMap : public cGenericAbstractEnumerator {
+  public : cEnumerator_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inEnumeratedObject,
+                                                const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
 //--- Current element access
-  public : class GALGAS_exceptionRoutinePriorityMap_2D_element current (LOCATION_ARGS) const ;
+  public : class GALGAS_panicRoutinePriorityMap_2D_element current (LOCATION_ARGS) const ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_exceptionRoutinePriorityMap ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicRoutinePriorityMap ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Class for element of '@exceptionRoutinePriorityMap' map                               *
+//                                 Class for element of '@panicRoutinePriorityMap' map                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cMapElement_exceptionRoutinePriorityMap : public cMapElement {
+class cMapElement_panicRoutinePriorityMap : public cMapElement {
 //--- Map attributes
 
 //--- Constructor
-  public : cMapElement_exceptionRoutinePriorityMap (const GALGAS_lstring & inKey
-                                                    COMMA_LOCATION_ARGS) ;
+  public : cMapElement_panicRoutinePriorityMap (const GALGAS_lstring & inKey
+                                                COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -5030,11 +5030,11 @@ class cMapElement_exceptionRoutinePriorityMap : public cMapElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   @exceptionRoutinePriorityMap_2D_element struct                                    *
+//                                     @panicRoutinePriorityMap_2D_element struct                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_exceptionRoutinePriorityMap_2D_element : public AC_GALGAS_root {
+class GALGAS_panicRoutinePriorityMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
 
@@ -5044,16 +5044,16 @@ class GALGAS_exceptionRoutinePriorityMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_exceptionRoutinePriorityMap_2D_element constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_panicRoutinePriorityMap_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
-  public : GALGAS_exceptionRoutinePriorityMap_2D_element (void) ;
+  public : GALGAS_panicRoutinePriorityMap_2D_element (void) ;
 
 //--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_exceptionRoutinePriorityMap_2D_element (void) ;
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_panicRoutinePriorityMap_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_exceptionRoutinePriorityMap_2D_element (const GALGAS_lstring & in_lkey) ;
+  public : GALGAS_panicRoutinePriorityMap_2D_element (const GALGAS_lstring & in_lkey) ;
 
 //-- Start of generic part --*
 
@@ -5061,19 +5061,19 @@ class GALGAS_exceptionRoutinePriorityMap_2D_element : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_exceptionRoutinePriorityMap_2D_element extractObject (const GALGAS_object & inObject,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicRoutinePriorityMap_2D_element extractObject (const GALGAS_object & inObject,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_exceptionRoutinePriorityMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0
-                                                                                 COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_panicRoutinePriorityMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_exceptionRoutinePriorityMap_2D_element & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_panicRoutinePriorityMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5087,12 +5087,12 @@ class GALGAS_exceptionRoutinePriorityMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_exceptionRoutinePriorityMap_2D_element class
+} ; // End of GALGAS_panicRoutinePriorityMap_2D_element class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_exceptionRoutinePriorityMap_2D_element ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicRoutinePriorityMap_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

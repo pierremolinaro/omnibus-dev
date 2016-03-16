@@ -43,7 +43,7 @@ override method @throwInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -58,10 +58,10 @@ override method @throwInstructionAST analyze
   [mCodeExpression analyzeExpression
     !self:inSelfType
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalTargetType:inContext.mExceptionCodeType
+    !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
     !modes:inModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -75,10 +75,10 @@ override method @throwInstructionAST analyze
      || ([result.mType key] != staticIntegerTypeName ()) then
     error mThrowLocation : "throw expression should be a literal integer"
   else
-    [[inContext.mExceptionCodeType kind] integer ?min:let min ?max:let max ?unsigned:* ?bitCount:*]
+    [[inContext.mPanicCodeType kind] integer ?min:let min ?max:let max ?unsigned:* ?bitCount:*]
     [result.mValue literalInteger ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
-      error mThrowLocation : "panic expression cannot be represented by an `" +[inContext.mExceptionCodeType key]
+      error mThrowLocation : "panic expression cannot be represented by an `" +[inContext.mPanicCodeType key]
     elsif not [option plm_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@throwInstructionIR.new {
         !mThrowLocation
