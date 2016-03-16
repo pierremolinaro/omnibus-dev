@@ -60,6 +60,43 @@ static unsigned countTrainingZeros (const unsigned inValue) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef struct {
+  unsigned mR0 ;
+  unsigned mR1 ;
+  unsigned mR2 ;
+  unsigned mR3 ;
+  unsigned mR12 ;
+  unsigned mLR ;
+  unsigned mPC ;
+  unsigned mXPSR ;
+} stacked_registers ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//                                            *---------------------*
+//                                            | LR return code      | +36 [ 9]
+//                                            *---------------------*
+//                                            | R13 (PSP)           | +32 [ 8]
+//                                            *---------------------*
+//                                            | R11                 | +28 [ 7]
+//                                            *---------------------*
+//                                            | R10                 | +24 [ 6]
+//                                            *---------------------*
+//                                            | R9                  | +20 [ 5]
+//                                            *---------------------*
+//                                            | R8                  | +16 [ 4]
+//                                            *---------------------*
+//                                            | R7                  | +12 [ 3]
+//                                            *---------------------*
+//                                            | R6                  | + 8 [ 2]
+//                                            *---------------------*
+//                                            | R5                  | + 4 [ 1]
+//  *--------------------------------*        *---------------------*
+//  | gRunningTaskContextSaveAddress +------> | R4                  | + 0 [ 0]
+//  *--------------------------------*        *---------------------*
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+typedef struct {
   unsigned mR4 ;
   unsigned mR5 ;
   unsigned mR6 ;
@@ -68,7 +105,7 @@ typedef struct {
   unsigned mR9 ;
   unsigned mR10 ;
   unsigned mR11 ;
-  unsigned mSP_USR ;
+  stacked_registers * mSP_USR ;
   unsigned mLR_RETURN_CODE ;
 } task_context ;
 
@@ -76,8 +113,8 @@ typedef struct {
 
 static void kernel_set_return_code (task_context * inTaskContext,
                                     const unsigned inReturnCode) {
-  unsigned * ptr = (unsigned *) inTaskContext->mSP_USR ;
-  *ptr = inReturnCode ;
+  stacked_registers * ptr = inTaskContext->mSP_USR ;
+  ptr->mR0 = inReturnCode ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -88,14 +125,12 @@ static void kernel_set_task_context (task_context * inTaskContext,
 //--- Initialize LR
   inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ;
 //--- Initialize SP
-  inTaskContext->mSP_USR = inStackPointerInitialValue - 32 ; // 8 stacked registers
-  unsigned * ptr = (unsigned *) inTaskContext->mSP_USR ;
+  stacked_registers * ptr = (stacked_registers *) (inStackPointerInitialValue - sizeof (stacked_registers)) ; // 8 stacked registers
+  inTaskContext->mSP_USR = ptr ;
 //--- Initialize PC
-  ptr += 6 ; // +24
-  *ptr = (unsigned) inTaskRoutine ;
+  ptr->mPC = (unsigned) inTaskRoutine ;
 //--- Initialize CPSR
-  ptr ++ ; // +28
-  *ptr = 1 << 24 ;
+  ptr->mXPSR = 1 << 24 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -198,8 +233,9 @@ static task_list gDeadlineWaitingTaskList ;
 //  B L O C K I N G    R U N N I N G    T A S K                                                                        *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_blockRunningTaskInList (task_list * ioWaitingList) asm ("proc..kernel_blockRunningTaskInList") ;
-void kernel_blockRunningTaskInList (task_list * ioWaitingList) {
+void blockInList (task_list * ioWaitingList) asm ("proc..blockInList") ;
+
+void blockInList (task_list * ioWaitingList) {
   const unsigned currentTaskIndex = kernel_runningTaskIndex () ;
   *ioWaitingList |= 1 << currentTaskIndex ;
   task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [currentTaskIndex] ;
@@ -209,8 +245,9 @@ void kernel_blockRunningTaskInList (task_list * ioWaitingList) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_blockRunningTaskInDeadlineList (const unsigned inDeadlineMS) asm ("proc..kernel_blockRunningTaskInDeadlineList") ;
-void kernel_blockRunningTaskInDeadlineList (const unsigned inDeadlineMS) {
+void blockOnDeadline (const unsigned inDeadlineMS) asm ("proc..blockOnDeadline") ;
+
+void blockOnDeadline (const unsigned inDeadlineMS) {
   const unsigned currentTaskIndex = kernel_runningTaskIndex () ;
   task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [currentTaskIndex] ;
   gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;
@@ -220,10 +257,10 @@ void kernel_blockRunningTaskInDeadlineList (const unsigned inDeadlineMS) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, const unsigned inDeadlineMS)
-  asm ("proc..kernel_blockRunningTaskInListAndDeadlineList") ;
+void blockInListAndOnDeadline (task_list * ioWaitingList, const unsigned inDeadlineMS)
+asm ("proc..blockInListAndOnDeadline") ;
 
-void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, const unsigned inDeadlineMS) {
+void blockInListAndOnDeadline (task_list * ioWaitingList, const unsigned inDeadlineMS) {
   const unsigned currentTaskIndex = kernel_runningTaskIndex () ;
   task_control_block * taskDescriptorPtr = & gTaskDescriptorArray [currentTaskIndex] ;
   *ioWaitingList |= 1 << currentTaskIndex ;
@@ -237,10 +274,10 @@ void kernel_blockRunningTaskInListAndDeadlineList (task_list * ioWaitingList, co
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList, unsigned char * outFound)
- asm ("proc..kernel_makeTaskReadyFromWaitingList") ;
+void makeTaskReady (task_list * ioWaitingList, unsigned char * outFound)
+asm ("proc..makeTaskReady") ;
 
-void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList, unsigned char * outFound) {
+void makeTaskReady (task_list * ioWaitingList, unsigned char * outFound) {
   * outFound = (* ioWaitingList) != 0 ;
   if (* outFound) {
     const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;
@@ -255,8 +292,10 @@ void kernel_makeTaskReadyFromWaitingList (task_list * ioWaitingList, unsigned ch
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) asm ("proc..kernel_tasksWithEarlierDateBecomeReady") ;
-void kernel_tasksWithEarlierDateBecomeReady (const unsigned inCurrentDate) {
+void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate)
+asm ("proc..makeTasksReadyFromCurrentDate") ;
+
+void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
   while (w > 0) {
     const unsigned taskIndex = countTrainingZeros (w) ;

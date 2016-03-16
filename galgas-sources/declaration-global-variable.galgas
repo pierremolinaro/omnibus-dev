@@ -224,7 +224,7 @@ method @globalVarDeclarationList-element enterInContext
 #--- Check allowed init routines are defined
   for () in mAllowedInitList do
     [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
-    [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!mInitPriority) !mHasWriteAccess]
+    [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!.null !mInitPriority) !mHasWriteAccess]
   end
 #--- Check allowed exception routines are defined
   for () in mAllowedExceptionList do

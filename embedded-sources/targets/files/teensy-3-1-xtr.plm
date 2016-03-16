@@ -1,19 +1,23 @@
 
-opaqueType $taskList @instantiable @copyable : 32
+opaqueType $taskList @instantiable : 32
 
 //--- Block running task
-extern proc kernel_blockRunningTaskInList `kernel (?!ioWaitingList $taskList)
+extern proc blockInList `kernel (?!list:ioWaitingList $taskList)
 
-extern proc kernel_blockRunningTaskInDeadlineList `kernel (?inDeadlineMS $uint32) 
+extern proc blockOnDeadline `kernel (?deadline:inDeadlineMS $uint32) 
 
-extern proc kernel_blockRunningTaskInListAndDeadlineList `kernel (
-  ?!ioWaitingList $taskList
-  ?inDeadlineMS $uint32)
+extern proc blockInListAndOnDeadline `kernel (
+  ?!list:ioWaitingList $taskList
+  ?deadine:inDeadlineMS $uint32
+)
 
 //--- Make task Ready
-extern proc kernel_makeTaskReadyFromWaitingList `kernel (?!ioWaitingList $taskList !outFound $bool)
+extern proc makeTaskReady `kernel (
+  ?!list:ioWaitingList $taskList
+  !found:outFound $bool
+)
 
-extern proc kernel_tasksWithEarlierDateBecomeReady `isr (?inCurrentDate $uint32)
+extern proc makeTasksReadyFromCurrentDate `isr (?currentDate:inCurrentDate $uint32)
 
 //-----------------------------------------------------------------------------*
 
@@ -45,7 +49,7 @@ required proc systickHandler `isr ()
 
 proc systickHandler `isr @global () {
   gUptimeMS +%= 1
-  kernel_tasksWithEarlierDateBecomeReady (!millis ())
+  makeTasksReadyFromCurrentDate (!currentDate:millis ())
   userSystickHandler ()
 }
 
@@ -56,7 +60,7 @@ proc userSystickHandler `isr @weak () {
 
 service waitUntilMS `kernel @noWarningIfUnused (?deadline: inDate $uint32) {
   if inDate > millis () then
-    kernel_blockRunningTaskInDeadlineList (!inDate)
+    blockOnDeadline (!deadline:inDate)
   end
 }
 
@@ -71,13 +75,5 @@ proc waitDuringMS `user @noWarningIfUnused (?delay: inDelay $uint32) {
 func millis `isr `kernel `user @noWarningIfUnused () -> $uint32 {
   result = gUptimeMS
 }
-
-//-----------------------------------------------------------------------------*
-
-//proc waitMS `user `init @noWarningIfUnused (?inDuration $uint32) {
-//  let deadline = gUptimeMS + inDuration
-//  while gUptimeMS < deadline do
-//  end
-//}
 
 //-----------------------------------------------------------------------------*

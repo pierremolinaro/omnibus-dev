@@ -91,8 +91,12 @@ func funcNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func initNameForInvocationGraph ?@lbigint inPriority -> @lstring outName {
-  let s = "init " + inPriority.bigint
+func initNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lbigint inPriority -> @lstring outName {
+  var s = "init"
+  if inReceiverType != .null then
+    s += " $" + [inReceiverType key]
+  end
+  s += " " + inPriority.bigint
   outName = .new {!s !inPriority.location}
 }
 

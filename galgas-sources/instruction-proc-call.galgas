@@ -406,7 +406,7 @@ private proc analyzeCall
         error name : "this variable cannot be used as input parameter"
       end
       if not isCopyable then
-        error name : "the '" + name + "' variable is not copyable"
+        error name : "an $" + [type key] + " instance is not copyable"
       end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       outEffectiveParameterListIR +=

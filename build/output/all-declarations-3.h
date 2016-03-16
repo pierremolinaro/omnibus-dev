@@ -1330,14 +1330,4 @@ class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & 
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category getter '@valueIR llvmName' (as function)                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_llvmName (const class GALGAS_valueIR & inObject,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
 #endif
