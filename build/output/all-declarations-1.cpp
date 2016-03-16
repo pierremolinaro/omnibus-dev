@@ -10838,105 +10838,105 @@ GALGAS_taskSortedListIR GALGAS_taskSortedListIR::extractObject (const GALGAS_obj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_exceptionRoutinePriorityMap::cMapElement_exceptionRoutinePriorityMap (const GALGAS_lstring & inKey
-                                                                                  COMMA_LOCATION_ARGS) :
+cMapElement_panicRoutinePriorityMap::cMapElement_panicRoutinePriorityMap (const GALGAS_lstring & inKey
+                                                                          COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cMapElement_exceptionRoutinePriorityMap::isValid (void) const {
+bool cMapElement_panicRoutinePriorityMap::isValid (void) const {
   return mAttribute_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement * cMapElement_exceptionRoutinePriorityMap::copy (void) {
+cMapElement * cMapElement_panicRoutinePriorityMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_exceptionRoutinePriorityMap (mAttribute_lkey COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_panicRoutinePriorityMap (mAttribute_lkey COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_exceptionRoutinePriorityMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
+void cMapElement_panicRoutinePriorityMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cMapElement_exceptionRoutinePriorityMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_exceptionRoutinePriorityMap * operand = (cMapElement_exceptionRoutinePriorityMap *) inOperand ;
+typeComparisonResult cMapElement_panicRoutinePriorityMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_panicRoutinePriorityMap * operand = (cMapElement_panicRoutinePriorityMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap::GALGAS_exceptionRoutinePriorityMap (void) :
+GALGAS_panicRoutinePriorityMap::GALGAS_panicRoutinePriorityMap (void) :
 AC_GALGAS_map () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap::GALGAS_exceptionRoutinePriorityMap (const GALGAS_exceptionRoutinePriorityMap & inSource) :
+GALGAS_panicRoutinePriorityMap::GALGAS_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap & GALGAS_exceptionRoutinePriorityMap::operator = (const GALGAS_exceptionRoutinePriorityMap & inSource) {
+GALGAS_panicRoutinePriorityMap & GALGAS_panicRoutinePriorityMap::operator = (const GALGAS_panicRoutinePriorityMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_exceptionRoutinePriorityMap result ;
+GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_panicRoutinePriorityMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap GALGAS_exceptionRoutinePriorityMap::constructor_mapWithMapToOverride (const GALGAS_exceptionRoutinePriorityMap & inMapToOverride
-                                                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionRoutinePriorityMap result ;
+GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_mapWithMapToOverride (const GALGAS_panicRoutinePriorityMap & inMapToOverride
+                                                                                                 COMMA_LOCATION_ARGS) {
+  GALGAS_panicRoutinePriorityMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap GALGAS_exceptionRoutinePriorityMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_exceptionRoutinePriorityMap result ;
+GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) const {
+  GALGAS_panicRoutinePriorityMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  cMapElement_exceptionRoutinePriorityMap * p = NULL ;
-  macroMyNew (p, cMapElement_exceptionRoutinePriorityMap (inKey COMMA_HERE)) ;
+void GALGAS_panicRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  cMapElement_panicRoutinePriorityMap * p = NULL ;
+  macroMyNew (p, cMapElement_panicRoutinePriorityMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@exceptionRoutinePriorityMap insert error: '%K' already in map" ;
+  const char * kInsertErrorMessage = "@panicRoutinePriorityMap insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionRoutinePriorityMap::setter_insertSetupKey (GALGAS_lstring inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  cMapElement_exceptionRoutinePriorityMap * p = NULL ;
-  macroMyNew (p, cMapElement_exceptionRoutinePriorityMap (inKey COMMA_HERE)) ;
+void GALGAS_panicRoutinePriorityMap::setter_insertSetupKey (GALGAS_lstring inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  cMapElement_panicRoutinePriorityMap * p = NULL ;
+  macroMyNew (p, cMapElement_panicRoutinePriorityMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -10947,11 +10947,11 @@ void GALGAS_exceptionRoutinePriorityMap::setter_insertSetupKey (GALGAS_lstring i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionRoutinePriorityMap::setter_insertLoopKey (GALGAS_lstring inKey,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) {
-  cMapElement_exceptionRoutinePriorityMap * p = NULL ;
-  macroMyNew (p, cMapElement_exceptionRoutinePriorityMap (inKey COMMA_HERE)) ;
+void GALGAS_panicRoutinePriorityMap::setter_insertLoopKey (GALGAS_lstring inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
+  cMapElement_panicRoutinePriorityMap * p = NULL ;
+  macroMyNew (p, cMapElement_panicRoutinePriorityMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -10962,71 +10962,71 @@ void GALGAS_exceptionRoutinePriorityMap::setter_insertLoopKey (GALGAS_lstring in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_exceptionRoutinePriorityMap_searchSetupKey = "there is no exception setup routine with priority %K" ;
+const char * kSearchErrorMessage_panicRoutinePriorityMap_searchSetupKey = "there is no exception setup routine with priority %K" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionRoutinePriorityMap::method_searchSetupKey (GALGAS_lstring inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  const cMapElement_exceptionRoutinePriorityMap * p = (const cMapElement_exceptionRoutinePriorityMap *) performSearch (inKey,
-                                                                                                                         inCompiler,
-                                                                                                                         kSearchErrorMessage_exceptionRoutinePriorityMap_searchSetupKey
-                                                                                                                         COMMA_THERE) ;
+void GALGAS_panicRoutinePriorityMap::method_searchSetupKey (GALGAS_lstring inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
+  const cMapElement_panicRoutinePriorityMap * p = (const cMapElement_panicRoutinePriorityMap *) performSearch (inKey,
+                                                                                                                 inCompiler,
+                                                                                                                 kSearchErrorMessage_panicRoutinePriorityMap_searchSetupKey
+                                                                                                                 COMMA_THERE) ;
   if (NULL == p) {
   }else{
-    macroValidSharedObject (p, cMapElement_exceptionRoutinePriorityMap) ;
+    macroValidSharedObject (p, cMapElement_panicRoutinePriorityMap) ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_exceptionRoutinePriorityMap_searchLoopKey = "there is no  exception loop routine with priority %K" ;
+const char * kSearchErrorMessage_panicRoutinePriorityMap_searchLoopKey = "there is no  exception loop routine with priority %K" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionRoutinePriorityMap::method_searchLoopKey (GALGAS_lstring inKey,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
-  const cMapElement_exceptionRoutinePriorityMap * p = (const cMapElement_exceptionRoutinePriorityMap *) performSearch (inKey,
-                                                                                                                         inCompiler,
-                                                                                                                         kSearchErrorMessage_exceptionRoutinePriorityMap_searchLoopKey
-                                                                                                                         COMMA_THERE) ;
+void GALGAS_panicRoutinePriorityMap::method_searchLoopKey (GALGAS_lstring inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
+  const cMapElement_panicRoutinePriorityMap * p = (const cMapElement_panicRoutinePriorityMap *) performSearch (inKey,
+                                                                                                                 inCompiler,
+                                                                                                                 kSearchErrorMessage_panicRoutinePriorityMap_searchLoopKey
+                                                                                                                 COMMA_THERE) ;
   if (NULL == p) {
   }else{
-    macroValidSharedObject (p, cMapElement_exceptionRoutinePriorityMap) ;
+    macroValidSharedObject (p, cMapElement_panicRoutinePriorityMap) ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_exceptionRoutinePriorityMap * GALGAS_exceptionRoutinePriorityMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                                 const GALGAS_string & inKey
-                                                                                                                 COMMA_LOCATION_ARGS) {
-  cMapElement_exceptionRoutinePriorityMap * result = (cMapElement_exceptionRoutinePriorityMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_exceptionRoutinePriorityMap) ;
+cMapElement_panicRoutinePriorityMap * GALGAS_panicRoutinePriorityMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                         const GALGAS_string & inKey
+                                                                                                         COMMA_LOCATION_ARGS) {
+  cMapElement_panicRoutinePriorityMap * result = (cMapElement_panicRoutinePriorityMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_panicRoutinePriorityMap) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_exceptionRoutinePriorityMap::cEnumerator_exceptionRoutinePriorityMap (const GALGAS_exceptionRoutinePriorityMap & inEnumeratedObject,
-                                                                                  const typeEnumerationOrder inOrder) :
+cEnumerator_panicRoutinePriorityMap::cEnumerator_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inEnumeratedObject,
+                                                                          const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap_2D_element cEnumerator_exceptionRoutinePriorityMap::current (LOCATION_ARGS) const {
-  const cMapElement_exceptionRoutinePriorityMap * p = (const cMapElement_exceptionRoutinePriorityMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_exceptionRoutinePriorityMap) ;
-  return GALGAS_exceptionRoutinePriorityMap_2D_element (p->mAttribute_lkey) ;
+GALGAS_panicRoutinePriorityMap_2D_element cEnumerator_panicRoutinePriorityMap::current (LOCATION_ARGS) const {
+  const cMapElement_panicRoutinePriorityMap * p = (const cMapElement_panicRoutinePriorityMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_panicRoutinePriorityMap) ;
+  return GALGAS_panicRoutinePriorityMap_2D_element (p->mAttribute_lkey) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_exceptionRoutinePriorityMap::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_panicRoutinePriorityMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
@@ -11036,42 +11036,42 @@ GALGAS_lstring cEnumerator_exceptionRoutinePriorityMap::current_lkey (LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          @exceptionRoutinePriorityMap type                                          *
+//                                            @panicRoutinePriorityMap type                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_exceptionRoutinePriorityMap ("exceptionRoutinePriorityMap",
-                                                    NULL) ;
+kTypeDescriptor_GALGAS_panicRoutinePriorityMap ("panicRoutinePriorityMap",
+                                                NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_exceptionRoutinePriorityMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_exceptionRoutinePriorityMap ;
+const C_galgas_type_descriptor * GALGAS_panicRoutinePriorityMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_panicRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_exceptionRoutinePriorityMap::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_panicRoutinePriorityMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_exceptionRoutinePriorityMap (*this)) ;
+    macroMyNew (result, GALGAS_panicRoutinePriorityMap (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap GALGAS_exceptionRoutinePriorityMap::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionRoutinePriorityMap result ;
-  const GALGAS_exceptionRoutinePriorityMap * p = (const GALGAS_exceptionRoutinePriorityMap *) inObject.embeddedObject () ;
+GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::extractObject (const GALGAS_object & inObject,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_panicRoutinePriorityMap result ;
+  const GALGAS_panicRoutinePriorityMap * p = (const GALGAS_panicRoutinePriorityMap *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_exceptionRoutinePriorityMap *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_panicRoutinePriorityMap *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("exceptionRoutinePriorityMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("panicRoutinePriorityMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

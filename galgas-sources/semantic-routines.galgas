@@ -134,7 +134,7 @@ proc routineSemanticAnalysis
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:procedureModeSet
-    !allowException:not [procedureModeSet hasKey !panicModeName ()]
+    !allowPanic:not [procedureModeSet hasKey !panicModeName ()]
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
@@ -224,7 +224,7 @@ method @routineMapIR-element llvmCodeGeneration
   case section : routineName = llvmNameForSectionImplementation (!lkey.string)
   case service : routineName = llvmNameForServiceImplementation (!lkey.string)
   end
-  if [option plm_options.noPanicGeneration value] && mNullOnNoException then
+  if [option plm_options.noPanicGeneration value] && mNullOnNoPanic then
   #--- Generate in assembly code routine pointer as NULL value
     ioAssemblerCode += asSeparatorLine ()
     ioAssemblerCode += "  .global " + routineName + "\n"

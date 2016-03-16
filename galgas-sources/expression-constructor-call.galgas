@@ -67,7 +67,7 @@ override method @constructorCall analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -110,7 +110,7 @@ override method @constructorCall analyzeExpression
             !optionalTargetType:formal_mType
             !context:inContext
             !modes:inModeSet
-            !allowException:inAllowExceptions
+            !allowPanic:inAllowPanic
             !?temporary:ioTemporaries
             !?staticStringMap:ioGlobalLiteralStringMap
             !?variableMap:ioVariableMap

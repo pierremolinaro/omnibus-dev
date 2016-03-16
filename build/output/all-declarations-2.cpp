@@ -1505,7 +1505,7 @@ cMapElement_routineMapIR::cMapElement_routineMapIR (const GALGAS_lstring & inKey
                                                     const GALGAS_bool & in_mIsRequired,
                                                     const GALGAS_bool & in_mWarnIfUnused,
                                                     const GALGAS_bool & in_mWeak,
-                                                    const GALGAS_bool & in_mNullOnNoException,
+                                                    const GALGAS_bool & in_mNullOnNoPanic,
                                                     const GALGAS_bool & in_mGlobal,
                                                     const GALGAS_routineKind & in_mKind
                                                     COMMA_LOCATION_ARGS) :
@@ -1515,7 +1515,7 @@ mAttribute_mInstructionGenerationList (in_mInstructionGenerationList),
 mAttribute_mIsRequired (in_mIsRequired),
 mAttribute_mWarnIfUnused (in_mWarnIfUnused),
 mAttribute_mWeak (in_mWeak),
-mAttribute_mNullOnNoException (in_mNullOnNoException),
+mAttribute_mNullOnNoPanic (in_mNullOnNoPanic),
 mAttribute_mGlobal (in_mGlobal),
 mAttribute_mKind (in_mKind) {
 }
@@ -1523,14 +1523,14 @@ mAttribute_mKind (in_mKind) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_routineMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () && mAttribute_mWarnIfUnused.isValid () && mAttribute_mWeak.isValid () && mAttribute_mNullOnNoException.isValid () && mAttribute_mGlobal.isValid () && mAttribute_mKind.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () && mAttribute_mWarnIfUnused.isValid () && mAttribute_mWeak.isValid () && mAttribute_mNullOnNoPanic.isValid () && mAttribute_mGlobal.isValid () && mAttribute_mKind.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_routineMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_routineMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mInstructionGenerationList, mAttribute_mIsRequired, mAttribute_mWarnIfUnused, mAttribute_mWeak, mAttribute_mNullOnNoException, mAttribute_mGlobal, mAttribute_mKind COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_routineMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mInstructionGenerationList, mAttribute_mIsRequired, mAttribute_mWarnIfUnused, mAttribute_mWeak, mAttribute_mNullOnNoPanic, mAttribute_mGlobal, mAttribute_mKind COMMA_HERE)) ;
   return result ;
 }
 
@@ -1559,8 +1559,8 @@ void cMapElement_routineMapIR::description (C_String & ioString, const int32_t i
   mAttribute_mWeak.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mNullOnNoException" ":" ;
-  mAttribute_mNullOnNoException.description (ioString, inIndentation) ;
+  ioString << "mNullOnNoPanic" ":" ;
+  mAttribute_mNullOnNoPanic.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mGlobal" ":" ;
@@ -1592,7 +1592,7 @@ typeComparisonResult cMapElement_routineMapIR::compare (const cCollectionElement
     result = mAttribute_mWeak.objectCompare (operand->mAttribute_mWeak) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mNullOnNoException.objectCompare (operand->mAttribute_mNullOnNoException) ;
+    result = mAttribute_mNullOnNoPanic.objectCompare (operand->mAttribute_mNullOnNoPanic) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mGlobal.objectCompare (operand->mAttribute_mGlobal) ;
@@ -1731,7 +1731,7 @@ void GALGAS_routineMapIR::method_searchKey (GALGAS_lstring inKey,
     outArgument2 = p->mAttribute_mIsRequired ;
     outArgument3 = p->mAttribute_mWarnIfUnused ;
     outArgument4 = p->mAttribute_mWeak ;
-    outArgument5 = p->mAttribute_mNullOnNoException ;
+    outArgument5 = p->mAttribute_mNullOnNoPanic ;
     outArgument6 = p->mAttribute_mGlobal ;
     outArgument7 = p->mAttribute_mKind ;
   }
@@ -1761,7 +1761,7 @@ void GALGAS_routineMapIR::setter_removeKey (GALGAS_lstring inKey,
     outArgument2 = p->mAttribute_mIsRequired ;
     outArgument3 = p->mAttribute_mWarnIfUnused ;
     outArgument4 = p->mAttribute_mWeak ;
-    outArgument5 = p->mAttribute_mNullOnNoException ;
+    outArgument5 = p->mAttribute_mNullOnNoPanic ;
     outArgument6 = p->mAttribute_mGlobal ;
     outArgument7 = p->mAttribute_mKind ;
   }
@@ -1844,15 +1844,15 @@ GALGAS_bool GALGAS_routineMapIR::getter_mWeakForKey (const GALGAS_string & inKey
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_routineMapIR::getter_mNullOnNoExceptionForKey (const GALGAS_string & inKey,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_routineMapIR::getter_mNullOnNoPanicForKey (const GALGAS_string & inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_routineMapIR * p = (const cMapElement_routineMapIR *) attributes ;
   GALGAS_bool result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapIR) ;
-    result = p->mAttribute_mNullOnNoException ;
+    result = p->mAttribute_mNullOnNoPanic ;
   }
   return result ;
 }
@@ -1959,15 +1959,15 @@ void GALGAS_routineMapIR::setter_setMWeakForKey (GALGAS_bool inAttributeValue,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_routineMapIR::setter_setMNullOnNoExceptionForKey (GALGAS_bool inAttributeValue,
-                                                              GALGAS_string inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_routineMapIR::setter_setMNullOnNoPanicForKey (GALGAS_bool inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_routineMapIR * p = (cMapElement_routineMapIR *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapIR) ;
-    p->mAttribute_mNullOnNoException = inAttributeValue ;
+    p->mAttribute_mNullOnNoPanic = inAttributeValue ;
   }
 }
 
@@ -2022,7 +2022,7 @@ cGenericAbstractEnumerator () {
 GALGAS_routineMapIR_2D_element cEnumerator_routineMapIR::current (LOCATION_ARGS) const {
   const cMapElement_routineMapIR * p = (const cMapElement_routineMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapIR) ;
-  return GALGAS_routineMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mInstructionGenerationList, p->mAttribute_mIsRequired, p->mAttribute_mWarnIfUnused, p->mAttribute_mWeak, p->mAttribute_mNullOnNoException, p->mAttribute_mGlobal, p->mAttribute_mKind) ;
+  return GALGAS_routineMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mInstructionGenerationList, p->mAttribute_mIsRequired, p->mAttribute_mWarnIfUnused, p->mAttribute_mWeak, p->mAttribute_mNullOnNoPanic, p->mAttribute_mGlobal, p->mAttribute_mKind) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2075,10 +2075,10 @@ GALGAS_bool cEnumerator_routineMapIR::current_mWeak (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cEnumerator_routineMapIR::current_mNullOnNoException (LOCATION_ARGS) const {
+GALGAS_bool cEnumerator_routineMapIR::current_mNullOnNoPanic (LOCATION_ARGS) const {
   const cMapElement_routineMapIR * p = (const cMapElement_routineMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapIR) ;
-  return p->mAttribute_mNullOnNoException ;
+  return p->mAttribute_mNullOnNoPanic ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

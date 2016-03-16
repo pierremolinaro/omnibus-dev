@@ -48,8 +48,8 @@ abstract method @abstractDeclaration semanticAnalysis
 
 struct @semanticTemporariesStruct {
   @uint mTemporaryIndex
-  @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
-  @exceptionRoutinePriorityMap mExceptionLoopRoutinePriorityMap 
+  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
+  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
   @initRoutinePriorityMap mInitRoutinePriorityMap
   @bootRoutinePriorityMap mBootRoutinePriorityMap
   @subprogramInvocationGraph mSubprogramInvocationGraph
@@ -142,8 +142,8 @@ proc semanticAnalysis
     ]
   end
 #--- Generate panic clauses
-  for exception in inAST.mExceptionClauses do
-    [exception exceptionSemanticAnalysis
+  for panic in inAST.mPanicClauses do
+    [panic exceptionSemanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct

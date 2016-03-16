@@ -223,7 +223,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:functionModeSet
-    !allowException:not [functionModeSet hasKey !panicModeName ()]
+    !allowPanic:not [functionModeSet hasKey !panicModeName ()]
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap

@@ -117,7 +117,7 @@ override method @globalConstantDeclaration enterInContext
     !optionalTargetType:annotationType
     !context:ioContext
     !modes:{}
-    !allowException:true
+    !allowPanic:true
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap

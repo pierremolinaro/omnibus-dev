@@ -117,7 +117,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -131,7 +131,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -145,7 +145,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !optionalTargetType:leftOperand.mType
     !context:inContext
     !modes:inModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -275,7 +275,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -290,7 +290,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -305,7 +305,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !optionalTargetType:leftOperand.mType
     !context:inContext
     !modes:inModeSet
-    !allowException:inAllowExceptions
+    !allowPanic:inAllowPanic
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap

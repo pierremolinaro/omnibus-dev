@@ -58,7 +58,7 @@ abstract method @instructionAST analyze
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -72,7 +72,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?endOfInstructionList:@location inEndOfInstructionList
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -86,7 +86,7 @@ method @instructionListAST analyzeBranchInstructionList
       !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
       !context:inContext
       !modes:inModeSet
-      !allowException:inAllowExceptions
+      !allowPanic:inAllowPanic
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
@@ -104,7 +104,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -116,7 +116,7 @@ method @instructionListAST analyzeRoutineInstructionList
       !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
       !context:inContext
       !modes:inModeSet
-      !allowException:inAllowExceptions
+      !allowPanic:inAllowPanic
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap

@@ -34,6 +34,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "false",
   "for",
   "func",
+  "guard",
   "if",
   "import",
   "in",

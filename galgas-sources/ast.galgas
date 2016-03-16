@@ -31,8 +31,8 @@ struct @ast {
   @lstringlist mTargetList
   @bootList mBootList
   @initList mInitList
-  @exceptionClauseListAST mExceptionClauses
-  @exceptionTypesAST mExceptionTypes
+  @panicClauseListAST mPanicClauses
+  @panicTypesAST mPanicTypes
   @taskList mTaskList
 }
 

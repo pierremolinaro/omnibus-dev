@@ -167,7 +167,7 @@ proc initSemanticAnalysis
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:inModeSet
-    !allowException:true
+    !allowPanic:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap

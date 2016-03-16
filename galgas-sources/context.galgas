@@ -165,14 +165,14 @@ struct @semanticContext {
   @uint mPointerSize # in bit count
   @unifiedTypeMap-proxy mBooleanType
   @unifiedTypeMap-proxy mLiteralIntegerType
-  @unifiedTypeMap-proxy mExceptionCodeType
-  @unifiedTypeMap-proxy mExceptionLineType
+  @unifiedTypeMap-proxy mPanicCodeType
+  @unifiedTypeMap-proxy mPanicLineType
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
-  @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
-  @exceptionRoutinePriorityMap mExceptionLoopRoutinePriorityMap 
+  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
+  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
   @controlRegisterMap mControlRegisterMap
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
@@ -237,9 +237,9 @@ proc buildSemanticContext
   for initRoutine in inAST.mInitList do
     [initRoutine enterInContext !?context:outSemanticContext]
   end
-#--- Enter exception routines
-  for execptionRoutine in inAST.mExceptionClauses do
-    [execptionRoutine enterInContext !?context:outSemanticContext]
+#--- Enter panic routines
+  for panicRoutine in inAST.mPanicClauses do
+    [panicRoutine enterInContext !?context:outSemanticContext]
   end
 #---
   for (declaration) in inDeclarationListAST do
@@ -249,22 +249,22 @@ proc buildSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
-#--- Solve exception types
-  if [inAST.mExceptionTypes length] != 1 then
+#--- Solve panic types
+  if [inAST.mPanicTypes length] != 1 then
     error ["" nowhere]
-    : "exactly one exception type declaration should be provided (found:" + [inAST.mExceptionTypes length] + ")"
-    for () in inAST.mExceptionTypes do
-      error mExceptionCodeTypeName:"exception type declaration is here"
+    : "exactly one panic type declaration should be provided (found:" + [inAST.mPanicTypes length] + ")"
+    for () in inAST.mPanicTypes do
+      error mPanicCodeTypeName:"panic type declaration is here"
     end
   else
-    [inAST.mExceptionTypes first ?let @lstring exceptionCodeTypeName ?let @lstring exceptionLineTypeName]
-    outSemanticContext.mExceptionCodeType = .searchKey {
+    [inAST.mPanicTypes first ?let @lstring panicCodeTypeName ?let @lstring panicLineTypeName]
+    outSemanticContext.mPanicCodeType = .searchKey {
       !outSemanticContext.mTypeMap
-      !exceptionCodeTypeName
+      !panicCodeTypeName
     }
-    outSemanticContext.mExceptionLineType = .searchKey {
+    outSemanticContext.mPanicLineType = .searchKey {
       !outSemanticContext.mTypeMap
-      !exceptionLineTypeName
+      !panicLineTypeName
     }
   end
 #--- Build an HTML containing all glogal constants

@@ -308,7 +308,7 @@ void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructio
                                                    const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
                                                    const class GALGAS_semanticContext constin_inContext,
                                                    const class GALGAS_stringset constin_inModeSet,
-                                                   const class GALGAS_bool constin_inAllowExceptions,
+                                                   const class GALGAS_bool constin_inAllowPanic,
                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                    class GALGAS_variableMap & io_ioVariableMap,
@@ -325,8 +325,8 @@ void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructio
 class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_uint mAttribute_mTemporaryIndex ;
-  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionSetupRoutinePriorityMap ;
-  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionLoopRoutinePriorityMap ;
+  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicSetupRoutinePriorityMap ;
+  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicLoopRoutinePriorityMap ;
   public : GALGAS_initRoutinePriorityMap mAttribute_mInitRoutinePriorityMap ;
   public : GALGAS_bootRoutinePriorityMap mAttribute_mBootRoutinePriorityMap ;
   public : GALGAS_subprogramInvocationGraph mAttribute_mSubprogramInvocationGraph ;
@@ -347,8 +347,8 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_semanticTemporariesStruct (const GALGAS_uint & in_mTemporaryIndex,
-                                             const GALGAS_exceptionRoutinePriorityMap & in_mExceptionSetupRoutinePriorityMap,
-                                             const GALGAS_exceptionRoutinePriorityMap & in_mExceptionLoopRoutinePriorityMap,
+                                             const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
+                                             const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
                                              const GALGAS_initRoutinePriorityMap & in_mInitRoutinePriorityMap,
                                              const GALGAS_bootRoutinePriorityMap & in_mBootRoutinePriorityMap,
                                              const GALGAS_subprogramInvocationGraph & in_mSubprogramInvocationGraph) ;
@@ -365,8 +365,8 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_semanticTemporariesStruct constructor_new (const class GALGAS_uint & inOperand0,
-                                                                    const class GALGAS_exceptionRoutinePriorityMap & inOperand1,
-                                                                    const class GALGAS_exceptionRoutinePriorityMap & inOperand2,
+                                                                    const class GALGAS_panicRoutinePriorityMap & inOperand1,
+                                                                    const class GALGAS_panicRoutinePriorityMap & inOperand2,
                                                                     const class GALGAS_initRoutinePriorityMap & inOperand3,
                                                                     const class GALGAS_bootRoutinePriorityMap & inOperand4,
                                                                     const class GALGAS_subprogramInvocationGraph & inOperand5
@@ -386,11 +386,11 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bootRoutinePriorityMap getter_mBootRoutinePriorityMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_mExceptionLoopRoutinePriorityMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_mExceptionSetupRoutinePriorityMap (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_initRoutinePriorityMap getter_mInitRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicLoopRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicSetupRoutinePriorityMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_subprogramInvocationGraph getter_mSubprogramInvocationGraph (LOCATION_ARGS) const ;
 
@@ -577,7 +577,7 @@ void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inOb
                                            const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
                                            const GALGAS_semanticContext constin_inContext,
                                            const GALGAS_stringset constin_inModes,
-                                           const GALGAS_bool constin_inAllowExceptions,
+                                           const GALGAS_bool constin_inAllowPanic,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_variableMap & io_ioVariableMap,
@@ -850,17 +850,6 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_controlRegist
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Category method '@exceptionClauseListAST noteTypesInPrecedenceGraph'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_exceptionClauseListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                   Category method '@externProcedureDeclarationListAST noteTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -899,6 +888,17 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_globalVarDecl
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_initList inObject,
+                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Category method '@panicClauseListAST noteTypesInPrecedenceGraph'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_panicClauseListAST inObject,
                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
@@ -1035,17 +1035,6 @@ void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Category method '@exceptionClauseListAST-element enterInContext'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterInContext (const class GALGAS_exceptionClauseListAST_2D_element inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                    Category method '@externProcedureDeclarationListAST enterExternProcInContext'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1085,6 +1074,17 @@ void categoryMethod_enterInContext (const class GALGAS_globalVarDeclarationList_
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_enterInContext (const class GALGAS_initList_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Category method '@panicClauseListAST-element enterInContext'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_element inObject,
                                     class GALGAS_semanticContext & io_ioContext,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
@@ -1206,19 +1206,6 @@ void categoryMethod_bootSemanticAnalysis (const class GALGAS_bootList_2D_element
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Category method '@exceptionClauseListAST-element exceptionSemanticAnalysis'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_exceptionSemanticAnalysis (const class GALGAS_exceptionClauseListAST_2D_element inObject,
-                                               const class GALGAS_semanticContext constin_inContext,
-                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                Category method '@externProcedureDeclarationListAST externProcedureSemanticAnalysis'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1267,6 +1254,19 @@ void categoryMethod_initSemanticAnalysis (const class GALGAS_initList_2D_element
                                           class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Category method '@panicClauseListAST-element exceptionSemanticAnalysis'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_exceptionSemanticAnalysis (const class GALGAS_panicClauseListAST_2D_element inObject,
+                                               const class GALGAS_semanticContext constin_inContext,
+                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
