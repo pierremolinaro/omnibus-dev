@@ -9692,11 +9692,13 @@ GALGAS_taskMap GALGAS_taskMap::extractObject (const GALGAS_object & inObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_taskMapIR::cMapElement_taskMapIR (const GALGAS_lstring & inKey,
+                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mTaskType,
                                               const GALGAS_bigint & in_mPriority,
                                               const GALGAS_bigint & in_mStackSize,
                                               const GALGAS_instructionListIR & in_mInitInstructionListIR
                                               COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
+mAttribute_mTaskType (in_mTaskType),
 mAttribute_mPriority (in_mPriority),
 mAttribute_mStackSize (in_mStackSize),
 mAttribute_mInitInstructionListIR (in_mInitInstructionListIR) {
@@ -9705,20 +9707,24 @@ mAttribute_mInitInstructionListIR (in_mInitInstructionListIR) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_taskMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mPriority.isValid () && mAttribute_mStackSize.isValid () && mAttribute_mInitInstructionListIR.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mTaskType.isValid () && mAttribute_mPriority.isValid () && mAttribute_mStackSize.isValid () && mAttribute_mInitInstructionListIR.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_taskMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_taskMapIR (mAttribute_lkey, mAttribute_mPriority, mAttribute_mStackSize, mAttribute_mInitInstructionListIR COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_taskMapIR (mAttribute_lkey, mAttribute_mTaskType, mAttribute_mPriority, mAttribute_mStackSize, mAttribute_mInitInstructionListIR COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_taskMapIR::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mTaskType" ":" ;
+  mAttribute_mTaskType.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mPriority" ":" ;
@@ -9738,6 +9744,9 @@ void cMapElement_taskMapIR::description (C_String & ioString, const int32_t inIn
 typeComparisonResult cMapElement_taskMapIR::compare (const cCollectionElement * inOperand) const {
   cMapElement_taskMapIR * operand = (cMapElement_taskMapIR *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mTaskType.objectCompare (operand->mAttribute_mTaskType) ;
+  }
   if (kOperandEqual == result) {
     result = mAttribute_mPriority.objectCompare (operand->mAttribute_mPriority) ;
   }
@@ -9798,13 +9807,14 @@ GALGAS_taskMapIR GALGAS_taskMapIR::getter_overriddenMap (C_Compiler * inCompiler
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::addAssign_operation (const GALGAS_lstring & inKey,
-                                            const GALGAS_bigint & inArgument0,
+                                            const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
                                             const GALGAS_bigint & inArgument1,
-                                            const GALGAS_instructionListIR & inArgument2,
+                                            const GALGAS_bigint & inArgument2,
+                                            const GALGAS_instructionListIR & inArgument3,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
   cMapElement_taskMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_taskMapIR (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_taskMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -9816,13 +9826,14 @@ void GALGAS_taskMapIR::addAssign_operation (const GALGAS_lstring & inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_insertKey (GALGAS_lstring inKey,
-                                         GALGAS_bigint inArgument0,
+                                         GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                          GALGAS_bigint inArgument1,
-                                         GALGAS_instructionListIR inArgument2,
+                                         GALGAS_bigint inArgument2,
+                                         GALGAS_instructionListIR inArgument3,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
   cMapElement_taskMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_taskMapIR (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_taskMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -9838,9 +9849,10 @@ const char * kSearchErrorMessage_taskMapIR_searchKey = "** internal error **" ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::method_searchKey (GALGAS_lstring inKey,
-                                         GALGAS_bigint & outArgument0,
+                                         GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                          GALGAS_bigint & outArgument1,
-                                         GALGAS_instructionListIR & outArgument2,
+                                         GALGAS_bigint & outArgument2,
+                                         GALGAS_instructionListIR & outArgument3,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) const {
   const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) performSearch (inKey,
@@ -9851,20 +9863,23 @@ void GALGAS_taskMapIR::method_searchKey (GALGAS_lstring inKey,
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
+    outArgument3.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_taskMapIR) ;
-    outArgument0 = p->mAttribute_mPriority ;
-    outArgument1 = p->mAttribute_mStackSize ;
-    outArgument2 = p->mAttribute_mInitInstructionListIR ;
+    outArgument0 = p->mAttribute_mTaskType ;
+    outArgument1 = p->mAttribute_mPriority ;
+    outArgument2 = p->mAttribute_mStackSize ;
+    outArgument3 = p->mAttribute_mInitInstructionListIR ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_removeKey (GALGAS_lstring inKey,
-                                         GALGAS_bigint & outArgument0,
+                                         GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                          GALGAS_bigint & outArgument1,
-                                         GALGAS_instructionListIR & outArgument2,
+                                         GALGAS_bigint & outArgument2,
+                                         GALGAS_instructionListIR & outArgument3,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
   const char * kRemoveErrorMessage = "** internal error **" ;
@@ -9873,10 +9888,26 @@ void GALGAS_taskMapIR::setter_removeKey (GALGAS_lstring inKey,
   cMapElement_taskMapIR * p = (cMapElement_taskMapIR *) attributes.ptr () ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_taskMapIR) ;
-    outArgument0 = p->mAttribute_mPriority ;
-    outArgument1 = p->mAttribute_mStackSize ;
-    outArgument2 = p->mAttribute_mInitInstructionListIR ;
+    outArgument0 = p->mAttribute_mTaskType ;
+    outArgument1 = p->mAttribute_mPriority ;
+    outArgument2 = p->mAttribute_mStackSize ;
+    outArgument3 = p->mAttribute_mInitInstructionListIR ;
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_taskMapIR::getter_mTaskTypeForKey (const GALGAS_string & inKey,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) attributes ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_taskMapIR) ;
+    result = p->mAttribute_mTaskType ;
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9922,6 +9953,20 @@ GALGAS_instructionListIR GALGAS_taskMapIR::getter_mInitInstructionListIRForKey (
     result = p->mAttribute_mInitInstructionListIR ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_taskMapIR::setter_setMTaskTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                  GALGAS_string inKey,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_taskMapIR * p = (cMapElement_taskMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_taskMapIR) ;
+    p->mAttribute_mTaskType = inAttributeValue ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9989,7 +10034,7 @@ cGenericAbstractEnumerator () {
 GALGAS_taskMapIR_2D_element cEnumerator_taskMapIR::current (LOCATION_ARGS) const {
   const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_taskMapIR) ;
-  return GALGAS_taskMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mPriority, p->mAttribute_mStackSize, p->mAttribute_mInitInstructionListIR) ;
+  return GALGAS_taskMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mTaskType, p->mAttribute_mPriority, p->mAttribute_mStackSize, p->mAttribute_mInitInstructionListIR) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9998,6 +10043,14 @@ GALGAS_lstring cEnumerator_taskMapIR::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_taskMapIR::current_mTaskType (LOCATION_ARGS) const {
+  const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_taskMapIR) ;
+  return p->mAttribute_mTaskType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -20,7 +20,7 @@ section getSysTick (!outResult $uint32) {
 
 task T priority 0 stackSize 512 {
 
-  proc setup () {
+  init 1 {
   //--- Compute getSysTick duration
     waitDuringMS (!delay:1)
     var t0 $uint32 getSysTick (?t0)

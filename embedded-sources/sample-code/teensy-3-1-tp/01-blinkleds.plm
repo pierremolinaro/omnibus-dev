@@ -4,8 +4,7 @@ target "teensy-3-1-tp"
 
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
-  proc setup () {
-  }
+
   proc loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L0)
@@ -22,8 +21,7 @@ task T1 priority 1 stackSize 512 {
 
 task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
-  proc setup () {
-  }
+
   proc loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L1)
@@ -38,8 +36,7 @@ task T2 priority 2 stackSize 512 {
 
 task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
-  proc setup () {
-  }
+
   proc loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L2)
@@ -55,9 +52,6 @@ task T3 priority 3 stackSize 512 {
 task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
-  proc setup () {
-  }
-
   proc loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L3)
@@ -72,8 +66,7 @@ task T4 priority 4 stackSize 512 {
 
 task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
-  proc setup () {
-  }
+
   proc loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L4)

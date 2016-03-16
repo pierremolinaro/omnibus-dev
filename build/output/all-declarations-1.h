@@ -4227,24 +4227,27 @@ class GALGAS_taskMapIR : public AC_GALGAS_map {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_bigint & inOperand1,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                       const class GALGAS_bigint & inOperand2,
-                                                      const class GALGAS_instructionListIR & inOperand3,
+                                                      const class GALGAS_bigint & inOperand3,
+                                                      const class GALGAS_instructionListIR & inOperand4,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_bigint constinArgument1,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                    class GALGAS_bigint constinArgument2,
-                                                   class GALGAS_instructionListIR constinArgument3,
+                                                   class GALGAS_bigint constinArgument3,
+                                                   class GALGAS_instructionListIR constinArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_bigint & outArgument1,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                    class GALGAS_bigint & outArgument2,
-                                                   class GALGAS_instructionListIR & outArgument3,
+                                                   class GALGAS_bigint & outArgument3,
+                                                   class GALGAS_instructionListIR & outArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -4263,12 +4266,18 @@ class GALGAS_taskMapIR : public AC_GALGAS_map {
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                            class GALGAS_string constinArgument1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_bigint & outArgument1,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                    class GALGAS_bigint & outArgument2,
-                                                   class GALGAS_instructionListIR & outArgument3,
+                                                   class GALGAS_bigint & outArgument3,
+                                                   class GALGAS_instructionListIR & outArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -4286,6 +4295,10 @@ class GALGAS_taskMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mStackSizeForKey (const class GALGAS_string & constinOperand0,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTaskTypeForKey (const class GALGAS_string & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskMapIR getter_overriddenMap (C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const ;
@@ -4313,6 +4326,7 @@ class cEnumerator_taskMapIR : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_unifiedTypeMap_2D_proxy current_mTaskType (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mPriority (LOCATION_ARGS) const ;
   public : class GALGAS_bigint current_mStackSize (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mInitInstructionListIR (LOCATION_ARGS) const ;
@@ -4455,12 +4469,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListIR ;
 
 class cMapElement_taskMapIR : public cMapElement {
 //--- Map attributes
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTaskType ;
   public : GALGAS_bigint mAttribute_mPriority ;
   public : GALGAS_bigint mAttribute_mStackSize ;
   public : GALGAS_instructionListIR mAttribute_mInitInstructionListIR ;
 
 //--- Constructor
   public : cMapElement_taskMapIR (const GALGAS_lstring & inKey,
+                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mTaskType,
                                   const GALGAS_bigint & in_mPriority,
                                   const GALGAS_bigint & in_mStackSize,
                                   const GALGAS_instructionListIR & in_mInitInstructionListIR
@@ -4488,6 +4504,7 @@ class cMapElement_taskMapIR : public cMapElement {
 class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTaskType ;
   public : GALGAS_bigint mAttribute_mPriority ;
   public : GALGAS_bigint mAttribute_mStackSize ;
   public : GALGAS_instructionListIR mAttribute_mInitInstructionListIR ;
@@ -4508,6 +4525,7 @@ class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_taskMapIR_2D_element (const GALGAS_lstring & in_lkey,
+                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mTaskType,
                                         const GALGAS_bigint & in_mPriority,
                                         const GALGAS_bigint & in_mStackSize,
                                         const GALGAS_instructionListIR & in_mInitInstructionListIR) ;
@@ -4524,9 +4542,10 @@ class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_taskMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                               const class GALGAS_bigint & inOperand1,
+                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                                const class GALGAS_bigint & inOperand2,
-                                                               const class GALGAS_instructionListIR & inOperand3
+                                                               const class GALGAS_bigint & inOperand3,
+                                                               const class GALGAS_instructionListIR & inOperand4
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4548,6 +4567,8 @@ class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mPriority (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mStackSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTaskType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

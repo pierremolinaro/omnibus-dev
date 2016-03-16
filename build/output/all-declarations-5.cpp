@@ -637,8 +637,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
-  "  proc setup () {\n"
-  "  }\n"
+  "\n"
   "  proc loop () {\n"
   "    waitUntilMS (!deadline:self.compteur)\n"
   "    ledOn (!LED_L0)\n"
@@ -655,8 +654,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T2 priority 2 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
-  "  proc setup () {\n"
-  "  }\n"
+  "\n"
   "  proc loop () {\n"
   "    waitUntilMS (!deadline:self.compteur)\n"
   "    ledOn (!LED_L1)\n"
@@ -671,8 +669,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T3 priority 3 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
-  "  proc setup () {\n"
-  "  }\n"
+  "\n"
   "  proc loop () {\n"
   "    waitUntilMS (!deadline:self.compteur)\n"
   "    ledOn (!LED_L2)\n"
@@ -688,9 +685,6 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T4 priority 4 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  proc setup () {\n"
-  "  }\n"
-  "\n"
   "  proc loop () {\n"
   "    waitUntilMS (!deadline:self.compteur)\n"
   "    ledOn (!LED_L3)\n"
@@ -705,8 +699,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T5 priority 5 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
-  "  proc setup () {\n"
-  "  }\n"
+  "\n"
   "  proc loop () {\n"
   "    waitUntilMS (!deadline:self.compteur)\n"
   "    ledOn (!LED_L4)\n"
@@ -723,7 +716,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  1828, // Text length
+  1721, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -751,7 +744,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T priority 0 stackSize 512 {\n"
   "\n"
-  "  proc setup () {\n"
+  "  init 1 {\n"
   "  //--- Compute getSysTick duration\n"
   "    waitDuringMS (!delay:1)\n"
   "    var t0 $uint32 getSysTick (\?t0)\n"
@@ -839,7 +832,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-section-service-duration.plm",
   "plm",
   true, // Text file
-  2584, // Text length
+  2577, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -881,7 +874,12 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T1 priority 1 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  proc setup () {\n"
+  "  init 123 {\n"
+  "    self.top += 1\n"
+  "  }\n"
+  "  \n"
+  "  init 256 {\n"
+  "    self.top += 2\n"
   "  }\n"
   "  \n"
   "  proc loop () {\n"
@@ -900,9 +898,6 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T2 priority 2 stackSize 512 {\n"
   "\n"
-  "  proc setup () {\n"
-  "  }\n"
-  "  \n"
   "  proc loop () {\n"
   "    s.P ()\n"
   "    ledOn (!LED_L2)\n"
@@ -917,7 +912,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  1125, // Text length
+  1151, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

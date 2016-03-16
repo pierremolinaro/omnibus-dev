@@ -1578,6 +1578,16 @@ class GALGAS_string function_stackNameForTask (const class GALGAS_string & const
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Function 'initNameForTaskType'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_initNameForTaskType (const class GALGAS_string & constinArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Function 'stackAddressForTask'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
