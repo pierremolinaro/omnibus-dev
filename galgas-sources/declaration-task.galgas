@@ -181,9 +181,6 @@ method @taskList enterInContext
     for procedure in task.mTaskProcList do
       [!?taskProcedureMap insertKey !procedure.mProcedureName]
     end
-    if not [taskProcedureMap hasKey !"setup"] then
-      error task.mEndOfTaskDeclaration : "a task should declare an 'setup' procedure"
-    end
     if not [taskProcedureMap hasKey !"loop"] then
       error task.mEndOfTaskDeclaration : "a task should declare an 'loop' procedure"
     end
@@ -328,6 +325,7 @@ method @taskList-element semanticAnalysis
 #------------------------------------------- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
     !mTaskName
+    !taskType
     !mPriority.bigint
     !mStackSize.bigint
     !initInstructionListIR
@@ -339,6 +337,7 @@ method @taskList-element semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @taskMapIR {
+  @unifiedTypeMap-proxy mTaskType
   @bigint mPriority
   @bigint mStackSize
   @instructionListIR mInitInstructionListIR
@@ -390,15 +389,21 @@ method @taskMapIR generateCode
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     ioLLVMcode += "\n"
-    let argument = "(%$" + task.mTaskName + "* @task.var." + task.mTaskName + ")"
+    let effectiveParameter = "(%$" + task.mTaskName + "* @task.var." + task.mTaskName + ")"
+    let formalArgument = "(%$" + task.mTaskName + "* %self)"
+    ioLLVMcode += llvmSeparatorLine ()
+    ioLLVMcode += "\n"
+    ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + " nounwind {\n"
+    [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  ret void\n"
+    ioLLVMcode += "}\n\n"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " () nounwind noreturn naked {\n"
-    ioLLVMcode += "  call void @" + llvmNameForProcedure (!"$" + task.mTaskName + ".setup") + " " + argument + "\n"
-    [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "loop:\n"
-    ioLLVMcode += "  call void @" + llvmNameForProcedure (!"$" + task.mTaskName + ".loop") + " " + argument + "\n"
+    ioLLVMcode += "  call void @" + llvmNameForProcedure (!"$" + task.mTaskName + ".loop") + " " + effectiveParameter + "\n"
     ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "}\n\n"
   end

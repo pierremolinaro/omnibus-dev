@@ -42,9 +42,6 @@ task T1 priority 1 stackSize 512 {
     self.top += 2
   }
   
-  proc setup () {
-  }
-  
   proc loop () {
     waitUntilMS (!deadline:self.top)
     s.V ()
@@ -61,9 +58,6 @@ task T1 priority 1 stackSize 512 {
 
 task T2 priority 2 stackSize 512 {
 
-  proc setup () {
-  }
-  
   proc loop () {
     s.P ()
     ledOn (!LED_L2)

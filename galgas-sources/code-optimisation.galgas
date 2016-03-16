@@ -178,9 +178,9 @@ private proc suppressInaccessibleSubprograms
   for init in ioIntermediateCodeStruct.mInitList do
     [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
   end
-#--- Tasks (setup and loop)
+#--- Tasks (init and loop)
   for task in ioIntermediateCodeStruct.mTaskMapIR do
-    outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + ".setup"
+    [task.mInitInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
     outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + ".loop"
   end
 #--- Panic clauses (if exception code is generated)
@@ -191,8 +191,6 @@ private proc suppressInaccessibleSubprograms
 #--- Explore routines
   @functionMapIR accessibleFunctionMap  = {}
   @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
-#  @taskProcedureMapIR  accessibleTaskProcMap   = {}
-#  @taskProcedureMapIR  nonExploredTaskProcMap  = ioIntermediateCodeStruct.mTaskProcedureMap
   var continues = true
   let bound = [ioIntermediateCodeStruct.mRoutineMapIR count]
     + [ioIntermediateCodeStruct.mFunctionMapIR count]
@@ -200,7 +198,6 @@ private proc suppressInaccessibleSubprograms
     continues = false
     exploreProcs (!?accessibleProcedureMap !?outAccessibleEntities !?nonExploredProcedureMap !?continues)
     exploreFunctions (!?accessibleFunctionMap !?outAccessibleEntities !?nonExploredFunctionMap !?continues)
-#    exploreTaskProcs (!?accessibleTaskProcMap !?outAccessibleEntities !?nonExploredTaskProcMap !?continues)
   end
   if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
     ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
@@ -210,10 +207,6 @@ private proc suppressInaccessibleSubprograms
     ioIntermediateCodeStruct.mFunctionMapIR = accessibleFunctionMap
     ioOptimizing = true
   end
-#  if ioIntermediateCodeStruct.mTaskProcedureMap != accessibleTaskProcMap then
-#    ioIntermediateCodeStruct.mTaskProcedureMap = accessibleTaskProcMap
-#    ioOptimizing = true
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -291,35 +284,6 @@ private proc exploreFunctions
     end
   end
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#private proc exploreTaskProcs
-#  ?!@taskProcedureMapIR ioAccessibleTaskProcMap
-#  ?!@accessibleEntities ioAccessibleEntities
-#  ?!@taskProcedureMapIR ioNonExploredTaskProcMap
-#  ?!@bool ioContinueExploreRoutines
-#{
-#  let @taskProcedureMapIR exNonExploredTaskProcMap = ioNonExploredTaskProcMap
-#  ioNonExploredTaskProcMap = {}
-#  for taskProc in exNonExploredTaskProcMap do
-#    if [ioAccessibleEntities.mTaskProcedureSet hasKey !taskProc.lkey.string] then
-#      [!?ioAccessibleTaskProcMap insertKey
-#        !taskProc.lkey
-#        !taskProc.mInstructionGenerationList
-#        !taskProc.mWarnIfUnused
-#      ]        
-#      [taskProc enterAccessibleEntities !?ioAccessibleEntities]
-#      ioContinueExploreRoutines = true
-#    else
-#      [!?ioNonExploredTaskProcMap insertKey
-#        !taskProc.lkey
-#        !taskProc.mInstructionGenerationList
-#        !taskProc.mWarnIfUnused
-#      ]        
-#    end
-#  end
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

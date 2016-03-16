@@ -229,6 +229,12 @@ func stackNameForTask ?let @string inTaskName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func initNameForTaskType ?let @string inTaskTypeName -> @string outResult {
+  outResult = "@task.init.$" + inTaskTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func stackAddressForTask ?let @string inTaskName -> @string outResult {
   outResult = "%task.stack.address." + inTaskName
 }
