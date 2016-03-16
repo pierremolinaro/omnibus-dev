@@ -220,6 +220,7 @@ override method @structureDeclaration enterInContext
   @propertyMap propertyMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
+  var canBeCopied = true
   for () in mStructureFieldListAST do (fieldIndex)
   #--- Field type
     let @unifiedTypeMap-proxy fieldType = if mFieldTypeName.string == ""
@@ -256,6 +257,9 @@ override method @structureDeclaration enterInContext
       if not [actualFieldType instantiable] then
         error mFieldName : "$" + [actualFieldType key] + " type is not instanciable"
       end
+      if not [actualFieldType copyable] then
+        canBeCopied = false
+      end
       propertyList += !mFieldName.string !actualFieldType
       [!?propertyMap insertKey !mFieldName !actualFieldType ![propertyMap count]]
       sortedOperandIRList += !@operandIR.new {!actualFieldType !expressionIR.mValue} !fieldIndex
@@ -272,17 +276,21 @@ override method @structureDeclaration enterInContext
     !mStructureName
     !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
   ]
-#---------------------------------------- Attribute "unique"
-  var copyable = true
+#---------------------------------------- Attribute "copyable"
+  var copyableAttribute = false
   for (s) in mAttributeListAST do
-    if s.string == "unique" then
-      if not copyable then
+    if s.string == "copyable" then
+      if copyableAttribute then
         error s : "duplicated attribute"
       end
-      copyable = false
+      copyableAttribute = true
     else
-      error s : "unknown attribute"
+      error s : "only @copyable attribute is allowed here"
     end
+  end
+  if copyableAttribute && not canBeCopied then
+    error mStructureName : "this structure cannot be copied, one field is not copyable"
+    copyableAttribute = false
   end
 #---------------------------------------- Functions
   @functionMap functionMap = {}
@@ -317,7 +325,7 @@ override method @structureDeclaration enterInContext
     !typedConstantMap:{}
     !functionMap:functionMap
     !instantiable:true
-    !copyable:copyable
+    !copyable:copyableAttribute
     !equatable:false
     !comparable:false
     !enumerationType:.null # Not enumerable

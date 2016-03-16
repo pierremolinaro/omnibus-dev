@@ -8,6 +8,7 @@ list @taskList {
   @lbigint mStackSize
   @taskVarListAST mVarList
   @procedureDeclarationListAST mTaskProcList
+  @taskInitListAST mTaskInitListAST
   @location mEndOfTaskDeclaration
 }
 
@@ -17,6 +18,25 @@ list @taskVarListAST {
   @lstring mVarName
   @lstring mVarTypeName
   @expressionAST mVarInitExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @taskInitListAST {
+  @lbigint mTaskInitPriority
+  @instructionListAST mTaskInitInstructionList
+  @location mEndOfTaskInitDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sortedlist @taskInitSortedListAST {
+  @lbigint mTaskInitPriority
+  @instructionListAST mTaskInitInstructionList
+  @location mEndOfTaskInitDeclaration
+  @bigint mPriority
+}{
+  mPriority <
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -37,6 +57,7 @@ syntax extension common_syntax {
     ${$
     @taskVarListAST taskVarList = {}
     @procedureDeclarationListAST taskProcList = {}
+    @taskInitListAST taskInitListAST = {}
     repeat
     while
       $var$
@@ -59,6 +80,14 @@ syntax extension common_syntax {
       let endOfProc = @location.here
       $}$
       taskProcList += !{} !procName !{} !formalArgumentList !instructionList !endOfProc
+    while
+      $init$
+      $integer$ ?let @lbigint priority
+      ${$
+      <instructionList> ?let instructionList !?*
+      let endOfInit = @location.here
+      $}$
+      taskInitListAST += !priority !instructionList !endOfInit
     end
     let endOfTask = @location.here
     $}$
@@ -68,6 +97,7 @@ syntax extension common_syntax {
       !stackSize
       !taskVarList
       !taskProcList
+      !taskInitListAST
       !endOfTask
   }
 
@@ -248,12 +278,12 @@ method @taskList-element semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Check stack size is >= 64, and a multiple of 8
+#------------------------------------------- Check stack size is >= 64, and a multiple of 8
   let stackSize = mStackSize.bigint
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
     error mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
-#--- Analyze task procedures
+#------------------------------------------- Analyze task procedures
   let taskType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName}
   for procedure in mTaskProcList do
     routineSemanticAnalysis (
@@ -274,14 +304,35 @@ method @taskList-element semanticAnalysis
       !?intermediateCode:ioIntermediateCodeStruct
     )
   end
-#--- Generate task
+#------------------------------------------- Analyze task init routines
+  @taskInitSortedListAST taskInitSortedListAST = {}
+  for (priority instructionList endOfDeclaration) in mTaskInitListAST do
+    taskInitSortedListAST += !priority !instructionList !endOfDeclaration !priority.bigint
+  end
+  @instructionListIR initInstructionListIR = {}
+  for (taskInitPriority taskInitInstructionList endOfTaskInitDeclaration *) in taskInitSortedListAST do
+    initSemanticAnalysis (
+      !context:inContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+      !selfType:taskType
+      !priority:taskInitPriority
+      !modes:{!userModeName ()}
+      !requiredBy:{}
+      !instructionList:taskInitInstructionList
+      !endOfDeclaration:endOfTaskInitDeclaration
+      ?let @instructionListIR partialInstructionGenerationList
+    )
+    initInstructionListIR += partialInstructionGenerationList
+  end
+#------------------------------------------- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
     !mTaskName
     !mPriority.bigint
     !mStackSize.bigint
+    !initInstructionListIR
   ]
 }
-
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
@@ -290,6 +341,7 @@ method @taskList-element semanticAnalysis
 map @taskMapIR {
   @bigint mPriority
   @bigint mStackSize
+  @instructionListIR mInitInstructionListIR
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
@@ -297,10 +349,11 @@ map @taskMapIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @taskListIR {
+sortedlist @taskSortedListIR {
   @string mTaskName
   @bigint mPriority
   @bigint mStackSize
+  @instructionListIR mInitInstructionListIR
 }{
   mPriority <
 }
@@ -310,7 +363,7 @@ sortedlist @taskListIR {
 method @taskMapIR generateCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?!@generationAdds ioGenerationAdds
 {
 #--- Declare task variables
   ioLLVMcode += llvmTitleComment (!"Task variables")
@@ -328,9 +381,9 @@ method @taskMapIR generateCode
   end
   ioLLVMcode += "\n"
 #--- Build ordered task list
-  @taskListIR orderedTaskList = {}
+  @taskSortedListIR orderedTaskList = {}
   for task in self do
-    orderedTaskList += !task.lkey.string !task.mPriority !task.mStackSize
+    orderedTaskList += !task.lkey.string !task.mPriority !task.mStackSize !task.mInitInstructionListIR
   end
 #--- Declare task stacks and main routine
   for task in orderedTaskList do
@@ -342,6 +395,7 @@ method @taskMapIR generateCode
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " () nounwind noreturn naked {\n"
     ioLLVMcode += "  call void @" + llvmNameForProcedure (!"$" + task.mTaskName + ".setup") + " " + argument + "\n"
+    [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "loop:\n"
     ioLLVMcode += "  call void @" + llvmNameForProcedure (!"$" + task.mTaskName + ".loop") + " " + argument + "\n"

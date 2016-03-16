@@ -40,8 +40,7 @@ syntax extension common_syntax {
       end
     end
     ${$
-    @labelMap labelMap = {}
-    <instructionList> ?let instructionList !?labelMap
+    <instructionList> ?let instructionList !?*
     let endOfInit = @location.here
     $}$
     ioAST.mInitList +=
@@ -98,28 +97,60 @@ method @initList-element initSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  if not [inContext.mModeMap hasKey !initModeName ()] then
-    error mInitLocation : "the `init mode should be defined in order to use init routines"
-  end
-  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !.new{![mPriority string] !mPriority.location}]
-#--- Check "requiredBy" routines are defined
-  for (procName procFormalArgumentList) in mRequiredByProcList do
-    let lkey = @lstring.new {!"." + procName !procName.location}
-    [inContext.mRoutineMapForContext searchKey !lkey ?5*]
-  end
+  initSemanticAnalysis (
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+    !selfType:.null
+    !priority:mPriority
+    !modes:{!initModeName ()}
+    !requiredBy:mRequiredByProcList
+    !instructionList:mInstructionList
+    !endOfDeclaration:mEndOfInitLocation
+    ?let @instructionListIR instructionGenerationList
+  )
+#--- Code generation
+  ioIntermediateCodeStruct.mInitList +=
+    !mRequiredByProcList
+    !mInitLocation
+    !instructionGenerationList
+    !mEndOfInitLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc initSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  ?selfType:let @unifiedTypeMap-proxy inSelfType
+  ?priority:let @lbigint inPriority
+  ?modes:let @stringset inModeSet
+  ?requiredBy:let @initRequiredByProcList inRequiredByProcList
+  ?instructionList:let @instructionListAST inInstructionListAST
+  ?endOfDeclaration:let @location inEndOfInitDeclaration
+  !@instructionListIR outInstructionGenerationList
+{
+#--- Check init routine is unique
+  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType !inPriority)
+  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !routineNameForInvocationGraph]
 #---
-  let routineNameForInvocationGraph = initNameForInvocationGraph (!mPriority)
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph
       !routineNameForInvocationGraph
     ]
   end
-  for (procName procFormalArgumentList) in mRequiredByProcList do
+  for (procName procFormalArgumentList) in inRequiredByProcList do
     [!?ioTemporaries.mSubprogramInvocationGraph addEdge
-      !procNameForInvocationGraph (!.null !procName)
+      !procNameForInvocationGraph (!inSelfType !procName)
       !routineNameForInvocationGraph
     ]
+  end
+#--- Check "requiredBy" routines are defined
+  for (procName procFormalArgumentList) in inRequiredByProcList do
+    let lkey = @lstring.new {!"." + procName !procName.location}
+    [inContext.mRoutineMapForContext searchKey !lkey ?5*]
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
@@ -130,26 +161,20 @@ method @initList-element initSemanticAnalysis
     !globalsAreConstant:false
   )
 #--- Analyze instruction list
-  @instructionListIR instructionGenerationList = {}
-  [mInstructionList analyzeRoutineInstructionList
-    !self:.null
+  outInstructionGenerationList = {}
+  [inInstructionListAST analyzeRoutineInstructionList
+    !self:inSelfType
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !modes:{!initModeName ()}
+    !modes:inModeSet
     !allowException:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
-    !?generatedCode:instructionGenerationList
+    !?generatedCode:outInstructionGenerationList
   ]
 #---
-  [variableMap checkAutomatonStates !mEndOfInitLocation]
-#--- Code generation
-  ioIntermediateCodeStruct.mInitList +=
-    !mRequiredByProcList
-    !mInitLocation
-    !instructionGenerationList
-    !mEndOfInitLocation
+  [variableMap checkAutomatonStates !inEndOfInitDeclaration]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -223,7 +223,7 @@ override method @varOperatorAssignInstructionAST analyze
     ?op:let @infixOperatorDescription binaryOperator
   ]
   if not isCopyable then
-    error mTargetVarName : "the '" + mTargetVarName + "' variable is not copyable"
+    error mTargetVarName : "an $" + [targetType key] + " instance is not copyable"
   end
 #--- Code generation
   [targetVariableKind loadFromMemory

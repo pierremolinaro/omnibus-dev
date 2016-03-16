@@ -136,7 +136,7 @@ override method @varInExpressionAST analyzeExpression
     error mSourceVarName : "routine has no access right on this variable"
   end
   if not copyable then
-    error mSourceVarName : "an object of $" + [variableType key] + " is not copyable"
+    error mSourceVarName : "an $" + [variableType key] + " instance is not copyable"
   end
 #--- Load variable
   [variableKind loadFromMemory
@@ -188,7 +188,7 @@ override method @selfVarInExpressionAST analyzeExpression
     case structure (@propertyMap propertyMap *) :
       [propertyMap searchKey !mSourceVarName ?let type ?let idx]
       if not [type copyable] then
-        error mSourceVarName : "an object of $" + [type key] + " is not copyable"
+        error mSourceVarName : "an $" + [type key] + " instance is not copyable"
       end
       getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf

@@ -857,25 +857,23 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    if self.value > 0 then\n"
   "      self.value -= 1\n"
   "    else\n"
-  "      kernel_blockRunningTaskInList (!\?self.list)\n"
+  "      blockInList (!\?list:self.list)\n"
   "    end\n"
   "  }\n"
   "\n"
   "  service V `kernel () {\n"
-  "    kernel_makeTaskReadyFromWaitingList (!\?self.list \?let found)\n"
+  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
   "    if not found then\n"
   "      self.value += 1\n"
   "    end\n"
   "  }\n"
   "}\n"
   "\n"
+  "//------------------------------------------------*\n"
+  "\n"
   "var s = $semaphore (!value:0) {\n"
   "  proc $T1.loop\n"
   "  proc $T2.loop\n"
-  "}\n"
-  "\n"
-  "var gL = $taskList () {\n"
-  "  proc $T1.setup\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -883,11 +881,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T1 priority 1 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  var list = $taskList ()\n"
-  "\n"
   "  proc setup () {\n"
-  "    var list2 = self.list\n"
-  "    var list3 = gL\n"
   "  }\n"
   "  \n"
   "  proc loop () {\n"
@@ -923,7 +917,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  1212, // Text length
+  1125, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

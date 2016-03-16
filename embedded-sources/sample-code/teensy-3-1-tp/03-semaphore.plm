@@ -10,25 +10,23 @@ struct $semaphore {
     if self.value > 0 then
       self.value -= 1
     else
-      kernel_blockRunningTaskInList (!?self.list)
+      blockInList (!?list:self.list)
     end
   }
 
   service V `kernel () {
-    kernel_makeTaskReadyFromWaitingList (!?self.list ?let found)
+    makeTaskReady (!?list:self.list ?found:let found)
     if not found then
       self.value += 1
     end
   }
 }
 
+//------------------------------------------------*
+
 var s = $semaphore (!value:0) {
   proc $T1.loop
   proc $T2.loop
-}
-
-var gL = $taskList () {
-  proc $T1.setup
 }
 
 //------------------------------------------------*
@@ -36,11 +34,15 @@ var gL = $taskList () {
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
-  var list = $taskList ()
-
+  init 123 {
+    self.top += 1
+  }
+  
+  init 256 {
+    self.top += 2
+  }
+  
   proc setup () {
-    var list2 = self.list
-    var list3 = gL
   }
   
   proc loop () {

@@ -11,6 +11,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                  Category getter '@valueIR llvmName' (as function)                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_llvmName (const class GALGAS_valueIR & inObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      Routine 'enterControlRegistersInContext'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -244,6 +254,171 @@ class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Routine 'initSemanticAnalysis'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArgument0,
+                                   class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                   class GALGAS_intermediateCodeStruct & ioArgument2,
+                                   const class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
+                                   const class GALGAS_lbigint constinArgument4,
+                                   const class GALGAS_stringset constinArgument5,
+                                   const class GALGAS_initRequiredByProcList constinArgument6,
+                                   const class GALGAS_instructionListAST constinArgument7,
+                                   const class GALGAS_location constinArgument8,
+                                   class GALGAS_instructionListIR & outArgument9,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'initNameForInvocationGraph'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_initNameForInvocationGraph (class GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                          class GALGAS_lbigint inArgument1,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Function 'initialVariableMap'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_variableMap function_initialVariableMap (const class GALGAS_string & constinArgument0,
+                                                      const class GALGAS_semanticContext & constinArgument1,
+                                                      const class GALGAS_bool & constinArgument2,
+                                                      const class GALGAS_accessKind & constinArgument3,
+                                                      class GALGAS_bool inArgument4,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'procNameForInvocationGraph'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_procNameForInvocationGraph (class GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                          class GALGAS_lstring inArgument1,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category method '@instructionListAST analyzeRoutineInstructionList'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
+                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                   const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
+                                                   const class GALGAS_semanticContext constin_inContext,
+                                                   const class GALGAS_stringset constin_inModeSet,
+                                                   const class GALGAS_bool constin_inAllowExceptions,
+                                                   class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                   class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                   class GALGAS_variableMap & io_ioVariableMap,
+                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @semanticTemporariesStruct struct                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_uint mAttribute_mTemporaryIndex ;
+  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionSetupRoutinePriorityMap ;
+  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionLoopRoutinePriorityMap ;
+  public : GALGAS_initRoutinePriorityMap mAttribute_mInitRoutinePriorityMap ;
+  public : GALGAS_bootRoutinePriorityMap mAttribute_mBootRoutinePriorityMap ;
+  public : GALGAS_subprogramInvocationGraph mAttribute_mSubprogramInvocationGraph ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_semanticTemporariesStruct constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_semanticTemporariesStruct (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_semanticTemporariesStruct (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_semanticTemporariesStruct (const GALGAS_uint & in_mTemporaryIndex,
+                                             const GALGAS_exceptionRoutinePriorityMap & in_mExceptionSetupRoutinePriorityMap,
+                                             const GALGAS_exceptionRoutinePriorityMap & in_mExceptionLoopRoutinePriorityMap,
+                                             const GALGAS_initRoutinePriorityMap & in_mInitRoutinePriorityMap,
+                                             const GALGAS_bootRoutinePriorityMap & in_mBootRoutinePriorityMap,
+                                             const GALGAS_subprogramInvocationGraph & in_mSubprogramInvocationGraph) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_semanticTemporariesStruct extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_semanticTemporariesStruct constructor_new (const class GALGAS_uint & inOperand0,
+                                                                    const class GALGAS_exceptionRoutinePriorityMap & inOperand1,
+                                                                    const class GALGAS_exceptionRoutinePriorityMap & inOperand2,
+                                                                    const class GALGAS_initRoutinePriorityMap & inOperand3,
+                                                                    const class GALGAS_bootRoutinePriorityMap & inOperand4,
+                                                                    const class GALGAS_subprogramInvocationGraph & inOperand5
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bootRoutinePriorityMap getter_mBootRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_mExceptionLoopRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_mExceptionSetupRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_initRoutinePriorityMap getter_mInitRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_subprogramInvocationGraph getter_mSubprogramInvocationGraph (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTemporaryIndex (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_semanticTemporariesStruct class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          Routine 'checkRequiredProcedures'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -313,17 +488,6 @@ class GALGAS_operandIR function_checkAssignmentCompatibility (const class GALGAS
 class GALGAS_string function_llvmNameForLocalVariable (class GALGAS_string inArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'procNameForInvocationGraph'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_procNameForInvocationGraph (class GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                          class GALGAS_lstring inArgument1,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -481,111 +645,6 @@ void categoryModifier_appendGetElementPtrFromSelf (class GALGAS_instructionListI
                                                    const class GALGAS_string constin_inFieldName,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @semanticTemporariesStruct struct                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
-//--------------------------------- Public data members
-  public : GALGAS_uint mAttribute_mTemporaryIndex ;
-  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionSetupRoutinePriorityMap ;
-  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionLoopRoutinePriorityMap ;
-  public : GALGAS_initRoutinePriorityMap mAttribute_mInitRoutinePriorityMap ;
-  public : GALGAS_bootRoutinePriorityMap mAttribute_mBootRoutinePriorityMap ;
-  public : GALGAS_subprogramInvocationGraph mAttribute_mSubprogramInvocationGraph ;
-
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_semanticTemporariesStruct constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_semanticTemporariesStruct (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_semanticTemporariesStruct (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_semanticTemporariesStruct (const GALGAS_uint & in_mTemporaryIndex,
-                                             const GALGAS_exceptionRoutinePriorityMap & in_mExceptionSetupRoutinePriorityMap,
-                                             const GALGAS_exceptionRoutinePriorityMap & in_mExceptionLoopRoutinePriorityMap,
-                                             const GALGAS_initRoutinePriorityMap & in_mInitRoutinePriorityMap,
-                                             const GALGAS_bootRoutinePriorityMap & in_mBootRoutinePriorityMap,
-                                             const GALGAS_subprogramInvocationGraph & in_mSubprogramInvocationGraph) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_semanticTemporariesStruct extractObject (const GALGAS_object & inObject,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_semanticTemporariesStruct constructor_new (const class GALGAS_uint & inOperand0,
-                                                                    const class GALGAS_exceptionRoutinePriorityMap & inOperand1,
-                                                                    const class GALGAS_exceptionRoutinePriorityMap & inOperand2,
-                                                                    const class GALGAS_initRoutinePriorityMap & inOperand3,
-                                                                    const class GALGAS_bootRoutinePriorityMap & inOperand4,
-                                                                    const class GALGAS_subprogramInvocationGraph & inOperand5
-                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bootRoutinePriorityMap getter_mBootRoutinePriorityMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_mExceptionLoopRoutinePriorityMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap getter_mExceptionSetupRoutinePriorityMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_initRoutinePriorityMap getter_mInitRoutinePriorityMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_subprogramInvocationGraph getter_mSubprogramInvocationGraph (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTemporaryIndex (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_semanticTemporariesStruct class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'initialVariableMap'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_variableMap function_initialVariableMap (const class GALGAS_string & constinArgument0,
-                                                      const class GALGAS_semanticContext & constinArgument1,
-                                                      const class GALGAS_bool & constinArgument2,
-                                                      const class GALGAS_accessKind & constinArgument3,
-                                                      class GALGAS_bool inArgument4,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1312,25 +1371,6 @@ void routine_routineSemanticAnalysis (const class GALGAS_unifiedTypeMap_2D_proxy
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Category method '@instructionListAST analyzeRoutineInstructionList'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                                   const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
-                                                   const class GALGAS_semanticContext constin_inContext,
-                                                   const class GALGAS_stringset constin_inModeSet,
-                                                   const class GALGAS_bool constin_inAllowExceptions,
-                                                   class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                   class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                   class GALGAS_variableMap & io_ioVariableMap,
-                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Function 'taskProcNameForInvocationGraph'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1348,16 +1388,6 @@ class GALGAS_lstring function_taskProcNameForInvocationGraph (class GALGAS_strin
 
 class GALGAS_lstring function_funcNameForInvocationGraph (class GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                                           class GALGAS_lstring inArgument1,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'initNameForInvocationGraph'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_initNameForInvocationGraph (class GALGAS_lbigint inArgument0,
                                                           class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
