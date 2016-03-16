@@ -1,0 +1,78 @@
+target "teensy-3-1-tp"
+
+//------------------------------------------------*
+
+struct $semaphore {
+  var value $uint32
+  var list = $taskList ()
+  var guard = $guardList ()
+
+  service P `kernel () {
+    if self.value > 0 then
+      self.value -= 1
+    else
+      blockInList (!?list:self.list)
+    end
+  }
+
+  service V `kernel () {
+    makeTaskReady (!?list:self.list ?found:let found)
+    if not found then
+      self.value += 1
+    end
+  }
+
+//  guard P () {
+//    let accepted = self.value > 0
+//    if accepted then
+//      self.value -= 1
+//    end
+//    handleGuardedCommand (!?self.guard !accepted)
+//  }
+}
+
+//------------------------------------------------*
+
+var s = $semaphore (!value:0) {
+  proc $T1.loop
+  proc $T2.loop
+}
+
+//------------------------------------------------*
+
+task T1 priority 1 stackSize 512 {
+  var top $uint32 = 0
+
+  init 123 {
+    self.top = 1
+  }
+  
+  init 256 {
+    self.top += 2
+  }
+  
+  proc loop () {
+    waitUntilMS (!deadline:self.top)
+    s.V ()
+    self.top += 250
+    ledOn (!LED_L1)
+    waitUntilMS (!deadline:self.top)
+    s.V ()
+    self.top += 250
+    ledOff (!LED_L1)
+  }
+}
+
+//------------------------------------------------*
+
+task T2 priority 2 stackSize 512 {
+
+  proc loop () {
+    s.P ()
+    ledOn (!LED_L2)
+    s.P ()
+    ledOff (!LED_L2)
+  }
+}
+
+//------------------------------------------------*

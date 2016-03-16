@@ -1257,16 +1257,16 @@ void categoryMethod_initSemanticAnalysis (const class GALGAS_initList_2D_element
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Category method '@panicClauseListAST-element exceptionSemanticAnalysis'                       *
+//                         Category method '@panicClauseListAST-element panicSemanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_exceptionSemanticAnalysis (const class GALGAS_panicClauseListAST_2D_element inObject,
-                                               const class GALGAS_semanticContext constin_inContext,
-                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+void categoryMethod_panicSemanticAnalysis (const class GALGAS_panicClauseListAST_2D_element inObject,
+                                           const class GALGAS_semanticContext constin_inContext,
+                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1383,14 +1383,14 @@ class GALGAS_lstring function_funcNameForInvocationGraph (class GALGAS_unifiedTy
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Function 'exceptionNameForInvocationGraph'                                      *
+//                                       Function 'panicNameForInvocationGraph'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_exceptionNameForInvocationGraph (class GALGAS_string inArgument0,
-                                                               class GALGAS_lbigint inArgument1,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_panicNameForInvocationGraph (class GALGAS_string inArgument0,
+                                                           class GALGAS_lbigint inArgument1,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2095,8 +2095,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationAdds ;
 
 class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_mExceptionCodeLLVMType ;
-  public : GALGAS_string mAttribute_mExceptionLineLLVMType ;
+  public : GALGAS_string mAttribute_mPanicCodeLLVMType ;
+  public : GALGAS_string mAttribute_mPanicLineLLVMType ;
   public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
 
 
@@ -2114,8 +2114,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_generationContext (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_generationContext (const GALGAS_string & in_mExceptionCodeLLVMType,
-                                     const GALGAS_string & in_mExceptionLineLLVMType,
+  public : GALGAS_generationContext (const GALGAS_string & in_mPanicCodeLLVMType,
+                                     const GALGAS_string & in_mPanicLineLLVMType,
                                      const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
 
 //-- Start of generic part --*
@@ -2146,11 +2146,11 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mExceptionCodeLLVMType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mExceptionLineLLVMType (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPanicCodeLLVMType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPanicLineLLVMType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

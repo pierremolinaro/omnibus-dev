@@ -91,7 +91,7 @@ override method @convertExpressionAST analyzeExpression
   ]
 #--- 
   if not inAllowPanic then
-    error mTypeName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+    error mTypeName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze type
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
@@ -173,9 +173,9 @@ override method @convertInstructionIR llvmInstructionCode
   ioLLVMcode += " " + operandType + " " + [mOperand.mValue llvmName] + ", " + maxTarget + "\n"
   ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
   ioLLVMcode += convertFailLabel + ":\n"
-  ioLLVMcode += "  call void @raise_exception." + staticStringIndex + " ("
-  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + convertOverflowCode + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
+  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + convertOverflowCode + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += convertMaxOkLabel + ":\n"
   ioLLVMcode += "  " + [mTarget.mValue llvmName] + " = trunc " + operandType + " " + [mOperand.mValue llvmName] + " to " + [mTarget.mType llvmTypeName] + "\n"

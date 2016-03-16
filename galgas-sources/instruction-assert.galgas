@@ -53,7 +53,7 @@ override method @assertInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if [inModeSet hasKey !panicModeName ()] then
-    error mAssertInstructionLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+    error mAssertInstructionLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}

@@ -195,7 +195,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
       let assertGenerated = expressionBitCount > fieldBitCount
       if assertGenerated && [inModeSet hasKey !panicModeName ()] then
         error mExpressionLocation
-          : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+          : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
       end
       getNewTempVariable (!type !?ioTemporaries ?outResult)
       ioInstructionGenerationList += !@registerIntegerConstantInExpressionIR.new {

@@ -207,7 +207,7 @@ private func getInfixOperatorMap
     outOperatorMap = inContext.mBooleanXorOperatorMap
   case addOp :
     if [inModeSet hasKey !panicModeName ()] then
-      error inOperatorLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
       outOperatorMap = inContext.mAddNoOvfOperatorMap
@@ -218,7 +218,7 @@ private func getInfixOperatorMap
     outOperatorMap = inContext.mAddNoOvfOperatorMap
   case subOp :
     if [inModeSet hasKey !panicModeName ()] then
-      error inOperatorLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
       outOperatorMap = inContext.mSubNoOvfOperatorMap
@@ -229,7 +229,7 @@ private func getInfixOperatorMap
     outOperatorMap = inContext.mSubOperatorMap
   case mulOp :
     if [inModeSet hasKey !panicModeName ()] then
-      error inOperatorLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
       outOperatorMap = inContext.mMulNoOvfOperatorMap
@@ -240,7 +240,7 @@ private func getInfixOperatorMap
     outOperatorMap = inContext.mMulNoOvfOperatorMap
   case divOp :
     if [inModeSet hasKey !panicModeName ()] then
-      error inOperatorLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
       outOperatorMap = inContext.mDivNoOvfOperatorMap
@@ -251,7 +251,7 @@ private func getInfixOperatorMap
     outOperatorMap = inContext.mDivNoOvfOperatorMap
   case modOp :
     if [inModeSet hasKey !panicModeName ()] then
-      error inOperatorLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
+      error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
       outOperatorMap = inContext.mModNoOvfOperatorMap

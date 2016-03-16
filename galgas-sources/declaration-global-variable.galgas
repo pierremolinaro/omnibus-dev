@@ -25,10 +25,10 @@ list @allowedInitList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedExceptionList {
+list @allowedPanicList {
   @bool mHasWriteAccess
-  @lstring mExceptionName
-  @lbigint mExceptionPriority
+  @lstring mPanicName
+  @lbigint mPanicPriority
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -39,7 +39,7 @@ list @globalVarDeclarationList {
   @expressionAST mSourceExpression
   @allowedRoutineList mAllowedProcList
   @allowedInitList mAllowedInitList
-  @allowedExceptionList mAllowedExceptionList
+  @allowedPanicList mAllowedPanicList
   @allowedFunctionList mAllowedFunctionList
 }
 
@@ -65,7 +65,7 @@ syntax extension common_syntax {
     @allowedRoutineList allowedRoutineList = {}
     @allowedInitList allowedInitList = {}
     @allowedFunctionList allowedFunctionList = {}
-    @allowedExceptionList allowedExceptionList = {}
+    @allowedPanicList allowedPanicList = {}
     ${$
     repeat
       @bool hasWriteAccess
@@ -120,9 +120,9 @@ syntax extension common_syntax {
       or
         $panic$
         $proc$
-        $identifier$ ?let exceptionName
+        $identifier$ ?let panicName
         $integer$ ?let @lbigint priority
-        allowedExceptionList += !hasWriteAccess !exceptionName !priority
+        allowedPanicList += !hasWriteAccess !panicName !priority
       end
     while
     end
@@ -133,7 +133,7 @@ syntax extension common_syntax {
       !expression
       !allowedRoutineList
       !allowedInitList
-      !allowedExceptionList
+      !allowedPanicList
       !allowedFunctionList
   }
 
@@ -226,23 +226,23 @@ method @globalVarDeclarationList-element enterInContext
     [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
     [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!.null !mInitPriority) !mHasWriteAccess]
   end
-#--- Check allowed exception routines are defined
-  for () in mAllowedExceptionList do
-    if mExceptionName.string == "setup" then
+#--- Check allowed panic routines are defined
+  for () in mAllowedPanicList do
+    if mPanicName.string == "setup" then
       [ioContext.mPanicSetupRoutinePriorityMap searchSetupKey
-        !.new{![mExceptionPriority.bigint string]
-        !mExceptionPriority.location}
+        !.new{![mPanicPriority.bigint string]
+        !mPanicPriority.location}
       ]
-    elsif mExceptionName.string == "loop" then
+    elsif mPanicName.string == "loop" then
       [ioContext.mPanicLoopRoutinePriorityMap searchLoopKey
-        !.new{![mExceptionPriority.bigint string]
-        !mExceptionPriority.location}
+        !.new{![mPanicPriority.bigint string]
+        !mPanicPriority.location}
       ]
     else
-      error mExceptionName : "exception routine name should be \"setup\" or \"loop\""
+      error mPanicName : "panic routine name should be \"setup\" or \"loop\""
     end
     [!?allowedRoutineMap insertKey
-      !exceptionNameForInvocationGraph (!mExceptionName.string !mExceptionPriority)
+      !panicNameForInvocationGraph (!mPanicName.string !mPanicPriority)
       !mHasWriteAccess
     ]
   end

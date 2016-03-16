@@ -86,7 +86,7 @@ proc routineSemanticAnalysis
   ?warnIfUnused:let @bool inWarnIfUnused
   ?globalProcedure:let @bool inGlobalProcedure
   ?weakProcedure:let @bool inWeakProcedure
-  ?nullOnNoException:let @bool inNullOnNoException
+  ?nullOnNoPanic:let @bool inNullOnNoPanic
   ?registerAccess:let @accessKind inRegisterAccessKind
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -163,7 +163,7 @@ proc routineSemanticAnalysis
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
         !inWeakProcedure
-        !inNullOnNoException
+        !inNullOnNoPanic
         !inGlobalProcedure
         !inRoutineKind
       ]  
@@ -175,7 +175,7 @@ proc routineSemanticAnalysis
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
         !inWeakProcedure
-        !inNullOnNoException
+        !inNullOnNoPanic
         !inGlobalProcedure
         !inRoutineKind
       ]
@@ -188,7 +188,7 @@ proc routineSemanticAnalysis
       ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
       !inWarnIfUnused
       !inWeakProcedure
-      !inNullOnNoException
+      !inNullOnNoPanic
       !inGlobalProcedure
       !inRoutineKind
     ]  

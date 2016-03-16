@@ -102,8 +102,8 @@ func initNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lbigint 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func exceptionNameForInvocationGraph ?@string inName ?@lbigint inPriority -> @lstring outName {
-  let s = "exception . " + inName + " " + inPriority.bigint
+func panicNameForInvocationGraph ?@string inName ?@lbigint inPriority -> @lstring outName {
+  let s = "panic . " + inName + " " + inPriority.bigint
   outName = .new {!s !inPriority.location}
 }
 

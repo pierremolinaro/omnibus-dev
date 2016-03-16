@@ -97,8 +97,8 @@ proc codeGeneration
   ?typeMap:let @unifiedTypeMap inTypeMap
 #  ?typeInitialierMap:let @typeInitializerMap inTypeInitializerMap
   ?target:let @lstring inTargetName
-  ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
-  ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
+  ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
+  ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
@@ -121,8 +121,8 @@ proc codeGeneration
     !typeMap:inTypeMap
 #    !typeInitialierMap:inTypeInitializerMap
     !target:inTargetName
-    !exceptionCodeType:inExceptionCodeType
-    !exceptionLineType:inExceptionLineType
+    !panicCodeType:inPanicCodeType
+    !panicLineType:inPanicLineType
     !sourceFileSet:inSourceFileAbsolutePathSet
   )
 }
@@ -130,8 +130,8 @@ proc codeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationContext {
-  @string mExceptionCodeLLVMType
-  @string mExceptionLineLLVMType
+  @string mPanicCodeLLVMType
+  @string mPanicLineLLVMType
   @globalTaskVariableList mGlobalTaskVariableList
 }
 
@@ -144,15 +144,15 @@ private proc generateLLVMfile
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?typeMap:let @unifiedTypeMap inTypeMap
   ?target:let @lstring inTargetName
-  ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
-  ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
+  ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
+  ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   @generationAdds generationAdds = .default
   generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
   let @generationContext generationContext = .new {
-    ![inExceptionCodeType llvmTypeName]
-    ![inExceptionLineType llvmTypeName]
+    ![inPanicCodeType llvmTypeName]
+    ![inPanicLineType llvmTypeName]
     !inIntermediateCodeStruct.mGlobalTaskVariableList
   }
   let sourceDirectory = inProductDirectory + "/sources"
@@ -222,23 +222,23 @@ private proc generateLLVMfile
   if not [option plm_options.noPanicGeneration value] then
     llvmCode += getTargetTextFile (
        !currentDir:inCurrentDirectory
-       !from:inTargetName.string + "/target-exception.ll"
+       !from:inTargetName.string + "/target-panic.ll"
     )
     llvmCode += llvmTitleComment (!"Raise Panic internal")
-    llvmCode += "define internal void @raise_exception_internal ("
-    llvmCode += generationContext.mExceptionLineLLVMType + " %in.LINE, "
-    llvmCode += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
+    llvmCode += "define internal void @raise_panic_internal ("
+    llvmCode += generationContext.mPanicLineLLVMType + " %in.LINE, "
+    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
     llvmCode += "i8* %in.FILE) nounwind noreturn {\n"
   #--- First argument: line
     llvmCode += "  %" + llvmNameForLocalVariable (!"LINE") + " = alloca "
-    llvmCode += generationContext.mExceptionLineLLVMType + "\n"
-    llvmCode += "  store " + generationContext.mExceptionLineLLVMType + " %in.LINE, "
-    llvmCode += generationContext.mExceptionLineLLVMType + "* %" + llvmNameForLocalVariable (!"LINE") + "\n"
+    llvmCode += generationContext.mPanicLineLLVMType + "\n"
+    llvmCode += "  store " + generationContext.mPanicLineLLVMType + " %in.LINE, "
+    llvmCode += generationContext.mPanicLineLLVMType + "* %" + llvmNameForLocalVariable (!"LINE") + "\n"
   #--- Second argument : code
     llvmCode += "  %" + llvmNameForLocalVariable (!"CODE")
-    llvmCode += " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
-    llvmCode += "  store " + generationContext.mExceptionCodeLLVMType + " %in.CODE, "
-    llvmCode += generationContext.mExceptionCodeLLVMType + "* %" + llvmNameForLocalVariable (!"CODE") + "\n"
+    llvmCode += " = alloca " + generationContext.mPanicCodeLLVMType + "\n"
+    llvmCode += "  store " + generationContext.mPanicCodeLLVMType + " %in.CODE, "
+    llvmCode += generationContext.mPanicCodeLLVMType + "* %" + llvmNameForLocalVariable (!"CODE") + "\n"
   #--- Third argument : file    
     llvmCode += "  %" + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
     llvmCode += "  store i8* %in.FILE, i8** %" + llvmNameForLocalVariable (!"FILE") + "\n"
@@ -247,14 +247,14 @@ private proc generateLLVMfile
       !generationContext
       !?generationAdds
     ]
-    llvmCode += "  br label %exception.loop\n\n"
-    llvmCode += "exception.loop:\n"
+    llvmCode += "  br label %panic.loop\n\n"
+    llvmCode += "panic.loop:\n"
     [inIntermediateCodeStruct.mPanicLoopInstructionListIR instructionListLLVMCode
       !?llvmCode
       !generationContext
       !?generationAdds
     ]
-    llvmCode += "  br label %exception.loop\n"
+    llvmCode += "  br label %panic.loop\n"
     llvmCode += "}\n\n"
   #--- File specific routines
     for (filePath) in inSourceFileAbsolutePathSet do
@@ -262,11 +262,11 @@ private proc generateLLVMfile
         ![[filePath lastPathComponent] stringByDeletingPathExtension]
         ?let staticStringIndex
       ]
-      let routineName = "@raise_exception." + staticStringIndex
+      let routineName = "@raise_panic." + staticStringIndex
       llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
       llvmCode += "define internal void " + routineName + " (i32 %inSourceLine, i32 %inCode) nounwind noreturn {\n"
       llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
-      llvmCode += "  call void @raise_exception (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"
+      llvmCode += "  call void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"
       llvmCode += "  unreachable\n"
       llvmCode += "}\n\n"
     end

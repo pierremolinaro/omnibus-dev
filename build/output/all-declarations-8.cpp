@@ -850,11 +850,11 @@ static void categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_9036 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 171)).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_min = extractPtr_9036->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_max = extractPtr_9036->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_9036->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_9036->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_9031 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 171)).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_min = extractPtr_9031->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_max = extractPtr_9031->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_9031->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_9031->mAssociatedValue3 ;
       const enumGalgasBool test_4 = extractedValue_unsigned.operator_not (SOURCE_FILE ("expression-cst-registre.galgas", 192)).boolEnum () ;
       if (kBoolTrue == test_4) {
         inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 193)) ;
@@ -867,7 +867,7 @@ static void categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (
         }
         const enumGalgasBool test_6 = test_5.boolEnum () ;
         if (kBoolTrue == test_6) {
-          inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 198)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 198))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 197)) ;
+          inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 198)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 198))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 197)) ;
         }
         {
         routine_getNewTempVariable (var_type, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 200)) ;
@@ -1549,7 +1549,7 @@ static void categoryMethod_assertInstructionAST_analyze (const cPtr_instructionA
   macroValidSharedObject (object, cPtr_assertInstructionAST) ;
   const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 55)) COMMA_SOURCE_FILE ("instruction-assert.galgas", 55)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (object->mAttribute_mAssertInstructionLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 56)), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 56)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 56))  COMMA_SOURCE_FILE ("instruction-assert.galgas", 56)) ;
+    inCompiler->emitSemanticError (object->mAttribute_mAssertInstructionLocation, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 56)), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 56)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 56))  COMMA_SOURCE_FILE ("instruction-assert.galgas", 56)) ;
   }
   GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-assert.galgas", 59)) ;
   GALGAS_operandIR var_expressionValue ;
@@ -1681,7 +1681,7 @@ static void categoryMethod_throwInstructionAST_analyze (const cPtr_instructionAS
   macroValidSharedObject (object, cPtr_throwInstructionAST) ;
   const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 53)) COMMA_SOURCE_FILE ("instruction-panic.galgas", 53)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (object->mAttribute_mThrowLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 54)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 54)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 54))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 54)) ;
+    inCompiler->emitSemanticError (object->mAttribute_mThrowLocation, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 54)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 54)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 54))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 54)) ;
   }
   GALGAS_instructionListIR var_unusedInstructionListIR = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-panic.galgas", 57)) ;
   GALGAS_operandIR var_result ;
@@ -1700,9 +1700,9 @@ static void categoryMethod_throwInstructionAST_analyze (const cPtr_instructionAS
   }else if (kBoolFalse == test_3) {
     GALGAS_bigint var_min ;
     GALGAS_bigint var_max ;
-    GALGAS_bool joker_3886 ; // Joker input parameter
-    GALGAS_uint joker_3898 ; // Joker input parameter
-    constinArgument_inContext.mAttribute_mPanicCodeType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 78)).method_integer (var_min, var_max, joker_3886, joker_3898, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 78)) ;
+    GALGAS_bool joker_3877 ; // Joker input parameter
+    GALGAS_uint joker_3889 ; // Joker input parameter
+    constinArgument_inContext.mAttribute_mPanicCodeType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 78)).method_integer (var_min, var_max, joker_3877, joker_3889, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 78)) ;
     GALGAS_bigint var_throwValue ;
     var_result.mAttribute_mValue.method_literalInteger (var_throwValue, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 79)) ;
     GALGAS_bool test_4 = GALGAS_bool (kIsStrictInf, var_throwValue.objectCompare (var_min)) ;
@@ -1749,9 +1749,9 @@ static void categoryMethod_throwInstructionIR_llvmInstructionCode (const cPtr_ab
   {
   categoryModifier_findOrAddStaticString (ioArgument_ioGenerationAdds.mAttribute_mStaticStringMap, object->mAttribute_mThrowLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 108)).getter_lastPathComponent (SOURCE_FILE ("instruction-panic.galgas", 108)).getter_stringByDeletingPathExtension (SOURCE_FILE ("instruction-panic.galgas", 108)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 107)) ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @raise_exception.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("instruction-panic.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 111)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 111)), inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 111)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mExceptionLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)).add_operation (object->mAttribute_mThrowLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)).getter_string (SOURCE_FILE ("instruction-panic.galgas", 112)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)), inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mExceptionCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 113)).add_operation (object->mAttribute_mCode.getter_string (SOURCE_FILE ("instruction-panic.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 113)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 113)), inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 113)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @raise_panic.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("instruction-panic.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 111)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 111)), inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 111)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)).add_operation (object->mAttribute_mThrowLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)).getter_string (SOURCE_FILE ("instruction-panic.galgas", 112)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)), inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 112)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 113)).add_operation (object->mAttribute_mCode.getter_string (SOURCE_FILE ("instruction-panic.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 113)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 113)), inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 113)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1914,7 +1914,7 @@ static void categoryMethod_varOperatorAssignInstructionAST_analyze (const cPtr_i
       const enumGalgasBool test_4 = var_panicMode.boolEnum () ;
       if (kBoolTrue == test_4) {
         GALGAS_location location_5 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_5, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186)) ;
+        inCompiler->emitSemanticError (location_5, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 186)) ;
       }
       GALGAS_infixOperatorMap temp_6 ;
       const enumGalgasBool test_7 = var_noPanicGeneration.boolEnum () ;
@@ -1936,7 +1936,7 @@ static void categoryMethod_varOperatorAssignInstructionAST_analyze (const cPtr_i
       const enumGalgasBool test_8 = var_panicMode.boolEnum () ;
       if (kBoolTrue == test_8) {
         GALGAS_location location_9 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_9, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 193)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 193)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 193))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 193)) ;
+        inCompiler->emitSemanticError (location_9, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 193)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 193)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 193))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 193)) ;
       }
       GALGAS_infixOperatorMap temp_10 ;
       const enumGalgasBool test_11 = var_noPanicGeneration.boolEnum () ;
@@ -1958,7 +1958,7 @@ static void categoryMethod_varOperatorAssignInstructionAST_analyze (const cPtr_i
       const enumGalgasBool test_12 = var_panicMode.boolEnum () ;
       if (kBoolTrue == test_12) {
         GALGAS_location location_13 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_13, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 200)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 200)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 200))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 200)) ;
+        inCompiler->emitSemanticError (location_13, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 200)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 200)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 200))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 200)) ;
       }
       GALGAS_infixOperatorMap temp_14 ;
       const enumGalgasBool test_15 = var_noPanicGeneration.boolEnum () ;
@@ -1980,7 +1980,7 @@ static void categoryMethod_varOperatorAssignInstructionAST_analyze (const cPtr_i
       const enumGalgasBool test_16 = var_panicMode.boolEnum () ;
       if (kBoolTrue == test_16) {
         GALGAS_location location_17 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_17, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 207)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 207))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 207)) ;
+        inCompiler->emitSemanticError (location_17, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 207)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 207))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 207)) ;
       }
       GALGAS_infixOperatorMap temp_18 ;
       const enumGalgasBool test_19 = var_noPanicGeneration.boolEnum () ;
@@ -2002,7 +2002,7 @@ static void categoryMethod_varOperatorAssignInstructionAST_analyze (const cPtr_i
       const enumGalgasBool test_20 = var_panicMode.boolEnum () ;
       if (kBoolTrue == test_20) {
         GALGAS_location location_21 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_21, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 214)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 214)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 214))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 214)) ;
+        inCompiler->emitSemanticError (location_21, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 214)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 214)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 214))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 214)) ;
       }
       GALGAS_infixOperatorMap temp_22 ;
       const enumGalgasBool test_23 = var_noPanicGeneration.boolEnum () ;
@@ -2021,8 +2021,8 @@ static void categoryMethod_varOperatorAssignInstructionAST_analyze (const cPtr_i
     break ;
   }
   GALGAS_infixOperatorDescription var_binaryOperator ;
-  GALGAS_unifiedTypeMap_2D_proxy joker_8566 ; // Joker input parameter
-  categoryMethod_checkBinaryOperationWith (var_operatorMap, var_targetType, var_sourceValue.mAttribute_mType, object->mAttribute_mTargetVarName.mAttribute_location, joker_8566, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 220)) ;
+  GALGAS_unifiedTypeMap_2D_proxy joker_8541 ; // Joker input parameter
+  categoryMethod_checkBinaryOperationWith (var_operatorMap, var_targetType, var_sourceValue.mAttribute_mType, object->mAttribute_mTargetVarName.mAttribute_location, joker_8541, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 220)) ;
   const enumGalgasBool test_24 = var_isCopyable.operator_not (SOURCE_FILE ("instruction-operator-assign.galgas", 227)).boolEnum () ;
   if (kBoolTrue == test_24) {
     GALGAS_location location_25 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
@@ -2117,8 +2117,8 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_analyze (const cP
       break ;
     case GALGAS_typeKind::kEnum_structure:
       {
-        const cEnumAssociatedValues_typeKind_structure * extractPtr_15454 = (const cEnumAssociatedValues_typeKind_structure *) (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 267)).unsafePointer ()) ;
-        const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_15454->mAssociatedValue0 ;
+        const cEnumAssociatedValues_typeKind_structure * extractPtr_15404 = (const cEnumAssociatedValues_typeKind_structure *) (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 267)).unsafePointer ()) ;
+        const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_15404->mAssociatedValue0 ;
         GALGAS_unifiedTypeMap_2D_proxy var_targetType ;
         GALGAS_uint var_idx ;
         extractedValue_propertyMap.method_searchKey (object->mAttribute_mTargetVarName, var_targetType, var_idx, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 283)) ;
@@ -2150,7 +2150,7 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_analyze (const cP
             const enumGalgasBool test_9 = var_panicMode.boolEnum () ;
             if (kBoolTrue == test_9) {
               GALGAS_location location_10 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_10, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 333)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 333)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 333))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 333)) ;
+              inCompiler->emitSemanticError (location_10, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 333)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 333)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 333))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 333)) ;
             }
             GALGAS_infixOperatorMap temp_11 ;
             const enumGalgasBool test_12 = var_noPanicGeneration.boolEnum () ;
@@ -2172,7 +2172,7 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_analyze (const cP
             const enumGalgasBool test_13 = var_panicMode.boolEnum () ;
             if (kBoolTrue == test_13) {
               GALGAS_location location_14 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_14, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 340)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 340))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 340)) ;
+              inCompiler->emitSemanticError (location_14, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 340)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 340))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 340)) ;
             }
             GALGAS_infixOperatorMap temp_15 ;
             const enumGalgasBool test_16 = var_noPanicGeneration.boolEnum () ;
@@ -2194,7 +2194,7 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_analyze (const cP
             const enumGalgasBool test_17 = var_panicMode.boolEnum () ;
             if (kBoolTrue == test_17) {
               GALGAS_location location_18 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_18, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 347)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 347)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 347))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 347)) ;
+              inCompiler->emitSemanticError (location_18, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 347)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 347)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 347))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 347)) ;
             }
             GALGAS_infixOperatorMap temp_19 ;
             const enumGalgasBool test_20 = var_noPanicGeneration.boolEnum () ;
@@ -2216,7 +2216,7 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_analyze (const cP
             const enumGalgasBool test_21 = var_panicMode.boolEnum () ;
             if (kBoolTrue == test_21) {
               GALGAS_location location_22 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_22, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 354)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 354)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 354))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 354)) ;
+              inCompiler->emitSemanticError (location_22, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 354)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 354)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 354))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 354)) ;
             }
             GALGAS_infixOperatorMap temp_23 ;
             const enumGalgasBool test_24 = var_noPanicGeneration.boolEnum () ;
@@ -2238,7 +2238,7 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_analyze (const cP
             const enumGalgasBool test_25 = var_panicMode.boolEnum () ;
             if (kBoolTrue == test_25) {
               GALGAS_location location_26 (object->mAttribute_mTargetVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_26, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 361)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 361)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 361))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 361)) ;
+              inCompiler->emitSemanticError (location_26, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 361)), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 361)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 361))  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 361)) ;
             }
             GALGAS_infixOperatorMap temp_27 ;
             const enumGalgasBool test_28 = var_noPanicGeneration.boolEnum () ;
@@ -2257,8 +2257,8 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_analyze (const cP
           break ;
         }
         GALGAS_infixOperatorDescription var_binaryOperator ;
-        GALGAS_unifiedTypeMap_2D_proxy joker_14423 ; // Joker input parameter
-        categoryMethod_checkBinaryOperationWith (var_operatorMap, var_targetType, var_sourceValue.mAttribute_mType, object->mAttribute_mTargetVarName.mAttribute_location, joker_14423, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 367)) ;
+        GALGAS_unifiedTypeMap_2D_proxy joker_14373 ; // Joker input parameter
+        categoryMethod_checkBinaryOperationWith (var_operatorMap, var_targetType, var_sourceValue.mAttribute_mType, object->mAttribute_mTargetVarName.mAttribute_location, joker_14373, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 367)) ;
         GALGAS_objectInMemoryIR var_fieldAddress ;
         {
         routine_getLocalNameOfNewTempObjectInMemory (var_targetType, ioArgument_ioTemporaries, var_fieldAddress, inCompiler  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 378)) ;
@@ -3244,25 +3244,25 @@ static void categoryMethod_binaryOperationIR_llvmInstructionCode (const cPtr_abs
   case GALGAS_llvmBinaryOperation::kEnum_udivOVF:
     {
       const GALGAS_binaryOperationIR temp_6 = object ;
-      callCategoryMethod_enterCodeForDivisionWithZeroDivisorException ((const cPtr_binaryOperationIR *) temp_6.ptr (), GALGAS_string ("udiv"), GALGAS_uint ((uint32_t) 39U), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 198)) ;
+      callCategoryMethod_enterCodeForDivisionWithZeroDivisorPanic ((const cPtr_binaryOperationIR *) temp_6.ptr (), GALGAS_string ("udiv"), GALGAS_uint ((uint32_t) 39U), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 198)) ;
     }
     break ;
   case GALGAS_llvmBinaryOperation::kEnum_sdivOVF:
     {
       const GALGAS_binaryOperationIR temp_7 = object ;
-      callCategoryMethod_enterCodeForDivisionWithZeroDivisorException ((const cPtr_binaryOperationIR *) temp_7.ptr (), GALGAS_string ("sdiv"), GALGAS_uint ((uint32_t) 39U), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 206)) ;
+      callCategoryMethod_enterCodeForDivisionWithZeroDivisorPanic ((const cPtr_binaryOperationIR *) temp_7.ptr (), GALGAS_string ("sdiv"), GALGAS_uint ((uint32_t) 39U), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 206)) ;
     }
     break ;
   case GALGAS_llvmBinaryOperation::kEnum_uremOVF:
     {
       const GALGAS_binaryOperationIR temp_8 = object ;
-      callCategoryMethod_enterCodeForDivisionWithZeroDivisorException ((const cPtr_binaryOperationIR *) temp_8.ptr (), GALGAS_string ("urem"), GALGAS_uint ((uint32_t) 44U), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 214)) ;
+      callCategoryMethod_enterCodeForDivisionWithZeroDivisorPanic ((const cPtr_binaryOperationIR *) temp_8.ptr (), GALGAS_string ("urem"), GALGAS_uint ((uint32_t) 44U), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 214)) ;
     }
     break ;
   case GALGAS_llvmBinaryOperation::kEnum_sremOVF:
     {
       const GALGAS_binaryOperationIR temp_9 = object ;
-      callCategoryMethod_enterCodeForDivisionWithZeroDivisorException ((const cPtr_binaryOperationIR *) temp_9.ptr (), GALGAS_string ("srem"), GALGAS_uint ((uint32_t) 44U), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 222)) ;
+      callCategoryMethod_enterCodeForDivisionWithZeroDivisorPanic ((const cPtr_binaryOperationIR *) temp_9.ptr (), GALGAS_string ("srem"), GALGAS_uint ((uint32_t) 44U), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 222)) ;
     }
     break ;
   case GALGAS_llvmBinaryOperation::kEnum_and:

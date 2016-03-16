@@ -3714,18 +3714,18 @@ GALGAS_allowedInitList GALGAS_allowedInitList::extractObject (const GALGAS_objec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Class for element of '@allowedExceptionList' list                                  *
+//                                    Class for element of '@allowedPanicList' list                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cCollectionElement_allowedExceptionList : public cCollectionElement {
-  public : GALGAS_allowedExceptionList_2D_element mObject ;
+class cCollectionElement_allowedPanicList : public cCollectionElement {
+  public : GALGAS_allowedPanicList_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_allowedExceptionList (const GALGAS_bool & in_mHasWriteAccess,
-                                                    const GALGAS_lstring & in_mExceptionName,
-                                                    const GALGAS_lbigint & in_mExceptionPriority
-                                                    COMMA_LOCATION_ARGS) ;
+  public : cCollectionElement_allowedPanicList (const GALGAS_bool & in_mHasWriteAccess,
+                                                const GALGAS_lstring & in_mPanicName,
+                                                const GALGAS_lbigint & in_mPanicPriority
+                                                COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -3742,62 +3742,62 @@ class cCollectionElement_allowedExceptionList : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_allowedExceptionList::cCollectionElement_allowedExceptionList (const GALGAS_bool & in_mHasWriteAccess,
-                                                                                  const GALGAS_lstring & in_mExceptionName,
-                                                                                  const GALGAS_lbigint & in_mExceptionPriority
-                                                                                  COMMA_LOCATION_ARGS) :
+cCollectionElement_allowedPanicList::cCollectionElement_allowedPanicList (const GALGAS_bool & in_mHasWriteAccess,
+                                                                          const GALGAS_lstring & in_mPanicName,
+                                                                          const GALGAS_lbigint & in_mPanicPriority
+                                                                          COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mHasWriteAccess, in_mExceptionName, in_mExceptionPriority) {
+mObject (in_mHasWriteAccess, in_mPanicName, in_mPanicPriority) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cCollectionElement_allowedExceptionList::isValid (void) const {
+bool cCollectionElement_allowedPanicList::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement * cCollectionElement_allowedExceptionList::copy (void) {
+cCollectionElement * cCollectionElement_allowedPanicList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_allowedExceptionList (mObject.mAttribute_mHasWriteAccess, mObject.mAttribute_mExceptionName, mObject.mAttribute_mExceptionPriority COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_allowedPanicList (mObject.mAttribute_mHasWriteAccess, mObject.mAttribute_mPanicName, mObject.mAttribute_mPanicPriority COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cCollectionElement_allowedExceptionList::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_allowedPanicList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mHasWriteAccess" ":" ;
   mObject.mAttribute_mHasWriteAccess.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mExceptionName" ":" ;
-  mObject.mAttribute_mExceptionName.description (ioString, inIndentation) ;
+  ioString << "mPanicName" ":" ;
+  mObject.mAttribute_mPanicName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mExceptionPriority" ":" ;
-  mObject.mAttribute_mExceptionPriority.description (ioString, inIndentation) ;
+  ioString << "mPanicPriority" ":" ;
+  mObject.mAttribute_mPanicPriority.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cCollectionElement_allowedExceptionList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_allowedExceptionList * operand = (cCollectionElement_allowedExceptionList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_allowedExceptionList) ;
+typeComparisonResult cCollectionElement_allowedPanicList::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_allowedPanicList * operand = (cCollectionElement_allowedPanicList *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_allowedPanicList) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList::GALGAS_allowedExceptionList (void) :
+GALGAS_allowedPanicList::GALGAS_allowedPanicList (void) :
 AC_GALGAS_list () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList::GALGAS_allowedExceptionList (cSharedList * inSharedListPtr) :
+GALGAS_allowedPanicList::GALGAS_allowedPanicList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
   if (NULL == inSharedListPtr) {
     createNewEmptyList (HERE) ;
@@ -3806,23 +3806,23 @@ AC_GALGAS_list (inSharedListPtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_allowedExceptionList::constructor_emptyList (LOCATION_ARGS) {
-  GALGAS_allowedExceptionList result ;
+GALGAS_allowedPanicList GALGAS_allowedPanicList::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_allowedPanicList result ;
   result.createNewEmptyList (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_allowedExceptionList::constructor_listWithValue (const GALGAS_bool & inOperand0,
-                                                                                    const GALGAS_lstring & inOperand1,
-                                                                                    const GALGAS_lbigint & inOperand2
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_allowedExceptionList result ;
+GALGAS_allowedPanicList GALGAS_allowedPanicList::constructor_listWithValue (const GALGAS_bool & inOperand0,
+                                                                            const GALGAS_lstring & inOperand1,
+                                                                            const GALGAS_lbigint & inOperand2
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_allowedPanicList result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_allowedExceptionList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
+    GALGAS_allowedPanicList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -3830,28 +3830,28 @@ GALGAS_allowedExceptionList GALGAS_allowedExceptionList::constructor_listWithVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                             const GALGAS_bool & in_mHasWriteAccess,
-                                                             const GALGAS_lstring & in_mExceptionName,
-                                                             const GALGAS_lbigint & in_mExceptionPriority
-                                                             COMMA_LOCATION_ARGS) {
-  cCollectionElement_allowedExceptionList * p = NULL ;
-  macroMyNew (p, cCollectionElement_allowedExceptionList (in_mHasWriteAccess,
-                                                          in_mExceptionName,
-                                                          in_mExceptionPriority COMMA_THERE)) ;
+void GALGAS_allowedPanicList::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                         const GALGAS_bool & in_mHasWriteAccess,
+                                                         const GALGAS_lstring & in_mPanicName,
+                                                         const GALGAS_lbigint & in_mPanicPriority
+                                                         COMMA_LOCATION_ARGS) {
+  cCollectionElement_allowedPanicList * p = NULL ;
+  macroMyNew (p, cCollectionElement_allowedPanicList (in_mHasWriteAccess,
+                                                      in_mPanicName,
+                                                      in_mPanicPriority COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::addAssign_operation (const GALGAS_bool & inOperand0,
-                                                       const GALGAS_lstring & inOperand1,
-                                                       const GALGAS_lbigint & inOperand2
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_allowedPanicList::addAssign_operation (const GALGAS_bool & inOperand0,
+                                                   const GALGAS_lstring & inOperand1,
+                                                   const GALGAS_lbigint & inOperand2
+                                                   COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_allowedExceptionList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_allowedPanicList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3861,15 +3861,15 @@ void GALGAS_allowedExceptionList::addAssign_operation (const GALGAS_bool & inOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::setter_insertAtIndex (const GALGAS_bool inOperand0,
-                                                        const GALGAS_lstring inOperand1,
-                                                        const GALGAS_lbigint inOperand2,
-                                                        const GALGAS_uint inInsertionIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_allowedPanicList::setter_insertAtIndex (const GALGAS_bool inOperand0,
+                                                    const GALGAS_lstring inOperand1,
+                                                    const GALGAS_lbigint inOperand2,
+                                                    const GALGAS_uint inInsertionIndex,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_allowedExceptionList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_allowedPanicList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3879,123 +3879,123 @@ void GALGAS_allowedExceptionList::setter_insertAtIndex (const GALGAS_bool inOper
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::setter_removeAtIndex (GALGAS_bool & outOperand0,
-                                                        GALGAS_lstring & outOperand1,
-                                                        GALGAS_lbigint & outOperand2,
-                                                        const GALGAS_uint inRemoveIndex,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_allowedPanicList::setter_removeAtIndex (GALGAS_bool & outOperand0,
+                                                    GALGAS_lstring & outOperand1,
+                                                    GALGAS_lbigint & outOperand2,
+                                                    const GALGAS_uint inRemoveIndex,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
+    cCollectionElement_allowedPanicList * p = (cCollectionElement_allowedPanicList *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
       outOperand1.drop () ;
       outOperand2.drop () ;
     }else{
-      macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
+      macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
       outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
-      outOperand1 = p->mObject.mAttribute_mExceptionName ;
-      outOperand2 = p->mObject.mAttribute_mExceptionPriority ;
+      outOperand1 = p->mObject.mAttribute_mPanicName ;
+      outOperand2 = p->mObject.mAttribute_mPanicPriority ;
     }
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::setter_popFirst (GALGAS_bool & outOperand0,
-                                                   GALGAS_lstring & outOperand1,
-                                                   GALGAS_lbigint & outOperand2,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
-    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
-    outOperand1 = p->mObject.mAttribute_mExceptionName ;
-    outOperand2 = p->mObject.mAttribute_mExceptionPriority ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedExceptionList::setter_popLast (GALGAS_bool & outOperand0,
-                                                  GALGAS_lstring & outOperand1,
-                                                  GALGAS_lbigint & outOperand2,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
-    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
-    outOperand1 = p->mObject.mAttribute_mExceptionName ;
-    outOperand2 = p->mObject.mAttribute_mExceptionPriority ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedExceptionList::method_first (GALGAS_bool & outOperand0,
-                                                GALGAS_lstring & outOperand1,
-                                                GALGAS_lbigint & outOperand2,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
-    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
-    outOperand1 = p->mObject.mAttribute_mExceptionName ;
-    outOperand2 = p->mObject.mAttribute_mExceptionPriority ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedExceptionList::method_last (GALGAS_bool & outOperand0,
+void GALGAS_allowedPanicList::setter_popFirst (GALGAS_bool & outOperand0,
                                                GALGAS_lstring & outOperand1,
                                                GALGAS_lbigint & outOperand2,
                                                C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const {
+                                               COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
-  readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedPanicList * p = (cCollectionElement_allowedPanicList *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
+    macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
     outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
-    outOperand1 = p->mObject.mAttribute_mExceptionName ;
-    outOperand2 = p->mObject.mAttribute_mExceptionPriority ;
+    outOperand1 = p->mObject.mAttribute_mPanicName ;
+    outOperand2 = p->mObject.mAttribute_mPanicPriority ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_allowedExceptionList::add_operation (const GALGAS_allowedExceptionList & inOperand,
-                                                                        C_Compiler * /* inCompiler */
-                                                                        COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_allowedExceptionList result ;
+void GALGAS_allowedPanicList::setter_popLast (GALGAS_bool & outOperand0,
+                                              GALGAS_lstring & outOperand1,
+                                              GALGAS_lbigint & outOperand2,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedPanicList * p = (cCollectionElement_allowedPanicList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
+    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
+    outOperand1 = p->mObject.mAttribute_mPanicName ;
+    outOperand2 = p->mObject.mAttribute_mPanicPriority ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedPanicList::method_first (GALGAS_bool & outOperand0,
+                                            GALGAS_lstring & outOperand1,
+                                            GALGAS_lbigint & outOperand2,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedPanicList * p = (cCollectionElement_allowedPanicList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
+    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
+    outOperand1 = p->mObject.mAttribute_mPanicName ;
+    outOperand2 = p->mObject.mAttribute_mPanicPriority ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_allowedPanicList::method_last (GALGAS_bool & outOperand0,
+                                           GALGAS_lstring & outOperand1,
+                                           GALGAS_lbigint & outOperand2,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_allowedPanicList * p = (cCollectionElement_allowedPanicList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
+    outOperand0 = p->mObject.mAttribute_mHasWriteAccess ;
+    outOperand1 = p->mObject.mAttribute_mPanicName ;
+    outOperand2 = p->mObject.mAttribute_mPanicPriority ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedPanicList GALGAS_allowedPanicList::add_operation (const GALGAS_allowedPanicList & inOperand,
+                                                                C_Compiler * /* inCompiler */
+                                                                COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_allowedPanicList result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -4005,52 +4005,52 @@ GALGAS_allowedExceptionList GALGAS_allowedExceptionList::add_operation (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_allowedExceptionList::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_allowedExceptionList result = GALGAS_allowedExceptionList::constructor_emptyList (THERE) ;
+GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedPanicList result = GALGAS_allowedPanicList::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_allowedExceptionList::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_allowedExceptionList result = GALGAS_allowedExceptionList::constructor_emptyList (THERE) ;
+GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedPanicList result = GALGAS_allowedPanicList::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_allowedExceptionList::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) const {
-  GALGAS_allowedExceptionList result = GALGAS_allowedExceptionList::constructor_emptyList (THERE) ;
+GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const {
+  GALGAS_allowedPanicList result = GALGAS_allowedPanicList::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::plusAssign_operation (const GALGAS_allowedExceptionList inOperand,
-                                                        C_Compiler * /* inCompiler */
-                                                        COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_allowedPanicList::plusAssign_operation (const GALGAS_allowedPanicList inOperand,
+                                                    C_Compiler * /* inCompiler */
+                                                    COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_allowedExceptionList::getter_mHasWriteAccessAtIndex (const GALGAS_uint & inIndex,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_allowedPanicList::getter_mHasWriteAccessAtIndex (const GALGAS_uint & inIndex,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
+  cCollectionElement_allowedPanicList * p = (cCollectionElement_allowedPanicList *) attributes.ptr () ;
   GALGAS_bool result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
+    macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
     result = p->mObject.mAttribute_mHasWriteAccess ;
   }
   return result ;
@@ -4058,30 +4058,30 @@ GALGAS_bool GALGAS_allowedExceptionList::getter_mHasWriteAccessAtIndex (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_allowedExceptionList::getter_mExceptionNameAtIndex (const GALGAS_uint & inIndex,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_allowedPanicList::getter_mPanicNameAtIndex (const GALGAS_uint & inIndex,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
+  cCollectionElement_allowedPanicList * p = (cCollectionElement_allowedPanicList *) attributes.ptr () ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
-    result = p->mObject.mAttribute_mExceptionName ;
+    macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
+    result = p->mObject.mAttribute_mPanicName ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_allowedExceptionList::getter_mExceptionPriorityAtIndex (const GALGAS_uint & inIndex,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const {
+GALGAS_lbigint GALGAS_allowedPanicList::getter_mPanicPriorityAtIndex (const GALGAS_uint & inIndex,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
+  cCollectionElement_allowedPanicList * p = (cCollectionElement_allowedPanicList *) attributes.ptr () ;
   GALGAS_lbigint result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
-    result = p->mObject.mAttribute_mExceptionPriority ;
+    macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
+    result = p->mObject.mAttribute_mPanicPriority ;
   }
   return result ;
 }
@@ -4090,43 +4090,43 @@ GALGAS_lbigint GALGAS_allowedExceptionList::getter_mExceptionPriorityAtIndex (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_allowedExceptionList::cEnumerator_allowedExceptionList (const GALGAS_allowedExceptionList & inEnumeratedObject,
-                                                                    const typeEnumerationOrder inOrder) :
+cEnumerator_allowedPanicList::cEnumerator_allowedPanicList (const GALGAS_allowedPanicList & inEnumeratedObject,
+                                                            const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList_2D_element cEnumerator_allowedExceptionList::current (LOCATION_ARGS) const {
-  const cCollectionElement_allowedExceptionList * p = (const cCollectionElement_allowedExceptionList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
+GALGAS_allowedPanicList_2D_element cEnumerator_allowedPanicList::current (LOCATION_ARGS) const {
+  const cCollectionElement_allowedPanicList * p = (const cCollectionElement_allowedPanicList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
   return p->mObject ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cEnumerator_allowedExceptionList::current_mHasWriteAccess (LOCATION_ARGS) const {
-  const cCollectionElement_allowedExceptionList * p = (const cCollectionElement_allowedExceptionList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
+GALGAS_bool cEnumerator_allowedPanicList::current_mHasWriteAccess (LOCATION_ARGS) const {
+  const cCollectionElement_allowedPanicList * p = (const cCollectionElement_allowedPanicList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
   return p->mObject.mAttribute_mHasWriteAccess ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_allowedExceptionList::current_mExceptionName (LOCATION_ARGS) const {
-  const cCollectionElement_allowedExceptionList * p = (const cCollectionElement_allowedExceptionList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
-  return p->mObject.mAttribute_mExceptionName ;
+GALGAS_lstring cEnumerator_allowedPanicList::current_mPanicName (LOCATION_ARGS) const {
+  const cCollectionElement_allowedPanicList * p = (const cCollectionElement_allowedPanicList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
+  return p->mObject.mAttribute_mPanicName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cEnumerator_allowedExceptionList::current_mExceptionPriority (LOCATION_ARGS) const {
-  const cCollectionElement_allowedExceptionList * p = (const cCollectionElement_allowedExceptionList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
-  return p->mObject.mAttribute_mExceptionPriority ;
+GALGAS_lbigint cEnumerator_allowedPanicList::current_mPanicPriority (LOCATION_ARGS) const {
+  const cCollectionElement_allowedPanicList * p = (const cCollectionElement_allowedPanicList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_allowedPanicList) ;
+  return p->mObject.mAttribute_mPanicPriority ;
 }
 
 
@@ -4134,42 +4134,42 @@ GALGAS_lbigint cEnumerator_allowedExceptionList::current_mExceptionPriority (LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             @allowedExceptionList type                                              *
+//                                               @allowedPanicList type                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_allowedExceptionList ("allowedExceptionList",
-                                             NULL) ;
+kTypeDescriptor_GALGAS_allowedPanicList ("allowedPanicList",
+                                         NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_allowedExceptionList::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_allowedExceptionList ;
+const C_galgas_type_descriptor * GALGAS_allowedPanicList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_allowedPanicList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_allowedExceptionList::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_allowedPanicList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_allowedExceptionList (*this)) ;
+    macroMyNew (result, GALGAS_allowedPanicList (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_allowedExceptionList::extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_allowedExceptionList result ;
-  const GALGAS_allowedExceptionList * p = (const GALGAS_allowedExceptionList *) inObject.embeddedObject () ;
+GALGAS_allowedPanicList GALGAS_allowedPanicList::extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_allowedPanicList result ;
+  const GALGAS_allowedPanicList * p = (const GALGAS_allowedPanicList *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_allowedExceptionList *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_allowedPanicList *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("allowedExceptionList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("allowedPanicList", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -10940,7 +10940,7 @@ void GALGAS_panicRoutinePriorityMap::setter_insertSetupKey (GALGAS_lstring inKey
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "an exception setup routine with priority %K has been already declared" ;
+  const char * kInsertErrorMessage = "a panic setup routine with priority %K has been already declared" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
@@ -10955,14 +10955,14 @@ void GALGAS_panicRoutinePriorityMap::setter_insertLoopKey (GALGAS_lstring inKey,
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "an exception loop routine with priority %K has been already declared" ;
+  const char * kInsertErrorMessage = "a panic loop routine with priority %K has been already declared" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_panicRoutinePriorityMap_searchSetupKey = "there is no exception setup routine with priority %K" ;
+const char * kSearchErrorMessage_panicRoutinePriorityMap_searchSetupKey = "there is no panic setup routine with priority %K" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10981,7 +10981,7 @@ void GALGAS_panicRoutinePriorityMap::method_searchSetupKey (GALGAS_lstring inKey
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_panicRoutinePriorityMap_searchLoopKey = "there is no  exception loop routine with priority %K" ;
+const char * kSearchErrorMessage_panicRoutinePriorityMap_searchLoopKey = "there is no panic loop routine with priority %K" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
