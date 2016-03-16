@@ -88,7 +88,9 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <instruction_beginning_by_self> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    $self$
+    $.$
     $identifier$ ?let varName
     <op_assign> ?let @operatorAssignKind operatorAssign
     <expression> ?let @expressionAST expression

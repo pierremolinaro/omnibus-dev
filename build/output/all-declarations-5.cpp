@@ -875,7 +875,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var top $uint32 = 0\n"
   "\n"
   "  init 123 {\n"
-  "    self.top += 1\n"
+  "    self.top = 1\n"
   "  }\n"
   "  \n"
   "  init 256 {\n"
@@ -912,7 +912,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  1151, // Text length
+  1150, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

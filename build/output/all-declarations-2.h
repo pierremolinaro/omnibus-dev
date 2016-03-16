@@ -7231,15 +7231,6 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
                                              GALGAS_labelMap & ioArgument1,
                                              C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'instruction_beginning_by_self' non terminal
-//--- 'parse' label
-  public : virtual void nt_instruction_5F_beginning_5F_by_5F_self_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_instruction_5F_beginning_5F_by_5F_self_ (GALGAS_instructionListAST & ioArgument0,
-                                                                    GALGAS_labelMap & ioArgument1,
-                                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'op_assign' non terminal
 //--- 'parse' label
   public : virtual void nt_op_5F_assign_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
