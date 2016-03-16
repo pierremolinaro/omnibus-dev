@@ -2,6 +2,11 @@
 #  MODE NAMES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once guardModeName -> @string outResult {
+  outResult = "guard"
+}
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func %once bootModeName -> @string outResult {
   outResult = "boot"
 }
@@ -71,6 +76,17 @@ func sectionNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstri
 
 func serviceNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
   var s = "service"
+  if inReceiverType != .null then
+    s += " $" + [inReceiverType key]
+  end
+  s += " " + inName
+  outName = .new {!s !inName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func guardNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
+  var s = "guard"
   if inReceiverType != .null then
     s += " $" + [inReceiverType key]
   end
@@ -163,6 +179,12 @@ func llvmNameForSectionCall ?@string inName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func llvmNameForGuardCall ?@string inName -> @string outName {
+  outName = "guard.call." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func llvmNameForSectionImplementation ?@string inName -> @string outName {
   outName = "section.implementation." + inName
 }
@@ -171,6 +193,12 @@ func llvmNameForSectionImplementation ?@string inName -> @string outName {
 
 func llvmNameForServiceImplementation ?@string inName -> @string outName {
   outName = "service.implementation." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForGuardImplementation ?@string inName -> @string outName {
+  outName = "guard.implementation." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

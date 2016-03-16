@@ -48,6 +48,31 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @serviceDeclarationListAST enterInContext
+  ?receiverType:let @string inReceiverTypeName
+  ?!context:@semanticContext ioContext
+{
+  for service in self do
+  #--- Signature
+    @procedureSignature signature = {}
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in service.mServiceFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      signature += !formalArgumentPassingMode !selector.string !typeProxy
+    end
+  #--- Enter in context
+    [!?ioContext.mRoutineMapForContext insertKey
+      !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
+      !true # service.mMutating
+      !@modeMap {![userModeName () nowhere]}
+      !signature
+      !.service
+      !false # Not weak
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

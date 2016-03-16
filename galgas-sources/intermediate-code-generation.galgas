@@ -74,7 +74,7 @@ map @routineMapIR {
   @bool mGlobal
   @routineKind mKind
 
-  insert insertKey error message "** internal error **"
+  insert insertKey error message "routine '%K' is already defined"
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
 }

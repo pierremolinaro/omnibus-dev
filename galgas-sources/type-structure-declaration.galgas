@@ -9,6 +9,7 @@ class @structureDeclaration : @abstractDeclaration {
   @procedureDeclarationListAST mProcedureDeclarationListAST
   @functionDeclarationListAST mFunctionDeclarationListAST
   @serviceDeclarationListAST mServiceListAST
+  @guardDeclarationListAST mGuardListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -54,6 +55,7 @@ syntax extension common_syntax {
     @structureFieldListAST fieldList = {}
     @functionDeclarationListAST functionDeclarationListAST = {}
     @serviceDeclarationListAST serviceListAST = {}
+    @guardDeclarationListAST guardListAST = {}
     repeat
     while
       $var$
@@ -77,6 +79,8 @@ syntax extension common_syntax {
     while
       <service> !?serviceListAST
     while
+      <guard> !?guardListAST
+    while
       $func$
       <function_declaration> !?functionDeclarationListAST
     while
@@ -90,6 +94,7 @@ syntax extension common_syntax {
       !procedureDeclarationListAST
       !functionDeclarationListAST
       !serviceListAST
+      !guardListAST
     }
   }
 
@@ -117,6 +122,7 @@ override method @structureDeclaration addExtension
         ![newDeclaration mProcedureDeclarationListAST] + procedures
         ![newDeclaration mFunctionDeclarationListAST] + functions
         ![newDeclaration mServiceListAST]
+        ![newDeclaration mGuardListAST]        
       }
     else
       ioExtensionDeclarationListAST += !typeName !procedures !fieldList !functions
@@ -165,6 +171,8 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
   end
 #--- Add structure services
   [mServiceListAST noteTypesInPrecedenceGraph !?ioGraph]
+#--- Add structure guards
+  [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -314,9 +322,10 @@ override method @structureDeclaration enterInContext
       !resultType
     ]
   end
-#---------------------------------------- services and procedures
+#---------------------------------------- services, procedures, guards
   [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
   [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+  [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
@@ -369,6 +378,13 @@ override method @structureDeclaration semanticAnalysis
   ]
 #--- Analyze services
   [mServiceListAST serviceSemanticAnalysis
+    !receiverType:structureType
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+  ]
+#--- Analyze guards
+  [mGuardListAST guardSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries

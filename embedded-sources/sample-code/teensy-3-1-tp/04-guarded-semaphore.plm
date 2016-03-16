@@ -5,7 +5,7 @@ target "teensy-3-1-tp"
 struct $semaphore {
   var value $uint32
   var list = $taskList ()
-  var guard = $guardList ()
+  var guardList = $guardList ()
 
   service P `kernel () {
     if self.value > 0 then
@@ -22,13 +22,13 @@ struct $semaphore {
     end
   }
 
-//  guard P () {
-//    let accepted = self.value > 0
-//    if accepted then
-//      self.value -= 1
-//    end
-//    handleGuardedCommand (!?self.guard !accepted)
-//  }
+  guard P () {
+    let accepted = self.value > 0
+    if accepted then
+      self.value -= 1
+    end
+    handleGuardedCommand (!?guard:self.guardList !accepted:accepted)
+  }
 }
 
 //------------------------------------------------*

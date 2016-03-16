@@ -169,6 +169,7 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mPanicLineType
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
+  @guardMapForContext mGuardMapForContext
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
@@ -226,6 +227,7 @@ proc buildSemanticContext
 {
   outSemanticContext = .default
 #--- Add predefined modes
+  [!?outSemanticContext.mModeMap insertKey ![guardModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![bootModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![initModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![panicModeName () nowhere]]

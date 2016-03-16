@@ -27,6 +27,8 @@ opaqueType $guardList @instantiable : 32
 
 extern proc tickHandlerForGuardedWaitUntil `isr (?currentDate:inCurrentDate $uint32)
 
+extern proc handleGuardedCommand `guard (?!guard:ioGuard $guardList ?accepted:inAccepted $bool)
+
 //-----------------------------------------------------------------------------*
 
 init 0 { // Configure Systick interrupt every ms
