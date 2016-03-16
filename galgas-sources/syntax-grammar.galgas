@@ -32,11 +32,6 @@ syntax common_syntax (plm_lexique) {
 
   #·····················································································································
   
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
-    $self$
-    $.$
-    <instruction_beginning_by_self> !?ioInstructionList !?ioLabelMap
-  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

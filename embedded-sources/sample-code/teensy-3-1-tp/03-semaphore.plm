@@ -35,7 +35,7 @@ task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
   init 123 {
-    self.top += 1
+    self.top = 1
   }
   
   init 256 {
