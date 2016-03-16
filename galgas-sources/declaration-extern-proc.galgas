@@ -149,7 +149,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
 
 map @externProcedureMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  insert insertKey error message "** internal error **"
+  insert insertKey error message "extern procedure %K is already declared"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

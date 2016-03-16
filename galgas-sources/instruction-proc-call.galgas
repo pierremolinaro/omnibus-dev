@@ -346,6 +346,7 @@ private proc analyzeCall
   case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !inRoutineName)
   case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !inRoutineName)
   case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !inRoutineName)
+  case guard : routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !inRoutineName)
   end
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
 #--- Analyze effective parameters
@@ -560,6 +561,7 @@ override method @procCallInstructionIR llvmInstructionCode
   case procedure : ioLLVMcode += llvmNameForProcedure (!mProcName)
   case service : ioLLVMcode += llvmNameForServiceCall (!mProcName)
   case section : ioLLVMcode += llvmNameForSectionCall (!mProcName)
+  case guard : ioLLVMcode += llvmNameForGuardCall (!mProcName)
   end
   ioLLVMcode += " ("
   for () in mParameters do

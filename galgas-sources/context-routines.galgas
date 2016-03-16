@@ -8,6 +8,7 @@ enum @routineKind {
   case procedure
   case section
   case service
+  case guard
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -23,6 +24,17 @@ map @routineMapForContext {
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"
   remove removeKey error message "there is no '%K' routine"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+# Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
+map @guardMapForContext {
+  @procedureSignature mSignature
+
+  insert insertKey error message "the '%K' guard is already declared in %L"
+  search searchKey error message "there is no '%K' guard"
+  remove removeKey error message "there is no '%K' guard"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -134,31 +146,6 @@ method @procedureDeclarationListAST enterInContext
         !weakProcedure
       ]
     end
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @serviceDeclarationListAST enterInContext
-  ?receiverType:let @string inReceiverTypeName
-  ?!context:@semanticContext ioContext
-{
-  for service in self do
-  #--- Signature
-    @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in service.mServiceFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-      signature += !formalArgumentPassingMode !selector.string !typeProxy
-    end
-  #--- Enter in context
-    [!?ioContext.mRoutineMapForContext insertKey
-      !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
-      !true # service.mMutating
-      !@modeMap {![userModeName () nowhere]}
-      !signature
-      !.service
-      !false # Not weak
-    ]
   end
 }
 

@@ -925,7 +925,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "struct $semaphore {\n"
   "  var value $uint32\n"
   "  var list = $taskList ()\n"
-  "  var guard = $guardList ()\n"
+  "  var guardList = $guardList ()\n"
   "\n"
   "  service P `kernel () {\n"
   "    if self.value > 0 then\n"
@@ -942,13 +942,13 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "//  guard P () {\n"
-  "//    let accepted = self.value > 0\n"
-  "//    if accepted then\n"
-  "//      self.value -= 1\n"
-  "//    end\n"
-  "//    handleGuardedCommand (!\?self.guard !accepted)\n"
-  "//  }\n"
+  "  guard P () {\n"
+  "    let accepted = self.value > 0\n"
+  "    if accepted then\n"
+  "      self.value -= 1\n"
+  "    end\n"
+  "    handleGuardedCommand (!\?guard:self.guardList !accepted:accepted)\n"
+  "  }\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -1001,7 +1001,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "04-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  1347, // Text length
+  1356, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -2572,6 +2572,9 @@ typeComparisonResult cPtr_structureDeclaration::dynamicObjectCompare (const acPt
   if (kOperandEqual == result) {
     result = mAttribute_mServiceListAST.objectCompare (p->mAttribute_mServiceListAST) ;
   }
+  if (kOperandEqual == result) {
+    result = mAttribute_mGuardListAST.objectCompare (p->mAttribute_mGuardListAST) ;
+  }
   return result ;
 }
 
@@ -2608,7 +2611,8 @@ GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_default (LO
                                                        GALGAS_structureFieldListAST::constructor_emptyList (HERE),
                                                        GALGAS_procedureDeclarationListAST::constructor_emptyList (HERE),
                                                        GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
-                                                       GALGAS_serviceDeclarationListAST::constructor_emptyList (HERE)
+                                                       GALGAS_serviceDeclarationListAST::constructor_emptyList (HERE),
+                                                       GALGAS_guardDeclarationListAST::constructor_emptyList (HERE)
                                                        COMMA_THERE) ;
 }
 
@@ -2626,11 +2630,12 @@ GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_new (const 
                                                                           const GALGAS_structureFieldListAST & inAttribute_mStructureFieldListAST,
                                                                           const GALGAS_procedureDeclarationListAST & inAttribute_mProcedureDeclarationListAST,
                                                                           const GALGAS_functionDeclarationListAST & inAttribute_mFunctionDeclarationListAST,
-                                                                          const GALGAS_serviceDeclarationListAST & inAttribute_mServiceListAST
+                                                                          const GALGAS_serviceDeclarationListAST & inAttribute_mServiceListAST,
+                                                                          const GALGAS_guardDeclarationListAST & inAttribute_mGuardListAST
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_structureDeclaration result ;
-  if (inAttribute_mStructureName.isValid () && inAttribute_mAttributeListAST.isValid () && inAttribute_mStructureFieldListAST.isValid () && inAttribute_mProcedureDeclarationListAST.isValid () && inAttribute_mFunctionDeclarationListAST.isValid () && inAttribute_mServiceListAST.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_structureDeclaration (inAttribute_mStructureName, inAttribute_mAttributeListAST, inAttribute_mStructureFieldListAST, inAttribute_mProcedureDeclarationListAST, inAttribute_mFunctionDeclarationListAST, inAttribute_mServiceListAST COMMA_THERE)) ;
+  if (inAttribute_mStructureName.isValid () && inAttribute_mAttributeListAST.isValid () && inAttribute_mStructureFieldListAST.isValid () && inAttribute_mProcedureDeclarationListAST.isValid () && inAttribute_mFunctionDeclarationListAST.isValid () && inAttribute_mServiceListAST.isValid () && inAttribute_mGuardListAST.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_structureDeclaration (inAttribute_mStructureName, inAttribute_mAttributeListAST, inAttribute_mStructureFieldListAST, inAttribute_mProcedureDeclarationListAST, inAttribute_mFunctionDeclarationListAST, inAttribute_mServiceListAST, inAttribute_mGuardListAST COMMA_THERE)) ;
   }
   return result ;
 }
@@ -2744,6 +2749,24 @@ GALGAS_serviceDeclarationListAST cPtr_structureDeclaration::getter_mServiceListA
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardDeclarationListAST GALGAS_structureDeclaration::getter_mGuardListAST (UNUSED_LOCATION_ARGS) const {
+  GALGAS_guardDeclarationListAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_structureDeclaration * p = (const cPtr_structureDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_structureDeclaration) ;
+    result = p->mAttribute_mGuardListAST ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardDeclarationListAST cPtr_structureDeclaration::getter_mGuardListAST (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGuardListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                    Pointer class for @structureDeclaration class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2752,7 +2775,8 @@ cPtr_structureDeclaration::cPtr_structureDeclaration (const GALGAS_lstring & in_
                                                       const GALGAS_structureFieldListAST & in_mStructureFieldListAST,
                                                       const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
                                                       const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
-                                                      const GALGAS_serviceDeclarationListAST & in_mServiceListAST
+                                                      const GALGAS_serviceDeclarationListAST & in_mServiceListAST,
+                                                      const GALGAS_guardDeclarationListAST & in_mGuardListAST
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclaration (THERE),
 mAttribute_mStructureName (in_mStructureName),
@@ -2760,7 +2784,8 @@ mAttribute_mAttributeListAST (in_mAttributeListAST),
 mAttribute_mStructureFieldListAST (in_mStructureFieldListAST),
 mAttribute_mProcedureDeclarationListAST (in_mProcedureDeclarationListAST),
 mAttribute_mFunctionDeclarationListAST (in_mFunctionDeclarationListAST),
-mAttribute_mServiceListAST (in_mServiceListAST) {
+mAttribute_mServiceListAST (in_mServiceListAST),
+mAttribute_mGuardListAST (in_mGuardListAST) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2783,6 +2808,8 @@ void cPtr_structureDeclaration::description (C_String & ioString,
   mAttribute_mFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mServiceListAST.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mGuardListAST.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -2790,7 +2817,7 @@ void cPtr_structureDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_structureDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_structureDeclaration (mAttribute_mStructureName, mAttribute_mAttributeListAST, mAttribute_mStructureFieldListAST, mAttribute_mProcedureDeclarationListAST, mAttribute_mFunctionDeclarationListAST, mAttribute_mServiceListAST COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_structureDeclaration (mAttribute_mStructureName, mAttribute_mAttributeListAST, mAttribute_mStructureFieldListAST, mAttribute_mProcedureDeclarationListAST, mAttribute_mFunctionDeclarationListAST, mAttribute_mServiceListAST, mAttribute_mGuardListAST COMMA_THERE)) ;
   return ptr ;
 }
 

@@ -11,6 +11,948 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                      @objectInMemoryIR enum, associated values                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_lstring mAssociatedValue1 ;
+  public : const GALGAS_bigint mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                            const GALGAS_lstring & inAssociatedValue1,
+                                                            const GALGAS_bigint & inAssociatedValue2
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_register (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectInMemoryIR_globalVariable : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+  public : const GALGAS_bool mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectInMemoryIR_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                  const GALGAS_string & inAssociatedValue1,
+                                                                  const GALGAS_bool & inAssociatedValue2
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_globalVariable (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectInMemoryIR_localValue : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectInMemoryIR_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                              const GALGAS_string & inAssociatedValue1
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_localValue (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectInMemoryIR_globalConstant : public cEnumAssociatedValues {
+  public : const GALGAS_operandIR mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectInMemoryIR_globalConstant (const GALGAS_operandIR & inAssociatedValue0,
+                                                                  const GALGAS_string & inAssociatedValue1
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_globalConstant (void) {}
+} ;
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Bool options                                                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_31_ ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_32_ ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationS ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ_33_ ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_5F_displayDeadCodeElimination ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_writeControlRegisterHTMLDumpFile ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_writeGlobalConstantDependencyGraphFile ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_writeGlobalConstantHTMLDumpFile ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_writeTypeDependencyGraphFile ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               UInt options                                                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              String options                                                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedSampleFile ;
+
+extern C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedTargets ;
+
+extern C_StringCommandLineOption gOption_plm_5F_options_useDirAsTargetDir ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              String List options                                                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern C_StringListCommandLineOption gOption_plm_5F_options_pathList ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Routine 'enterBooleanOperators'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterBooleanOperators (class GALGAS_lstring inArgument0,
+                                    class GALGAS_semanticContext & ioArgument1,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Pointer class for @infixOperatorDescription class                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_infixOperatorDescription : public acPtr_class {
+//--- Attributes
+  public : GALGAS_llvmBinaryOperation mAttribute_mOperator ;
+
+//--- Constructor
+  public : cPtr_infixOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
+                                          COMMA_LOCATION_ARGS) ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_llvmBinaryOperation getter_mOperator (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const = 0 ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const = 0 ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const = 0 ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     @infixObjectObjectOperatorDescription class                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_infixObjectObjectOperatorDescription : public GALGAS_infixOperatorDescription {
+//--- Constructor
+  public : GALGAS_infixObjectObjectOperatorDescription (void) ;
+
+//---
+  public : inline const class cPtr_infixObjectObjectOperatorDescription * ptr (void) const { return (const cPtr_infixObjectObjectOperatorDescription *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_infixObjectObjectOperatorDescription (const cPtr_infixObjectObjectOperatorDescription * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_infixObjectObjectOperatorDescription extractObject (const GALGAS_object & inObject,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_infixObjectObjectOperatorDescription constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_infixObjectObjectOperatorDescription & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_infixObjectObjectOperatorDescription class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixObjectObjectOperatorDescription ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Pointer class for @infixObjectObjectOperatorDescription class                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_infixObjectObjectOperatorDescription : public cPtr_infixOperatorDescription {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_infixObjectObjectOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'combineTypeNamesForInfixOperator'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_combineTypeNamesForInfixOperator (const class GALGAS_string & constinArgument0,
+                                                                const class GALGAS_string & constinArgument1,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @semanticContext struct                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_semanticContext : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_uint mAttribute_mPointerSize ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mBooleanType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mLiteralIntegerType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mPanicCodeType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mPanicLineType ;
+  public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
+  public : GALGAS_routineMapForContext mAttribute_mRoutineMapForContext ;
+  public : GALGAS_guardMapForContext mAttribute_mGuardMapForContext ;
+  public : GALGAS_functionMap mAttribute_mFunctionMap ;
+  public : GALGAS_initRoutineMap mAttribute_mInitRoutineMap ;
+  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicSetupRoutinePriorityMap ;
+  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicLoopRoutinePriorityMap ;
+  public : GALGAS_controlRegisterMap mAttribute_mControlRegisterMap ;
+  public : GALGAS_globalConstantMap mAttribute_mGlobalConstantMap ;
+  public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
+  public : GALGAS_constructorMap mAttribute_mConstructorMap ;
+  public : GALGAS_modeMap mAttribute_mModeMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mEqualOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mNonEqualOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mStrictInfOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mInfEqualOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mStrictSupOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mSupEqualOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mAndOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mOrOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mXorOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mBooleanXorOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mAddOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mAddNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mSubOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mSubNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mMulOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mMulNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mDivOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mDivNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mModOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mModNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mLeftShiftOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mRightShiftOperatorMap ;
+  public : GALGAS_prefixOperatorMap mAttribute_mUnaryMinusOperatorMap ;
+  public : GALGAS_prefixOperatorMap mAttribute_mNotOperatorMap ;
+  public : GALGAS_prefixOperatorMap mAttribute_mUnsignedComplementOperatorMap ;
+  public : GALGAS_taskMap mAttribute_mTaskMap ;
+  public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_semanticContext constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_semanticContext (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_semanticContext (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_semanticContext (const GALGAS_uint & in_mPointerSize,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mBooleanType,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mLiteralIntegerType,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicCodeType,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicLineType,
+                                   const GALGAS_unifiedTypeMap & in_mTypeMap,
+                                   const GALGAS_routineMapForContext & in_mRoutineMapForContext,
+                                   const GALGAS_guardMapForContext & in_mGuardMapForContext,
+                                   const GALGAS_functionMap & in_mFunctionMap,
+                                   const GALGAS_initRoutineMap & in_mInitRoutineMap,
+                                   const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
+                                   const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
+                                   const GALGAS_controlRegisterMap & in_mControlRegisterMap,
+                                   const GALGAS_globalConstantMap & in_mGlobalConstantMap,
+                                   const GALGAS_globalVariableMap & in_mGlobalVariableMap,
+                                   const GALGAS_constructorMap & in_mConstructorMap,
+                                   const GALGAS_modeMap & in_mModeMap,
+                                   const GALGAS_infixOperatorMap & in_mEqualOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mNonEqualOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mStrictInfOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mInfEqualOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mStrictSupOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mSupEqualOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mAndOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mOrOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mXorOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mBooleanXorOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mAddOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mAddNoOvfOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mSubOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mSubNoOvfOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mMulOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mMulNoOvfOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mDivOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mDivNoOvfOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mModOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mModNoOvfOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mLeftShiftOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mRightShiftOperatorMap,
+                                   const GALGAS_prefixOperatorMap & in_mUnaryMinusOperatorMap,
+                                   const GALGAS_prefixOperatorMap & in_mNotOperatorMap,
+                                   const GALGAS_prefixOperatorMap & in_mUnsignedComplementOperatorMap,
+                                   const GALGAS_taskMap & in_mTaskMap,
+                                   const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_semanticContext extractObject (const GALGAS_object & inObject,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_semanticContext constructor_new (const class GALGAS_uint & inOperand0,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
+                                                          const class GALGAS_unifiedTypeMap & inOperand5,
+                                                          const class GALGAS_routineMapForContext & inOperand6,
+                                                          const class GALGAS_guardMapForContext & inOperand7,
+                                                          const class GALGAS_functionMap & inOperand8,
+                                                          const class GALGAS_initRoutineMap & inOperand9,
+                                                          const class GALGAS_panicRoutinePriorityMap & inOperand10,
+                                                          const class GALGAS_panicRoutinePriorityMap & inOperand11,
+                                                          const class GALGAS_controlRegisterMap & inOperand12,
+                                                          const class GALGAS_globalConstantMap & inOperand13,
+                                                          const class GALGAS_globalVariableMap & inOperand14,
+                                                          const class GALGAS_constructorMap & inOperand15,
+                                                          const class GALGAS_modeMap & inOperand16,
+                                                          const class GALGAS_infixOperatorMap & inOperand17,
+                                                          const class GALGAS_infixOperatorMap & inOperand18,
+                                                          const class GALGAS_infixOperatorMap & inOperand19,
+                                                          const class GALGAS_infixOperatorMap & inOperand20,
+                                                          const class GALGAS_infixOperatorMap & inOperand21,
+                                                          const class GALGAS_infixOperatorMap & inOperand22,
+                                                          const class GALGAS_infixOperatorMap & inOperand23,
+                                                          const class GALGAS_infixOperatorMap & inOperand24,
+                                                          const class GALGAS_infixOperatorMap & inOperand25,
+                                                          const class GALGAS_infixOperatorMap & inOperand26,
+                                                          const class GALGAS_infixOperatorMap & inOperand27,
+                                                          const class GALGAS_infixOperatorMap & inOperand28,
+                                                          const class GALGAS_infixOperatorMap & inOperand29,
+                                                          const class GALGAS_infixOperatorMap & inOperand30,
+                                                          const class GALGAS_infixOperatorMap & inOperand31,
+                                                          const class GALGAS_infixOperatorMap & inOperand32,
+                                                          const class GALGAS_infixOperatorMap & inOperand33,
+                                                          const class GALGAS_infixOperatorMap & inOperand34,
+                                                          const class GALGAS_infixOperatorMap & inOperand35,
+                                                          const class GALGAS_infixOperatorMap & inOperand36,
+                                                          const class GALGAS_infixOperatorMap & inOperand37,
+                                                          const class GALGAS_infixOperatorMap & inOperand38,
+                                                          const class GALGAS_prefixOperatorMap & inOperand39,
+                                                          const class GALGAS_prefixOperatorMap & inOperand40,
+                                                          const class GALGAS_prefixOperatorMap & inOperand41,
+                                                          const class GALGAS_taskMap & inOperand42,
+                                                          const class GALGAS_globalTaskVariableList & inOperand43
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_semanticContext & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mAddNoOvfOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mAddOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mAndOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mBooleanType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mBooleanXorOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_constructorMap getter_mConstructorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterMap getter_mControlRegisterMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mDivNoOvfOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mDivOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mEqualOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_functionMap getter_mFunctionMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMap getter_mGlobalConstantMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMap getter_mGlobalVariableMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_guardMapForContext getter_mGuardMapForContext (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mInfEqualOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_initRoutineMap getter_mInitRoutineMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mLeftShiftOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mLiteralIntegerType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mModNoOvfOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mModOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_modeMap getter_mModeMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mMulNoOvfOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mMulOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mNonEqualOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap getter_mNotOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mOrOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mPanicCodeType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mPanicLineType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicLoopRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_mPanicSetupRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPointerSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mRightShiftOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineMapForContext getter_mRoutineMapForContext (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mStrictInfOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mStrictSupOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSubNoOvfOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSubOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSupEqualOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_taskMap getter_mTaskMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap getter_mTypeMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap getter_mUnaryMinusOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap getter_mUnsignedComplementOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mXorOperatorMap (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_semanticContext class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticContext ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Routine 'enterEnumerationOperators'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterEnumerationOperators (class GALGAS_lstring inArgument0,
+                                        class GALGAS_semanticContext & ioArgument1,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Routine 'enterAliasPrefixOperator'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterAliasPrefixOperator (class GALGAS_prefixOperatorMap & ioArgument0,
+                                       const class GALGAS_lstring constinArgument1,
+                                       const class GALGAS_lstring constinArgument2,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'enterAliasInfixOperator'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterAliasInfixOperator (class GALGAS_infixOperatorMap & ioArgument0,
+                                      const class GALGAS_lstring constinArgument1,
+                                      const class GALGAS_lstring constinArgument2,
+                                      const class GALGAS_lstring constinArgument3,
+                                      const class GALGAS_lstring constinArgument4,
+                                      const class GALGAS_lstring constinArgument5,
+                                      const class GALGAS_lstring constinArgument6,
+                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
+                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument8,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'enter_integer_integer_operators'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enter_5F_integer_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'enter_integer_literal_operators'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enter_5F_integer_5F_literal_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  @integerObject_5F_literal_5F_infixOperator class                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_integerObject_5F_literal_5F_infixOperator : public GALGAS_infixOperatorDescription {
+//--- Constructor
+  public : GALGAS_integerObject_5F_literal_5F_infixOperator (void) ;
+
+//---
+  public : inline const class cPtr_integerObject_5F_literal_5F_infixOperator * ptr (void) const { return (const cPtr_integerObject_5F_literal_5F_infixOperator *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_integerObject_5F_literal_5F_infixOperator (const cPtr_integerObject_5F_literal_5F_infixOperator * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_integerObject_5F_literal_5F_infixOperator extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_integerObject_5F_literal_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_integerObject_5F_literal_5F_infixOperator & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_integerObject_5F_literal_5F_infixOperator class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerObject_5F_literal_5F_infixOperator ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Pointer class for @integerObject_literal_infixOperator class                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_integerObject_5F_literal_5F_infixOperator : public cPtr_infixOperatorDescription {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_integerObject_5F_literal_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'staticIntegerTypeName'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'enter_literal_integer_operators'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enter_5F_literal_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  @literal_5F_integerObject_5F_infixOperator class                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_literal_5F_integerObject_5F_infixOperator : public GALGAS_infixOperatorDescription {
+//--- Constructor
+  public : GALGAS_literal_5F_integerObject_5F_infixOperator (void) ;
+
+//---
+  public : inline const class cPtr_literal_5F_integerObject_5F_infixOperator * ptr (void) const { return (const cPtr_literal_5F_integerObject_5F_infixOperator *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_literal_5F_integerObject_5F_infixOperator (const cPtr_literal_5F_integerObject_5F_infixOperator * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_literal_5F_integerObject_5F_infixOperator extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_literal_5F_integerObject_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_literal_5F_integerObject_5F_infixOperator & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_literal_5F_integerObject_5F_infixOperator class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literal_5F_integerObject_5F_infixOperator ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Pointer class for @literal_integerObject_infixOperator class                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_literal_5F_integerObject_5F_infixOperator : public cPtr_infixOperatorDescription {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_literal_5F_integerObject_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Routine 'enterLiteralIntegerOperators'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterLiteralIntegerOperators (const class GALGAS_lstring constinArgument0,
+                                           class GALGAS_semanticContext & ioArgument1,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 @literal_5F_literal_5F_integerInfixOperation class                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_literal_5F_literal_5F_integerInfixOperation : public GALGAS_infixOperatorDescription {
+//--- Constructor
+  public : GALGAS_literal_5F_literal_5F_integerInfixOperation (void) ;
+
+//---
+  public : inline const class cPtr_literal_5F_literal_5F_integerInfixOperation * ptr (void) const { return (const cPtr_literal_5F_literal_5F_integerInfixOperation *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_literal_5F_literal_5F_integerInfixOperation (const cPtr_literal_5F_literal_5F_integerInfixOperation * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_literal_5F_literal_5F_integerInfixOperation extractObject (const GALGAS_object & inObject,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_literal_5F_literal_5F_integerInfixOperation constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_literal_5F_literal_5F_integerInfixOperation & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_literal_5F_literal_5F_integerInfixOperation class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literal_5F_literal_5F_integerInfixOperation ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Pointer class for @literal_literal_integerInfixOperation class                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_literal_5F_literal_5F_integerInfixOperation : public cPtr_infixOperatorDescription {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_literal_5F_literal_5F_integerInfixOperation (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildGlobalConstantMapHTMLFile (class GALGAS_globalConstantMap inArgument0,
+                                             const class GALGAS_lstring constinArgument1,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Filewrapper 'constantDumpGenerationTemplate'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Filewrapper template 'constantDumpGenerationTemplate dump'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class C_Compiler * inCompiler,
+                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                       const class GALGAS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
+                                                                       const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                       const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'linkForGlobalConstant'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Category getter '@valueIR llvmName' (as function)                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_llvmName (const class GALGAS_valueIR & inObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      Routine 'enterControlRegistersInContext'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -468,6 +1410,17 @@ class GALGAS_operandIR function_checkAssignmentCompatibility (const class GALGAS
                                                               const class GALGAS_bool & constinArgument3,
                                                               class C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Function 'guardNameForInvocationGraph'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_guardNameForInvocationGraph (class GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                           class GALGAS_lstring inArgument1,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -972,6 +1925,15 @@ class GALGAS_string function_bootModeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                              Function 'guardModeName'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_guardModeName (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                               Function 'initModeName'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1472,6 +2434,16 @@ class GALGAS_string function_llvmNameForSectionCall (class GALGAS_string inArgum
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Function 'llvmNameForGuardCall'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForGuardCall (class GALGAS_string inArgument0,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                     Function 'llvmNameForSectionImplementation'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1489,6 +2461,16 @@ class GALGAS_string function_llvmNameForSectionImplementation (class GALGAS_stri
 class GALGAS_string function_llvmNameForServiceImplementation (class GALGAS_string inArgument0,
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Function 'llvmNameForGuardImplementation'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForGuardImplementation (class GALGAS_string inArgument0,
+                                                             class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
