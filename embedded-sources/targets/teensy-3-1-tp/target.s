@@ -80,7 +80,7 @@
 @                                            *---------------------*
 @                                            | R5                  | + 4 [ 1]
 @  *--------------------------------*        *---------------------*
-@  | gRunningTaskContextSaveAddress +------> | R4                  | + 0 [ 0]
+@  | gRunningTaskControlBlock       +------> | R4                  | + 0 [ 0]
 @  *--------------------------------*        *---------------------*
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
@@ -107,7 +107,7 @@ as_svcHandler:
 @----------------------------------------- R12 <- address of routine to call
   ldr   r12, [r4, r12, lsl #2]   @ R12 = R4 + (R12 << 2)
 @----------------------------------------- R4 <- calling task context
-  ldr   r4, =gRunningTaskContextSaveAddress
+  ldr   r4, =gRunningTaskControlBlock
   ldr   r4, [r4]
 @----------------------------------------- Call service routine
   blx   r12         @ R4:calling task context address, R5:thread PSP
@@ -130,7 +130,7 @@ _handle_context_switch:
 @----------------------------------------- Select task to run
   bl    kernel_selectTaskToRun
 @----------------------------------------- R0 <- calling task context, R1 <- new task context
-  ldr   r1, =gRunningTaskContextSaveAddress
+  ldr   r1, =gRunningTaskControlBlock
   mov   r0, r4
   ldr   r1, [r1]
 @----------------------------------------- Restore preserved registers
@@ -176,7 +176,7 @@ as_systickHandler:
 @----------------------------------------- Activity led On (macro that uses only R4 and R5)
   ACTIVITY_LED_ON
 @----------------------------------------- R4 <- running task context
-  ldr   r4, =gRunningTaskContextSaveAddress
+  ldr   r4, =gRunningTaskControlBlock
   ldr   r4, [r4]
 @----------------------------------------- Call Systick handler (C routine)
   bl    proc..systickHandler
