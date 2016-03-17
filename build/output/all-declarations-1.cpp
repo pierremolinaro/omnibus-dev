@@ -3353,20 +3353,11 @@ GALGAS_routineKind GALGAS_routineKind::constructor_service (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKind GALGAS_routineKind::constructor_guard (UNUSED_LOCATION_ARGS) {
-  GALGAS_routineKind result ;
-  result.mEnum = kEnum_guard ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_routineKind [5] = {
+static const char * gEnumNameArrayFor_routineKind [4] = {
   "(not built)",
   "procedure",
   "section",
-  "service",
-  "guard"
+  "service"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3385,12 +3376,6 @@ GALGAS_bool GALGAS_routineKind::getter_isSection (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_bool GALGAS_routineKind::getter_isService (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_service == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineKind::getter_isGuard (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_guard == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

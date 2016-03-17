@@ -19,11 +19,12 @@ struct $semaphore {
     makeTaskReady (!?list:self.list ?found:let found)
     if not found then
       self.value += 1
+      guardDidChange (!?guard:self.guardList)
     end
   }
 
   guard P () {
-    let accepted = self.value > 0
+    accepted = self.value > 0
     if accepted then
       self.value -= 1
     end
@@ -33,9 +34,31 @@ struct $semaphore {
 
 //------------------------------------------------*
 
-var s = $semaphore (!value:0) {
+var s0 = $semaphore (!value:0) {
+  proc $T0.loop
+}
+
+//------------------------------------------------*
+
+var s1 = $semaphore (!value:0) {
   proc $T1.loop
-  proc $T2.loop
+}
+
+//------------------------------------------------*
+
+task T0 priority 0 stackSize 512 {
+  var top $uint32 = 0
+
+  proc loop () {
+    waitUntilMS (!deadline:self.top)
+    s0.V ()
+    self.top += 500
+    ledOn (!LED_L0)
+    waitUntilMS (!deadline:self.top)
+    s0.V ()
+    self.top += 500
+    ledOff (!LED_L0)
+  }
 }
 
 //------------------------------------------------*
@@ -43,22 +66,14 @@ var s = $semaphore (!value:0) {
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
-  init 123 {
-    self.top = 1
-  }
-  
-  init 256 {
-    self.top += 2
-  }
-  
   proc loop () {
     waitUntilMS (!deadline:self.top)
-    s.V ()
-    self.top += 250
+    s1.V ()
+    self.top += 400
     ledOn (!LED_L1)
     waitUntilMS (!deadline:self.top)
-    s.V ()
-    self.top += 250
+    s1.V ()
+    self.top += 400
     ledOff (!LED_L1)
   }
 }
@@ -68,10 +83,13 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
 
   proc loop () {
-    s.P ()
-    ledOn (!LED_L2)
-    s.P ()
-    ledOff (!LED_L2)
+    on s0.P () then
+      ledOn  (!LED_L4)
+      ledOff (!LED_L3)
+    elson s1.P () then
+      ledOn  (!LED_L3)
+      ledOff (!LED_L4)
+    end
   }
 }
 

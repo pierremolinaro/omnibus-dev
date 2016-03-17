@@ -332,7 +332,9 @@ static void kernel_exitFromGuard (const unsigned inTaskIndex) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterInGuard (GuardList ** inGuardArray) ;
+void enterInGuard (GuardList ** inGuardArray) asm ("section.call.enterInGuard") ;
+
+void kernel_enterInGuard (GuardList ** inGuardArray) asm ("section.implementation.enterInGuard") ;
 
 void kernel_enterInGuard (GuardList ** inGuardArray) {
   const unsigned runningTaskIndex = kernel_runningTaskIndex () ;
@@ -342,6 +344,8 @@ void kernel_enterInGuard (GuardList ** inGuardArray) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) asm ("proc..handleGuardedCommand") ;
 
 void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) {
   const unsigned runningTaskIndex = kernel_runningTaskIndex () ;
@@ -360,6 +364,8 @@ void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void kernel_guardDidChange (GuardList * ioGuardList) asm ("proc..guardDidChange") ;
+
 void kernel_guardDidChange (GuardList * ioGuardList) {
   while (ioGuardList->mGuardValue > 0) {
     const unsigned taskIndex = countTrainingZeros (ioGuardList->mGuardValue) ;
@@ -369,6 +375,10 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+void waitForGuardChange (void) asm ("service.call.waitForGuardChange") ;
+
+void kernel_waitForGuardChange (void) asm ("service.implementation.waitForGuardChange") ;
 
 void kernel_waitForGuardChange (void) {
   const unsigned runningTaskIndex = kernel_runningTaskIndex () ;

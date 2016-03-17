@@ -92,20 +92,14 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @routineMapIR sectionCodeGeneration
-  ?let @string inCurrentDirectory
-  ?let @string inTargetName
   ?!@string ioLLVMcode
-  ?!@string ioAssemblerCode
+  ?!@2stringlist ioSectionList
 {
-  var idx = 0
   for section in self do
     if section.mKind == .section then
       let sectionCallName = llvmNameForSectionCall (!section.lkey.string)
-      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
-      s = [s stringByReplacingStringByString !"!ENTRY!" !sectionCallName]
-      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-      ioAssemblerCode += s
-      idx += 1
+      let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
+      ioSectionList += !sectionCallName !sectionImplementationName
       ioLLVMcode += llvmTitleComment (!sectionCallName)
       ioLLVMcode += "declare void @" + sectionCallName + " ("
       for () in section.mFormalArgumentListForGeneration
@@ -124,20 +118,45 @@ method @routineMapIR sectionCodeGeneration
       ioLLVMcode += ") nounwind \n\n"
     end
   end
-  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
-  idx = 0
-  for section in self do
-    if section.mKind == .section then
-      let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
-      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
-      s = [s stringByReplacingStringByString !"!ENTRY!" !sectionImplementationName]
-      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-      ioAssemblerCode += s
-      idx += 1
-    end
-  end
+#  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
+#  idx = 0
+#  for section in self do
+#    if section.mKind == .section then
+#      let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
+#      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
+#      s = [s stringByReplacingStringByString !"!ENTRY!" !sectionImplementationName]
+#      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+#      ioAssemblerCode += s
+#      idx += 1
+#    end
+#  end
+#  let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
+#  ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc generateSectionDispatcher
+  ?let @string inCurrentDirectory
+  ?let @string inTargetName
+  ?!@string ioAssemblerCode
+  ?let @2stringlist inSectionList
+{
   let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
   ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
+  for (callName implementationName) in inSectionList do (idx)
+    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
+    s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
+    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+    ioAssemblerCode += s
+  end
+  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
+  for (* implementationName) in inSectionList do (idx)
+    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
+    s = [s stringByReplacingStringByString !"!ENTRY!" !implementationName]
+    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+    ioAssemblerCode += s
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

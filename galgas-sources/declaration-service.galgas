@@ -119,32 +119,14 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @routineMapIR serviceCodeGeneration
-  ?let @string inCurrentDirectory
-  ?let @string inTargetName
   ?!@string ioLLVMcode
-  ?!@string ioAssemblerCode
+  ?!@2stringlist ioServiceList
 {
-#--- Generate service entries
-  var idx = 0
-  for service in self do
-   if service.mKind == .service then
-      let name = llvmNameForServiceCall (!service.lkey.string)
-      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-entry.s")
-      s = [s stringByReplacingStringByString !"!ENTRY!" !name]
-      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-      ioAssemblerCode += s
-      idx += 1
-    end
-  end
-  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-header.s")
-  idx = 0
   for service in self do
     if service.mKind == .service then
       let serviceImplementationName = llvmNameForServiceImplementation (!service.lkey.string)
-      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-entry.s")
-      s = [s stringByReplacingStringByString !"!ENTRY!" !serviceImplementationName]
-      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-      ioAssemblerCode += s
+      let serviceCallName = llvmNameForServiceCall (!service.lkey.string)
+      ioServiceList += !serviceCallName !serviceImplementationName
       ioLLVMcode += llvmTitleComment (!serviceImplementationName)
       ioLLVMcode += "declare void @" + llvmNameForServiceCall (!service.lkey.string) + " ("
       let typeName = [service.lkey.string stringByDeletingPathExtension]
@@ -164,10 +146,31 @@ method @routineMapIR serviceCodeGeneration
         end
       end
       ioLLVMcode += ") nounwind \n\n"
-      idx += 1
     end
   end
-  ioAssemblerCode += "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc generateServiceDispatcher
+  ?let @string inCurrentDirectory
+  ?let @string inTargetName
+  ?!@string ioAssemblerCode
+  ?let @2stringlist inServiceList
+{
+  for (callName *) in inServiceList do (idx)
+    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-entry.s")
+    s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
+    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+    ioAssemblerCode += s
+  end
+  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-header.s")
+  for (* implementationName) in inServiceList do (idx)
+    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-entry.s")
+    s = [s stringByReplacingStringByString !"!ENTRY!" !implementationName]
+    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+    ioAssemblerCode += s
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

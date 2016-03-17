@@ -29,8 +29,10 @@ abstract class @abstractExpressionIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationAdds {
+  @uint mUniqueIndex
   @stringset mIntrinsicsDeclarationSet
   @staticStringMap mStaticStringMap
+  @bool mUsesGuards
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -119,7 +121,6 @@ proc codeGeneration
     !eof:inEndOfSourceFileLocation
     !intermediateCode:inIntermediateCodeStruct
     !typeMap:inTypeMap
-#    !typeInitialierMap:inTypeInitializerMap
     !target:inTargetName
     !panicCodeType:inPanicCodeType
     !panicLineType:inPanicLineType
@@ -200,24 +201,52 @@ private proc generateLLVMfile
   [inIntermediateCodeStruct.mRoutineMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
+  @2stringlist serviceList = {}
+  @2stringlist sectionList = {}
+#----------------------------------------- Use guards ?
+  if generationAdds.mUsesGuards then
+    let enterInGuard = enterInGuardFunctionName ()
+    sectionList += !llvmNameForSectionCall (!enterInGuard) !llvmNameForSectionImplementation (!enterInGuard)
+    generationAdds.mIntrinsicsDeclarationSet += !"declare void @" + llvmNameForSectionCall (!enterInGuard) + " (i32*)\n"
+    let waitForGuardChange = waitForGuardChangeFunctionName ()
+    serviceList += !llvmNameForServiceCall (!waitForGuardChange) !llvmNameForServiceImplementation (!waitForGuardChange)
+    generationAdds.mIntrinsicsDeclarationSet += !"declare void @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
+  end
 #----------------------------------------- Sections
   [inIntermediateCodeStruct.mRoutineMapIR sectionCodeGeneration
-    !inCurrentDirectory
-    !inTargetName.string
     !?llvmCode
-    !?asCode
+    !?sectionList
   ]
 #----------------------------------------- Services
   [inIntermediateCodeStruct.mRoutineMapIR serviceCodeGeneration
-    !inCurrentDirectory
-    !inTargetName.string
     !?llvmCode
-    !?asCode
+    !?serviceList
+  ]
+#----------------------------------------- Guards
+  [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
+    !?llvmCode
+    !?serviceList
+    !generationContext
+    !?generationAdds
   ]
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
     [function implementationCodeGeneration !?llvmCode !generationContext !?generationAdds]
   end
+#----------------------------------------- Service dispatcher
+  generateServiceDispatcher (
+    !inCurrentDirectory
+    !inTargetName.string
+    !?asCode
+    !serviceList
+  )
+#----------------------------------------- Section dispatcher
+  generateSectionDispatcher (
+    !inCurrentDirectory
+    !inTargetName.string
+    !?asCode
+    !sectionList
+  )
 #----------------------------------------- Panic
   if not [option plm_options.noPanicGeneration value] then
     llvmCode += getTargetTextFile (

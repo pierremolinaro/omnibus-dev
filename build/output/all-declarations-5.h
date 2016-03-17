@@ -1922,6 +1922,90 @@ class cPtr_loadTaskVariableIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                               @onInstructionIR class                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_onInstructionIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_onInstructionIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_onInstructionIR constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_onInstructionIR * ptr (void) const { return (const cPtr_onInstructionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_onInstructionIR (const cPtr_onInstructionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_onInstructionIR extractObject (const GALGAS_object & inObject,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_onInstructionIR constructor_new (const class GALGAS_onInstructionBranchListIR & inOperand0
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_onInstructionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_onInstructionBranchListIR getter_mOnInstructionBranchListIR (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_onInstructionIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_onInstructionIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Pointer class for @onInstructionIR class                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_onInstructionIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_onInstructionBranchListIR mAttribute_mOnInstructionBranchListIR ;
+
+//--- Constructor
+  public : cPtr_onInstructionIR (const GALGAS_onInstructionBranchListIR & in_mOnInstructionBranchListIR
+                                 COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_onInstructionBranchListIR getter_mOnInstructionBranchListIR (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            @procCallInstructionIR class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

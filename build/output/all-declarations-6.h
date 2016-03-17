@@ -170,20 +170,6 @@ void categoryMethod_guardSemanticAnalysis (const class GALGAS_guardDeclarationLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Category method '@routineMapIR guardCodeGeneration'                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_guardCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                         const class GALGAS_string constin_inCurrentDirectory,
-                                         const class GALGAS_string constin_inTargetName,
-                                         class GALGAS_string & io_ioLLVMcode,
-                                         class GALGAS_string & io_ioAssemblerCode,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                  Abstract category method '@instructionAST noteInstructionTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -581,6 +567,19 @@ void enterCategoryGetter_typeName (const int32_t inClassIndex,
 class GALGAS_string callCategoryGetter_typeName (const cPtr_integerDeclaration * inObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Category method '@guardMapIR-element llvmCodeGeneration'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_llvmCodeGeneration (const class GALGAS_guardMapIR_2D_element inObject,
+                                        class GALGAS_string & io_ioLLVMcode,
+                                        const class GALGAS_generationContext constin_inGenerationContext,
+                                        class GALGAS_generationAdds & io_ioGenerationAdds,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -7,6 +7,7 @@
 struct @accessibleEntities {
   @stringset mAccessibleRegisterSet
   @stringset mRoutineSet
+  @stringset mGuardSet
   @stringset mFunctionSet
   @stringset mSectionSet
   @stringset mGlobalVariableSet
@@ -57,6 +58,7 @@ proc codeOptimisation
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let initialProcedureMap = ioIntermediateCodeStruct.mRoutineMapIR
+  let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
   let initialFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
   @uint pass = 0
   @bool optimizing = true
@@ -72,6 +74,7 @@ proc codeOptimisation
       s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
       s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routines\n"
+      s += "  " + [ioIntermediateCodeStruct.mGuardMapIR count] + " guards\n"
       s += "  " + [ioIntermediateCodeStruct.mFunctionMapIR count] + " functions\n"
       message s
     end
@@ -117,7 +120,7 @@ proc codeOptimisation
     end
     ioIntermediateCodeStruct.mGlobalVariableMap = globalVariableMap
   end
-#--- Warn on unused procedures
+#--- Warn on unused routines
   for () in initialProcedureMap do
     if (not [ioIntermediateCodeStruct.mRoutineMapIR hasKey !lkey.string]) && mWarnIfUnused then
       warning lkey: "unused procedure; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
@@ -127,6 +130,12 @@ proc codeOptimisation
   for () in initialFunctionMap do
     if (not [ioIntermediateCodeStruct.mFunctionMapIR hasKey !lkey.string]) && mWarnIfUnused then
       warning lkey: "unused function; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
+    end
+  end
+#--- Warn on unused guard
+  for () in initialGuardMap do
+    if (not [ioIntermediateCodeStruct.mGuardMapIR hasKey !lkey.string]) && mWarnIfUnused then
+      warning lkey: "unused guard; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
     end
   end
 }
@@ -141,6 +150,10 @@ private proc suppressInaccessibleSubprograms
   outAccessibleEntities = .default
   @routineMapIR accessibleProcedureMap = {}
   @routineMapIR nonExploredProcedureMap = {}
+  @functionMapIR accessibleFunctionMap  = {}
+  @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
+  @guardMapIR accessibleGuardMap = {}
+  @guardMapIR nonExploredGuardMap = ioIntermediateCodeStruct.mGuardMapIR
 #--- First, required procedures
   for procedure in ioIntermediateCodeStruct.mRoutineMapIR do
     if procedure.mIsRequired then
@@ -189,15 +202,15 @@ private proc suppressInaccessibleSubprograms
     [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
   end
 #--- Explore routines
-  @functionMapIR accessibleFunctionMap  = {}
-  @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
   var continues = true
   let bound = [ioIntermediateCodeStruct.mRoutineMapIR count]
     + [ioIntermediateCodeStruct.mFunctionMapIR count]
+    + [ioIntermediateCodeStruct.mGuardMapIR count]
   loop (bound + 1) while continues do
     continues = false
     exploreProcs (!?accessibleProcedureMap !?outAccessibleEntities !?nonExploredProcedureMap !?continues)
     exploreFunctions (!?accessibleFunctionMap !?outAccessibleEntities !?nonExploredFunctionMap !?continues)
+    exploreGuards (!?accessibleGuardMap !?outAccessibleEntities !?nonExploredGuardMap !?continues)
   end
   if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
     ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
@@ -205,6 +218,10 @@ private proc suppressInaccessibleSubprograms
   end
   if ioIntermediateCodeStruct.mFunctionMapIR != accessibleFunctionMap then
     ioIntermediateCodeStruct.mFunctionMapIR = accessibleFunctionMap
+    ioOptimizing = true
+  end
+  if ioIntermediateCodeStruct.mGuardMapIR != accessibleGuardMap then
+    ioIntermediateCodeStruct.mGuardMapIR = accessibleGuardMap
     ioOptimizing = true
   end
 }
@@ -280,6 +297,37 @@ private proc exploreFunctions
         !function.mResultType
         !function.mResultVarName
         !function.mWarnIfUnused
+      ]        
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc exploreGuards
+  ?!@guardMapIR ioAccessibleGuardMap
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@guardMapIR ioNonExploredGuardMap
+  ?!@bool ioContinueExploreRoutines
+{
+  let @guardMapIR exNonExploredGuardMap = ioNonExploredGuardMap
+  ioNonExploredGuardMap = {}
+  for guard in exNonExploredGuardMap do
+    if [ioAccessibleEntities.mGuardSet hasKey !guard.lkey.string] then
+      [!?ioAccessibleGuardMap insertKey
+        !guard.lkey
+        !guard.mFormalArgumentListForGeneration
+        !guard.mInstructionGenerationList
+        !guard.mWarnIfUnused
+      ]        
+      [guard enterAccessibleEntities !?ioAccessibleEntities]
+      ioContinueExploreRoutines = true
+    else
+      [!?ioNonExploredGuardMap insertKey
+        !guard.lkey
+        !guard.mFormalArgumentListForGeneration
+        !guard.mInstructionGenerationList
+        !guard.mWarnIfUnused
       ]        
     end
   end

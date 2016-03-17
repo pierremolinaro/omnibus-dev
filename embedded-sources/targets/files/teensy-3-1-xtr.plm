@@ -29,6 +29,8 @@ extern proc tickHandlerForGuardedWaitUntil `isr (?currentDate:inCurrentDate $uin
 
 extern proc handleGuardedCommand `guard (?!guard:ioGuard $guardList ?accepted:inAccepted $bool)
 
+extern proc guardDidChange `kernel (?!guard:ioGuard $guardList)
+
 //-----------------------------------------------------------------------------*
 
 init 0 { // Configure Systick interrupt every ms
