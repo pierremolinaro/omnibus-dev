@@ -179,20 +179,14 @@ func llvmNameForSectionCall ?@string inName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGuardCall ?@string inName -> @string outName {
-  outName = "guard.call." + inName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func llvmNameForSectionImplementation ?@string inName -> @string outName {
   outName = "section.implementation." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForServiceImplementation ?@string inName -> @string outName {
-  outName = "service.implementation." + inName
+func llvmNameForGuardCall ?@string inName -> @string outName {
+  outName = "guard.call." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -203,8 +197,26 @@ func llvmNameForGuardImplementation ?@string inName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once enterInGuardFunctionName -> @string outName {
+  outName = "enterInGuard"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once waitForGuardChangeFunctionName -> @string outName {
+  outName = "waitForGuardChange"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func llvmNameForServiceCall ?@string inName -> @string outName {
   outName = "service.call." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForServiceImplementation ?@string inName -> @string outName {
+  outName = "service.implementation." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

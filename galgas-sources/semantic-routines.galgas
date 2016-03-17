@@ -104,7 +104,6 @@ proc routineSemanticAnalysis
   case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!inSelfType !inRoutineName)
   case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inSelfType !inRoutineName)
   case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inSelfType !inRoutineName)
-  case guard : routineNameForInvocationGraph = guardNameForInvocationGraph (!inSelfType !inRoutineName)
   end
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
@@ -224,7 +223,6 @@ method @routineMapIR-element llvmCodeGeneration
   case procedure : routineName = llvmNameForProcedure (!lkey.string)
   case section : routineName = llvmNameForSectionImplementation (!lkey.string)
   case service : routineName = llvmNameForServiceImplementation (!lkey.string)
-  case guard : routineName = llvmNameForGuardImplementation (!lkey.string)
   end
   if [option plm_options.noPanicGeneration value] && mNullOnNoPanic then
   #--- Generate in assembly code routine pointer as NULL value

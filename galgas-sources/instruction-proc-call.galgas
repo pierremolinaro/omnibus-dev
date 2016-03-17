@@ -193,7 +193,7 @@ override method @selfRoutineCallInstructionAST analyze
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  analyzeCall (
+  analyzeRoutineCall (
     !self:inSelfType
     !receiverName:.new{![inSelfType key] !mRoutineName.location}
     !routineName:mRoutineName
@@ -232,7 +232,7 @@ override method @standaloneRoutineCallInstructionAST analyze
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  analyzeCall (
+  analyzeRoutineCall (
     !self:inSelfType
     !receiverName:.new{!"" !mRoutineName.location}
     !routineName:mRoutineName
@@ -271,7 +271,7 @@ override method @remoteRoutineCallInstructionAST analyze
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  analyzeCall (
+  analyzeRoutineCall (
     !self:inSelfType
     !receiverName:mReceiverName
     !routineName:mRoutineName
@@ -299,7 +299,7 @@ override method @remoteRoutineCallInstructionAST analyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc analyzeCall
+proc analyzeRoutineCall
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?receiverName:let @lstring inReceiverName
   ?routineName:let @lstring inRoutineName
@@ -346,12 +346,52 @@ private proc analyzeCall
   case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !inRoutineName)
   case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !inRoutineName)
   case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !inRoutineName)
-  case guard : routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !inRoutineName)
   end
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#--- Check mode
+  checkMode (
+    !requiredModes:inRequiredModeSet
+    !possibleModes:[modeMap keySet]
+    !error:inRoutineName.location
+  )
+#--- Analyze effective parameters
+  analyzeEffectiveParameters (
+    !self:inSelfType
+    !formal:formalSignature
+    !effective:inEffectiveParameterList
+    !errorLocation:inRoutineName.location
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:inRequiredModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    !?effectiveIR:outEffectiveParameterListIR
+  )
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc analyzeEffectiveParameters
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?formal:let @procedureSignature inFormalSignature
+  ?effective:let @procEffectiveParameterListAST inEffectiveParameterList
+  ?errorLocation:let @location inErrorLocation
+  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?requiredModeSet:let @stringset inRequiredModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
+{
 #--- Analyze effective parameters
   @procEffectiveParameterList parameterList = {}
-  for () formal_ in formalSignature, () effective_ in inEffectiveParameterList do
+  for () formal_ in inFormalSignature, () effective_ in inEffectiveParameterList do
     switch effective_mEffectiveParameterKind 
     case inputWithType (@bool constant @lstring typeName @lstring name) :
       let type = if typeName.string == "" then
@@ -385,7 +425,7 @@ private proc analyzeCall
       end
       [!?ioInstructionGenerationList appendAlloca !name.string !type]
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-      outEffectiveParameterListIR +=
+      ioEffectiveParameterListIR +=
         !.input
         !effective_mSelector
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
@@ -410,14 +450,14 @@ private proc analyzeCall
         error name : "an $" + [type key] + " instance is not copyable"
       end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-      outEffectiveParameterListIR +=
+      ioEffectiveParameterListIR +=
         !.input
         !effective_mSelector
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
-        !routineNameForInvocationGraph:routineNameForInvocationGraph
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:formal_mType
         !context:inContext
         !modes:inRequiredModeSet
@@ -435,7 +475,7 @@ private proc analyzeCall
         !staticTypeAllowed:false
       )
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
-      outEffectiveParameterListIR += 
+      ioEffectiveParameterListIR += 
         !.output
         !effective_mSelector
         !result
@@ -456,29 +496,29 @@ private proc analyzeCall
         error name : "routine has no access right on the this variable"
       end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-      outEffectiveParameterListIR +=
+      ioEffectiveParameterListIR +=
         !.outputInput
         !effective_mSelector
         !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
-        error name : "'self' is not available in this context" :parameterList, outEffectiveParameterListIR
+        error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
       else
         switch [inSelfType kind]
         case opaque (*) :
-          error name : "an opaque type does not handle field access" : parameterList, outEffectiveParameterListIR
+          error name : "an opaque type does not handle field access" : parameterList, ioEffectiveParameterListIR
         case boolean :
-          error name : "a boolean does not handle field access" : parameterList, outEffectiveParameterListIR
+          error name : "a boolean does not handle field access" : parameterList, ioEffectiveParameterListIR
         case staticInteger :
-          error name : "an integer does not handle field access" : parameterList, outEffectiveParameterListIR
+          error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case boolset :
-          error name : "a boolset does not handle field access" : parameterList, outEffectiveParameterListIR
+          error name : "a boolset does not handle field access" : parameterList, ioEffectiveParameterListIR
         case literalString :
-          error name : "a literal string does not handle field access" : parameterList, outEffectiveParameterListIR
+          error name : "a literal string does not handle field access" : parameterList, ioEffectiveParameterListIR
         case enumeration (*) :
-          error name : "an enumeration does not handle field access" : parameterList, outEffectiveParameterListIR
+          error name : "an enumeration does not handle field access" : parameterList, ioEffectiveParameterListIR
         case integer (* * * *) :
-          error name : "an integer does not handle field access" : parameterList, outEffectiveParameterListIR
+          error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case structure (@propertyMap propertyMap *) :
           [propertyMap searchKey !name ?let type ?let idx]
           getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
@@ -489,7 +529,7 @@ private proc analyzeCall
             !name.string
           ]        
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-          outEffectiveParameterListIR +=
+          ioEffectiveParameterListIR +=
             !.outputInput
             !effective_mSelector
             !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![fieldAddress name])}}
@@ -497,18 +537,12 @@ private proc analyzeCall
       end
     end
   end
-#--- Check mode
-  checkMode (
-    !requiredModes:inRequiredModeSet
-    !possibleModes:[modeMap keySet]
-    !error:inRoutineName.location
-  )
 #--- Check parameters
-  if [formalSignature length] != [inEffectiveParameterList length] then
-    error inRoutineName: "this routine requires " + [formalSignature length] + " argument(s), this call names "
+  if [inFormalSignature length] != [inEffectiveParameterList length] then
+    error inErrorLocation: "this routine requires " + [inFormalSignature length] + " argument(s), this call names "
       + [inEffectiveParameterList length] + " argument(s)"
   else
-    for () formal_ in formalSignature, () actual_ in parameterList do
+    for () formal_ in inFormalSignature, () actual_ in parameterList do
       if [formal_mType key] != [actual_mParameterType key] then
         error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
            "', and is incompatible with the formal type '" + [formal_mType key] + "'"
@@ -561,7 +595,6 @@ override method @procCallInstructionIR llvmInstructionCode
   case procedure : ioLLVMcode += llvmNameForProcedure (!mProcName)
   case service : ioLLVMcode += llvmNameForServiceCall (!mProcName)
   case section : ioLLVMcode += llvmNameForSectionCall (!mProcName)
-  case guard : ioLLVMcode += llvmNameForGuardCall (!mProcName)
   end
   ioLLVMcode += " ("
   for () in mParameters do

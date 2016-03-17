@@ -8,7 +8,6 @@ enum @routineKind {
   case procedure
   case section
   case service
-  case guard
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

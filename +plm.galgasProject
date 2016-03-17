@@ -83,6 +83,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/instruction-panic.galgas"
   "galgas-sources/instruction-operator-assign.galgas"
   "galgas-sources/instruction-if.galgas"
+  "galgas-sources/instruction-on.galgas"
   "galgas-sources/instruction-proc-call.galgas"
   "galgas-sources/instruction-while.galgas"
   "galgas-sources/instruction-for-in-do.galgas"

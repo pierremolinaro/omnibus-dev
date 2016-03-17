@@ -273,7 +273,6 @@ method @globalVarDeclarationList-element enterInContext
     case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !procedure.mRoutineName)
-    case guard : routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     end
     [!?allowedRoutineMap insertKey !routineNameForInvocationGraph !procedure.mHasWriteAccess]
   end
