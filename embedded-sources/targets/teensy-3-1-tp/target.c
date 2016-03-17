@@ -152,9 +152,9 @@ typedef struct {
   unsigned * mStackBufferAddress ;
   unsigned mStackBufferSize ; // In bytes
 //--- Guards
-  GuardList ** mGuardListPtr ;
   unsigned short mGuardCount ;
   GuardState mGuardState ;
+  GuardList * mGuardListArray [!GUARDCOUNT!] ;
 } TaskControlBlock ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -218,7 +218,6 @@ void kernel_create_task (const unsigned inTaskIndex,
                          routineTaskType inTaskRoutine) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
   taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;
-  taskControlBlockPtr->mGuardListPtr = (GuardList **) 0 ;
   taskControlBlockPtr->mGuardCount = 0 ;
   taskControlBlockPtr->mGuardState = GUARD_OUTSIDE ;
 //--- Store stack parameters
@@ -316,7 +315,7 @@ static void kernel_exitFromGuard (const unsigned inTaskIndex) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
   const unsigned guardCount = taskControlBlockPtr->mGuardCount ;
   for (unsigned i=0 ; i<guardCount ; i++) {
-   taskControlBlockPtr->mGuardListPtr [i]->mGuardValue &= ~ (1 << inTaskIndex) ;
+   taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= ~ (1 << inTaskIndex) ;
   }
   gDeadlineWaitingInGuardTaskList &= ~ (1 << inTaskIndex) ;
   if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
@@ -331,14 +330,13 @@ static void kernel_exitFromGuard (const unsigned inTaskIndex) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterInGuard (GuardList ** inGuardArray) asm ("section.call.enterInGuard") ;
+void enterInGuard (void) asm ("section.call.enterInGuard") ;
 
-void kernel_enterInGuard (GuardList ** inGuardArray) asm ("section.implementation.enterInGuard") ;
+void kernel_enterInGuard (void) asm ("section.implementation.enterInGuard") ;
 
-void kernel_enterInGuard (GuardList ** inGuardArray) {
+void kernel_enterInGuard (void) {
   const unsigned runningTaskIndex = kernel_runningTaskIndex () ;
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;
-  taskControlBlockPtr->mGuardListPtr = inGuardArray ;
   taskControlBlockPtr->mGuardState = GUARD_EVALUATING ;
 }
 
@@ -355,7 +353,7 @@ void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted
     }else{
       ioGuardList->mGuardValue |= 1 << runningTaskIndex ;
       const unsigned guardCount = taskControlBlockPtr->mGuardCount ;
-      taskControlBlockPtr->mGuardListPtr [guardCount] = ioGuardList ;
+      taskControlBlockPtr->mGuardListArray [guardCount] = ioGuardList ;
       taskControlBlockPtr->mGuardCount = guardCount + 1 ;
     }
   }

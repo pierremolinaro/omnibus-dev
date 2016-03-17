@@ -34,7 +34,10 @@ override method @storeGlobalVariableIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+override method @storeGlobalVariableIR enterAccessibleEntities 
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
   ioAccessibleEntities.mGlobalVariableSet += !mGlobalVarName
 }
 

@@ -29,7 +29,10 @@ override method @getElementPtrIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getElementPtrIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+override method @getElementPtrIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
 }
 
 

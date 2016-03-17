@@ -138,7 +138,6 @@ private proc compileProject
           !eof:inEndOfSourceFile
           !intermediateCode:intermediateCodeStruct
           !typeMap:semanticContext.mTypeMap
-#          !typeInitialierMap:semanticContext.mTypeInitializerMap
           !target:inTargetName
           !panicCodeType:semanticContext.mPanicCodeType
           !panicLineType:semanticContext.mPanicLineType

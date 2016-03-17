@@ -253,6 +253,7 @@ override method @registerIntegerConstantInExpressionIR llvmInstructionCode
 
 override method @registerIntegerConstantInExpressionIR enterAccessibleEntities
   ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }
 

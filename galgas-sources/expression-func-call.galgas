@@ -246,7 +246,10 @@ override method @functionCallIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @functionCallIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+override method @functionCallIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+ {
   ioAccessibleEntities.mFunctionSet += !mFunctionName
 }
 

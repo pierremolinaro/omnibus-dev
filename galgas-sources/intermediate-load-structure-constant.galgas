@@ -27,7 +27,10 @@ override method @loadStructureConstantIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadStructureConstantIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+override method @loadStructureConstantIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
 }
 
 

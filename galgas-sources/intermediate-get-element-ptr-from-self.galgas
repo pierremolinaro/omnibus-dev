@@ -31,7 +31,10 @@ override method @getElementPtrFromSelfIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getElementPtrFromSelfIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+override method @getElementPtrFromSelfIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

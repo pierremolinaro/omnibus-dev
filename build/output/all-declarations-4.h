@@ -1006,6 +1006,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_instructionListIR mAttribute_mPanicLoopInstructionListIR ;
   public : GALGAS_taskMapIR mAttribute_mTaskMapIR ;
   public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
+  public : GALGAS_uint mAttribute_mMaxBranchOfOnInstructions ;
 
 
 //--------------------------------- Accessors
@@ -1036,7 +1037,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_instructionListIR & in_mPanicSetupInstructionListIR,
                                           const GALGAS_instructionListIR & in_mPanicLoopInstructionListIR,
                                           const GALGAS_taskMapIR & in_mTaskMapIR,
-                                          const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
+                                          const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
+                                          const GALGAS_uint & in_mMaxBranchOfOnInstructions) ;
 
 //-- Start of generic part --*
 
@@ -1063,7 +1065,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_instructionListIR & inOperand11,
                                                                  const class GALGAS_instructionListIR & inOperand12,
                                                                  const class GALGAS_taskMapIR & inOperand13,
-                                                                 const class GALGAS_globalTaskVariableList & inOperand14
+                                                                 const class GALGAS_globalTaskVariableList & inOperand14,
+                                                                 const class GALGAS_uint & inOperand15
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1095,6 +1098,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_guardMapIR getter_mGuardMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_initListIR getter_mInitList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mMaxBranchOfOnInstructions (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mPanicLoopInstructionListIR (LOCATION_ARGS) const ;
 
@@ -2838,6 +2843,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessibleEntities 
 
 void categoryMethod_enterAccessibleEntities (const class GALGAS_instructionListIR inObject,
                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2849,6 +2855,7 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_instructionListI
 
 void categoryMethod_enterAccessibleEntities (const class GALGAS_routineMapIR_2D_element inObject,
                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2862,6 +2869,7 @@ void routine_exploreFunctions (class GALGAS_functionMapIR & ioArgument0,
                                class GALGAS_accessibleEntities & ioArgument1,
                                class GALGAS_functionMapIR & ioArgument2,
                                class GALGAS_bool & ioArgument3,
+                               class GALGAS_uint & ioArgument4,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -2875,6 +2883,7 @@ void routine_exploreGuards (class GALGAS_guardMapIR & ioArgument0,
                             class GALGAS_accessibleEntities & ioArgument1,
                             class GALGAS_guardMapIR & ioArgument2,
                             class GALGAS_bool & ioArgument3,
+                            class GALGAS_uint & ioArgument4,
                             class C_Compiler * inCompiler
                             COMMA_LOCATION_ARGS) ;
 
@@ -2888,6 +2897,7 @@ void routine_exploreProcs (class GALGAS_routineMapIR & ioArgument0,
                            class GALGAS_accessibleEntities & ioArgument1,
                            class GALGAS_routineMapIR & ioArgument2,
                            class GALGAS_bool & ioArgument3,
+                           class GALGAS_uint & ioArgument4,
                            class C_Compiler * inCompiler
                            COMMA_LOCATION_ARGS) ;
 
@@ -2899,6 +2909,7 @@ void routine_exploreProcs (class GALGAS_routineMapIR & ioArgument0,
 
 void categoryMethod_enterAccessibleEntities (const class GALGAS_functionMapIR_2D_element inObject,
                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2910,6 +2921,7 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_functionMapIR_2D
 
 void categoryMethod_enterAccessibleEntities (const class GALGAS_guardMapIR_2D_element inObject,
                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 

@@ -137,7 +137,10 @@ class @convertInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertInstructionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+override method @convertInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
