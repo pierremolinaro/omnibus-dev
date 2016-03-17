@@ -30,26 +30,28 @@ method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessi
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities
+abstract method @abstractInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
   for (instruction) in self do
-    [instruction enterAccessibleEntities !?ioAccessibleEntities]
+    [instruction enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+method @routineMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -168,7 +170,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mGlobal
         !procedure.mKind
       ]        
-      [procedure enterAccessibleEntities !?outAccessibleEntities]
+      [procedure enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
       outAccessibleEntities.mRoutineSet += !procedure.lkey.string
     else
       [!?nonExploredProcedureMap insertKey
@@ -186,20 +188,20 @@ private proc suppressInaccessibleSubprograms
   end
 #--- Then, boot and init clauses
   for boot in ioIntermediateCodeStruct.mBootList do
-    [boot.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
+    [boot.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
   end
   for init in ioIntermediateCodeStruct.mInitList do
-    [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
+    [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
   end
 #--- Tasks (init and loop)
   for task in ioIntermediateCodeStruct.mTaskMapIR do
-    [task.mInitInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
+    [task.mInitInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
     outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + ".loop"
   end
 #--- Panic clauses (if panic code is generated)
   if not [option plm_options.noPanicGeneration value] then
-    [ioIntermediateCodeStruct.mPanicSetupInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
-    [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
+    [ioIntermediateCodeStruct.mPanicSetupInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
+    [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
   end
 #--- Explore routines
   var continues = true
@@ -208,9 +210,9 @@ private proc suppressInaccessibleSubprograms
     + [ioIntermediateCodeStruct.mGuardMapIR count]
   loop (bound + 1) while continues do
     continues = false
-    exploreProcs (!?accessibleProcedureMap !?outAccessibleEntities !?nonExploredProcedureMap !?continues)
-    exploreFunctions (!?accessibleFunctionMap !?outAccessibleEntities !?nonExploredFunctionMap !?continues)
-    exploreGuards (!?accessibleGuardMap !?outAccessibleEntities !?nonExploredGuardMap !?continues)
+    exploreProcs (!?accessibleProcedureMap !?outAccessibleEntities !?nonExploredProcedureMap !?continues !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
+    exploreFunctions (!?accessibleFunctionMap !?outAccessibleEntities !?nonExploredFunctionMap !?continues !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
+    exploreGuards (!?accessibleGuardMap !?outAccessibleEntities !?nonExploredGuardMap !?continues !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
   end
   if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
     ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
@@ -233,6 +235,7 @@ private proc exploreProcs
   ?!@accessibleEntities ioAccessibleEntities
   ?!@routineMapIR ioNonExploredProcedureMap
   ?!@bool ioContinueExploreRoutines
+  ?!@uint ioMaxBranchOfOnInstructions
 {
   let @routineMapIR exNonExploredProcedureMap = ioNonExploredProcedureMap
   ioNonExploredProcedureMap = {}
@@ -249,7 +252,7 @@ private proc exploreProcs
         !procedure.mGlobal
         !procedure.mKind
       ]        
-      [procedure enterAccessibleEntities !?ioAccessibleEntities]
+      [procedure enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioContinueExploreRoutines = true
     else
       [!?ioNonExploredProcedureMap insertKey
@@ -274,6 +277,7 @@ private proc exploreFunctions
   ?!@accessibleEntities ioAccessibleEntities
   ?!@functionMapIR ioNonExploredFunctionMap
   ?!@bool ioContinueExploreRoutines
+  ?!@uint ioMaxBranchOfOnInstructions
 {
   let @functionMapIR exNonExploredFunctionMap = ioNonExploredFunctionMap
   ioNonExploredFunctionMap = {}
@@ -287,7 +291,7 @@ private proc exploreFunctions
         !function.mResultVarName
         !function.mWarnIfUnused
       ]        
-      [function enterAccessibleEntities !?ioAccessibleEntities]
+      [function enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioContinueExploreRoutines = true
     else
       [!?ioNonExploredFunctionMap insertKey
@@ -309,6 +313,7 @@ private proc exploreGuards
   ?!@accessibleEntities ioAccessibleEntities
   ?!@guardMapIR ioNonExploredGuardMap
   ?!@bool ioContinueExploreRoutines
+  ?!@uint ioMaxBranchOfOnInstructions
 {
   let @guardMapIR exNonExploredGuardMap = ioNonExploredGuardMap
   ioNonExploredGuardMap = {}
@@ -320,7 +325,7 @@ private proc exploreGuards
         !guard.mInstructionGenerationList
         !guard.mWarnIfUnused
       ]        
-      [guard enterAccessibleEntities !?ioAccessibleEntities]
+      [guard enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioContinueExploreRoutines = true
     else
       [!?ioNonExploredGuardMap insertKey

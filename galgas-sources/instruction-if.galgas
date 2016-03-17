@@ -220,9 +220,12 @@ override method @ifInstructionIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mThenInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
-  [mElseInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+override method @ifInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mThenInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mElseInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -158,10 +158,12 @@ override method @whileInstructionIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @whileInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mTestInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
-#  [mTestExpression enterAccessibleEntities !?ioAccessibleEntities]
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+override method @whileInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mTestInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

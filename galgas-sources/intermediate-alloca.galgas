@@ -26,7 +26,10 @@ override method @allocaConstantIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @allocaConstantIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+override method @allocaConstantIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
 }
 
 

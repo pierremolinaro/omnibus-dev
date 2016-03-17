@@ -614,7 +614,10 @@ override method @procCallInstructionIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+override method @procCallInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
   ioAccessibleEntities.mRoutineSet += !mProcName
   if mGlobalVariableName != "" then
     ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName

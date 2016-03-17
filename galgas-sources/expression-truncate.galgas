@@ -128,7 +128,10 @@ class @truncateInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @truncateInstructionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+override method @truncateInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

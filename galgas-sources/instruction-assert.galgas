@@ -116,8 +116,11 @@ override method @assertInstructionIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assertInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
+override method @assertInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
