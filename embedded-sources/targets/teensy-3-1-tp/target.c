@@ -309,19 +309,18 @@ static TaskList gDeadlineWaitingInGuardTaskList ;
 
 static void kernel_exitFromGuard (const unsigned inTaskIndex) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
-  const unsigned guardCount = taskControlBlockPtr->mGuardCount ;
   const unsigned mask = ~ (1 << inTaskIndex) ;
+  const unsigned guardCount = taskControlBlockPtr->mGuardCount ;
   for (unsigned i=0 ; i<guardCount ; i++) {
    taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;
   }
   gDeadlineWaitingInGuardTaskList &= ~ mask ;
-  if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
+/*  if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
     kernel_makeTaskReady (inTaskIndex) ;
     taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
   }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
-    kernel_makeTaskReady (inTaskIndex) ;
     taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
-  }
+  } */
   taskControlBlockPtr->mGuardCount = 0 ;
 }
 
@@ -331,7 +330,7 @@ void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted
 
 void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) {
   const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
-  if (gRunningTaskControlBlock->mGuardState != GUARD_DID_CHANGE) {
+  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
     if (inAccepted) {
       kernel_exitFromGuard (runningTaskIndex) ;
     }else{
@@ -340,6 +339,8 @@ void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted
       gRunningTaskControlBlock->mGuardListArray [guardCount] = ioGuardList ;
       gRunningTaskControlBlock->mGuardCount = guardCount + 1 ;
     }
+  }else if ((gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE) && inAccepted) {
+    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
   }
 }
 
@@ -352,6 +353,13 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
     const unsigned taskIndex = countTrainingZeros (ioGuardList->mGuardValue) ;
     ioGuardList->mGuardValue &= ~ (1 << taskIndex) ;
     kernel_exitFromGuard (taskIndex) ;    
+    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
+    if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
+      kernel_makeTaskReady (taskIndex) ;
+      taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+    }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
+      taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
+    }
   }
 }
 
@@ -398,6 +406,12 @@ void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
     if (inUptime >= taskControlBlockPtr->mDate) {
       gDeadlineWaitingInGuardTaskList &= ~ (1 << taskIndex) ;
       kernel_exitFromGuard (taskIndex) ;
+      if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
+        kernel_makeTaskReady (taskIndex) ;
+        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+      }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
+        taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
+      }
     }
   }
 }
