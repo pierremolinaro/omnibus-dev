@@ -1,0 +1,296 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @guardDeclarationListAST {
+  @lstring mGuardName
+  @lstringlist mGuardAttributeList
+  @procFormalArgumentList mGuardFormalArgumentList
+  @instructionListAST mGuardInstructionList
+  @location mEndOfGuardDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <guard> ?!@guardDeclarationListAST ioGuardListAST {
+    $guard$
+    $identifier$ ?let guardName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    <procedure_formal_arguments> ?formalArguments:let guardFormalArgumentList
+    ${$
+    <instructionList> ?let instructionList !?*
+    $}$
+    ioGuardListAST +=
+      !guardName
+      !attributeList
+      !guardFormalArgumentList
+      !instructionList
+      !.here
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* * formalArgumentTypeName *) in mGuardFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+    [mGuardInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#    CONTEXT                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @guardDeclarationListAST enterInContext
+  ?receiverType:let @string inReceiverTypeName
+  ?!context:@semanticContext ioContext
+{
+  for guard in self do
+  #--- Signature
+    @procedureSignature signature = {}
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in guard.mGuardFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      signature += !formalArgumentPassingMode !selector.string !typeProxy
+    end
+  #--- Enter in context
+    [!?ioContext.mGuardMapForContext insertKey
+      !@lstring.new {!inReceiverTypeName + "." + guard.mGuardName !guard.mGuardName.location}
+      !signature
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @guardDeclarationListAST guardSemanticAnalysis
+  ?receiverType:@unifiedTypeMap-proxy inReceiverType
+  ?context:let @semanticContext inSemanticContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for guard in self do
+    var warnIfUnused = true
+    for (attribute) in guard.mGuardAttributeList do
+      if attribute.string == noWarningIfUnusedAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+        end
+        warnIfUnused = false    
+      else
+        error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
+      end
+    end
+    guardSemanticAnalysis (
+      !receiverType:inReceiverType
+      !guard.mGuardName
+      !guard.mGuardFormalArgumentList
+      !guard.mGuardInstructionList
+      !guard.mEndOfGuardDeclaration
+      !warnIfUnused:warnIfUnused
+      !context:inSemanticContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    )
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc guardSemanticAnalysis
+  ?receiverType:let @unifiedTypeMap-proxy inSelfType
+  ?let @lstring inRoutineName
+  ?let @procFormalArgumentList inRoutineFormalArgumentList
+  ?let @instructionListAST inRoutineInstructionList
+  ?let @location inEndOfRoutineDeclaration
+  ?warnIfUnused:let @bool inWarnIfUnused
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Variable map
+  let routineNameForInvocationGraph = guardNameForInvocationGraph (!inSelfType !inRoutineName)
+  @variableMap variableMap = initialVariableMap (
+    !routineNameForInvocation:routineNameForInvocationGraph.string
+    !context:inContext
+    !userMode:false
+    !registerAccess:.noAccess
+    !globalsAreConstant:false
+  )
+#--- Add 'accepted" output variable
+  let resultVarName = @lstring.new {!"accepted" !inRoutineName.location}
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["bool" nowhere]}
+  [!?variableMap insertOutputFormalArgument
+    !lkey:resultVarName
+    !type:resultType
+    !readAccessAllowed:true
+    !variableKind:.localValue {!type:resultType !name:resultVarName.string}
+    !copyable:true
+    !fieldMap:{}
+    !canBeUsedAsInputParameter:true
+    !isConstant:false # Is not constant
+  ]
+#--- Analyse formal arguments
+  @procFormalArgumentListForGeneration formalArguments = {}
+  enterFormalArguments (
+    !context:inContext
+    !inRoutineFormalArgumentList
+    !?variableMap
+    !?formalArguments
+  )
+#--- Enter subprogram invocation graph
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !routineNameForInvocationGraph
+      !inRoutineName
+    ]
+  end
+#--- Analyze instruction list
+  @instructionListIR instructionGenerationList = {}
+  [inRoutineInstructionList analyzeRoutineInstructionList
+    !self:inSelfType
+    !routineNameForInvocationGraph:routineNameForInvocationGraph
+    !context:inContext
+    !modes:{!guardModeName ()}
+    !allowPanic:true
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+    !?variableMap:variableMap
+    !?generatedCode:instructionGenerationList
+  ]
+#---
+  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
+#--- Code generation
+  let guardMangledName = if inSelfType == .null then
+    @lstring.new {!"." + inRoutineName !inRoutineName.location}
+  else
+    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
+  end
+  [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
+    !guardMangledName
+    !formalArguments
+    !instructionGenerationList
+    !inWarnIfUnused
+  ]  
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @guardMapIR guardCodeGeneration
+  ?!@string ioLLVMcode
+  ?!@2stringlist ioServiceList
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  for guard in self do
+    let guardImplementationName = llvmNameForGuardImplementation (!guard.lkey.string)
+    let guardCallName = llvmNameForGuardCall (!guard.lkey.string)
+    ioServiceList += !guardCallName !guardImplementationName
+    ioLLVMcode += llvmTitleComment (!guardImplementationName)
+    ioLLVMcode += "declare i1 @" + guardCallName + " ("
+    let typeName = [guard.lkey.string stringByDeletingPathExtension]
+    var first = typeName == ""
+    if not first then
+      ioLLVMcode += "%" + typeName + "* %self"  
+    end
+    for () in guard.mFormalArgumentListForGeneration do
+      if first then first = false else ioLLVMcode += ", " end
+      switch mFormalArgumentKind
+      case input :
+        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      case output :
+        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+     case inputOutput :
+        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+      end
+    end
+    ioLLVMcode += ") nounwind \n\n"
+    [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @guardMapIR-element llvmCodeGeneration 
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let guardImplementationName = llvmNameForGuardImplementation (!lkey.string)
+  ioLLVMcode += llvmTitleComment (!guardImplementationName)
+  ioLLVMcode += "define i1 @" + guardImplementationName + " ("
+  let receiverTypeName = [lkey.string stringByDeletingPathExtension]
+  var first = true
+  if receiverTypeName != "" then
+    ioLLVMcode += "%" + receiverTypeName + "* %self"
+    first = false
+  end
+  for () in mFormalArgumentListForGeneration do
+    if first then
+      first = false
+    else
+      ioLLVMcode += ", "
+    end
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    end
+  end
+  ioLLVMcode += ") nounwind {\n"
+#--- Declare "accepted" variable 
+  let accepted_llvmName = llvmNameForLocalVariable (!"accepted")
+   ioLLVMcode += "  %" + accepted_llvmName + " = alloca i1\n"
+#--- Store input arguments in memory
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmTypeName]
+      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+    case output, inputOutput :
+    end
+  end
+#--- Instruction list
+  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#--- Epilog
+  ioLLVMcode += "  %" + accepted_llvmName + ".loaded = load i1, i1* %" + accepted_llvmName + "\n"
+  ioLLVMcode += "  ret i1 %" + accepted_llvmName + ".loaded\n"
+  ioLLVMcode += "}\n\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @guardMapIR-element enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

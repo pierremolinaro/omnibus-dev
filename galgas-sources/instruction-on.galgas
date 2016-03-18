@@ -1,0 +1,287 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @onInstructionBranchList {
+  @lstring mReceiverName
+  @lstring mGuardName
+  @procEffectiveParameterListAST mProcEffectiveParameterListAST
+  @instructionListAST mInstructionList
+  @location mEndOfBranch
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @onInstructionAST : @instructionAST {
+  @onInstructionBranchList mBranchList
+  @location mEndOf_on_instruction
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
+    $on$
+    @lstring onLabel
+    select
+      onLabel = .new {!"" !.here}
+    or
+      $attribute$ ?onLabel
+      [!?ioLabelMap insertKey !onLabel]
+    end
+    @onInstructionBranchList onInstructionBranchList = {}
+    repeat
+      $identifier$ ?let receiverName
+      $.$
+      $identifier$ ?let guardName
+      <effective_parameters> ?let effectiveParameterList
+      $then$
+      <instructionList> ?let instructionList !?ioLabelMap
+      onInstructionBranchList +=
+        !receiverName
+        !guardName
+        !effectiveParameterList
+        !instructionList
+        !.here
+    while
+      $elson$
+    end
+    ioInstructionList += !@onInstructionAST.new {!onInstructionBranchList !.here}
+    $end$
+    @lstring endLabel
+    select
+      endLabel = .new {!"" !.here}
+    or
+      $attribute$ ?endLabel
+    end
+    if onLabel.string != endLabel.string then
+      error endLabel : "'end' label does not match 'on' label, it should be "
+         + (if onLabel.string != "" then "@" + onLabel.string else "empty" end)
+    end 
+  }
+  
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @onInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (* * * instructionList *) in mBranchList do
+    [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @onInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inRequiredModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  @onInstructionBranchListIR onInstructionBranchListIR = {}
+  for (receiverName guardName effectiveParameterList instructionList endOfBranch) in mBranchList do
+    [!?ioVariableMap openOverrideForSelectBlock]
+  #--- Guard
+    @instructionListIR guardInstructionGenerationList = {}
+    analyzeGuardCall (
+      !self:inSelfType
+      !receiverName:receiverName
+      !routineName:guardName
+      !effective:effectiveParameterList
+      !callerForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !requiredModeSet:inRequiredModeSet
+      !allowPanic:inAllowPanic
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?instructionListIR:guardInstructionGenerationList
+      ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
+      ?guardMangledName:let @lstring guardMangledName
+    )
+  #--- Instruction list
+    @instructionListIR branchInstructionGenerationList = {}
+    [instructionList analyzeBranchInstructionList
+      !self:inSelfType
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !endOfInstructionList:endOfBranch
+      !context:inContext
+      !modes:inRequiredModeSet
+      !allowPanic:inAllowPanic
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?instructionListIR:branchInstructionGenerationList
+    ]
+    [!?ioVariableMap closeOverride !endOfBranch]
+  #---
+    onInstructionBranchListIR +=
+      !guardMangledName.string
+      !guardInstructionGenerationList
+      !guardEffectiveParameterListIR
+      !branchInstructionGenerationList
+  end
+#--- Code generation
+  ioInstructionGenerationList += !@onInstructionIR.new {!onInstructionBranchListIR}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc analyzeGuardCall
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?receiverName:let @lstring inReceiverName
+  ?routineName:let @lstring inGuardName
+  ?effective:let @procEffectiveParameterListAST inEffectiveParameterList
+  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?requiredModeSet:let @stringset inRequiredModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
+  !guardMangledName:@lstring outGuardMangledName
+{
+  outEffectiveParameterListIR = {}
+  @unifiedTypeMap-proxy receiverType
+  if inReceiverName.string != "" then
+    [!?ioVariableMap searchForReadAccess
+      !lkey:inReceiverName
+      ?type:receiverType
+      ?1*
+      ?variableKind:@objectInMemoryIR variableKind
+      ?4*
+    ]
+    outGuardMangledName = .new {!"$" + [receiverType key] + "." + inGuardName !inGuardName.location}
+    outEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] #--- add "load receiver" as first argument
+  else
+    outGuardMangledName = .new {!"." + inGuardName !inGuardName.location}
+    receiverType = .null
+  end
+  [inContext.mGuardMapForContext searchKey !outGuardMangledName ?let @procedureSignature formalSignature]
+#--- Enter in invocation graph
+  let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !inGuardName)
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#--- Check mode
+#  checkMode (
+#    !requiredModes:inRequiredModeSet
+#    !possibleModes:[modeMap keySet]
+#    !error:inGuardName.location
+#  )
+#--- Analyze effective parameters
+  analyzeEffectiveParameters (
+    !self:inSelfType
+    !formal:formalSignature
+    !effective:inEffectiveParameterList
+    !errorLocation:inGuardName.location
+    !callerForInvocationGraph:routineNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:inRequiredModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    !?effectiveIR:outEffectiveParameterListIR
+  )
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @onInstructionBranchListIR {
+  @string mGuardMangledName
+  @instructionListIR mGuardInstructionGenerationList
+  @procCallEffectiveParameterListIR mEffectiveParameterListIR
+  @instructionListIR mInstructionGenerationList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @onInstructionIR : @abstractInstructionIR {
+  @onInstructionBranchListIR mOnInstructionBranchListIR
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @onInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  ioGenerationAdds.mUsesGuards = true
+  let onLabel = "on." + ioGenerationAdds.mUniqueIndex
+  ioGenerationAdds.mUniqueIndex ++
+#---
+  ioLLVMcode += "  br label %" + onLabel + ".start\n\n"
+  let startLabelName = onLabel + ".start" 
+  ioLLVMcode += startLabelName + ":\n"
+  let exitLabelName = onLabel + ".exit" 
+  for branch in mOnInstructionBranchListIR do (idx)
+    [branch.mGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    let acceptanceVarName = "%" + onLabel + ".accept." + idx 
+    ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + llvmNameForGuardCall (!branch.mGuardMangledName)
+    ioLLVMcode += " ("
+    for () in branch.mEffectiveParameterListIR do
+      switch mEffectiveParameterPassingMode
+      case input:
+        ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+      case output:
+        ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+      case outputInput:
+        ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+      end
+    between
+      ioLLVMcode += ", "
+    end
+    ioLLVMcode += ")\n"
+    let acceptedLabelName = onLabel + ".accepted." + idx
+    let rejectedLabelName = onLabel + ".rejected." + idx
+    ioLLVMcode += "  br i1 " + acceptanceVarName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
+    ioLLVMcode += acceptedLabelName + ":\n"
+    [branch.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  br label %" + exitLabelName + "\n\n"
+    ioLLVMcode += rejectedLabelName + ":\n"
+  end
+  ioLLVMcode += "  call void @" + llvmNameForServiceCall (!waitForGuardChangeFunctionName ()) + " ()\n"
+  ioLLVMcode += "  br label %" + startLabelName + "\n\n"
+  ioLLVMcode += exitLabelName + ":\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @onInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  let branchCount = [mOnInstructionBranchListIR length]
+  if ioMaxBranchOfOnInstructions < branchCount then
+    ioMaxBranchOfOnInstructions = branchCount
+  end
+  for branch in mOnInstructionBranchListIR do
+    [branch.mGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+    [branch.mGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+    [branch.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+    ioAccessibleEntities.mGuardSet += !branch.mGuardMangledName
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
