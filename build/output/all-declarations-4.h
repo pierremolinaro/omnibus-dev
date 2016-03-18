@@ -964,6 +964,15 @@ void routine_enterControlRegistersInContext (const class GALGAS_controlRegisterD
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                               Function 'boolTypeName'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                               Function 'userModeName'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1491,7 +1500,7 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
 void routine_analyzeGuardCall (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                const class GALGAS_lstring constinArgument1,
                                const class GALGAS_lstring constinArgument2,
-                               const class GALGAS_procEffectiveParameterListAST constinArgument3,
+                               const class GALGAS_effectiveParameterListAST constinArgument3,
                                const class GALGAS_lstring constinArgument4,
                                const class GALGAS_semanticContext constinArgument5,
                                const class GALGAS_stringset constinArgument6,
@@ -1523,7 +1532,7 @@ class GALGAS_operandIR extensionGetter_address (const class GALGAS_objectInMemor
 
 void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                          const class GALGAS_procedureSignature constinArgument1,
-                                         const class GALGAS_procEffectiveParameterListAST constinArgument2,
+                                         const class GALGAS_effectiveParameterListAST constinArgument2,
                                          const class GALGAS_location constinArgument3,
                                          const class GALGAS_lstring constinArgument4,
                                          const class GALGAS_semanticContext constinArgument5,
@@ -1546,7 +1555,7 @@ void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_pr
 void routine_analyzeRoutineCall (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                  const class GALGAS_lstring constinArgument1,
                                  const class GALGAS_lstring constinArgument2,
-                                 const class GALGAS_procEffectiveParameterListAST constinArgument3,
+                                 const class GALGAS_effectiveParameterListAST constinArgument3,
                                  const class GALGAS_lstring constinArgument4,
                                  const class GALGAS_semanticContext constinArgument5,
                                  const class GALGAS_stringset constinArgument6,
@@ -1620,6 +1629,17 @@ class GALGAS_string function_llvmNameForLocalVariable (class GALGAS_string inArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//           Category getter '@effectiveParameterPassingModeAST passingModeForActualSelector' (as function)            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_passingModeForActualSelector (const class GALGAS_effectiveParameterPassingModeAST & inObject,
+                                                                  class GALGAS_lstring inArgument0,
+                                                                  class C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                               Category getter '@objectInMemoryIR name' (as function)                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1627,17 +1647,6 @@ class GALGAS_string function_llvmNameForLocalVariable (class GALGAS_string inArg
 class GALGAS_string extensionGetter_name (const class GALGAS_objectInMemoryIR & inObject,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//         Category getter '@procEffectiveParameterPassingModeAST passingModeForActualSelector' (as function)          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_passingModeForActualSelector (const class GALGAS_procEffectiveParameterPassingModeAST & inObject,
-                                                                  class GALGAS_lstring inArgument0,
-                                                                  class C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2549,15 +2558,6 @@ class GALGAS_string function_literalCharacterArrayName (const class GALGAS_uint 
 
 class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               Function 'boolTypeName'                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -144,7 +144,7 @@ proc guardSemanticAnalysis
   )
 #--- Add 'accepted" output variable
   let resultVarName = @lstring.new {!"accepted" !inRoutineName.location}
-  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["bool" nowhere]}
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
   [!?variableMap insertOutputFormalArgument
     !lkey:resultVarName
     !type:resultType
