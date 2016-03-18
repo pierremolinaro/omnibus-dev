@@ -17,7 +17,7 @@ typedef unsigned char bool ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef enum {GUARD_OUTSIDE, GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
+typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -216,7 +216,7 @@ void kernel_create_task (const unsigned inTaskIndex,
   taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;
   taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;
   taskControlBlockPtr->mGuardCount = 0 ;
-  taskControlBlockPtr->mGuardState = GUARD_OUTSIDE ;
+  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
 //--- Store stack parameters
 //  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;
 //  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
@@ -316,20 +316,12 @@ static void kernel_exitFromGuard (const unsigned inTaskIndex) {
   gDeadlineWaitingInGuardTaskList &= ~ mask ;
   if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
     kernel_makeTaskReady (inTaskIndex) ;
-    taskControlBlockPtr->mGuardState = GUARD_OUTSIDE ;
+    taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
   }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
     kernel_makeTaskReady (inTaskIndex) ;
     taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
   }
   taskControlBlockPtr->mGuardCount = 0 ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterInGuard (void) asm ("enterInGuard") ;
-
-void enterInGuard (void) {
-  gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -372,6 +364,8 @@ void kernel_waitForGuardChange (void) {
   if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
     gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;
     kernel_makeNoTaskRunning () ;
+  }else{
+    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
   }
 }
 
