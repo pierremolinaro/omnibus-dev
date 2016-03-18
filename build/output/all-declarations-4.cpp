@@ -14477,6 +14477,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
+  "// GUARD_EVALUATING_OR_OUTSIDE should be the first constant\n"
   "typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -14674,9 +14675,9 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "                         RoutineTaskType inTaskRoutine) {\n"
   "  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
   "  taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;\n"
-  "  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;\n"
-  "  taskControlBlockPtr->mGuardCount = 0 ;\n"
-  "  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "//  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // statically initialized to 0\n"
+  "//  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0\n"
+  "//  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0\n"
   "//--- Store stack parameters\n"
   "//  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;\n"
   "//  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;\n"
@@ -14731,7 +14732,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
   "    gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;\n"
   "    *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;\n"
-  "    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;\n"
+  "//    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // Leave dangling pointer \?\n"
   "    kernel_makeTaskReady (taskIndex) ;\n"
   "  }\n"
   "}\n"
@@ -14867,7 +14868,7 @@ const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  20326, // Text length
+  20515, // Text length
   gWrapperFileContent_24_targetTemplates
 ) ;
 

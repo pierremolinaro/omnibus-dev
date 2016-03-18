@@ -17,6 +17,7 @@ typedef unsigned char bool ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+// GUARD_EVALUATING_OR_OUTSIDE should be the first constant
 typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -214,9 +215,9 @@ void kernel_create_task (const unsigned inTaskIndex,
                          RoutineTaskType inTaskRoutine) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
   taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;
-  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;
-  taskControlBlockPtr->mGuardCount = 0 ;
-  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+//  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // statically initialized to 0
+//  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0
+//  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0
 //--- Store stack parameters
 //  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;
 //  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
@@ -271,7 +272,7 @@ void makeTaskReady (TaskList * ioWaitingList, unsigned char * outFound) {
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
     gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;
     *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;
-    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;
+//    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // Leave dangling pointer ?
     kernel_makeTaskReady (taskIndex) ;
   }
 }
