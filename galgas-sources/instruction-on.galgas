@@ -192,12 +192,6 @@ proc analyzeGuardCall
 #--- Enter in invocation graph
   let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !inGuardName)
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
-#--- Check mode
-#  checkMode (
-#    !requiredModes:inRequiredModeSet
-#    !possibleModes:[modeMap keySet]
-#    !error:inGuardName.location
-#  )
 #--- Analyze effective parameters
   analyzeEffectiveParameters (
     !self:inSelfType

@@ -280,7 +280,14 @@ method @routineMapIR-element llvmCodeGeneration
       switch mFormalArgumentKind
       case input :
         let llvmType = [mFormalArgumentType llvmTypeName]
-        ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+        ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + llvmType + "\n"
+      case output, inputOutput :
+      end
+    end
+    for () in mFormalArgumentListForGeneration do
+      switch mFormalArgumentKind
+      case input :
+        let llvmType = [mFormalArgumentType llvmTypeName]
         ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
       case output, inputOutput :
       end
