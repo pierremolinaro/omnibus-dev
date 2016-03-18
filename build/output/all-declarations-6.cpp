@@ -4118,7 +4118,7 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_instructionListIR inOb
 
 GALGAS_generationAdds::GALGAS_generationAdds (void) :
 mAttribute_mUniqueIndex (),
-mAttribute_mIntrinsicsDeclarationSet (),
+mAttribute_mExternFunctionDeclarationSet (),
 mAttribute_mStaticStringMap (),
 mAttribute_mUsesGuards () {
 }
@@ -4135,7 +4135,7 @@ GALGAS_generationAdds::GALGAS_generationAdds (const GALGAS_uint & inOperand0,
                                               const GALGAS_staticStringMap & inOperand2,
                                               const GALGAS_bool & inOperand3) :
 mAttribute_mUniqueIndex (inOperand0),
-mAttribute_mIntrinsicsDeclarationSet (inOperand1),
+mAttribute_mExternFunctionDeclarationSet (inOperand1),
 mAttribute_mStaticStringMap (inOperand2),
 mAttribute_mUsesGuards (inOperand3) {
 }
@@ -4171,7 +4171,7 @@ typeComparisonResult GALGAS_generationAdds::objectCompare (const GALGAS_generati
     result = mAttribute_mUniqueIndex.objectCompare (inOperand.mAttribute_mUniqueIndex) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIntrinsicsDeclarationSet.objectCompare (inOperand.mAttribute_mIntrinsicsDeclarationSet) ;
+    result = mAttribute_mExternFunctionDeclarationSet.objectCompare (inOperand.mAttribute_mExternFunctionDeclarationSet) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mStaticStringMap.objectCompare (inOperand.mAttribute_mStaticStringMap) ;
@@ -4185,14 +4185,14 @@ typeComparisonResult GALGAS_generationAdds::objectCompare (const GALGAS_generati
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_generationAdds::isValid (void) const {
-  return mAttribute_mUniqueIndex.isValid () && mAttribute_mIntrinsicsDeclarationSet.isValid () && mAttribute_mStaticStringMap.isValid () && mAttribute_mUsesGuards.isValid () ;
+  return mAttribute_mUniqueIndex.isValid () && mAttribute_mExternFunctionDeclarationSet.isValid () && mAttribute_mStaticStringMap.isValid () && mAttribute_mUsesGuards.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_generationAdds::drop (void) {
   mAttribute_mUniqueIndex.drop () ;
-  mAttribute_mIntrinsicsDeclarationSet.drop () ;
+  mAttribute_mExternFunctionDeclarationSet.drop () ;
   mAttribute_mStaticStringMap.drop () ;
   mAttribute_mUsesGuards.drop () ;
 }
@@ -4207,7 +4207,7 @@ void GALGAS_generationAdds::description (C_String & ioString,
   }else{
     mAttribute_mUniqueIndex.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIntrinsicsDeclarationSet.description (ioString, inIndentation+1) ;
+    mAttribute_mExternFunctionDeclarationSet.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mStaticStringMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -4224,8 +4224,8 @@ GALGAS_uint GALGAS_generationAdds::getter_mUniqueIndex (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_stringset GALGAS_generationAdds::getter_mIntrinsicsDeclarationSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIntrinsicsDeclarationSet ;
+GALGAS_stringset GALGAS_generationAdds::getter_mExternFunctionDeclarationSet (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mExternFunctionDeclarationSet ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10850,7 +10850,7 @@ static void categoryMethod_binaryOperationIR_enterCodeForOverflowOperation (cons
     "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 96)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_labelName.add_operation (GALGAS_string (".noovf:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 97)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 97)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (" = extractvalue {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (", i1} "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (".r, 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)) ;
-  ioArgument_ioGenerationAdds.mAttribute_mIntrinsicsDeclarationSet.addAssign_operation (GALGAS_string ("declare {").add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" %a, "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" %b)"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)) ;
+  ioArgument_ioGenerationAdds.mAttribute_mExternFunctionDeclarationSet.addAssign_operation (GALGAS_string ("declare {").add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" %a, "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" %b)"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 

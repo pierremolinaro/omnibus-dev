@@ -2574,15 +2574,6 @@ class GALGAS_string function_llvmNameForGuardImplementation (class GALGAS_string
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Function 'enterInGuardFunctionName'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_enterInGuardFunctionName (class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Function 'waitForGuardChangeFunctionName'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3170,7 +3161,7 @@ void categoryModifier_findOrAddStaticString (class GALGAS_staticStringMap & ioOb
 class GALGAS_generationAdds : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_uint mAttribute_mUniqueIndex ;
-  public : GALGAS_stringset mAttribute_mIntrinsicsDeclarationSet ;
+  public : GALGAS_stringset mAttribute_mExternFunctionDeclarationSet ;
   public : GALGAS_staticStringMap mAttribute_mStaticStringMap ;
   public : GALGAS_bool mAttribute_mUsesGuards ;
 
@@ -3190,7 +3181,7 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_generationAdds (const GALGAS_uint & in_mUniqueIndex,
-                                  const GALGAS_stringset & in_mIntrinsicsDeclarationSet,
+                                  const GALGAS_stringset & in_mExternFunctionDeclarationSet,
                                   const GALGAS_staticStringMap & in_mStaticStringMap,
                                   const GALGAS_bool & in_mUsesGuards) ;
 
@@ -3223,7 +3214,7 @@ class GALGAS_generationAdds : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mIntrinsicsDeclarationSet (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mExternFunctionDeclarationSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticStringMap getter_mStaticStringMap (LOCATION_ARGS) const ;
 

@@ -30,7 +30,7 @@ abstract class @abstractExpressionIR {
 
 struct @generationAdds {
   @uint mUniqueIndex
-  @stringset mIntrinsicsDeclarationSet
+  @stringset mExternFunctionDeclarationSet
   @staticStringMap mStaticStringMap
   @bool mUsesGuards
 }
@@ -204,12 +204,9 @@ private proc generateLLVMfile
   @2stringlist sectionList = {}
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
-#    let enterInGuard = enterInGuardFunctionName ()
-#    sectionList += !llvmNameForSectionCall (!enterInGuard) !llvmNameForSectionImplementation (!enterInGuard)
-    generationAdds.mIntrinsicsDeclarationSet += !"declare void @" + enterInGuardFunctionName () + " ()\n"
     let waitForGuardChange = waitForGuardChangeFunctionName ()
     serviceList += !llvmNameForServiceCall (!waitForGuardChange) !llvmNameForServiceImplementation (!waitForGuardChange)
-    generationAdds.mIntrinsicsDeclarationSet += !"declare void @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
+    generationAdds.mExternFunctionDeclarationSet += !"declare void @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
   end
 #----------------------------------------- Sections
   [inIntermediateCodeStruct.mRoutineMapIR sectionCodeGeneration
@@ -302,9 +299,9 @@ private proc generateLLVMfile
 #----------------------------------------- tasks
   [inIntermediateCodeStruct.mTaskMapIR generateCode !?llvmCode !generationContext !?generationAdds]
 #----------------------------------------- Intrinsics
-  if [generationAdds.mIntrinsicsDeclarationSet count] > 0 then
-    llvmCode += llvmTitleComment (!"LLVM intrinsics")
-    for (s) in generationAdds.mIntrinsicsDeclarationSet do
+  if [generationAdds.mExternFunctionDeclarationSet count] > 0 then
+    llvmCode += llvmTitleComment (!"LLVM extern functions")
+    for (s) in generationAdds.mExternFunctionDeclarationSet do
       llvmCode += s + "\n"
     end
     llvmCode += "\n"
