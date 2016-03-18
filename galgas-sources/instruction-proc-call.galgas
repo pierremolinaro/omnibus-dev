@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @procEffectiveParameterPassingModeAST {
+enum @effectiveParameterPassingModeAST {
   case input (@lstring name)
   case inputWithType (@bool constant @lstring typeName @lstring name)
   case output (@expressionAST exp @location endOfExp)
@@ -12,15 +12,15 @@ enum @procEffectiveParameterPassingModeAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @procEffectiveParameterListAST {
-  @procEffectiveParameterPassingModeAST mEffectiveParameterKind
+list @effectiveParameterListAST {
+  @effectiveParameterPassingModeAST mEffectiveParameterKind
   @lstring mSelector
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @abstractCallInstructionAST : @instructionAST {
-  @procEffectiveParameterListAST mEffectiveParameterList
+  @effectiveParameterListAST mEffectiveParameterList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -88,7 +88,7 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <effective_parameters> !@procEffectiveParameterListAST outEffectiveParameterList {
+  rule <effective_parameters> !@effectiveParameterListAST outEffectiveParameterList {
     outEffectiveParameterList = {}
     $($
     repeat
@@ -159,7 +159,7 @@ override method @abstractCallInstructionAST noteInstructionTypesInPrecedenceGrap
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstring inSelector -> @string outResult {
+getter @effectiveParameterPassingModeAST passingModeForActualSelector ?@lstring inSelector -> @string outResult {
   switch self
   case input (*) : outResult = "?"
   case inputWithType (* * *) : outResult = "?"
@@ -175,7 +175,7 @@ getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstr
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procEffectiveParameterList {
-  @procEffectiveParameterPassingModeAST mEffectiveParameterPassingMode
+  @effectiveParameterPassingModeAST mEffectiveParameterPassingMode
   @lstring mSelector
   @unifiedTypeMap-proxy mParameterType
 }
@@ -303,7 +303,7 @@ proc analyzeRoutineCall
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?receiverName:let @lstring inReceiverName
   ?routineName:let @lstring inRoutineName
-  ?effective:let @procEffectiveParameterListAST inEffectiveParameterList
+  ?effective:let @effectiveParameterListAST inEffectiveParameterList
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?requiredModeSet:let @stringset inRequiredModeSet
@@ -377,7 +377,7 @@ proc analyzeRoutineCall
 proc analyzeEffectiveParameters
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?formal:let @procedureSignature inFormalSignature
-  ?effective:let @procEffectiveParameterListAST inEffectiveParameterList
+  ?effective:let @effectiveParameterListAST inEffectiveParameterList
   ?errorLocation:let @location inErrorLocation
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext

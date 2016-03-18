@@ -13240,8 +13240,8 @@ GALGAS_instructionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procEffectiveParameterListAST GALGAS_abstractCallInstructionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_procEffectiveParameterListAST result ;
+GALGAS_effectiveParameterListAST GALGAS_abstractCallInstructionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_effectiveParameterListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_abstractCallInstructionAST * p = (const cPtr_abstractCallInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_abstractCallInstructionAST) ;
@@ -13252,7 +13252,7 @@ GALGAS_procEffectiveParameterListAST GALGAS_abstractCallInstructionAST::getter_m
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procEffectiveParameterListAST cPtr_abstractCallInstructionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+GALGAS_effectiveParameterListAST cPtr_abstractCallInstructionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEffectiveParameterList ;
 }
 
@@ -13260,7 +13260,7 @@ GALGAS_procEffectiveParameterListAST cPtr_abstractCallInstructionAST::getter_mEf
 //                                 Pointer class for @abstractCallInstructionAST class                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_abstractCallInstructionAST::cPtr_abstractCallInstructionAST (const GALGAS_procEffectiveParameterListAST & in_mEffectiveParameterList
+cPtr_abstractCallInstructionAST::cPtr_abstractCallInstructionAST (const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList
                                                                   COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (THERE),
 mAttribute_mEffectiveParameterList (in_mEffectiveParameterList) {
@@ -13358,7 +13358,7 @@ GALGAS_abstractCallInstructionAST () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_remoteRoutineCallInstructionAST GALGAS_remoteRoutineCallInstructionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_remoteRoutineCallInstructionAST::constructor_new (GALGAS_procEffectiveParameterListAST::constructor_emptyList (HERE),
+  return GALGAS_remoteRoutineCallInstructionAST::constructor_new (GALGAS_effectiveParameterListAST::constructor_emptyList (HERE),
                                                                   GALGAS_lstring::constructor_default (HERE),
                                                                   GALGAS_lstring::constructor_default (HERE)
                                                                   COMMA_THERE) ;
@@ -13373,7 +13373,7 @@ GALGAS_abstractCallInstructionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_remoteRoutineCallInstructionAST GALGAS_remoteRoutineCallInstructionAST::constructor_new (const GALGAS_procEffectiveParameterListAST & inAttribute_mEffectiveParameterList,
+GALGAS_remoteRoutineCallInstructionAST GALGAS_remoteRoutineCallInstructionAST::constructor_new (const GALGAS_effectiveParameterListAST & inAttribute_mEffectiveParameterList,
                                                                                                 const GALGAS_lstring & inAttribute_mReceiverName,
                                                                                                 const GALGAS_lstring & inAttribute_mRoutineName
                                                                                                 COMMA_LOCATION_ARGS) {
@@ -13424,7 +13424,7 @@ GALGAS_lstring cPtr_remoteRoutineCallInstructionAST::getter_mRoutineName (UNUSED
 //                              Pointer class for @remoteRoutineCallInstructionAST class                               *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_remoteRoutineCallInstructionAST::cPtr_remoteRoutineCallInstructionAST (const GALGAS_procEffectiveParameterListAST & in_mEffectiveParameterList,
+cPtr_remoteRoutineCallInstructionAST::cPtr_remoteRoutineCallInstructionAST (const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList,
                                                                             const GALGAS_lstring & in_mReceiverName,
                                                                             const GALGAS_lstring & in_mRoutineName
                                                                             COMMA_LOCATION_ARGS) :
@@ -13547,7 +13547,7 @@ GALGAS_abstractCallInstructionAST () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_selfRoutineCallInstructionAST GALGAS_selfRoutineCallInstructionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_selfRoutineCallInstructionAST::constructor_new (GALGAS_procEffectiveParameterListAST::constructor_emptyList (HERE),
+  return GALGAS_selfRoutineCallInstructionAST::constructor_new (GALGAS_effectiveParameterListAST::constructor_emptyList (HERE),
                                                                 GALGAS_lstring::constructor_default (HERE)
                                                                 COMMA_THERE) ;
 }
@@ -13561,7 +13561,7 @@ GALGAS_abstractCallInstructionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selfRoutineCallInstructionAST GALGAS_selfRoutineCallInstructionAST::constructor_new (const GALGAS_procEffectiveParameterListAST & inAttribute_mEffectiveParameterList,
+GALGAS_selfRoutineCallInstructionAST GALGAS_selfRoutineCallInstructionAST::constructor_new (const GALGAS_effectiveParameterListAST & inAttribute_mEffectiveParameterList,
                                                                                             const GALGAS_lstring & inAttribute_mRoutineName
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_selfRoutineCallInstructionAST result ;
@@ -13593,7 +13593,7 @@ GALGAS_lstring cPtr_selfRoutineCallInstructionAST::getter_mRoutineName (UNUSED_L
 //                               Pointer class for @selfRoutineCallInstructionAST class                                *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_selfRoutineCallInstructionAST::cPtr_selfRoutineCallInstructionAST (const GALGAS_procEffectiveParameterListAST & in_mEffectiveParameterList,
+cPtr_selfRoutineCallInstructionAST::cPtr_selfRoutineCallInstructionAST (const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList,
                                                                         const GALGAS_lstring & in_mRoutineName
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractCallInstructionAST (in_mEffectiveParameterList COMMA_THERE),
@@ -13712,7 +13712,7 @@ GALGAS_abstractCallInstructionAST () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_standaloneRoutineCallInstructionAST GALGAS_standaloneRoutineCallInstructionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_standaloneRoutineCallInstructionAST::constructor_new (GALGAS_procEffectiveParameterListAST::constructor_emptyList (HERE),
+  return GALGAS_standaloneRoutineCallInstructionAST::constructor_new (GALGAS_effectiveParameterListAST::constructor_emptyList (HERE),
                                                                       GALGAS_lstring::constructor_default (HERE)
                                                                       COMMA_THERE) ;
 }
@@ -13726,7 +13726,7 @@ GALGAS_abstractCallInstructionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_standaloneRoutineCallInstructionAST GALGAS_standaloneRoutineCallInstructionAST::constructor_new (const GALGAS_procEffectiveParameterListAST & inAttribute_mEffectiveParameterList,
+GALGAS_standaloneRoutineCallInstructionAST GALGAS_standaloneRoutineCallInstructionAST::constructor_new (const GALGAS_effectiveParameterListAST & inAttribute_mEffectiveParameterList,
                                                                                                         const GALGAS_lstring & inAttribute_mRoutineName
                                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_standaloneRoutineCallInstructionAST result ;
@@ -13758,7 +13758,7 @@ GALGAS_lstring cPtr_standaloneRoutineCallInstructionAST::getter_mRoutineName (UN
 //                            Pointer class for @standaloneRoutineCallInstructionAST class                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_standaloneRoutineCallInstructionAST::cPtr_standaloneRoutineCallInstructionAST (const GALGAS_procEffectiveParameterListAST & in_mEffectiveParameterList,
+cPtr_standaloneRoutineCallInstructionAST::cPtr_standaloneRoutineCallInstructionAST (const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList,
                                                                                     const GALGAS_lstring & in_mRoutineName
                                                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractCallInstructionAST (in_mEffectiveParameterList COMMA_THERE),

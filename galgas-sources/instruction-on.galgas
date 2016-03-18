@@ -2,10 +2,15 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @guardedCommand {
+  case synchronization (@lstring optionalReceiverName @lstring guardName @effectiveParameterListAST effectiveParameterListAST)
+  case boolean (@expressionAST expression @location endOfExpression)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @onInstructionBranchList {
-  @lstring mOptionalReceiverName
-  @lstring mGuardName
-  @procEffectiveParameterListAST mProcEffectiveParameterListAST
+  @guardedCommand mGuardedCommand
   @instructionListAST mInstructionList
   @location mEndOfBranch
 }
@@ -25,6 +30,34 @@ syntax extension common_syntax {
 
   #·····················································································································
 
+  rule <guarded_command> !@guardedCommand outGuardedCommand {
+    select
+     $:$
+     <expression> ?let @expressionAST expression
+      outGuardedCommand = .boolean {!expression:expression !endOfExpression:.here}
+    or
+      $identifier$ ?let guardName
+      <effective_parameters> ?let effectiveParameterList
+      outGuardedCommand = .synchronization {
+        !optionalReceiverName:["" here]
+        !guardName:guardName
+        !effectiveParameterListAST:effectiveParameterList
+      }
+    or
+      $identifier$ ?let receiverName
+      $.$
+      $identifier$ ?let guardName
+      <effective_parameters> ?let effectiveParameterList
+      outGuardedCommand = .synchronization {
+        !optionalReceiverName:receiverName
+        !guardName:guardName
+        !effectiveParameterListAST:effectiveParameterList
+      }
+    end
+  }
+  
+ #·····················································································································
+
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $on$
     @lstring onLabel
@@ -36,31 +69,13 @@ syntax extension common_syntax {
     end
     @onInstructionBranchList onInstructionBranchList = {}
     repeat
-      select
-        $identifier$ ?let guardName
-        <effective_parameters> ?let effectiveParameterList
-        $then$
-        <instructionList> ?let instructionList !?ioLabelMap
-        onInstructionBranchList +=
-          !["" here]
-          !guardName
-          !effectiveParameterList
-          !instructionList
-          !.here
-      or
-        $identifier$ ?let receiverName
-        $.$
-        $identifier$ ?let guardName
-        <effective_parameters> ?let effectiveParameterList
-        $then$
-        <instructionList> ?let instructionList !?ioLabelMap
-        onInstructionBranchList +=
-          !receiverName
-          !guardName
-          !effectiveParameterList
-          !instructionList
-          !.here
-      end
+      <guarded_command> ?let @guardedCommand guardedCommand
+      $then$
+      <instructionList> ?let instructionList !?ioLabelMap
+      onInstructionBranchList +=
+        !guardedCommand
+        !instructionList
+        !.here
     while
       $elson$
     end
@@ -87,7 +102,7 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @onInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (* * * instructionList *) in mBranchList do
+  for (* instructionList *) in mBranchList do
     [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
@@ -108,26 +123,59 @@ override method @onInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   @onInstructionBranchListIR onInstructionBranchListIR = {}
-  for (receiverName guardName effectiveParameterList instructionList endOfBranch) in mBranchList do
+  for (guardedCommand instructionList endOfBranch) in mBranchList do
     [!?ioVariableMap openOverrideForSelectBlock]
   #--- Guard
-    @instructionListIR guardInstructionGenerationList = {}
-    analyzeGuardCall (
-      !self:inSelfType
-      !receiverName:receiverName
-      !routineName:guardName
-      !effective:effectiveParameterList
-      !callerForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !requiredModeSet:inRequiredModeSet
-      !allowPanic:inAllowPanic
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?instructionListIR:guardInstructionGenerationList
-      ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
-      ?guardMangledName:let @lstring guardMangledName
-    )
+    @guardedCommandIR guardedCommandIR
+    switch guardedCommand
+    case synchronization (optionalReceiverName guardName effectiveParameterList) :
+     @instructionListIR guardInstructionGenerationList = {}
+     analyzeGuardCall (
+        !self:inSelfType
+        !receiverName:optionalReceiverName
+        !routineName:guardName
+        !effective:effectiveParameterList
+        !callerForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !requiredModeSet:inRequiredModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?instructionListIR:guardInstructionGenerationList
+        ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
+        ?guardMangledName:let @lstring guardMangledName
+      )
+      guardedCommandIR = .synchronization {
+        !guardMangledName:guardMangledName.string
+        !guardInstructionGenerationList:guardInstructionGenerationList
+        !effectiveParameterListIR:guardEffectiveParameterListIR
+      }
+    case boolean (expression endOfExpression) :
+      @instructionListIR guardInstructionGenerationList = {}
+      [expression analyzeExpression
+        !self:inSelfType
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:.null
+        !context:inContext
+        !modes:inRequiredModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?instructionListIR:guardInstructionGenerationList
+        ?result:@operandIR sourceOperand
+      ]
+      if [sourceOperand.mType key] != boolTypeName () then
+        error endOfExpression : "guarded expression should be boolean"
+      elsif [sourceOperand.mValue isStatic] then
+        warning endOfExpression : "guarded expression is static"
+      end
+      guardedCommandIR = .booleanGuard {
+        !instructionGenerationList:guardInstructionGenerationList
+        !result:sourceOperand
+      }
+    end
   #--- Instruction list
     @instructionListIR branchInstructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
@@ -145,9 +193,7 @@ override method @onInstructionAST analyze
     [!?ioVariableMap closeOverride !endOfBranch]
   #---
     onInstructionBranchListIR +=
-      !guardMangledName.string
-      !guardInstructionGenerationList
-      !guardEffectiveParameterListIR
+      !guardedCommandIR
       !branchInstructionGenerationList
   end
 #--- Code generation
@@ -160,7 +206,7 @@ proc analyzeGuardCall
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?receiverName:let @lstring inReceiverName
   ?routineName:let @lstring inGuardName
-  ?effective:let @procEffectiveParameterListAST inEffectiveParameterList
+  ?effective:let @effectiveParameterListAST inEffectiveParameterList
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?requiredModeSet:let @stringset inRequiredModeSet
@@ -214,10 +260,15 @@ proc analyzeGuardCall
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @guardedCommandIR {
+  case synchronization (@string guardMangledName @instructionListIR guardInstructionGenerationList @procCallEffectiveParameterListIR effectiveParameterListIR)
+  case booleanGuard (@instructionListIR instructionGenerationList @operandIR result)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @onInstructionBranchListIR {
-  @string mGuardMangledName
-  @instructionListIR mGuardInstructionGenerationList
-  @procCallEffectiveParameterListIR mEffectiveParameterListIR
+  @guardedCommandIR mGuardedCommand
   @instructionListIR mInstructionGenerationList
 }
 
@@ -243,23 +294,36 @@ override method @onInstructionIR llvmInstructionCode
   ioLLVMcode += startLabelName + ":\n"
   let exitLabelName = onLabel + ".exit" 
   for branch in mOnInstructionBranchListIR do (idx)
-    [branch.mGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     let acceptanceVarName = "%" + onLabel + ".accept." + idx 
-    ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + llvmNameForGuardCall (!branch.mGuardMangledName)
-    ioLLVMcode += " ("
-    for () in branch.mEffectiveParameterListIR do
-      switch mEffectiveParameterPassingMode
-      case input:
-        ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
-      case output:
-        ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
-      case outputInput:
-        ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+    switch branch.mGuardedCommand
+    case synchronization (guardMangledName guardInstructionGenerationList effectiveParameterListIR) :
+      [guardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+      ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + llvmNameForGuardCall (!guardMangledName)
+      ioLLVMcode += " ("
+      for () in effectiveParameterListIR do
+        switch mEffectiveParameterPassingMode
+        case input:
+          ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+        case output:
+          ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+        case outputInput:
+          ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+        end
+      between
+        ioLLVMcode += ", "
       end
-    between
-      ioLLVMcode += ", "
+      ioLLVMcode += ")\n"
+    case booleanGuard (instructionGenerationList @operandIR result) :
+      [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+      let acceptedLabelName = onLabel + "." + idx + ".true"
+      let rejectedLabelName = onLabel + "." + idx + ".false"
+      ioLLVMcode += "  br i1 " + [result.mValue llvmName] + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
+      ioLLVMcode += acceptedLabelName + ":\n"
+      ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
+      ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
+      ioLLVMcode += rejectedLabelName + ":\n"
+      ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result.mValue llvmName] + ", 0 ; assignment\n"
     end
-    ioLLVMcode += ")\n"
     let acceptedLabelName = onLabel + ".accepted." + idx
     let rejectedLabelName = onLabel + ".rejected." + idx
     ioLLVMcode += "  br i1 " + acceptanceVarName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
@@ -284,10 +348,15 @@ override method @onInstructionIR enterAccessibleEntities
     ioMaxBranchOfOnInstructions = branchCount
   end
   for branch in mOnInstructionBranchListIR do
-    [branch.mGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    [branch.mGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
     [branch.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    ioAccessibleEntities.mGuardSet += !branch.mGuardMangledName
+    switch branch.mGuardedCommand
+    case synchronization (guardMangledName guardInstructionGenerationList *) :
+      [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#      [effectiveParameterListIR enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+      ioAccessibleEntities.mGuardSet += !guardMangledName
+    case booleanGuard (instructionGenerationList *) :
+      [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+    end
   end
 }
 
