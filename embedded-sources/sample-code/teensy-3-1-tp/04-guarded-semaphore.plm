@@ -1,13 +1,13 @@
 target "teensy-3-1-tp"
 
-//------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 struct $semaphore {
   var value $uint32
   var list = $taskList ()
   var guardList = $guardList ()
 
-  service P `kernel () {
+  service P `kernel @noWarningIfUnused () {
     if self.value > 0 then
       self.value -= 1
     else
@@ -32,19 +32,19 @@ struct $semaphore {
   }
 }
 
-//------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 var s0 = $semaphore (!value:0) {
   proc $T0.loop
 }
 
-//------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 var s1 = $semaphore (!value:0) {
   proc $T1.loop
 }
 
-//------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
@@ -61,7 +61,7 @@ task T0 priority 0 stackSize 512 {
   }
 }
 
-//------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
@@ -78,12 +78,14 @@ task T1 priority 1 stackSize 512 {
   }
 }
 
-//------------------------------------------------*
+//-----------------------------------------------------------------------------*
 
 task T2 priority 2 stackSize 512 {
   var flag0 = true
   var flag1 = true
-
+  var flag2 = true
+  var deadline $uint32 = 0
+  
   proc loop () {
     on s0.P () then
       if self.flag0 then
@@ -99,8 +101,16 @@ task T2 priority 2 stackSize 512 {
         ledOff (!LED_L3)
       end
       self.flag1 = self.flag1 xor true
+    elson waitUntilMS (!deadline:self.deadline) then
+      self.deadline += 200
+      if self.flag2 then
+        ledOn  (!LED_L2)
+      else
+        ledOff (!LED_L2)
+      end
+      self.flag2 = self.flag2 xor true
     end
   }
 }
 
-//------------------------------------------------*
+//-----------------------------------------------------------------------------*
