@@ -82,7 +82,7 @@ func initialVariableMap
     ]
   end
 #------------------------------------------------------- Add global variables
-  for (variableName variableType modeSet allowedProcedureMap * isConstant) in inContext.mGlobalVariableMap do
+  for (variableName variableType modeSet allowedProcedureMap allowedGuardMap * isConstant) in inContext.mGlobalVariableMap do
     var writeAccess = false
     var allowedAccess = [allowedProcedureMap hasKey !inRoutineNameForInvocation]
     if allowedAccess then

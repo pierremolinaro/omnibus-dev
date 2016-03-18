@@ -33,6 +33,13 @@ list @allowedPanicList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @allowedGuardList {
+  @lstring mOptionalTypeName
+  @lstring mGuardName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @globalVarDeclarationList {
   @lstring mTypeName # Empty string if no type annotation
   @lstring mVarName
@@ -41,6 +48,7 @@ list @globalVarDeclarationList {
   @allowedInitList mAllowedInitList
   @allowedPanicList mAllowedPanicList
   @allowedFunctionList mAllowedFunctionList
+  @allowedGuardList mAllowedGuardList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -66,6 +74,7 @@ syntax extension common_syntax {
     @allowedInitList allowedInitList = {}
     @allowedFunctionList allowedFunctionList = {}
     @allowedPanicList allowedPanicList = {}
+    @allowedGuardList allowedGuardList = {}
     ${$
     repeat
       @bool hasWriteAccess
@@ -79,6 +88,17 @@ syntax extension common_syntax {
         hasWriteAccess = true
       end
       select
+        $guard$
+        @lstring typeName
+        select
+          typeName = ["" nowhere]
+        or
+          $typeName$ ?typeName
+          $.$
+        end
+        $identifier$ ?let sectionName
+        allowedGuardList += !typeName !sectionName
+      or
         $section$
         @lstring typeName
         select
@@ -135,6 +155,7 @@ syntax extension common_syntax {
       !allowedInitList
       !allowedPanicList
       !allowedFunctionList
+      !allowedGuardList
   }
 
   #·····················································································································
@@ -146,7 +167,7 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (globalVariableTypeName 6*) in self do
+  for (globalVariableTypeName 7*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]
@@ -276,12 +297,33 @@ method @globalVarDeclarationList-element enterInContext
     end
     [!?allowedRoutineMap insertKey !routineNameForInvocationGraph !procedure.mHasWriteAccess]
   end
+#--- Check allowed guards are defined
+  @allowedGuardMap allowedGuardMap = {}
+  for guard in mAllowedGuardList do
+    @lstring guardMangledName
+    @unifiedTypeMap-proxy receiverType
+    if guard.mOptionalTypeName.string == "" then
+      guardMangledName = .new {!"." + guard.mGuardName !guard.mGuardName.location}
+      receiverType = .null
+    else
+      guardMangledName = .new {!"$" + guard.mOptionalTypeName + "." + guard.mGuardName !guard.mGuardName.location}
+      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !guard.mOptionalTypeName}
+    end
+    [ioContext.mGuardMapForContext searchKey
+      !guardMangledName
+      ?*
+    ]
+    executionModes += !guardModeName ()
+    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
+    [!?allowedGuardMap insertKey !routineNameForInvocationGraph]
+  end
 #--- Enter variable in globale variable map
   [!?ioContext.mGlobalVariableMap insertKey
     !lkey:mVarName
     !type:result.mType
     !executionModeSet:executionModes
     !allowedRoutineMap:allowedRoutineMap
+    !allowedGuardMap:allowedGuardMap
     !initialValue:result.mValue
     !isConstant:false # Is not constant
   ]
@@ -301,6 +343,7 @@ method @globalVarDeclarationList-element semanticAnalysis
     ?type:let inferredType
     ?executionModeSet:let executionModeSet
     ?allowedRoutineMap:let unused allowedProcedureMap
+    ?allowedGuardMap:let unused allowedGuardMap
     ?initialValue:let expressionGeneratedCode
     ?isConstant:let unused isConstant
   ]
@@ -309,7 +352,6 @@ method @globalVarDeclarationList-element semanticAnalysis
     !inferredType
     ![executionModeSet count] > 1
     !expressionGeneratedCode
-#    !isConstant
   ]
 }
 

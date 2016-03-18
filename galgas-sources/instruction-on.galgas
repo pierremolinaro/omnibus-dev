@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @onInstructionBranchList {
-  @lstring mReceiverName
+  @lstring mOptionalReceiverName
   @lstring mGuardName
   @procEffectiveParameterListAST mProcEffectiveParameterListAST
   @instructionListAST mInstructionList
@@ -36,18 +36,31 @@ syntax extension common_syntax {
     end
     @onInstructionBranchList onInstructionBranchList = {}
     repeat
-      $identifier$ ?let receiverName
-      $.$
-      $identifier$ ?let guardName
-      <effective_parameters> ?let effectiveParameterList
-      $then$
-      <instructionList> ?let instructionList !?ioLabelMap
-      onInstructionBranchList +=
-        !receiverName
-        !guardName
-        !effectiveParameterList
-        !instructionList
-        !.here
+      select
+        $identifier$ ?let guardName
+        <effective_parameters> ?let effectiveParameterList
+        $then$
+        <instructionList> ?let instructionList !?ioLabelMap
+        onInstructionBranchList +=
+          !["" here]
+          !guardName
+          !effectiveParameterList
+          !instructionList
+          !.here
+      or
+        $identifier$ ?let receiverName
+        $.$
+        $identifier$ ?let guardName
+        <effective_parameters> ?let effectiveParameterList
+        $then$
+        <instructionList> ?let instructionList !?ioLabelMap
+        onInstructionBranchList +=
+          !receiverName
+          !guardName
+          !effectiveParameterList
+          !instructionList
+          !.here
+      end
     while
       $elson$
     end

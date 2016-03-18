@@ -147,7 +147,7 @@ typedef struct {
 //--- Context buffer (SHOULD BE THE FIRST FIELD)
   TaskContext mTaskContext ;
 //--- This field is used for deadline waiting
-  unsigned mDate ;
+  unsigned mTaskDeadline ;
 //---
   TaskList * mWaitingList ;
 //--- Stack buffer parameters
@@ -255,7 +255,7 @@ void blockOnDeadline (const unsigned inDeadline) asm ("proc..blockOnDeadline") ;
 void blockOnDeadline (const unsigned inDeadline) {
   const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
   gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;
-  gRunningTaskControlBlock->mDate = inDeadline ;
+  gRunningTaskControlBlock->mTaskDeadline = inDeadline ;
   kernel_makeNoTaskRunning () ;
 }
 
@@ -288,7 +288,7 @@ void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
     const unsigned taskIndex = countTrainingZeros (w) ;
     w &= ~ (1 << taskIndex) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
-    if (inCurrentDate >= taskControlBlockPtr->mDate) {
+    if (inCurrentDate >= taskControlBlockPtr->mTaskDeadline) {
       gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;
       if (taskControlBlockPtr->mWaitingList != (TaskList *) 0) {
         *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;
@@ -307,7 +307,7 @@ static TaskList gDeadlineWaitingInGuardTaskList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void kernel_exitFromGuard (const unsigned inTaskIndex) {
+static void removeTaskFromGuards (const unsigned inTaskIndex) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
   const unsigned mask = ~ (1 << inTaskIndex) ;
   const unsigned guardCount = taskControlBlockPtr->mGuardCount ;
@@ -315,13 +315,13 @@ static void kernel_exitFromGuard (const unsigned inTaskIndex) {
    taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;
   }
   gDeadlineWaitingInGuardTaskList &= ~ mask ;
+  taskControlBlockPtr->mGuardCount = 0 ;
 /*  if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
     kernel_makeTaskReady (inTaskIndex) ;
     taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
   }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
     taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
   } */
-  taskControlBlockPtr->mGuardCount = 0 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -329,15 +329,36 @@ static void kernel_exitFromGuard (const unsigned inTaskIndex) {
 void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) asm ("proc..handleGuardedCommand") ;
 
 void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) {
-  const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
   if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
+    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
     if (inAccepted) {
-      kernel_exitFromGuard (runningTaskIndex) ;
+      removeTaskFromGuards (runningTaskIndex) ;
     }else{
       ioGuardList->mGuardValue |= 1 << runningTaskIndex ;
       const unsigned guardCount = gRunningTaskControlBlock->mGuardCount ;
       gRunningTaskControlBlock->mGuardListArray [guardCount] = ioGuardList ;
       gRunningTaskControlBlock->mGuardCount = guardCount + 1 ;
+    }
+  }else if ((gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE) && inAccepted) {
+    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void handleGuardedWaitUntil (const unsigned inDeadline, const bool inAccepted) asm ("proc..handleGuardedWaitUntil") ;
+
+void handleGuardedWaitUntil (const unsigned inDeadline, const bool inAccepted) {
+  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
+    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
+    if (inAccepted) {
+      removeTaskFromGuards (runningTaskIndex) ;
+    }else{
+      const unsigned mask = 1 << runningTaskIndex ;
+      if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {
+        gRunningTaskControlBlock->mTaskDeadline = inDeadline ;
+      }
+      gDeadlineWaitingInGuardTaskList |= mask ;
     }
   }else if ((gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE) && inAccepted) {
     gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
@@ -352,7 +373,7 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
   while (ioGuardList->mGuardValue > 0) {
     const unsigned taskIndex = countTrainingZeros (ioGuardList->mGuardValue) ;
     ioGuardList->mGuardValue &= ~ (1 << taskIndex) ;
-    kernel_exitFromGuard (taskIndex) ;    
+    removeTaskFromGuards (taskIndex) ;    
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
     if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
       kernel_makeTaskReady (taskIndex) ;
@@ -380,21 +401,6 @@ void kernel_waitForGuardChange (void) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void guardedWaitUntil (const unsigned inDeadline) asm ("proc..guardedWaitUntil") ;
-
-void kernel_guardedWaitUntil (const unsigned inDeadline) {
-  if (gRunningTaskControlBlock->mGuardState != GUARD_DID_CHANGE) {
-    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
-    const unsigned mask = 1 << runningTaskIndex ;
-    if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mDate > inDeadline)) {
-      gRunningTaskControlBlock->mDate = inDeadline ;
-    }
-    gDeadlineWaitingInGuardTaskList |= mask ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void tickHandlerForGuardedWaitUntil (const unsigned inUptime) asm ("proc..tickHandlerForGuardedWaitUntil") ;
 
 void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
@@ -403,9 +409,8 @@ void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
     const unsigned taskIndex = countTrainingZeros (w) ;
     w &= ~ (1 << taskIndex) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
-    if (inUptime >= taskControlBlockPtr->mDate) {
-      gDeadlineWaitingInGuardTaskList &= ~ (1 << taskIndex) ;
-      kernel_exitFromGuard (taskIndex) ;
+    if (inUptime >= taskControlBlockPtr->mTaskDeadline) {
+      removeTaskFromGuards (taskIndex) ;
       if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
         kernel_makeTaskReady (taskIndex) ;
         taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;

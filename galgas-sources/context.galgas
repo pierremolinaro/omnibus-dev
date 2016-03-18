@@ -62,10 +62,18 @@ map @globalConstantMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @allowedGuardMap {
+  insert insertKey error message "the '%K' guard is already declared in %L"
+  search searchKey error message "there is no '%K' guard"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 map @globalVariableMap %selectors {
   @unifiedTypeMap-proxy type
   @stringset executionModeSet
   @allowedRoutineMap allowedRoutineMap
+  @allowedGuardMap allowedGuardMap
   @valueIR initialValue
   @bool isConstant
   insert insertKey error message "the '%K' global variable is already declared in %L"
@@ -284,12 +292,13 @@ proc buildSemanticContext
     !outSemanticContext.mControlRegisterMap
     !sourceFile:inSourceFile
   )
-#--- Enter procedures, functions, sections, services in context
+#--- Enter procedures, functions, sections, services, guards in context
   [inAST.mProcedureListAST enterInContext !selfTypeName:"" !?context: outSemanticContext]
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
   [inAST.mServiceListAST enterInContext !receiverType:"" !?context: outSemanticContext]
+  [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #--- Enter tasks
   [inAST.mTaskList enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
 #--- Check required procs mode

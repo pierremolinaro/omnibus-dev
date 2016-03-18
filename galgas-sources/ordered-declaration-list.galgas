@@ -37,6 +37,7 @@ proc buildOrderedDeclarationList
   [inAST.mFunctionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mSectionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mServiceListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  [inAST.mGuardListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGlobalVarDeclarationList noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskList noteTypesInPrecedenceGraph !?precedenceGraph]

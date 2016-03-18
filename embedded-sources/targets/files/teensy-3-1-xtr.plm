@@ -23,11 +23,11 @@ extern proc makeTasksReadyFromCurrentDate `isr (?currentDate:inCurrentDate $uint
 
 opaqueType $guardList @instantiable : 32
 
-// extern service guardedWaitUntil (?deadline:inDeadlineMS $uint32)
-
 extern proc tickHandlerForGuardedWaitUntil `isr (?currentDate:inCurrentDate $uint32)
 
 extern proc handleGuardedCommand `guard (?!guard:ioGuard $guardList ?accepted:inAccepted $bool)
+
+extern proc handleGuardedWaitUntil `guard (?deadline:inDeadlineMS $uint32 ?accepted:inAccepted $bool)
 
 extern proc guardDidChange `kernel (?!guard:ioGuard $guardList)
 
@@ -49,6 +49,12 @@ var gUptimeMS $uint32 = 0 {
 
 //-----------------------------------------------------------------------------*
 
+func millis `isr `kernel `user `guard @noWarningIfUnused () -> $uint32 {
+  result = gUptimeMS
+}
+
+//-----------------------------------------------------------------------------*
+
 proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
   let deadline = gUptimeMS + inDuration
   while gUptimeMS < deadline do
@@ -62,6 +68,7 @@ required proc systickHandler `isr ()
 proc systickHandler `isr @global () {
   gUptimeMS +%= 1
   makeTasksReadyFromCurrentDate (!currentDate:millis ())
+  tickHandlerForGuardedWaitUntil (!currentDate:millis ())
   userSystickHandler ()
 }
 
@@ -84,8 +91,9 @@ proc waitDuringMS `user @noWarningIfUnused (?delay: inDelay $uint32) {
 
 //-----------------------------------------------------------------------------*
 
-func millis `isr `kernel `user @noWarningIfUnused () -> $uint32 {
-  result = gUptimeMS
+guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
+  accepted = inDeadline <= millis ()
+  handleGuardedWaitUntil (!deadline:inDeadline !accepted:accepted)
 }
 
 //-----------------------------------------------------------------------------*
