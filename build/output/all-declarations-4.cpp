@@ -4231,7 +4231,7 @@ void routine_analyzeGuardCall (const GALGAS_unifiedTypeMap_2D_proxy constinArgum
   ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("instruction-on.galgas", 194)) ;
   }
   {
-  routine_analyzeEffectiveParameters (constinArgument_inSelfType, var_formalSignature, constinArgument_inEffectiveParameterList, constinArgument_inGuardName.mAttribute_location, var_routineNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, outArgument_outEffectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("instruction-on.galgas", 202)) ;
+  routine_analyzeEffectiveParameters (constinArgument_inSelfType, var_formalSignature, constinArgument_inEffectiveParameterList, constinArgument_inGuardName.mAttribute_location, var_routineNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, outArgument_outEffectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("instruction-on.galgas", 196)) ;
   }
 }
 
@@ -13557,9 +13557,9 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "\n"
   "extern proc tickHandlerForGuardedWaitUntil `isr (\?currentDate:inCurrentDate $uint32)\n"
   "\n"
-  "extern proc handleGuardedCommand `guard (\?!guard:ioGuard $guardList \?accepted:inAccepted $bool)\n"
+  "extern proc handleGuardedCommand `guard (\?!guard:ioGuard $guardList)\n"
   "\n"
-  "extern proc handleGuardedWaitUntil `guard (\?deadline:inDeadlineMS $uint32 \?accepted:inAccepted $bool)\n"
+  "extern proc handleGuardedWaitUntil `guard (\?deadline:inDeadlineMS $uint32)\n"
   "\n"
   "extern proc guardDidChange `kernel (\?!guard:ioGuard $guardList)\n"
   "\n"
@@ -13625,7 +13625,9 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "\n"
   "guard waitUntilMS @noWarningIfUnused (\?deadline:inDeadline $uint32) {\n"
   "  accepted = inDeadline <= millis ()\n"
-  "  handleGuardedWaitUntil (!deadline:inDeadline !accepted:accepted)\n"
+  "  if not accepted then\n"
+  "    handleGuardedWaitUntil (!deadline:inDeadline)\n"
+  "  end\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
@@ -13634,7 +13636,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  3318, // Text length
+  3276, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 
@@ -14772,61 +14774,51 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void removeTaskFromGuards (const unsigned inTaskIndex) {\n"
-  "  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
-  "  const unsigned mask = ~ (1 << inTaskIndex) ;\n"
+  "static void removeTaskFromGuards (TaskControlBlock * taskControlBlockPtr) {\n"
+  "  const unsigned mask = ~ (1 << taskControlBlockPtr->mTaskIndex) ;\n"
   "  const unsigned guardCount = taskControlBlockPtr->mGuardCount ;\n"
   "  for (unsigned i=0 ; i<guardCount ; i++) {\n"
   "   taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;\n"
   "  }\n"
   "  gDeadlineWaitingInGuardTaskList &= ~ mask ;\n"
   "  taskControlBlockPtr->mGuardCount = 0 ;\n"
-  "/*  if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
-  "    kernel_makeTaskReady (inTaskIndex) ;\n"
-  "    taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "  }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "    taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
-  "  } */\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) asm (\"proc..handleGuardedCommand\") ;\n"
+  "void noteGuardHasBeenAccepted (void) asm (\"noteGuardHasBeenAccepted\") ;\n"
   "\n"
-  "void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) {\n"
+  "void noteGuardHasBeenAccepted (void) {\n"
+  "  gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "  removeTaskFromGuards (gRunningTaskControlBlock) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_handleGuardedCommand (GuardList * ioGuardList) asm (\"proc..handleGuardedCommand\") ;\n"
+  "\n"
+  "void kernel_handleGuardedCommand (GuardList * ioGuardList) {\n"
   "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
-  "    if (inAccepted) {\n"
-  "      removeTaskFromGuards (runningTaskIndex) ;\n"
-  "    }else{\n"
-  "      ioGuardList->mGuardValue |= 1 << runningTaskIndex ;\n"
-  "      const unsigned guardCount = gRunningTaskControlBlock->mGuardCount ;\n"
-  "      gRunningTaskControlBlock->mGuardListArray [guardCount] = ioGuardList ;\n"
-  "      gRunningTaskControlBlock->mGuardCount = guardCount + 1 ;\n"
-  "    }\n"
-  "  }else if ((gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE) && inAccepted) {\n"
-  "    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "    ioGuardList->mGuardValue |= 1 << runningTaskIndex ;\n"
+  "    const unsigned guardCount = gRunningTaskControlBlock->mGuardCount ;\n"
+  "    gRunningTaskControlBlock->mGuardListArray [guardCount] = ioGuardList ;\n"
+  "    gRunningTaskControlBlock->mGuardCount = guardCount + 1 ;\n"
   "  }\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void handleGuardedWaitUntil (const unsigned inDeadline, const bool inAccepted) asm (\"proc..handleGuardedWaitUntil\") ;\n"
+  "void handleGuardedWaitUntil (const unsigned inDeadline) asm (\"proc..handleGuardedWaitUntil\") ;\n"
   "\n"
-  "void handleGuardedWaitUntil (const unsigned inDeadline, const bool inAccepted) {\n"
+  "void handleGuardedWaitUntil (const unsigned inDeadline) {\n"
   "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
-  "    if (inAccepted) {\n"
-  "      removeTaskFromGuards (runningTaskIndex) ;\n"
-  "    }else{\n"
-  "      const unsigned mask = 1 << runningTaskIndex ;\n"
-  "      if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {\n"
-  "        gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
-  "      }\n"
-  "      gDeadlineWaitingInGuardTaskList |= mask ;\n"
+  "    const unsigned mask = 1 << runningTaskIndex ;\n"
+  "    if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {\n"
+  "      gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
   "    }\n"
-  "  }else if ((gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE) && inAccepted) {\n"
-  "    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "    gDeadlineWaitingInGuardTaskList |= mask ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -14838,8 +14830,8 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "  while (ioGuardList->mGuardValue > 0) {\n"
   "    const unsigned taskIndex = countTrainingZeros (ioGuardList->mGuardValue) ;\n"
   "    ioGuardList->mGuardValue &= ~ (1 << taskIndex) ;\n"
-  "    removeTaskFromGuards (taskIndex) ;    \n"
   "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
+  "    removeTaskFromGuards (taskControlBlockPtr) ;    \n"
   "    if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
   "      kernel_makeTaskReady (taskIndex) ;\n"
   "      taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
@@ -14875,7 +14867,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "    w &= ~ (1 << taskIndex) ;\n"
   "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
   "    if (inUptime >= taskControlBlockPtr->mTaskDeadline) {\n"
-  "      removeTaskFromGuards (taskIndex) ;\n"
+  "      removeTaskFromGuards (taskControlBlockPtr) ;\n"
   "      if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
   "        kernel_makeTaskReady (taskIndex) ;\n"
   "        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
@@ -14892,7 +14884,7 @@ const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  21725, // Text length
+  21120, // Text length
   gWrapperFileContent_24_targetTemplates
 ) ;
 

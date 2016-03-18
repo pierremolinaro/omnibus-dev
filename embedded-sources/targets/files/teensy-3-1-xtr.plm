@@ -25,9 +25,9 @@ opaqueType $guardList @instantiable : 32
 
 extern proc tickHandlerForGuardedWaitUntil `isr (?currentDate:inCurrentDate $uint32)
 
-extern proc handleGuardedCommand `guard (?!guard:ioGuard $guardList ?accepted:inAccepted $bool)
+extern proc handleGuardedCommand `guard (?!guard:ioGuard $guardList)
 
-extern proc handleGuardedWaitUntil `guard (?deadline:inDeadlineMS $uint32 ?accepted:inAccepted $bool)
+extern proc handleGuardedWaitUntil `guard (?deadline:inDeadlineMS $uint32)
 
 extern proc guardDidChange `kernel (?!guard:ioGuard $guardList)
 
@@ -93,7 +93,9 @@ proc waitDuringMS `user @noWarningIfUnused (?delay: inDelay $uint32) {
 
 guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
   accepted = inDeadline <= millis ()
-  handleGuardedWaitUntil (!deadline:inDeadline !accepted:accepted)
+  if not accepted then
+    handleGuardedWaitUntil (!deadline:inDeadline)
+  end
 }
 
 //-----------------------------------------------------------------------------*

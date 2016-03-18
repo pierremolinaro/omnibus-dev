@@ -948,8 +948,9 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    accepted = self.value > 0\n"
   "    if accepted then\n"
   "      self.value -= 1\n"
+  "    else\n"
+  "      handleGuardedCommand (!\?guard:self.guardList)\n"
   "    end\n"
-  "    handleGuardedCommand (!\?guard:self.guardList !accepted:accepted)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1040,7 +1041,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "04-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2510, // Text length
+  2502, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 

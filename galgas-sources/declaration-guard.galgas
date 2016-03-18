@@ -276,7 +276,14 @@ method @guardMapIR-element llvmCodeGeneration
     switch mFormalArgumentKind
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
-      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + llvmType + "\n"
+    case output, inputOutput :
+    end
+  end
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmTypeName]
       ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
     case output, inputOutput :
     end
@@ -284,7 +291,13 @@ method @guardMapIR-element llvmCodeGeneration
 #--- Instruction list
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
 #--- Epilog
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @noteGuardHasBeenAccepted ()\n"
   ioLLVMcode += "  %" + accepted_llvmName + ".loaded = load i1, i1* %" + accepted_llvmName + "\n"
+  ioLLVMcode += "  br i1 %" + accepted_llvmName + ".loaded, label %" + accepted_llvmName + ".true, label %" + accepted_llvmName + ".exit\n\n"
+  ioLLVMcode += accepted_llvmName + ".true:\n"
+  ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
+  ioLLVMcode += "  br label %" + accepted_llvmName + ".exit\n\n"
+  ioLLVMcode += accepted_llvmName + ".exit:\n"
   ioLLVMcode += "  ret i1 %" + accepted_llvmName + ".loaded\n"
   ioLLVMcode += "}\n\n"
 }
