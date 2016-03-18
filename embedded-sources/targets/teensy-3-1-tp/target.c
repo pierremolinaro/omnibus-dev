@@ -17,7 +17,7 @@ typedef unsigned char bool ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef enum {GUARD_OUTSIDE, GUARD_EVALUATING, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
+typedef enum {GUARD_OUTSIDE, GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -25,7 +25,7 @@ typedef enum {GUARD_OUTSIDE, GUARD_EVALUATING, GUARD_DID_CHANGE, GUARD_WAITING_F
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (* routineTaskType) (void) ;
+typedef void (* RoutineTaskType) (void) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -81,7 +81,7 @@ typedef struct {
   unsigned mLR ;
   unsigned mPC ;
   unsigned mXPSR ;
-} stacked_registers ;
+} StackedRegisters ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -118,19 +118,19 @@ typedef struct {
   unsigned mR9 ;
   unsigned mR10 ;
   unsigned mR11 ;
-  stacked_registers * mSP_USR ;
+  StackedRegisters * mSP_USR ;
   unsigned mLR_RETURN_CODE ;
 } TaskContext ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void kernel_set_task_context (TaskContext * inTaskContext,
-                                     const unsigned inStackPointerInitialValue,
-                                     routineTaskType inTaskRoutine) {
+                                     const unsigned inTopOfStack,
+                                     RoutineTaskType inTaskRoutine) {
 //--- Initialize LR
   inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ;
 //--- Initialize SP
-  stacked_registers * ptr = (stacked_registers *) (inStackPointerInitialValue - sizeof (stacked_registers)) ; // 8 stacked registers
+  StackedRegisters * ptr = (StackedRegisters *) (inTopOfStack - sizeof (StackedRegisters)) ; // 8 stacked registers
   inTaskContext->mSP_USR = ptr ;
 //--- Initialize PC
   ptr->mPC = (unsigned) inTaskRoutine ;
@@ -150,11 +150,13 @@ typedef struct {
 //---
   TaskList * mWaitingList ;
 //--- Stack buffer parameters
-  unsigned * mStackBufferAddress ;
-  unsigned mStackBufferSize ; // In bytes
+//  unsigned * mStackBufferAddress ;
+//  unsigned mStackBufferSize ; // In bytes
+//--- Task index
+  unsigned char mTaskIndex ;
 //--- Guards
-  unsigned short mGuardCount ;
   GuardState mGuardState ;
+  unsigned short mGuardCount ;
   GuardList * mGuardListArray [GUARD_COUNT] ;
 } TaskControlBlock ;
 
@@ -167,14 +169,7 @@ static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)
-static unsigned gRunningTaskIndex ; // Not significant if gRunningTaskControlBlock == NULL
 static TaskList gReadyTaskList ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static unsigned kernel_runningTaskIndex (void) {
-  return gRunningTaskIndex ;
-}
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -194,13 +189,13 @@ void kernel_selectTaskToRun (void) ;
 
 void kernel_selectTaskToRun (void) {
   if (((TaskControlBlock *) 0) != gRunningTaskControlBlock) {
-    gReadyTaskList |= 1 << gRunningTaskIndex ;
+    gReadyTaskList |= 1 << gRunningTaskControlBlock->mTaskIndex ;
     gRunningTaskControlBlock = (TaskControlBlock *) 0 ;
   }
   if (gReadyTaskList != 0) {
-    gRunningTaskIndex = countTrainingZeros (gReadyTaskList) ;
-    gReadyTaskList &= ~ (1 << gRunningTaskIndex) ;
-    gRunningTaskControlBlock = & gTaskDescriptorArray [gRunningTaskIndex] ;
+    const unsigned runningTaskIndex = countTrainingZeros (gReadyTaskList) ;
+    gReadyTaskList &= ~ (1 << runningTaskIndex) ;
+    gRunningTaskControlBlock = & gTaskDescriptorArray [runningTaskIndex] ;
   }
 }
 
@@ -211,23 +206,24 @@ void kernel_selectTaskToRun (void) {
 void kernel_create_task (const unsigned inTaskIndex,
                          unsigned * inStackBufferAddress,
                          unsigned inStackBufferSize,
-                         routineTaskType inTaskRoutine) ;
+                         RoutineTaskType inTaskRoutine) ;
 
 void kernel_create_task (const unsigned inTaskIndex,
                          unsigned * inStackBufferAddress,
                          unsigned inStackBufferSize,
-                         routineTaskType inTaskRoutine) {
+                         RoutineTaskType inTaskRoutine) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
+  taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;
   taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;
   taskControlBlockPtr->mGuardCount = 0 ;
   taskControlBlockPtr->mGuardState = GUARD_OUTSIDE ;
 //--- Store stack parameters
-  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;
-  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
+//  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;
+//  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
 //--- Stack Pointer initial value
-  const unsigned spInitialValue = ((unsigned) taskControlBlockPtr->mStackBufferAddress) + taskControlBlockPtr->mStackBufferSize ;
+  const unsigned topOfStack = ((unsigned) inStackBufferAddress) + inStackBufferSize ;
 //--- Initialize Context
-  kernel_set_task_context (& taskControlBlockPtr->mTaskContext, spInitialValue, inTaskRoutine) ;
+  kernel_set_task_context (& taskControlBlockPtr->mTaskContext, topOfStack, inTaskRoutine) ;
 //--- Make task ready
   kernel_makeTaskReady (inTaskIndex) ;
 }
@@ -245,22 +241,20 @@ static TaskList gDeadlineWaitingTaskList ;
 void blockInList (TaskList * ioWaitingList) asm ("proc..blockInList") ;
 
 void blockInList (TaskList * ioWaitingList) {
-  const unsigned currentTaskIndex = kernel_runningTaskIndex () ;
+  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
   *ioWaitingList |= 1 << currentTaskIndex ;
- // TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [currentTaskIndex] ;
   gRunningTaskControlBlock->mWaitingList = ioWaitingList ;
   kernel_makeNoTaskRunning () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void blockOnDeadline (const unsigned inDeadlineMS) asm ("proc..blockOnDeadline") ;
+void blockOnDeadline (const unsigned inDeadline) asm ("proc..blockOnDeadline") ;
 
-void blockOnDeadline (const unsigned inDeadlineMS) {
-  const unsigned currentTaskIndex = kernel_runningTaskIndex () ;
- // TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [currentTaskIndex] ;
+void blockOnDeadline (const unsigned inDeadline) {
+  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
   gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;
-  gRunningTaskControlBlock->mDate = inDeadlineMS ;
+  gRunningTaskControlBlock->mDate = inDeadline ;
   kernel_makeNoTaskRunning () ;
 }
 
@@ -315,14 +309,15 @@ static TaskList gDeadlineWaitingInGuardTaskList ;
 static void kernel_exitFromGuard (const unsigned inTaskIndex) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
   const unsigned guardCount = taskControlBlockPtr->mGuardCount ;
+  const unsigned mask = ~ (1 << inTaskIndex) ;
   for (unsigned i=0 ; i<guardCount ; i++) {
-   taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= ~ (1 << inTaskIndex) ;
+   taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;
   }
-  gDeadlineWaitingInGuardTaskList &= ~ (1 << inTaskIndex) ;
+  gDeadlineWaitingInGuardTaskList &= ~ mask ;
   if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
     kernel_makeTaskReady (inTaskIndex) ;
     taskControlBlockPtr->mGuardState = GUARD_OUTSIDE ;
-  }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING) {
+  }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
     kernel_makeTaskReady (inTaskIndex) ;
     taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
   }
@@ -331,14 +326,10 @@ static void kernel_exitFromGuard (const unsigned inTaskIndex) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterInGuard (void) asm ("section.call.enterInGuard") ;
+void enterInGuard (void) asm ("enterInGuard") ;
 
-void kernel_enterInGuard (void) asm ("section.implementation.enterInGuard") ;
-
-void kernel_enterInGuard (void) {
-//  const unsigned runningTaskIndex = kernel_runningTaskIndex () ;
-//  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;
-  gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING ;
+void enterInGuard (void) {
+  gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -346,8 +337,7 @@ void kernel_enterInGuard (void) {
 void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) asm ("proc..handleGuardedCommand") ;
 
 void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) {
-  const unsigned runningTaskIndex = kernel_runningTaskIndex () ;
-//  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;
+  const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
   if (gRunningTaskControlBlock->mGuardState != GUARD_DID_CHANGE) {
     if (inAccepted) {
       kernel_exitFromGuard (runningTaskIndex) ;
@@ -379,9 +369,7 @@ void waitForGuardChange (void) asm ("service.call.waitForGuardChange") ;
 void kernel_waitForGuardChange (void) asm ("service.implementation.waitForGuardChange") ;
 
 void kernel_waitForGuardChange (void) {
-//  const unsigned runningTaskIndex = kernel_runningTaskIndex () ;
-//   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;
-  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING) {
+  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
     gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;
     kernel_makeNoTaskRunning () ;
   }
@@ -392,9 +380,8 @@ void kernel_waitForGuardChange (void) {
 void guardedWaitUntil (const unsigned inDeadline) asm ("proc..guardedWaitUntil") ;
 
 void kernel_guardedWaitUntil (const unsigned inDeadline) {
-//  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;
   if (gRunningTaskControlBlock->mGuardState != GUARD_DID_CHANGE) {
-    const unsigned runningTaskIndex = kernel_runningTaskIndex () ;
+    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
     const unsigned mask = 1 << runningTaskIndex ;
     if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mDate > inDeadline)) {
       gRunningTaskControlBlock->mDate = inDeadline ;
@@ -421,4 +408,3 @@ void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-

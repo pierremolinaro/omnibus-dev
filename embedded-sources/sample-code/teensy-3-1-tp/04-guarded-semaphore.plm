@@ -52,11 +52,11 @@ task T0 priority 0 stackSize 512 {
   proc loop () {
     waitUntilMS (!deadline:self.top)
     s0.V ()
-    self.top += 500
+    self.top += 250
     ledOn (!LED_L0)
     waitUntilMS (!deadline:self.top)
     s0.V ()
-    self.top += 500
+    self.top += 250
     ledOff (!LED_L0)
   }
 }
@@ -69,26 +69,36 @@ task T1 priority 1 stackSize 512 {
   proc loop () {
     waitUntilMS (!deadline:self.top)
     s1.V ()
-    self.top += 400
-    ledOn (!LED_L1)
+    self.top += 249
+    ledOn (!LED_L4)
     waitUntilMS (!deadline:self.top)
     s1.V ()
-    self.top += 400
-    ledOff (!LED_L1)
+    self.top += 249
+    ledOff (!LED_L4)
   }
 }
 
 //------------------------------------------------*
 
 task T2 priority 2 stackSize 512 {
+  var flag0 = true
+  var flag1 = true
 
   proc loop () {
     on s0.P () then
-      ledOn  (!LED_L4)
-      ledOff (!LED_L3)
+      if self.flag0 then
+        ledOn  (!LED_L1)
+      else
+        ledOff (!LED_L1)
+      end
+      self.flag0 = self.flag0 xor true
     elson s1.P () then
-      ledOn  (!LED_L3)
-      ledOff (!LED_L4)
+      if self.flag1 then
+        ledOn  (!LED_L3)
+      else
+        ledOff (!LED_L3)
+      end
+      self.flag1 = self.flag1 xor true
     end
   }
 }

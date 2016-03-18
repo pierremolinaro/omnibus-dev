@@ -8732,9 +8732,7 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
   GALGAS__32_stringlist var_sectionList = GALGAS__32_stringlist::constructor_emptyList (SOURCE_FILE ("code-generation.galgas", 204)) ;
   const enumGalgasBool test_1 = var_generationAdds.mAttribute_mUsesGuards.boolEnum () ;
   if (kBoolTrue == test_1) {
-    GALGAS_string var_enterInGuard = function_enterInGuardFunctionName (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 207)) ;
-    var_sectionList.addAssign_operation (function_llvmNameForSectionCall (var_enterInGuard, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 208)), function_llvmNameForSectionImplementation (var_enterInGuard, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 208))  COMMA_SOURCE_FILE ("code-generation.galgas", 208)) ;
-    var_generationAdds.mAttribute_mIntrinsicsDeclarationSet.addAssign_operation (GALGAS_string ("declare void @").add_operation (function_llvmNameForSectionCall (var_enterInGuard, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 209)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 209))  COMMA_SOURCE_FILE ("code-generation.galgas", 209)) ;
+    var_generationAdds.mAttribute_mIntrinsicsDeclarationSet.addAssign_operation (GALGAS_string ("declare void @").add_operation (function_enterInGuardFunctionName (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 209)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 209))  COMMA_SOURCE_FILE ("code-generation.galgas", 209)) ;
     GALGAS_string var_waitForGuardChange = function_waitForGuardChangeFunctionName (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 210)) ;
     var_serviceList.addAssign_operation (function_llvmNameForServiceCall (var_waitForGuardChange, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 211)), function_llvmNameForServiceImplementation (var_waitForGuardChange, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 211))  COMMA_SOURCE_FILE ("code-generation.galgas", 211)) ;
     var_generationAdds.mAttribute_mIntrinsicsDeclarationSet.addAssign_operation (GALGAS_string ("declare void @").add_operation (function_llvmNameForServiceCall (var_waitForGuardChange, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 212)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 212))  COMMA_SOURCE_FILE ("code-generation.galgas", 212)) ;
@@ -8742,10 +8740,10 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
   categoryMethod_sectionCodeGeneration (constinArgument_inIntermediateCodeStruct.mAttribute_mRoutineMapIR, var_llvmCode, var_sectionList, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 215)) ;
   categoryMethod_serviceCodeGeneration (constinArgument_inIntermediateCodeStruct.mAttribute_mRoutineMapIR, var_llvmCode, var_serviceList, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 220)) ;
   categoryMethod_guardCodeGeneration (constinArgument_inIntermediateCodeStruct.mAttribute_mGuardMapIR, var_llvmCode, var_serviceList, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 225)) ;
-  cEnumerator_functionMapIR enumerator_10180 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
-  while (enumerator_10180.hasCurrentObject ()) {
-    categoryMethod_implementationCodeGeneration (enumerator_10180.current (HERE), var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 233)) ;
-    enumerator_10180.gotoNextObject () ;
+  cEnumerator_functionMapIR enumerator_10171 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
+  while (enumerator_10171.hasCurrentObject ()) {
+    categoryMethod_implementationCodeGeneration (enumerator_10171.current (HERE), var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 233)) ;
+    enumerator_10171.gotoNextObject () ;
   }
   {
   routine_generateServiceDispatcher (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string, var_asCode, var_serviceList, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 236)) ;
@@ -8779,62 +8777,62 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
     var_llvmCode.plusAssign_operation(GALGAS_string ("  br label %panic.loop\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 285)) ;
     var_llvmCode.plusAssign_operation(GALGAS_string ("}\n"
       "\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 286)) ;
-    cEnumerator_stringset enumerator_12620 (constinArgument_inSourceFileAbsolutePathSet, kEnumeration_up) ;
-    while (enumerator_12620.hasCurrentObject ()) {
+    cEnumerator_stringset enumerator_12611 (constinArgument_inSourceFileAbsolutePathSet, kEnumeration_up) ;
+    while (enumerator_12611.hasCurrentObject ()) {
       GALGAS_uint var_staticStringIndex ;
       {
-      categoryModifier_findOrAddStaticString (var_generationAdds.mAttribute_mStaticStringMap, enumerator_12620.current_key (HERE).getter_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 290)).getter_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 290)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 289)) ;
+      categoryModifier_findOrAddStaticString (var_generationAdds.mAttribute_mStaticStringMap, enumerator_12611.current_key (HERE).getter_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 290)).getter_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 290)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 289)) ;
       }
       GALGAS_string var_routineName = GALGAS_string ("@raise_panic.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("code-generation.galgas", 293)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 293)) ;
-      var_llvmCode.plusAssign_operation(function_llvmTitleComment (var_routineName.add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294)).add_operation (enumerator_12620.current_key (HERE).getter_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 294)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 294)) ;
+      var_llvmCode.plusAssign_operation(function_llvmTitleComment (var_routineName.add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294)).add_operation (enumerator_12611.current_key (HERE).getter_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 294)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 294)) ;
       var_llvmCode.plusAssign_operation(GALGAS_string ("define internal void ").add_operation (var_routineName, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)).add_operation (GALGAS_string (" (i32 %inSourceLine, i32 %inCode) nounwind noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 295)) ;
       var_llvmCode.plusAssign_operation(GALGAS_string ("  %str.FILE = load i8*, i8** @string.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("code-generation.galgas", 296)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 296)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 296)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 296)) ;
       var_llvmCode.plusAssign_operation(GALGAS_string ("  call void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 297)) ;
       var_llvmCode.plusAssign_operation(GALGAS_string ("  unreachable\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 298)) ;
       var_llvmCode.plusAssign_operation(GALGAS_string ("}\n"
         "\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 299)) ;
-      enumerator_12620.gotoNextObject () ;
+      enumerator_12611.gotoNextObject () ;
     }
   }
   categoryMethod_generateCode (constinArgument_inIntermediateCodeStruct.mAttribute_mTaskMapIR, var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 303)) ;
   const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mIntrinsicsDeclarationSet.getter_count (SOURCE_FILE ("code-generation.galgas", 305)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
     var_llvmCode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("LLVM intrinsics"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 306)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 306)) ;
-    cEnumerator_stringset enumerator_13697 (var_generationAdds.mAttribute_mIntrinsicsDeclarationSet, kEnumeration_up) ;
-    while (enumerator_13697.hasCurrentObject ()) {
-      var_llvmCode.plusAssign_operation(enumerator_13697.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 308)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 308)) ;
-      enumerator_13697.gotoNextObject () ;
+    cEnumerator_stringset enumerator_13688 (var_generationAdds.mAttribute_mIntrinsicsDeclarationSet, kEnumeration_up) ;
+    while (enumerator_13688.hasCurrentObject ()) {
+      var_llvmCode.plusAssign_operation(enumerator_13688.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 308)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 308)) ;
+      enumerator_13688.gotoNextObject () ;
     }
     var_llvmCode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 310)) ;
   }
   const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mStaticStringMap.getter_count (SOURCE_FILE ("code-generation.galgas", 313)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
     var_llvmCode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Static strings"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 314)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 314)) ;
-    cEnumerator_staticStringMap enumerator_13973 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
-    while (enumerator_13973.hasCurrentObject ()) {
-      GALGAS_string var_lgStr = enumerator_13973.current_lkey (HERE).mAttribute_string.getter_length (SOURCE_FILE ("code-generation.galgas", 316)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 316)).getter_string (SOURCE_FILE ("code-generation.galgas", 316)) ;
-      var_llvmCode.plusAssign_operation(function_literalCharacterArrayName (enumerator_13973.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 317)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 317)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 317)) ;
+    cEnumerator_staticStringMap enumerator_13964 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
+    while (enumerator_13964.hasCurrentObject ()) {
+      GALGAS_string var_lgStr = enumerator_13964.current_lkey (HERE).mAttribute_string.getter_length (SOURCE_FILE ("code-generation.galgas", 316)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 316)).getter_string (SOURCE_FILE ("code-generation.galgas", 316)) ;
+      var_llvmCode.plusAssign_operation(function_literalCharacterArrayName (enumerator_13964.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 317)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 317)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 317)) ;
       var_llvmCode.plusAssign_operation(var_lgStr.add_operation (GALGAS_string (" x i8] c\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 318)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 318)) ;
-      var_llvmCode.plusAssign_operation(enumerator_13973.current_lkey (HERE).mAttribute_string.getter_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 319)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 319)) ;
+      var_llvmCode.plusAssign_operation(enumerator_13964.current_lkey (HERE).mAttribute_string.getter_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 319)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 319)) ;
       var_llvmCode.plusAssign_operation(GALGAS_string ("\\00\", align 1\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 320)) ;
-      var_llvmCode.plusAssign_operation(function_literalStringName (enumerator_13973.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 321)) ;
+      var_llvmCode.plusAssign_operation(function_literalStringName (enumerator_13964.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 321)) ;
       var_llvmCode.plusAssign_operation(var_lgStr.add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)).add_operation (var_lgStr, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 322)) ;
-      var_llvmCode.plusAssign_operation(function_literalCharacterArrayName (enumerator_13973.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 323)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
+      var_llvmCode.plusAssign_operation(function_literalCharacterArrayName (enumerator_13964.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 323)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
         "\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 323)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 323)) ;
-      enumerator_13973.gotoNextObject () ;
+      enumerator_13964.gotoNextObject () ;
     }
   }
   var_llvmCode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 327)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 327)) ;
-  GALGAS_bool joker_14696 ; // Joker input parameter
-  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 328)), joker_14696, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 328)) ;
+  GALGAS_bool joker_14687 ; // Joker input parameter
+  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 328)), joker_14687, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 328)) ;
   var_asCode.plusAssign_operation(function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 330)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 330)) ;
-  GALGAS_bool joker_14867 ; // Joker input parameter
-  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 331)), joker_14867, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 331)) ;
+  GALGAS_bool joker_14858 ; // Joker input parameter
+  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 331)), joker_14858, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 331)) ;
   GALGAS_string var_cCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 335)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 333)) ;
   GALGAS_string var_s_31_ = var_cCode.getter_stringByReplacingStringByString (GALGAS_string ("!TASKCOUNT!"), constinArgument_inIntermediateCodeStruct.mAttribute_mTaskMapIR.getter_count (SOURCE_FILE ("code-generation.galgas", 337)).getter_string (SOURCE_FILE ("code-generation.galgas", 337)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 337)) ;
   GALGAS_string var_s_32_ = var_s_31_.getter_stringByReplacingStringByString (GALGAS_string ("!GUARDCOUNT!"), constinArgument_inIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions.getter_string (SOURCE_FILE ("code-generation.galgas", 338)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 338)) ;
-  GALGAS_bool joker_15358 ; // Joker input parameter
-  var_s_32_.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 339)), joker_15358, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 339)) ;
+  GALGAS_bool joker_15349 ; // Joker input parameter
+  var_s_32_.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 339)), joker_15349, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 339)) ;
   const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 341)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_5) {
     GALGAS_string temp_6 ;
@@ -8866,9 +8864,9 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 354)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 354)) ;
-  cEnumerator_unifiedTypeMap enumerator_16105 (constinArgument_inTypeMap, kEnumeration_up) ;
-  while (enumerator_16105.hasCurrentObject ()) {
-    switch (enumerator_16105.current_kind (HERE).enumValue ()) {
+  cEnumerator_unifiedTypeMap enumerator_16096 (constinArgument_inTypeMap, kEnumeration_up) ;
+  while (enumerator_16096.hasCurrentObject ()) {
+    switch (enumerator_16096.current_kind (HERE).enumValue ()) {
     case GALGAS_typeKind::kNotBuilt:
       break ;
     case GALGAS_typeKind::kEnum_boolean:
@@ -8889,16 +8887,16 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_typeKind::kEnum_structure:
       {
-        const cEnumAssociatedValues_typeKind_structure * extractPtr_16449 = (const cEnumAssociatedValues_typeKind_structure *) (enumerator_16105.current_kind (HERE).unsafePointer ()) ;
-        const GALGAS_propertyList extractedValue_propertyList = extractPtr_16449->mAssociatedValue1 ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%$").add_operation (enumerator_16105.current_lkey (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 362)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 362)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 362)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 362)) ;
-        cEnumerator_propertyList enumerator_16332 (extractedValue_propertyList, kEnumeration_up) ;
-        while (enumerator_16332.hasCurrentObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(enumerator_16332.current_mType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 364)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 364)) ;
-          if (enumerator_16332.hasNextObject ()) {
+        const cEnumAssociatedValues_typeKind_structure * extractPtr_16440 = (const cEnumAssociatedValues_typeKind_structure *) (enumerator_16096.current_kind (HERE).unsafePointer ()) ;
+        const GALGAS_propertyList extractedValue_propertyList = extractPtr_16440->mAssociatedValue1 ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%$").add_operation (enumerator_16096.current_lkey (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 362)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 362)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 362)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 362)) ;
+        cEnumerator_propertyList enumerator_16323 (extractedValue_propertyList, kEnumeration_up) ;
+        while (enumerator_16323.hasCurrentObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(enumerator_16323.current_mType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 364)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 364)) ;
+          if (enumerator_16323.hasNextObject ()) {
             ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 365)) ;
           }
-          enumerator_16332.gotoNextObject () ;
+          enumerator_16323.gotoNextObject () ;
         }
         ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 367)) ;
       }
@@ -8916,7 +8914,7 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       }
       break ;
     }
-    enumerator_16105.gotoNextObject () ;
+    enumerator_16096.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 373)) ;
 }
@@ -14550,7 +14548,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "typedef enum {GUARD_OUTSIDE, GUARD_EVALUATING, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;\n"
+  "typedef enum {GUARD_OUTSIDE, GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//                                                                                                                     *\n"
@@ -14558,7 +14556,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "//                                                                                                                     *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "typedef void (* routineTaskType) (void) ;\n"
+  "typedef void (* RoutineTaskType) (void) ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -14614,7 +14612,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "  unsigned mLR ;\n"
   "  unsigned mPC ;\n"
   "  unsigned mXPSR ;\n"
-  "} stacked_registers ;\n"
+  "} StackedRegisters ;\n"
   "\n"
   "//----------------------------------------------------------------------------------------------------------------------\n"
   "//\n"
@@ -14651,19 +14649,19 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "  unsigned mR9 ;\n"
   "  unsigned mR10 ;\n"
   "  unsigned mR11 ;\n"
-  "  stacked_registers * mSP_USR ;\n"
+  "  StackedRegisters * mSP_USR ;\n"
   "  unsigned mLR_RETURN_CODE ;\n"
   "} TaskContext ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void kernel_set_task_context (TaskContext * inTaskContext,\n"
-  "                                     const unsigned inStackPointerInitialValue,\n"
-  "                                     routineTaskType inTaskRoutine) {\n"
+  "                                     const unsigned inTopOfStack,\n"
+  "                                     RoutineTaskType inTaskRoutine) {\n"
   "//--- Initialize LR\n"
   "  inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ;\n"
   "//--- Initialize SP\n"
-  "  stacked_registers * ptr = (stacked_registers *) (inStackPointerInitialValue - sizeof (stacked_registers)) ; // 8 stacked registers\n"
+  "  StackedRegisters * ptr = (StackedRegisters *) (inTopOfStack - sizeof (StackedRegisters)) ; // 8 stacked registers\n"
   "  inTaskContext->mSP_USR = ptr ;\n"
   "//--- Initialize PC\n"
   "  ptr->mPC = (unsigned) inTaskRoutine ;\n"
@@ -14683,11 +14681,13 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "//---\n"
   "  TaskList * mWaitingList ;\n"
   "//--- Stack buffer parameters\n"
-  "  unsigned * mStackBufferAddress ;\n"
-  "  unsigned mStackBufferSize ; // In bytes\n"
+  "//  unsigned * mStackBufferAddress ;\n"
+  "//  unsigned mStackBufferSize ; // In bytes\n"
+  "//--- Task index\n"
+  "  unsigned char mTaskIndex ;\n"
   "//--- Guards\n"
-  "  unsigned short mGuardCount ;\n"
   "  GuardState mGuardState ;\n"
+  "  unsigned short mGuardCount ;\n"
   "  GuardList * mGuardListArray [GUARD_COUNT] ;\n"
   "} TaskControlBlock ;\n"
   "\n"
@@ -14700,14 +14700,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)\n"
-  "static unsigned gRunningTaskIndex ; // Not significant if gRunningTaskControlBlock == NULL\n"
   "static TaskList gReadyTaskList ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "static unsigned kernel_runningTaskIndex (void) {\n"
-  "  return gRunningTaskIndex ;\n"
-  "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -14727,13 +14720,13 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "void kernel_selectTaskToRun (void) {\n"
   "  if (((TaskControlBlock *) 0) != gRunningTaskControlBlock) {\n"
-  "    gReadyTaskList |= 1 << gRunningTaskIndex ;\n"
+  "    gReadyTaskList |= 1 << gRunningTaskControlBlock->mTaskIndex ;\n"
   "    gRunningTaskControlBlock = (TaskControlBlock *) 0 ;\n"
   "  }\n"
   "  if (gReadyTaskList != 0) {\n"
-  "    gRunningTaskIndex = countTrainingZeros (gReadyTaskList) ;\n"
-  "    gReadyTaskList &= ~ (1 << gRunningTaskIndex) ;\n"
-  "    gRunningTaskControlBlock = & gTaskDescriptorArray [gRunningTaskIndex] ;\n"
+  "    const unsigned runningTaskIndex = countTrainingZeros (gReadyTaskList) ;\n"
+  "    gReadyTaskList &= ~ (1 << runningTaskIndex) ;\n"
+  "    gRunningTaskControlBlock = & gTaskDescriptorArray [runningTaskIndex] ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -14744,23 +14737,24 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "void kernel_create_task (const unsigned inTaskIndex,\n"
   "                         unsigned * inStackBufferAddress,\n"
   "                         unsigned inStackBufferSize,\n"
-  "                         routineTaskType inTaskRoutine) ;\n"
+  "                         RoutineTaskType inTaskRoutine) ;\n"
   "\n"
   "void kernel_create_task (const unsigned inTaskIndex,\n"
   "                         unsigned * inStackBufferAddress,\n"
   "                         unsigned inStackBufferSize,\n"
-  "                         routineTaskType inTaskRoutine) {\n"
+  "                         RoutineTaskType inTaskRoutine) {\n"
   "  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
+  "  taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;\n"
   "  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;\n"
   "  taskControlBlockPtr->mGuardCount = 0 ;\n"
   "  taskControlBlockPtr->mGuardState = GUARD_OUTSIDE ;\n"
   "//--- Store stack parameters\n"
-  "  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;\n"
-  "  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;\n"
+  "//  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;\n"
+  "//  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;\n"
   "//--- Stack Pointer initial value\n"
-  "  const unsigned spInitialValue = ((unsigned) taskControlBlockPtr->mStackBufferAddress) + taskControlBlockPtr->mStackBufferSize ;\n"
+  "  const unsigned topOfStack = ((unsigned) inStackBufferAddress) + inStackBufferSize ;\n"
   "//--- Initialize Context\n"
-  "  kernel_set_task_context (& taskControlBlockPtr->mTaskContext, spInitialValue, inTaskRoutine) ;\n"
+  "  kernel_set_task_context (& taskControlBlockPtr->mTaskContext, topOfStack, inTaskRoutine) ;\n"
   "//--- Make task ready\n"
   "  kernel_makeTaskReady (inTaskIndex) ;\n"
   "}\n"
@@ -14778,22 +14772,20 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "void blockInList (TaskList * ioWaitingList) asm (\"proc..blockInList\") ;\n"
   "\n"
   "void blockInList (TaskList * ioWaitingList) {\n"
-  "  const unsigned currentTaskIndex = kernel_runningTaskIndex () ;\n"
+  "  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
   "  *ioWaitingList |= 1 << currentTaskIndex ;\n"
-  " // TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [currentTaskIndex] ;\n"
   "  gRunningTaskControlBlock->mWaitingList = ioWaitingList ;\n"
   "  kernel_makeNoTaskRunning () ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void blockOnDeadline (const unsigned inDeadlineMS) asm (\"proc..blockOnDeadline\") ;\n"
+  "void blockOnDeadline (const unsigned inDeadline) asm (\"proc..blockOnDeadline\") ;\n"
   "\n"
-  "void blockOnDeadline (const unsigned inDeadlineMS) {\n"
-  "  const unsigned currentTaskIndex = kernel_runningTaskIndex () ;\n"
-  " // TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [currentTaskIndex] ;\n"
+  "void blockOnDeadline (const unsigned inDeadline) {\n"
+  "  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
   "  gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;\n"
-  "  gRunningTaskControlBlock->mDate = inDeadlineMS ;\n"
+  "  gRunningTaskControlBlock->mDate = inDeadline ;\n"
   "  kernel_makeNoTaskRunning () ;\n"
   "}\n"
   "\n"
@@ -14848,14 +14840,15 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "static void kernel_exitFromGuard (const unsigned inTaskIndex) {\n"
   "  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
   "  const unsigned guardCount = taskControlBlockPtr->mGuardCount ;\n"
+  "  const unsigned mask = ~ (1 << inTaskIndex) ;\n"
   "  for (unsigned i=0 ; i<guardCount ; i++) {\n"
-  "   taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= ~ (1 << inTaskIndex) ;\n"
+  "   taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;\n"
   "  }\n"
-  "  gDeadlineWaitingInGuardTaskList &= ~ (1 << inTaskIndex) ;\n"
+  "  gDeadlineWaitingInGuardTaskList &= ~ mask ;\n"
   "  if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
   "    kernel_makeTaskReady (inTaskIndex) ;\n"
   "    taskControlBlockPtr->mGuardState = GUARD_OUTSIDE ;\n"
-  "  }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING) {\n"
+  "  }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "    kernel_makeTaskReady (inTaskIndex) ;\n"
   "    taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
   "  }\n"
@@ -14864,14 +14857,10 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void enterInGuard (void) asm (\"section.call.enterInGuard\") ;\n"
+  "void enterInGuard (void) asm (\"enterInGuard\") ;\n"
   "\n"
-  "void kernel_enterInGuard (void) asm (\"section.implementation.enterInGuard\") ;\n"
-  "\n"
-  "void kernel_enterInGuard (void) {\n"
-  "//  const unsigned runningTaskIndex = kernel_runningTaskIndex () ;\n"
-  "//  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;\n"
-  "  gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING ;\n"
+  "void enterInGuard (void) {\n"
+  "  gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -14879,8 +14868,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) asm (\"proc..handleGuardedCommand\") ;\n"
   "\n"
   "void kernel_handleGuardedCommand (GuardList * ioGuardList, const bool inAccepted) {\n"
-  "  const unsigned runningTaskIndex = kernel_runningTaskIndex () ;\n"
-  "//  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;\n"
+  "  const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
   "  if (gRunningTaskControlBlock->mGuardState != GUARD_DID_CHANGE) {\n"
   "    if (inAccepted) {\n"
   "      kernel_exitFromGuard (runningTaskIndex) ;\n"
@@ -14912,9 +14900,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "void kernel_waitForGuardChange (void) asm (\"service.implementation.waitForGuardChange\") ;\n"
   "\n"
   "void kernel_waitForGuardChange (void) {\n"
-  "//  const unsigned runningTaskIndex = kernel_runningTaskIndex () ;\n"
-  "//   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;\n"
-  "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING) {\n"
+  "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "    gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
   "    kernel_makeNoTaskRunning () ;\n"
   "  }\n"
@@ -14925,9 +14911,8 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "void guardedWaitUntil (const unsigned inDeadline) asm (\"proc..guardedWaitUntil\") ;\n"
   "\n"
   "void kernel_guardedWaitUntil (const unsigned inDeadline) {\n"
-  "//  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [runningTaskIndex] ;\n"
   "  if (gRunningTaskControlBlock->mGuardState != GUARD_DID_CHANGE) {\n"
-  "    const unsigned runningTaskIndex = kernel_runningTaskIndex () ;\n"
+  "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
   "    const unsigned mask = 1 << runningTaskIndex ;\n"
   "    if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mDate > inDeadline)) {\n"
   "      gRunningTaskControlBlock->mDate = inDeadline ;\n"
@@ -14953,14 +14938,13 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "  }\n"
   "}\n"
   "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n" ;
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  21401, // Text length
+  20503, // Text length
   gWrapperFileContent_24_targetTemplates
 ) ;
 

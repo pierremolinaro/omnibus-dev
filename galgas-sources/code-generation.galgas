@@ -204,9 +204,9 @@ private proc generateLLVMfile
   @2stringlist sectionList = {}
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
-    let enterInGuard = enterInGuardFunctionName ()
-    sectionList += !llvmNameForSectionCall (!enterInGuard) !llvmNameForSectionImplementation (!enterInGuard)
-    generationAdds.mIntrinsicsDeclarationSet += !"declare void @" + llvmNameForSectionCall (!enterInGuard) + " ()\n"
+#    let enterInGuard = enterInGuardFunctionName ()
+#    sectionList += !llvmNameForSectionCall (!enterInGuard) !llvmNameForSectionImplementation (!enterInGuard)
+    generationAdds.mIntrinsicsDeclarationSet += !"declare void @" + enterInGuardFunctionName () + " ()\n"
     let waitForGuardChange = waitForGuardChangeFunctionName ()
     serviceList += !llvmNameForServiceCall (!waitForGuardChange) !llvmNameForServiceImplementation (!waitForGuardChange)
     generationAdds.mIntrinsicsDeclarationSet += !"declare void @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
