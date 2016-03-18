@@ -11,25 +11,19 @@ sys.path.append (os.path.dirname (os.path.abspath (sys.argv [0])) + "/sources")
 import plm
 
 #----------------------------------------------------------------------------------------------------------------------*
-#                                                                                                                      *
-#                         Object files directories                                                                     *
-#                                                                                                                      *
-#----------------------------------------------------------------------------------------------------------------------*
-
-def archiveBaseURL ():
-  return "http://crossgcc.rts-software.org/downloads/plm-tools/"
-
-#----------------------------------------------------------------------------------------------------------------------*
-#                                                                                                                      *
 #   Tool dir                                                                                                           *
-#                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
 def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
   if SYSTEM_NAME == "Darwin":
     MACHINE = "i386"
-  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.8.0-binutils-2.26-libusb-1.0.19")
+  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.8.0-binutils-2.26-openocd-0.8.0-libusb-1.0.19")
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+def archiveBaseURL ():
+  return "http://crossgcc.rts-software.org/downloads/plm-tools/"
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *

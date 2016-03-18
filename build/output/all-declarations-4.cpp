@@ -13714,25 +13714,19 @@ const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "import plm\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#                         Object files directories                                                                     *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def archiveBaseURL ():\n"
-  "  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
   "#   Tool dir                                                                                                           *\n"
-  "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def toolDir ():\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.8.0-binutils-2.26-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.8.0-binutils-2.26-openocd-0.8.0-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def archiveBaseURL ():\n"
+  "  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -13909,7 +13903,7 @@ const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  14452, // Text length
+  13740, // Text length
   gWrapperFileContent_10_targetTemplates
 ) ;
 
