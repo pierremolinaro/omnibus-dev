@@ -26,7 +26,6 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "do",
   "else",
   "elsif",
-  "elson",
   "end",
   "enum",
   "extend",
@@ -54,6 +53,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "required",
   "requiredBy",
   "section",
+  "select",
   "self",
   "service",
   "struct",
@@ -64,6 +64,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "true",
   "truncate",
   "var",
+  "when",
   "while",
   "xor"
 }

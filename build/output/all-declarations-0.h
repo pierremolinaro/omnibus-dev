@@ -97,7 +97,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_do,
    kToken_else,
    kToken_elsif,
-   kToken_elson,
    kToken_end,
    kToken_enum,
    kToken_extend,
@@ -125,6 +124,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_required,
    kToken_requiredBy,
    kToken_section,
+   kToken_select,
    kToken_self,
    kToken_service,
    kToken_struct,
@@ -135,6 +135,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_true,
    kToken_truncate,
    kToken_var,
+   kToken_when,
    kToken_while,
    kToken_xor,
    kToken__3A_,
@@ -215,7 +216,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 110 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 111 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -7111,6 +7112,8 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_67 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_common_5F_syntax_68 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -11998,7 +12001,8 @@ class GALGAS_guardedCommand : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_synchronization,
-    kEnum_boolean
+    kEnum_boolean,
+    kEnum_boolAndSync
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -12025,6 +12029,13 @@ class GALGAS_guardedCommand : public AC_GALGAS_root {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static GALGAS_guardedCommand constructor_boolAndSync (const class GALGAS_expressionAST & inOperand0,
+                                                                 const class GALGAS_location & inOperand1,
+                                                                 const class GALGAS_lstring & inOperand2,
+                                                                 const class GALGAS_lstring & inOperand3,
+                                                                 const class GALGAS_effectiveParameterListAST & inOperand4
+                                                                 COMMA_LOCATION_ARGS) ;
+
   public : static GALGAS_guardedCommand constructor_boolean (const class GALGAS_expressionAST & inOperand0,
                                                              const class GALGAS_location & inOperand1
                                                              COMMA_LOCATION_ARGS) ;
@@ -12043,6 +12054,14 @@ class GALGAS_guardedCommand : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_boolAndSync (class GALGAS_expressionAST & outArgument0,
+                                                     class GALGAS_location & outArgument1,
+                                                     class GALGAS_lstring & outArgument2,
+                                                     class GALGAS_lstring & outArgument3,
+                                                     class GALGAS_effectiveParameterListAST & outArgument4,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_boolean (class GALGAS_expressionAST & outArgument0,
                                                  class GALGAS_location & outArgument1,
                                                  C_Compiler * inCompiler
@@ -12057,6 +12076,8 @@ class GALGAS_guardedCommand : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolAndSync (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolean (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSynchronization (LOCATION_ARGS) const ;
@@ -12112,6 +12133,30 @@ class cEnumAssociatedValues_guardedCommand_boolean : public cEnumAssociatedValue
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_guardedCommand_boolean (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_guardedCommand_boolAndSync : public cEnumAssociatedValues {
+  public : const GALGAS_expressionAST mAssociatedValue0 ;
+  public : const GALGAS_location mAssociatedValue1 ;
+  public : const GALGAS_lstring mAssociatedValue2 ;
+  public : const GALGAS_lstring mAssociatedValue3 ;
+  public : const GALGAS_effectiveParameterListAST mAssociatedValue4 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_guardedCommand_boolAndSync (const GALGAS_expressionAST & inAssociatedValue0,
+                                                             const GALGAS_location & inAssociatedValue1,
+                                                             const GALGAS_lstring & inAssociatedValue2,
+                                                             const GALGAS_lstring & inAssociatedValue3,
+                                                             const GALGAS_effectiveParameterListAST & inAssociatedValue4
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_guardedCommand_boolAndSync (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

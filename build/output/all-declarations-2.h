@@ -2498,7 +2498,8 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_synchronization,
-    kEnum_booleanGuard
+    kEnum_booleanGuard,
+    kEnum_boolAndSync
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -2525,6 +2526,13 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static GALGAS_guardedCommandIR constructor_boolAndSync (const class GALGAS_instructionListIR & inOperand0,
+                                                                   const class GALGAS_operandIR & inOperand1,
+                                                                   const class GALGAS_string & inOperand2,
+                                                                   const class GALGAS_instructionListIR & inOperand3,
+                                                                   const class GALGAS_procCallEffectiveParameterListIR & inOperand4
+                                                                   COMMA_LOCATION_ARGS) ;
+
   public : static GALGAS_guardedCommandIR constructor_booleanGuard (const class GALGAS_instructionListIR & inOperand0,
                                                                     const class GALGAS_operandIR & inOperand1
                                                                     COMMA_LOCATION_ARGS) ;
@@ -2543,6 +2551,14 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_boolAndSync (class GALGAS_instructionListIR & outArgument0,
+                                                     class GALGAS_operandIR & outArgument1,
+                                                     class GALGAS_string & outArgument2,
+                                                     class GALGAS_instructionListIR & outArgument3,
+                                                     class GALGAS_procCallEffectiveParameterListIR & outArgument4,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_booleanGuard (class GALGAS_instructionListIR & outArgument0,
                                                       class GALGAS_operandIR & outArgument1,
                                                       C_Compiler * inCompiler
@@ -2557,6 +2573,8 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolAndSync (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBooleanGuard (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSynchronization (LOCATION_ARGS) const ;
@@ -2612,6 +2630,30 @@ class cEnumAssociatedValues_guardedCommandIR_booleanGuard : public cEnumAssociat
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_guardedCommandIR_booleanGuard (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_guardedCommandIR_boolAndSync : public cEnumAssociatedValues {
+  public : const GALGAS_instructionListIR mAssociatedValue0 ;
+  public : const GALGAS_operandIR mAssociatedValue1 ;
+  public : const GALGAS_string mAssociatedValue2 ;
+  public : const GALGAS_instructionListIR mAssociatedValue3 ;
+  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue4 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_instructionListIR & inAssociatedValue0,
+                                                               const GALGAS_operandIR & inAssociatedValue1,
+                                                               const GALGAS_string & inAssociatedValue2,
+                                                               const GALGAS_instructionListIR & inAssociatedValue3,
+                                                               const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue4
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_guardedCommandIR_boolAndSync (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
