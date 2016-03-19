@@ -1009,28 +1009,29 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var deadline $uint32 = 0\n"
   "  \n"
   "  proc loop () {\n"
-  "    on s0.P () then\n"
+  "    select\n"
+  "    on s0.P () :\n"
   "      if self.flag0 then\n"
   "        ledOn  (!LED_L1)\n"
   "      else\n"
   "        ledOff (!LED_L1)\n"
   "      end\n"
   "      self.flag0 = self.flag0 xor true\n"
-  "    elson s1.P () then\n"
+  "    on s1.P () :\n"
   "      if self.flag1 then\n"
   "        ledOn  (!LED_L3)\n"
   "      else\n"
   "        ledOff (!LED_L3)\n"
   "      end\n"
   "      self.flag1 = self.flag1 xor true\n"
-  "    elson waitUntilMS (!deadline:self.deadline) then\n"
+  "    when self.flag2 on waitUntilMS (!deadline:self.deadline) :\n"
   "      self.deadline += 200\n"
-  "      if self.flag2 then\n"
-  "        ledOn  (!LED_L2)\n"
-  "      else\n"
-  "        ledOff (!LED_L2)\n"
-  "      end\n"
-  "      self.flag2 = self.flag2 xor true\n"
+  "      ledOn  (!LED_L2)\n"
+  "      self.flag2 = false\n"
+  "    when not self.flag2 on waitUntilMS (!deadline:self.deadline) :\n"
+  "      self.deadline += 200\n"
+  "      ledOff  (!LED_L2)\n"
+  "      self.flag2 = true\n"
   "    end\n"
   "  }\n"
   "}\n"
@@ -1041,7 +1042,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "04-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2502, // Text length
+  2569, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
