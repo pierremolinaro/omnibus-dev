@@ -327,7 +327,7 @@ proc analyzeRoutineCall
       ?4*
     ]
     outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
-    outEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] #--- add "load receiver" as first argument
+    outEffectiveParameterListIR += !.outputInput !"" ![variableKind address] #--- add "load receiver" as first argument
   else
     outRoutineMangledName = .new {!"." + inRoutineName !inRoutineName.location}
     receiverType = .null
@@ -338,7 +338,7 @@ proc analyzeRoutineCall
     ?let modeMap
     ?let @procedureSignature formalSignature
     ?outRoutineKind
-    ?*
+    ?2*
   ]
 #--- Enter in invocation graph
   @lstring routineNameForInvocationGraph
@@ -427,7 +427,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !effective_mSelector
+        !effective_mSelector.string
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
@@ -452,7 +452,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !effective_mSelector
+        !effective_mSelector.string
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
@@ -477,7 +477,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
       ioEffectiveParameterListIR += 
         !.output
-        !effective_mSelector
+        !effective_mSelector.string
         !result
     case outputInput (@lstring name) :
      [!?ioVariableMap searchForReadWriteAccess
@@ -498,7 +498,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.outputInput
-        !effective_mSelector
+        !effective_mSelector.string
         !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
@@ -531,7 +531,7 @@ proc analyzeEffectiveParameters
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
           ioEffectiveParameterListIR +=
             !.outputInput
-            !effective_mSelector
+            !effective_mSelector.string
             !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![fieldAddress name])}}
         end    
       end
@@ -570,7 +570,7 @@ enum @procEffectiveParameterPassingModeIR {
 
 list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
-  @lstring mSelector
+  @string mSelector
   @operandIR mParameter
 }
 

@@ -299,7 +299,7 @@ proc analyzeGuardCall
       ?4*
     ]
     outGuardMangledName = .new {!"$" + [receiverType key] + "." + inGuardName !inGuardName.location}
-    outEffectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] #--- add "load receiver" as first argument
+    outEffectiveParameterListIR += !.outputInput !"" ![variableKind address] #--- add "load receiver" as first argument
   else
     outGuardMangledName = .new {!"." + inGuardName !inGuardName.location}
     receiverType = .null

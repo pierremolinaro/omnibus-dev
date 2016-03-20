@@ -69,6 +69,11 @@ method @serviceDeclarationListAST enterInContext
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
   #--- Enter in context
+    let returnType = if service.mReturnTypeName.string == "" then
+      @unifiedTypeMap-proxy.null
+    else
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !service.mReturnTypeName}
+    end
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
       !true # service.mMutating
@@ -76,6 +81,7 @@ method @serviceDeclarationListAST enterInContext
       !signature
       !.service
       !false # Not weak
+      !returnType
     ]
   end
 }

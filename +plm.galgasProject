@@ -50,7 +50,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-boot.galgas"
   "galgas-sources/declaration-init.galgas"
   "galgas-sources/declaration-proc.galgas"
-  "galgas-sources/declaration-func.galgas"
   "galgas-sources/declaration-required-proc.galgas"
   "galgas-sources/declaration-extern-proc.galgas"
   "galgas-sources/declaration-section.galgas"

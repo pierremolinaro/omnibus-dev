@@ -174,7 +174,6 @@ method @taskList enterInContext
       !llvmTypeName:"%$" + task.mTaskName.string
       !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
       !typedConstantMap:{}
-      !functionMap:{}
       !instantiable:false
       !copyable:false
       !equatable:false

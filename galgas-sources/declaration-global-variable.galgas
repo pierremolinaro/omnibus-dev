@@ -120,20 +120,20 @@ syntax extension common_syntax {
         $identifier$ ?let procName
         allowedRoutineList += !hasWriteAccess !typeName !procName !.procedure
       or
-        $func$
-        @lstring typeName
-        select
-          typeName = ["" nowhere]
-        or
-          $typeName$ ?typeName
-          $.$
-        end
-        $identifier$ ?let funcName
-        if hasWriteAccess then
-          error funcName : "a function cannot write a global variable"
-        end
-        allowedFunctionList += !typeName !funcName
-      or
+#        $func$
+#        @lstring typeName
+#        select
+#          typeName = ["" nowhere]
+#        or
+#          $typeName$ ?typeName
+#          $.$
+#        end
+#        $identifier$ ?let funcName
+#        if hasWriteAccess then
+#          error funcName : "a function cannot write a global variable"
+#        end
+#        allowedFunctionList += !typeName !funcName
+#      or
         $init$
         $integer$ ?let @lbigint priority
         allowedInitList += !hasWriteAccess !priority
@@ -229,20 +229,8 @@ method @globalVarDeclarationList-element enterInContext
     !staticTypeAllowed:false
   )
   @stringset executionModes = {}
-#--- Check allowed function are defined
-  @allowedRoutineMap allowedRoutineMap = {}
-  for (typeName funcName) in mAllowedFunctionList do
-    @unifiedTypeMap-proxy receiverType
-    if typeName.string == "" then
-      [ioContext.mFunctionMap searchKey !funcName ?3*]
-      receiverType = .null
-    else
-      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !typeName}
-      [[receiverType functionMap] searchKey !funcName ?3*]
-    end
-    [!?allowedRoutineMap insertKey !funcNameForInvocationGraph (!receiverType !funcName) !false]
-  end
 #--- Check allowed init routines are defined
+  @allowedRoutineMap allowedRoutineMap = {}
   for () in mAllowedInitList do
     [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
     [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!.null !mInitPriority) !mHasWriteAccess]
@@ -282,9 +270,7 @@ method @globalVarDeclarationList-element enterInContext
       !routineMangledName
       ?*
       ?let procedureModeMap
-      ?*
-      ?*
-      ?*
+      ?4*
     ]
     for () in procedureModeMap do
       executionModes += !lkey.string

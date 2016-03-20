@@ -150,7 +150,7 @@ proc initSemanticAnalysis
 #--- Check "requiredBy" routines are defined
   for (procName procFormalArgumentList) in inRequiredByProcList do
     let lkey = @lstring.new {!"." + procName !procName.location}
-    [inContext.mRoutineMapForContext searchKey !lkey ?5*]
+    [inContext.mRoutineMapForContext searchKey !lkey ?6*]
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (

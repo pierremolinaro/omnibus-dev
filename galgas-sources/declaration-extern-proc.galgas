@@ -6,6 +6,7 @@ list @externProcedureDeclarationListAST {
   @lstring mExternProcedureName
   @lstringlist mProcedureModeList
   @procFormalArgumentList mProcFormalArgumentList
+  @lstring mReturnTypeName
   @location mEndOfProcLocation
 }
 
@@ -24,7 +25,14 @@ syntax extension common_syntax {
       ?name:let procName
       ?attributes:let unused attributeList
       ?formalArguments:let procFormalArgumentList
-    ioAST.mExternProcList += !procName !requiredModeList !procFormalArgumentList !.here
+    @lstring returnTypeName
+    select
+      returnTypeName = ["" here]
+    or
+      $->$
+      $typeName$ ?returnTypeName
+    end
+    ioAST.mExternProcList += !procName !requiredModeList !procFormalArgumentList !returnTypeName !.here
   }
 
   #·····················································································································
@@ -72,6 +80,11 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     [!?procedureModeMap insertKey !mValue] ;
   end
 #--- Enter in context
+  let returnType = if mReturnTypeName.string == "" then
+    @unifiedTypeMap-proxy.null
+  else
+    @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mReturnTypeName}
+  end
   [!?ioContext.mRoutineMapForContext insertKey
     !@lstring.new {!"." + mExternProcedureName !mExternProcedureName.location}
     !false # not mutating
@@ -79,6 +92,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     !signature
     !.procedure
     !false # Not weak
+    !returnType
   ]
 }
 

@@ -19,6 +19,7 @@ map @routineMapForContext {
   @procedureSignature mSignature
   @routineKind mRoutineKind
   @bool mWeak
+  @unifiedTypeMap-proxy mReturnType
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"
@@ -97,6 +98,12 @@ method @procedureDeclarationListAST enterInContext
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
+  #--- Return type
+    let returnType = if procedure.mReturnTypeName.string == "" then
+      @unifiedTypeMap-proxy.null
+    else
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReturnTypeName}
+    end
   #--- Mode map
     @modeMap procedureModeMap = {}
     for () in procedure.mProcedureModeList do
@@ -116,7 +123,7 @@ method @procedureDeclarationListAST enterInContext
       elsif weakProcedure && weak then
         error procedure.mProcedureName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
-        [!?ioContext.mRoutineMapForContext removeKey !lkey ?5*] # Remove weak routine
+        [!?ioContext.mRoutineMapForContext removeKey !lkey ?6*] # Remove weak routine
         [!?ioContext.mRoutineMapForContext insertKey # Insert routine
           !lkey
           !false # not mutating
@@ -124,6 +131,7 @@ method @procedureDeclarationListAST enterInContext
           !signature
           !.procedure
           !weakProcedure
+          !returnType
         ]
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
@@ -133,6 +141,7 @@ method @procedureDeclarationListAST enterInContext
           !signature
           !.procedure
           !weakProcedure
+          !returnType
         ]
       end
     else
@@ -143,6 +152,7 @@ method @procedureDeclarationListAST enterInContext
         !signature
         !.procedure
         !weakProcedure
+        !returnType
       ]
     end
   end
@@ -161,6 +171,11 @@ method @sectionDeclarationListAST enterInContext
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
+    let returnType = if section.mReturnTypeName.string == "" then
+      @unifiedTypeMap-proxy.null
+    else
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !section.mReturnTypeName}
+    end
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
@@ -169,6 +184,7 @@ method @sectionDeclarationListAST enterInContext
       !signature
       !.section
       !false # Not weak
+      !returnType
     ]
   end
 }

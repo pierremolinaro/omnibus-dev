@@ -99,7 +99,7 @@ private proc compileProject
   end
   ast.mDeclarationList = newDeclarationList
 #--- Raise an error for every unhandled extension
-  for (typeName * * *) in extensionDeclarationListAST do
+  for (typeName * *) in extensionDeclarationListAST do
     error typeName : "this type is not defined or does not support extension"
   end
 #--- Ordered declaration list
@@ -195,7 +195,6 @@ private proc addTargetSpecificFiles
   ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
   ioAST.mProcedureListAST = ast.mProcedureListAST + ioAST.mProcedureListAST
   ioAST.mRequiredProcList = ast.mRequiredProcList + ioAST.mRequiredProcList
-  ioAST.mFunctionListAST = ast.mFunctionListAST + ioAST.mFunctionListAST
   ioAST.mExternProcList = ast.mExternProcList + ioAST.mExternProcList
   ioAST.mSectionListAST = ast.mSectionListAST + ioAST.mSectionListAST
   ioAST.mServiceListAST = ast.mServiceListAST + ioAST.mServiceListAST

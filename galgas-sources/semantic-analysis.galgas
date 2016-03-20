@@ -126,13 +126,6 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  for function in inAST.mFunctionListAST do
-    [function functionSemanticAnalysis
-      !context:inSemanticContext
-      !?temporary:temporaries
-      !?intermediateCode:outIntermediateCodeStruct
-    ]
-  end
   for boot in inAST.mBootList do
     [boot bootSemanticAnalysis
       !context:inSemanticContext

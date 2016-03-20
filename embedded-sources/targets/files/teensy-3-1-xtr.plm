@@ -44,12 +44,12 @@ init 0 { // Configure Systick interrupt every ms
 var gUptimeMS $uint32 = 0 {
   @rw proc systickHandler
   proc busyWaitingDuringMS
-  func millis
+  proc millis
 }
 
 //-----------------------------------------------------------------------------*
 
-func millis `isr `kernel `user `guard @noWarningIfUnused () -> $uint32 {
+proc millis `isr `kernel `user `guard @noWarningIfUnused () -> $uint32 {
   result = gUptimeMS
 }
 

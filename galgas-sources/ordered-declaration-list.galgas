@@ -34,7 +34,6 @@ proc buildOrderedDeclarationList
   [inAST.mPanicClauses noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mProcedureListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternProcList noteTypesInPrecedenceGraph !?precedenceGraph]
-  [inAST.mFunctionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mSectionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mServiceListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGuardListAST noteTypesInPrecedenceGraph !?precedenceGraph]

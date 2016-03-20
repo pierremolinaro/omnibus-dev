@@ -1112,7 +1112,8 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_functionCallIR constructor_new (const class GALGAS_operandIR & inOperand0,
                                                          const class GALGAS_string & inOperand1,
-                                                         const class GALGAS_procCallEffectiveParameterListIR & inOperand2
+                                                         const class GALGAS_routineKind & inOperand2,
+                                                         const class GALGAS_procCallEffectiveParameterListIR & inOperand3
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1127,6 +1128,8 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mFunctionName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mKind (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mResult (LOCATION_ARGS) const ;
 
@@ -1151,11 +1154,13 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_operandIR mAttribute_mResult ;
   public : GALGAS_string mAttribute_mFunctionName ;
+  public : GALGAS_routineKind mAttribute_mKind ;
   public : GALGAS_procCallEffectiveParameterListIR mAttribute_mArgumentList ;
 
 //--- Constructor
   public : cPtr_functionCallIR (const GALGAS_operandIR & in_mResult,
                                 const GALGAS_string & in_mFunctionName,
+                                const GALGAS_routineKind & in_mKind,
                                 const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
                                 COMMA_LOCATION_ARGS) ;
 
@@ -1165,6 +1170,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mFunctionName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_routineKind getter_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

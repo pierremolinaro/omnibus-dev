@@ -297,7 +297,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
   public : GALGAS_routineMapForContext mAttribute_mRoutineMapForContext ;
   public : GALGAS_guardMapForContext mAttribute_mGuardMapForContext ;
-  public : GALGAS_functionMap mAttribute_mFunctionMap ;
   public : GALGAS_initRoutineMap mAttribute_mInitRoutineMap ;
   public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicSetupRoutinePriorityMap ;
   public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicLoopRoutinePriorityMap ;
@@ -357,7 +356,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_unifiedTypeMap & in_mTypeMap,
                                    const GALGAS_routineMapForContext & in_mRoutineMapForContext,
                                    const GALGAS_guardMapForContext & in_mGuardMapForContext,
-                                   const GALGAS_functionMap & in_mFunctionMap,
                                    const GALGAS_initRoutineMap & in_mInitRoutineMap,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicSetupRoutinePriorityMap,
                                    const GALGAS_panicRoutinePriorityMap & in_mPanicLoopRoutinePriorityMap,
@@ -413,15 +411,15 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_unifiedTypeMap & inOperand5,
                                                           const class GALGAS_routineMapForContext & inOperand6,
                                                           const class GALGAS_guardMapForContext & inOperand7,
-                                                          const class GALGAS_functionMap & inOperand8,
-                                                          const class GALGAS_initRoutineMap & inOperand9,
+                                                          const class GALGAS_initRoutineMap & inOperand8,
+                                                          const class GALGAS_panicRoutinePriorityMap & inOperand9,
                                                           const class GALGAS_panicRoutinePriorityMap & inOperand10,
-                                                          const class GALGAS_panicRoutinePriorityMap & inOperand11,
-                                                          const class GALGAS_controlRegisterMap & inOperand12,
-                                                          const class GALGAS_globalConstantMap & inOperand13,
-                                                          const class GALGAS_globalVariableMap & inOperand14,
-                                                          const class GALGAS_constructorMap & inOperand15,
-                                                          const class GALGAS_modeMap & inOperand16,
+                                                          const class GALGAS_controlRegisterMap & inOperand11,
+                                                          const class GALGAS_globalConstantMap & inOperand12,
+                                                          const class GALGAS_globalVariableMap & inOperand13,
+                                                          const class GALGAS_constructorMap & inOperand14,
+                                                          const class GALGAS_modeMap & inOperand15,
+                                                          const class GALGAS_infixOperatorMap & inOperand16,
                                                           const class GALGAS_infixOperatorMap & inOperand17,
                                                           const class GALGAS_infixOperatorMap & inOperand18,
                                                           const class GALGAS_infixOperatorMap & inOperand19,
@@ -443,12 +441,11 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand35,
                                                           const class GALGAS_infixOperatorMap & inOperand36,
                                                           const class GALGAS_infixOperatorMap & inOperand37,
-                                                          const class GALGAS_infixOperatorMap & inOperand38,
+                                                          const class GALGAS_prefixOperatorMap & inOperand38,
                                                           const class GALGAS_prefixOperatorMap & inOperand39,
                                                           const class GALGAS_prefixOperatorMap & inOperand40,
-                                                          const class GALGAS_prefixOperatorMap & inOperand41,
-                                                          const class GALGAS_taskMap & inOperand42,
-                                                          const class GALGAS_globalTaskVariableList & inOperand43
+                                                          const class GALGAS_taskMap & inOperand41,
+                                                          const class GALGAS_globalTaskVariableList & inOperand42
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -482,8 +479,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mDivOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mEqualOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_functionMap getter_mFunctionMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMap getter_mGlobalConstantMap (LOCATION_ARGS) const ;
 
@@ -1006,7 +1001,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_globalConstantMapIR mAttribute_mGlobalConstantMap ;
   public : GALGAS_routineMapIR mAttribute_mRoutineMapIR ;
   public : GALGAS_guardMapIR mAttribute_mGuardMapIR ;
-  public : GALGAS_functionMapIR mAttribute_mFunctionMapIR ;
   public : GALGAS_externProcedureMapIR mAttribute_mExternProcedureMapIR ;
   public : GALGAS_stringset mAttribute_mRequiredProcedureSet ;
   public : GALGAS_bootListIR mAttribute_mBootList ;
@@ -1038,7 +1032,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
                                           const GALGAS_routineMapIR & in_mRoutineMapIR,
                                           const GALGAS_guardMapIR & in_mGuardMapIR,
-                                          const GALGAS_functionMapIR & in_mFunctionMapIR,
                                           const GALGAS_externProcedureMapIR & in_mExternProcedureMapIR,
                                           const GALGAS_stringset & in_mRequiredProcedureSet,
                                           const GALGAS_bootListIR & in_mBootList,
@@ -1066,16 +1059,15 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_globalConstantMapIR & inOperand3,
                                                                  const class GALGAS_routineMapIR & inOperand4,
                                                                  const class GALGAS_guardMapIR & inOperand5,
-                                                                 const class GALGAS_functionMapIR & inOperand6,
-                                                                 const class GALGAS_externProcedureMapIR & inOperand7,
-                                                                 const class GALGAS_stringset & inOperand8,
-                                                                 const class GALGAS_bootListIR & inOperand9,
-                                                                 const class GALGAS_initListIR & inOperand10,
+                                                                 const class GALGAS_externProcedureMapIR & inOperand6,
+                                                                 const class GALGAS_stringset & inOperand7,
+                                                                 const class GALGAS_bootListIR & inOperand8,
+                                                                 const class GALGAS_initListIR & inOperand9,
+                                                                 const class GALGAS_instructionListIR & inOperand10,
                                                                  const class GALGAS_instructionListIR & inOperand11,
-                                                                 const class GALGAS_instructionListIR & inOperand12,
-                                                                 const class GALGAS_taskMapIR & inOperand13,
-                                                                 const class GALGAS_globalTaskVariableList & inOperand14,
-                                                                 const class GALGAS_uint & inOperand15
+                                                                 const class GALGAS_taskMapIR & inOperand12,
+                                                                 const class GALGAS_globalTaskVariableList & inOperand13,
+                                                                 const class GALGAS_uint & inOperand14
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1095,8 +1087,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterMapIR getter_mControlRegisterMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureMapIR getter_mExternProcedureMapIR (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_functionMapIR getter_mFunctionMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMapIR getter_mGlobalConstantMap (LOCATION_ARGS) const ;
 
@@ -1975,17 +1965,6 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_externProcedu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Category method '@functionDeclarationListAST noteTypesInPrecedenceGraph'                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_functionDeclarationListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                       Category method '@globalVarDeclarationList noteTypesInPrecedenceGraph'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2171,17 +2150,6 @@ void categoryMethod_enterExternProcInContext (const class GALGAS_externProcedure
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category method '@functionDeclarationListAST enterInContext'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAST inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                         Category method '@globalVarDeclarationList-element enterInContext'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2353,19 +2321,6 @@ void categoryMethod_externProcedureSemanticAnalysis (const class GALGAS_externPr
                                                      class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Category method '@functionDeclarationListAST-element functionSemanticAnalysis'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_functionSemanticAnalysis (const class GALGAS_functionDeclarationListAST_2D_element inObject,
-                                              const class GALGAS_semanticContext constin_inContext,
-                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                              class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2789,7 +2744,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : GALGAS_stringset mAttribute_mAccessibleRegisterSet ;
   public : GALGAS_stringset mAttribute_mRoutineSet ;
   public : GALGAS_stringset mAttribute_mGuardSet ;
-  public : GALGAS_stringset mAttribute_mFunctionSet ;
   public : GALGAS_stringset mAttribute_mSectionSet ;
   public : GALGAS_stringset mAttribute_mGlobalVariableSet ;
   public : GALGAS_stringset mAttribute_mTaskVariableSet ;
@@ -2812,7 +2766,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : GALGAS_accessibleEntities (const GALGAS_stringset & in_mAccessibleRegisterSet,
                                       const GALGAS_stringset & in_mRoutineSet,
                                       const GALGAS_stringset & in_mGuardSet,
-                                      const GALGAS_stringset & in_mFunctionSet,
                                       const GALGAS_stringset & in_mSectionSet,
                                       const GALGAS_stringset & in_mGlobalVariableSet,
                                       const GALGAS_stringset & in_mTaskVariableSet) ;
@@ -2833,8 +2786,7 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
                                                              const class GALGAS_stringset & inOperand2,
                                                              const class GALGAS_stringset & inOperand3,
                                                              const class GALGAS_stringset & inOperand4,
-                                                             const class GALGAS_stringset & inOperand5,
-                                                             const class GALGAS_stringset & inOperand6
+                                                             const class GALGAS_stringset & inOperand5
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2850,8 +2802,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mAccessibleRegisterSet (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mFunctionSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mGlobalVariableSet (LOCATION_ARGS) const ;
 
@@ -2900,20 +2850,6 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_routineMapIR_2D_
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Routine 'exploreFunctions'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_exploreFunctions (class GALGAS_functionMapIR & ioArgument0,
-                               class GALGAS_accessibleEntities & ioArgument1,
-                               class GALGAS_functionMapIR & ioArgument2,
-                               class GALGAS_bool & ioArgument3,
-                               class GALGAS_uint & ioArgument4,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                               Routine 'exploreGuards'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2939,18 +2875,6 @@ void routine_exploreProcs (class GALGAS_routineMapIR & ioArgument0,
                            class GALGAS_uint & ioArgument4,
                            class C_Compiler * inCompiler
                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Category method '@functionMapIR-element enterAccessibleEntities'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const class GALGAS_functionMapIR_2D_element inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3060,19 +2984,6 @@ void categoryMethod_llvmPrototypeGeneration (const class GALGAS_externProcedureM
                                              class GALGAS_string & io_ioLLVMcode,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category method '@functionMapIR-element implementationCodeGeneration'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_implementationCodeGeneration (const class GALGAS_functionMapIR_2D_element inObject,
-                                                  class GALGAS_string & io_ioLLVMcode,
-                                                  const class GALGAS_generationContext constin_inGenerationContext,
-                                                  class GALGAS_generationAdds & io_ioGenerationAdds,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
