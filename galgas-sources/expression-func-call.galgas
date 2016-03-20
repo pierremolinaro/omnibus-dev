@@ -43,17 +43,25 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
-    @lstring receiverName
-    @lstring functionName
-    $identifier$ ?let x
-#    select
-      functionName = x
-      receiverName = ["" nowhere]
-#    or
-#      $.$
-#      receiverName = x
-#      $identifier$ ?functionName
-#    end
+    $identifier$ ?let functionName
+    $($
+    @functionCallEffectiveParameterList parameterList = {}
+    repeat
+    while
+      $!$ ?let selector
+      <expression> ?let expression
+      parameterList += !selector !expression
+    end
+    $)$
+    outExpression = @functionCallInExpressionAST.new {!["" here] !functionName !parameterList}
+  }
+
+  #·····················································································································
+
+  rule <primary> !@expressionAST outExpression {
+    $identifier$ ?let receiverName
+    $.$
+    $identifier$ ?let functionName
     $($
     @functionCallEffectiveParameterList parameterList = {}
     repeat

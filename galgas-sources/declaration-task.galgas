@@ -72,7 +72,7 @@ syntax extension common_syntax {
       <expression> ?let initExpression
       taskVarList += !varName !typeName !initExpression
     while
-      $proc$
+      $func$
       $identifier$ ?let procName
       <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList formalArgumentList
       @lstring returnTypeName

@@ -1,615 +1,615 @@
 
-required proc NMIHandler `isr ()
+required func NMIHandler `isr ()
 
-proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
+func NMIHandler `isr @nullWhenPanicDisabled @weak () {
   panic 2
 }
 
 //-----------------------------------------------------------------------------*
 
-//required proc HardFaultHandler `isr ()
+//required func HardFaultHandler `isr ()
 //
-//proc HardFaultHandler `isr @nullWhenPanicDisabled @weak () {
+//func HardFaultHandler `isr @nullWhenPanicDisabled @weak () {
 //  panic 3
 //}
 
 //-----------------------------------------------------------------------------*
 
-required proc MemManageHandler `isr ()
+required func MemManageHandler `isr ()
 
-proc MemManageHandler `isr @nullWhenPanicDisabled @weak () {
+func MemManageHandler `isr @nullWhenPanicDisabled @weak () {
   panic 4
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc BusFaultHandler `isr ()
+required func BusFaultHandler `isr ()
 
-proc BusFaultHandler `isr @nullWhenPanicDisabled @weak () {
+func BusFaultHandler `isr @nullWhenPanicDisabled @weak () {
   panic 5
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc UsageFaultHandler `isr ()
+required func UsageFaultHandler `isr ()
 
-proc UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {
+func UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {
   panic 6
 }
 
 //-----------------------------------------------------------------------------*
 
-//required proc svcHandler `isr ()
+//required func svcHandler `isr ()
 //
-//proc svcHandler `isr @nullWhenPanicDisabled @weak () {
+//func svcHandler `isr @nullWhenPanicDisabled @weak () {
 //  panic 11
 //}
 
 //-----------------------------------------------------------------------------*
 
-required proc DebugMonitorHandler `isr ()
+required func DebugMonitorHandler `isr ()
 
-proc DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {
+func DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {
   panic 12
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc PendSVHandler `isr ()
+required func PendSVHandler `isr ()
 
-proc PendSVHandler `isr @nullWhenPanicDisabled @weak () {
+func PendSVHandler `isr @nullWhenPanicDisabled @weak () {
   panic 14
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel0TranfertCompleteHandler `isr ()
+required func DMAChannel0TranfertCompleteHandler `isr ()
 
-proc DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 16
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel1TranfertCompleteHandler `isr ()
+required func DMAChannel1TranfertCompleteHandler `isr ()
 
-proc DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 17
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel2TranfertCompleteHandler `isr ()
+required func DMAChannel2TranfertCompleteHandler `isr ()
 
-proc DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 18
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel3TranfertCompleteHandler `isr ()
+required func DMAChannel3TranfertCompleteHandler `isr ()
 
-proc DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 19
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel4TranfertCompleteHandler `isr ()
+required func DMAChannel4TranfertCompleteHandler `isr ()
 
-proc DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 20
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel5TranfertCompleteHandler `isr ()
+required func DMAChannel5TranfertCompleteHandler `isr ()
 
-proc DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 21
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel6TranfertCompleteHandler `isr ()
+required func DMAChannel6TranfertCompleteHandler `isr ()
 
-proc DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 22
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel7TranfertCompleteHandler `isr ()
+required func DMAChannel7TranfertCompleteHandler `isr ()
 
-proc DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 23
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel8TranfertCompleteHandler `isr ()
+required func DMAChannel8TranfertCompleteHandler `isr ()
 
-proc DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 24
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel9TranfertCompleteHandler `isr ()
+required func DMAChannel9TranfertCompleteHandler `isr ()
 
-proc DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 25
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel10TranfertCompleteHandler `isr ()
+required func DMAChannel10TranfertCompleteHandler `isr ()
 
-proc DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 26
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel11TranfertCompleteHandler `isr ()
+required func DMAChannel11TranfertCompleteHandler `isr ()
 
-proc DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 27
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel12TranfertCompleteHandler `isr ()
+required func DMAChannel12TranfertCompleteHandler `isr ()
 
-proc DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 28
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel13TranfertCompleteHandler `isr ()
+required func DMAChannel13TranfertCompleteHandler `isr ()
 
-proc DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 29
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel14TranfertCompleteHandler `isr ()
+required func DMAChannel14TranfertCompleteHandler `isr ()
 
-proc DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 30
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAChannel15TranfertCompleteHandler `isr ()
+required func DMAChannel15TranfertCompleteHandler `isr ()
 
-proc DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 31
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DMAErrorHandler `isr ()
+required func DMAErrorHandler `isr ()
 
-proc DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {
   panic 32
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc flashMemoryCommandCompleteHandler `isr ()
+required func flashMemoryCommandCompleteHandler `isr ()
 
-proc flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {
   panic 34
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc flashMemoryReadCollisionHandler `isr ()
+required func flashMemoryReadCollisionHandler `isr ()
 
-proc flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {
+func flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {
   panic 35
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc modeControllerHandler `isr ()
+required func modeControllerHandler `isr ()
 
-proc modeControllerHandler `isr @nullWhenPanicDisabled @weak () {
+func modeControllerHandler `isr @nullWhenPanicDisabled @weak () {
   panic 36
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc LLWUHandler `isr ()
+required func LLWUHandler `isr ()
 
-proc LLWUHandler `isr @nullWhenPanicDisabled @weak () {
+func LLWUHandler `isr @nullWhenPanicDisabled @weak () {
   panic 37
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc WDOGEWMHandler `isr ()
+required func WDOGEWMHandler `isr ()
 
-proc WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {
+func WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {
   panic 38
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc I2C0Handler `isr ()
+required func I2C0Handler `isr ()
 
-proc I2C0Handler `isr @nullWhenPanicDisabled @weak () {
+func I2C0Handler `isr @nullWhenPanicDisabled @weak () {
   panic 40
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc I2C1Handler `isr ()
+required func I2C1Handler `isr ()
 
-proc I2C1Handler `isr @nullWhenPanicDisabled @weak () {
+func I2C1Handler `isr @nullWhenPanicDisabled @weak () {
   panic 41
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc SPI0Handler `isr ()
+required func SPI0Handler `isr ()
 
-proc SPI0Handler `isr @nullWhenPanicDisabled @weak () {
+func SPI0Handler `isr @nullWhenPanicDisabled @weak () {
   panic 42
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc SPI1Handler `isr ()
+required func SPI1Handler `isr ()
 
-proc SPI1Handler `isr @nullWhenPanicDisabled @weak () {
+func SPI1Handler `isr @nullWhenPanicDisabled @weak () {
   panic 43
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CAN0MessageBufferHandler `isr ()
+required func CAN0MessageBufferHandler `isr ()
 
-proc CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {
+func CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {
   panic 45
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CAN0BusOffHandler `isr ()
+required func CAN0BusOffHandler `isr ()
 
-proc CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {
+func CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {
   panic 46
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CAN0ErrorHandler `isr ()
+required func CAN0ErrorHandler `isr ()
 
-proc CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
   panic 47
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CAN0TransmitWarningHandler `isr ()
+required func CAN0TransmitWarningHandler `isr ()
 
-proc CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {
+func CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {
   panic 48
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CAN0ReceiveWarningHandler `isr ()
+required func CAN0ReceiveWarningHandler `isr ()
 
-proc CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {
+func CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {
   panic 49
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CAN0WakeUpHandler `isr ()
+required func CAN0WakeUpHandler `isr ()
 
-proc CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {
+func CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {
   panic 50
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc I2S0TransmitHandler `isr ()
+required func I2S0TransmitHandler `isr ()
 
-proc I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {
+func I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {
   panic 51
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc I2S0ReceiveHandler `isr ()
+required func I2S0ReceiveHandler `isr ()
 
-proc I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {
+func I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {
   panic 52
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc UART0LONHandler `isr ()
+required func UART0LONHandler `isr ()
 
-proc UART0LONHandler `isr @nullWhenPanicDisabled @weak () {
+func UART0LONHandler `isr @nullWhenPanicDisabled @weak () {
   panic 60
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc UART0StatusHandler `isr ()
+required func UART0StatusHandler `isr ()
 
-proc UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {
+func UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {
   panic 61
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc UART0ErrorHandler `isr ()
+required func UART0ErrorHandler `isr ()
 
-proc UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
   panic 62
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc UART1StatusHandler `isr ()
+required func UART1StatusHandler `isr ()
 
-proc UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {
+func UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {
   panic 63
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc UART1ErrorHandler `isr ()
+required func UART1ErrorHandler `isr ()
 
-proc UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {
   panic 64
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc UART2StatusHandler `isr ()
+required func UART2StatusHandler `isr ()
 
-proc UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {
+func UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {
   panic 64
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc UART2ErrorHandler `isr ()
+required func UART2ErrorHandler `isr ()
 
-proc UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {
   panic 65
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc ADC0Handler `isr ()
+required func ADC0Handler `isr ()
 
-proc ADC0Handler `isr @nullWhenPanicDisabled @weak () {
+func ADC0Handler `isr @nullWhenPanicDisabled @weak () {
   panic 73
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc ADC1Handler `isr ()
+required func ADC1Handler `isr ()
 
-proc ADC1Handler `isr @nullWhenPanicDisabled @weak () {
+func ADC1Handler `isr @nullWhenPanicDisabled @weak () {
   panic 74
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CMP0Handler `isr ()
+required func CMP0Handler `isr ()
 
-proc CMP0Handler `isr @nullWhenPanicDisabled @weak () {
+func CMP0Handler `isr @nullWhenPanicDisabled @weak () {
   panic 75
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CMP1Handler `isr ()
+required func CMP1Handler `isr ()
 
-proc CMP1Handler `isr @nullWhenPanicDisabled @weak () {
+func CMP1Handler `isr @nullWhenPanicDisabled @weak () {
   panic 76
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CMP2Handler `isr ()
+required func CMP2Handler `isr ()
 
-proc CMP2Handler `isr @nullWhenPanicDisabled @weak () {
+func CMP2Handler `isr @nullWhenPanicDisabled @weak () {
   panic 77
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc FMT0Handler `isr ()
+required func FMT0Handler `isr ()
 
-proc FMT0Handler `isr @nullWhenPanicDisabled @weak () {
+func FMT0Handler `isr @nullWhenPanicDisabled @weak () {
   panic 78
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc FMT1Handler `isr ()
+required func FMT1Handler `isr ()
 
-proc FMT1Handler `isr @nullWhenPanicDisabled @weak () {
+func FMT1Handler `isr @nullWhenPanicDisabled @weak () {
   panic 79
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc FMT2Handler `isr ()
+required func FMT2Handler `isr ()
 
-proc FMT2Handler `isr @nullWhenPanicDisabled @weak () {
+func FMT2Handler `isr @nullWhenPanicDisabled @weak () {
   panic 80
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc CMTHandler `isr ()
+required func CMTHandler `isr ()
 
-proc CMTHandler `isr @nullWhenPanicDisabled @weak () {
+func CMTHandler `isr @nullWhenPanicDisabled @weak () {
   panic 81
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc RTCAlarmHandler `isr ()
+required func RTCAlarmHandler `isr ()
 
-proc RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {
+func RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {
   panic 82
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc RTCSecondHandler `isr ()
+required func RTCSecondHandler `isr ()
 
-proc RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {
+func RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {
   panic 83
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc PITChannel0Handler `isr ()
+required func PITChannel0Handler `isr ()
 
-proc PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {
+func PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {
   panic 84
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc PITChannel1Handler `isr ()
+required func PITChannel1Handler `isr ()
 
-proc PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {
+func PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {
   panic 85
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc PITChannel2Handler `isr ()
+required func PITChannel2Handler `isr ()
 
-proc PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {
+func PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {
   panic 86
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc PITChannel3Handler `isr ()
+required func PITChannel3Handler `isr ()
 
-proc PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {
+func PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {
   panic 87
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc PDBHandler `isr ()
+required func PDBHandler `isr ()
 
-proc PDBHandler `isr @nullWhenPanicDisabled @weak () {
+func PDBHandler `isr @nullWhenPanicDisabled @weak () {
   panic 88
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc USBOTGHandler `isr ()
+required func USBOTGHandler `isr ()
 
-proc USBOTGHandler `isr @nullWhenPanicDisabled @weak () {
+func USBOTGHandler `isr @nullWhenPanicDisabled @weak () {
   panic 89
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc USBChargerDetectHandler `isr ()
+required func USBChargerDetectHandler `isr ()
 
-proc USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {
+func USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {
   panic 90
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc DAC0Handler `isr ()
+required func DAC0Handler `isr ()
 
-proc DAC0Handler `isr @nullWhenPanicDisabled @weak () {
+func DAC0Handler `isr @nullWhenPanicDisabled @weak () {
   panic 97
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc TSIHandler `isr ()
+required func TSIHandler `isr ()
 
-proc TSIHandler `isr @nullWhenPanicDisabled @weak () {
+func TSIHandler `isr @nullWhenPanicDisabled @weak () {
   panic 99
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc MCGHandler `isr ()
+required func MCGHandler `isr ()
 
-proc MCGHandler `isr @nullWhenPanicDisabled @weak () {
+func MCGHandler `isr @nullWhenPanicDisabled @weak () {
   panic 100
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc lowPowerTimerHandler `isr ()
+required func lowPowerTimerHandler `isr ()
 
-proc lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {
+func lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {
   panic 101
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc pinDetectPortAHandler `isr ()
+required func pinDetectPortAHandler `isr ()
 
-proc pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {
+func pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {
   panic 103
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc pinDetectPortBHandler `isr ()
+required func pinDetectPortBHandler `isr ()
 
-proc pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {
+func pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {
   panic 104
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc pinDetectPortCHandler `isr ()
+required func pinDetectPortCHandler `isr ()
 
-proc pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {
+func pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {
   panic 105
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc pinDetectPortDHandler `isr ()
+required func pinDetectPortDHandler `isr ()
 
-proc pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {
+func pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {
   panic 106
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc pinDetectPortEHandler `isr ()
+required func pinDetectPortEHandler `isr ()
 
-proc pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {
+func pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {
   panic 107
 }
 
 //-----------------------------------------------------------------------------*
 
-required proc softwareInterruptHandler `isr ()
+required func softwareInterruptHandler `isr ()
 
-proc softwareInterruptHandler `isr @nullWhenPanicDisabled @weak () {
+func softwareInterruptHandler `isr @nullWhenPanicDisabled @weak () {
   panic 110
 }
 

@@ -143,7 +143,13 @@ method @routineMapIR serviceCodeGeneration
       let serviceCallName = llvmNameForServiceCall (!service.lkey.string)
       ioServiceList += !serviceCallName !serviceImplementationName
       ioLLVMcode += llvmTitleComment (!serviceImplementationName)
-      ioLLVMcode += "declare void @" + llvmNameForServiceCall (!service.lkey.string) + " ("
+      ioLLVMcode += "declare"
+      if service.mReturnType == .null then
+        ioLLVMcode += " void"
+      else
+        ioLLVMcode += " " + [service.mReturnType llvmTypeName]
+      end
+      ioLLVMcode += " @" + llvmNameForServiceCall (!service.lkey.string) + " ("
       let typeName = [service.lkey.string stringByDeletingPathExtension]
       var first = typeName == ""
       if not first then

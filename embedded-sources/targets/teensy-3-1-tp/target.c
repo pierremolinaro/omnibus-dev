@@ -140,6 +140,14 @@ static void kernel_set_task_context (TaskContext * inTaskContext,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+static void kernel_set_return_code (TaskContext * inTaskContext,
+                                    const unsigned inReturnCode) {
+  StackedRegisters * ptr = inTaskContext->mSP_USR ;
+  ptr->mR0 = inReturnCode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //   T A S K    C O N T R O L    B L O C K                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -260,6 +268,22 @@ void blockOnDeadline (const unsigned inDeadline) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) asm ("proc..blockInListAndOnDeadline") ;
+
+void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) {
+  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
+//--- Insert in tool list
+  *ioWaitingList |= 1 << currentTaskIndex ;
+  gRunningTaskControlBlock->mWaitingList = ioWaitingList ;
+//--- Insert in deadline list
+  gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;
+  gRunningTaskControlBlock->mTaskDeadline = inDeadline ;
+//--- Block task
+  kernel_makeNoTaskRunning () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -273,6 +297,7 @@ void makeTaskReady (TaskList * ioWaitingList, unsigned char * outFound) {
     gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;
     *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;
 //    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // Leave dangling pointer ?
+    kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
     kernel_makeTaskReady (taskIndex) ;
   }
 }
@@ -294,6 +319,7 @@ void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
         *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;
         taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;
       }
+      kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 0) ;
       kernel_makeTaskReady (taskIndex) ;
     }
   }

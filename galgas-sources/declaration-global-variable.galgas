@@ -110,36 +110,22 @@ syntax extension common_syntax {
         $identifier$ ?let sectionName
         allowedRoutineList += !hasWriteAccess !typeName !sectionName !.section
       or
-        $proc$
+        $func$
         $identifier$ ?let procName
         allowedRoutineList += !hasWriteAccess !["" nowhere] !procName !.procedure
       or
-        $proc$
+        $func$
         $typeName$ ?let typeName
         $.$
         $identifier$ ?let procName
         allowedRoutineList += !hasWriteAccess !typeName !procName !.procedure
       or
-#        $func$
-#        @lstring typeName
-#        select
-#          typeName = ["" nowhere]
-#        or
-#          $typeName$ ?typeName
-#          $.$
-#        end
-#        $identifier$ ?let funcName
-#        if hasWriteAccess then
-#          error funcName : "a function cannot write a global variable"
-#        end
-#        allowedFunctionList += !typeName !funcName
-#      or
         $init$
         $integer$ ?let @lbigint priority
         allowedInitList += !hasWriteAccess !priority
       or
         $panic$
-        $proc$
+        $func$
         $identifier$ ?let panicName
         $integer$ ?let @lbigint priority
         allowedPanicList += !hasWriteAccess !panicName !priority

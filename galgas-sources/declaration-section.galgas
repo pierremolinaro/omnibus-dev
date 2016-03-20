@@ -111,7 +111,13 @@ method @routineMapIR sectionCodeGeneration
       let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
       ioSectionList += !sectionCallName !sectionImplementationName
       ioLLVMcode += llvmTitleComment (!sectionCallName)
-      ioLLVMcode += "declare void @" + sectionCallName + " ("
+      ioLLVMcode += "declare"
+      if section.mReturnType == .null then
+        ioLLVMcode += " void"
+      else
+        ioLLVMcode += " " + [section.mReturnType llvmTypeName]
+      end
+      ioLLVMcode += " @" + sectionCallName + " ("
       for () in section.mFormalArgumentListForGeneration
       do
         switch mFormalArgumentKind

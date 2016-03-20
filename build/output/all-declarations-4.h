@@ -2466,17 +2466,6 @@ class GALGAS_lstring function_taskProcNameForInvocationGraph (class GALGAS_strin
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Function 'funcNameForInvocationGraph'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_funcNameForInvocationGraph (class GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                          class GALGAS_lstring inArgument1,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                       Function 'panicNameForInvocationGraph'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

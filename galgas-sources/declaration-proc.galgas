@@ -92,7 +92,7 @@ syntax extension common_syntax {
     !attributes:@lstringlist outAttributeList
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
   {
-    $proc$
+    $func$
     $identifier$ ?outProcName
     outProcModeList = {}
     repeat

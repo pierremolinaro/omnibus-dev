@@ -36,13 +36,13 @@ struct $semaphore {
 //-----------------------------------------------------------------------------*
 
 var s0 = $semaphore (!value:0) {
-  proc $T0.loop
+  func $T0.loop
 }
 
 //-----------------------------------------------------------------------------*
 
 var s1 = $semaphore (!value:0) {
-  proc $T1.loop
+  func $T1.loop
 }
 
 //-----------------------------------------------------------------------------*
@@ -50,7 +50,7 @@ var s1 = $semaphore (!value:0) {
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
-  proc loop () {
+  func loop () {
     waitUntilMS (!deadline:self.top)
     s0.V ()
     self.top += 250
@@ -67,7 +67,7 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
-  proc loop () {
+  func loop () {
     waitUntilMS (!deadline:self.top)
     s1.V ()
     self.top += 249
@@ -87,7 +87,7 @@ task T2 priority 2 stackSize 512 {
   var flag2 = true
   var deadline $uint32 = 0
   
-  proc loop () {
+  func loop () {
     select
     on s0.P () :
       if self.flag0 then
