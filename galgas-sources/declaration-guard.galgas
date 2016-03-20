@@ -141,6 +141,7 @@ proc guardSemanticAnalysis
     !userMode:false
     !registerAccess:.noAccess
     !globalsAreConstant:false
+    !returnTypeName:["" nowhere]
   )
 #--- Add 'accepted" output variable
   let resultVarName = @lstring.new {!"accepted" !inRoutineName.location}

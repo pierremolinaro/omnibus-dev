@@ -178,20 +178,8 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !userMode:[functionModeSet hasKey !userModeName ()]
     !registerAccess:.readWriteAccess
     !globalsAreConstant:true
+    !returnTypeName:mResultTypeName
   )
-#--- Add 'result" variable
-  let resultVarName = @lstring.new {!"result" !mResultTypeName.location}
-  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mResultTypeName}
-  [!?variableMap insertOutputFormalArgument
-    !lkey:resultVarName
-    !type:resultType
-    !readAccessAllowed:true
-    !variableKind:.localValue {!type:resultType !name:resultVarName.string}
-    !copyable:true
-    !fieldMap:{}
-    !canBeUsedAsInputParameter:true
-    !isConstant:false # Is not constant
-  ]
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
   for (* formalArgumentTypeName formalArgumentName) in mFuncFormalArgumentList do
@@ -232,12 +220,13 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfFuncLocation]
 #--- Code generation
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mResultTypeName}
   [!?ioIntermediateCodeStruct.mFunctionMapIR insertKey
     !mFunctionName
     !formalArguments
     !instructionGenerationList
     !resultType
-    !resultVarName.string
+    !functionResultVariableName ()
     !warnIfUnused
   ]  
 }

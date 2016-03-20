@@ -75,11 +75,18 @@ syntax extension common_syntax {
       $proc$
       $identifier$ ?let procName
       <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList formalArgumentList
+      @lstring returnTypeName
+      select
+        returnTypeName = ["" here]
+      or
+        $->$
+        $typeName$ ?returnTypeName
+      end
       ${$
       <instructionList> ?let instructionList !?*
       let endOfProc = @location.here
       $}$
-      taskProcList += !{} !procName !{} !formalArgumentList !instructionList !endOfProc
+      taskProcList += !{} !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
     while
       $init$
       $integer$ ?let @lbigint priority
@@ -289,6 +296,7 @@ method @taskList-element semanticAnalysis
       !{!.new {!userModeName () !procedure.mProcedureName.location}}
       !procedure.mProcedureName
       !procedure.mProcedureFormalArgumentList
+      !returnTypeName:procedure.mReturnTypeName
       !procedure.mProcedureInstructionList
       !procedure.mEndOfProcedureDeclaration
       !warnIfUnused:true

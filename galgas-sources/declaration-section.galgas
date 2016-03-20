@@ -6,6 +6,7 @@ list @sectionDeclarationListAST {
   @lstring mSectionName
   @lstringlist mSectionAttributeList
   @procFormalArgumentList mSectionFormalArgumentList
+  @lstring mReturnTypeName
   @instructionListAST mSectionInstructionList
   @location mEndOfSectionLocation
 }
@@ -28,6 +29,13 @@ syntax extension common_syntax {
       attributeList += !attribute
     end
     <procedure_formal_arguments> ?formalArguments:let sectionFormalArgumentList
+    @lstring returnTypeName
+    select
+      returnTypeName = ["" here]
+    or
+      $->$
+      $typeName$ ?returnTypeName
+    end
     ${$
     @labelMap labelMap = {}
     <instructionList> ?let instructionList !?labelMap
@@ -36,6 +44,7 @@ syntax extension common_syntax {
       !sectionName
       !attributeList
       !sectionFormalArgumentList
+      !returnTypeName
       !instructionList
       !.here
   }
@@ -73,6 +82,7 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
       !{!.new {!sectionModeName () !section.mSectionName.location}}
       !section.mSectionName
       !section.mSectionFormalArgumentList
+      !returnTypeName:section.mReturnTypeName
       !section.mSectionInstructionList
       !section.mEndOfSectionLocation
       !warnIfUnused:true
@@ -118,20 +128,6 @@ method @routineMapIR sectionCodeGeneration
       ioLLVMcode += ") nounwind \n\n"
     end
   end
-#  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
-#  idx = 0
-#  for section in self do
-#    if section.mKind == .section then
-#      let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
-#      var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
-#      s = [s stringByReplacingStringByString !"!ENTRY!" !sectionImplementationName]
-#      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-#      ioAssemblerCode += s
-#      idx += 1
-#    end
-#  end
-#  let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
-#  ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

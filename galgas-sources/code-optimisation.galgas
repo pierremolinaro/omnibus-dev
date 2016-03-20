@@ -169,6 +169,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
+        !procedure.mReturnType
       ]        
       [procedure enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
       outAccessibleEntities.mRoutineSet += !procedure.lkey.string
@@ -183,6 +184,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
+        !procedure.mReturnType
       ]        
     end
   end
@@ -251,6 +253,7 @@ private proc exploreProcs
         !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
+        !procedure.mReturnType
       ]        
       [procedure enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioContinueExploreRoutines = true
@@ -265,6 +268,7 @@ private proc exploreProcs
         !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
+        !procedure.mReturnType
     ]        
     end
   end

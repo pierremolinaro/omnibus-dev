@@ -159,6 +159,7 @@ proc initSemanticAnalysis
     !userMode:false
     !registerAccess:.readWriteAccess
     !globalsAreConstant:false
+    !returnTypeName:["" nowhere]
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}

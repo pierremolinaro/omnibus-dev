@@ -81,6 +81,7 @@ proc routineSemanticAnalysis
   ?let @lstringlist inRoutineModeList
   ?let @lstring inRoutineName
   ?let @procFormalArgumentList inRoutineFormalArgumentList
+  ?returnTypeName:let @lstring inReturnTypeName
   ?let @instructionListAST inRoutineInstructionList
   ?let @location inEndOfRoutineDeclaration
   ?warnIfUnused:let @bool inWarnIfUnused
@@ -111,6 +112,7 @@ proc routineSemanticAnalysis
     !userMode:[procedureModeSet hasKey !userModeName ()]
     !registerAccess:inRegisterAccessKind
     !globalsAreConstant:false
+    !returnTypeName:inReturnTypeName
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
@@ -143,6 +145,11 @@ proc routineSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
 #--- Code generation
+  let returnType = if inReturnTypeName.string == "" then
+    @unifiedTypeMap-proxy.null
+  else
+    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
+  end
   let routineMangledName = if inSelfType == .null then
     @lstring.new {!"." + inRoutineName !inRoutineName.location}
   else
@@ -155,7 +162,7 @@ proc routineSemanticAnalysis
     elsif inWeakProcedure && weak then
       error routineMangledName : "this weak procedure overrides a weak procedure"
     elsif (not inWeakProcedure) && weak then
-      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?8*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?9*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
         !formalArguments
@@ -166,6 +173,7 @@ proc routineSemanticAnalysis
         !inNullOnNoPanic
         !inGlobalProcedure
         !inRoutineKind
+        !returnType
       ]  
     else # (not weakProcedure) && (not weak)
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
@@ -178,6 +186,7 @@ proc routineSemanticAnalysis
         !inNullOnNoPanic
         !inGlobalProcedure
         !inRoutineKind
+        !returnType
       ]
     end
   else
@@ -191,6 +200,7 @@ proc routineSemanticAnalysis
       !inNullOnNoPanic
       !inGlobalProcedure
       !inRoutineKind
+      !returnType
     ]  
   end
 }
@@ -231,7 +241,13 @@ method @routineMapIR-element llvmCodeGeneration
     ioAssemblerCode += "  " + routineName + " = 0\n\n"
   #--- In LLVM, declare routine as extern
     ioLLVMcode += llvmTitleComment (!routineName)
-    ioLLVMcode += "declare void @" + routineName + " ("
+    ioLLVMcode += "declare"
+    if mReturnType == .null then
+      ioLLVMcode += " void"
+    else
+      ioLLVMcode += " " + [mReturnType llvmTypeName]
+    end
+    ioLLVMcode += " @" + routineName + " ("
     for () in mFormalArgumentListForGeneration
     do
       switch mFormalArgumentKind
@@ -252,7 +268,12 @@ method @routineMapIR-element llvmCodeGeneration
     if not mGlobal then
       ioLLVMcode += " internal"
     end
-    ioLLVMcode += " void @" + routineName + " ("
+    if mReturnType == .null then
+      ioLLVMcode += " void"
+    else
+      ioLLVMcode += " " + [mReturnType llvmTypeName]
+    end
+    ioLLVMcode += " @" + routineName + " ("
     let receiverTypeName = [lkey.string stringByDeletingPathExtension]
     var first = true
     if receiverTypeName != "" then
@@ -275,6 +296,10 @@ method @routineMapIR-element llvmCodeGeneration
       end
     end
     ioLLVMcode += ") nounwind {\n"
+  #--- Add result variable ?
+    if mReturnType != .null then
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ()) + " = alloca " + [mReturnType llvmTypeName] + "\n"
+    end
   #--- Store input arguments in memory
     for () in mFormalArgumentListForGeneration do
       switch mFormalArgumentKind
@@ -292,11 +317,16 @@ method @routineMapIR-element llvmCodeGeneration
       case output, inputOutput :
       end
     end
-   
   #--- Instruction list
     [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   #--- Epilog
-    ioLLVMcode += "  ret void\n"
+    if mReturnType == .null then
+      ioLLVMcode += "  ret void\n"
+    else
+      let resultVarLLVMName = "%" + llvmNameForLocalVariable (!functionResultVariableName ())
+      ioLLVMcode += "  %result = load " + [mReturnType llvmTypeName] + ", " + [mReturnType llvmTypeName] + "* " + resultVarLLVMName + "\n"
+      ioLLVMcode += "  ret " + [mReturnType llvmTypeName] + " %result\n"
+    end
     ioLLVMcode += "}\n\n"
   end
 }

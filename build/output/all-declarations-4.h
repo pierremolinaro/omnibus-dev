@@ -1244,6 +1244,7 @@ class GALGAS_variableMap function_initialVariableMap (const class GALGAS_string 
                                                       const class GALGAS_bool & constinArgument2,
                                                       const class GALGAS_accessKind & constinArgument3,
                                                       class GALGAS_bool inArgument4,
+                                                      const class GALGAS_lstring & constinArgument5,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -1739,6 +1740,15 @@ void categoryModifier_appendGetElementPtrFromSelf (class GALGAS_instructionListI
                                                    const class GALGAS_string constin_inFieldName,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'functionResultVariableName'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_functionResultVariableName (class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2474,16 +2484,17 @@ void routine_routineSemanticAnalysis (const class GALGAS_unifiedTypeMap_2D_proxy
                                       const class GALGAS_lstringlist constinArgument2,
                                       const class GALGAS_lstring constinArgument3,
                                       const class GALGAS_procFormalArgumentList constinArgument4,
-                                      const class GALGAS_instructionListAST constinArgument5,
-                                      const class GALGAS_location constinArgument6,
-                                      const class GALGAS_bool constinArgument7,
+                                      const class GALGAS_lstring constinArgument5,
+                                      const class GALGAS_instructionListAST constinArgument6,
+                                      const class GALGAS_location constinArgument7,
                                       const class GALGAS_bool constinArgument8,
                                       const class GALGAS_bool constinArgument9,
                                       const class GALGAS_bool constinArgument10,
-                                      const class GALGAS_accessKind constinArgument11,
-                                      const class GALGAS_semanticContext constinArgument12,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument13,
-                                      class GALGAS_intermediateCodeStruct & ioArgument14,
+                                      const class GALGAS_bool constinArgument11,
+                                      const class GALGAS_accessKind constinArgument12,
+                                      const class GALGAS_semanticContext constinArgument13,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument14,
+                                      class GALGAS_intermediateCodeStruct & ioArgument15,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
