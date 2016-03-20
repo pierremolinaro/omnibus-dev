@@ -2,17 +2,10 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @functionCallEffectiveParameterList {
-  @lstring mSelector
-  @expressionAST mExpression
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 class @functionCallInExpressionAST : @expressionAST {
   @lstring mReceiverName
   @lstring mFunctionName
-  @functionCallEffectiveParameterList mParameterList
+  @effectiveParameterListAST mEffectiveParameterList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -28,32 +21,16 @@ syntax extension common_syntax {
     let receiverName = @lstring.new {!"self" !.here}
     $.$
     $identifier$ ?let functionName
-    $($
-    @functionCallEffectiveParameterList parameterList = {}
-    repeat
-    while
-      $!$ ?let selector
-      <expression> ?let expression
-      parameterList += !selector !expression
-    end
-    $)$
-    outExpression = @functionCallInExpressionAST.new {!receiverName !functionName !parameterList}
+    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
+    outExpression = @functionCallInExpressionAST.new {!receiverName !functionName !effectiveParameterList}
   }
 
   #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
     $identifier$ ?let functionName
-    $($
-    @functionCallEffectiveParameterList parameterList = {}
-    repeat
-    while
-      $!$ ?let selector
-      <expression> ?let expression
-      parameterList += !selector !expression
-    end
-    $)$
-    outExpression = @functionCallInExpressionAST.new {!["" here] !functionName !parameterList}
+    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
+    outExpression = @functionCallInExpressionAST.new {!["" here] !functionName !effectiveParameterList}
   }
 
   #·····················································································································
@@ -62,16 +39,8 @@ syntax extension common_syntax {
     $identifier$ ?let receiverName
     $.$
     $identifier$ ?let functionName
-    $($
-    @functionCallEffectiveParameterList parameterList = {}
-    repeat
-    while
-      $!$ ?let selector
-      <expression> ?let expression
-      parameterList += !selector !expression
-    end
-    $)$
-    outExpression = @functionCallInExpressionAST.new {!receiverName !functionName !parameterList}
+    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
+    outExpression = @functionCallInExpressionAST.new {!receiverName !functionName !effectiveParameterList}
   }
 
   #·····················································································································
@@ -86,8 +55,17 @@ override method @functionCallInExpressionAST addDependenceEdgeForStaticExpressio
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for () in mParameterList do
-    [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  for () in mEffectiveParameterList do
+    switch mEffectiveParameterKind
+    case input (*):
+    case inputWithType (* @lstring typeName *) :
+      if typeName.string != "" then
+        [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+      end
+    case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    case outputInput (*) :
+    case outputInputSelfVariable (*) :
+    end 
   end
 }
 
@@ -96,8 +74,17 @@ override method @functionCallInExpressionAST addDependenceEdgeForStaticExpressio
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionCallInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in mParameterList do
-    [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  for () in mEffectiveParameterList do
+    switch mEffectiveParameterKind
+    case input (*):
+    case inputWithType (* @lstring typeName *) :
+      if typeName.string != "" then
+        [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+      end
+    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case outputInput (*) :
+    case outputInputSelfVariable (*) :
+    end 
   end
 }
 
@@ -110,7 +97,7 @@ override method @functionCallInExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
+  ?modes:let @stringset inRequiredModeSet
   ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -118,102 +105,123 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
-  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#--- Search in function map
-  @lstring functionMangledName
-  @unifiedTypeMap-proxy receiverType
-  if mReceiverName.string != "" then
-    [!?ioVariableMap searchForReadAccess
-      !lkey:mReceiverName
-      ?type:receiverType
-      ?1*
-      ?variableKind:@objectInMemoryIR variableKind
-      ?4*
-    ]
-    functionMangledName = .new {!"$" + [receiverType key] + "." + mFunctionName !mFunctionName.location}
-    effectiveParameterListIR += !.outputInput !"" ![variableKind address] #--- add "load receiver" as first argument
-  else
-    functionMangledName = .new {!"." + mFunctionName !mFunctionName.location}
-    receiverType = .null
-  end
-  [inContext.mRoutineMapForContext searchKey
-    !functionMangledName
-    ?let unused mutating
-    ?let functionModeMap
-    ?let @procedureSignature functionSignature
-    ?let routineKind
-    ?*
-    ?let functionResultType
-  ]
-#---
-  if functionResultType == .null then
-    error mFunctionName : "cannot be used as function: no returned value"
-  end
-#--- Enter in invocation graph
-  @lstring routineNameForInvocationGraph
-  switch routineKind
-  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mFunctionName)
-  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mFunctionName)
-  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mFunctionName)
-  end
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge
-    !inCallerNameForInvocationGraph
-    !routineNameForInvocationGraph
-  ]
-#--- Check mode
-  checkMode (
-    !requiredModes:inModeSet
-    !possibleModes:[functionModeMap keySet]
-    !error:mFunctionName.location
+  analyzeRoutineCall (
+    !self:inSelfType
+    !receiverName:mReceiverName
+    !routineName:mFunctionName
+    !effective:mEffectiveParameterList
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:inRequiredModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+    ?routineKind:let @routineKind routineKind
+    ?routineMangledName:let @lstring functionMangledName
+    ?returnType:let @unifiedTypeMap-proxy returnedType
   )
-#---
-  if [functionSignature length] != [mParameterList length] then
-    error mFunctionName : "this function declares " + [functionSignature length] 
-      + " formal parameters, the call names " + [mParameterList length] + " effective arguments"
-  else
-    for formal in functionSignature, actual in mParameterList
-    do
-      if actual.mSelector.string != formal.mSelector then
-        var s = "!"
-        if formal.mSelector != "" then
-          s += formal.mSelector + ":"
-        end
-        error actual.mSelector : "required selector: " + s
-      end
-      [actual.mExpression analyzeExpression
-        !self:inSelfType
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:formal.mType
-        !context:inContext
-        !modes:inModeSet
-        !allowPanic:inAllowPanic
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?instructionListIR:ioInstructionGenerationList
-        ?result:@operandIR argumentIR
-      ]
-      if [argumentIR.mType key] == [formal.mType key] then
-        effectiveParameterListIR +=
-          !.output
-          !formal.mSelector
-          !argumentIR
-      elsif [[argumentIR.mType kind] isStaticInteger] && [[formal.mType kind] isInteger] then
-        [argumentIR.mValue literalInteger ?value:let @bigint value]
-        [[formal.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
-        if (min <= value) && (value <= max) then
-          effectiveParameterListIR += !.output !formal.mSelector !.new {!formal.mType !argumentIR.mValue}
-        else
-          error actual.mSelector: "the literal integer cannot fit in an $" + [formal.mType key]
-        end
-      else
-        error actual.mSelector : "the actual parameter has the $" + [argumentIR.mType key]
-         + ", but the formal argument has the $" + [formal.mType key] + " type"
-      end
-    end
+  if returnedType == .null then
+    error mFunctionName : "cannot be called in expression: no return value"
   end
+#  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+##--- Search in function map
+#  @lstring functionMangledName
+#  @unifiedTypeMap-proxy receiverType
+#  if mReceiverName.string != "" then
+#    [!?ioVariableMap searchForReadAccess
+#      !lkey:mReceiverName
+#      ?type:receiverType
+#      ?1*
+#      ?variableKind:@objectInMemoryIR variableKind
+#      ?4*
+#    ]
+#    functionMangledName = .new {!"$" + [receiverType key] + "." + mFunctionName !mFunctionName.location}
+#    effectiveParameterListIR += !.outputInput !"" ![variableKind address] #--- add "load receiver" as first argument
+#  else
+#    functionMangledName = .new {!"." + mFunctionName !mFunctionName.location}
+#    receiverType = .null
+#  end
+#  [inContext.mRoutineMapForContext searchKey
+#    !functionMangledName
+#    ?let unused mutating
+#    ?let functionModeMap
+#    ?let @procedureSignature functionSignature
+#    ?let routineKind
+#    ?*
+#    ?let functionResultType
+#  ]
+##---
+#  if functionResultType == .null then
+#    error mFunctionName : "cannot be used as function: no returned value"
+#  end
+##--- Enter in invocation graph
+#  @lstring routineNameForInvocationGraph
+#  switch routineKind
+#  case function : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mFunctionName)
+#  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mFunctionName)
+#  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mFunctionName)
+#  end
+#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge
+#    !inCallerNameForInvocationGraph
+#    !routineNameForInvocationGraph
+#  ]
+##--- Check mode
+#  checkMode (
+#    !requiredModes:inModeSet
+#    !possibleModes:[functionModeMap keySet]
+#    !error:mFunctionName.location
+#  )
+##---
+#  if [functionSignature length] != [mParameterList length] then
+#    error mFunctionName : "this function declares " + [functionSignature length] 
+#      + " formal parameters, the call names " + [mParameterList length] + " effective arguments"
+#  else
+#    for formal in functionSignature, actual in mParameterList
+#    do
+#      if actual.mSelector.string != formal.mSelector then
+#        var s = "!"
+#        if formal.mSelector != "" then
+#          s += formal.mSelector + ":"
+#        end
+#        error actual.mSelector : "required selector: " + s
+#      end
+#      [actual.mExpression analyzeExpression
+#        !self:inSelfType
+#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#        !optionalTargetType:formal.mType
+#        !context:inContext
+#        !modes:inModeSet
+#        !allowPanic:inAllowPanic
+#        !?temporary:ioTemporaries
+#        !?staticStringMap:ioGlobalLiteralStringMap
+#        !?variableMap:ioVariableMap
+#        !?instructionListIR:ioInstructionGenerationList
+#        ?result:@operandIR argumentIR
+#      ]
+#      if [argumentIR.mType key] == [formal.mType key] then
+#        effectiveParameterListIR +=
+#          !.output
+#          !formal.mSelector
+#          !argumentIR
+#      elsif [[argumentIR.mType kind] isStaticInteger] && [[formal.mType kind] isInteger] then
+#        [argumentIR.mValue literalInteger ?value:let @bigint value]
+#        [[formal.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+#        if (min <= value) && (value <= max) then
+#          effectiveParameterListIR += !.output !formal.mSelector !.new {!formal.mType !argumentIR.mValue}
+#        else
+#          error actual.mSelector: "the literal integer cannot fit in an $" + [formal.mType key]
+#        end
+#      else
+#        error actual.mSelector : "the actual parameter has the $" + [argumentIR.mType key]
+#         + ", but the formal argument has the $" + [formal.mType key] + " type"
+#      end
+#    end
+#  end
 #--- New LLVM variable for function call result
-  getNewTempVariable (!functionResultType !?ioTemporaries ?outResult)
+  getNewTempVariable (!returnedType !?ioTemporaries ?outResult)
 #--- Code generation
   ioInstructionGenerationList += !@functionCallIR.new {
     !outResult
@@ -241,7 +249,7 @@ override method @functionCallIR llvmInstructionCode
 {
   ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName] + " @"
   switch mKind 
-  case procedure : ioLLVMcode += llvmNameForProcedure (!mFunctionName)
+  case function : ioLLVMcode += llvmNameForFunction (!mFunctionName)
   case service : ioLLVMcode += llvmNameForServiceCall (!mFunctionName)
   case section : ioLLVMcode += llvmNameForSectionCall (!mFunctionName)
   end

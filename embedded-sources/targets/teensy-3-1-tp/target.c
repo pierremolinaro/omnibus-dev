@@ -247,7 +247,7 @@ static TaskList gDeadlineWaitingTaskList ;
 //  B L O C K I N G    R U N N I N G    T A S K                                                                        *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void blockInList (TaskList * ioWaitingList) asm ("proc..blockInList") ;
+void blockInList (TaskList * ioWaitingList) asm ("!FUNC!.blockInList") ;
 
 void blockInList (TaskList * ioWaitingList) {
   const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
@@ -258,7 +258,7 @@ void blockInList (TaskList * ioWaitingList) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void blockOnDeadline (const unsigned inDeadline) asm ("proc..blockOnDeadline") ;
+void blockOnDeadline (const unsigned inDeadline) asm ("!FUNC!.blockOnDeadline") ;
 
 void blockOnDeadline (const unsigned inDeadline) {
   const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
@@ -269,7 +269,7 @@ void blockOnDeadline (const unsigned inDeadline) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) asm ("proc..blockInListAndOnDeadline") ;
+void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) asm ("!FUNC!.blockInListAndOnDeadline") ;
 
 void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) {
   const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
@@ -287,7 +287,7 @@ void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadli
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTaskReady (TaskList * ioWaitingList, unsigned char * outFound) asm ("proc..makeTaskReady") ;
+void makeTaskReady (TaskList * ioWaitingList, unsigned char * outFound) asm ("!FUNC!.makeTaskReady") ;
 
 void makeTaskReady (TaskList * ioWaitingList, unsigned char * outFound) {
   * outFound = (* ioWaitingList) != 0 ;
@@ -305,7 +305,7 @@ void makeTaskReady (TaskList * ioWaitingList, unsigned char * outFound) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate)
-asm ("proc..makeTasksReadyFromCurrentDate") ;
+asm ("!FUNC!.makeTasksReadyFromCurrentDate") ;
 
 void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
@@ -354,7 +354,7 @@ void noteGuardHasBeenAccepted (void) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_handleGuardedCommand (GuardList * ioGuardList) asm ("proc..handleGuardedCommand") ;
+void kernel_handleGuardedCommand (GuardList * ioGuardList) asm ("!FUNC!.handleGuardedCommand") ;
 
 void kernel_handleGuardedCommand (GuardList * ioGuardList) {
   if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
@@ -368,7 +368,7 @@ void kernel_handleGuardedCommand (GuardList * ioGuardList) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void handleGuardedWaitUntil (const unsigned inDeadline) asm ("proc..handleGuardedWaitUntil") ;
+void handleGuardedWaitUntil (const unsigned inDeadline) asm ("!FUNC!.handleGuardedWaitUntil") ;
 
 void handleGuardedWaitUntil (const unsigned inDeadline) {
   if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
@@ -383,7 +383,7 @@ void handleGuardedWaitUntil (const unsigned inDeadline) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void kernel_guardDidChange (GuardList * ioGuardList) asm ("proc..guardDidChange") ;
+void kernel_guardDidChange (GuardList * ioGuardList) asm ("!FUNC!.guardDidChange") ;
 
 void kernel_guardDidChange (GuardList * ioGuardList) {
   while (ioGuardList->mGuardValue > 0) {
@@ -417,7 +417,7 @@ void kernel_waitForGuardChange (void) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void tickHandlerForGuardedWaitUntil (const unsigned inUptime) asm ("proc..tickHandlerForGuardedWaitUntil") ;
+void tickHandlerForGuardedWaitUntil (const unsigned inUptime) asm ("!FUNC!.tickHandlerForGuardedWaitUntil") ;
 
 void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
   unsigned w = gDeadlineWaitingInGuardTaskList ;

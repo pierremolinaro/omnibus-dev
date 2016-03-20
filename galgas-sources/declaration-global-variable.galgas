@@ -11,13 +11,6 @@ list @allowedRoutineList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedFunctionList {
-  @lstring mReceiverTypeName
-  @lstring mFuncName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 list @allowedInitList {
   @bool mHasWriteAccess
   @lbigint mInitPriority
@@ -47,7 +40,6 @@ list @globalVarDeclarationList {
   @allowedRoutineList mAllowedProcList
   @allowedInitList mAllowedInitList
   @allowedPanicList mAllowedPanicList
-  @allowedFunctionList mAllowedFunctionList
   @allowedGuardList mAllowedGuardList
 }
 
@@ -72,7 +64,6 @@ syntax extension common_syntax {
     <expression> ?let @expressionAST expression
     @allowedRoutineList allowedRoutineList = {}
     @allowedInitList allowedInitList = {}
-    @allowedFunctionList allowedFunctionList = {}
     @allowedPanicList allowedPanicList = {}
     @allowedGuardList allowedGuardList = {}
     ${$
@@ -112,13 +103,13 @@ syntax extension common_syntax {
       or
         $func$
         $identifier$ ?let procName
-        allowedRoutineList += !hasWriteAccess !["" nowhere] !procName !.procedure
+        allowedRoutineList += !hasWriteAccess !["" nowhere] !procName !.function
       or
         $func$
         $typeName$ ?let typeName
         $.$
         $identifier$ ?let procName
-        allowedRoutineList += !hasWriteAccess !typeName !procName !.procedure
+        allowedRoutineList += !hasWriteAccess !typeName !procName !.function
       or
         $init$
         $integer$ ?let @lbigint priority
@@ -140,7 +131,6 @@ syntax extension common_syntax {
       !allowedRoutineList
       !allowedInitList
       !allowedPanicList
-      !allowedFunctionList
       !allowedGuardList
   }
 
@@ -153,7 +143,7 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (globalVariableTypeName 7*) in self do
+  for (globalVariableTypeName 6*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]
@@ -263,7 +253,7 @@ method @globalVarDeclarationList-element enterInContext
     end
     @lstring routineNameForInvocationGraph
     switch procedure.mRoutineKind
-    case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !procedure.mRoutineName)
+    case function : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !procedure.mRoutineName)
     end

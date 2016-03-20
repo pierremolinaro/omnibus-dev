@@ -209,7 +209,11 @@ override method @selfRoutineCallInstructionAST analyze
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKind routineKind
     ?routineMangledName:let @lstring routineMangledName
+    ?returnType:let @unifiedTypeMap-proxy returnedType
   )
+  if returnedType != .null then
+    error mRoutineName : "cannot be called in instruction: return value"
+  end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !"" # Receiver is self
@@ -248,7 +252,11 @@ override method @standaloneRoutineCallInstructionAST analyze
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKind routineKind
     ?routineMangledName:let @lstring routineMangledName
+    ?returnType:let @unifiedTypeMap-proxy returnedType
   )
+  if returnedType != .null then
+    error mRoutineName : "cannot be called in instruction: return value"
+  end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !"" # No receiver
@@ -287,7 +295,11 @@ override method @remoteRoutineCallInstructionAST analyze
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKind routineKind
     ?routineMangledName:let @lstring routineMangledName
+    ?returnType:let @unifiedTypeMap-proxy returnedType
   )
+  if returnedType != .null then
+    error mRoutineName : "cannot be called in instruction: return value"
+  end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !mReceiverName.string
@@ -315,6 +327,7 @@ proc analyzeRoutineCall
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !routineKind:@routineKind outRoutineKind
   !routineMangledName:@lstring outRoutineMangledName
+  !returnType:@unifiedTypeMap-proxy outReturnedType
 {
   outEffectiveParameterListIR = {}
   @unifiedTypeMap-proxy receiverType
@@ -338,12 +351,13 @@ proc analyzeRoutineCall
     ?let modeMap
     ?let @procedureSignature formalSignature
     ?outRoutineKind
-    ?2*
+    ?*
+    ?outReturnedType
   ]
 #--- Enter in invocation graph
   @lstring routineNameForInvocationGraph
   switch outRoutineKind
-  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !inRoutineName)
+  case function : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !inRoutineName)
   case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !inRoutineName)
   case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !inRoutineName)
   end
@@ -592,7 +606,7 @@ override method @procCallInstructionIR llvmInstructionCode
 {
   ioLLVMcode += "  call void @"
   switch mKind 
-  case procedure : ioLLVMcode += llvmNameForProcedure (!mProcName)
+  case function : ioLLVMcode += llvmNameForFunction (!mProcName)
   case service : ioLLVMcode += llvmNameForServiceCall (!mProcName)
   case section : ioLLVMcode += llvmNameForSectionCall (!mProcName)
   end

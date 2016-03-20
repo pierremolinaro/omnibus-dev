@@ -28,60 +28,60 @@ declare void @as_sectionHandler () nounwind
 ;--- ARM Core System Handler Vectors
   [15  x void()*] [
     void()* @as_resetHandler, ; 1
-    void()* @!PROC!NMIHandler, ; 2
+    void()* @!FUNC!NMIHandler, ; 2
     void()* @as_sectionHandler, ; 3
-    void()* @!PROC!MemManageHandler, ; 4
-    void()* @!PROC!BusFaultHandler, ; 5
-    void()* @!PROC!UsageFaultHandler, ; 6
+    void()* @!FUNC!MemManageHandler, ; 4
+    void()* @!FUNC!BusFaultHandler, ; 5
+    void()* @!FUNC!UsageFaultHandler, ; 6
     void()* null, ; 7, reserved
     void()* null, ; 8, reserved
     void()* null, ; 9, reserved
     void()* null, ; 10, reserved
     void()* @as_svcHandler, ; 11
-    void()* @!PROC!DebugMonitorHandler, ; 12
+    void()* @!FUNC!DebugMonitorHandler, ; 12
     void()* null, ; 13, reserved
-    void()* @!PROC!PendSVHandler, ; 14
+    void()* @!FUNC!PendSVHandler, ; 14
     void()* @as_systickHandler  ; 15
   ],
 ;--- Non-Core Vectors
   [240  x void()*] [
-    void()* @!PROC!DMAChannel0TranfertCompleteHandler, ; 16
-    void()* @!PROC!DMAChannel1TranfertCompleteHandler, ; 17
-    void()* @!PROC!DMAChannel2TranfertCompleteHandler, ; 18
-    void()* @!PROC!DMAChannel3TranfertCompleteHandler, ; 19
-    void()* @!PROC!DMAChannel4TranfertCompleteHandler, ; 20
-    void()* @!PROC!DMAChannel5TranfertCompleteHandler, ; 21
-    void()* @!PROC!DMAChannel6TranfertCompleteHandler, ; 22
-    void()* @!PROC!DMAChannel7TranfertCompleteHandler, ; 23
-    void()* @!PROC!DMAChannel8TranfertCompleteHandler, ; 24
-    void()* @!PROC!DMAChannel9TranfertCompleteHandler, ; 25
-    void()* @!PROC!DMAChannel10TranfertCompleteHandler, ; 26
-    void()* @!PROC!DMAChannel11TranfertCompleteHandler, ; 27
-    void()* @!PROC!DMAChannel12TranfertCompleteHandler, ; 28
-    void()* @!PROC!DMAChannel13TranfertCompleteHandler, ; 29
-    void()* @!PROC!DMAChannel14TranfertCompleteHandler, ; 30
-    void()* @!PROC!DMAChannel15TranfertCompleteHandler, ; 31
-    void()* @!PROC!DMAErrorHandler, ; 32
+    void()* @!FUNC!DMAChannel0TranfertCompleteHandler, ; 16
+    void()* @!FUNC!DMAChannel1TranfertCompleteHandler, ; 17
+    void()* @!FUNC!DMAChannel2TranfertCompleteHandler, ; 18
+    void()* @!FUNC!DMAChannel3TranfertCompleteHandler, ; 19
+    void()* @!FUNC!DMAChannel4TranfertCompleteHandler, ; 20
+    void()* @!FUNC!DMAChannel5TranfertCompleteHandler, ; 21
+    void()* @!FUNC!DMAChannel6TranfertCompleteHandler, ; 22
+    void()* @!FUNC!DMAChannel7TranfertCompleteHandler, ; 23
+    void()* @!FUNC!DMAChannel8TranfertCompleteHandler, ; 24
+    void()* @!FUNC!DMAChannel9TranfertCompleteHandler, ; 25
+    void()* @!FUNC!DMAChannel10TranfertCompleteHandler, ; 26
+    void()* @!FUNC!DMAChannel11TranfertCompleteHandler, ; 27
+    void()* @!FUNC!DMAChannel12TranfertCompleteHandler, ; 28
+    void()* @!FUNC!DMAChannel13TranfertCompleteHandler, ; 29
+    void()* @!FUNC!DMAChannel14TranfertCompleteHandler, ; 30
+    void()* @!FUNC!DMAChannel15TranfertCompleteHandler, ; 31
+    void()* @!FUNC!DMAErrorHandler, ; 32
     void()* null, ; 33
-    void()* @!PROC!flashMemoryCommandCompleteHandler, ; 34
-    void()* @!PROC!flashMemoryReadCollisionHandler, ; 35
-    void()* @!PROC!modeControllerHandler, ; 36
-    void()* @!PROC!LLWUHandler, ; 37
-    void()* @!PROC!WDOGEWMHandler, ; 38
+    void()* @!FUNC!flashMemoryCommandCompleteHandler, ; 34
+    void()* @!FUNC!flashMemoryReadCollisionHandler, ; 35
+    void()* @!FUNC!modeControllerHandler, ; 36
+    void()* @!FUNC!LLWUHandler, ; 37
+    void()* @!FUNC!WDOGEWMHandler, ; 38
     void()* null, ; 39
-    void()* @!PROC!I2C0Handler, ; 40
-    void()* @!PROC!I2C1Handler, ; 41
-    void()* @!PROC!SPI0Handler, ; 42
-    void()* @!PROC!SPI1Handler, ; 43
+    void()* @!FUNC!I2C0Handler, ; 40
+    void()* @!FUNC!I2C1Handler, ; 41
+    void()* @!FUNC!SPI0Handler, ; 42
+    void()* @!FUNC!SPI1Handler, ; 43
     void()* null, ; 44
-    void()* @!PROC!CAN0MessageBufferHandler, ; 45
-    void()* @!PROC!CAN0BusOffHandler, ; 46
-    void()* @!PROC!CAN0ErrorHandler, ; 47
-    void()* @!PROC!CAN0TransmitWarningHandler, ; 48
-    void()* @!PROC!CAN0ReceiveWarningHandler, ; 49
-    void()* @!PROC!CAN0WakeUpHandler, ; 50
-    void()* @!PROC!I2S0TransmitHandler, ; 51
-    void()* @!PROC!I2S0ReceiveHandler, ; 52
+    void()* @!FUNC!CAN0MessageBufferHandler, ; 45
+    void()* @!FUNC!CAN0BusOffHandler, ; 46
+    void()* @!FUNC!CAN0ErrorHandler, ; 47
+    void()* @!FUNC!CAN0TransmitWarningHandler, ; 48
+    void()* @!FUNC!CAN0ReceiveWarningHandler, ; 49
+    void()* @!FUNC!CAN0WakeUpHandler, ; 50
+    void()* @!FUNC!I2S0TransmitHandler, ; 51
+    void()* @!FUNC!I2S0ReceiveHandler, ; 52
     void()* null, ; 53
     void()* null, ; 54
     void()* null, ; 55
@@ -89,57 +89,57 @@ declare void @as_sectionHandler () nounwind
     void()* null, ; 57
     void()* null, ; 58
     void()* null, ; 59
-    void()* @!PROC!UART0LONHandler, ; 60
-    void()* @!PROC!UART0StatusHandler, ; 61
-    void()* @!PROC!UART0ErrorHandler, ; 62
-    void()* @!PROC!UART1StatusHandler, ; 63
-    void()* @!PROC!UART1ErrorHandler, ; 64
-    void()* @!PROC!UART2StatusHandler, ; 65
-    void()* @!PROC!UART2ErrorHandler, ; 66
+    void()* @!FUNC!UART0LONHandler, ; 60
+    void()* @!FUNC!UART0StatusHandler, ; 61
+    void()* @!FUNC!UART0ErrorHandler, ; 62
+    void()* @!FUNC!UART1StatusHandler, ; 63
+    void()* @!FUNC!UART1ErrorHandler, ; 64
+    void()* @!FUNC!UART2StatusHandler, ; 65
+    void()* @!FUNC!UART2ErrorHandler, ; 66
     void()* null, ; 67
     void()* null, ; 68
     void()* null, ; 69
     void()* null, ; 70
     void()* null, ; 71
     void()* null, ; 72
-    void()* @!PROC!ADC0Handler, ; 73
-    void()* @!PROC!ADC1Handler, ; 74
-    void()* @!PROC!CMP0Handler, ; 75
-    void()* @!PROC!CMP1Handler, ; 76
-    void()* @!PROC!CMP2Handler, ; 77
-    void()* @!PROC!FMT0Handler, ; 78
-    void()* @!PROC!FMT1Handler, ; 79
-    void()* @!PROC!FMT2Handler, ; 80
-    void()* @!PROC!CMTHandler, ; 81
-    void()* @!PROC!RTCAlarmHandler, ; 82
-    void()* @!PROC!RTCSecondHandler, ; 83
-    void()* @!PROC!PITChannel0Handler, ; 84
-    void()* @!PROC!PITChannel1Handler, ; 85
-    void()* @!PROC!PITChannel2Handler, ; 86
-    void()* @!PROC!PITChannel3Handler, ; 87
-    void()* @!PROC!PDBHandler, ; 88
-    void()* @!PROC!USBOTGHandler, ; 89
-    void()* @!PROC!USBChargerDetectHandler, ; 90
+    void()* @!FUNC!ADC0Handler, ; 73
+    void()* @!FUNC!ADC1Handler, ; 74
+    void()* @!FUNC!CMP0Handler, ; 75
+    void()* @!FUNC!CMP1Handler, ; 76
+    void()* @!FUNC!CMP2Handler, ; 77
+    void()* @!FUNC!FMT0Handler, ; 78
+    void()* @!FUNC!FMT1Handler, ; 79
+    void()* @!FUNC!FMT2Handler, ; 80
+    void()* @!FUNC!CMTHandler, ; 81
+    void()* @!FUNC!RTCAlarmHandler, ; 82
+    void()* @!FUNC!RTCSecondHandler, ; 83
+    void()* @!FUNC!PITChannel0Handler, ; 84
+    void()* @!FUNC!PITChannel1Handler, ; 85
+    void()* @!FUNC!PITChannel2Handler, ; 86
+    void()* @!FUNC!PITChannel3Handler, ; 87
+    void()* @!FUNC!PDBHandler, ; 88
+    void()* @!FUNC!USBOTGHandler, ; 89
+    void()* @!FUNC!USBChargerDetectHandler, ; 90
     void()* null, ; 91
     void()* null, ; 92
     void()* null, ; 93
     void()* null, ; 94
     void()* null, ; 95
     void()* null, ; 96
-    void()* @!PROC!DAC0Handler, ; 97
+    void()* @!FUNC!DAC0Handler, ; 97
     void()* null, ; 98
-    void()* @!PROC!TSIHandler, ; 99
-    void()* @!PROC!MCGHandler, ; 100
-    void()* @!PROC!lowPowerTimerHandler, ; 101
+    void()* @!FUNC!TSIHandler, ; 99
+    void()* @!FUNC!MCGHandler, ; 100
+    void()* @!FUNC!lowPowerTimerHandler, ; 101
     void()* null, ; 102
-    void()* @!PROC!pinDetectPortAHandler, ; 103
-    void()* @!PROC!pinDetectPortBHandler, ; 104
-    void()* @!PROC!pinDetectPortCHandler, ; 105
-    void()* @!PROC!pinDetectPortDHandler, ; 106
-    void()* @!PROC!pinDetectPortEHandler, ; 107
+    void()* @!FUNC!pinDetectPortAHandler, ; 103
+    void()* @!FUNC!pinDetectPortBHandler, ; 104
+    void()* @!FUNC!pinDetectPortCHandler, ; 105
+    void()* @!FUNC!pinDetectPortDHandler, ; 106
+    void()* @!FUNC!pinDetectPortEHandler, ; 107
     void()* null, ; 108
     void()* null, ; 109
-    void()* @!PROC!softwareInterruptHandler, ; 110
+    void()* @!FUNC!softwareInterruptHandler, ; 110
     void()* null, ; 111
     void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, ; 112 à 119
     void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, void()* null, ; 120 à 127

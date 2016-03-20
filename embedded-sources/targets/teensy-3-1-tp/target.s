@@ -17,7 +17,6 @@
 @  ACTIVITY LED ON        When this macro is used, we can only use R4 and R5 registers.                                *
 @----------------------------------------------------------------------------------------------------------------------*
 
-
   .macro ACTIVITY_LED_ON
     ldr   r4, =GPIOC_PSOR
     movs  r5, # 1 << 5
@@ -167,8 +166,15 @@ __no_context_to_restore:
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
+  .global !FUNC!systickHandler
+  .type !FUNC!systickHandler, %function
+
+@----------------------------------------------------------------------------------------------------------------------*
+
   .global as_systickHandler
   .type as_systickHandler, %function
+
+@----------------------------------------------------------------------------------------------------------------------*
 
 as_systickHandler:
 @----------------------------------------- Save preserved registers
@@ -179,7 +185,7 @@ as_systickHandler:
   ldr   r4, =gRunningTaskControlBlock
   ldr   r4, [r4]
 @----------------------------------------- Call Systick handler (C routine)
-  bl    proc..systickHandler
+  bl    !FUNC!systickHandler
 @----------------------------------------- Test backgroundTaskContext to check if init passed
   ldr   r5, =backgroundTaskContext
   ldr   r5, [r5]

@@ -156,22 +156,21 @@ private proc generateLLVMfile
     !inIntermediateCodeStruct.mGlobalTaskVariableList
   }
   let sourceDirectory = inProductDirectory + "/sources"
-  var llvmCode = ""
-  var asCode = ""
 #----------------------------------------- Include assembler specific file
-  asCode += asTitleComment (!"Target specific code")
-  asCode +=  getTargetTextFile (
+  var asCode = asTitleComment (!"Target specific code")
+  let asFileContents = getTargetTextFile (
      !currentDir:inCurrentDirectory
      !from:inTargetName.string + "/target.s"
   )
+  asCode += [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
   asCode += "\n"
 #----------------------------------------- Include LLVM specific file
-  llvmCode += llvmTitleComment (!"Target specific code")
+  var llvmCode = llvmTitleComment (!"Target specific code")
   let targetLLVMcode = getTargetTextFile (
      !currentDir:inCurrentDirectory
      !from:inTargetName.string + "/target.ll"
   )
-  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!PROC!" !llvmNameForProcedure (!".")]
+  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
   llvmCode += "\n"
 #----------------------------------------- Structure types declaration
   declareLLVMTypes (!inTypeMap !?llvmCode)
@@ -329,7 +328,8 @@ private proc generateLLVMfile
   )
   let s1 = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
   let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
-  [s2 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
+  let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
+  [s3 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
 #----------------------------------------- Perform compilation
   if (@uint.errorCount == 0) then # && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end
