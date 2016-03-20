@@ -6789,60 +6789,6 @@ C_galgas_function_descriptor functionDescriptor_isrModeName ("isrModeName",
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Function 'taskProcNameForInvocationGraph'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring function_taskProcNameForInvocationGraph (GALGAS_string inArgument_inTaskName,
-                                                        GALGAS_lstring inArgument_inProcName,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring result_outName ; // Returned variable
-  GALGAS_string var_s = GALGAS_string ("taskproc ").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 49)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 49)).add_operation (inArgument_inProcName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 49)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 49)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inProcName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 50)) ;
-//---
-  return result_outName ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_taskProcNameForInvocationGraph [3] = {
-  & kTypeDescriptor_GALGAS_string,
-  & kTypeDescriptor_GALGAS_lstring,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_taskProcNameForInvocationGraph (C_Compiler * inCompiler,
-                                                                               const cObjectArray & inEffectiveParameterArray,
-                                                                               const GALGAS_location & /* §§ inErrorLocation */
-                                                                               COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  const GALGAS_lstring operand1 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
-                                                                 inCompiler
-                                                                 COMMA_THERE) ;
-  return function_taskProcNameForInvocationGraph (operand0,
-                                                  operand1,
-                                                  inCompiler
-                                                  COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_taskProcNameForInvocationGraph ("taskProcNameForInvocationGraph",
-                                                                                functionWithGenericHeader_taskProcNameForInvocationGraph,
-                                                                                & kTypeDescriptor_GALGAS_lstring,
-                                                                                2,
-                                                                                functionArgs_taskProcNameForInvocationGraph) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Function 'procNameForInvocationGraph'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6853,12 +6799,12 @@ GALGAS_lstring function_procNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_pro
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
   GALGAS_string var_s = GALGAS_string ("proc") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 57)))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 52)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 58)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 58)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 58)) ;
+    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 53)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 53)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 53)) ;
   }
-  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 60)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 60)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 61)) ;
+  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 55)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 55)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 55)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 56)) ;
 //---
   return result_outName ;
 }
@@ -6912,12 +6858,12 @@ GALGAS_lstring function_sectionNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_
                                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
   GALGAS_string var_s = GALGAS_string ("section") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 68)))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 63)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 69)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 69)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 69)) ;
+    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 64)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 64)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 64)) ;
   }
-  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 71)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 71)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 71)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 72)) ;
+  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 66)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 66)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 67)) ;
 //---
   return result_outName ;
 }
@@ -6971,12 +6917,12 @@ GALGAS_lstring function_serviceNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_
                                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
   GALGAS_string var_s = GALGAS_string ("service") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 79)))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 74)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 80)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 80)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 80)) ;
+    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 75)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 75)) ;
   }
-  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 82)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 82)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 82)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 83)) ;
+  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 77)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 77)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 78)) ;
 //---
   return result_outName ;
 }
@@ -7030,12 +6976,12 @@ GALGAS_lstring function_guardNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_pr
                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
   GALGAS_string var_s = GALGAS_string ("guard") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 90)))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 85)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 91)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 91)) ;
+    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 86)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 86)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 86)) ;
   }
-  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 93)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 93)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 94)) ;
+  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 88)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 89)) ;
 //---
   return result_outName ;
 }
@@ -7089,12 +7035,12 @@ GALGAS_lstring function_initNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_pro
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
   GALGAS_string var_s = GALGAS_string ("init") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 101)))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 96)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)) ;
+    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 97)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 97)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 97)) ;
   }
-  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 104)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 104)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 105)) ;
+  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 99)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 99)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 100)) ;
 //---
   return result_outName ;
 }
@@ -7147,8 +7093,8 @@ GALGAS_lstring function_panicNameForInvocationGraph (GALGAS_string inArgument_in
                                                      C_Compiler * inCompiler
                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  GALGAS_string var_s = GALGAS_string ("panic . ").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 111)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 111)).add_operation (inArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 111)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 112)) ;
+  GALGAS_string var_s = GALGAS_string ("panic . ").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 106)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 106)).add_operation (inArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 106)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 106)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 107)) ;
 //---
   return result_outName ;
 }
@@ -7192,53 +7138,6 @@ C_galgas_function_descriptor functionDescriptor_panicNameForInvocationGraph ("pa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Function 'mangledNameForType'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_mangledNameForType (GALGAS_string inArgument_inName,
-                                           C_Compiler * inCompiler
-                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outPrefix ; // Returned variable
-  result_outPrefix = GALGAS_string ("type.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 118)) ;
-//---
-  return result_outPrefix ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_mangledNameForType [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_mangledNameForType (C_Compiler * inCompiler,
-                                                                   const cObjectArray & inEffectiveParameterArray,
-                                                                   const GALGAS_location & /* §§ inErrorLocation */
-                                                                   COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_mangledNameForType (operand0,
-                                      inCompiler
-                                      COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_mangledNameForType ("mangledNameForType",
-                                                                    functionWithGenericHeader_mangledNameForType,
-                                                                    & kTypeDescriptor_GALGAS_string,
-                                                                    1,
-                                                                    functionArgs_mangledNameForType) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                            Function 'literalStringName'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7247,7 +7146,7 @@ GALGAS_string function_literalStringName (const GALGAS_uint & constinArgument_in
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("@string.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 124)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 124)) ;
+  result_outName = GALGAS_string ("@string.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 113)) ;
 //---
   return result_outName ;
 }
@@ -7294,7 +7193,7 @@ GALGAS_string function_literalCharacterArrayName (const GALGAS_uint & constinArg
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 130)) ;
+  result_outName = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 119)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 119)) ;
 //---
   return result_outName ;
 }
@@ -7613,53 +7512,6 @@ C_galgas_function_descriptor functionDescriptor_functionResultVariableName ("fun
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Function 'llvmNameForFunction'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForFunction (GALGAS_string inArgument_inName,
-                                            C_Compiler * inCompiler
-                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("func.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 160)) ;
-//---
-  return result_outName ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForFunction [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForFunction (C_Compiler * inCompiler,
-                                                                    const cObjectArray & inEffectiveParameterArray,
-                                                                    const GALGAS_location & /* §§ inErrorLocation */
-                                                                    COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_llvmNameForFunction (operand0,
-                                       inCompiler
-                                       COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForFunction ("llvmNameForFunction",
-                                                                     functionWithGenericHeader_llvmNameForFunction,
-                                                                     & kTypeDescriptor_GALGAS_string,
-                                                                     1,
-                                                                     functionArgs_llvmNameForFunction) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                           Function 'llvmNameForProcedure'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7668,7 +7520,7 @@ GALGAS_string function_llvmNameForProcedure (GALGAS_string inArgument_inName,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("proc.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 166)) ;
+  result_outName = GALGAS_string ("proc.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 149)) ;
 //---
   return result_outName ;
 }
@@ -7707,6 +7559,100 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForProcedure ("llvmNameF
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          Function 'llvmNameForServiceCall'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForServiceCall (GALGAS_string inArgument_inName,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outName ; // Returned variable
+  result_outName = GALGAS_string ("service.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 157)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceCall [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForServiceCall (C_Compiler * inCompiler,
+                                                                       const cObjectArray & inEffectiveParameterArray,
+                                                                       const GALGAS_location & /* §§ inErrorLocation */
+                                                                       COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_llvmNameForServiceCall (operand0,
+                                          inCompiler
+                                          COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForServiceCall ("llvmNameForServiceCall",
+                                                                        functionWithGenericHeader_llvmNameForServiceCall,
+                                                                        & kTypeDescriptor_GALGAS_string,
+                                                                        1,
+                                                                        functionArgs_llvmNameForServiceCall) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForServiceImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForServiceImplementation (GALGAS_string inArgument_inName,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outName ; // Returned variable
+  result_outName = GALGAS_string ("service.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 163)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceImplementation [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForServiceImplementation (C_Compiler * inCompiler,
+                                                                                 const cObjectArray & inEffectiveParameterArray,
+                                                                                 const GALGAS_location & /* §§ inErrorLocation */
+                                                                                 COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_llvmNameForServiceImplementation (operand0,
+                                                    inCompiler
+                                                    COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForServiceImplementation ("llvmNameForServiceImplementation",
+                                                                                  functionWithGenericHeader_llvmNameForServiceImplementation,
+                                                                                  & kTypeDescriptor_GALGAS_string,
+                                                                                  1,
+                                                                                  functionArgs_llvmNameForServiceImplementation) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          Function 'llvmNameForSectionCall'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7715,7 +7661,7 @@ GALGAS_string function_llvmNameForSectionCall (GALGAS_string inArgument_inName,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("section.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 172)) ;
+  result_outName = GALGAS_string ("section.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 171)) ;
 //---
   return result_outName ;
 }
@@ -7762,7 +7708,7 @@ GALGAS_string function_llvmNameForSectionImplementation (GALGAS_string inArgumen
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("section.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 178)) ;
+  result_outName = GALGAS_string ("section.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 177)) ;
 //---
   return result_outName ;
 }
@@ -7809,7 +7755,7 @@ GALGAS_string function_llvmNameForGuardCall (GALGAS_string inArgument_inName,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("guard.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 184)) ;
+  result_outName = GALGAS_string ("guard.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 185)) ;
 //---
   return result_outName ;
 }
@@ -7856,7 +7802,7 @@ GALGAS_string function_llvmNameForGuardImplementation (GALGAS_string inArgument_
                                                        C_Compiler * inCompiler
                                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("guard.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 190)) ;
+  result_outName = GALGAS_string ("guard.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 191)) ;
 //---
   return result_outName ;
 }
@@ -7965,100 +7911,6 @@ C_galgas_function_descriptor functionDescriptor_waitForGuardChangeFunctionName (
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'llvmNameForServiceCall'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForServiceCall (GALGAS_string inArgument_inName,
-                                               C_Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("service.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 202)) ;
-//---
-  return result_outName ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceCall [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForServiceCall (C_Compiler * inCompiler,
-                                                                       const cObjectArray & inEffectiveParameterArray,
-                                                                       const GALGAS_location & /* §§ inErrorLocation */
-                                                                       COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_llvmNameForServiceCall (operand0,
-                                          inCompiler
-                                          COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForServiceCall ("llvmNameForServiceCall",
-                                                                        functionWithGenericHeader_llvmNameForServiceCall,
-                                                                        & kTypeDescriptor_GALGAS_string,
-                                                                        1,
-                                                                        functionArgs_llvmNameForServiceCall) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Function 'llvmNameForServiceImplementation'                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForServiceImplementation (GALGAS_string inArgument_inName,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("service.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 208)) ;
-//---
-  return result_outName ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceImplementation [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForServiceImplementation (C_Compiler * inCompiler,
-                                                                                 const cObjectArray & inEffectiveParameterArray,
-                                                                                 const GALGAS_location & /* §§ inErrorLocation */
-                                                                                 COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_llvmNameForServiceImplementation (operand0,
-                                                    inCompiler
-                                                    COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForServiceImplementation ("llvmNameForServiceImplementation",
-                                                                                  functionWithGenericHeader_llvmNameForServiceImplementation,
-                                                                                  & kTypeDescriptor_GALGAS_string,
-                                                                                  1,
-                                                                                  functionArgs_llvmNameForServiceImplementation) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                         Function 'llvmNameForLocalVariable'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8067,7 +7919,7 @@ GALGAS_string function_llvmNameForLocalVariable (GALGAS_string inArgument_inName
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("var.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 214)) ;
+  result_outName = GALGAS_string ("var.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 205)) ;
 //---
   return result_outName ;
 }
@@ -8114,7 +7966,7 @@ GALGAS_string function_llvmNameForGlobalVariable (GALGAS_string inArgument_inNam
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("gvar.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 220)) ;
+  result_outName = GALGAS_string ("gvar.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 211)) ;
 //---
   return result_outName ;
 }
@@ -8161,7 +8013,7 @@ GALGAS_string function_llvmNameForRegister (GALGAS_string inArgument_inName,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("register.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 226)) ;
+  result_outName = GALGAS_string ("register.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 217)) ;
 //---
   return result_outName ;
 }
@@ -8477,6 +8329,60 @@ C_galgas_function_descriptor functionDescriptor_nullWhenPanicDisabledAttribute (
                                                                                 & kTypeDescriptor_GALGAS_string,
                                                                                 0,
                                                                                 functionArgs_nullWhenPanicDisabledAttribute) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Function 'taskProcNameForInvocationGraph'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring function_taskProcNameForInvocationGraph (GALGAS_string inArgument_inTaskName,
+                                                        GALGAS_lstring inArgument_inProcName,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_outName ; // Returned variable
+  GALGAS_string var_s = GALGAS_string ("taskproc ").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 251)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 251)).add_operation (inArgument_inProcName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 251)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 251)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inProcName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 252)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_taskProcNameForInvocationGraph [3] = {
+  & kTypeDescriptor_GALGAS_string,
+  & kTypeDescriptor_GALGAS_lstring,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_taskProcNameForInvocationGraph (C_Compiler * inCompiler,
+                                                                               const cObjectArray & inEffectiveParameterArray,
+                                                                               const GALGAS_location & /* §§ inErrorLocation */
+                                                                               COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  const GALGAS_lstring operand1 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                                 inCompiler
+                                                                 COMMA_THERE) ;
+  return function_taskProcNameForInvocationGraph (operand0,
+                                                  operand1,
+                                                  inCompiler
+                                                  COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_taskProcNameForInvocationGraph ("taskProcNameForInvocationGraph",
+                                                                                functionWithGenericHeader_taskProcNameForInvocationGraph,
+                                                                                & kTypeDescriptor_GALGAS_lstring,
+                                                                                2,
+                                                                                functionArgs_taskProcNameForInvocationGraph) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -14128,7 +14034,7 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   " \n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "func ledOn `user `panic `isr @noWarningIfUnused (\?inLeds $uint32) {\n"
+  "func ledOn `user `panic `isr `kernel `guard @noWarningIfUnused (\?inLeds $uint32) {\n"
   "//--- Led L0\n"
   "  if ((inLeds & LED_L0) != 0) then\n"
   "    GPIOA_PSOR = 1 << 12 ;\n"
@@ -14153,7 +14059,7 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "func ledOff `user `panic `isr @noWarningIfUnused (\?inLeds $uint32) {\n"
+  "func ledOff `user `panic `isr `kernel `guard @noWarningIfUnused (\?inLeds $uint32) {\n"
   "//--- Led L0\n"
   "  if ((inLeds & LED_L0) != 0) then\n"
   "    GPIOA_PCOR = 1 << 12 ;\n"
@@ -14176,13 +14082,38 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "  end\n"
   "}\n"
   "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "func ledToggle `user `panic `isr `kernel `guard @noWarningIfUnused (\?inLeds $uint32) {\n"
+  "//--- Led L0\n"
+  "  if ((inLeds & LED_L0) != 0) then\n"
+  "    GPIOA_PTOR = 1 << 12 ;\n"
+  "  end\n"
+  "//--- Led L1\n"
+  "  if ((inLeds & LED_L1) != 0) then\n"
+  "    GPIOA_PTOR = 1 << 13 ;\n"
+  "  end\n"
+  "//--- Led L2\n"
+  "  if ((inLeds & LED_L2) != 0) then\n"
+  "    GPIOD_PTOR = 1 << 7 ;\n"
+  "  end\n"
+  "//--- Led L3\n"
+  "  if ((inLeds & LED_L3) != 0) then\n"
+  "    GPIOD_PTOR = 1 << 4 ;\n"
+  "  end\n"
+  "//--- Led L4\n"
+  "  if ((inLeds & LED_L4) != 0) then\n"
+  "    GPIOD_PTOR = 1 << 2 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "teensy-3-1-leds.plm",
   "plm",
   true, // Text file
-  2271, // Text length
+  2875, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 

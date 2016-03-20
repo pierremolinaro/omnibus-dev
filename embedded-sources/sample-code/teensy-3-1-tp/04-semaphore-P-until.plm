@@ -60,26 +60,14 @@ task T1 priority 1 stackSize 512 {
 
 task T2 priority 2 stackSize 512 {
   var top $uint32 = 0
-  var flagSem = true
-  var flagTop = true
 
   func loop () {
     let r = s.P_until (!deadline:self.top)
     if r then
-      if self.flagSem then
-        ledOn (!LED_L1)
-      else
-        ledOff (!LED_L1)
-      end
-      self.flagSem = self.flagSem xor true
+      ledToggle (!LED_L1)
     else
       self.top += 400
-      if self.flagTop then
-        ledOn (!LED_L4)
-      else
-        ledOff (!LED_L4)
-      end
-      self.flagTop = self.flagTop xor true
+      ledToggle (!LED_L4)
     end
   }
 }

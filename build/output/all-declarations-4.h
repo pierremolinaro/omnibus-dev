@@ -2455,17 +2455,6 @@ void routine_routineSemanticAnalysis (const class GALGAS_unifiedTypeMap_2D_proxy
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Function 'taskProcNameForInvocationGraph'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_taskProcNameForInvocationGraph (class GALGAS_string inArgument0,
-                                                              class GALGAS_lstring inArgument1,
-                                                              class C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                       Function 'panicNameForInvocationGraph'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2474,16 +2463,6 @@ class GALGAS_lstring function_panicNameForInvocationGraph (class GALGAS_string i
                                                            class GALGAS_lbigint inArgument1,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'mangledNameForType'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForType (class GALGAS_string inArgument0,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2516,13 +2495,23 @@ class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Function 'llvmNameForFunction'                                            *
+//                                          Function 'llvmNameForServiceCall'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForFunction (class GALGAS_string inArgument0,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForServiceCall (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForServiceImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForServiceImplementation (class GALGAS_string inArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2572,26 +2561,6 @@ class GALGAS_string function_llvmNameForGuardImplementation (class GALGAS_string
 
 class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'llvmNameForServiceCall'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForServiceCall (class GALGAS_string inArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Function 'llvmNameForServiceImplementation'                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForServiceImplementation (class GALGAS_string inArgument0,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2648,6 +2617,17 @@ class GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
 
 class GALGAS_string function_nullWhenPanicDisabledAttribute (class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Function 'taskProcNameForInvocationGraph'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_taskProcNameForInvocationGraph (class GALGAS_string inArgument0,
+                                                              class GALGAS_lstring inArgument1,
+                                                              class C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

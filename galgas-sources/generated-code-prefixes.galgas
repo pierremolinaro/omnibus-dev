@@ -1,6 +1,8 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  MODE NAMES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Modes
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once guardModeName -> @string outResult {
   outResult = "guard"
@@ -43,13 +45,6 @@ func %once isrModeName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION PREFIXES                                                                                             
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func taskProcNameForInvocationGraph ?@string inTaskName ?@lstring inProcName -> @lstring outName {
-  let s = "taskproc " + inTaskName + " " + inProcName
-  outName = .new {!s !inProcName.location}
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func procNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
@@ -114,12 +109,6 @@ func panicNameForInvocationGraph ?@string inName ?@lbigint inPriority -> @lstrin
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mangledNameForType ?name:@string inName -> @string outPrefix {
-  outPrefix = "type." + inName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func literalStringName ?let @uint inIndex -> @string outName {
   outName = "@string." + inIndex
 }
@@ -156,16 +145,26 @@ func %once functionResultVariableName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForFunction ?name:@string inName -> @string outName {
-  outName = "func." + inName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func llvmNameForProcedure ?@string inName -> @string outName {
   outName = "proc." + inName
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Services
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForServiceCall ?@string inName -> @string outName {
+  outName = "service.call." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForServiceImplementation ?@string inName -> @string outName {
+  outName = "service.implementation." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Sections
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForSectionCall ?@string inName -> @string outName {
@@ -178,6 +177,8 @@ func llvmNameForSectionImplementation ?@string inName -> @string outName {
   outName = "section.implementation." + inName
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Guards
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGuardCall ?@string inName -> @string outName {
@@ -197,17 +198,7 @@ func %once waitForGuardChangeFunctionName -> @string outName {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForServiceCall ?@string inName -> @string outName {
-  outName = "service.call." + inName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForServiceImplementation ?@string inName -> @string outName {
-  outName = "service.implementation." + inName
-}
-
+#!  Variable names
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForLocalVariable ?@string inName -> @string outName {
@@ -226,6 +217,8 @@ func llvmNameForRegister ?name:@string inName -> @string outName {
   outName = "register." + inName
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Attributes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once noWarningIfUnusedAttribute -> @string outResult {
@@ -252,6 +245,13 @@ func %once nullWhenPanicDisabledAttribute -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Tasks
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func taskProcNameForInvocationGraph ?@string inTaskName ?@lstring inProcName -> @lstring outName {
+  let s = "taskproc " + inTaskName + " " + inProcName
+  outName = .new {!s !inProcName.location}
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func stackNameForTask ?let @string inTaskName -> @string outResult {
