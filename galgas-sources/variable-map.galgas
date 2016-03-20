@@ -10,10 +10,26 @@ func initialVariableMap
   ?userMode:let @bool inAcceptUserMode
   ?registerAccess:let @accessKind inRegisterAccessKind
   ?globalsAreConstant:@bool inGlobalsAreConstant
+  ?returnTypeName:let @lstring inReturnTypeName
   -> @variableMap outVariableMap
 {
-#------------------------------------------------------- Add registers
   outVariableMap = .emptyMap
+#------------------------------------------------------- Add result variable ?
+  if inReturnTypeName.string != "" then
+    let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
+    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
+    [!?outVariableMap insertOutputFormalArgument
+      !lkey:resultVarName
+      !type:resultType
+      !readAccessAllowed:true
+      !variableKind:.localValue {!type:resultType !name:resultVarName.string}
+      !copyable:true
+      !fieldMap:{}
+      !canBeUsedAsInputParameter:true
+      !isConstant:false # Is not constant
+    ]
+  end
+#------------------------------------------------------- Add registers
   switch inRegisterAccessKind
   case noAccess :
     for () in inContext.mControlRegisterMap do

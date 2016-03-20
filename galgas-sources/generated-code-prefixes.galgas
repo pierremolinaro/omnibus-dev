@@ -161,6 +161,12 @@ func %once staticIntegerTypeName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once functionResultVariableName -> @string outName {
+  outName = "result"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func llvmNameForFunction ?name:@string inName -> @string outName {
   outName = "func." + inName
 }
@@ -255,6 +261,8 @@ func %once nullWhenPanicDisabledAttribute -> @string outResult {
   outResult = "nullWhenPanicDisabled"
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! Tasks
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func stackNameForTask ?let @string inTaskName -> @string outResult {

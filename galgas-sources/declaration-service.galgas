@@ -7,6 +7,7 @@ list @serviceDeclarationListAST {
   @lstring mServiceMode
   @lstringlist mServiceAttributeList
   @procFormalArgumentList mServiceFormalArgumentList
+  @lstring mReturnTypeName
   @instructionListAST mServiceInstructionList
   @location mEndOfServiceLocation
 }
@@ -30,15 +31,22 @@ syntax extension common_syntax {
       attributeList += !attribute
     end
     <procedure_formal_arguments> ?formalArguments:let serviceFormalArgumentList
+    @lstring returnTypeName
+    select
+      returnTypeName = ["" here]
+    or
+      $->$
+      $typeName$ ?returnTypeName
+    end
     ${$
-    @labelMap labelMap = {}
-    <instructionList> ?let instructionList !?labelMap
+    <instructionList> ?let instructionList !?*
     $}$
     ioServiceListAST +=
       !serviceName
       !modeName
       !attributeList
       !serviceFormalArgumentList
+      !returnTypeName
       !instructionList
       !.here
   }
@@ -100,6 +108,7 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
       !{!service.mServiceMode}
       !service.mServiceName
       !service.mServiceFormalArgumentList
+      !returnTypeName:service.mReturnTypeName
       !service.mServiceInstructionList
       !service.mEndOfServiceLocation
       !warnIfUnused:warnIfUnused

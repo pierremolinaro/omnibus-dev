@@ -75,6 +75,7 @@ map @routineMapIR {
   @bool mNullOnNoPanic
   @bool mGlobal
   @routineKind mKind
+  @unifiedTypeMap-proxy mReturnType # .null if no return value
 
   insert insertKey error message "routine '%K' is already defined"
   search searchKey error message "** internal error **"

@@ -120,6 +120,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !userMode:[procedureModeSet hasKey !userModeName ()]
     !registerAccess:.readWriteAccess
     !globalsAreConstant:false
+    !returnTypeName:["" nowhere]
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}

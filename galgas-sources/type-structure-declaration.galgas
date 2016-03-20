@@ -420,12 +420,14 @@ method @structureDeclaration functionSemanticAnalysis
       end
     end
   #--- Variable map
+    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !function.mResultTypeName}
     @variableMap variableMap = initialVariableMap (
       !routineNameForInvocation:funcNameForInvocationGraph (!inStructureType !function.mFunctionName).string
       !context:inContext
       !userMode:[functionModeSet hasKey !"user"]
       !registerAccess:.readWriteAccess
       !globalsAreConstant:true
+      !returnTypeName:function.mResultTypeName
     )
   #--- Add "self" variable to variable map
     [!?variableMap insertUsedLocalConstant
@@ -437,19 +439,6 @@ method @structureDeclaration functionSemanticAnalysis
       !fieldMap:{} # fieldMap
       !canBeUsedAsInputParameter:false # mCanBeUsedAsInputParameter
       !isConstant:true # mIsConstant
-    ]
-  #--- Add 'result" variable
-    let resultVarName = @lstring.new {!"result" !function.mResultTypeName.location}
-    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !function.mResultTypeName}
-    [!?variableMap insertOutputFormalArgument
-      !lkey:resultVarName
-      !type:resultType
-      !readAccessAllowed:true
-      !variableKind:.localValue {!type:resultType !name:resultVarName.string}
-      !copyable:true
-      !fieldMap:{}
-      !canBeUsedAsInputParameter:true
-      !isConstant:false # Is not constant
     ]
   #--- Analyse formal arguments
     @procFormalArgumentListForGeneration formalArguments = {}
@@ -497,7 +486,7 @@ method @structureDeclaration functionSemanticAnalysis
       !formalArguments
       !instructionGenerationList
       !resultType
-      !resultVarName.string
+      !functionResultVariableName ()
       !warnIfUnused
     ]  
   end
@@ -518,6 +507,7 @@ method @structureDeclaration procedureSemanticAnalysis
       !procedure.mProcedureModeList
       !procedure.mProcedureName
       !procedure.mProcedureFormalArgumentList
+      !returnTypeName:procedure.mReturnTypeName
       !procedure.mProcedureInstructionList
       !procedure.mEndOfProcedureDeclaration
       !warnIfUnused:true

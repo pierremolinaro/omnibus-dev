@@ -37,6 +37,7 @@ list @procedureDeclarationListAST {
   @lstring mProcedureName
   @lstringlist mProcedureAttributeList
   @procFormalArgumentList mProcedureFormalArgumentList
+  @lstring mReturnTypeName # Empty string if no return value
   @instructionListAST mProcedureInstructionList
   @location mEndOfProcedureDeclaration
 }
@@ -63,15 +64,22 @@ syntax extension common_syntax {
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
+    @lstring returnTypeName
+    select
+      returnTypeName = ["" here]
+    or
+      $->$
+      $typeName$ ?returnTypeName
+    end
     ${$
-    @labelMap labelMap = {}
-    <instructionList> ?let instructionList !?labelMap
+    <instructionList> ?let instructionList !?*
     $}$
     ioProcListAST +=
       !procModeList
       !procName
       !attributeList
       !procFormalArgumentList
+      !returnTypeName
       !instructionList
       !.here
   }
@@ -189,6 +197,7 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
       !procedure.mProcedureModeList
       !procedure.mProcedureName
       !procedure.mProcedureFormalArgumentList
+      !returnTypeName:procedure.mReturnTypeName
       !procedure.mProcedureInstructionList
       !procedure.mEndOfProcedureDeclaration
       !warnIfUnused:warnIfUnused

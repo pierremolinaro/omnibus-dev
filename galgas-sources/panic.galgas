@@ -121,6 +121,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !userMode:false
     !registerAccess:.readWriteAccess
     !globalsAreConstant:false
+    !returnTypeName:["" nowhere]
   )
 #--- Insert predefined input arguments
   let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
