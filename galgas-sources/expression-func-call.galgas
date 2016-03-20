@@ -167,7 +167,6 @@ override method @functionCallInExpressionAST analyzeExpression
     !error:mFunctionName.location
   )
 #---
-  var s = llvmNameForFunction (!name:mFunctionName.string) + " ("
   if [functionSignature length] != [mParameterList length] then
     error mFunctionName : "this function declares " + [functionSignature length] 
       + " formal parameters, the call names " + [mParameterList length] + " effective arguments"
@@ -211,11 +210,8 @@ override method @functionCallInExpressionAST analyzeExpression
         error actual.mSelector : "the actual parameter has the $" + [argumentIR.mType key]
          + ", but the formal argument has the $" + [formal.mType key] + " type"
       end
-    between 
-      s += ", "
     end
   end
-  s += ")"
 #--- New LLVM variable for function call result
   getNewTempVariable (!functionResultType !?ioTemporaries ?outResult)
 #--- Code generation
