@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @routineKind {
-  case procedure
+  case function
   case section
   case service
 }
@@ -129,7 +129,7 @@ method @procedureDeclarationListAST enterInContext
           !false # not mutating
           !procedureModeMap
           !signature
-          !.procedure
+          !.function
           !weakProcedure
           !returnType
         ]
@@ -139,7 +139,7 @@ method @procedureDeclarationListAST enterInContext
           !false # not mutating
           !procedureModeMap
           !signature
-          !.procedure
+          !.function
           !weakProcedure
           !returnType
         ]
@@ -150,7 +150,7 @@ method @procedureDeclarationListAST enterInContext
         !false # not mutating
         !procedureModeMap
         !signature
-        !.procedure
+        !.function
         !weakProcedure
         !returnType
       ]

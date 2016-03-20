@@ -102,7 +102,7 @@ proc routineSemanticAnalysis
 #--- Variable map
   @lstring routineNameForInvocationGraph
   switch inRoutineKind
-  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!inSelfType !inRoutineName)
+  case function : routineNameForInvocationGraph = procNameForInvocationGraph (!inSelfType !inRoutineName)
   case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inSelfType !inRoutineName)
   case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inSelfType !inRoutineName)
   end
@@ -230,7 +230,7 @@ method @routineMapIR-element llvmCodeGeneration
 {
   @string routineName
   switch mKind
-  case procedure : routineName = llvmNameForProcedure (!lkey.string)
+  case function : routineName = llvmNameForFunction (!lkey.string)
   case section : routineName = llvmNameForSectionImplementation (!lkey.string)
   case service : routineName = llvmNameForServiceImplementation (!lkey.string)
   end

@@ -193,7 +193,7 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
     end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
-      !.procedure
+      !.function
       !procedure.mProcedureModeList
       !procedure.mProcedureName
       !procedure.mProcedureFormalArgumentList

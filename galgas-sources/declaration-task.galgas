@@ -291,7 +291,7 @@ method @taskList-element semanticAnalysis
   for procedure in mTaskProcList do
     routineSemanticAnalysis (
       !receiverType:taskType
-      !.procedure
+      !.function
       !{!.new {!userModeName () !procedure.mProcedureName.location}}
       !procedure.mProcedureName
       !procedure.mProcedureFormalArgumentList
@@ -410,7 +410,7 @@ method @taskMapIR generateCode
     ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "loop:\n"
-    ioLLVMcode += "  call void @" + llvmNameForProcedure (!"$" + task.mTaskName + ".loop") + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + ".loop") + " " + effectiveParameter + "\n"
     ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "}\n\n"
   end

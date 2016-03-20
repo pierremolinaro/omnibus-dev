@@ -2,6 +2,13 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @functionCallEffectiveParameterList {
+  @lstring mSelector
+  @expressionAST mExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 class @constructorCall : @expressionAST {
   @lstring mTypeName
   @functionCallEffectiveParameterList mParameterList
@@ -15,12 +22,7 @@ class @constructorCall : @expressionAST {
 syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
-    @lstring optionalTypeName
-#    select
-#      optionalTypeName = .new {!"" !.here}
-#    or
-      $typeName$ ?optionalTypeName
-#    end
+    $typeName$ ?let typeName
     $($
     @functionCallEffectiveParameterList parameterList = {}
     repeat
@@ -31,7 +33,7 @@ syntax extension common_syntax {
     end
     let errorLocation = @location.here
     $)$
-    outExpression = @constructorCall.new {!optionalTypeName !parameterList !errorLocation}
+    outExpression = @constructorCall.new {!typeName !parameterList !errorLocation}
   }
 
 }

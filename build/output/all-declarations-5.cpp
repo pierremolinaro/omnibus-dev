@@ -980,26 +980,14 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T2 priority 2 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
-  "  var flagSem = true\n"
-  "  var flagTop = true\n"
   "\n"
   "  func loop () {\n"
   "    let r = s.P_until (!deadline:self.top)\n"
   "    if r then\n"
-  "      if self.flagSem then\n"
-  "        ledOn (!LED_L1)\n"
-  "      else\n"
-  "        ledOff (!LED_L1)\n"
-  "      end\n"
-  "      self.flagSem = self.flagSem xor true\n"
+  "      ledToggle (!LED_L1)\n"
   "    else\n"
   "      self.top += 400\n"
-  "      if self.flagTop then\n"
-  "        ledOn (!LED_L4)\n"
-  "      else\n"
-  "        ledOff (!LED_L4)\n"
-  "      end\n"
-  "      self.flagTop = self.flagTop xor true\n"
+  "      ledToggle (!LED_L4)\n"
   "    end\n"
   "  }\n"
   "}\n"
@@ -1010,7 +998,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "04-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1800, // Text length
+  1530, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -10243,7 +10231,7 @@ typeComparisonResult cPtr_functionCallInExpressionAST::dynamicObjectCompare (con
     result = mAttribute_mFunctionName.objectCompare (p->mAttribute_mFunctionName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mParameterList.objectCompare (p->mAttribute_mParameterList) ;
+    result = mAttribute_mEffectiveParameterList.objectCompare (p->mAttribute_mEffectiveParameterList) ;
   }
   return result ;
 }
@@ -10278,7 +10266,7 @@ GALGAS_expressionAST () {
 GALGAS_functionCallInExpressionAST GALGAS_functionCallInExpressionAST::constructor_default (LOCATION_ARGS) {
   return GALGAS_functionCallInExpressionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
                                                               GALGAS_lstring::constructor_default (HERE),
-                                                              GALGAS_functionCallEffectiveParameterList::constructor_emptyList (HERE)
+                                                              GALGAS_effectiveParameterListAST::constructor_emptyList (HERE)
                                                               COMMA_THERE) ;
 }
 
@@ -10293,11 +10281,11 @@ GALGAS_expressionAST (inSourcePtr) {
 
 GALGAS_functionCallInExpressionAST GALGAS_functionCallInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mReceiverName,
                                                                                         const GALGAS_lstring & inAttribute_mFunctionName,
-                                                                                        const GALGAS_functionCallEffectiveParameterList & inAttribute_mParameterList
+                                                                                        const GALGAS_effectiveParameterListAST & inAttribute_mEffectiveParameterList
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_functionCallInExpressionAST result ;
-  if (inAttribute_mReceiverName.isValid () && inAttribute_mFunctionName.isValid () && inAttribute_mParameterList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_functionCallInExpressionAST (inAttribute_mReceiverName, inAttribute_mFunctionName, inAttribute_mParameterList COMMA_THERE)) ;
+  if (inAttribute_mReceiverName.isValid () && inAttribute_mFunctionName.isValid () && inAttribute_mEffectiveParameterList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_functionCallInExpressionAST (inAttribute_mReceiverName, inAttribute_mFunctionName, inAttribute_mEffectiveParameterList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -10340,20 +10328,20 @@ GALGAS_lstring cPtr_functionCallInExpressionAST::getter_mFunctionName (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_functionCallEffectiveParameterList GALGAS_functionCallInExpressionAST::getter_mParameterList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_functionCallEffectiveParameterList result ;
+GALGAS_effectiveParameterListAST GALGAS_functionCallInExpressionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_effectiveParameterListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_functionCallInExpressionAST * p = (const cPtr_functionCallInExpressionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallInExpressionAST) ;
-    result = p->mAttribute_mParameterList ;
+    result = p->mAttribute_mEffectiveParameterList ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_functionCallEffectiveParameterList cPtr_functionCallInExpressionAST::getter_mParameterList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mParameterList ;
+GALGAS_effectiveParameterListAST cPtr_functionCallInExpressionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mEffectiveParameterList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10362,12 +10350,12 @@ GALGAS_functionCallEffectiveParameterList cPtr_functionCallInExpressionAST::gett
 
 cPtr_functionCallInExpressionAST::cPtr_functionCallInExpressionAST (const GALGAS_lstring & in_mReceiverName,
                                                                     const GALGAS_lstring & in_mFunctionName,
-                                                                    const GALGAS_functionCallEffectiveParameterList & in_mParameterList
+                                                                    const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList
                                                                     COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mAttribute_mReceiverName (in_mReceiverName),
 mAttribute_mFunctionName (in_mFunctionName),
-mAttribute_mParameterList (in_mParameterList) {
+mAttribute_mEffectiveParameterList (in_mEffectiveParameterList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10383,7 +10371,7 @@ void cPtr_functionCallInExpressionAST::description (C_String & ioString,
   ioString << ", " ;
   mAttribute_mFunctionName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mParameterList.description (ioString, inIndentation+1) ;
+  mAttribute_mEffectiveParameterList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -10391,7 +10379,7 @@ void cPtr_functionCallInExpressionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_functionCallInExpressionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_functionCallInExpressionAST (mAttribute_mReceiverName, mAttribute_mFunctionName, mAttribute_mParameterList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_functionCallInExpressionAST (mAttribute_mReceiverName, mAttribute_mFunctionName, mAttribute_mEffectiveParameterList COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -15399,6 +15387,208 @@ GALGAS_selfVarAssignmentInstructionAST GALGAS_selfVarAssignmentInstructionAST::e
       result = *p ;
     }else{
       inCompiler->castError ("selfVarAssignmentInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_selfVarOperatorAssignInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mTargetVarName.objectCompare (p->mAttribute_mTargetVarName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_selfVarOperatorAssignInstructionAST::objectCompare (const GALGAS_selfVarOperatorAssignInstructionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfVarOperatorAssignInstructionAST::GALGAS_selfVarOperatorAssignInstructionAST (void) :
+GALGAS_instructionAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfVarOperatorAssignInstructionAST::GALGAS_selfVarOperatorAssignInstructionAST (const cPtr_selfVarOperatorAssignInstructionAST * inSourcePtr) :
+GALGAS_instructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_selfVarOperatorAssignInstructionAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfVarOperatorAssignInstructionAST GALGAS_selfVarOperatorAssignInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mTargetVarName,
+                                                                                                        const GALGAS_expressionAST & inAttribute_mSourceExpression,
+                                                                                                        const GALGAS_operatorAssignKind & inAttribute_mOperator
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_selfVarOperatorAssignInstructionAST result ;
+  if (inAttribute_mTargetVarName.isValid () && inAttribute_mSourceExpression.isValid () && inAttribute_mOperator.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_selfVarOperatorAssignInstructionAST (inAttribute_mTargetVarName, inAttribute_mSourceExpression, inAttribute_mOperator COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_selfVarOperatorAssignInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
+    result = p->mAttribute_mTargetVarName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_selfVarOperatorAssignInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTargetVarName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST GALGAS_selfVarOperatorAssignInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_expressionAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
+    result = p->mAttribute_mSourceExpression ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST cPtr_selfVarOperatorAssignInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSourceExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignKind GALGAS_selfVarOperatorAssignInstructionAST::getter_mOperator (UNUSED_LOCATION_ARGS) const {
+  GALGAS_operatorAssignKind result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
+    result = p->mAttribute_mOperator ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignKind cPtr_selfVarOperatorAssignInstructionAST::getter_mOperator (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOperator ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                            Pointer class for @selfVarOperatorAssignInstructionAST class                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_selfVarOperatorAssignInstructionAST::cPtr_selfVarOperatorAssignInstructionAST (const GALGAS_lstring & in_mTargetVarName,
+                                                                                    const GALGAS_expressionAST & in_mSourceExpression,
+                                                                                    const GALGAS_operatorAssignKind & in_mOperator
+                                                                                    COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (THERE),
+mAttribute_mTargetVarName (in_mTargetVarName),
+mAttribute_mSourceExpression (in_mSourceExpression),
+mAttribute_mOperator (in_mOperator) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_selfVarOperatorAssignInstructionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_selfVarOperatorAssignInstructionAST ;
+}
+
+void cPtr_selfVarOperatorAssignInstructionAST::description (C_String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString << "[@selfVarOperatorAssignInstructionAST:" ;
+  mAttribute_mTargetVarName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mOperator.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_selfVarOperatorAssignInstructionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_selfVarOperatorAssignInstructionAST (mAttribute_mTargetVarName, mAttribute_mSourceExpression, mAttribute_mOperator COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @selfVarOperatorAssignInstructionAST type                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_selfVarOperatorAssignInstructionAST ("selfVarOperatorAssignInstructionAST",
+                                                            & kTypeDescriptor_GALGAS_instructionAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_selfVarOperatorAssignInstructionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_selfVarOperatorAssignInstructionAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_selfVarOperatorAssignInstructionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_selfVarOperatorAssignInstructionAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfVarOperatorAssignInstructionAST GALGAS_selfVarOperatorAssignInstructionAST::extractObject (const GALGAS_object & inObject,
+                                                                                                      C_Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_selfVarOperatorAssignInstructionAST result ;
+  const GALGAS_selfVarOperatorAssignInstructionAST * p = (const GALGAS_selfVarOperatorAssignInstructionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_selfVarOperatorAssignInstructionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("selfVarOperatorAssignInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

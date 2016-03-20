@@ -90,7 +90,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     !false # not mutating
     !procedureModeMap
     !signature
-    !.procedure
+    !.function
     !false # Not weak
     !returnType
   ]
@@ -178,7 +178,7 @@ method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
-  let procName = llvmNameForProcedure (!"." + lkey.string)
+  let procName = llvmNameForFunction (!"." + lkey.string)
   ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
   ioLLVMcode += "declare void @" + procName + " ("
   for () in mFormalArgumentListForGeneration

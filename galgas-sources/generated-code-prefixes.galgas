@@ -44,11 +44,11 @@ func %once isrModeName -> @string outResult {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION PREFIXES                                                                                             
+#! Names for invocation graph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func procNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
-  var s = "proc"
+  var s = "func"
   if inReceiverType != .null then
     s += " $" + [inReceiverType key]
   end
@@ -103,10 +103,12 @@ func initNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lbigint 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func panicNameForInvocationGraph ?@string inName ?@lbigint inPriority -> @lstring outName {
-  let s = "panic . " + inName + " " + inPriority.bigint
+  let s = "panic " + inName + " " + inPriority.bigint
   outName = .new {!s !inPriority.location}
 }
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!  Literal Strings
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func literalStringName ?let @uint inIndex -> @string outName {
@@ -145,8 +147,8 @@ func %once functionResultVariableName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForProcedure ?@string inName -> @string outName {
-  outName = "proc." + inName
+func llvmNameForFunction ?@string inName -> @string outName {
+  outName = "func." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
