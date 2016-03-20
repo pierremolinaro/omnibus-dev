@@ -5,7 +5,7 @@ target "teensy-3-1-tp"
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
-  proc loop () {
+  func loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L0)
     self.compteur +%= 500
@@ -22,7 +22,7 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
 
-  proc loop () {
+  func loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L1)
     self.compteur +%= 499
@@ -37,7 +37,7 @@ task T2 priority 2 stackSize 512 {
 task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
 
-  proc loop () {
+  func loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L2)
     self.compteur +%= 498
@@ -52,7 +52,7 @@ task T3 priority 3 stackSize 512 {
 task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
-  proc loop () {
+  func loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L3)
     self.compteur +%= 497
@@ -67,7 +67,7 @@ task T4 priority 4 stackSize 512 {
 task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
 
-  proc loop () {
+  func loop () {
     waitUntilMS (!deadline:self.compteur)
     ledOn (!LED_L4)
     self.compteur +%= 496

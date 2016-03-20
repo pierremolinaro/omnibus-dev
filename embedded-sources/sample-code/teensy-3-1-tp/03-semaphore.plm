@@ -25,8 +25,8 @@ struct $semaphore {
 //------------------------------------------------*
 
 var s = $semaphore (!value:0) {
-  proc $T1.loop
-  proc $T2.loop
+  func $T1.loop
+  func $T2.loop
 }
 
 //------------------------------------------------*
@@ -42,7 +42,7 @@ task T1 priority 1 stackSize 512 {
     self.top += 2
   }
   
-  proc loop () {
+  func loop () {
     waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 250
@@ -58,7 +58,7 @@ task T1 priority 1 stackSize 512 {
 
 task T2 priority 2 stackSize 512 {
 
-  proc loop () {
+  func loop () {
     s.P ()
     ledOn (!LED_L2)
     s.P ()

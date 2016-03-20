@@ -96,17 +96,6 @@ func guardNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func funcNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
-  var s = "func"
-  if inReceiverType != .null then
-    s += " $" + [inReceiverType key]
-  end
-  s += " " + inName
-  outName = .new {!s !inName.location}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func initNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lbigint inPriority -> @lstring outName {
   var s = "init"
   if inReceiverType != .null then

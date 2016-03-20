@@ -4536,28 +4536,28 @@ void routine_generateSectionDispatcher (const GALGAS_string constinArgument_inCu
                                         const GALGAS__32_stringlist constinArgument_inSectionList,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_sectionAssemblyCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-code.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 141)) ;
-  ioArgument_ioAssemblerCode.plusAssign_operation(var_sectionAssemblyCode.getter_stringByReplacingStringByString (GALGAS_string ("!PROC!"), function_llvmNameForProcedure (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 142)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 142)) ;
-  cEnumerator__32_stringlist enumerator_5846 (constinArgument_inSectionList, kEnumeration_up) ;
-  GALGAS_uint index_5799 ((uint32_t) 0) ;
-  while (enumerator_5846.hasCurrentObject ()) {
-    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 144)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 144)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_5846.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 145)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_5799.getter_string (SOURCE_FILE ("declaration-section.galgas", 146)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 146)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 147)) ;
-    enumerator_5846.gotoNextObject () ;
-    index_5799.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 143)) ;
+  GALGAS_string var_sectionAssemblyCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-code.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 147)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 147)) ;
+  ioArgument_ioAssemblerCode.plusAssign_operation(var_sectionAssemblyCode.getter_stringByReplacingStringByString (GALGAS_string ("!PROC!"), function_llvmNameForProcedure (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 148)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 148)) ;
+  cEnumerator__32_stringlist enumerator_6021 (constinArgument_inSectionList, kEnumeration_up) ;
+  GALGAS_uint index_5974 ((uint32_t) 0) ;
+  while (enumerator_6021.hasCurrentObject ()) {
+    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 150)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 150)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6021.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 151)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_5974.getter_string (SOURCE_FILE ("declaration-section.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 152)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 153)) ;
+    enumerator_6021.gotoNextObject () ;
+    index_5974.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 149)) ;
   }
-  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 149)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 149)) ;
-  cEnumerator__32_stringlist enumerator_6291 (constinArgument_inSectionList, kEnumeration_up) ;
-  GALGAS_uint index_6251 ((uint32_t) 0) ;
-  while (enumerator_6291.hasCurrentObject ()) {
-    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 151)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 151)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6291.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 152)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_6251.getter_string (SOURCE_FILE ("declaration-section.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 153)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 154)) ;
-    enumerator_6291.gotoNextObject () ;
-    index_6251.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 150)) ;
+  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 155)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 155)) ;
+  cEnumerator__32_stringlist enumerator_6466 (constinArgument_inSectionList, kEnumeration_up) ;
+  GALGAS_uint index_6426 ((uint32_t) 0) ;
+  while (enumerator_6466.hasCurrentObject ()) {
+    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 157)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6466.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 158)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_6426.getter_string (SOURCE_FILE ("declaration-section.galgas", 159)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 159)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 160)) ;
+    enumerator_6466.gotoNextObject () ;
+    index_6426.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 156)) ;
   }
 }
 
@@ -4574,26 +4574,26 @@ void routine_generateServiceDispatcher (const GALGAS_string constinArgument_inCu
                                         const GALGAS__32_stringlist constinArgument_inServiceList,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator__32_stringlist enumerator_6901 (constinArgument_inServiceList, kEnumeration_up) ;
-  GALGAS_uint index_6871 ((uint32_t) 0) ;
-  while (enumerator_6901.hasCurrentObject ()) {
-    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 177)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6901.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 178)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_6871.getter_string (SOURCE_FILE ("declaration-service.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 179)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 180)) ;
-    enumerator_6901.gotoNextObject () ;
-    index_6871.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 176)) ;
+  cEnumerator__32_stringlist enumerator_7076 (constinArgument_inServiceList, kEnumeration_up) ;
+  GALGAS_uint index_7046 ((uint32_t) 0) ;
+  while (enumerator_7076.hasCurrentObject ()) {
+    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 183)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_7076.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 184)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_7046.getter_string (SOURCE_FILE ("declaration-service.galgas", 185)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 185)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 186)) ;
+    enumerator_7076.gotoNextObject () ;
+    index_7046.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 182)) ;
   }
-  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 182)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 182)), inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 182)) ;
-  cEnumerator__32_stringlist enumerator_7346 (constinArgument_inServiceList, kEnumeration_up) ;
-  GALGAS_uint index_7306 ((uint32_t) 0) ;
-  while (enumerator_7346.hasCurrentObject ()) {
-    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 184)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 184)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_7346.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 185)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_7306.getter_string (SOURCE_FILE ("declaration-service.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 186)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 187)) ;
-    enumerator_7346.gotoNextObject () ;
-    index_7306.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 183)) ;
+  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 188)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 188)), inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 188)) ;
+  cEnumerator__32_stringlist enumerator_7521 (constinArgument_inServiceList, kEnumeration_up) ;
+  GALGAS_uint index_7481 ((uint32_t) 0) ;
+  while (enumerator_7521.hasCurrentObject ()) {
+    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 190)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 190)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_7521.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 191)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_7481.getter_string (SOURCE_FILE ("declaration-service.galgas", 192)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 192)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 193)) ;
+    enumerator_7521.gotoNextObject () ;
+    index_7481.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 189)) ;
   }
 }
 
@@ -7079,65 +7079,6 @@ C_galgas_function_descriptor functionDescriptor_guardNameForInvocationGraph ("gu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Function 'funcNameForInvocationGraph'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring function_funcNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_proxy inArgument_inReceiverType,
-                                                    GALGAS_lstring inArgument_inName,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring result_outName ; // Returned variable
-  GALGAS_string var_s = GALGAS_string ("func") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 101)))).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)) ;
-  }
-  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 104)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 104)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 105)) ;
-//---
-  return result_outName ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_funcNameForInvocationGraph [3] = {
-  & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
-  & kTypeDescriptor_GALGAS_lstring,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_funcNameForInvocationGraph (C_Compiler * inCompiler,
-                                                                           const cObjectArray & inEffectiveParameterArray,
-                                                                           const GALGAS_location & /* §§ inErrorLocation */
-                                                                           COMMA_LOCATION_ARGS) {
-  const GALGAS_unifiedTypeMap_2D_proxy operand0 = GALGAS_unifiedTypeMap_2D_proxy::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                                                                 inCompiler
-                                                                                                 COMMA_THERE) ;
-  const GALGAS_lstring operand1 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
-                                                                 inCompiler
-                                                                 COMMA_THERE) ;
-  return function_funcNameForInvocationGraph (operand0,
-                                              operand1,
-                                              inCompiler
-                                              COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_funcNameForInvocationGraph ("funcNameForInvocationGraph",
-                                                                            functionWithGenericHeader_funcNameForInvocationGraph,
-                                                                            & kTypeDescriptor_GALGAS_lstring,
-                                                                            2,
-                                                                            functionArgs_funcNameForInvocationGraph) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Function 'initNameForInvocationGraph'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7148,12 +7089,12 @@ GALGAS_lstring function_initNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_pro
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
   GALGAS_string var_s = GALGAS_string ("init") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 112)))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, inArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 101)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 113)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 113)) ;
+    var_s.plusAssign_operation(GALGAS_string (" $").add_operation (inArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 102)) ;
   }
-  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 115)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 115)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 115)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 116)) ;
+  var_s.plusAssign_operation(GALGAS_string (" ").add_operation (inArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 104)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 104)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 105)) ;
 //---
   return result_outName ;
 }
@@ -7206,8 +7147,8 @@ GALGAS_lstring function_panicNameForInvocationGraph (GALGAS_string inArgument_in
                                                      C_Compiler * inCompiler
                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  GALGAS_string var_s = GALGAS_string ("panic . ").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 122)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 122)).add_operation (inArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 122)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 123)) ;
+  GALGAS_string var_s = GALGAS_string ("panic . ").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 111)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 111)).add_operation (inArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 111)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s, inArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 112)) ;
 //---
   return result_outName ;
 }
@@ -7259,7 +7200,7 @@ GALGAS_string function_mangledNameForType (GALGAS_string inArgument_inName,
                                            C_Compiler * inCompiler
                                            COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outPrefix ; // Returned variable
-  result_outPrefix = GALGAS_string ("type.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 129)) ;
+  result_outPrefix = GALGAS_string ("type.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 118)) ;
 //---
   return result_outPrefix ;
 }
@@ -7306,7 +7247,7 @@ GALGAS_string function_literalStringName (const GALGAS_uint & constinArgument_in
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("@string.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 135)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 135)) ;
+  result_outName = GALGAS_string ("@string.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 124)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 124)) ;
 //---
   return result_outName ;
 }
@@ -7353,7 +7294,7 @@ GALGAS_string function_literalCharacterArrayName (const GALGAS_uint & constinArg
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 141)) ;
+  result_outName = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 130)) ;
 //---
   return result_outName ;
 }
@@ -7680,7 +7621,7 @@ GALGAS_string function_llvmNameForFunction (GALGAS_string inArgument_inName,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("func.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 171)) ;
+  result_outName = GALGAS_string ("func.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 160)) ;
 //---
   return result_outName ;
 }
@@ -7727,7 +7668,7 @@ GALGAS_string function_llvmNameForProcedure (GALGAS_string inArgument_inName,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("proc.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 177)) ;
+  result_outName = GALGAS_string ("proc.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 166)) ;
 //---
   return result_outName ;
 }
@@ -7774,7 +7715,7 @@ GALGAS_string function_llvmNameForSectionCall (GALGAS_string inArgument_inName,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("section.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 183)) ;
+  result_outName = GALGAS_string ("section.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 172)) ;
 //---
   return result_outName ;
 }
@@ -7821,7 +7762,7 @@ GALGAS_string function_llvmNameForSectionImplementation (GALGAS_string inArgumen
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("section.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 189)) ;
+  result_outName = GALGAS_string ("section.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 178)) ;
 //---
   return result_outName ;
 }
@@ -7868,7 +7809,7 @@ GALGAS_string function_llvmNameForGuardCall (GALGAS_string inArgument_inName,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("guard.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 195)) ;
+  result_outName = GALGAS_string ("guard.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 184)) ;
 //---
   return result_outName ;
 }
@@ -7915,7 +7856,7 @@ GALGAS_string function_llvmNameForGuardImplementation (GALGAS_string inArgument_
                                                        C_Compiler * inCompiler
                                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("guard.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 201)) ;
+  result_outName = GALGAS_string ("guard.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 190)) ;
 //---
   return result_outName ;
 }
@@ -8032,7 +7973,7 @@ GALGAS_string function_llvmNameForServiceCall (GALGAS_string inArgument_inName,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("service.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 213)) ;
+  result_outName = GALGAS_string ("service.call.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 202)) ;
 //---
   return result_outName ;
 }
@@ -8079,7 +8020,7 @@ GALGAS_string function_llvmNameForServiceImplementation (GALGAS_string inArgumen
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("service.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 219)) ;
+  result_outName = GALGAS_string ("service.implementation.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 208)) ;
 //---
   return result_outName ;
 }
@@ -8126,7 +8067,7 @@ GALGAS_string function_llvmNameForLocalVariable (GALGAS_string inArgument_inName
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("var.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 225)) ;
+  result_outName = GALGAS_string ("var.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 214)) ;
 //---
   return result_outName ;
 }
@@ -8173,7 +8114,7 @@ GALGAS_string function_llvmNameForGlobalVariable (GALGAS_string inArgument_inNam
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("gvar.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 231)) ;
+  result_outName = GALGAS_string ("gvar.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 220)) ;
 //---
   return result_outName ;
 }
@@ -8220,7 +8161,7 @@ GALGAS_string function_llvmNameForRegister (GALGAS_string inArgument_inName,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("register.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 237)) ;
+  result_outName = GALGAS_string ("register.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 226)) ;
 //---
   return result_outName ;
 }
@@ -8547,7 +8488,7 @@ GALGAS_string function_stackNameForTask (const GALGAS_string & constinArgument_i
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@task.stack.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 269)) ;
+  result_outResult = GALGAS_string ("@task.stack.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 258)) ;
 //---
   return result_outResult ;
 }
@@ -8594,7 +8535,7 @@ GALGAS_string function_initNameForTaskType (const GALGAS_string & constinArgumen
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@task.init.$").add_operation (constinArgument_inTaskTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 275)) ;
+  result_outResult = GALGAS_string ("@task.init.$").add_operation (constinArgument_inTaskTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 264)) ;
 //---
   return result_outResult ;
 }
@@ -8641,7 +8582,7 @@ GALGAS_string function_stackAddressForTask (const GALGAS_string & constinArgumen
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("%task.stack.address.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 281)) ;
+  result_outResult = GALGAS_string ("%task.stack.address.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 270)) ;
 //---
   return result_outResult ;
 }
@@ -8688,7 +8629,7 @@ GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgu
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 287)) ;
+  result_outResult = GALGAS_string ("@task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 276)) ;
 //---
   return result_outResult ;
 }
@@ -8736,7 +8677,7 @@ GALGAS_string function_llvmNameForTaskVariable (GALGAS_string inArgument_inTaskN
                                                 C_Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 293)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 293)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 293)) ;
+  result_outName = GALGAS_string ("task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 282)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 282)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 282)) ;
 //---
   return result_outName ;
 }
@@ -10766,7 +10707,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
 const char * gWrapperFileContent_2_targetTemplates = "\n"
   "pointerSize 32\n"
   "\n"
-  "panic proc : $int32 $uint32\n"
+  "panic func : $int32 $uint32\n"
   "\n"
   "import \"files/mk20dx256.plm\"\n"
   "import \"files/teensy-3-1-boot.plm\"\n"
@@ -12998,617 +12939,617 @@ const cRegularFileWrapper gWrapperFile_4_targetTemplates (
 //--- File 'files/teensy-3-1-default-isr.plm'
 
 const char * gWrapperFileContent_5_targetTemplates = "\n"
-  "required proc NMIHandler `isr ()\n"
+  "required func NMIHandler `isr ()\n"
   "\n"
-  "proc NMIHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func NMIHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 2\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "//required proc HardFaultHandler `isr ()\n"
+  "//required func HardFaultHandler `isr ()\n"
   "//\n"
-  "//proc HardFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "//func HardFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "//  panic 3\n"
   "//}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc MemManageHandler `isr ()\n"
+  "required func MemManageHandler `isr ()\n"
   "\n"
-  "proc MemManageHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func MemManageHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 4\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc BusFaultHandler `isr ()\n"
+  "required func BusFaultHandler `isr ()\n"
   "\n"
-  "proc BusFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func BusFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 5\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc UsageFaultHandler `isr ()\n"
+  "required func UsageFaultHandler `isr ()\n"
   "\n"
-  "proc UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 6\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "//required proc svcHandler `isr ()\n"
+  "//required func svcHandler `isr ()\n"
   "//\n"
-  "//proc svcHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "//func svcHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "//  panic 11\n"
   "//}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DebugMonitorHandler `isr ()\n"
+  "required func DebugMonitorHandler `isr ()\n"
   "\n"
-  "proc DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 12\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc PendSVHandler `isr ()\n"
+  "required func PendSVHandler `isr ()\n"
   "\n"
-  "proc PendSVHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func PendSVHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 14\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel0TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel0TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 16\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel1TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel1TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 17\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel2TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel2TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 18\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel3TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel3TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 19\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel4TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel4TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 20\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel5TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel5TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 21\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel6TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel6TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 22\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel7TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel7TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 23\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel8TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel8TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 24\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel9TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel9TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 25\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel10TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel10TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 26\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel11TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel11TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 27\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel12TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel12TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 28\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel13TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel13TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 29\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel14TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel14TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 30\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAChannel15TranfertCompleteHandler `isr ()\n"
+  "required func DMAChannel15TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 31\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DMAErrorHandler `isr ()\n"
+  "required func DMAErrorHandler `isr ()\n"
   "\n"
-  "proc DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 32\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc flashMemoryCommandCompleteHandler `isr ()\n"
+  "required func flashMemoryCommandCompleteHandler `isr ()\n"
   "\n"
-  "proc flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 34\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc flashMemoryReadCollisionHandler `isr ()\n"
+  "required func flashMemoryReadCollisionHandler `isr ()\n"
   "\n"
-  "proc flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 35\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc modeControllerHandler `isr ()\n"
+  "required func modeControllerHandler `isr ()\n"
   "\n"
-  "proc modeControllerHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func modeControllerHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 36\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc LLWUHandler `isr ()\n"
+  "required func LLWUHandler `isr ()\n"
   "\n"
-  "proc LLWUHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func LLWUHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 37\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc WDOGEWMHandler `isr ()\n"
+  "required func WDOGEWMHandler `isr ()\n"
   "\n"
-  "proc WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 38\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc I2C0Handler `isr ()\n"
+  "required func I2C0Handler `isr ()\n"
   "\n"
-  "proc I2C0Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func I2C0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 40\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc I2C1Handler `isr ()\n"
+  "required func I2C1Handler `isr ()\n"
   "\n"
-  "proc I2C1Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func I2C1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 41\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc SPI0Handler `isr ()\n"
+  "required func SPI0Handler `isr ()\n"
   "\n"
-  "proc SPI0Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func SPI0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 42\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc SPI1Handler `isr ()\n"
+  "required func SPI1Handler `isr ()\n"
   "\n"
-  "proc SPI1Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func SPI1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 43\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CAN0MessageBufferHandler `isr ()\n"
+  "required func CAN0MessageBufferHandler `isr ()\n"
   "\n"
-  "proc CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 45\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CAN0BusOffHandler `isr ()\n"
+  "required func CAN0BusOffHandler `isr ()\n"
   "\n"
-  "proc CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 46\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CAN0ErrorHandler `isr ()\n"
+  "required func CAN0ErrorHandler `isr ()\n"
   "\n"
-  "proc CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 47\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CAN0TransmitWarningHandler `isr ()\n"
+  "required func CAN0TransmitWarningHandler `isr ()\n"
   "\n"
-  "proc CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 48\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CAN0ReceiveWarningHandler `isr ()\n"
+  "required func CAN0ReceiveWarningHandler `isr ()\n"
   "\n"
-  "proc CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 49\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CAN0WakeUpHandler `isr ()\n"
+  "required func CAN0WakeUpHandler `isr ()\n"
   "\n"
-  "proc CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 50\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc I2S0TransmitHandler `isr ()\n"
+  "required func I2S0TransmitHandler `isr ()\n"
   "\n"
-  "proc I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 51\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc I2S0ReceiveHandler `isr ()\n"
+  "required func I2S0ReceiveHandler `isr ()\n"
   "\n"
-  "proc I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 52\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc UART0LONHandler `isr ()\n"
+  "required func UART0LONHandler `isr ()\n"
   "\n"
-  "proc UART0LONHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func UART0LONHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 60\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc UART0StatusHandler `isr ()\n"
+  "required func UART0StatusHandler `isr ()\n"
   "\n"
-  "proc UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 61\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc UART0ErrorHandler `isr ()\n"
+  "required func UART0ErrorHandler `isr ()\n"
   "\n"
-  "proc UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 62\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc UART1StatusHandler `isr ()\n"
+  "required func UART1StatusHandler `isr ()\n"
   "\n"
-  "proc UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 63\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc UART1ErrorHandler `isr ()\n"
+  "required func UART1ErrorHandler `isr ()\n"
   "\n"
-  "proc UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 64\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc UART2StatusHandler `isr ()\n"
+  "required func UART2StatusHandler `isr ()\n"
   "\n"
-  "proc UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 64\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc UART2ErrorHandler `isr ()\n"
+  "required func UART2ErrorHandler `isr ()\n"
   "\n"
-  "proc UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 65\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc ADC0Handler `isr ()\n"
+  "required func ADC0Handler `isr ()\n"
   "\n"
-  "proc ADC0Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func ADC0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 73\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc ADC1Handler `isr ()\n"
+  "required func ADC1Handler `isr ()\n"
   "\n"
-  "proc ADC1Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func ADC1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 74\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CMP0Handler `isr ()\n"
+  "required func CMP0Handler `isr ()\n"
   "\n"
-  "proc CMP0Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CMP0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 75\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CMP1Handler `isr ()\n"
+  "required func CMP1Handler `isr ()\n"
   "\n"
-  "proc CMP1Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CMP1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 76\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CMP2Handler `isr ()\n"
+  "required func CMP2Handler `isr ()\n"
   "\n"
-  "proc CMP2Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CMP2Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 77\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc FMT0Handler `isr ()\n"
+  "required func FMT0Handler `isr ()\n"
   "\n"
-  "proc FMT0Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func FMT0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 78\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc FMT1Handler `isr ()\n"
+  "required func FMT1Handler `isr ()\n"
   "\n"
-  "proc FMT1Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func FMT1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 79\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc FMT2Handler `isr ()\n"
+  "required func FMT2Handler `isr ()\n"
   "\n"
-  "proc FMT2Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func FMT2Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 80\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc CMTHandler `isr ()\n"
+  "required func CMTHandler `isr ()\n"
   "\n"
-  "proc CMTHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func CMTHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 81\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc RTCAlarmHandler `isr ()\n"
+  "required func RTCAlarmHandler `isr ()\n"
   "\n"
-  "proc RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 82\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc RTCSecondHandler `isr ()\n"
+  "required func RTCSecondHandler `isr ()\n"
   "\n"
-  "proc RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 83\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc PITChannel0Handler `isr ()\n"
+  "required func PITChannel0Handler `isr ()\n"
   "\n"
-  "proc PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 84\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc PITChannel1Handler `isr ()\n"
+  "required func PITChannel1Handler `isr ()\n"
   "\n"
-  "proc PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 85\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc PITChannel2Handler `isr ()\n"
+  "required func PITChannel2Handler `isr ()\n"
   "\n"
-  "proc PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 86\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc PITChannel3Handler `isr ()\n"
+  "required func PITChannel3Handler `isr ()\n"
   "\n"
-  "proc PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 87\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc PDBHandler `isr ()\n"
+  "required func PDBHandler `isr ()\n"
   "\n"
-  "proc PDBHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func PDBHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 88\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc USBOTGHandler `isr ()\n"
+  "required func USBOTGHandler `isr ()\n"
   "\n"
-  "proc USBOTGHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func USBOTGHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 89\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc USBChargerDetectHandler `isr ()\n"
+  "required func USBChargerDetectHandler `isr ()\n"
   "\n"
-  "proc USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 90\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc DAC0Handler `isr ()\n"
+  "required func DAC0Handler `isr ()\n"
   "\n"
-  "proc DAC0Handler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func DAC0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 97\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc TSIHandler `isr ()\n"
+  "required func TSIHandler `isr ()\n"
   "\n"
-  "proc TSIHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func TSIHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 99\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc MCGHandler `isr ()\n"
+  "required func MCGHandler `isr ()\n"
   "\n"
-  "proc MCGHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func MCGHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 100\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc lowPowerTimerHandler `isr ()\n"
+  "required func lowPowerTimerHandler `isr ()\n"
   "\n"
-  "proc lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 101\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc pinDetectPortAHandler `isr ()\n"
+  "required func pinDetectPortAHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 103\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc pinDetectPortBHandler `isr ()\n"
+  "required func pinDetectPortBHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 104\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc pinDetectPortCHandler `isr ()\n"
+  "required func pinDetectPortCHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 105\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc pinDetectPortDHandler `isr ()\n"
+  "required func pinDetectPortDHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 106\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc pinDetectPortEHandler `isr ()\n"
+  "required func pinDetectPortEHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 107\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc softwareInterruptHandler `isr ()\n"
+  "required func softwareInterruptHandler `isr ()\n"
   "\n"
-  "proc softwareInterruptHandler `isr @nullWhenPanicDisabled @weak () {\n"
+  "func softwareInterruptHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 110\n"
   "}\n"
   "\n"
@@ -13640,7 +13581,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc configurePorts `init @noWarningIfUnused () {\n"
+  "func configurePorts `init @noWarningIfUnused () {\n"
   "//--- D4 (PTB0) is a GPIO (input by default)\n"
   "  PORTB_PCR0 = (1 << 8) ;\n"
   "  GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)\n"
@@ -13663,34 +13604,34 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc driveHighE `init `panic `user @noWarningIfUnused () {\n"
+  "func driveHighE `init `panic `user @noWarningIfUnused () {\n"
   "  GPIOB_PSOR = 1 << 1 ; // E is PTB1\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "\n"
-  "proc driveLowE `init `panic `user @noWarningIfUnused () {\n"
+  "func driveLowE `init `panic `user @noWarningIfUnused () {\n"
   "  GPIOB_PCOR = 1 << 1 ; // E is PTB1\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "\n"
-  "proc driveHighRS `init `panic `user @noWarningIfUnused () {\n"
+  "func driveHighRS `init `panic `user @noWarningIfUnused () {\n"
   "  GPIOB_PSOR = 1 << 3 ; // RS is PTB3\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "\n"
-  "proc driveLowRS `init `panic `user @noWarningIfUnused () {\n"
+  "func driveLowRS `init `panic `user @noWarningIfUnused () {\n"
   "  GPIOB_PCOR = 1 << 3 ; // RS is PTB3\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc setD4 `init `panic `user @noWarningIfUnused (\?inValue $bool) { // PTB0\n"
+  "func setD4 `init `panic `user @noWarningIfUnused (\?inValue $bool) { // PTB0\n"
   "  if inValue then\n"
   "    GPIOB_PSOR = 1 << 0 ;\n"
   "  else\n"
@@ -13700,7 +13641,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc setD5 `init `panic `user @noWarningIfUnused (\?inValue $bool) { // PTC0\n"
+  "func setD5 `init `panic `user @noWarningIfUnused (\?inValue $bool) { // PTC0\n"
   "  if inValue then\n"
   "    GPIOC_PSOR = 1 << 0 ;\n"
   "  else\n"
@@ -13710,7 +13651,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc setD6 `init `panic `user @noWarningIfUnused (\?inValue $bool) { // PTD1\n"
+  "func setD6 `init `panic `user @noWarningIfUnused (\?inValue $bool) { // PTD1\n"
   "  if inValue then\n"
   "    GPIOD_PSOR = 1 << 1 ;\n"
   "  else\n"
@@ -13720,7 +13661,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc setD7 `init `panic `user @noWarningIfUnused (\?inValue $bool) { // PTB2\n"
+  "func setD7 `init `panic `user @noWarningIfUnused (\?inValue $bool) { // PTB2\n"
   "  if inValue then\n"
   "    GPIOB_PSOR = 1 << 2 ;\n"
   "  else\n"
@@ -13732,7 +13673,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "//   UTILITY ROUTINES                                                          *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc programLcd4BitDataBusOutput `init @noWarningIfUnused (\?inValue $uint8) {\n"
+  "func programLcd4BitDataBusOutput `init @noWarningIfUnused (\?inValue $uint8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -13741,7 +13682,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc write4BitCommand `init @noWarningIfUnused (\?inValue $uint8) {\n"
+  "func write4BitCommand `init @noWarningIfUnused (\?inValue $uint8) {\n"
   "  busyWaitingDuringMS (!1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput (!inValue) ;\n"
@@ -13752,7 +13693,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc write8bitCommand `init @noWarningIfUnused (\?inCommand $uint8) {\n"
+  "func write8bitCommand `init @noWarningIfUnused (\?inCommand $uint8) {\n"
   "  busyWaitingDuringMS (!1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput (!inCommand >> 4) ;\n"
@@ -13821,7 +13762,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "//   PRINT ROUTINES IN USER MODE                                               *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc programLcd4BitDataBusOutput_inUserMode `user @noWarningIfUnused (\?inValue $uint8) {\n"
+  "func programLcd4BitDataBusOutput_inUserMode `user @noWarningIfUnused (\?inValue $uint8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -13830,7 +13771,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc write8bitCommand_inUserMode `user @noWarningIfUnused (\?inCommand $uint8) {\n"
+  "func write8bitCommand_inUserMode `user @noWarningIfUnused (\?inCommand $uint8) {\n"
   "  waitDuringMS (!delay:1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;\n"
@@ -13846,7 +13787,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc writeData_inUserMode `user @noWarningIfUnused (\?inData $uint8) {\n"
+  "func writeData_inUserMode `user @noWarningIfUnused (\?inData $uint8) {\n"
   "  waitDuringMS (!delay:1) ;\n"
   "  driveHighRS () ;\n"
   "  programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;\n"
@@ -13867,7 +13808,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "// Line 2 : 20 -> 39\n"
   "// Line 3 : 84 -> 103\n"
   "\n"
-  "proc goto `user @noWarningIfUnused (\?line:inLine $uint32 \?column:inColumn $uint8) {\n"
+  "func goto `user @noWarningIfUnused (\?line:inLine $uint32 \?column:inColumn $uint8) {\n"
   "  if inColumn < 20 then\n"
   "    if inLine == 0 then\n"
   "      write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;\n"
@@ -13883,13 +13824,13 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc clearScreen `user @noWarningIfUnused () {\n"
+  "func clearScreen `user @noWarningIfUnused () {\n"
   "  write8bitCommand_inUserMode (!0x01)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printSpaces `user @noWarningIfUnused (\?inCount $uint32) {\n"
+  "func printSpaces `user @noWarningIfUnused (\?inCount $uint32) {\n"
   "  var count = inCount\n"
   "  while (count > 0) do\n"
   "    writeData_inUserMode (!0x20)\n"
@@ -13899,7 +13840,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printUnsigned `user @noWarningIfUnused (\?inValue $uint32) {\n"
+  "func printUnsigned `user @noWarningIfUnused (\?inValue $uint32) {\n"
   "  var divisor $uint32 = 1_000_000_000\n"
   "  var value = inValue\n"
   "  var isPrinting = false\n"
@@ -13920,7 +13861,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printSigned `user @noWarningIfUnused (\?inValue $int32) {\n"
+  "func printSigned `user @noWarningIfUnused (\?inValue $int32) {\n"
   "  if inValue >= 0 then\n"
   "    printUnsigned (!truncate inValue : $uint32)\n"
   "  else\n"
@@ -13931,7 +13872,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printString `user @noWarningIfUnused (\?inString $staticString) {\n"
+  "func printString `user @noWarningIfUnused (\?inString $staticString) {\n"
   "  for c in inString do\n"
   "    writeData_inUserMode (!c)\n"
   "  end\n"
@@ -13992,7 +13933,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "//   EXCEPTION                                                                 *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc programLcd4BitDataBusOutput_inExceptionMode `panic @noWarningIfUnused (\?inValue $uint8) {\n"
+  "func programLcd4BitDataBusOutput_inExceptionMode `panic @noWarningIfUnused (\?inValue $uint8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -14001,14 +13942,14 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc waitOneMillisecondInExceptionMode `panic @noWarningIfUnused () {\n"
+  "func waitOneMillisecondInExceptionMode `panic @noWarningIfUnused () {\n"
   "  while not SYST_CSR.COUNTFLAG.bool do\n"
   "  end\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc waitMSInExceptionMode `panic @noWarningIfUnused (\?duration: inDuration $uint32) {\n"
+  "func waitMSInExceptionMode `panic @noWarningIfUnused (\?duration: inDuration $uint32) {\n"
   "  var duration = inDuration\n"
   "  while duration > 0 do\n"
   "    waitOneMillisecondInExceptionMode ()\n"
@@ -14018,7 +13959,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc writeDataInExceptionMode `panic @noWarningIfUnused (\?inData $uint8) {\n"
+  "func writeDataInExceptionMode `panic @noWarningIfUnused (\?inData $uint8) {\n"
   "  waitOneMillisecondInExceptionMode () ;\n"
   "  driveHighRS () ;\n"
   "  programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;\n"
@@ -14034,7 +13975,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printUnsignedInExceptionMode `panic @noWarningIfUnused (\?inValue $uint32) {\n"
+  "func printUnsignedInExceptionMode `panic @noWarningIfUnused (\?inValue $uint32) {\n"
   "  var divisor $uint32 = 1_000_000_000\n"
   "  var value = inValue\n"
   "  var isPrinting = false\n"
@@ -14055,7 +13996,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printSignedInExceptionMode `panic @noWarningIfUnused (\?inValue $int32) {\n"
+  "func printSignedInExceptionMode `panic @noWarningIfUnused (\?inValue $int32) {\n"
   "  if inValue >= 0 then\n"
   "    printUnsignedInExceptionMode (!truncate inValue : $uint32)\n"
   "  else\n"
@@ -14066,7 +14007,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc write8bitCommandInExceptionMode `panic @noWarningIfUnused (\?inCommand $uint8) {\n"
+  "func write8bitCommandInExceptionMode `panic @noWarningIfUnused (\?inCommand $uint8) {\n"
   "  waitOneMillisecondInExceptionMode () ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;\n"
@@ -14082,7 +14023,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc gotoInExceptionMode `panic @noWarningIfUnused (\?line:inLine $uint32 \?column:inColumn $uint8) {\n"
+  "func gotoInExceptionMode `panic @noWarningIfUnused (\?line:inLine $uint32 \?column:inColumn $uint8) {\n"
   "  if inColumn < 20 then\n"
   "    if inLine == 0 then\n"
   "      write8bitCommandInExceptionMode (!0x80 +% 0 +% inColumn) ;\n"
@@ -14098,13 +14039,13 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc clearScreenInExceptionMode `panic @noWarningIfUnused () {\n"
+  "func clearScreenInExceptionMode `panic @noWarningIfUnused () {\n"
   "  write8bitCommandInExceptionMode (!0x01)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printStringInExceptionMode `panic @noWarningIfUnused (\?inString $staticString) {\n"
+  "func printStringInExceptionMode `panic @noWarningIfUnused (\?inString $staticString) {\n"
   "  for c in inString do\n"
   "    writeDataInExceptionMode (!c)\n"
   "  end\n"
@@ -14112,7 +14053,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "panic proc setup 0 {\n"
+  "panic func setup 0 {\n"
   "  clearScreenInExceptionMode ()\n"
   "  waitMSInExceptionMode (!duration:4)\n"
   "  gotoInExceptionMode (!line:0 !column:0)\n"
@@ -14125,7 +14066,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "  printSignedInExceptionMode (!CODE)\n"
   "}\n"
   "\n"
-  "panic proc loop 0 {\n"
+  "panic func loop 0 {\n"
   "  waitMSInExceptionMode (!duration:50)\n"
   "  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)\n"
   "  waitMSInExceptionMode (!duration:50)\n"
@@ -14187,7 +14128,7 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   " \n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc ledOn `user `panic `isr @noWarningIfUnused (\?inLeds $uint32) {\n"
+  "func ledOn `user `panic `isr @noWarningIfUnused (\?inLeds $uint32) {\n"
   "//--- Led L0\n"
   "  if ((inLeds & LED_L0) != 0) then\n"
   "    GPIOA_PSOR = 1 << 12 ;\n"
@@ -14212,7 +14153,7 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc ledOff `user `panic `isr @noWarningIfUnused (\?inLeds $uint32) {\n"
+  "func ledOff `user `panic `isr @noWarningIfUnused (\?inLeds $uint32) {\n"
   "//--- Led L0\n"
   "  if ((inLeds & LED_L0) != 0) then\n"
   "    GPIOA_PCOR = 1 << 12 ;\n"
@@ -14254,17 +14195,19 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "opaqueType $taskList @instantiable : 32\n"
   "\n"
   "//--- Block running task\n"
-  "extern proc blockInList `kernel (\?!list:ioWaitingList $taskList)\n"
+  "extern func blockInList `kernel (\?!list:ioWaitingList $taskList)\n"
   "\n"
-  "extern proc blockOnDeadline `kernel (\?deadline:inDeadlineMS $uint32) \n"
+  "extern func blockOnDeadline `kernel (\?deadline:inDeadline $uint32) \n"
+  "\n"
+  "extern func blockInListAndOnDeadline `kernel (\?!list:ioWaitingList $taskList \?deadline:inDeadline $uint32) \n"
   "\n"
   "//--- Make task Ready\n"
-  "extern proc makeTaskReady `kernel (\n"
+  "extern func makeTaskReady `kernel (\n"
   "  \?!list:ioWaitingList $taskList\n"
   "  !found:outFound $bool\n"
   ")\n"
   "\n"
-  "extern proc makeTasksReadyFromCurrentDate `isr (\?currentDate:inCurrentDate $uint32)\n"
+  "extern func makeTasksReadyFromCurrentDate `isr (\?currentDate:inCurrentDate $uint32)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "//   GUARD                                                                     *\n"
@@ -14272,13 +14215,13 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "\n"
   "opaqueType $guardList @instantiable : 32\n"
   "\n"
-  "extern proc tickHandlerForGuardedWaitUntil `isr (\?currentDate:inCurrentDate $uint32)\n"
+  "extern func tickHandlerForGuardedWaitUntil `isr (\?currentDate:inCurrentDate $uint32)\n"
   "\n"
-  "extern proc handleGuardedCommand `guard (\?!guard:ioGuard $guardList)\n"
+  "extern func handleGuardedCommand `guard (\?!guard:ioGuard $guardList)\n"
   "\n"
-  "extern proc handleGuardedWaitUntil `guard (\?deadline:inDeadlineMS $uint32)\n"
+  "extern func handleGuardedWaitUntil `guard (\?deadline:inDeadlineMS $uint32)\n"
   "\n"
-  "extern proc guardDidChange `kernel (\?!guard:ioGuard $guardList)\n"
+  "extern func guardDidChange `kernel (\?!guard:ioGuard $guardList)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -14291,20 +14234,20 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var gUptimeMS $uint32 = 0 {\n"
-  "  @rw proc systickHandler\n"
-  "  proc busyWaitingDuringMS\n"
-  "  proc millis\n"
+  "  @rw func systickHandler\n"
+  "  func busyWaitingDuringMS\n"
+  "  func millis\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc millis `isr `kernel `user `guard @noWarningIfUnused () -> $uint32 {\n"
+  "func millis `isr `kernel `user `guard @noWarningIfUnused () -> $uint32 {\n"
   "  result = gUptimeMS\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc busyWaitingDuringMS `init @noWarningIfUnused (\?inDuration $uint32) {\n"
+  "func busyWaitingDuringMS `init @noWarningIfUnused (\?inDuration $uint32) {\n"
   "  let deadline = gUptimeMS + inDuration\n"
   "  while gUptimeMS < deadline do\n"
   "  end\n"
@@ -14312,16 +14255,16 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc systickHandler `isr ()\n"
+  "required func systickHandler `isr ()\n"
   "\n"
-  "proc systickHandler `isr @global () {\n"
+  "func systickHandler `isr @global () {\n"
   "  gUptimeMS +%= 1\n"
   "  makeTasksReadyFromCurrentDate (!currentDate:millis ())\n"
   "  tickHandlerForGuardedWaitUntil (!currentDate:millis ())\n"
   "  userSystickHandler ()\n"
   "}\n"
   "\n"
-  "proc userSystickHandler `isr @weak () {\n"
+  "func userSystickHandler `isr @weak () {\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -14334,7 +14277,7 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc waitDuringMS `user @noWarningIfUnused (\?delay: inDelay $uint32) {\n"
+  "func waitDuringMS `user @noWarningIfUnused (\?delay: inDelay $uint32) {\n"
   "  waitUntilMS (!deadline:millis () + inDelay)\n"
   "}\n"
   "\n"
@@ -14353,7 +14296,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  3276, // Text length
+  3383, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 
@@ -15324,6 +15267,14 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_set_return_code (TaskContext * inTaskContext,\n"
+  "                                    const unsigned inReturnCode) {\n"
+  "  StackedRegisters * ptr = inTaskContext->mSP_USR ;\n"
+  "  ptr->mR0 = inReturnCode ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   T A S K    C O N T R O L    B L O C K                                                                             *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -15444,6 +15395,22 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) asm (\"proc..blockInListAndOnDeadline\") ;\n"
+  "\n"
+  "void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) {\n"
+  "  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
+  "//--- Insert in tool list\n"
+  "  *ioWaitingList |= 1 << currentTaskIndex ;\n"
+  "  gRunningTaskControlBlock->mWaitingList = ioWaitingList ;\n"
+  "//--- Insert in deadline list\n"
+  "  gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;\n"
+  "  gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
+  "//--- Block task\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -15457,6 +15424,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "    gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;\n"
   "    *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;\n"
   "//    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // Leave dangling pointer \?\n"
+  "    kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
   "    kernel_makeTaskReady (taskIndex) ;\n"
   "  }\n"
   "}\n"
@@ -15478,6 +15446,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "        *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;\n"
   "        taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;\n"
   "      }\n"
+  "      kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 0) ;\n"
   "      kernel_makeTaskReady (taskIndex) ;\n"
   "    }\n"
   "  }\n"
@@ -15601,7 +15570,7 @@ const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  21120, // Text length
+  22330, // Text length
   gWrapperFileContent_24_targetTemplates
 ) ;
 

@@ -1,7 +1,7 @@
 
 pointerSize 32
 
-panic proc : $int32 $uint32
+panic func : $int32 $uint32
 
 import "files/mk20dx256.plm"
 import "files/teensy-3-1-boot.plm"

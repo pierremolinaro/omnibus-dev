@@ -94,7 +94,7 @@ task T priority 0 stackSize 512 {
     printUnsigned (!(t0 - t1) - systickDuration)
   }
   
-  proc loop () {
+  func loop () {
     waitDuringMS (!delay:250)
     ledOn (!LED_L1) // Allumer la led
     waitDuringMS (!delay:250)
