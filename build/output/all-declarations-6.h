@@ -456,35 +456,6 @@ void callCategoryMethod_enterAccessibleEntities (const class cPtr_abstractInstru
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Category method '@structureDeclaration functionSemanticAnalysis'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_structureDeclaration_functionSemanticAnalysis) (const class cPtr_structureDeclaration * inObject,
-                                                                                       const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                                       const class GALGAS_semanticContext constinArgument1,
-                                                                                       class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                                                                       class GALGAS_intermediateCodeStruct & ioArgument3,
-                                                                                       class C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_functionSemanticAnalysis (const int32_t inClassIndex,
-                                                   categoryMethodSignature_structureDeclaration_functionSemanticAnalysis inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_functionSemanticAnalysis (const class cPtr_structureDeclaration * inObject,
-                                                  const GALGAS_unifiedTypeMap_2D_proxy constin_inStructureType,
-                                                  const GALGAS_semanticContext constin_inContext,
-                                                  GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                  GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                          Category method '@structureDeclaration procedureSemanticAnalysis'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

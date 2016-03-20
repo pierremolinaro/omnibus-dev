@@ -225,10 +225,6 @@ private proc generateLLVMfile
     !generationContext
     !?generationAdds
   ]
-#----------------------------------------- Functions
-  for function in inIntermediateCodeStruct.mFunctionMapIR do
-    [function implementationCodeGeneration !?llvmCode !generationContext !?generationAdds]
-  end
 #----------------------------------------- Service dispatcher
   generateServiceDispatcher (
     !inCurrentDirectory

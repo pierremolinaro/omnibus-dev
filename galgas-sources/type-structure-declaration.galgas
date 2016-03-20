@@ -7,7 +7,6 @@ class @structureDeclaration : @abstractDeclaration {
   @lstringlist mAttributeListAST
   @structureFieldListAST mStructureFieldListAST
   @procedureDeclarationListAST mProcedureDeclarationListAST
-  @functionDeclarationListAST mFunctionDeclarationListAST
   @serviceDeclarationListAST mServiceListAST
   @guardDeclarationListAST mGuardListAST
 }
@@ -53,7 +52,6 @@ syntax extension common_syntax {
     ${$
     @procedureDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
-    @functionDeclarationListAST functionDeclarationListAST = {}
     @serviceDeclarationListAST serviceListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
@@ -81,9 +79,6 @@ syntax extension common_syntax {
     while
       <guard> !?guardListAST
     while
-      $func$
-      <function_declaration> !?functionDeclarationListAST
-    while
       $;$
     end
     $}$
@@ -92,7 +87,6 @@ syntax extension common_syntax {
       !attributeList
       !fieldList
       !procedureDeclarationListAST
-      !functionDeclarationListAST
       !serviceListAST
       !guardListAST
     }
@@ -113,19 +107,18 @@ override method @structureDeclaration addExtension
   @structureDeclaration newDeclaration = self
   let currentExtensionDeclarationListAST = ioExtensionDeclarationListAST
   ioExtensionDeclarationListAST = {}
-  for (typeName procedures fieldList functions) in currentExtensionDeclarationListAST do
+  for (typeName procedures fieldList) in currentExtensionDeclarationListAST do
     if mStructureName.string == typeName.string then
       newDeclaration = .new {
         ![newDeclaration mStructureName]
         ![newDeclaration mAttributeListAST]
         ![newDeclaration mStructureFieldListAST] + fieldList
         ![newDeclaration mProcedureDeclarationListAST] + procedures
-        ![newDeclaration mFunctionDeclarationListAST] + functions
         ![newDeclaration mServiceListAST]
         ![newDeclaration mGuardListAST]        
       }
     else
-      ioExtensionDeclarationListAST += !typeName !procedures !fieldList !functions
+      ioExtensionDeclarationListAST += !typeName !procedures !fieldList
     end
   end
   outNewDeclaration = newDeclaration
@@ -158,16 +151,6 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
       [!?ioGraph noteNode !typeName]
     end
     [mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
-#--- Add structure functions
-  for () in mFunctionDeclarationListAST do
-    for (* formalArgumentTypeName *) in mFuncFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
-    let resultTypeName = @lstring.new {!"$" + mResultTypeName !mResultTypeName.location}
-    [!?ioGraph noteNode !resultTypeName]
-    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 #--- Add structure services
   [mServiceListAST noteTypesInPrecedenceGraph !?ioGraph]
@@ -300,28 +283,6 @@ override method @structureDeclaration enterInContext
     error mStructureName : "this structure cannot be copied, one field is not copyable"
     copyableAttribute = false
   end
-#---------------------------------------- Functions
-  @functionMap functionMap = {}
-  for function in mFunctionDeclarationListAST do
-    @funcSignature signature = {}
-    for (selector formalArgumentTypeName *) in function.mFuncFormalArgumentList do
-      signature += !selector !.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-    end
-  #--- Mode map
-    @modeMap functionModeMap = {}
-    for () in function.mFunctionModeList do
-      [!?functionModeMap insertKey !mValue]
-    end
-  #--- Result type
-    let resultType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !function.mResultTypeName}
-  #--- Enter in context
-    [!?functionMap insertKey
-      !function.mFunctionName
-      !functionModeMap
-      !signature
-      !resultType
-    ]
-  end
 #---------------------------------------- services, procedures, guards
   [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
   [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
@@ -332,7 +293,6 @@ override method @structureDeclaration enterInContext
     !llvmTypeName:"%$" + mStructureName.string
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !typedConstantMap:{}
-    !functionMap:functionMap
     !instantiable:true
     !copyable:copyableAttribute
     !equatable:false
@@ -369,13 +329,6 @@ override method @structureDeclaration semanticAnalysis
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
-#--- Analyze functions
-  [self functionSemanticAnalysis
-    !structureType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
 #--- Analyze services
   [mServiceListAST serviceSemanticAnalysis
     !receiverType:structureType
@@ -390,106 +343,6 @@ override method @structureDeclaration semanticAnalysis
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @structureDeclaration functionSemanticAnalysis
-  ?structureType:let @unifiedTypeMap-proxy inStructureType
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  for function in mFunctionDeclarationListAST do
-  #--- Check modes
-    @stringset functionModeSet = {}
-    for mode in function.mFunctionModeList do
-      [inContext.mModeMap searchKey !mode.mValue]
-      functionModeSet += !mode.mValue.string
-    end
-  #--- Check attributes
-    @bool warnIfUnused = true
-    for (attribute) in function.mFunctionAttributeList do
-      if attribute.string == noWarningIfUnusedAttribute () then
-        if not warnIfUnused then
-          error attribute : "duplicated attribute"
-        end
-        warnIfUnused = false
-      else
-        error attribute : "unknown attribute"
-      end
-    end
-  #--- Variable map
-    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !function.mResultTypeName}
-    @variableMap variableMap = initialVariableMap (
-      !routineNameForInvocation:funcNameForInvocationGraph (!inStructureType !function.mFunctionName).string
-      !context:inContext
-      !userMode:[functionModeSet hasKey !"user"]
-      !registerAccess:.readWriteAccess
-      !globalsAreConstant:true
-      !returnTypeName:function.mResultTypeName
-    )
-  #--- Add "self" variable to variable map
-    [!?variableMap insertUsedLocalConstant
-      !lkey:.new {!"self" !.here}
-      !type:inStructureType
-      !readAccessAllowed:true # mReadAccessAllowed
-      !variableKind:.localValue {!type:inStructureType !name:"self"}
-      !copyable:true # copyable
-      !fieldMap:{} # fieldMap
-      !canBeUsedAsInputParameter:false # mCanBeUsedAsInputParameter
-      !isConstant:true # mIsConstant
-    ]
-  #--- Analyse formal arguments
-    @procFormalArgumentListForGeneration formalArguments = {}
-    formalArguments += !.inputOutput !inStructureType !llvmNameForLocalVariable (!"self")
-    for (* formalArgumentTypeName formalArgumentName) in function.mFuncFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
-      [!?variableMap insertConstantInputFormalArgument
-        !lkey:formalArgumentName
-        !type:typeProxy
-        !readAccessAllowed:true
-        !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
-        !copyable:[typeProxy copyable]
-        !fieldMap:{}
-        !canBeUsedAsInputParameter:false
-        !isConstant:true # Is constant
-      ]
-      formalArguments += !.input !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
-    end
-  #---
-    let routineNameForInvocationGraph = funcNameForInvocationGraph (!inStructureType !function.mFunctionName)
-    if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-      [!?ioTemporaries.mSubprogramInvocationGraph addNode
-        !routineNameForInvocationGraph
-        !routineNameForInvocationGraph
-      ]
-    end
-  #--- Analyze instruction list
-    @instructionListIR instructionGenerationList = {}
-    [function.mInstructionList analyzeRoutineInstructionList
-      !self:inStructureType
-      !routineNameForInvocationGraph:routineNameForInvocationGraph
-      !context:inContext
-      !modes:functionModeSet
-      !allowPanic:not [functionModeSet hasKey !panicModeName ()]
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
-      !?generatedCode:instructionGenerationList
-    ]
-  #---
-    [variableMap checkAutomatonStates !function.mEndOfFuncLocation]
-  #--- Code generation
-    [!?ioIntermediateCodeStruct.mFunctionMapIR insertKey
-      !.new {!mStructureName.string + "." + function.mFunctionName !function.mFunctionName.location}
-      !formalArguments
-      !instructionGenerationList
-      !resultType
-      !functionResultVariableName ()
-      !warnIfUnused
-    ]  
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

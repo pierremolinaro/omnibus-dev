@@ -11,7 +11,6 @@ struct @intermediateCodeStruct {
   @globalConstantMapIR mGlobalConstantMap
   @routineMapIR mRoutineMapIR
   @guardMapIR mGuardMapIR
-  @functionMapIR mFunctionMapIR
   @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
   @bootListIR mBootList
@@ -92,18 +91,6 @@ map @guardMapIR {
   insert insertKey error message "guard '%K' is already defined"
   search searchKey error message "** internal error **"
   remove removeKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @functionMapIR {
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionListIR mInstructionGenerationList
-  @unifiedTypeMap-proxy mResultType
-  @string mResultVarName
-  @bool mWarnIfUnused
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

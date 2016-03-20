@@ -113,7 +113,6 @@ sharedmap @unifiedTypeMap %selectors {
   @string llvmTypeName # For Example: i23, %$toto
   @typeKind kind
   @typedConstantMap typedConstantMap
-  @functionMap functionMap
   @bool instantiable
   @bool copyable
   @bool equatable
@@ -178,7 +177,6 @@ struct @semanticContext {
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
   @guardMapForContext mGuardMapForContext
-  @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
   @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
   @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
@@ -296,7 +294,6 @@ proc buildSemanticContext
   [inAST.mProcedureListAST enterInContext !selfTypeName:"" !?context: outSemanticContext]
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !receiverType:"" !?context: outSemanticContext]
-  [inAST.mFunctionListAST enterInContext !?context: outSemanticContext]
   [inAST.mServiceListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #--- Enter tasks

@@ -99,7 +99,7 @@ override method @functionCallInExpressionAST noteExpressionTypesInPrecedenceGrap
 
 override method @functionCallInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -110,11 +110,9 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
-#--- Search proc in proc map
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  @modeMap functionModeMap
-  @funcSignature functionSignature
-  @unifiedTypeMap-proxy functionResultType
+#--- Search in function map
+  @lstring functionMangledName
   @unifiedTypeMap-proxy receiverType
   if mReceiverName.string != "" then
     [!?ioVariableMap searchForReadAccess
@@ -124,27 +122,35 @@ override method @functionCallInExpressionAST analyzeExpression
       ?variableKind:@objectInMemoryIR variableKind
       ?4*
     ]
-  #--- Load variable
-    effectiveParameterListIR += !.outputInput !["" nowhere] ![variableKind address] 
-    [[receiverType functionMap] searchKey
-      !mFunctionName
-      ?functionModeMap
-      ?functionSignature
-      ?functionResultType
-    ]
+    functionMangledName = .new {!"$" + [receiverType key] + "." + mFunctionName !mFunctionName.location}
+    effectiveParameterListIR += !.outputInput !"" ![variableKind address] #--- add "load receiver" as first argument
   else
-    [inContext.mFunctionMap searchKey
-      !mFunctionName
-      ?functionModeMap
-      ?functionSignature
-      ?functionResultType
-    ]
+    functionMangledName = .new {!"." + mFunctionName !mFunctionName.location}
     receiverType = .null
   end
+  [inContext.mRoutineMapForContext searchKey
+    !functionMangledName
+    ?let unused mutating
+    ?let functionModeMap
+    ?let @procedureSignature functionSignature
+    ?let routineKind
+    ?*
+    ?let functionResultType
+  ]
+#---
+  if functionResultType == .null then
+    error mFunctionName : "cannot be used as function: no returned value"
+  end
 #--- Enter in invocation graph
+  @lstring routineNameForInvocationGraph
+  switch routineKind
+  case procedure : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !mFunctionName)
+  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !mFunctionName)
+  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !mFunctionName)
+  end
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
-    !inRoutineNameForInvocationGraph
-    !funcNameForInvocationGraph (!receiverType !mFunctionName)
+    !inCallerNameForInvocationGraph
+    !routineNameForInvocationGraph
   ]
 #--- Check mode
   checkMode (
@@ -160,17 +166,17 @@ override method @functionCallInExpressionAST analyzeExpression
   else
     for formal in functionSignature, actual in mParameterList
     do
-      if actual.mSelector.string != formal.mFormalSelector.string then
+      if actual.mSelector.string != formal.mSelector then
         var s = "!"
-        if formal.mFormalSelector.string != "" then
-          s += formal.mFormalSelector.string + ":"
+        if formal.mSelector != "" then
+          s += formal.mSelector + ":"
         end
         error actual.mSelector : "required selector: " + s
       end
       [actual.mExpression analyzeExpression
         !self:inSelfType
-        !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-        !optionalTargetType:formal.mArgumentType
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:formal.mType
         !context:inContext
         !modes:inModeSet
         !allowPanic:inAllowPanic
@@ -180,22 +186,22 @@ override method @functionCallInExpressionAST analyzeExpression
         !?instructionListIR:ioInstructionGenerationList
         ?result:@operandIR argumentIR
       ]
-      if [argumentIR.mType key] == [formal.mArgumentType key] then
+      if [argumentIR.mType key] == [formal.mType key] then
         effectiveParameterListIR +=
           !.output
-          !formal.mFormalSelector
+          !formal.mSelector
           !argumentIR
-      elsif [[argumentIR.mType kind] isStaticInteger] && [[formal.mArgumentType kind] isInteger] then
+      elsif [[argumentIR.mType kind] isStaticInteger] && [[formal.mType kind] isInteger] then
         [argumentIR.mValue literalInteger ?value:let @bigint value]
-        [[formal.mArgumentType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+        [[formal.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
         if (min <= value) && (value <= max) then
-          effectiveParameterListIR += !.output !formal.mFormalSelector !.new {!formal.mArgumentType !argumentIR.mValue}
+          effectiveParameterListIR += !.output !formal.mSelector !.new {!formal.mType !argumentIR.mValue}
         else
-          error actual.mSelector: "the literal integer cannot fit in an $" + [formal.mArgumentType key]
+          error actual.mSelector: "the literal integer cannot fit in an $" + [formal.mType key]
         end
       else
         error actual.mSelector : "the actual parameter has the $" + [argumentIR.mType key]
-         + ", but the formal argument has the $" + [formal.mArgumentType key] + " type"
+         + ", but the formal argument has the $" + [formal.mType key] + " type"
       end
     between 
       s += ", "
@@ -204,10 +210,11 @@ override method @functionCallInExpressionAST analyzeExpression
   s += ")"
 #--- New LLVM variable for function call result
   getNewTempVariable (!functionResultType !?ioTemporaries ?outResult)
-#--- Generate code
+#--- Code generation
   ioInstructionGenerationList += !@functionCallIR.new {
     !outResult
-    !if receiverType == .null then "" else [receiverType key] + "." end + mFunctionName
+    !functionMangledName.string
+    !routineKind
     !effectiveParameterListIR
   }
 }
@@ -217,6 +224,7 @@ override method @functionCallInExpressionAST analyzeExpression
 class @functionCallIR : @abstractInstructionIR {
   @operandIR mResult
   @string mFunctionName
+  @routineKind mKind
   @procCallEffectiveParameterListIR mArgumentList
 }
 
@@ -227,8 +235,13 @@ override method @functionCallIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName]
-  ioLLVMcode += " @" + llvmNameForFunction (!name:mFunctionName) + " ("
+  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName] + " @"
+  switch mKind 
+  case procedure : ioLLVMcode += llvmNameForProcedure (!mFunctionName)
+  case service : ioLLVMcode += llvmNameForServiceCall (!mFunctionName)
+  case section : ioLLVMcode += llvmNameForSectionCall (!mFunctionName)
+  end
+  ioLLVMcode += " ("
   for () in mArgumentList do
     switch mEffectiveParameterPassingMode
     case input:
@@ -250,7 +263,7 @@ override method @functionCallIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
  {
-  ioAccessibleEntities.mFunctionSet += !mFunctionName
+  ioAccessibleEntities.mRoutineSet += !mFunctionName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -8,7 +8,6 @@ struct @accessibleEntities {
   @stringset mAccessibleRegisterSet
   @stringset mRoutineSet
   @stringset mGuardSet
-  @stringset mFunctionSet
   @stringset mSectionSet
   @stringset mGlobalVariableSet
   @stringset mTaskVariableSet
@@ -50,21 +49,14 @@ method @routineMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAcc
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc codeOptimisation
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let initialProcedureMap = ioIntermediateCodeStruct.mRoutineMapIR
   let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
-  let initialFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
   @uint pass = 0
   @bool optimizing = true
-  loop ([ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
+  loop ([ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count] + 1)
   while optimizing do
     optimizing = false
     pass ++
@@ -77,7 +69,6 @@ proc codeOptimisation
       s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
       s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routines\n"
       s += "  " + [ioIntermediateCodeStruct.mGuardMapIR count] + " guards\n"
-      s += "  " + [ioIntermediateCodeStruct.mFunctionMapIR count] + " functions\n"
       message s
     end
   #------------------------------------------- loop through sub programs
@@ -128,12 +119,6 @@ proc codeOptimisation
       warning lkey: "unused procedure; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
     end
   end
-#--- Warn on unused function
-  for () in initialFunctionMap do
-    if (not [ioIntermediateCodeStruct.mFunctionMapIR hasKey !lkey.string]) && mWarnIfUnused then
-      warning lkey: "unused function; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
-    end
-  end
 #--- Warn on unused guard
   for () in initialGuardMap do
     if (not [ioIntermediateCodeStruct.mGuardMapIR hasKey !lkey.string]) && mWarnIfUnused then
@@ -152,8 +137,6 @@ private proc suppressInaccessibleSubprograms
   outAccessibleEntities = .default
   @routineMapIR accessibleProcedureMap = {}
   @routineMapIR nonExploredProcedureMap = {}
-  @functionMapIR accessibleFunctionMap  = {}
-  @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
   @guardMapIR accessibleGuardMap = {}
   @guardMapIR nonExploredGuardMap = ioIntermediateCodeStruct.mGuardMapIR
 #--- First, required procedures
@@ -208,20 +191,14 @@ private proc suppressInaccessibleSubprograms
 #--- Explore routines
   var continues = true
   let bound = [ioIntermediateCodeStruct.mRoutineMapIR count]
-    + [ioIntermediateCodeStruct.mFunctionMapIR count]
     + [ioIntermediateCodeStruct.mGuardMapIR count]
   loop (bound + 1) while continues do
     continues = false
     exploreProcs (!?accessibleProcedureMap !?outAccessibleEntities !?nonExploredProcedureMap !?continues !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
-    exploreFunctions (!?accessibleFunctionMap !?outAccessibleEntities !?nonExploredFunctionMap !?continues !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
     exploreGuards (!?accessibleGuardMap !?outAccessibleEntities !?nonExploredGuardMap !?continues !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
   end
   if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
     ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
-    ioOptimizing = true
-  end
-  if ioIntermediateCodeStruct.mFunctionMapIR != accessibleFunctionMap then
-    ioIntermediateCodeStruct.mFunctionMapIR = accessibleFunctionMap
     ioOptimizing = true
   end
   if ioIntermediateCodeStruct.mGuardMapIR != accessibleGuardMap then
@@ -270,42 +247,6 @@ private proc exploreProcs
         !procedure.mKind
         !procedure.mReturnType
     ]        
-    end
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-private proc exploreFunctions
-  ?!@functionMapIR ioAccessibleFunctionMap
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@functionMapIR ioNonExploredFunctionMap
-  ?!@bool ioContinueExploreRoutines
-  ?!@uint ioMaxBranchOfOnInstructions
-{
-  let @functionMapIR exNonExploredFunctionMap = ioNonExploredFunctionMap
-  ioNonExploredFunctionMap = {}
-  for function in exNonExploredFunctionMap do
-    if [ioAccessibleEntities.mFunctionSet hasKey !function.lkey.string] then
-      [!?ioAccessibleFunctionMap insertKey
-        !function.lkey
-        !function.mFormalArgumentListForGeneration
-        !function.mInstructionGenerationList
-        !function.mResultType
-        !function.mResultVarName
-        !function.mWarnIfUnused
-      ]        
-      [function enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-      ioContinueExploreRoutines = true
-    else
-      [!?ioNonExploredFunctionMap insertKey
-        !function.lkey
-        !function.mFormalArgumentListForGeneration
-        !function.mInstructionGenerationList
-        !function.mResultType
-        !function.mResultVarName
-        !function.mWarnIfUnused
-      ]        
     end
   end
 }
