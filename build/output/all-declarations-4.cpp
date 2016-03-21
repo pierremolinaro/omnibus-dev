@@ -11422,7 +11422,7 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "extern func blockInListAndOnDeadline `kernel (\?!list:ioWaitingList $taskList \?deadline:inDeadline $uint32) \n"
   "\n"
   "//--- Make task Ready\n"
-  "extern func makeTaskReady `kernel (\n"
+  "extern func makeTaskReady `kernel `isr (\n"
   "  \?!list:ioWaitingList $taskList\n"
   "  !found:outFound $bool\n"
   ")\n"
@@ -11516,7 +11516,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  3368, // Text length
+  3373, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 

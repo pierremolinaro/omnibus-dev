@@ -3,45 +3,52 @@ target "teensy-3-1-tp"
 //-----------------------------------------------------------------------------*
 
 struct $rendezVous {
-  var inputList = $taskList ()
-  var outputList = $taskList ()
+  var inputWaitList = $taskList ()
+  var outputWaitList = $taskList ()
   var inputGuardList = $guardList ()
   var outputGuardList = $guardList ()
 
   service input `kernel () {
-    makeTaskReady (!?list:self.outputList ?found:let found)
+    makeTaskReady (!?list:self.outputWaitList ?found:let found)
     if not found then
       guardDidChange (!?guard:self.outputGuardList)
-      blockInList (!?list:self.inputList)
+      blockInList (!?list:self.inputWaitList)
     end
   }
 
   service output `kernel () {
-    makeTaskReady (!?list:self.inputList ?found:let found)
+    makeTaskReady (!?list:self.inputWaitList ?found:let found)
     if not found then
       guardDidChange (!?guard:self.inputGuardList)
-      blockInList (!?list:self.outputList)
+      blockInList (!?list:self.outputWaitList)
     end
   }
 
   service inputUntil `kernel (?deadline:inDeadline $uint32) -> $bool {
-    makeTaskReady (!?list:self.outputList ?found:result)
+    makeTaskReady (!?list:self.outputWaitList ?found:result)
     if (not result) and (inDeadline > millis ()) then 
-      blockInListAndOnDeadline (!?list:self.inputList !deadline:inDeadline)
+      blockInListAndOnDeadline (!?list:self.inputWaitList !deadline:inDeadline)
     end
   }
 
   service outputUntil `kernel (?deadline:inDeadline $uint32) -> $bool {
-    makeTaskReady (!?list:self.inputList ?found:result)
+    makeTaskReady (!?list:self.inputWaitList ?found:result)
     if (not result) and (inDeadline > millis ()) then 
-      blockInListAndOnDeadline (!?list:self.outputList !deadline:inDeadline)
+      blockInListAndOnDeadline (!?list:self.outputWaitList !deadline:inDeadline)
     end
   }
 
   guard input () {
-    makeTaskReady (!?list:self.outputList ?found:accept)
+    makeTaskReady (!?list:self.outputWaitList ?found:accept)
     if not accept then
       handleGuardedCommand (!?guard:self.inputGuardList)
+    end
+  }
+
+  guard output () {
+    makeTaskReady (!?list:self.inputWaitList ?found:accept)
+    if not accept then
+      handleGuardedCommand (!?guard:self.outputGuardList)
     end
   }
 

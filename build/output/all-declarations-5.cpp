@@ -1128,7 +1128,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  service input `kernel () {\n"
   "    makeTaskReady (!\?list:self.outputList \?found:let found)\n"
   "    if not found then\n"
-  "      guardDidChange (!\?guard:self.outputList)\n"
+  "      guardDidChange (!\?guard:self.outputGuardList)\n"
   "      blockInList (!\?list:self.inputList)\n"
   "    end\n"
   "  }\n"
@@ -1207,7 +1207,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "06-rendez-vous.plm",
   "plm",
   true, // Text file
-  2217, // Text length
+  2222, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
