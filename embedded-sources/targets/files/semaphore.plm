@@ -1,0 +1,54 @@
+//——————————————————————————————————————————————————————————————————————————————
+
+struct $semaphore {
+  var value $uint32
+  var list = $taskList ()
+  var guardList = $guardList ()
+
+  //············································································
+  
+  service V `kernel @noWarningIfUnused () {
+    let found = makeTaskReady (!?list:self.list)
+    if not found then
+      self.value += 1
+      guardDidChange (!?guard:self.guardList)
+    end
+  }
+
+  //············································································
+
+  service P `kernel @noWarningIfUnused () {
+    if self.value > 0 then
+      self.value -= 1
+    else
+      blockInList (!?list:self.list)
+    end
+  }
+
+  //············································································
+
+  service P_until `kernel @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
+    result = self.value > 0
+    if result then
+      self.value -= 1
+    elsif inDeadline > millis () then 
+      blockInListAndOnDeadline (!?list:self.list !deadline:inDeadline)
+    end
+  }
+
+  //············································································
+
+  guard P @noWarningIfUnused () {
+    accept = self.value > 0
+    if accept then
+      self.value -= 1
+    else
+      handleGuardedCommand (!?guard:self.guardList)
+    end
+  }
+
+  //············································································
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+

@@ -52,44 +52,29 @@ static unsigned countTrainingZeros (const unsigned inValue) {
 //                C O R T E X    M 4    S T A C K E D    R E G I S T E R S                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   |                            |                                                                    *
-//         PSP+32 -> |----------------------------| \                                                                  *
-//                   | xPSR                       |  |                                                                 *
-//         PSP+28 -> |----------------------------|  |                                                                 *
-//                   | PC (after SVC instruction) |  |                                                                 *
-//         PSP+24 -> |----------------------------|  |                                                                 *
-//                   | LR                         |  |                                                                 *
-//         PSP+20 -> |----------------------------|  |                                                                 *
-//                   | R12                        |  |  Saved by interrupt response                                    *
-//         PSP+16 -> |----------------------------|  |                                                                 *
-//                   | R3                         |  |                                                                 *
-//         PSP+12 -> |----------------------------|  |                                                                 *
-//                   | R2                         |  |                                                                 *
-//         PSP+8  -> |----------------------------|  |                                                                 *
-//                   | R1                         |  |                                                                 *
-//         PSP+4  -> |----------------------------|  |                                                                 *
-//                   | R0                         |  |                                                                 *
-//         PSP    -> |----------------------------| /                                                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef struct {
-  unsigned mR0 ;
-  unsigned mR1 ;
-  unsigned mR2 ;
-  unsigned mR3 ;
-  unsigned mR12 ;
-  unsigned mLR ;
-  unsigned mPC ;
-  unsigned mXPSR ;
-} StackedRegisters ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//                                            *---------------------*
-//                                            | LR return code      | +36 [ 9]
-//                                            *---------------------*
-//                                            | R13 (PSP)           | +32 [ 8]
+//         PSP+32 -> |                            |                                                                    *
+//                   |----------------------------| \                                                                  *
+//         PSP+28 -> | xPSR                       |  |                                                                 *
+//                   |----------------------------|  |                                                                 *
+//         PSP+24 -> | PC (after SVC instruction) |  |                                                                 *
+//                   |----------------------------|  |                                                                 *
+//         PSP+20 -> | LR                         |  |                                                                 *
+//                   |----------------------------|  |                                                                 *
+//         PSP+16 -> | R12                        |  |  Saved by interrupt response                                    *
+//                   |----------------------------|  |                                                                 *
+//         PSP+12 -> | R3                         |  |                                                                 *
+//                   |----------------------------|  |                                                                 *
+//         PSP+8  -> | R2                         |  |                                                                 *
+//                   |----------------------------|  |                                                                 *
+//         PSP+4  -> | R1                         |  |                                                                 *
+//                   |----------------------------|  |                                                                 *
+//   /---- PSP ----> | R0                         |  |                                                                 *
+//   |               |----------------------------| /                                                                  *
+//   |                                                                                                                 *
+//   |                                        *---------------------*
+//   |                                        | LR return code      | +36 [ 9]
+//   |                                        *---------------------*
+//   \----------------------------------------| R13 (PSP)           | +32 [ 8]
 //                                            *---------------------*
 //                                            | R11                 | +28 [ 7]
 //                                            *---------------------*
@@ -108,6 +93,19 @@ typedef struct {
 //  | gRunningTaskContextSaveAddress +------> | R4                  | + 0 [ 0]
 //  *--------------------------------*        *---------------------*
 //
+//----------------------------------------------------------------------------------------------------------------------
+
+typedef struct {
+  unsigned mR0 ;
+  unsigned mR1 ;
+  unsigned mR2 ;
+  unsigned mR3 ;
+  unsigned mR12 ;
+  unsigned mLR ;
+  unsigned mPC ;
+  unsigned mXPSR ;
+} StackedRegisters ;
+
 //----------------------------------------------------------------------------------------------------------------------
 
 typedef struct {
@@ -197,7 +195,7 @@ static void kernel_makeNoTaskRunning (void) {
 void kernel_selectTaskToRun (void) ;
 
 void kernel_selectTaskToRun (void) {
-  if (((TaskControlBlock *) 0) != gRunningTaskControlBlock) {
+  if (gRunningTaskControlBlock != ((TaskControlBlock *) 0)) {
     gReadyTaskList |= 1 << gRunningTaskControlBlock->mTaskIndex ;
     gRunningTaskControlBlock = (TaskControlBlock *) 0 ;
   }
@@ -223,9 +221,9 @@ void kernel_create_task (const unsigned inTaskIndex,
                          RoutineTaskType inTaskRoutine) {
   TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;
   taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;
-//  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // statically initialized to 0
-//  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0
-//  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0
+  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // statically initialized to 0
+  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0
+  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0
 //--- Store stack parameters
 //  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;
 //  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;
@@ -251,8 +249,10 @@ void blockInList (TaskList * ioWaitingList) asm ("!FUNC!.blockInList") ;
 
 void blockInList (TaskList * ioWaitingList) {
   const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
+//--- Insert in tool list
   *ioWaitingList |= 1 << currentTaskIndex ;
   gRunningTaskControlBlock->mWaitingList = ioWaitingList ;
+//--- Block task
   kernel_makeNoTaskRunning () ;
 }
 
@@ -262,6 +262,7 @@ void blockOnDeadline (const unsigned inDeadline) asm ("!FUNC!.blockOnDeadline") 
 
 void blockOnDeadline (const unsigned inDeadline) {
   const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
+//--- Insert in deadline list
   gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;
   gRunningTaskControlBlock->mTaskDeadline = inDeadline ;
   kernel_makeNoTaskRunning () ;
@@ -287,19 +288,25 @@ void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadli
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTaskReady (TaskList * ioWaitingList, unsigned char * outFound) asm ("!FUNC!.makeTaskReady") ;
+unsigned char makeTaskReady (TaskList * ioWaitingList) asm ("!FUNC!.makeTaskReady") ;
 
-void makeTaskReady (TaskList * ioWaitingList, unsigned char * outFound) {
-  * outFound = (* ioWaitingList) != 0 ;
-  if (* outFound) {
+unsigned char makeTaskReady (TaskList * ioWaitingList) {
+  unsigned char found = (* ioWaitingList) != 0 ;
+  if (found) {
+  //--- Get index of waiting task
     const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
+  //--- Remove task from deadline list
     gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;
-    *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;
-//    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // Leave dangling pointer ?
+  //--- Remove task from waiting list
+    *(ioWaitingList) &= ~ (1 << taskIndex) ;
+  //--- Clear task waiting list pointer
+    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;
+  //--- Set return code and make task ready
     kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
     kernel_makeTaskReady (taskIndex) ;
   }
+  return found ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -314,11 +321,14 @@ void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
     w &= ~ (1 << taskIndex) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
     if (inCurrentDate >= taskControlBlockPtr->mTaskDeadline) {
+    //--- Remove task from deadline list
       gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;
+    //--- Remove task for waiting list ?
       if (taskControlBlockPtr->mWaitingList != (TaskList *) 0) {
         *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;
         taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;
       }
+    //--- Set return code and make task ready
       kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 0) ;
       kernel_makeTaskReady (taskIndex) ;
     }
@@ -337,7 +347,7 @@ static void removeTaskFromGuards (TaskControlBlock * taskControlBlockPtr) {
   const unsigned mask = ~ (1 << taskControlBlockPtr->mTaskIndex) ;
   const unsigned guardCount = taskControlBlockPtr->mGuardCount ;
   for (unsigned i=0 ; i<guardCount ; i++) {
-   taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;
+    taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;
   }
   gDeadlineWaitingInGuardTaskList &= ~ mask ;
   taskControlBlockPtr->mGuardCount = 0 ;

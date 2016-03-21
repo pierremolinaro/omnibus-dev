@@ -104,7 +104,9 @@ proc codeGeneration
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
 #--- Create source directory (if does not exist)
-  let productDirectory = homeDir + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
+  let productDirectory = homeDir
+    + if [option plm_options.noPanicGeneration value] then "no-panic" else "" end
+    + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
   let sourceDirectory = productDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
 #--- Generate target files

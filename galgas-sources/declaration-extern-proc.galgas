@@ -152,9 +152,17 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
       !mExternProcedureName
     ]
   end
+#--- Return type
+  let returnType = if mReturnTypeName.string == "" then
+    @unifiedTypeMap-proxy.null
+  else
+    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName}
+  end
+#---
   [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
     !mExternProcedureName
     !formalArguments
+    !returnType
   ]  
 }
 
@@ -164,6 +172,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
 
 map @externProcedureMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @unifiedTypeMap-proxy mReturnType
   insert insertKey error message "extern procedure %K is already declared"
 }
 
@@ -180,7 +189,13 @@ method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
 method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
   let procName = llvmNameForFunction (!"." + lkey.string)
   ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
-  ioLLVMcode += "declare void @" + procName + " ("
+  ioLLVMcode += "declare"
+  if mReturnType == .null then
+    ioLLVMcode += " void"
+  else
+      ioLLVMcode += " " + [mReturnType llvmTypeName]
+  end
+  ioLLVMcode += " @" + procName + " ("
   for () in mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind

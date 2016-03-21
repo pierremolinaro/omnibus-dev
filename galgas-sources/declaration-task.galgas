@@ -406,7 +406,7 @@ method @taskMapIR generateCode
     ioLLVMcode += "}\n\n"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
-    ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " () nounwind noreturn naked {\n"
+    ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " () nounwind noreturn { ; no naked\n"
     ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "loop:\n"

@@ -43,6 +43,13 @@ class @remoteRoutineCallInstructionAST : @abstractCallInstructionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @selfRemoteRoutineCallInstructionAST : @abstractCallInstructionAST {
+  @lstring mPropertyName
+  @lstring mMethodName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -69,6 +76,22 @@ syntax extension common_syntax {
     $identifier$ ?let routineName
     <effective_parameters> ?let effectiveParameterList
     ioInstructionList += !@remoteRoutineCallInstructionAST.new {
+      !effectiveParameterList
+      !receiverName
+      !routineName
+    }
+  }
+
+  #·····················································································································
+
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    $self$
+    $.$
+    $identifier$ ?let receiverName
+    $.$
+    $identifier$ ?let routineName
+    <effective_parameters> ?let effectiveParameterList
+    ioInstructionList += !@selfRemoteRoutineCallInstructionAST.new {
       !effectiveParameterList
       !receiverName
       !routineName
@@ -307,6 +330,102 @@ override method @remoteRoutineCallInstructionAST analyze
     !routineKind
     !effectiveParameterListIR
   }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfRemoteRoutineCallInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inRequiredModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  if inSelfType == .null then
+    error mPropertyName : "'self' is not available in this context"
+  else
+    switch [inSelfType kind]
+    case opaque (*) :
+      error mPropertyName : "an opaque type does not handle field access" : ioInstructionGenerationList
+    case boolean :
+      error mPropertyName : "a boolean does not handle field access" : ioInstructionGenerationList
+    case staticInteger :
+      error mPropertyName : "an integer does not handle field access" : ioInstructionGenerationList
+    case boolset :
+      error mPropertyName : "a boolset does not handle field access" : ioInstructionGenerationList
+    case literalString :
+      error mPropertyName : "a literal string does not handle field access" : ioInstructionGenerationList
+    case enumeration (*) :
+      error mPropertyName : "an enumeration does not handle field access" : ioInstructionGenerationList
+    case integer (* * * *) :
+      error mPropertyName : "an integer does not handle field access" : ioInstructionGenerationList
+    case structure (@propertyMap propertyMap *) :
+      [propertyMap searchKey !mPropertyName ?let propertyType ?let idx]
+      getLocalNameOfNewTempObjectInMemory (!propertyType !?ioTemporaries ?let propertyAddressLLVMvar)
+      [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+        !propertyAddressLLVMvar
+        !inSelfType
+        !idx
+        !mPropertyName.string
+      ]        
+      let routineMangledName = @lstring.new {!"$" + [propertyType key] + "." + mMethodName !mMethodName.location}
+      @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+      effectiveParameterListIR += !.outputInput !"" ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
+      [inContext.mRoutineMapForContext searchKey
+        !routineMangledName
+        ?let unused mutating
+        ?let modeMap
+        ?let @procedureSignature formalSignature
+        ?let routineKind
+        ?*
+        ?let returnedType
+      ]
+    #--- Enter in invocation graph
+      @lstring routineNameForInvocationGraph
+      switch routineKind
+      case function : routineNameForInvocationGraph = procNameForInvocationGraph (!propertyType !mMethodName)
+      case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!propertyType !mMethodName)
+      case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!propertyType !mMethodName)
+      end
+      [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+    #--- Check mode
+      checkMode (
+        !requiredModes:inRequiredModeSet
+        !possibleModes:[modeMap keySet]
+        !error:mMethodName.location
+      )
+    #--- Analyze effective parameters
+      analyzeEffectiveParameters (
+        !self:inSelfType
+        !formal:formalSignature
+        !effective:mEffectiveParameterList
+        !errorLocation:mMethodName.location
+        !callerForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !requiredModeSet:inRequiredModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?instructionListIR:ioInstructionGenerationList
+        !?effectiveIR:effectiveParameterListIR
+      )
+      if returnedType != .null then
+        error mMethodName : "cannot be called in instruction: return value"
+      end
+    #--- Code generation
+      ioInstructionGenerationList += !@procCallInstructionIR.new {
+        !""
+        !routineMangledName.string
+        !routineKind
+        !effectiveParameterListIR
+      }
+    end    
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

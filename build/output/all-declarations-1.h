@@ -6349,12 +6349,14 @@ class GALGAS_externProcedureMapIR : public AC_GALGAS_map {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_procFormalArgumentListForGeneration & inOperand1,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_procFormalArgumentListForGeneration constinArgument1,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -6362,6 +6364,11 @@ class GALGAS_externProcedureMapIR : public AC_GALGAS_map {
                                                                                    class GALGAS_string constinArgument1,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReturnTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                              class GALGAS_string constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -6371,6 +6378,10 @@ class GALGAS_externProcedureMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentListForGeneration getter_mFormalArgumentListForGenerationForKey (const class GALGAS_string & constinOperand0,
                                                                                                                             C_Compiler * inCompiler
                                                                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeForKey (const class GALGAS_string & constinOperand0,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureMapIR getter_overriddenMap (C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
@@ -6399,6 +6410,7 @@ class cEnumerator_externProcedureMapIR : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_procFormalArgumentListForGeneration current_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
+  public : class GALGAS_unifiedTypeMap_2D_proxy current_mReturnType (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_externProcedureMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -6567,10 +6579,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentL
 class cMapElement_externProcedureMapIR : public cMapElement {
 //--- Map attributes
   public : GALGAS_procFormalArgumentListForGeneration mAttribute_mFormalArgumentListForGeneration ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mReturnType ;
 
 //--- Constructor
   public : cMapElement_externProcedureMapIR (const GALGAS_lstring & inKey,
-                                             const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration
+                                             const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
+                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -6596,6 +6610,7 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
   public : GALGAS_procFormalArgumentListForGeneration mAttribute_mFormalArgumentListForGeneration ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mReturnType ;
 
 
 //--------------------------------- Accessors
@@ -6613,7 +6628,8 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_externProcedureMapIR_2D_element (const GALGAS_lstring & in_lkey,
-                                                   const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration) ;
+                                                   const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
+                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType) ;
 
 //-- Start of generic part --*
 
@@ -6627,7 +6643,8 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_externProcedureMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                          const class GALGAS_procFormalArgumentListForGeneration & inOperand1
+                                                                          const class GALGAS_procFormalArgumentListForGeneration & inOperand1,
+                                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -6645,6 +6662,8 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentListForGeneration getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

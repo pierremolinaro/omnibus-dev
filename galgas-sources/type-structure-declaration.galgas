@@ -283,10 +283,6 @@ override method @structureDeclaration enterInContext
     error mStructureName : "this structure cannot be copied, one field is not copyable"
     copyableAttribute = false
   end
-#---------------------------------------- services, procedures, guards
-#  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
-#  [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
-#  [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName

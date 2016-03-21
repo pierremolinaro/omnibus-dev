@@ -842,7 +842,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "struct $semaphore {\n"
+  "struct $monSemaphore {\n"
   "  var value $uint32\n"
   "  var list = $taskList ()\n"
   "\n"
@@ -855,7 +855,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "\n"
   "  service V `kernel () {\n"
-  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
+  "    let found = makeTaskReady (!\?list:self.list)\n"
   "    if not found then\n"
   "      self.value += 1\n"
   "    end\n"
@@ -864,7 +864,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "var s = $semaphore (!value:0) {\n"
+  "var s = $monSemaphore (!value:0) {\n"
   "  func $T1.loop\n"
   "  func $T2.loop\n"
   "}\n"
@@ -912,7 +912,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  1150, // Text length
+  1151, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -922,12 +922,12 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "struct $semaphore {\n"
+  "struct $monSemaphore {\n"
   "  var value $uint32\n"
   "  var list = $taskList ()\n"
   "\n"
   "  service V `kernel () {\n"
-  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
+  "    let found = makeTaskReady (!\?list:self.list)\n"
   "    if not found then\n"
   "      self.value += 1\n"
   "    end\n"
@@ -946,7 +946,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var s = $semaphore (!value:0) {\n"
+  "var s = $monSemaphore (!value:0) {\n"
   "  func $T1.loop\n"
   "  func $T2.loop\n"
   "}\n"
@@ -998,7 +998,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "04-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1530, // Text length
+  1531, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -1008,7 +1008,7 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "struct $semaphore {\n"
+  "struct $monSemaphore {\n"
   "  var value $uint32\n"
   "  var list = $taskList ()\n"
   "  var guardList = $guardList ()\n"
@@ -1022,7 +1022,7 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "\n"
   "  service V `kernel () {\n"
-  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
+  "    let found = makeTaskReady (!\?list:self.list)\n"
   "    if not found then\n"
   "      self.value += 1\n"
   "      guardDidChange (!\?guard:self.guardList)\n"
@@ -1041,13 +1041,13 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var s0 = $semaphore (!value:0) {\n"
+  "var s0 = $monSemaphore (!value:0) {\n"
   "  func $T0.loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var s1 = $semaphore (!value:0) {\n"
+  "var s1 = $monSemaphore (!value:0) {\n"
   "  func $T1.loop\n"
   "}\n"
   "\n"
@@ -1109,7 +1109,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "05-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2113, // Text length
+  2117, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1120,45 +1120,52 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "struct $rendezVous {\n"
-  "  var inputList = $taskList ()\n"
-  "  var outputList = $taskList ()\n"
+  "  var inputWaitList = $taskList ()\n"
+  "  var outputWaitList = $taskList ()\n"
   "  var inputGuardList = $guardList ()\n"
   "  var outputGuardList = $guardList ()\n"
   "\n"
   "  service input `kernel () {\n"
-  "    makeTaskReady (!\?list:self.outputList \?found:let found)\n"
+  "    let found = makeTaskReady (!\?list:self.outputWaitList)\n"
   "    if not found then\n"
   "      guardDidChange (!\?guard:self.outputGuardList)\n"
-  "      blockInList (!\?list:self.inputList)\n"
+  "      blockInList (!\?list:self.inputWaitList)\n"
   "    end\n"
   "  }\n"
   "\n"
   "  service output `kernel () {\n"
-  "    makeTaskReady (!\?list:self.inputList \?found:let found)\n"
+  "    let found = makeTaskReady (!\?list:self.inputWaitList)\n"
   "    if not found then\n"
   "      guardDidChange (!\?guard:self.inputGuardList)\n"
-  "      blockInList (!\?list:self.outputList)\n"
+  "      blockInList (!\?list:self.outputWaitList)\n"
   "    end\n"
   "  }\n"
   "\n"
   "  service inputUntil `kernel (\?deadline:inDeadline $uint32) -> $bool {\n"
-  "    makeTaskReady (!\?list:self.outputList \?found:result)\n"
+  "    result = makeTaskReady (!\?list:self.outputWaitList)\n"
   "    if (not result) and (inDeadline > millis ()) then \n"
-  "      blockInListAndOnDeadline (!\?list:self.inputList !deadline:inDeadline)\n"
+  "      blockInListAndOnDeadline (!\?list:self.inputWaitList !deadline:inDeadline)\n"
   "    end\n"
   "  }\n"
   "\n"
   "  service outputUntil `kernel (\?deadline:inDeadline $uint32) -> $bool {\n"
-  "    makeTaskReady (!\?list:self.inputList \?found:result)\n"
+  "    result = makeTaskReady (!\?list:self.inputWaitList)\n"
   "    if (not result) and (inDeadline > millis ()) then \n"
-  "      blockInListAndOnDeadline (!\?list:self.outputList !deadline:inDeadline)\n"
+  "      blockInListAndOnDeadline (!\?list:self.outputWaitList !deadline:inDeadline)\n"
   "    end\n"
   "  }\n"
   "\n"
   "  guard input () {\n"
-  "    makeTaskReady (!\?list:self.outputList \?found:accept)\n"
+  "    accept = makeTaskReady (!\?list:self.outputWaitList)\n"
   "    if not accept then\n"
   "      handleGuardedCommand (!\?guard:self.inputGuardList)\n"
+  "    end\n"
+  "  }\n"
+  "\n"
+  "  guard output () {\n"
+  "    accept = makeTaskReady (!\?list:self.inputWaitList)\n"
+  "    if not accept then\n"
+  "      handleGuardedCommand (!\?guard:self.outputGuardList)\n"
   "    end\n"
   "  }\n"
   "\n"
@@ -1207,19 +1214,96 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "06-rendez-vous.plm",
   "plm",
   true, // Text file
-  2222, // Text length
+  2410, // Text length
   gWrapperFileContent_5_embeddedSampleCode
+) ;
+
+//--- File 'teensy-3-1-tp/07-rendez-vous-data.plm'
+
+const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "struct $rendezVousData {\n"
+  "  var autoriserLecture  = $semaphore (!value:0)\n"
+  "  var autoriserEcriture = $semaphore (!value:1)\n"
+  "  var signalerDonneeLue = $semaphore (!value:0)\n"
+  "  var data $uint32 = 0\n"
+  "\n"
+  "  func output `user (\?data:inData $uint32) {\n"
+  "    self.autoriserEcriture.P ()\n"
+  "    self.data = inData\n"
+  "    self.autoriserLecture.V ()\n"
+  "    self.signalerDonneeLue.P ()\n"
+  "  }\n"
+  "\n"
+  "  func input `user (!data:outData $uint32) {\n"
+  "    self.autoriserLecture.P ()\n"
+  "    outData = self.data\n"
+  "    self.signalerDonneeLue.V ()\n"
+  "    self.autoriserEcriture.V ()\n"
+  "  }\n"
+  "\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var rdvs = $rendezVousData () {\n"
+  "  func $T0.loop\n"
+  "  func $T1.loop\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "task T0 priority 0 stackSize 512 {\n"
+  "  var top $uint32 = 0\n"
+  "  var n $uint32 = 1\n"
+  "\n"
+  "  func loop () {\n"
+  "    waitUntilMS (!deadline:self.top)\n"
+  "    self.n += 1\n"
+  "    rdvs.output (!data:self.n)\n"
+  "    self.top += 500\n"
+  "    ledOn (!LED_L0)\n"
+  "    waitUntilMS (!deadline:self.top)\n"
+  "    self.n += 1\n"
+  "    rdvs.output (!data:self.n)\n"
+  "    self.top += 500\n"
+  "    ledOff (!LED_L0)\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "task T1 priority 1 stackSize 1024 {\n"
+  "  func loop () {\n"
+  "    rdvs.input (\?data:var x)\n"
+  "    ledToggle (!LED_L1)\n"
+  "    goto (!line:0 !column:0)\n"
+  "    printUnsigned (!x)\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
+  "07-rendez-vous-data.plm",
+  "plm",
+  true, // Text file
+  1549, // Text length
+  gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-tp' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [7] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [8] = {
   & gWrapperFile_0_embeddedSampleCode,
   & gWrapperFile_1_embeddedSampleCode,
   & gWrapperFile_2_embeddedSampleCode,
   & gWrapperFile_3_embeddedSampleCode,
   & gWrapperFile_4_embeddedSampleCode,
   & gWrapperFile_5_embeddedSampleCode,
+  & gWrapperFile_6_embeddedSampleCode,
   NULL
 } ;
 
@@ -1233,7 +1317,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1]
 
 const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   "teensy-3-1-tp",
-  6,
+  7,
   gWrapperAllFiles_embeddedSampleCode_1,
   0,
   gWrapperAllDirectories_embeddedSampleCode_1
@@ -13673,6 +13757,198 @@ GALGAS_remoteRoutineCallInstructionAST GALGAS_remoteRoutineCallInstructionAST::e
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_selfRemoteRoutineCallInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_selfRemoteRoutineCallInstructionAST * p = (const cPtr_selfRemoteRoutineCallInstructionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_selfRemoteRoutineCallInstructionAST) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mEffectiveParameterList.objectCompare (p->mAttribute_mEffectiveParameterList) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mPropertyName.objectCompare (p->mAttribute_mPropertyName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mMethodName.objectCompare (p->mAttribute_mMethodName) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_selfRemoteRoutineCallInstructionAST::objectCompare (const GALGAS_selfRemoteRoutineCallInstructionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfRemoteRoutineCallInstructionAST::GALGAS_selfRemoteRoutineCallInstructionAST (void) :
+GALGAS_abstractCallInstructionAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfRemoteRoutineCallInstructionAST GALGAS_selfRemoteRoutineCallInstructionAST::constructor_default (LOCATION_ARGS) {
+  return GALGAS_selfRemoteRoutineCallInstructionAST::constructor_new (GALGAS_effectiveParameterListAST::constructor_emptyList (HERE),
+                                                                      GALGAS_lstring::constructor_default (HERE),
+                                                                      GALGAS_lstring::constructor_default (HERE)
+                                                                      COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfRemoteRoutineCallInstructionAST::GALGAS_selfRemoteRoutineCallInstructionAST (const cPtr_selfRemoteRoutineCallInstructionAST * inSourcePtr) :
+GALGAS_abstractCallInstructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_selfRemoteRoutineCallInstructionAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfRemoteRoutineCallInstructionAST GALGAS_selfRemoteRoutineCallInstructionAST::constructor_new (const GALGAS_effectiveParameterListAST & inAttribute_mEffectiveParameterList,
+                                                                                                        const GALGAS_lstring & inAttribute_mPropertyName,
+                                                                                                        const GALGAS_lstring & inAttribute_mMethodName
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_selfRemoteRoutineCallInstructionAST result ;
+  if (inAttribute_mEffectiveParameterList.isValid () && inAttribute_mPropertyName.isValid () && inAttribute_mMethodName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_selfRemoteRoutineCallInstructionAST (inAttribute_mEffectiveParameterList, inAttribute_mPropertyName, inAttribute_mMethodName COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_selfRemoteRoutineCallInstructionAST::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_selfRemoteRoutineCallInstructionAST * p = (const cPtr_selfRemoteRoutineCallInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_selfRemoteRoutineCallInstructionAST) ;
+    result = p->mAttribute_mPropertyName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_selfRemoteRoutineCallInstructionAST::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mPropertyName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_selfRemoteRoutineCallInstructionAST::getter_mMethodName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_selfRemoteRoutineCallInstructionAST * p = (const cPtr_selfRemoteRoutineCallInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_selfRemoteRoutineCallInstructionAST) ;
+    result = p->mAttribute_mMethodName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_selfRemoteRoutineCallInstructionAST::getter_mMethodName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mMethodName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                            Pointer class for @selfRemoteRoutineCallInstructionAST class                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_selfRemoteRoutineCallInstructionAST::cPtr_selfRemoteRoutineCallInstructionAST (const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList,
+                                                                                    const GALGAS_lstring & in_mPropertyName,
+                                                                                    const GALGAS_lstring & in_mMethodName
+                                                                                    COMMA_LOCATION_ARGS) :
+cPtr_abstractCallInstructionAST (in_mEffectiveParameterList COMMA_THERE),
+mAttribute_mPropertyName (in_mPropertyName),
+mAttribute_mMethodName (in_mMethodName) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_selfRemoteRoutineCallInstructionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_selfRemoteRoutineCallInstructionAST ;
+}
+
+void cPtr_selfRemoteRoutineCallInstructionAST::description (C_String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString << "[@selfRemoteRoutineCallInstructionAST:" ;
+  mAttribute_mEffectiveParameterList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mPropertyName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mMethodName.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_selfRemoteRoutineCallInstructionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_selfRemoteRoutineCallInstructionAST (mAttribute_mEffectiveParameterList, mAttribute_mPropertyName, mAttribute_mMethodName COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @selfRemoteRoutineCallInstructionAST type                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_selfRemoteRoutineCallInstructionAST ("selfRemoteRoutineCallInstructionAST",
+                                                            & kTypeDescriptor_GALGAS_abstractCallInstructionAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_selfRemoteRoutineCallInstructionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_selfRemoteRoutineCallInstructionAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_selfRemoteRoutineCallInstructionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_selfRemoteRoutineCallInstructionAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selfRemoteRoutineCallInstructionAST GALGAS_selfRemoteRoutineCallInstructionAST::extractObject (const GALGAS_object & inObject,
+                                                                                                      C_Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_selfRemoteRoutineCallInstructionAST result ;
+  const GALGAS_selfRemoteRoutineCallInstructionAST * p = (const GALGAS_selfRemoteRoutineCallInstructionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_selfRemoteRoutineCallInstructionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("selfRemoteRoutineCallInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_selfRoutineCallInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_selfRoutineCallInstructionAST * p = (const cPtr_selfRoutineCallInstructionAST *) inOperandPtr ;
@@ -15292,182 +15568,6 @@ GALGAS_onInstructionAST GALGAS_onInstructionAST::extractObject (const GALGAS_obj
       result = *p ;
     }else{
       inCompiler->castError ("onInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_selfVarAssignmentInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_selfVarAssignmentInstructionAST * p = (const cPtr_selfVarAssignmentInstructionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_selfVarAssignmentInstructionAST) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarName.objectCompare (p->mAttribute_mTargetVarName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_selfVarAssignmentInstructionAST::objectCompare (const GALGAS_selfVarAssignmentInstructionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selfVarAssignmentInstructionAST::GALGAS_selfVarAssignmentInstructionAST (void) :
-GALGAS_instructionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selfVarAssignmentInstructionAST::GALGAS_selfVarAssignmentInstructionAST (const cPtr_selfVarAssignmentInstructionAST * inSourcePtr) :
-GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_selfVarAssignmentInstructionAST) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selfVarAssignmentInstructionAST GALGAS_selfVarAssignmentInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mTargetVarName,
-                                                                                                const GALGAS_expressionAST & inAttribute_mSourceExpression
-                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_selfVarAssignmentInstructionAST result ;
-  if (inAttribute_mTargetVarName.isValid () && inAttribute_mSourceExpression.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_selfVarAssignmentInstructionAST (inAttribute_mTargetVarName, inAttribute_mSourceExpression COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_selfVarAssignmentInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_selfVarAssignmentInstructionAST * p = (const cPtr_selfVarAssignmentInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_selfVarAssignmentInstructionAST) ;
-    result = p->mAttribute_mTargetVarName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_selfVarAssignmentInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST GALGAS_selfVarAssignmentInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_selfVarAssignmentInstructionAST * p = (const cPtr_selfVarAssignmentInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_selfVarAssignmentInstructionAST) ;
-    result = p->mAttribute_mSourceExpression ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST cPtr_selfVarAssignmentInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceExpression ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                              Pointer class for @selfVarAssignmentInstructionAST class                               *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_selfVarAssignmentInstructionAST::cPtr_selfVarAssignmentInstructionAST (const GALGAS_lstring & in_mTargetVarName,
-                                                                            const GALGAS_expressionAST & in_mSourceExpression
-                                                                            COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (THERE),
-mAttribute_mTargetVarName (in_mTargetVarName),
-mAttribute_mSourceExpression (in_mSourceExpression) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_selfVarAssignmentInstructionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_selfVarAssignmentInstructionAST ;
-}
-
-void cPtr_selfVarAssignmentInstructionAST::description (C_String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString << "[@selfVarAssignmentInstructionAST:" ;
-  mAttribute_mTargetVarName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_selfVarAssignmentInstructionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_selfVarAssignmentInstructionAST (mAttribute_mTargetVarName, mAttribute_mSourceExpression COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @selfVarAssignmentInstructionAST type                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_selfVarAssignmentInstructionAST ("selfVarAssignmentInstructionAST",
-                                                        & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_selfVarAssignmentInstructionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_selfVarAssignmentInstructionAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_selfVarAssignmentInstructionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_selfVarAssignmentInstructionAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selfVarAssignmentInstructionAST GALGAS_selfVarAssignmentInstructionAST::extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_selfVarAssignmentInstructionAST result ;
-  const GALGAS_selfVarAssignmentInstructionAST * p = (const GALGAS_selfVarAssignmentInstructionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_selfVarAssignmentInstructionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("selfVarAssignmentInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
