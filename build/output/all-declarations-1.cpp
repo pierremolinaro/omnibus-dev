@@ -13876,23 +13876,25 @@ GALGAS_labelMap GALGAS_labelMap::extractObject (const GALGAS_object & inObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_externProcedureMapIR::cMapElement_externProcedureMapIR (const GALGAS_lstring & inKey,
-                                                                    const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration
+                                                                    const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
+                                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
                                                                     COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mAttribute_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration) {
+mAttribute_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
+mAttribute_mReturnType (in_mReturnType) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_externProcedureMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mReturnType.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_externProcedureMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_externProcedureMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_externProcedureMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mReturnType COMMA_HERE)) ;
   return result ;
 }
 
@@ -13903,6 +13905,10 @@ void cMapElement_externProcedureMapIR::description (C_String & ioString, const i
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mFormalArgumentListForGeneration" ":" ;
   mAttribute_mFormalArgumentListForGeneration.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mReturnType" ":" ;
+  mAttribute_mReturnType.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13912,6 +13918,9 @@ typeComparisonResult cMapElement_externProcedureMapIR::compare (const cCollectio
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
     result = mAttribute_mFormalArgumentListForGeneration.objectCompare (operand->mAttribute_mFormalArgumentListForGeneration) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mReturnType.objectCompare (operand->mAttribute_mReturnType) ;
   }
   return result ;
 }
@@ -13965,10 +13974,11 @@ GALGAS_externProcedureMapIR GALGAS_externProcedureMapIR::getter_overriddenMap (C
 
 void GALGAS_externProcedureMapIR::addAssign_operation (const GALGAS_lstring & inKey,
                                                        const GALGAS_procFormalArgumentListForGeneration & inArgument0,
+                                                       const GALGAS_unifiedTypeMap_2D_proxy & inArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   cMapElement_externProcedureMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_externProcedureMapIR (inKey, inArgument0 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_externProcedureMapIR (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -13981,10 +13991,11 @@ void GALGAS_externProcedureMapIR::addAssign_operation (const GALGAS_lstring & in
 
 void GALGAS_externProcedureMapIR::setter_insertKey (GALGAS_lstring inKey,
                                                     GALGAS_procFormalArgumentListForGeneration inArgument0,
+                                                    GALGAS_unifiedTypeMap_2D_proxy inArgument1,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   cMapElement_externProcedureMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_externProcedureMapIR (inKey, inArgument0 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_externProcedureMapIR (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -14010,6 +14021,21 @@ GALGAS_procFormalArgumentListForGeneration GALGAS_externProcedureMapIR::getter_m
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_externProcedureMapIR::getter_mReturnTypeForKey (const GALGAS_string & inKey,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_externProcedureMapIR * p = (const cMapElement_externProcedureMapIR *) attributes ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_externProcedureMapIR) ;
+    result = p->mAttribute_mReturnType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_externProcedureMapIR::setter_setMFormalArgumentListForGenerationForKey (GALGAS_procFormalArgumentListForGeneration inAttributeValue,
                                                                                     GALGAS_string inKey,
                                                                                     C_Compiler * inCompiler
@@ -14019,6 +14045,20 @@ void GALGAS_externProcedureMapIR::setter_setMFormalArgumentListForGenerationForK
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_externProcedureMapIR) ;
     p->mAttribute_mFormalArgumentListForGeneration = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_externProcedureMapIR::setter_setMReturnTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                               GALGAS_string inKey,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_externProcedureMapIR * p = (cMapElement_externProcedureMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_externProcedureMapIR) ;
+    p->mAttribute_mReturnType = inAttributeValue ;
   }
 }
 
@@ -14045,7 +14085,7 @@ cGenericAbstractEnumerator () {
 GALGAS_externProcedureMapIR_2D_element cEnumerator_externProcedureMapIR::current (LOCATION_ARGS) const {
   const cMapElement_externProcedureMapIR * p = (const cMapElement_externProcedureMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_externProcedureMapIR) ;
-  return GALGAS_externProcedureMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration) ;
+  return GALGAS_externProcedureMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mReturnType) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14062,6 +14102,14 @@ GALGAS_procFormalArgumentListForGeneration cEnumerator_externProcedureMapIR::cur
   const cMapElement_externProcedureMapIR * p = (const cMapElement_externProcedureMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_externProcedureMapIR) ;
   return p->mAttribute_mFormalArgumentListForGeneration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_externProcedureMapIR::current_mReturnType (LOCATION_ARGS) const {
+  const cMapElement_externProcedureMapIR * p = (const cMapElement_externProcedureMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_externProcedureMapIR) ;
+  return p->mAttribute_mReturnType ;
 }
 
 

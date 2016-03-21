@@ -2,7 +2,7 @@ target "teensy-3-1-tp"
 
 //------------------------------------------------*
 
-struct $semaphore {
+struct $monSemaphore {
   var value $uint32
   var list = $taskList ()
 
@@ -15,7 +15,7 @@ struct $semaphore {
   }
 
   service V `kernel () {
-    makeTaskReady (!?list:self.list ?found:let found)
+    let found = makeTaskReady (!?list:self.list)
     if not found then
       self.value += 1
     end
@@ -24,7 +24,7 @@ struct $semaphore {
 
 //------------------------------------------------*
 
-var s = $semaphore (!value:0) {
+var s = $monSemaphore (!value:0) {
   func $T1.loop
   func $T2.loop
 }

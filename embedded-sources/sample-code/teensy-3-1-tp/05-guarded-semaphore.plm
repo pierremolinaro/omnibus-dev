@@ -2,7 +2,7 @@ target "teensy-3-1-tp"
 
 //-----------------------------------------------------------------------------*
 
-struct $semaphore {
+struct $monSemaphore {
   var value $uint32
   var list = $taskList ()
   var guardList = $guardList ()
@@ -16,7 +16,7 @@ struct $semaphore {
   }
 
   service V `kernel () {
-    makeTaskReady (!?list:self.list ?found:let found)
+    let found = makeTaskReady (!?list:self.list)
     if not found then
       self.value += 1
       guardDidChange (!?guard:self.guardList)
@@ -35,13 +35,13 @@ struct $semaphore {
 
 //-----------------------------------------------------------------------------*
 
-var s0 = $semaphore (!value:0) {
+var s0 = $monSemaphore (!value:0) {
   func $T0.loop
 }
 
 //-----------------------------------------------------------------------------*
 
-var s1 = $semaphore (!value:0) {
+var s1 = $monSemaphore (!value:0) {
   func $T1.loop
 }
 

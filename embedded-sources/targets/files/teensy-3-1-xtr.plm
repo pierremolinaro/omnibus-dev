@@ -12,10 +12,7 @@ extern func blockOnDeadline `kernel (?deadline:inDeadline $uint32)
 extern func blockInListAndOnDeadline `kernel (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
 
 //--- Make task Ready
-extern func makeTaskReady `kernel `isr (
-  ?!list:ioWaitingList $taskList
-  !found:outFound $bool
-)
+extern func makeTaskReady `kernel `isr (?!list:ioWaitingList $taskList) -> $bool
 
 extern func makeTasksReadyFromCurrentDate `isr (?currentDate:inCurrentDate $uint32)
 
@@ -57,8 +54,8 @@ func millis `isr `kernel `user @noWarningIfUnused () -> $uint32 {
 
 //-----------------------------------------------------------------------------*
 
-func busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
-  let deadline = gUptimeMS + inDuration
+func busyWaitingDuringMS `init @noWarningIfUnused (?inDelay $uint32) {
+  let deadline = gUptimeMS + inDelay
   while gUptimeMS < deadline do
   end
 }
@@ -68,9 +65,10 @@ func busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
 required func systickHandler `isr ()
 
 func systickHandler `isr @global () {
-  gUptimeMS +%= 1
-  makeTasksReadyFromCurrentDate (!currentDate:millis ())
-  tickHandlerForGuardedWaitUntil (!currentDate:millis ())
+  let now = gUptimeMS +% 1
+  gUptimeMS = now
+  makeTasksReadyFromCurrentDate (!currentDate:now)
+  tickHandlerForGuardedWaitUntil (!currentDate:now)
   userSystickHandler ()
 }
 
