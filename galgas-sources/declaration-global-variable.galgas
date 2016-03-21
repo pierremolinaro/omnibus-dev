@@ -275,7 +275,7 @@ method @globalVarDeclarationList-element enterInContext
       !guardMangledName
       ?*
     ]
-    executionModes += !guardModeName ()
+    executionModes += !isrModeName ()
     let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
     [!?allowedGuardMap insertKey !routineNameForInvocationGraph]
   end

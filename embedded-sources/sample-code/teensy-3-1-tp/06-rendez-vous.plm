@@ -1,0 +1,87 @@
+target "teensy-3-1-tp"
+
+//-----------------------------------------------------------------------------*
+
+struct $rendezVous {
+  var inputList = $taskList ()
+  var outputList = $taskList ()
+  var inputGuardList = $guardList ()
+  var outputGuardList = $guardList ()
+
+  service input `kernel () {
+    makeTaskReady (!?list:self.outputList ?found:let found)
+    if not found then
+      guardDidChange (!?guard:self.outputGuardList)
+      blockInList (!?list:self.inputList)
+    end
+  }
+
+  service output `kernel () {
+    makeTaskReady (!?list:self.inputList ?found:let found)
+    if not found then
+      guardDidChange (!?guard:self.inputGuardList)
+      blockInList (!?list:self.outputList)
+    end
+  }
+
+  service inputUntil `kernel (?deadline:inDeadline $uint32) -> $bool {
+    makeTaskReady (!?list:self.outputList ?found:result)
+    if (not result) and (inDeadline > millis ()) then 
+      blockInListAndOnDeadline (!?list:self.inputList !deadline:inDeadline)
+    end
+  }
+
+  service outputUntil `kernel (?deadline:inDeadline $uint32) -> $bool {
+    makeTaskReady (!?list:self.inputList ?found:result)
+    if (not result) and (inDeadline > millis ()) then 
+      blockInListAndOnDeadline (!?list:self.outputList !deadline:inDeadline)
+    end
+  }
+
+  guard input () {
+    makeTaskReady (!?list:self.outputList ?found:accept)
+    if not accept then
+      handleGuardedCommand (!?guard:self.inputGuardList)
+    end
+  }
+
+
+}
+
+//-----------------------------------------------------------------------------*
+
+var rdvs = $rendezVous () {
+  func $T0.loop
+  func $T1.loop
+}
+
+//-----------------------------------------------------------------------------*
+
+task T0 priority 0 stackSize 512 {
+  var top $uint32 = 0
+
+  func loop () {
+    waitUntilMS (!deadline:self.top)
+    rdvs.output ()
+    self.top += 250
+    ledOn (!LED_L0)
+    waitUntilMS (!deadline:self.top)
+    rdvs.output ()
+    self.top += 250
+    ledOff (!LED_L0)
+  }
+}
+
+//-----------------------------------------------------------------------------*
+
+task T1 priority 1 stackSize 512 {
+
+  func loop () {
+    rdvs.input ()
+    ledOn (!LED_L1)
+    rdvs.input ()
+    ledOff (!LED_L1)
+  }
+}
+
+//-----------------------------------------------------------------------------*

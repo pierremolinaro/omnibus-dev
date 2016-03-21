@@ -1291,12 +1291,12 @@ void routine_guardSemanticAnalysis (const class GALGAS_unifiedTypeMap_2D_proxy c
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Function 'guardModeName'                                               *
+//                                            Function 'acceptVariableName'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_guardModeName (class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_acceptVariableName (class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1308,6 +1308,15 @@ class GALGAS_lstring function_guardNameForInvocationGraph (class GALGAS_unifiedT
                                                            class GALGAS_lstring inArgument1,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               Function 'isrModeName'                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_isrModeName (class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1885,14 +1894,14 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_sectionDeclar
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Category method '@serviceDeclarationListAST noteTypesInPrecedenceGraph'                       *
+//                   Category method '@serviceDeclarationListAST noteServiceTypesInPrecedenceGraph'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_serviceDeclarationListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void categoryMethod_noteServiceTypesInPrecedenceGraph (const class GALGAS_serviceDeclarationListAST inObject,
+                                                       class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1939,15 +1948,6 @@ class GALGAS_string function_initModeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               Function 'isrModeName'                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_isrModeName (class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                              Function 'kernelModeName'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1990,6 +1990,33 @@ void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * i
                                         GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Abstract category method '@abstractDeclaration enterRoutinesInContext'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractDeclaration_enterRoutinesInContext) (const class cPtr_abstractDeclaration * inObject,
+                                                                                    const class GALGAS_procedureDeclarationListAST constinArgument0,
+                                                                                    class GALGAS_semanticContext & ioArgument1,
+                                                                                    class GALGAS_staticStringMap & ioArgument2,
+                                                                                    class C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterRoutinesInContext (const int32_t inClassIndex,
+                                                 categoryMethodSignature_abstractDeclaration_enterRoutinesInContext inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterRoutinesInContext (const class cPtr_abstractDeclaration * inObject,
+                                                const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                                GALGAS_semanticContext & io_ioContext,
+                                                GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

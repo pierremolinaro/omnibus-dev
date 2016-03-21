@@ -53,18 +53,6 @@ method @procedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePr
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @serviceDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    for (* * formalArgumentTypeName *) in mServiceFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
-    [mServiceInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @sectionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do

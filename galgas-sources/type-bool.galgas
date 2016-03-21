@@ -87,6 +87,15 @@ override method @booleanDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+override method @booleanDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 private proc enterBooleanOperators
   ?boolTypeName:@lstring inBooleanTypeName
   ?!context:@semanticContext ioContext

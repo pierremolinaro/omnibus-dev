@@ -144,7 +144,7 @@ proc guardSemanticAnalysis
     !returnTypeName:["" nowhere]
   )
 #--- Add 'accepted" output variable
-  let resultVarName = @lstring.new {!"accepted" !inRoutineName.location}
+  let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
   [!?variableMap insertOutputFormalArgument
     !lkey:resultVarName
@@ -177,7 +177,7 @@ proc guardSemanticAnalysis
     !self:inSelfType
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !modes:{!guardModeName ()}
+    !modes:{!isrModeName ()}
     !allowPanic:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
@@ -269,8 +269,8 @@ method @guardMapIR-element llvmCodeGeneration
     end
   end
   ioLLVMcode += ") nounwind {\n"
-#--- Declare "accepted" variable 
-  let accepted_llvmName = llvmNameForLocalVariable (!"accepted")
+#--- Declare "accept" variable 
+  let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableName ())
    ioLLVMcode += "  %" + accepted_llvmName + " = alloca i1\n"
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do
