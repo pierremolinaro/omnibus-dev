@@ -4,9 +4,10 @@
 #!   Modes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once guardModeName -> @string outResult {
-  outResult = "guard"
-}
+#func %once guardModeName -> @string outResult {
+#  outResult = "guard"
+#}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once bootModeName -> @string outResult {
@@ -181,6 +182,12 @@ func llvmNameForSectionImplementation ?@string inName -> @string outName {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Guards
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once acceptVariableName -> @string outName {
+  outName = "accept"
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGuardCall ?@string inName -> @string outName {

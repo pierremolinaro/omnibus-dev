@@ -118,6 +118,15 @@ override method @opaqueTypeDeclaration enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @opaqueTypeDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

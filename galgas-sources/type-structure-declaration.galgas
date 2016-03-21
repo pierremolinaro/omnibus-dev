@@ -137,11 +137,11 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
     if fieldTypeName.string != "" then
       let typeName = @lstring.new {!"$" + fieldTypeName !fieldTypeName.location}
       [!?ioGraph addEdge !structureTypeName !typeName]
-      switch initExpression
-      case noExpression :
-      case expression (initExpression) :
-        [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
-      end
+    end
+    switch initExpression
+    case noExpression :
+    case expression (initExpression) :
+      [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
     end
   end
 #--- Add structure procedures
@@ -153,7 +153,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
     [mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 #--- Add structure services
-  [mServiceListAST noteTypesInPrecedenceGraph !?ioGraph]
+  [mServiceListAST noteServiceTypesInPrecedenceGraph !?ioGraph]
 #--- Add structure guards
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
@@ -284,9 +284,9 @@ override method @structureDeclaration enterInContext
     copyableAttribute = false
   end
 #---------------------------------------- services, procedures, guards
-  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
-  [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
-  [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+#  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
+#  [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+#  [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
@@ -299,6 +299,18 @@ override method @structureDeclaration enterInContext
     !comparable:false
     !enumerationType:.null # Not enumerable
   ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @structureDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
+  [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+  [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

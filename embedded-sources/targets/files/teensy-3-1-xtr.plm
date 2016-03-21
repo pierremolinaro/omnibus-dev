@@ -27,9 +27,9 @@ opaqueType $guardList @instantiable : 32
 
 extern func tickHandlerForGuardedWaitUntil `isr (?currentDate:inCurrentDate $uint32)
 
-extern func handleGuardedCommand `guard (?!guard:ioGuard $guardList)
+extern func handleGuardedCommand `isr (?!guard:ioGuard $guardList)
 
-extern func handleGuardedWaitUntil `guard (?deadline:inDeadlineMS $uint32)
+extern func handleGuardedWaitUntil `isr (?deadline:inDeadlineMS $uint32)
 
 extern func guardDidChange `kernel (?!guard:ioGuard $guardList)
 
@@ -51,7 +51,7 @@ var gUptimeMS $uint32 = 0 {
 
 //-----------------------------------------------------------------------------*
 
-func millis `isr `kernel `user `guard @noWarningIfUnused () -> $uint32 {
+func millis `isr `kernel `user @noWarningIfUnused () -> $uint32 {
   result = gUptimeMS
 }
 
@@ -94,8 +94,8 @@ func waitDuringMS `user @noWarningIfUnused (?delay: inDelay $uint32) {
 //-----------------------------------------------------------------------------*
 
 guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
-  accepted = inDeadline <= millis ()
-  if not accepted then
+  accept = inDeadline <= millis ()
+  if not accept then
     handleGuardedWaitUntil (!deadline:inDeadline)
   end
 }

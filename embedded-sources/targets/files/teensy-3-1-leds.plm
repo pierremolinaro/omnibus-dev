@@ -40,7 +40,7 @@ let ALL_LEDS = LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4
  
 //-----------------------------------------------------------------------------*
 
-func ledOn `user `panic `isr `kernel `guard @noWarningIfUnused (?inLeds $uint32) {
+func ledOn `user `panic `isr `kernel @noWarningIfUnused (?inLeds $uint32) {
 //--- Led L0
   if ((inLeds & LED_L0) != 0) then
     GPIOA_PSOR = 1 << 12 ;
@@ -65,7 +65,7 @@ func ledOn `user `panic `isr `kernel `guard @noWarningIfUnused (?inLeds $uint32)
 
 //-----------------------------------------------------------------------------*
 
-func ledOff `user `panic `isr `kernel `guard @noWarningIfUnused (?inLeds $uint32) {
+func ledOff `user `panic `isr `kernel @noWarningIfUnused (?inLeds $uint32) {
 //--- Led L0
   if ((inLeds & LED_L0) != 0) then
     GPIOA_PCOR = 1 << 12 ;
@@ -90,7 +90,7 @@ func ledOff `user `panic `isr `kernel `guard @noWarningIfUnused (?inLeds $uint32
 
 //-----------------------------------------------------------------------------*
 
-func ledToggle `user `panic `isr `kernel `guard @noWarningIfUnused (?inLeds $uint32) {
+func ledToggle `user `panic `isr `kernel @noWarningIfUnused (?inLeds $uint32) {
 //--- Led L0
   if ((inLeds & LED_L0) != 0) then
     GPIOA_PTOR = 1 << 12 ;

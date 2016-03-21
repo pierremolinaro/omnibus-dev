@@ -56,6 +56,22 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @serviceDeclarationListAST noteServiceTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* * formalArgumentTypeName *) in mServiceFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+    [mServiceInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @serviceDeclarationListAST enterInContext
   ?receiverType:let @string inReceiverTypeName

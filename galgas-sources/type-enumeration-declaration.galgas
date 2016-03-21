@@ -134,6 +134,15 @@ override method @enumerationDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+override method @enumerationDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 proc enterEnumerationOperators
   ?integerTypeName:@lstring inEnumerationTypeName
   ?!context:@semanticContext ioContext
