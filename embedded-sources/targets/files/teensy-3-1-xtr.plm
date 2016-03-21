@@ -12,7 +12,7 @@ extern func blockOnDeadline `kernel (?deadline:inDeadline $uint32)
 extern func blockInListAndOnDeadline `kernel (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
 
 //--- Make task Ready
-extern func makeTaskReady `kernel (
+extern func makeTaskReady `kernel `isr (
   ?!list:ioWaitingList $taskList
   !found:outFound $bool
 )

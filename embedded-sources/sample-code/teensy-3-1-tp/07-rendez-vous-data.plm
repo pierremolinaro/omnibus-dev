@@ -1,0 +1,96 @@
+target "teensy-3-1-tp"
+
+//-----------------------------------------------------------------------------*
+
+struct $semaphore {
+  var value $uint32
+  var list = $taskList ()
+  var guardList = $guardList ()
+
+  service P `kernel @noWarningIfUnused () {
+    if self.value > 0 then
+      self.value -= 1
+    else
+      blockInList (!?list:self.list)
+    end
+  }
+
+  service V `kernel () {
+    makeTaskReady (!?list:self.list ?found:let found)
+    if not found then
+      self.value += 1
+      guardDidChange (!?guard:self.guardList)
+    end
+  }
+
+  guard P () {
+    accept = self.value > 0
+    if accept then
+      self.value -= 1
+    else
+      handleGuardedCommand (!?guard:self.guardList)
+    end
+  }
+}
+
+//-----------------------------------------------------------------------------*
+
+struct $rendezVousData {
+  var lecture = $semaphore (!value:0)
+  var ecriture = $semaphore (!value:1)
+  var liberation = $semaphore (!value:0)
+  var data $int32 = 0
+
+  func output `user (?data:inData $int32) {
+    self.ecriture.P ()
+    self.data = inData
+    self.lecture.V ()
+    self.liberation.P ()
+  }
+
+  func input `user (!data:outData $int32) {
+    self.lecture.P ()
+    outData = self.data
+    self.liberation.V ()
+    self.ecriture.V ()
+  }
+
+}
+
+//-----------------------------------------------------------------------------*
+
+var rdvs = $rendezVousData () {
+  func $T0.loop
+  func $T1.loop
+}
+
+//-----------------------------------------------------------------------------*
+
+task T0 priority 0 stackSize 512 {
+  var top $uint32 = 0
+
+  func loop () {
+    waitUntilMS (!deadline:self.top)
+    rdvs.output ()
+    self.top += 250
+    ledOn (!LED_L0)
+    waitUntilMS (!deadline:self.top)
+    rdvs.output ()
+    self.top += 250
+    ledOff (!LED_L0)
+  }
+}
+
+//-----------------------------------------------------------------------------*
+
+task T1 priority 1 stackSize 512 {
+
+  func loop () {
+    rdvs.input ()
+    ledOn (!LED_L1)
+    rdvs.input ()
+    ledOff (!LED_L1)
+  }
+}
+
+//-----------------------------------------------------------------------------*
