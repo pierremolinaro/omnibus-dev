@@ -131,7 +131,7 @@ method @routineMapIR sectionCodeGeneration
       between
         ioLLVMcode += ", "
       end
-      ioLLVMcode += ") nounwind \n\n"
+      ioLLVMcode += ") nounwind\n\n"
     end
   end
 }

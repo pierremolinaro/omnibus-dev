@@ -182,7 +182,7 @@ method @routineMapIR serviceCodeGeneration
           ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
         end
       end
-      ioLLVMcode += ") nounwind \n\n"
+      ioLLVMcode += ") nounwind\n\n"
     end
   end
 }

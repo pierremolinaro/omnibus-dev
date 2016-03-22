@@ -72,12 +72,14 @@ SECTIONS {
     . = ALIGN(4);
     *(.glue_7);
     . = ALIGN(4);
-  } > flash
-
-  .ARM.exidx : {
-    *(.ARM.exidx* .gnu.linkonce.armexidx.*);
     __code_end = . ;
   } > flash
+
+  /DISCARD/ : {
+    *(rel.ARM.*);
+    *(.ARM.*);
+    *(.gnu.linkonce.armexidx.*);
+  }
 }
 
 /*----------------------------------------------------------------------------*/
@@ -97,6 +99,7 @@ SECTIONS {
     __data_end = . ;
   } > sram_u AT > flash
 }
+
 
 /*----------------------------------------------------------------------------*/
 

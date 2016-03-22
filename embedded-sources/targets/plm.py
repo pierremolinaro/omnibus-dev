@@ -204,6 +204,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += [toolDirectory + "/lib/" + library]
   rule.mCommand += ["-o", productELF]
   rule.mCommand += ["-Tsources/linker.ld"]
+  rule.mDependences += ["sources/linker.ld"]
   rule.mCommand += ["-Map=" + productELF + ".map"]
   make.addRule (rule)
   #--- Add objcopy rule

@@ -1824,26 +1824,26 @@ void routine_generateSectionDispatcher (const GALGAS_string constinArgument_inCu
                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string var_sectionAssemblyCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-code.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 147)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 147)) ;
   ioArgument_ioAssemblerCode.plusAssign_operation(var_sectionAssemblyCode.getter_stringByReplacingStringByString (GALGAS_string ("!PROC!"), function_llvmNameForFunction (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 148)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 148)) ;
-  cEnumerator__32_stringlist enumerator_6020 (constinArgument_inSectionList, kEnumeration_up) ;
-  GALGAS_uint index_5973 ((uint32_t) 0) ;
-  while (enumerator_6020.hasCurrentObject ()) {
+  cEnumerator__32_stringlist enumerator_6019 (constinArgument_inSectionList, kEnumeration_up) ;
+  GALGAS_uint index_5972 ((uint32_t) 0) ;
+  while (enumerator_6019.hasCurrentObject ()) {
     GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 150)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 150)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6020.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 151)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_5973.getter_string (SOURCE_FILE ("declaration-section.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 152)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6019.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 151)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_5972.getter_string (SOURCE_FILE ("declaration-section.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 152)) ;
     ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 153)) ;
-    enumerator_6020.gotoNextObject () ;
-    index_5973.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 149)) ;
+    enumerator_6019.gotoNextObject () ;
+    index_5972.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 149)) ;
   }
   ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 155)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 155)) ;
-  cEnumerator__32_stringlist enumerator_6465 (constinArgument_inSectionList, kEnumeration_up) ;
-  GALGAS_uint index_6425 ((uint32_t) 0) ;
-  while (enumerator_6465.hasCurrentObject ()) {
+  cEnumerator__32_stringlist enumerator_6464 (constinArgument_inSectionList, kEnumeration_up) ;
+  GALGAS_uint index_6424 ((uint32_t) 0) ;
+  while (enumerator_6464.hasCurrentObject ()) {
     GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 157)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6465.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 158)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_6425.getter_string (SOURCE_FILE ("declaration-section.galgas", 159)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 159)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6464.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 158)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_6424.getter_string (SOURCE_FILE ("declaration-section.galgas", 159)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 159)) ;
     ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 160)) ;
-    enumerator_6465.gotoNextObject () ;
-    index_6425.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 156)) ;
+    enumerator_6464.gotoNextObject () ;
+    index_6424.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 156)) ;
   }
 }
 
@@ -1860,26 +1860,26 @@ void routine_generateServiceDispatcher (const GALGAS_string constinArgument_inCu
                                         const GALGAS__32_stringlist constinArgument_inServiceList,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator__32_stringlist enumerator_8118 (constinArgument_inServiceList, kEnumeration_up) ;
-  GALGAS_uint index_8088 ((uint32_t) 0) ;
-  while (enumerator_8118.hasCurrentObject ()) {
+  cEnumerator__32_stringlist enumerator_8117 (constinArgument_inServiceList, kEnumeration_up) ;
+  GALGAS_uint index_8087 ((uint32_t) 0) ;
+  while (enumerator_8117.hasCurrentObject ()) {
     GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 199)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 199)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_8118.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 200)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_8088.getter_string (SOURCE_FILE ("declaration-service.galgas", 201)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 201)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_8117.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 200)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_8087.getter_string (SOURCE_FILE ("declaration-service.galgas", 201)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 201)) ;
     ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 202)) ;
-    enumerator_8118.gotoNextObject () ;
-    index_8088.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 198)) ;
+    enumerator_8117.gotoNextObject () ;
+    index_8087.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 198)) ;
   }
   ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 204)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 204)), inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 204)) ;
-  cEnumerator__32_stringlist enumerator_8563 (constinArgument_inServiceList, kEnumeration_up) ;
-  GALGAS_uint index_8523 ((uint32_t) 0) ;
-  while (enumerator_8563.hasCurrentObject ()) {
+  cEnumerator__32_stringlist enumerator_8562 (constinArgument_inServiceList, kEnumeration_up) ;
+  GALGAS_uint index_8522 ((uint32_t) 0) ;
+  while (enumerator_8562.hasCurrentObject ()) {
     GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 206)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_8563.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 207)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_8523.getter_string (SOURCE_FILE ("declaration-service.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 208)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_8562.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 207)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_8522.getter_string (SOURCE_FILE ("declaration-service.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-service.galgas", 208)) ;
     ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 209)) ;
-    enumerator_8563.gotoNextObject () ;
-    index_8523.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 205)) ;
+    enumerator_8562.gotoNextObject () ;
+    index_8522.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-service.galgas", 205)) ;
   }
 }
 
@@ -7850,6 +7850,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    rule.mCommand += [toolDirectory + \"/lib/\" + library]\n"
   "  rule.mCommand += [\"-o\", productELF]\n"
   "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
+  "  rule.mDependences += [\"sources/linker.ld\"]\n"
   "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
   "  make.addRule (rule)\n"
   "  #--- Add objcopy rule\n"
@@ -7900,7 +7901,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  11292, // Text length
+  11337, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -11727,7 +11728,14 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def CLANGcompiler ():\n"
-  "  return [toolDir () + \"/bin/clang\", \"--target=armv7-none--eabi\", \"-mcpu=cortex-m4\", \"-Oz\", \"-fomit-frame-pointer\", \"-fshort-enums\"]\n"
+  "  result = [toolDir () + \"/bin/clang\"]\n"
+  "  result.append (\"--target=armv7-none--eabi\")\n"
+  "  result.append (\"-mcpu=cortex-m4\")\n"
+  "  result.append (\"-Oz\")\n"
+  "  result.append (\"-fomit-frame-pointer\")\n"
+  "  result.append (\"-fshort-enums\")\n"
+  "#  result.append (\"-funwind-tables\")\n"
+  "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -11770,7 +11778,6 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "  result.append (\"--no-undefined\")\n"
   "  result.append (\"--cref\")\n"
   "  result.append (\"-static\")\n"
-  "  result.append (\"-s\")\n"
   "  result.append (\"--gc-sections\")\n"
   "  return result\n"
   "\n"
@@ -11868,7 +11875,7 @@ const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  13740, // Text length
+  13857, // Text length
   gWrapperFileContent_11_targetTemplates
 ) ;
 
@@ -11995,12 +12002,14 @@ const char * gWrapperFileContent_13_targetTemplates = "/*-----------------------
   "    . = ALIGN(4);\n"
   "    *(.glue_7);\n"
   "    . = ALIGN(4);\n"
-  "  } > flash\n"
-  "\n"
-  "  .ARM.exidx : {\n"
-  "    *(.ARM.exidx* .gnu.linkonce.armexidx.*);\n"
   "    __code_end = . ;\n"
   "  } > flash\n"
+  "\n"
+  "  /DISCARD/ : {\n"
+  "    *(rel.ARM.*);\n"
+  "    *(.ARM.*);\n"
+  "    *(.gnu.linkonce.armexidx.*);\n"
+  "  }\n"
   "}\n"
   "\n"
   "/*----------------------------------------------------------------------------*/\n"
@@ -12020,6 +12029,7 @@ const char * gWrapperFileContent_13_targetTemplates = "/*-----------------------
   "    __data_end = . ;\n"
   "  } > sram_u AT > flash\n"
   "}\n"
+  "\n"
   "\n"
   "/*----------------------------------------------------------------------------*/\n"
   "\n"
@@ -12083,7 +12093,7 @@ const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "linker.ld",
   "ld",
   true, // Text file
-  5218, // Text length
+  5231, // Text length
   gWrapperFileContent_13_targetTemplates
 ) ;
 
