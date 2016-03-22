@@ -232,7 +232,7 @@ method @guardMapIR guardCodeGeneration
         ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
       end
     end
-    ioLLVMcode += ") nounwind \n\n"
+    ioLLVMcode += ") nounwind\n\n"
     [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
 }

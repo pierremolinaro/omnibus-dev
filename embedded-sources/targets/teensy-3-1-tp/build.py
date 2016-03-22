@@ -59,7 +59,14 @@ def LLVMLinkercompiler ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def CLANGcompiler ():
-  return [toolDir () + "/bin/clang", "--target=armv7-none--eabi", "-mcpu=cortex-m4", "-Oz", "-fomit-frame-pointer", "-fshort-enums"]
+  result = [toolDir () + "/bin/clang"]
+  result.append ("--target=armv7-none--eabi")
+  result.append ("-mcpu=cortex-m4")
+  result.append ("-Oz")
+  result.append ("-fomit-frame-pointer")
+  result.append ("-fshort-enums")
+#  result.append ("-funwind-tables")
+  return result
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -102,7 +109,6 @@ def linker ():
   result.append ("--no-undefined")
   result.append ("--cref")
   result.append ("-static")
-  result.append ("-s")
   result.append ("--gc-sections")
   return result
 

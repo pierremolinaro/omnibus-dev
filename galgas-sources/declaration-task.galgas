@@ -400,7 +400,7 @@ method @taskMapIR generateCode
     let formalArgument = "(%$" + task.mTaskName + "* %self)"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
-    ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + " nounwind {\n"
+    ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + " nounwind{\n"
     [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
