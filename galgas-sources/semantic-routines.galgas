@@ -261,7 +261,7 @@ method @routineMapIR-element llvmCodeGeneration
     between
       ioLLVMcode += ", "
     end
-    ioLLVMcode += ") nounwind ; NULL in assembly code\n\n"
+    ioLLVMcode += ")" + llvmAttributeFunction () + "; NULL in assembly code\n\n"
   else
     ioLLVMcode += llvmTitleComment (!routineName)
     ioLLVMcode += "define"
@@ -295,7 +295,7 @@ method @routineMapIR-element llvmCodeGeneration
         ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
       end
     end
-    ioLLVMcode += ") nounwind {\n"
+    ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
   #--- Add result variable ?
     if mReturnType != .null then
       ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ()) + " = alloca " + [mReturnType llvmTypeName] + "\n"

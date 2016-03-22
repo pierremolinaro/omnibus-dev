@@ -65,7 +65,7 @@ def CLANGcompiler ():
   result.append ("-Oz")
   result.append ("-fomit-frame-pointer")
   result.append ("-fshort-enums")
-#  result.append ("-funwind-tables")
+  result.append ("-funwind-tables")
   return result
 
 #----------------------------------------------------------------------------------------------------------------------*

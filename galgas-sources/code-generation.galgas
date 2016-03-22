@@ -184,7 +184,7 @@ private proc generateLLVMfile
   end
 #----------------------------------------- Boot
   llvmCode += llvmTitleComment (!"Boot")
-  llvmCode += "define internal void @boot () nounwind {\n"
+  llvmCode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
   for boot in inIntermediateCodeStruct.mBootList do
     [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
   end
@@ -250,7 +250,7 @@ private proc generateLLVMfile
     llvmCode += "define internal void @raise_panic_internal ("
     llvmCode += generationContext.mPanicLineLLVMType + " %in.LINE, "
     llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
-    llvmCode += "i8* %in.FILE) nounwind noreturn {\n"
+    llvmCode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn {\n"
   #--- First argument: line
     llvmCode += "  %" + llvmNameForLocalVariable (!"LINE") + " = alloca "
     llvmCode += generationContext.mPanicLineLLVMType + "\n"
@@ -286,7 +286,7 @@ private proc generateLLVMfile
       ]
       let routineName = "@raise_panic." + staticStringIndex
       llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
-      llvmCode += "define internal void " + routineName + " (i32 %inSourceLine, i32 %inCode) nounwind noreturn {\n"
+      llvmCode += "define internal void " + routineName + " (i32 %inSourceLine, i32 %inCode)" + llvmAttributeFunction () + "noreturn {\n"
       llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
       llvmCode += "  call void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"
       llvmCode += "  unreachable\n"
