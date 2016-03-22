@@ -232,7 +232,7 @@ method @guardMapIR guardCodeGeneration
         ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
       end
     end
-    ioLLVMcode += ") nounwind\n\n"
+    ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
     [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
 }
@@ -268,7 +268,7 @@ method @guardMapIR-element llvmCodeGeneration
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
     end
   end
-  ioLLVMcode += ") nounwind {\n"
+  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Declare "accept" variable 
   let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableName ())
    ioLLVMcode += "  %" + accepted_llvmName + " = alloca i1\n"

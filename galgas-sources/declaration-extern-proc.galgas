@@ -209,7 +209,7 @@ method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMco
   between
     ioLLVMcode += ", "
   end
-  ioLLVMcode += ") nounwind ; defined in C\n\n"
+  ioLLVMcode += ")" + llvmAttributeFunction () + "; defined in C\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

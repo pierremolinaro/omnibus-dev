@@ -152,6 +152,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   make.addRule (rule)
   LLVMsourceList = ["all.ll"]
   #---------------------------------------------- Add LLVM files compile rule
+  objectWithoutUnwindTableList = []
   objectList = []
   for source in LLVMsourceList:
   #--- Optimize LLVM source
@@ -182,6 +183,16 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += ["-aln=" + listingFile]
     make.addRule (rule)
     objectList.append (asObject)
+    #---------------------------------------------- Add remove .ARM.* section rule
+    objectWOUN = objectDir + "/wo-unw-opt-" + source + ".o"
+    rule = makefile.Rule ([objectWOUN], "Remove unwind section of " + source + ".o")
+    rule.mDependences += [asObject]
+    rule.mCommand += objcopy
+    rule.mCommand += ["-R", ".ARM.*"]
+    rule.mCommand += [asObject]
+    rule.mCommand += [objectWOUN]
+    make.addRule (rule)
+    objectWithoutUnwindTableList.append (objectWOUN)
   #---------------------------------------------- Add assembler files compile rule
   for source in assemblerSourceList:
     object = objectDir + "/" + source + ".o"
@@ -194,12 +205,22 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += ["-aln=" + listingFile]
     make.addRule (rule)
     objectList.append (object)
+    #---------------------------------------------- Add remove .ARM.* section rule
+    objectWOUN = objectDir + "/wo-unw-" + source + ".o"
+    rule = makefile.Rule ([objectWOUN], "Remove unwind sections of " + source + ".o")
+    rule.mDependences += [object]
+    rule.mCommand += objcopy
+    rule.mCommand += ["-R", ".ARM.*"]
+    rule.mCommand += [object]
+    rule.mCommand += [objectWOUN]
+    make.addRule (rule)
+    objectWithoutUnwindTableList.append (objectWOUN)
   #---------------------------------------------- Add linker rule
   productELF = productDir + "/product.elf"
   rule = makefile.Rule ([productELF], "Linking " + productELF)
-  rule.mDependences += objectList
+  rule.mDependences += objectWithoutUnwindTableList
   rule.mCommand += linker
-  rule.mCommand += objectList
+  rule.mCommand += objectWithoutUnwindTableList
   for library in linkerLibraries:
     rule.mCommand += [toolDirectory + "/lib/" + library]
   rule.mCommand += ["-o", productELF]

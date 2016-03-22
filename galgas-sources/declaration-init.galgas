@@ -198,7 +198,7 @@ method @initListIR generateLLVMinitCode
   ?!@generationAdds ioGenerationAdds
 {
   ioLLVMcode += llvmTitleComment (!"Init")
-  ioLLVMcode += "define internal void @init () nounwind {\n"
+  ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
   for init in self do
     @bool generate 
     if [init.mInitRequiredByProcList length] == 0 then

@@ -400,13 +400,13 @@ method @taskMapIR generateCode
     let formalArgument = "(%$" + task.mTaskName + "* %self)"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
-    ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + " nounwind{\n"
+    ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
     [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
-    ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " () nounwind noreturn { ; no naked\n"
+    ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn { ; no naked\n"
     ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "loop:\n"
@@ -416,7 +416,7 @@ method @taskMapIR generateCode
   end
 #--- Start tasks
   ioLLVMcode += llvmTitleComment (!"Start tasks")
-  ioLLVMcode += "define internal void @start.tasks () nounwind {\n"
+  ioLLVMcode += "define internal void @start.tasks ()" + llvmAttributeFunction () + "{\n"
   for task in orderedTaskList do (idx)
     ioLLVMcode += "  " + stackAddressForTask (!task.mTaskName)
     ioLLVMcode += " = getelementptr inbounds [" + (task.mStackSize / 4) + " x i32], "
