@@ -3595,7 +3595,7 @@ void routine_routineSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy const
 static GALGAS_string onceFunction_llvmAttributeFunction (C_Compiler * /* inCompiler */
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string (" nounwind ") ;
+  result_outResult = GALGAS_string (" nounwind minsize optsize ") ;
 //---
   return result_outResult ;
 }
@@ -11825,7 +11825,7 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "  result.append (\"-Oz\")\n"
   "  result.append (\"-fomit-frame-pointer\")\n"
   "  result.append (\"-fshort-enums\")\n"
-  "  result.append (\"-funwind-tables\")\n"
+  "#  result.append (\"-funwind-tables\")\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -11966,7 +11966,7 @@ const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  13856, // Text length
+  13857, // Text length
   gWrapperFileContent_11_targetTemplates
 ) ;
 
@@ -13164,7 +13164,7 @@ const char * gWrapperFileContent_26_targetTemplates = "target datalayout = \"e-m
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "define internal void @clearBSS () nounwind {\n"
+  "define internal void @clearBSS () nounwind minsize optsize {\n"
   "entry:\n"
   "  %startPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_start, i32 0, i32 0\n"
   "  %endPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_end, i32 0, i32 0\n"
@@ -13207,7 +13207,7 @@ const char * gWrapperFileContent_26_targetTemplates = "target datalayout = \"e-m
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "define internal void @copyData () nounwind {\n"
+  "define internal void @copyData () nounwind minsize optsize {\n"
   "entry:\n"
   "  %data_start = getelementptr  [0 x i32], [0 x i32]* @__data_start, i32 0, i32 0\n"
   "  %data_end = getelementptr  [0 x i32], [0 x i32]* @__data_end, i32 0, i32 0\n"
@@ -13235,7 +13235,7 @@ const char * gWrapperFileContent_26_targetTemplates = "target datalayout = \"e-m
   ";   configuration.on.boot                                                                                              *\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "define void @configuration.on.boot () nounwind {\n"
+  "define void @configuration.on.boot () nounwind minsize optsize {\n"
   "  call void @boot ()\n"
   "  call void @clearBSS ()\n"
   "  call void @copyData ()\n"
@@ -13255,7 +13255,7 @@ const cRegularFileWrapper gWrapperFile_26_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
-  12553, // Text length
+  12601, // Text length
   gWrapperFileContent_26_targetTemplates
 ) ;
 

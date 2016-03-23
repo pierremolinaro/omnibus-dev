@@ -22,6 +22,12 @@ struct $rendezVousData {
     self.autoriserEcriture.V ()
   }
 
+  guard input (!data:outData $uint32) : self.autoriserLecture.P () {
+    outData = self.data
+    self.signalerDonneeLue.V ()
+    self.autoriserEcriture.V ()
+  }
+
 }
 
 //-----------------------------------------------------------------------------*
