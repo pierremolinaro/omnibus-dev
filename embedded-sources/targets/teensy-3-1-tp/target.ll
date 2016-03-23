@@ -183,7 +183,7 @@ declare void @as_sectionHandler () nounwind
 
 ;----------------------------------------------------------------------------------------------------------------------*
 
-define internal void @clearBSS () nounwind {
+define internal void @clearBSS () nounwind minsize optsize {
 entry:
   %startPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_start, i32 0, i32 0
   %endPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_end, i32 0, i32 0
@@ -226,7 +226,7 @@ clearCompleted:
 
 ;----------------------------------------------------------------------------------------------------------------------*
 
-define internal void @copyData () nounwind {
+define internal void @copyData () nounwind minsize optsize {
 entry:
   %data_start = getelementptr  [0 x i32], [0 x i32]* @__data_start, i32 0, i32 0
   %data_end = getelementptr  [0 x i32], [0 x i32]* @__data_end, i32 0, i32 0
@@ -254,7 +254,7 @@ copyCompleted:
 ;   configuration.on.boot                                                                                              *
 ;----------------------------------------------------------------------------------------------------------------------*
 
-define void @configuration.on.boot () nounwind {
+define void @configuration.on.boot () nounwind minsize optsize {
   call void @boot ()
   call void @clearBSS ()
   call void @copyData ()
