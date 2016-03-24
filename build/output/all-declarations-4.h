@@ -1614,16 +1614,6 @@ void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_pr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Function 'getRoutineKindIR'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_routineKind function_getRoutineKindIR (class GALGAS_routineKind inArgument0,
-                                                    class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                            Routine 'analyzeRoutineCall'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1660,6 +1650,17 @@ class GALGAS_routineKindIR function_checkMode (const class GALGAS_stringset & co
                                                const class GALGAS_location & constinArgument3,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'primitiveNameForInvocationGraph'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_primitiveNameForInvocationGraph (class GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                               class GALGAS_lstring inArgument1,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2097,6 +2098,17 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_panicClauseLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                 Category method '@primitiveDeclarationListAST notePrimitiveTypesInPrecedenceGraph'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_notePrimitiveTypesInPrecedenceGraph (const class GALGAS_primitiveDeclarationListAST inObject,
+                                                         class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                      Category method '@procedureDeclarationListAST noteTypesInPrecedenceGraph'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2302,6 +2314,18 @@ void categoryMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_ele
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Category method '@primitiveDeclarationListAST enterInContext'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_primitiveDeclarationListAST inObject,
+                                    const class GALGAS_string constin_inReceiverTypeName,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Category method '@procedureDeclarationListAST enterInContext'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2482,6 +2506,20 @@ void categoryMethod_panicSemanticAnalysis (const class GALGAS_panicClauseListAST
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                      Category method '@primitiveDeclarationListAST primitiveSemanticAnalysis'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_primitiveSemanticAnalysis (const class GALGAS_primitiveDeclarationListAST inObject,
+                                               class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
+                                               const class GALGAS_semanticContext constin_inSemanticContext,
+                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                      Category method '@procedureDeclarationListAST procedureSemanticAnalysis'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2607,6 +2645,26 @@ class GALGAS_string function_literalCharacterArrayName (const class GALGAS_uint 
 
 class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Function 'llvmNameForPrimitiveCall'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveCall (class GALGAS_string inArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Function 'llvmNameForPrimitiveImplementation'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveImplementation (class GALGAS_string inArgument0,
+                                                                 class C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3134,6 +3192,18 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObject
                                         class GALGAS_generationAdds & io_ioGenerationAdds,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Category method '@routineMapIR primitiveCodeGeneration'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_primitiveCodeGeneration (const class GALGAS_routineMapIR inObject,
+                                             class GALGAS_string & io_ioLLVMcode,
+                                             class GALGAS__32_stringlist & io_ioServiceList,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -81,6 +81,17 @@ func serviceNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstri
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func primitiveNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
+  var s = "primitive"
+  if inReceiverType != .null then
+    s += " $" + [inReceiverType key]
+  end
+  s += " " + inName
+  outName = .new {!s !inName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func guardNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
   var s = "guard"
   if inReceiverType != .null then
@@ -150,6 +161,20 @@ func %once functionResultVariableName -> @string outName {
 
 func llvmNameForFunction ?@string inName -> @string outName {
   outName = "func." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Primitives
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForPrimitiveCall ?@string inName -> @string outName {
+  outName = "primitive.call." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForPrimitiveImplementation ?@string inName -> @string outName {
+  outName = "primitive.implementation." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -44,6 +44,12 @@ var rdvs2 = $rendezVousData () {
 
 //-----------------------------------------------------------------------------*
 
+var s = $semaphore (!value:1) {
+  func $T0.loop
+}
+
+//-----------------------------------------------------------------------------*
+
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
   var n $uint32 = 1
@@ -65,8 +71,10 @@ task T1 priority 1 stackSize 1024 {
   func loop () {
     rdvs.input (?data:let x)
     ledToggle (!LED_L1)
-//    goto (!line:0 !column:0)
-//    printUnsigned (!x)
+    s.P ()
+      goto (!line:0 !column:0)
+      printUnsigned (!x)
+    s.V ()
   }
 }
 
@@ -79,8 +87,10 @@ task T2 priority 2 stackSize 1024 {
     select
     on rdvs2.input (?data:let x) :
       ledToggle (!LED_L2)
-      goto (!line:0 !column:0)
-      printUnsigned (!x)
+      s.P ()
+        goto (!line:1 !column:0)
+        printUnsigned (!x)
+      s.V ()
     on waitUntilMS (!deadline:self.deadline) :
       self.deadline += 200
       ledToggle  (!LED_L4)

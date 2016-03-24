@@ -197,6 +197,7 @@ private proc addTargetSpecificFiles
   ioAST.mRequiredProcList = ast.mRequiredProcList + ioAST.mRequiredProcList
   ioAST.mExternProcList = ast.mExternProcList + ioAST.mExternProcList
   ioAST.mSectionListAST = ast.mSectionListAST + ioAST.mSectionListAST
+  ioAST.mPrimitiveListAST = ast.mPrimitiveListAST + ioAST.mPrimitiveListAST
   ioAST.mServiceListAST = ast.mServiceListAST + ioAST.mServiceListAST
   ioAST.mGuardListAST = ast.mGuardListAST + ioAST.mGuardListAST
   ioAST.mTargetList += ast.mTargetList

@@ -407,6 +407,8 @@ override method @selfRemoteRoutineCallInstructionAST analyze
         routineNameForInvocationGraph = sectionNameForInvocationGraph (!propertyType !mMethodName)
       case service :
         routineNameForInvocationGraph = serviceNameForInvocationGraph (!propertyType !mMethodName)
+      case primitive :
+        routineNameForInvocationGraph = primitiveNameForInvocationGraph (!propertyType !mMethodName)
       end
       [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
     #--- Check modes
@@ -444,16 +446,6 @@ override method @selfRemoteRoutineCallInstructionAST analyze
         !effectiveParameterListIR
       }
     end    
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func getRoutineKindIR ?@routineKind inRoutineKind -> @routineKind outResult {
-  switch inRoutineKind
-  case function : outResult = .function
-  case section : outResult = .section
-  case service : outResult = .service
   end
 }
 
@@ -512,6 +504,8 @@ proc analyzeRoutineCall
     routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !inRoutineName)
   case service :
     routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !inRoutineName)
+  case primitive :
+    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !inRoutineName)
   end
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
 #--- Check modes
@@ -752,8 +746,10 @@ list @procCallEffectiveParameterListIR {
 
 enum @routineKindIR {
   case function
+  case primitiveInProcessorUserMode
   case sectionInProcessorUserMode
   case serviceInProcessorUserMode
+  case primitiveInProcessorPrivilegedMode
   case sectionInProcessorPrivilegedMode
   case serviceInProcessorPrivilegedMode
 }
@@ -781,6 +777,8 @@ override method @procCallInstructionIR llvmInstructionCode
   case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mProcName)
   case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mProcName)
   case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mProcName)
+  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mProcName)
+  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mProcName)
   end
   ioLLVMcode += " ("
   for () in mParameters do

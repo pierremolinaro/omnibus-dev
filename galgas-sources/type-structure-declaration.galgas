@@ -8,6 +8,7 @@ class @structureDeclaration : @abstractDeclaration {
   @structureFieldListAST mStructureFieldListAST
   @procedureDeclarationListAST mProcedureDeclarationListAST
   @serviceDeclarationListAST mServiceListAST
+  @primitiveDeclarationListAST mPrimitiveListAST
   @guardDeclarationListAST mGuardListAST
 }
 
@@ -53,6 +54,7 @@ syntax extension common_syntax {
     @procedureDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
+    @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
@@ -79,6 +81,8 @@ syntax extension common_syntax {
     while
       <guard> !?guardListAST
     while
+      <primitive> !?primitiveListAST
+    while
       $;$
     end
     $}$
@@ -88,6 +92,7 @@ syntax extension common_syntax {
       !fieldList
       !procedureDeclarationListAST
       !serviceListAST
+      !primitiveListAST
       !guardListAST
     }
   }
@@ -115,6 +120,7 @@ override method @structureDeclaration addExtension
         ![newDeclaration mStructureFieldListAST] + fieldList
         ![newDeclaration mProcedureDeclarationListAST] + procedures
         ![newDeclaration mServiceListAST]
+        ![newDeclaration mPrimitiveListAST]
         ![newDeclaration mGuardListAST]        
       }
     else
@@ -154,6 +160,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
   end
 #--- Add structure services
   [mServiceListAST noteServiceTypesInPrecedenceGraph !?ioGraph]
+  [mPrimitiveListAST notePrimitiveTypesInPrecedenceGraph !?ioGraph]
 #--- Add structure guards
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
@@ -308,6 +315,7 @@ override method @structureDeclaration enterRoutinesInContext
 {
   [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
   [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+  [mPrimitiveListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 }
 
@@ -341,6 +349,13 @@ override method @structureDeclaration semanticAnalysis
   ]
 #--- Analyze services
   [mServiceListAST serviceSemanticAnalysis
+    !receiverType:structureType
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+  ]
+#--- Analyze primitives
+  [mPrimitiveListAST primitiveSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries

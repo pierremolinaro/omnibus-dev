@@ -2,13 +2,13 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @serviceDeclarationListAST {
-  @lstring mServiceName
-  @lstringlist mServiceAttributeList
-  @procFormalArgumentList mServiceFormalArgumentList
+list @primitiveDeclarationListAST {
+  @lstring mPrimitiveName
+  @lstringlist mPrimitiveNameAttributeList
+  @procFormalArgumentList mPrimitiveFormalArgumentList
   @lstring mReturnTypeName
-  @instructionListAST mServiceInstructionList
-  @location mEndOfServiceLocation
+  @instructionListAST mPrimitiveInstructionList
+  @location mEndOfPrimitiveDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,16 +19,16 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <service> ?!@serviceDeclarationListAST ioServiceListAST {
-    $service$
-    $identifier$ ?let serviceName
+  rule <primitive> ?!@primitiveDeclarationListAST ioPrimitiveListAST {
+    $primitive$
+    $identifier$ ?let primitiveName
     @lstringlist attributeList = {}
     repeat
     while
       $attribute$ ?let attribute
       attributeList += !attribute
     end
-    <procedure_formal_arguments> ?formalArguments:let serviceFormalArgumentList
+    <procedure_formal_arguments> ?formalArguments:let primitiveFormalArgumentList
     @lstring returnTypeName
     select
       returnTypeName = ["" here]
@@ -39,10 +39,10 @@ syntax extension common_syntax {
     ${$
     <instructionList> ?let instructionList !?*
     $}$
-    ioServiceListAST +=
-      !serviceName
+    ioPrimitiveListAST +=
+      !primitiveName
       !attributeList
-      !serviceFormalArgumentList
+      !primitiveFormalArgumentList
       !returnTypeName
       !instructionList
       !.here
@@ -56,13 +56,13 @@ syntax extension common_syntax {
 #  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @serviceDeclarationListAST noteServiceTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @primitiveDeclarationListAST notePrimitiveTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
-    for (* * formalArgumentTypeName *) in mServiceFormalArgumentList do
+    for (* * formalArgumentTypeName *) in mPrimitiveFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
-    [mServiceInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    [mPrimitiveInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -70,31 +70,31 @@ method @serviceDeclarationListAST noteServiceTypesInPrecedenceGraph ?!@semanticT
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @serviceDeclarationListAST enterInContext
+method @primitiveDeclarationListAST enterInContext
   ?receiverType:let @string inReceiverTypeName
   ?!context:@semanticContext ioContext
 {
-  for service in self do
+  for primitive in self do
   #--- Signature
     @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in service.mServiceFormalArgumentList do
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in primitive.mPrimitiveFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
   #--- Mode map
-    let @modeMap modeMap = {![userModeName () nowhere], ![isrModeName () nowhere], ![kernelModeName () nowhere]}
+    @modeMap modeMap = {![userModeName () nowhere], ![kernelModeName () nowhere]}
   #--- Enter in context
-    let returnType = if service.mReturnTypeName.string == "" then
+    let returnType = if primitive.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
     else
-      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !service.mReturnTypeName}
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !primitive.mReturnTypeName}
     end
     [!?ioContext.mRoutineMapForContext insertKey
-      !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
-      !true # service.mMutating
+      !@lstring.new {!inReceiverTypeName + "." + primitive.mPrimitiveName !primitive.mPrimitiveName.location}
+      !true # primitive.mMutating
       !modeMap
       !signature
-      !.service
+      !.primitive
       !false # Not weak
       !returnType
     ]
@@ -105,15 +105,15 @@ method @serviceDeclarationListAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @serviceDeclarationListAST serviceSemanticAnalysis
+method @primitiveDeclarationListAST primitiveSemanticAnalysis
   ?receiverType:@unifiedTypeMap-proxy inReceiverType
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for service in self do
+  for primitive in self do
     var warnIfUnused = true
-    for (attribute) in service.mServiceAttributeList do
+    for (attribute) in primitive.mPrimitiveNameAttributeList do
       if attribute.string == noWarningIfUnusedAttribute () then
         if not warnIfUnused then
           error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
@@ -125,13 +125,13 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
     end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
-      !.service
-      !{![isrModeName () nowhere], ![kernelModeName () nowhere]}
-      !service.mServiceName
-      !service.mServiceFormalArgumentList
-      !returnTypeName:service.mReturnTypeName
-      !service.mServiceInstructionList
-      !service.mEndOfServiceLocation
+      !.primitive
+      !{![kernelModeName () nowhere]}
+      !primitive.mPrimitiveName
+      !primitive.mPrimitiveFormalArgumentList
+      !returnTypeName:primitive.mReturnTypeName
+      !primitive.mPrimitiveInstructionList
+      !primitive.mEndOfPrimitiveDeclaration
       !warnIfUnused:warnIfUnused
       !globalProcedure:true
       !weakProcedure:false
@@ -148,29 +148,29 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR serviceCodeGeneration
+method @routineMapIR primitiveCodeGeneration
   ?!@string ioLLVMcode
   ?!@2stringlist ioServiceList
 {
-  for service in self do
-    if service.mKind == .service then
-      let serviceImplementationName = llvmNameForServiceImplementation (!service.lkey.string)
-      let serviceCallName = llvmNameForServiceCall (!service.lkey.string)
-      ioServiceList += !serviceCallName !serviceImplementationName
-      ioLLVMcode += llvmTitleComment (!serviceImplementationName)
+  for primitive in self do
+    if primitive.mKind == .primitive then
+      let primitiveImplementationName = llvmNameForPrimitiveImplementation (!primitive.lkey.string)
+      let primitiveCallName = llvmNameForPrimitiveCall (!primitive.lkey.string)
+      ioServiceList += !primitiveCallName !primitiveImplementationName
+      ioLLVMcode += llvmTitleComment (!primitiveImplementationName)
       ioLLVMcode += "declare"
-      if service.mReturnType == .null then
+      if primitive.mReturnType == .null then
         ioLLVMcode += " void"
       else
-        ioLLVMcode += " " + [service.mReturnType llvmTypeName]
+        ioLLVMcode += " " + [primitive.mReturnType llvmTypeName]
       end
-      ioLLVMcode += " @" + llvmNameForServiceCall (!service.lkey.string) + " ("
-      let typeName = [service.lkey.string stringByDeletingPathExtension]
+      ioLLVMcode += " @" + primitiveCallName + " ("
+      let typeName = [primitive.lkey.string stringByDeletingPathExtension]
       var first = typeName == ""
       if not first then
         ioLLVMcode += "%" + typeName + "* %self"  
       end
-      for () in service.mFormalArgumentListForGeneration do
+      for () in primitive.mFormalArgumentListForGeneration do
         if first then first = false else ioLLVMcode += ", " end
         switch mFormalArgumentKind
         case input :
@@ -187,27 +187,3 @@ method @routineMapIR serviceCodeGeneration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc generateServiceDispatcher
-  ?let @string inCurrentDirectory
-  ?let @string inTargetName
-  ?!@string ioAssemblerCode
-  ?let @2stringlist inServiceList
-{
-  for (callName *) in inServiceList do (idx)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-entry.s")
-    s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
-  end
-  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-header.s")
-  for (* implementationName) in inServiceList do (idx)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-entry.s")
-    s = [s stringByReplacingStringByString !"!ENTRY!" !implementationName]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
