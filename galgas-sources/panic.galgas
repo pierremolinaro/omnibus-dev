@@ -167,6 +167,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
   end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
+  @allocaList initAllocaList = {}
   [mPanicInstructionList analyzeRoutineInstructionList
     !self:.null
     !routineNameForInvocationGraph:routineNameForInvocationGraph
@@ -176,6 +177,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?alloca:initAllocaList
     !?generatedCode:instructionGenerationList
   ]
 #---

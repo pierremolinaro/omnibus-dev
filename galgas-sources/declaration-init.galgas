@@ -107,12 +107,14 @@ method @initList-element initSemanticAnalysis
     !requiredBy:mRequiredByProcList
     !instructionList:mInstructionList
     !endOfDeclaration:mEndOfInitLocation
+    ?let @allocaList allocaList
     ?let @instructionListIR instructionGenerationList
   )
 #--- Code generation
   ioIntermediateCodeStruct.mInitList +=
     !mRequiredByProcList
     !mInitLocation
+    !allocaList
     !instructionGenerationList
     !mEndOfInitLocation
 }
@@ -129,6 +131,7 @@ proc initSemanticAnalysis
   ?requiredBy:let @initRequiredByProcList inRequiredByProcList
   ?instructionList:let @instructionListAST inInstructionListAST
   ?endOfDeclaration:let @location inEndOfInitDeclaration
+  !@allocaList outAllocaList
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
@@ -163,6 +166,7 @@ proc initSemanticAnalysis
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}
+  outAllocaList = {}
   [inInstructionListAST analyzeRoutineInstructionList
     !self:inSelfType
     !routineNameForInvocationGraph:routineNameForInvocationGraph
@@ -172,6 +176,7 @@ proc initSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList
   ]
 #---
@@ -185,6 +190,7 @@ proc initSemanticAnalysis
 list @initListIR {
   @initRequiredByProcList mInitRequiredByProcList
   @location mInitLocation
+  @allocaList mAllocaList
   @instructionListIR mInstructionListIR
   @location mEndOfInitLocation
 }
@@ -199,6 +205,11 @@ method @initListIR generateLLVMinitCode
 {
   ioLLVMcode += llvmTitleComment (!"Init")
   ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
+  for init in self do
+    for (variable type) in init.mAllocaList do
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    end
+  end
   for init in self do
     @bool generate 
     if [init.mInitRequiredByProcList length] == 0 then

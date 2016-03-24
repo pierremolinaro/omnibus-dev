@@ -186,6 +186,11 @@ private proc generateLLVMfile
   llvmCode += llvmTitleComment (!"Boot")
   llvmCode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
   for boot in inIntermediateCodeStruct.mBootList do
+    for (variable type) in boot.mAllocaList do
+      llvmCode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    end
+  end
+  for boot in inIntermediateCodeStruct.mBootList do
     [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
   end
   llvmCode += "  ret void\n"

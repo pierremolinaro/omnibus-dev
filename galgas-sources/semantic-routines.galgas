@@ -130,6 +130,7 @@ proc routineSemanticAnalysis
     ]
   end
 #--- Analyze instruction list
+  @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
   [inRoutineInstructionList analyzeRoutineInstructionList
     !self:inSelfType
@@ -140,6 +141,7 @@ proc routineSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?alloca:allocaList
     !?generatedCode:instructionGenerationList
   ]
 #---
@@ -162,10 +164,11 @@ proc routineSemanticAnalysis
     elsif inWeakProcedure && weak then
       error routineMangledName : "this weak procedure overrides a weak procedure"
     elsif (not inWeakProcedure) && weak then
-      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?9*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?10*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
         !formalArguments
+        !allocaList
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
@@ -179,6 +182,7 @@ proc routineSemanticAnalysis
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
         !routineMangledName
         !formalArguments
+        !allocaList
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
@@ -193,6 +197,7 @@ proc routineSemanticAnalysis
     [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
       !routineMangledName
       !formalArguments
+      !allocaList
       !instructionGenerationList
       ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
       !inWarnIfUnused
@@ -207,6 +212,13 @@ proc routineSemanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @allocaList {
+  @string mVarName
+  @unifiedTypeMap-proxy mType
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @routineMapIR llvmCodeGeneration 
@@ -299,6 +311,9 @@ method @routineMapIR-element llvmCodeGeneration
   #--- Add result variable ?
     if mReturnType != .null then
       ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ()) + " = alloca " + [mReturnType llvmTypeName] + "\n"
+    end
+    for (variable type) in mAllocaList do
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
     end
   #--- Store input arguments in memory
     for () in mFormalArgumentListForGeneration do

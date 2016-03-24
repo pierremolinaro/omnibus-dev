@@ -122,6 +122,7 @@ override method @ifInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
@@ -158,6 +159,7 @@ override method @ifInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:thenInstructionGenerationList
   ]
 #--- Analyze 'else' instruction list
@@ -172,6 +174,7 @@ override method @ifInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:elseInstructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_if_instruction]

@@ -171,6 +171,7 @@ proc guardSemanticAnalysis
   )
   @procFormalArgumentListForGeneration formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
+  @allocaList allocaList = {}
   switch inGuardKind
   case baseGuard :
   #--- Add 'accepted" output variable
@@ -225,6 +226,7 @@ proc guardSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?alloca:allocaList
     !?generatedCode:instructionGenerationList
   ]
 #---
@@ -258,12 +260,12 @@ abstract method @abstractCallInstructionAST baseGuardAnalyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR
@@ -272,12 +274,12 @@ override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @selfRoutineCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR
@@ -286,12 +288,12 @@ override method @selfRoutineCallInstructionAST baseGuardAnalyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @remoteRoutineCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR

@@ -11,6 +11,30 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   @guardKindGenerationIR enum, associated values                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnumAssociatedValues {
+  public : const GALGAS_instructionListIR mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (const GALGAS_instructionListIR & inAssociatedValue0,
+                                                                         const GALGAS_string & inAssociatedValue1,
+                                                                         const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue2
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      @objectInMemoryIR enum, associated values                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1208,7 +1232,8 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
                                    const class GALGAS_initRequiredByProcList constinArgument6,
                                    const class GALGAS_instructionListAST constinArgument7,
                                    const class GALGAS_location constinArgument8,
-                                   class GALGAS_instructionListIR & outArgument9,
+                                   class GALGAS_allocaList & outArgument9,
+                                   class GALGAS_instructionListIR & outArgument10,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -1264,6 +1289,7 @@ void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructio
                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                    class GALGAS_variableMap & io_ioVariableMap,
+                                                   class GALGAS_allocaList & io_ioAllocaList,
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;

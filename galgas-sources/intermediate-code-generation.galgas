@@ -67,6 +67,7 @@ map @typeMapIR {
 
 map @routineMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
   @bool mIsRequired
   @bool mWarnIfUnused
