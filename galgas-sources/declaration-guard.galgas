@@ -177,6 +177,7 @@ proc guardSemanticAnalysis
   #--- Add 'accepted" output variable
     let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
+    allocaList += !resultVarName.string !resultType
     [!?variableMap insertOutputFormalArgument
       !lkey:resultVarName
       !type:resultType
@@ -241,6 +242,7 @@ proc guardSemanticAnalysis
     !guardMangledName
     !formalArguments
     !convenienceGuardGenerationIR
+    !allocaList
     !instructionGenerationList
     !inWarnIfUnused
   ]
@@ -394,6 +396,7 @@ enum @guardKindGenerationIR {
 map @guardMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
   @guardKindGenerationIR mGuardKindGenerationIR
+  @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
   @bool mWarnIfUnused
 
@@ -471,6 +474,9 @@ method @guardMapIR-element llvmCodeGeneration
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Declare "accept" variable 
   let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableName ())
+  for (variable type) in mAllocaList do
+    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+  end
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
@@ -491,7 +497,7 @@ method @guardMapIR-element llvmCodeGeneration
 #--- Base guard or convenience guard ?
   switch mGuardKindGenerationIR
   case baseGuard :
-    ioLLVMcode += "  %" + accepted_llvmName + " = alloca i1\n"
+ #   ioLLVMcode += "  %" + accepted_llvmName + " = alloca i1\n"
     ioLLVMcode += "  store i1 false, i1* %" + accepted_llvmName + "\n"
     [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  %" + accepted_llvmName + ".loaded = load i1, i1* %" + accepted_llvmName + "\n"
