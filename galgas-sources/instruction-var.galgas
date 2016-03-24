@@ -137,7 +137,7 @@ override method @varInstructionWithAssignmentAST analyze
     !isConstant:false # Is not constant
   ]
 #--- Code generation
-  [!?ioInstructionGenerationList appendAlloca !varLLVMName !result.mType]
+  ioAllocaList += !varLLVMName !result.mType
   [!?ioInstructionGenerationList appendStoreLocalVariable
     !varLLVMName
     !result.mType
@@ -156,8 +156,8 @@ override method @varInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
   let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
 #---
@@ -179,10 +179,7 @@ override method @varInstructionAST analyze
     !isConstant:false # Is not constant
   ]
 #--- Code generation
-  [!?ioInstructionGenerationList appendAlloca
-    !varLLVMName
-    !targetType
-  ]
+  ioAllocaList += !varLLVMName !targetType
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

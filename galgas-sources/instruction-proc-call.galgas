@@ -595,7 +595,6 @@ proc analyzeEffectiveParameters
         ]
       end
       ioAllocaList += !varLLVMName !type
-#      [!?ioInstructionGenerationList appendAlloca !varLLVMName !type]
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
