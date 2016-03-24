@@ -222,6 +222,14 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
                                                  GALGAS_procFormalArgumentList & outArgument3,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'routine_call' non terminal
+//--- 'parse' label
+  public : virtual void nt_routine_5F_call_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_routine_5F_call_ (GALGAS_abstractCallInstructionAST & outArgument0,
+                                             C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'section' non terminal
 //--- 'parse' label
   public : virtual void nt_section_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -411,154 +419,35 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_66 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_67 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_68 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_69 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      @objectInMemoryIR enum, associated values                                      *
+//                                   @guardKindGenerationIR enum, associated values                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_lstring mAssociatedValue1 ;
-  public : const GALGAS_bigint mAssociatedValue2 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                            const GALGAS_lstring & inAssociatedValue1,
-                                                            const GALGAS_bigint & inAssociatedValue2
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_register (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_globalVariable : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnumAssociatedValues {
+  public : const GALGAS_instructionListIR mAssociatedValue0 ;
   public : const GALGAS_string mAssociatedValue1 ;
-  public : const GALGAS_bool mAssociatedValue2 ;
+  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue2 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                  const GALGAS_string & inAssociatedValue1,
-                                                                  const GALGAS_bool & inAssociatedValue2
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (const GALGAS_instructionListIR & inAssociatedValue0,
+                                                                         const GALGAS_string & inAssociatedValue1,
+                                                                         const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue2
+                                                                         COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_globalVariable (void) {}
+  public : virtual ~ cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (void) {}
 } ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_localValue : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                              const GALGAS_string & inAssociatedValue1
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_localValue (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_globalConstant : public cEnumAssociatedValues {
-  public : const GALGAS_operandIR mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_globalConstant (const GALGAS_operandIR & inAssociatedValue0,
-                                                                  const GALGAS_string & inAssociatedValue1
-                                                                  COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_globalConstant (void) {}
-} ;
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Bool options                                                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_31_ ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_32_ ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationS ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ_33_ ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_5F_displayDeadCodeElimination ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeControlRegisterHTMLDumpFile ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeGlobalConstantDependencyGraphFile ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeGlobalConstantHTMLDumpFile ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeTypeDependencyGraphFile ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               UInt options                                                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              String options                                                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedSampleFile ;
-
-extern C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedTargets ;
-
-extern C_StringCommandLineOption gOption_plm_5F_options_useDirAsTargetDir ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              String List options                                                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern C_StringListCommandLineOption gOption_plm_5F_options_pathList ;
-
-//---------------------------------------------------------------------------------------------------------------------*
 
 #endif

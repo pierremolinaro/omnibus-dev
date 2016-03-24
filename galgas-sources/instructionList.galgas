@@ -55,7 +55,7 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 
 abstract method @instructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -68,7 +68,7 @@ abstract method @instructionAST analyze
 
 method @instructionListAST analyzeBranchInstructionList
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?endOfInstructionList:@location inEndOfInstructionList
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -83,7 +83,7 @@ method @instructionListAST analyzeBranchInstructionList
   for () in self do
     [mInstruction analyze 
       !self:inSelfType
-      !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !modes:inModeSet
       !allowPanic:inAllowPanic
@@ -101,7 +101,7 @@ method @instructionListAST analyzeBranchInstructionList
 
 method @instructionListAST analyzeRoutineInstructionList
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -113,7 +113,7 @@ method @instructionListAST analyzeRoutineInstructionList
   for () in self do
     [mInstruction analyze 
       !self:inSelfType
-      !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !modes:inModeSet
       !allowPanic:inAllowPanic

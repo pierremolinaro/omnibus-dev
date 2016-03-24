@@ -133,6 +133,19 @@ void categoryMethod_llvmPrototypeGeneration (const class GALGAS_externProcedureM
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                              Category method '@guardMapIR-element llvmCodeGeneration'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_llvmCodeGeneration (const class GALGAS_guardMapIR_2D_element inObject,
+                                        class GALGAS_string & io_ioLLVMcode,
+                                        const class GALGAS_generationContext constin_inGenerationContext,
+                                        class GALGAS_generationAdds & io_ioGenerationAdds,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                  Abstract category method '@instructionAST noteInstructionTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -182,7 +195,7 @@ void enterCategoryMethod_analyze (const int32_t inClassIndex,
 
 void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
                                  const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                 const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
+                                 const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                  const GALGAS_semanticContext constin_inContext,
                                  const GALGAS_stringset constin_inModeSet,
                                  const GALGAS_bool constin_inAllowPanic,
@@ -201,7 +214,7 @@ void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
 
 void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instructionListAST inObject,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                                  const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
+                                                  const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                                   class GALGAS_location in_inEndOfInstructionList,
                                                   const class GALGAS_semanticContext constin_inContext,
                                                   const class GALGAS_stringset constin_inModeSet,
@@ -503,19 +516,6 @@ void enterCategoryGetter_typeName (const int32_t inClassIndex,
 class GALGAS_string callCategoryGetter_typeName (const cPtr_integerDeclaration * inObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category method '@guardMapIR-element llvmCodeGeneration'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_llvmCodeGeneration (const class GALGAS_guardMapIR_2D_element inObject,
-                                        class GALGAS_string & io_ioLLVMcode,
-                                        const class GALGAS_generationContext constin_inGenerationContext,
-                                        class GALGAS_generationAdds & io_ioGenerationAdds,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

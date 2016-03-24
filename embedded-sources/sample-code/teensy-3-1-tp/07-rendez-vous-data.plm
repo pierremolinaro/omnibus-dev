@@ -34,6 +34,11 @@ struct $rendezVousData {
 
 var rdvs = $rendezVousData () {
   func $T0.loop
+}
+
+//-----------------------------------------------------------------------------*
+
+var rdvs2 = $rendezVousData () {
   func $T1.loop
 }
 
@@ -45,26 +50,41 @@ task T0 priority 0 stackSize 512 {
 
   func loop () {
     waitUntilMS (!deadline:self.top)
-    self.n += 1
     rdvs.output (!data:self.n)
+    rdvs2.output (!data:self.n)
+    ledToggle (!LED_L0)
     self.top += 500
-    ledOn (!LED_L0)
-    waitUntilMS (!deadline:self.top)
     self.n += 1
-    rdvs.output (!data:self.n)
-    self.top += 500
-    ledOff (!LED_L0)
   }
 }
 
 //-----------------------------------------------------------------------------*
 
 task T1 priority 1 stackSize 1024 {
+
   func loop () {
-    rdvs.input (?data:var x)
+    rdvs.input (?data:let x)
     ledToggle (!LED_L1)
-    goto (!line:0 !column:0)
-    printUnsigned (!x)
+//    goto (!line:0 !column:0)
+//    printUnsigned (!x)
+  }
+}
+
+//-----------------------------------------------------------------------------*
+
+task T2 priority 2 stackSize 1024 {
+  var deadline $uint32 = 0
+
+  func loop () {
+    select
+    on rdvs2.input (?data:let x) :
+      ledToggle (!LED_L2)
+      goto (!line:0 !column:0)
+      printUnsigned (!x)
+    on waitUntilMS (!deadline:self.deadline) :
+      self.deadline += 200
+      ledToggle  (!LED_L4)
+    end
   }
 }
 

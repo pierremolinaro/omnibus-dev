@@ -56,7 +56,7 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 
 override method @forInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -68,7 +68,7 @@ override method @forInstructionAST analyze
 #--- Analyze iterated expression
   [mIteratedExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext
     !modes:inModeSet
@@ -84,13 +84,16 @@ override method @forInstructionAST analyze
   if iteratedElementType == .null then
     error mEndOf_iteratedExpression_instruction : "this object is not enumerable"
   end
+#---
+  let enumeratedVarLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+  ioTemporaries.mTemporaryIndex ++
 #--- Analyze instruction list
   [!?ioVariableMap openOverrideForRepeatBlock]
   [!?ioVariableMap insertUsedLocalConstant
     !lkey:mVarName
     !type:iteratedElementType
     !readAccessAllowed:true # Read access ok
-    !variableKind:.localValue {!type:iteratedElementType !name:mVarName.string}
+    !variableKind:.localValue {!type:iteratedElementType !name:enumeratedVarLLVMName}
     !copyable:true
     !fieldMap:{}
     !canBeUsedAsInputParameter:false
@@ -99,7 +102,7 @@ override method @forInstructionAST analyze
   @instructionListIR instructionGenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_do_instruction
     !context:inContext
     !modes:inModeSet
@@ -112,7 +115,7 @@ override method @forInstructionAST analyze
   [!?ioVariableMap closeOverride !mEndOf_do_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@forInstructionIR.new {
-    !mVarName.string
+    !enumeratedVarLLVMName
     !iteratedElementType
     !mEndOf_iteratedExpression_instruction
     !iteratedExpressionResult

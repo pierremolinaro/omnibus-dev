@@ -115,7 +115,7 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 
 override method @ifInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -127,7 +127,7 @@ override method @ifInstructionAST analyze
 #--- Analyze test expression
   [mTestExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext
     !modes:inModeSet
@@ -150,7 +150,7 @@ override method @ifInstructionAST analyze
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfThenInstructionList
     !context:inContext
     !modes:inModeSet
@@ -164,7 +164,7 @@ override method @ifInstructionAST analyze
   @instructionListIR elseInstructionGenerationList = {}
   [mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfElseInstructionList
     !context:inContext
     !modes:inModeSet

@@ -82,15 +82,3 @@ map @routineMapIR {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @guardMapIR {
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionListIR mInstructionGenerationList
-  @bool mWarnIfUnused
-
-  insert insertKey error message "guard '%K' is already defined"
-  search searchKey error message "** internal error **"
-  remove removeKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

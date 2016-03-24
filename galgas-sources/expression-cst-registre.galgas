@@ -86,7 +86,7 @@ override method @registerIntegerExpInExpressionAST noteExpressionTypesInPreceden
 
 override method @registerConstantInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModeSet
@@ -121,7 +121,7 @@ override method @registerConstantInExpressionAST analyzeExpression
 
 override method @registerIntegerExpInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -156,7 +156,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
 #--- Analyze expression
   [mExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet

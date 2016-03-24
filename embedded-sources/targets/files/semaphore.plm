@@ -7,7 +7,7 @@ struct $semaphore {
 
   //············································································
   
-  service V `kernel @noWarningIfUnused () {
+  service V `kernel `isr @noWarningIfUnused () {
     let found = makeTaskReady (!?list:self.list)
     if not found then
       self.value += 1

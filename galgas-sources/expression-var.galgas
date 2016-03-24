@@ -111,7 +111,7 @@ override method @controlRegisterFieldInExpressionAST noteExpressionTypesInPreced
 
 override method @varInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet
@@ -156,7 +156,7 @@ override method @varInExpressionAST analyzeExpression
 
 override method @selfVarInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet
@@ -210,7 +210,7 @@ override method @selfVarInExpressionAST analyzeExpression
 
 override method @controlRegisterFieldInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet

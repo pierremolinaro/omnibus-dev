@@ -42,7 +42,7 @@ override method @prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGrap
 
 override method @prefixOperatorExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -56,7 +56,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
 #--- Analyze expression
   [mExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet

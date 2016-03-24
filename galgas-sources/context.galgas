@@ -89,10 +89,12 @@ map @modeMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc checkMode
+func checkMode
   ?requiredModes:let @stringset inRequiredModes
   ?possibleModes:let @stringset inPossibleModes
+  ?kind:@routineKind inRoutineKind
   ?error:let @location inErrorLocation
+  -> @routineKindIR outResult
 {
   if (inPossibleModes & inRequiredModes) != inRequiredModes  then
     let missingModes = inRequiredModes - inPossibleModes
@@ -104,6 +106,36 @@ proc checkMode
     between s += ", "
     end
     error inErrorLocation : s
+  end
+  var requiredModeListString = ""
+  for (m) in inRequiredModes do
+    requiredModeListString += " `" + m
+  end
+  let runInProcessorUserMode = [inRequiredModes hasKey !userModeName ()]
+  let runInProcessorPrivilegedMode = [inRequiredModes hasKey !isrModeName ()] || [inRequiredModes hasKey !kernelModeName ()]
+  switch inRoutineKind
+  case function :
+    outResult = .function
+  case section :
+    if runInProcessorUserMode && runInProcessorPrivilegedMode then
+      error inErrorLocation : "a section cannot be called in" + requiredModeListString + " mode(s)" : outResult
+    elsif runInProcessorUserMode then
+      outResult = .sectionInProcessorUserMode
+    elsif runInProcessorPrivilegedMode then
+      outResult = .sectionInProcessorPrivilegedMode
+    else
+      error inErrorLocation : "a section cannot be called in" + requiredModeListString + " mode(s)" : outResult
+    end
+  case service :
+    if runInProcessorUserMode && runInProcessorPrivilegedMode then
+      error inErrorLocation : "a service cannot be called in" + requiredModeListString + " mode(s)" : outResult
+    elsif runInProcessorUserMode then
+      outResult = .serviceInProcessorUserMode
+    elsif runInProcessorPrivilegedMode then
+      outResult = .serviceInProcessorPrivilegedMode
+    else
+      error inErrorLocation : "a service cannot be called in" + requiredModeListString + " mode(s)" : outResult
+    end
   end
 }
 

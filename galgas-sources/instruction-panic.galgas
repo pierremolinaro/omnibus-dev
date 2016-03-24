@@ -40,7 +40,7 @@ override method @throwInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 
 override method @throwInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -57,7 +57,7 @@ override method @throwInstructionAST analyze
   @instructionListIR unusedInstructionListIR = {}
   [mCodeExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
     !modes:inModeSet

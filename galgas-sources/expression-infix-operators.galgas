@@ -113,7 +113,7 @@ method @infixOperatorMap checkBinaryOperationWith
 
 override method @infixOperatorExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -127,7 +127,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet
@@ -141,7 +141,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:leftOperand.mType
     !context:inContext
     !modes:inModeSet
@@ -271,7 +271,7 @@ private func getInfixOperatorMap
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -286,7 +286,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   @instructionListIR leftInstructionGenerationList = {}
   [mLeftExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !modes:inModeSet
@@ -301,7 +301,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   @instructionListIR rightInstructionGenerationList = {}
   [mRightExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:leftOperand.mType
     !context:inContext
     !modes:inModeSet

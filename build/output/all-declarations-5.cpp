@@ -1113,9 +1113,106 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/06-rendez-vous.plm'
+//--- File 'teensy-3-1-tp/05-guarded-semaphore2.plm'
 
 const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "struct $monSemaphore {\n"
+  "  var s = $semaphore (!value:0) \n"
+  "  var s2 = $semaphore (!value:0) \n"
+  "\n"
+  "  func P `user @noWarningIfUnused () {\n"
+  "    self.s.P ()\n"
+  "  }\n"
+  "\n"
+  "  func V `user () {\n"
+  "    self.s.V ()\n"
+  "  }\n"
+  "\n"
+  "  guard P () : self.s.P () {\n"
+  "    self.s2.V ()\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var s0 = $monSemaphore () {\n"
+  "  func $T0.loop\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var s1 = $monSemaphore () {\n"
+  "  func $T1.loop\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "task T0 priority 0 stackSize 512 {\n"
+  "  var top $uint32 = 0\n"
+  "\n"
+  "  func loop () {\n"
+  "    waitUntilMS (!deadline:self.top)\n"
+  "    s0.V ()\n"
+  "    self.top += 250\n"
+  "    ledOn (!LED_L0)\n"
+  "    waitUntilMS (!deadline:self.top)\n"
+  "    s0.V ()\n"
+  "    self.top += 250\n"
+  "    ledOff (!LED_L0)\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "task T1 priority 1 stackSize 512 {\n"
+  "  var top $uint32 = 0\n"
+  "\n"
+  "  func loop () {\n"
+  "    waitUntilMS (!deadline:self.top)\n"
+  "    s1.V ()\n"
+  "    self.top += 249\n"
+  "    ledOn (!LED_L4)\n"
+  "    waitUntilMS (!deadline:self.top)\n"
+  "    s1.V ()\n"
+  "    self.top += 249\n"
+  "    ledOff (!LED_L4)\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "task T2 priority 2 stackSize 512 {\n"
+  "  var deadline $uint32 = 0\n"
+  "  \n"
+  "  func loop () {\n"
+  "    select\n"
+  "    on s0.P () :\n"
+  "      ledToggle  (!LED_L1)\n"
+  "    on s1.P () :\n"
+  "      ledToggle  (!LED_L3)\n"
+  "    on waitUntilMS (!deadline:self.deadline) :\n"
+  "      self.deadline += 200\n"
+  "      ledToggle  (!LED_L2)\n"
+  "    end\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
+  "05-guarded-semaphore2.plm",
+  "plm",
+  true, // Text file
+  1755, // Text length
+  gWrapperFileContent_5_embeddedSampleCode
+) ;
+
+//--- File 'teensy-3-1-tp/06-rendez-vous.plm'
+
+const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1210,17 +1307,17 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "06-rendez-vous.plm",
   "plm",
   true, // Text file
   2410, // Text length
-  gWrapperFileContent_5_embeddedSampleCode
+  gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-tp/07-rendez-vous-data.plm'
 
-const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1244,12 +1341,23 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    self.autoriserEcriture.V ()\n"
   "  }\n"
   "\n"
+  "  guard input (!data:outData $uint32) : self.autoriserLecture.P () {\n"
+  "    outData = self.data\n"
+  "    self.signalerDonneeLue.V ()\n"
+  "    self.autoriserEcriture.V ()\n"
+  "  }\n"
+  "\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var rdvs = $rendezVousData () {\n"
   "  func $T0.loop\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var rdvs2 = $rendezVousData () {\n"
   "  func $T1.loop\n"
   "}\n"
   "\n"
@@ -1261,42 +1369,57 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "  func loop () {\n"
   "    waitUntilMS (!deadline:self.top)\n"
-  "    self.n += 1\n"
   "    rdvs.output (!data:self.n)\n"
+  "    rdvs2.output (!data:self.n)\n"
+  "    ledToggle (!LED_L0)\n"
   "    self.top += 500\n"
-  "    ledOn (!LED_L0)\n"
-  "    waitUntilMS (!deadline:self.top)\n"
   "    self.n += 1\n"
-  "    rdvs.output (!data:self.n)\n"
-  "    self.top += 500\n"
-  "    ledOff (!LED_L0)\n"
   "  }\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T1 priority 1 stackSize 1024 {\n"
+  "\n"
   "  func loop () {\n"
-  "    rdvs.input (\?data:var x)\n"
+  "    rdvs.input (\?data:let x)\n"
   "    ledToggle (!LED_L1)\n"
-  "    goto (!line:0 !column:0)\n"
-  "    printUnsigned (!x)\n"
+  "//    goto (!line:0 !column:0)\n"
+  "//    printUnsigned (!x)\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "task T2 priority 2 stackSize 1024 {\n"
+  "  var deadline $uint32 = 0\n"
+  "\n"
+  "  func loop () {\n"
+  "    select\n"
+  "    on rdvs2.input (\?data:let x) :\n"
+  "      ledToggle (!LED_L2)\n"
+  "      goto (!line:0 !column:0)\n"
+  "      printUnsigned (!x)\n"
+  "    on waitUntilMS (!deadline:self.deadline) :\n"
+  "      self.deadline += 200\n"
+  "      ledToggle  (!LED_L4)\n"
+  "    end\n"
   "  }\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
+const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "07-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  1549, // Text length
-  gWrapperFileContent_6_embeddedSampleCode
+  2152, // Text length
+  gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-tp' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [8] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [9] = {
   & gWrapperFile_0_embeddedSampleCode,
   & gWrapperFile_1_embeddedSampleCode,
   & gWrapperFile_2_embeddedSampleCode,
@@ -1304,6 +1427,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [8] = {
   & gWrapperFile_4_embeddedSampleCode,
   & gWrapperFile_5_embeddedSampleCode,
   & gWrapperFile_6_embeddedSampleCode,
+  & gWrapperFile_7_embeddedSampleCode,
   NULL
 } ;
 
@@ -1317,7 +1441,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1]
 
 const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   "teensy-3-1-tp",
-  7,
+  8,
   gWrapperAllFiles_embeddedSampleCode_1,
   0,
   gWrapperAllDirectories_embeddedSampleCode_1
@@ -4845,7 +4969,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_functionCallIR GALGAS_functionCallIR::constructor_new (const GALGAS_operandIR & inAttribute_mResult,
                                                               const GALGAS_string & inAttribute_mFunctionName,
-                                                              const GALGAS_routineKind & inAttribute_mKind,
+                                                              const GALGAS_routineKindIR & inAttribute_mKind,
                                                               const GALGAS_procCallEffectiveParameterListIR & inAttribute_mArgumentList
                                                               COMMA_LOCATION_ARGS) {
   GALGAS_functionCallIR result ;
@@ -4893,8 +5017,8 @@ GALGAS_string cPtr_functionCallIR::getter_mFunctionName (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKind GALGAS_functionCallIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
-  GALGAS_routineKind result ;
+GALGAS_routineKindIR GALGAS_functionCallIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
+  GALGAS_routineKindIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
@@ -4905,7 +5029,7 @@ GALGAS_routineKind GALGAS_functionCallIR::getter_mKind (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKind cPtr_functionCallIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
+GALGAS_routineKindIR cPtr_functionCallIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mKind ;
 }
 
@@ -4933,7 +5057,7 @@ GALGAS_procCallEffectiveParameterListIR cPtr_functionCallIR::getter_mArgumentLis
 
 cPtr_functionCallIR::cPtr_functionCallIR (const GALGAS_operandIR & in_mResult,
                                           const GALGAS_string & in_mFunctionName,
-                                          const GALGAS_routineKind & in_mKind,
+                                          const GALGAS_routineKindIR & in_mKind,
                                           const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -6846,7 +6970,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_new (const GALGAS_string & inAttribute_mGlobalVariableName,
                                                                             const GALGAS_string & inAttribute_mProcName,
-                                                                            const GALGAS_routineKind & inAttribute_mKind,
+                                                                            const GALGAS_routineKindIR & inAttribute_mKind,
                                                                             const GALGAS_procCallEffectiveParameterListIR & inAttribute_mParameters
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_procCallInstructionIR result ;
@@ -6894,8 +7018,8 @@ GALGAS_string cPtr_procCallInstructionIR::getter_mProcName (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKind GALGAS_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
-  GALGAS_routineKind result ;
+GALGAS_routineKindIR GALGAS_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
+  GALGAS_routineKindIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_procCallInstructionIR) ;
@@ -6906,7 +7030,7 @@ GALGAS_routineKind GALGAS_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineKind cPtr_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
+GALGAS_routineKindIR cPtr_procCallInstructionIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mKind ;
 }
 
@@ -6934,7 +7058,7 @@ GALGAS_procCallEffectiveParameterListIR cPtr_procCallInstructionIR::getter_mPara
 
 cPtr_procCallInstructionIR::cPtr_procCallInstructionIR (const GALGAS_string & in_mGlobalVariableName,
                                                         const GALGAS_string & in_mProcName,
-                                                        const GALGAS_routineKind & in_mKind,
+                                                        const GALGAS_routineKindIR & in_mKind,
                                                         const GALGAS_procCallEffectiveParameterListIR & in_mParameters
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -15384,190 +15508,6 @@ GALGAS_letInstructionWithAssignmentAST GALGAS_letInstructionWithAssignmentAST::e
       result = *p ;
     }else{
       inCompiler->castError ("letInstructionWithAssignmentAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_onInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_onInstructionAST * p = (const cPtr_onInstructionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_onInstructionAST) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mBranchList.objectCompare (p->mAttribute_mBranchList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mEndOf_5F_on_5F_instruction.objectCompare (p->mAttribute_mEndOf_5F_on_5F_instruction) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_onInstructionAST::objectCompare (const GALGAS_onInstructionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_onInstructionAST::GALGAS_onInstructionAST (void) :
-GALGAS_instructionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_onInstructionAST GALGAS_onInstructionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_onInstructionAST::constructor_new (GALGAS_onInstructionBranchList::constructor_emptyList (HERE),
-                                                   GALGAS_location::constructor_nowhere (HERE)
-                                                   COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_onInstructionAST::GALGAS_onInstructionAST (const cPtr_onInstructionAST * inSourcePtr) :
-GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_onInstructionAST) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_onInstructionAST GALGAS_onInstructionAST::constructor_new (const GALGAS_onInstructionBranchList & inAttribute_mBranchList,
-                                                                  const GALGAS_location & inAttribute_mEndOf_5F_on_5F_instruction
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_onInstructionAST result ;
-  if (inAttribute_mBranchList.isValid () && inAttribute_mEndOf_5F_on_5F_instruction.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_onInstructionAST (inAttribute_mBranchList, inAttribute_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_onInstructionBranchList GALGAS_onInstructionAST::getter_mBranchList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_onInstructionBranchList result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_onInstructionAST * p = (const cPtr_onInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_onInstructionAST) ;
-    result = p->mAttribute_mBranchList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_onInstructionBranchList cPtr_onInstructionAST::getter_mBranchList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBranchList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_onInstructionAST::getter_mEndOf_5F_on_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_onInstructionAST * p = (const cPtr_onInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_onInstructionAST) ;
-    result = p->mAttribute_mEndOf_5F_on_5F_instruction ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_onInstructionAST::getter_mEndOf_5F_on_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOf_5F_on_5F_instruction ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                      Pointer class for @onInstructionAST class                                      *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_onInstructionAST::cPtr_onInstructionAST (const GALGAS_onInstructionBranchList & in_mBranchList,
-                                              const GALGAS_location & in_mEndOf_5F_on_5F_instruction
-                                              COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (THERE),
-mAttribute_mBranchList (in_mBranchList),
-mAttribute_mEndOf_5F_on_5F_instruction (in_mEndOf_5F_on_5F_instruction) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_onInstructionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_onInstructionAST ;
-}
-
-void cPtr_onInstructionAST::description (C_String & ioString,
-                                         const int32_t inIndentation) const {
-  ioString << "[@onInstructionAST:" ;
-  mAttribute_mBranchList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mEndOf_5F_on_5F_instruction.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_onInstructionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_onInstructionAST (mAttribute_mBranchList, mAttribute_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @onInstructionAST type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_onInstructionAST ("onInstructionAST",
-                                         & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_onInstructionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_onInstructionAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_onInstructionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_onInstructionAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_onInstructionAST GALGAS_onInstructionAST::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_onInstructionAST result ;
-  const GALGAS_onInstructionAST * p = (const GALGAS_onInstructionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_onInstructionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("onInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
