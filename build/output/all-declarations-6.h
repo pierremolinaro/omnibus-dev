@@ -182,7 +182,8 @@ typedef void (*categoryMethodSignature_instructionAST_analyze) (const class cPtr
                                                                 class GALGAS_semanticTemporariesStruct & ioArgument5,
                                                                 class GALGAS_staticStringMap & ioArgument6,
                                                                 class GALGAS_variableMap & ioArgument7,
-                                                                class GALGAS_instructionListIR & ioArgument8,
+                                                                class GALGAS_allocaList & ioArgument8,
+                                                                class GALGAS_instructionListIR & ioArgument9,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -202,6 +203,7 @@ void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
                                  GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                  GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                  GALGAS_variableMap & io_ioVariableMap,
+                                 GALGAS_allocaList & io_ioAllocaList,
                                  GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                  C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
@@ -222,6 +224,7 @@ void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instruction
                                                   class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                   class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                   class GALGAS_variableMap & io_ioVariableMap,
+                                                  class GALGAS_allocaList & io_ioAllocaList,
                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;

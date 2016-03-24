@@ -62,6 +62,7 @@ abstract method @instructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -76,6 +77,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Begin branch
@@ -90,6 +92,7 @@ method @instructionListAST analyzeBranchInstructionList
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
     ]
   end
@@ -108,6 +111,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {
   for () in self do
@@ -120,6 +124,7 @@ method @instructionListAST analyzeRoutineInstructionList
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
     ]
   end

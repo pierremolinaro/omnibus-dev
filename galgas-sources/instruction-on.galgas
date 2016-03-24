@@ -146,6 +146,7 @@ override method @onInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   @onInstructionBranchListIR onInstructionBranchListIR = {}
@@ -260,6 +261,7 @@ override method @onInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
       !?instructionListIR:branchInstructionGenerationList
     ]
     [!?ioVariableMap closeOverride !endOfBranch]

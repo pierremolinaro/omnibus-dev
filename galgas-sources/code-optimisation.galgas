@@ -145,6 +145,7 @@ private proc suppressInaccessibleSubprograms
       [!?accessibleProcedureMap insertKey
         !procedure.lkey
         !procedure.mFormalArgumentListForGeneration
+        !procedure.mAllocaList
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
@@ -160,6 +161,7 @@ private proc suppressInaccessibleSubprograms
       [!?nonExploredProcedureMap insertKey
         !procedure.lkey
         !procedure.mFormalArgumentListForGeneration
+        !procedure.mAllocaList
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
@@ -223,6 +225,7 @@ private proc exploreProcs
      [!?ioAccessibleProcedureMap insertKey
         !procedure.lkey
         !procedure.mFormalArgumentListForGeneration
+        !procedure.mAllocaList
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
@@ -238,6 +241,7 @@ private proc exploreProcs
       [!?ioNonExploredProcedureMap insertKey
         !procedure.lkey
         !procedure.mFormalArgumentListForGeneration
+        !procedure.mAllocaList
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused

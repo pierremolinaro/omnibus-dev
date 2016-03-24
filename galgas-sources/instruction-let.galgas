@@ -63,6 +63,7 @@ override method @letInstructionWithAssignmentAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let @unifiedTypeMap-proxy targetType = if mOptionalTypeName.string == ""
@@ -110,10 +111,8 @@ override method @letInstructionWithAssignmentAST analyze
     !isConstant:true
   ]
 #--- Generate code
-  [!?ioInstructionGenerationList appendAlloca
-    !varLLVMName
-    !result.mType
-  ]
+  ioAllocaList += !varLLVMName !result.mType
+#  [!?ioInstructionGenerationList appendAlloca !varLLVMName !result.mType]
   [localConstant storeInMemory
     !value:result
     !?instructionListIR:ioInstructionGenerationList

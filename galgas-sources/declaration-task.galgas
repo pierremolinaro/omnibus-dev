@@ -314,6 +314,7 @@ method @taskList-element semanticAnalysis
     taskInitSortedListAST += !priority !instructionList !endOfDeclaration !priority.bigint
   end
   @instructionListIR initInstructionListIR = {}
+  @allocaList initAllocaList = {}
   for (taskInitPriority taskInitInstructionList endOfTaskInitDeclaration *) in taskInitSortedListAST do
     initSemanticAnalysis (
       !context:inContext
@@ -325,9 +326,11 @@ method @taskList-element semanticAnalysis
       !requiredBy:{}
       !instructionList:taskInitInstructionList
       !endOfDeclaration:endOfTaskInitDeclaration
+      ?let partialAllocaList
       ?let @instructionListIR partialInstructionGenerationList
     )
     initInstructionListIR += partialInstructionGenerationList
+    initAllocaList += partialAllocaList
   end
 #------------------------------------------- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
@@ -335,6 +338,7 @@ method @taskList-element semanticAnalysis
     !taskType
     !mPriority.bigint
     !mStackSize.bigint
+    !initAllocaList
     !initInstructionListIR
   ]
 }
@@ -347,6 +351,7 @@ map @taskMapIR {
   @unifiedTypeMap-proxy mTaskType
   @bigint mPriority
   @bigint mStackSize
+  @allocaList mAllocaList
   @instructionListIR mInitInstructionListIR
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
@@ -359,6 +364,7 @@ sortedlist @taskSortedListIR {
   @string mTaskName
   @bigint mPriority
   @bigint mStackSize
+  @allocaList mAllocaList
   @instructionListIR mInitInstructionListIR
 }{
   mPriority <
@@ -389,7 +395,7 @@ method @taskMapIR generateCode
 #--- Build ordered task list
   @taskSortedListIR orderedTaskList = {}
   for task in self do
-    orderedTaskList += !task.lkey.string !task.mPriority !task.mStackSize !task.mInitInstructionListIR
+    orderedTaskList += !task.lkey.string !task.mPriority !task.mStackSize  !task.mAllocaList !task.mInitInstructionListIR
   end
 #--- Declare task stacks and main routine
   for task in orderedTaskList do
@@ -401,6 +407,9 @@ method @taskMapIR generateCode
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+    for (variable type) in task.mAllocaList do
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    end
     [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
