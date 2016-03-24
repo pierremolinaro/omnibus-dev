@@ -6,14 +6,14 @@ struct $monSemaphore {
   var value $uint32
   var list = $taskList ()
 
-  service V `kernel () {
+  service V () {
     let found = makeTaskReady (!?list:self.list)
     if not found then
       self.value += 1
     end
   }
 
-  service P_until `kernel (?deadline:inDeadline $uint32) -> $bool {
+  primitive P_until (?deadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
     if result then
       self.value -= 1

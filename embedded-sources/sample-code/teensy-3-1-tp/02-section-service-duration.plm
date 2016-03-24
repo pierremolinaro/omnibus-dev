@@ -7,7 +7,7 @@ section emptySection () {
 
 //------------------------------------------------*
 
-service emptyService `kernel () {
+service emptyService () {
 }
 
 //------------------------------------------------*

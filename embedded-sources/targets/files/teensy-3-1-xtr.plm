@@ -77,7 +77,7 @@ func userSystickHandler `isr @weak () {
 
 //-----------------------------------------------------------------------------*
 
-service waitUntilMS `kernel @noWarningIfUnused (?deadline: inDate $uint32) {
+primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
   if inDate > millis () then
     blockOnDeadline (!deadline:inDate)
   end

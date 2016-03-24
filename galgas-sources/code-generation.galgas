@@ -224,6 +224,11 @@ private proc generateLLVMfile
     !?llvmCode
     !?serviceList
   ]
+#----------------------------------------- Primitives
+  [inIntermediateCodeStruct.mRoutineMapIR primitiveCodeGeneration
+    !?llvmCode
+    !?serviceList
+  ]
 #----------------------------------------- Guards
   [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
     !?llvmCode

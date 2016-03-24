@@ -7,7 +7,7 @@ struct $semaphore {
 
   //············································································
   
-  service V `kernel `isr @noWarningIfUnused () {
+  service V @noWarningIfUnused () {
     let found = makeTaskReady (!?list:self.list)
     if not found then
       self.value += 1
@@ -17,7 +17,7 @@ struct $semaphore {
 
   //············································································
 
-  service P `kernel @noWarningIfUnused () {
+  primitive P @noWarningIfUnused () {
     if self.value > 0 then
       self.value -= 1
     else
@@ -27,7 +27,7 @@ struct $semaphore {
 
   //············································································
 
-  service P_until `kernel @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
+  primitive P_until @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
     if result then
       self.value -= 1

@@ -162,6 +162,8 @@ override method @functionCallIR llvmInstructionCode
   case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mFunctionName)
   case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mFunctionName)
   case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mFunctionName)
+  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionName)
+  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionName)
   end
   ioLLVMcode += " ("
   for () in mArgumentList do

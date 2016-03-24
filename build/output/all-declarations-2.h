@@ -1942,8 +1942,10 @@ class GALGAS_routineKindIR : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_function,
+    kEnum_primitiveInProcessorUserMode,
     kEnum_sectionInProcessorUserMode,
     kEnum_serviceInProcessorUserMode,
+    kEnum_primitiveInProcessorPrivilegedMode,
     kEnum_sectionInProcessorPrivilegedMode,
     kEnum_serviceInProcessorPrivilegedMode
   } enumeration ;
@@ -1969,6 +1971,10 @@ class GALGAS_routineKindIR : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_routineKindIR constructor_function (LOCATION_ARGS) ;
 
+  public : static GALGAS_routineKindIR constructor_primitiveInProcessorPrivilegedMode (LOCATION_ARGS) ;
+
+  public : static GALGAS_routineKindIR constructor_primitiveInProcessorUserMode (LOCATION_ARGS) ;
+
   public : static GALGAS_routineKindIR constructor_sectionInProcessorPrivilegedMode (LOCATION_ARGS) ;
 
   public : static GALGAS_routineKindIR constructor_sectionInProcessorUserMode (LOCATION_ARGS) ;
@@ -1990,6 +1996,10 @@ class GALGAS_routineKindIR : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPrimitiveInProcessorPrivilegedMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPrimitiveInProcessorUserMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSectionInProcessorPrivilegedMode (LOCATION_ARGS) const ;
 

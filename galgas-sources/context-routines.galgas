@@ -8,6 +8,7 @@ enum @routineKind {
   case function
   case section
   case service
+  case primitive
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

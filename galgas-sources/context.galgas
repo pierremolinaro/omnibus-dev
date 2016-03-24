@@ -136,6 +136,16 @@ func checkMode
     else
       error inErrorLocation : "a service cannot be called in" + requiredModeListString + " mode(s)" : outResult
     end
+  case primitive :
+    if runInProcessorUserMode && runInProcessorPrivilegedMode then
+      error inErrorLocation : "a primitive cannot be called in" + requiredModeListString + " mode(s)" : outResult
+    elsif runInProcessorUserMode then
+      outResult = .primitiveInProcessorUserMode
+    elsif runInProcessorPrivilegedMode then
+      outResult = .primitiveInProcessorPrivilegedMode
+    else
+      error inErrorLocation : "a service cannot be called in" + requiredModeListString + " mode(s)" : outResult
+    end
   end
 }
 
@@ -332,6 +342,7 @@ proc buildSemanticContext
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mServiceListAST enterInContext !receiverType:"" !?context: outSemanticContext]
+  [inAST.mPrimitiveListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #--- Enter tasks
   [inAST.mTaskList enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]

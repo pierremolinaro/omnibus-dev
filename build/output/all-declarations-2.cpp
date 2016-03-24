@@ -4199,6 +4199,14 @@ GALGAS_routineKindIR GALGAS_routineKindIR::constructor_function (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_routineKindIR GALGAS_routineKindIR::constructor_primitiveInProcessorUserMode (UNUSED_LOCATION_ARGS) {
+  GALGAS_routineKindIR result ;
+  result.mEnum = kEnum_primitiveInProcessorUserMode ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_routineKindIR GALGAS_routineKindIR::constructor_sectionInProcessorUserMode (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKindIR result ;
   result.mEnum = kEnum_sectionInProcessorUserMode ;
@@ -4210,6 +4218,14 @@ GALGAS_routineKindIR GALGAS_routineKindIR::constructor_sectionInProcessorUserMod
 GALGAS_routineKindIR GALGAS_routineKindIR::constructor_serviceInProcessorUserMode (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKindIR result ;
   result.mEnum = kEnum_serviceInProcessorUserMode ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineKindIR GALGAS_routineKindIR::constructor_primitiveInProcessorPrivilegedMode (UNUSED_LOCATION_ARGS) {
+  GALGAS_routineKindIR result ;
+  result.mEnum = kEnum_primitiveInProcessorPrivilegedMode ;
   return result ;
 }
 
@@ -4231,11 +4247,13 @@ GALGAS_routineKindIR GALGAS_routineKindIR::constructor_serviceInProcessorPrivile
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_routineKindIR [6] = {
+static const char * gEnumNameArrayFor_routineKindIR [8] = {
   "(not built)",
   "function",
+  "primitiveInProcessorUserMode",
   "sectionInProcessorUserMode",
   "serviceInProcessorUserMode",
+  "primitiveInProcessorPrivilegedMode",
   "sectionInProcessorPrivilegedMode",
   "serviceInProcessorPrivilegedMode"
 } ;
@@ -4248,6 +4266,12 @@ GALGAS_bool GALGAS_routineKindIR::getter_isFunction (UNUSED_LOCATION_ARGS) const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_routineKindIR::getter_isPrimitiveInProcessorUserMode (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_primitiveInProcessorUserMode == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_bool GALGAS_routineKindIR::getter_isSectionInProcessorUserMode (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_sectionInProcessorUserMode == mEnum) ;
 }
@@ -4256,6 +4280,12 @@ GALGAS_bool GALGAS_routineKindIR::getter_isSectionInProcessorUserMode (UNUSED_LO
 
 GALGAS_bool GALGAS_routineKindIR::getter_isServiceInProcessorUserMode (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_serviceInProcessorUserMode == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_routineKindIR::getter_isPrimitiveInProcessorPrivilegedMode (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_primitiveInProcessorPrivilegedMode == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
