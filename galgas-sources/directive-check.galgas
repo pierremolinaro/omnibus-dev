@@ -50,7 +50,7 @@ override method @checkInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
 #--- Analyze expression
@@ -65,6 +65,7 @@ override method @checkInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
     ?result:@operandIR expressionResult
   ]

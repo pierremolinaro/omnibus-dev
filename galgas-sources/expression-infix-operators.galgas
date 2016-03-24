@@ -121,6 +121,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -135,6 +136,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @operandIR leftOperand
   ]
@@ -149,6 +151,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @operandIR rightOperand
   ]
@@ -279,6 +282,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -294,6 +298,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:leftInstructionGenerationList
     ?result:let @operandIR leftOperand
   ]
@@ -309,6 +314,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:rightInstructionGenerationList
     ?result:let @operandIR rightOperand
   ]

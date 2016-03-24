@@ -119,6 +119,7 @@ override method @varInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -164,6 +165,7 @@ override method @selfVarInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
+  ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -218,6 +220,7 @@ override method @controlRegisterFieldInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {

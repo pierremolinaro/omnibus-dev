@@ -47,7 +47,7 @@ override method @throwInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Panic allowed ?
@@ -66,6 +66,7 @@ override method @throwInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:unusedInstructionListIR
     ?result:@operandIR result
   ]

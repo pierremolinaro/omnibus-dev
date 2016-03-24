@@ -349,6 +349,7 @@ override method @selfRemoteRoutineCallInstructionAST baseGuardAnalyze
       let routineNameForInvocationGraph = guardNameForInvocationGraph (!propertyType !mMethodName)
        [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
     #--- Analyze effective parameters
+      @allocaList baseGuardAllocaList = {}
       analyzeEffectiveParameters (
         !self:inSelfType
         !formal:formalSignature
@@ -361,11 +362,13 @@ override method @selfRemoteRoutineCallInstructionAST baseGuardAnalyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?alloca:baseGuardAllocaList
         !?instructionListIR:baseGuardInstructionGenerationList
         !?effectiveIR:effectiveParameterListIR
       )
     #--- Code generation
       outConvenienceGuardGenerationIR = .convenienceGuard {
+        !baseGuardAllocaList:baseGuardAllocaList
         !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
         !baseGuardMangledName:routineMangledName.string
         !baseGuardEffectiveParameterList:effectiveParameterListIR
@@ -380,7 +383,8 @@ override method @selfRemoteRoutineCallInstructionAST baseGuardAnalyze
 
 enum @guardKindGenerationIR {
   case baseGuard
-  case convenienceGuard (@instructionListIR baseGuardInstructionGenerationList
+  case convenienceGuard (@allocaList baseGuardAllocaList
+                         @instructionListIR baseGuardInstructionGenerationList
                          @string baseGuardMangledName
                          @procCallEffectiveParameterListIR baseGuardEffectiveParameterList)
 }
@@ -498,7 +502,10 @@ method @guardMapIR-element llvmCodeGeneration
     ioLLVMcode += accepted_llvmName + ".false:\n"
     ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
-  case convenienceGuard (baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
+  case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
+    for (variable type) in baseGuardAllocaList do
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    end
     [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardImplementation (!baseGuardMangledName)
     ioLLVMcode += " ("
@@ -523,15 +530,6 @@ method @guardMapIR-element llvmCodeGeneration
     ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
   end
-##--- Epilog
-#  ioLLVMcode += "  %" + accepted_llvmName + ".loaded = load i1, i1* %" + accepted_llvmName + "\n"
-#  ioLLVMcode += "  br i1 %" + accepted_llvmName + ".loaded, label %" + accepted_llvmName + ".true, label %" + accepted_llvmName + ".exit\n\n"
-#  ioLLVMcode += accepted_llvmName + ".true:\n"
-#  ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
-#  ioLLVMcode += "  br label %" + accepted_llvmName + ".exit\n\n"
-#  ioLLVMcode += accepted_llvmName + ".exit:\n"
-#  ioLLVMcode += "  ret i1 %" + accepted_llvmName + ".loaded\n"
-#  ioLLVMcode += "}\n\n"
   ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @noteGuardHasBeenAccepted ()\n"
 }
 
@@ -544,7 +542,7 @@ method @guardMapIR-element enterAccessibleEntities
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
   switch mGuardKindGenerationIR
   case baseGuard :
-  case convenienceGuard (baseGuardInstructionGenerationList baseGuardMangledName *) :
+  case convenienceGuard (* baseGuardInstructionGenerationList baseGuardMangledName *) :
     [baseGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
     ioAccessibleEntities.mGuardSet += !baseGuardMangledName
   end

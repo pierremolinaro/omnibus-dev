@@ -72,6 +72,7 @@ override method @convertExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -86,6 +87,7 @@ override method @convertExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR expressionResult
   ]

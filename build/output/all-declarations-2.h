@@ -1346,9 +1346,10 @@ class GALGAS_guardKindGenerationIR : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_guardKindGenerationIR constructor_baseGuard (LOCATION_ARGS) ;
 
-  public : static GALGAS_guardKindGenerationIR constructor_convenienceGuard (const class GALGAS_instructionListIR & inOperand0,
-                                                                             const class GALGAS_string & inOperand1,
-                                                                             const class GALGAS_procCallEffectiveParameterListIR & inOperand2
+  public : static GALGAS_guardKindGenerationIR constructor_convenienceGuard (const class GALGAS_allocaList & inOperand0,
+                                                                             const class GALGAS_instructionListIR & inOperand1,
+                                                                             const class GALGAS_string & inOperand2,
+                                                                             const class GALGAS_procCallEffectiveParameterListIR & inOperand3
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1360,9 +1361,10 @@ class GALGAS_guardKindGenerationIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_convenienceGuard (class GALGAS_instructionListIR & outArgument0,
-                                                          class GALGAS_string & outArgument1,
-                                                          class GALGAS_procCallEffectiveParameterListIR & outArgument2,
+  public : VIRTUAL_IN_DEBUG void method_convenienceGuard (class GALGAS_allocaList & outArgument0,
+                                                          class GALGAS_instructionListIR & outArgument1,
+                                                          class GALGAS_string & outArgument2,
+                                                          class GALGAS_procCallEffectiveParameterListIR & outArgument3,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
 

@@ -220,6 +220,7 @@ override method @structureDeclaration enterInContext
     end
   #--- Init expression
     @instructionListIR initInstructionGenerationList = {}
+    @allocaList allocaList = {}
     @semanticTemporariesStruct temporaries = .default
     switch mInitialisation
     case expression (initExpression) :
@@ -233,10 +234,11 @@ override method @structureDeclaration enterInContext
         !?temporary:temporaries
         !?staticStringMap:*
         !?variableMap:*
+        !?alloca:allocaList
         !?instructionListIR:initInstructionGenerationList
         ?result:@operandIR expressionIR
       ]
-      if not [expressionIR.mValue isStatic] then
+      if ([initInstructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionIR.mValue isStatic] then
         error mFieldName : "initialization expression cannot be computed statically"
       end
       @unifiedTypeMap-proxy actualFieldType

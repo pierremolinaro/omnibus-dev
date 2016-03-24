@@ -73,6 +73,7 @@ override method @constructorCall analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -116,6 +117,7 @@ override method @constructorCall analyzeExpression
             !?temporary:ioTemporaries
             !?staticStringMap:ioGlobalLiteralStringMap
             !?variableMap:ioVariableMap
+            !?alloca:ioAllocaList
             !?instructionListIR:ioInstructionGenerationList
             ?result:let @operandIR expressionResult
           ]

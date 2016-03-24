@@ -213,6 +213,7 @@ method @taskVarListAST-element enterInContext
 #--- Analyze source expression
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
+  @allocaList allocaList = {}
   @variableMap variableMap = variableMapWithConstants (!context:ioContext)
   [mVarInitExpression analyzeExpression
     !self:.null
@@ -224,10 +225,11 @@ method @taskVarListAST-element enterInContext
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
+    !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:let @operandIR expressionResult
   ]
-  if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
+  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult.mValue isStatic] then
     error mVarName : "source expression cannot be statically computed"
   end
 #--- Check variable type and expression type

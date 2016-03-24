@@ -102,6 +102,7 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -117,6 +118,7 @@ override method @functionCallInExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKindIR routineKind

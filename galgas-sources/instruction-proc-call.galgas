@@ -221,7 +221,7 @@ override method @selfRoutineCallInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   analyzeRoutineCall (
@@ -236,6 +236,7 @@ override method @selfRoutineCallInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKindIR routineKindIR
@@ -265,7 +266,7 @@ override method @standaloneRoutineCallInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   analyzeRoutineCall (
@@ -280,6 +281,7 @@ override method @standaloneRoutineCallInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKindIR routineKindIR
@@ -309,7 +311,7 @@ override method @remoteRoutineCallInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   analyzeRoutineCall (
@@ -324,6 +326,7 @@ override method @remoteRoutineCallInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKindIR routineKindIR
@@ -353,7 +356,7 @@ override method @selfRemoteRoutineCallInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if inSelfType == .null then
@@ -426,6 +429,7 @@ override method @selfRemoteRoutineCallInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         !?effectiveIR:effectiveParameterListIR
       )
@@ -467,6 +471,7 @@ proc analyzeRoutineCall
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !routineKind:@routineKindIR outRoutineKindIR
@@ -529,6 +534,7 @@ proc analyzeRoutineCall
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR
   )
@@ -548,6 +554,7 @@ proc analyzeEffectiveParameters
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
 {
@@ -587,7 +594,8 @@ proc analyzeEffectiveParameters
           !isConstant:false
         ]
       end
-      [!?ioInstructionGenerationList appendAlloca !varLLVMName !type]
+      ioAllocaList += !varLLVMName !type
+#      [!?ioInstructionGenerationList appendAlloca !varLLVMName !type]
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
@@ -630,6 +638,7 @@ proc analyzeEffectiveParameters
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @operandIR expressionResult
       ]

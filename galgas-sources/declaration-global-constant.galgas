@@ -112,6 +112,7 @@ override method @globalConstantDeclaration enterInContext
 #--- Analyze source expression
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
+  @allocaList allocaList = {}
   [mSourceExpression analyzeExpression
     !self:.null
     !routineNameForInvocationGraph:["compiler" nowhere]
@@ -122,6 +123,7 @@ override method @globalConstantDeclaration enterInContext
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
+    !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:let @operandIR expressionResult
   ]
@@ -133,7 +135,7 @@ override method @globalConstantDeclaration enterInContext
     !staticTypeAllowed:true
   )
   drop annotationType, expressionResult
-  if ([instructionGenerationList length] > 0) || not [result.mValue isStatic] then
+  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result.mValue isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end
 #--- Enter in context

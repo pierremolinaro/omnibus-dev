@@ -77,7 +77,7 @@ override method @varAssignmentInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Get target type
@@ -99,6 +99,7 @@ override method @varAssignmentInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR sourceOperand
   ]
@@ -141,7 +142,7 @@ override method @selfVarAssignmentInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if inSelfType == .null then
@@ -183,6 +184,7 @@ override method @selfVarAssignmentInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:@operandIR sourceOperand
       ]

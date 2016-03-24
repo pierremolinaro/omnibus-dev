@@ -169,6 +169,7 @@ override method @onInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
         ?guardMangledName:let @lstring guardMangledName
@@ -191,6 +192,7 @@ override method @onInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?result:@operandIR sourceOperand
       ]
@@ -215,6 +217,7 @@ override method @onInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:let @operandIR boolExpressionResult
       ]
@@ -236,6 +239,7 @@ override method @onInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
         ?guardMangledName:let @lstring guardMangledName
@@ -288,6 +292,7 @@ proc analyzeGuardCall
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !guardMangledName:@lstring outGuardMangledName
@@ -325,6 +330,7 @@ proc analyzeGuardCall
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR
   )

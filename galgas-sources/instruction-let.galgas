@@ -81,6 +81,7 @@ override method @letInstructionWithAssignmentAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @operandIR expressionResult
   ]
@@ -112,7 +113,6 @@ override method @letInstructionWithAssignmentAST analyze
   ]
 #--- Generate code
   ioAllocaList += !varLLVMName !result.mType
-#  [!?ioInstructionGenerationList appendAlloca !varLLVMName !result.mType]
   [localConstant storeInMemory
     !value:result
     !?instructionListIR:ioInstructionGenerationList
