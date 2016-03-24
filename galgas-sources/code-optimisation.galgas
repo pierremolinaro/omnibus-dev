@@ -272,6 +272,7 @@ private proc exploreGuards
         !guard.lkey
         !guard.mFormalArgumentListForGeneration
         !guard.mGuardKindGenerationIR
+        !guard.mAllocaList
         !guard.mInstructionGenerationList
         !guard.mWarnIfUnused
       ]        
@@ -282,6 +283,7 @@ private proc exploreGuards
         !guard.lkey
         !guard.mFormalArgumentListForGeneration
         !guard.mGuardKindGenerationIR
+        !guard.mAllocaList
         !guard.mInstructionGenerationList
         !guard.mWarnIfUnused
       ]        

@@ -2017,12 +2017,14 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR:
 cMapElement_guardMapIR::cMapElement_guardMapIR (const GALGAS_lstring & inKey,
                                                 const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
                                                 const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
+                                                const GALGAS_allocaList & in_mAllocaList,
                                                 const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                                 const GALGAS_bool & in_mWarnIfUnused
                                                 COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
 mAttribute_mGuardKindGenerationIR (in_mGuardKindGenerationIR),
+mAttribute_mAllocaList (in_mAllocaList),
 mAttribute_mInstructionGenerationList (in_mInstructionGenerationList),
 mAttribute_mWarnIfUnused (in_mWarnIfUnused) {
 }
@@ -2030,14 +2032,14 @@ mAttribute_mWarnIfUnused (in_mWarnIfUnused) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_guardMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mGuardKindGenerationIR.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mWarnIfUnused.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mGuardKindGenerationIR.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mWarnIfUnused.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_guardMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_guardMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mGuardKindGenerationIR, mAttribute_mInstructionGenerationList, mAttribute_mWarnIfUnused COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_guardMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mGuardKindGenerationIR, mAttribute_mAllocaList, mAttribute_mInstructionGenerationList, mAttribute_mWarnIfUnused COMMA_HERE)) ;
   return result ;
 }
 
@@ -2052,6 +2054,10 @@ void cMapElement_guardMapIR::description (C_String & ioString, const int32_t inI
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mGuardKindGenerationIR" ":" ;
   mAttribute_mGuardKindGenerationIR.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mAllocaList" ":" ;
+  mAttribute_mAllocaList.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mInstructionGenerationList" ":" ;
@@ -2072,6 +2078,9 @@ typeComparisonResult cMapElement_guardMapIR::compare (const cCollectionElement *
   }
   if (kOperandEqual == result) {
     result = mAttribute_mGuardKindGenerationIR.objectCompare (operand->mAttribute_mGuardKindGenerationIR) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mAllocaList.objectCompare (operand->mAttribute_mAllocaList) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mInstructionGenerationList.objectCompare (operand->mAttribute_mInstructionGenerationList) ;
@@ -2132,12 +2141,13 @@ GALGAS_guardMapIR GALGAS_guardMapIR::getter_overriddenMap (C_Compiler * inCompil
 void GALGAS_guardMapIR::addAssign_operation (const GALGAS_lstring & inKey,
                                              const GALGAS_procFormalArgumentListForGeneration & inArgument0,
                                              const GALGAS_guardKindGenerationIR & inArgument1,
-                                             const GALGAS_instructionListIR & inArgument2,
-                                             const GALGAS_bool & inArgument3,
+                                             const GALGAS_allocaList & inArgument2,
+                                             const GALGAS_instructionListIR & inArgument3,
+                                             const GALGAS_bool & inArgument4,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) {
   cMapElement_guardMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_guardMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_guardMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -2151,12 +2161,13 @@ void GALGAS_guardMapIR::addAssign_operation (const GALGAS_lstring & inKey,
 void GALGAS_guardMapIR::setter_insertKey (GALGAS_lstring inKey,
                                           GALGAS_procFormalArgumentListForGeneration inArgument0,
                                           GALGAS_guardKindGenerationIR inArgument1,
-                                          GALGAS_instructionListIR inArgument2,
-                                          GALGAS_bool inArgument3,
+                                          GALGAS_allocaList inArgument2,
+                                          GALGAS_instructionListIR inArgument3,
+                                          GALGAS_bool inArgument4,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) {
   cMapElement_guardMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_guardMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_guardMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -2174,8 +2185,9 @@ const char * kSearchErrorMessage_guardMapIR_searchKey = "** internal error **" ;
 void GALGAS_guardMapIR::method_searchKey (GALGAS_lstring inKey,
                                           GALGAS_procFormalArgumentListForGeneration & outArgument0,
                                           GALGAS_guardKindGenerationIR & outArgument1,
-                                          GALGAS_instructionListIR & outArgument2,
-                                          GALGAS_bool & outArgument3,
+                                          GALGAS_allocaList & outArgument2,
+                                          GALGAS_instructionListIR & outArgument3,
+                                          GALGAS_bool & outArgument4,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) const {
   const cMapElement_guardMapIR * p = (const cMapElement_guardMapIR *) performSearch (inKey,
@@ -2187,12 +2199,14 @@ void GALGAS_guardMapIR::method_searchKey (GALGAS_lstring inKey,
     outArgument1.drop () ;
     outArgument2.drop () ;
     outArgument3.drop () ;
+    outArgument4.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_guardMapIR) ;
     outArgument0 = p->mAttribute_mFormalArgumentListForGeneration ;
     outArgument1 = p->mAttribute_mGuardKindGenerationIR ;
-    outArgument2 = p->mAttribute_mInstructionGenerationList ;
-    outArgument3 = p->mAttribute_mWarnIfUnused ;
+    outArgument2 = p->mAttribute_mAllocaList ;
+    outArgument3 = p->mAttribute_mInstructionGenerationList ;
+    outArgument4 = p->mAttribute_mWarnIfUnused ;
   }
 }
 
@@ -2201,8 +2215,9 @@ void GALGAS_guardMapIR::method_searchKey (GALGAS_lstring inKey,
 void GALGAS_guardMapIR::setter_removeKey (GALGAS_lstring inKey,
                                           GALGAS_procFormalArgumentListForGeneration & outArgument0,
                                           GALGAS_guardKindGenerationIR & outArgument1,
-                                          GALGAS_instructionListIR & outArgument2,
-                                          GALGAS_bool & outArgument3,
+                                          GALGAS_allocaList & outArgument2,
+                                          GALGAS_instructionListIR & outArgument3,
+                                          GALGAS_bool & outArgument4,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) {
   const char * kRemoveErrorMessage = "** internal error **" ;
@@ -2213,8 +2228,9 @@ void GALGAS_guardMapIR::setter_removeKey (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_guardMapIR) ;
     outArgument0 = p->mAttribute_mFormalArgumentListForGeneration ;
     outArgument1 = p->mAttribute_mGuardKindGenerationIR ;
-    outArgument2 = p->mAttribute_mInstructionGenerationList ;
-    outArgument3 = p->mAttribute_mWarnIfUnused ;
+    outArgument2 = p->mAttribute_mAllocaList ;
+    outArgument3 = p->mAttribute_mInstructionGenerationList ;
+    outArgument4 = p->mAttribute_mWarnIfUnused ;
   }
 }
 
@@ -2244,6 +2260,21 @@ GALGAS_guardKindGenerationIR GALGAS_guardMapIR::getter_mGuardKindGenerationIRFor
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_guardMapIR) ;
     result = p->mAttribute_mGuardKindGenerationIR ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allocaList GALGAS_guardMapIR::getter_mAllocaListForKey (const GALGAS_string & inKey,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_guardMapIR * p = (const cMapElement_guardMapIR *) attributes ;
+  GALGAS_allocaList result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_guardMapIR) ;
+    result = p->mAttribute_mAllocaList ;
   }
   return result ;
 }
@@ -2308,6 +2339,20 @@ void GALGAS_guardMapIR::setter_setMGuardKindGenerationIRForKey (GALGAS_guardKind
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_guardMapIR::setter_setMAllocaListForKey (GALGAS_allocaList inAttributeValue,
+                                                     GALGAS_string inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_guardMapIR * p = (cMapElement_guardMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_guardMapIR) ;
+    p->mAttribute_mAllocaList = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_guardMapIR::setter_setMInstructionGenerationListForKey (GALGAS_instructionListIR inAttributeValue,
                                                                     GALGAS_string inKey,
                                                                     C_Compiler * inCompiler
@@ -2357,7 +2402,7 @@ cGenericAbstractEnumerator () {
 GALGAS_guardMapIR_2D_element cEnumerator_guardMapIR::current (LOCATION_ARGS) const {
   const cMapElement_guardMapIR * p = (const cMapElement_guardMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_guardMapIR) ;
-  return GALGAS_guardMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mGuardKindGenerationIR, p->mAttribute_mInstructionGenerationList, p->mAttribute_mWarnIfUnused) ;
+  return GALGAS_guardMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mGuardKindGenerationIR, p->mAttribute_mAllocaList, p->mAttribute_mInstructionGenerationList, p->mAttribute_mWarnIfUnused) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2382,6 +2427,14 @@ GALGAS_guardKindGenerationIR cEnumerator_guardMapIR::current_mGuardKindGeneratio
   const cMapElement_guardMapIR * p = (const cMapElement_guardMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_guardMapIR) ;
   return p->mAttribute_mGuardKindGenerationIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allocaList cEnumerator_guardMapIR::current_mAllocaList (LOCATION_ARGS) const {
+  const cMapElement_guardMapIR * p = (const cMapElement_guardMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_guardMapIR) ;
+  return p->mAttribute_mAllocaList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
