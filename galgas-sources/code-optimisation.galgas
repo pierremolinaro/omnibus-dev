@@ -267,6 +267,7 @@ private proc exploreGuards
       [!?ioAccessibleGuardMap insertKey
         !guard.lkey
         !guard.mFormalArgumentListForGeneration
+        !guard.mGuardKindGenerationIR
         !guard.mInstructionGenerationList
         !guard.mWarnIfUnused
       ]        
@@ -276,6 +277,7 @@ private proc exploreGuards
       [!?ioNonExploredGuardMap insertKey
         !guard.lkey
         !guard.mFormalArgumentListForGeneration
+        !guard.mGuardKindGenerationIR
         !guard.mInstructionGenerationList
         !guard.mWarnIfUnused
       ]        

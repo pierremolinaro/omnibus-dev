@@ -431,7 +431,7 @@ abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticT
 
 abstract method @expressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModes

@@ -4,7 +4,7 @@
 
 list @serviceDeclarationListAST {
   @lstring mServiceName
-  @lstring mServiceMode
+  @lstringlist mServiceModeList
   @lstringlist mServiceAttributeList
   @procFormalArgumentList mServiceFormalArgumentList
   @lstring mReturnTypeName
@@ -23,7 +23,12 @@ syntax extension common_syntax {
   rule <service> ?!@serviceDeclarationListAST ioServiceListAST {
     $service$
     $identifier$ ?let serviceName
-    $modeName$ ?let modeName
+    @lstringlist modeList = {}
+    repeat
+      $modeName$ ?let modeName
+      modeList += !modeName
+    while
+    end
     @lstringlist attributeList = {}
     repeat
     while
@@ -43,7 +48,7 @@ syntax extension common_syntax {
     $}$
     ioServiceListAST +=
       !serviceName
-      !modeName
+      !modeList
       !attributeList
       !serviceFormalArgumentList
       !returnTypeName
@@ -84,6 +89,11 @@ method @serviceDeclarationListAST enterInContext
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
+  #--- Mode map
+    @modeMap modeMap = {![userModeName () nowhere]}
+    for (modeName) in service.mServiceModeList do
+      [!?modeMap insertKey !modeName]
+    end
   #--- Enter in context
     let returnType = if service.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
@@ -93,7 +103,7 @@ method @serviceDeclarationListAST enterInContext
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
       !true # service.mMutating
-      !@modeMap {![userModeName () nowhere]}
+      !modeMap
       !signature
       !.service
       !false # Not weak
@@ -127,7 +137,7 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.service
-      !{!service.mServiceMode}
+      !service.mServiceModeList
       !service.mServiceName
       !service.mServiceFormalArgumentList
       !returnTypeName:service.mReturnTypeName

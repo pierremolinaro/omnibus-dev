@@ -2,10 +2,18 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @guardKind {
+  case baseGuard
+  case convenienceGuard (@abstractCallInstructionAST base)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @guardDeclarationListAST {
   @lstring mGuardName
   @lstringlist mGuardAttributeList
   @procFormalArgumentList mGuardFormalArgumentList
+  @guardKind mGuardKind
   @instructionListAST mGuardInstructionList
   @location mEndOfGuardDeclaration
 }
@@ -28,6 +36,14 @@ syntax extension common_syntax {
       attributeList += !attribute
     end
     <procedure_formal_arguments> ?formalArguments:let guardFormalArgumentList
+    @guardKind guardKind
+    select
+      guardKind = .baseGuard
+    or
+      $:$
+      <routine_call> ?let @abstractCallInstructionAST instruction
+      guardKind = .convenienceGuard {!base:instruction}
+    end
     ${$
     <instructionList> ?let instructionList !?*
     $}$
@@ -35,6 +51,7 @@ syntax extension common_syntax {
       !guardName
       !attributeList
       !guardFormalArgumentList
+      !guardKind
       !instructionList
       !.here
   }
@@ -110,6 +127,7 @@ method @guardDeclarationListAST guardSemanticAnalysis
       !receiverType:inReceiverType
       !guard.mGuardName
       !guard.mGuardFormalArgumentList
+      !guard.mGuardKind
       !guard.mGuardInstructionList
       !guard.mEndOfGuardDeclaration
       !warnIfUnused:warnIfUnused
@@ -126,6 +144,7 @@ proc guardSemanticAnalysis
   ?receiverType:let @unifiedTypeMap-proxy inSelfType
   ?let @lstring inRoutineName
   ?let @procFormalArgumentList inRoutineFormalArgumentList
+  ?let @guardKind inGuardKind
   ?let @instructionListAST inRoutineInstructionList
   ?let @location inEndOfRoutineDeclaration
   ?warnIfUnused:let @bool inWarnIfUnused
@@ -133,8 +152,15 @@ proc guardSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Variable map
+#--- Enter subprogram invocation graph
   let routineNameForInvocationGraph = guardNameForInvocationGraph (!inSelfType !inRoutineName)
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !routineNameForInvocationGraph
+      !inRoutineName
+    ]
+  end
+#--- Variable map
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
@@ -143,34 +169,51 @@ proc guardSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
   )
-#--- Add 'accepted" output variable
-  let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
-  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
-  [!?variableMap insertOutputFormalArgument
-    !lkey:resultVarName
-    !type:resultType
-    !readAccessAllowed:true
-    !variableKind:.localValue {!type:resultType !name:resultVarName.string}
-    !copyable:true
-    !fieldMap:{}
-    !canBeUsedAsInputParameter:true
-    !isConstant:false # Is not constant
-  ]
-#--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
-  enterFormalArguments (
-    !context:inContext
-    !inRoutineFormalArgumentList
-    !?variableMap
-    !?formalArguments
-  )
-#--- Enter subprogram invocation graph
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
-      !inRoutineName
+  @guardKindGenerationIR convenienceGuardGenerationIR
+  switch inGuardKind
+  case baseGuard :
+  #--- Add 'accepted" output variable
+    let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
+    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
+    [!?variableMap insertOutputFormalArgument
+      !lkey:resultVarName
+      !type:resultType
+      !readAccessAllowed:true
+      !variableKind:.localValue {!type:resultType !name:resultVarName.string}
+      !copyable:true
+      !fieldMap:{}
+      !canBeUsedAsInputParameter:true
+      !isConstant:false # Is not constant
     ]
-  end
+  #--- Analyse formal arguments
+    enterFormalArguments (
+      !context:inContext
+      !inRoutineFormalArgumentList
+      !?variableMap
+      !?formalArguments
+    )
+    convenienceGuardGenerationIR = .baseGuard
+  case convenienceGuard (baseGuardInstruction):
+  #--- Analyse formal arguments
+    enterFormalArguments (
+      !context:inContext
+      !inRoutineFormalArgumentList
+      !?variableMap
+      !?formalArguments
+    )
+  #--- Analyze base guard
+    @instructionListIR baseGuardInstructionGenerationList = {}
+    [baseGuardInstruction baseGuardAnalyze 
+      !self:inSelfType
+      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !context:inContext
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?variableMap:variableMap
+      ?convenienceGuardGenerationIR
+    ]
+  end 
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [inRoutineInstructionList analyzeRoutineInstructionList
@@ -195,13 +238,164 @@ proc guardSemanticAnalysis
   [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
     !guardMangledName
     !formalArguments
+    !convenienceGuardGenerationIR
     !instructionGenerationList
     !inWarnIfUnused
-  ]  
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+abstract method @abstractCallInstructionAST baseGuardAnalyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+{
+  error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfRoutineCallInstructionAST baseGuardAnalyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+{
+  error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @remoteRoutineCallInstructionAST baseGuardAnalyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+{
+  error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @selfRemoteRoutineCallInstructionAST baseGuardAnalyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+{
+  if inSelfType == .null then
+    error mPropertyName : "'self' is not available in this context" : outConvenienceGuardGenerationIR
+  else
+    switch [inSelfType kind]
+    case opaque (*) :
+      error mPropertyName : "an opaque type does not handle field access" : outConvenienceGuardGenerationIR
+    case boolean :
+      error mPropertyName : "a boolean does not handle field access" : outConvenienceGuardGenerationIR
+    case staticInteger :
+      error mPropertyName : "an integer does not handle field access" : outConvenienceGuardGenerationIR
+    case boolset :
+      error mPropertyName : "a boolset does not handle field access" : outConvenienceGuardGenerationIR
+    case literalString :
+      error mPropertyName : "a literal string does not handle field access" : outConvenienceGuardGenerationIR
+    case enumeration (*) :
+      error mPropertyName : "an enumeration does not handle field access" : outConvenienceGuardGenerationIR
+    case integer (* * * *) :
+      error mPropertyName : "an integer does not handle field access" : outConvenienceGuardGenerationIR
+    case structure (@propertyMap propertyMap *) :
+      [propertyMap searchKey !mPropertyName ?let propertyType ?let idx]
+      getLocalNameOfNewTempObjectInMemory (!propertyType !?ioTemporaries ?let propertyAddressLLVMvar)
+      @instructionListIR baseGuardInstructionGenerationList = {}
+      [!?baseGuardInstructionGenerationList appendGetElementPtrFromSelf
+        !propertyAddressLLVMvar
+        !inSelfType
+        !idx
+        !mPropertyName.string
+      ]        
+      let routineMangledName = @lstring.new {!"$" + [propertyType key] + "." + mMethodName !mMethodName.location}
+      @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+      effectiveParameterListIR += !.outputInput !"" ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
+      [inContext.mGuardMapForContext searchKey
+        !routineMangledName
+        ?let @procedureSignature formalSignature
+      ]
+    #--- Enter in invocation graph
+      let routineNameForInvocationGraph = guardNameForInvocationGraph (!propertyType !mMethodName)
+       [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+    #--- Analyze effective parameters
+      analyzeEffectiveParameters (
+        !self:inSelfType
+        !formal:formalSignature
+        !effective:mEffectiveParameterList
+        !errorLocation:mMethodName.location
+        !callerForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !requiredModeSet:{!isrModeName ()}
+        !allowPanic:true
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?instructionListIR:baseGuardInstructionGenerationList
+        !?effectiveIR:effectiveParameterListIR
+      )
+    #--- Code generation
+      outConvenienceGuardGenerationIR = .convenienceGuard {
+        !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+        !baseGuardMangledName:routineMangledName.string
+        !baseGuardEffectiveParameterList:effectiveParameterListIR
+      }
+    end    
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @guardKindGenerationIR {
+  case baseGuard
+  case convenienceGuard (@instructionListIR baseGuardInstructionGenerationList
+                         @string baseGuardMangledName
+                         @procCallEffectiveParameterListIR baseGuardEffectiveParameterList)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @guardMapIR {
+  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @guardKindGenerationIR mGuardKindGenerationIR
+  @instructionListIR mInstructionGenerationList
+  @bool mWarnIfUnused
+
+  insert insertKey error message "guard '%K' is already defined"
+  search searchKey error message "** internal error **"
+  remove removeKey error message "** internal error **"
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @guardMapIR guardCodeGeneration
@@ -271,7 +465,6 @@ method @guardMapIR-element llvmCodeGeneration
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Declare "accept" variable 
   let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableName ())
-   ioLLVMcode += "  %" + accepted_llvmName + " = alloca i1\n"
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
@@ -289,18 +482,55 @@ method @guardMapIR-element llvmCodeGeneration
     case output, inputOutput :
     end
   end
-#--- Instruction list
-  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#--- Epilog
+#--- Base guard or convenience guard ?
+  switch mGuardKindGenerationIR
+  case baseGuard :
+    ioLLVMcode += "  %" + accepted_llvmName + " = alloca i1\n"
+    ioLLVMcode += "  store i1 false, i1* %" + accepted_llvmName + "\n"
+    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  %" + accepted_llvmName + ".loaded = load i1, i1* %" + accepted_llvmName + "\n"
+    ioLLVMcode += "  br i1 %" + accepted_llvmName + ".loaded, label %" + accepted_llvmName + ".true, label %" + accepted_llvmName + ".false\n\n"
+    ioLLVMcode += accepted_llvmName + ".true:\n"
+    ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
+    ioLLVMcode += "  ret i1 true\n\n"
+    ioLLVMcode += accepted_llvmName + ".false:\n"
+    ioLLVMcode += "  ret i1 false\n"
+    ioLLVMcode += "}\n\n"
+  case convenienceGuard (baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
+    [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardImplementation (!baseGuardMangledName)
+    ioLLVMcode += " ("
+    for () in baseGuardEffectiveParameterList do
+      switch mEffectiveParameterPassingMode
+      case input:
+        ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+      case output:
+        ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+      case outputInput:
+        ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+      end
+    between
+      ioLLVMcode += ", "
+    end
+    ioLLVMcode += ")\n"
+    ioLLVMcode += "  br i1 %baseGuard.result, label %baseGuard.true, label %baseGuard.exit\n\n"
+    ioLLVMcode += "baseGuard.true:\n"
+    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  ret i1 true\n\n"
+    ioLLVMcode += "baseGuard.exit:\n"
+    ioLLVMcode += "  ret i1 false\n"
+    ioLLVMcode += "}\n\n"
+  end
+##--- Epilog
+#  ioLLVMcode += "  %" + accepted_llvmName + ".loaded = load i1, i1* %" + accepted_llvmName + "\n"
+#  ioLLVMcode += "  br i1 %" + accepted_llvmName + ".loaded, label %" + accepted_llvmName + ".true, label %" + accepted_llvmName + ".exit\n\n"
+#  ioLLVMcode += accepted_llvmName + ".true:\n"
+#  ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
+#  ioLLVMcode += "  br label %" + accepted_llvmName + ".exit\n\n"
+#  ioLLVMcode += accepted_llvmName + ".exit:\n"
+#  ioLLVMcode += "  ret i1 %" + accepted_llvmName + ".loaded\n"
+#  ioLLVMcode += "}\n\n"
   ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @noteGuardHasBeenAccepted ()\n"
-  ioLLVMcode += "  %" + accepted_llvmName + ".loaded = load i1, i1* %" + accepted_llvmName + "\n"
-  ioLLVMcode += "  br i1 %" + accepted_llvmName + ".loaded, label %" + accepted_llvmName + ".true, label %" + accepted_llvmName + ".exit\n\n"
-  ioLLVMcode += accepted_llvmName + ".true:\n"
-  ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
-  ioLLVMcode += "  br label %" + accepted_llvmName + ".exit\n\n"
-  ioLLVMcode += accepted_llvmName + ".exit:\n"
-  ioLLVMcode += "  ret i1 %" + accepted_llvmName + ".loaded\n"
-  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -310,6 +540,12 @@ method @guardMapIR-element enterAccessibleEntities
   ?!@uint ioMaxBranchOfOnInstructions
 {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  switch mGuardKindGenerationIR
+  case baseGuard :
+  case convenienceGuard (baseGuardInstructionGenerationList baseGuardMangledName *) :
+    [baseGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+    ioAccessibleEntities.mGuardSet += !baseGuardMangledName
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

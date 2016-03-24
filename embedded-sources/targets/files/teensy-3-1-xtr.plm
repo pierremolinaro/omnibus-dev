@@ -28,7 +28,7 @@ extern func handleGuardedCommand `isr (?!guard:ioGuard $guardList)
 
 extern func handleGuardedWaitUntil `isr (?deadline:inDeadlineMS $uint32)
 
-extern func guardDidChange `kernel (?!guard:ioGuard $guardList)
+extern func guardDidChange `kernel `isr (?!guard:ioGuard $guardList)
 
 //-----------------------------------------------------------------------------*
 

@@ -69,7 +69,7 @@ override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 
 override method @whileInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -82,7 +82,7 @@ override method @whileInstructionAST analyze
   @instructionListIR testInstructionGenerationList = {}
   [mTestExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext
     !modes:inModeSet
@@ -105,7 +105,7 @@ override method @whileInstructionAST analyze
   [!?ioVariableMap openOverrideForRepeatBlock]
   [mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_while_instruction
     !context:inContext
     !modes:inModeSet

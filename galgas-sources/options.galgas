@@ -1,7 +1,6 @@
 option plm_options {
   @stringlist pathList: '\0', "path" -> "Search pathes for source files"
   @bool noPanicGeneration: '\0', "no-panic-generation" -> "Do not generate panic code"
-  @bool performFlashing: 'f', "flash-target" -> "After successful compilation, flash target"
 
   @bool writeRoutineInvocationGraphFile : 'i', "routine-invocation-graph" -> "Write routine invocation graph file"
   @bool writeTypeDependencyGraphFile : 't', "type-dependency-graph" -> "Write type dependency graph file"
@@ -24,4 +23,6 @@ option plm_options {
   @bool optimizationS : '\0', "Os" -> "Like previous option with extra optimizations for size"
   @bool optimizationZ : '\0', "Oz" -> "Like previous option but reduces code size further"
   @bool optimizationZ3 : '\0', "O3" -> "Optimization level 3"
+
+  @bool performFlashing: 'f', "flash-target" -> "After successful compilation, flash target"
 }

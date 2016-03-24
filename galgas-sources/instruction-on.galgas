@@ -174,6 +174,7 @@ override method @onInstructionAST analyze
       )
       guardedCommandIR = .synchronization {
         !guardMangledName:guardMangledName.string
+        !globalVarName:optionalReceiverName.string
         !guardInstructionGenerationList:guardInstructionGenerationList
         !effectiveParameterListIR:guardEffectiveParameterListIR
       }
@@ -242,6 +243,7 @@ override method @onInstructionAST analyze
         !boolExpInstructionGenerationList:boolExpInstructionGenerationList
         !boolExpResult:boolExpressionResult
         !guardMangledName:guardMangledName.string
+        !globalVarName:optionalReceiverName.string
         !guardInstructionGenerationList:guardInstructionGenerationList
         !effectiveParameterListIR:guardEffectiveParameterListIR
       }
@@ -331,9 +333,19 @@ proc analyzeGuardCall
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardedCommandIR {
-  case synchronization (@string guardMangledName @instructionListIR guardInstructionGenerationList @procCallEffectiveParameterListIR effectiveParameterListIR)
+  case synchronization (@string guardMangledName
+                        @string globalVarName # "" if not global var
+                        @instructionListIR guardInstructionGenerationList
+                        @procCallEffectiveParameterListIR effectiveParameterListIR)
+
   case booleanGuard (@instructionListIR instructionGenerationList @operandIR result)
-  case boolAndSync (@instructionListIR boolExpInstructionGenerationList @operandIR boolExpResult @string guardMangledName @instructionListIR guardInstructionGenerationList @procCallEffectiveParameterListIR effectiveParameterListIR)
+
+  case boolAndSync (@instructionListIR boolExpInstructionGenerationList
+                    @operandIR boolExpResult
+                    @string guardMangledName
+                    @string globalVarName # "" if not global var
+                    @instructionListIR guardInstructionGenerationList
+                    @procCallEffectiveParameterListIR effectiveParameterListIR)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -368,7 +380,7 @@ override method @onInstructionIR llvmInstructionCode
   for branch in mOnInstructionBranchListIR do (idx)
     let acceptanceVarName = "%" + onLabel + ".accept." + idx 
     switch branch.mGuardedCommand
-    case synchronization (guardMangledName guardInstructionGenerationList effectiveParameterListIR) :
+    case synchronization (guardMangledName * guardInstructionGenerationList effectiveParameterListIR) :
       [guardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + llvmNameForGuardCall (!guardMangledName)
       ioLLVMcode += " ("
@@ -395,7 +407,7 @@ override method @onInstructionIR llvmInstructionCode
       ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += rejectedLabelName + ":\n"
       ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result.mValue llvmName] + ", 0 ; assignment\n"
-    case boolAndSync (ExpInstructionList expResult guardMangledName guardInstructionList effectiveParameterList) :
+    case boolAndSync (ExpInstructionList expResult guardMangledName * guardInstructionList effectiveParameterList) :
       [ExpInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let testOkLabelName = onLabel + "." + idx + ".boolexp.true"
       let testExitLabelName = onLabel + "." + idx + ".test.exit"
@@ -451,15 +463,21 @@ override method @onInstructionIR enterAccessibleEntities
   for branch in mOnInstructionBranchListIR do
     [branch.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
     switch branch.mGuardedCommand
-    case synchronization (guardMangledName guardInstructionGenerationList *) :
+    case synchronization (guardMangledName optionalReceiverName guardInstructionGenerationList *) :
       [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioAccessibleEntities.mGuardSet += !guardMangledName
+      if optionalReceiverName != "" then
+        ioAccessibleEntities.mGlobalVariableSet += !optionalReceiverName
+      end
     case booleanGuard (instructionGenerationList *) :
       [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    case boolAndSync (instructionGenerationList * guardMangledName guardInstructionGenerationList *) :
+    case boolAndSync (instructionGenerationList * guardMangledName optionalReceiverName guardInstructionGenerationList *) :
       [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioAccessibleEntities.mGuardSet += !guardMangledName
+      if optionalReceiverName != "" then
+        ioAccessibleEntities.mGlobalVariableSet += !optionalReceiverName
+      end
     end
   end
 }

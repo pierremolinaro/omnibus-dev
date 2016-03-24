@@ -82,7 +82,7 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 
 override method @varInstructionWithAssignmentAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModes
   ?allowPanic:let @bool inAllowPanic
@@ -98,7 +98,7 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
     !modes:inModes
@@ -121,7 +121,9 @@ override method @varInstructionWithAssignmentAST analyze
   )
   drop expressionResult, targetType
 #--- Declare local variable
-  let targetVar = @objectInMemoryIR.localValue {!type:result.mType !name:mVarName.string}
+  let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+  ioTemporaries.mTemporaryIndex ++
+  let targetVar = @objectInMemoryIR.localValue {!type:result.mType !name:varLLVMName}
   [!?ioVariableMap insertDefinedLocalVariable
     !lkey:mVarName
     !type:result.mType
@@ -133,9 +135,9 @@ override method @varInstructionWithAssignmentAST analyze
     !isConstant:false # Is not constant
   ]
 #--- Code generation
-  [!?ioInstructionGenerationList appendAlloca !mVarName.string !result.mType]
+  [!?ioInstructionGenerationList appendAlloca !varLLVMName !result.mType]
   [!?ioInstructionGenerationList appendStoreLocalVariable
-    !mVarName.string
+    !varLLVMName
     !result.mType
     !result
   ]
@@ -145,11 +147,11 @@ override method @varInstructionWithAssignmentAST analyze
 
 override method @varInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModes
   ?allowPanic:let @bool unused inAllowPanic
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -160,7 +162,9 @@ override method @varInstructionAST analyze
     error mVarName : "$" + [targetType key] + " type is not instanciable"
   end
 #--- Declare local variable
-  let targetVar = @objectInMemoryIR.localValue {!type:targetType !name:mVarName.string}
+  let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+  ioTemporaries.mTemporaryIndex ++
+  let targetVar = @objectInMemoryIR.localValue {!type:targetType !name:varLLVMName}
   [!?ioVariableMap insertUndefinedLocalVariable
     !lkey:mVarName
     !type:targetType
@@ -173,7 +177,7 @@ override method @varInstructionAST analyze
   ]
 #--- Code generation
   [!?ioInstructionGenerationList appendAlloca
-    !mVarName.string
+    !varLLVMName
     !targetType
   ]
 }

@@ -70,7 +70,7 @@ override method @varAssignmentInstructionAST noteInstructionTypesInPrecedenceGra
 
 override method @varAssignmentInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -90,7 +90,7 @@ override method @varAssignmentInstructionAST analyze
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
     !modes:inModeSet
@@ -133,7 +133,7 @@ override method @varAssignmentInstructionAST analyze
 
 override method @selfVarAssignmentInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -173,7 +173,7 @@ override method @selfVarAssignmentInstructionAST analyze
     #--- Analyze source expression
       [mSourceExpression analyzeExpression
         !self:inSelfType
-        !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:targetType
         !context:inContext
         !modes:inModeSet
