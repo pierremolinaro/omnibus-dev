@@ -94,6 +94,7 @@ override method @registerConstantInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
+  ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -129,6 +130,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
@@ -164,6 +166,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @operandIR expressionResult
   ]

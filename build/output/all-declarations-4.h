@@ -16,14 +16,16 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnumAssociatedValues {
-  public : const GALGAS_instructionListIR mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue2 ;
+  public : const GALGAS_allocaList mAssociatedValue0 ;
+  public : const GALGAS_instructionListIR mAssociatedValue1 ;
+  public : const GALGAS_string mAssociatedValue2 ;
+  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue3 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (const GALGAS_instructionListIR & inAssociatedValue0,
-                                                                         const GALGAS_string & inAssociatedValue1,
-                                                                         const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue2
+  public : cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (const GALGAS_allocaList & inAssociatedValue0,
+                                                                         const GALGAS_instructionListIR & inAssociatedValue1,
+                                                                         const GALGAS_string & inAssociatedValue2,
+                                                                         const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
                                                                          COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -1570,9 +1572,10 @@ void routine_analyzeGuardCall (const class GALGAS_unifiedTypeMap_2D_proxy consti
                                class GALGAS_semanticTemporariesStruct & ioArgument8,
                                class GALGAS_staticStringMap & ioArgument9,
                                class GALGAS_variableMap & ioArgument10,
-                               class GALGAS_instructionListIR & ioArgument11,
-                               class GALGAS_procCallEffectiveParameterListIR & outArgument12,
-                               class GALGAS_lstring & outArgument13,
+                               class GALGAS_allocaList & ioArgument11,
+                               class GALGAS_instructionListIR & ioArgument12,
+                               class GALGAS_procCallEffectiveParameterListIR & outArgument13,
+                               class GALGAS_lstring & outArgument14,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -1603,8 +1606,9 @@ void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_pr
                                          class GALGAS_semanticTemporariesStruct & ioArgument8,
                                          class GALGAS_staticStringMap & ioArgument9,
                                          class GALGAS_variableMap & ioArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
+                                         class GALGAS_allocaList & ioArgument11,
+                                         class GALGAS_instructionListIR & ioArgument12,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument13,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -1635,11 +1639,12 @@ void routine_analyzeRoutineCall (const class GALGAS_unifiedTypeMap_2D_proxy cons
                                  class GALGAS_semanticTemporariesStruct & ioArgument8,
                                  class GALGAS_staticStringMap & ioArgument9,
                                  class GALGAS_variableMap & ioArgument10,
-                                 class GALGAS_instructionListIR & ioArgument11,
-                                 class GALGAS_procCallEffectiveParameterListIR & outArgument12,
-                                 class GALGAS_routineKindIR & outArgument13,
-                                 class GALGAS_lstring & outArgument14,
-                                 class GALGAS_unifiedTypeMap_2D_proxy & outArgument15,
+                                 class GALGAS_allocaList & ioArgument11,
+                                 class GALGAS_instructionListIR & ioArgument12,
+                                 class GALGAS_procCallEffectiveParameterListIR & outArgument13,
+                                 class GALGAS_routineKindIR & outArgument14,
+                                 class GALGAS_lstring & outArgument15,
+                                 class GALGAS_unifiedTypeMap_2D_proxy & outArgument16,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -1759,8 +1764,9 @@ typedef void (*categoryMethodSignature_expressionAST_analyzeExpression) (const c
                                                                          class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                                          class GALGAS_staticStringMap & ioArgument7,
                                                                          class GALGAS_variableMap & ioArgument8,
-                                                                         class GALGAS_instructionListIR & ioArgument9,
-                                                                         class GALGAS_operandIR & outArgument10,
+                                                                         class GALGAS_allocaList & ioArgument9,
+                                                                         class GALGAS_instructionListIR & ioArgument10,
+                                                                         class GALGAS_operandIR & outArgument11,
                                                                          class C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -1781,6 +1787,7 @@ void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inOb
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_variableMap & io_ioVariableMap,
+                                           GALGAS_allocaList & io_ioAllocaList,
                                            GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                            GALGAS_operandIR & out_outResult,
                                            C_Compiler * inCompiler
@@ -1797,18 +1804,6 @@ void routine_getLocalNameOfNewTempObjectInMemory (const class GALGAS_unifiedType
                                                   class GALGAS_objectInMemoryIR & outArgument2,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category setter '@instructionListIR appendAlloca'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendAlloca (class GALGAS_instructionListIR & ioObject,
-                                    const class GALGAS_string constin_inLocalVariableName,
-                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
