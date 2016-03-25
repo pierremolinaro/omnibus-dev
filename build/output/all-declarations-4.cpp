@@ -14896,9 +14896,6 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "//--- Led L4 : PTD2\n"
   "  PORTD_PCR2 = (1 << 8)\n"
   "  GPIOD_PDDR |= (1 << 2)\n"
-  "//--- Led Teensy\n"
-  "  PORTC_PCR5 = (1 << 8)\n"
-  "  GPIOC_PDDR |= (1 << 5)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -14992,7 +14989,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "teensy-3-1-leds.plm",
   "plm",
   true, // Text file
-  2883, // Text length
+  2817, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 
@@ -15036,6 +15033,9 @@ const char * gWrapperFileContent_9_targetTemplates = "//------------------------
   "  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
   "  SYST_CVR = 0\n"
   "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
+  "//--- Led Teensy\n"
+  "  PORTC_PCR5 = (1 << 8)\n"
+  "  GPIOC_PDDR |= (1 << 5)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -15104,7 +15104,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  3362, // Text length
+  3428, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 
@@ -15849,19 +15849,30 @@ const char * gWrapperFileContent_20_targetTemplates = "@------------------------
   "@  Section !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "  .global !ENTRY!\n"
-  "  .type !ENTRY!, %function\n"
+  "\t.section\t\".text.!ENTRY!\",\"ax\",%progbits\n"
+  "\t.globl\t!ENTRY!\n"
+  "\t.align\t1\n"
+  "\t.type\t!ENTRY!,%function\n"
+  "\t.code\t16\n"
+  "\t.thumb_func\n"
   "\n"
   "!ENTRY!:\n"
-  "    udf !IDX!\n"
-  "    bx  lr\n"
-  "\n" ;
+  "\t.fnstart\n"
+  "  udf !IDX!\n"
+  "  bx  lr\n"
+  ".Lfunc_end_!ENTRY!:\n"
+  "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
+  "  .cantunwind\n"
+  "\t.fnend\n"
+  "\n"
+  "  .global !ENTRY!\n"
+  "  .type !ENTRY!, %function\n" ;
 
 const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "section-entry.s",
   "s",
   true, // Text file
-  343, // Text length
+  552, // Text length
   gWrapperFileContent_20_targetTemplates
 ) ;
 
@@ -15904,19 +15915,27 @@ const char * gWrapperFileContent_23_targetTemplates = "@------------------------
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "  .global !ENTRY!\n"
-  "  .type !ENTRY!, %function\n"
+  "\t.section\t\".text.!ENTRY!\",\"ax\",%progbits\n"
+  "\t.globl\t!ENTRY!\n"
+  "\t.align\t1\n"
+  "\t.type\t!ENTRY!,%function\n"
+  "\t.code\t16\n"
+  "\t.thumb_func\n"
   "\n"
   "!ENTRY!:\n"
-  "    svc #!IDX! + 1\n"
-  "    bx  lr\n"
-  "\n" ;
+  "\t.fnstart\n"
+  "  svc #!IDX! + 1\n"
+  "  bx  lr\n"
+  ".Lfunc_end_!ENTRY!:\n"
+  "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
+  "  .cantunwind\n"
+  "\t.fnend\n" ;
 
 const cRegularFileWrapper gWrapperFile_23_targetTemplates (
   "service-entry.s",
   "s",
   true, // Text file
-  348, // Text length
+  511, // Text length
   gWrapperFileContent_23_targetTemplates
 ) ;
 
