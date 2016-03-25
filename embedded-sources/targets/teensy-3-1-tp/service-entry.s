@@ -2,10 +2,18 @@
 @  Service !ENTRY!
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global !ENTRY!
-  .type !ENTRY!, %function
+	.section	".text.!ENTRY!","ax",%progbits
+	.globl	!ENTRY!
+	.align	1
+	.type	!ENTRY!,%function
+	.code	16
+	.thumb_func
 
 !ENTRY!:
-    svc #!IDX! + 1
-    bx  lr
-
+	.fnstart
+  svc #!IDX! + 1
+  bx  lr
+.Lfunc_end_!ENTRY!:
+  .size	!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!
+  .cantunwind
+	.fnend

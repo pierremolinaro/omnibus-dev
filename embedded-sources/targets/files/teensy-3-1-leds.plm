@@ -23,9 +23,6 @@ init 100 requiredBy ledOn (?inLeds $uint32), ledToggle (?inLeds $uint32), ledOff
 //--- Led L4 : PTD2
   PORTD_PCR2 = (1 << 8)
   GPIOD_PDDR |= (1 << 2)
-//--- Led Teensy
-  PORTC_PCR5 = (1 << 8)
-  GPIOC_PDDR |= (1 << 5)
 }
 
 //-----------------------------------------------------------------------------*
