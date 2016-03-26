@@ -2,14 +2,6 @@ target "LPC-L2294"
 
 //------------------------------------------------*
 
-init 100 {
-//--- Program pin P1.23 as an output (STAT led)
-  IO1DIR |= 1 << 23
-  IO1CLR  = 1 << 23 // Led On
-}
-
-//------------------------------------------------*
-
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
