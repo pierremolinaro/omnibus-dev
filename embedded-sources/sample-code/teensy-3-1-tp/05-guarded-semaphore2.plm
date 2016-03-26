@@ -2,33 +2,17 @@ target "teensy-3-1-tp"
 
 //-----------------------------------------------------------------------------*
 
-struct $monSemaphore {
-  var s = $semaphore (!value:0) 
-  var s2 = $semaphore (!value:0) 
-
-  func P `user @noWarningIfUnused () {
-    self.s.P ()
-  }
-
-  func V `user () {
-    self.s.V ()
-  }
-
-  guard P () : self.s.P () {
-    self.s2.V ()
-  }
-}
-
-//-----------------------------------------------------------------------------*
-
-var s0 = $monSemaphore () {
+var s0 = $semaphore (!value:0) {
   func $T0.loop
 }
 
 //-----------------------------------------------------------------------------*
 
-var s1 = $monSemaphore () {
+var s1 = $semaphore (!value:0) {
   func $T1.loop
+}
+
+guard PP () : s1.P () {
 }
 
 //-----------------------------------------------------------------------------*
@@ -74,7 +58,7 @@ task T2 priority 2 stackSize 512 {
     select
     on s0.P () :
       ledToggle  (!LED_L1)
-    on s1.P () :
+    on PP () :
       ledToggle  (!LED_L3)
     on waitUntilMS (!deadline:self.deadline) :
       self.deadline += 200

@@ -346,15 +346,57 @@ override method @selfRoutineCallInstructionAST baseGuardAnalyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @remoteRoutineCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  error inCallerNameForInvocationGraph: "NOT HANDLED YET @remoteRoutineCallInstructionAST" : outConvenienceGuardGenerationIR
+  [!?ioVariableMap searchForReadAccess
+    !lkey:mReceiverName
+    ?type:let receiverType
+    ?1*
+    ?variableKind:@objectInMemoryIR variableKind
+    ?4*
+  ]
+  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  effectiveParameterListIR += !.outputInput !"" ![variableKind address] #--- add "load receiver" as first argument
+  @instructionListIR baseGuardInstructionGenerationList = {}
+  let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + mRoutineName !mRoutineName.location}
+  [inContext.mGuardMapForContext searchKey
+    !routineMangledName
+    ?let @procedureSignature formalSignature
+  ]
+#--- Enter in invocation graph
+  let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !mRoutineName)
+   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#--- Analyze effective parameters
+  @allocaList baseGuardAllocaList = {}
+  analyzeEffectiveParameters (
+    !self:inSelfType
+    !formal:formalSignature
+    !effective:mEffectiveParameterList
+    !errorLocation:mRoutineName.location
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:{!isrModeName ()}
+    !allowPanic:true
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:baseGuardAllocaList
+    !?instructionListIR:baseGuardInstructionGenerationList
+    !?effectiveIR:effectiveParameterListIR
+  )
+#--- Code generation
+  outConvenienceGuardGenerationIR = .convenienceGuard {
+    !baseGuardAllocaList:baseGuardAllocaList
+    !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+    !baseGuardMangledName:routineMangledName.string
+    !baseGuardEffectiveParameterList:effectiveParameterListIR
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
