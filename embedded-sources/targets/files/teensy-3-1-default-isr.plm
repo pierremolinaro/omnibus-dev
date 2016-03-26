@@ -1,615 +1,607 @@
 
-required func NMIHandler `isr ()
+required func `isr NMIHandler ()
 
-func NMIHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr NMIHandler @nullWhenPanicDisabled @weak () {
   panic 2
 }
 
 //-----------------------------------------------------------------------------*
 
-//required func HardFaultHandler `isr ()
+//required func `isr HardFaultHandler ()
 //
-//func HardFaultHandler `isr @nullWhenPanicDisabled @weak () {
+//func `isr HardFaultHandler @nullWhenPanicDisabled @weak () {
 //  panic 3
 //}
 
 //-----------------------------------------------------------------------------*
 
-required func MemManageHandler `isr ()
+required func `isr MemManageHandler ()
 
-func MemManageHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr MemManageHandler @nullWhenPanicDisabled @weak () {
   panic 4
 }
 
 //-----------------------------------------------------------------------------*
 
-required func BusFaultHandler `isr ()
+required func `isr BusFaultHandler ()
 
-func BusFaultHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr BusFaultHandler @nullWhenPanicDisabled @weak () {
   panic 5
 }
 
 //-----------------------------------------------------------------------------*
 
-required func UsageFaultHandler `isr ()
+required func `isr UsageFaultHandler ()
 
-func UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr UsageFaultHandler @nullWhenPanicDisabled @weak () {
   panic 6
 }
 
 //-----------------------------------------------------------------------------*
 
-//required func svcHandler `isr ()
-//
-//func svcHandler `isr @nullWhenPanicDisabled @weak () {
-//  panic 11
-//}
+required func `isr DebugMonitorHandler ()
 
-//-----------------------------------------------------------------------------*
-
-required func DebugMonitorHandler `isr ()
-
-func DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DebugMonitorHandler @nullWhenPanicDisabled @weak () {
   panic 12
 }
 
 //-----------------------------------------------------------------------------*
 
-required func PendSVHandler `isr ()
+required func `isr PendSVHandler ()
 
-func PendSVHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr PendSVHandler @nullWhenPanicDisabled @weak () {
   panic 14
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel0TranfertCompleteHandler `isr ()
+required func `isr DMAChannel0TranfertCompleteHandler ()
 
-func DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel0TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 16
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel1TranfertCompleteHandler `isr ()
+required func `isr DMAChannel1TranfertCompleteHandler ()
 
-func DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel1TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 17
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel2TranfertCompleteHandler `isr ()
+required func `isr DMAChannel2TranfertCompleteHandler ()
 
-func DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel2TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 18
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel3TranfertCompleteHandler `isr ()
+required func `isr DMAChannel3TranfertCompleteHandler ()
 
-func DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel3TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 19
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel4TranfertCompleteHandler `isr ()
+required func `isr DMAChannel4TranfertCompleteHandler ()
 
-func DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel4TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 20
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel5TranfertCompleteHandler `isr ()
+required func `isr DMAChannel5TranfertCompleteHandler ()
 
-func DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel5TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 21
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel6TranfertCompleteHandler `isr ()
+required func `isr DMAChannel6TranfertCompleteHandler ()
 
-func DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel6TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 22
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel7TranfertCompleteHandler `isr ()
+required func `isr DMAChannel7TranfertCompleteHandler ()
 
-func DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel7TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 23
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel8TranfertCompleteHandler `isr ()
+required func `isr DMAChannel8TranfertCompleteHandler ()
 
-func DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel8TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 24
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel9TranfertCompleteHandler `isr ()
+required func `isr DMAChannel9TranfertCompleteHandler ()
 
-func DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel9TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 25
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel10TranfertCompleteHandler `isr ()
+required func `isr DMAChannel10TranfertCompleteHandler ()
 
-func DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel10TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 26
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel11TranfertCompleteHandler `isr ()
+required func `isr DMAChannel11TranfertCompleteHandler ()
 
-func DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel11TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 27
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel12TranfertCompleteHandler `isr ()
+required func `isr DMAChannel12TranfertCompleteHandler ()
 
-func DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel12TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 28
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel13TranfertCompleteHandler `isr ()
+required func `isr DMAChannel13TranfertCompleteHandler ()
 
-func DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel13TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 29
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel14TranfertCompleteHandler `isr ()
+required func `isr DMAChannel14TranfertCompleteHandler ()
 
-func DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel14TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 30
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAChannel15TranfertCompleteHandler `isr ()
+required func `isr DMAChannel15TranfertCompleteHandler ()
 
-func DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAChannel15TranfertCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 31
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DMAErrorHandler `isr ()
+required func `isr DMAErrorHandler ()
 
-func DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr DMAErrorHandler @nullWhenPanicDisabled @weak () {
   panic 32
 }
 
 //-----------------------------------------------------------------------------*
 
-required func flashMemoryCommandCompleteHandler `isr ()
+required func `isr flashMemoryCommandCompleteHandler ()
 
-func flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr flashMemoryCommandCompleteHandler @nullWhenPanicDisabled @weak () {
   panic 34
 }
 
 //-----------------------------------------------------------------------------*
 
-required func flashMemoryReadCollisionHandler `isr ()
+required func `isr flashMemoryReadCollisionHandler ()
 
-func flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr flashMemoryReadCollisionHandler @nullWhenPanicDisabled @weak () {
   panic 35
 }
 
 //-----------------------------------------------------------------------------*
 
-required func modeControllerHandler `isr ()
+required func `isr modeControllerHandler ()
 
-func modeControllerHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr modeControllerHandler @nullWhenPanicDisabled @weak () {
   panic 36
 }
 
 //-----------------------------------------------------------------------------*
 
-required func LLWUHandler `isr ()
+required func `isr LLWUHandler ()
 
-func LLWUHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr LLWUHandler @nullWhenPanicDisabled @weak () {
   panic 37
 }
 
 //-----------------------------------------------------------------------------*
 
-required func WDOGEWMHandler `isr ()
+required func `isr WDOGEWMHandler ()
 
-func WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr WDOGEWMHandler @nullWhenPanicDisabled @weak () {
   panic 38
 }
 
 //-----------------------------------------------------------------------------*
 
-required func I2C0Handler `isr ()
+required func `isr I2C0Handler ()
 
-func I2C0Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr I2C0Handler @nullWhenPanicDisabled @weak () {
   panic 40
 }
 
 //-----------------------------------------------------------------------------*
 
-required func I2C1Handler `isr ()
+required func `isr I2C1Handler ()
 
-func I2C1Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr I2C1Handler @nullWhenPanicDisabled @weak () {
   panic 41
 }
 
 //-----------------------------------------------------------------------------*
 
-required func SPI0Handler `isr ()
+required func `isr SPI0Handler ()
 
-func SPI0Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr SPI0Handler @nullWhenPanicDisabled @weak () {
   panic 42
 }
 
 //-----------------------------------------------------------------------------*
 
-required func SPI1Handler `isr ()
+required func `isr SPI1Handler ()
 
-func SPI1Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr SPI1Handler @nullWhenPanicDisabled @weak () {
   panic 43
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CAN0MessageBufferHandler `isr ()
+required func `isr CAN0MessageBufferHandler ()
 
-func CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr CAN0MessageBufferHandler @nullWhenPanicDisabled @weak () {
   panic 45
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CAN0BusOffHandler `isr ()
+required func `isr CAN0BusOffHandler ()
 
-func CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr CAN0BusOffHandler @nullWhenPanicDisabled @weak () {
   panic 46
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CAN0ErrorHandler `isr ()
+required func `isr CAN0ErrorHandler ()
 
-func CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr CAN0ErrorHandler @nullWhenPanicDisabled @weak () {
   panic 47
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CAN0TransmitWarningHandler `isr ()
+required func `isr CAN0TransmitWarningHandler ()
 
-func CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr CAN0TransmitWarningHandler @nullWhenPanicDisabled @weak () {
   panic 48
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CAN0ReceiveWarningHandler `isr ()
+required func `isr CAN0ReceiveWarningHandler ()
 
-func CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr CAN0ReceiveWarningHandler @nullWhenPanicDisabled @weak () {
   panic 49
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CAN0WakeUpHandler `isr ()
+required func `isr CAN0WakeUpHandler ()
 
-func CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr CAN0WakeUpHandler @nullWhenPanicDisabled @weak () {
   panic 50
 }
 
 //-----------------------------------------------------------------------------*
 
-required func I2S0TransmitHandler `isr ()
+required func `isr I2S0TransmitHandler ()
 
-func I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr I2S0TransmitHandler @nullWhenPanicDisabled @weak () {
   panic 51
 }
 
 //-----------------------------------------------------------------------------*
 
-required func I2S0ReceiveHandler `isr ()
+required func `isr I2S0ReceiveHandler ()
 
-func I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr I2S0ReceiveHandler @nullWhenPanicDisabled @weak () {
   panic 52
 }
 
 //-----------------------------------------------------------------------------*
 
-required func UART0LONHandler `isr ()
+required func `isr UART0LONHandler ()
 
-func UART0LONHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr UART0LONHandler @nullWhenPanicDisabled @weak () {
   panic 60
 }
 
 //-----------------------------------------------------------------------------*
 
-required func UART0StatusHandler `isr ()
+required func `isr UART0StatusHandler ()
 
-func UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr UART0StatusHandler @nullWhenPanicDisabled @weak () {
   panic 61
 }
 
 //-----------------------------------------------------------------------------*
 
-required func UART0ErrorHandler `isr ()
+required func `isr UART0ErrorHandler ()
 
-func UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr UART0ErrorHandler @nullWhenPanicDisabled @weak () {
   panic 62
 }
 
 //-----------------------------------------------------------------------------*
 
-required func UART1StatusHandler `isr ()
+required func `isr UART1StatusHandler ()
 
-func UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr UART1StatusHandler @nullWhenPanicDisabled @weak () {
   panic 63
 }
 
 //-----------------------------------------------------------------------------*
 
-required func UART1ErrorHandler `isr ()
+required func `isr UART1ErrorHandler ()
 
-func UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr UART1ErrorHandler @nullWhenPanicDisabled @weak () {
   panic 64
 }
 
 //-----------------------------------------------------------------------------*
 
-required func UART2StatusHandler `isr ()
+required func `isr UART2StatusHandler ()
 
-func UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr UART2StatusHandler @nullWhenPanicDisabled @weak () {
   panic 64
 }
 
 //-----------------------------------------------------------------------------*
 
-required func UART2ErrorHandler `isr ()
+required func `isr UART2ErrorHandler ()
 
-func UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr UART2ErrorHandler @nullWhenPanicDisabled @weak () {
   panic 65
 }
 
 //-----------------------------------------------------------------------------*
 
-required func ADC0Handler `isr ()
+required func `isr ADC0Handler ()
 
-func ADC0Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr ADC0Handler @nullWhenPanicDisabled @weak () {
   panic 73
 }
 
 //-----------------------------------------------------------------------------*
 
-required func ADC1Handler `isr ()
+required func `isr ADC1Handler ()
 
-func ADC1Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr ADC1Handler @nullWhenPanicDisabled @weak () {
   panic 74
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CMP0Handler `isr ()
+required func `isr CMP0Handler ()
 
-func CMP0Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr CMP0Handler @nullWhenPanicDisabled @weak () {
   panic 75
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CMP1Handler `isr ()
+required func `isr CMP1Handler ()
 
-func CMP1Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr CMP1Handler @nullWhenPanicDisabled @weak () {
   panic 76
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CMP2Handler `isr ()
+required func `isr CMP2Handler ()
 
-func CMP2Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr CMP2Handler @nullWhenPanicDisabled @weak () {
   panic 77
 }
 
 //-----------------------------------------------------------------------------*
 
-required func FMT0Handler `isr ()
+required func `isr FMT0Handler ()
 
-func FMT0Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr FMT0Handler @nullWhenPanicDisabled @weak () {
   panic 78
 }
 
 //-----------------------------------------------------------------------------*
 
-required func FMT1Handler `isr ()
+required func `isr FMT1Handler ()
 
-func FMT1Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr FMT1Handler @nullWhenPanicDisabled @weak () {
   panic 79
 }
 
 //-----------------------------------------------------------------------------*
 
-required func FMT2Handler `isr ()
+required func `isr FMT2Handler ()
 
-func FMT2Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr FMT2Handler @nullWhenPanicDisabled @weak () {
   panic 80
 }
 
 //-----------------------------------------------------------------------------*
 
-required func CMTHandler `isr ()
+required func `isr CMTHandler ()
 
-func CMTHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr CMTHandler @nullWhenPanicDisabled @weak () {
   panic 81
 }
 
 //-----------------------------------------------------------------------------*
 
-required func RTCAlarmHandler `isr ()
+required func `isr RTCAlarmHandler ()
 
-func RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr RTCAlarmHandler @nullWhenPanicDisabled @weak () {
   panic 82
 }
 
 //-----------------------------------------------------------------------------*
 
-required func RTCSecondHandler `isr ()
+required func `isr RTCSecondHandler ()
 
-func RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr RTCSecondHandler @nullWhenPanicDisabled @weak () {
   panic 83
 }
 
 //-----------------------------------------------------------------------------*
 
-required func PITChannel0Handler `isr ()
+required func `isr PITChannel0Handler ()
 
-func PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr PITChannel0Handler @nullWhenPanicDisabled @weak () {
   panic 84
 }
 
 //-----------------------------------------------------------------------------*
 
-required func PITChannel1Handler `isr ()
+required func `isr PITChannel1Handler ()
 
-func PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr PITChannel1Handler @nullWhenPanicDisabled @weak () {
   panic 85
 }
 
 //-----------------------------------------------------------------------------*
 
-required func PITChannel2Handler `isr ()
+required func `isr PITChannel2Handler ()
 
-func PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr PITChannel2Handler @nullWhenPanicDisabled @weak () {
   panic 86
 }
 
 //-----------------------------------------------------------------------------*
 
-required func PITChannel3Handler `isr ()
+required func `isr PITChannel3Handler ()
 
-func PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr PITChannel3Handler @nullWhenPanicDisabled @weak () {
   panic 87
 }
 
 //-----------------------------------------------------------------------------*
 
-required func PDBHandler `isr ()
+required func `isr PDBHandler ()
 
-func PDBHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr PDBHandler @nullWhenPanicDisabled @weak () {
   panic 88
 }
 
 //-----------------------------------------------------------------------------*
 
-required func USBOTGHandler `isr ()
+required func `isr USBOTGHandler ()
 
-func USBOTGHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr USBOTGHandler @nullWhenPanicDisabled @weak () {
   panic 89
 }
 
 //-----------------------------------------------------------------------------*
 
-required func USBChargerDetectHandler `isr ()
+required func `isr USBChargerDetectHandler ()
 
-func USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr USBChargerDetectHandler @nullWhenPanicDisabled @weak () {
   panic 90
 }
 
 //-----------------------------------------------------------------------------*
 
-required func DAC0Handler `isr ()
+required func `isr DAC0Handler ()
 
-func DAC0Handler `isr @nullWhenPanicDisabled @weak () {
+func `isr DAC0Handler @nullWhenPanicDisabled @weak () {
   panic 97
 }
 
 //-----------------------------------------------------------------------------*
 
-required func TSIHandler `isr ()
+required func `isr TSIHandler ()
 
-func TSIHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr TSIHandler @nullWhenPanicDisabled @weak () {
   panic 99
 }
 
 //-----------------------------------------------------------------------------*
 
-required func MCGHandler `isr ()
+required func `isr MCGHandler ()
 
-func MCGHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr MCGHandler @nullWhenPanicDisabled @weak () {
   panic 100
 }
 
 //-----------------------------------------------------------------------------*
 
-required func lowPowerTimerHandler `isr ()
+required func `isr lowPowerTimerHandler ()
 
-func lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr lowPowerTimerHandler @nullWhenPanicDisabled @weak () {
   panic 101
 }
 
 //-----------------------------------------------------------------------------*
 
-required func pinDetectPortAHandler `isr ()
+required func `isr pinDetectPortAHandler ()
 
-func pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr pinDetectPortAHandler @nullWhenPanicDisabled @weak () {
   panic 103
 }
 
 //-----------------------------------------------------------------------------*
 
-required func pinDetectPortBHandler `isr ()
+required func `isr pinDetectPortBHandler ()
 
-func pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr pinDetectPortBHandler @nullWhenPanicDisabled @weak () {
   panic 104
 }
 
 //-----------------------------------------------------------------------------*
 
-required func pinDetectPortCHandler `isr ()
+required func `isr pinDetectPortCHandler ()
 
-func pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr pinDetectPortCHandler @nullWhenPanicDisabled @weak () {
   panic 105
 }
 
 //-----------------------------------------------------------------------------*
 
-required func pinDetectPortDHandler `isr ()
+required func `isr pinDetectPortDHandler ()
 
-func pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr pinDetectPortDHandler @nullWhenPanicDisabled @weak () {
   panic 106
 }
 
 //-----------------------------------------------------------------------------*
 
-required func pinDetectPortEHandler `isr ()
+required func `isr pinDetectPortEHandler ()
 
-func pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr pinDetectPortEHandler @nullWhenPanicDisabled @weak () {
   panic 107
 }
 
 //-----------------------------------------------------------------------------*
 
-required func softwareInterruptHandler `isr ()
+required func `isr softwareInterruptHandler ()
 
-func softwareInterruptHandler `isr @nullWhenPanicDisabled @weak () {
+func `isr softwareInterruptHandler @nullWhenPanicDisabled @weak () {
   panic 110
 }
 

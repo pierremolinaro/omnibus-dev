@@ -8,14 +8,14 @@ struct $rendezVousData {
   var signalerDonneeLue = $semaphore (!value:0)
   var data $uint32 = 0
 
-  func output `user (?data:inData $uint32) {
+  func `user output (?data:inData $uint32) {
     self.autoriserEcriture.P ()
     self.data = inData
     self.autoriserLecture.V ()
     self.signalerDonneeLue.P ()
   }
 
-  func input `user (!data:outData $uint32) {
+  func `user input (!data:outData $uint32) {
     self.autoriserLecture.P ()
     outData = self.data
     self.signalerDonneeLue.V ()

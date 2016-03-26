@@ -93,13 +93,13 @@ syntax extension common_syntax {
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
   {
     $func$
-    $identifier$ ?outProcName
     outProcModeList = {}
     repeat
       $modeName$ ?let procMode
       outProcModeList += !procMode
     while
     end
+    $identifier$ ?outProcName
     outAttributeList = {}
     repeat
     while

@@ -5,16 +5,16 @@
 opaqueType $taskList @instantiable : 32
 
 //--- Block running task
-extern func blockInList `kernel (?!list:ioWaitingList $taskList)
+extern func `kernel blockInList (?!list:ioWaitingList $taskList)
 
-extern func blockOnDeadline `kernel (?deadline:inDeadline $uint32) 
+extern func `kernel blockOnDeadline (?deadline:inDeadline $uint32) 
 
-extern func blockInListAndOnDeadline `kernel (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
+extern func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
 
 //--- Make task Ready
-extern func makeTaskReady `kernel `isr (?!list:ioWaitingList $taskList) -> $bool
+extern func `kernel `isr makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
 
-extern func makeTasksReadyFromCurrentDate `isr (?currentDate:inCurrentDate $uint32)
+extern func `isr makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint32)
 
 //-----------------------------------------------------------------------------*
 //   GUARD                                                                     *
@@ -22,13 +22,13 @@ extern func makeTasksReadyFromCurrentDate `isr (?currentDate:inCurrentDate $uint
 
 opaqueType $guardList @instantiable : 32
 
-extern func tickHandlerForGuardedWaitUntil `isr (?currentDate:inCurrentDate $uint32)
+extern func `isr tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
 
-extern func handleGuardedCommand `isr (?!guard:ioGuard $guardList)
+extern func `isr handleGuardedCommand (?!guard:ioGuard $guardList)
 
-extern func handleGuardedWaitUntil `isr (?deadline:inDeadlineMS $uint32)
+extern func `isr handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
 
-extern func guardDidChange `kernel `isr (?!guard:ioGuard $guardList)
+extern func `kernel `isr guardDidChange (?!guard:ioGuard $guardList)
 
 //-----------------------------------------------------------------------------*
 
@@ -51,13 +51,13 @@ var gUptimeMS $uint32 = 0 {
 
 //-----------------------------------------------------------------------------*
 
-func millis `isr `kernel `user @noWarningIfUnused () -> $uint32 {
+func `isr `kernel `user millis @noWarningIfUnused () -> $uint32 {
   result = gUptimeMS
 }
 
 //-----------------------------------------------------------------------------*
 
-func busyWaitingDuringMS `init @noWarningIfUnused (?inDelay $uint32) {
+func `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
   let deadline = gUptimeMS + inDelay
   while gUptimeMS < deadline do
   end
@@ -65,9 +65,9 @@ func busyWaitingDuringMS `init @noWarningIfUnused (?inDelay $uint32) {
 
 //-----------------------------------------------------------------------------*
 
-required func systickHandler `isr ()
+required func `isr systickHandler ()
 
-func systickHandler `isr @global () {
+func `isr systickHandler @global () {
   let now = gUptimeMS +% 1
   gUptimeMS = now
   makeTasksReadyFromCurrentDate (!currentDate:now)
@@ -75,7 +75,7 @@ func systickHandler `isr @global () {
   userSystickHandler ()
 }
 
-func userSystickHandler `isr @weak () {
+func `isr userSystickHandler @weak () {
 }
 
 //-----------------------------------------------------------------------------*
@@ -88,7 +88,7 @@ primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
 
 //-----------------------------------------------------------------------------*
 
-func waitDuringMS `user @noWarningIfUnused (?delay: inDelay $uint32) {
+func `user waitDuringMS @noWarningIfUnused (?delay: inDelay $uint32) {
   waitUntilMS (!deadline:millis () + inDelay)
 }
 

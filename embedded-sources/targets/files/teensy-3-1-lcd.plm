@@ -14,7 +14,7 @@
 
 //-----------------------------------------------------------------------------*
 
-func configurePorts `init @noWarningIfUnused () {
+func `init configurePorts @noWarningIfUnused () {
 //--- D4 (PTB0) is a GPIO (input by default)
   PORTB_PCR0 = (1 << 8) ;
   GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)
@@ -37,34 +37,34 @@ func configurePorts `init @noWarningIfUnused () {
 
 //-----------------------------------------------------------------------------*
 
-func driveHighE `init `panic `user @noWarningIfUnused () {
+func `init `panic `user  driveHighE @noWarningIfUnused () {
   GPIOB_PSOR = 1 << 1 ; // E is PTB1
 }
 
 //-----------------------------------------------------------------------------*
 
 
-func driveLowE `init `panic `user @noWarningIfUnused () {
+func `init `panic `user  driveLowE @noWarningIfUnused () {
   GPIOB_PCOR = 1 << 1 ; // E is PTB1
 }
 
 //-----------------------------------------------------------------------------*
 
 
-func driveHighRS `init `panic `user @noWarningIfUnused () {
+func `init `panic `user  driveHighRS @noWarningIfUnused () {
   GPIOB_PSOR = 1 << 3 ; // RS is PTB3
 }
 
 //-----------------------------------------------------------------------------*
 
 
-func driveLowRS `init `panic `user @noWarningIfUnused () {
+func `init `panic `user  driveLowRS @noWarningIfUnused () {
   GPIOB_PCOR = 1 << 3 ; // RS is PTB3
 }
 
 //-----------------------------------------------------------------------------*
 
-func setD4 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTB0
+func `init `panic `user setD4 @noWarningIfUnused (?inValue $bool) { // PTB0
   if inValue then
     GPIOB_PSOR = 1 << 0 ;
   else
@@ -74,7 +74,7 @@ func setD4 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTB0
 
 //-----------------------------------------------------------------------------*
 
-func setD5 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTC0
+func `init `panic `user setD5 @noWarningIfUnused (?inValue $bool) { // PTC0
   if inValue then
     GPIOC_PSOR = 1 << 0 ;
   else
@@ -84,7 +84,7 @@ func setD5 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTC0
 
 //-----------------------------------------------------------------------------*
 
-func setD6 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTD1
+func `init `panic `user setD6 @noWarningIfUnused (?inValue $bool) { // PTD1
   if inValue then
     GPIOD_PSOR = 1 << 1 ;
   else
@@ -94,7 +94,7 @@ func setD6 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTD1
 
 //-----------------------------------------------------------------------------*
 
-func setD7 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTB2
+func `init `panic `user setD7 @noWarningIfUnused (?inValue $bool) { // PTB2
   if inValue then
     GPIOB_PSOR = 1 << 2 ;
   else
@@ -106,7 +106,7 @@ func setD7 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTB2
 //   UTILITY ROUTINES                                                          *
 //-----------------------------------------------------------------------------*
 
-func programLcd4BitDataBusOutput `init @noWarningIfUnused (?inValue $uint8) {
+func `init programLcd4BitDataBusOutput @noWarningIfUnused (?inValue $uint8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -115,7 +115,7 @@ func programLcd4BitDataBusOutput `init @noWarningIfUnused (?inValue $uint8) {
 
 //-----------------------------------------------------------------------------*
 
-func write4BitCommand `init @noWarningIfUnused (?inValue $uint8) {
+func `init write4BitCommand @noWarningIfUnused (?inValue $uint8) {
   busyWaitingDuringMS (!1) ;
   driveLowRS () ;
   programLcd4BitDataBusOutput (!inValue) ;
@@ -126,7 +126,7 @@ func write4BitCommand `init @noWarningIfUnused (?inValue $uint8) {
 
 //-----------------------------------------------------------------------------*
 
-func write8bitCommand `init @noWarningIfUnused (?inCommand $uint8) {
+func `init write8bitCommand @noWarningIfUnused (?inCommand $uint8) {
   busyWaitingDuringMS (!1) ;
   driveLowRS () ;
   programLcd4BitDataBusOutput (!inCommand >> 4) ;
@@ -195,7 +195,7 @@ write8bitCommandInExceptionMode (?data $uint8)
 //   PRINT ROUTINES IN USER MODE                                               *
 //-----------------------------------------------------------------------------*
 
-func programLcd4BitDataBusOutput_inUserMode `user @noWarningIfUnused (?inValue $uint8) {
+func `user programLcd4BitDataBusOutput_inUserMode @noWarningIfUnused (?inValue $uint8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -204,7 +204,7 @@ func programLcd4BitDataBusOutput_inUserMode `user @noWarningIfUnused (?inValue $
 
 //-----------------------------------------------------------------------------*
 
-func write8bitCommand_inUserMode `user @noWarningIfUnused (?inCommand $uint8) {
+func`user write8bitCommand_inUserMode @noWarningIfUnused (?inCommand $uint8) {
   waitDuringMS (!delay:1) ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;
@@ -220,7 +220,7 @@ func write8bitCommand_inUserMode `user @noWarningIfUnused (?inCommand $uint8) {
 
 //-----------------------------------------------------------------------------*
 
-func writeData_inUserMode `user @noWarningIfUnused (?inData $uint8) {
+func`user writeData_inUserMode @noWarningIfUnused (?inData $uint8) {
   waitDuringMS (!delay:1) ;
   driveHighRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;
@@ -241,7 +241,7 @@ func writeData_inUserMode `user @noWarningIfUnused (?inData $uint8) {
 // Line 2 : 20 -> 39
 // Line 3 : 84 -> 103
 
-func goto `user @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
+func `user goto @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
   if inColumn < 20 then
     if inLine == 0 then
       write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
@@ -257,13 +257,13 @@ func goto `user @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8
 
 //-----------------------------------------------------------------------------*
 
-func clearScreen `user @noWarningIfUnused () {
+func `user clearScreen @noWarningIfUnused () {
   write8bitCommand_inUserMode (!0x01)
 }
 
 //-----------------------------------------------------------------------------*
 
-func printSpaces `user @noWarningIfUnused (?inCount $uint32) {
+func `user printSpaces @noWarningIfUnused (?inCount $uint32) {
   var count = inCount
   while (count > 0) do
     writeData_inUserMode (!0x20)
@@ -273,7 +273,7 @@ func printSpaces `user @noWarningIfUnused (?inCount $uint32) {
 
 //-----------------------------------------------------------------------------*
 
-func printUnsigned `user @noWarningIfUnused (?inValue $uint32) {
+func `user printUnsigned @noWarningIfUnused (?inValue $uint32) {
   var divisor $uint32 = 1_000_000_000
   var value = inValue
   var isPrinting = false
@@ -294,7 +294,7 @@ func printUnsigned `user @noWarningIfUnused (?inValue $uint32) {
 
 //-----------------------------------------------------------------------------*
 
-func printSigned `user @noWarningIfUnused (?inValue $int32) {
+func `user printSigned @noWarningIfUnused (?inValue $int32) {
   if inValue >= 0 then
     printUnsigned (!truncate inValue : $uint32)
   else
@@ -305,7 +305,7 @@ func printSigned `user @noWarningIfUnused (?inValue $int32) {
 
 //-----------------------------------------------------------------------------*
 
-func printString `user @noWarningIfUnused (?inString $staticString) {
+func `user printString @noWarningIfUnused (?inString $staticString) {
   for c in inString do
     writeData_inUserMode (!c)
   end
@@ -366,7 +366,7 @@ func printString `user @noWarningIfUnused (?inString $staticString) {
 //   EXCEPTION                                                                 *
 //-----------------------------------------------------------------------------*
 
-func programLcd4BitDataBusOutput_inExceptionMode `panic @noWarningIfUnused (?inValue $uint8) {
+func `panic programLcd4BitDataBusOutput_inExceptionMode @noWarningIfUnused (?inValue $uint8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -375,14 +375,14 @@ func programLcd4BitDataBusOutput_inExceptionMode `panic @noWarningIfUnused (?inV
 
 //-----------------------------------------------------------------------------*
 
-func waitOneMillisecondInExceptionMode `panic @noWarningIfUnused () {
+func `panic waitOneMillisecondInExceptionMode @noWarningIfUnused () {
   while not SYST_CSR.COUNTFLAG.bool do
   end
 }
 
 //-----------------------------------------------------------------------------*
 
-func waitMSInExceptionMode `panic @noWarningIfUnused (?duration: inDuration $uint32) {
+func `panic waitMSInExceptionMode @noWarningIfUnused (?duration: inDuration $uint32) {
   var duration = inDuration
   while duration > 0 do
     waitOneMillisecondInExceptionMode ()
@@ -392,7 +392,7 @@ func waitMSInExceptionMode `panic @noWarningIfUnused (?duration: inDuration $uin
 
 //-----------------------------------------------------------------------------*
 
-func writeDataInExceptionMode `panic @noWarningIfUnused (?inData $uint8) {
+func `panic writeDataInExceptionMode @noWarningIfUnused (?inData $uint8) {
   waitOneMillisecondInExceptionMode () ;
   driveHighRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;
@@ -408,7 +408,7 @@ func writeDataInExceptionMode `panic @noWarningIfUnused (?inData $uint8) {
 
 //-----------------------------------------------------------------------------*
 
-func printUnsignedInExceptionMode `panic @noWarningIfUnused (?inValue $uint32) {
+func `panic printUnsignedInExceptionMode @noWarningIfUnused (?inValue $uint32) {
   var divisor $uint32 = 1_000_000_000
   var value = inValue
   var isPrinting = false
@@ -429,7 +429,7 @@ func printUnsignedInExceptionMode `panic @noWarningIfUnused (?inValue $uint32) {
 
 //-----------------------------------------------------------------------------*
 
-func printSignedInExceptionMode `panic @noWarningIfUnused (?inValue $int32) {
+func `panic printSignedInExceptionMode @noWarningIfUnused (?inValue $int32) {
   if inValue >= 0 then
     printUnsignedInExceptionMode (!truncate inValue : $uint32)
   else
@@ -440,7 +440,7 @@ func printSignedInExceptionMode `panic @noWarningIfUnused (?inValue $int32) {
 
 //-----------------------------------------------------------------------------*
 
-func write8bitCommandInExceptionMode `panic @noWarningIfUnused (?inCommand $uint8) {
+func `panic write8bitCommandInExceptionMode @noWarningIfUnused (?inCommand $uint8) {
   waitOneMillisecondInExceptionMode () ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;
@@ -456,7 +456,7 @@ func write8bitCommandInExceptionMode `panic @noWarningIfUnused (?inCommand $uint
 
 //-----------------------------------------------------------------------------*
 
-func gotoInExceptionMode `panic @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
+func `panic gotoInExceptionMode @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
   if inColumn < 20 then
     if inLine == 0 then
       write8bitCommandInExceptionMode (!0x80 +% 0 +% inColumn) ;
@@ -472,13 +472,13 @@ func gotoInExceptionMode `panic @noWarningIfUnused (?line:inLine $uint32 ?column
 
 //-----------------------------------------------------------------------------*
 
-func clearScreenInExceptionMode `panic @noWarningIfUnused () {
+func `panic clearScreenInExceptionMode @noWarningIfUnused () {
   write8bitCommandInExceptionMode (!0x01)
 }
 
 //-----------------------------------------------------------------------------*
 
-func printStringInExceptionMode `panic @noWarningIfUnused (?inString $staticString) {
+func `panic printStringInExceptionMode @noWarningIfUnused (?inString $staticString) {
   for c in inString do
     writeDataInExceptionMode (!c)
   end
