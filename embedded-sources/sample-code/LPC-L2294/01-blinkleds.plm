@@ -1,0 +1,28 @@
+target "LPC-L2294"
+
+//------------------------------------------------*
+
+init 100 {
+//--- Program pin P1.23 as an output (STAT led)
+  IO1DIR |= 1 << 23
+  IO1CLR  = 1 << 23 // Led On
+}
+
+//------------------------------------------------*
+
+task T1 priority 1 stackSize 512 {
+  var compteur $uint32 = 0
+
+  func loop () {
+    //waitUntilMS (!deadline:self.compteur)
+//    IO1CLR  = 1 << 23 // Led On
+    // ledOn (!LED_L0)
+    self.compteur +%= 500
+    // waitUntilMS (!deadline:self.compteur)
+    // ledOff (!LED_L0)
+//    IO1SET  = 1 << 23 // Led Off
+    self.compteur +%= 500
+  }
+}
+
+//------------------------------------------------*

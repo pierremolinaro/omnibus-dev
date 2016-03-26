@@ -1,0 +1,13 @@
+reset halt
+mww 0xE01FC040 0
+mdw 0xE01FC040
+mww 0xE002C014 0x0F804924
+mdw 0xE002C014
+mww 0xFFE00004 0x20000400
+mdw 0xFFE00004
+load_image product/product-linker.elf
+mww 0xE01FC040 2
+mdw 0xE01FC040
+soft_reset_halt
+resume
+shutdown

@@ -87,7 +87,7 @@ def downloadArchive (archiveURL, archivePath):
 def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceList, \
                  objectDir, LLCcompiler, llvmOptimizerCompiler, \
                  asAssembler, \
-                 productDir, linker, linkerLibraries, objcopy, \
+                 productDir, linker, linkerScripts, linkerLibraries, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget, \
                  CLANGcompiler, CsourceList, LLVMLinkerCompiler, \
                  currentFile) :
@@ -195,27 +195,28 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     make.addRule (rule)
     objectList.append (object)
   #---------------------------------------------- Add linker rule
-  productELF = productDir + "/product.elf"
-  rule = makefile.Rule ([productELF], "Linking " + productELF)
-  rule.mDependences += objectList
-  rule.mCommand += linker
-  rule.mCommand += objectList
-  for library in linkerLibraries:
-    rule.mCommand += [toolDirectory + "/lib/" + library]
-  rule.mCommand += ["-o", productELF]
-  rule.mCommand += ["-Tsources/linker.ld"]
-  rule.mDependences += ["sources/linker.ld"]
-  rule.mCommand += ["-Map=" + productELF + ".map"]
-  make.addRule (rule)
-  #--- Add objcopy rule
-  productHEX = productDir + "/product.ihex"
-  rule = makefile.Rule ([productHEX], "Hexing " + productHEX)
-  rule.mDependences += [productELF]
-  rule.mCommand += objcopy
-  rule.mCommand += ["-O", "ihex"]
-  rule.mCommand += [productELF]
-  rule.mCommand += [productHEX]
-  make.addRule (rule)
+  for lkScript in linkerScripts:
+    productELF = productDir + "/product-" + lkScript + ".elf"
+    rule = makefile.Rule ([productELF], "Linking " + productELF)
+    rule.mDependences += objectList
+    rule.mCommand += linker
+    rule.mCommand += objectList
+    for library in linkerLibraries:
+      rule.mCommand += [toolDirectory + "/lib/" + library]
+    rule.mCommand += ["-o", productELF]
+    rule.mCommand += ["-Tsources/" + lkScript + ".ld"]
+    rule.mDependences += ["sources/" + lkScript + ".ld"]
+    rule.mCommand += ["-Map=" + productELF + ".map"]
+    make.addRule (rule)
+    #--- Add objcopy rule
+    productHEX = productDir + "/product.ihex"
+    rule = makefile.Rule ([productHEX], "Hexing " + productHEX)
+    rule.mDependences += [productELF]
+    rule.mCommand += objcopy
+    rule.mCommand += ["-O", "ihex"]
+    rule.mCommand += [productELF]
+    rule.mCommand += [productHEX]
+    make.addRule (rule)
   #--- Add goals
   make.addGoal ("run", [productHEX], "Building all and run")
   make.addGoal ("all", [productHEX], "Building all")

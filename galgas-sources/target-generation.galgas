@@ -71,6 +71,12 @@ proc generateTarget
 #--- Copy plm.py
   copyExecutableFile (
     !currentDir:inCurrentDirectory
+    !from:"toolpath.py"
+    !to:inProductDirectory + "/sources/toolpath.py"
+  )
+#--- Copy plm.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
     !from:"plm.py"
     !to:inProductDirectory + "/sources/plm.py"
   )

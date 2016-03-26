@@ -1,0 +1,282 @@
+//------------------------------------------------------------------------------
+
+// Vectored Interrupt Controller (VIC)
+register VICIRQStatus   at 0xFFFF_F000 $uint32
+register VICFIQStatus   at 0xFFFF_F000 $uint32
+register VICRawIntr     at 0xFFFF_F008 $uint32
+register VICIntSelect   at 0xFFFF_F00C $uint32
+register VICIntEnable   at 0xFFFF_F010 $uint32
+register VICIntEnClr    at 0xFFFF_F014 $uint32
+register VICSoftInt     at 0xFFFF_F018 $uint32
+register VICSoftIntClr  at 0xFFFF_F01C $uint32
+register VICProtection  at 0xFFFF_F020 $uint32
+register VICVectAddr    at 0xFFFF_F030 $uint32
+register VICDefVectAddr at 0xFFFF_F034 $uint32
+
+//register VICVect(INDEX) $uint32 (0xFFFF_F100 + ((INDEX) << 2
+
+// register VICVectAddr[16] at 0xFFFF_F100 : 4 $uint32
+register VICVectAddr0   at 0xFFFF_F100 $uint32
+register VICVectAddr1   at 0xFFFF_F104 $uint32
+register VICVectAddr2   at 0xFFFF_F108 $uint32
+register VICVectAddr3   at 0xFFFF_F10C $uint32
+register VICVectAddr4   at 0xFFFF_F110 $uint32
+register VICVectAddr5   at 0xFFFF_F114 $uint32
+register VICVectAddr6   at 0xFFFF_F118 $uint32
+register VICVectAddr7   at 0xFFFF_F11C $uint32
+register VICVectAddr8   at 0xFFFF_F120 $uint32
+register VICVectAddr9   at 0xFFFF_F124 $uint32
+register VICVectAddr10  at 0xFFFF_F128 $uint32
+register VICVectAddr11  at 0xFFFF_F12C $uint32
+register VICVectAddr12  at 0xFFFF_F130 $uint32
+register VICVectAddr13  at 0xFFFF_F134 $uint32
+register VICVectAddr14  at 0xFFFF_F138 $uint32
+register VICVectAddr15  at 0xFFFF_F13C $uint32
+
+//register VICVectCntl(INDEX) $uint32 (0xFFFF_F200 + ((INDEX) << 2
+
+register VICVectCntl0   at 0xFFFF_F200 $uint32
+register VICVectCntl1   at 0xFFFF_F204 $uint32
+register VICVectCntl2   at 0xFFFF_F208 $uint32
+register VICVectCntl3   at 0xFFFF_F20C $uint32
+register VICVectCntl4   at 0xFFFF_F210 $uint32
+register VICVectCntl5   at 0xFFFF_F214 $uint32
+register VICVectCntl6   at 0xFFFF_F218 $uint32
+register VICVectCntl7   at 0xFFFF_F21C $uint32
+register VICVectCntl8   at 0xFFFF_F220 $uint32
+register VICVectCntl9   at 0xFFFF_F224 $uint32
+register VICVectCntl10  at 0xFFFF_F228 $uint32
+register VICVectCntl11  at 0xFFFF_F22C $uint32
+register VICVectCntl12  at 0xFFFF_F230 $uint32
+register VICVectCntl13  at 0xFFFF_F234 $uint32
+register VICVectCntl14  at 0xFFFF_F238 $uint32
+register VICVectCntl15  at 0xFFFF_F23C $uint32
+
+//------------------------------------------------------------------------------
+
+// Watchdog
+register WDMOD            at 0xE000_0000 $uint8
+register WDTC             at 0xE000_0004 $uint32
+register WDFEED           at 0xE000_0008 $uint8
+register WDTV             at 0xE000_000C $uint32
+
+// Pin Connect Block
+register PINSEL0        at 0xE002_C000 $uint32
+register PINSEL1        at 0xE002_C004 $uint32
+register PINSEL2        at 0xE002_C014 $uint32
+
+// General Purpose Input/Output (GPIO)
+register IO0PIN          at 0xE002_8000 $uint32
+register IO0SET @user    at 0xE002_8004 $uint32
+register IO0DIR          at 0xE002_8008 $uint32
+register IO0CLR @user    at 0xE002_800C $uint32
+
+register IO1PIN          at 0xE002_8010 $uint32
+register IO1SET @user    at 0xE002_8014 $uint32
+register IO1DIR          at 0xE002_8018 $uint32
+register IO1CLR @user    at 0xE002_801C $uint32
+
+register IO2PIN          at 0xE002_8020 $uint32
+register IO2SET @user    at 0xE002_8024 $uint32
+register IO2DIR          at 0xE002_8028 $uint32
+register IO2CLR @user    at 0xE002_802C $uint32
+
+register IO3PIN          at 0xE002_8030 $uint32
+register IO3SET @user    at 0xE002_8034 $uint32
+register IO3DIR          at 0xE002_8038 $uint32
+register IO3CLR @user    at 0xE002_803C $uint32
+
+// Memory Accelerator Module (MAM)
+register MAMCR            at 0xE01F_C000 $uint8
+register MAMTIM           at 0xE01F_C004 $uint8
+register MEMMAP           at 0xE01F_C040 $uint8
+
+// Phase Locked Loop (PLL)
+register PLLCON           at 0xE01F_C080 $uint8
+register PLLCFG           at 0xE01F_C084 $uint8
+register PLLSTAT          at 0xE01F_C088 $uint16
+register PLLFEED          at 0xE01F_C08C $uint8
+
+// VPB Divider */
+register VPBDIV           at 0xE01F_C100 $uint8
+
+// Power Control */
+register PCON             at 0xE01F_C0C0 $uint8
+register PCONP            at 0xE01F_C0C4 $uint32
+
+// External Interrupts
+register EXTINT           at 0xE01F_C140 $uint8
+register EXTWAKE          at 0xE01F_C144 $uint8
+register EXTMODE          at 0xE01F_C148 $uint8
+register EXTPOLAR         at 0xE01F_C14C $uint8
+
+// Timer 0
+register TIMER0_IR      at 0xE000_4000 $uint32
+register TIMER0_TCR     at 0xE000_4004 $uint32
+register TIMER0_TC      at 0xE000_4008 $uint32
+register TIMER0_PR      at 0xE000_400C $uint32
+register TIMER0_PC      at 0xE000_4010 $uint32
+register TIMER0_MCR     at 0xE000_4014 $uint32
+register TIMER0_MR0     at 0xE000_4018 $uint32
+register TIMER0_MR1     at 0xE000_401C $uint32
+register TIMER0_MR2     at 0xE000_4020 $uint32
+register TIMER0_MR3     at 0xE000_4024 $uint32
+register TIMER0_CCR     at 0xE000_4028 $uint32
+register TIMER0_CR0     at 0xE000_402C $uint32
+register TIMER0_CR1     at 0xE000_4030 $uint32
+register TIMER0_CR2     at 0xE000_4034 $uint32
+register TIMER0_CR3     at 0xE000_4038 $uint32
+register TIMER0_EMR     at 0xE000_403C $uint32
+
+// Timer 1
+register TIMER1_IR      at 0xE000_8000 $uint32
+register TIMER1_TCR     at 0xE000_8004 $uint32
+register TIMER1_TC      at 0xE000_8008 $uint32
+register TIMER1_PR      at 0xE000_800C $uint32
+register TIMER1_PC      at 0xE000_8010 $uint32
+register TIMER1_MCR     at 0xE000_8014 $uint32
+register TIMER1_MR0     at 0xE000_8018 $uint32
+register TIMER1_MR1     at 0xE000_801C $uint32
+register TIMER1_MR2     at 0xE000_8020 $uint32
+register TIMER1_MR3     at 0xE000_8024 $uint32
+register TIMER1_CCR     at 0xE000_8028 $uint32
+register TIMER1_CR0     at 0xE000_802C $uint32
+register TIMER1_CR1     at 0xE000_8030 $uint32
+register TIMER1_CR2     at 0xE000_8034 $uint32
+register TIMER1_CR3     at 0xE000_8038 $uint32
+register TIMER1_EMR     at 0xE000_803C $uint32
+
+// Pulse Width Modulator (PWM)
+register PWM_IR         at 0xE001_4000 $uint32
+register PWM_TCR        at 0xE001_4004 $uint32
+register PWM_TC         at 0xE001_4008 $uint32
+register PWM_PR         at 0xE001_400C $uint32
+register PWM_PC         at 0xE001_4010 $uint32
+register PWM_MCR        at 0xE001_4014 $uint32
+register PWM_MR0        at 0xE001_4018 $uint32
+register PWM_MR1        at 0xE001_401C $uint32
+register PWM_MR2        at 0xE001_4020 $uint32
+register PWM_MR3        at 0xE001_4024 $uint32
+register PWM_MR4        at 0xE001_4040 $uint32
+register PWM_MR5        at 0xE001_4044 $uint32
+register PWM_MR6        at 0xE001_4048 $uint32
+register PWM_CCR        at 0xE001_4028 $uint32
+register PWM_CR0        at 0xE001_402C $uint32
+register PWM_CR1        at 0xE001_4030 $uint32
+register PWM_CR2        at 0xE001_4034 $uint32
+register PWM_CR3        at 0xE001_4038 $uint32
+register PWM_EMR        at 0xE001_403C $uint32
+register PWM_PCR        at 0xE001_404C $uint32
+register PWM_LER        at 0xE001_4050 $uint32
+
+// Universal Asynchronous Receiver Transmitter 0 (UART0)
+register U0RBR        at 0xE000_C000 $uint8
+register U0THR        at 0xE000_C000 $uint8
+register U0DLL        at 0xE000_C000 $uint8
+register U0DLM        at 0xE000_C004 $uint8
+register U0IER        at 0xE000_C004 $uint32
+register U0IIR        at 0xE000_C008 $uint32
+register U0FCR        at 0xE000_C008 $uint8
+register U0LCR        at 0xE000_C00C $uint8
+register U0LSR        at 0xE000_C014 $uint8
+register U0SCR        at 0xE000_C01C $uint8
+register U0ACR        at 0xE000_C020 $uint32
+register U0FDR        at 0xE000_C028 $uint32
+register U0TER        at 0xE000_C030 $uint8
+
+
+// Universal Asynchronous Receiver Transmitter 1 (UART1)
+register U1RBR        at 0xE001_0000 $uint8
+register U1THR        at 0xE001_0000 $uint8
+register U1DLL        at 0xE001_0000 $uint8
+register U1DLM        at 0xE001_0004 $uint8
+register U1IER        at 0xE001_0004 $uint32
+register U1IIR        at 0xE001_0008 $uint32
+register U1FCR        at 0xE001_0008 $uint8
+register U1LCR        at 0xE001_000C $uint8
+register U1MCR        at 0xE001_0010 $uint8
+register U1LSR        at 0xE001_0014 $uint8
+register U1MSR        at 0xE001_0018 $uint8
+register U1SCR        at 0xE001_001C $uint8
+register U1ACR        at 0xE001_0020 $uint32
+register U1FDR        at 0xE001_0028 $uint32
+register U1TER        at 0xE001_0030 $uint8
+
+
+// I2C Interface
+register I2C_I2CONSET     at 0xE001_C000 $uint8
+register I2C_I2STAT       at 0xE001_C004 $uint8
+register I2C_I2DAT        at 0xE001_C008 $uint8
+register I2C_I2ADR        at 0xE001_C00C $uint8
+register I2C_I2SCLH       at 0xE001_C010 $uint16
+register I2C_I2SCLL       at 0xE001_C014 $uint16
+register I2C_I2CONCLR     at 0xE001_C018 $uint8
+
+// SPI 0 (Serial Peripheral Interface 0)
+register SPI0_SPCR          at 0xE002_0000 $uint16
+register SPI0_SPSR          at 0xE002_0004 $uint8
+register SPI0_SPDR          at 0xE002_0008 $uint16
+register SPI0_SPCCR         at 0xE002_000C $uint8
+// register SPI0_SPTCR        at 0xE002_0010 $uint8
+// register SPI0_SPTSR        at 0xE002_0014 $uint8
+// register SPI0_SPTOR        at 0xE002_0018 $uint8
+register SPI0_SPINT         at 0xE002_001C $uint8
+
+// SPI 1 (Serial Peripheral Interface 1)
+register SPI1_SPCR          at 0xE003_0000 $uint16
+register SPI1_SPSR          at 0xE003_0004 $uint8
+register SPI1_SPDR          at 0xE003_0008 $uint16
+register SPI1_SPCCR         at 0xE003_000C $uint8
+// register SPI1_SPTCR        at  $uint8   0xE003_0010
+// register SPI1_SPTSR        at  $uint8   0xE003_0014
+// register SPI1_SPTOR        at  $uint8   0xE003_0018
+register SPI1_SPINT         at 0xE003_001C $uint8
+
+// Real Time Clock
+register RTC_ILR          at 0xE002_4000 $uint8
+register RTC_CTC          at 0xE002_4004 $uint16
+register RTC_CCR          at 0xE002_4008 $uint8
+register RTC_CIIR         at 0xE002_400C $uint8
+register RTC_AMR          at 0xE002_4010 $uint8
+register RTC_CTIME0       at 0xE002_4014 $uint32
+register RTC_CTIME1       at 0xE002_4018 $uint32
+register RTC_CTIME2       at 0xE002_401C $uint32
+register RTC_SEC          at 0xE002_4020 $uint8
+register RTC_MIN          at 0xE002_4024 $uint8
+register RTC_HOUR         at 0xE002_4028 $uint8
+register RTC_DOM          at 0xE002_402C $uint8
+register RTC_DOW          at 0xE002_4030 $uint8
+register RTC_DOY          at 0xE002_4034 $uint16
+register RTC_MONTH        at 0xE002_4038 $uint8
+register RTC_YEAR         at 0xE002_403C $uint16
+register RTC_ALSEC        at 0xE002_4060 $uint8
+register RTC_ALMIN        at 0xE002_4064 $uint8
+register RTC_ALHOUR       at 0xE002_4068 $uint8
+register RTC_ALDOM        at 0xE002_406C $uint8
+register RTC_ALDOW        at 0xE002_4070 $uint8
+register RTC_ALDOY        at 0xE002_4074 $uint16
+register RTC_ALMON        at 0xE002_4078 $uint8
+register RTC_ALYEAR       at 0xE002_407C $uint16
+register RTC_PREINT       at 0xE002_4080 $uint16
+register RTC_PREFRAC      at 0xE002_4084 $uint16
+
+// Bank Configuration registers
+register BCFG0          at 0xFFE0_0000 $uint32
+register BCFG1          at 0xFFE0_0004 $uint32
+register BCFG2          at 0xFFE0_0008 $uint32
+register BCFG3          at 0xFFE0_000C $uint32
+
+// CAN Controllers
+register CAN_AMFR          at 0xE003_C000 $uint32
+register CAN_SFF_SA        at 0xE003_C004 $uint32
+register CAN_SFF_GRP_SA    at 0xE003_C008 $uint32
+register CAN_EFF_SA        at 0xE003_C00C $uint32
+register CAN_EFF_GRP_SA    at 0xE003_C010 $uint32
+register CAN_END_OF_TABLES at 0xE003_C014 $uint32
+
+// Analog/Digital Converter (ADC)
+register ADCR           at 0xE003_4000 $uint32
+register ADGDR          at 0xE003_4004 $uint32
+register ADINTEN        at 0xE003_400C $uint32
+
+//------------------------------------------------------------------------------

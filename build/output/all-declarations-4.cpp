@@ -3951,9 +3951,9 @@ void routine_enterControlRegistersInContext (const GALGAS_controlRegisterDeclara
           break ;
         case GALGAS_controlRegisterBitSlice::kEnum_namedBit:
           {
-            const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * extractPtr_8493 = (const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *) (enumerator_7307.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
-            const GALGAS_lstring extractedValue_name = extractPtr_8493->mAssociatedValue0 ;
-            const GALGAS_lbigint extractedValue_count = extractPtr_8493->mAssociatedValue1 ;
+            const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * extractPtr_8495 = (const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *) (enumerator_7307.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
+            const GALGAS_lstring extractedValue_name = extractPtr_8495->mAssociatedValue0 ;
+            const GALGAS_lbigint extractedValue_count = extractPtr_8495->mAssociatedValue1 ;
             GALGAS_uint var_bitCount = extractedValue_count.mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 186)) ;
             var_controlRegisterFieldList.addAssign_operation (var_bitCount, extractedValue_name.mAttribute_string  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 187)) ;
             {
@@ -3961,7 +3961,7 @@ void routine_enterControlRegistersInContext (const GALGAS_controlRegisterDeclara
             }
             GALGAS_controlRegisterBitSliceAccessMap var_registerSubMap = GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("declaration-control-register.galgas", 193)) ;
             {
-            var_registerSubMap.setter_insertKey (GALGAS_lstring::constructor_new (GALGAS_string ("shift"), extractedValue_name.mAttribute_location  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 195)), GALGAS_llvmBinaryOperation::constructor_lshr (SOURCE_FILE ("declaration-control-register.galgas", 196)), var_shiftCount.getter_bigint (SOURCE_FILE ("declaration-control-register.galgas", 197)), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("declaration-control-register.galgas", 198)), var_registerType, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 194)) ;
+            var_registerSubMap.setter_insertKey (GALGAS_lstring::constructor_new (GALGAS_string ("shifted"), extractedValue_name.mAttribute_location  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 195)), GALGAS_llvmBinaryOperation::constructor_lshr (SOURCE_FILE ("declaration-control-register.galgas", 196)), var_shiftCount.getter_bigint (SOURCE_FILE ("declaration-control-register.galgas", 197)), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("declaration-control-register.galgas", 198)), var_registerType, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 194)) ;
             }
             {
             var_registerSubMap.setter_insertKey (GALGAS_lstring::constructor_new (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 202)), extractedValue_name.mAttribute_location  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 202)), GALGAS_llvmBinaryOperation::constructor_icmp_5F_ne (SOURCE_FILE ("declaration-control-register.galgas", 203)), GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 204)), GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("declaration-control-register.galgas", 205)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 201)) ;
@@ -3977,42 +3977,42 @@ void routine_enterControlRegistersInContext (const GALGAS_controlRegisterDeclara
         enumerator_7307.gotoNextObject () ;
       }
     }
-    cEnumerator_controlRegisterNameList enumerator_8563 (enumerator_5894.current_mRegisterNameList (HERE), kEnumeration_up) ;
-    while (enumerator_8563.hasCurrentObject ()) {
+    cEnumerator_controlRegisterNameList enumerator_8565 (enumerator_5894.current_mRegisterNameList (HERE), kEnumeration_up) ;
+    while (enumerator_8565.hasCurrentObject ()) {
       GALGAS_bool var_isReadOnly = GALGAS_bool (false) ;
       GALGAS_bool var_isAccessibleInUserMode = GALGAS_bool (false) ;
-      cEnumerator_lstringlist enumerator_8698 (enumerator_8563.current_mAttributeList (HERE), kEnumeration_up) ;
-      while (enumerator_8698.hasCurrentObject ()) {
-        const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, enumerator_8698.current_mValue (HERE).mAttribute_string.objectCompare (GALGAS_string ("ro"))).boolEnum () ;
+      cEnumerator_lstringlist enumerator_8700 (enumerator_8565.current_mAttributeList (HERE), kEnumeration_up) ;
+      while (enumerator_8700.hasCurrentObject ()) {
+        const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, enumerator_8700.current_mValue (HERE).mAttribute_string.objectCompare (GALGAS_string ("ro"))).boolEnum () ;
         if (kBoolTrue == test_8) {
           const enumGalgasBool test_9 = var_isReadOnly.boolEnum () ;
           if (kBoolTrue == test_9) {
-            GALGAS_location location_10 (enumerator_8698.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            GALGAS_location location_10 (enumerator_8700.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
             inCompiler->emitSemanticError (location_10, GALGAS_string ("duplicated attribute")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 228)) ;
           }else if (kBoolFalse == test_9) {
             var_isReadOnly = GALGAS_bool (true) ;
           }
         }else if (kBoolFalse == test_8) {
-          const enumGalgasBool test_11 = GALGAS_bool (kIsEqual, enumerator_8698.current_mValue (HERE).mAttribute_string.objectCompare (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 232)))).boolEnum () ;
+          const enumGalgasBool test_11 = GALGAS_bool (kIsEqual, enumerator_8700.current_mValue (HERE).mAttribute_string.objectCompare (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 232)))).boolEnum () ;
           if (kBoolTrue == test_11) {
             const enumGalgasBool test_12 = var_isAccessibleInUserMode.boolEnum () ;
             if (kBoolTrue == test_12) {
-              GALGAS_location location_13 (enumerator_8698.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+              GALGAS_location location_13 (enumerator_8700.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
               inCompiler->emitSemanticError (location_13, GALGAS_string ("duplicated attribute")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 234)) ;
             }else if (kBoolFalse == test_12) {
               var_isAccessibleInUserMode = GALGAS_bool (true) ;
             }
           }else if (kBoolFalse == test_11) {
-            GALGAS_location location_14 (enumerator_8698.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            GALGAS_location location_14 (enumerator_8700.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
             inCompiler->emitSemanticError (location_14, GALGAS_string ("only @ro attribute (read only) and @user (accessible un `user mode) are accepted here")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 239)) ;
           }
         }
-        enumerator_8698.gotoNextObject () ;
+        enumerator_8700.gotoNextObject () ;
       }
       {
-      ioArgument_ioContext.mAttribute_mControlRegisterMap.setter_insertKey (enumerator_8563.current_mRegisterName (HERE), var_registerType, var_isReadOnly, var_isAccessibleInUserMode, var_registerBitSliceMap, var_registerFieldMap, enumerator_8563.current_mRegisterAddress (HERE).mAttribute_bigint, var_controlRegisterFieldList, var_registerBitCount, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 242)) ;
+      ioArgument_ioContext.mAttribute_mControlRegisterMap.setter_insertKey (enumerator_8565.current_mRegisterName (HERE), var_registerType, var_isReadOnly, var_isAccessibleInUserMode, var_registerBitSliceMap, var_registerFieldMap, enumerator_8565.current_mRegisterAddress (HERE).mAttribute_bigint, var_controlRegisterFieldList, var_registerBitCount, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 242)) ;
       }
-      enumerator_8563.gotoNextObject () ;
+      enumerator_8565.gotoNextObject () ;
     }
     enumerator_5894.gotoNextObject () ;
   }
@@ -4030,62 +4030,62 @@ void routine_controlRegistersSemanticAnalysis (const GALGAS_controlRegisterDecla
                                                GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_controlRegisterDeclarationListAST enumerator_10225 (constinArgument_inRegisterDeclarationListAST, kEnumeration_up) ;
-  while (enumerator_10225.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_registerType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, enumerator_10225.current_mRegisterTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 268)) ;
+  cEnumerator_controlRegisterDeclarationListAST enumerator_10227 (constinArgument_inRegisterDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_10227.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_registerType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, enumerator_10227.current_mRegisterTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 268)) ;
     switch (var_registerType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 269)).enumValue ()) {
     case GALGAS_typeKind::kNotBuilt:
       break ;
     case GALGAS_typeKind::kEnum_boolean:
       {
-        GALGAS_location location_0 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_0 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_0, GALGAS_string ("a boolean type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 270)) ;
       }
       break ;
     case GALGAS_typeKind::kEnum_boolset:
       {
-        GALGAS_location location_1 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_1 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_1, GALGAS_string ("a boolset type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 271)) ;
       }
       break ;
     case GALGAS_typeKind::kEnum_integer:
       {
-        const cEnumAssociatedValues_typeKind_integer * extractPtr_11295 = (const cEnumAssociatedValues_typeKind_integer *) (var_registerType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 269)).unsafePointer ()) ;
-        const GALGAS_bool extractedValue_unsigned = extractPtr_11295->mAssociatedValue2 ;
-        const GALGAS_uint extractedValue_size = extractPtr_11295->mAssociatedValue3 ;
-        const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, enumerator_10225.current_mRegisterBitSliceList (HERE).getter_length (SOURCE_FILE ("declaration-control-register.galgas", 273)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+        const cEnumAssociatedValues_typeKind_integer * extractPtr_11297 = (const cEnumAssociatedValues_typeKind_integer *) (var_registerType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 269)).unsafePointer ()) ;
+        const GALGAS_bool extractedValue_unsigned = extractPtr_11297->mAssociatedValue2 ;
+        const GALGAS_uint extractedValue_size = extractPtr_11297->mAssociatedValue3 ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, enumerator_10227.current_mRegisterBitSliceList (HERE).getter_length (SOURCE_FILE ("declaration-control-register.galgas", 273)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
         if (kBoolTrue == test_2) {
           const enumGalgasBool test_3 = extractedValue_unsigned.operator_not (SOURCE_FILE ("declaration-control-register.galgas", 274)).boolEnum () ;
           if (kBoolTrue == test_3) {
-            GALGAS_location location_4 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            GALGAS_location location_4 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
             inCompiler->emitSemanticError (location_4, GALGAS_string ("the register type should be unsigned in order to define bit slices")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 275)) ;
           }
           GALGAS_uint var_shiftCount = GALGAS_uint ((uint32_t) 0U) ;
-          cEnumerator_controlRegisterBitSliceList enumerator_10862 (enumerator_10225.current_mRegisterBitSliceList (HERE), kEnumeration_down) ;
-          while (enumerator_10862.hasCurrentObject ()) {
-            switch (enumerator_10862.current_mRegisterBitSlice (HERE).enumValue ()) {
+          cEnumerator_controlRegisterBitSliceList enumerator_10864 (enumerator_10227.current_mRegisterBitSliceList (HERE), kEnumeration_down) ;
+          while (enumerator_10864.hasCurrentObject ()) {
+            switch (enumerator_10864.current_mRegisterBitSlice (HERE).enumValue ()) {
             case GALGAS_controlRegisterBitSlice::kNotBuilt:
               break ;
             case GALGAS_controlRegisterBitSlice::kEnum_unusedBits:
               {
-                const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits * extractPtr_11003 = (const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *) (enumerator_10862.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
-                const GALGAS_lbigint extractedValue_count = extractPtr_11003->mAssociatedValue0 ;
+                const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits * extractPtr_11005 = (const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *) (enumerator_10864.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
+                const GALGAS_lbigint extractedValue_count = extractPtr_11005->mAssociatedValue0 ;
                 var_shiftCount = var_shiftCount.add_operation (extractedValue_count.mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 281)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 281)) ;
               }
               break ;
             case GALGAS_controlRegisterBitSlice::kEnum_namedBit:
               {
-                const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * extractPtr_11106 = (const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *) (enumerator_10862.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
-                const GALGAS_lbigint extractedValue_count = extractPtr_11106->mAssociatedValue1 ;
+                const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * extractPtr_11108 = (const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *) (enumerator_10864.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
+                const GALGAS_lbigint extractedValue_count = extractPtr_11108->mAssociatedValue1 ;
                 var_shiftCount = var_shiftCount.add_operation (extractedValue_count.mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 283)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 283)) ;
               }
               break ;
             }
-            enumerator_10862.gotoNextObject () ;
+            enumerator_10864.gotoNextObject () ;
           }
           const enumGalgasBool test_5 = GALGAS_bool (kIsNotEqual, extractedValue_size.objectCompare (var_shiftCount)).boolEnum () ;
           if (kBoolTrue == test_5) {
-            GALGAS_location location_6 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            GALGAS_location location_6 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
             inCompiler->emitSemanticError (location_6, GALGAS_string ("total bit slice count is ").add_operation (var_shiftCount.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 287)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287)).add_operation (GALGAS_string (" (should be "), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287)).add_operation (extractedValue_size.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 287)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 287)) ;
           }
         }
@@ -4093,49 +4093,49 @@ void routine_controlRegistersSemanticAnalysis (const GALGAS_controlRegisterDecla
       break ;
     case GALGAS_typeKind::kEnum_literalString:
       {
-        GALGAS_location location_7 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_7 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_7, GALGAS_string ("a literal string type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 290)) ;
       }
       break ;
     case GALGAS_typeKind::kEnum_structure:
       {
-        GALGAS_location location_8 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_8 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_8, GALGAS_string ("a structure type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 291)) ;
       }
       break ;
     case GALGAS_typeKind::kEnum_enumeration:
       {
-        GALGAS_location location_9 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_9 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_9, GALGAS_string ("an enumeration type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 292)) ;
       }
       break ;
     case GALGAS_typeKind::kEnum_staticInteger:
       {
-        GALGAS_location location_10 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_10 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_10, GALGAS_string ("a literal integer type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 293)) ;
       }
       break ;
     case GALGAS_typeKind::kEnum_opaque:
       {
-        GALGAS_location location_11 (enumerator_10225.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_11 (enumerator_10227.current_mRegisterTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_11, GALGAS_string ("an opaque type is not valid for a register")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 294)) ;
       }
       break ;
     }
     GALGAS_bigint var_maxAddress = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)).left_shift_operation (constinArgument_inContext.mAttribute_mPointerSize COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)) ;
-    cEnumerator_controlRegisterNameList enumerator_11924 (enumerator_10225.current_mRegisterNameList (HERE), kEnumeration_up) ;
-    while (enumerator_11924.hasCurrentObject ()) {
-      const enumGalgasBool test_12 = GALGAS_bool (kIsStrictSup, enumerator_11924.current_mRegisterAddress (HERE).mAttribute_bigint.objectCompare (var_maxAddress)).boolEnum () ;
+    cEnumerator_controlRegisterNameList enumerator_11926 (enumerator_10227.current_mRegisterNameList (HERE), kEnumeration_up) ;
+    while (enumerator_11926.hasCurrentObject ()) {
+      const enumGalgasBool test_12 = GALGAS_bool (kIsStrictSup, enumerator_11926.current_mRegisterAddress (HERE).mAttribute_bigint.objectCompare (var_maxAddress)).boolEnum () ;
       if (kBoolTrue == test_12) {
-        GALGAS_location location_13 (enumerator_11924.current_mRegisterAddress (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_13 (enumerator_11926.current_mRegisterAddress (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_13, GALGAS_string ("register address should be lower or equal to ").add_operation (var_maxAddress.getter_hexString (SOURCE_FILE ("declaration-control-register.galgas", 300)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 300))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 300)) ;
       }
       {
-      ioArgument_ioIntermediateCodeStruct.mAttribute_mControlRegisterMap.setter_insertKey (enumerator_11924.current_mRegisterName (HERE), enumerator_10225.current_mRegisterTypeName (HERE).mAttribute_string, enumerator_11924.current_mRegisterAddress (HERE).mAttribute_bigint, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 303)) ;
+      ioArgument_ioIntermediateCodeStruct.mAttribute_mControlRegisterMap.setter_insertKey (enumerator_11926.current_mRegisterName (HERE), enumerator_10227.current_mRegisterTypeName (HERE).mAttribute_string, enumerator_11926.current_mRegisterAddress (HERE).mAttribute_bigint, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 303)) ;
       }
-      enumerator_11924.gotoNextObject () ;
+      enumerator_11926.gotoNextObject () ;
     }
-    enumerator_10225.gotoNextObject () ;
+    enumerator_10227.gotoNextObject () ;
   }
 }
 
@@ -4154,26 +4154,26 @@ void routine_buildControlRegisterMapHTMLFile (const GALGAS_controlRegisterMap co
   const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_writeControlRegisterHTMLDumpFile.getter_value ()).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_stringset var_firstLetterSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-control-register.galgas", 323)) ;
-    cEnumerator_controlRegisterMap enumerator_13087 (constinArgument_inControlRegisterMap, kEnumeration_up) ;
-    while (enumerator_13087.hasCurrentObject ()) {
-      var_firstLetterSet.addAssign_operation (enumerator_13087.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 325)).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 325))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 325)) ;
-      enumerator_13087.gotoNextObject () ;
+    cEnumerator_controlRegisterMap enumerator_13089 (constinArgument_inControlRegisterMap, kEnumeration_up) ;
+    while (enumerator_13089.hasCurrentObject ()) {
+      var_firstLetterSet.addAssign_operation (enumerator_13089.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 325)).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 325))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 325)) ;
+      enumerator_13089.gotoNextObject () ;
     }
     GALGAS_string var_tableOfTypeString = GALGAS_string::makeEmptyString () ;
     GALGAS_char var_currentFirstLetter = GALGAS_char (TO_UNICODE (32)) ;
-    cEnumerator_controlRegisterMap enumerator_13276 (constinArgument_inControlRegisterMap, kEnumeration_up) ;
-    while (enumerator_13276.hasCurrentObject ()) {
-      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter.objectCompare (enumerator_13276.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 330)))).boolEnum () ;
+    cEnumerator_controlRegisterMap enumerator_13278 (constinArgument_inControlRegisterMap, kEnumeration_up) ;
+    while (enumerator_13278.hasCurrentObject ()) {
+      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter.objectCompare (enumerator_13278.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 330)))).boolEnum () ;
       if (kBoolTrue == test_1) {
-        var_currentFirstLetter = enumerator_13276.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 331)) ;
+        var_currentFirstLetter = enumerator_13278.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 331)) ;
         var_tableOfTypeString.plusAssign_operation(GALGAS_string ("<br><a name=\"").add_operation (var_currentFirstLetter.getter_uint (SOURCE_FILE ("declaration-control-register.galgas", 332)).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 332)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 332)).add_operation (GALGAS_string ("\"><b>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 332)).add_operation (var_currentFirstLetter.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 332)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 332)).add_operation (GALGAS_string ("</b></a><br>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 332)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 332)) ;
       }
-      var_tableOfTypeString.plusAssign_operation(function_linkForControlRegister (enumerator_13276.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 334)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 334)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 334)) ;
-      enumerator_13276.gotoNextObject () ;
+      var_tableOfTypeString.plusAssign_operation(function_linkForControlRegister (enumerator_13278.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 334)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 334)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 334)) ;
+      enumerator_13278.gotoNextObject () ;
     }
     GALGAS_string var_typeDumpString = GALGAS_string (filewrapperTemplate_controlRegisterDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.mAttribute_string.getter_lastPathComponent (SOURCE_FILE ("declaration-control-register.galgas", 337)), constinArgument_inControlRegisterMap, var_firstLetterSet, var_tableOfTypeString COMMA_SOURCE_FILE ("declaration-control-register.galgas", 336))) ;
-    GALGAS_bool joker_13925 ; // Joker input parameter
-    var_typeDumpString.method_writeToFileWhenDifferentContents (var_typeDumpFilePath, joker_13925, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 342)) ;
+    GALGAS_bool joker_13927 ; // Joker input parameter
+    var_typeDumpString.method_writeToFileWhenDifferentContents (var_typeDumpFilePath, joker_13927, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 342)) ;
   }else if (kBoolFalse == test_0) {
     {
     GALGAS_string::class_method_deleteFileIfExists (var_typeDumpFilePath, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 344)) ;
@@ -4428,10 +4428,10 @@ GALGAS_string function_fieldIndexColumns (const GALGAS_uint & constinArgument_in
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
   result_outResult = GALGAS_string::makeEmptyString () ;
-  cEnumerator_range enumerator_14976 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inBitCount.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 370))), kEnumeration_down) ;
-  while (enumerator_14976.hasCurrentObject ()) {
-    result_outResult.plusAssign_operation(GALGAS_string ("<td class=\"fields\">").add_operation (enumerator_14976.current (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 371)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 371)).add_operation (GALGAS_string ("</td>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 371)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 371)) ;
-    enumerator_14976.gotoNextObject () ;
+  cEnumerator_range enumerator_14978 (GALGAS_range (GALGAS_uint ((uint32_t) 0U), constinArgument_inBitCount.substract_operation (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 370))), kEnumeration_down) ;
+  while (enumerator_14978.hasCurrentObject ()) {
+    result_outResult.plusAssign_operation(GALGAS_string ("<td class=\"fields\">").add_operation (enumerator_14978.current (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 371)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 371)).add_operation (GALGAS_string ("</td>"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 371)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 371)) ;
+    enumerator_14978.gotoNextObject () ;
   }
 //---
   return result_outResult ;
@@ -4930,28 +4930,26 @@ void routine_generateSectionDispatcher (const GALGAS_string constinArgument_inCu
                                         const GALGAS__32_stringlist constinArgument_inSectionList,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_sectionAssemblyCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-code.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 147)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 147)) ;
-  ioArgument_ioAssemblerCode.plusAssign_operation(var_sectionAssemblyCode.getter_stringByReplacingStringByString (GALGAS_string ("!PROC!"), function_llvmNameForFunction (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 148)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 148)) ;
-  cEnumerator__32_stringlist enumerator_6042 (constinArgument_inSectionList, kEnumeration_up) ;
-  GALGAS_uint index_5995 ((uint32_t) 0) ;
-  while (enumerator_6042.hasCurrentObject ()) {
-    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 150)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 150)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6042.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 151)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_5995.getter_string (SOURCE_FILE ("declaration-section.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 152)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 153)) ;
-    enumerator_6042.gotoNextObject () ;
-    index_5995.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 149)) ;
+  cEnumerator__32_stringlist enumerator_5811 (constinArgument_inSectionList, kEnumeration_up) ;
+  GALGAS_uint index_5764 ((uint32_t) 0) ;
+  while (enumerator_5811.hasCurrentObject ()) {
+    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 148)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_5811.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 149)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_5764.getter_string (SOURCE_FILE ("declaration-section.galgas", 150)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 150)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 151)) ;
+    enumerator_5811.gotoNextObject () ;
+    index_5764.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 147)) ;
   }
-  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 155)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 155)) ;
-  cEnumerator__32_stringlist enumerator_6487 (constinArgument_inSectionList, kEnumeration_up) ;
-  GALGAS_uint index_6447 ((uint32_t) 0) ;
-  while (enumerator_6487.hasCurrentObject ()) {
-    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 157)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6487.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 158)) ;
-    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_6447.getter_string (SOURCE_FILE ("declaration-section.galgas", 159)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 159)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 160)) ;
-    enumerator_6487.gotoNextObject () ;
-    index_6447.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 156)) ;
+  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 153)), inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 153)) ;
+  cEnumerator__32_stringlist enumerator_6256 (constinArgument_inSectionList, kEnumeration_up) ;
+  GALGAS_uint index_6216 ((uint32_t) 0) ;
+  while (enumerator_6256.hasCurrentObject ()) {
+    GALGAS_string var_s = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 155)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_6256.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 156)) ;
+    var_s = var_s.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_6216.getter_string (SOURCE_FILE ("declaration-section.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("declaration-section.galgas", 157)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 158)) ;
+    enumerator_6256.gotoNextObject () ;
+    index_6216.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-section.galgas", 154)) ;
   }
 }
 
@@ -5983,70 +5981,88 @@ void routine_buildOrderedDeclarationList (const GALGAS_ast constinArgument_inAST
   categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mControlRegisterDeclarationListAST, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 41)) ;
   categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 42)) ;
   categoryMethod_noteTypesInPrecedenceGraph (constinArgument_inAST.mAttribute_mTaskList, var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 43)) ;
-  cEnumerator_stringlist enumerator_2759 (var_precedenceGraph.getter_undefinedNodeKeyList (SOURCE_FILE ("ordered-declaration-list.galgas", 45)), kEnumeration_up) ;
-  while (enumerator_2759.hasCurrentObject ()) {
-    GALGAS_stringlist var_split = enumerator_2759.current_mValue (HERE).getter_componentsSeparatedByString (GALGAS_string ("int") COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 46)) ;
-    GALGAS_bool test_0 = GALGAS_bool (kIsEqual, var_split.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 47)).objectCompare (GALGAS_uint ((uint32_t) 2U))) ;
-    if (kBoolTrue == test_0.boolEnum ()) {
-      test_0 = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 47)).getter_isDecimalUnsignedNumber (SOURCE_FILE ("ordered-declaration-list.galgas", 47)) ;
+  cEnumerator_panicTypesAST enumerator_2666 (constinArgument_inAST.mAttribute_mPanicTypes, kEnumeration_up) ;
+  while (enumerator_2666.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, enumerator_2666.current_mPanicCodeTypeName (HERE).mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      GALGAS_lstring var_typeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_2666.current_mPanicCodeTypeName (HERE).getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 46)), enumerator_2666.current_mPanicCodeTypeName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 46)) ;
+      {
+      var_precedenceGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 47)) ;
+      }
     }
-    const enumGalgasBool test_1 = test_0.boolEnum () ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_2666.current_mPanicLineTypeName (HERE).mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_1) {
-      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 48)).objectCompare (GALGAS_string ("$u"))).boolEnum () ;
-      if (kBoolTrue == test_2) {
-        GALGAS_uint var_n = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 49)).getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 49)) ;
-        GALGAS_integerDeclaration var_declaration = GALGAS_integerDeclaration::constructor_new (GALGAS_bool (false), var_n  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 50)) ;
-        callCategoryMethod_enterInPrecedenceGraph ((const cPtr_integerDeclaration *) var_declaration.ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 51)) ;
-      }else if (kBoolFalse == test_2) {
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 52)).objectCompare (GALGAS_string ("$"))).boolEnum () ;
-        if (kBoolTrue == test_3) {
-          GALGAS_uint var_n = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 53)).getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 53)) ;
-          GALGAS_integerDeclaration var_declaration = GALGAS_integerDeclaration::constructor_new (GALGAS_bool (true), var_n  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 54)) ;
-          callCategoryMethod_enterInPrecedenceGraph ((const cPtr_integerDeclaration *) var_declaration.ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 55)) ;
+      GALGAS_lstring var_typeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_2666.current_mPanicLineTypeName (HERE).getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 50)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 50)), enumerator_2666.current_mPanicLineTypeName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 50)) ;
+      {
+      var_precedenceGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 51)) ;
+      }
+    }
+    enumerator_2666.gotoNextObject () ;
+  }
+  cEnumerator_stringlist enumerator_3083 (var_precedenceGraph.getter_undefinedNodeKeyList (SOURCE_FILE ("ordered-declaration-list.galgas", 55)), kEnumeration_up) ;
+  while (enumerator_3083.hasCurrentObject ()) {
+    GALGAS_stringlist var_split = enumerator_3083.current_mValue (HERE).getter_componentsSeparatedByString (GALGAS_string ("int") COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 56)) ;
+    GALGAS_bool test_2 = GALGAS_bool (kIsEqual, var_split.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 57)).objectCompare (GALGAS_uint ((uint32_t) 2U))) ;
+    if (kBoolTrue == test_2.boolEnum ()) {
+      test_2 = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)).getter_isDecimalUnsignedNumber (SOURCE_FILE ("ordered-declaration-list.galgas", 57)) ;
+    }
+    const enumGalgasBool test_3 = test_2.boolEnum () ;
+    if (kBoolTrue == test_3) {
+      const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 58)).objectCompare (GALGAS_string ("$u"))).boolEnum () ;
+      if (kBoolTrue == test_4) {
+        GALGAS_uint var_n = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 59)).getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 59)) ;
+        GALGAS_integerDeclaration var_declaration = GALGAS_integerDeclaration::constructor_new (GALGAS_bool (false), var_n  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 60)) ;
+        callCategoryMethod_enterInPrecedenceGraph ((const cPtr_integerDeclaration *) var_declaration.ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 61)) ;
+      }else if (kBoolFalse == test_4) {
+        const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 62)).objectCompare (GALGAS_string ("$"))).boolEnum () ;
+        if (kBoolTrue == test_5) {
+          GALGAS_uint var_n = var_split.getter_mValueAtIndex (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 63)).getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 63)) ;
+          GALGAS_integerDeclaration var_declaration = GALGAS_integerDeclaration::constructor_new (GALGAS_bool (true), var_n  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 64)) ;
+          callCategoryMethod_enterInPrecedenceGraph ((const cPtr_integerDeclaration *) var_declaration.ptr (), var_precedenceGraph, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 65)) ;
         }
       }
     }
-    enumerator_2759.gotoNextObject () ;
+    enumerator_3083.gotoNextObject () ;
   }
-  GALGAS_bool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("ordered-declaration-list.galgas", 60)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
-  if (kBoolTrue == test_4.boolEnum ()) {
-    test_4 = GALGAS_bool (gOption_plm_5F_options_writeTypeDependencyGraphFile.getter_value ()) ;
+  GALGAS_bool test_6 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("ordered-declaration-list.galgas", 70)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  if (kBoolTrue == test_6.boolEnum ()) {
+    test_6 = GALGAS_bool (gOption_plm_5F_options_writeTypeDependencyGraphFile.getter_value ()) ;
   }
-  const enumGalgasBool test_5 = test_4.boolEnum () ;
-  if (kBoolTrue == test_5) {
-    GALGAS_string var_s = var_precedenceGraph.getter_graphviz (SOURCE_FILE ("ordered-declaration-list.galgas", 61)) ;
-    GALGAS_string var_filePath = constinArgument_inSourceFile.add_operation (GALGAS_string (".declarationDependency.dot"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 62)) ;
-    GALGAS_bool joker_3731 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_3731, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 63)) ;
+  const enumGalgasBool test_7 = test_6.boolEnum () ;
+  if (kBoolTrue == test_7) {
+    GALGAS_string var_s = var_precedenceGraph.getter_graphviz (SOURCE_FILE ("ordered-declaration-list.galgas", 71)) ;
+    GALGAS_string var_filePath = constinArgument_inSourceFile.add_operation (GALGAS_string (".declarationDependency.dot"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 72)) ;
+    GALGAS_bool joker_4055 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_4055, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 73)) ;
   }
-  outArgument_outDeclarationListAST = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("ordered-declaration-list.galgas", 66)) ;
-  const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_precedenceGraph.getter_undefinedNodeCount (SOURCE_FILE ("ordered-declaration-list.galgas", 67)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-  if (kBoolTrue == test_6) {
-    cEnumerator_lstringlist enumerator_3953 (var_precedenceGraph.getter_undefinedNodeReferenceList (SOURCE_FILE ("ordered-declaration-list.galgas", 68)), kEnumeration_up) ;
-    while (enumerator_3953.hasCurrentObject ()) {
-      GALGAS_location location_7 (enumerator_3953.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_7, enumerator_3953.current_mValue (HERE).mAttribute_string.add_operation (GALGAS_string (" is not defined"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 69))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 69)) ;
-      enumerator_3953.gotoNextObject () ;
+  outArgument_outDeclarationListAST = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("ordered-declaration-list.galgas", 76)) ;
+  const enumGalgasBool test_8 = GALGAS_bool (kIsStrictSup, var_precedenceGraph.getter_undefinedNodeCount (SOURCE_FILE ("ordered-declaration-list.galgas", 77)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  if (kBoolTrue == test_8) {
+    cEnumerator_lstringlist enumerator_4277 (var_precedenceGraph.getter_undefinedNodeReferenceList (SOURCE_FILE ("ordered-declaration-list.galgas", 78)), kEnumeration_up) ;
+    while (enumerator_4277.hasCurrentObject ()) {
+      GALGAS_location location_9 (enumerator_4277.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+      inCompiler->emitSemanticError (location_9, enumerator_4277.current_mValue (HERE).mAttribute_string.add_operation (GALGAS_string (" is not defined"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 79))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 79)) ;
+      enumerator_4277.gotoNextObject () ;
     }
-  }else if (kBoolFalse == test_6) {
+  }else if (kBoolFalse == test_8) {
     GALGAS_declarationListAST var_unsortedSemanticDeclarationListAST ;
-    GALGAS_lstringlist joker_4100 ; // Joker input parameter
-    GALGAS_lstringlist joker_4175 ; // Joker input parameter
-    var_precedenceGraph.method_topologicalSort (outArgument_outDeclarationListAST, joker_4100, var_unsortedSemanticDeclarationListAST, joker_4175, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 72)) ;
-    const enumGalgasBool test_8 = GALGAS_bool (kIsStrictSup, var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 78)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-    if (kBoolTrue == test_8) {
-      GALGAS_string var_s = GALGAS_string ("semantic analysis not performed, ").add_operation (var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 80)).getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 79)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 79)).add_operation (GALGAS_string (" declarations are involved in circular definition:"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 80)) ;
-      cEnumerator_declarationListAST enumerator_4469 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
-      while (enumerator_4469.hasCurrentObject ()) {
+    GALGAS_lstringlist joker_4424 ; // Joker input parameter
+    GALGAS_lstringlist joker_4499 ; // Joker input parameter
+    var_precedenceGraph.method_topologicalSort (outArgument_outDeclarationListAST, joker_4424, var_unsortedSemanticDeclarationListAST, joker_4499, inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 82)) ;
+    const enumGalgasBool test_10 = GALGAS_bool (kIsStrictSup, var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 88)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    if (kBoolTrue == test_10) {
+      GALGAS_string var_s = GALGAS_string ("semantic analysis not performed, ").add_operation (var_unsortedSemanticDeclarationListAST.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 90)).getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 89)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 89)).add_operation (GALGAS_string (" declarations are involved in circular definition:"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 90)) ;
+      cEnumerator_declarationListAST enumerator_4793 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
+      while (enumerator_4793.hasCurrentObject ()) {
         var_s.plusAssign_operation(GALGAS_string ("\n"
-          "-  ").add_operation (callCategoryGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclaration *) enumerator_4469.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 83)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 83)), inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 83)) ;
-        enumerator_4469.gotoNextObject () ;
+          "-  ").add_operation (callCategoryGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclaration *) enumerator_4793.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 93)), inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 93)) ;
+        enumerator_4793.gotoNextObject () ;
       }
-      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 85)) ;
-      cEnumerator_declarationListAST enumerator_4641 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
-      while (enumerator_4641.hasCurrentObject ()) {
-        inCompiler->emitSemanticError (callCategoryGetter_location ((const cPtr_abstractDeclaration *) enumerator_4641.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 87)), GALGAS_string ("the ").add_operation (callCategoryGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclaration *) enumerator_4641.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 87)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 87)).add_operation (GALGAS_string (" is declared here"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 87))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 87)) ;
-        enumerator_4641.gotoNextObject () ;
+      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 95)) ;
+      cEnumerator_declarationListAST enumerator_4965 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
+      while (enumerator_4965.hasCurrentObject ()) {
+        inCompiler->emitSemanticError (callCategoryGetter_location ((const cPtr_abstractDeclaration *) enumerator_4965.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 97)), GALGAS_string ("the ").add_operation (callCategoryGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclaration *) enumerator_4965.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 97)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 97)).add_operation (GALGAS_string (" is declared here"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 97))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 97)) ;
+        enumerator_4965.gotoNextObject () ;
       }
     }
   }
@@ -10249,9 +10265,33 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
+//--- File '/LPC-L2294.plm-target'
+
+const char * gWrapperFileContent_0_targetTemplates = "\n"
+  "pointerSize 32\n"
+  "\n"
+  "panic func : $int32 $uint32\n"
+  "\n"
+  "import \"files/registers-lpc2294.plm\"\n"
+  "//import \"files/teensy-3-1-boot.plm\"\n"
+  "//import \"files/teensy-3-1-default-isr.plm\"\n"
+  "import \"files/lpc2294-xtr.plm\"\n"
+  "//import \"files/teensy-3-1-leds.plm\"\n"
+  "//import \"files/teensy-3-1-lcd.plm\"\n"
+  "import \"files/semaphore.plm\"\n"
+  "import \"files/LPC2294-default-isr.plm\"" ;
+
+const cRegularFileWrapper gWrapperFile_0_targetTemplates (
+  "LPC-L2294.plm-target",
+  "plm-target",
+  true, // Text file
+  335, // Text length
+  gWrapperFileContent_0_targetTemplates
+) ;
+
 //--- File '/makefile.py'
 
-const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""*\n"
@@ -11165,17 +11205,17 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""*\n" ;
 
-const cRegularFileWrapper gWrapperFile_0_targetTemplates (
+const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "makefile.py",
   "py",
   true, // Text file
   39656, // Text length
-  gWrapperFileContent_0_targetTemplates
+  gWrapperFileContent_1_targetTemplates
 ) ;
 
 //--- File '/plm.py'
 
-const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_2_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -11264,7 +11304,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceList, \\\n"
   "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
   "                 asAssembler, \\\n"
-  "                 productDir, linker, linkerLibraries, objcopy, \\\n"
+  "                 productDir, linker, linkerScripts, linkerLibraries, objcopy, \\\n"
   "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget, \\\n"
   "                 CLANGcompiler, CsourceList, LLVMLinkerCompiler, \\\n"
   "                 currentFile) :\n"
@@ -11372,27 +11412,28 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    make.addRule (rule)\n"
   "    objectList.append (object)\n"
   "  #---------------------------------------------- Add linker rule\n"
-  "  productELF = productDir + \"/product.elf\"\n"
-  "  rule = makefile.Rule ([productELF], \"Linking \" + productELF)\n"
-  "  rule.mDependences += objectList\n"
-  "  rule.mCommand += linker\n"
-  "  rule.mCommand += objectList\n"
-  "  for library in linkerLibraries:\n"
-  "    rule.mCommand += [toolDirectory + \"/lib/\" + library]\n"
-  "  rule.mCommand += [\"-o\", productELF]\n"
-  "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
-  "  rule.mDependences += [\"sources/linker.ld\"]\n"
-  "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
-  "  make.addRule (rule)\n"
-  "  #--- Add objcopy rule\n"
-  "  productHEX = productDir + \"/product.ihex\"\n"
-  "  rule = makefile.Rule ([productHEX], \"Hexing \" + productHEX)\n"
-  "  rule.mDependences += [productELF]\n"
-  "  rule.mCommand += objcopy\n"
-  "  rule.mCommand += [\"-O\", \"ihex\"]\n"
-  "  rule.mCommand += [productELF]\n"
-  "  rule.mCommand += [productHEX]\n"
-  "  make.addRule (rule)\n"
+  "  for lkScript in linkerScripts:\n"
+  "    productELF = productDir + \"/product-\" + lkScript + \".elf\"\n"
+  "    rule = makefile.Rule ([productELF], \"Linking \" + productELF)\n"
+  "    rule.mDependences += objectList\n"
+  "    rule.mCommand += linker\n"
+  "    rule.mCommand += objectList\n"
+  "    for library in linkerLibraries:\n"
+  "      rule.mCommand += [toolDirectory + \"/lib/\" + library]\n"
+  "    rule.mCommand += [\"-o\", productELF]\n"
+  "    rule.mCommand += [\"-Tsources/\" + lkScript + \".ld\"]\n"
+  "    rule.mDependences += [\"sources/\" + lkScript + \".ld\"]\n"
+  "    rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
+  "    make.addRule (rule)\n"
+  "    #--- Add objcopy rule\n"
+  "    productHEX = productDir + \"/product.ihex\"\n"
+  "    rule = makefile.Rule ([productHEX], \"Hexing \" + productHEX)\n"
+  "    rule.mDependences += [productELF]\n"
+  "    rule.mCommand += objcopy\n"
+  "    rule.mCommand += [\"-O\", \"ihex\"]\n"
+  "    rule.mCommand += [productELF]\n"
+  "    rule.mCommand += [productHEX]\n"
+  "    make.addRule (rule)\n"
   "  #--- Add goals\n"
   "  make.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
   "  make.addGoal (\"all\", [productHEX], \"Building all\")\n"
@@ -11428,22 +11469,22 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  11337, // Text length
-  gWrapperFileContent_1_targetTemplates
+  11464, // Text length
+  gWrapperFileContent_2_targetTemplates
 ) ;
 
 //--- File '/teensy-3-1-tp.plm-target'
 
-const char * gWrapperFileContent_2_targetTemplates = "\n"
+const char * gWrapperFileContent_3_targetTemplates = "\n"
   "pointerSize 32\n"
   "\n"
   "panic func : $int32 $uint32\n"
   "\n"
-  "import \"files/mk20dx256.plm\"\n"
+  "import \"files/registers-mk20dx256.plm\"\n"
   "import \"files/teensy-3-1-boot.plm\"\n"
   "import \"files/teensy-3-1-default-isr.plm\"\n"
   "import \"files/teensy-3-1-xtr.plm\"\n"
@@ -11451,17 +11492,2524 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "import \"files/teensy-3-1-lcd.plm\"\n"
   "import \"files/semaphore.plm\"\n" ;
 
-const cRegularFileWrapper gWrapperFile_2_targetTemplates (
+const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "teensy-3-1-tp.plm-target",
   "plm-target",
   true, // Text file
-  284, // Text length
-  gWrapperFileContent_2_targetTemplates
+  294, // Text length
+  gWrapperFileContent_3_targetTemplates
 ) ;
 
-//--- File 'files/mk20dx256.plm'
+//--- File '/toolpath.py'
 
-const char * gWrapperFileContent_3_targetTemplates = "\n"
+const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "import os\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   Tool dir                                                                                                           *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def toolDir ():\n"
+  "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
+  "  if SYSTEM_NAME == \"Darwin\":\n"
+  "    MACHINE = \"i386\"\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.8.0-binutils-2.26-openocd-0.8.0-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_4_targetTemplates (
+  "toolpath.py",
+  "py",
+  true, // Text file
+  939, // Text length
+  gWrapperFileContent_4_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/build-verbose.py'
+
+const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"all\", \"1\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_5_targetTemplates (
+  "build-verbose.py",
+  "py",
+  true, // Text file
+  1002, // Text length
+  gWrapperFileContent_5_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/build.py'
+
+const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "import sys, os\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "sys.path.append (os.path.dirname (os.path.abspath (sys.argv [0])) + \"/sources\")\n"
+  "import plm\n"
+  "import toolpath\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def archiveBaseURL ():\n"
+  "  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   LLVM optimizer invocation                                                                                          *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def llvmOptimizerCompiler ():\n"
+  "  return [toolpath.toolDir () + \"/bin/opt\", \"-<<OPT_OPTIMIZATION_OPTION>>\", \"-disable-simplify-libcalls\", \"-S\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   LLC Compiler invocation                                                                                            *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def LLCcompiler ():\n"
+  "  return [toolpath.toolDir () + \"/bin/llc\", \"-function-sections\", \"-data-sections\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   LLVM Linker invocation                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def LLVMLinkercompiler ():\n"
+  "  return [toolpath.toolDir () + \"/bin/llvm-link\", \"-S\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   CLANG Compiler invocation                                                                                          *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CLANGcompiler ():\n"
+  "  result = [toolpath.toolDir () + \"/bin/clang\"]\n"
+  "  result.append (\"--target=armv4-none--eabi\")\n"
+  "  result.append (\"-Oz\")\n"
+  "  result.append (\"-fomit-frame-pointer\")\n"
+  "  result.append (\"-fshort-enums\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   AS assembler invocation                                                                                            *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def asAssembler ():\n"
+  "  return [toolpath.toolDir () + \"/bin/arm-eabi-as\", \"-mcpu=arm7tdmi-s\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Display object size invocation                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def displayObjectSize ():\n"
+  "  return [toolpath.toolDir () + \"/bin/arm-eabi-size\", \"-t\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Object Dump invocation                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def dumpObjectCode ():\n"
+  "  return [toolpath.toolDir () + \"/bin/arm-eabi-objdump\", \"-Sdh\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker invocation                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerInvocation ():\n"
+  "  result = [toolpath.toolDir () + \"/bin/arm-eabi-ld\"]\n"
+  "  result.append (\"-nostartfiles\")\n"
+  "  result.append (\"--fatal-warnings\")\n"
+  "  result.append (\"--warn-common\")\n"
+  "  result.append (\"--no-undefined\")\n"
+  "  result.append (\"--cref\")\n"
+  "  result.append (\"-static\")\n"
+  "  result.append (\"--gc-sections\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker scripts                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerScripts ():\n"
+  "#  result = [\"external-ram\"] # Linker script is external-ram.ld\n"
+  "  result = [\"linker\"] # Linker script is linker.ld\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker libraries                                                                                                   *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerLibraries ():\n"
+  "  result = [\"libgcc-armv4.a\"]\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   objcopy invocation                                                                                                 *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objcopy ():\n"
+  "  return [toolpath.toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   C Source files                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CsourceList ():\n"
+  "  return [\"src.c\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   LLVM Source files                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def LLVMsourceList ():\n"
+  "  return [\"src.ll\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Assembler Source files                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def assemblerSourceList ():\n"
+  "  return [\"src.s\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Product directory                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def productDir ():\n"
+  "  return \"product\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objectDir ():\n"
+  "  return \"objects\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Run executable                                                                                                      *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runExecutableOnTarget ():\n"
+  "  return [toolpath.toolDir () + \"/bin/teensy-loader-cli\", \"-w\", \"-v\", \"-mmcu=mk20dx256\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   MAIN                                                                                                               *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "currentFile = os.path.abspath (sys.argv [0])\n"
+  "plm.runMakefile (toolpath.toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \\\n"
+  "                 LLCcompiler (), llvmOptimizerCompiler (), \\\n"
+  "                 asAssembler (), productDir (), \\\n"
+  "                 linkerInvocation (), linkerScripts (), linkerLibraries (), \\\n"
+  "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \\\n"
+  "                 CLANGcompiler (), CsourceList (), LLVMLinkercompiler (), \\\n"
+  "                 currentFile)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_6_targetTemplates (
+  "build.py",
+  "py",
+  true, // Text file
+  14030, // Text length
+  gWrapperFileContent_6_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/clean.py'
+
+const char * gWrapperFileContent_7_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Directories to clean\n"
+  "dir1 = scriptDir + \"/objects\"\n"
+  "dir2 = scriptDir + \"/product\"\n"
+  "dir3 = scriptDir + \"/as\"\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2, dir3], cwd=scriptDir)\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_7_targetTemplates (
+  "clean.py",
+  "py",
+  true, // Text file
+  1264, // Text length
+  gWrapperFileContent_7_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/flash.ld'
+
+const char * gWrapperFileContent_8_targetTemplates = "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                   Memory                                                                           */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "MEMORY {\n"
+  "  flash (rx) : ORIGIN = 0, LENGTH = 248k \n"
+  "  internalRam (rwx) : ORIGIN = 0x40000000, LENGTH = 16k \n"
+  "  externalRam (rwx) : ORIGIN = 0x81000000, LENGTH = 1M \n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "__internalRam_end = 0x40000000 + 16k ;\n"
+  "__externalRam_end = 0x81000000 + 1M ;\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                ISR Vectors                                                                         */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .vectors : {\n"
+  "    __vectors_start = . ;\n"
+  "    KEEP (*(.isr_vector)) ;\n"
+  "    __vectors_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                    Code                                                                            */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .text : {\n"
+  "    FILL(0xff)\n"
+  "    __code_start = . ;\n"
+  "  /*--- Tableau des routines d'initialisation */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_start = . ;\n"
+  "    KEEP (*(init_routine_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_end = . ;\n"
+  "  /*--- Initialisation des objets globaux C++ */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_start = . ;\n"
+  "    KEEP (*(.init_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_end = . ;\n"
+  "  /*--- Real Interrupt Service Routine Array */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_start = . ;\n"
+  "    KEEP (*(real_time_isr_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_end = . ;\n"
+  "  /*--- Code */\n"
+  "    *(.text.*) ;\n"
+  "    *(.text) ;\n"
+  "    *(text) ;\n"
+  "    *(.gnu.linkonce.t.*) ;\n"
+  "  /*---- ROM data ----*/\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.gnu.linkonce.r.*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7t);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7);\n"
+  "    . = ALIGN(4);\n"
+  "    __code_end = . ;\n"
+  "  } > flash\n"
+  "\n"
+  "  /DISCARD/ : {\n"
+  "    *(rel.ARM.*);\n"
+  "    *(.ARM.*);\n"
+  "    *(.gnu.linkonce.armexidx.*);\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                          Data (initialized data)                                                                   */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .data : {\n"
+  "    FILL (0xFF)\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_start = . ;\n"
+  "    * (.data.*init*) ;\n"
+  "    * (.data*) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_end = . ;\n"
+  "  } > externalRam AT > flash\n"
+  "}\n"
+  "\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "__data_load_start = LOADADDR (.data) ;\n"
+  "__data_load_end   = LOADADDR (.data) + SIZEOF (.data) ;\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                          BSS (zero initialized data)                                                               */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .bss : {\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_start = . ;\n"
+  "    * (.bss.*) ;\n"
+  "    * (.bss) ;\n"
+  "    * (COMMON) ;\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_end = . ;\n"
+  "  } > externalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                Stacks                                                                              */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .stacks :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    . += 1k ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __irq_stack_end = . ;\n"
+  "    __svc_stack_end = . ;\n"
+  "  } > internalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .stacks :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    . += 1k ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __und_stack_end = . ;\n"
+  "  } > internalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .stacks :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    . += 512 ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __abt_stack_end = . ;\n"
+  "  } > internalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .stacks :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    . += 512 ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __fiq_stack_end = . ;\n"
+  "  } > internalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                    Heap                                                                            */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .heap : {\n"
+  "    . = ALIGN (4) ;\n"
+  "    __heap_start = . ;\n"
+  "  } > externalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "__heap_end = __externalRam_end ;\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n" ;
+
+const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+  "flash.ld",
+  "ld",
+  true, // Text file
+  7649, // Text length
+  gWrapperFileContent_8_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/linker.ld'
+
+const char * gWrapperFileContent_9_targetTemplates = "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                   Memory                                                                           */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "MEMORY {\n"
+  "  flash (rx) : ORIGIN = 0, LENGTH = 248k \n"
+  "  internalRam (rwx) : ORIGIN = 0x40000000, LENGTH = 16k \n"
+  "  externalRam (rwx) : ORIGIN = 0x81000000, LENGTH = 1M \n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "__internalRam_end = 0x40000000 + 16k ;\n"
+  "__externalRam_end = 0x81000000 + 1M ;\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                ISR Vectors                                                                         */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .vectors : {\n"
+  "    __vectors_start = . ;\n"
+  "    KEEP (*(.isr_vector)) ;\n"
+  "    __vectors_end = . ;\n"
+  "  } > internalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                    Code                                                                            */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .text : {\n"
+  "    FILL(0xff)\n"
+  "    __code_start = . ;\n"
+  "  /*--- Tableau des routines d'initialisation */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_start = . ;\n"
+  "    KEEP (*(init_routine_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_end = . ;\n"
+  "  /*--- Initialisation des objets globaux C++ */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_start = . ;\n"
+  "    KEEP (*(.init_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_end = . ;\n"
+  "  /*--- Real Interrupt Service Routine Array */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_start = . ;\n"
+  "    KEEP (*(real_time_isr_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_end = . ;\n"
+  "  /*--- Code */\n"
+  "    *(.text.*) ;\n"
+  "    *(.text) ;\n"
+  "    *(text) ;\n"
+  "    *(.gnu.linkonce.t.*) ;\n"
+  "  /*---- ROM data ----*/\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.gnu.linkonce.r.*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7t);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7);\n"
+  "    . = ALIGN(4);\n"
+  "    __code_end = . ;\n"
+  "  } > externalRam\n"
+  "\n"
+  "  /DISCARD/ : {\n"
+  "    *(rel.ARM.*);\n"
+  "    *(.ARM.*);\n"
+  "    *(.gnu.linkonce.armexidx.*);\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                          Data (initialized data)                                                                   */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .data : {\n"
+  "    FILL (0xFF)\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_start = . ;\n"
+  "    * (.data.*init*) ;\n"
+  "    * (.data*) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_end = . ;\n"
+  "  } > externalRam AT > flash\n"
+  "}\n"
+  "\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "__data_load_start = LOADADDR (.data) ;\n"
+  "__data_load_end   = LOADADDR (.data) + SIZEOF (.data) ;\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                          BSS (zero initialized data)                                                               */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .bss : {\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_start = . ;\n"
+  "    * (.bss.*) ;\n"
+  "    * (.bss) ;\n"
+  "    * (COMMON) ;\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_end = . ;\n"
+  "  } > externalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                Stacks                                                                              */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .stacks :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    . += 1k ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __irq_stack_end = . ;\n"
+  "    __svc_stack_end = . ;\n"
+  "  } > externalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .stacks :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    . += 1k ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __und_stack_end = . ;\n"
+  "  } > externalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .stacks :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    . += 512 ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __abt_stack_end = . ;\n"
+  "  } > externalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .stacks :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    . += 512 ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __fiq_stack_end = . ;\n"
+  "  } > externalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "/*                                                                                                                    */\n"
+  "/*                                    Heap                                                                            */\n"
+  "/*                                                                                                                    */\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .heap : {\n"
+  "    . = ALIGN (4) ;\n"
+  "    __heap_start = . ;\n"
+  "  } > externalRam\n"
+  "}\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n"
+  "\n"
+  "__heap_end = __externalRam_end ;\n"
+  "\n"
+  "/*--------------------------------------------------------------------------------------------------------------------*/\n" ;
+
+const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+  "linker.ld",
+  "ld",
+  true, // Text file
+  7661, // Text length
+  gWrapperFileContent_9_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/objdump.py'
+
+const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"object-dump\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+  "objdump.py",
+  "py",
+  true, // Text file
+  1005, // Text length
+  gWrapperFileContent_10_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/objsize.py'
+
+const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-object-size\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+  "objsize.py",
+  "py",
+  true, // Text file
+  1013, // Text length
+  gWrapperFileContent_11_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/run.py'
+
+const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "import subprocess, sys, time, os, socket\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   Colors                                                                                                           *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#--- Build project\n"
+  "returncode = subprocess.call ([\"python\", \"build.py\"])\n"
+  "if returncode != 0 :\n"
+  "  sys.exit (returncode)\n"
+  "#---\n"
+  "openOCD = [\n"
+  "  \"./bin/openocd\",\n"
+  "  \"-f\",\n"
+  "  \"openocd-interface/olimex-arm-usb-ocd.cfg\",\n"
+  "  \"-f\",\n"
+  "  \"openocd-board/olimex-lpc-l2294-1Mo.cfg\",\n"
+  "]\n"
+  "str = \"+\"\n"
+  "for s in openOCD :\n"
+  "  str += \" \" + s\n"
+  "print BLUE () + str + ENDC ()\n"
+  "import toolpath\n"
+  "openOCDProcess = subprocess.Popen (openOCD, cwd=toolpath.toolDir ())\n"
+  "#--- Wait for openOCD is listening on port 4444\n"
+  "time.sleep(1)\n"
+  "#print (\"openOCD pid: \", openOCDProcess.pid)\n"
+  "#--- Read script file\n"
+  "f = open (scriptDir + \"/sources/external-ram.openOCD\", 'r')\n"
+  "content = f.read ()\n"
+  "f.close ()\n"
+  "#--- \n"
+  "client = socket.socket (socket.AF_INET, socket.SOCK_STREAM)\n"
+  "ok = False\n"
+  "if openOCDProcess.poll () == None :\n"
+  "  try:\n"
+  "    client.connect (('localhost', 4444))\n"
+  "    try:\n"
+  "      client.send (content)\n"
+  "      ok = True\n"
+  "    except:\n"
+  "      print (\"Cannot send data\")\n"
+  "  except:\n"
+  "    print (\"Connection refused\")\n"
+  "#--- Wait for openOCD to exit\n"
+  "if openOCDProcess.poll () == None :\n"
+  "  openOCDProcess.wait ()\n"
+  "if openOCDProcess.returncode == 0 :\n"
+  "  print GREEN () + \"Success\" + ENDC ()\n"
+  "else:\n"
+  "  print RED () + \"Error\" + ENDC ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+  "run.py",
+  "py",
+  true, // Text file
+  2587, // Text length
+  gWrapperFileContent_12_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/section-dispatcher-entry.s'
+
+const char * gWrapperFileContent_13_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
+
+const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+  "section-dispatcher-entry.s",
+  "s",
+  true, // Text file
+  25, // Text length
+  gWrapperFileContent_13_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/section-dispatcher-header.s'
+
+const char * gWrapperFileContent_14_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S E C T I O N   T A B L E                                                                            *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "__und_dispatcher_table:\n" ;
+
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+  "section-dispatcher-header.s",
+  "s",
+  true, // Text file
+  630, // Text length
+  gWrapperFileContent_14_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/section-entry.s'
+
+const char * gWrapperFileContent_15_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@  Section !ENTRY!\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "\t.section\t\".text.!ENTRY!\",\"ax\",%progbits\n"
+  "\t.globl\t!ENTRY!\n"
+  "\t.align\t1\n"
+  "\t.type\t!ENTRY!,%function\n"
+  "\t.code\t32\n"
+  "\n"
+  "!ENTRY!:\n"
+  "\t.fnstart\n"
+  "  .word  UNDEFINED_INSTRUCTION + (!IDX! << 8)\n"
+  "  bx  lr\n"
+  "\n"
+  ".Lfunc_end_!ENTRY!:\n"
+  "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
+  "  .cantunwind\n"
+  "\t.fnend\n"
+  "\n"
+  "  .global !ENTRY!\n"
+  "  .type !ENTRY!, %function\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+  "section-entry.s",
+  "s",
+  true, // Text file
+  575, // Text length
+  gWrapperFileContent_15_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/service-dispatcher-entry.s'
+
+const char * gWrapperFileContent_16_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
+
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+  "service-dispatcher-entry.s",
+  "s",
+  true, // Text file
+  25, // Text length
+  gWrapperFileContent_16_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/service-dispatcher-header.s'
+
+const char * gWrapperFileContent_17_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "__swi_dispatcher_table:\n" ;
+
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+  "service-dispatcher-header.s",
+  "s",
+  true, // Text file
+  630, // Text length
+  gWrapperFileContent_17_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/service-entry.s'
+
+const char * gWrapperFileContent_18_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@  Service !ENTRY!\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "\t.section\t\".text.!ENTRY!\",\"ax\",%progbits\n"
+  "\t.globl\t!ENTRY!\n"
+  "\t.align\t1\n"
+  "\t.type\t!ENTRY!,%function\n"
+  "\t.code\t32\n"
+  "\n"
+  "!ENTRY!:\n"
+  "\t.fnstart\n"
+  "  swi #!IDX!\n"
+  "  bx  lr\n"
+  "\n"
+  ".Lfunc_end_!ENTRY!:\n"
+  "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
+  "  .cantunwind\n"
+  "\t.fnend\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+  "service-entry.s",
+  "s",
+  true, // Text file
+  496, // Text length
+  gWrapperFileContent_18_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/target-panic.ll'
+
+const char * gWrapperFileContent_19_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "define internal void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %inSourceFile) nounwind noreturn naked {\n"
+  ";--- Mask interrupt: write 1 into FAULTMASK register\n"
+  "  call void asm sideeffect \"msr FAULTMASK, $0\", \"r\"(i32 1) nounwind\n"
+  ";--- Goto user code\n"
+  "  call void @raise_panic_internal (i32 %inSourceLine, i32 %inCode, i8* %inSourceFile)\n"
+  "  unreachable\n"
+  "}\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+  "target-panic.ll",
+  "ll",
+  true, // Text file
+  478, // Text length
+  gWrapperFileContent_19_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/target.c'
+
+const char * gWrapperFileContent_20_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#define TASK_COUNT (!TASKCOUNT!)\n"
+  "#define GUARD_COUNT (!GUARDCOUNT!)\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef unsigned TaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct { unsigned mGuardValue ; } GuardList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef unsigned char bool ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "// GUARD_EVALUATING_OR_OUTSIDE should be the first constant\n"
+  "typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//                                                                                                                     *\n"
+  "//   T A S K    R O U T I N E    T Y P E                                                                               *\n"
+  "//                                                                                                                     *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef void (* RoutineTaskType) (void) ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static unsigned countTrainingZeros (const unsigned inValue) {\n"
+  "  unsigned result = 0 ;\n"
+  "  unsigned w = inValue ;\n"
+  "  while ((w & 1) == 0) {\n"
+  "    result ++ ;\n"
+  "    w >>= 1 ;\n"
+  "  }\n"
+  "  return result ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//                                                                                                                     *\n"
+  "//   T A S K    C O N T E X T                                                                                          *\n"
+  "//                                                                                                                     *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//                                           *---------------------* +68\n"
+  "//                                           | PC_USR              | +64 [16]\n"
+  "//                                           | R12                 | +60 [15]\n"
+  "//                                           | R11                 | +56 [14]\n"
+  "//                                           | R10                 | +52 [13]\n"
+  "//                                           | R9                  | +48 [12]\n"
+  "//                                           | R8                  | +44 [11]\n"
+  "//                                           | R7                  | +40 [10]\n"
+  "//                                           | R6                  | +36 [ 9]\n"
+  "//                                           | R5                  | +32 [ 8]\n"
+  "//                                           | R4                  | +28 [ 7]\n"
+  "//                                           | R3                  | +24 [ 6]\n"
+  "//                                           | R2                  | +20 [ 5]\n"
+  "//                                           | R1                  | +16 [ 4]\n"
+  "//                                           | R0                  | +12 [ 3]\n"
+  "//                                           | LR_USR              | + 8 [ 2]\n"
+  "// *--------------------------------*        | SP_USR              | + 4 [ 1]\n"
+  "// |                                +------> | CPSR                | + 0 [ 0]\n"
+  "// *--------------------------------*        *---------------------*\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct {\n"
+  "  unsigned mCPSR ;\n"
+  "  unsigned mSP_USR ;\n"
+  "  unsigned mLR_USR ;\n"
+  "  unsigned mR0 ;\n"
+  "  unsigned mR1 ;\n"
+  "  unsigned mR2 ;\n"
+  "  unsigned mR3 ;\n"
+  "  unsigned mR4 ;\n"
+  "  unsigned mR5 ;\n"
+  "  unsigned mR6 ;\n"
+  "  unsigned mR7 ;\n"
+  "  unsigned mR8 ;\n"
+  "  unsigned mR9 ;\n"
+  "  unsigned mR10 ;\n"
+  "  unsigned mR11 ;\n"
+  "  unsigned mR12 ;\n"
+  "  unsigned mPC_USR ;\n"
+  "} TaskContext ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_set_task_context (TaskContext * inTaskContext,\n"
+  "                                     const unsigned inTopOfStack,\n"
+  "                                     RoutineTaskType inTaskRoutine) {\n"
+  "// --- Initialize LR\n"
+  "//   inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ;\n"
+  "// --- Initialize SP\n"
+  "//   StackedRegisters * ptr = (StackedRegisters *) (inTopOfStack - sizeof (StackedRegisters)) ; // 8 stacked registers\n"
+  "//   inTaskContext->mSP_USR = ptr ;\n"
+  "// --- Initialize PC\n"
+  "//   ptr->mPC = (unsigned) inTaskRoutine ;\n"
+  "// --- Initialize CPSR\n"
+  "//   ptr->mXPSR = 1 << 24 ;\n"
+  "\n"
+  "\n"
+  "//--- Initialize PC\n"
+  "  inTaskContext->mPC_USR = (unsigned) inTaskRoutine ;\n"
+  "//--- Initialize SP\n"
+  "  inTaskContext->mSP_USR = inTopOfStack ;\n"
+  "//--- Initialize CPSR\n"
+  "  inTaskContext->mCPSR = 0x10 ; // ARM USER MODE, IRQ and FIRQ interrupts enabled\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_set_return_code (TaskContext * inTaskContext, const unsigned inReturnCode) {\n"
+  "  inTaskContext->mR0 = inReturnCode ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   T A S K    C O N T R O L    B L O C K                                                                             *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct {\n"
+  "//--- Context buffer (SHOULD BE THE FIRST FIELD)\n"
+  "  TaskContext mTaskContext ;\n"
+  "//--- This field is used for deadline waiting\n"
+  "  unsigned mTaskDeadline ;\n"
+  "//---\n"
+  "  TaskList * mWaitingList ;\n"
+  "//--- Stack buffer parameters\n"
+  "//  unsigned * mStackBufferAddress ;\n"
+  "//  unsigned mStackBufferSize ; // In bytes\n"
+  "//--- Task index\n"
+  "  unsigned char mTaskIndex ;\n"
+  "//--- Guards\n"
+  "  GuardState mGuardState ;\n"
+  "  unsigned short mGuardCount ;\n"
+  "  GuardList * mGuardListArray [GUARD_COUNT] ;\n"
+  "} TaskControlBlock ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static TaskControlBlock gTaskDescriptorArray [TASK_COUNT] ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   S C H E D U L E R                                                                                                 *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "TaskControlBlock * gRunningTaskControlBlock ; // Shared with assembly code (arm_context.s)\n"
+  "static TaskList gReadyTaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_makeTaskReady (const unsigned inTaskIndex) {\n"
+  "  gReadyTaskList |= 1 << inTaskIndex ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void kernel_makeNoTaskRunning (void) {\n"
+  "  gRunningTaskControlBlock = (TaskControlBlock *) 0 ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_selectTaskToRun (void) ;\n"
+  "\n"
+  "void kernel_selectTaskToRun (void) {\n"
+  "  if (gRunningTaskControlBlock != ((TaskControlBlock *) 0)) {\n"
+  "    gReadyTaskList |= 1 << gRunningTaskControlBlock->mTaskIndex ;\n"
+  "    gRunningTaskControlBlock = (TaskControlBlock *) 0 ;\n"
+  "  }\n"
+  "  if (gReadyTaskList != 0) {\n"
+  "    const unsigned runningTaskIndex = countTrainingZeros (gReadyTaskList) ;\n"
+  "    gReadyTaskList &= ~ (1 << runningTaskIndex) ;\n"
+  "    gRunningTaskControlBlock = & gTaskDescriptorArray [runningTaskIndex] ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   kernel_create_task                                                                                                *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_create_task (const unsigned inTaskIndex,\n"
+  "                         unsigned * inStackBufferAddress,\n"
+  "                         unsigned inStackBufferSize,\n"
+  "                         RoutineTaskType inTaskRoutine) ;\n"
+  "\n"
+  "void kernel_create_task (const unsigned inTaskIndex,\n"
+  "                         unsigned * inStackBufferAddress,\n"
+  "                         unsigned inStackBufferSize,\n"
+  "                         RoutineTaskType inTaskRoutine) {\n"
+  "  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
+  "  taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;\n"
+  "  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // statically initialized to 0\n"
+  "  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0\n"
+  "  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0\n"
+  "//--- Store stack parameters\n"
+  "//  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;\n"
+  "//  taskControlBlockPtr->mStackBufferSize = inStackBufferSize ;\n"
+  "//--- Stack Pointer initial value\n"
+  "  const unsigned topOfStack = ((unsigned) inStackBufferAddress) + inStackBufferSize ;\n"
+  "//--- Initialize Context\n"
+  "  kernel_set_task_context (& taskControlBlockPtr->mTaskContext, topOfStack, inTaskRoutine) ;\n"
+  "//--- Make task ready\n"
+  "  kernel_makeTaskReady (inTaskIndex) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   L I S T    M A N A G E M E N T                                                                                    *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static TaskList gDeadlineWaitingTaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  B L O C K I N G    R U N N I N G    T A S K                                                                        *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void blockInList (TaskList * ioWaitingList) asm (\"!FUNC!.blockInList\") ;\n"
+  "\n"
+  "void blockInList (TaskList * ioWaitingList) {\n"
+  "  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
+  "//--- Insert in tool list\n"
+  "  *ioWaitingList |= 1 << currentTaskIndex ;\n"
+  "  gRunningTaskControlBlock->mWaitingList = ioWaitingList ;\n"
+  "//--- Block task\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void blockOnDeadline (const unsigned inDeadline) asm (\"!FUNC!.blockOnDeadline\") ;\n"
+  "\n"
+  "void blockOnDeadline (const unsigned inDeadline) {\n"
+  "  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
+  "//--- Insert in deadline list\n"
+  "  gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;\n"
+  "  gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) asm (\"!FUNC!.blockInListAndOnDeadline\") ;\n"
+  "\n"
+  "void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) {\n"
+  "  const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
+  "//--- Insert in tool list\n"
+  "  *ioWaitingList |= 1 << currentTaskIndex ;\n"
+  "  gRunningTaskControlBlock->mWaitingList = ioWaitingList ;\n"
+  "//--- Insert in deadline list\n"
+  "  gDeadlineWaitingTaskList |= 1 << currentTaskIndex ;\n"
+  "  gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
+  "//--- Block task\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "unsigned char makeTaskReady (TaskList * ioWaitingList) asm (\"!FUNC!.makeTaskReady\") ;\n"
+  "\n"
+  "unsigned char makeTaskReady (TaskList * ioWaitingList) {\n"
+  "  unsigned char found = (* ioWaitingList) != 0 ;\n"
+  "  if (found) {\n"
+  "  //--- Get index of waiting task\n"
+  "    const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;\n"
+  "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
+  "  //--- Remove task from deadline list\n"
+  "    gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;\n"
+  "  //--- Remove task from waiting list\n"
+  "    *(ioWaitingList) &= ~ (1 << taskIndex) ;\n"
+  "  //--- Clear task waiting list pointer\n"
+  "    taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;\n"
+  "  //--- Set return code and make task ready\n"
+  "    kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
+  "    kernel_makeTaskReady (taskIndex) ;\n"
+  "  }\n"
+  "  return found ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate)\n"
+  "asm (\"!FUNC!.makeTasksReadyFromCurrentDate\") ;\n"
+  "\n"
+  "void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {\n"
+  "  unsigned w = gDeadlineWaitingTaskList ;\n"
+  "  while (w > 0) {\n"
+  "    const unsigned taskIndex = countTrainingZeros (w) ;\n"
+  "    w &= ~ (1 << taskIndex) ;\n"
+  "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
+  "    if (inCurrentDate >= taskControlBlockPtr->mTaskDeadline) {\n"
+  "    //--- Remove task from deadline list\n"
+  "      gDeadlineWaitingTaskList &= ~ (1 << taskIndex) ;\n"
+  "    //--- Remove task for waiting list \?\n"
+  "      if (taskControlBlockPtr->mWaitingList != (TaskList *) 0) {\n"
+  "        *(taskControlBlockPtr->mWaitingList) &= ~ (1 << taskIndex) ;\n"
+  "        taskControlBlockPtr->mWaitingList = (TaskList *) 0 ;\n"
+  "      }\n"
+  "    //--- Set return code and make task ready\n"
+  "      kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 0) ;\n"
+  "      kernel_makeTaskReady (taskIndex) ;\n"
+  "    }\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//  G U A R D S                                                                                                        *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static TaskList gDeadlineWaitingInGuardTaskList ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void removeTaskFromGuards (TaskControlBlock * taskControlBlockPtr) {\n"
+  "  const unsigned mask = ~ (1 << taskControlBlockPtr->mTaskIndex) ;\n"
+  "  const unsigned guardCount = taskControlBlockPtr->mGuardCount ;\n"
+  "  for (unsigned i=0 ; i<guardCount ; i++) {\n"
+  "    taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;\n"
+  "  }\n"
+  "  gDeadlineWaitingInGuardTaskList &= ~ mask ;\n"
+  "  taskControlBlockPtr->mGuardCount = 0 ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void noteGuardHasBeenAccepted (void) asm (\"noteGuardHasBeenAccepted\") ;\n"
+  "\n"
+  "void noteGuardHasBeenAccepted (void) {\n"
+  "  gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "  removeTaskFromGuards (gRunningTaskControlBlock) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_handleGuardedCommand (GuardList * ioGuardList) asm (\"!FUNC!.handleGuardedCommand\") ;\n"
+  "\n"
+  "void kernel_handleGuardedCommand (GuardList * ioGuardList) {\n"
+  "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
+  "    ioGuardList->mGuardValue |= 1 << runningTaskIndex ;\n"
+  "    const unsigned guardCount = gRunningTaskControlBlock->mGuardCount ;\n"
+  "    gRunningTaskControlBlock->mGuardListArray [guardCount] = ioGuardList ;\n"
+  "    gRunningTaskControlBlock->mGuardCount = guardCount + 1 ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void handleGuardedWaitUntil (const unsigned inDeadline) asm (\"!FUNC!.handleGuardedWaitUntil\") ;\n"
+  "\n"
+  "void handleGuardedWaitUntil (const unsigned inDeadline) {\n"
+  "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
+  "    const unsigned mask = 1 << runningTaskIndex ;\n"
+  "    if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {\n"
+  "      gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
+  "    }\n"
+  "    gDeadlineWaitingInGuardTaskList |= mask ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_guardDidChange (GuardList * ioGuardList) asm (\"!FUNC!.guardDidChange\") ;\n"
+  "\n"
+  "void kernel_guardDidChange (GuardList * ioGuardList) {\n"
+  "  while (ioGuardList->mGuardValue > 0) {\n"
+  "    const unsigned taskIndex = countTrainingZeros (ioGuardList->mGuardValue) ;\n"
+  "    ioGuardList->mGuardValue &= ~ (1 << taskIndex) ;\n"
+  "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
+  "    removeTaskFromGuards (taskControlBlockPtr) ;    \n"
+  "    if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
+  "      kernel_makeTaskReady (taskIndex) ;\n"
+  "      taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "    }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "      taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
+  "    }\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void waitForGuardChange (void) asm (\"service.call.waitForGuardChange\") ;\n"
+  "\n"
+  "void kernel_waitForGuardChange (void) asm (\"service.implementation.waitForGuardChange\") ;\n"
+  "\n"
+  "void kernel_waitForGuardChange (void) {\n"
+  "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "    gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
+  "    kernel_makeNoTaskRunning () ;\n"
+  "  }else{\n"
+  "    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void tickHandlerForGuardedWaitUntil (const unsigned inUptime) asm (\"!FUNC!.tickHandlerForGuardedWaitUntil\") ;\n"
+  "\n"
+  "void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {\n"
+  "  unsigned w = gDeadlineWaitingInGuardTaskList ;\n"
+  "  while (w > 0) {\n"
+  "    const unsigned taskIndex = countTrainingZeros (w) ;\n"
+  "    w &= ~ (1 << taskIndex) ;\n"
+  "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
+  "    if (inUptime >= taskControlBlockPtr->mTaskDeadline) {\n"
+  "      removeTaskFromGuards (taskControlBlockPtr) ;\n"
+  "      if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
+  "        kernel_makeTaskReady (taskIndex) ;\n"
+  "        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "      }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "        taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
+  "      }\n"
+  "    }\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+  "target.c",
+  "c",
+  true, // Text file
+  19996, // Text length
+  gWrapperFileContent_20_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/target.ll'
+
+const char * gWrapperFileContent_21_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+  "target triple = \"armv4-none--eabi\"\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";   Clear BSS                                                                                                          *\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";void clearBSS (void) {\n"
+  ";  extern unsigned __bss_start ;\n"
+  ";  extern unsigned __bss_end ;\n"
+  ";  unsigned * p = & __bss_start ;\n"
+  ";  while (p != & __bss_end) {\n"
+  ";    * p = 0 ;\n"
+  ";    p ++ ;\n"
+  ";  }\n"
+  ";}\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "@__bss_start = external global [0 x i32]\n"
+  "@__bss_end = external global [0 x i32]\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "define internal void @clearBSS () nounwind minsize optsize {\n"
+  "entry:\n"
+  "  %startPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_start, i32 0, i32 0\n"
+  "  %endPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_end, i32 0, i32 0\n"
+  "  br label %bssLoopTest\n"
+  " \n"
+  "bssLoopTest:\n"
+  "  %p = phi i32* [%startPtr, %entry], [%p.next, %bssLoop]\n"
+  "  %completed = icmp eq i32* %p, %endPtr\n"
+  "  br i1 %completed, label %clearCompleted, label %bssLoop\n"
+  " \n"
+  "bssLoop:\n"
+  "  store i32 0, i32* %p, align 4\n"
+  "  %p.next = getelementptr inbounds i32, i32* %p, i32 1\n"
+  "  br label %bssLoopTest\n"
+  " \n"
+  "clearCompleted:\n"
+  "  ret void\n"
+  "}\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";   Copy .data section                                                                                                 *\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";void copyData (void) {\n"
+  ";  extern unsigned __data_start ;\n"
+  ";  extern unsigned __data_end ;\n"
+  ";  extern unsigned __data_load_start ;\n"
+  ";  unsigned * pSrc = & __data_load_start ;\n"
+  ";  unsigned * pDest = & __data_start ;\n"
+  ";  while (pDest != & __data_end) {\n"
+  ";    * pDest = * pSrc ;\n"
+  ";    pDest ++ ;\n"
+  ";    pSrc ++ ;\n"
+  ";  }\n"
+  ";}\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "@__data_start = external global [0 x i32]\n"
+  "@__data_end = external global [0 x i32]\n"
+  "@__data_load_start = external global [0 x i32]\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "define internal void @copyData () nounwind minsize optsize {\n"
+  "entry:\n"
+  "  %data_start = getelementptr  [0 x i32], [0 x i32]* @__data_start, i32 0, i32 0\n"
+  "  %data_end = getelementptr  [0 x i32], [0 x i32]* @__data_end, i32 0, i32 0\n"
+  "  %data_load_start = getelementptr  [0 x i32], [0 x i32]* @__data_load_start, i32 0, i32 0\n"
+  "  br label %copyLoop.test\n"
+  " \n"
+  "copyLoop.test:\n"
+  "  %pDest = phi i32* [%data_start, %entry], [%pDestInct, %copyLoop]\n"
+  "  %pSource = phi i32* [%data_load_start, %entry], [%pSourceInc, %copyLoop]\n"
+  "  %equal = icmp eq i32* %pDest, %data_end\n"
+  "  br i1 %equal, label %copyCompleted, label %copyLoop\n"
+  " \n"
+  "copyLoop:\n"
+  "  %value = load i32, i32* %pSource\n"
+  "  store i32 %value, i32* %pDest, align 4\n"
+  "  %pDestInct = getelementptr inbounds i32, i32* %pDest, i32 1\n"
+  "  %pSourceInc = getelementptr inbounds i32, i32* %pSource, i32 1\n"
+  "  br label %copyLoop.test\n"
+  "\n"
+  "copyCompleted:\n"
+  "  ret void\n"
+  "}\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";   configuration.on.boot                                                                                              *\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "define void @configuration.on.boot () nounwind minsize optsize {\n"
+  "  call void @boot ()\n"
+  "  call void @clearBSS ()\n"
+  "  call void @copyData ()\n"
+  "  call void @init ()\n"
+  "  call void @start.tasks ()\n"
+  "  ret  void\n"
+  "}\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  ";   Real time Kernel interface                                                                                         *\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  ";--- Create task \n"
+  "declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n" ;
+
+const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+  "target.ll",
+  "ll",
+  true, // Text file
+  4548, // Text length
+  gWrapperFileContent_21_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/target.s'
+
+const char * gWrapperFileContent_22_targetTemplates = "  .code 32\n"
+  "\t.text\n"
+  "\t.syntax unified\n"
+  "\t.cpu\tarm7tdmi-s\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@       A C T I V I T Y    L E D    M A N A G E M E N T                                                                *\n"
+  "@                                                                                                                      *\n"
+  "@  This file provides macros for managing activity led.                                                                *\n"
+  "@  It is included by sources/xtr/arm-context.s file.                                                                   *\n"
+  "@  On the LPC-L2294 card, we use 'STAT' led (formely P1.23):                                                           *\n"
+  "@    P1.23 low: led on;                                                                                                *\n"
+  "@    P1.23 high: led off.                                                                                              *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  IO0CLR      = 0xE002800C\n"
+  "  IO0SET      = 0xE0028004\n"
+  "  IO1CLR      = 0xE002801C\n"
+  "  IO1SET      = 0xE0028014\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@       A C T I V I T Y    L E D    O N                                                                                *\n"
+  "@                                                                                                                      *\n"
+  "@  When this macro is used, we can only use R6 and R7 registers.                                                       *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .macro ACTIVITY_LED_ON\n"
+  "@    ldr   r7, =IO1CLR\n"
+  "@    mov   r6, #(1 << 23)\n"
+  "@    str   r6, [r7]\n"
+  "  .endm\n"
+  "  \n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@       A C T I V I T Y    L E D    O F F                                                                              *\n"
+  "@                                                                                                                      *\n"
+  "@  When this macro is used, we can only use R6 and R7 registers.                                                       *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .macro ACTIVITY_LED_OFF\n"
+  "@    ldr   r7, =IO1SET\n"
+  "@    mov   r6, #(1 << 23)\n"
+  "@    str   r6, [r7]\n"
+  "  .endm\n"
+  "  \n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 R E S E T    H A N D L E R                                                                           *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "@--- Modes defined status Register\n"
+  "   ARM_MODE_USER  = 0x10      @ Normal User Mode\n"
+  "   ARM_MODE_FIQ   = 0x11      @ FIQ Interrupt Mode\n"
+  "   ARM_MODE_IRQ   = 0x12      @ IRQ Interrupt Mode\n"
+  "   ARM_MODE_SVC   = 0x13      @ SWI Interrupt Mode\n"
+  "   ARM_MODE_ABORT = 0x17      @ Abort Processing memory Fault Mode\n"
+  "   ARM_MODE_UNDEF = 0x1B      @ Undefined Instruction Mode\n"
+  "   \n"
+  "@--- Interrupt masks for status Register\n"
+  "   I_BIT          = 0x80      @ IRQ (IRQ is disabled when I bit is set)\n"
+  "   F_BIT          = 0x40      @ FIQ (FIQ is disabled when F bit is set)\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@               Vector table and reset entry                                                                           *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "   .section .isr_vector, \"ax\"\n"
+  "\n"
+  "   ldr pc, ResetAddr    @ Reset\n"
+  "   ldr pc, UndefAddr    @ Undefined instruction\n"
+  "   ldr pc, SWIAddr      @ Software interrupt\n"
+  "   ldr pc, PAbortAddr   @ Prefetch abort\n"
+  "   ldr pc, DAbortAddr   @ Data abort\n"
+  "   .word   0xb8a06f60   @ Checksum\n"
+  "   ldr pc, IRQAddr      @ IRQ interrupt\n"
+  "   ldr pc, FIQAddr      @ FIQ interrupt\n"
+  "ResetAddr:     .word ResetHandler\n"
+  "UndefAddr:     .word UndefHandler\n"
+  "SWIAddr:       .word SWIHandler\n"
+  "PAbortAddr:    .word !FUNC!PAbortHandler\n"
+  "DAbortAddr:    .word !FUNC!DAbortHandler\n"
+  "IRQAddr:       .word IRQHandler\n"
+  "FIQAddr:       .word !FUNC!FIQHandler\n"
+  "               .word 0xFFFFFFFF @ pad word to get 64 bytes in isr_vector section\n"
+  "   \n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                           Reset handler                                                                              *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "   .section .init, \"ax\"\n"
+  "   .global ResetHandler\n"
+  "\n"
+  "ResetHandler:\n"
+  "@-------------------------- Setup a stack and  status register for each mode\n"
+  "   msr   CPSR_c, #ARM_MODE_UNDEF | I_BIT | F_BIT  @ Undefined Instruction Mode     \n"
+  "   ldr   sp, =__und_stack_end\n"
+  "   \n"
+  "   msr   CPSR_c, #ARM_MODE_ABORT | I_BIT | F_BIT  @ Abort Mode\n"
+  "   ldr   sp, =__abt_stack_end\n"
+  "   \n"
+  "   msr   CPSR_c, #ARM_MODE_FIQ | I_BIT | F_BIT @ FIQ Mode\n"
+  "   ldr   sp, =__fiq_stack_end\n"
+  "   \n"
+  "   msr   CPSR_c, #ARM_MODE_IRQ | I_BIT | F_BIT  @ IRQ Mode\n"
+  "   ldr   sp, =__irq_stack_end\n"
+  "   \n"
+  "   msr   CPSR_c, #ARM_MODE_SVC | I_BIT | F_BIT @ Supervisor Mode\n"
+  "   ldr   sp, =__svc_stack_end\n"
+  "\n"
+  "@---------------------------------------- Initialize system (boot, init)\n"
+  "   bl    configuration.on.boot\n"
+  "\n"
+  "@---------------------------------------- Call entry point\n"
+  "   b    __entry_point\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@              A R M 4    C O N T E X T                                                                                *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@ ARM4 task context is stored is an 17 * 4 byte buffer.                                                                *\n"
+  "@                                                                                                                      *\n"
+  "@ The gRunningTaskControlBlock shared variable points to the buffer associated to the current task.                    *\n"
+  "@                                                                                                                      *\n"
+  "@                                                                      offset                                          *\n"
+  "@                                              *---------------------*                                                 *\n"
+  "@                                              | PC_USR              | +64                                             *\n"
+  "@                                              | R12                 | +60                                             *\n"
+  "@                                              | R11                 | +56                                             *\n"
+  "@                                              | R10                 | +52                                             *\n"
+  "@                                              | R9                  | +48                                             *\n"
+  "@                                              | R8                  | +44                                             *\n"
+  "@                                              | R7                  | +40                                             *\n"
+  "@                                              | R6                  | +36                                             *\n"
+  "@                                              | R5                  | +32                                             *\n"
+  "@                                              | R4                  | +28                                             *\n"
+  "@                                              | R3                  | +24                                             *\n"
+  "@                                              | R2                  | +20                                             *\n"
+  "@                                              | R1                  | +16                                             *\n"
+  "@                                              | R0                  | +12                                             *\n"
+  "@                                              | LR_USR              | + 8                                             *\n"
+  "@    *--------------------------------*        | SP_USR              | + 4                                             *\n"
+  "@    | gRunningTaskControlBlock       +------> | CPSR                | + 0                                             *\n"
+  "@    *--------------------------------*        *---------------------*                                                 *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@        A R M    A B I                                                                                                *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@    From document ARM IHI 0042C, current through ABI release 2.07                                                     *\n"
+  "@                                                                                                                      *\n"
+  "@ The first four registers r0-r3 are used to pass argument values into a subroutine and to return a result value from  *\n"
+  "@ a function. They may also be used to hold intermediate values within a routine (but, in general, only between        *\n"
+  "@ subroutine calls).                                                                                                   *\n"
+  "@                                                                                                                      *\n"
+  "@ A subroutine must preserve the contents of the registers r4-r8, r10, r11 and SP (and r9 in PCS variants that         *\n"
+  "@ designate r9 as v6).                                                                                                 *\n"
+  "@                                                                                                                      *\n"
+  "@ So we can freely use r9 in SWI handler \? No, we preserve r4-r11                                                      *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@        S W I    H A N D L E R                                                                                        *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global SWIHandler\n"
+  "\n"
+  "SWIHandler:\n"
+  "@ Here :\n"
+  "@  - lr points to the next instruction after the SWI instruction\n"
+  "@  - the user sp can be retrieved into reg register using mrs reg, spsr\n"
+  "@  - do not modify r0-r3, they contain actual parameters\n"
+  "@-------------------------- Save working registers\n"
+  "  stmfd sp!, {r6-r8, lr}\n"
+  "@-------------------------- Led On (uses only r6 and r7)\n"
+  "  ACTIVITY_LED_ON @ macro defined in activity_led_management.s file\n"
+  "@--------------------------- Get SWI Immediat value\n"
+  "@   LDRH loads a halfword from memory and zero-extends it to a 32-bit word.\n"
+  "  ldrh  r6, [lr, #-4] @ Get 16 last bits of swi instruction\n"
+  "@--------------------------- r8 <- address of sys_xxx routine to call\n"
+  "  ldr   r8, =__swi_dispatcher_table\n"
+  "  ldr   r8, [r8, r6, LSL #2]\n"
+  "@--------------------------- R6 <- address of gRunningTaskControlBlock variable\n"
+  "  ldr   r6, =gRunningTaskControlBlock\n"
+  "@--------------------------- Save context pointer of current running task in R7\n"
+  "  ldr   r7, [r6]\n"
+  "@--------------------------- Call sys_xxx routine\n"
+  "  mov   lr, pc\n"
+  "  bx    r8\n"
+  "@--------------------------- Save 32-bit return value in R8\n"
+  "  mov   r8, r0\n"
+  "@--------------------------- Select Running Task\n"
+  "  bl    kernel_selectTaskToRun\n"
+  "@--------------------------- Restore return value from r8\n"
+  "  mov   r0, r8\n"
+  "@--------------------------- R2 <- address of new running task context\n"
+  "@  R7: context of running task on SWI call\n"
+  "@  R6: 'gRunningTaskControlBlock' address\n"
+  "  ldr   r2, [r6] @ R2 <- address of new running task context\n"
+  "  mov   r3, r7 @ R3: context of running task on SWI call\n"
+  "@--------------------------- Restore task registers\n"
+  "  ldmfd sp!, {r6-r8, lr}\n"
+  "@--------------------------- Context Switch\n"
+  "  teq    r2, r3 @ Compare R2 (new task), with R3 (calling task)\n"
+  "  moveqs pc, lr @ Return from interrupt if no context swith\n"
+  "@--------------------------- Perform the context switch\n"
+  "@----------- First save context of calling task\n"
+  "@--- If sp is NULL, there is no context to save\n"
+  "  movs  r3, r3\n"
+  "  beq   __restore_context_of_running_task\n"
+  "@--- Save registers R0, ..., R12, LR of calling task\n"
+  "  add   r3, r3, #12 @ Make room for sp_usr, lr_usr and cpsr_usr\n"
+  "  stmia r3, {r0-r12, lr}\n"
+  "@--- cpsr_usr -> R8\n"
+  "  mrs   r8, spsr\n"
+  "@--- Save sp_usr (R8)\n"
+  "  str   r8, [r3, #-12]\n"
+  "@--- Store sp_usr, lr_usr\n"
+  "  sub   r3, r3, #8 @ Restore original value of R8\n"
+  "  stmia r3, {r13, r14}^\n"
+  "@---------------------------------- Restore context of the new running task\n"
+  "__restore_context_of_running_task:\n"
+  "  movs  r2, r2\n"
+  "  beq   __no_context_to_restore\n"
+  "@--- Restore cpsr_usr from R8\n"
+  "  ldr   r8, [r2]\n"
+  "  msr   spsr, r8\n"
+  "@--- Restore sp_usr, lr_usr\n"
+  "  add   r2, r2, #4\n"
+  "  ldmia r2, {r13, r14}^\n"
+  "@--- Restore registers R0, ..., R12, and PC\n"
+  "@    (^ and pc using perform here return from interrupt)\n"
+  "  add   r2, r2, #8\n"
+  "  ldmia r2, {r0-r12, pc}^\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "__no_context_to_restore:\n"
+  "@--- Led Off (uses only r6 and r7)\n"
+  "  ACTIVITY_LED_OFF @ macro defined in activity_led_management.s file\n"
+  "@--- Set User Mode, interrupts enabled\n"
+  "  msr   CPSR_c, #ARM_MODE_USER\n"
+  "@--- Wait for interrupt\n"
+  "__wait_interrupt:\n"
+  "  b     __wait_interrupt\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@        C O N T R O L   R E G I S T E R                                                                               *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  VICVectAddr = 0xFFFFF030\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@        I R Q    H A N D L E R                                                                                        *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global IRQHandler\n"
+  "  .global __entry_point\n"
+  "  .type __entry_point, %function\n"
+  "  .global kernel_selectTaskToRun\n"
+  "  .type kernel_selectTaskToRun, %function\n"
+  "\n"
+  "IRQHandler:\n"
+  "@--------------------------- Adjust return address\n"
+  "  sub   r14, r14, #4\n"
+  "@--------------------------- Save r0 on IRQ stack\n"
+  "  stmfd sp!, {r0}\n"
+  "@--------------------------- Context save\n"
+  "@--- R0 <- Address of current task context save\n"
+  "  ldr   r0, =gRunningTaskControlBlock\n"
+  "  ldr   r0, [r0]\n"
+  "@--- If r0 is NULL, there is no context to save\n"
+  "  movs  r0, r0\n"
+  "  beq   __no_context_to_save_on_irq\n"
+  "@--- Save registers R1, ..., R12, LR\n"
+  "  add   r0, r0, #4*4 @ Make room for sp_usr, lr_usr, cpsr_usr and r0\n"
+  "  stmia r0, {r1-r12, lr}\n"
+  "@--- cpsr_usr -> R8\n"
+  "  mrs   r8, spsr\n"
+  "@--- Save sp_usr (R8)\n"
+  "  sub   r0, r0, #4*4 @ Restore original value\n"
+  "  str   r8, [r0]\n"
+  "@--- Store sp_usr, lr_usr\n"
+  "  add   r0, r0, #4\n"
+  "  stmia r0, {r13, r14}^\n"
+  "@--- Store user task r0\n"
+  "  add   r0, r0, #8\n"
+  "  ldr   r1, [sp]\n"
+  "  str   r1, [r0]\n"
+  "@--------------------------- Adjust IRQ stack\n"
+  "__no_context_to_save_on_irq:\n"
+  "  add   sp, sp, #4\n"
+  "@--------------------------- Led On (uses only r6 and r7)\n"
+  "  ACTIVITY_LED_ON @ macro defined in activity_led_management.s file\n"
+  "@--------------------------- IRQ Body : run interrupt service routine\n"
+  "@--- R1 <- contenu du registre VICVectAddr (call interrupt routine service)\n"
+  "  ldr   r1, =VICVectAddr\n"
+  "  ldr   r1, [r1]\n"
+  "@--- Call interrupt routine service\n"
+  "  mov   lr, pc @--- Link Register -> return address\n"
+  "  bx    r1\n"
+  "@--- Acknowledge interrupt service (write any value into VICVectAddr register)\n"
+  "  ldr   r0, =VICVectAddr\n"
+  "  str   r0, [r0]\n"
+  "@--------------------------- Select Running Task\n"
+  "__entry_point: @ This entry point is kernel start routine\n"
+  "  bl    kernel_selectTaskToRun\n"
+  "@--------------------------- Context restore\n"
+  "@--- r0 <- Address of current running task context save\n"
+  "  ldr   r0, =gRunningTaskControlBlock\n"
+  "  ldr   r0, [r0]\n"
+  "  movs  r0, r0\n"
+  "  beq   __no_context_to_restore\n"
+  "@--- Restore cpsr_usr (r1)\n"
+  "  ldr   r1, [r0]\n"
+  "@--- Restore cpsr_usr from r1\n"
+  "  msr   spsr, r1\n"
+  "@--- Restore sp_usr, lr_usr\n"
+  "  add   r0, r0, #4\n"
+  "  ldmia r0, {r13, r14}^\n"
+  "@--- Restore registers R0, ..., R12, PC\n"
+  "@    ('^' and 'pc' means return from interrupt)\n"
+  "  add   r0, r0, #8\n"
+  "  ldmia r0, {r0-r12, pc}^\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@        U N D E F I N E D    I N S T R U C T I O N    H A N D L E R                                                   *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@ We use some arm undefined instructions for performing kernel defined operations that do not use context switchs.     *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@           In ARM Architecture ReferenceManual, page A3-39                                                            *\n"
+  "@          A3.16.5 Architecturally Undefined Instruction space                                                         *\n"
+  "@                                                                                                                      *\n"
+  "@ In general, Undefined instructions might be used to extend the ARM instruction set in the future. However, it is     *\n"
+  "@ intended that instructions with the following encoding will not be used for this:                                    *\n"
+  "@                                                                                                                      *\n"
+  "@ 3322 2222 2222 1111  1111 1100 0000 0000                                                                             *\n"
+  "@ 1098 7654 3210 9876  5432 1098 7654 3210                                                                             *\n"
+  "@ ---- ---- ---- ----  ---- ---- ---- ----                                                                             *\n"
+  "@ cond 0111 1111 xxxx  xxxx xxxx 1111 xxxx                                                                             *\n"
+  "@                                                                                                                      *\n"
+  "@ If a programmer wants to use an Undefined instruction for software, purposes with minimal risk that future hardware  *\n"
+  "@ will treat it as a defined instruction, one of the instructions with this encoding must be used.                     *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global UndefHandler\n"
+  "\n"
+  "UndefHandler:\n"
+  "@--- Save preserved registers\n"
+  "  stmfd r13!, {r7, lr}\n"
+  "@--- r7 <- bits 15-8 of undef instruction\n"
+  "@    LDRB loads a byte from memory and zero-extends the byte to a 32-bit word.\n"
+  "  ldrb  r7, [lr, #-4 + 1] @ -4 for undef instruction, +1 for getting second byte\n"
+  "@--- r12 <- address of routine to call\n"
+  "  ldr   r12, =__und_dispatcher_table\n"
+  "  ldr   r12, [r12, r7, LSL #2]\n"
+  "@--- Call routine\n"
+  "  mov   lr, pc\n"
+  "  bx    r12\n"
+  "@--- Return from interrupt\n"
+  "  ldmfd r13!, {r7, pc}^\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  I_BIT_MASK = 0x80      @ IRQ is disabled when I bit is set\n"
+  "  UNDEFINED_INSTRUCTION = 0xE7F000F0\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_22_targetTemplates (
+  "target.s",
+  "s",
+  true, // Text file
+  23812, // Text length
+  gWrapperFileContent_22_targetTemplates
+) ;
+
+//--- All files of 'LPC-L2294' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [19] = {
+  & gWrapperFile_5_targetTemplates,
+  & gWrapperFile_6_targetTemplates,
+  & gWrapperFile_7_targetTemplates,
+  & gWrapperFile_8_targetTemplates,
+  & gWrapperFile_9_targetTemplates,
+  & gWrapperFile_10_targetTemplates,
+  & gWrapperFile_11_targetTemplates,
+  & gWrapperFile_12_targetTemplates,
+  & gWrapperFile_13_targetTemplates,
+  & gWrapperFile_14_targetTemplates,
+  & gWrapperFile_15_targetTemplates,
+  & gWrapperFile_16_targetTemplates,
+  & gWrapperFile_17_targetTemplates,
+  & gWrapperFile_18_targetTemplates,
+  & gWrapperFile_19_targetTemplates,
+  & gWrapperFile_20_targetTemplates,
+  & gWrapperFile_21_targetTemplates,
+  & gWrapperFile_22_targetTemplates,
+  NULL
+} ;
+
+//--- All sub-directories of 'LPC-L2294' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_1 [1] = {
+  NULL
+} ;
+
+//--- Directory 'LPC-L2294'
+
+const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
+  "LPC-L2294",
+  18,
+  gWrapperAllFiles_targetTemplates_1,
+  0,
+  gWrapperAllDirectories_targetTemplates_1
+) ;
+
+//--- File 'files/LPC2294-default-isr.plm'
+
+const char * gWrapperFileContent_23_targetTemplates = "\n"
+  "required func `isr PAbortHandler ()\n"
+  "\n"
+  "func `isr PAbortHandler @nullWhenPanicDisabled @weak @global () {\n"
+  "  panic 2\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required func `isr DAbortHandler ()\n"
+  "\n"
+  "func `isr DAbortHandler @nullWhenPanicDisabled @weak @global () {\n"
+  "  panic 3\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required func `isr FIQHandler ()\n"
+  "\n"
+  "func `isr FIQHandler @nullWhenPanicDisabled @weak @global () {\n"
+  "  panic 4\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_23_targetTemplates (
+  "LPC2294-default-isr.plm",
+  "plm",
+  true, // Text file
+  588, // Text length
+  gWrapperFileContent_23_targetTemplates
+) ;
+
+//--- File 'files/lpc2294-xtr.plm'
+
+const char * gWrapperFileContent_24_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+  "//   SYNCHRONIZATION TOOLS ROUTINES                                            *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "opaqueType $taskList @instantiable : 32\n"
+  "\n"
+  "//--- Block running task\n"
+  "extern func `kernel blockInList (\?!list:ioWaitingList $taskList)\n"
+  "\n"
+  "extern func `kernel blockOnDeadline (\?deadline:inDeadline $uint32) \n"
+  "\n"
+  "extern func `kernel blockInListAndOnDeadline (\?!list:ioWaitingList $taskList \?deadline:inDeadline $uint32) \n"
+  "\n"
+  "//--- Make task Ready\n"
+  "extern func `kernel `isr makeTaskReady (\?!list:ioWaitingList $taskList) -> $bool\n"
+  "\n"
+  "extern func `isr makeTasksReadyFromCurrentDate (\?currentDate:inCurrentDate $uint32)\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   GUARD                                                                     *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "opaqueType $guardList @instantiable : 32\n"
+  "\n"
+  "extern func `isr tickHandlerForGuardedWaitUntil (\?currentDate:inCurrentDate $uint32)\n"
+  "\n"
+  "extern func `isr handleGuardedCommand (\?!guard:ioGuard $guardList)\n"
+  "\n"
+  "extern func `isr handleGuardedWaitUntil (\?deadline:inDeadlineMS $uint32)\n"
+  "\n"
+  "extern func `kernel `isr guardDidChange (\?!guard:ioGuard $guardList)\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "init 0 { // Configure Systick interrupt every ms\n"
+  "//  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
+  "//  SYST_CVR = 0\n"
+  "//  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
+  "////--- Led Teensy\n"
+  "//  PORTC_PCR5 = (1 << 8)\n"
+  "//  GPIOC_PDDR |= (1 << 5)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var gUptimeMS $uint32 = 0 {\n"
+  "  @rw func systickHandler\n"
+  "  func busyWaitingDuringMS\n"
+  "  func millis\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "func `isr `kernel `user millis @noWarningIfUnused () -> $uint32 {\n"
+  "  result = gUptimeMS\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "func `init busyWaitingDuringMS @noWarningIfUnused (\?inDelay $uint32) {\n"
+  "  let deadline = gUptimeMS + inDelay\n"
+  "  while gUptimeMS < deadline do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required func `isr systickHandler ()\n"
+  "\n"
+  "func `isr systickHandler @global () {\n"
+  "  let now = gUptimeMS +% 1\n"
+  "  gUptimeMS = now\n"
+  "  makeTasksReadyFromCurrentDate (!currentDate:now)\n"
+  "  tickHandlerForGuardedWaitUntil (!currentDate:now)\n"
+  "  userSystickHandler ()\n"
+  "}\n"
+  "\n"
+  "func `isr userSystickHandler @weak () {\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "primitive waitUntilMS @noWarningIfUnused (\?deadline: inDate $uint32) {\n"
+  "  if inDate > millis () then\n"
+  "    blockOnDeadline (!deadline:inDate)\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "func `user waitDuringMS @noWarningIfUnused (\?delay: inDelay $uint32) {\n"
+  "  waitUntilMS (!deadline:millis () + inDelay)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "guard waitUntilMS @noWarningIfUnused (\?deadline:inDeadline $uint32) {\n"
+  "  accept = inDeadline <= millis ()\n"
+  "  if not accept then\n"
+  "    handleGuardedWaitUntil (!deadline:inDeadline)\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+  "lpc2294-xtr.plm",
+  "plm",
+  true, // Text file
+  3440, // Text length
+  gWrapperFileContent_24_targetTemplates
+) ;
+
+//--- File 'files/registers-lpc2294.plm'
+
+const char * gWrapperFileContent_25_targetTemplates = "//------------------------------------------------------------------------------\n"
+  "\n"
+  "// Vectored Interrupt Controller (VIC)\n"
+  "register VICIRQStatus   at 0xFFFF_F000 $uint32\n"
+  "register VICFIQStatus   at 0xFFFF_F000 $uint32\n"
+  "register VICRawIntr     at 0xFFFF_F008 $uint32\n"
+  "register VICIntSelect   at 0xFFFF_F00C $uint32\n"
+  "register VICIntEnable   at 0xFFFF_F010 $uint32\n"
+  "register VICIntEnClr    at 0xFFFF_F014 $uint32\n"
+  "register VICSoftInt     at 0xFFFF_F018 $uint32\n"
+  "register VICSoftIntClr  at 0xFFFF_F01C $uint32\n"
+  "register VICProtection  at 0xFFFF_F020 $uint32\n"
+  "register VICVectAddr    at 0xFFFF_F030 $uint32\n"
+  "register VICDefVectAddr at 0xFFFF_F034 $uint32\n"
+  "\n"
+  "//register VICVect(INDEX) $uint32 (0xFFFF_F100 + ((INDEX) << 2\n"
+  "\n"
+  "// register VICVectAddr[16] at 0xFFFF_F100 : 4 $uint32\n"
+  "register VICVectAddr0   at 0xFFFF_F100 $uint32\n"
+  "register VICVectAddr1   at 0xFFFF_F104 $uint32\n"
+  "register VICVectAddr2   at 0xFFFF_F108 $uint32\n"
+  "register VICVectAddr3   at 0xFFFF_F10C $uint32\n"
+  "register VICVectAddr4   at 0xFFFF_F110 $uint32\n"
+  "register VICVectAddr5   at 0xFFFF_F114 $uint32\n"
+  "register VICVectAddr6   at 0xFFFF_F118 $uint32\n"
+  "register VICVectAddr7   at 0xFFFF_F11C $uint32\n"
+  "register VICVectAddr8   at 0xFFFF_F120 $uint32\n"
+  "register VICVectAddr9   at 0xFFFF_F124 $uint32\n"
+  "register VICVectAddr10  at 0xFFFF_F128 $uint32\n"
+  "register VICVectAddr11  at 0xFFFF_F12C $uint32\n"
+  "register VICVectAddr12  at 0xFFFF_F130 $uint32\n"
+  "register VICVectAddr13  at 0xFFFF_F134 $uint32\n"
+  "register VICVectAddr14  at 0xFFFF_F138 $uint32\n"
+  "register VICVectAddr15  at 0xFFFF_F13C $uint32\n"
+  "\n"
+  "//register VICVectCntl(INDEX) $uint32 (0xFFFF_F200 + ((INDEX) << 2\n"
+  "\n"
+  "register VICVectCntl0   at 0xFFFF_F200 $uint32\n"
+  "register VICVectCntl1   at 0xFFFF_F204 $uint32\n"
+  "register VICVectCntl2   at 0xFFFF_F208 $uint32\n"
+  "register VICVectCntl3   at 0xFFFF_F20C $uint32\n"
+  "register VICVectCntl4   at 0xFFFF_F210 $uint32\n"
+  "register VICVectCntl5   at 0xFFFF_F214 $uint32\n"
+  "register VICVectCntl6   at 0xFFFF_F218 $uint32\n"
+  "register VICVectCntl7   at 0xFFFF_F21C $uint32\n"
+  "register VICVectCntl8   at 0xFFFF_F220 $uint32\n"
+  "register VICVectCntl9   at 0xFFFF_F224 $uint32\n"
+  "register VICVectCntl10  at 0xFFFF_F228 $uint32\n"
+  "register VICVectCntl11  at 0xFFFF_F22C $uint32\n"
+  "register VICVectCntl12  at 0xFFFF_F230 $uint32\n"
+  "register VICVectCntl13  at 0xFFFF_F234 $uint32\n"
+  "register VICVectCntl14  at 0xFFFF_F238 $uint32\n"
+  "register VICVectCntl15  at 0xFFFF_F23C $uint32\n"
+  "\n"
+  "//------------------------------------------------------------------------------\n"
+  "\n"
+  "// Watchdog\n"
+  "register WDMOD            at 0xE000_0000 $uint8\n"
+  "register WDTC             at 0xE000_0004 $uint32\n"
+  "register WDFEED           at 0xE000_0008 $uint8\n"
+  "register WDTV             at 0xE000_000C $uint32\n"
+  "\n"
+  "// Pin Connect Block\n"
+  "register PINSEL0        at 0xE002_C000 $uint32\n"
+  "register PINSEL1        at 0xE002_C004 $uint32\n"
+  "register PINSEL2        at 0xE002_C014 $uint32\n"
+  "\n"
+  "// General Purpose Input/Output (GPIO)\n"
+  "register IO0PIN          at 0xE002_8000 $uint32\n"
+  "register IO0SET @user    at 0xE002_8004 $uint32\n"
+  "register IO0DIR          at 0xE002_8008 $uint32\n"
+  "register IO0CLR @user    at 0xE002_800C $uint32\n"
+  "\n"
+  "register IO1PIN          at 0xE002_8010 $uint32\n"
+  "register IO1SET @user    at 0xE002_8014 $uint32\n"
+  "register IO1DIR          at 0xE002_8018 $uint32\n"
+  "register IO1CLR @user    at 0xE002_801C $uint32\n"
+  "\n"
+  "register IO2PIN          at 0xE002_8020 $uint32\n"
+  "register IO2SET @user    at 0xE002_8024 $uint32\n"
+  "register IO2DIR          at 0xE002_8028 $uint32\n"
+  "register IO2CLR @user    at 0xE002_802C $uint32\n"
+  "\n"
+  "register IO3PIN          at 0xE002_8030 $uint32\n"
+  "register IO3SET @user    at 0xE002_8034 $uint32\n"
+  "register IO3DIR          at 0xE002_8038 $uint32\n"
+  "register IO3CLR @user    at 0xE002_803C $uint32\n"
+  "\n"
+  "// Memory Accelerator Module (MAM)\n"
+  "register MAMCR            at 0xE01F_C000 $uint8\n"
+  "register MAMTIM           at 0xE01F_C004 $uint8\n"
+  "register MEMMAP           at 0xE01F_C040 $uint8\n"
+  "\n"
+  "// Phase Locked Loop (PLL)\n"
+  "register PLLCON           at 0xE01F_C080 $uint8\n"
+  "register PLLCFG           at 0xE01F_C084 $uint8\n"
+  "register PLLSTAT          at 0xE01F_C088 $uint16\n"
+  "register PLLFEED          at 0xE01F_C08C $uint8\n"
+  "\n"
+  "// VPB Divider */\n"
+  "register VPBDIV           at 0xE01F_C100 $uint8\n"
+  "\n"
+  "// Power Control */\n"
+  "register PCON             at 0xE01F_C0C0 $uint8\n"
+  "register PCONP            at 0xE01F_C0C4 $uint32\n"
+  "\n"
+  "// External Interrupts\n"
+  "register EXTINT           at 0xE01F_C140 $uint8\n"
+  "register EXTWAKE          at 0xE01F_C144 $uint8\n"
+  "register EXTMODE          at 0xE01F_C148 $uint8\n"
+  "register EXTPOLAR         at 0xE01F_C14C $uint8\n"
+  "\n"
+  "// Timer 0\n"
+  "register TIMER0_IR      at 0xE000_4000 $uint32\n"
+  "register TIMER0_TCR     at 0xE000_4004 $uint32\n"
+  "register TIMER0_TC      at 0xE000_4008 $uint32\n"
+  "register TIMER0_PR      at 0xE000_400C $uint32\n"
+  "register TIMER0_PC      at 0xE000_4010 $uint32\n"
+  "register TIMER0_MCR     at 0xE000_4014 $uint32\n"
+  "register TIMER0_MR0     at 0xE000_4018 $uint32\n"
+  "register TIMER0_MR1     at 0xE000_401C $uint32\n"
+  "register TIMER0_MR2     at 0xE000_4020 $uint32\n"
+  "register TIMER0_MR3     at 0xE000_4024 $uint32\n"
+  "register TIMER0_CCR     at 0xE000_4028 $uint32\n"
+  "register TIMER0_CR0     at 0xE000_402C $uint32\n"
+  "register TIMER0_CR1     at 0xE000_4030 $uint32\n"
+  "register TIMER0_CR2     at 0xE000_4034 $uint32\n"
+  "register TIMER0_CR3     at 0xE000_4038 $uint32\n"
+  "register TIMER0_EMR     at 0xE000_403C $uint32\n"
+  "\n"
+  "// Timer 1\n"
+  "register TIMER1_IR      at 0xE000_8000 $uint32\n"
+  "register TIMER1_TCR     at 0xE000_8004 $uint32\n"
+  "register TIMER1_TC      at 0xE000_8008 $uint32\n"
+  "register TIMER1_PR      at 0xE000_800C $uint32\n"
+  "register TIMER1_PC      at 0xE000_8010 $uint32\n"
+  "register TIMER1_MCR     at 0xE000_8014 $uint32\n"
+  "register TIMER1_MR0     at 0xE000_8018 $uint32\n"
+  "register TIMER1_MR1     at 0xE000_801C $uint32\n"
+  "register TIMER1_MR2     at 0xE000_8020 $uint32\n"
+  "register TIMER1_MR3     at 0xE000_8024 $uint32\n"
+  "register TIMER1_CCR     at 0xE000_8028 $uint32\n"
+  "register TIMER1_CR0     at 0xE000_802C $uint32\n"
+  "register TIMER1_CR1     at 0xE000_8030 $uint32\n"
+  "register TIMER1_CR2     at 0xE000_8034 $uint32\n"
+  "register TIMER1_CR3     at 0xE000_8038 $uint32\n"
+  "register TIMER1_EMR     at 0xE000_803C $uint32\n"
+  "\n"
+  "// Pulse Width Modulator (PWM)\n"
+  "register PWM_IR         at 0xE001_4000 $uint32\n"
+  "register PWM_TCR        at 0xE001_4004 $uint32\n"
+  "register PWM_TC         at 0xE001_4008 $uint32\n"
+  "register PWM_PR         at 0xE001_400C $uint32\n"
+  "register PWM_PC         at 0xE001_4010 $uint32\n"
+  "register PWM_MCR        at 0xE001_4014 $uint32\n"
+  "register PWM_MR0        at 0xE001_4018 $uint32\n"
+  "register PWM_MR1        at 0xE001_401C $uint32\n"
+  "register PWM_MR2        at 0xE001_4020 $uint32\n"
+  "register PWM_MR3        at 0xE001_4024 $uint32\n"
+  "register PWM_MR4        at 0xE001_4040 $uint32\n"
+  "register PWM_MR5        at 0xE001_4044 $uint32\n"
+  "register PWM_MR6        at 0xE001_4048 $uint32\n"
+  "register PWM_CCR        at 0xE001_4028 $uint32\n"
+  "register PWM_CR0        at 0xE001_402C $uint32\n"
+  "register PWM_CR1        at 0xE001_4030 $uint32\n"
+  "register PWM_CR2        at 0xE001_4034 $uint32\n"
+  "register PWM_CR3        at 0xE001_4038 $uint32\n"
+  "register PWM_EMR        at 0xE001_403C $uint32\n"
+  "register PWM_PCR        at 0xE001_404C $uint32\n"
+  "register PWM_LER        at 0xE001_4050 $uint32\n"
+  "\n"
+  "// Universal Asynchronous Receiver Transmitter 0 (UART0)\n"
+  "register U0RBR        at 0xE000_C000 $uint8\n"
+  "register U0THR        at 0xE000_C000 $uint8\n"
+  "register U0DLL        at 0xE000_C000 $uint8\n"
+  "register U0DLM        at 0xE000_C004 $uint8\n"
+  "register U0IER        at 0xE000_C004 $uint32\n"
+  "register U0IIR        at 0xE000_C008 $uint32\n"
+  "register U0FCR        at 0xE000_C008 $uint8\n"
+  "register U0LCR        at 0xE000_C00C $uint8\n"
+  "register U0LSR        at 0xE000_C014 $uint8\n"
+  "register U0SCR        at 0xE000_C01C $uint8\n"
+  "register U0ACR        at 0xE000_C020 $uint32\n"
+  "register U0FDR        at 0xE000_C028 $uint32\n"
+  "register U0TER        at 0xE000_C030 $uint8\n"
+  "\n"
+  "\n"
+  "// Universal Asynchronous Receiver Transmitter 1 (UART1)\n"
+  "register U1RBR        at 0xE001_0000 $uint8\n"
+  "register U1THR        at 0xE001_0000 $uint8\n"
+  "register U1DLL        at 0xE001_0000 $uint8\n"
+  "register U1DLM        at 0xE001_0004 $uint8\n"
+  "register U1IER        at 0xE001_0004 $uint32\n"
+  "register U1IIR        at 0xE001_0008 $uint32\n"
+  "register U1FCR        at 0xE001_0008 $uint8\n"
+  "register U1LCR        at 0xE001_000C $uint8\n"
+  "register U1MCR        at 0xE001_0010 $uint8\n"
+  "register U1LSR        at 0xE001_0014 $uint8\n"
+  "register U1MSR        at 0xE001_0018 $uint8\n"
+  "register U1SCR        at 0xE001_001C $uint8\n"
+  "register U1ACR        at 0xE001_0020 $uint32\n"
+  "register U1FDR        at 0xE001_0028 $uint32\n"
+  "register U1TER        at 0xE001_0030 $uint8\n"
+  "\n"
+  "\n"
+  "// I2C Interface\n"
+  "register I2C_I2CONSET     at 0xE001_C000 $uint8\n"
+  "register I2C_I2STAT       at 0xE001_C004 $uint8\n"
+  "register I2C_I2DAT        at 0xE001_C008 $uint8\n"
+  "register I2C_I2ADR        at 0xE001_C00C $uint8\n"
+  "register I2C_I2SCLH       at 0xE001_C010 $uint16\n"
+  "register I2C_I2SCLL       at 0xE001_C014 $uint16\n"
+  "register I2C_I2CONCLR     at 0xE001_C018 $uint8\n"
+  "\n"
+  "// SPI 0 (Serial Peripheral Interface 0)\n"
+  "register SPI0_SPCR          at 0xE002_0000 $uint16\n"
+  "register SPI0_SPSR          at 0xE002_0004 $uint8\n"
+  "register SPI0_SPDR          at 0xE002_0008 $uint16\n"
+  "register SPI0_SPCCR         at 0xE002_000C $uint8\n"
+  "// register SPI0_SPTCR        at 0xE002_0010 $uint8\n"
+  "// register SPI0_SPTSR        at 0xE002_0014 $uint8\n"
+  "// register SPI0_SPTOR        at 0xE002_0018 $uint8\n"
+  "register SPI0_SPINT         at 0xE002_001C $uint8\n"
+  "\n"
+  "// SPI 1 (Serial Peripheral Interface 1)\n"
+  "register SPI1_SPCR          at 0xE003_0000 $uint16\n"
+  "register SPI1_SPSR          at 0xE003_0004 $uint8\n"
+  "register SPI1_SPDR          at 0xE003_0008 $uint16\n"
+  "register SPI1_SPCCR         at 0xE003_000C $uint8\n"
+  "// register SPI1_SPTCR        at  $uint8   0xE003_0010\n"
+  "// register SPI1_SPTSR        at  $uint8   0xE003_0014\n"
+  "// register SPI1_SPTOR        at  $uint8   0xE003_0018\n"
+  "register SPI1_SPINT         at 0xE003_001C $uint8\n"
+  "\n"
+  "// Real Time Clock\n"
+  "register RTC_ILR          at 0xE002_4000 $uint8\n"
+  "register RTC_CTC          at 0xE002_4004 $uint16\n"
+  "register RTC_CCR          at 0xE002_4008 $uint8\n"
+  "register RTC_CIIR         at 0xE002_400C $uint8\n"
+  "register RTC_AMR          at 0xE002_4010 $uint8\n"
+  "register RTC_CTIME0       at 0xE002_4014 $uint32\n"
+  "register RTC_CTIME1       at 0xE002_4018 $uint32\n"
+  "register RTC_CTIME2       at 0xE002_401C $uint32\n"
+  "register RTC_SEC          at 0xE002_4020 $uint8\n"
+  "register RTC_MIN          at 0xE002_4024 $uint8\n"
+  "register RTC_HOUR         at 0xE002_4028 $uint8\n"
+  "register RTC_DOM          at 0xE002_402C $uint8\n"
+  "register RTC_DOW          at 0xE002_4030 $uint8\n"
+  "register RTC_DOY          at 0xE002_4034 $uint16\n"
+  "register RTC_MONTH        at 0xE002_4038 $uint8\n"
+  "register RTC_YEAR         at 0xE002_403C $uint16\n"
+  "register RTC_ALSEC        at 0xE002_4060 $uint8\n"
+  "register RTC_ALMIN        at 0xE002_4064 $uint8\n"
+  "register RTC_ALHOUR       at 0xE002_4068 $uint8\n"
+  "register RTC_ALDOM        at 0xE002_406C $uint8\n"
+  "register RTC_ALDOW        at 0xE002_4070 $uint8\n"
+  "register RTC_ALDOY        at 0xE002_4074 $uint16\n"
+  "register RTC_ALMON        at 0xE002_4078 $uint8\n"
+  "register RTC_ALYEAR       at 0xE002_407C $uint16\n"
+  "register RTC_PREINT       at 0xE002_4080 $uint16\n"
+  "register RTC_PREFRAC      at 0xE002_4084 $uint16\n"
+  "\n"
+  "// Bank Configuration registers\n"
+  "register BCFG0          at 0xFFE0_0000 $uint32\n"
+  "register BCFG1          at 0xFFE0_0004 $uint32\n"
+  "register BCFG2          at 0xFFE0_0008 $uint32\n"
+  "register BCFG3          at 0xFFE0_000C $uint32\n"
+  "\n"
+  "// CAN Controllers\n"
+  "register CAN_AMFR          at 0xE003_C000 $uint32\n"
+  "register CAN_SFF_SA        at 0xE003_C004 $uint32\n"
+  "register CAN_SFF_GRP_SA    at 0xE003_C008 $uint32\n"
+  "register CAN_EFF_SA        at 0xE003_C00C $uint32\n"
+  "register CAN_EFF_GRP_SA    at 0xE003_C010 $uint32\n"
+  "register CAN_END_OF_TABLES at 0xE003_C014 $uint32\n"
+  "\n"
+  "// Analog/Digital Converter (ADC)\n"
+  "register ADCR           at 0xE003_4000 $uint32\n"
+  "register ADGDR          at 0xE003_4004 $uint32\n"
+  "register ADINTEN        at 0xE003_400C $uint32\n"
+  "\n"
+  "//------------------------------------------------------------------------------\n" ;
+
+const cRegularFileWrapper gWrapperFile_25_targetTemplates (
+  "registers-lpc2294.plm",
+  "plm",
+  true, // Text file
+  11643, // Text length
+  gWrapperFileContent_25_targetTemplates
+) ;
+
+//--- File 'files/registers-mk20dx256.plm'
+
+const char * gWrapperFileContent_26_targetTemplates = "\n"
   "let f_cpu $uint32 = 96_000_000\n"
   "\n"
   "let f_bus $uint32 = 48_000_000\n"
@@ -13588,17 +16136,17 @@ const char * gWrapperFileContent_3_targetTemplates = "\n"
   "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_targetTemplates (
-  "mk20dx256.plm",
+const cRegularFileWrapper gWrapperFile_26_targetTemplates (
+  "registers-mk20dx256.plm",
   "plm",
   true, // Text file
   134360, // Text length
-  gWrapperFileContent_3_targetTemplates
+  gWrapperFileContent_26_targetTemplates
 ) ;
 
 //--- File 'files/semaphore.plm'
 
-const char * gWrapperFileContent_4_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_27_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "struct $semaphore {\n"
   "  var value $uint32\n"
@@ -13653,17 +16201,17 @@ const char * gWrapperFileContent_4_targetTemplates = "//\xE2""\x80""\x94""\xE2""
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_targetTemplates (
+const cRegularFileWrapper gWrapperFile_27_targetTemplates (
   "semaphore.plm",
   "plm",
   true, // Text file
   1461, // Text length
-  gWrapperFileContent_4_targetTemplates
+  gWrapperFileContent_27_targetTemplates
 ) ;
 
 //--- File 'files/teensy-3-1-boot.plm'
 
-const char * gWrapperFileContent_5_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_28_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "\n"
   "boot 0 {\n"
   "//---------1- Inhiber le chien de garde\n"
@@ -13728,17 +16276,17 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_targetTemplates (
+const cRegularFileWrapper gWrapperFile_28_targetTemplates (
   "teensy-3-1-boot.plm",
   "plm",
   true, // Text file
   2377, // Text length
-  gWrapperFileContent_5_targetTemplates
+  gWrapperFileContent_28_targetTemplates
 ) ;
 
 //--- File 'files/teensy-3-1-default-isr.plm'
 
-const char * gWrapperFileContent_6_targetTemplates = "\n"
+const char * gWrapperFileContent_29_targetTemplates = "\n"
   "required func `isr NMIHandler ()\n"
   "\n"
   "func `isr NMIHandler @nullWhenPanicDisabled @weak () {\n"
@@ -14347,17 +16895,17 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_targetTemplates (
+const cRegularFileWrapper gWrapperFile_29_targetTemplates (
   "teensy-3-1-default-isr.plm",
   "plm",
   true, // Text file
   15621, // Text length
-  gWrapperFileContent_6_targetTemplates
+  gWrapperFileContent_29_targetTemplates
 ) ;
 
 //--- File 'files/teensy-3-1-lcd.plm'
 
-const char * gWrapperFileContent_7_targetTemplates = "\n"
+const char * gWrapperFileContent_30_targetTemplates = "\n"
   "// http://esd.cs.ucr.edu/labs/interface/interface.html\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -14868,17 +17416,17 @@ const char * gWrapperFileContent_7_targetTemplates = "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_targetTemplates (
+const cRegularFileWrapper gWrapperFile_30_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
   16018, // Text length
-  gWrapperFileContent_7_targetTemplates
+  gWrapperFileContent_30_targetTemplates
 ) ;
 
 //--- File 'files/teensy-3-1-leds.plm'
 
-const char * gWrapperFileContent_8_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_31_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "//   Led L0 : PTA12\n"
   "//   Led L1 : PTA13\n"
   "//   Led L2 : PTD7\n"
@@ -14992,17 +17540,17 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+const cRegularFileWrapper gWrapperFile_31_targetTemplates (
   "teensy-3-1-leds.plm",
   "plm",
   true, // Text file
   2763, // Text length
-  gWrapperFileContent_8_targetTemplates
+  gWrapperFileContent_31_targetTemplates
 ) ;
 
 //--- File 'files/teensy-3-1-xtr.plm'
 
-const char * gWrapperFileContent_9_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_32_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "//   SYNCHRONIZATION TOOLS ROUTINES                                            *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -15107,353 +17655,41 @@ const char * gWrapperFileContent_9_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+const cRegularFileWrapper gWrapperFile_32_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
   3428, // Text length
-  gWrapperFileContent_9_targetTemplates
+  gWrapperFileContent_32_targetTemplates
 ) ;
 
 //--- All files of 'files' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [8] = {
-  & gWrapperFile_3_targetTemplates,
-  & gWrapperFile_4_targetTemplates,
-  & gWrapperFile_5_targetTemplates,
-  & gWrapperFile_6_targetTemplates,
-  & gWrapperFile_7_targetTemplates,
-  & gWrapperFile_8_targetTemplates,
-  & gWrapperFile_9_targetTemplates,
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [11] = {
+  & gWrapperFile_23_targetTemplates,
+  & gWrapperFile_24_targetTemplates,
+  & gWrapperFile_25_targetTemplates,
+  & gWrapperFile_26_targetTemplates,
+  & gWrapperFile_27_targetTemplates,
+  & gWrapperFile_28_targetTemplates,
+  & gWrapperFile_29_targetTemplates,
+  & gWrapperFile_30_targetTemplates,
+  & gWrapperFile_31_targetTemplates,
+  & gWrapperFile_32_targetTemplates,
   NULL
 } ;
 
 //--- All sub-directories of 'files' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_1 [1] = {
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [1] = {
   NULL
 } ;
 
 //--- Directory 'files'
 
-const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
-  "files",
-  7,
-  gWrapperAllFiles_targetTemplates_1,
-  0,
-  gWrapperAllDirectories_targetTemplates_1
-) ;
-
-//--- File 'lpc2294/lpc2294.plm'
-
-const char * gWrapperFileContent_10_targetTemplates = "//------------------------------------------------------------------------------\n"
-  "\n"
-  "// Vectored Interrupt Controller (VIC)\n"
-  "register VICIRQStatus   at 0xFFFF_F000 $uint32\n"
-  "register VICFIQStatus   at 0xFFFF_F000 $uint32\n"
-  "register VICRawIntr     at 0xFFFF_F008 $uint32\n"
-  "register VICIntSelect   at 0xFFFF_F00C $uint32\n"
-  "register VICIntEnable   at 0xFFFF_F010 $uint32\n"
-  "register VICIntEnClr    at 0xFFFF_F014 $uint32\n"
-  "register VICSoftInt     at 0xFFFF_F018 $uint32\n"
-  "register VICSoftIntClr  at 0xFFFF_F01C $uint32\n"
-  "register VICProtection  at 0xFFFF_F020 $uint32\n"
-  "register VICVectAddr    at 0xFFFF_F030 $uint32\n"
-  "register VICDefVectAddr at 0xFFFF_F034 $uint32\n"
-  "\n"
-  "//register VICVect(INDEX) $uint32 (0xFFFF_F100 + ((INDEX) << 2\n"
-  "\n"
-  "register VICVectAddr0   at 0xFFFF_F100 $uint32\n"
-  "register VICVectAddr1   at 0xFFFF_F104 $uint32\n"
-  "register VICVectAddr2   at 0xFFFF_F108 $uint32\n"
-  "register VICVectAddr3   at 0xFFFF_F10C $uint32\n"
-  "register VICVectAddr4   at 0xFFFF_F110 $uint32\n"
-  "register VICVectAddr5   at 0xFFFF_F114 $uint32\n"
-  "register VICVectAddr6   at 0xFFFF_F118 $uint32\n"
-  "register VICVectAddr7   at 0xFFFF_F11C $uint32\n"
-  "register VICVectAddr8   at 0xFFFF_F120 $uint32\n"
-  "register VICVectAddr9   at 0xFFFF_F124 $uint32\n"
-  "register VICVectAddr10  at 0xFFFF_F128 $uint32\n"
-  "register VICVectAddr11  at 0xFFFF_F12C $uint32\n"
-  "register VICVectAddr12  at 0xFFFF_F130 $uint32\n"
-  "register VICVectAddr13  at 0xFFFF_F134 $uint32\n"
-  "register VICVectAddr14  at 0xFFFF_F138 $uint32\n"
-  "register VICVectAddr15  at 0xFFFF_F13C $uint32\n"
-  "\n"
-  "//register VICVectCntl(INDEX) $uint32 (0xFFFF_F200 + ((INDEX) << 2\n"
-  "\n"
-  "register VICVectCntl0   at 0xFFFF_F200 $uint32\n"
-  "register VICVectCntl1   at 0xFFFF_F204 $uint32\n"
-  "register VICVectCntl2   at 0xFFFF_F208 $uint32\n"
-  "register VICVectCntl3   at 0xFFFF_F20C $uint32\n"
-  "register VICVectCntl4   at 0xFFFF_F210 $uint32\n"
-  "register VICVectCntl5   at 0xFFFF_F214 $uint32\n"
-  "register VICVectCntl6   at 0xFFFF_F218 $uint32\n"
-  "register VICVectCntl7   at 0xFFFF_F21C $uint32\n"
-  "register VICVectCntl8   at 0xFFFF_F220 $uint32\n"
-  "register VICVectCntl9   at 0xFFFF_F224 $uint32\n"
-  "register VICVectCntl10  at 0xFFFF_F228 $uint32\n"
-  "register VICVectCntl11  at 0xFFFF_F22C $uint32\n"
-  "register VICVectCntl12  at 0xFFFF_F230 $uint32\n"
-  "register VICVectCntl13  at 0xFFFF_F234 $uint32\n"
-  "register VICVectCntl14  at 0xFFFF_F238 $uint32\n"
-  "register VICVectCntl15  at 0xFFFF_F23C $uint32\n"
-  "\n"
-  "//------------------------------------------------------------------------------\n"
-  "\n"
-  "// Watchdog\n"
-  "register WDMOD            at 0xE000_0000 $uint8\n"
-  "register WDTC             at 0xE000_0004 $uint32\n"
-  "register WDFEED           at 0xE000_0008 $uint8\n"
-  "register WDTV             at 0xE000_000C $uint32\n"
-  "\n"
-  "// Pin Connect Block\n"
-  "register PINSEL0        at 0xE002_C000 $uint32\n"
-  "register PINSEL1        at 0xE002_C004 $uint32\n"
-  "register PINSEL2        at 0xE002_C014 $uint32\n"
-  "\n"
-  "// General Purpose Input/Output (GPIO)\n"
-  "register IO0PIN          at 0xE002_8000 $uint32\n"
-  "register IO0SET          at 0xE002_8004 $uint32\n"
-  "register IO0DIR          at 0xE002_8008 $uint32\n"
-  "register IO0CLR          at 0xE002_800C $uint32\n"
-  "\n"
-  "register IO1PIN          at 0xE002_8010 $uint32\n"
-  "register IO1SET          at 0xE002_8014 $uint32\n"
-  "register IO1DIR          at 0xE002_8018 $uint32\n"
-  "register IO1CLR          at 0xE002_801C $uint32\n"
-  "\n"
-  "register IO2PIN          at 0xE002_8020 $uint32\n"
-  "register IO2SET          at 0xE002_8024 $uint32\n"
-  "register IO2DIR          at 0xE002_8028 $uint32\n"
-  "register IO2CLR          at 0xE002_802C $uint32\n"
-  "\n"
-  "register IO3PIN          at 0xE002_8030 $uint32\n"
-  "register IO3SET          at 0xE002_8034 $uint32\n"
-  "register IO3DIR          at 0xE002_8038 $uint32\n"
-  "register IO3CLR          at 0xE002_803C $uint32\n"
-  "\n"
-  "// Memory Accelerator Module (MAM)\n"
-  "register MAMCR            at 0xE01F_C000 $uint8\n"
-  "register MAMTIM           at 0xE01F_C004 $uint8\n"
-  "register MEMMAP           at 0xE01F_C040 $uint8\n"
-  "\n"
-  "// Phase Locked Loop (PLL)\n"
-  "register PLLCON           at 0xE01F_C080 $uint8\n"
-  "register PLLCFG           at 0xE01F_C084 $uint8\n"
-  "register PLLSTAT          at 0xE01F_C088 $uint16\n"
-  "register PLLFEED          at 0xE01F_C08C $uint8\n"
-  "\n"
-  "// VPB Divider */\n"
-  "register VPBDIV           at 0xE01F_C100 $uint8\n"
-  "\n"
-  "// Power Control */\n"
-  "register PCON             at 0xE01F_C0C0 $uint8\n"
-  "register PCONP            at 0xE01F_C0C4 $uint32\n"
-  "\n"
-  "// External Interrupts\n"
-  "register EXTINT           at 0xE01F_C140 $uint8\n"
-  "register EXTWAKE          at 0xE01F_C144 $uint8\n"
-  "register EXTMODE          at 0xE01F_C148 $uint8\n"
-  "register EXTPOLAR         at 0xE01F_C14C $uint8\n"
-  "\n"
-  "// Timer 0\n"
-  "register TIMER0_IR      at 0xE000_4000 $uint32\n"
-  "register TIMER0_TCR     at 0xE000_4004 $uint32\n"
-  "register TIMER0_TC      at 0xE000_4008 $uint32\n"
-  "register TIMER0_PR      at 0xE000_400C $uint32\n"
-  "register TIMER0_PC      at 0xE000_4010 $uint32\n"
-  "register TIMER0_MCR     at 0xE000_4014 $uint32\n"
-  "register TIMER0_MR0     at 0xE000_4018 $uint32\n"
-  "register TIMER0_MR1     at 0xE000_401C $uint32\n"
-  "register TIMER0_MR2     at 0xE000_4020 $uint32\n"
-  "register TIMER0_MR3     at 0xE000_4024 $uint32\n"
-  "register TIMER0_CCR     at 0xE000_4028 $uint32\n"
-  "register TIMER0_CR0     at 0xE000_402C $uint32\n"
-  "register TIMER0_CR1     at 0xE000_4030 $uint32\n"
-  "register TIMER0_CR2     at 0xE000_4034 $uint32\n"
-  "register TIMER0_CR3     at 0xE000_4038 $uint32\n"
-  "register TIMER0_EMR     at 0xE000_403C $uint32\n"
-  "\n"
-  "// Timer 1\n"
-  "register TIMER1_IR      at 0xE000_8000 $uint32\n"
-  "register TIMER1_TCR     at 0xE000_8004 $uint32\n"
-  "register TIMER1_TC      at 0xE000_8008 $uint32\n"
-  "register TIMER1_PR      at 0xE000_800C $uint32\n"
-  "register TIMER1_PC      at 0xE000_8010 $uint32\n"
-  "register TIMER1_MCR     at 0xE000_8014 $uint32\n"
-  "register TIMER1_MR0     at 0xE000_8018 $uint32\n"
-  "register TIMER1_MR1     at 0xE000_801C $uint32\n"
-  "register TIMER1_MR2     at 0xE000_8020 $uint32\n"
-  "register TIMER1_MR3     at 0xE000_8024 $uint32\n"
-  "register TIMER1_CCR     at 0xE000_8028 $uint32\n"
-  "register TIMER1_CR0     at 0xE000_802C $uint32\n"
-  "register TIMER1_CR1     at 0xE000_8030 $uint32\n"
-  "register TIMER1_CR2     at 0xE000_8034 $uint32\n"
-  "register TIMER1_CR3     at 0xE000_8038 $uint32\n"
-  "register TIMER1_EMR     at 0xE000_803C $uint32\n"
-  "\n"
-  "// Pulse Width Modulator (PWM)\n"
-  "register PWM_IR         at 0xE001_4000 $uint32\n"
-  "register PWM_TCR        at 0xE001_4004 $uint32\n"
-  "register PWM_TC         at 0xE001_4008 $uint32\n"
-  "register PWM_PR         at 0xE001_400C $uint32\n"
-  "register PWM_PC         at 0xE001_4010 $uint32\n"
-  "register PWM_MCR        at 0xE001_4014 $uint32\n"
-  "register PWM_MR0        at 0xE001_4018 $uint32\n"
-  "register PWM_MR1        at 0xE001_401C $uint32\n"
-  "register PWM_MR2        at 0xE001_4020 $uint32\n"
-  "register PWM_MR3        at 0xE001_4024 $uint32\n"
-  "register PWM_MR4        at 0xE001_4040 $uint32\n"
-  "register PWM_MR5        at 0xE001_4044 $uint32\n"
-  "register PWM_MR6        at 0xE001_4048 $uint32\n"
-  "register PWM_CCR        at 0xE001_4028 $uint32\n"
-  "register PWM_CR0        at 0xE001_402C $uint32\n"
-  "register PWM_CR1        at 0xE001_4030 $uint32\n"
-  "register PWM_CR2        at 0xE001_4034 $uint32\n"
-  "register PWM_CR3        at 0xE001_4038 $uint32\n"
-  "register PWM_EMR        at 0xE001_403C $uint32\n"
-  "register PWM_PCR        at 0xE001_404C $uint32\n"
-  "register PWM_LER        at 0xE001_4050 $uint32\n"
-  "\n"
-  "// Universal Asynchronous Receiver Transmitter 0 (UART0)\n"
-  "register U0RBR        at 0xE000_C000 $uint8\n"
-  "register U0THR        at 0xE000_C000 $uint8\n"
-  "register U0DLL        at 0xE000_C000 $uint8\n"
-  "register U0DLM        at 0xE000_C004 $uint8\n"
-  "register U0IER        at 0xE000_C004 $uint32\n"
-  "register U0IIR        at 0xE000_C008 $uint32\n"
-  "register U0FCR        at 0xE000_C008 $uint8\n"
-  "register U0LCR        at 0xE000_C00C $uint8\n"
-  "register U0LSR        at 0xE000_C014 $uint8\n"
-  "register U0SCR        at 0xE000_C01C $uint8\n"
-  "register U0ACR        at 0xE000_C020 $uint32\n"
-  "register U0FDR        at 0xE000_C028 $uint32\n"
-  "register U0TER        at 0xE000_C030 $uint8\n"
-  "\n"
-  "\n"
-  "// Universal Asynchronous Receiver Transmitter 1 (UART1)\n"
-  "register U1RBR        at 0xE001_0000 $uint8\n"
-  "register U1THR        at 0xE001_0000 $uint8\n"
-  "register U1DLL        at 0xE001_0000 $uint8\n"
-  "register U1DLM        at 0xE001_0004 $uint8\n"
-  "register U1IER        at 0xE001_0004 $uint32\n"
-  "register U1IIR        at 0xE001_0008 $uint32\n"
-  "register U1FCR        at 0xE001_0008 $uint8\n"
-  "register U1LCR        at 0xE001_000C $uint8\n"
-  "register U1MCR        at 0xE001_0010 $uint8\n"
-  "register U1LSR        at 0xE001_0014 $uint8\n"
-  "register U1MSR        at 0xE001_0018 $uint8\n"
-  "register U1SCR        at 0xE001_001C $uint8\n"
-  "register U1ACR        at 0xE001_0020 $uint32\n"
-  "register U1FDR        at 0xE001_0028 $uint32\n"
-  "register U1TER        at 0xE001_0030 $uint8\n"
-  "\n"
-  "\n"
-  "// I2C Interface\n"
-  "register I2C_I2CONSET     at 0xE001_C000 $uint8\n"
-  "register I2C_I2STAT       at 0xE001_C004 $uint8\n"
-  "register I2C_I2DAT        at 0xE001_C008 $uint8\n"
-  "register I2C_I2ADR        at 0xE001_C00C $uint8\n"
-  "register I2C_I2SCLH       at 0xE001_C010 $uint16\n"
-  "register I2C_I2SCLL       at 0xE001_C014 $uint16\n"
-  "register I2C_I2CONCLR     at 0xE001_C018 $uint8\n"
-  "\n"
-  "// SPI 0 (Serial Peripheral Interface 0)\n"
-  "register SPI0_SPCR          at 0xE002_0000 $uint16\n"
-  "register SPI0_SPSR          at 0xE002_0004 $uint8\n"
-  "register SPI0_SPDR          at 0xE002_0008 $uint16\n"
-  "register SPI0_SPCCR         at 0xE002_000C $uint8\n"
-  "// register SPI0_SPTCR        at 0xE002_0010 $uint8\n"
-  "// register SPI0_SPTSR        at 0xE002_0014 $uint8\n"
-  "// register SPI0_SPTOR        at 0xE002_0018 $uint8\n"
-  "register SPI0_SPINT         at 0xE002_001C $uint8\n"
-  "\n"
-  "// SPI 1 (Serial Peripheral Interface 1)\n"
-  "register SPI1_SPCR          at 0xE003_0000 $uint16\n"
-  "register SPI1_SPSR          at 0xE003_0004 $uint8\n"
-  "register SPI1_SPDR          at 0xE003_0008 $uint16\n"
-  "register SPI1_SPCCR         at 0xE003_000C $uint8\n"
-  "// register SPI1_SPTCR        at  $uint8   0xE003_0010\n"
-  "// register SPI1_SPTSR        at  $uint8   0xE003_0014\n"
-  "// register SPI1_SPTOR        at  $uint8   0xE003_0018\n"
-  "register SPI1_SPINT         at 0xE003_001C $uint8\n"
-  "\n"
-  "// Real Time Clock\n"
-  "register RTC_ILR          at 0xE002_4000 $uint8\n"
-  "register RTC_CTC          at 0xE002_4004 $uint16\n"
-  "register RTC_CCR          at 0xE002_4008 $uint8\n"
-  "register RTC_CIIR         at 0xE002_400C $uint8\n"
-  "register RTC_AMR          at 0xE002_4010 $uint8\n"
-  "register RTC_CTIME0       at 0xE002_4014 $uint32\n"
-  "register RTC_CTIME1       at 0xE002_4018 $uint32\n"
-  "register RTC_CTIME2       at 0xE002_401C $uint32\n"
-  "register RTC_SEC          at 0xE002_4020 $uint8\n"
-  "register RTC_MIN          at 0xE002_4024 $uint8\n"
-  "register RTC_HOUR         at 0xE002_4028 $uint8\n"
-  "register RTC_DOM          at 0xE002_402C $uint8\n"
-  "register RTC_DOW          at 0xE002_4030 $uint8\n"
-  "register RTC_DOY          at 0xE002_4034 $uint16\n"
-  "register RTC_MONTH        at 0xE002_4038 $uint8\n"
-  "register RTC_YEAR         at 0xE002_403C $uint16\n"
-  "register RTC_ALSEC        at 0xE002_4060 $uint8\n"
-  "register RTC_ALMIN        at 0xE002_4064 $uint8\n"
-  "register RTC_ALHOUR       at 0xE002_4068 $uint8\n"
-  "register RTC_ALDOM        at 0xE002_406C $uint8\n"
-  "register RTC_ALDOW        at 0xE002_4070 $uint8\n"
-  "register RTC_ALDOY        at 0xE002_4074 $uint16\n"
-  "register RTC_ALMON        at 0xE002_4078 $uint8\n"
-  "register RTC_ALYEAR       at 0xE002_407C $uint16\n"
-  "register RTC_PREINT       at 0xE002_4080 $uint16\n"
-  "register RTC_PREFRAC      at 0xE002_4084 $uint16\n"
-  "\n"
-  "// Bank Configuration registers\n"
-  "register BCFG0          at 0xFFE0_0000 $uint32\n"
-  "register BCFG1          at 0xFFE0_0004 $uint32\n"
-  "register BCFG2          at 0xFFE0_0008 $uint32\n"
-  "register BCFG3          at 0xFFE0_000C $uint32\n"
-  "\n"
-  "// CAN Controllers\n"
-  "register CAN_AMFR          at 0xE003_C000 $uint32\n"
-  "register CAN_SFF_SA        at 0xE003_C004 $uint32\n"
-  "register CAN_SFF_GRP_SA    at 0xE003_C008 $uint32\n"
-  "register CAN_EFF_SA        at 0xE003_C00C $uint32\n"
-  "register CAN_EFF_GRP_SA    at 0xE003_C010 $uint32\n"
-  "register CAN_END_OF_TABLES at 0xE003_C014 $uint32\n"
-  "\n"
-  "// Analog/Digital Converter (ADC)\n"
-  "register ADCR           at 0xE003_4000 $uint32\n"
-  "register ADGDR          at 0xE003_4004 $uint32\n"
-  "register ADINTEN        at 0xE003_400C $uint32\n"
-  "\n"
-  "//------------------------------------------------------------------------------\n" ;
-
-const cRegularFileWrapper gWrapperFile_10_targetTemplates (
-  "lpc2294.plm",
-  "plm",
-  true, // Text file
-  11588, // Text length
-  gWrapperFileContent_10_targetTemplates
-) ;
-
-//--- All files of 'lpc2294' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [2] = {
-  & gWrapperFile_10_targetTemplates,
-  NULL
-} ;
-
-//--- All sub-directories of 'lpc2294' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'lpc2294'
-
 const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
-  "lpc2294",
-  1,
+  "files",
+  10,
   gWrapperAllFiles_targetTemplates_2,
   0,
   gWrapperAllDirectories_targetTemplates_2
@@ -15461,7 +17697,7 @@ const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
 
 //--- File 'teensy-3-1-tp/build-verbose.py'
 
-const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_33_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -15495,17 +17731,17 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+const cRegularFileWrapper gWrapperFile_33_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_11_targetTemplates
+  gWrapperFileContent_33_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/build.py'
 
-const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_34_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15516,16 +17752,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "sys.path.append (os.path.dirname (os.path.abspath (sys.argv [0])) + \"/sources\")\n"
   "import plm\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   Tool dir                                                                                                           *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def toolDir ():\n"
-  "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
-  "  if SYSTEM_NAME == \"Darwin\":\n"
-  "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.8.0-binutils-2.26-openocd-0.8.0-libusb-1.0.19\")\n"
+  "import toolpath\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -15539,7 +17766,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def llvmOptimizerCompiler ():\n"
-  "  return [toolDir () + \"/bin/opt\", \"-<<OPT_OPTIMIZATION_OPTION>>\", \"-disable-simplify-libcalls\", \"-S\"]\n"
+  "  return [toolpath.toolDir () + \"/bin/opt\", \"-<<OPT_OPTIMIZATION_OPTION>>\", \"-disable-simplify-libcalls\", \"-S\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15548,7 +17775,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\", \"-function-sections\", \"-data-sections\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
+  "  return [toolpath.toolDir () + \"/bin/llc\", \"-function-sections\", \"-data-sections\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15557,7 +17784,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLVMLinkercompiler ():\n"
-  "  return [toolDir () + \"/bin/llvm-link\", \"-S\"]\n"
+  "  return [toolpath.toolDir () + \"/bin/llvm-link\", \"-S\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15566,13 +17793,12 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def CLANGcompiler ():\n"
-  "  result = [toolDir () + \"/bin/clang\"]\n"
+  "  result = [toolpath.toolDir () + \"/bin/clang\"]\n"
   "  result.append (\"--target=armv7-none--eabi\")\n"
   "  result.append (\"-mcpu=cortex-m4\")\n"
   "  result.append (\"-Oz\")\n"
   "  result.append (\"-fomit-frame-pointer\")\n"
   "  result.append (\"-fshort-enums\")\n"
-  "#  result.append (\"-funwind-tables\")\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15582,7 +17808,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def asAssembler ():\n"
-  "  return [toolDir () + \"/bin/arm-eabi-as\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "  return [toolpath.toolDir () + \"/bin/arm-eabi-as\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15591,7 +17817,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def displayObjectSize ():\n"
-  "  return [toolDir () + \"/bin/arm-eabi-size\", \"-t\"]\n"
+  "  return [toolpath.toolDir () + \"/bin/arm-eabi-size\", \"-t\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15600,7 +17826,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def dumpObjectCode ():\n"
-  "  return [toolDir () + \"/bin/arm-eabi-objdump\", \"-Sdh\", \"-Mforce-thumb\"]\n"
+  "  return [toolpath.toolDir () + \"/bin/arm-eabi-objdump\", \"-Sdh\", \"-Mforce-thumb\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15609,7 +17835,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def linker ():\n"
-  "  result = [toolDir () + \"/bin/arm-eabi-ld\"]\n"
+  "  result = [toolpath.toolDir () + \"/bin/arm-eabi-ld\"]\n"
   "  result.append (\"-nostartfiles\")\n"
   "  result.append (\"--fatal-warnings\")\n"
   "  result.append (\"--warn-common\")\n"
@@ -15617,6 +17843,16 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "  result.append (\"--cref\")\n"
   "  result.append (\"-static\")\n"
   "  result.append (\"--gc-sections\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker scripts                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerScripts ():\n"
+  "  result = [\"linker\"] # Linker script is linker.ld\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15636,7 +17872,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def objcopy ():\n"
-  "  return [toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
+  "  return [toolpath.toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15690,7 +17926,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runExecutableOnTarget ():\n"
-  "  return [toolDir () + \"/bin/teensy-loader-cli\", \"-w\", \"-v\", \"-mmcu=mk20dx256\"]\n"
+  "  return [toolpath.toolDir () + \"/bin/teensy-loader-cli\", \"-w\", \"-v\", \"-mmcu=mk20dx256\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -15699,27 +17935,27 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "currentFile = os.path.abspath (sys.argv [0])\n"
-  "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \\\n"
+  "plm.runMakefile (toolpath.toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \\\n"
   "                 LLCcompiler (), llvmOptimizerCompiler (), \\\n"
   "                 asAssembler (), productDir (), \\\n"
-  "                 linker (), linkerLibraries (), \\\n"
+  "                 linker (), linkerScripts (), linkerLibraries (), \\\n"
   "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \\\n"
   "                 CLANGcompiler (), CsourceList (), LLVMLinkercompiler (), \\\n"
   "                 currentFile)\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+const cRegularFileWrapper gWrapperFile_34_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  13857, // Text length
-  gWrapperFileContent_12_targetTemplates
+  14012, // Text length
+  gWrapperFileContent_34_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/clean.py'
 
-const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_35_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15756,17 +17992,17 @@ const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+const cRegularFileWrapper gWrapperFile_35_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_13_targetTemplates
+  gWrapperFileContent_35_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/linker.ld'
 
-const char * gWrapperFileContent_14_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_36_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -15927,17 +18163,17 @@ const char * gWrapperFileContent_14_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+const cRegularFileWrapper gWrapperFile_36_targetTemplates (
   "linker.ld",
   "ld",
   true, // Text file
   5231, // Text length
-  gWrapperFileContent_14_targetTemplates
+  gWrapperFileContent_36_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/objdump.py'
 
-const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_37_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -15971,17 +18207,17 @@ const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+const cRegularFileWrapper gWrapperFile_37_targetTemplates (
   "objdump.py",
   "py",
   true, // Text file
   1005, // Text length
-  gWrapperFileContent_15_targetTemplates
+  gWrapperFileContent_37_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/objsize.py'
 
-const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_38_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -16015,17 +18251,17 @@ const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+const cRegularFileWrapper gWrapperFile_38_targetTemplates (
   "objsize.py",
   "py",
   true, // Text file
   1013, // Text length
-  gWrapperFileContent_16_targetTemplates
+  gWrapperFileContent_38_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/run.py'
 
-const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_39_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -16034,122 +18270,42 @@ const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "import subprocess\n"
   "import sys\n"
   "import os\n"
-  "import atexit\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
   "\n"
-  "def cleanup():\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.kill ()\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "#--- Register a function for killing subprocess\n"
-  "atexit.register (cleanup)\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
   "os.chdir (scriptDir)\n"
   "#---\n"
-  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
-  "#--- Wait for subprocess termination\n"
-  "try:\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "except :\n"
-  "    sys.exit (1)\n"
+  "returncode = subprocess.call ([\"python\", \"build.py\", \"run\"])\n"
+  "if returncode != 0 :\n"
+  "    sys.exit (returncode)\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+const cRegularFileWrapper gWrapperFile_39_targetTemplates (
   "run.py",
   "py",
   true, // Text file
-  1036, // Text length
-  gWrapperFileContent_17_targetTemplates
-) ;
-
-//--- File 'teensy-3-1-tp/section-code.s'
-
-const char * gWrapperFileContent_18_targetTemplates = "\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@                 U D F    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@                    |                            |                                                                    *\n"
-  "@          PSP+32 -> |----------------------------| \\ \n"
-  "@                    | xPSR                       |  |\n"
-  "@          PSP+28 -> |----------------------------|  |\n"
-  "@                    | PC (UDF instruction)       |  |\n"
-  "@          PSP+24 -> |----------------------------|  |\n"
-  "@                    | LR                         |  |\n"
-  "@          PSP+20 -> |----------------------------|  |\n"
-  "@                    | R12                        |  |  Saved by interrupt response\n"
-  "@          PSP+16 -> |----------------------------|  |\n"
-  "@                    | R3                         |  |\n"
-  "@          PSP+12 -> |----------------------------|  |\n"
-  "@                    | R2                         |  |\n"
-  "@          PSP+8  -> |----------------------------|  |\n"
-  "@                    | R1                         |  |\n"
-  "@          PSP+4  -> |----------------------------|  |\n"
-  "@                    | R0                         |  |\n"
-  "@          PSP    -> |----------------------------| /\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "  .global as_sectionHandler\n"
-  "  .type as_sectionHandler, %function\n"
-  "\n"
-  "as_sectionHandler:\n"
-  "@----------------------------------------- Save preserved registers\n"
-  "  push  {r5, lr}\n"
-  "@----------------------------------------- R5 <- thread SP\n"
-  "  mrs   r5, psp           @ r5 <- thread SP\n"
-  "@----------------------------------------- LR <- Address of UDF instruction\n"
-  "  ldr   lr, [r5, #24]     @ 24 : 6 stacked registers before saved PC\n"
-  "@----------------------------------------- Set return address to instruction following UDF\n"
-  "  adds  lr, #2\n"
-  "  str   lr, [r5, #24]\n"
-  "@----------------------------------------- R12 <- address of dispatcher\n"
-  "  ldr   r12, =__udf_dispatcher_table\n"
-  "@----------------------------------------- LR <- bits 0-7 of UDF instruction\n"
-  "  ldrb  lr, [lr, #-2]            @ LR is service call index\n"
-  "@----------------------------------------- r12 <- address of routine to call\n"
-  "  ldr   r12, [r12, lr, lsl #2]   @ R12 += LR << 2\n"
-  "@----------------------------------------- Call service routine\n"
-  "  blx   r12                      @ R5: thread PSP\n"
-  "@----------------------------------------- Set return code (from R0 to R3) in stacked registers\n"
-  "  stmia r5!, {r0, r1, r2, r3}    @ R5 is thread SP\n"
-  "@----------------------------------------- Restore preserved registers, return from interrupt\n"
-  "  pop   {r5, pc}\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_18_targetTemplates (
-  "section-code.s",
-  "s",
-  true, // Text file
-  3346, // Text length
-  gWrapperFileContent_18_targetTemplates
+  629, // Text length
+  gWrapperFileContent_39_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/section-dispatcher-entry.s'
 
-const char * gWrapperFileContent_19_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
+const char * gWrapperFileContent_40_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+const cRegularFileWrapper gWrapperFile_40_targetTemplates (
   "section-dispatcher-entry.s",
   "s",
   true, // Text file
   25, // Text length
-  gWrapperFileContent_19_targetTemplates
+  gWrapperFileContent_40_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/section-dispatcher-header.s'
 
-const char * gWrapperFileContent_20_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_41_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S E C T I O N   T A B L E                                                                            *\n"
   "@                                                                                                                      *\n"
@@ -16157,17 +18313,17 @@ const char * gWrapperFileContent_20_targetTemplates = "@------------------------
   "\n"
   "__udf_dispatcher_table:\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+const cRegularFileWrapper gWrapperFile_41_targetTemplates (
   "section-dispatcher-header.s",
   "s",
   true, // Text file
   630, // Text length
-  gWrapperFileContent_20_targetTemplates
+  gWrapperFileContent_41_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/section-entry.s'
 
-const char * gWrapperFileContent_21_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_42_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16182,37 +18338,39 @@ const char * gWrapperFileContent_21_targetTemplates = "@------------------------
   "\t.fnstart\n"
   "  udf !IDX!\n"
   "  bx  lr\n"
+  "\n"
   ".Lfunc_end_!ENTRY!:\n"
   "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
   "  .cantunwind\n"
   "\t.fnend\n"
   "\n"
   "  .global !ENTRY!\n"
-  "  .type !ENTRY!, %function\n" ;
+  "  .type !ENTRY!, %function\n"
+  "\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+const cRegularFileWrapper gWrapperFile_42_targetTemplates (
   "section-entry.s",
   "s",
   true, // Text file
-  552, // Text length
-  gWrapperFileContent_21_targetTemplates
+  554, // Text length
+  gWrapperFileContent_42_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/service-dispatcher-entry.s'
 
-const char * gWrapperFileContent_22_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
+const char * gWrapperFileContent_43_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
 
-const cRegularFileWrapper gWrapperFile_22_targetTemplates (
+const cRegularFileWrapper gWrapperFile_43_targetTemplates (
   "service-dispatcher-entry.s",
   "s",
   true, // Text file
   29, // Text length
-  gWrapperFileContent_22_targetTemplates
+  gWrapperFileContent_43_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/service-dispatcher-header.s'
 
-const char * gWrapperFileContent_23_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_44_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
   "@                                                                                                                      *\n"
@@ -16223,17 +18381,17 @@ const char * gWrapperFileContent_23_targetTemplates = "@------------------------
   "__svc_dispatcher_table:\n"
   "  .word __direct_return_for_null_service @ 0\n" ;
 
-const cRegularFileWrapper gWrapperFile_23_targetTemplates (
+const cRegularFileWrapper gWrapperFile_44_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
   728, // Text length
-  gWrapperFileContent_23_targetTemplates
+  gWrapperFileContent_44_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/service-entry.s'
 
-const char * gWrapperFileContent_24_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_45_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16248,22 +18406,24 @@ const char * gWrapperFileContent_24_targetTemplates = "@------------------------
   "\t.fnstart\n"
   "  svc #!IDX! + 1\n"
   "  bx  lr\n"
+  "\n"
   ".Lfunc_end_!ENTRY!:\n"
   "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
   "  .cantunwind\n"
-  "\t.fnend\n" ;
+  "\t.fnend\n"
+  "\n" ;
 
-const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+const cRegularFileWrapper gWrapperFile_45_targetTemplates (
   "service-entry.s",
   "s",
   true, // Text file
-  511, // Text length
-  gWrapperFileContent_24_targetTemplates
+  513, // Text length
+  gWrapperFileContent_45_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/target-panic.ll'
 
-const char * gWrapperFileContent_25_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_46_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "define internal void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %inSourceFile) nounwind noreturn naked {\n"
   ";--- Mask interrupt: write 1 into FAULTMASK register\n"
@@ -16274,17 +18434,17 @@ const char * gWrapperFileContent_25_targetTemplates = ";------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_25_targetTemplates (
+const cRegularFileWrapper gWrapperFile_46_targetTemplates (
   "target-panic.ll",
   "ll",
   true, // Text file
   478, // Text length
-  gWrapperFileContent_25_targetTemplates
+  gWrapperFileContent_46_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/target.c'
 
-const char * gWrapperFileContent_26_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_47_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#define TASK_COUNT (!TASKCOUNT!)\n"
   "#define GUARD_COUNT (!GUARDCOUNT!)\n"
@@ -16735,17 +18895,17 @@ const char * gWrapperFileContent_26_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_26_targetTemplates (
+const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "target.c",
   "c",
   true, // Text file
   22543, // Text length
-  gWrapperFileContent_26_targetTemplates
+  gWrapperFileContent_47_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/target.ll'
 
-const char * gWrapperFileContent_27_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_48_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
@@ -17017,17 +19177,17 @@ const char * gWrapperFileContent_27_targetTemplates = "target datalayout = \"e-m
   ";--- Create task \n"
   "declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n" ;
 
-const cRegularFileWrapper gWrapperFile_27_targetTemplates (
+const cRegularFileWrapper gWrapperFile_48_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
   12601, // Text length
-  gWrapperFileContent_27_targetTemplates
+  gWrapperFileContent_48_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/target.s'
 
-const char * gWrapperFileContent_28_targetTemplates = "\t.syntax unified\n"
+const char * gWrapperFileContent_49_targetTemplates = "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
   "\t.thumb\n"
   "\n"
@@ -17254,37 +19414,90 @@ const char * gWrapperFileContent_28_targetTemplates = "\t.syntax unified\n"
   "infiniteLoop:\n"
   "  ACTIVITY_LED_OFF\n"
   "  wfi\n"
-  "  b  infiniteLoop\n" ;
+  "  b  infiniteLoop\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 U D F    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                    |                            |                                                                    *\n"
+  "@          PSP+32 -> |----------------------------| \\ \n"
+  "@                    | xPSR                       |  |\n"
+  "@          PSP+28 -> |----------------------------|  |\n"
+  "@                    | PC (UDF instruction)       |  |\n"
+  "@          PSP+24 -> |----------------------------|  |\n"
+  "@                    | LR                         |  |\n"
+  "@          PSP+20 -> |----------------------------|  |\n"
+  "@                    | R12                        |  |  Saved by interrupt response\n"
+  "@          PSP+16 -> |----------------------------|  |\n"
+  "@                    | R3                         |  |\n"
+  "@          PSP+12 -> |----------------------------|  |\n"
+  "@                    | R2                         |  |\n"
+  "@          PSP+8  -> |----------------------------|  |\n"
+  "@                    | R1                         |  |\n"
+  "@          PSP+4  -> |----------------------------|  |\n"
+  "@                    | R0                         |  |\n"
+  "@          PSP    -> |----------------------------| /\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global as_sectionHandler\n"
+  "  .type as_sectionHandler, %function\n"
+  "\n"
+  "as_sectionHandler:\n"
+  "@----------------------------------------- Save preserved registers\n"
+  "  push  {r5, lr}\n"
+  "@----------------------------------------- R5 <- thread SP\n"
+  "  mrs   r5, psp           @ r5 <- thread SP\n"
+  "@----------------------------------------- LR <- Address of UDF instruction\n"
+  "  ldr   lr, [r5, #24]     @ 24 : 6 stacked registers before saved PC\n"
+  "@----------------------------------------- Set return address to instruction following UDF\n"
+  "  adds  lr, #2\n"
+  "  str   lr, [r5, #24]\n"
+  "@----------------------------------------- R12 <- address of dispatcher\n"
+  "  ldr   r12, =__udf_dispatcher_table\n"
+  "@----------------------------------------- LR <- bits 0-7 of UDF instruction\n"
+  "  ldrb  lr, [lr, #-2]            @ LR is service call index\n"
+  "@----------------------------------------- r12 <- address of routine to call\n"
+  "  ldr   r12, [r12, lr, lsl #2]   @ R12 += LR << 2\n"
+  "@----------------------------------------- Call service routine\n"
+  "  blx   r12                      @ R5: thread PSP\n"
+  "@----------------------------------------- Set return code (from R0 to R3) in stacked registers\n"
+  "  stmia r5!, {r0, r1, r2, r3}    @ R5 is thread SP\n"
+  "@----------------------------------------- Restore preserved registers, return from interrupt\n"
+  "  pop   {r5, pc}\n"
+  "\n" ;
 
-const cRegularFileWrapper gWrapperFile_28_targetTemplates (
+const cRegularFileWrapper gWrapperFile_49_targetTemplates (
   "target.s",
   "s",
   true, // Text file
-  12544, // Text length
-  gWrapperFileContent_28_targetTemplates
+  15890, // Text length
+  gWrapperFileContent_49_targetTemplates
 ) ;
 
 //--- All files of 'teensy-3-1-tp' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [19] = {
-  & gWrapperFile_11_targetTemplates,
-  & gWrapperFile_12_targetTemplates,
-  & gWrapperFile_13_targetTemplates,
-  & gWrapperFile_14_targetTemplates,
-  & gWrapperFile_15_targetTemplates,
-  & gWrapperFile_16_targetTemplates,
-  & gWrapperFile_17_targetTemplates,
-  & gWrapperFile_18_targetTemplates,
-  & gWrapperFile_19_targetTemplates,
-  & gWrapperFile_20_targetTemplates,
-  & gWrapperFile_21_targetTemplates,
-  & gWrapperFile_22_targetTemplates,
-  & gWrapperFile_23_targetTemplates,
-  & gWrapperFile_24_targetTemplates,
-  & gWrapperFile_25_targetTemplates,
-  & gWrapperFile_26_targetTemplates,
-  & gWrapperFile_27_targetTemplates,
-  & gWrapperFile_28_targetTemplates,
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [18] = {
+  & gWrapperFile_33_targetTemplates,
+  & gWrapperFile_34_targetTemplates,
+  & gWrapperFile_35_targetTemplates,
+  & gWrapperFile_36_targetTemplates,
+  & gWrapperFile_37_targetTemplates,
+  & gWrapperFile_38_targetTemplates,
+  & gWrapperFile_39_targetTemplates,
+  & gWrapperFile_40_targetTemplates,
+  & gWrapperFile_41_targetTemplates,
+  & gWrapperFile_42_targetTemplates,
+  & gWrapperFile_43_targetTemplates,
+  & gWrapperFile_44_targetTemplates,
+  & gWrapperFile_45_targetTemplates,
+  & gWrapperFile_46_targetTemplates,
+  & gWrapperFile_47_targetTemplates,
+  & gWrapperFile_48_targetTemplates,
+  & gWrapperFile_49_targetTemplates,
   NULL
 } ;
 
@@ -17298,7 +19511,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_3 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
   "teensy-3-1-tp",
-  18,
+  17,
   gWrapperAllFiles_targetTemplates_3,
   0,
   gWrapperAllDirectories_targetTemplates_3
@@ -17306,10 +19519,12 @@ const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
 
 //--- All files of '' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [4] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [6] = {
   & gWrapperFile_0_targetTemplates,
   & gWrapperFile_1_targetTemplates,
   & gWrapperFile_2_targetTemplates,
+  & gWrapperFile_3_targetTemplates,
+  & gWrapperFile_4_targetTemplates,
   NULL
 } ;
 
@@ -17326,7 +19541,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [4] = 
 
 const cDirectoryWrapper gWrapperDirectory_0_targetTemplates (
   "",
-  3,
+  5,
   gWrapperAllFiles_targetTemplates_0,
   3,
   gWrapperAllDirectories_targetTemplates_0
