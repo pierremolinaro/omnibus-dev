@@ -618,7 +618,6 @@ proc analyzeEffectiveParameters
       ioEffectiveParameterListIR +=
         !.input
         !effective_mSelector.string
- #       !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![variableKind llvmName])}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
@@ -667,7 +666,6 @@ proc analyzeEffectiveParameters
         !.outputInput
         !effective_mSelector.string
         !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![variableKind llvmName])}}
-#        !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name.string)}}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR

@@ -270,21 +270,77 @@ override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
   ?!variableMap:@variableMap unused ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+  error inCallerNameForInvocationGraph: "NOT HANDLED YET @standaloneRoutineCallInstructionAST" : outConvenienceGuardGenerationIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @selfRoutineCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+  if inSelfType == .null then
+    error mRoutineName : "'self' is not available in this context" : outConvenienceGuardGenerationIR
+  else
+    switch [inSelfType kind]
+    case opaque (*) :
+      error mRoutineName : "an opaque type does not handle field access" : outConvenienceGuardGenerationIR
+    case boolean :
+      error mRoutineName : "a boolean does not handle field access" : outConvenienceGuardGenerationIR
+    case staticInteger :
+      error mRoutineName : "an integer does not handle field access" : outConvenienceGuardGenerationIR
+    case boolset :
+      error mRoutineName : "a boolset does not handle field access" : outConvenienceGuardGenerationIR
+    case literalString :
+      error mRoutineName : "a literal string does not handle field access" : outConvenienceGuardGenerationIR
+    case enumeration (*) :
+      error mRoutineName : "an enumeration does not handle field access" : outConvenienceGuardGenerationIR
+    case integer (* * * *) :
+      error mRoutineName : "an integer does not handle field access" : outConvenienceGuardGenerationIR
+    case structure (@propertyMap unused propertyMap *) :
+      @instructionListIR baseGuardInstructionGenerationList = {}
+      let routineMangledName = @lstring.new {!"$" + [inSelfType key] + "." + mRoutineName !mRoutineName.location}
+      @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+      effectiveParameterListIR += !.outputInput !"" !.new {!inSelfType !.selfObject}
+      [inContext.mGuardMapForContext searchKey
+        !routineMangledName
+        ?let @procedureSignature formalSignature
+      ]
+    #--- Enter in invocation graph
+      let routineNameForInvocationGraph = guardNameForInvocationGraph (!inSelfType !mRoutineName)
+       [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+    #--- Analyze effective parameters
+      @allocaList baseGuardAllocaList = {}
+      analyzeEffectiveParameters (
+        !self:inSelfType
+        !formal:formalSignature
+        !effective:mEffectiveParameterList
+        !errorLocation:mRoutineName.location
+        !callerForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !requiredModeSet:{!isrModeName ()}
+        !allowPanic:true
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?alloca:baseGuardAllocaList
+        !?instructionListIR:baseGuardInstructionGenerationList
+        !?effectiveIR:effectiveParameterListIR
+      )
+    #--- Code generation
+      outConvenienceGuardGenerationIR = .convenienceGuard {
+        !baseGuardAllocaList:baseGuardAllocaList
+        !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+        !baseGuardMangledName:routineMangledName.string
+        !baseGuardEffectiveParameterList:effectiveParameterListIR
+      }
+    end    
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -298,7 +354,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   ?!variableMap:@variableMap unused ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  error inCallerNameForInvocationGraph: "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+  error inCallerNameForInvocationGraph: "NOT HANDLED YET @remoteRoutineCallInstructionAST" : outConvenienceGuardGenerationIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
