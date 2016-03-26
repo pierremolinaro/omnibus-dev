@@ -262,15 +262,49 @@ abstract method @abstractCallInstructionAST baseGuardAnalyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  error inCallerNameForInvocationGraph: "NOT HANDLED YET @standaloneRoutineCallInstructionAST" : outConvenienceGuardGenerationIR
+  let routineMangledName = @lstring.new {!"." + mRoutineName !mRoutineName.location}
+  [inContext.mGuardMapForContext searchKey
+    !routineMangledName
+    ?let @procedureSignature formalSignature
+  ]
+#--- Enter in invocation graph
+  let routineNameForInvocationGraph = guardNameForInvocationGraph (!.null !mRoutineName)
+   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#--- Analyze effective parameters
+  @instructionListIR baseGuardInstructionGenerationList = {}
+  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  @allocaList baseGuardAllocaList = {}
+  analyzeEffectiveParameters (
+    !self:inSelfType
+    !formal:formalSignature
+    !effective:mEffectiveParameterList
+    !errorLocation:mRoutineName.location
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:{!isrModeName ()}
+    !allowPanic:true
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:baseGuardAllocaList
+    !?instructionListIR:baseGuardInstructionGenerationList
+    !?effectiveIR:effectiveParameterListIR
+  )
+#--- Code generation
+  outConvenienceGuardGenerationIR = .convenienceGuard {
+    !baseGuardAllocaList:baseGuardAllocaList
+    !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+    !baseGuardMangledName:routineMangledName.string
+    !baseGuardEffectiveParameterList:effectiveParameterListIR
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -15,6 +15,10 @@ var s1 = $semaphore (!value:0) {
 guard PP () : s1.P () {
 }
 
+guard convenienceWaitUntilMS (?deadline:inDeadline $uint32)
+: waitUntilMS (!deadline:inDeadline) {
+}
+
 //-----------------------------------------------------------------------------*
 
 task T0 priority 0 stackSize 512 {
@@ -60,7 +64,7 @@ task T2 priority 2 stackSize 512 {
       ledToggle  (!LED_L1)
     on PP () :
       ledToggle  (!LED_L3)
-    on waitUntilMS (!deadline:self.deadline) :
+    on convenienceWaitUntilMS (!deadline:self.deadline) :
       self.deadline += 200
       ledToggle  (!LED_L2)
     end

@@ -1136,6 +1136,10 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "guard PP () : s1.P () {\n"
   "}\n"
   "\n"
+  "guard convenienceWaitUntilMS (\?deadline:inDeadline $uint32)\n"
+  ": waitUntilMS (!deadline:inDeadline) {\n"
+  "}\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T0 priority 0 stackSize 512 {\n"
@@ -1181,7 +1185,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "      ledToggle  (!LED_L1)\n"
   "    on PP () :\n"
   "      ledToggle  (!LED_L3)\n"
-  "    on waitUntilMS (!deadline:self.deadline) :\n"
+  "    on convenienceWaitUntilMS (!deadline:self.deadline) :\n"
   "      self.deadline += 200\n"
   "      ledToggle  (!LED_L2)\n"
   "    end\n"
@@ -1194,7 +1198,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1463, // Text length
+  1576, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
