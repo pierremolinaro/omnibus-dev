@@ -624,14 +624,6 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "init 100 {\n"
-  "//--- Program pin P1.23 as an output (STAT led)\n"
-  "  IO1DIR |= 1 << 23\n"
-  "  IO1CLR  = 1 << 23 // Led On\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
@@ -653,7 +645,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  634, // Text length
+  469, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
