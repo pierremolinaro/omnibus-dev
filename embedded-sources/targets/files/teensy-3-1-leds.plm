@@ -7,7 +7,7 @@
 //   Led sur carte Teensy : PTC5
 //-----------------------------------------------------------------------------*
 
-init 100 requiredBy ledOn (?inLeds $uint32), ledToggle (?inLeds $uint32), ledOff (?inLeds $uint32) {
+init 100 requiredBy ledOn, ledToggle, ledOff {
 //--- Led L0 : PTA12
   PORTA_PCR12 = (1 << 8)
   GPIOA_PDDR |= (1 << 12)

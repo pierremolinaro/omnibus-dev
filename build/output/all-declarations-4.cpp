@@ -4793,7 +4793,7 @@ void routine_initSemanticAnalysis (const GALGAS_semanticContext constinArgument_
                                    const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
                                    const GALGAS_lbigint constinArgument_inPriority,
                                    const GALGAS_stringset constinArgument_inModeSet,
-                                   const GALGAS_initRequiredByProcList constinArgument_inRequiredByProcList,
+                                   const GALGAS_lstringlist constinArgument_inRequiredByProcList,
                                    const GALGAS_instructionListAST constinArgument_inInstructionListAST,
                                    const GALGAS_location constinArgument_inEndOfInitDeclaration,
                                    GALGAS_allocaList & outArgument_outAllocaList,
@@ -4802,40 +4802,40 @@ void routine_initSemanticAnalysis (const GALGAS_semanticContext constinArgument_
                                    COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outAllocaList.drop () ; // Release 'out' argument
   outArgument_outInstructionGenerationList.drop () ; // Release 'out' argument
-  GALGAS_lstring var_routineNameForInvocationGraph = function_initNameForInvocationGraph (constinArgument_inSelfType, constinArgument_inPriority, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 138)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph = function_initNameForInvocationGraph (constinArgument_inSelfType, constinArgument_inPriority, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 133)) ;
   {
-  ioArgument_ioTemporaries.mAttribute_mInitRoutinePriorityMap.setter_insertKey (var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 139)) ;
+  ioArgument_ioTemporaries.mAttribute_mInitRoutinePriorityMap.setter_insertKey (var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 134)) ;
   }
-  const enumGalgasBool test_0 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("declaration-init.galgas", 141)).operator_not (SOURCE_FILE ("declaration-init.galgas", 141)).boolEnum () ;
+  const enumGalgasBool test_0 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("declaration-init.galgas", 136)).operator_not (SOURCE_FILE ("declaration-init.galgas", 136)).boolEnum () ;
   if (kBoolTrue == test_0) {
     {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph, var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 142)) ;
+    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph, var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 137)) ;
     }
   }
-  cEnumerator_initRequiredByProcList enumerator_5984 (constinArgument_inRequiredByProcList, kEnumeration_up) ;
-  while (enumerator_5984.hasCurrentObject ()) {
+  cEnumerator_lstringlist enumerator_5719 (constinArgument_inRequiredByProcList, kEnumeration_up) ;
+  while (enumerator_5719.hasCurrentObject ()) {
     {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (function_procNameForInvocationGraph (constinArgument_inSelfType, enumerator_5984.current_mProcName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 149)), var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("declaration-init.galgas", 148)) ;
+    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (function_procNameForInvocationGraph (constinArgument_inSelfType, enumerator_5719.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 144)), var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("declaration-init.galgas", 143)) ;
     }
-    enumerator_5984.gotoNextObject () ;
+    enumerator_5719.gotoNextObject () ;
   }
-  cEnumerator_initRequiredByProcList enumerator_6259 (constinArgument_inRequiredByProcList, kEnumeration_up) ;
-  while (enumerator_6259.hasCurrentObject ()) {
-    GALGAS_lstring var_lkey = GALGAS_lstring::constructor_new (GALGAS_string (".").add_operation (enumerator_6259.current_mProcName (HERE).getter_string (SOURCE_FILE ("declaration-init.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 155)), enumerator_6259.current_mProcName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("declaration-init.galgas", 155)) ;
-    GALGAS_bool joker_6382_6 ; // Joker input parameter
-    GALGAS_modeMap joker_6382_5 ; // Joker input parameter
-    GALGAS_procedureSignature joker_6382_4 ; // Joker input parameter
-    GALGAS_routineKind joker_6382_3 ; // Joker input parameter
-    GALGAS_bool joker_6382_2 ; // Joker input parameter
-    GALGAS_unifiedTypeMap_2D_proxy joker_6382_1 ; // Joker input parameter
-    constinArgument_inContext.mAttribute_mRoutineMapForContext.method_searchKey (var_lkey, joker_6382_6, joker_6382_5, joker_6382_4, joker_6382_3, joker_6382_2, joker_6382_1, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 156)) ;
-    enumerator_6259.gotoNextObject () ;
+  cEnumerator_lstringlist enumerator_5971 (constinArgument_inRequiredByProcList, kEnumeration_up) ;
+  while (enumerator_5971.hasCurrentObject ()) {
+    GALGAS_lstring var_lkey = GALGAS_lstring::constructor_new (GALGAS_string (".").add_operation (enumerator_5971.current_mValue (HERE).getter_string (SOURCE_FILE ("declaration-init.galgas", 150)), inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 150)), enumerator_5971.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("declaration-init.galgas", 150)) ;
+    GALGAS_bool joker_6094_6 ; // Joker input parameter
+    GALGAS_modeMap joker_6094_5 ; // Joker input parameter
+    GALGAS_procedureSignature joker_6094_4 ; // Joker input parameter
+    GALGAS_routineKind joker_6094_3 ; // Joker input parameter
+    GALGAS_bool joker_6094_2 ; // Joker input parameter
+    GALGAS_unifiedTypeMap_2D_proxy joker_6094_1 ; // Joker input parameter
+    constinArgument_inContext.mAttribute_mRoutineMapForContext.method_searchKey (var_lkey, joker_6094_6, joker_6094_5, joker_6094_4, joker_6094_3, joker_6094_2, joker_6094_1, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 151)) ;
+    enumerator_5971.gotoNextObject () ;
   }
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (var_routineNameForInvocationGraph.mAttribute_string, constinArgument_inContext, GALGAS_bool (false), GALGAS_accessKind::constructor_readWriteAccess (SOURCE_FILE ("declaration-init.galgas", 163)), GALGAS_bool (false), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-init.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 159)) ;
-  outArgument_outInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-init.galgas", 168)) ;
-  outArgument_outAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-init.galgas", 169)) ;
-  categoryMethod_analyzeRoutineInstructionList (constinArgument_inInstructionListAST, constinArgument_inSelfType, var_routineNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap, outArgument_outAllocaList, outArgument_outInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 170)) ;
-  var_variableMap.method_checkAutomatonStates (constinArgument_inEndOfInitDeclaration, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 183)) ;
+  GALGAS_variableMap var_variableMap = function_initialVariableMap (var_routineNameForInvocationGraph.mAttribute_string, constinArgument_inContext, GALGAS_bool (false), GALGAS_accessKind::constructor_readWriteAccess (SOURCE_FILE ("declaration-init.galgas", 158)), GALGAS_bool (false), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-init.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 154)) ;
+  outArgument_outInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-init.galgas", 163)) ;
+  outArgument_outAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-init.galgas", 164)) ;
+  categoryMethod_analyzeRoutineInstructionList (constinArgument_inInstructionListAST, constinArgument_inSelfType, var_routineNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap, outArgument_outAllocaList, outArgument_outInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 165)) ;
+  var_variableMap.method_checkAutomatonStates (constinArgument_inEndOfInitDeclaration, inCompiler COMMA_SOURCE_FILE ("declaration-init.galgas", 178)) ;
 }
 
 
@@ -14504,10 +14504,10 @@ const char * gWrapperFileContent_7_targetTemplates = "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 10 requiredBy\n"
-  "writeData_inUserMode (\?data $uint8),\n"
-  "write8bitCommand_inUserMode (\?data $uint8),\n"
-  "writeDataInExceptionMode (\?data $uint8),\n"
-  "write8bitCommandInExceptionMode (\?data $uint8)\n"
+  "writeData_inUserMode,\n"
+  "write8bitCommand_inUserMode,\n"
+  "writeDataInExceptionMode,\n"
+  "write8bitCommandInExceptionMode\n"
   "{\n"
   "  configurePorts () ;\n"
   "//--- \xC3""\x89""tape 1 : attendre 15 ms\n"
@@ -14872,7 +14872,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  16078, // Text length
+  16018, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 
@@ -14887,7 +14887,7 @@ const char * gWrapperFileContent_8_targetTemplates = "//------------------------
   "//   Led sur carte Teensy : PTC5\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "init 100 requiredBy ledOn (\?inLeds $uint32), ledToggle (\?inLeds $uint32), ledOff (\?inLeds $uint32) {\n"
+  "init 100 requiredBy ledOn, ledToggle, ledOff {\n"
   "//--- Led L0 : PTA12\n"
   "  PORTA_PCR12 = (1 << 8)\n"
   "  GPIOA_PDDR |= (1 << 12)\n"
@@ -14996,7 +14996,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "teensy-3-1-leds.plm",
   "plm",
   true, // Text file
-  2817, // Text length
+  2763, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 

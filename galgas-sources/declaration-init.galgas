@@ -4,7 +4,7 @@
 
 sortedlist @initList {
   @location mInitLocation
-  @initRequiredByProcList mRequiredByProcList
+  @lstringlist mRequiredByProcList
   @instructionListAST mInstructionList
   @location mEndOfInitLocation
   @lbigint mPriority
@@ -12,10 +12,6 @@ sortedlist @initList {
   mPriority <
 }
 
-list @initRequiredByProcList {
-  @lstring mProcName
-  @procFormalArgumentList mProcFormalArgumentList
-}
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -27,14 +23,13 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $init$
     $integer$ ?let @lbigint priority
-    @initRequiredByProcList requiredByProcList = {}
+    @lstringlist requiredByProcList = {}
     select
     or
       $requiredBy$
       repeat
         $identifier$ ?let procName
-        <procedure_formal_arguments> ?formalArguments:let procFormalArgumentList
-        requiredByProcList += !procName !procFormalArgumentList
+        requiredByProcList += !procName
       while
         $,$
       end
@@ -128,7 +123,7 @@ proc initSemanticAnalysis
   ?selfType:let @unifiedTypeMap-proxy inSelfType
   ?priority:let @lbigint inPriority
   ?modes:let @stringset inModeSet
-  ?requiredBy:let @initRequiredByProcList inRequiredByProcList
+  ?requiredBy:let @lstringlist inRequiredByProcList
   ?instructionList:let @instructionListAST inInstructionListAST
   ?endOfDeclaration:let @location inEndOfInitDeclaration
   !@allocaList outAllocaList
@@ -144,14 +139,14 @@ proc initSemanticAnalysis
       !routineNameForInvocationGraph
     ]
   end
-  for (procName procFormalArgumentList) in inRequiredByProcList do
+  for (procName) in inRequiredByProcList do
     [!?ioTemporaries.mSubprogramInvocationGraph addEdge
       !procNameForInvocationGraph (!inSelfType !procName)
       !routineNameForInvocationGraph
     ]
   end
 #--- Check "requiredBy" routines are defined
-  for (procName procFormalArgumentList) in inRequiredByProcList do
+  for (procName) in inRequiredByProcList do
     let lkey = @lstring.new {!"." + procName !procName.location}
     [inContext.mRoutineMapForContext searchKey !lkey ?6*]
   end
@@ -188,7 +183,7 @@ proc initSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @initListIR {
-  @initRequiredByProcList mInitRequiredByProcList
+  @lstringlist mInitRequiredByProcList
   @location mInitLocation
   @allocaList mAllocaList
   @instructionListIR mInstructionListIR
@@ -216,7 +211,7 @@ method @initListIR generateLLVMinitCode
       generate = true
     else
       generate = false
-      for (procName *) in init.mInitRequiredByProcList while not generate do
+      for (procName) in init.mInitRequiredByProcList while not generate do
         generate = [inProcedureMapIR hasKey !"." + procName.string]
       end
     end

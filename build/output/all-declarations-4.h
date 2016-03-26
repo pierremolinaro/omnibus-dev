@@ -1231,7 +1231,7 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
                                    const class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
                                    const class GALGAS_lbigint constinArgument4,
                                    const class GALGAS_stringset constinArgument5,
-                                   const class GALGAS_initRequiredByProcList constinArgument6,
+                                   const class GALGAS_lstringlist constinArgument6,
                                    const class GALGAS_instructionListAST constinArgument7,
                                    const class GALGAS_location constinArgument8,
                                    class GALGAS_allocaList & outArgument9,
