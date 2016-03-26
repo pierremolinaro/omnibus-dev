@@ -12579,6 +12579,40 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
 
 const char * gWrapperFileContent_20_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
+  "#define VICIntEnClr    (*((volatile unsigned *) 0xFFFFF014))\n"
+  "#define VICIntEnable   (*((volatile unsigned *) 0xFFFFF010))\n"
+  "#define VICVect(INDEX) (*((volatile unsigned *) (0xFFFFF100 + ((INDEX) << 2))))\n"
+  "#define VICVectCntl(INDEX) (*((volatile unsigned *) (0xFFFFF200 + ((INDEX) << 2))))\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static unsigned gSlotID ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void installInterruptServiceRoutine (void irq_routine (void), const unsigned inSourceID) {\n"
+  "//---\n"
+  "  VICVect (gSlotID) = (unsigned) irq_routine ;\n"
+  "  VICVectCntl (gSlotID) = 0x20 | inSourceID ;\n"
+  "//---\n"
+  "  VICIntEnClr   = 1 << inSourceID ;\n"
+  "  VICIntEnable |= 1 << inSourceID ;\n"
+  "//---\n"
+  "  gSlotID ++ ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void interrupt5 (void) asm (\"!FUNC!.interrupt5\") ;\n"
+  "\n"
+  "void installInterrupts (void) ;\n"
+  "\n"
+  "void installInterrupts (void) {\n"
+  "  installInterruptServiceRoutine (interrupt5, 5) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
   "#define TASK_COUNT (!TASKCOUNT!)\n"
   "#define GUARD_COUNT (!GUARDCOUNT!)\n"
   "\n"
@@ -13004,7 +13038,7 @@ const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  19996, // Text length
+  21268, // Text length
   gWrapperFileContent_20_targetTemplates
 ) ;
 
@@ -13108,9 +13142,14 @@ const char * gWrapperFileContent_21_targetTemplates = "target datalayout = \"e-m
   "  call void @clearBSS ()\n"
   "  call void @copyData ()\n"
   "  call void @init ()\n"
+  "  call void @installInterrupts ()\n"
   "  call void @start.tasks ()\n"
   "  ret  void\n"
   "}\n"
+  "\n"
+  ";----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "declare void @installInterrupts () nounwind\n"
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
   ";   Real time Kernel interface                                                                                         *\n"
@@ -13123,7 +13162,7 @@ const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
-  4548, // Text length
+  4749, // Text length
   gWrapperFileContent_21_targetTemplates
 ) ;
 
@@ -13694,7 +13733,9 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "func `isr interrupt5 () {\n"
+  "required func `isr interrupt5 ()\n"
+  "\n"
+  "func `isr interrupt5 @global () {\n"
   "  TIMER1_IR = 1 // Clears MR0 interrupt\n"
   "  let now = gUptimeMS +% 1\n"
   "  gUptimeMS = now\n"
@@ -13737,7 +13778,7 @@ const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "lpc2294-xtr.plm",
   "plm",
   true, // Text file
-  4413, // Text length
+  4455, // Text length
   gWrapperFileContent_24_targetTemplates
 ) ;
 
