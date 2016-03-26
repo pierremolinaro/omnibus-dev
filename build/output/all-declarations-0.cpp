@@ -9538,7 +9538,7 @@ class cSortedListElement_initList : public cSortedListElement {
 
 //--- Constructor
   public : cSortedListElement_initList (const GALGAS_location & in_mInitLocation,
-                                        const GALGAS_initRequiredByProcList & in_mRequiredByProcList,
+                                        const GALGAS_lstringlist & in_mRequiredByProcList,
                                         const GALGAS_instructionListAST & in_mInstructionList,
                                         const GALGAS_location & in_mEndOfInitLocation,
                                         const GALGAS_lbigint & in_mPriority
@@ -9563,7 +9563,7 @@ class cSortedListElement_initList : public cSortedListElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 cSortedListElement_initList::cSortedListElement_initList (const GALGAS_location & in_mInitLocation,
-                                                          const GALGAS_initRequiredByProcList & in_mRequiredByProcList,
+                                                          const GALGAS_lstringlist & in_mRequiredByProcList,
                                                           const GALGAS_instructionListAST & in_mInstructionList,
                                                           const GALGAS_location & in_mEndOfInitLocation,
                                                           const GALGAS_lbigint & in_mPriority
@@ -9648,7 +9648,7 @@ GALGAS_initList GALGAS_initList::constructor_emptySortedList (LOCATION_ARGS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initList GALGAS_initList::constructor_sortedListWithValue (const GALGAS_location & inOperand0,
-                                                                  const GALGAS_initRequiredByProcList & inOperand1,
+                                                                  const GALGAS_lstringlist & inOperand1,
                                                                   const GALGAS_instructionListAST & inOperand2,
                                                                   const GALGAS_location & inOperand3,
                                                                   const GALGAS_lbigint & inOperand4
@@ -9666,7 +9666,7 @@ GALGAS_initList GALGAS_initList::constructor_sortedListWithValue (const GALGAS_l
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initList::addAssign_operation (const GALGAS_location & inOperand0,
-                                           const GALGAS_initRequiredByProcList & inOperand1,
+                                           const GALGAS_lstringlist & inOperand1,
                                            const GALGAS_instructionListAST & inOperand2,
                                            const GALGAS_location & inOperand3,
                                            const GALGAS_lbigint & inOperand4
@@ -9694,7 +9694,7 @@ void GALGAS_initList::plusAssign_operation (const GALGAS_initList inOperand,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initList::setter_popSmallest (GALGAS_location & outOperand0,
-                                          GALGAS_initRequiredByProcList & outOperand1,
+                                          GALGAS_lstringlist & outOperand1,
                                           GALGAS_instructionListAST & outOperand2,
                                           GALGAS_location & outOperand3,
                                           GALGAS_lbigint & outOperand4,
@@ -9722,7 +9722,7 @@ void GALGAS_initList::setter_popSmallest (GALGAS_location & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initList::setter_popGreatest (GALGAS_location & outOperand0,
-                                          GALGAS_initRequiredByProcList & outOperand1,
+                                          GALGAS_lstringlist & outOperand1,
                                           GALGAS_instructionListAST & outOperand2,
                                           GALGAS_location & outOperand3,
                                           GALGAS_lbigint & outOperand4,
@@ -9750,7 +9750,7 @@ void GALGAS_initList::setter_popGreatest (GALGAS_location & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initList::method_smallest (GALGAS_location & outOperand0,
-                                       GALGAS_initRequiredByProcList & outOperand1,
+                                       GALGAS_lstringlist & outOperand1,
                                        GALGAS_instructionListAST & outOperand2,
                                        GALGAS_location & outOperand3,
                                        GALGAS_lbigint & outOperand4,
@@ -9778,7 +9778,7 @@ void GALGAS_initList::method_smallest (GALGAS_location & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initList::method_greatest (GALGAS_location & outOperand0,
-                                       GALGAS_initRequiredByProcList & outOperand1,
+                                       GALGAS_lstringlist & outOperand1,
                                        GALGAS_instructionListAST & outOperand2,
                                        GALGAS_location & outOperand3,
                                        GALGAS_lbigint & outOperand4,
@@ -9829,7 +9829,7 @@ GALGAS_location cEnumerator_initList::current_mInitLocation (LOCATION_ARGS) cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_initRequiredByProcList cEnumerator_initList::current_mRequiredByProcList (LOCATION_ARGS) const {
+GALGAS_lstringlist cEnumerator_initList::current_mRequiredByProcList (LOCATION_ARGS) const {
   const cSortedListElement_initList * p = (const cSortedListElement_initList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cSortedListElement_initList) ;
   return p->mObject.mAttribute_mRequiredByProcList ;
@@ -12445,25 +12445,23 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i12_parse (C_Le
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i13_ (GALGAS_ast & ioArgument_ioAST,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-init.galgas", 28)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-init.galgas", 24)) ;
   GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-init.galgas", 29)) ;
-  GALGAS_initRequiredByProcList var_requiredByProcList = GALGAS_initRequiredByProcList::constructor_emptyList (SOURCE_FILE ("declaration-init.galgas", 30)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-init.galgas", 25)) ;
+  GALGAS_lstringlist var_requiredByProcList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-init.galgas", 26)) ;
   switch (select_common_5F_syntax_23 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_requiredBy) COMMA_SOURCE_FILE ("declaration-init.galgas", 33)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_requiredBy) COMMA_SOURCE_FILE ("declaration-init.galgas", 29)) ;
     bool repeatFlag_0 = true ;
     while (repeatFlag_0) {
       GALGAS_lstring var_procName = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-init.galgas", 35)) ;
-      GALGAS_procFormalArgumentList var_procFormalArgumentList ;
-      nt_procedure_5F_formal_5F_arguments_ (var_procFormalArgumentList, inCompiler) ;
-      var_requiredByProcList.addAssign_operation (var_procName, var_procFormalArgumentList  COMMA_SOURCE_FILE ("declaration-init.galgas", 37)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-init.galgas", 31)) ;
+      var_requiredByProcList.addAssign_operation (var_procName  COMMA_SOURCE_FILE ("declaration-init.galgas", 32)) ;
       switch (select_common_5F_syntax_24 (inCompiler)) {
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2C_) COMMA_SOURCE_FILE ("declaration-init.galgas", 39)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2C_) COMMA_SOURCE_FILE ("declaration-init.galgas", 34)) ;
       } break ;
       default:
         repeatFlag_0 = false ;
@@ -12474,32 +12472,31 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i13_ (GALGAS_as
   default:
     break ;
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-init.galgas", 42)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-init.galgas", 37)) ;
   GALGAS_instructionListAST var_instructionList ;
-  GALGAS_labelMap joker_1654 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-init.galgas", 43)) ;
-  nt_instructionList_ (var_instructionList, joker_1654, inCompiler) ;
-  GALGAS_location var_endOfInit = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-init.galgas", 44)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-init.galgas", 45)) ;
-  ioArgument_ioAST.mAttribute_mInitList.addAssign_operation (var_priority.mAttribute_location, var_requiredByProcList, var_instructionList, var_endOfInit, var_priority  COMMA_SOURCE_FILE ("declaration-init.galgas", 46)) ;
+  GALGAS_labelMap joker_1423 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-init.galgas", 38)) ;
+  nt_instructionList_ (var_instructionList, joker_1423, inCompiler) ;
+  GALGAS_location var_endOfInit = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-init.galgas", 39)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-init.galgas", 40)) ;
+  ioArgument_ioAST.mAttribute_mInitList.addAssign_operation (var_priority.mAttribute_location, var_requiredByProcList, var_instructionList, var_endOfInit, var_priority  COMMA_SOURCE_FILE ("declaration-init.galgas", 41)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i13_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-init.galgas", 28)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-init.galgas", 29)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-init.galgas", 24)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-init.galgas", 25)) ;
   switch (select_common_5F_syntax_23 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_requiredBy) COMMA_SOURCE_FILE ("declaration-init.galgas", 33)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_requiredBy) COMMA_SOURCE_FILE ("declaration-init.galgas", 29)) ;
     bool repeatFlag_0 = true ;
     while (repeatFlag_0) {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-init.galgas", 35)) ;
-      nt_procedure_5F_formal_5F_arguments_parse (inCompiler) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-init.galgas", 31)) ;
       switch (select_common_5F_syntax_24 (inCompiler)) {
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2C_) COMMA_SOURCE_FILE ("declaration-init.galgas", 39)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2C_) COMMA_SOURCE_FILE ("declaration-init.galgas", 34)) ;
       } break ;
       default:
         repeatFlag_0 = false ;
@@ -12510,9 +12507,9 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i13_parse (C_Le
   default:
     break ;
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-init.galgas", 42)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-init.galgas", 37)) ;
   nt_instructionList_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-init.galgas", 45)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-init.galgas", 40)) ;
   inCompiler->resetTemplateString () ;
 }
 

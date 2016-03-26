@@ -145,10 +145,10 @@ func `init write8bitCommand @noWarningIfUnused (?inCommand $uint8) {
 //-----------------------------------------------------------------------------*
 
 init 10 requiredBy
-writeData_inUserMode (?data $uint8),
-write8bitCommand_inUserMode (?data $uint8),
-writeDataInExceptionMode (?data $uint8),
-write8bitCommandInExceptionMode (?data $uint8)
+writeData_inUserMode,
+write8bitCommand_inUserMode,
+writeDataInExceptionMode,
+write8bitCommandInExceptionMode
 {
   configurePorts () ;
 //--- Étape 1 : attendre 15 ms
