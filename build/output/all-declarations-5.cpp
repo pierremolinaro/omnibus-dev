@@ -1123,33 +1123,17 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "struct $monSemaphore {\n"
-  "  var s = $semaphore (!value:0) \n"
-  "  var s2 = $semaphore (!value:0) \n"
-  "\n"
-  "  func P `user @noWarningIfUnused () {\n"
-  "    self.s.P ()\n"
-  "  }\n"
-  "\n"
-  "  func V `user () {\n"
-  "    self.s.V ()\n"
-  "  }\n"
-  "\n"
-  "  guard P () : self.s.P () {\n"
-  "    self.s2.V ()\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "var s0 = $monSemaphore () {\n"
+  "var s0 = $semaphore (!value:0) {\n"
   "  func $T0.loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var s1 = $monSemaphore () {\n"
+  "var s1 = $semaphore (!value:0) {\n"
   "  func $T1.loop\n"
+  "}\n"
+  "\n"
+  "guard PP () : s1.P () {\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1195,7 +1179,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    select\n"
   "    on s0.P () :\n"
   "      ledToggle  (!LED_L1)\n"
-  "    on s1.P () :\n"
+  "    on PP () :\n"
   "      ledToggle  (!LED_L3)\n"
   "    on waitUntilMS (!deadline:self.deadline) :\n"
   "      self.deadline += 200\n"
@@ -1210,7 +1194,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1755, // Text length
+  1463, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
