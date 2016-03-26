@@ -1,0 +1,24 @@
+
+required func `isr PAbortHandler ()
+
+func `isr PAbortHandler @nullWhenPanicDisabled @weak @global () {
+  panic 2
+}
+
+//-----------------------------------------------------------------------------*
+
+required func `isr DAbortHandler ()
+
+func `isr DAbortHandler @nullWhenPanicDisabled @weak @global () {
+  panic 3
+}
+
+//-----------------------------------------------------------------------------*
+
+required func `isr FIQHandler ()
+
+func `isr FIQHandler @nullWhenPanicDisabled @weak @global () {
+  panic 4
+}
+
+//-----------------------------------------------------------------------------*

@@ -192,7 +192,7 @@ proc enterControlRegistersInContext
           ]
           @controlRegisterBitSliceAccessMap registerSubMap = {}
           [!?registerSubMap insertKey
-            !.new{!"shift" !name.location}
+            !.new{!"shifted" !name.location}
             !.lshr
             ![shiftCount bigint]
             !{}

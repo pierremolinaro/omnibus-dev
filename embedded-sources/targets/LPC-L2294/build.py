@@ -51,8 +51,7 @@ def LLVMLinkercompiler ():
 
 def CLANGcompiler ():
   result = [toolpath.toolDir () + "/bin/clang"]
-  result.append ("--target=armv7-none--eabi")
-  result.append ("-mcpu=cortex-m4")
+  result.append ("--target=armv4-none--eabi")
   result.append ("-Oz")
   result.append ("-fomit-frame-pointer")
   result.append ("-fshort-enums")
@@ -65,7 +64,7 @@ def CLANGcompiler ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def asAssembler ():
-  return [toolpath.toolDir () + "/bin/arm-eabi-as", "-mthumb", "-mcpu=cortex-m4"]
+  return [toolpath.toolDir () + "/bin/arm-eabi-as", "-mcpu=arm7tdmi-s"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -83,7 +82,7 @@ def displayObjectSize ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def dumpObjectCode ():
-  return [toolpath.toolDir () + "/bin/arm-eabi-objdump", "-Sdh", "-Mforce-thumb"]
+  return [toolpath.toolDir () + "/bin/arm-eabi-objdump", "-Sdh"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -91,7 +90,7 @@ def dumpObjectCode ():
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-def linker ():
+def linkerInvocation ():
   result = [toolpath.toolDir () + "/bin/arm-eabi-ld"]
   result.append ("-nostartfiles")
   result.append ("--fatal-warnings")
@@ -109,6 +108,7 @@ def linker ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def linkerScripts ():
+#  result = ["external-ram"] # Linker script is external-ram.ld
   result = ["linker"] # Linker script is linker.ld
   return result
 
@@ -119,7 +119,7 @@ def linkerScripts ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def linkerLibraries ():
-  result = ["libgcc-armv7e-m.a"]
+  result = ["libgcc-armv4.a"]
   return result
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -195,7 +195,7 @@ currentFile = os.path.abspath (sys.argv [0])
 plm.runMakefile (toolpath.toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \
                  LLCcompiler (), llvmOptimizerCompiler (), \
                  asAssembler (), productDir (), \
-                 linker (), linkerScripts (), linkerLibraries (), \
+                 linkerInvocation (), linkerScripts (), linkerLibraries (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \
                  CLANGcompiler (), CsourceList (), LLVMLinkercompiler (), \
                  currentFile)

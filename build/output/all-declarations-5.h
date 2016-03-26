@@ -86,54 +86,6 @@ void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Abstract category method '@abstractDeclaration addExtension'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_abstractDeclaration_addExtension) (const class cPtr_abstractDeclaration * inObject,
-                                                                          class GALGAS_extensionDeclarationListAST & ioArgument0,
-                                                                          class GALGAS_abstractDeclaration & outArgument1,
-                                                                          class C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_addExtension (const int32_t inClassIndex,
-                                       categoryMethodSignature_abstractDeclaration_addExtension inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_addExtension (const class cPtr_abstractDeclaration * inObject,
-                                      GALGAS_extensionDeclarationListAST & io_ioExtensionDeclarationListAST,
-                                      GALGAS_abstractDeclaration & out_outNewDeclaration,
-                                      C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Routine 'addPredefinedTypes'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_addPredefinedTypes (class GALGAS_declarationListAST & ioArgument0,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Routine 'addTargetSpecificFiles'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0,
-                                     class GALGAS_ast & ioArgument1,
-                                     const class GALGAS_string constinArgument2,
-                                     class GALGAS_stringset & ioArgument3,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                              @booleanDeclaration class                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -386,6 +338,44 @@ class cPtr_literalStringDeclaration : public cPtr_abstractDeclaration {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Abstract category method '@abstractDeclaration addExtension'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractDeclaration_addExtension) (const class cPtr_abstractDeclaration * inObject,
+                                                                          class GALGAS_extensionDeclarationListAST & ioArgument0,
+                                                                          class GALGAS_abstractDeclaration & outArgument1,
+                                                                          class C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_addExtension (const int32_t inClassIndex,
+                                       categoryMethodSignature_abstractDeclaration_addExtension inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_addExtension (const class cPtr_abstractDeclaration * inObject,
+                                      GALGAS_extensionDeclarationListAST & io_ioExtensionDeclarationListAST,
+                                      GALGAS_abstractDeclaration & out_outNewDeclaration,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'addTargetSpecificFiles'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0,
+                                     class GALGAS_ast & ioArgument1,
+                                     const class GALGAS_string constinArgument2,
+                                     class GALGAS_stringset & ioArgument3,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                    Routine 'recursiveImportEmbeddedTargetFiles'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -423,6 +413,7 @@ extern const char * gWrapperFileContent_4_embeddedSampleCode ;
 extern const char * gWrapperFileContent_5_embeddedSampleCode ;
 extern const char * gWrapperFileContent_6_embeddedSampleCode ;
 extern const char * gWrapperFileContent_7_embeddedSampleCode ;
+extern const char * gWrapperFileContent_8_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -437,11 +428,13 @@ extern const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode ;
 extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;
+extern const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

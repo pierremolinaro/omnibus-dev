@@ -1425,16 +1425,6 @@ class GALGAS_string function_getTargetTextFile (const class GALGAS_string & cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Function 'llvmNameForFunction'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForFunction (class GALGAS_string inArgument0,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                         Routine 'generateServiceDispatcher'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2648,6 +2638,16 @@ class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Function 'llvmNameForFunction'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForFunction (class GALGAS_string inArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                         Function 'llvmNameForPrimitiveCall'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3457,6 +3457,27 @@ extern const char * gWrapperFileContent_25_targetTemplates ;
 extern const char * gWrapperFileContent_26_targetTemplates ;
 extern const char * gWrapperFileContent_27_targetTemplates ;
 extern const char * gWrapperFileContent_28_targetTemplates ;
+extern const char * gWrapperFileContent_29_targetTemplates ;
+extern const char * gWrapperFileContent_30_targetTemplates ;
+extern const char * gWrapperFileContent_31_targetTemplates ;
+extern const char * gWrapperFileContent_32_targetTemplates ;
+extern const char * gWrapperFileContent_33_targetTemplates ;
+extern const char * gWrapperFileContent_34_targetTemplates ;
+extern const char * gWrapperFileContent_35_targetTemplates ;
+extern const char * gWrapperFileContent_36_targetTemplates ;
+extern const char * gWrapperFileContent_37_targetTemplates ;
+extern const char * gWrapperFileContent_38_targetTemplates ;
+extern const char * gWrapperFileContent_39_targetTemplates ;
+extern const char * gWrapperFileContent_40_targetTemplates ;
+extern const char * gWrapperFileContent_41_targetTemplates ;
+extern const char * gWrapperFileContent_42_targetTemplates ;
+extern const char * gWrapperFileContent_43_targetTemplates ;
+extern const char * gWrapperFileContent_44_targetTemplates ;
+extern const char * gWrapperFileContent_45_targetTemplates ;
+extern const char * gWrapperFileContent_46_targetTemplates ;
+extern const char * gWrapperFileContent_47_targetTemplates ;
+extern const char * gWrapperFileContent_48_targetTemplates ;
+extern const char * gWrapperFileContent_49_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3492,6 +3513,27 @@ extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_27_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_28_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_29_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_30_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_31_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_32_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_33_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_34_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_35_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_36_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_37_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_38_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_39_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_40_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_41_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_42_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_43_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_44_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_45_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_46_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_47_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_48_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_49_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

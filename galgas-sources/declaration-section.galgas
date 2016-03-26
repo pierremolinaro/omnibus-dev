@@ -144,8 +144,6 @@ proc generateSectionDispatcher
   ?!@string ioAssemblerCode
   ?let @2stringlist inSectionList
 {
-  let sectionAssemblyCode = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-code.s")
-  ioAssemblerCode += [sectionAssemblyCode stringByReplacingStringByString !"!PROC!" !llvmNameForFunction (!".")]
   for (callName implementationName) in inSectionList do (idx)
     var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
     s = [s stringByReplacingStringByString !"!ENTRY!" !callName]

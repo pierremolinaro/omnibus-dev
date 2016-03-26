@@ -80,16 +80,21 @@ private proc compileProject
 {
   @ast ast = inAST
   @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
-#--- Add target specific files
+#------------------------------------------------------------ Add target specific files
   addTargetSpecificFiles (
     !forTarget:inTargetName
     !?toAST:ast
     !currentDirectory:inCurrentDirectory
     !?importedFilePathSet:sourceFileAbsolutePathSet
   )
-#--- Add Predefined types
-  addPredefinedTypes (!?declarationList:ast.mDeclarationList)
-#--- Add type extensions
+#------------------------------------------------------------ Add Predefined types
+#--- Add boolean type
+  ast.mDeclarationList += !@booleanDeclaration.new {![boolTypeName () nowhere] !{}}
+#--- Literal integer type
+  ast.mDeclarationList += !@literalIntegerDeclaration.new
+#--- Add String type
+  ast.mDeclarationList += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
+#------------------------------------------------------------  Add type extensions
   let declarationList = ast.mDeclarationList
   var @declarationListAST newDeclarationList = {}
   var extensionDeclarationListAST = ast.mExtensionDeclarationListAST
@@ -102,14 +107,14 @@ private proc compileProject
   for (typeName * *) in extensionDeclarationListAST do
     error typeName : "this type is not defined or does not support extension"
   end
-#--- Ordered declaration list
+#------------------------------------------------------------ Ordered declaration list
   buildOrderedDeclarationList (
     !ast:ast
     !sourceFile:inSourceFile.string
     !endOfSourceFile:inEndOfSourceFile
     ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
   )
-#--- Semantic context
+#------------------------------------------------------------ Semantic context
   if @uint.errorCount == 0 then
     @staticStringMap globalLiteralStringMap = {}
     buildSemanticContext (
@@ -148,19 +153,6 @@ private proc compileProject
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-private proc addPredefinedTypes
-  ?!declarationList:@declarationListAST ioDeclarationList
-{
-#--- Add boolean type
-  ioDeclarationList += !@booleanDeclaration.new {![boolTypeName () nowhere] !{}}
-#--- Literal integer type
-  ioDeclarationList += !@literalIntegerDeclaration.new
-#--- Add String type
-  ioDeclarationList += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
-}
- 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc addTargetSpecificFiles

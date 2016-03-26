@@ -6,12 +6,11 @@
 	.globl	!ENTRY!
 	.align	1
 	.type	!ENTRY!,%function
-	.code	16
-	.thumb_func
+	.code	32
 
 !ENTRY!:
 	.fnstart
-  udf !IDX!
+  .word  UNDEFINED_INSTRUCTION + (!IDX! << 8)
   bx  lr
 
 .Lfunc_end_!ENTRY!:

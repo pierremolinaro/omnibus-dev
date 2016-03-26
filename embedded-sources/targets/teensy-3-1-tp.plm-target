@@ -3,7 +3,7 @@ pointerSize 32
 
 panic func : $int32 $uint32
 
-import "files/mk20dx256.plm"
+import "files/registers-mk20dx256.plm"
 import "files/teensy-3-1-boot.plm"
 import "files/teensy-3-1-default-isr.plm"
 import "files/teensy-3-1-xtr.plm"
