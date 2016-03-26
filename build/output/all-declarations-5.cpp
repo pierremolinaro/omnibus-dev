@@ -1038,6 +1038,9 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "      handleGuardedCommand (!\?guard:self.guardList)\n"
   "    end\n"
   "  }\n"
+  "  \n"
+  "  guard PP () : self.P () {\n"
+  "  }\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1093,7 +1096,7 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  \n"
   "  func loop () {\n"
   "    select\n"
-  "    on s0.P () :\n"
+  "    on s0.PP () :\n"
   "      ledToggle  (!LED_L1)\n"
   "    on s1.P () :\n"
   "      ledToggle  (!LED_L3)\n"
@@ -1110,7 +1113,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "05-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2103, // Text length
+  2139, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 

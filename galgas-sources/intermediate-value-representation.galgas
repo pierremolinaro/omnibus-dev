@@ -12,6 +12,7 @@ struct @operandIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @valueIR {
+  case selfObject 
   case literalInteger  (@bigint value)
   case llvmLocalObject (@string name)
   case llvmGlobalObject (@string name)
@@ -23,6 +24,7 @@ enum @valueIR {
 
 getter @valueIR llvmName -> @string outResult {
   switch self
+  case selfObject : outResult = "%self"
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = "%" + name
   case llvmGlobalObject (@string name) : outResult = "@" + name
@@ -44,6 +46,7 @@ getter @valueIR llvmName -> @string outResult {
 
 getter @valueIR name -> @string outResult {
   switch self
+  case selfObject : outResult = "self"
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = name
   case llvmGlobalObject (@string name) : outResult = name
@@ -56,6 +59,7 @@ getter @valueIR name -> @string outResult {
 
 getter @valueIR isStatic -> @bool outResult {
   switch self
+  case selfObject : outResult = false
   case literalInteger (*) : outResult = true
   case llvmLocalObject (*) : outResult = false
   case llvmGlobalObject (*) : outResult = false

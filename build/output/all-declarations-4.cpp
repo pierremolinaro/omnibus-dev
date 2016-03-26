@@ -1738,6 +1738,14 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_valueIR GALGAS_valueIR::constructor_selfObject (UNUSED_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  result.mEnum = kEnum_selfObject ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_valueIR GALGAS_valueIR::constructor_literalInteger (const GALGAS_bigint & inAssociatedValue0
                                                            COMMA_LOCATION_ARGS) {
   GALGAS_valueIR result ;
@@ -1897,14 +1905,21 @@ void GALGAS_valueIR::method_literalString (GALGAS_uint & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_valueIR [6] = {
+static const char * gEnumNameArrayFor_valueIR [7] = {
   "(not built)",
+  "selfObject",
   "literalInteger",
   "llvmLocalObject",
   "llvmGlobalObject",
   "llvmStructureConstant",
   "literalString"
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_valueIR::getter_isSelfObject (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_selfObject == mEnum) ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3843,248 +3858,6 @@ void routine_enterLiteralIntegerOperators (const GALGAS_lstring constinArgument_
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_buildGlobalConstantMapHTMLFile (GALGAS_globalConstantMap inArgument_inGlobalConstantMap,
-                                             const GALGAS_lstring constinArgument_inSourceFile,
-                                             C_Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_typeDumpFilePath = constinArgument_inSourceFile.mAttribute_string.add_operation (GALGAS_string (".global-constants.html"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 166)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_writeGlobalConstantHTMLDumpFile.getter_value ()).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    GALGAS_stringset var_firstLetterSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-global-constant.galgas", 168)) ;
-    cEnumerator_globalConstantMap enumerator_7321 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
-    while (enumerator_7321.hasCurrentObject ()) {
-      var_firstLetterSet.addAssign_operation (enumerator_7321.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 170)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 170))  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 170)) ;
-      enumerator_7321.gotoNextObject () ;
-    }
-    GALGAS_string var_tableOfTypeString = GALGAS_string::makeEmptyString () ;
-    GALGAS_char var_currentFirstLetter = GALGAS_char (TO_UNICODE (32)) ;
-    cEnumerator_globalConstantMap enumerator_7509 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
-    while (enumerator_7509.hasCurrentObject ()) {
-      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter.objectCompare (enumerator_7509.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 175)))).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        var_currentFirstLetter = enumerator_7509.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 176)) ;
-        var_tableOfTypeString.plusAssign_operation(GALGAS_string ("<br><a name=\"").add_operation (var_currentFirstLetter.getter_uint (SOURCE_FILE ("declaration-global-constant.galgas", 177)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)).add_operation (GALGAS_string ("\"><b>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)).add_operation (var_currentFirstLetter.getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)).add_operation (GALGAS_string ("</b></a><br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)) ;
-      }
-      var_tableOfTypeString.plusAssign_operation(function_linkForGlobalConstant (enumerator_7509.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 179)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 179)) ;
-      enumerator_7509.gotoNextObject () ;
-    }
-    GALGAS_string var_typeDumpString = GALGAS_string (filewrapperTemplate_constantDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.mAttribute_string.getter_lastPathComponent (SOURCE_FILE ("declaration-global-constant.galgas", 182)), inArgument_inGlobalConstantMap, var_firstLetterSet, var_tableOfTypeString COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 181))) ;
-    GALGAS_bool joker_8149 ; // Joker input parameter
-    var_typeDumpString.method_writeToFileWhenDifferentContents (var_typeDumpFilePath, joker_8149, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 187)) ;
-  }else if (kBoolFalse == test_0) {
-    {
-    GALGAS_string::class_method_deleteFileIfExists (var_typeDumpFilePath, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 189)) ;
-    }
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Filewrapper 'constantDumpGenerationTemplate'                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-//--- All files of '' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_constantDumpGenerationTemplate_0 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of '' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_constantDumpGenerationTemplate_0 [1] = {
-  NULL
-} ;
-
-//--- Directory ''
-
-const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate (
-  "",
-  0,
-  gWrapperAllFiles_constantDumpGenerationTemplate_0,
-  0,
-  gWrapperAllDirectories_constantDumpGenerationTemplate_0
-) ;
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Filewrapper template 'constantDumpGenerationTemplate dump'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compiler * inCompiler,
-                                                                       const GALGAS_string & in_PROJECT_5F_NAME,
-                                                                       const GALGAS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
-                                                                       const GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
-                                                                       const GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
-                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  C_String result ;
-  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
-    "<html>\n"
-    "<head>\n"
-    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
-    "<title>Global constants of " ;
-  result << in_PROJECT_5F_NAME.stringValue () ;
-  result << "</title>\n"
-    "<style type=\"text/css\">body {\n"
-    "  font-family: Georgia, sans-serif ;\n"
-    "  font-size: small ;\n"
-    "}\n"
-    "\n"
-    "h1 {\n"
-    "  text-align: center ;\n"
-    "}\n"
-    "\n"
-    ".selecteur {\n"
-    "  color:green ;\n"
-    "}\n"
-    "\n"
-    "a.header_link {\n"
-    "  background-color: #FFFFCC ;\n"
-    "}\n"
-    "\n"
-    "a:visited, a:link, a:active{\n"
-    "  color: blue ;\n"
-    "  text-decoration: underline ;\n"
-    "}\n"
-    "\n"
-    "a:hover {\n"
-    "  color:green ;\n"
-    "  background-color: #FFFF00 ;\n"
-    "  text-decoration: none ;\n"
-    "}\n"
-    "\n"
-    "table.result {\n"
-    "  border: 1px solid #666666 ;\n"
-    "}\n"
-    "\n"
-    "td.result_title {\n"
-    "  font-weight: bold ;\n"
-    "  text-align: center ;\n"
-    "  background-color: yellow ;\n"
-    "}\n"
-    "\n"
-    "tr.result_line {\n"
-    "  background-color: #EEEEEE ;\n"
-    "}\n"
-    "\n"
-    "</style>\n"
-    "</head>\n"
-    "<body>\n"
-    "<div>\n"
-    "<h1>Global Constants of " ;
-  result << in_PROJECT_5F_NAME.stringValue () ;
-  result << "</h1>\n"
-    "<p>This document lists all " ;
-  result << in_GLOBAL_5F_CONSTANT_5F_MAP.getter_count (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).stringValue () ;
-  result << " defined global constants, sorted by name.</p>\n"
-    "<p>" ;
-  GALGAS_uint index_1005_ (0) ;
-  if (in_FIRST_5F_LETTER_5F_SET.isValid ()) {
-    cEnumerator_stringset enumerator_1005 (in_FIRST_5F_LETTER_5F_SET, kEnumeration_up) ;
-    while (enumerator_1005.hasCurrentObject ()) {
-      result << "<a class=\"header_link\" href=\"#" ;
-      result << enumerator_1005.current_key (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).getter_uint (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).stringValue () ;
-      result << "\">" ;
-      result << enumerator_1005.current_key (HERE).stringValue () ;
-      result << "</a>" ;
-      if (enumerator_1005.hasNextObject ()) {
-        result << " - " ;
-      }
-      index_1005_.increment () ;
-      enumerator_1005.gotoNextObject () ;
-    }
-  }
-  result << "</p>\n"
-    "<p>" ;
-  result << in_TABLE_5F_OF_5F_TYPES_5F_STRING.stringValue () ;
-  result << "\n"
-    "</p>\n"
-    "<table class=\"result\">\n"
-    "<tr><td class=\"result_title\">Constant Name</td><td class=\"result_title\">PLM Type</td><td class=\"result_title\">LLVM Type</td><td class=\"result_title\">V"
-    "alue</td></tr>\n" ;
-  GALGAS_uint index_1375_ (0) ;
-  if (in_GLOBAL_5F_CONSTANT_5F_MAP.isValid ()) {
-    cEnumerator_globalConstantMap enumerator_1375 (in_GLOBAL_5F_CONSTANT_5F_MAP, kEnumeration_up) ;
-    while (enumerator_1375.hasCurrentObject ()) {
-      result << "<tr class=\"result_line\"><td><a name=\"" ;
-      result << enumerator_1375.current_lkey (HERE).mAttribute_string.stringValue () ;
-      result << "\">" ;
-      result << enumerator_1375.current_lkey (HERE).mAttribute_string.stringValue () ;
-      result << "</a></td><td>$" ;
-      result << enumerator_1375.current_mValue (HERE).mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue () ;
-      result << "</td><td>" ;
-      result << enumerator_1375.current_mValue (HERE).mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue () ;
-      result << "</td><td>" ;
-      result << extensionGetter_llvmName (enumerator_1375.current_mValue (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue () ;
-      result << "</td></tr>\n" ;
-      index_1375_.increment () ;
-      enumerator_1375.gotoNextObject () ;
-    }
-  }
-  result << "\n"
-    "</table>\n"
-    "</div>\n"
-    "</body>\n"
-    "</html>\n" ;
-  return GALGAS_string (result) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'linkForGlobalConstant'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_linkForGlobalConstant (const GALGAS_string & constinArgument_inConstantName,
-                                              C_Compiler * inCompiler
-                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("<a class=\"header_link\" href=\"#").add_operation (constinArgument_inConstantName, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 208)).add_operation (GALGAS_string ("\">"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 208)).add_operation (constinArgument_inConstantName, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 208)).add_operation (GALGAS_string ("</a>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 208)) ;
-//---
-  return result_outResult ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_linkForGlobalConstant [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_linkForGlobalConstant (C_Compiler * inCompiler,
-                                                                      const cObjectArray & inEffectiveParameterArray,
-                                                                      const GALGAS_location & /* §§ inErrorLocation */
-                                                                      COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_linkForGlobalConstant (operand0,
-                                         inCompiler
-                                         COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_linkForGlobalConstant ("linkForGlobalConstant",
-                                                                       functionWithGenericHeader_linkForGlobalConstant,
-                                                                       & kTypeDescriptor_GALGAS_string,
-                                                                       1,
-                                                                       functionArgs_linkForGlobalConstant) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Routine 'enterControlRegistersInContext'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4695,6 +4468,248 @@ C_galgas_function_descriptor functionDescriptor_fieldIndexColumns ("fieldIndexCo
                                                                    & kTypeDescriptor_GALGAS_string,
                                                                    1,
                                                                    functionArgs_fieldIndexColumns) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildGlobalConstantMapHTMLFile (GALGAS_globalConstantMap inArgument_inGlobalConstantMap,
+                                             const GALGAS_lstring constinArgument_inSourceFile,
+                                             C_Compiler * inCompiler
+                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string var_typeDumpFilePath = constinArgument_inSourceFile.mAttribute_string.add_operation (GALGAS_string (".global-constants.html"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 166)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_writeGlobalConstantHTMLDumpFile.getter_value ()).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_stringset var_firstLetterSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-global-constant.galgas", 168)) ;
+    cEnumerator_globalConstantMap enumerator_7321 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
+    while (enumerator_7321.hasCurrentObject ()) {
+      var_firstLetterSet.addAssign_operation (enumerator_7321.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 170)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 170))  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 170)) ;
+      enumerator_7321.gotoNextObject () ;
+    }
+    GALGAS_string var_tableOfTypeString = GALGAS_string::makeEmptyString () ;
+    GALGAS_char var_currentFirstLetter = GALGAS_char (TO_UNICODE (32)) ;
+    cEnumerator_globalConstantMap enumerator_7509 (inArgument_inGlobalConstantMap, kEnumeration_up) ;
+    while (enumerator_7509.hasCurrentObject ()) {
+      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_currentFirstLetter.objectCompare (enumerator_7509.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 175)))).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        var_currentFirstLetter = enumerator_7509.current_lkey (HERE).mAttribute_string.getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 176)) ;
+        var_tableOfTypeString.plusAssign_operation(GALGAS_string ("<br><a name=\"").add_operation (var_currentFirstLetter.getter_uint (SOURCE_FILE ("declaration-global-constant.galgas", 177)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)).add_operation (GALGAS_string ("\"><b>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)).add_operation (var_currentFirstLetter.getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)).add_operation (GALGAS_string ("</b></a><br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 177)) ;
+      }
+      var_tableOfTypeString.plusAssign_operation(function_linkForGlobalConstant (enumerator_7509.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 179)).add_operation (GALGAS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 179)) ;
+      enumerator_7509.gotoNextObject () ;
+    }
+    GALGAS_string var_typeDumpString = GALGAS_string (filewrapperTemplate_constantDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.mAttribute_string.getter_lastPathComponent (SOURCE_FILE ("declaration-global-constant.galgas", 182)), inArgument_inGlobalConstantMap, var_firstLetterSet, var_tableOfTypeString COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 181))) ;
+    GALGAS_bool joker_8149 ; // Joker input parameter
+    var_typeDumpString.method_writeToFileWhenDifferentContents (var_typeDumpFilePath, joker_8149, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 187)) ;
+  }else if (kBoolFalse == test_0) {
+    {
+    GALGAS_string::class_method_deleteFileIfExists (var_typeDumpFilePath, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 189)) ;
+    }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Filewrapper 'constantDumpGenerationTemplate'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+//--- All files of '' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_constantDumpGenerationTemplate_0 [1] = {
+  NULL
+} ;
+
+//--- All sub-directories of '' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_constantDumpGenerationTemplate_0 [1] = {
+  NULL
+} ;
+
+//--- Directory ''
+
+const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate (
+  "",
+  0,
+  gWrapperAllFiles_constantDumpGenerationTemplate_0,
+  0,
+  gWrapperAllDirectories_constantDumpGenerationTemplate_0
+) ;
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Filewrapper template 'constantDumpGenerationTemplate dump'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compiler * inCompiler,
+                                                                       const GALGAS_string & in_PROJECT_5F_NAME,
+                                                                       const GALGAS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
+                                                                       const GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                       const GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  C_String result ;
+  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
+    "<html>\n"
+    "<head>\n"
+    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+    "<title>Global constants of " ;
+  result << in_PROJECT_5F_NAME.stringValue () ;
+  result << "</title>\n"
+    "<style type=\"text/css\">body {\n"
+    "  font-family: Georgia, sans-serif ;\n"
+    "  font-size: small ;\n"
+    "}\n"
+    "\n"
+    "h1 {\n"
+    "  text-align: center ;\n"
+    "}\n"
+    "\n"
+    ".selecteur {\n"
+    "  color:green ;\n"
+    "}\n"
+    "\n"
+    "a.header_link {\n"
+    "  background-color: #FFFFCC ;\n"
+    "}\n"
+    "\n"
+    "a:visited, a:link, a:active{\n"
+    "  color: blue ;\n"
+    "  text-decoration: underline ;\n"
+    "}\n"
+    "\n"
+    "a:hover {\n"
+    "  color:green ;\n"
+    "  background-color: #FFFF00 ;\n"
+    "  text-decoration: none ;\n"
+    "}\n"
+    "\n"
+    "table.result {\n"
+    "  border: 1px solid #666666 ;\n"
+    "}\n"
+    "\n"
+    "td.result_title {\n"
+    "  font-weight: bold ;\n"
+    "  text-align: center ;\n"
+    "  background-color: yellow ;\n"
+    "}\n"
+    "\n"
+    "tr.result_line {\n"
+    "  background-color: #EEEEEE ;\n"
+    "}\n"
+    "\n"
+    "</style>\n"
+    "</head>\n"
+    "<body>\n"
+    "<div>\n"
+    "<h1>Global Constants of " ;
+  result << in_PROJECT_5F_NAME.stringValue () ;
+  result << "</h1>\n"
+    "<p>This document lists all " ;
+  result << in_GLOBAL_5F_CONSTANT_5F_MAP.getter_count (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).stringValue () ;
+  result << " defined global constants, sorted by name.</p>\n"
+    "<p>" ;
+  GALGAS_uint index_1005_ (0) ;
+  if (in_FIRST_5F_LETTER_5F_SET.isValid ()) {
+    cEnumerator_stringset enumerator_1005 (in_FIRST_5F_LETTER_5F_SET, kEnumeration_up) ;
+    while (enumerator_1005.hasCurrentObject ()) {
+      result << "<a class=\"header_link\" href=\"#" ;
+      result << enumerator_1005.current_key (HERE).getter_characterAtIndex (GALGAS_uint ((uint32_t) 0U), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).getter_uint (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).stringValue () ;
+      result << "\">" ;
+      result << enumerator_1005.current_key (HERE).stringValue () ;
+      result << "</a>" ;
+      if (enumerator_1005.hasNextObject ()) {
+        result << " - " ;
+      }
+      index_1005_.increment () ;
+      enumerator_1005.gotoNextObject () ;
+    }
+  }
+  result << "</p>\n"
+    "<p>" ;
+  result << in_TABLE_5F_OF_5F_TYPES_5F_STRING.stringValue () ;
+  result << "\n"
+    "</p>\n"
+    "<table class=\"result\">\n"
+    "<tr><td class=\"result_title\">Constant Name</td><td class=\"result_title\">PLM Type</td><td class=\"result_title\">LLVM Type</td><td class=\"result_title\">V"
+    "alue</td></tr>\n" ;
+  GALGAS_uint index_1375_ (0) ;
+  if (in_GLOBAL_5F_CONSTANT_5F_MAP.isValid ()) {
+    cEnumerator_globalConstantMap enumerator_1375 (in_GLOBAL_5F_CONSTANT_5F_MAP, kEnumeration_up) ;
+    while (enumerator_1375.hasCurrentObject ()) {
+      result << "<tr class=\"result_line\"><td><a name=\"" ;
+      result << enumerator_1375.current_lkey (HERE).mAttribute_string.stringValue () ;
+      result << "\">" ;
+      result << enumerator_1375.current_lkey (HERE).mAttribute_string.stringValue () ;
+      result << "</a></td><td>$" ;
+      result << enumerator_1375.current_mValue (HERE).mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue () ;
+      result << "</td><td>" ;
+      result << enumerator_1375.current_mValue (HERE).mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue () ;
+      result << "</td><td>" ;
+      result << extensionGetter_llvmName (enumerator_1375.current_mValue (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue () ;
+      result << "</td></tr>\n" ;
+      index_1375_.increment () ;
+      enumerator_1375.gotoNextObject () ;
+    }
+  }
+  result << "\n"
+    "</table>\n"
+    "</div>\n"
+    "</body>\n"
+    "</html>\n" ;
+  return GALGAS_string (result) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'linkForGlobalConstant'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_linkForGlobalConstant (const GALGAS_string & constinArgument_inConstantName,
+                                              C_Compiler * inCompiler
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("<a class=\"header_link\" href=\"#").add_operation (constinArgument_inConstantName, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 208)).add_operation (GALGAS_string ("\">"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 208)).add_operation (constinArgument_inConstantName, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 208)).add_operation (GALGAS_string ("</a>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 208)) ;
+//---
+  return result_outResult ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_linkForGlobalConstant [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_linkForGlobalConstant (C_Compiler * inCompiler,
+                                                                      const cObjectArray & inEffectiveParameterArray,
+                                                                      const GALGAS_location & /* §§ inErrorLocation */
+                                                                      COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_linkForGlobalConstant (operand0,
+                                         inCompiler
+                                         COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_linkForGlobalConstant ("linkForGlobalConstant",
+                                                                       functionWithGenericHeader_linkForGlobalConstant,
+                                                                       & kTypeDescriptor_GALGAS_string,
+                                                                       1,
+                                                                       functionArgs_linkForGlobalConstant) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -5485,8 +5500,8 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_input:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_input * extractPtr_24892 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_input *) (enumerator_22382.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_24892->mAssociatedValue0 ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_input * extractPtr_24804 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_input *) (enumerator_22382.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_24804->mAssociatedValue0 ;
         GALGAS_unifiedTypeMap_2D_proxy var_type ;
         GALGAS_bool var_accessIsAllowed ;
         GALGAS_objectInMemoryIR var_variableKind ;
@@ -5513,67 +5528,67 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
           inCompiler->emitSemanticError (location_8, GALGAS_string ("an $").add_operation (var_type.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 615)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 615)).add_operation (GALGAS_string (" instance is not copyable"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 615))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 615)) ;
         }
         var_parameterList.addAssign_operation (enumerator_22382.current_mEffectiveParameterKind (HERE), enumerator_22382.current_mSelector (HERE), var_type  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 617)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("instruction-proc-call.galgas", 619)), enumerator_22382.current_mSelector (HERE).mAttribute_string, GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extensionGetter_llvmName (var_variableKind, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 622)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 622))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 622))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 622))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 618)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("instruction-proc-call.galgas", 619)), enumerator_22382.current_mSelector (HERE).mAttribute_string, GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extensionGetter_llvmName (var_variableKind, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 621)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 621))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 621))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 621))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 618)) ;
       }
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_output:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_output * extractPtr_25883 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_output *) (enumerator_22382.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_expression = extractPtr_25883->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfExp = extractPtr_25883->mAssociatedValue1 ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_output * extractPtr_25795 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_output *) (enumerator_22382.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_expression = extractPtr_25795->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfExp = extractPtr_25795->mAssociatedValue1 ;
         GALGAS_operandIR var_expressionResult ;
-        callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inSelfType, constinArgument_inCallerNameForInvocationGraph, enumerator_22339.current_mType (HERE), constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 624)) ;
-        GALGAS_operandIR var_result = function_checkAssignmentCompatibility (var_expressionResult, enumerator_22339.current_mType (HERE), extractedValue_endOfExp, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 638)) ;
-        var_parameterList.addAssign_operation (enumerator_22382.current_mEffectiveParameterKind (HERE), enumerator_22382.current_mSelector (HERE), enumerator_22339.current_mType (HERE)  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 644)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_output (SOURCE_FILE ("instruction-proc-call.galgas", 646)), enumerator_22382.current_mSelector (HERE).mAttribute_string, var_result  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 645)) ;
+        callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inSelfType, constinArgument_inCallerNameForInvocationGraph, enumerator_22339.current_mType (HERE), constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 623)) ;
+        GALGAS_operandIR var_result = function_checkAssignmentCompatibility (var_expressionResult, enumerator_22339.current_mType (HERE), extractedValue_endOfExp, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 637)) ;
+        var_parameterList.addAssign_operation (enumerator_22382.current_mEffectiveParameterKind (HERE), enumerator_22382.current_mSelector (HERE), enumerator_22339.current_mType (HERE)  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 643)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_output (SOURCE_FILE ("instruction-proc-call.galgas", 645)), enumerator_22382.current_mSelector (HERE).mAttribute_string, var_result  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 644)) ;
       }
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInput:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput * extractPtr_26731 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput *) (enumerator_22382.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_26731->mAssociatedValue0 ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput * extractPtr_26643 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput *) (enumerator_22382.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_26643->mAssociatedValue0 ;
         GALGAS_unifiedTypeMap_2D_proxy var_type ;
         GALGAS_bool var_accessIsAllowed ;
         GALGAS_objectInMemoryIR var_variableKind ;
         GALGAS_bool var_canBeUsedAsInputParameter ;
         {
-        GALGAS_bool joker_26107_2 ; // Joker input parameter
-        GALGAS_controlRegisterBitSliceAccessMap joker_26107_1 ; // Joker input parameter
-        GALGAS_bool joker_26195 ; // Joker input parameter
-        ioArgument_ioVariableMap.setter_searchForReadWriteAccess (extractedValue_name, var_type, var_accessIsAllowed, var_variableKind, joker_26107_2, joker_26107_1, var_canBeUsedAsInputParameter, joker_26195, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 650)) ;
+        GALGAS_bool joker_26019_2 ; // Joker input parameter
+        GALGAS_controlRegisterBitSliceAccessMap joker_26019_1 ; // Joker input parameter
+        GALGAS_bool joker_26107 ; // Joker input parameter
+        ioArgument_ioVariableMap.setter_searchForReadWriteAccess (extractedValue_name, var_type, var_accessIsAllowed, var_variableKind, joker_26019_2, joker_26019_1, var_canBeUsedAsInputParameter, joker_26107, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 649)) ;
         }
-        const enumGalgasBool test_9 = var_canBeUsedAsInputParameter.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 659)).boolEnum () ;
+        const enumGalgasBool test_9 = var_canBeUsedAsInputParameter.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 658)).boolEnum () ;
         if (kBoolTrue == test_9) {
           GALGAS_location location_10 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-          inCompiler->emitSemanticError (location_10, GALGAS_string ("this variable cannot be used as output/input parameter")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 660)) ;
+          inCompiler->emitSemanticError (location_10, GALGAS_string ("this variable cannot be used as output/input parameter")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 659)) ;
         }
-        const enumGalgasBool test_11 = var_accessIsAllowed.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 662)).boolEnum () ;
+        const enumGalgasBool test_11 = var_accessIsAllowed.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 661)).boolEnum () ;
         if (kBoolTrue == test_11) {
           GALGAS_location location_12 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-          inCompiler->emitSemanticError (location_12, GALGAS_string ("routine has no access right on the this variable")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 663)) ;
+          inCompiler->emitSemanticError (location_12, GALGAS_string ("routine has no access right on the this variable")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 662)) ;
         }
-        var_parameterList.addAssign_operation (enumerator_22382.current_mEffectiveParameterKind (HERE), enumerator_22382.current_mSelector (HERE), var_type  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 665)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-proc-call.galgas", 667)), enumerator_22382.current_mSelector (HERE).mAttribute_string, GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extensionGetter_llvmName (var_variableKind, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 669)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 669))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 669))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 669))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 666)) ;
+        var_parameterList.addAssign_operation (enumerator_22382.current_mEffectiveParameterKind (HERE), enumerator_22382.current_mSelector (HERE), var_type  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 664)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-proc-call.galgas", 666)), enumerator_22382.current_mSelector (HERE).mAttribute_string, GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extensionGetter_llvmName (var_variableKind, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 668)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 668))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 668))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 668))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 665)) ;
       }
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInputSelfVariable:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable * extractPtr_28727 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable *) (enumerator_22382.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_28727->mAssociatedValue0 ;
-        const enumGalgasBool test_13 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-proc-call.galgas", 672)))).boolEnum () ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable * extractPtr_28550 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable *) (enumerator_22382.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_28550->mAssociatedValue0 ;
+        const enumGalgasBool test_13 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-proc-call.galgas", 670)))).boolEnum () ;
         if (kBoolTrue == test_13) {
           GALGAS_location location_14 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-          inCompiler->emitSemanticError (location_14, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 673)) ;
+          inCompiler->emitSemanticError (location_14, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 671)) ;
           var_parameterList.drop () ; // Release error dropped variable
           ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
         }else if (kBoolFalse == test_13) {
-          switch (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 675)).enumValue ()) {
+          switch (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 673)).enumValue ()) {
           case GALGAS_typeKind::kNotBuilt:
             break ;
           case GALGAS_typeKind::kEnum_opaque:
             {
               GALGAS_location location_15 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_15, GALGAS_string ("an opaque type does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 677)) ;
+              inCompiler->emitSemanticError (location_15, GALGAS_string ("an opaque type does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 675)) ;
               var_parameterList.drop () ; // Release error dropped variable
               ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
             }
@@ -5581,7 +5596,7 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
           case GALGAS_typeKind::kEnum_boolean:
             {
               GALGAS_location location_16 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_16, GALGAS_string ("a boolean does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 679)) ;
+              inCompiler->emitSemanticError (location_16, GALGAS_string ("a boolean does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 677)) ;
               var_parameterList.drop () ; // Release error dropped variable
               ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
             }
@@ -5589,7 +5604,7 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
           case GALGAS_typeKind::kEnum_staticInteger:
             {
               GALGAS_location location_17 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_17, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 681)) ;
+              inCompiler->emitSemanticError (location_17, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 679)) ;
               var_parameterList.drop () ; // Release error dropped variable
               ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
             }
@@ -5597,7 +5612,7 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
           case GALGAS_typeKind::kEnum_boolset:
             {
               GALGAS_location location_18 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_18, GALGAS_string ("a boolset does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 683)) ;
+              inCompiler->emitSemanticError (location_18, GALGAS_string ("a boolset does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 681)) ;
               var_parameterList.drop () ; // Release error dropped variable
               ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
             }
@@ -5605,7 +5620,7 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
           case GALGAS_typeKind::kEnum_literalString:
             {
               GALGAS_location location_19 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_19, GALGAS_string ("a literal string does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 685)) ;
+              inCompiler->emitSemanticError (location_19, GALGAS_string ("a literal string does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 683)) ;
               var_parameterList.drop () ; // Release error dropped variable
               ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
             }
@@ -5613,7 +5628,7 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
           case GALGAS_typeKind::kEnum_enumeration:
             {
               GALGAS_location location_20 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_20, GALGAS_string ("an enumeration does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 687)) ;
+              inCompiler->emitSemanticError (location_20, GALGAS_string ("an enumeration does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 685)) ;
               var_parameterList.drop () ; // Release error dropped variable
               ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
             }
@@ -5621,27 +5636,27 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
           case GALGAS_typeKind::kEnum_integer:
             {
               GALGAS_location location_21 (extractedValue_name.getter_location (HERE)) ; // Implicit use of 'location' getter
-              inCompiler->emitSemanticError (location_21, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 689)) ;
+              inCompiler->emitSemanticError (location_21, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 687)) ;
               var_parameterList.drop () ; // Release error dropped variable
               ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
             }
             break ;
           case GALGAS_typeKind::kEnum_structure:
             {
-              const cEnumAssociatedValues_typeKind_structure * extractPtr_28701 = (const cEnumAssociatedValues_typeKind_structure *) (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 675)).unsafePointer ()) ;
-              const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_28701->mAssociatedValue0 ;
+              const cEnumAssociatedValues_typeKind_structure * extractPtr_28524 = (const cEnumAssociatedValues_typeKind_structure *) (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 673)).unsafePointer ()) ;
+              const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_28524->mAssociatedValue0 ;
               GALGAS_unifiedTypeMap_2D_proxy var_type ;
               GALGAS_uint var_idx ;
-              extractedValue_propertyMap.method_searchKey (extractedValue_name, var_type, var_idx, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 691)) ;
+              extractedValue_propertyMap.method_searchKey (extractedValue_name, var_type, var_idx, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 689)) ;
               GALGAS_objectInMemoryIR var_fieldAddress ;
               {
-              routine_getLocalNameOfNewTempObjectInMemory (var_type, ioArgument_ioTemporaries, var_fieldAddress, inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 692)) ;
+              routine_getLocalNameOfNewTempObjectInMemory (var_type, ioArgument_ioTemporaries, var_fieldAddress, inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 690)) ;
               }
               {
-              categoryModifier_appendGetElementPtrFromSelf (ioArgument_ioInstructionGenerationList, var_fieldAddress, constinArgument_inSelfType, var_idx, extractedValue_name.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 693)) ;
+              categoryModifier_appendGetElementPtrFromSelf (ioArgument_ioInstructionGenerationList, var_fieldAddress, constinArgument_inSelfType, var_idx, extractedValue_name.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 691)) ;
               }
-              var_parameterList.addAssign_operation (enumerator_22382.current_mEffectiveParameterKind (HERE), enumerator_22382.current_mSelector (HERE), var_type  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 699)) ;
-              ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-proc-call.galgas", 701)), enumerator_22382.current_mSelector (HERE).mAttribute_string, GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extensionGetter_name (var_fieldAddress, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 703)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 703))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 703))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 703))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 700)) ;
+              var_parameterList.addAssign_operation (enumerator_22382.current_mEffectiveParameterKind (HERE), enumerator_22382.current_mSelector (HERE), var_type  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 697)) ;
+              ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-proc-call.galgas", 699)), enumerator_22382.current_mSelector (HERE).mAttribute_string, GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_llvmLocalObject (function_llvmNameForLocalVariable (extensionGetter_name (var_fieldAddress, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 701)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 701))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 701))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 701))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 698)) ;
             }
             break ;
           }
@@ -5652,27 +5667,27 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
     enumerator_22339.gotoNextObject () ;
     enumerator_22382.gotoNextObject () ;
   }
-  const enumGalgasBool test_22 = GALGAS_bool (kIsNotEqual, constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 709)).objectCompare (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 709)))).boolEnum () ;
+  const enumGalgasBool test_22 = GALGAS_bool (kIsNotEqual, constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 707)).objectCompare (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 707)))).boolEnum () ;
   if (kBoolTrue == test_22) {
-    inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("this routine requires ").add_operation (constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 710)).getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 710)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 710)).add_operation (GALGAS_string (" argument(s), this call names "), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 710)).add_operation (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 711)).getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 710)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 710)).add_operation (GALGAS_string (" argument(s)"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 711))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 710)) ;
+    inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("this routine requires ").add_operation (constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 708)).getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 708)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 708)).add_operation (GALGAS_string (" argument(s), this call names "), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 708)).add_operation (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 709)).getter_string (SOURCE_FILE ("instruction-proc-call.galgas", 708)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 708)).add_operation (GALGAS_string (" argument(s)"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 709))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 708)) ;
   }else if (kBoolFalse == test_22) {
-    cEnumerator_procedureSignature enumerator_29059 (constinArgument_inFormalSignature, kEnumeration_up) ;
-    cEnumerator_procEffectiveParameterList enumerator_29088 (var_parameterList, kEnumeration_up) ;
-    while (enumerator_29059.hasCurrentObject () && enumerator_29088.hasCurrentObject ()) {
-      const enumGalgasBool test_23 = GALGAS_bool (kIsNotEqual, enumerator_29059.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 714)).objectCompare (enumerator_29088.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 714)))).boolEnum () ;
+    cEnumerator_procedureSignature enumerator_28882 (constinArgument_inFormalSignature, kEnumeration_up) ;
+    cEnumerator_procEffectiveParameterList enumerator_28911 (var_parameterList, kEnumeration_up) ;
+    while (enumerator_28882.hasCurrentObject () && enumerator_28911.hasCurrentObject ()) {
+      const enumGalgasBool test_23 = GALGAS_bool (kIsNotEqual, enumerator_28882.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 712)).objectCompare (enumerator_28911.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 712)))).boolEnum () ;
       if (kBoolTrue == test_23) {
-        GALGAS_location location_24 (enumerator_29088.current_mSelector (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_24, GALGAS_string ("the actual parameter type is '").add_operation (enumerator_29088.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 715)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 715)).add_operation (GALGAS_string ("', and is incompatible with the formal type '"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 715)).add_operation (enumerator_29059.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 716)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 716)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 716))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 715)) ;
+        GALGAS_location location_24 (enumerator_28911.current_mSelector (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_24, GALGAS_string ("the actual parameter type is '").add_operation (enumerator_28911.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 713)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 713)).add_operation (GALGAS_string ("', and is incompatible with the formal type '"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 713)).add_operation (enumerator_28882.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 714)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 714)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 714))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 713)) ;
       }
-      GALGAS_string var_requiredPassingMode = extensionGetter_requiredActualPassingModeForSelector (enumerator_29059.current_mFormalArgumentPassingMode (HERE), enumerator_29059.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 718)) ;
-      GALGAS_string var_testedPassingMode = extensionGetter_passingModeForActualSelector (enumerator_29088.current_mEffectiveParameterPassingMode (HERE), enumerator_29088.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 719)) ;
+      GALGAS_string var_requiredPassingMode = extensionGetter_requiredActualPassingModeForSelector (enumerator_28882.current_mFormalArgumentPassingMode (HERE), enumerator_28882.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 716)) ;
+      GALGAS_string var_testedPassingMode = extensionGetter_passingModeForActualSelector (enumerator_28911.current_mEffectiveParameterPassingMode (HERE), enumerator_28911.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 717)) ;
       const enumGalgasBool test_25 = GALGAS_bool (kIsNotEqual, var_requiredPassingMode.objectCompare (var_testedPassingMode)).boolEnum () ;
       if (kBoolTrue == test_25) {
-        GALGAS_location location_26 (enumerator_29088.current_mSelector (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_26, GALGAS_string ("the required selector is '").add_operation (var_requiredPassingMode, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 721)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 721))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 721)) ;
+        GALGAS_location location_26 (enumerator_28911.current_mSelector (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_26, GALGAS_string ("the required selector is '").add_operation (var_requiredPassingMode, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 719)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 719))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 719)) ;
       }
-      enumerator_29059.gotoNextObject () ;
-      enumerator_29088.gotoNextObject () ;
+      enumerator_28882.gotoNextObject () ;
+      enumerator_28911.gotoNextObject () ;
     }
   }
 }
@@ -15137,9 +15152,324 @@ const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
   gWrapperAllDirectories_targetTemplates_1
 ) ;
 
+//--- File 'lpc2294/lpc2294.plm'
+
+const char * gWrapperFileContent_10_targetTemplates = "//------------------------------------------------------------------------------\n"
+  "\n"
+  "// Vectored Interrupt Controller (VIC)\n"
+  "register VICIRQStatus   at 0xFFFF_F000 $uint32\n"
+  "register VICFIQStatus   at 0xFFFF_F000 $uint32\n"
+  "register VICRawIntr     at 0xFFFF_F008 $uint32\n"
+  "register VICIntSelect   at 0xFFFF_F00C $uint32\n"
+  "register VICIntEnable   at 0xFFFF_F010 $uint32\n"
+  "register VICIntEnClr    at 0xFFFF_F014 $uint32\n"
+  "register VICSoftInt     at 0xFFFF_F018 $uint32\n"
+  "register VICSoftIntClr  at 0xFFFF_F01C $uint32\n"
+  "register VICProtection  at 0xFFFF_F020 $uint32\n"
+  "register VICVectAddr    at 0xFFFF_F030 $uint32\n"
+  "register VICDefVectAddr at 0xFFFF_F034 $uint32\n"
+  "\n"
+  "//register VICVect(INDEX) $uint32 (0xFFFF_F100 + ((INDEX) << 2\n"
+  "\n"
+  "register VICVectAddr0   at 0xFFFF_F100 $uint32\n"
+  "register VICVectAddr1   at 0xFFFF_F104 $uint32\n"
+  "register VICVectAddr2   at 0xFFFF_F108 $uint32\n"
+  "register VICVectAddr3   at 0xFFFF_F10C $uint32\n"
+  "register VICVectAddr4   at 0xFFFF_F110 $uint32\n"
+  "register VICVectAddr5   at 0xFFFF_F114 $uint32\n"
+  "register VICVectAddr6   at 0xFFFF_F118 $uint32\n"
+  "register VICVectAddr7   at 0xFFFF_F11C $uint32\n"
+  "register VICVectAddr8   at 0xFFFF_F120 $uint32\n"
+  "register VICVectAddr9   at 0xFFFF_F124 $uint32\n"
+  "register VICVectAddr10  at 0xFFFF_F128 $uint32\n"
+  "register VICVectAddr11  at 0xFFFF_F12C $uint32\n"
+  "register VICVectAddr12  at 0xFFFF_F130 $uint32\n"
+  "register VICVectAddr13  at 0xFFFF_F134 $uint32\n"
+  "register VICVectAddr14  at 0xFFFF_F138 $uint32\n"
+  "register VICVectAddr15  at 0xFFFF_F13C $uint32\n"
+  "\n"
+  "//register VICVectCntl(INDEX) $uint32 (0xFFFF_F200 + ((INDEX) << 2\n"
+  "\n"
+  "register VICVectCntl0   at 0xFFFF_F200 $uint32\n"
+  "register VICVectCntl1   at 0xFFFF_F204 $uint32\n"
+  "register VICVectCntl2   at 0xFFFF_F208 $uint32\n"
+  "register VICVectCntl3   at 0xFFFF_F20C $uint32\n"
+  "register VICVectCntl4   at 0xFFFF_F210 $uint32\n"
+  "register VICVectCntl5   at 0xFFFF_F214 $uint32\n"
+  "register VICVectCntl6   at 0xFFFF_F218 $uint32\n"
+  "register VICVectCntl7   at 0xFFFF_F21C $uint32\n"
+  "register VICVectCntl8   at 0xFFFF_F220 $uint32\n"
+  "register VICVectCntl9   at 0xFFFF_F224 $uint32\n"
+  "register VICVectCntl10  at 0xFFFF_F228 $uint32\n"
+  "register VICVectCntl11  at 0xFFFF_F22C $uint32\n"
+  "register VICVectCntl12  at 0xFFFF_F230 $uint32\n"
+  "register VICVectCntl13  at 0xFFFF_F234 $uint32\n"
+  "register VICVectCntl14  at 0xFFFF_F238 $uint32\n"
+  "register VICVectCntl15  at 0xFFFF_F23C $uint32\n"
+  "\n"
+  "//------------------------------------------------------------------------------\n"
+  "\n"
+  "// Watchdog\n"
+  "register WDMOD            at 0xE000_0000 $uint8\n"
+  "register WDTC             at 0xE000_0004 $uint32\n"
+  "register WDFEED           at 0xE000_0008 $uint8\n"
+  "register WDTV             at 0xE000_000C $uint32\n"
+  "\n"
+  "// Pin Connect Block\n"
+  "register PINSEL0        at 0xE002_C000 $uint32\n"
+  "register PINSEL1        at 0xE002_C004 $uint32\n"
+  "register PINSEL2        at 0xE002_C014 $uint32\n"
+  "\n"
+  "// General Purpose Input/Output (GPIO)\n"
+  "register IO0PIN          at 0xE002_8000 $uint32\n"
+  "register IO0SET          at 0xE002_8004 $uint32\n"
+  "register IO0DIR          at 0xE002_8008 $uint32\n"
+  "register IO0CLR          at 0xE002_800C $uint32\n"
+  "\n"
+  "register IO1PIN          at 0xE002_8010 $uint32\n"
+  "register IO1SET          at 0xE002_8014 $uint32\n"
+  "register IO1DIR          at 0xE002_8018 $uint32\n"
+  "register IO1CLR          at 0xE002_801C $uint32\n"
+  "\n"
+  "register IO2PIN          at 0xE002_8020 $uint32\n"
+  "register IO2SET          at 0xE002_8024 $uint32\n"
+  "register IO2DIR          at 0xE002_8028 $uint32\n"
+  "register IO2CLR          at 0xE002_802C $uint32\n"
+  "\n"
+  "register IO3PIN          at 0xE002_8030 $uint32\n"
+  "register IO3SET          at 0xE002_8034 $uint32\n"
+  "register IO3DIR          at 0xE002_8038 $uint32\n"
+  "register IO3CLR          at 0xE002_803C $uint32\n"
+  "\n"
+  "// Memory Accelerator Module (MAM)\n"
+  "register MAMCR            at 0xE01F_C000 $uint8\n"
+  "register MAMTIM           at 0xE01F_C004 $uint8\n"
+  "register MEMMAP           at 0xE01F_C040 $uint8\n"
+  "\n"
+  "// Phase Locked Loop (PLL)\n"
+  "register PLLCON           at 0xE01F_C080 $uint8\n"
+  "register PLLCFG           at 0xE01F_C084 $uint8\n"
+  "register PLLSTAT          at 0xE01F_C088 $uint16\n"
+  "register PLLFEED          at 0xE01F_C08C $uint8\n"
+  "\n"
+  "// VPB Divider */\n"
+  "register VPBDIV           at 0xE01F_C100 $uint8\n"
+  "\n"
+  "// Power Control */\n"
+  "register PCON             at 0xE01F_C0C0 $uint8\n"
+  "register PCONP            at 0xE01F_C0C4 $uint32\n"
+  "\n"
+  "// External Interrupts\n"
+  "register EXTINT           at 0xE01F_C140 $uint8\n"
+  "register EXTWAKE          at 0xE01F_C144 $uint8\n"
+  "register EXTMODE          at 0xE01F_C148 $uint8\n"
+  "register EXTPOLAR         at 0xE01F_C14C $uint8\n"
+  "\n"
+  "// Timer 0\n"
+  "register TIMER0_IR      at 0xE000_4000 $uint32\n"
+  "register TIMER0_TCR     at 0xE000_4004 $uint32\n"
+  "register TIMER0_TC      at 0xE000_4008 $uint32\n"
+  "register TIMER0_PR      at 0xE000_400C $uint32\n"
+  "register TIMER0_PC      at 0xE000_4010 $uint32\n"
+  "register TIMER0_MCR     at 0xE000_4014 $uint32\n"
+  "register TIMER0_MR0     at 0xE000_4018 $uint32\n"
+  "register TIMER0_MR1     at 0xE000_401C $uint32\n"
+  "register TIMER0_MR2     at 0xE000_4020 $uint32\n"
+  "register TIMER0_MR3     at 0xE000_4024 $uint32\n"
+  "register TIMER0_CCR     at 0xE000_4028 $uint32\n"
+  "register TIMER0_CR0     at 0xE000_402C $uint32\n"
+  "register TIMER0_CR1     at 0xE000_4030 $uint32\n"
+  "register TIMER0_CR2     at 0xE000_4034 $uint32\n"
+  "register TIMER0_CR3     at 0xE000_4038 $uint32\n"
+  "register TIMER0_EMR     at 0xE000_403C $uint32\n"
+  "\n"
+  "// Timer 1\n"
+  "register TIMER1_IR      at 0xE000_8000 $uint32\n"
+  "register TIMER1_TCR     at 0xE000_8004 $uint32\n"
+  "register TIMER1_TC      at 0xE000_8008 $uint32\n"
+  "register TIMER1_PR      at 0xE000_800C $uint32\n"
+  "register TIMER1_PC      at 0xE000_8010 $uint32\n"
+  "register TIMER1_MCR     at 0xE000_8014 $uint32\n"
+  "register TIMER1_MR0     at 0xE000_8018 $uint32\n"
+  "register TIMER1_MR1     at 0xE000_801C $uint32\n"
+  "register TIMER1_MR2     at 0xE000_8020 $uint32\n"
+  "register TIMER1_MR3     at 0xE000_8024 $uint32\n"
+  "register TIMER1_CCR     at 0xE000_8028 $uint32\n"
+  "register TIMER1_CR0     at 0xE000_802C $uint32\n"
+  "register TIMER1_CR1     at 0xE000_8030 $uint32\n"
+  "register TIMER1_CR2     at 0xE000_8034 $uint32\n"
+  "register TIMER1_CR3     at 0xE000_8038 $uint32\n"
+  "register TIMER1_EMR     at 0xE000_803C $uint32\n"
+  "\n"
+  "// Pulse Width Modulator (PWM)\n"
+  "register PWM_IR         at 0xE001_4000 $uint32\n"
+  "register PWM_TCR        at 0xE001_4004 $uint32\n"
+  "register PWM_TC         at 0xE001_4008 $uint32\n"
+  "register PWM_PR         at 0xE001_400C $uint32\n"
+  "register PWM_PC         at 0xE001_4010 $uint32\n"
+  "register PWM_MCR        at 0xE001_4014 $uint32\n"
+  "register PWM_MR0        at 0xE001_4018 $uint32\n"
+  "register PWM_MR1        at 0xE001_401C $uint32\n"
+  "register PWM_MR2        at 0xE001_4020 $uint32\n"
+  "register PWM_MR3        at 0xE001_4024 $uint32\n"
+  "register PWM_MR4        at 0xE001_4040 $uint32\n"
+  "register PWM_MR5        at 0xE001_4044 $uint32\n"
+  "register PWM_MR6        at 0xE001_4048 $uint32\n"
+  "register PWM_CCR        at 0xE001_4028 $uint32\n"
+  "register PWM_CR0        at 0xE001_402C $uint32\n"
+  "register PWM_CR1        at 0xE001_4030 $uint32\n"
+  "register PWM_CR2        at 0xE001_4034 $uint32\n"
+  "register PWM_CR3        at 0xE001_4038 $uint32\n"
+  "register PWM_EMR        at 0xE001_403C $uint32\n"
+  "register PWM_PCR        at 0xE001_404C $uint32\n"
+  "register PWM_LER        at 0xE001_4050 $uint32\n"
+  "\n"
+  "// Universal Asynchronous Receiver Transmitter 0 (UART0)\n"
+  "register U0RBR        at 0xE000_C000 $uint8\n"
+  "register U0THR        at 0xE000_C000 $uint8\n"
+  "register U0DLL        at 0xE000_C000 $uint8\n"
+  "register U0DLM        at 0xE000_C004 $uint8\n"
+  "register U0IER        at 0xE000_C004 $uint32\n"
+  "register U0IIR        at 0xE000_C008 $uint32\n"
+  "register U0FCR        at 0xE000_C008 $uint8\n"
+  "register U0LCR        at 0xE000_C00C $uint8\n"
+  "register U0LSR        at 0xE000_C014 $uint8\n"
+  "register U0SCR        at 0xE000_C01C $uint8\n"
+  "register U0ACR        at 0xE000_C020 $uint32\n"
+  "register U0FDR        at 0xE000_C028 $uint32\n"
+  "register U0TER        at 0xE000_C030 $uint8\n"
+  "\n"
+  "\n"
+  "// Universal Asynchronous Receiver Transmitter 1 (UART1)\n"
+  "register U1RBR        at 0xE001_0000 $uint8\n"
+  "register U1THR        at 0xE001_0000 $uint8\n"
+  "register U1DLL        at 0xE001_0000 $uint8\n"
+  "register U1DLM        at 0xE001_0004 $uint8\n"
+  "register U1IER        at 0xE001_0004 $uint32\n"
+  "register U1IIR        at 0xE001_0008 $uint32\n"
+  "register U1FCR        at 0xE001_0008 $uint8\n"
+  "register U1LCR        at 0xE001_000C $uint8\n"
+  "register U1MCR        at 0xE001_0010 $uint8\n"
+  "register U1LSR        at 0xE001_0014 $uint8\n"
+  "register U1MSR        at 0xE001_0018 $uint8\n"
+  "register U1SCR        at 0xE001_001C $uint8\n"
+  "register U1ACR        at 0xE001_0020 $uint32\n"
+  "register U1FDR        at 0xE001_0028 $uint32\n"
+  "register U1TER        at 0xE001_0030 $uint8\n"
+  "\n"
+  "\n"
+  "// I2C Interface\n"
+  "register I2C_I2CONSET     at 0xE001_C000 $uint8\n"
+  "register I2C_I2STAT       at 0xE001_C004 $uint8\n"
+  "register I2C_I2DAT        at 0xE001_C008 $uint8\n"
+  "register I2C_I2ADR        at 0xE001_C00C $uint8\n"
+  "register I2C_I2SCLH       at 0xE001_C010 $uint16\n"
+  "register I2C_I2SCLL       at 0xE001_C014 $uint16\n"
+  "register I2C_I2CONCLR     at 0xE001_C018 $uint8\n"
+  "\n"
+  "// SPI 0 (Serial Peripheral Interface 0)\n"
+  "register SPI0_SPCR          at 0xE002_0000 $uint16\n"
+  "register SPI0_SPSR          at 0xE002_0004 $uint8\n"
+  "register SPI0_SPDR          at 0xE002_0008 $uint16\n"
+  "register SPI0_SPCCR         at 0xE002_000C $uint8\n"
+  "// register SPI0_SPTCR        at 0xE002_0010 $uint8\n"
+  "// register SPI0_SPTSR        at 0xE002_0014 $uint8\n"
+  "// register SPI0_SPTOR        at 0xE002_0018 $uint8\n"
+  "register SPI0_SPINT         at 0xE002_001C $uint8\n"
+  "\n"
+  "// SPI 1 (Serial Peripheral Interface 1)\n"
+  "register SPI1_SPCR          at 0xE003_0000 $uint16\n"
+  "register SPI1_SPSR          at 0xE003_0004 $uint8\n"
+  "register SPI1_SPDR          at 0xE003_0008 $uint16\n"
+  "register SPI1_SPCCR         at 0xE003_000C $uint8\n"
+  "// register SPI1_SPTCR        at  $uint8   0xE003_0010\n"
+  "// register SPI1_SPTSR        at  $uint8   0xE003_0014\n"
+  "// register SPI1_SPTOR        at  $uint8   0xE003_0018\n"
+  "register SPI1_SPINT         at 0xE003_001C $uint8\n"
+  "\n"
+  "// Real Time Clock\n"
+  "register RTC_ILR          at 0xE002_4000 $uint8\n"
+  "register RTC_CTC          at 0xE002_4004 $uint16\n"
+  "register RTC_CCR          at 0xE002_4008 $uint8\n"
+  "register RTC_CIIR         at 0xE002_400C $uint8\n"
+  "register RTC_AMR          at 0xE002_4010 $uint8\n"
+  "register RTC_CTIME0       at 0xE002_4014 $uint32\n"
+  "register RTC_CTIME1       at 0xE002_4018 $uint32\n"
+  "register RTC_CTIME2       at 0xE002_401C $uint32\n"
+  "register RTC_SEC          at 0xE002_4020 $uint8\n"
+  "register RTC_MIN          at 0xE002_4024 $uint8\n"
+  "register RTC_HOUR         at 0xE002_4028 $uint8\n"
+  "register RTC_DOM          at 0xE002_402C $uint8\n"
+  "register RTC_DOW          at 0xE002_4030 $uint8\n"
+  "register RTC_DOY          at 0xE002_4034 $uint16\n"
+  "register RTC_MONTH        at 0xE002_4038 $uint8\n"
+  "register RTC_YEAR         at 0xE002_403C $uint16\n"
+  "register RTC_ALSEC        at 0xE002_4060 $uint8\n"
+  "register RTC_ALMIN        at 0xE002_4064 $uint8\n"
+  "register RTC_ALHOUR       at 0xE002_4068 $uint8\n"
+  "register RTC_ALDOM        at 0xE002_406C $uint8\n"
+  "register RTC_ALDOW        at 0xE002_4070 $uint8\n"
+  "register RTC_ALDOY        at 0xE002_4074 $uint16\n"
+  "register RTC_ALMON        at 0xE002_4078 $uint8\n"
+  "register RTC_ALYEAR       at 0xE002_407C $uint16\n"
+  "register RTC_PREINT       at 0xE002_4080 $uint16\n"
+  "register RTC_PREFRAC      at 0xE002_4084 $uint16\n"
+  "\n"
+  "// Bank Configuration registers\n"
+  "register BCFG0          at 0xFFE0_0000 $uint32\n"
+  "register BCFG1          at 0xFFE0_0004 $uint32\n"
+  "register BCFG2          at 0xFFE0_0008 $uint32\n"
+  "register BCFG3          at 0xFFE0_000C $uint32\n"
+  "\n"
+  "// CAN Controllers\n"
+  "register CAN_AMFR          at 0xE003_C000 $uint32\n"
+  "register CAN_SFF_SA        at 0xE003_C004 $uint32\n"
+  "register CAN_SFF_GRP_SA    at 0xE003_C008 $uint32\n"
+  "register CAN_EFF_SA        at 0xE003_C00C $uint32\n"
+  "register CAN_EFF_GRP_SA    at 0xE003_C010 $uint32\n"
+  "register CAN_END_OF_TABLES at 0xE003_C014 $uint32\n"
+  "\n"
+  "// Analog/Digital Converter (ADC)\n"
+  "register ADCR           at 0xE003_4000 $uint32\n"
+  "register ADGDR          at 0xE003_4004 $uint32\n"
+  "register ADINTEN        at 0xE003_400C $uint32\n"
+  "\n"
+  "//------------------------------------------------------------------------------\n" ;
+
+const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+  "lpc2294.plm",
+  "plm",
+  true, // Text file
+  11588, // Text length
+  gWrapperFileContent_10_targetTemplates
+) ;
+
+//--- All files of 'lpc2294' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [2] = {
+  & gWrapperFile_10_targetTemplates,
+  NULL
+} ;
+
+//--- All sub-directories of 'lpc2294' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [1] = {
+  NULL
+} ;
+
+//--- Directory 'lpc2294'
+
+const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
+  "lpc2294",
+  1,
+  gWrapperAllFiles_targetTemplates_2,
+  0,
+  gWrapperAllDirectories_targetTemplates_2
+) ;
+
 //--- File 'teensy-3-1-tp/build-verbose.py'
 
-const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -15173,17 +15503,17 @@ const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_10_targetTemplates
+  gWrapperFileContent_11_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/build.py'
 
-const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15387,17 +15717,17 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   13857, // Text length
-  gWrapperFileContent_11_targetTemplates
+  gWrapperFileContent_12_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/clean.py'
 
-const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15434,17 +15764,17 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_12_targetTemplates
+  gWrapperFileContent_13_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/linker.ld'
 
-const char * gWrapperFileContent_13_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_14_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -15605,17 +15935,17 @@ const char * gWrapperFileContent_13_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "linker.ld",
   "ld",
   true, // Text file
   5231, // Text length
-  gWrapperFileContent_13_targetTemplates
+  gWrapperFileContent_14_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/objdump.py'
 
-const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -15649,17 +15979,17 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "objdump.py",
   "py",
   true, // Text file
   1005, // Text length
-  gWrapperFileContent_14_targetTemplates
+  gWrapperFileContent_15_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/objsize.py'
 
-const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -15693,17 +16023,17 @@ const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "objsize.py",
   "py",
   true, // Text file
   1013, // Text length
-  gWrapperFileContent_15_targetTemplates
+  gWrapperFileContent_16_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/run.py'
 
-const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -15740,17 +16070,17 @@ const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "run.py",
   "py",
   true, // Text file
   1036, // Text length
-  gWrapperFileContent_16_targetTemplates
+  gWrapperFileContent_17_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/section-code.s'
 
-const char * gWrapperFileContent_17_targetTemplates = "\n"
+const char * gWrapperFileContent_18_targetTemplates = "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 U D F    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
@@ -15805,29 +16135,29 @@ const char * gWrapperFileContent_17_targetTemplates = "\n"
   "  pop   {r5, pc}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "section-code.s",
   "s",
   true, // Text file
   3346, // Text length
-  gWrapperFileContent_17_targetTemplates
+  gWrapperFileContent_18_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/section-dispatcher-entry.s'
 
-const char * gWrapperFileContent_18_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
+const char * gWrapperFileContent_19_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "section-dispatcher-entry.s",
   "s",
   true, // Text file
   25, // Text length
-  gWrapperFileContent_18_targetTemplates
+  gWrapperFileContent_19_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/section-dispatcher-header.s'
 
-const char * gWrapperFileContent_19_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_20_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S E C T I O N   T A B L E                                                                            *\n"
   "@                                                                                                                      *\n"
@@ -15835,17 +16165,17 @@ const char * gWrapperFileContent_19_targetTemplates = "@------------------------
   "\n"
   "__udf_dispatcher_table:\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "section-dispatcher-header.s",
   "s",
   true, // Text file
   630, // Text length
-  gWrapperFileContent_19_targetTemplates
+  gWrapperFileContent_20_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/section-entry.s'
 
-const char * gWrapperFileContent_20_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_21_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -15868,29 +16198,29 @@ const char * gWrapperFileContent_20_targetTemplates = "@------------------------
   "  .global !ENTRY!\n"
   "  .type !ENTRY!, %function\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "section-entry.s",
   "s",
   true, // Text file
   552, // Text length
-  gWrapperFileContent_20_targetTemplates
+  gWrapperFileContent_21_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/service-dispatcher-entry.s'
 
-const char * gWrapperFileContent_21_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
+const char * gWrapperFileContent_22_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+const cRegularFileWrapper gWrapperFile_22_targetTemplates (
   "service-dispatcher-entry.s",
   "s",
   true, // Text file
   29, // Text length
-  gWrapperFileContent_21_targetTemplates
+  gWrapperFileContent_22_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/service-dispatcher-header.s'
 
-const char * gWrapperFileContent_22_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_23_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
   "@                                                                                                                      *\n"
@@ -15901,17 +16231,17 @@ const char * gWrapperFileContent_22_targetTemplates = "@------------------------
   "__svc_dispatcher_table:\n"
   "  .word __direct_return_for_null_service @ 0\n" ;
 
-const cRegularFileWrapper gWrapperFile_22_targetTemplates (
+const cRegularFileWrapper gWrapperFile_23_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
   728, // Text length
-  gWrapperFileContent_22_targetTemplates
+  gWrapperFileContent_23_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/service-entry.s'
 
-const char * gWrapperFileContent_23_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_24_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -15931,17 +16261,17 @@ const char * gWrapperFileContent_23_targetTemplates = "@------------------------
   "  .cantunwind\n"
   "\t.fnend\n" ;
 
-const cRegularFileWrapper gWrapperFile_23_targetTemplates (
+const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "service-entry.s",
   "s",
   true, // Text file
   511, // Text length
-  gWrapperFileContent_23_targetTemplates
+  gWrapperFileContent_24_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/target-panic.ll'
 
-const char * gWrapperFileContent_24_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_25_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "define internal void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %inSourceFile) nounwind noreturn naked {\n"
   ";--- Mask interrupt: write 1 into FAULTMASK register\n"
@@ -15952,17 +16282,17 @@ const char * gWrapperFileContent_24_targetTemplates = ";------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+const cRegularFileWrapper gWrapperFile_25_targetTemplates (
   "target-panic.ll",
   "ll",
   true, // Text file
   478, // Text length
-  gWrapperFileContent_24_targetTemplates
+  gWrapperFileContent_25_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/target.c'
 
-const char * gWrapperFileContent_25_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_26_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#define TASK_COUNT (!TASKCOUNT!)\n"
   "#define GUARD_COUNT (!GUARDCOUNT!)\n"
@@ -16413,17 +16743,17 @@ const char * gWrapperFileContent_25_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_25_targetTemplates (
+const cRegularFileWrapper gWrapperFile_26_targetTemplates (
   "target.c",
   "c",
   true, // Text file
   22543, // Text length
-  gWrapperFileContent_25_targetTemplates
+  gWrapperFileContent_26_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/target.ll'
 
-const char * gWrapperFileContent_26_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_27_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
@@ -16695,17 +17025,17 @@ const char * gWrapperFileContent_26_targetTemplates = "target datalayout = \"e-m
   ";--- Create task \n"
   "declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n" ;
 
-const cRegularFileWrapper gWrapperFile_26_targetTemplates (
+const cRegularFileWrapper gWrapperFile_27_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
   12601, // Text length
-  gWrapperFileContent_26_targetTemplates
+  gWrapperFileContent_27_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-tp/target.s'
 
-const char * gWrapperFileContent_27_targetTemplates = "\t.syntax unified\n"
+const char * gWrapperFileContent_28_targetTemplates = "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
   "\t.thumb\n"
   "\n"
@@ -16934,18 +17264,17 @@ const char * gWrapperFileContent_27_targetTemplates = "\t.syntax unified\n"
   "  wfi\n"
   "  b  infiniteLoop\n" ;
 
-const cRegularFileWrapper gWrapperFile_27_targetTemplates (
+const cRegularFileWrapper gWrapperFile_28_targetTemplates (
   "target.s",
   "s",
   true, // Text file
   12544, // Text length
-  gWrapperFileContent_27_targetTemplates
+  gWrapperFileContent_28_targetTemplates
 ) ;
 
 //--- All files of 'teensy-3-1-tp' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [19] = {
-  & gWrapperFile_10_targetTemplates,
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [19] = {
   & gWrapperFile_11_targetTemplates,
   & gWrapperFile_12_targetTemplates,
   & gWrapperFile_13_targetTemplates,
@@ -16963,23 +17292,24 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [19] = {
   & gWrapperFile_25_targetTemplates,
   & gWrapperFile_26_targetTemplates,
   & gWrapperFile_27_targetTemplates,
+  & gWrapperFile_28_targetTemplates,
   NULL
 } ;
 
 //--- All sub-directories of 'teensy-3-1-tp' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [1] = {
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_3 [1] = {
   NULL
 } ;
 
 //--- Directory 'teensy-3-1-tp'
 
-const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
+const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
   "teensy-3-1-tp",
   18,
-  gWrapperAllFiles_targetTemplates_2,
+  gWrapperAllFiles_targetTemplates_3,
   0,
-  gWrapperAllDirectories_targetTemplates_2
+  gWrapperAllDirectories_targetTemplates_3
 ) ;
 
 //--- All files of '' directory
@@ -16993,9 +17323,10 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [4] = {
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [3] = {
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [4] = {
   & gWrapperDirectory_1_targetTemplates,
   & gWrapperDirectory_2_targetTemplates,
+  & gWrapperDirectory_3_targetTemplates,
   NULL
 } ;
 
@@ -17005,7 +17336,7 @@ const cDirectoryWrapper gWrapperDirectory_0_targetTemplates (
   "",
   3,
   gWrapperAllFiles_targetTemplates_0,
-  2,
+  3,
   gWrapperAllDirectories_targetTemplates_0
 ) ;
 

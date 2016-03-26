@@ -31,6 +31,9 @@ struct $monSemaphore {
       handleGuardedCommand (!?guard:self.guardList)
     end
   }
+  
+  guard PP () : self.P () {
+  }
 }
 
 //-----------------------------------------------------------------------------*
@@ -86,7 +89,7 @@ task T2 priority 2 stackSize 512 {
   
   func loop () {
     select
-    on s0.P () :
+    on s0.PP () :
       ledToggle  (!LED_L1)
     on s1.P () :
       ledToggle  (!LED_L3)

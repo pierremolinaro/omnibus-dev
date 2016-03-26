@@ -913,67 +913,6 @@ class cPtr_literal_5F_literal_5F_integerInfixOperation : public cPtr_infixOperat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_buildGlobalConstantMapHTMLFile (class GALGAS_globalConstantMap inArgument0,
-                                             const class GALGAS_lstring constinArgument1,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Filewrapper 'constantDumpGenerationTemplate'                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Filewrapper template 'constantDumpGenerationTemplate dump'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class C_Compiler * inCompiler,
-                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
-                                                                       const class GALGAS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
-                                                                       const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
-                                                                       const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
-                                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'linkForGlobalConstant'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
-                                                    class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category getter '@valueIR llvmName' (as function)                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_llvmName (const class GALGAS_valueIR & inObject,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Routine 'enterControlRegistersInContext'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1209,6 +1148,67 @@ class GALGAS_string function_linkForControlRegister (const class GALGAS_string &
 class GALGAS_string function_fieldIndexColumns (const class GALGAS_uint & constinArgument0,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildGlobalConstantMapHTMLFile (class GALGAS_globalConstantMap inArgument0,
+                                             const class GALGAS_lstring constinArgument1,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Filewrapper 'constantDumpGenerationTemplate'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Filewrapper template 'constantDumpGenerationTemplate dump'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class C_Compiler * inCompiler,
+                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                       const class GALGAS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
+                                                                       const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                       const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'linkForGlobalConstant'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Category getter '@valueIR llvmName' (as function)                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_llvmName (const class GALGAS_valueIR & inObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3456,6 +3456,7 @@ extern const char * gWrapperFileContent_24_targetTemplates ;
 extern const char * gWrapperFileContent_25_targetTemplates ;
 extern const char * gWrapperFileContent_26_targetTemplates ;
 extern const char * gWrapperFileContent_27_targetTemplates ;
+extern const char * gWrapperFileContent_28_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3490,11 +3491,13 @@ extern const cRegularFileWrapper gWrapperFile_24_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_27_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_28_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_1_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_2_targetTemplates ;
+extern const cDirectoryWrapper gWrapperDirectory_3_targetTemplates ;
 
 #endif
