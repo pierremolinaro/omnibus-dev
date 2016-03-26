@@ -88,7 +88,9 @@ func `isr `kernel `user millis @noWarningIfUnused () -> $uint32 {
 
 //-----------------------------------------------------------------------------*
 
-func `isr interrupt5 () {
+required func `isr interrupt5 ()
+
+func `isr interrupt5 @global () {
   TIMER1_IR = 1 // Clears MR0 interrupt
   let now = gUptimeMS +% 1
   gUptimeMS = now

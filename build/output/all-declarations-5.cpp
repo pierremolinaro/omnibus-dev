@@ -624,17 +624,27 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
+  "section ledOn () {\n"
+  "  IO1CLR  = 1 << 23 // Led On\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "section ledOff () {\n"
+  "  IO1SET  = 1 << 23 // Led Off\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
   "  func loop () {\n"
   "    //waitUntilMS (!deadline:self.compteur)\n"
-  "//    IO1CLR  = 1 << 23 // Led On\n"
-  "    // ledOn (!LED_L0)\n"
+  "    ledOn ()\n"
   "    self.compteur +%= 500\n"
   "    // waitUntilMS (!deadline:self.compteur)\n"
-  "    // ledOff (!LED_L0)\n"
-  "//    IO1SET  = 1 << 23 // Led Off\n"
+  "    ledOff ()\n"
   "    self.compteur +%= 500\n"
   "  }\n"
   "}\n"
@@ -645,7 +655,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  469, // Text length
+  592, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
