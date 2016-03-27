@@ -1,10 +1,85 @@
 
 configuration 32:$int32:$uint32 {
+  NMI : 2
+  MemManage : 4
+  BusFault : 5
+  UsageFault : 6
+  DebugMonitor : 12
+  PendSV : 14
+  systick : 15
+  DMAChannel0TranfertComplete : 16
+  DMAChannel1TranfertComplete : 17
+  DMAChannel2TranfertComplete : 18
+  DMAChannel3TranfertComplete : 19
+  DMAChannel4TranfertComplete : 20
+  DMAChannel5TranfertComplete : 21
+  DMAChannel6TranfertComplete : 22
+  DMAChannel7TranfertComplete : 23
+  DMAChannel8TranfertComplete : 24
+  DMAChannel9TranfertComplete : 25
+  DMAChannel10TranfertComplete : 26
+  DMAChannel11TranfertComplete : 27
+  DMAChannel12TranfertComplete : 28
+  DMAChannel13TranfertComplete : 29
+  DMAChannel14TranfertComplete : 30
+  DMAChannel15TranfertComplete : 31
+  DMAError : 32
+  flashMemoryCommandComplete : 34
+  flashMemoryReadCollision : 35
+  modeController : 36
+  LLWU : 37
+  WDOGEWM : 38
+  I2C0 : 40
+  I2C1 : 41
+  SPI0 : 42
+  SPI1 : 43
+  CAN0MessageBuffer : 45
+  CAN0BusOff : 46
+  CAN0Error : 47
+  CAN0TransmitWarning : 48
+  CAN0ReceiveWarning : 49
+  CAN0WakeUp : 50
+  I2S0Transmit : 51
+  I2S0Receive : 52
+  UART0LON : 60
+  UART0Status : 61
+  UART0Error : 62
+  UART1Status : 63
+  UART1Error : 64
+  UART2Status : 65
+  UART2Error : 66
+  ADC0 : 73
+  ADC1 : 74
+  CMP0 : 75
+  CMP1 : 76
+  CMP2 : 77
+  FMT0 : 78
+  FMT1 : 79
+  FMT2 : 80
+  CMT : 81
+  RTCAlarm : 82
+  RTCSecond : 83
+  PITChannel0 : 84
+  PITChannel1 : 85
+  PITChannel2 : 86
+  PITChannel3 : 87
+  PDB : 88
+  USBOTG : 89
+  USBChargerDetect : 90
+  DAC0 : 97
+  TSI : 99
+  MCG : 100
+  lowPowerTimer : 101
+  pinDetectPortA : 103
+  pinDetectPortB : 104
+  pinDetectPortC : 105
+  pinDetectPortD : 106
+  pinDetectPortE : 107
+  softwareInterrupt : 110
 }
 
 import "files/registers-mk20dx256.plm"
 import "files/teensy-3-1-boot.plm"
-import "files/teensy-3-1-default-isr.plm"
 import "files/teensy-3-1-xtr.plm"
 import "files/teensy-3-1-leds.plm"
 import "files/teensy-3-1-lcd.plm"

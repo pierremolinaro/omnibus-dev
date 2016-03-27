@@ -33,6 +33,13 @@ list @allowedGuardList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @allowedISRList {
+  @bool mHasWriteAccess
+  @lstring mISRName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @globalVarDeclarationList {
   @lstring mTypeName # Empty string if no type annotation
   @lstring mVarName
@@ -41,6 +48,7 @@ list @globalVarDeclarationList {
   @allowedInitList mAllowedInitList
   @allowedPanicList mAllowedPanicList
   @allowedGuardList mAllowedGuardList
+  @allowedISRList mAllowedISRList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -66,6 +74,7 @@ syntax extension common_syntax {
     @allowedInitList allowedInitList = {}
     @allowedPanicList allowedPanicList = {}
     @allowedGuardList allowedGuardList = {}
+    @allowedISRList allowedISRList = {}
     ${$
     repeat
       @bool hasWriteAccess
@@ -115,6 +124,10 @@ syntax extension common_syntax {
         $integer$ ?let @lbigint priority
         allowedInitList += !hasWriteAccess !priority
       or
+        $isr$
+        $identifier$ ?let isrName
+        allowedISRList += !hasWriteAccess !isrName
+      or
         $panic$
         $func$
         $identifier$ ?let panicName
@@ -132,6 +145,7 @@ syntax extension common_syntax {
       !allowedInitList
       !allowedPanicList
       !allowedGuardList
+      !allowedISRList
   }
 
   #·····················································································································
@@ -143,7 +157,7 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (globalVariableTypeName 6*) in self do
+  for (globalVariableTypeName 7*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]
@@ -278,9 +292,15 @@ method @globalVarDeclarationList-element enterInContext
       !guardMangledName
       ?*
     ]
-    executionModes += !isrModeName ()
+    executionModes += !serviceModeName ()
     let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
     [!?allowedGuardMap insertKey !routineNameForInvocationGraph]
+  end
+#--- Check allowed isr are defined
+  for isr in mAllowedISRList do
+    if not [ioContext.mDefinedInterruptSet hasKey !isr.mISRName.string] then
+      error isr.mISRName : "this isr is not defined"
+    end
   end
 #--- Enter variable in globale variable map
   [!?ioContext.mGlobalVariableMap insertKey

@@ -1,5 +1,33 @@
 
 configuration 32:$int32:$uint32 {
+  WDT : 0
+  ARMCore0 : 2
+  ARMCore1 : 3
+  TIMER0 : 4
+  TIMER1 : 5
+  UART0 : 6
+  UART1 : 7
+  PWM0 : 8
+  I2C : 9
+  SPI0 : 10
+  SPI1_SSP : 11
+  PLL : 12
+  RTC : 13
+  EINT0 : 14
+  EINT1 : 15
+  EINT2 : 16
+  EINT3 : 17
+  ADC : 18
+  CAN_COMMON : 19
+  CAN0_TX : 20
+  CAN1_TX : 21
+  CAN2_TX : 22
+  CAN3_TX : 23
+  FULLCAN : 25
+  CAN0_RX : 26
+  CAN1_RX : 27
+  CAN2_RX : 28
+  CAN_3_RX : 30
 }
 
 import "files/registers-lpc2294.plm"

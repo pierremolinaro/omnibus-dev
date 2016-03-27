@@ -12,9 +12,9 @@ extern func `kernel blockOnDeadline (?deadline:inDeadline $uint32)
 extern func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
 
 //--- Make task Ready
-extern func `kernel `isr makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
+extern func `kernel `service makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
 
-extern func `isr makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint32)
+extern func `service makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint32)
 
 //-----------------------------------------------------------------------------*
 //   GUARD                                                                     *
@@ -22,13 +22,13 @@ extern func `isr makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint
 
 opaqueType $guardList @instantiable : 32
 
-extern func `isr tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
+extern func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
 
-extern func `isr handleGuardedCommand (?!guard:ioGuard $guardList)
+extern func `service handleGuardedCommand (?!guard:ioGuard $guardList)
 
-extern func `isr handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
+extern func `service handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
 
-extern func `kernel `isr guardDidChange (?!guard:ioGuard $guardList)
+extern func `kernel `service guardDidChange (?!guard:ioGuard $guardList)
 
 //-----------------------------------------------------------------------------*
 
@@ -82,15 +82,15 @@ var gUptimeMS $uint32 = 0 {
 
 //-----------------------------------------------------------------------------*
 
-func `isr `kernel `user millis @noWarningIfUnused () -> $uint32 {
+func `service `kernel `user millis @noWarningIfUnused () -> $uint32 {
   result = gUptimeMS
 }
 
 //-----------------------------------------------------------------------------*
 
-required func `isr interrupt5 ()
+required func `service interrupt5 ()
 
-func `isr interrupt5 @global () {
+func `service interrupt5 @global () {
   TIMER1_IR = 1 // Clears MR0 interrupt
   let now = gUptimeMS +% 1
   gUptimeMS = now
@@ -101,7 +101,7 @@ func `isr interrupt5 @global () {
 
 //-----------------------------------------------------------------------------*
 
-func `isr userSystickHandler @weak () {
+func `service userSystickHandler @weak () {
 }
 
 //-----------------------------------------------------------------------------*

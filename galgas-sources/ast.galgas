@@ -25,6 +25,7 @@ struct @ast {
   @procedureDeclarationListAST mProcedureListAST
   @requiredProcedureDeclarationListAST mRequiredProcList
   @externProcedureDeclarationListAST mExternProcList
+  @isrDeclarationListAST mISRDeclarationListAST
   @sectionDeclarationListAST mSectionListAST
   @serviceDeclarationListAST mServiceListAST
   @primitiveDeclarationListAST mPrimitiveListAST
@@ -33,7 +34,7 @@ struct @ast {
   @bootList mBootList
   @initList mInitList
   @panicClauseListAST mPanicClauses
-  @panicTypesAST mPanicTypes
+  @configurationDeclarationList mConfigurationDeclarationList
   @taskList mTaskList
 }
 

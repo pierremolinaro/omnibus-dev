@@ -12,9 +12,9 @@ extern func `kernel blockOnDeadline (?deadline:inDeadline $uint32)
 extern func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
 
 //--- Make task Ready
-extern func `kernel `isr makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
+extern func `kernel `service makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
 
-extern func `isr makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint32)
+extern func `service makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint32)
 
 //-----------------------------------------------------------------------------*
 //   GUARD                                                                     *
@@ -22,13 +22,13 @@ extern func `isr makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint
 
 opaqueType $guardList @instantiable : 32
 
-extern func `isr tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
+extern func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
 
-extern func `isr handleGuardedCommand (?!guard:ioGuard $guardList)
+extern func `service handleGuardedCommand (?!guard:ioGuard $guardList)
 
-extern func `isr handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
+extern func `service handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
 
-extern func `kernel `isr guardDidChange (?!guard:ioGuard $guardList)
+extern func `kernel `service guardDidChange (?!guard:ioGuard $guardList)
 
 //-----------------------------------------------------------------------------*
 
@@ -44,14 +44,14 @@ init 0 { // Configure Systick interrupt every ms
 //-----------------------------------------------------------------------------*
 
 var gUptimeMS $uint32 = 0 {
-  @rw func systickHandler
+  @rw isr systick
   func busyWaitingDuringMS
   func millis
 }
 
 //-----------------------------------------------------------------------------*
 
-func `isr `kernel `user millis @noWarningIfUnused () -> $uint32 {
+func `service `kernel `user millis @noWarningIfUnused () -> $uint32 {
   result = gUptimeMS
 }
 
@@ -65,9 +65,7 @@ func `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
 
 //-----------------------------------------------------------------------------*
 
-required func `isr systickHandler ()
-
-func `isr systickHandler @global () {
+isr systick @xtr {
   let now = gUptimeMS +% 1
   gUptimeMS = now
   makeTasksReadyFromCurrentDate (!currentDate:now)
@@ -75,7 +73,7 @@ func `isr systickHandler @global () {
   userSystickHandler ()
 }
 
-func `isr userSystickHandler @weak () {
+func `service userSystickHandler @weak () {
 }
 
 //-----------------------------------------------------------------------------*

@@ -10,6 +10,537 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                   Overriding category method '@globalConstantDeclaration enterRoutinesInContext'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_globalConstantDeclaration_enterRoutinesInContext (const cPtr_abstractDeclaration * /* inObject */,
+                                                                             const GALGAS_procedureDeclarationListAST /* constinArgument_inProcedureListAST */,
+                                                                             GALGAS_semanticContext & /* ioArgument_ioContext */,
+                                                                             GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
+                                                                             C_Compiler * /* inCompiler */
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_globalConstantDeclaration_enterRoutinesInContext (void) {
+  enterCategoryMethod_enterRoutinesInContext (kTypeDescriptor_GALGAS_globalConstantDeclaration.mSlotID,
+                                              categoryMethod_globalConstantDeclaration_enterRoutinesInContext) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_globalConstantDeclaration_enterRoutinesInContext (defineCategoryMethod_globalConstantDeclaration_enterRoutinesInContext, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Overriding category method '@globalConstantDeclaration semanticAnalysis'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_globalConstantDeclaration_semanticAnalysis (const cPtr_abstractDeclaration * /* inObject */,
+                                                                       const GALGAS_semanticContext /* constinArgument_inContext */,
+                                                                       GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
+                                                                       GALGAS_intermediateCodeStruct & /* ioArgument_ioIntermediateCodeStruct */,
+                                                                       C_Compiler * /* inCompiler */
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_globalConstantDeclaration_semanticAnalysis (void) {
+  enterCategoryMethod_semanticAnalysis (kTypeDescriptor_GALGAS_globalConstantDeclaration.mSlotID,
+                                        categoryMethod_globalConstantDeclaration_semanticAnalysis) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_globalConstantDeclaration_semanticAnalysis (defineCategoryMethod_globalConstantDeclaration_semanticAnalysis, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                 Overriding category method '@standaloneRoutineCallInstructionAST baseGuardAnalyze'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_standaloneRoutineCallInstructionAST_baseGuardAnalyze (const cPtr_abstractCallInstructionAST * inObject,
+                                                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                                 const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                                 const GALGAS_semanticContext constinArgument_inContext,
+                                                                                 GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                                 GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                                 GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                                 GALGAS_guardKindGenerationIR & outArgument_outConvenienceGuardGenerationIR,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_standaloneRoutineCallInstructionAST * object = (const cPtr_standaloneRoutineCallInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_standaloneRoutineCallInstructionAST) ;
+  GALGAS_lstring var_routineMangledName = GALGAS_lstring::constructor_new (GALGAS_string (".").add_operation (object->mAttribute_mRoutineName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 273)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 273)), object->mAttribute_mRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-guard.galgas", 273)) ;
+  GALGAS_procedureSignature var_formalSignature ;
+  constinArgument_inContext.mAttribute_mGuardMapForContext.method_searchKey (var_routineMangledName, var_formalSignature, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 274)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph = function_guardNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-guard.galgas", 279)), object->mAttribute_mRoutineName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 279)) ;
+  {
+  ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("declaration-guard.galgas", 280)) ;
+  }
+  GALGAS_instructionListIR var_baseGuardInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 282)) ;
+  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 283)) ;
+  GALGAS_allocaList var_baseGuardAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 284)) ;
+  {
+  GALGAS_stringset temp_0 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-guard.galgas", 292)) ;
+  temp_0.addAssign_operation (function_serviceModeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 292))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 292)) ;
+  routine_analyzeEffectiveParameters (constinArgument_inSelfType, var_formalSignature, object->mAttribute_mEffectiveParameterList, object->mAttribute_mRoutineName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, temp_0, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 285)) ;
+  }
+  outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 302)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_standaloneRoutineCallInstructionAST_baseGuardAnalyze (void) {
+  enterCategoryMethod_baseGuardAnalyze (kTypeDescriptor_GALGAS_standaloneRoutineCallInstructionAST.mSlotID,
+                                        categoryMethod_standaloneRoutineCallInstructionAST_baseGuardAnalyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_standaloneRoutineCallInstructionAST_baseGuardAnalyze (defineCategoryMethod_standaloneRoutineCallInstructionAST_baseGuardAnalyze, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                    Overriding category method '@selfRoutineCallInstructionAST baseGuardAnalyze'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_selfRoutineCallInstructionAST_baseGuardAnalyze (const cPtr_abstractCallInstructionAST * inObject,
+                                                                           const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                           const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                           const GALGAS_semanticContext constinArgument_inContext,
+                                                                           GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                           GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                           GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                           GALGAS_guardKindGenerationIR & outArgument_outConvenienceGuardGenerationIR,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_selfRoutineCallInstructionAST * object = (const cPtr_selfRoutineCallInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_selfRoutineCallInstructionAST) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-guard.galgas", 321)))).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_location location_1 (object->mAttribute_mRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 322)) ;
+    outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+  }else if (kBoolFalse == test_0) {
+    switch (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 324)).enumValue ()) {
+    case GALGAS_typeKind::kNotBuilt:
+      break ;
+    case GALGAS_typeKind::kEnum_opaque:
+      {
+        GALGAS_location location_2 (object->mAttribute_mRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_2, GALGAS_string ("an opaque type does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 326)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_boolean:
+      {
+        GALGAS_location location_3 (object->mAttribute_mRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_3, GALGAS_string ("a boolean does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 328)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_staticInteger:
+      {
+        GALGAS_location location_4 (object->mAttribute_mRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_4, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 330)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_boolset:
+      {
+        GALGAS_location location_5 (object->mAttribute_mRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_5, GALGAS_string ("a boolset does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 332)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_literalString:
+      {
+        GALGAS_location location_6 (object->mAttribute_mRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_6, GALGAS_string ("a literal string does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 334)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_enumeration:
+      {
+        GALGAS_location location_7 (object->mAttribute_mRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_7, GALGAS_string ("an enumeration does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 336)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_integer:
+      {
+        GALGAS_location location_8 (object->mAttribute_mRoutineName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_8, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 338)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_structure:
+      {
+        const cEnumAssociatedValues_typeKind_structure * extractPtr_15561 = (const cEnumAssociatedValues_typeKind_structure *) (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 324)).unsafePointer ()) ;
+        const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_15561->mAssociatedValue0 ;
+        GALGAS_instructionListIR var_baseGuardInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 340)) ;
+        GALGAS_lstring var_routineMangledName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (constinArgument_inSelfType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 341)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 341)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 341)).add_operation (object->mAttribute_mRoutineName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 341)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 341)), object->mAttribute_mRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-guard.galgas", 341)) ;
+        GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 342)) ;
+        var_effectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 343)), GALGAS_string::makeEmptyString (), GALGAS_operandIR::constructor_new (constinArgument_inSelfType, GALGAS_valueIR::constructor_selfObject (SOURCE_FILE ("declaration-guard.galgas", 343))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 343))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 343)) ;
+        GALGAS_procedureSignature var_formalSignature ;
+        constinArgument_inContext.mAttribute_mGuardMapForContext.method_searchKey (var_routineMangledName, var_formalSignature, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 344)) ;
+        GALGAS_lstring var_routineNameForInvocationGraph = function_guardNameForInvocationGraph (constinArgument_inSelfType, object->mAttribute_mRoutineName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 349)) ;
+        {
+        ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("declaration-guard.galgas", 350)) ;
+        }
+        GALGAS_allocaList var_baseGuardAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 352)) ;
+        {
+        GALGAS_stringset temp_9 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-guard.galgas", 360)) ;
+        temp_9.addAssign_operation (function_serviceModeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 360))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 360)) ;
+        routine_analyzeEffectiveParameters (constinArgument_inSelfType, var_formalSignature, object->mAttribute_mEffectiveParameterList, object->mAttribute_mRoutineName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, temp_9, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 353)) ;
+        }
+        outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 370)) ;
+      }
+      break ;
+    }
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_selfRoutineCallInstructionAST_baseGuardAnalyze (void) {
+  enterCategoryMethod_baseGuardAnalyze (kTypeDescriptor_GALGAS_selfRoutineCallInstructionAST.mSlotID,
+                                        categoryMethod_selfRoutineCallInstructionAST_baseGuardAnalyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_selfRoutineCallInstructionAST_baseGuardAnalyze (defineCategoryMethod_selfRoutineCallInstructionAST_baseGuardAnalyze, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                   Overriding category method '@remoteRoutineCallInstructionAST baseGuardAnalyze'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (const cPtr_abstractCallInstructionAST * inObject,
+                                                                             const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                             const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                             const GALGAS_semanticContext constinArgument_inContext,
+                                                                             GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                             GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                             GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                             GALGAS_guardKindGenerationIR & outArgument_outConvenienceGuardGenerationIR,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_remoteRoutineCallInstructionAST * object = (const cPtr_remoteRoutineCallInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_remoteRoutineCallInstructionAST) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_receiverType ;
+  GALGAS_objectInMemoryIR var_variableKind ;
+  {
+  GALGAS_bool joker_16250_1 ; // Joker input parameter
+  GALGAS_bool joker_16307_4 ; // Joker input parameter
+  GALGAS_controlRegisterBitSliceAccessMap joker_16307_3 ; // Joker input parameter
+  GALGAS_bool joker_16307_2 ; // Joker input parameter
+  GALGAS_bool joker_16307_1 ; // Joker input parameter
+  ioArgument_ioVariableMap.setter_searchForReadAccess (object->mAttribute_mReceiverName, var_receiverType, joker_16250_1, var_variableKind, joker_16307_4, joker_16307_3, joker_16307_2, joker_16307_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 391)) ;
+  }
+  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 398)) ;
+  var_effectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 399)), GALGAS_string::makeEmptyString (), extensionGetter_address (var_variableKind, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 399))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 399)) ;
+  GALGAS_instructionListIR var_baseGuardInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 400)) ;
+  GALGAS_lstring var_routineMangledName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (var_receiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 401)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 401)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 401)).add_operation (object->mAttribute_mRoutineName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 401)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 401)), object->mAttribute_mRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-guard.galgas", 401)) ;
+  GALGAS_procedureSignature var_formalSignature ;
+  constinArgument_inContext.mAttribute_mGuardMapForContext.method_searchKey (var_routineMangledName, var_formalSignature, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 402)) ;
+  GALGAS_lstring var_routineNameForInvocationGraph = function_guardNameForInvocationGraph (var_receiverType, object->mAttribute_mRoutineName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 407)) ;
+  {
+  ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("declaration-guard.galgas", 408)) ;
+  }
+  GALGAS_allocaList var_baseGuardAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 410)) ;
+  {
+  GALGAS_stringset temp_0 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-guard.galgas", 418)) ;
+  temp_0.addAssign_operation (function_serviceModeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 418))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 418)) ;
+  routine_analyzeEffectiveParameters (constinArgument_inSelfType, var_formalSignature, object->mAttribute_mEffectiveParameterList, object->mAttribute_mRoutineName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, temp_0, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 411)) ;
+  }
+  outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 428)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (void) {
+  enterCategoryMethod_baseGuardAnalyze (kTypeDescriptor_GALGAS_remoteRoutineCallInstructionAST.mSlotID,
+                                        categoryMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (defineCategoryMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                 Overriding category method '@selfRemoteRoutineCallInstructionAST baseGuardAnalyze'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_selfRemoteRoutineCallInstructionAST_baseGuardAnalyze (const cPtr_abstractCallInstructionAST * inObject,
+                                                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                                 const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                                 const GALGAS_semanticContext constinArgument_inContext,
+                                                                                 GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                                 GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                                 GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                                 GALGAS_guardKindGenerationIR & outArgument_outConvenienceGuardGenerationIR,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_selfRemoteRoutineCallInstructionAST * object = (const cPtr_selfRemoteRoutineCallInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_selfRemoteRoutineCallInstructionAST) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-guard.galgas", 447)))).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_location location_1 (object->mAttribute_mPropertyName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 448)) ;
+    outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+  }else if (kBoolFalse == test_0) {
+    switch (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 450)).enumValue ()) {
+    case GALGAS_typeKind::kNotBuilt:
+      break ;
+    case GALGAS_typeKind::kEnum_opaque:
+      {
+        GALGAS_location location_2 (object->mAttribute_mPropertyName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_2, GALGAS_string ("an opaque type does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 452)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_boolean:
+      {
+        GALGAS_location location_3 (object->mAttribute_mPropertyName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_3, GALGAS_string ("a boolean does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 454)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_staticInteger:
+      {
+        GALGAS_location location_4 (object->mAttribute_mPropertyName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_4, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 456)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_boolset:
+      {
+        GALGAS_location location_5 (object->mAttribute_mPropertyName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_5, GALGAS_string ("a boolset does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 458)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_literalString:
+      {
+        GALGAS_location location_6 (object->mAttribute_mPropertyName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_6, GALGAS_string ("a literal string does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 460)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_enumeration:
+      {
+        GALGAS_location location_7 (object->mAttribute_mPropertyName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_7, GALGAS_string ("an enumeration does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 462)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_integer:
+      {
+        GALGAS_location location_8 (object->mAttribute_mPropertyName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_8, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 464)) ;
+        outArgument_outConvenienceGuardGenerationIR.drop () ; // Release error dropped variable
+      }
+      break ;
+    case GALGAS_typeKind::kEnum_structure:
+      {
+        const cEnumAssociatedValues_typeKind_structure * extractPtr_21843 = (const cEnumAssociatedValues_typeKind_structure *) (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 450)).unsafePointer ()) ;
+        const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_21843->mAssociatedValue0 ;
+        GALGAS_unifiedTypeMap_2D_proxy var_propertyType ;
+        GALGAS_uint var_idx ;
+        extractedValue_propertyMap.method_searchKey (object->mAttribute_mPropertyName, var_propertyType, var_idx, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 466)) ;
+        GALGAS_objectInMemoryIR var_propertyAddressLLVMvar ;
+        {
+        routine_getLocalNameOfNewTempObjectInMemory (var_propertyType, ioArgument_ioTemporaries, var_propertyAddressLLVMvar, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 467)) ;
+        }
+        GALGAS_instructionListIR var_baseGuardInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 468)) ;
+        {
+        categoryModifier_appendGetElementPtrFromSelf (var_baseGuardInstructionGenerationList, var_propertyAddressLLVMvar, constinArgument_inSelfType, var_idx, object->mAttribute_mPropertyName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 469)) ;
+        }
+        GALGAS_lstring var_routineMangledName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (var_propertyType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 475)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 475)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 475)).add_operation (object->mAttribute_mMethodName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 475)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 475)), object->mAttribute_mMethodName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-guard.galgas", 475)) ;
+        GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 476)) ;
+        var_effectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 477)), GALGAS_string::makeEmptyString (), extensionGetter_address (var_propertyAddressLLVMvar, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 477))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 477)) ;
+        GALGAS_procedureSignature var_formalSignature ;
+        constinArgument_inContext.mAttribute_mGuardMapForContext.method_searchKey (var_routineMangledName, var_formalSignature, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 478)) ;
+        GALGAS_lstring var_routineNameForInvocationGraph = function_guardNameForInvocationGraph (var_propertyType, object->mAttribute_mMethodName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 483)) ;
+        {
+        ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("declaration-guard.galgas", 484)) ;
+        }
+        GALGAS_allocaList var_baseGuardAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 486)) ;
+        {
+        GALGAS_stringset temp_9 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-guard.galgas", 494)) ;
+        temp_9.addAssign_operation (function_serviceModeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 494))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 494)) ;
+        routine_analyzeEffectiveParameters (constinArgument_inSelfType, var_formalSignature, object->mAttribute_mEffectiveParameterList, object->mAttribute_mMethodName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, temp_9, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 487)) ;
+        }
+        outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 504)) ;
+      }
+      break ;
+    }
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_selfRemoteRoutineCallInstructionAST_baseGuardAnalyze (void) {
+  enterCategoryMethod_baseGuardAnalyze (kTypeDescriptor_GALGAS_selfRemoteRoutineCallInstructionAST.mSlotID,
+                                        categoryMethod_selfRemoteRoutineCallInstructionAST_baseGuardAnalyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_selfRemoteRoutineCallInstructionAST_baseGuardAnalyze (defineCategoryMethod_selfRemoteRoutineCallInstructionAST_baseGuardAnalyze, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//               Overriding category method '@convertExpressionAST addDependenceEdgeForStaticExpression'               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_convertExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
+                                                                                      const GALGAS_lstring constinArgument_inConstantName,
+                                                                                      GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_convertExpressionAST * object = (const cPtr_convertExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_convertExpressionAST) ;
+  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 44)) ;
+  GALGAS_lstring var_typeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (object->mAttribute_mTypeName.getter_string (SOURCE_FILE ("expression-convert.galgas", 45)), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 45)), object->mAttribute_mTypeName.mAttribute_location  COMMA_SOURCE_FILE ("expression-convert.galgas", 45)) ;
+  {
+  ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-convert.galgas", 46)) ;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_convertExpressionAST_addDependenceEdgeForStaticExpression (void) {
+  enterCategoryMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_convertExpressionAST.mSlotID,
+                                                            categoryMethod_convertExpressionAST_addDependenceEdgeForStaticExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_convertExpressionAST_addDependenceEdgeForStaticExpression (defineCategoryMethod_convertExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//               Overriding category method '@convertExpressionAST noteExpressionTypesInPrecedenceGraph'               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_convertExpressionAST_noteExpressionTypesInPrecedenceGraph (const cPtr_expressionAST * inObject,
+                                                                                      GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_convertExpressionAST * object = (const cPtr_convertExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_convertExpressionAST) ;
+  callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 54)) ;
+  GALGAS_lstring var_typeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (object->mAttribute_mTypeName.getter_string (SOURCE_FILE ("expression-convert.galgas", 55)), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 55)), object->mAttribute_mTypeName.mAttribute_location  COMMA_SOURCE_FILE ("expression-convert.galgas", 55)) ;
+  {
+  ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-convert.galgas", 56)) ;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_convertExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
+  enterCategoryMethod_noteExpressionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_convertExpressionAST.mSlotID,
+                                                            categoryMethod_convertExpressionAST_noteExpressionTypesInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_convertExpressionAST_noteExpressionTypesInPrecedenceGraph (defineCategoryMethod_convertExpressionAST_noteExpressionTypesInPrecedenceGraph, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Overriding category method '@convertExpressionAST analyzeExpression'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_convertExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
+                                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                   const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inOptionalTargetType,
+                                                                   const GALGAS_semanticContext constinArgument_inContext,
+                                                                   const GALGAS_stringset constinArgument_inModeSet,
+                                                                   const GALGAS_bool constinArgument_inAllowPanic,
+                                                                   GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                   GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                   GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                   GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                   GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                   GALGAS_operandIR & outArgument_outResult,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_convertExpressionAST * object = (const cPtr_convertExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_convertExpressionAST) ;
+  GALGAS_operandIR var_expressionResult ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inSelfType, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 80)) ;
+  const enumGalgasBool test_0 = constinArgument_inAllowPanic.operator_not (SOURCE_FILE ("expression-convert.galgas", 95)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_location location_1 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("operations that can generate panic are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 96)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 96))  COMMA_SOURCE_FILE ("expression-convert.galgas", 96)) ;
+  }
+  GALGAS_unifiedTypeMap_2D_proxy var_resultType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mTypeName, inCompiler  COMMA_SOURCE_FILE ("expression-convert.galgas", 99)) ;
+  const enumGalgasBool test_2 = var_resultType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 101)).getter_isInteger (SOURCE_FILE ("expression-convert.galgas", 101)).operator_not (SOURCE_FILE ("expression-convert.galgas", 101)).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    GALGAS_location location_3 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_3, GALGAS_string ("this type is not an integer type")  COMMA_SOURCE_FILE ("expression-convert.galgas", 102)) ;
+    outArgument_outResult.drop () ; // Release error dropped variable
+  }else if (kBoolFalse == test_2) {
+    const enumGalgasBool test_4 = var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 103)).getter_isInteger (SOURCE_FILE ("expression-convert.galgas", 103)).operator_not (SOURCE_FILE ("expression-convert.galgas", 103)).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      inCompiler->emitSemanticError (object->mAttribute_mEndOfExpression, GALGAS_string ("expression type is not an integer type")  COMMA_SOURCE_FILE ("expression-convert.galgas", 104)) ;
+      outArgument_outResult.drop () ; // Release error dropped variable
+    }else if (kBoolFalse == test_4) {
+      GALGAS_bigint var_minSource ;
+      GALGAS_bigint var_maxSource ;
+      GALGAS_bool joker_5066 ; // Joker input parameter
+      GALGAS_uint joker_5078 ; // Joker input parameter
+      var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 106)).method_integer (var_minSource, var_maxSource, joker_5066, joker_5078, inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 106)) ;
+      GALGAS_bigint var_minTarget ;
+      GALGAS_bigint var_maxTarget ;
+      GALGAS_bool joker_5160 ; // Joker input parameter
+      GALGAS_uint joker_5172 ; // Joker input parameter
+      var_resultType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 107)).method_integer (var_minTarget, var_maxTarget, joker_5160, joker_5172, inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 107)) ;
+      GALGAS_bool test_5 = GALGAS_bool (kIsInfOrEqual, var_minTarget.objectCompare (var_minSource)) ;
+      if (kBoolTrue == test_5.boolEnum ()) {
+        test_5 = GALGAS_bool (kIsSupOrEqual, var_maxTarget.objectCompare (var_maxSource)) ;
+      }
+      GALGAS_bool var_alwaysPossible = test_5 ;
+      const enumGalgasBool test_6 = var_alwaysPossible.boolEnum () ;
+      if (kBoolTrue == test_6) {
+        GALGAS_location location_7 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_7, GALGAS_string ("useless explicit conversion")  COMMA_SOURCE_FILE ("expression-convert.galgas", 110)) ;
+      }
+      {
+      routine_getNewTempVariable (var_resultType, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-convert.galgas", 112)) ;
+      }
+      const enumGalgasBool test_8 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
+      if (kBoolTrue == test_8) {
+        ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_truncateInstructionIR::constructor_new (outArgument_outResult, var_expressionResult  COMMA_SOURCE_FILE ("expression-convert.galgas", 114))  COMMA_SOURCE_FILE ("expression-convert.galgas", 114)) ;
+      }else if (kBoolFalse == test_8) {
+        ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_convertInstructionIR::constructor_new (outArgument_outResult, var_expressionResult, object->mAttribute_mTypeName.mAttribute_location  COMMA_SOURCE_FILE ("expression-convert.galgas", 119))  COMMA_SOURCE_FILE ("expression-convert.galgas", 119)) ;
+      }
+    }
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_convertExpressionAST_analyzeExpression (void) {
+  enterCategoryMethod_analyzeExpression (kTypeDescriptor_GALGAS_convertExpressionAST.mSlotID,
+                                         categoryMethod_convertExpressionAST_analyzeExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_convertExpressionAST_analyzeExpression (defineCategoryMethod_convertExpressionAST_analyzeExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                     Overriding category method '@convertInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

@@ -40,8 +40,8 @@ func %once kernelModeName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once isrModeName -> @string outResult {
-  outResult = "isr"
+func %once serviceModeName -> @string outResult {
+  outResult = "service"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -161,6 +161,27 @@ func %once functionResultVariableName -> @string outName {
 
 func llvmNameForFunction ?@string inName -> @string outName {
   outName = "func." + inName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Interrupt routine
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func interruptNameForInvocationGraph ?@lstring inName -> @lstring outName {
+  let s = "interrupt " + inName
+  outName = .new {!s !inName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForInterrupt ?@lstring inName -> @lstring outName {
+  outName = .new {!"interrupt." + inName !inName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForISR ?@string inName -> @string outName {
+  outName = "isr." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

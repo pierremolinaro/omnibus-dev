@@ -82,7 +82,7 @@ method @serviceDeclarationListAST enterInContext
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
   #--- Mode map
-    let @modeMap modeMap = {![userModeName () nowhere], ![isrModeName () nowhere], ![kernelModeName () nowhere]}
+    let @modeMap modeMap = {![userModeName () nowhere], ![serviceModeName () nowhere], ![kernelModeName () nowhere]}
   #--- Enter in context
     let returnType = if service.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
@@ -126,7 +126,7 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.service
-      !{![isrModeName () nowhere], ![kernelModeName () nowhere]}
+      !{![serviceModeName () nowhere], ![kernelModeName () nowhere]}
       !service.mServiceName
       !service.mServiceFormalArgumentList
       !returnTypeName:service.mReturnTypeName
