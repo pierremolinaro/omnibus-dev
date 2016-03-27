@@ -12558,7 +12558,7 @@ const char * gWrapperFileContent_19_targetTemplates = ";------------------------
   "\n"
   "define internal void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %inSourceFile) nounwind noreturn naked {\n"
   ";--- Mask interrupt: write 1 into FAULTMASK register\n"
-  "  call void asm sideeffect \"msr FAULTMASK, $0\", \"r\"(i32 1) nounwind\n"
+  ";  call void asm sideeffect \"msr FAULTMASK, $0\", \"r\"(i32 1) nounwind\n"
   ";--- Goto user code\n"
   "  call void @raise_panic_internal (i32 %inSourceLine, i32 %inCode, i8* %inSourceFile)\n"
   "  unreachable\n"
@@ -12569,7 +12569,7 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "target-panic.ll",
   "ll",
   true, // Text file
-  478, // Text length
+  479, // Text length
   gWrapperFileContent_19_targetTemplates
 ) ;
 
