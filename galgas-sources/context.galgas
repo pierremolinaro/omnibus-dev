@@ -74,6 +74,7 @@ map @globalVariableMap %selectors {
   @stringset executionModeSet
   @allowedRoutineMap allowedRoutineMap
   @allowedGuardMap allowedGuardMap
+  @allowedISRMap allowedISRMap
   @valueIR initialValue
   @bool isConstant
   insert insertKey error message "the '%K' global variable is already declared in %L"

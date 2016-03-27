@@ -88,7 +88,6 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
       !warnIfUnused:true
       !globalProcedure:true
       !weakProcedure:false
-      !nullOnNoPanic:false
       !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries

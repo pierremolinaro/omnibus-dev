@@ -87,7 +87,6 @@ proc routineSemanticAnalysis
   ?warnIfUnused:let @bool inWarnIfUnused
   ?globalProcedure:let @bool inGlobalProcedure
   ?weakProcedure:let @bool inWeakProcedure
-  ?nullOnNoPanic:let @bool inNullOnNoPanic
   ?registerAccess:let @accessKind inRegisterAccessKind
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -165,7 +164,7 @@ proc routineSemanticAnalysis
     elsif inWeakProcedure && weak then
       error routineMangledName : "this weak procedure overrides a weak procedure"
     elsif (not inWeakProcedure) && weak then
-      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?10*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?9*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
         !formalArguments
@@ -174,7 +173,6 @@ proc routineSemanticAnalysis
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
         !inWeakProcedure
-        !inNullOnNoPanic
         !inGlobalProcedure
         !inRoutineKind
         !returnType
@@ -188,7 +186,6 @@ proc routineSemanticAnalysis
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
         !inWeakProcedure
-        !inNullOnNoPanic
         !inGlobalProcedure
         !inRoutineKind
         !returnType
@@ -203,7 +200,6 @@ proc routineSemanticAnalysis
       ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
       !inWarnIfUnused
       !inWeakProcedure
-      !inNullOnNoPanic
       !inGlobalProcedure
       !inRoutineKind
       !returnType
@@ -237,7 +233,7 @@ method @routineMapIR llvmCodeGeneration
 
 method @routineMapIR-element llvmCodeGeneration 
   ?!@string ioLLVMcode
-  ?!@string ioAssemblerCode
+  ?!@string unused ioAssemblerCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
@@ -248,35 +244,35 @@ method @routineMapIR-element llvmCodeGeneration
   case service : routineName = llvmNameForServiceImplementation (!lkey.string)
   case primitive : routineName = llvmNameForPrimitiveImplementation (!lkey.string)
   end
-  if [option plm_options.noPanicGeneration value] && mNullOnNoPanic then
-  #--- Generate in assembly code routine pointer as NULL value
-    ioAssemblerCode += asSeparatorLine ()
-    ioAssemblerCode += "  .global " + routineName + "\n"
-    ioAssemblerCode += "  " + routineName + " = 0\n\n"
-  #--- In LLVM, declare routine as extern
-    ioLLVMcode += llvmTitleComment (!routineName)
-    ioLLVMcode += "declare"
-    if mReturnType == .null then
-      ioLLVMcode += " void"
-    else
-      ioLLVMcode += " " + [mReturnType llvmTypeName]
-    end
-    ioLLVMcode += " @" + routineName + " ("
-    for () in mFormalArgumentListForGeneration
-    do
-      switch mFormalArgumentKind
-      case input :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-      case output :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-     case inputOutput :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-      end
-    between
-      ioLLVMcode += ", "
-    end
-    ioLLVMcode += ")" + llvmAttributeFunction () + "; NULL in assembly code\n\n"
-  else
+#  if [option plm_options.noPanicGeneration value] && mNullOnNoPanic then
+#  #--- Generate in assembly code routine pointer as NULL value
+#    ioAssemblerCode += asSeparatorLine ()
+#    ioAssemblerCode += "  .global " + routineName + "\n"
+#    ioAssemblerCode += "  " + routineName + " = 0\n\n"
+#  #--- In LLVM, declare routine as extern
+#    ioLLVMcode += llvmTitleComment (!routineName)
+#    ioLLVMcode += "declare"
+#    if mReturnType == .null then
+#      ioLLVMcode += " void"
+#    else
+#      ioLLVMcode += " " + [mReturnType llvmTypeName]
+#    end
+#    ioLLVMcode += " @" + routineName + " ("
+#    for () in mFormalArgumentListForGeneration
+#    do
+#      switch mFormalArgumentKind
+#      case input :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+#      case output :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+#     case inputOutput :
+#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+#      end
+#    between
+#      ioLLVMcode += ", "
+#    end
+#    ioLLVMcode += ")" + llvmAttributeFunction () + "; NULL in assembly code\n\n"
+#  else
     ioLLVMcode += llvmTitleComment (!routineName)
     ioLLVMcode += "define"
     if not mGlobal then
@@ -345,7 +341,7 @@ method @routineMapIR-element llvmCodeGeneration
       ioLLVMcode += "  ret " + [mReturnType llvmTypeName] + " %result\n"
     end
     ioLLVMcode += "}\n\n"
-  end
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

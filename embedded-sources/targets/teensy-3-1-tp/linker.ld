@@ -37,24 +37,6 @@ SECTIONS {
   .text : {
     FILL(0xff)
     __code_start = . ;
-  /*--- Tableau des routines d'initialisation */
-    . = ALIGN (4) ;
-    __init_routine_array_start = . ;
-    KEEP (*(init_routine_array)) ;
-    . = ALIGN (4) ;
-    __init_routine_array_end = . ;
-  /*--- Initialisation des objets globaux C++ */
-    . = ALIGN (4) ;
-    __constructor_array_start = . ;
-    KEEP (*(.init_array)) ;
-    . = ALIGN (4) ;
-    __constructor_array_end = . ;
-  /*--- Real Interrupt Service Routine Array */
-    . = ALIGN (4) ;
-    __real_time_isr_array_start = . ;
-    KEEP (*(real_time_isr_array)) ;
-    . = ALIGN (4) ;
-    __real_time_isr_array_end = . ;
   /*--- Code */
     *(.text.*) ;
     *(.text) ;

@@ -164,7 +164,6 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
     var warnIfUnused = true
     var globalProcedure = false
     var weakProcedure = false
-    var nullOnNoPanic = false
     for (attribute) in procedure.mProcedureAttributeList do
       if attribute.string == noWarningIfUnusedAttribute () then
         if not warnIfUnused then
@@ -181,11 +180,6 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
           error attribute : "duplicate @" + weakAttribute () + " attribute"
         end
         weakProcedure = true    
-      elsif attribute.string == nullWhenPanicDisabledAttribute () then
-        if nullOnNoPanic then
-          error attribute : "duplicate @" + nullWhenPanicDisabledAttribute () + " attribute"
-        end
-        nullOnNoPanic = true    
       else
         error attribute : "unknown attribute; available attributes are @"
           + noWarningIfUnusedAttribute () + ", @" + weakAttribute () + ", @" + globalAttribute ()
@@ -203,7 +197,6 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
       !warnIfUnused:warnIfUnused
       !globalProcedure:globalProcedure
       !weakProcedure:weakProcedure
-      !nullOnNoPanic:nullOnNoPanic
       !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries

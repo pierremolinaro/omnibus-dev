@@ -98,33 +98,38 @@ func initialVariableMap
     ]
   end
 #------------------------------------------------------- Add global variables
-  for (variableName variableType modeSet allowedProcedureMap allowedGuardMap * isConstant) in inContext.mGlobalVariableMap do
+  for variable in inContext.mGlobalVariableMap do
     var writeAccess = false
-    var allowedAccess = [allowedProcedureMap hasKey !inRoutineNameForInvocation]
+    var allowedAccess = [variable.allowedRoutineMap hasKey !inRoutineNameForInvocation]
     if allowedAccess then
-      writeAccess = [allowedProcedureMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+      writeAccess = [variable.allowedRoutineMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+    else
+      allowedAccess = [variable.allowedISRMap hasKey !inRoutineNameForInvocation]
+      if allowedAccess then
+        writeAccess = [variable.allowedISRMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+      end
     end
     if inGlobalsAreConstant || not writeAccess then
       [!?outVariableMap insertUsedLocalConstant
-        !lkey:variableName
-        !type:variableType
+        !lkey:variable.lkey
+        !type:variable.type
         !readAccessAllowed:allowedAccess
-        !variableKind:.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
-        !copyable:[variableType copyable]
+        !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !isVolatile:[variable.executionModeSet count] > 1}
+        !copyable:[variable.type copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-        !isConstant:true # Is constant
+        !isConstant:true
       ]
     else
       [!?outVariableMap insertGlobalVariable
-        !lkey:variableName
-        !type:variableType
+        !lkey:variable.lkey
+        !type:variable.type
         !readAccessAllowed:allowedAccess
-        !variableKind:.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
-        !copyable:[variableType copyable]
+        !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !isVolatile:[variable.executionModeSet count] > 1}
+        !copyable:[variable.type copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-        !isConstant:isConstant
+        !isConstant:variable.isConstant
       ]
     end
   end

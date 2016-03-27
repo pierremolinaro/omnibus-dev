@@ -391,7 +391,6 @@ method @structureDeclaration procedureSemanticAnalysis
       !warnIfUnused:true
       !globalProcedure:false
       !weakProcedure:false
-      !nullOnNoPanic:false
       !registerAccess:.readWriteAccess
       !context:inContext
       !?temporary:ioTemporaries

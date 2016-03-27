@@ -135,7 +135,6 @@ method @primitiveDeclarationListAST primitiveSemanticAnalysis
       !warnIfUnused:warnIfUnused
       !globalProcedure:true
       !weakProcedure:false
-      !nullOnNoPanic:false
       !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries

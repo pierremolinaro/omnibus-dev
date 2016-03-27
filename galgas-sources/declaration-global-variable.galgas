@@ -177,6 +177,14 @@ map @allowedRoutineMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @allowedISRMap {
+  @bool mHasWriteAccess
+  insert insertKey error message "the '%K' routine is already declared in %L"
+  search searchKey error message "there is no '%K' routine"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @globalVarDeclarationList-element enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
@@ -297,7 +305,10 @@ method @globalVarDeclarationList-element enterInContext
     [!?allowedGuardMap insertKey !routineNameForInvocationGraph]
   end
 #--- Check allowed isr are defined
+  @allowedISRMap allowedISRMap = {}
   for isr in mAllowedISRList do
+    let name = interruptNameForInvocationGraph (!isr.mISRName)
+    [!?allowedISRMap insertKey !name !isr.mHasWriteAccess]
     if not [ioContext.mDefinedInterruptSet hasKey !isr.mISRName.string] then
       error isr.mISRName : "this isr is not defined"
     end
@@ -309,6 +320,7 @@ method @globalVarDeclarationList-element enterInContext
     !executionModeSet:executionModes
     !allowedRoutineMap:allowedRoutineMap
     !allowedGuardMap:allowedGuardMap
+    !allowedISRMap:allowedISRMap
     !initialValue:result.mValue
     !isConstant:false # Is not constant
   ]
@@ -329,6 +341,7 @@ method @globalVarDeclarationList-element semanticAnalysis
     ?executionModeSet:let executionModeSet
     ?allowedRoutineMap:let unused allowedProcedureMap
     ?allowedGuardMap:let unused allowedGuardMap
+    ?allowedISRMap:let unused allowedISRMap
     ?initialValue:let expressionGeneratedCode
     ?isConstant:let unused isConstant
   ]

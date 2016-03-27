@@ -303,7 +303,6 @@ method @taskList-element semanticAnalysis
       !warnIfUnused:true
       !globalProcedure:false
       !weakProcedure:false
-      !nullOnNoPanic:false
       !registerAccess:.noAccess
       !context:inContext
       !?temporary:ioTemporaries

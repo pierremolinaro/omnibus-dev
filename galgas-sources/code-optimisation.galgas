@@ -150,7 +150,6 @@ private proc suppressInaccessibleSubprograms
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
         !procedure.mWeak
-        !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
@@ -166,7 +165,6 @@ private proc suppressInaccessibleSubprograms
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
         !procedure.mWeak
-        !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
@@ -241,7 +239,6 @@ private proc exploreProcs
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
         !procedure.mWeak
-        !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
@@ -257,7 +254,6 @@ private proc exploreProcs
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
         !procedure.mWeak
-        !procedure.mNullOnNoPanic
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
