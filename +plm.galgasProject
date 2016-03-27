@@ -19,7 +19,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/cocoa.galgas"
 
 #--- Pointer
-  "galgas-sources/pointer-size.galgas"
+  "galgas-sources/configuration.galgas"
 
 #--- Boolset
 #  "galgas-sources/boolset-type.galgas"

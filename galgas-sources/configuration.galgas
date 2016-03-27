@@ -2,13 +2,20 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @pointerSizeDeclaration : @abstractDeclaration {
-  @lbigint mSize
+class @configurationDeclaration : @abstractDeclaration {
+  @lbigint mPointerSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @pointerSizeDeclaration location -> @location outLocation {
+list @panicTypesAST {
+  @lstring mPanicCodeTypeName
+  @lstring mPanicLineTypeName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @configurationDeclaration location -> @location outLocation {
   outLocation = .nowhere
 }
 
@@ -21,9 +28,17 @@ syntax extension plm_target_specific_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $pointerSize$
+    $configuration$
     $integer$ ?let @lbigint size
-    ioAST.mDeclarationList += !@pointerSizeDeclaration.new {!size}
+    ioAST.mDeclarationList += !@configurationDeclaration.new {!size}
+    $:$
+    $typeName$ ?let panicCodeTypeName 
+    $:$
+    $typeName$ ?let panicLineTypeName
+    ioAST.mPanicTypes += !panicCodeTypeName !panicLineTypeName
+    ${$
+    
+    $}$
   }
 
   #·····················································································································
@@ -34,7 +49,7 @@ syntax extension plm_target_specific_syntax {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @pointerSizeDeclaration addExtension
+override method @configurationDeclaration addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   !@abstractDeclaration outNewDeclaration
 {
@@ -45,34 +60,34 @@ override method @pointerSizeDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @pointerSizeDeclaration enterInPrecedenceGraph
+override method @configurationDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let name = ["pointer size " + mSize.bigint nowhere]
+  let name = ["pointer size " + mPointerSize.bigint nowhere]
   [!?ioGraph addNode !name !self]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @pointerSizeDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "pointer size " + mSize.bigint
+override getter @configurationDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "pointer size " + mPointerSize.bigint
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @pointerSizeDeclaration enterInContext
+override method @configurationDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  ioContext.mPointerSize = [mSize.bigint uint]
+  ioContext.mPointerSize = [mPointerSize.bigint uint]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @pointerSizeDeclaration enterRoutinesInContext
+override method @configurationDeclaration enterRoutinesInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -83,7 +98,7 @@ override method @pointerSizeDeclaration enterRoutinesInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @pointerSizeDeclaration semanticAnalysis
+override method @configurationDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

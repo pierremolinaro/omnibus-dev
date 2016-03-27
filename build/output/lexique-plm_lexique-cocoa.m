@@ -131,7 +131,7 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"stackSize", plm_lexique_1_stackSize},
   {"opaqueType", plm_lexique_1_opaqueType},
   {"requiredBy", plm_lexique_1_requiredBy},
-  {"pointerSize", plm_lexique_1_pointerSize}
+  {"configuration", plm_lexique_1_configuration}
 } ;
 
 static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedString) {
@@ -546,6 +546,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_boot */,
     1 /* plm_lexique_1_case */,
     1 /* plm_lexique_1_check */,
+    1 /* plm_lexique_1_configuration */,
     1 /* plm_lexique_1_convert */,
     1 /* plm_lexique_1_do */,
     1 /* plm_lexique_1_else */,
@@ -570,7 +571,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_on */,
     1 /* plm_lexique_1_or */,
     1 /* plm_lexique_1_panic */,
-    1 /* plm_lexique_1_pointerSize */,
     1 /* plm_lexique_1_primitive */,
     1 /* plm_lexique_1_priority */,
     1 /* plm_lexique_1_register */,
@@ -669,6 +669,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_boot */,
     YES /* plm_lexique_1_case */,
     YES /* plm_lexique_1_check */,
+    YES /* plm_lexique_1_configuration */,
     YES /* plm_lexique_1_convert */,
     YES /* plm_lexique_1_do */,
     YES /* plm_lexique_1_else */,
@@ -693,7 +694,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_on */,
     YES /* plm_lexique_1_or */,
     YES /* plm_lexique_1_panic */,
-    YES /* plm_lexique_1_pointerSize */,
     YES /* plm_lexique_1_primitive */,
     YES /* plm_lexique_1_priority */,
     YES /* plm_lexique_1_register */,

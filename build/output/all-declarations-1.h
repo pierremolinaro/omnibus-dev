@@ -69,22 +69,22 @@ class cParser_plm_5F_target_5F_specific_5F_syntax {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            @pointerSizeDeclaration class                                            *
+//                                           @configurationDeclaration class                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_pointerSizeDeclaration : public GALGAS_abstractDeclaration {
+class GALGAS_configurationDeclaration : public GALGAS_abstractDeclaration {
 //--- Constructor
-  public : GALGAS_pointerSizeDeclaration (void) ;
+  public : GALGAS_configurationDeclaration (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_pointerSizeDeclaration constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_configurationDeclaration constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_pointerSizeDeclaration * ptr (void) const { return (const cPtr_pointerSizeDeclaration *) mObjectPtr ; }
+  public : inline const class cPtr_configurationDeclaration * ptr (void) const { return (const cPtr_configurationDeclaration *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_pointerSizeDeclaration (const cPtr_pointerSizeDeclaration * inSourcePtr) ;
+  public : GALGAS_configurationDeclaration (const cPtr_configurationDeclaration * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -92,16 +92,16 @@ class GALGAS_pointerSizeDeclaration : public GALGAS_abstractDeclaration {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_pointerSizeDeclaration extractObject (const GALGAS_object & inObject,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_pointerSizeDeclaration constructor_new (const class GALGAS_lbigint & inOperand0
+  public : static GALGAS_configurationDeclaration extractObject (const GALGAS_object & inObject,
+                                                                 C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_configurationDeclaration constructor_new (const class GALGAS_lbigint & inOperand0
+                                                                   COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_pointerSizeDeclaration & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_configurationDeclaration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -109,38 +109,38 @@ class GALGAS_pointerSizeDeclaration : public GALGAS_abstractDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSize (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_pointerSizeDeclaration class
+} ; // End of GALGAS_configurationDeclaration class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_pointerSizeDeclaration ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_configurationDeclaration ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Pointer class for @pointerSizeDeclaration class                                   *
+//                                  Pointer class for @configurationDeclaration class                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_pointerSizeDeclaration : public cPtr_abstractDeclaration {
+class cPtr_configurationDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
-  public : GALGAS_lbigint mAttribute_mSize ;
+  public : GALGAS_lbigint mAttribute_mPointerSize ;
 
 //--- Constructor
-  public : cPtr_pointerSizeDeclaration (const GALGAS_lbigint & in_mSize
-                                        COMMA_LOCATION_ARGS) ;
+  public : cPtr_configurationDeclaration (const GALGAS_lbigint & in_mPointerSize
+                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mSize (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
