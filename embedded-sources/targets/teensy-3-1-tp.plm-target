@@ -1,7 +1,6 @@
 
-pointerSize 32
-
-panic func : $int32 $uint32
+configuration 32:$int32:$uint32 {
+}
 
 import "files/registers-mk20dx256.plm"
 import "files/teensy-3-1-boot.plm"

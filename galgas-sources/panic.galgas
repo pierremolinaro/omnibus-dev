@@ -2,13 +2,6 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @panicTypesAST {
-  @lstring mPanicCodeTypeName
-  @lstring mPanicLineTypeName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 sortedlist @panicClauseListAST {
   @lstring mPanicClauseName
   @instructionListAST mPanicInstructionList
@@ -45,17 +38,6 @@ syntax extension common_syntax {
       !priority.location
   }
 
-  #·····················································································································
-
-  rule <declaration> ?!@ast ioAST {
-    $panic$
-    $func$
-    $:$
-    $typeName$ ?let panicCodeTypeName 
-    $typeName$ ?let panicLineTypeName
-    ioAST.mPanicTypes += !panicCodeTypeName !panicLineTypeName
-  }
-  
   #·····················································································································
 
 }

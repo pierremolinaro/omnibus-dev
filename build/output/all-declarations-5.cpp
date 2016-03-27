@@ -640,10 +640,10 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "  var compteur $uint32 = 0\n"
   "\n"
   "  func loop () {\n"
-  "    //waitUntilMS (!deadline:self.compteur)\n"
+  "    waitUntilMS (!deadline:self.compteur)\n"
   "    ledOn ()\n"
   "    self.compteur +%= 500\n"
-  "    // waitUntilMS (!deadline:self.compteur)\n"
+  "    waitUntilMS (!deadline:self.compteur)\n"
   "    ledOff ()\n"
   "    self.compteur +%= 500\n"
   "  }\n"
@@ -655,7 +655,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  592, // Text length
+  587, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -1801,6 +1801,163 @@ GALGAS_booleanDeclaration GALGAS_booleanDeclaration::extractObject (const GALGAS
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_configurationDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_configurationDeclaration * p = (const cPtr_configurationDeclaration *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_configurationDeclaration) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mPointerSize.objectCompare (p->mAttribute_mPointerSize) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_configurationDeclaration::objectCompare (const GALGAS_configurationDeclaration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_configurationDeclaration::GALGAS_configurationDeclaration (void) :
+GALGAS_abstractDeclaration () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_configurationDeclaration GALGAS_configurationDeclaration::constructor_default (LOCATION_ARGS) {
+  return GALGAS_configurationDeclaration::constructor_new (GALGAS_lbigint::constructor_default (HERE)
+                                                           COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_configurationDeclaration::GALGAS_configurationDeclaration (const cPtr_configurationDeclaration * inSourcePtr) :
+GALGAS_abstractDeclaration (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_configurationDeclaration) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_configurationDeclaration GALGAS_configurationDeclaration::constructor_new (const GALGAS_lbigint & inAttribute_mPointerSize
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_configurationDeclaration result ;
+  if (inAttribute_mPointerSize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_configurationDeclaration (inAttribute_mPointerSize COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint GALGAS_configurationDeclaration::getter_mPointerSize (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lbigint result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_configurationDeclaration * p = (const cPtr_configurationDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclaration) ;
+    result = p->mAttribute_mPointerSize ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint cPtr_configurationDeclaration::getter_mPointerSize (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mPointerSize ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                  Pointer class for @configurationDeclaration class                                  *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_configurationDeclaration::cPtr_configurationDeclaration (const GALGAS_lbigint & in_mPointerSize
+                                                              COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclaration (THERE),
+mAttribute_mPointerSize (in_mPointerSize) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_configurationDeclaration::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_configurationDeclaration ;
+}
+
+void cPtr_configurationDeclaration::description (C_String & ioString,
+                                                 const int32_t inIndentation) const {
+  ioString << "[@configurationDeclaration:" ;
+  mAttribute_mPointerSize.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_configurationDeclaration::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_configurationDeclaration (mAttribute_mPointerSize COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @configurationDeclaration type                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_configurationDeclaration ("configurationDeclaration",
+                                                 & kTypeDescriptor_GALGAS_abstractDeclaration) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_configurationDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_configurationDeclaration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_configurationDeclaration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_configurationDeclaration (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_configurationDeclaration GALGAS_configurationDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_configurationDeclaration result ;
+  const GALGAS_configurationDeclaration * p = (const GALGAS_configurationDeclaration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_configurationDeclaration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("configurationDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_enumerationDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_enumerationDeclaration * p = (const cPtr_enumerationDeclaration *) inOperandPtr ;
@@ -2855,163 +3012,6 @@ GALGAS_opaqueTypeDeclaration GALGAS_opaqueTypeDeclaration::extractObject (const 
       result = *p ;
     }else{
       inCompiler->castError ("opaqueTypeDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_pointerSizeDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_pointerSizeDeclaration * p = (const cPtr_pointerSizeDeclaration *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_pointerSizeDeclaration) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mSize.objectCompare (p->mAttribute_mSize) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_pointerSizeDeclaration::objectCompare (const GALGAS_pointerSizeDeclaration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_pointerSizeDeclaration::GALGAS_pointerSizeDeclaration (void) :
-GALGAS_abstractDeclaration () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_pointerSizeDeclaration GALGAS_pointerSizeDeclaration::constructor_default (LOCATION_ARGS) {
-  return GALGAS_pointerSizeDeclaration::constructor_new (GALGAS_lbigint::constructor_default (HERE)
-                                                         COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_pointerSizeDeclaration::GALGAS_pointerSizeDeclaration (const cPtr_pointerSizeDeclaration * inSourcePtr) :
-GALGAS_abstractDeclaration (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_pointerSizeDeclaration) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_pointerSizeDeclaration GALGAS_pointerSizeDeclaration::constructor_new (const GALGAS_lbigint & inAttribute_mSize
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_pointerSizeDeclaration result ;
-  if (inAttribute_mSize.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_pointerSizeDeclaration (inAttribute_mSize COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lbigint GALGAS_pointerSizeDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lbigint result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_pointerSizeDeclaration * p = (const cPtr_pointerSizeDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_pointerSizeDeclaration) ;
-    result = p->mAttribute_mSize ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lbigint cPtr_pointerSizeDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSize ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                   Pointer class for @pointerSizeDeclaration class                                   *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_pointerSizeDeclaration::cPtr_pointerSizeDeclaration (const GALGAS_lbigint & in_mSize
-                                                          COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclaration (THERE),
-mAttribute_mSize (in_mSize) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_pointerSizeDeclaration::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_pointerSizeDeclaration ;
-}
-
-void cPtr_pointerSizeDeclaration::description (C_String & ioString,
-                                               const int32_t inIndentation) const {
-  ioString << "[@pointerSizeDeclaration:" ;
-  mAttribute_mSize.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_pointerSizeDeclaration::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_pointerSizeDeclaration (mAttribute_mSize COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @pointerSizeDeclaration type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_pointerSizeDeclaration ("pointerSizeDeclaration",
-                                               & kTypeDescriptor_GALGAS_abstractDeclaration) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_pointerSizeDeclaration::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_pointerSizeDeclaration ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_pointerSizeDeclaration::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_pointerSizeDeclaration (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_pointerSizeDeclaration GALGAS_pointerSizeDeclaration::extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_pointerSizeDeclaration result ;
-  const GALGAS_pointerSizeDeclaration * p = (const GALGAS_pointerSizeDeclaration *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_pointerSizeDeclaration *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("pointerSizeDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

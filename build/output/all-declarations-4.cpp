@@ -10268,9 +10268,8 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
 //--- File '/LPC-L2294.plm-target'
 
 const char * gWrapperFileContent_0_targetTemplates = "\n"
-  "pointerSize 32\n"
-  "\n"
-  "panic func : $int32 $uint32\n"
+  "configuration 32:$int32:$uint32 {\n"
+  "}\n"
   "\n"
   "import \"files/registers-lpc2294.plm\"\n"
   "//import \"files/teensy-3-1-boot.plm\"\n"
@@ -10285,7 +10284,7 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   "LPC-L2294.plm-target",
   "plm-target",
   true, // Text file
-  335, // Text length
+  327, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
@@ -11480,9 +11479,8 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
 //--- File '/teensy-3-1-tp.plm-target'
 
 const char * gWrapperFileContent_3_targetTemplates = "\n"
-  "pointerSize 32\n"
-  "\n"
-  "panic func : $int32 $uint32\n"
+  "configuration 32:$int32:$uint32 {\n"
+  "}\n"
   "\n"
   "import \"files/registers-mk20dx256.plm\"\n"
   "import \"files/teensy-3-1-boot.plm\"\n"
@@ -11496,7 +11494,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "teensy-3-1-tp.plm-target",
   "plm-target",
   true, // Text file
-  294, // Text length
+  286, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
