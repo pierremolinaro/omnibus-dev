@@ -13,6 +13,7 @@ list @configurationDeclarationList {
   @lbigint mPointerSize
   @lstring mPanicCodeTypeName
   @lstring mPanicLineTypeName
+  @lstring mPanicGenerationForISR
   @interruptionConfigurationList mInterruptionConfigurationList
 }
 
@@ -31,6 +32,8 @@ syntax extension plm_target_specific_syntax {
     $typeName$ ?let panicCodeTypeName 
     $:$
     $typeName$ ?let panicLineTypeName
+    $:$
+    $identifier$ ?let panicGenerationForISR
     @interruptionConfigurationList interruptionConfigurationList = {}
     ${$
     repeat
@@ -41,7 +44,12 @@ syntax extension plm_target_specific_syntax {
       interruptionConfigurationList += !interruptName !interruptIndex
     end
     $}$
-    ioAST.mConfigurationDeclarationList += !pointerSize !panicCodeTypeName !panicLineTypeName !interruptionConfigurationList
+    ioAST.mConfigurationDeclarationList +=
+      !pointerSize
+      !panicCodeTypeName
+      !panicLineTypeName
+      !panicGenerationForISR
+      !interruptionConfigurationList
   }
 
   #·····················································································································
@@ -81,6 +89,11 @@ method @configurationDeclarationList enterInContext ?!context:@semanticContext i
     end
     ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicCodeTypeName}
     ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicLineTypeName}
+    if config.mPanicGenerationForISR.string == "generatePanicForISR" then
+      ioContext.mGeneratePanicForISR = true
+    elsif config.mPanicGenerationForISR.string != "noPanicForISR" then
+      error config.mPanicGenerationForISR : "this configuration field should be \"generatePanicForISR\" or \"noPanicForISR\""
+    end
     for (name panicCode) in config.mInterruptionConfigurationList do
       if [panicCode.bigint fitsInUInt] then
         [!?ioContext.mAvailableInterruptMap insertKey !name ![panicCode.bigint uint]]

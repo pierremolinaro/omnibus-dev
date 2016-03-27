@@ -10878,6 +10878,7 @@ class cCollectionElement_configurationDeclarationList : public cCollectionElemen
   public : cCollectionElement_configurationDeclarationList (const GALGAS_lbigint & in_mPointerSize,
                                                             const GALGAS_lstring & in_mPanicCodeTypeName,
                                                             const GALGAS_lstring & in_mPanicLineTypeName,
+                                                            const GALGAS_lstring & in_mPanicGenerationForISR,
                                                             const GALGAS_interruptionConfigurationList & in_mInterruptionConfigurationList
                                                             COMMA_LOCATION_ARGS) ;
 
@@ -10899,10 +10900,11 @@ class cCollectionElement_configurationDeclarationList : public cCollectionElemen
 cCollectionElement_configurationDeclarationList::cCollectionElement_configurationDeclarationList (const GALGAS_lbigint & in_mPointerSize,
                                                                                                   const GALGAS_lstring & in_mPanicCodeTypeName,
                                                                                                   const GALGAS_lstring & in_mPanicLineTypeName,
+                                                                                                  const GALGAS_lstring & in_mPanicGenerationForISR,
                                                                                                   const GALGAS_interruptionConfigurationList & in_mInterruptionConfigurationList
                                                                                                   COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mPointerSize, in_mPanicCodeTypeName, in_mPanicLineTypeName, in_mInterruptionConfigurationList) {
+mObject (in_mPointerSize, in_mPanicCodeTypeName, in_mPanicLineTypeName, in_mPanicGenerationForISR, in_mInterruptionConfigurationList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10915,7 +10917,7 @@ bool cCollectionElement_configurationDeclarationList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_configurationDeclarationList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_configurationDeclarationList (mObject.mAttribute_mPointerSize, mObject.mAttribute_mPanicCodeTypeName, mObject.mAttribute_mPanicLineTypeName, mObject.mAttribute_mInterruptionConfigurationList COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_configurationDeclarationList (mObject.mAttribute_mPointerSize, mObject.mAttribute_mPanicCodeTypeName, mObject.mAttribute_mPanicLineTypeName, mObject.mAttribute_mPanicGenerationForISR, mObject.mAttribute_mInterruptionConfigurationList COMMA_HERE)) ;
   return result ;
 }
 
@@ -10934,6 +10936,10 @@ void cCollectionElement_configurationDeclarationList::description (C_String & io
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mPanicLineTypeName" ":" ;
   mObject.mAttribute_mPanicLineTypeName.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mPanicGenerationForISR" ":" ;
+  mObject.mAttribute_mPanicGenerationForISR.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mInterruptionConfigurationList" ":" ;
@@ -10976,13 +10982,14 @@ GALGAS_configurationDeclarationList GALGAS_configurationDeclarationList::constru
 GALGAS_configurationDeclarationList GALGAS_configurationDeclarationList::constructor_listWithValue (const GALGAS_lbigint & inOperand0,
                                                                                                     const GALGAS_lstring & inOperand1,
                                                                                                     const GALGAS_lstring & inOperand2,
-                                                                                                    const GALGAS_interruptionConfigurationList & inOperand3
+                                                                                                    const GALGAS_lstring & inOperand3,
+                                                                                                    const GALGAS_interruptionConfigurationList & inOperand4
                                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_configurationDeclarationList result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_configurationDeclarationList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
+    GALGAS_configurationDeclarationList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -10994,12 +11001,14 @@ void GALGAS_configurationDeclarationList::makeAttributesFromObjects (capCollecti
                                                                      const GALGAS_lbigint & in_mPointerSize,
                                                                      const GALGAS_lstring & in_mPanicCodeTypeName,
                                                                      const GALGAS_lstring & in_mPanicLineTypeName,
+                                                                     const GALGAS_lstring & in_mPanicGenerationForISR,
                                                                      const GALGAS_interruptionConfigurationList & in_mInterruptionConfigurationList
                                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement_configurationDeclarationList * p = NULL ;
   macroMyNew (p, cCollectionElement_configurationDeclarationList (in_mPointerSize,
                                                                   in_mPanicCodeTypeName,
                                                                   in_mPanicLineTypeName,
+                                                                  in_mPanicGenerationForISR,
                                                                   in_mInterruptionConfigurationList COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -11010,11 +11019,12 @@ void GALGAS_configurationDeclarationList::makeAttributesFromObjects (capCollecti
 void GALGAS_configurationDeclarationList::addAssign_operation (const GALGAS_lbigint & inOperand0,
                                                                const GALGAS_lstring & inOperand1,
                                                                const GALGAS_lstring & inOperand2,
-                                                               const GALGAS_interruptionConfigurationList & inOperand3
+                                                               const GALGAS_lstring & inOperand3,
+                                                               const GALGAS_interruptionConfigurationList & inOperand4
                                                                COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_configurationDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_configurationDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -11027,13 +11037,14 @@ void GALGAS_configurationDeclarationList::addAssign_operation (const GALGAS_lbig
 void GALGAS_configurationDeclarationList::setter_insertAtIndex (const GALGAS_lbigint inOperand0,
                                                                 const GALGAS_lstring inOperand1,
                                                                 const GALGAS_lstring inOperand2,
-                                                                const GALGAS_interruptionConfigurationList inOperand3,
+                                                                const GALGAS_lstring inOperand3,
+                                                                const GALGAS_interruptionConfigurationList inOperand4,
                                                                 const GALGAS_uint inInsertionIndex,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_configurationDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_configurationDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -11046,7 +11057,8 @@ void GALGAS_configurationDeclarationList::setter_insertAtIndex (const GALGAS_lbi
 void GALGAS_configurationDeclarationList::setter_removeAtIndex (GALGAS_lbigint & outOperand0,
                                                                 GALGAS_lstring & outOperand1,
                                                                 GALGAS_lstring & outOperand2,
-                                                                GALGAS_interruptionConfigurationList & outOperand3,
+                                                                GALGAS_lstring & outOperand3,
+                                                                GALGAS_interruptionConfigurationList & outOperand4,
                                                                 const GALGAS_uint inRemoveIndex,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
@@ -11059,12 +11071,14 @@ void GALGAS_configurationDeclarationList::setter_removeAtIndex (GALGAS_lbigint &
       outOperand1.drop () ;
       outOperand2.drop () ;
       outOperand3.drop () ;
+      outOperand4.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_configurationDeclarationList) ;
       outOperand0 = p->mObject.mAttribute_mPointerSize ;
       outOperand1 = p->mObject.mAttribute_mPanicCodeTypeName ;
       outOperand2 = p->mObject.mAttribute_mPanicLineTypeName ;
-      outOperand3 = p->mObject.mAttribute_mInterruptionConfigurationList ;
+      outOperand3 = p->mObject.mAttribute_mPanicGenerationForISR ;
+      outOperand4 = p->mObject.mAttribute_mInterruptionConfigurationList ;
     }
   }
 }
@@ -11074,7 +11088,8 @@ void GALGAS_configurationDeclarationList::setter_removeAtIndex (GALGAS_lbigint &
 void GALGAS_configurationDeclarationList::setter_popFirst (GALGAS_lbigint & outOperand0,
                                                            GALGAS_lstring & outOperand1,
                                                            GALGAS_lstring & outOperand2,
-                                                           GALGAS_interruptionConfigurationList & outOperand3,
+                                                           GALGAS_lstring & outOperand3,
+                                                           GALGAS_interruptionConfigurationList & outOperand4,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -11085,12 +11100,14 @@ void GALGAS_configurationDeclarationList::setter_popFirst (GALGAS_lbigint & outO
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_configurationDeclarationList) ;
     outOperand0 = p->mObject.mAttribute_mPointerSize ;
     outOperand1 = p->mObject.mAttribute_mPanicCodeTypeName ;
     outOperand2 = p->mObject.mAttribute_mPanicLineTypeName ;
-    outOperand3 = p->mObject.mAttribute_mInterruptionConfigurationList ;
+    outOperand3 = p->mObject.mAttribute_mPanicGenerationForISR ;
+    outOperand4 = p->mObject.mAttribute_mInterruptionConfigurationList ;
   }
 }
 
@@ -11099,7 +11116,8 @@ void GALGAS_configurationDeclarationList::setter_popFirst (GALGAS_lbigint & outO
 void GALGAS_configurationDeclarationList::setter_popLast (GALGAS_lbigint & outOperand0,
                                                           GALGAS_lstring & outOperand1,
                                                           GALGAS_lstring & outOperand2,
-                                                          GALGAS_interruptionConfigurationList & outOperand3,
+                                                          GALGAS_lstring & outOperand3,
+                                                          GALGAS_interruptionConfigurationList & outOperand4,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -11110,12 +11128,14 @@ void GALGAS_configurationDeclarationList::setter_popLast (GALGAS_lbigint & outOp
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_configurationDeclarationList) ;
     outOperand0 = p->mObject.mAttribute_mPointerSize ;
     outOperand1 = p->mObject.mAttribute_mPanicCodeTypeName ;
     outOperand2 = p->mObject.mAttribute_mPanicLineTypeName ;
-    outOperand3 = p->mObject.mAttribute_mInterruptionConfigurationList ;
+    outOperand3 = p->mObject.mAttribute_mPanicGenerationForISR ;
+    outOperand4 = p->mObject.mAttribute_mInterruptionConfigurationList ;
   }
 }
 
@@ -11124,7 +11144,8 @@ void GALGAS_configurationDeclarationList::setter_popLast (GALGAS_lbigint & outOp
 void GALGAS_configurationDeclarationList::method_first (GALGAS_lbigint & outOperand0,
                                                         GALGAS_lstring & outOperand1,
                                                         GALGAS_lstring & outOperand2,
-                                                        GALGAS_interruptionConfigurationList & outOperand3,
+                                                        GALGAS_lstring & outOperand3,
+                                                        GALGAS_interruptionConfigurationList & outOperand4,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -11135,12 +11156,14 @@ void GALGAS_configurationDeclarationList::method_first (GALGAS_lbigint & outOper
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_configurationDeclarationList) ;
     outOperand0 = p->mObject.mAttribute_mPointerSize ;
     outOperand1 = p->mObject.mAttribute_mPanicCodeTypeName ;
     outOperand2 = p->mObject.mAttribute_mPanicLineTypeName ;
-    outOperand3 = p->mObject.mAttribute_mInterruptionConfigurationList ;
+    outOperand3 = p->mObject.mAttribute_mPanicGenerationForISR ;
+    outOperand4 = p->mObject.mAttribute_mInterruptionConfigurationList ;
   }
 }
 
@@ -11149,7 +11172,8 @@ void GALGAS_configurationDeclarationList::method_first (GALGAS_lbigint & outOper
 void GALGAS_configurationDeclarationList::method_last (GALGAS_lbigint & outOperand0,
                                                        GALGAS_lstring & outOperand1,
                                                        GALGAS_lstring & outOperand2,
-                                                       GALGAS_interruptionConfigurationList & outOperand3,
+                                                       GALGAS_lstring & outOperand3,
+                                                       GALGAS_interruptionConfigurationList & outOperand4,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -11160,12 +11184,14 @@ void GALGAS_configurationDeclarationList::method_last (GALGAS_lbigint & outOpera
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_configurationDeclarationList) ;
     outOperand0 = p->mObject.mAttribute_mPointerSize ;
     outOperand1 = p->mObject.mAttribute_mPanicCodeTypeName ;
     outOperand2 = p->mObject.mAttribute_mPanicLineTypeName ;
-    outOperand3 = p->mObject.mAttribute_mInterruptionConfigurationList ;
+    outOperand3 = p->mObject.mAttribute_mPanicGenerationForISR ;
+    outOperand4 = p->mObject.mAttribute_mInterruptionConfigurationList ;
   }
 }
 
@@ -11267,6 +11293,21 @@ GALGAS_lstring GALGAS_configurationDeclarationList::getter_mPanicLineTypeNameAtI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_lstring GALGAS_configurationDeclarationList::getter_mPanicGenerationForISRAtIndex (const GALGAS_uint & inIndex,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_configurationDeclarationList * p = (cCollectionElement_configurationDeclarationList *) attributes.ptr () ;
+  GALGAS_lstring result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_configurationDeclarationList) ;
+    result = p->mObject.mAttribute_mPanicGenerationForISR ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_interruptionConfigurationList GALGAS_configurationDeclarationList::getter_mInterruptionConfigurationListAtIndex (const GALGAS_uint & inIndex,
                                                                                                                         C_Compiler * inCompiler
                                                                                                                         COMMA_LOCATION_ARGS) const {
@@ -11321,6 +11362,14 @@ GALGAS_lstring cEnumerator_configurationDeclarationList::current_mPanicLineTypeN
   const cCollectionElement_configurationDeclarationList * p = (const cCollectionElement_configurationDeclarationList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_configurationDeclarationList) ;
   return p->mObject.mAttribute_mPanicLineTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_configurationDeclarationList::current_mPanicGenerationForISR (LOCATION_ARGS) const {
+  const cCollectionElement_configurationDeclarationList * p = (const cCollectionElement_configurationDeclarationList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_configurationDeclarationList) ;
+  return p->mObject.mAttribute_mPanicGenerationForISR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
