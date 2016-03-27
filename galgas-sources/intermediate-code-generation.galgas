@@ -11,6 +11,7 @@ struct @intermediateCodeStruct {
   @globalConstantMapIR mGlobalConstantMap
   @routineMapIR mRoutineMapIR
   @guardMapIR mGuardMapIR
+  @interruptMapIR mInterruptMapIR
   @externProcedureMapIR mExternProcedureMapIR
   @stringset mRequiredProcedureSet
   @bootListIR mBootList
@@ -76,6 +77,18 @@ map @routineMapIR {
   @bool mGlobal
   @routineKind mKind
   @unifiedTypeMap-proxy mReturnType # .null if no return value
+
+  insert insertKey error message "interrupt '%K' is already defined"
+  search searchKey error message "** internal error **"
+  remove removeKey error message "** internal error **"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @interruptMapIR {
+  @allocaList mAllocaList
+  @instructionListIR mInstructionGenerationList
+  @bool mXTR
 
   insert insertKey error message "routine '%K' is already defined"
   search searchKey error message "** internal error **"

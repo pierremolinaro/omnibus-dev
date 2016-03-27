@@ -100,6 +100,7 @@ proc codeGeneration
   ?target:let @lstring inTargetName
   ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
   ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
+  ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
@@ -125,6 +126,7 @@ proc codeGeneration
     !target:inTargetName
     !panicCodeType:inPanicCodeType
     !panicLineType:inPanicLineType
+    !interrupts:inAvailableInterruptMap
     !sourceFileSet:inSourceFileAbsolutePathSet
   )
 }
@@ -135,6 +137,7 @@ struct @generationContext {
   @string mPanicCodeLLVMType
   @string mPanicLineLLVMType
   @globalTaskVariableList mGlobalTaskVariableList
+  @availableInterruptMap mAvailableInterruptMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -148,6 +151,7 @@ private proc generateLLVMfile
   ?target:let @lstring inTargetName
   ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
   ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
+  ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   @generationAdds generationAdds = .default
@@ -156,6 +160,7 @@ private proc generateLLVMfile
     ![inPanicCodeType llvmTypeName]
     ![inPanicLineType llvmTypeName]
     !inIntermediateCodeStruct.mGlobalTaskVariableList
+    !inAvailableInterruptMap
   }
   let sourceDirectory = inProductDirectory + "/sources"
 #----------------------------------------- Include assembler specific file
@@ -164,7 +169,8 @@ private proc generateLLVMfile
      !currentDir:inCurrentDirectory
      !from:inTargetName.string + "/target.s"
   )
-  asCode += [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
+  let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
+  asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForISR (!"")]
   asCode += "\n"
 #----------------------------------------- Include LLVM specific file
   var llvmCode = llvmTitleComment (!"Target specific code")
@@ -202,8 +208,26 @@ private proc generateLLVMfile
     !generationContext
     !?generationAdds
   ]
-#----------------------------------------- Procedures
+#----------------------------------------- Routines
   [inIntermediateCodeStruct.mRoutineMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
+#----------------------------------------- Interrupts
+  let undefinedInterruptString = getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/undefined-interrupt.s"
+  )
+  let XTRInterruptHandlerString = getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/xtr-interrupt-handler.s"
+  )
+  [inIntermediateCodeStruct.mInterruptMapIR interruptCodeGeneration
+    !?llvmCode
+    !?asCode
+    !undefinedInterruptString
+    !XTRInterruptHandlerString
+    !generationContext
+    
+    !?generationAdds
+  ]
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
   @2stringlist serviceList = {}

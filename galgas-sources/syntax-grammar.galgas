@@ -22,6 +22,8 @@ syntax common_syntax (plm_lexique) {
     while
       <primitive> !?ioAst.mPrimitiveListAST
     while
+      <isr> !?ioAst.mISRDeclarationListAST
+    while
       $import$
       $literal_string$ ?let importedFile
       outImportedFileList += !importedFile

@@ -112,7 +112,7 @@ func checkMode
     requiredModeListString += " `" + m
   end
   let runInProcessorUserMode = [inRequiredModes hasKey !userModeName ()]
-  let runInProcessorPrivilegedMode = [inRequiredModes hasKey !isrModeName ()] || [inRequiredModes hasKey !kernelModeName ()]
+  let runInProcessorPrivilegedMode = [inRequiredModes hasKey !serviceModeName ()] || [inRequiredModes hasKey !kernelModeName ()]
   switch inRoutineKind
   case function :
     outResult = .function
@@ -202,6 +202,14 @@ map @constructorMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @availableInterruptMap {
+  @uint mPanicCode
+  insert insertKey error message "interrupt '%K' is already defined"
+  search searchKey error message "interrupt '%K' is not defined"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @globalTaskVariableList {
   @string mTaskName
   @string mTaskTypeName
@@ -227,6 +235,10 @@ struct @semanticContext {
   @globalVariableMap mGlobalVariableMap
   @constructorMap mConstructorMap
   @modeMap mModeMap
+#--- Interrupts
+  @stringset mDefinedInterruptSet
+  @availableInterruptMap mAvailableInterruptMap
+#--- Operator
   @infixOperatorMap mEqualOperatorMap           # ==
   @infixOperatorMap mNonEqualOperatorMap        # !=
   @infixOperatorMap mStrictInfOperatorMap       # <
@@ -280,13 +292,12 @@ proc buildSemanticContext
 {
   outSemanticContext = .default
 #--- Add predefined modes
-#  [!?outSemanticContext.mModeMap insertKey ![guardModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![bootModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![initModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![panicModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![sectionModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![kernelModeName () nowhere]]
-  [!?outSemanticContext.mModeMap insertKey ![isrModeName () nowhere]]
+  [!?outSemanticContext.mModeMap insertKey ![serviceModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![userModeName () nowhere]]
 #--- Enter init routines
   for initRoutine in inAST.mInitList do
@@ -304,24 +315,8 @@ proc buildSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
-#--- Solve panic types
-  if [inAST.mPanicTypes length] != 1 then
-    error ["" nowhere]
-    : "exactly one panic type declaration should be provided (found:" + [inAST.mPanicTypes length] + ")"
-    for () in inAST.mPanicTypes do
-      error mPanicCodeTypeName:"panic type declaration is here"
-    end
-  else
-    [inAST.mPanicTypes first ?let @lstring panicCodeTypeName ?let @lstring panicLineTypeName]
-    outSemanticContext.mPanicCodeType = .searchKey {
-      !outSemanticContext.mTypeMap
-      !panicCodeTypeName
-    }
-    outSemanticContext.mPanicLineType = .searchKey {
-      !outSemanticContext.mTypeMap
-      !panicLineTypeName
-    }
-  end
+#--- Enter configuration
+  [inAST.mConfigurationDeclarationList enterInContext !?context:outSemanticContext]
 #--- Build an HTML containing all glogal constants
   buildGlobalConstantMapHTMLFile (
     !outSemanticContext.mGlobalConstantMap
@@ -338,6 +333,7 @@ proc buildSemanticContext
     !sourceFile:inSourceFile
   )
 #--- Enter procedures, functions, sections, services, guards in context
+  [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
   [inAST.mProcedureListAST enterInContext !selfTypeName:"" !?context: outSemanticContext]
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !receiverType:"" !?context: outSemanticContext]

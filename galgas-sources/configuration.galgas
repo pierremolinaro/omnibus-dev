@@ -2,21 +2,18 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @configurationDeclaration : @abstractDeclaration {
-  @lbigint mPointerSize
+list @interruptionConfigurationList {
+  @lstring mInterruptName
+  @lbigint mInterruptIndex
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
-list @panicTypesAST {
+list @configurationDeclarationList {
+  @lbigint mPointerSize
   @lstring mPanicCodeTypeName
   @lstring mPanicLineTypeName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @configurationDeclaration location -> @location outLocation {
-  outLocation = .nowhere
+  @interruptionConfigurationList mInterruptionConfigurationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -29,16 +26,22 @@ syntax extension plm_target_specific_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $configuration$
-    $integer$ ?let @lbigint size
-    ioAST.mDeclarationList += !@configurationDeclaration.new {!size}
+    $integer$ ?let pointerSize
     $:$
     $typeName$ ?let panicCodeTypeName 
     $:$
     $typeName$ ?let panicLineTypeName
-    ioAST.mPanicTypes += !panicCodeTypeName !panicLineTypeName
+    @interruptionConfigurationList interruptionConfigurationList = {}
     ${$
-    
+    repeat
+    while
+      $identifier$ ?let interruptName
+      $:$
+      $integer$ ?let interruptIndex
+      interruptionConfigurationList += !interruptName !interruptIndex
+    end
     $}$
+    ioAST.mConfigurationDeclarationList += !pointerSize !panicCodeTypeName !panicLineTypeName !interruptionConfigurationList
   }
 
   #·····················································································································
@@ -46,63 +49,46 @@ syntax extension plm_target_specific_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @configurationDeclaration addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @configurationDeclaration enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let name = ["pointer size " + mPointerSize.bigint nowhere]
-  [!?ioGraph addNode !name !self]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @configurationDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "pointer size " + mPointerSize.bigint
+method @configurationDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  var first = true
+  for config in self do
+    if first then
+      first = false
+      let panicCodeTypeName = @lstring.new {!"$" + config.mPanicCodeTypeName !config.mPanicCodeTypeName.location}
+      [!?ioGraph noteNode !panicCodeTypeName]
+      let panicLineTypeName = @lstring.new {!"$" + config.mPanicLineTypeName !config.mPanicLineTypeName.location}
+      [!?ioGraph noteNode !panicLineTypeName]
+    else
+      error config.mPointerSize : "duplicate configuration"
+    end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
-override method @configurationDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-  ioContext.mPointerSize = [mPointerSize.bigint uint]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @configurationDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @configurationDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
+method @configurationDeclarationList enterInContext ?!context:@semanticContext ioContext {
+  for config in self do
+    if config.mPointerSize.bigint == 0G then
+      error config.mPointerSize : "zero size pointer not allowed"
+    else
+      ioContext.mPointerSize = [config.mPointerSize.bigint uint]
+    end
+    ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicCodeTypeName}
+    ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicLineTypeName}
+    for (name panicCode) in config.mInterruptionConfigurationList do
+      if [panicCode.bigint fitsInUInt] then
+        [!?ioContext.mAvailableInterruptMap insertKey !name ![panicCode.bigint uint]]
+      else
+        error panicCode : "value does not fit in $" + config.mPanicCodeTypeName
+      end
+    end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

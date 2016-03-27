@@ -222,7 +222,7 @@ proc guardSemanticAnalysis
     !self:inSelfType
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !modes:{!isrModeName ()}
+    !modes:{!serviceModeName ()}
     !allowPanic:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
@@ -289,7 +289,7 @@ override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
     !errorLocation:mRoutineName.location
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
-    !requiredModeSet:{!isrModeName ()}
+    !requiredModeSet:{!serviceModeName ()}
     !allowPanic:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -357,7 +357,7 @@ override method @selfRoutineCallInstructionAST baseGuardAnalyze
         !errorLocation:mRoutineName.location
         !callerForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
-        !requiredModeSet:{!isrModeName ()}
+        !requiredModeSet:{!serviceModeName ()}
         !allowPanic:true
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
@@ -415,7 +415,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
     !errorLocation:mRoutineName.location
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
-    !requiredModeSet:{!isrModeName ()}
+    !requiredModeSet:{!serviceModeName ()}
     !allowPanic:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -491,7 +491,7 @@ override method @selfRemoteRoutineCallInstructionAST baseGuardAnalyze
         !errorLocation:mMethodName.location
         !callerForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
-        !requiredModeSet:{!isrModeName ()}
+        !requiredModeSet:{!serviceModeName ()}
         !allowPanic:true
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap

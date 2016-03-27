@@ -41,16 +41,7 @@ proc buildOrderedDeclarationList
   [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGlobalVarDeclarationList noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskList noteTypesInPrecedenceGraph !?precedenceGraph]
-  for (t1 t2) in inAST.mPanicTypes do
-    if t1.string != "" then
-      let typeName = @lstring.new {!"$" + t1 !t1.location}
-      [!?precedenceGraph noteNode !typeName]
-    end
-    if t2.string != "" then
-      let typeName = @lstring.new {!"$" + t2 !t2.location}
-      [!?precedenceGraph noteNode !typeName]
-    end
-  end
+  [inAST.mConfigurationDeclarationList noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed $uintXX and $intXX types
   for () in [precedenceGraph undefinedNodeKeyList] do
     let split = [mValue componentsSeparatedByString !"int"]

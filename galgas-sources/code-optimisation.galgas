@@ -187,9 +187,20 @@ private proc suppressInaccessibleSubprograms
   end
 #--- Panic clauses (if panic code is generated)
   if not [option plm_options.noPanicGeneration value] then
-    [ioIntermediateCodeStruct.mPanicSetupInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
-    [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
+    [ioIntermediateCodeStruct.mPanicSetupInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
+    [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
   end
+#--- interrupts
+  [ioIntermediateCodeStruct.mInterruptMapIR enterAccessibleEntities
+    !?outAccessibleEntities
+    !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+  ]
 #--- Explore routines
   var continues = true
   let bound = [ioIntermediateCodeStruct.mRoutineMapIR count]

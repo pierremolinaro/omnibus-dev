@@ -146,6 +146,7 @@ private proc compileProject
           !target:inTargetName
           !panicCodeType:semanticContext.mPanicCodeType
           !panicLineType:semanticContext.mPanicLineType
+          !interrupts:semanticContext.mAvailableInterruptMap
           !sourceFileSet:sourceFileAbsolutePathSet
         )
       end
@@ -196,7 +197,8 @@ private proc addTargetSpecificFiles
   ioAST.mInitList += ast.mInitList
   ioAST.mBootList += ast.mBootList
   ioAST.mPanicClauses += ast.mPanicClauses # + ioAST.mPanicClauses
-  ioAST.mPanicTypes = ast.mPanicTypes + ioAST.mPanicTypes
+  ioAST.mConfigurationDeclarationList = ast.mConfigurationDeclarationList + ioAST.mConfigurationDeclarationList
+  ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
   ioAST.mTaskList = ast.mTaskList + ioAST.mTaskList
 }
 

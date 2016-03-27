@@ -1,23 +1,23 @@
 
-required func `isr PAbortHandler ()
+required func `service PAbortHandler ()
 
-func `isr PAbortHandler @nullWhenPanicDisabled @weak @global () {
+func `service PAbortHandler @nullWhenPanicDisabled @weak @global () {
   panic 2
 }
 
 //-----------------------------------------------------------------------------*
 
-required func `isr DAbortHandler ()
+required func `service DAbortHandler ()
 
-func `isr DAbortHandler @nullWhenPanicDisabled @weak @global () {
+func `service DAbortHandler @nullWhenPanicDisabled @weak @global () {
   panic 3
 }
 
 //-----------------------------------------------------------------------------*
 
-required func `isr FIQHandler ()
+required func `service FIQHandler ()
 
-func `isr FIQHandler @nullWhenPanicDisabled @weak @global () {
+func `service FIQHandler @nullWhenPanicDisabled @weak @global () {
   panic 4
 }
 
