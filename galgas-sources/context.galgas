@@ -221,6 +221,7 @@ list @globalTaskVariableList {
 
 struct @semanticContext {
   @uint mPointerSize # in bit count
+  @bool mGeneratePanicForISR
   @unifiedTypeMap-proxy mBooleanType
   @unifiedTypeMap-proxy mLiteralIntegerType
   @unifiedTypeMap-proxy mPanicCodeType

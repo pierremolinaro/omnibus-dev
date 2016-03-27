@@ -1,5 +1,5 @@
 
-configuration 32:$int32:$uint32 {
+configuration 32:$int32:$uint32:generatePanicForISR {
   NMI : 2
   MemManage : 4
   BusFault : 5

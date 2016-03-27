@@ -171,7 +171,7 @@ method @interruptMapIR interruptCodeGeneration
 #--- Generate stubs for undefined interrupt entries
   for (lkey panicCode) in inGenerationContext.mAvailableInterruptMap do
     if not [definedInterrupts hasKey !lkey.string] then
-      if [option plm_options.noPanicGeneration value] then
+      if [option plm_options.noPanicGeneration value] || not inGenerationContext.mGeneratePanicForISR then
         let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForISR (!lkey.string)]
         ioAScode += s
       else

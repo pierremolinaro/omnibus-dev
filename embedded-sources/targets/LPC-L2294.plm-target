@@ -1,5 +1,5 @@
 
-configuration 32:$int32:$uint32 {
+configuration 32:$int32:$uint32:noPanicForISR {
   WDT : 0
   ARMCore0 : 2
   ARMCore1 : 3

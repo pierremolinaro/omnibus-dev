@@ -101,6 +101,7 @@ proc codeGeneration
   ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
   ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
+  ?generatePanicForISR:let @bool inGeneratePanicForISR
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
@@ -127,6 +128,7 @@ proc codeGeneration
     !panicCodeType:inPanicCodeType
     !panicLineType:inPanicLineType
     !interrupts:inAvailableInterruptMap
+    !generatePanicForISR:inGeneratePanicForISR
     !sourceFileSet:inSourceFileAbsolutePathSet
   )
 }
@@ -136,6 +138,7 @@ proc codeGeneration
 struct @generationContext {
   @string mPanicCodeLLVMType
   @string mPanicLineLLVMType
+  @bool mGeneratePanicForISR
   @globalTaskVariableList mGlobalTaskVariableList
   @availableInterruptMap mAvailableInterruptMap
 }
@@ -152,6 +155,7 @@ private proc generateLLVMfile
   ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
   ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
+  ?generatePanicForISR:let @bool inGeneratePanicForISR
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   @generationAdds generationAdds = .default
@@ -159,6 +163,7 @@ private proc generateLLVMfile
   let @generationContext generationContext = .new {
     ![inPanicCodeType llvmTypeName]
     ![inPanicLineType llvmTypeName]
+    !inGeneratePanicForISR
     !inIntermediateCodeStruct.mGlobalTaskVariableList
     !inAvailableInterruptMap
   }

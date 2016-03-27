@@ -1731,24 +1731,24 @@ void categoryMethod_noteTypesInPrecedenceGraph (const GALGAS_configurationDeclar
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bool var_first = GALGAS_bool (true) ;
   const GALGAS_configurationDeclarationList temp_0 = inObject ;
-  cEnumerator_configurationDeclarationList enumerator_2512 (temp_0, kEnumeration_up) ;
-  while (enumerator_2512.hasCurrentObject ()) {
+  cEnumerator_configurationDeclarationList enumerator_2651 (temp_0, kEnumeration_up) ;
+  while (enumerator_2651.hasCurrentObject ()) {
     const enumGalgasBool test_1 = var_first.boolEnum () ;
     if (kBoolTrue == test_1) {
       var_first = GALGAS_bool (false) ;
-      GALGAS_lstring var_panicCodeTypeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_2512.current (HERE).mAttribute_mPanicCodeTypeName.getter_string (SOURCE_FILE ("configuration.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 60)), enumerator_2512.current (HERE).mAttribute_mPanicCodeTypeName.mAttribute_location  COMMA_SOURCE_FILE ("configuration.galgas", 60)) ;
+      GALGAS_lstring var_panicCodeTypeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_2651.current (HERE).mAttribute_mPanicCodeTypeName.getter_string (SOURCE_FILE ("configuration.galgas", 68)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 68)), enumerator_2651.current (HERE).mAttribute_mPanicCodeTypeName.mAttribute_location  COMMA_SOURCE_FILE ("configuration.galgas", 68)) ;
       {
-      ioArgument_ioGraph.setter_noteNode (var_panicCodeTypeName COMMA_SOURCE_FILE ("configuration.galgas", 61)) ;
+      ioArgument_ioGraph.setter_noteNode (var_panicCodeTypeName COMMA_SOURCE_FILE ("configuration.galgas", 69)) ;
       }
-      GALGAS_lstring var_panicLineTypeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_2512.current (HERE).mAttribute_mPanicLineTypeName.getter_string (SOURCE_FILE ("configuration.galgas", 62)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 62)), enumerator_2512.current (HERE).mAttribute_mPanicLineTypeName.mAttribute_location  COMMA_SOURCE_FILE ("configuration.galgas", 62)) ;
+      GALGAS_lstring var_panicLineTypeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_2651.current (HERE).mAttribute_mPanicLineTypeName.getter_string (SOURCE_FILE ("configuration.galgas", 70)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 70)), enumerator_2651.current (HERE).mAttribute_mPanicLineTypeName.mAttribute_location  COMMA_SOURCE_FILE ("configuration.galgas", 70)) ;
       {
-      ioArgument_ioGraph.setter_noteNode (var_panicLineTypeName COMMA_SOURCE_FILE ("configuration.galgas", 63)) ;
+      ioArgument_ioGraph.setter_noteNode (var_panicLineTypeName COMMA_SOURCE_FILE ("configuration.galgas", 71)) ;
       }
     }else if (kBoolFalse == test_1) {
-      GALGAS_location location_2 (enumerator_2512.current (HERE).mAttribute_mPointerSize.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_2, GALGAS_string ("duplicate configuration")  COMMA_SOURCE_FILE ("configuration.galgas", 65)) ;
+      GALGAS_location location_2 (enumerator_2651.current (HERE).mAttribute_mPointerSize.getter_location (HERE)) ; // Implicit use of 'location' getter
+      inCompiler->emitSemanticError (location_2, GALGAS_string ("duplicate configuration")  COMMA_SOURCE_FILE ("configuration.galgas", 73)) ;
     }
-    enumerator_2512.gotoNextObject () ;
+    enumerator_2651.gotoNextObject () ;
   }
 }
 
@@ -1764,31 +1764,41 @@ void categoryMethod_enterInContext (const GALGAS_configurationDeclarationList in
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_configurationDeclarationList temp_0 = inObject ;
-  cEnumerator_configurationDeclarationList enumerator_3503 (temp_0, kEnumeration_up) ;
-  while (enumerator_3503.hasCurrentObject ()) {
-    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_3503.current (HERE).mAttribute_mPointerSize.mAttribute_bigint.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 77)))).boolEnum () ;
+  cEnumerator_configurationDeclarationList enumerator_3642 (temp_0, kEnumeration_up) ;
+  while (enumerator_3642.hasCurrentObject ()) {
+    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_3642.current (HERE).mAttribute_mPointerSize.mAttribute_bigint.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 85)))).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_location location_2 (enumerator_3503.current (HERE).mAttribute_mPointerSize.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_2, GALGAS_string ("zero size pointer not allowed")  COMMA_SOURCE_FILE ("configuration.galgas", 78)) ;
+      GALGAS_location location_2 (enumerator_3642.current (HERE).mAttribute_mPointerSize.getter_location (HERE)) ; // Implicit use of 'location' getter
+      inCompiler->emitSemanticError (location_2, GALGAS_string ("zero size pointer not allowed")  COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
     }else if (kBoolFalse == test_1) {
-      ioArgument_ioContext.mAttribute_mPointerSize = enumerator_3503.current (HERE).mAttribute_mPointerSize.mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 80)) ;
+      ioArgument_ioContext.mAttribute_mPointerSize = enumerator_3642.current (HERE).mAttribute_mPointerSize.mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 88)) ;
     }
-    ioArgument_ioContext.mAttribute_mPanicCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_3503.current (HERE).mAttribute_mPanicCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
-    ioArgument_ioContext.mAttribute_mPanicLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_3503.current (HERE).mAttribute_mPanicLineTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 83)) ;
-    cEnumerator_interruptionConfigurationList enumerator_3989 (enumerator_3503.current (HERE).mAttribute_mInterruptionConfigurationList, kEnumeration_up) ;
-    while (enumerator_3989.hasCurrentObject ()) {
-      const enumGalgasBool test_3 = enumerator_3989.current_mInterruptIndex (HERE).mAttribute_bigint.getter_fitsInUInt (SOURCE_FILE ("configuration.galgas", 85)).boolEnum () ;
-      if (kBoolTrue == test_3) {
-        {
-        ioArgument_ioContext.mAttribute_mAvailableInterruptMap.setter_insertKey (enumerator_3989.current_mInterruptName (HERE), enumerator_3989.current_mInterruptIndex (HERE).mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 86)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
-        }
-      }else if (kBoolFalse == test_3) {
-        GALGAS_location location_4 (enumerator_3989.current_mInterruptIndex (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
-        inCompiler->emitSemanticError (location_4, GALGAS_string ("value does not fit in $").add_operation (enumerator_3503.current (HERE).mAttribute_mPanicCodeTypeName.getter_string (SOURCE_FILE ("configuration.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 88))  COMMA_SOURCE_FILE ("configuration.galgas", 88)) ;
+    ioArgument_ioContext.mAttribute_mPanicCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_3642.current (HERE).mAttribute_mPanicCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 90)) ;
+    ioArgument_ioContext.mAttribute_mPanicLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_3642.current (HERE).mAttribute_mPanicLineTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 91)) ;
+    const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_3642.current (HERE).mAttribute_mPanicGenerationForISR.mAttribute_string.objectCompare (GALGAS_string ("generatePanicForISR"))).boolEnum () ;
+    if (kBoolTrue == test_3) {
+      ioArgument_ioContext.mAttribute_mGeneratePanicForISR = GALGAS_bool (true) ;
+    }else if (kBoolFalse == test_3) {
+      const enumGalgasBool test_4 = GALGAS_bool (kIsNotEqual, enumerator_3642.current (HERE).mAttribute_mPanicGenerationForISR.mAttribute_string.objectCompare (GALGAS_string ("noPanicForISR"))).boolEnum () ;
+      if (kBoolTrue == test_4) {
+        GALGAS_location location_5 (enumerator_3642.current (HERE).mAttribute_mPanicGenerationForISR.getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_5, GALGAS_string ("this configuration field should be \"generatePanicForISR\" or \"noPanicForISR\"")  COMMA_SOURCE_FILE ("configuration.galgas", 95)) ;
       }
-      enumerator_3989.gotoNextObject () ;
     }
-    enumerator_3503.gotoNextObject () ;
+    cEnumerator_interruptionConfigurationList enumerator_4451 (enumerator_3642.current (HERE).mAttribute_mInterruptionConfigurationList, kEnumeration_up) ;
+    while (enumerator_4451.hasCurrentObject ()) {
+      const enumGalgasBool test_6 = enumerator_4451.current_mInterruptIndex (HERE).mAttribute_bigint.getter_fitsInUInt (SOURCE_FILE ("configuration.galgas", 98)).boolEnum () ;
+      if (kBoolTrue == test_6) {
+        {
+        ioArgument_ioContext.mAttribute_mAvailableInterruptMap.setter_insertKey (enumerator_4451.current_mInterruptName (HERE), enumerator_4451.current_mInterruptIndex (HERE).mAttribute_bigint.getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 99)) ;
+        }
+      }else if (kBoolFalse == test_6) {
+        GALGAS_location location_7 (enumerator_4451.current_mInterruptIndex (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_7, GALGAS_string ("value does not fit in $").add_operation (enumerator_3642.current (HERE).mAttribute_mPanicCodeTypeName.getter_string (SOURCE_FILE ("configuration.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 101))  COMMA_SOURCE_FILE ("configuration.galgas", 101)) ;
+      }
+      enumerator_4451.gotoNextObject () ;
+    }
+    enumerator_3642.gotoNextObject () ;
   }
 }
 
@@ -2794,11 +2804,15 @@ void categoryMethod_interruptCodeGeneration (const GALGAS_interruptMapIR inObjec
   while (enumerator_7289.hasCurrentObject ()) {
     const enumGalgasBool test_4 = var_definedInterrupts.getter_hasKey (enumerator_7289.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("declaration-isr.galgas", 173)).operator_not (SOURCE_FILE ("declaration-isr.galgas", 173)).boolEnum () ;
     if (kBoolTrue == test_4) {
-      const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
-      if (kBoolTrue == test_5) {
+      GALGAS_bool test_5 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()) ;
+      if (kBoolTrue != test_5.boolEnum ()) {
+        test_5 = constinArgument_inGenerationContext.mAttribute_mGeneratePanicForISR.operator_not (SOURCE_FILE ("declaration-isr.galgas", 174)) ;
+      }
+      const enumGalgasBool test_6 = test_5.boolEnum () ;
+      if (kBoolTrue == test_6) {
         GALGAS_string var_s = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GALGAS_string ("!ISR!"), function_llvmNameForISR (enumerator_7289.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 175)) ;
         ioArgument_ioAScode.plusAssign_operation(var_s, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 176)) ;
-      }else if (kBoolFalse == test_5) {
+      }else if (kBoolFalse == test_6) {
         GALGAS_string var_name = function_llvmNameForISR (enumerator_7289.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 178)) ;
         ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Panic code for ").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 179)) ;
         ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define void @").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)).add_operation (GALGAS_string (" noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)) ;
@@ -5036,6 +5050,7 @@ void callCategoryMethod_llvmInstructionCode (const cPtr_abstractInstructionIR * 
 GALGAS_generationContext::GALGAS_generationContext (void) :
 mAttribute_mPanicCodeLLVMType (),
 mAttribute_mPanicLineLLVMType (),
+mAttribute_mGeneratePanicForISR (),
 mAttribute_mGlobalTaskVariableList (),
 mAttribute_mAvailableInterruptMap () {
 }
@@ -5049,12 +5064,14 @@ GALGAS_generationContext::~ GALGAS_generationContext (void) {
 
 GALGAS_generationContext::GALGAS_generationContext (const GALGAS_string & inOperand0,
                                                     const GALGAS_string & inOperand1,
-                                                    const GALGAS_globalTaskVariableList & inOperand2,
-                                                    const GALGAS_availableInterruptMap & inOperand3) :
+                                                    const GALGAS_bool & inOperand2,
+                                                    const GALGAS_globalTaskVariableList & inOperand3,
+                                                    const GALGAS_availableInterruptMap & inOperand4) :
 mAttribute_mPanicCodeLLVMType (inOperand0),
 mAttribute_mPanicLineLLVMType (inOperand1),
-mAttribute_mGlobalTaskVariableList (inOperand2),
-mAttribute_mAvailableInterruptMap (inOperand3) {
+mAttribute_mGeneratePanicForISR (inOperand2),
+mAttribute_mGlobalTaskVariableList (inOperand3),
+mAttribute_mAvailableInterruptMap (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5062,6 +5079,7 @@ mAttribute_mAvailableInterruptMap (inOperand3) {
 GALGAS_generationContext GALGAS_generationContext::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_generationContext (GALGAS_string::constructor_default (HERE),
                                    GALGAS_string::constructor_default (HERE),
+                                   GALGAS_bool::constructor_default (HERE),
                                    GALGAS_globalTaskVariableList::constructor_emptyList (HERE),
                                    GALGAS_availableInterruptMap::constructor_emptyMap (HERE)) ;
 }
@@ -5070,12 +5088,13 @@ GALGAS_generationContext GALGAS_generationContext::constructor_default (UNUSED_L
 
 GALGAS_generationContext GALGAS_generationContext::constructor_new (const GALGAS_string & inOperand0,
                                                                     const GALGAS_string & inOperand1,
-                                                                    const GALGAS_globalTaskVariableList & inOperand2,
-                                                                    const GALGAS_availableInterruptMap & inOperand3 
+                                                                    const GALGAS_bool & inOperand2,
+                                                                    const GALGAS_globalTaskVariableList & inOperand3,
+                                                                    const GALGAS_availableInterruptMap & inOperand4 
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_generationContext result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_generationContext (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_generationContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
   }
   return result ;
 }
@@ -5091,6 +5110,9 @@ typeComparisonResult GALGAS_generationContext::objectCompare (const GALGAS_gener
     result = mAttribute_mPanicLineLLVMType.objectCompare (inOperand.mAttribute_mPanicLineLLVMType) ;
   }
   if (result == kOperandEqual) {
+    result = mAttribute_mGeneratePanicForISR.objectCompare (inOperand.mAttribute_mGeneratePanicForISR) ;
+  }
+  if (result == kOperandEqual) {
     result = mAttribute_mGlobalTaskVariableList.objectCompare (inOperand.mAttribute_mGlobalTaskVariableList) ;
   }
   if (result == kOperandEqual) {
@@ -5102,7 +5124,7 @@ typeComparisonResult GALGAS_generationContext::objectCompare (const GALGAS_gener
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_generationContext::isValid (void) const {
-  return mAttribute_mPanicCodeLLVMType.isValid () && mAttribute_mPanicLineLLVMType.isValid () && mAttribute_mGlobalTaskVariableList.isValid () && mAttribute_mAvailableInterruptMap.isValid () ;
+  return mAttribute_mPanicCodeLLVMType.isValid () && mAttribute_mPanicLineLLVMType.isValid () && mAttribute_mGeneratePanicForISR.isValid () && mAttribute_mGlobalTaskVariableList.isValid () && mAttribute_mAvailableInterruptMap.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5110,6 +5132,7 @@ bool GALGAS_generationContext::isValid (void) const {
 void GALGAS_generationContext::drop (void) {
   mAttribute_mPanicCodeLLVMType.drop () ;
   mAttribute_mPanicLineLLVMType.drop () ;
+  mAttribute_mGeneratePanicForISR.drop () ;
   mAttribute_mGlobalTaskVariableList.drop () ;
   mAttribute_mAvailableInterruptMap.drop () ;
 }
@@ -5125,6 +5148,8 @@ void GALGAS_generationContext::description (C_String & ioString,
     mAttribute_mPanicCodeLLVMType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mPanicLineLLVMType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mGeneratePanicForISR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -5143,6 +5168,12 @@ GALGAS_string GALGAS_generationContext::getter_mPanicCodeLLVMType (UNUSED_LOCATI
 
 GALGAS_string GALGAS_generationContext::getter_mPanicLineLLVMType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPanicLineLLVMType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_generationContext::getter_mGeneratePanicForISR (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGeneratePanicForISR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9108,6 +9139,7 @@ GALGAS_string extensionGetter_passingModeForActualSelector (const GALGAS_effecti
 
 GALGAS_semanticContext::GALGAS_semanticContext (void) :
 mAttribute_mPointerSize (),
+mAttribute_mGeneratePanicForISR (),
 mAttribute_mBooleanType (),
 mAttribute_mLiteralIntegerType (),
 mAttribute_mPanicCodeType (),
@@ -9162,24 +9194,24 @@ GALGAS_semanticContext::~ GALGAS_semanticContext (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_uint & inOperand0,
-                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                const GALGAS_bool & inOperand1,
                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
-                                                const GALGAS_unifiedTypeMap & inOperand5,
-                                                const GALGAS_routineMapForContext & inOperand6,
-                                                const GALGAS_guardMapForContext & inOperand7,
-                                                const GALGAS_initRoutineMap & inOperand8,
-                                                const GALGAS_panicRoutinePriorityMap & inOperand9,
+                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
+                                                const GALGAS_unifiedTypeMap & inOperand6,
+                                                const GALGAS_routineMapForContext & inOperand7,
+                                                const GALGAS_guardMapForContext & inOperand8,
+                                                const GALGAS_initRoutineMap & inOperand9,
                                                 const GALGAS_panicRoutinePriorityMap & inOperand10,
-                                                const GALGAS_controlRegisterMap & inOperand11,
-                                                const GALGAS_globalConstantMap & inOperand12,
-                                                const GALGAS_globalVariableMap & inOperand13,
-                                                const GALGAS_constructorMap & inOperand14,
-                                                const GALGAS_modeMap & inOperand15,
-                                                const GALGAS_stringset & inOperand16,
-                                                const GALGAS_availableInterruptMap & inOperand17,
-                                                const GALGAS_infixOperatorMap & inOperand18,
+                                                const GALGAS_panicRoutinePriorityMap & inOperand11,
+                                                const GALGAS_controlRegisterMap & inOperand12,
+                                                const GALGAS_globalConstantMap & inOperand13,
+                                                const GALGAS_globalVariableMap & inOperand14,
+                                                const GALGAS_constructorMap & inOperand15,
+                                                const GALGAS_modeMap & inOperand16,
+                                                const GALGAS_stringset & inOperand17,
+                                                const GALGAS_availableInterruptMap & inOperand18,
                                                 const GALGAS_infixOperatorMap & inOperand19,
                                                 const GALGAS_infixOperatorMap & inOperand20,
                                                 const GALGAS_infixOperatorMap & inOperand21,
@@ -9201,62 +9233,65 @@ GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_uint & inOperand0,
                                                 const GALGAS_infixOperatorMap & inOperand37,
                                                 const GALGAS_infixOperatorMap & inOperand38,
                                                 const GALGAS_infixOperatorMap & inOperand39,
-                                                const GALGAS_prefixOperatorMap & inOperand40,
+                                                const GALGAS_infixOperatorMap & inOperand40,
                                                 const GALGAS_prefixOperatorMap & inOperand41,
                                                 const GALGAS_prefixOperatorMap & inOperand42,
-                                                const GALGAS_taskMap & inOperand43,
-                                                const GALGAS_globalTaskVariableList & inOperand44) :
+                                                const GALGAS_prefixOperatorMap & inOperand43,
+                                                const GALGAS_taskMap & inOperand44,
+                                                const GALGAS_globalTaskVariableList & inOperand45) :
 mAttribute_mPointerSize (inOperand0),
-mAttribute_mBooleanType (inOperand1),
-mAttribute_mLiteralIntegerType (inOperand2),
-mAttribute_mPanicCodeType (inOperand3),
-mAttribute_mPanicLineType (inOperand4),
-mAttribute_mTypeMap (inOperand5),
-mAttribute_mRoutineMapForContext (inOperand6),
-mAttribute_mGuardMapForContext (inOperand7),
-mAttribute_mInitRoutineMap (inOperand8),
-mAttribute_mPanicSetupRoutinePriorityMap (inOperand9),
-mAttribute_mPanicLoopRoutinePriorityMap (inOperand10),
-mAttribute_mControlRegisterMap (inOperand11),
-mAttribute_mGlobalConstantMap (inOperand12),
-mAttribute_mGlobalVariableMap (inOperand13),
-mAttribute_mConstructorMap (inOperand14),
-mAttribute_mModeMap (inOperand15),
-mAttribute_mDefinedInterruptSet (inOperand16),
-mAttribute_mAvailableInterruptMap (inOperand17),
-mAttribute_mEqualOperatorMap (inOperand18),
-mAttribute_mNonEqualOperatorMap (inOperand19),
-mAttribute_mStrictInfOperatorMap (inOperand20),
-mAttribute_mInfEqualOperatorMap (inOperand21),
-mAttribute_mStrictSupOperatorMap (inOperand22),
-mAttribute_mSupEqualOperatorMap (inOperand23),
-mAttribute_mAndOperatorMap (inOperand24),
-mAttribute_mOrOperatorMap (inOperand25),
-mAttribute_mXorOperatorMap (inOperand26),
-mAttribute_mBooleanXorOperatorMap (inOperand27),
-mAttribute_mAddOperatorMap (inOperand28),
-mAttribute_mAddNoOvfOperatorMap (inOperand29),
-mAttribute_mSubOperatorMap (inOperand30),
-mAttribute_mSubNoOvfOperatorMap (inOperand31),
-mAttribute_mMulOperatorMap (inOperand32),
-mAttribute_mMulNoOvfOperatorMap (inOperand33),
-mAttribute_mDivOperatorMap (inOperand34),
-mAttribute_mDivNoOvfOperatorMap (inOperand35),
-mAttribute_mModOperatorMap (inOperand36),
-mAttribute_mModNoOvfOperatorMap (inOperand37),
-mAttribute_mLeftShiftOperatorMap (inOperand38),
-mAttribute_mRightShiftOperatorMap (inOperand39),
-mAttribute_mUnaryMinusOperatorMap (inOperand40),
-mAttribute_mNotOperatorMap (inOperand41),
-mAttribute_mUnsignedComplementOperatorMap (inOperand42),
-mAttribute_mTaskMap (inOperand43),
-mAttribute_mGlobalTaskVariableList (inOperand44) {
+mAttribute_mGeneratePanicForISR (inOperand1),
+mAttribute_mBooleanType (inOperand2),
+mAttribute_mLiteralIntegerType (inOperand3),
+mAttribute_mPanicCodeType (inOperand4),
+mAttribute_mPanicLineType (inOperand5),
+mAttribute_mTypeMap (inOperand6),
+mAttribute_mRoutineMapForContext (inOperand7),
+mAttribute_mGuardMapForContext (inOperand8),
+mAttribute_mInitRoutineMap (inOperand9),
+mAttribute_mPanicSetupRoutinePriorityMap (inOperand10),
+mAttribute_mPanicLoopRoutinePriorityMap (inOperand11),
+mAttribute_mControlRegisterMap (inOperand12),
+mAttribute_mGlobalConstantMap (inOperand13),
+mAttribute_mGlobalVariableMap (inOperand14),
+mAttribute_mConstructorMap (inOperand15),
+mAttribute_mModeMap (inOperand16),
+mAttribute_mDefinedInterruptSet (inOperand17),
+mAttribute_mAvailableInterruptMap (inOperand18),
+mAttribute_mEqualOperatorMap (inOperand19),
+mAttribute_mNonEqualOperatorMap (inOperand20),
+mAttribute_mStrictInfOperatorMap (inOperand21),
+mAttribute_mInfEqualOperatorMap (inOperand22),
+mAttribute_mStrictSupOperatorMap (inOperand23),
+mAttribute_mSupEqualOperatorMap (inOperand24),
+mAttribute_mAndOperatorMap (inOperand25),
+mAttribute_mOrOperatorMap (inOperand26),
+mAttribute_mXorOperatorMap (inOperand27),
+mAttribute_mBooleanXorOperatorMap (inOperand28),
+mAttribute_mAddOperatorMap (inOperand29),
+mAttribute_mAddNoOvfOperatorMap (inOperand30),
+mAttribute_mSubOperatorMap (inOperand31),
+mAttribute_mSubNoOvfOperatorMap (inOperand32),
+mAttribute_mMulOperatorMap (inOperand33),
+mAttribute_mMulNoOvfOperatorMap (inOperand34),
+mAttribute_mDivOperatorMap (inOperand35),
+mAttribute_mDivNoOvfOperatorMap (inOperand36),
+mAttribute_mModOperatorMap (inOperand37),
+mAttribute_mModNoOvfOperatorMap (inOperand38),
+mAttribute_mLeftShiftOperatorMap (inOperand39),
+mAttribute_mRightShiftOperatorMap (inOperand40),
+mAttribute_mUnaryMinusOperatorMap (inOperand41),
+mAttribute_mNotOperatorMap (inOperand42),
+mAttribute_mUnsignedComplementOperatorMap (inOperand43),
+mAttribute_mTaskMap (inOperand44),
+mAttribute_mGlobalTaskVariableList (inOperand45) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_semanticContext (GALGAS_uint::constructor_default (HERE),
+                                 GALGAS_bool::constructor_default (HERE),
                                  GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
                                  GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
                                  GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
@@ -9306,24 +9341,24 @@ GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCAT
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_uint & inOperand0,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                const GALGAS_bool & inOperand1,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
-                                                                const GALGAS_unifiedTypeMap & inOperand5,
-                                                                const GALGAS_routineMapForContext & inOperand6,
-                                                                const GALGAS_guardMapForContext & inOperand7,
-                                                                const GALGAS_initRoutineMap & inOperand8,
-                                                                const GALGAS_panicRoutinePriorityMap & inOperand9,
+                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
+                                                                const GALGAS_unifiedTypeMap & inOperand6,
+                                                                const GALGAS_routineMapForContext & inOperand7,
+                                                                const GALGAS_guardMapForContext & inOperand8,
+                                                                const GALGAS_initRoutineMap & inOperand9,
                                                                 const GALGAS_panicRoutinePriorityMap & inOperand10,
-                                                                const GALGAS_controlRegisterMap & inOperand11,
-                                                                const GALGAS_globalConstantMap & inOperand12,
-                                                                const GALGAS_globalVariableMap & inOperand13,
-                                                                const GALGAS_constructorMap & inOperand14,
-                                                                const GALGAS_modeMap & inOperand15,
-                                                                const GALGAS_stringset & inOperand16,
-                                                                const GALGAS_availableInterruptMap & inOperand17,
-                                                                const GALGAS_infixOperatorMap & inOperand18,
+                                                                const GALGAS_panicRoutinePriorityMap & inOperand11,
+                                                                const GALGAS_controlRegisterMap & inOperand12,
+                                                                const GALGAS_globalConstantMap & inOperand13,
+                                                                const GALGAS_globalVariableMap & inOperand14,
+                                                                const GALGAS_constructorMap & inOperand15,
+                                                                const GALGAS_modeMap & inOperand16,
+                                                                const GALGAS_stringset & inOperand17,
+                                                                const GALGAS_availableInterruptMap & inOperand18,
                                                                 const GALGAS_infixOperatorMap & inOperand19,
                                                                 const GALGAS_infixOperatorMap & inOperand20,
                                                                 const GALGAS_infixOperatorMap & inOperand21,
@@ -9345,15 +9380,16 @@ GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_uin
                                                                 const GALGAS_infixOperatorMap & inOperand37,
                                                                 const GALGAS_infixOperatorMap & inOperand38,
                                                                 const GALGAS_infixOperatorMap & inOperand39,
-                                                                const GALGAS_prefixOperatorMap & inOperand40,
+                                                                const GALGAS_infixOperatorMap & inOperand40,
                                                                 const GALGAS_prefixOperatorMap & inOperand41,
                                                                 const GALGAS_prefixOperatorMap & inOperand42,
-                                                                const GALGAS_taskMap & inOperand43,
-                                                                const GALGAS_globalTaskVariableList & inOperand44 
+                                                                const GALGAS_prefixOperatorMap & inOperand43,
+                                                                const GALGAS_taskMap & inOperand44,
+                                                                const GALGAS_globalTaskVariableList & inOperand45 
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_semanticContext result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid () && inOperand32.isValid () && inOperand33.isValid () && inOperand34.isValid () && inOperand35.isValid () && inOperand36.isValid () && inOperand37.isValid () && inOperand38.isValid () && inOperand39.isValid () && inOperand40.isValid () && inOperand41.isValid () && inOperand42.isValid () && inOperand43.isValid () && inOperand44.isValid ()) {
-    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31, inOperand32, inOperand33, inOperand34, inOperand35, inOperand36, inOperand37, inOperand38, inOperand39, inOperand40, inOperand41, inOperand42, inOperand43, inOperand44) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid () && inOperand32.isValid () && inOperand33.isValid () && inOperand34.isValid () && inOperand35.isValid () && inOperand36.isValid () && inOperand37.isValid () && inOperand38.isValid () && inOperand39.isValid () && inOperand40.isValid () && inOperand41.isValid () && inOperand42.isValid () && inOperand43.isValid () && inOperand44.isValid () && inOperand45.isValid ()) {
+    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31, inOperand32, inOperand33, inOperand34, inOperand35, inOperand36, inOperand37, inOperand38, inOperand39, inOperand40, inOperand41, inOperand42, inOperand43, inOperand44, inOperand45) ;
   }
   return result ;
 }
@@ -9364,6 +9400,9 @@ typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanti
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAttribute_mPointerSize.objectCompare (inOperand.mAttribute_mPointerSize) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mGeneratePanicForISR.objectCompare (inOperand.mAttribute_mGeneratePanicForISR) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mBooleanType.objectCompare (inOperand.mAttribute_mBooleanType) ;
@@ -9503,13 +9542,14 @@ typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanti
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_semanticContext::isValid (void) const {
-  return mAttribute_mPointerSize.isValid () && mAttribute_mBooleanType.isValid () && mAttribute_mLiteralIntegerType.isValid () && mAttribute_mPanicCodeType.isValid () && mAttribute_mPanicLineType.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mRoutineMapForContext.isValid () && mAttribute_mGuardMapForContext.isValid () && mAttribute_mInitRoutineMap.isValid () && mAttribute_mPanicSetupRoutinePriorityMap.isValid () && mAttribute_mPanicLoopRoutinePriorityMap.isValid () && mAttribute_mControlRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mConstructorMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mDefinedInterruptSet.isValid () && mAttribute_mAvailableInterruptMap.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mBooleanXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mModNoOvfOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () && mAttribute_mNotOperatorMap.isValid () && mAttribute_mUnsignedComplementOperatorMap.isValid () && mAttribute_mTaskMap.isValid () && mAttribute_mGlobalTaskVariableList.isValid () ;
+  return mAttribute_mPointerSize.isValid () && mAttribute_mGeneratePanicForISR.isValid () && mAttribute_mBooleanType.isValid () && mAttribute_mLiteralIntegerType.isValid () && mAttribute_mPanicCodeType.isValid () && mAttribute_mPanicLineType.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mRoutineMapForContext.isValid () && mAttribute_mGuardMapForContext.isValid () && mAttribute_mInitRoutineMap.isValid () && mAttribute_mPanicSetupRoutinePriorityMap.isValid () && mAttribute_mPanicLoopRoutinePriorityMap.isValid () && mAttribute_mControlRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mConstructorMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mDefinedInterruptSet.isValid () && mAttribute_mAvailableInterruptMap.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mBooleanXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mModNoOvfOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () && mAttribute_mNotOperatorMap.isValid () && mAttribute_mUnsignedComplementOperatorMap.isValid () && mAttribute_mTaskMap.isValid () && mAttribute_mGlobalTaskVariableList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_semanticContext::drop (void) {
   mAttribute_mPointerSize.drop () ;
+  mAttribute_mGeneratePanicForISR.drop () ;
   mAttribute_mBooleanType.drop () ;
   mAttribute_mLiteralIntegerType.drop () ;
   mAttribute_mPanicCodeType.drop () ;
@@ -9565,6 +9605,8 @@ void GALGAS_semanticContext::description (C_String & ioString,
     ioString << " not built" ;
   }else{
     mAttribute_mPointerSize.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mGeneratePanicForISR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mBooleanType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -9661,6 +9703,12 @@ void GALGAS_semanticContext::description (C_String & ioString,
 
 GALGAS_uint GALGAS_semanticContext::getter_mPointerSize (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPointerSize ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_semanticContext::getter_mGeneratePanicForISR (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGeneratePanicForISR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11355,6 +11403,7 @@ GALGAS_configurationDeclarationList_2D_element::GALGAS_configurationDeclarationL
 mAttribute_mPointerSize (),
 mAttribute_mPanicCodeTypeName (),
 mAttribute_mPanicLineTypeName (),
+mAttribute_mPanicGenerationForISR (),
 mAttribute_mInterruptionConfigurationList () {
 }
 
@@ -11368,17 +11417,20 @@ GALGAS_configurationDeclarationList_2D_element::~ GALGAS_configurationDeclaratio
 GALGAS_configurationDeclarationList_2D_element::GALGAS_configurationDeclarationList_2D_element (const GALGAS_lbigint & inOperand0,
                                                                                                 const GALGAS_lstring & inOperand1,
                                                                                                 const GALGAS_lstring & inOperand2,
-                                                                                                const GALGAS_interruptionConfigurationList & inOperand3) :
+                                                                                                const GALGAS_lstring & inOperand3,
+                                                                                                const GALGAS_interruptionConfigurationList & inOperand4) :
 mAttribute_mPointerSize (inOperand0),
 mAttribute_mPanicCodeTypeName (inOperand1),
 mAttribute_mPanicLineTypeName (inOperand2),
-mAttribute_mInterruptionConfigurationList (inOperand3) {
+mAttribute_mPanicGenerationForISR (inOperand3),
+mAttribute_mInterruptionConfigurationList (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_configurationDeclarationList_2D_element GALGAS_configurationDeclarationList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_configurationDeclarationList_2D_element (GALGAS_lbigint::constructor_default (HERE),
+                                                         GALGAS_lstring::constructor_default (HERE),
                                                          GALGAS_lstring::constructor_default (HERE),
                                                          GALGAS_lstring::constructor_default (HERE),
                                                          GALGAS_interruptionConfigurationList::constructor_emptyList (HERE)) ;
@@ -11389,11 +11441,12 @@ GALGAS_configurationDeclarationList_2D_element GALGAS_configurationDeclarationLi
 GALGAS_configurationDeclarationList_2D_element GALGAS_configurationDeclarationList_2D_element::constructor_new (const GALGAS_lbigint & inOperand0,
                                                                                                                 const GALGAS_lstring & inOperand1,
                                                                                                                 const GALGAS_lstring & inOperand2,
-                                                                                                                const GALGAS_interruptionConfigurationList & inOperand3 
+                                                                                                                const GALGAS_lstring & inOperand3,
+                                                                                                                const GALGAS_interruptionConfigurationList & inOperand4 
                                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_configurationDeclarationList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_configurationDeclarationList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_configurationDeclarationList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
   }
   return result ;
 }
@@ -11412,6 +11465,9 @@ typeComparisonResult GALGAS_configurationDeclarationList_2D_element::objectCompa
     result = mAttribute_mPanicLineTypeName.objectCompare (inOperand.mAttribute_mPanicLineTypeName) ;
   }
   if (result == kOperandEqual) {
+    result = mAttribute_mPanicGenerationForISR.objectCompare (inOperand.mAttribute_mPanicGenerationForISR) ;
+  }
+  if (result == kOperandEqual) {
     result = mAttribute_mInterruptionConfigurationList.objectCompare (inOperand.mAttribute_mInterruptionConfigurationList) ;
   }
   return result ;
@@ -11420,7 +11476,7 @@ typeComparisonResult GALGAS_configurationDeclarationList_2D_element::objectCompa
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_configurationDeclarationList_2D_element::isValid (void) const {
-  return mAttribute_mPointerSize.isValid () && mAttribute_mPanicCodeTypeName.isValid () && mAttribute_mPanicLineTypeName.isValid () && mAttribute_mInterruptionConfigurationList.isValid () ;
+  return mAttribute_mPointerSize.isValid () && mAttribute_mPanicCodeTypeName.isValid () && mAttribute_mPanicLineTypeName.isValid () && mAttribute_mPanicGenerationForISR.isValid () && mAttribute_mInterruptionConfigurationList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11429,6 +11485,7 @@ void GALGAS_configurationDeclarationList_2D_element::drop (void) {
   mAttribute_mPointerSize.drop () ;
   mAttribute_mPanicCodeTypeName.drop () ;
   mAttribute_mPanicLineTypeName.drop () ;
+  mAttribute_mPanicGenerationForISR.drop () ;
   mAttribute_mInterruptionConfigurationList.drop () ;
 }
 
@@ -11445,6 +11502,8 @@ void GALGAS_configurationDeclarationList_2D_element::description (C_String & ioS
     mAttribute_mPanicCodeTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mPanicLineTypeName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mPanicGenerationForISR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mInterruptionConfigurationList.description (ioString, inIndentation+1) ;
   }
@@ -11467,6 +11526,12 @@ GALGAS_lstring GALGAS_configurationDeclarationList_2D_element::getter_mPanicCode
 
 GALGAS_lstring GALGAS_configurationDeclarationList_2D_element::getter_mPanicLineTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPanicLineTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_configurationDeclarationList_2D_element::getter_mPanicGenerationForISR (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mPanicGenerationForISR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
