@@ -312,6 +312,21 @@ private proc generateLLVMfile
     ]
     llvmCode += "  br label %panic.loop\n"
     llvmCode += "}\n\n"
+  #--- Panic for isr
+    [!?generationAdds.mStaticStringMap findOrAddStaticString
+      !"-"
+      ?let staticStringIndex
+    ]
+    llvmCode += llvmTitleComment (!"Panic for ISR")
+    llvmCode += "define internal void @panic.isr (" + generationContext.mPanicCodeLLVMType + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
+    llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
+    llvmCode += "  call void @raise_panic_internal ("    
+    llvmCode += generationContext.mPanicLineLLVMType + " 0, "
+    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
+    llvmCode += "i8* %str.FILE"
+    llvmCode += " )\n"    
+    llvmCode += "  unreachable\n"    
+    llvmCode += "}\n\n"    
   #--- File specific routines
     for (filePath) in inSourceFileAbsolutePathSet do
       [!?generationAdds.mStaticStringMap findOrAddStaticString

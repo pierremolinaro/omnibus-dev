@@ -56,10 +56,20 @@ openOCDProcess = subprocess.Popen (openOCD, cwd=scriptDir)
 #--- Wait for openOCD is listening on port 4444
 time.sleep (1)
 #print ("openOCD pid: ", openOCDProcess.pid)
-#--- Read script file
-f = open (scriptDir + "/sources/external-ram.openOCD", 'r')
-content = f.read ()
-f.close ()
+#--- OpenOCD Script
+openOCDScript  = "reset halt\n"
+openOCDScript += "mww 0xE01FC040 0\n"
+openOCDScript += "mdw 0xE01FC040\n"
+openOCDScript += "mww 0xE002C014 0x0F804924\n"
+openOCDScript += "mdw 0xE002C014\n"
+openOCDScript += "mww 0xFFE00004 0x20000400\n"
+openOCDScript += "mdw 0xFFE00004\n"
+openOCDScript += "load_image product/product-linker.elf\n"
+openOCDScript += "mww 0xE01FC040 2\n"
+openOCDScript += "mdw 0xE01FC040\n"
+openOCDScript += "soft_reset_halt\n"
+openOCDScript += "resume\n"
+openOCDScript += "shutdown\n"
 #--- 
 client = socket.socket (socket.AF_INET, socket.SOCK_STREAM)
 ok = False
@@ -67,7 +77,7 @@ if openOCDProcess.poll () == None :
   try:
     client.connect (('localhost', 4444))
     try:
-      client.send (content)
+      client.send (openOCDScript)
       ok = True
     except:
       print ("Cannot send data")

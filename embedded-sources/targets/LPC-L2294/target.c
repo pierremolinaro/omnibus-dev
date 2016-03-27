@@ -11,9 +11,9 @@ static unsigned gSlotID ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void installInterruptServiceRoutine (void irq_routine (void), const unsigned inSourceID) {
+static void installInterruptServiceRoutine (const unsigned irq_routine, const unsigned inSourceID) {
 //---
-  VICVect (gSlotID) = (unsigned) irq_routine ;
+  VICVect (gSlotID) = irq_routine ;
   VICVectCntl (gSlotID) = 0x20 | inSourceID ;
 //---
   VICIntEnClr   = 1 << inSourceID ;
@@ -24,12 +24,16 @@ static void installInterruptServiceRoutine (void irq_routine (void), const unsig
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void interrupt5 (void) asm ("!FUNC!.interrupt5") ;
+extern unsigned __plm_interrupt_vectors [30] ;
 
 void installInterrupts (void) ;
 
 void installInterrupts (void) {
-  installInterruptServiceRoutine (interrupt5, 5) ;
+  for (unsigned i=0 ; i<30 ; i++) {
+    if (__plm_interrupt_vectors [i] != 0) {
+      installInterruptServiceRoutine (__plm_interrupt_vectors [i], i) ;
+    }
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

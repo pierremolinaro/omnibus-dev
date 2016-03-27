@@ -76,7 +76,7 @@ init 100 {
 //-----------------------------------------------------------------------------*
 
 var gUptimeMS $uint32 = 0 {
-  @rw func interrupt5
+  @rw isr TIMER1
   func millis
 }
 
@@ -88,9 +88,7 @@ func `service `kernel `user millis @noWarningIfUnused () -> $uint32 {
 
 //-----------------------------------------------------------------------------*
 
-required func `service interrupt5 ()
-
-func `service interrupt5 @global () {
+isr TIMER1 @xtr {
   TIMER1_IR = 1 // Clears MR0 interrupt
   let now = gUptimeMS +% 1
   gUptimeMS = now

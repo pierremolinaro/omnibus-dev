@@ -10167,64 +10167,79 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
     var_llvmCode.plusAssign_operation(GALGAS_string ("  br label %panic.loop\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 313)) ;
     var_llvmCode.plusAssign_operation(GALGAS_string ("}\n"
       "\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 314)) ;
-    cEnumerator_stringset enumerator_13610 (constinArgument_inSourceFileAbsolutePathSet, kEnumeration_up) ;
-    while (enumerator_13610.hasCurrentObject ()) {
+    GALGAS_uint var_staticStringIndex ;
+    {
+    categoryModifier_findOrAddStaticString (var_generationAdds.mAttribute_mStaticStringMap, GALGAS_string ("-"), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 316)) ;
+    }
+    var_llvmCode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Panic for ISR"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 320)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 320)) ;
+    var_llvmCode.plusAssign_operation(GALGAS_string ("define internal void @panic.isr (").add_operation (var_generationContext.mAttribute_mPanicCodeLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)).add_operation (GALGAS_string (" %in.CODE) "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)).add_operation (GALGAS_string ("noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 321)) ;
+    var_llvmCode.plusAssign_operation(GALGAS_string ("  %str.FILE = load i8*, i8** @string.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("code-generation.galgas", 322)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 322)) ;
+    var_llvmCode.plusAssign_operation(GALGAS_string ("  call void @raise_panic_internal ("), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 323)) ;
+    var_llvmCode.plusAssign_operation(var_generationContext.mAttribute_mPanicLineLLVMType.add_operation (GALGAS_string (" 0, "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 324)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 324)) ;
+    var_llvmCode.plusAssign_operation(var_generationContext.mAttribute_mPanicCodeLLVMType.add_operation (GALGAS_string (" %in.CODE, "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 325)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 325)) ;
+    var_llvmCode.plusAssign_operation(GALGAS_string ("i8* %str.FILE"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 326)) ;
+    var_llvmCode.plusAssign_operation(GALGAS_string (" )\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 327)) ;
+    var_llvmCode.plusAssign_operation(GALGAS_string ("  unreachable\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 328)) ;
+    var_llvmCode.plusAssign_operation(GALGAS_string ("}\n"
+      "\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 329)) ;
+    cEnumerator_stringset enumerator_14338 (constinArgument_inSourceFileAbsolutePathSet, kEnumeration_up) ;
+    while (enumerator_14338.hasCurrentObject ()) {
       GALGAS_uint var_staticStringIndex ;
       {
-      categoryModifier_findOrAddStaticString (var_generationAdds.mAttribute_mStaticStringMap, enumerator_13610.current_key (HERE).getter_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 318)).getter_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 318)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 317)) ;
+      categoryModifier_findOrAddStaticString (var_generationAdds.mAttribute_mStaticStringMap, enumerator_14338.current_key (HERE).getter_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 333)).getter_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 333)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 332)) ;
       }
-      GALGAS_string var_routineName = GALGAS_string ("@raise_panic.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("code-generation.galgas", 321)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 321)) ;
-      var_llvmCode.plusAssign_operation(function_llvmTitleComment (var_routineName.add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)).add_operation (enumerator_13610.current_key (HERE).getter_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 322)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 322)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 322)) ;
-      var_llvmCode.plusAssign_operation(GALGAS_string ("define internal void ").add_operation (var_routineName, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 323)).add_operation (GALGAS_string (" (i32 %inSourceLine, i32 %inCode)"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 323)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 323)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 323)).add_operation (GALGAS_string ("noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 323)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 323)) ;
-      var_llvmCode.plusAssign_operation(GALGAS_string ("  %str.FILE = load i8*, i8** @string.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("code-generation.galgas", 324)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 324)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 324)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 324)) ;
-      var_llvmCode.plusAssign_operation(GALGAS_string ("  call void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 325)) ;
-      var_llvmCode.plusAssign_operation(GALGAS_string ("  unreachable\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 326)) ;
+      GALGAS_string var_routineName = GALGAS_string ("@raise_panic.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("code-generation.galgas", 336)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 336)) ;
+      var_llvmCode.plusAssign_operation(function_llvmTitleComment (var_routineName.add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 337)).add_operation (enumerator_14338.current_key (HERE).getter_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 337)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 337)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 337)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 337)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 337)) ;
+      var_llvmCode.plusAssign_operation(GALGAS_string ("define internal void ").add_operation (var_routineName, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 338)).add_operation (GALGAS_string (" (i32 %inSourceLine, i32 %inCode)"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 338)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 338)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 338)).add_operation (GALGAS_string ("noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 338)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 338)) ;
+      var_llvmCode.plusAssign_operation(GALGAS_string ("  %str.FILE = load i8*, i8** @string.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("code-generation.galgas", 339)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 339)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 339)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 339)) ;
+      var_llvmCode.plusAssign_operation(GALGAS_string ("  call void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 340)) ;
+      var_llvmCode.plusAssign_operation(GALGAS_string ("  unreachable\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 341)) ;
       var_llvmCode.plusAssign_operation(GALGAS_string ("}\n"
-        "\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 327)) ;
-      enumerator_13610.gotoNextObject () ;
+        "\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 342)) ;
+      enumerator_14338.gotoNextObject () ;
     }
   }
-  categoryMethod_generateCode (constinArgument_inIntermediateCodeStruct.mAttribute_mTaskMapIR, var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 331)) ;
-  const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mExternFunctionDeclarationSet.getter_count (SOURCE_FILE ("code-generation.galgas", 333)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  categoryMethod_generateCode (constinArgument_inIntermediateCodeStruct.mAttribute_mTaskMapIR, var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 346)) ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mExternFunctionDeclarationSet.getter_count (SOURCE_FILE ("code-generation.galgas", 348)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    var_llvmCode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("LLVM extern functions"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 334)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 334)) ;
-    cEnumerator_stringset enumerator_14723 (var_generationAdds.mAttribute_mExternFunctionDeclarationSet, kEnumeration_up) ;
-    while (enumerator_14723.hasCurrentObject ()) {
-      var_llvmCode.plusAssign_operation(enumerator_14723.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 336)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 336)) ;
-      enumerator_14723.gotoNextObject () ;
+    var_llvmCode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("LLVM extern functions"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 349)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 349)) ;
+    cEnumerator_stringset enumerator_15451 (var_generationAdds.mAttribute_mExternFunctionDeclarationSet, kEnumeration_up) ;
+    while (enumerator_15451.hasCurrentObject ()) {
+      var_llvmCode.plusAssign_operation(enumerator_15451.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 351)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 351)) ;
+      enumerator_15451.gotoNextObject () ;
     }
-    var_llvmCode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 338)) ;
+    var_llvmCode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 353)) ;
   }
-  const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mStaticStringMap.getter_count (SOURCE_FILE ("code-generation.galgas", 341)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mStaticStringMap.getter_count (SOURCE_FILE ("code-generation.galgas", 356)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
-    var_llvmCode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Static strings"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 342)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 342)) ;
-    cEnumerator_staticStringMap enumerator_14999 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
-    while (enumerator_14999.hasCurrentObject ()) {
-      GALGAS_string var_lgStr = enumerator_14999.current_lkey (HERE).mAttribute_string.getter_length (SOURCE_FILE ("code-generation.galgas", 344)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 344)).getter_string (SOURCE_FILE ("code-generation.galgas", 344)) ;
-      var_llvmCode.plusAssign_operation(function_literalCharacterArrayName (enumerator_14999.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 345)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 345)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 345)) ;
-      var_llvmCode.plusAssign_operation(var_lgStr.add_operation (GALGAS_string (" x i8] c\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 346)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 346)) ;
-      var_llvmCode.plusAssign_operation(enumerator_14999.current_lkey (HERE).mAttribute_string.getter_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 347)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 347)) ;
-      var_llvmCode.plusAssign_operation(GALGAS_string ("\\00\", align 1\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 348)) ;
-      var_llvmCode.plusAssign_operation(function_literalStringName (enumerator_14999.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 349)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 349)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 349)) ;
-      var_llvmCode.plusAssign_operation(var_lgStr.add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 350)).add_operation (var_lgStr, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 350)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 350)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 350)) ;
-      var_llvmCode.plusAssign_operation(function_literalCharacterArrayName (enumerator_14999.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 351)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
-        "\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 351)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 351)) ;
-      enumerator_14999.gotoNextObject () ;
+    var_llvmCode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Static strings"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 357)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 357)) ;
+    cEnumerator_staticStringMap enumerator_15727 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
+    while (enumerator_15727.hasCurrentObject ()) {
+      GALGAS_string var_lgStr = enumerator_15727.current_lkey (HERE).mAttribute_string.getter_length (SOURCE_FILE ("code-generation.galgas", 359)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 359)).getter_string (SOURCE_FILE ("code-generation.galgas", 359)) ;
+      var_llvmCode.plusAssign_operation(function_literalCharacterArrayName (enumerator_15727.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 360)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 360)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 360)) ;
+      var_llvmCode.plusAssign_operation(var_lgStr.add_operation (GALGAS_string (" x i8] c\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 361)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 361)) ;
+      var_llvmCode.plusAssign_operation(enumerator_15727.current_lkey (HERE).mAttribute_string.getter_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 362)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 362)) ;
+      var_llvmCode.plusAssign_operation(GALGAS_string ("\\00\", align 1\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 363)) ;
+      var_llvmCode.plusAssign_operation(function_literalStringName (enumerator_15727.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 364)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 364)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 364)) ;
+      var_llvmCode.plusAssign_operation(var_lgStr.add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 365)).add_operation (var_lgStr, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 365)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 365)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 365)) ;
+      var_llvmCode.plusAssign_operation(function_literalCharacterArrayName (enumerator_15727.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 366)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
+        "\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 366)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 366)) ;
+      enumerator_15727.gotoNextObject () ;
     }
   }
-  var_llvmCode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 355)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 355)) ;
-  GALGAS_bool joker_15722 ; // Joker input parameter
-  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 356)), joker_15722, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 356)) ;
-  var_asCode.plusAssign_operation(function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 358)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 358)) ;
-  GALGAS_bool joker_15893 ; // Joker input parameter
-  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 359)), joker_15893, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 359)) ;
-  GALGAS_string var_cCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 363)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 361)) ;
-  GALGAS_string var_s_31_ = var_cCode.getter_stringByReplacingStringByString (GALGAS_string ("!TASKCOUNT!"), constinArgument_inIntermediateCodeStruct.mAttribute_mTaskMapIR.getter_count (SOURCE_FILE ("code-generation.galgas", 365)).getter_string (SOURCE_FILE ("code-generation.galgas", 365)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 365)) ;
-  GALGAS_string var_s_32_ = var_s_31_.getter_stringByReplacingStringByString (GALGAS_string ("!GUARDCOUNT!"), constinArgument_inIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions.getter_string (SOURCE_FILE ("code-generation.galgas", 366)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 366)) ;
-  GALGAS_string var_s_33_ = var_s_32_.getter_stringByReplacingStringByString (GALGAS_string ("!FUNC!"), function_llvmNameForFunction (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 367)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 367)) ;
-  GALGAS_bool joker_16469 ; // Joker input parameter
-  var_s_33_.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 368)), joker_16469, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 368)) ;
-  const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 370)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  var_llvmCode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 370)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 370)) ;
+  GALGAS_bool joker_16450 ; // Joker input parameter
+  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 371)), joker_16450, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 371)) ;
+  var_asCode.plusAssign_operation(function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 373)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 373)) ;
+  GALGAS_bool joker_16621 ; // Joker input parameter
+  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 374)), joker_16621, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 374)) ;
+  GALGAS_string var_cCode = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 378)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 376)) ;
+  GALGAS_string var_s_31_ = var_cCode.getter_stringByReplacingStringByString (GALGAS_string ("!TASKCOUNT!"), constinArgument_inIntermediateCodeStruct.mAttribute_mTaskMapIR.getter_count (SOURCE_FILE ("code-generation.galgas", 380)).getter_string (SOURCE_FILE ("code-generation.galgas", 380)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 380)) ;
+  GALGAS_string var_s_32_ = var_s_31_.getter_stringByReplacingStringByString (GALGAS_string ("!GUARDCOUNT!"), constinArgument_inIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions.getter_string (SOURCE_FILE ("code-generation.galgas", 381)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 381)) ;
+  GALGAS_string var_s_33_ = var_s_32_.getter_stringByReplacingStringByString (GALGAS_string ("!FUNC!"), function_llvmNameForFunction (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 382)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 382)) ;
+  GALGAS_bool joker_17197 ; // Joker input parameter
+  var_s_33_.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 383)), joker_17197, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 383)) ;
+  const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 385)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_5) {
     GALGAS_string temp_6 ;
     const enumGalgasBool test_7 = GALGAS_bool (gOption_plm_5F_options_performFlashing.getter_value ()).boolEnum () ;
@@ -10234,11 +10249,11 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
       temp_6 = GALGAS_string ("build") ;
     }
     GALGAS_string var_script = temp_6 ;
-    GALGAS_string var_fullScript = GALGAS_string ("python ").add_operation (constinArgument_inProductDirectory, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 372)).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 372)).add_operation (var_script, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 372)).add_operation (GALGAS_string (".py"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 372)) ;
-    GALGAS_sint var_result = var_fullScript.getter_system (SOURCE_FILE ("code-generation.galgas", 373)) ;
+    GALGAS_string var_fullScript = GALGAS_string ("python ").add_operation (constinArgument_inProductDirectory, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 387)).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 387)).add_operation (var_script, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 387)).add_operation (GALGAS_string (".py"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 387)) ;
+    GALGAS_sint var_result = var_fullScript.getter_system (SOURCE_FILE ("code-generation.galgas", 388)) ;
     const enumGalgasBool test_8 = GALGAS_bool (kIsNotEqual, var_result.objectCompare (GALGAS_sint ((int32_t) 0L))).boolEnum () ;
     if (kBoolTrue == test_8) {
-      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFileLocation, GALGAS_string ("error during LLVM compilation or flashing")  COMMA_SOURCE_FILE ("code-generation.galgas", 375)) ;
+      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFileLocation, GALGAS_string ("error during LLVM compilation or flashing")  COMMA_SOURCE_FILE ("code-generation.galgas", 390)) ;
     }
   }
 }
@@ -10254,10 +10269,10 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
                                GALGAS_string & ioArgument_ioLLVMcode,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 383)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 383)) ;
-  cEnumerator_unifiedTypeMap enumerator_17216 (constinArgument_inTypeMap, kEnumeration_up) ;
-  while (enumerator_17216.hasCurrentObject ()) {
-    switch (enumerator_17216.current_kind (HERE).enumValue ()) {
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 398)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 398)) ;
+  cEnumerator_unifiedTypeMap enumerator_17944 (constinArgument_inTypeMap, kEnumeration_up) ;
+  while (enumerator_17944.hasCurrentObject ()) {
+    switch (enumerator_17944.current_kind (HERE).enumValue ()) {
     case GALGAS_typeKind::kNotBuilt:
       break ;
     case GALGAS_typeKind::kEnum_boolean:
@@ -10278,18 +10293,18 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       break ;
     case GALGAS_typeKind::kEnum_structure:
       {
-        const cEnumAssociatedValues_typeKind_structure * extractPtr_17560 = (const cEnumAssociatedValues_typeKind_structure *) (enumerator_17216.current_kind (HERE).unsafePointer ()) ;
-        const GALGAS_propertyList extractedValue_propertyList = extractPtr_17560->mAssociatedValue1 ;
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%$").add_operation (enumerator_17216.current_lkey (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 391)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 391)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 391)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 391)) ;
-        cEnumerator_propertyList enumerator_17443 (extractedValue_propertyList, kEnumeration_up) ;
-        while (enumerator_17443.hasCurrentObject ()) {
-          ioArgument_ioLLVMcode.plusAssign_operation(enumerator_17443.current_mType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 393)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 393)) ;
-          if (enumerator_17443.hasNextObject ()) {
-            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 394)) ;
+        const cEnumAssociatedValues_typeKind_structure * extractPtr_18288 = (const cEnumAssociatedValues_typeKind_structure *) (enumerator_17944.current_kind (HERE).unsafePointer ()) ;
+        const GALGAS_propertyList extractedValue_propertyList = extractPtr_18288->mAssociatedValue1 ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%$").add_operation (enumerator_17944.current_lkey (HERE).getter_string (SOURCE_FILE ("code-generation.galgas", 406)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 406)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 406)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 406)) ;
+        cEnumerator_propertyList enumerator_18171 (extractedValue_propertyList, kEnumeration_up) ;
+        while (enumerator_18171.hasCurrentObject ()) {
+          ioArgument_ioLLVMcode.plusAssign_operation(enumerator_18171.current_mType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 408)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 408)) ;
+          if (enumerator_18171.hasNextObject ()) {
+            ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 409)) ;
           }
-          enumerator_17443.gotoNextObject () ;
+          enumerator_18171.gotoNextObject () ;
         }
-        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 396)) ;
+        ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 411)) ;
       }
       break ;
     case GALGAS_typeKind::kEnum_literalString:
@@ -10305,9 +10320,9 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       }
       break ;
     }
-    enumerator_17216.gotoNextObject () ;
+    enumerator_17944.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 402)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 417)) ;
 }
 
 
@@ -10348,7 +10363,11 @@ const char * gWrapperFileContent_0_targetTemplates = "\n"
   "  CAN0_RX : 26\n"
   "  CAN1_RX : 27\n"
   "  CAN2_RX : 28\n"
-  "  CAN_3_RX : 30\n"
+  "  CAN3_RX : 29\n"
+  "  \n"
+  "  PAbort : 40\n"
+  "  DAbort : 41\n"
+  "  FIQ : 42\n"
   "}\n"
   "\n"
   "import \"files/registers-lpc2294.plm\"\n"
@@ -10358,13 +10377,13 @@ const char * gWrapperFileContent_0_targetTemplates = "\n"
   "//import \"files/teensy-3-1-leds.plm\"\n"
   "//import \"files/teensy-3-1-lcd.plm\"\n"
   "import \"files/semaphore.plm\"\n"
-  "import \"files/LPC2294-default-isr.plm\"" ;
+  "\n" ;
 
 const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   "LPC-L2294.plm-target",
   "plm-target",
   true, // Text file
-  705, // Text length
+  709, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
@@ -12547,10 +12566,20 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "#--- Wait for openOCD is listening on port 4444\n"
   "time.sleep (1)\n"
   "#print (\"openOCD pid: \", openOCDProcess.pid)\n"
-  "#--- Read script file\n"
-  "f = open (scriptDir + \"/sources/external-ram.openOCD\", 'r')\n"
-  "content = f.read ()\n"
-  "f.close ()\n"
+  "#--- OpenOCD Script\n"
+  "openOCDScript  = \"reset halt\\n\"\n"
+  "openOCDScript += \"mww 0xE01FC040 0\\n\"\n"
+  "openOCDScript += \"mdw 0xE01FC040\\n\"\n"
+  "openOCDScript += \"mww 0xE002C014 0x0F804924\\n\"\n"
+  "openOCDScript += \"mdw 0xE002C014\\n\"\n"
+  "openOCDScript += \"mww 0xFFE00004 0x20000400\\n\"\n"
+  "openOCDScript += \"mdw 0xFFE00004\\n\"\n"
+  "openOCDScript += \"load_image product/product-linker.elf\\n\"\n"
+  "openOCDScript += \"mww 0xE01FC040 2\\n\"\n"
+  "openOCDScript += \"mdw 0xE01FC040\\n\"\n"
+  "openOCDScript += \"soft_reset_halt\\n\"\n"
+  "openOCDScript += \"resume\\n\"\n"
+  "openOCDScript += \"shutdown\\n\"\n"
   "#--- \n"
   "client = socket.socket (socket.AF_INET, socket.SOCK_STREAM)\n"
   "ok = False\n"
@@ -12558,7 +12587,7 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "  try:\n"
   "    client.connect (('localhost', 4444))\n"
   "    try:\n"
-  "      client.send (content)\n"
+  "      client.send (openOCDScript)\n"
   "      ok = True\n"
   "    except:\n"
   "      print (\"Cannot send data\")\n"
@@ -12578,7 +12607,7 @@ const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "run.py",
   "py",
   true, // Text file
-  2677, // Text length
+  3090, // Text length
   gWrapperFileContent_12_targetTemplates
 ) ;
 
@@ -12743,9 +12772,9 @@ const char * gWrapperFileContent_20_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void installInterruptServiceRoutine (void irq_routine (void), const unsigned inSourceID) {\n"
+  "static void installInterruptServiceRoutine (const unsigned irq_routine, const unsigned inSourceID) {\n"
   "//---\n"
-  "  VICVect (gSlotID) = (unsigned) irq_routine ;\n"
+  "  VICVect (gSlotID) = irq_routine ;\n"
   "  VICVectCntl (gSlotID) = 0x20 | inSourceID ;\n"
   "//---\n"
   "  VICIntEnClr   = 1 << inSourceID ;\n"
@@ -12756,12 +12785,16 @@ const char * gWrapperFileContent_20_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "void interrupt5 (void) asm (\"!FUNC!.interrupt5\") ;\n"
+  "extern unsigned __plm_interrupt_vectors [30] ;\n"
   "\n"
   "void installInterrupts (void) ;\n"
   "\n"
   "void installInterrupts (void) {\n"
-  "  installInterruptServiceRoutine (interrupt5, 5) ;\n"
+  "  for (unsigned i=0 ; i<30 ; i++) {\n"
+  "    if (__plm_interrupt_vectors [i] != 0) {\n"
+  "      installInterruptServiceRoutine (__plm_interrupt_vectors [i], i) ;\n"
+  "    }\n"
+  "  }\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -13191,7 +13224,7 @@ const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  21268, // Text length
+  21367, // Text length
   gWrapperFileContent_20_targetTemplates
 ) ;
 
@@ -13403,13 +13436,13 @@ const char * gWrapperFileContent_22_targetTemplates = "  .code 32\n"
   "   .word   0xb8a06f60   @ Checksum\n"
   "   ldr pc, IRQAddr      @ IRQ interrupt\n"
   "   ldr pc, FIQAddr      @ FIQ interrupt\n"
-  "ResetAddr:     .word ResetHandler\n"
-  "UndefAddr:     .word UndefHandler\n"
+  "ResetAddr:     .word as_reset_handler\n"
+  "UndefAddr:     .word as_undef_handler\n"
   "SWIAddr:       .word SWIHandler\n"
-  "PAbortAddr:    .word !FUNC!PAbortHandler\n"
-  "DAbortAddr:    .word !FUNC!DAbortHandler\n"
-  "IRQAddr:       .word IRQHandler\n"
-  "FIQAddr:       .word !FUNC!FIQHandler\n"
+  "PAbortAddr:    .word !ISR!PAbort\n"
+  "DAbortAddr:    .word !ISR!DAbort\n"
+  "IRQAddr:       .word as_irq_handler\n"
+  "FIQAddr:       .word !ISR!FIQ\n"
   "               .word 0xFFFFFFFF @ pad word to get 64 bytes in isr_vector section\n"
   "   \n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
@@ -13419,9 +13452,9 @@ const char * gWrapperFileContent_22_targetTemplates = "  .code 32\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "   .section .init, \"ax\"\n"
-  "   .global ResetHandler\n"
+  "   .global as_reset_handler\n"
   "\n"
-  "ResetHandler:\n"
+  "as_reset_handler:\n"
   "@-------------------------- Setup a stack and  status register for each mode\n"
   "   msr   CPSR_c, #ARM_MODE_UNDEF | I_BIT | F_BIT  @ Undefined Instruction Mode     \n"
   "   ldr   sp, =__und_stack_end\n"
@@ -13443,6 +13476,48 @@ const char * gWrapperFileContent_22_targetTemplates = "  .code 32\n"
   "\n"
   "@---------------------------------------- Call entry point\n"
   "   b    __entry_point\n"
+  "\n"
+  "   .text\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@              I N T E R R U P T    V E C T O R S                                                                      *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global __plm_interrupt_vectors\n"
+  "\n"
+  "__plm_interrupt_vectors :\n"
+  "  .word !ISR!WDT      @ 0\n"
+  "  .word 0             @ 1\n"
+  "  .word !ISR!ARMCore0 @ 2\n"
+  "  .word !ISR!ARMCore1 @ 3\n"
+  "  .word !ISR!TIMER0   @ 4\n"
+  "  .word !ISR!TIMER1   @ 5\n"
+  "  .word !ISR!UART0    @ 6\n"
+  "  .word !ISR!UART1    @ 7\n"
+  "  .word !ISR!PWM0     @ 8\n"
+  "  .word !ISR!I2C      @ 9\n"
+  "  .word !ISR!SPI0     @ 10\n"
+  "  .word !ISR!SPI1_SSP @ 11\n"
+  "  .word !ISR!PLL      @ 12\n"
+  "  .word !ISR!RTC      @ 13\n"
+  "  .word !ISR!EINT0    @ 14\n"
+  "  .word !ISR!EINT1    @ 15\n"
+  "  .word !ISR!EINT2    @ 16\n"
+  "  .word !ISR!EINT3    @ 17\n"
+  "  .word !ISR!ADC      @ 18\n"
+  "  .word !ISR!CAN_COMMON @ 19\n"
+  "  .word !ISR!CAN0_TX @ 20\n"
+  "  .word !ISR!CAN1_TX @ 21\n"
+  "  .word !ISR!CAN2_TX @ 22\n"
+  "  .word !ISR!CAN3_TX @ 23\n"
+  "  .word 0            @ 24\n"
+  "  .word !ISR!FULLCAN @ 25\n"
+  "  .word !ISR!CAN0_RX @ 26\n"
+  "  .word !ISR!CAN1_RX @ 27\n"
+  "  .word !ISR!CAN2_RX @ 28\n"
+  "  .word !ISR!CAN3_RX @ 29\n"
   "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
@@ -13593,13 +13668,13 @@ const char * gWrapperFileContent_22_targetTemplates = "  .code 32\n"
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "  .global IRQHandler\n"
+  "  .global as_irq_handler\n"
   "  .global __entry_point\n"
   "  .type __entry_point, %function\n"
   "  .global kernel_selectTaskToRun\n"
   "  .type kernel_selectTaskToRun, %function\n"
   "\n"
-  "IRQHandler:\n"
+  "as_irq_handler:\n"
   "@--------------------------- Adjust return address\n"
   "  sub   r14, r14, #4\n"
   "@--------------------------- Save r0 on IRQ stack\n"
@@ -13688,9 +13763,9 @@ const char * gWrapperFileContent_22_targetTemplates = "  .code 32\n"
   "@                                                                                                                      *\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "  .global UndefHandler\n"
+  "  .global as_undef_handler\n"
   "\n"
-  "UndefHandler:\n"
+  "as_undef_handler:\n"
   "@--- Save preserved registers\n"
   "  stmfd r13!, {r7, lr}\n"
   "@--- r7 <- bits 15-8 of undef instruction\n"
@@ -13715,13 +13790,62 @@ const cRegularFileWrapper gWrapperFile_22_targetTemplates (
   "target.s",
   "s",
   true, // Text file
-  23812, // Text length
+  25294, // Text length
   gWrapperFileContent_22_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/undefined-interrupt.s'
+
+const char * gWrapperFileContent_23_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@  Undefined interrupt !ISR!\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "\t!ISR! = 0\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_23_targetTemplates (
+  "undefined-interrupt.s",
+  "s",
+  true, // Text file
+  284, // Text length
+  gWrapperFileContent_23_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/xtr-interrupt-handler.s'
+
+const char * gWrapperFileContent_24_targetTemplates = "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S Y S T I C K    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                            *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global !ISR!\n"
+  "  .type !ISR!, %function\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global !HANDLER!\n"
+  "  .type !HANDLER!, %function\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "!ISR!:\n"
+  "@----------------------------------------- Call Interrupt handler\n"
+  "  b    !HANDLER!\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+  "xtr-interrupt-handler.s",
+  "s",
+  true, // Text file
+  1034, // Text length
+  gWrapperFileContent_24_targetTemplates
 ) ;
 
 //--- All files of 'LPC-L2294' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [19] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [21] = {
   & gWrapperFile_5_targetTemplates,
   & gWrapperFile_6_targetTemplates,
   & gWrapperFile_7_targetTemplates,
@@ -13740,6 +13864,8 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [19] = {
   & gWrapperFile_20_targetTemplates,
   & gWrapperFile_21_targetTemplates,
   & gWrapperFile_22_targetTemplates,
+  & gWrapperFile_23_targetTemplates,
+  & gWrapperFile_24_targetTemplates,
   NULL
 } ;
 
@@ -13753,50 +13879,15 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_1 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
   "LPC-L2294",
-  18,
+  20,
   gWrapperAllFiles_targetTemplates_1,
   0,
   gWrapperAllDirectories_targetTemplates_1
 ) ;
 
-//--- File 'files/LPC2294-default-isr.plm'
-
-const char * gWrapperFileContent_23_targetTemplates = "\n"
-  "required func `service PAbortHandler ()\n"
-  "\n"
-  "func `service PAbortHandler @nullWhenPanicDisabled @weak @global () {\n"
-  "  panic 2\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `service DAbortHandler ()\n"
-  "\n"
-  "func `service DAbortHandler @nullWhenPanicDisabled @weak @global () {\n"
-  "  panic 3\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `service FIQHandler ()\n"
-  "\n"
-  "func `service FIQHandler @nullWhenPanicDisabled @weak @global () {\n"
-  "  panic 4\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_23_targetTemplates (
-  "LPC2294-default-isr.plm",
-  "plm",
-  true, // Text file
-  612, // Text length
-  gWrapperFileContent_23_targetTemplates
-) ;
-
 //--- File 'files/lpc2294-xtr.plm'
 
-const char * gWrapperFileContent_24_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_25_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "//   SYNCHRONIZATION TOOLS ROUTINES                                            *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -13874,7 +13965,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var gUptimeMS $uint32 = 0 {\n"
-  "  @rw func interrupt5\n"
+  "  @rw isr TIMER1\n"
   "  func millis\n"
   "}\n"
   "\n"
@@ -13886,9 +13977,7 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required func `service interrupt5 ()\n"
-  "\n"
-  "func `service interrupt5 @global () {\n"
+  "isr TIMER1 @xtr {\n"
   "  TIMER1_IR = 1 // Clears MR0 interrupt\n"
   "  let now = gUptimeMS +% 1\n"
   "  gUptimeMS = now\n"
@@ -13927,17 +14016,17 @@ const char * gWrapperFileContent_24_targetTemplates = "//-----------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+const cRegularFileWrapper gWrapperFile_25_targetTemplates (
   "lpc2294-xtr.plm",
   "plm",
   true, // Text file
-  4495, // Text length
-  gWrapperFileContent_24_targetTemplates
+  4432, // Text length
+  gWrapperFileContent_25_targetTemplates
 ) ;
 
 //--- File 'files/registers-lpc2294.plm'
 
-const char * gWrapperFileContent_25_targetTemplates = "//------------------------------------------------------------------------------\n"
+const char * gWrapperFileContent_26_targetTemplates = "//------------------------------------------------------------------------------\n"
   "\n"
   "// Vectored Interrupt Controller (VIC)\n"
   "register VICIRQStatus   at 0xFFFF_F000 $uint32\n"
@@ -14220,17 +14309,17 @@ const char * gWrapperFileContent_25_targetTemplates = "//-----------------------
   "\n"
   "//------------------------------------------------------------------------------\n" ;
 
-const cRegularFileWrapper gWrapperFile_25_targetTemplates (
+const cRegularFileWrapper gWrapperFile_26_targetTemplates (
   "registers-lpc2294.plm",
   "plm",
   true, // Text file
   11643, // Text length
-  gWrapperFileContent_25_targetTemplates
+  gWrapperFileContent_26_targetTemplates
 ) ;
 
 //--- File 'files/registers-mk20dx256.plm'
 
-const char * gWrapperFileContent_26_targetTemplates = "\n"
+const char * gWrapperFileContent_27_targetTemplates = "\n"
   "let f_cpu $uint32 = 96_000_000\n"
   "\n"
   "let f_bus $uint32 = 48_000_000\n"
@@ -16357,17 +16446,17 @@ const char * gWrapperFileContent_26_targetTemplates = "\n"
   "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_26_targetTemplates (
+const cRegularFileWrapper gWrapperFile_27_targetTemplates (
   "registers-mk20dx256.plm",
   "plm",
   true, // Text file
   134360, // Text length
-  gWrapperFileContent_26_targetTemplates
+  gWrapperFileContent_27_targetTemplates
 ) ;
 
 //--- File 'files/semaphore.plm'
 
-const char * gWrapperFileContent_27_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+const char * gWrapperFileContent_28_targetTemplates = "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "struct $semaphore {\n"
   "  var value $uint32\n"
@@ -16422,17 +16511,17 @@ const char * gWrapperFileContent_27_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_27_targetTemplates (
+const cRegularFileWrapper gWrapperFile_28_targetTemplates (
   "semaphore.plm",
   "plm",
   true, // Text file
   1461, // Text length
-  gWrapperFileContent_27_targetTemplates
+  gWrapperFileContent_28_targetTemplates
 ) ;
 
 //--- File 'files/teensy-3-1-boot.plm'
 
-const char * gWrapperFileContent_28_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_29_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "\n"
   "boot 0 {\n"
   "//---------1- Inhiber le chien de garde\n"
@@ -16497,630 +16586,11 @@ const char * gWrapperFileContent_28_targetTemplates = "//-----------------------
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_28_targetTemplates (
+const cRegularFileWrapper gWrapperFile_29_targetTemplates (
   "teensy-3-1-boot.plm",
   "plm",
   true, // Text file
   2377, // Text length
-  gWrapperFileContent_28_targetTemplates
-) ;
-
-//--- File 'files/teensy-3-1-default-isr.plm'
-
-const char * gWrapperFileContent_29_targetTemplates = "\n"
-  "required func `isr NMIHandler ()\n"
-  "\n"
-  "func `isr NMIHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 2\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "//required func `isr HardFaultHandler ()\n"
-  "//\n"
-  "//func `isr HardFaultHandler @nullWhenPanicDisabled @weak () {\n"
-  "//  panic 3\n"
-  "//}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr MemManageHandler ()\n"
-  "\n"
-  "func `isr MemManageHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 4\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr BusFaultHandler ()\n"
-  "\n"
-  "func `isr BusFaultHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 5\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr UsageFaultHandler ()\n"
-  "\n"
-  "func `isr UsageFaultHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 6\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DebugMonitorHandler ()\n"
-  "\n"
-  "func `isr DebugMonitorHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 12\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr PendSVHandler ()\n"
-  "\n"
-  "func `isr PendSVHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 14\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel0TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel0TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 16\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel1TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel1TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 17\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel2TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel2TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 18\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel3TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel3TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 19\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel4TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel4TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 20\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel5TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel5TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 21\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel6TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel6TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 22\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel7TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel7TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 23\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel8TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel8TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 24\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel9TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel9TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 25\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel10TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel10TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 26\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel11TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel11TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 27\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel12TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel12TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 28\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel13TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel13TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 29\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel14TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel14TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 30\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAChannel15TranfertCompleteHandler ()\n"
-  "\n"
-  "func `isr DMAChannel15TranfertCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 31\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DMAErrorHandler ()\n"
-  "\n"
-  "func `isr DMAErrorHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 32\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr flashMemoryCommandCompleteHandler ()\n"
-  "\n"
-  "func `isr flashMemoryCommandCompleteHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 34\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr flashMemoryReadCollisionHandler ()\n"
-  "\n"
-  "func `isr flashMemoryReadCollisionHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 35\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr modeControllerHandler ()\n"
-  "\n"
-  "func `isr modeControllerHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 36\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr LLWUHandler ()\n"
-  "\n"
-  "func `isr LLWUHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 37\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr WDOGEWMHandler ()\n"
-  "\n"
-  "func `isr WDOGEWMHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 38\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr I2C0Handler ()\n"
-  "\n"
-  "func `isr I2C0Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 40\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr I2C1Handler ()\n"
-  "\n"
-  "func `isr I2C1Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 41\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr SPI0Handler ()\n"
-  "\n"
-  "func `isr SPI0Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 42\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr SPI1Handler ()\n"
-  "\n"
-  "func `isr SPI1Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 43\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CAN0MessageBufferHandler ()\n"
-  "\n"
-  "func `isr CAN0MessageBufferHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 45\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CAN0BusOffHandler ()\n"
-  "\n"
-  "func `isr CAN0BusOffHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 46\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CAN0ErrorHandler ()\n"
-  "\n"
-  "func `isr CAN0ErrorHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 47\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CAN0TransmitWarningHandler ()\n"
-  "\n"
-  "func `isr CAN0TransmitWarningHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 48\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CAN0ReceiveWarningHandler ()\n"
-  "\n"
-  "func `isr CAN0ReceiveWarningHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 49\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CAN0WakeUpHandler ()\n"
-  "\n"
-  "func `isr CAN0WakeUpHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 50\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr I2S0TransmitHandler ()\n"
-  "\n"
-  "func `isr I2S0TransmitHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 51\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr I2S0ReceiveHandler ()\n"
-  "\n"
-  "func `isr I2S0ReceiveHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 52\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr UART0LONHandler ()\n"
-  "\n"
-  "func `isr UART0LONHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 60\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr UART0StatusHandler ()\n"
-  "\n"
-  "func `isr UART0StatusHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 61\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr UART0ErrorHandler ()\n"
-  "\n"
-  "func `isr UART0ErrorHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 62\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr UART1StatusHandler ()\n"
-  "\n"
-  "func `isr UART1StatusHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 63\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr UART1ErrorHandler ()\n"
-  "\n"
-  "func `isr UART1ErrorHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 64\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr UART2StatusHandler ()\n"
-  "\n"
-  "func `isr UART2StatusHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 64\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr UART2ErrorHandler ()\n"
-  "\n"
-  "func `isr UART2ErrorHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 65\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr ADC0Handler ()\n"
-  "\n"
-  "func `isr ADC0Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 73\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr ADC1Handler ()\n"
-  "\n"
-  "func `isr ADC1Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 74\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CMP0Handler ()\n"
-  "\n"
-  "func `isr CMP0Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 75\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CMP1Handler ()\n"
-  "\n"
-  "func `isr CMP1Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 76\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CMP2Handler ()\n"
-  "\n"
-  "func `isr CMP2Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 77\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr FMT0Handler ()\n"
-  "\n"
-  "func `isr FMT0Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 78\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr FMT1Handler ()\n"
-  "\n"
-  "func `isr FMT1Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 79\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr FMT2Handler ()\n"
-  "\n"
-  "func `isr FMT2Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 80\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr CMTHandler ()\n"
-  "\n"
-  "func `isr CMTHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 81\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr RTCAlarmHandler ()\n"
-  "\n"
-  "func `isr RTCAlarmHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 82\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr RTCSecondHandler ()\n"
-  "\n"
-  "func `isr RTCSecondHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 83\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr PITChannel0Handler ()\n"
-  "\n"
-  "func `isr PITChannel0Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 84\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr PITChannel1Handler ()\n"
-  "\n"
-  "func `isr PITChannel1Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 85\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr PITChannel2Handler ()\n"
-  "\n"
-  "func `isr PITChannel2Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 86\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr PITChannel3Handler ()\n"
-  "\n"
-  "func `isr PITChannel3Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 87\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr PDBHandler ()\n"
-  "\n"
-  "func `isr PDBHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 88\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr USBOTGHandler ()\n"
-  "\n"
-  "func `isr USBOTGHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 89\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr USBChargerDetectHandler ()\n"
-  "\n"
-  "func `isr USBChargerDetectHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 90\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr DAC0Handler ()\n"
-  "\n"
-  "func `isr DAC0Handler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 97\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr TSIHandler ()\n"
-  "\n"
-  "func `isr TSIHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 99\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr MCGHandler ()\n"
-  "\n"
-  "func `isr MCGHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 100\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr lowPowerTimerHandler ()\n"
-  "\n"
-  "func `isr lowPowerTimerHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 101\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr pinDetectPortAHandler ()\n"
-  "\n"
-  "func `isr pinDetectPortAHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 103\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr pinDetectPortBHandler ()\n"
-  "\n"
-  "func `isr pinDetectPortBHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 104\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr pinDetectPortCHandler ()\n"
-  "\n"
-  "func `isr pinDetectPortCHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 105\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr pinDetectPortDHandler ()\n"
-  "\n"
-  "func `isr pinDetectPortDHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 106\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr pinDetectPortEHandler ()\n"
-  "\n"
-  "func `isr pinDetectPortEHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 107\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required func `isr softwareInterruptHandler ()\n"
-  "\n"
-  "func `isr softwareInterruptHandler @nullWhenPanicDisabled @weak () {\n"
-  "  panic 110\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_29_targetTemplates (
-  "teensy-3-1-default-isr.plm",
-  "plm",
-  true, // Text file
-  15621, // Text length
   gWrapperFileContent_29_targetTemplates
 ) ;
 
@@ -17884,9 +17354,7 @@ const cRegularFileWrapper gWrapperFile_32_targetTemplates (
 
 //--- All files of 'files' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [11] = {
-  & gWrapperFile_23_targetTemplates,
-  & gWrapperFile_24_targetTemplates,
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [9] = {
   & gWrapperFile_25_targetTemplates,
   & gWrapperFile_26_targetTemplates,
   & gWrapperFile_27_targetTemplates,
@@ -17908,7 +17376,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
   "files",
-  10,
+  8,
   gWrapperAllFiles_targetTemplates_2,
   0,
   gWrapperAllDirectories_targetTemplates_2
