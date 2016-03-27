@@ -244,104 +244,74 @@ method @routineMapIR-element llvmCodeGeneration
   case service : routineName = llvmNameForServiceImplementation (!lkey.string)
   case primitive : routineName = llvmNameForPrimitiveImplementation (!lkey.string)
   end
-#  if [option plm_options.noPanicGeneration value] && mNullOnNoPanic then
-#  #--- Generate in assembly code routine pointer as NULL value
-#    ioAssemblerCode += asSeparatorLine ()
-#    ioAssemblerCode += "  .global " + routineName + "\n"
-#    ioAssemblerCode += "  " + routineName + " = 0\n\n"
-#  #--- In LLVM, declare routine as extern
-#    ioLLVMcode += llvmTitleComment (!routineName)
-#    ioLLVMcode += "declare"
-#    if mReturnType == .null then
-#      ioLLVMcode += " void"
-#    else
-#      ioLLVMcode += " " + [mReturnType llvmTypeName]
-#    end
-#    ioLLVMcode += " @" + routineName + " ("
-#    for () in mFormalArgumentListForGeneration
-#    do
-#      switch mFormalArgumentKind
-#      case input :
-#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-#      case output :
-#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-#     case inputOutput :
-#        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-#      end
-#    between
-#      ioLLVMcode += ", "
-#    end
-#    ioLLVMcode += ")" + llvmAttributeFunction () + "; NULL in assembly code\n\n"
-#  else
-    ioLLVMcode += llvmTitleComment (!routineName)
-    ioLLVMcode += "define"
-    if not mGlobal then
-      ioLLVMcode += " internal"
-    end
-    if mReturnType == .null then
-      ioLLVMcode += " void"
-    else
-      ioLLVMcode += " " + [mReturnType llvmTypeName]
-    end
-    ioLLVMcode += " @" + routineName + " ("
-    let receiverTypeName = [lkey.string stringByDeletingPathExtension]
-    var first = true
-    if receiverTypeName != "" then
-      ioLLVMcode += "%" + receiverTypeName + "* %self"
+  ioLLVMcode += llvmTitleComment (!routineName)
+  ioLLVMcode += "define"
+  if not mGlobal then
+    ioLLVMcode += " internal"
+  end
+  if mReturnType == .null then
+    ioLLVMcode += " void"
+  else
+    ioLLVMcode += " " + [mReturnType llvmTypeName]
+  end
+  ioLLVMcode += " @" + routineName + " ("
+  let receiverTypeName = [lkey.string stringByDeletingPathExtension]
+  var first = true
+  if receiverTypeName != "" then
+    ioLLVMcode += "%" + receiverTypeName + "* %self"
+    first = false
+  end
+  for () in mFormalArgumentListForGeneration do
+    if first then
       first = false
-    end
-    for () in mFormalArgumentListForGeneration do
-      if first then
-        first = false
-      else
-        ioLLVMcode += ", "
-      end
-      switch mFormalArgumentKind
-      case input :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-      case output :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-     case inputOutput :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-      end
-    end
-    ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-  #--- Add result variable ?
-    if mReturnType != .null then
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ()) + " = alloca " + [mReturnType llvmTypeName] + "\n"
-    end
-    for (variable type) in mAllocaList do
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
-    end
-  #--- Store input arguments in memory
-    for () in mFormalArgumentListForGeneration do
-      switch mFormalArgumentKind
-      case input :
-        let llvmType = [mFormalArgumentType llvmTypeName]
-        ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + llvmType + "\n"
-      case output, inputOutput :
-      end
-    end
-    for () in mFormalArgumentListForGeneration do
-      switch mFormalArgumentKind
-      case input :
-        let llvmType = [mFormalArgumentType llvmTypeName]
-        ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
-      case output, inputOutput :
-      end
-    end
-  #--- Instruction list
-    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  #--- Epilog
-    if mReturnType == .null then
-      ioLLVMcode += "  ret void\n"
     else
-      let resultVarLLVMName = "%" + llvmNameForLocalVariable (!functionResultVariableName ())
-      ioLLVMcode += "  %result = load " + [mReturnType llvmTypeName] + ", " + [mReturnType llvmTypeName] + "* " + resultVarLLVMName + "\n"
-      ioLLVMcode += "  ret " + [mReturnType llvmTypeName] + " %result\n"
+      ioLLVMcode += ", "
     end
-    ioLLVMcode += "}\n\n"
-#  end
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    end
+  end
+  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
+#--- Add result variable ?
+  if mReturnType != .null then
+    ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ()) + " = alloca " + [mReturnType llvmTypeName] + "\n"
+  end
+  for (variable type) in mAllocaList do
+    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+  end
+#--- Store input arguments in memory
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmTypeName]
+      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + llvmType + "\n"
+    case output, inputOutput :
+    end
+  end
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmTypeName]
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+    case output, inputOutput :
+    end
+  end
+#--- Instruction list
+  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#--- Epilog
+  if mReturnType == .null then
+    ioLLVMcode += "  ret void\n"
+  else
+    let resultVarLLVMName = "%" + llvmNameForLocalVariable (!functionResultVariableName ())
+    ioLLVMcode += "  %result = load " + [mReturnType llvmTypeName] + ", " + [mReturnType llvmTypeName] + "* " + resultVarLLVMName + "\n"
+    ioLLVMcode += "  ret " + [mReturnType llvmTypeName] + " %result\n"
+  end
+  ioLLVMcode += "}\n\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

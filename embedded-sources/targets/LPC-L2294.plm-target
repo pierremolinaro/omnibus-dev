@@ -27,7 +27,11 @@ configuration 32:$int32:$uint32 {
   CAN0_RX : 26
   CAN1_RX : 27
   CAN2_RX : 28
-  CAN_3_RX : 30
+  CAN3_RX : 29
+  
+  PAbort : 40
+  DAbort : 41
+  FIQ : 42
 }
 
 import "files/registers-lpc2294.plm"
@@ -37,4 +41,4 @@ import "files/lpc2294-xtr.plm"
 //import "files/teensy-3-1-leds.plm"
 //import "files/teensy-3-1-lcd.plm"
 import "files/semaphore.plm"
-import "files/LPC2294-default-isr.plm"
+

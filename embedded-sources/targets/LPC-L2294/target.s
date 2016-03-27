@@ -80,13 +80,13 @@
    .word   0xb8a06f60   @ Checksum
    ldr pc, IRQAddr      @ IRQ interrupt
    ldr pc, FIQAddr      @ FIQ interrupt
-ResetAddr:     .word ResetHandler
-UndefAddr:     .word UndefHandler
+ResetAddr:     .word as_reset_handler
+UndefAddr:     .word as_undef_handler
 SWIAddr:       .word SWIHandler
-PAbortAddr:    .word !FUNC!PAbortHandler
-DAbortAddr:    .word !FUNC!DAbortHandler
-IRQAddr:       .word IRQHandler
-FIQAddr:       .word !FUNC!FIQHandler
+PAbortAddr:    .word !ISR!PAbort
+DAbortAddr:    .word !ISR!DAbort
+IRQAddr:       .word as_irq_handler
+FIQAddr:       .word !ISR!FIQ
                .word 0xFFFFFFFF @ pad word to get 64 bytes in isr_vector section
    
 @----------------------------------------------------------------------------------------------------------------------*
@@ -96,9 +96,9 @@ FIQAddr:       .word !FUNC!FIQHandler
 @----------------------------------------------------------------------------------------------------------------------*
 
    .section .init, "ax"
-   .global ResetHandler
+   .global as_reset_handler
 
-ResetHandler:
+as_reset_handler:
 @-------------------------- Setup a stack and  status register for each mode
    msr   CPSR_c, #ARM_MODE_UNDEF | I_BIT | F_BIT  @ Undefined Instruction Mode     
    ldr   sp, =__und_stack_end
@@ -120,6 +120,48 @@ ResetHandler:
 
 @---------------------------------------- Call entry point
    b    __entry_point
+
+   .text
+
+@----------------------------------------------------------------------------------------------------------------------*
+@                                                                                                                      *
+@              I N T E R R U P T    V E C T O R S                                                                      *
+@                                                                                                                      *
+@----------------------------------------------------------------------------------------------------------------------*
+
+  .global __plm_interrupt_vectors
+
+__plm_interrupt_vectors :
+  .word !ISR!WDT      @ 0
+  .word 0             @ 1
+  .word !ISR!ARMCore0 @ 2
+  .word !ISR!ARMCore1 @ 3
+  .word !ISR!TIMER0   @ 4
+  .word !ISR!TIMER1   @ 5
+  .word !ISR!UART0    @ 6
+  .word !ISR!UART1    @ 7
+  .word !ISR!PWM0     @ 8
+  .word !ISR!I2C      @ 9
+  .word !ISR!SPI0     @ 10
+  .word !ISR!SPI1_SSP @ 11
+  .word !ISR!PLL      @ 12
+  .word !ISR!RTC      @ 13
+  .word !ISR!EINT0    @ 14
+  .word !ISR!EINT1    @ 15
+  .word !ISR!EINT2    @ 16
+  .word !ISR!EINT3    @ 17
+  .word !ISR!ADC      @ 18
+  .word !ISR!CAN_COMMON @ 19
+  .word !ISR!CAN0_TX @ 20
+  .word !ISR!CAN1_TX @ 21
+  .word !ISR!CAN2_TX @ 22
+  .word !ISR!CAN3_TX @ 23
+  .word 0            @ 24
+  .word !ISR!FULLCAN @ 25
+  .word !ISR!CAN0_RX @ 26
+  .word !ISR!CAN1_RX @ 27
+  .word !ISR!CAN2_RX @ 28
+  .word !ISR!CAN3_RX @ 29
 
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
@@ -270,13 +312,13 @@ __wait_interrupt:
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global IRQHandler
+  .global as_irq_handler
   .global __entry_point
   .type __entry_point, %function
   .global kernel_selectTaskToRun
   .type kernel_selectTaskToRun, %function
 
-IRQHandler:
+as_irq_handler:
 @--------------------------- Adjust return address
   sub   r14, r14, #4
 @--------------------------- Save r0 on IRQ stack
@@ -365,9 +407,9 @@ __entry_point: @ This entry point is kernel start routine
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global UndefHandler
+  .global as_undef_handler
 
-UndefHandler:
+as_undef_handler:
 @--- Save preserved registers
   stmfd r13!, {r7, lr}
 @--- r7 <- bits 15-8 of undef instruction

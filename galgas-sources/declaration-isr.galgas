@@ -1,0 +1,190 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @isrDeclarationListAST {
+  @lstring mISRName
+  @lstringlist mISRAttributeList
+  @instructionListAST mISRInstructionList
+  @location mEndOfISRDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <isr> ?!@isrDeclarationListAST ioSectionListAST {
+    $isr$
+    $identifier$ ?let sectionName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    ${$
+    @labelMap labelMap = {}
+    <instructionList> ?let instructionList !?labelMap
+    $}$
+    ioSectionListAST +=
+      !sectionName
+      !attributeList
+      !instructionList
+      !.here
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @isrDeclarationListAST enterInContext ?!@semanticContext ioSemanticContext {
+  for isr in self do
+    ioSemanticContext.mDefinedInterruptSet += !isr.mISRName.string
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @isrDeclarationListAST isrSemanticAnalysis
+  ?context:let @semanticContext inSemanticContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for isr in self do
+  #--- Analyze attributes
+    var xtrAttribute = false
+    for (attribute) in isr.mISRAttributeList do
+      if attribute.string != "xtr" then
+        error attribute : "only @xtr attribute is allowed here"
+      elsif xtrAttribute then
+        error attribute : "duplicate @xtr attribute"
+      else
+        xtrAttribute = true
+      end
+    end
+  #--- Modes
+    let @stringset modeSet = {!if xtrAttribute then serviceModeName () else sectionModeName () end}
+  #--- Invocation graph
+    let routineNameForInvocationGraph = interruptNameForInvocationGraph (!isr.mISRName)
+    if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+      [!?ioTemporaries.mSubprogramInvocationGraph addNode
+        !routineNameForInvocationGraph
+        !routineNameForInvocationGraph
+      ]
+    end
+  #--- Variable map
+    @variableMap variableMap = initialVariableMap (
+      !routineNameForInvocation:routineNameForInvocationGraph.string
+      !context:inSemanticContext
+      !userMode:false
+      !registerAccess:.readWriteAccess
+      !globalsAreConstant:false
+      !returnTypeName:["" nowhere]
+    )
+  #--- Analyze instruction list
+    @allocaList allocaList = {}
+    @instructionListIR instructionGenerationList = {}
+    [isr.mISRInstructionList analyzeRoutineInstructionList
+      !self:.null
+      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !context:inSemanticContext
+      !modes:modeSet
+      !allowPanic:not [modeSet hasKey !panicModeName ()]
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?variableMap:variableMap
+      !?alloca:allocaList
+      !?generatedCode:instructionGenerationList
+    ]
+  #---
+    [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
+  #--- Code generation
+    [inSemanticContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
+    [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
+      !isr.mISRName
+      !allocaList
+      !instructionGenerationList
+      !xtrAttribute
+    ]  
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @interruptMapIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+  for interrupt in self do
+    [interrupt.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @interruptMapIR interruptCodeGeneration
+  ?!@string ioLLVMcode
+  ?!@string ioAScode
+  ?let @string inUndefinedInterruptString
+  ?let @string inXTRInterruptHandlerString
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+#--- Generate interrupt routines
+  @stringset definedInterrupts = {}
+  for interrupt in self do
+    definedInterrupts += !interrupt.lkey.string
+    let interruptImplementationName = if interrupt.mXTR then
+      llvmNameForInterrupt (!interrupt.lkey).string
+    else
+      llvmNameForISR (!interrupt.lkey.string)
+    end
+    ioLLVMcode += llvmTitleComment (!interruptImplementationName)
+    ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
+  #--- Alloca
+    for (variable type) in interrupt.mAllocaList do
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    end
+  #--- Instruction list
+    [interrupt.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  #--- Epilog
+    ioLLVMcode += "  ret void\n"
+    ioLLVMcode += "}\n\n"
+  #---- Generate interrupt handler for XTR
+    if interrupt.mXTR then
+     let interruptHandlerName = llvmNameForInterrupt (!interrupt.lkey).string
+     let isrName = llvmNameForISR (!interrupt.lkey.string)
+     let s1 = [inXTRInterruptHandlerString stringByReplacingStringByString !"!ISR!" !isrName]
+     let s2 = [s1 stringByReplacingStringByString !"!HANDLER!" !interruptHandlerName]
+     ioAScode += s2
+    end
+  end
+#--- Generate stubs for undefined interrupt entries
+  for (lkey panicCode) in inGenerationContext.mAvailableInterruptMap do
+    if not [definedInterrupts hasKey !lkey.string] then
+      if [option plm_options.noPanicGeneration value] then
+        let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForISR (!lkey.string)]
+        ioAScode += s
+      else
+        let name = llvmNameForISR (!lkey.string)
+        ioLLVMcode += llvmTitleComment (!"Panic code for " + name)
+        ioLLVMcode += "define void @" + name + " ()" + llvmAttributeFunction () + " noreturn {\n"
+        ioLLVMcode += "  call void @panic.isr (i32 " + panicCode + ")\n"
+        ioLLVMcode += "  unreachable\n"
+        ioLLVMcode += "}\n\n"
+      end
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
