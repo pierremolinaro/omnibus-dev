@@ -9,6 +9,185 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         '@subprogramInvocationGraph' graph                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph::GALGAS_subprogramInvocationGraph (void) :
+AC_GALGAS_graph () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::constructor_emptyGraph (LOCATION_ARGS) {
+  GALGAS_subprogramInvocationGraph result ;
+  result.makeNewEmptyGraph (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::setter_addNode (GALGAS_lstring inKey,
+                                                       GALGAS_lstring inArgument_0,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  GALGAS_lstringlist::makeAttributesFromObjects (attributes, inArgument_0 COMMA_THERE) ;
+  const char * kErrorMessage = "the '%K' subprogram is already declared at %L" ;
+  internalAddNode (inKey, kErrorMessage, attributes, inCompiler COMMA_THERE) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_topologicalSort (GALGAS_lstringlist & outSortedList,
+                                                               GALGAS_lstringlist & outSortedKeyList,
+                                                               GALGAS_lstringlist & outUnsortedList,
+                                                               GALGAS_lstringlist & outUnsortedKeyList,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
+  cSharedList * sortedList = NULL ;
+  cSharedList * unsortedList = NULL ;
+  internalTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
+  outSortedList = GALGAS_lstringlist (sortedList) ;
+  outUnsortedList = GALGAS_lstringlist (unsortedList) ;
+  GALGAS_lstringlist::detachSharedList (sortedList) ;
+  GALGAS_lstringlist::detachSharedList (unsortedList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_depthFirstTopologicalSort (GALGAS_lstringlist & outSortedList,
+                                                                         GALGAS_lstringlist & outSortedKeyList,
+                                                                         GALGAS_lstringlist & outUnsortedList,
+                                                                         GALGAS_lstringlist & outUnsortedKeyList,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  cSharedList * sortedList = NULL ;
+  cSharedList * unsortedList = NULL ;
+  internalDepthFirstTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
+  outSortedList = GALGAS_lstringlist (sortedList) ;
+  outUnsortedList = GALGAS_lstringlist (unsortedList) ;
+  GALGAS_lstringlist::detachSharedList (sortedList) ;
+  GALGAS_lstringlist::detachSharedList (unsortedList) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::getter_reversedGraph (LOCATION_ARGS) const {
+  GALGAS_subprogramInvocationGraph result ;
+  result.reversedGraphFromGraph (*this COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_circularities (GALGAS_lstringlist & outInfoList,
+                                                             GALGAS_lstringlist & outKeyList
+                                                             COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalFindCircularities (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+  GALGAS_lstringlist::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_nodesWithNoSuccessor (GALGAS_lstringlist & outInfoList,
+                                                                    GALGAS_lstringlist & outKeyList
+                                                                    COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalNodesWithNoSuccessor (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+  GALGAS_lstringlist::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_nodesWithNoPredecessor (GALGAS_lstringlist & outInfoList,
+                                                                      GALGAS_lstringlist & outKeyList
+                                                                      COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalNodesWithNoPredecessor (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+  GALGAS_lstringlist::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::getter_subgraphFromNodes (const GALGAS_lstringlist & inStartKeyList,
+                                                                                             const GALGAS_stringset & inKeysToExclude,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_subprogramInvocationGraph result ;
+  subGraph (result, inStartKeyList, inKeysToExclude, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_subprogramInvocationGraph::getter_accessibleNodesFromNodes (const GALGAS_lstringlist & inStartKeyList,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  GALGAS_subprogramInvocationGraph resultingGraph ;
+  subGraph (resultingGraph,
+            inStartKeyList,
+            GALGAS_stringset::constructor_emptySet (HERE),
+            inCompiler
+            COMMA_THERE) ;
+  if (resultingGraph.isValid ()) {
+    result = resultingGraph.getter_lkeyList (THERE) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @subprogramInvocationGraph type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_subprogramInvocationGraph ("subprogramInvocationGraph",
+                                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_subprogramInvocationGraph::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_subprogramInvocationGraph ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_subprogramInvocationGraph::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_subprogramInvocationGraph (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_subprogramInvocationGraph result ;
+  const GALGAS_subprogramInvocationGraph * p = (const GALGAS_subprogramInvocationGraph *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_subprogramInvocationGraph *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("subprogramInvocationGraph", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_accessKind::GALGAS_accessKind (void) :
 mEnum (kNotBuilt) {

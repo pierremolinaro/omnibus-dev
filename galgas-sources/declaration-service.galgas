@@ -135,7 +135,6 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
       !warnIfUnused:warnIfUnused
       !globalProcedure:true
       !weakProcedure:false
-      !nullOnNoPanic:false
       !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries

@@ -2640,11 +2640,10 @@ void routine_routineSemanticAnalysis (const class GALGAS_unifiedTypeMap_2D_proxy
                                       const class GALGAS_bool constinArgument8,
                                       const class GALGAS_bool constinArgument9,
                                       const class GALGAS_bool constinArgument10,
-                                      const class GALGAS_bool constinArgument11,
-                                      const class GALGAS_accessKind constinArgument12,
-                                      const class GALGAS_semanticContext constinArgument13,
-                                      class GALGAS_semanticTemporariesStruct & ioArgument14,
-                                      class GALGAS_intermediateCodeStruct & ioArgument15,
+                                      const class GALGAS_accessKind constinArgument11,
+                                      const class GALGAS_semanticContext constinArgument12,
+                                      class GALGAS_semanticTemporariesStruct & ioArgument13,
+                                      class GALGAS_intermediateCodeStruct & ioArgument14,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
@@ -2872,15 +2871,6 @@ class GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
 
 class GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Function 'nullWhenPanicDisabledAttribute'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_nullWhenPanicDisabledAttribute (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3605,6 +3595,7 @@ extern const char * gWrapperFileContent_47_targetTemplates ;
 extern const char * gWrapperFileContent_48_targetTemplates ;
 extern const char * gWrapperFileContent_49_targetTemplates ;
 extern const char * gWrapperFileContent_50_targetTemplates ;
+extern const char * gWrapperFileContent_51_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3662,6 +3653,7 @@ extern const cRegularFileWrapper gWrapperFile_47_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_48_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_49_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_50_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_51_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

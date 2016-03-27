@@ -6,8 +6,9 @@
 @   INTERRUPT VECTOR                                                                                                   *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .section ".isr_vector"
-  .word __system_stack_end,
+	.section	.isr_vector,"a",%progbits
+
+  .word __system_stack_end
 @--- ARM Core System Handler Vectors
   .word as_reset_handler @ 1
   .word !ISR!NMI @ 2
@@ -302,40 +303,6 @@ __no_context_to_restore:
 @--- Return from exception
   ldr  r1, =0xFFFFFFFD
   bx   r1
-
-@----------------------------------------------------------------------------------------------------------------------*
-@                                                                                                                      *
-@                 S Y S T I C K    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                            *
-@                                                                                                                      *
-@----------------------------------------------------------------------------------------------------------------------*
-
-  .global !FUNC!systickHandler
-  .type !FUNC!systickHandler, %function
-
-@----------------------------------------------------------------------------------------------------------------------*
-
-  .global as_systickHandler
-  .type as_systickHandler, %function
-
-@----------------------------------------------------------------------------------------------------------------------*
-
-as_systickHandler:
-@----------------------------------------- Save preserved registers
-  push  {r4, r5, lr}
-@----------------------------------------- Activity led On (macro that uses only R4 and R5)
-  ACTIVITY_LED_ON
-@----------------------------------------- R4 <- running task context
-  ldr   r4, =gRunningTaskControlBlock
-  ldr   r4, [r4]
-@----------------------------------------- Call Systick handler (C routine)
-  bl    !FUNC!systickHandler
-@----------------------------------------- Test backgroundTaskContext to check if init passed
-  ldr   r5, =backgroundTaskContext
-  ldr   r5, [r5]
-  cmp   r5, #0
-  bne   _handle_context_switch
-@----------------------------------------- Still in init : return
-  pop   {r4, r5, pc}
 
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
