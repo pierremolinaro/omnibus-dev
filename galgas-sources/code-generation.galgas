@@ -276,10 +276,13 @@ private proc generateLLVMfile
   )
 #----------------------------------------- Panic
   if not [option plm_options.noPanicGeneration value] then
-    llvmCode += getTargetTextFile (
+    let s = getTargetTextFile (
        !currentDir:inCurrentDirectory
        !from:inTargetName.string + "/target-panic.ll"
     )
+    let s1 = [s stringByReplacingStringByString !"!PANICCODE!" !generationContext.mPanicCodeLLVMType]
+    let s2 = [s1 stringByReplacingStringByString !"!PANICLINE!" !generationContext.mPanicLineLLVMType]
+    llvmCode += s2
     llvmCode += llvmTitleComment (!"Raise Panic internal")
     llvmCode += "define internal void @raise_panic_internal ("
     llvmCode += generationContext.mPanicLineLLVMType + " %in.LINE, "
@@ -335,9 +338,13 @@ private proc generateLLVMfile
       ]
       let routineName = "@raise_panic." + staticStringIndex
       llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
-      llvmCode += "define internal void " + routineName + " (i32 %inSourceLine, i32 %inCode)" + llvmAttributeFunction () + "noreturn {\n"
+      llvmCode += "define internal void " + routineName + " ("
+      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
+      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode)" + llvmAttributeFunction () + "noreturn {\n"
       llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
-      llvmCode += "  call void @raise_panic (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"
+      llvmCode += "  call void @raise_panic ("
+      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
+      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode, i8* %str.FILE)\n"
       llvmCode += "  unreachable\n"
       llvmCode += "}\n\n"
     end
