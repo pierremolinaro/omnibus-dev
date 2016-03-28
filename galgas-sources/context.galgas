@@ -204,7 +204,7 @@ map @constructorMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @availableInterruptMap {
-  @uint mPanicCode
+  @interruptionPanicCode mInterruptionPanicCode
   insert insertKey error message "interrupt '%K' is already defined"
   search searchKey error message "interrupt '%K' is not defined"
 }
@@ -221,7 +221,6 @@ list @globalTaskVariableList {
 
 struct @semanticContext {
   @uint mPointerSize # in bit count
-  @bool mGeneratePanicForISR
   @unifiedTypeMap-proxy mBooleanType
   @unifiedTypeMap-proxy mLiteralIntegerType
   @unifiedTypeMap-proxy mPanicCodeType

@@ -2,9 +2,16 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @interruptionPanicCode {
+  case noPanicCode
+  case panicCode (@lbigint value)
+}
+
+#·······················································································································
+
 list @interruptionConfigurationList {
   @lstring mInterruptName
-  @lbigint mInterruptIndex
+  @interruptionPanicCode mInterruptionPanicCode
 }
 
 #·······················································································································
@@ -13,7 +20,6 @@ list @configurationDeclarationList {
   @lbigint mPointerSize
   @lstring mPanicCodeTypeName
   @lstring mPanicLineTypeName
-  @lstring mPanicGenerationForISR
   @interruptionConfigurationList mInterruptionConfigurationList
 }
 
@@ -32,23 +38,26 @@ syntax extension plm_target_specific_syntax {
     $typeName$ ?let panicCodeTypeName 
     $:$
     $typeName$ ?let panicLineTypeName
-    $:$
-    $identifier$ ?let panicGenerationForISR
-    @interruptionConfigurationList interruptionConfigurationList = {}
     ${$
+    @interruptionConfigurationList interruptionConfigurationList = {}
     repeat
     while
       $identifier$ ?let interruptName
-      $:$
-      $integer$ ?let interruptIndex
-      interruptionConfigurationList += !interruptName !interruptIndex
+      @interruptionPanicCode interruptionPanicCode
+      select
+        interruptionPanicCode = .noPanicCode
+      or
+        $:$
+        $integer$ ?let panicCode
+        interruptionPanicCode = .panicCode {!value:panicCode}
+      end
+      interruptionConfigurationList += !interruptName !interruptionPanicCode
     end
     $}$
     ioAST.mConfigurationDeclarationList +=
       !pointerSize
       !panicCodeTypeName
       !panicLineTypeName
-      !panicGenerationForISR
       !interruptionConfigurationList
   }
 
@@ -89,17 +98,12 @@ method @configurationDeclarationList enterInContext ?!context:@semanticContext i
     end
     ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicCodeTypeName}
     ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicLineTypeName}
-    if config.mPanicGenerationForISR.string == "generatePanicForISR" then
-      ioContext.mGeneratePanicForISR = true
-    elsif config.mPanicGenerationForISR.string != "noPanicForISR" then
-      error config.mPanicGenerationForISR : "this configuration field should be \"generatePanicForISR\" or \"noPanicForISR\""
-    end
     for (name panicCode) in config.mInterruptionConfigurationList do
-      if [panicCode.bigint fitsInUInt] then
-        [!?ioContext.mAvailableInterruptMap insertKey !name ![panicCode.bigint uint]]
-      else
-        error panicCode : "value does not fit in $" + config.mPanicCodeTypeName
-      end
+      [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
+#      if [panicCode.bigint fitsInUInt] then
+#      else
+#        error panicCode : "value does not fit in $" + config.mPanicCodeTypeName
+#      end
     end
   end
 }

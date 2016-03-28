@@ -34,66 +34,80 @@ void cParser_plm_5F_specific_5F_syntax::rule_plm_5F_specific_5F_syntax_declarati
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i0_ (GALGAS_ast & ioArgument_ioAST,
                                                                                                             C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_configuration) COMMA_SOURCE_FILE ("configuration.galgas", 29)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_configuration) COMMA_SOURCE_FILE ("configuration.galgas", 35)) ;
   GALGAS_lbigint var_pointerSize = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 30)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 31)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 36)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 37)) ;
   GALGAS_lstring var_panicCodeTypeName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("configuration.galgas", 32)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 33)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("configuration.galgas", 38)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 39)) ;
   GALGAS_lstring var_panicLineTypeName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("configuration.galgas", 34)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 35)) ;
-  GALGAS_lstring var_panicGenerationForISR = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 36)) ;
-  GALGAS_interruptionConfigurationList var_interruptionConfigurationList = GALGAS_interruptionConfigurationList::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 37)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("configuration.galgas", 38)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("configuration.galgas", 40)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("configuration.galgas", 41)) ;
+  GALGAS_interruptionConfigurationList var_interruptionConfigurationList = GALGAS_interruptionConfigurationList::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 42)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_0 (inCompiler)) {
     case 2: {
       GALGAS_lstring var_interruptName = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 41)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 42)) ;
-      GALGAS_lbigint var_interruptIndex = inCompiler->synthetizedAttribute_bigInteger () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 43)) ;
-      var_interruptionConfigurationList.addAssign_operation (var_interruptName, var_interruptIndex  COMMA_SOURCE_FILE ("configuration.galgas", 44)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 45)) ;
+      GALGAS_interruptionPanicCode var_interruptionPanicCode ;
+      switch (select_plm_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
+      case 1: {
+        var_interruptionPanicCode = GALGAS_interruptionPanicCode::constructor_noPanicCode (SOURCE_FILE ("configuration.galgas", 48)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 50)) ;
+        GALGAS_lbigint var_panicCode = inCompiler->synthetizedAttribute_bigInteger () ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 51)) ;
+        var_interruptionPanicCode = GALGAS_interruptionPanicCode::constructor_panicCode (var_panicCode  COMMA_SOURCE_FILE ("configuration.galgas", 52)) ;
+      } break ;
+      default:
+        break ;
+      }
+      var_interruptionConfigurationList.addAssign_operation (var_interruptName, var_interruptionPanicCode  COMMA_SOURCE_FILE ("configuration.galgas", 54)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("configuration.galgas", 46)) ;
-  ioArgument_ioAST.mAttribute_mConfigurationDeclarationList.addAssign_operation (var_pointerSize, var_panicCodeTypeName, var_panicLineTypeName, var_panicGenerationForISR, var_interruptionConfigurationList  COMMA_SOURCE_FILE ("configuration.galgas", 47)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("configuration.galgas", 56)) ;
+  ioArgument_ioAST.mAttribute_mConfigurationDeclarationList.addAssign_operation (var_pointerSize, var_panicCodeTypeName, var_panicLineTypeName, var_interruptionConfigurationList  COMMA_SOURCE_FILE ("configuration.galgas", 57)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i0_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_configuration) COMMA_SOURCE_FILE ("configuration.galgas", 29)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 30)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 31)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("configuration.galgas", 32)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 33)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("configuration.galgas", 34)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 35)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 36)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("configuration.galgas", 38)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_configuration) COMMA_SOURCE_FILE ("configuration.galgas", 35)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 36)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 37)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("configuration.galgas", 38)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 39)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("configuration.galgas", 40)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("configuration.galgas", 41)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_0 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 41)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 42)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 43)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("configuration.galgas", 45)) ;
+      switch (select_plm_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
+      case 1: {
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("configuration.galgas", 50)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("configuration.galgas", 51)) ;
+      } break ;
+      default:
+        break ;
+      }
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("configuration.galgas", 46)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("configuration.galgas", 56)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -108,7 +122,7 @@ class cCollectionElement_interruptionConfigurationList : public cCollectionEleme
 
 //--- Constructor
   public : cCollectionElement_interruptionConfigurationList (const GALGAS_lstring & in_mInterruptName,
-                                                             const GALGAS_lbigint & in_mInterruptIndex
+                                                             const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
                                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -127,10 +141,10 @@ class cCollectionElement_interruptionConfigurationList : public cCollectionEleme
 //---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_interruptionConfigurationList::cCollectionElement_interruptionConfigurationList (const GALGAS_lstring & in_mInterruptName,
-                                                                                                    const GALGAS_lbigint & in_mInterruptIndex
+                                                                                                    const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
                                                                                                     COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mInterruptName, in_mInterruptIndex) {
+mObject (in_mInterruptName, in_mInterruptionPanicCode) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -143,7 +157,7 @@ bool cCollectionElement_interruptionConfigurationList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_interruptionConfigurationList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_interruptionConfigurationList (mObject.mAttribute_mInterruptName, mObject.mAttribute_mInterruptIndex COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_interruptionConfigurationList (mObject.mAttribute_mInterruptName, mObject.mAttribute_mInterruptionPanicCode COMMA_HERE)) ;
   return result ;
 }
 
@@ -156,8 +170,8 @@ void cCollectionElement_interruptionConfigurationList::description (C_String & i
   mObject.mAttribute_mInterruptName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInterruptIndex" ":" ;
-  mObject.mAttribute_mInterruptIndex.description (ioString, inIndentation) ;
+  ioString << "mInterruptionPanicCode" ":" ;
+  mObject.mAttribute_mInterruptionPanicCode.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -194,7 +208,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::const
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                                      const GALGAS_lbigint & inOperand1
+                                                                                                      const GALGAS_interruptionPanicCode & inOperand1
                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_interruptionConfigurationList result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
@@ -210,11 +224,11 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::const
 
 void GALGAS_interruptionConfigurationList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                       const GALGAS_lstring & in_mInterruptName,
-                                                                      const GALGAS_lbigint & in_mInterruptIndex
+                                                                      const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
                                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement_interruptionConfigurationList * p = NULL ;
   macroMyNew (p, cCollectionElement_interruptionConfigurationList (in_mInterruptName,
-                                                                   in_mInterruptIndex COMMA_THERE)) ;
+                                                                   in_mInterruptionPanicCode COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -222,7 +236,7 @@ void GALGAS_interruptionConfigurationList::makeAttributesFromObjects (capCollect
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                                                const GALGAS_lbigint & inOperand1
+                                                                const GALGAS_interruptionPanicCode & inOperand1
                                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -237,7 +251,7 @@ void GALGAS_interruptionConfigurationList::addAssign_operation (const GALGAS_lst
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                                 const GALGAS_lbigint inOperand1,
+                                                                 const GALGAS_interruptionPanicCode inOperand1,
                                                                  const GALGAS_uint inInsertionIndex,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) {
@@ -254,7 +268,7 @@ void GALGAS_interruptionConfigurationList::setter_insertAtIndex (const GALGAS_ls
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                                 GALGAS_lbigint & outOperand1,
+                                                                 GALGAS_interruptionPanicCode & outOperand1,
                                                                  const GALGAS_uint inRemoveIndex,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) {
@@ -268,7 +282,7 @@ void GALGAS_interruptionConfigurationList::setter_removeAtIndex (GALGAS_lstring 
     }else{
       macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
       outOperand0 = p->mObject.mAttribute_mInterruptName ;
-      outOperand1 = p->mObject.mAttribute_mInterruptIndex ;
+      outOperand1 = p->mObject.mAttribute_mInterruptionPanicCode ;
     }
   }
 }
@@ -276,7 +290,7 @@ void GALGAS_interruptionConfigurationList::setter_removeAtIndex (GALGAS_lstring 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::setter_popFirst (GALGAS_lstring & outOperand0,
-                                                            GALGAS_lbigint & outOperand1,
+                                                            GALGAS_interruptionPanicCode & outOperand1,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -288,14 +302,14 @@ void GALGAS_interruptionConfigurationList::setter_popFirst (GALGAS_lstring & out
   }else{
     macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
     outOperand0 = p->mObject.mAttribute_mInterruptName ;
-    outOperand1 = p->mObject.mAttribute_mInterruptIndex ;
+    outOperand1 = p->mObject.mAttribute_mInterruptionPanicCode ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::setter_popLast (GALGAS_lstring & outOperand0,
-                                                           GALGAS_lbigint & outOperand1,
+                                                           GALGAS_interruptionPanicCode & outOperand1,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -307,14 +321,14 @@ void GALGAS_interruptionConfigurationList::setter_popLast (GALGAS_lstring & outO
   }else{
     macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
     outOperand0 = p->mObject.mAttribute_mInterruptName ;
-    outOperand1 = p->mObject.mAttribute_mInterruptIndex ;
+    outOperand1 = p->mObject.mAttribute_mInterruptionPanicCode ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::method_first (GALGAS_lstring & outOperand0,
-                                                         GALGAS_lbigint & outOperand1,
+                                                         GALGAS_interruptionPanicCode & outOperand1,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -326,14 +340,14 @@ void GALGAS_interruptionConfigurationList::method_first (GALGAS_lstring & outOpe
   }else{
     macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
     outOperand0 = p->mObject.mAttribute_mInterruptName ;
-    outOperand1 = p->mObject.mAttribute_mInterruptIndex ;
+    outOperand1 = p->mObject.mAttribute_mInterruptionPanicCode ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::method_last (GALGAS_lstring & outOperand0,
-                                                        GALGAS_lbigint & outOperand1,
+                                                        GALGAS_interruptionPanicCode & outOperand1,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -345,7 +359,7 @@ void GALGAS_interruptionConfigurationList::method_last (GALGAS_lstring & outOper
   }else{
     macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
     outOperand0 = p->mObject.mAttribute_mInterruptName ;
-    outOperand1 = p->mObject.mAttribute_mInterruptIndex ;
+    outOperand1 = p->mObject.mAttribute_mInterruptionPanicCode ;
   }
 }
 
@@ -417,15 +431,15 @@ GALGAS_lstring GALGAS_interruptionConfigurationList::getter_mInterruptNameAtInde
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_interruptionConfigurationList::getter_mInterruptIndexAtIndex (const GALGAS_uint & inIndex,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const {
+GALGAS_interruptionPanicCode GALGAS_interruptionConfigurationList::getter_mInterruptionPanicCodeAtIndex (const GALGAS_uint & inIndex,
+                                                                                                         C_Compiler * inCompiler
+                                                                                                         COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_interruptionConfigurationList * p = (cCollectionElement_interruptionConfigurationList *) attributes.ptr () ;
-  GALGAS_lbigint result ;
+  GALGAS_interruptionPanicCode result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
-    result = p->mObject.mAttribute_mInterruptIndex ;
+    result = p->mObject.mAttribute_mInterruptionPanicCode ;
   }
   return result ;
 }
@@ -459,10 +473,10 @@ GALGAS_lstring cEnumerator_interruptionConfigurationList::current_mInterruptName
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cEnumerator_interruptionConfigurationList::current_mInterruptIndex (LOCATION_ARGS) const {
+GALGAS_interruptionPanicCode cEnumerator_interruptionConfigurationList::current_mInterruptionPanicCode (LOCATION_ARGS) const {
   const cCollectionElement_interruptionConfigurationList * p = (const cCollectionElement_interruptionConfigurationList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
-  return p->mObject.mAttribute_mInterruptIndex ;
+  return p->mObject.mAttribute_mInterruptionPanicCode ;
 }
 
 
