@@ -1,33 +1,33 @@
 
-configuration 32:$int32:$uint32:noPanicForISR {
-  WDT : 0
-  ARMCore0 : 2
-  ARMCore1 : 3
-  TIMER0 : 4
-  TIMER1 : 5
-  UART0 : 6
-  UART1 : 7
-  PWM0 : 8
-  I2C : 9
-  SPI0 : 10
-  SPI1_SSP : 11
-  PLL : 12
-  RTC : 13
-  EINT0 : 14
-  EINT1 : 15
-  EINT2 : 16
-  EINT3 : 17
-  ADC : 18
-  CAN_COMMON : 19
-  CAN0_TX : 20
-  CAN1_TX : 21
-  CAN2_TX : 22
-  CAN3_TX : 23
-  FULLCAN : 25
-  CAN0_RX : 26
-  CAN1_RX : 27
-  CAN2_RX : 28
-  CAN3_RX : 29
+configuration 32:$int32:$uint32 {
+  WDT
+  ARMCore0
+  ARMCore1
+  TIMER0
+  TIMER1
+  UART0
+  UART1
+  PWM0
+  I2C
+  SPI0
+  SPI1_SSP
+  PLL
+  RTC
+  EINT0
+  EINT1
+  EINT2
+  EINT3
+  ADC
+  CAN_COMMON
+  CAN0_TX
+  CAN1_TX
+  CAN2_TX
+  CAN3_TX
+  FULLCAN
+  CAN0_RX
+  CAN1_RX
+  CAN2_RX
+  CAN3_RX
   
   PAbort : 40
   DAbort : 41

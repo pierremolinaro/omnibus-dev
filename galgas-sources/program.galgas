@@ -147,7 +147,6 @@ private proc compileProject
           !panicCodeType:semanticContext.mPanicCodeType
           !panicLineType:semanticContext.mPanicLineType
           !interrupts:semanticContext.mAvailableInterruptMap
-          !generatePanicForISR:semanticContext.mGeneratePanicForISR
           !sourceFileSet:sourceFileAbsolutePathSet
         )
       end
