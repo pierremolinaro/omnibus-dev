@@ -10,7 +10,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@globalConstantDeclaration semanticAnalysis'                       *
+//                      Overriding extension method '@globalConstantDeclaration semanticAnalysis'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -21,6 +21,7 @@ static void categoryMethod_globalConstantDeclaration_semanticAnalysis (const cPt
                                                                        C_Compiler * /* inCompiler */
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_globalConstantDeclaration_semanticAnalysis (void) {
@@ -34,7 +35,7 @@ C_PrologueEpilogue gMethod_globalConstantDeclaration_semanticAnalysis (defineCat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Overriding category method '@standaloneRoutineCallInstructionAST baseGuardAnalyze'                  *
+//                 Overriding extension method '@standaloneRoutineCallInstructionAST baseGuardAnalyze'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -67,6 +68,7 @@ static void categoryMethod_standaloneRoutineCallInstructionAST_baseGuardAnalyze 
   }
   outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 302)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_standaloneRoutineCallInstructionAST_baseGuardAnalyze (void) {
@@ -80,7 +82,7 @@ C_PrologueEpilogue gMethod_standaloneRoutineCallInstructionAST_baseGuardAnalyze 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@selfRoutineCallInstructionAST baseGuardAnalyze'                     *
+//                    Overriding extension method '@selfRoutineCallInstructionAST baseGuardAnalyze'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -180,6 +182,7 @@ static void categoryMethod_selfRoutineCallInstructionAST_baseGuardAnalyze (const
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfRoutineCallInstructionAST_baseGuardAnalyze (void) {
@@ -193,7 +196,7 @@ C_PrologueEpilogue gMethod_selfRoutineCallInstructionAST_baseGuardAnalyze (defin
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Overriding category method '@remoteRoutineCallInstructionAST baseGuardAnalyze'                    *
+//                   Overriding extension method '@remoteRoutineCallInstructionAST baseGuardAnalyze'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -237,6 +240,7 @@ static void categoryMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (con
   }
   outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 428)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (void) {
@@ -250,7 +254,7 @@ C_PrologueEpilogue gMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (def
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Overriding category method '@selfRemoteRoutineCallInstructionAST baseGuardAnalyze'                  *
+//                 Overriding extension method '@selfRemoteRoutineCallInstructionAST baseGuardAnalyze'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -360,6 +364,7 @@ static void categoryMethod_selfRemoteRoutineCallInstructionAST_baseGuardAnalyze 
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfRemoteRoutineCallInstructionAST_baseGuardAnalyze (void) {
@@ -373,7 +378,7 @@ C_PrologueEpilogue gMethod_selfRemoteRoutineCallInstructionAST_baseGuardAnalyze 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category method '@convertExpressionAST addDependenceEdgeForStaticExpression'               *
+//              Overriding extension method '@convertExpressionAST addDependenceEdgeForStaticExpression'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -390,6 +395,7 @@ static void categoryMethod_convertExpressionAST_addDependenceEdgeForStaticExpres
   ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-convert.galgas", 46)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_convertExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -403,7 +409,7 @@ C_PrologueEpilogue gMethod_convertExpressionAST_addDependenceEdgeForStaticExpres
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category method '@convertExpressionAST noteExpressionTypesInPrecedenceGraph'               *
+//              Overriding extension method '@convertExpressionAST noteExpressionTypesInPrecedenceGraph'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -419,6 +425,7 @@ static void categoryMethod_convertExpressionAST_noteExpressionTypesInPrecedenceG
   ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-convert.galgas", 56)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_convertExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -432,7 +439,7 @@ C_PrologueEpilogue gMethod_convertExpressionAST_noteExpressionTypesInPrecedenceG
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@convertExpressionAST analyzeExpression'                         *
+//                        Overriding extension method '@convertExpressionAST analyzeExpression'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -504,6 +511,7 @@ static void categoryMethod_convertExpressionAST_analyzeExpression (const cPtr_ex
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_convertExpressionAST_analyzeExpression (void) {
@@ -517,7 +525,7 @@ C_PrologueEpilogue gMethod_convertExpressionAST_analyzeExpression (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@convertInstructionIR enterAccessibleEntities'                      *
+//                     Overriding extension method '@convertInstructionIR enterAccessibleEntities'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -527,6 +535,7 @@ static void categoryMethod_convertInstructionIR_enterAccessibleEntities (const c
                                                                          C_Compiler * /* inCompiler */
                                                                          COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_convertInstructionIR_enterAccessibleEntities (void) {
@@ -540,7 +549,7 @@ C_PrologueEpilogue gMethod_convertInstructionIR_enterAccessibleEntities (defineC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@convertInstructionIR llvmInstructionCode'                        *
+//                       Overriding extension method '@convertInstructionIR llvmInstructionCode'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -611,6 +620,7 @@ static void categoryMethod_convertInstructionIR_llvmInstructionCode (const cPtr_
   ioArgument_ioLLVMcode.plusAssign_operation(var_convertMaxOkLabel.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 185)), inCompiler  COMMA_SOURCE_FILE ("expression-convert.galgas", 185)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)).add_operation (GALGAS_string (" = trunc "), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)).add_operation (var_operandType, inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)).add_operation (extensionGetter_llvmName (object->mAttribute_mOperand.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)).add_operation (object->mAttribute_mTarget.mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("expression-convert.galgas", 186)), inCompiler  COMMA_SOURCE_FILE ("expression-convert.galgas", 186)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_convertInstructionIR_llvmInstructionCode (void) {
@@ -624,7 +634,7 @@ C_PrologueEpilogue gMethod_convertInstructionIR_llvmInstructionCode (defineCateg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category method '@extendExpressionAST addDependenceEdgeForStaticExpression'                *
+//               Overriding extension method '@extendExpressionAST addDependenceEdgeForStaticExpression'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -641,6 +651,7 @@ static void categoryMethod_extendExpressionAST_addDependenceEdgeForStaticExpress
   ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-extend.galgas", 46)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_extendExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -654,7 +665,7 @@ C_PrologueEpilogue gMethod_extendExpressionAST_addDependenceEdgeForStaticExpress
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category method '@extendExpressionAST noteExpressionTypesInPrecedenceGraph'                *
+//               Overriding extension method '@extendExpressionAST noteExpressionTypesInPrecedenceGraph'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -670,6 +681,7 @@ static void categoryMethod_extendExpressionAST_noteExpressionTypesInPrecedenceGr
   ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-extend.galgas", 56)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_extendExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -683,7 +695,7 @@ C_PrologueEpilogue gMethod_extendExpressionAST_noteExpressionTypesInPrecedenceGr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@extendExpressionAST analyzeExpression'                         *
+//                        Overriding extension method '@extendExpressionAST analyzeExpression'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -790,6 +802,7 @@ static void categoryMethod_extendExpressionAST_analyzeExpression (const cPtr_exp
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_extendExpressionAST_analyzeExpression (void) {
@@ -803,7 +816,7 @@ C_PrologueEpilogue gMethod_extendExpressionAST_analyzeExpression (defineCategory
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//              Overriding category method '@truncateExpressionAST addDependenceEdgeForStaticExpression'               *
+//              Overriding extension method '@truncateExpressionAST addDependenceEdgeForStaticExpression'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -820,6 +833,7 @@ static void categoryMethod_truncateExpressionAST_addDependenceEdgeForStaticExpre
   ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-truncate.galgas", 46)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_truncateExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -833,7 +847,7 @@ C_PrologueEpilogue gMethod_truncateExpressionAST_addDependenceEdgeForStaticExpre
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//              Overriding category method '@truncateExpressionAST noteExpressionTypesInPrecedenceGraph'               *
+//              Overriding extension method '@truncateExpressionAST noteExpressionTypesInPrecedenceGraph'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -849,6 +863,7 @@ static void categoryMethod_truncateExpressionAST_noteExpressionTypesInPrecedence
   ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-truncate.galgas", 56)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_truncateExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -862,7 +877,7 @@ C_PrologueEpilogue gMethod_truncateExpressionAST_noteExpressionTypesInPrecedence
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@truncateExpressionAST analyzeExpression'                        *
+//                       Overriding extension method '@truncateExpressionAST analyzeExpression'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -929,6 +944,7 @@ static void categoryMethod_truncateExpressionAST_analyzeExpression (const cPtr_e
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_truncateExpressionAST_analyzeExpression (void) {
@@ -942,7 +958,7 @@ C_PrologueEpilogue gMethod_truncateExpressionAST_analyzeExpression (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@truncateInstructionIR enterAccessibleEntities'                     *
+//                    Overriding extension method '@truncateInstructionIR enterAccessibleEntities'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -952,6 +968,7 @@ static void categoryMethod_truncateInstructionIR_enterAccessibleEntities (const 
                                                                           C_Compiler * /* inCompiler */
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_truncateInstructionIR_enterAccessibleEntities (void) {
@@ -965,7 +982,7 @@ C_PrologueEpilogue gMethod_truncateInstructionIR_enterAccessibleEntities (define
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@truncateInstructionIR llvmInstructionCode'                       *
+//                      Overriding extension method '@truncateInstructionIR llvmInstructionCode'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -980,6 +997,7 @@ static void categoryMethod_truncateInstructionIR_llvmInstructionCode (const cPtr
   GALGAS_string var_operandType = object->mAttribute_mOperand.mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 146)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)).add_operation (GALGAS_string (" = trunc "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)).add_operation (var_operandType, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)).add_operation (extensionGetter_llvmName (object->mAttribute_mOperand.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)).add_operation (object->mAttribute_mTarget.mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 148)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("expression-truncate.galgas", 148)), inCompiler  COMMA_SOURCE_FILE ("expression-truncate.galgas", 147)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_truncateInstructionIR_llvmInstructionCode (void) {
@@ -993,7 +1011,7 @@ C_PrologueEpilogue gMethod_truncateInstructionIR_llvmInstructionCode (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Overriding category method '@constructorCall addDependenceEdgeForStaticExpression'                  *
+//                 Overriding extension method '@constructorCall addDependenceEdgeForStaticExpression'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1009,6 +1027,7 @@ static void categoryMethod_constructorCall_addDependenceEdgeForStaticExpression 
   ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, var_typeName COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 50)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_constructorCall_addDependenceEdgeForStaticExpression (void) {
@@ -1022,7 +1041,7 @@ C_PrologueEpilogue gMethod_constructorCall_addDependenceEdgeForStaticExpression 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Overriding category method '@constructorCall noteExpressionTypesInPrecedenceGraph'                  *
+//                 Overriding extension method '@constructorCall noteExpressionTypesInPrecedenceGraph'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1037,6 +1056,7 @@ static void categoryMethod_constructorCall_noteExpressionTypesInPrecedenceGraph 
   ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 59)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_constructorCall_noteExpressionTypesInPrecedenceGraph (void) {
@@ -1050,7 +1070,7 @@ C_PrologueEpilogue gMethod_constructorCall_noteExpressionTypesInPrecedenceGraph 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Overriding category method '@constructorCall analyzeExpression'                           *
+//                          Overriding extension method '@constructorCall analyzeExpression'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1147,6 +1167,7 @@ static void categoryMethod_constructorCall_analyzeExpression (const cPtr_express
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_constructorCall_analyzeExpression (void) {
@@ -1160,7 +1181,7 @@ C_PrologueEpilogue gMethod_constructorCall_analyzeExpression (defineCategoryMeth
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category method '@typedConstantCall addDependenceEdgeForStaticExpression'                 *
+//                Overriding extension method '@typedConstantCall addDependenceEdgeForStaticExpression'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1178,6 +1199,7 @@ static void categoryMethod_typedConstantCall_addDependenceEdgeForStaticExpressio
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_typedConstantCall_addDependenceEdgeForStaticExpression (void) {
@@ -1191,7 +1213,7 @@ C_PrologueEpilogue gMethod_typedConstantCall_addDependenceEdgeForStaticExpressio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category method '@typedConstantCall noteExpressionTypesInPrecedenceGraph'                 *
+//                Overriding extension method '@typedConstantCall noteExpressionTypesInPrecedenceGraph'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1208,6 +1230,7 @@ static void categoryMethod_typedConstantCall_noteExpressionTypesInPrecedenceGrap
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_typedConstantCall_noteExpressionTypesInPrecedenceGraph (void) {
@@ -1221,7 +1244,7 @@ C_PrologueEpilogue gMethod_typedConstantCall_noteExpressionTypesInPrecedenceGrap
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@typedConstantCall analyzeExpression'                          *
+//                         Overriding extension method '@typedConstantCall analyzeExpression'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1261,6 +1284,7 @@ static void categoryMethod_typedConstantCall_analyzeExpression (const cPtr_expre
     outArgument_outResult = GALGAS_operandIR::constructor_new (var_resultType, var_resultValue  COMMA_SOURCE_FILE ("expression-typed-constant.galgas", 86)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_typedConstantCall_analyzeExpression (void) {
@@ -1274,7 +1298,7 @@ C_PrologueEpilogue gMethod_typedConstantCall_analyzeExpression (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//            Overriding category method '@infixOperatorExpressionAST addDependenceEdgeForStaticExpression'            *
+//           Overriding extension method '@infixOperatorExpressionAST addDependenceEdgeForStaticExpression'            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1288,6 +1312,7 @@ static void categoryMethod_infixOperatorExpressionAST_addDependenceEdgeForStatic
   callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 55)) ;
   callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 56)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_infixOperatorExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -1301,7 +1326,7 @@ C_PrologueEpilogue gMethod_infixOperatorExpressionAST_addDependenceEdgeForStatic
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//   Overriding category method '@booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression'    *
+//   Overriding extension method '@booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression'   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1315,6 +1340,7 @@ static void categoryMethod_booleanShortCircuitAndOperatorExpressionAST_addDepend
   callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 65)) ;
   callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 66)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_booleanShortCircuitAndOperatorExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -1328,7 +1354,7 @@ C_PrologueEpilogue gMethod_booleanShortCircuitAndOperatorExpressionAST_addDepend
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//            Overriding category method '@infixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph'            *
+//           Overriding extension method '@infixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph'            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1341,6 +1367,7 @@ static void categoryMethod_infixOperatorExpressionAST_noteExpressionTypesInPrece
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 74)) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 75)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_infixOperatorExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -1354,7 +1381,7 @@ C_PrologueEpilogue gMethod_infixOperatorExpressionAST_noteExpressionTypesInPrece
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//   Overriding category method '@booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph'    *
+//   Overriding extension method '@booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph'   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1367,6 +1394,7 @@ static void categoryMethod_booleanShortCircuitAndOperatorExpressionAST_noteExpre
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 81)) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 82)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_booleanShortCircuitAndOperatorExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -1380,7 +1408,7 @@ C_PrologueEpilogue gMethod_booleanShortCircuitAndOperatorExpressionAST_noteExpre
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@infixOperatorExpressionAST analyzeExpression'                      *
+//                     Overriding extension method '@infixOperatorExpressionAST analyzeExpression'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1411,6 +1439,7 @@ static void categoryMethod_infixOperatorExpressionAST_analyzeExpression (const c
   categoryMethod_checkBinaryOperationWith (var_operatorMap, var_leftOperand.mAttribute_mType, var_rightOperand.mAttribute_mType, object->mAttribute_mOperatorLocation, var_resultType, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 161)) ;
   callCategoryMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_leftOperand, object->mAttribute_mOperatorLocation, var_rightOperand, var_resultType, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 169)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_infixOperatorExpressionAST_analyzeExpression (void) {
@@ -1424,7 +1453,7 @@ C_PrologueEpilogue gMethod_infixOperatorExpressionAST_analyzeExpression (defineC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Overriding category method '@booleanShortCircuitAndOperatorExpressionAST analyzeExpression'             *
+//            Overriding extension method '@booleanShortCircuitAndOperatorExpressionAST analyzeExpression'             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1466,6 +1495,7 @@ static void categoryMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeEx
   categoryModifier_appendShortCircuitAndOperation (ioArgument_ioInstructionGenerationList, outArgument_outResult, var_leftOperand, var_leftInstructionGenerationList, var_rightOperand, var_rightInstructionGenerationList, object->mAttribute_mOperatorLocation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 332)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeExpression (void) {
@@ -1479,7 +1509,7 @@ C_PrologueEpilogue gMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeEx
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@prefixOperatorExpressionAST addDependenceEdgeForStaticExpression'            *
+//           Overriding extension method '@prefixOperatorExpressionAST addDependenceEdgeForStaticExpression'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1492,6 +1522,7 @@ static void categoryMethod_prefixOperatorExpressionAST_addDependenceEdgeForStati
   macroValidSharedObject (object, cPtr_prefixOperatorExpressionAST) ;
   callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 28)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_prefixOperatorExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -1505,7 +1536,7 @@ C_PrologueEpilogue gMethod_prefixOperatorExpressionAST_addDependenceEdgeForStati
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph'            *
+//           Overriding extension method '@prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1517,6 +1548,7 @@ static void categoryMethod_prefixOperatorExpressionAST_noteExpressionTypesInPrec
   macroValidSharedObject (object, cPtr_prefixOperatorExpressionAST) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 36)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_prefixOperatorExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -1530,7 +1562,7 @@ C_PrologueEpilogue gMethod_prefixOperatorExpressionAST_noteExpressionTypesInPrec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@prefixOperatorExpressionAST analyzeExpression'                     *
+//                    Overriding extension method '@prefixOperatorExpressionAST analyzeExpression'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1692,6 +1724,7 @@ static void categoryMethod_prefixOperatorExpressionAST_analyzeExpression (const 
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_prefixOperatorExpressionAST_analyzeExpression (void) {
@@ -1705,7 +1738,7 @@ C_PrologueEpilogue gMethod_prefixOperatorExpressionAST_analyzeExpression (define
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//          Overriding category method '@literalIntegerInExpressionAST addDependenceEdgeForStaticExpression'           *
+//          Overriding extension method '@literalIntegerInExpressionAST addDependenceEdgeForStaticExpression'          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1718,6 +1751,7 @@ static void categoryMethod_literalIntegerInExpressionAST_addDependenceEdgeForSta
   ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, GALGAS_string ("$").add_operation (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 34)), inCompiler COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 34)).getter_nowhere (SOURCE_FILE ("expression-literal-integer.galgas", 34)) COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 34)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalIntegerInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -1731,7 +1765,7 @@ C_PrologueEpilogue gMethod_literalIntegerInExpressionAST_addDependenceEdgeForSta
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//          Overriding category method '@literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGraph'           *
+//          Overriding extension method '@literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGraph'          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1743,6 +1777,7 @@ static void categoryMethod_literalIntegerInExpressionAST_noteExpressionTypesInPr
   ioArgument_ioGraph.setter_noteNode (GALGAS_string ("$").add_operation (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 42)), inCompiler COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 42)).getter_nowhere (SOURCE_FILE ("expression-literal-integer.galgas", 42)) COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 42)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalIntegerInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -1756,7 +1791,7 @@ C_PrologueEpilogue gMethod_literalIntegerInExpressionAST_noteExpressionTypesInPr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@literalIntegerInExpressionAST analyzeExpression'                    *
+//                   Overriding extension method '@literalIntegerInExpressionAST analyzeExpression'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1779,6 +1814,7 @@ static void categoryMethod_literalIntegerInExpressionAST_analyzeExpression (cons
   macroValidSharedObject (object, cPtr_literalIntegerInExpressionAST) ;
   outArgument_outResult = GALGAS_operandIR::constructor_new (constinArgument_inContext.mAttribute_mLiteralIntegerType, GALGAS_valueIR::constructor_literalInteger (object->mAttribute_mLiteralInteger.mAttribute_bigint  COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 63))  COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 63)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalIntegerInExpressionAST_analyzeExpression (void) {
@@ -1792,7 +1828,7 @@ C_PrologueEpilogue gMethod_literalIntegerInExpressionAST_analyzeExpression (defi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@literalStringInExpressionAST addDependenceEdgeForStaticExpression'           *
+//          Overriding extension method '@literalStringInExpressionAST addDependenceEdgeForStaticExpression'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1805,6 +1841,7 @@ static void categoryMethod_literalStringInExpressionAST_addDependenceEdgeForStat
   ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (function_staticStringTypeName (inCompiler COMMA_SOURCE_FILE ("expression-literal-string.galgas", 34)), inCompiler COMMA_SOURCE_FILE ("expression-literal-string.galgas", 34)), constinArgument_inConstantName.mAttribute_location  COMMA_SOURCE_FILE ("expression-literal-string.galgas", 34)) COMMA_SOURCE_FILE ("expression-literal-string.galgas", 34)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalStringInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -1818,7 +1855,7 @@ C_PrologueEpilogue gMethod_literalStringInExpressionAST_addDependenceEdgeForStat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@literalStringInExpressionAST noteExpressionTypesInPrecedenceGraph'           *
+//          Overriding extension method '@literalStringInExpressionAST noteExpressionTypesInPrecedenceGraph'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1830,6 +1867,7 @@ static void categoryMethod_literalStringInExpressionAST_noteExpressionTypesInPre
   ioArgument_ioGraph.setter_noteNode (GALGAS_string ("$").add_operation (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("expression-literal-string.galgas", 42)), inCompiler COMMA_SOURCE_FILE ("expression-literal-string.galgas", 42)).getter_nowhere (SOURCE_FILE ("expression-literal-string.galgas", 42)) COMMA_SOURCE_FILE ("expression-literal-string.galgas", 42)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalStringInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -1843,7 +1881,7 @@ C_PrologueEpilogue gMethod_literalStringInExpressionAST_noteExpressionTypesInPre
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@literalStringInExpressionAST analyzeExpression'                     *
+//                    Overriding extension method '@literalStringInExpressionAST analyzeExpression'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1871,6 +1909,7 @@ static void categoryMethod_literalStringInExpressionAST_analyzeExpression (const
   }
   outArgument_outResult = GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_literalString (object->mAttribute_mLiteralString.mAttribute_string.getter_length (SOURCE_FILE ("expression-literal-string.galgas", 65)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("expression-literal-string.galgas", 65)), var_staticStringIndex  COMMA_SOURCE_FILE ("expression-literal-string.galgas", 65))  COMMA_SOURCE_FILE ("expression-literal-string.galgas", 65)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalStringInExpressionAST_analyzeExpression (void) {
@@ -1884,7 +1923,7 @@ C_PrologueEpilogue gMethod_literalStringInExpressionAST_analyzeExpression (defin
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//          Overriding category method '@literalBooleanInExpressionAST addDependenceEdgeForStaticExpression'           *
+//          Overriding extension method '@literalBooleanInExpressionAST addDependenceEdgeForStaticExpression'          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1897,6 +1936,7 @@ static void categoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForSta
   ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, GALGAS_string ("$").add_operation (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("expression-true-false.galgas", 41)), inCompiler COMMA_SOURCE_FILE ("expression-true-false.galgas", 41)).getter_nowhere (SOURCE_FILE ("expression-true-false.galgas", 41)) COMMA_SOURCE_FILE ("expression-true-false.galgas", 41)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -1910,7 +1950,7 @@ C_PrologueEpilogue gMethod_literalBooleanInExpressionAST_addDependenceEdgeForSta
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//          Overriding category method '@literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGraph'           *
+//          Overriding extension method '@literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGraph'          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1922,6 +1962,7 @@ static void categoryMethod_literalBooleanInExpressionAST_noteExpressionTypesInPr
   ioArgument_ioGraph.setter_noteNode (GALGAS_string ("$").add_operation (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("expression-true-false.galgas", 49)), inCompiler COMMA_SOURCE_FILE ("expression-true-false.galgas", 49)).getter_nowhere (SOURCE_FILE ("expression-true-false.galgas", 49)) COMMA_SOURCE_FILE ("expression-true-false.galgas", 49)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalBooleanInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -1935,7 +1976,7 @@ C_PrologueEpilogue gMethod_literalBooleanInExpressionAST_noteExpressionTypesInPr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@literalBooleanInExpressionAST analyzeExpression'                    *
+//                   Overriding extension method '@literalBooleanInExpressionAST analyzeExpression'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1965,6 +2006,7 @@ static void categoryMethod_literalBooleanInExpressionAST_analyzeExpression (cons
   }
   outArgument_outResult = GALGAS_operandIR::constructor_new (constinArgument_inContext.mAttribute_mBooleanType, GALGAS_valueIR::constructor_literalInteger (temp_0  COMMA_SOURCE_FILE ("expression-true-false.galgas", 70))  COMMA_SOURCE_FILE ("expression-true-false.galgas", 70)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalBooleanInExpressionAST_analyzeExpression (void) {
@@ -1978,7 +2020,7 @@ C_PrologueEpilogue gMethod_literalBooleanInExpressionAST_analyzeExpression (defi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category method '@varInExpressionAST addDependenceEdgeForStaticExpression'                *
+//               Overriding extension method '@varInExpressionAST addDependenceEdgeForStaticExpression'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1993,6 +2035,7 @@ static void categoryMethod_varInExpressionAST_addDependenceEdgeForStaticExpressi
   ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, object->mAttribute_mSourceVarName COMMA_SOURCE_FILE ("expression-var.galgas", 70)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -2006,7 +2049,7 @@ C_PrologueEpilogue gMethod_varInExpressionAST_addDependenceEdgeForStaticExpressi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//              Overriding category method '@selfVarInExpressionAST addDependenceEdgeForStaticExpression'              *
+//             Overriding extension method '@selfVarInExpressionAST addDependenceEdgeForStaticExpression'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2021,6 +2064,7 @@ static void categoryMethod_selfVarInExpressionAST_addDependenceEdgeForStaticExpr
   ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, object->mAttribute_mSourceVarName COMMA_SOURCE_FILE ("expression-var.galgas", 79)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfVarInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -2034,7 +2078,7 @@ C_PrologueEpilogue gMethod_selfVarInExpressionAST_addDependenceEdgeForStaticExpr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//       Overriding category method '@controlRegisterFieldInExpressionAST addDependenceEdgeForStaticExpression'        *
+//       Overriding extension method '@controlRegisterFieldInExpressionAST addDependenceEdgeForStaticExpression'       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2049,6 +2093,7 @@ static void categoryMethod_controlRegisterFieldInExpressionAST_addDependenceEdge
   ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, object->mAttribute_mRegisterVarName COMMA_SOURCE_FILE ("expression-var.galgas", 88)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_controlRegisterFieldInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -2062,7 +2107,7 @@ C_PrologueEpilogue gMethod_controlRegisterFieldInExpressionAST_addDependenceEdge
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category method '@varInExpressionAST noteExpressionTypesInPrecedenceGraph'                *
+//               Overriding extension method '@varInExpressionAST noteExpressionTypesInPrecedenceGraph'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2071,6 +2116,7 @@ static void categoryMethod_varInExpressionAST_noteExpressionTypesInPrecedenceGra
                                                                                     C_Compiler * /* inCompiler */
                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -2084,7 +2130,7 @@ C_PrologueEpilogue gMethod_varInExpressionAST_noteExpressionTypesInPrecedenceGra
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//              Overriding category method '@selfVarInExpressionAST noteExpressionTypesInPrecedenceGraph'              *
+//             Overriding extension method '@selfVarInExpressionAST noteExpressionTypesInPrecedenceGraph'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2093,6 +2139,7 @@ static void categoryMethod_selfVarInExpressionAST_noteExpressionTypesInPrecedenc
                                                                                         C_Compiler * /* inCompiler */
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfVarInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -2106,7 +2153,7 @@ C_PrologueEpilogue gMethod_selfVarInExpressionAST_noteExpressionTypesInPrecedenc
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//       Overriding category method '@controlRegisterFieldInExpressionAST noteExpressionTypesInPrecedenceGraph'        *
+//       Overriding extension method '@controlRegisterFieldInExpressionAST noteExpressionTypesInPrecedenceGraph'       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2115,6 +2162,7 @@ static void categoryMethod_controlRegisterFieldInExpressionAST_noteExpressionTyp
                                                                                                      C_Compiler * /* inCompiler */
                                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_controlRegisterFieldInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -2128,7 +2176,7 @@ C_PrologueEpilogue gMethod_controlRegisterFieldInExpressionAST_noteExpressionTyp
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@varInExpressionAST analyzeExpression'                          *
+//                         Overriding extension method '@varInExpressionAST analyzeExpression'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2172,6 +2220,7 @@ static void categoryMethod_varInExpressionAST_analyzeExpression (const cPtr_expr
   categoryMethod_loadFromMemory (var_variableKind, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 143)) ;
   GALGAS_unifiedTypeMap_2D_proxy var_expressionType = function_solveInferredType (constinArgument_inOptionalTargetType, var_variableType, object->mAttribute_mSourceVarName.mAttribute_location, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 149)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varInExpressionAST_analyzeExpression (void) {
@@ -2185,7 +2234,7 @@ C_PrologueEpilogue gMethod_varInExpressionAST_analyzeExpression (defineCategoryM
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@selfVarInExpressionAST analyzeExpression'                        *
+//                       Overriding extension method '@selfVarInExpressionAST analyzeExpression'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2289,6 +2338,7 @@ static void categoryMethod_selfVarInExpressionAST_analyzeExpression (const cPtr_
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfVarInExpressionAST_analyzeExpression (void) {
@@ -2302,7 +2352,7 @@ C_PrologueEpilogue gMethod_selfVarInExpressionAST_analyzeExpression (defineCateg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Overriding category method '@controlRegisterFieldInExpressionAST analyzeExpression'                 *
+//                Overriding extension method '@controlRegisterFieldInExpressionAST analyzeExpression'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2359,6 +2409,7 @@ static void categoryMethod_controlRegisterFieldInExpressionAST_analyzeExpression
     enumerator_10780.gotoNextObject () ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_controlRegisterFieldInExpressionAST_analyzeExpression (void) {
@@ -2372,7 +2423,7 @@ C_PrologueEpilogue gMethod_controlRegisterFieldInExpressionAST_analyzeExpression
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@functionCallInExpressionAST addDependenceEdgeForStaticExpression'            *
+//           Overriding extension method '@functionCallInExpressionAST addDependenceEdgeForStaticExpression'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2423,6 +2474,7 @@ static void categoryMethod_functionCallInExpressionAST_addDependenceEdgeForStati
     enumerator_2913.gotoNextObject () ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_functionCallInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -2436,7 +2488,7 @@ C_PrologueEpilogue gMethod_functionCallInExpressionAST_addDependenceEdgeForStati
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@functionCallInExpressionAST noteExpressionTypesInPrecedenceGraph'            *
+//           Overriding extension method '@functionCallInExpressionAST noteExpressionTypesInPrecedenceGraph'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2486,6 +2538,7 @@ static void categoryMethod_functionCallInExpressionAST_noteExpressionTypesInPrec
     enumerator_3854.gotoNextObject () ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_functionCallInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -2499,7 +2552,7 @@ C_PrologueEpilogue gMethod_functionCallInExpressionAST_noteExpressionTypesInPrec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@functionCallInExpressionAST analyzeExpression'                     *
+//                    Overriding extension method '@functionCallInExpressionAST analyzeExpression'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2537,6 +2590,7 @@ static void categoryMethod_functionCallInExpressionAST_analyzeExpression (const 
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_functionCallIR::constructor_new (outArgument_outResult, var_functionMangledName.mAttribute_string, var_routineKind, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("expression-func-call.galgas", 134))  COMMA_SOURCE_FILE ("expression-func-call.galgas", 134)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_functionCallInExpressionAST_analyzeExpression (void) {
@@ -2550,7 +2604,7 @@ C_PrologueEpilogue gMethod_functionCallInExpressionAST_analyzeExpression (define
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@functionCallIR llvmInstructionCode'                           *
+//                          Overriding extension method '@functionCallIR llvmInstructionCode'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2631,6 +2685,7 @@ static void categoryMethod_functionCallIR_llvmInstructionCode (const cPtr_abstra
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 181)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_functionCallIR_llvmInstructionCode (void) {
@@ -2644,7 +2699,7 @@ C_PrologueEpilogue gMethod_functionCallIR_llvmInstructionCode (defineCategoryMet
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@functionCallIR enterAccessibleEntities'                         *
+//                        Overriding extension method '@functionCallIR enterAccessibleEntities'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2657,6 +2712,7 @@ static void categoryMethod_functionCallIR_enterAccessibleEntities (const cPtr_ab
   macroValidSharedObject (object, cPtr_functionCallIR) ;
   ioArgument_ioAccessibleEntities.mAttribute_mRoutineSet.addAssign_operation (object->mAttribute_mFunctionName  COMMA_SOURCE_FILE ("expression-func-call.galgas", 190)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_functionCallIR_enterAccessibleEntities (void) {
@@ -2670,7 +2726,7 @@ C_PrologueEpilogue gMethod_functionCallIR_enterAccessibleEntities (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//         Overriding category method '@registerConstantInExpressionAST addDependenceEdgeForStaticExpression'          *
+//         Overriding extension method '@registerConstantInExpressionAST addDependenceEdgeForStaticExpression'         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2680,6 +2736,7 @@ static void categoryMethod_registerConstantInExpressionAST_addDependenceEdgeForS
                                                                                                  C_Compiler * /* inCompiler */
                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_registerConstantInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -2693,7 +2750,7 @@ C_PrologueEpilogue gMethod_registerConstantInExpressionAST_addDependenceEdgeForS
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//        Overriding category method '@registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression'         *
+//        Overriding extension method '@registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression'        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2703,6 +2760,7 @@ static void categoryMethod_registerIntegerExpInExpressionAST_addDependenceEdgeFo
                                                                                                    C_Compiler * /* inCompiler */
                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_registerIntegerExpInExpressionAST_addDependenceEdgeForStaticExpression (void) {
@@ -2716,7 +2774,7 @@ C_PrologueEpilogue gMethod_registerIntegerExpInExpressionAST_addDependenceEdgeFo
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//         Overriding category method '@registerConstantInExpressionAST noteExpressionTypesInPrecedenceGraph'          *
+//         Overriding extension method '@registerConstantInExpressionAST noteExpressionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2725,6 +2783,7 @@ static void categoryMethod_registerConstantInExpressionAST_noteExpressionTypesIn
                                                                                                  C_Compiler * /* inCompiler */
                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_registerConstantInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -2738,7 +2797,7 @@ C_PrologueEpilogue gMethod_registerConstantInExpressionAST_noteExpressionTypesIn
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//        Overriding category method '@registerIntegerExpInExpressionAST noteExpressionTypesInPrecedenceGraph'         *
+//        Overriding extension method '@registerIntegerExpInExpressionAST noteExpressionTypesInPrecedenceGraph'        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2747,6 +2806,7 @@ static void categoryMethod_registerIntegerExpInExpressionAST_noteExpressionTypes
                                                                                                    C_Compiler * /* inCompiler */
                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_registerIntegerExpInExpressionAST_noteExpressionTypesInPrecedenceGraph (void) {
@@ -2760,7 +2820,7 @@ C_PrologueEpilogue gMethod_registerIntegerExpInExpressionAST_noteExpressionTypes
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Overriding category method '@registerConstantInExpressionAST analyzeExpression'                   *
+//                  Overriding extension method '@registerConstantInExpressionAST analyzeExpression'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2795,6 +2855,7 @@ static void categoryMethod_registerConstantInExpressionAST_analyzeExpression (co
   var_registerFieldMap.method_searchKey (object->mAttribute_mFieldName, var_bitIndex, var_bitCount, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 112)) ;
   outArgument_outResult = GALGAS_operandIR::constructor_new (var_type, GALGAS_valueIR::constructor_literalInteger (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118)).left_shift_operation (var_bitCount COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118)).left_shift_operation (var_bitIndex COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_registerConstantInExpressionAST_analyzeExpression (void) {
@@ -2808,7 +2869,7 @@ C_PrologueEpilogue gMethod_registerConstantInExpressionAST_analyzeExpression (de
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Overriding category method '@registerIntegerExpInExpressionAST analyzeExpression'                  *
+//                 Overriding extension method '@registerIntegerExpInExpressionAST analyzeExpression'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2931,6 +2992,7 @@ static void categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (
     break ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (void) {
@@ -2944,7 +3006,7 @@ C_PrologueEpilogue gMethod_registerIntegerExpInExpressionAST_analyzeExpression (
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category method '@registerIntegerConstantInExpressionIR llvmInstructionCode'               *
+//              Overriding extension method '@registerIntegerConstantInExpressionIR llvmInstructionCode'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2961,6 +3023,7 @@ static void categoryMethod_registerIntegerConstantInExpressionIR_llvmInstruction
   if (kBoolTrue == test_0) {
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_registerIntegerConstantInExpressionIR_llvmInstructionCode (void) {
@@ -2974,7 +3037,7 @@ C_PrologueEpilogue gMethod_registerIntegerConstantInExpressionIR_llvmInstruction
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Overriding category method '@registerIntegerConstantInExpressionIR enterAccessibleEntities'             *
+//            Overriding extension method '@registerIntegerConstantInExpressionIR enterAccessibleEntities'             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2984,6 +3047,7 @@ static void categoryMethod_registerIntegerConstantInExpressionIR_enterAccessible
                                                                                           C_Compiler * /* inCompiler */
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities (void) {
@@ -2997,7 +3061,7 @@ C_PrologueEpilogue gMethod_registerIntegerConstantInExpressionIR_enterAccessible
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category method '@checkInstructionAST noteInstructionTypesInPrecedenceGraph'               *
+//              Overriding extension method '@checkInstructionAST noteInstructionTypesInPrecedenceGraph'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3009,6 +3073,7 @@ static void categoryMethod_checkInstructionAST_noteInstructionTypesInPrecedenceG
   macroValidSharedObject (object, cPtr_checkInstructionAST) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 37)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_checkInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3022,7 +3087,7 @@ C_PrologueEpilogue gMethod_checkInstructionAST_noteInstructionTypesInPrecedenceG
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Overriding category method '@checkInstructionAST analyze'                              *
+//                             Overriding extension method '@checkInstructionAST analyze'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3060,6 +3125,7 @@ static void categoryMethod_checkInstructionAST_analyze (const cPtr_instructionAS
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_checkInstructionAST_analyze (void) {
@@ -3073,7 +3139,7 @@ C_PrologueEpilogue gMethod_checkInstructionAST_analyze (defineCategoryMethod_che
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//         Overriding category method '@varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph'         *
+//        Overriding extension method '@varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3092,6 +3158,7 @@ static void categoryMethod_varInstructionWithAssignmentAST_noteInstructionTypesI
   }
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 69)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varInstructionWithAssignmentAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3105,7 +3172,7 @@ C_PrologueEpilogue gMethod_varInstructionWithAssignmentAST_noteInstructionTypesI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category method '@varInstructionAST noteInstructionTypesInPrecedenceGraph'                *
+//               Overriding extension method '@varInstructionAST noteInstructionTypesInPrecedenceGraph'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3120,6 +3187,7 @@ static void categoryMethod_varInstructionAST_noteInstructionTypesInPrecedenceGra
   ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("instruction-var.galgas", 76)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3133,7 +3201,7 @@ C_PrologueEpilogue gMethod_varInstructionAST_noteInstructionTypesInPrecedenceGra
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@varInstructionWithAssignmentAST analyze'                        *
+//                       Overriding extension method '@varInstructionWithAssignmentAST analyze'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3178,6 +3246,7 @@ static void categoryMethod_varInstructionWithAssignmentAST_analyze (const cPtr_i
   categoryModifier_appendStoreLocalVariable (ioArgument_ioInstructionGenerationList, var_varLLVMName, var_result.mAttribute_mType, var_result, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 141)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varInstructionWithAssignmentAST_analyze (void) {
@@ -3191,7 +3260,7 @@ C_PrologueEpilogue gMethod_varInstructionWithAssignmentAST_analyze (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Overriding category method '@varInstructionAST analyze'                               *
+//                              Overriding extension method '@varInstructionAST analyze'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3224,6 +3293,7 @@ static void categoryMethod_varInstructionAST_analyze (const cPtr_instructionAST 
   }
   ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName, var_targetType  COMMA_SOURCE_FILE ("instruction-var.galgas", 182)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varInstructionAST_analyze (void) {
@@ -3237,7 +3307,7 @@ C_PrologueEpilogue gMethod_varInstructionAST_analyze (defineCategoryMethod_varIn
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//         Overriding category method '@letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph'         *
+//        Overriding extension method '@letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3256,6 +3326,7 @@ static void categoryMethod_letInstructionWithAssignmentAST_noteInstructionTypesI
   }
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 50)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_letInstructionWithAssignmentAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3269,7 +3340,7 @@ C_PrologueEpilogue gMethod_letInstructionWithAssignmentAST_noteInstructionTypesI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@letInstructionWithAssignmentAST analyze'                        *
+//                       Overriding extension method '@letInstructionWithAssignmentAST analyze'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3313,6 +3384,7 @@ static void categoryMethod_letInstructionWithAssignmentAST_analyze (const cPtr_i
   ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName, var_result.mAttribute_mType  COMMA_SOURCE_FILE ("instruction-let.galgas", 115)) ;
   categoryMethod_storeInMemory (var_localConstant, var_result, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 116)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_letInstructionWithAssignmentAST_analyze (void) {
@@ -3326,7 +3398,7 @@ C_PrologueEpilogue gMethod_letInstructionWithAssignmentAST_analyze (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//         Overriding category method '@selfVarAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph'         *
+//        Overriding extension method '@selfVarAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3338,6 +3410,7 @@ static void categoryMethod_selfVarAssignmentInstructionAST_noteInstructionTypesI
   macroValidSharedObject (object, cPtr_selfVarAssignmentInstructionAST) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 58)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfVarAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3351,7 +3424,7 @@ C_PrologueEpilogue gMethod_selfVarAssignmentInstructionAST_noteInstructionTypesI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph'           *
+//          Overriding extension method '@varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3363,6 +3436,7 @@ static void categoryMethod_varAssignmentInstructionAST_noteInstructionTypesInPre
   macroValidSharedObject (object, cPtr_varAssignmentInstructionAST) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 64)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3376,7 +3450,7 @@ C_PrologueEpilogue gMethod_varAssignmentInstructionAST_noteInstructionTypesInPre
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@varAssignmentInstructionAST analyze'                          *
+//                         Overriding extension method '@varAssignmentInstructionAST analyze'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3435,6 +3509,7 @@ static void categoryMethod_varAssignmentInstructionAST_analyze (const cPtr_instr
   }
   categoryMethod_storeInMemory (var_target, var_result, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 131)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varAssignmentInstructionAST_analyze (void) {
@@ -3448,7 +3523,7 @@ C_PrologueEpilogue gMethod_varAssignmentInstructionAST_analyze (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@selfVarAssignmentInstructionAST analyze'                        *
+//                       Overriding extension method '@selfVarAssignmentInstructionAST analyze'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3540,6 +3615,7 @@ static void categoryMethod_selfVarAssignmentInstructionAST_analyze (const cPtr_i
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfVarAssignmentInstructionAST_analyze (void) {
@@ -3553,7 +3629,7 @@ C_PrologueEpilogue gMethod_selfVarAssignmentInstructionAST_analyze (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//              Overriding category method '@assertInstructionAST noteInstructionTypesInPrecedenceGraph'               *
+//              Overriding extension method '@assertInstructionAST noteInstructionTypesInPrecedenceGraph'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3565,6 +3641,7 @@ static void categoryMethod_assertInstructionAST_noteInstructionTypesInPrecedence
   macroValidSharedObject (object, cPtr_assertInstructionAST) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 37)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_assertInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3578,7 +3655,7 @@ C_PrologueEpilogue gMethod_assertInstructionAST_noteInstructionTypesInPrecedence
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Overriding category method '@assertInstructionAST analyze'                              *
+//                             Overriding extension method '@assertInstructionAST analyze'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3617,6 +3694,7 @@ static void categoryMethod_assertInstructionAST_analyze (const cPtr_instructionA
     ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_assertInstructionIR::constructor_new (object->mAttribute_mAssertInstructionLocation, var_instructionGenerationList, var_expressionValue  COMMA_SOURCE_FILE ("instruction-assert.galgas", 85))  COMMA_SOURCE_FILE ("instruction-assert.galgas", 85)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_assertInstructionAST_analyze (void) {
@@ -3630,7 +3708,7 @@ C_PrologueEpilogue gMethod_assertInstructionAST_analyze (defineCategoryMethod_as
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@assertInstructionIR llvmInstructionCode'                        *
+//                       Overriding extension method '@assertInstructionIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3648,6 +3726,7 @@ static void categoryMethod_assertInstructionIR_llvmInstructionCode (const cPtr_a
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  raise_exception (").add_operation (var_assertErrorCode.getter_string (SOURCE_FILE ("instruction-assert.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 113)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 113)).add_operation (object->mAttribute_mAssertInstructionLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 114)).getter_lastPathComponent (SOURCE_FILE ("instruction-assert.galgas", 114)).getter_utf_38_Representation (SOURCE_FILE ("instruction-assert.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 114)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 114)).add_operation (object->mAttribute_mAssertInstructionLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 115)).getter_string (SOURCE_FILE ("instruction-assert.galgas", 115)), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 115)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 115)), inCompiler  COMMA_SOURCE_FILE ("instruction-assert.galgas", 113)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("instruction-assert.galgas", 116)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_assertInstructionIR_llvmInstructionCode (void) {
@@ -3661,7 +3740,7 @@ C_PrologueEpilogue gMethod_assertInstructionIR_llvmInstructionCode (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@assertInstructionIR enterAccessibleEntities'                      *
+//                     Overriding extension method '@assertInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3674,6 +3753,7 @@ static void categoryMethod_assertInstructionIR_enterAccessibleEntities (const cP
   macroValidSharedObject (object, cPtr_assertInstructionIR) ;
   categoryMethod_enterAccessibleEntities (object->mAttribute_mInstructionList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-assert.galgas", 125)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_assertInstructionIR_enterAccessibleEntities (void) {
@@ -3687,7 +3767,7 @@ C_PrologueEpilogue gMethod_assertInstructionIR_enterAccessibleEntities (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category method '@throwInstructionAST noteInstructionTypesInPrecedenceGraph'               *
+//              Overriding extension method '@throwInstructionAST noteInstructionTypesInPrecedenceGraph'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3699,6 +3779,7 @@ static void categoryMethod_throwInstructionAST_noteInstructionTypesInPrecedenceG
   macroValidSharedObject (object, cPtr_throwInstructionAST) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mCodeExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 34)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_throwInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3712,7 +3793,7 @@ C_PrologueEpilogue gMethod_throwInstructionAST_noteInstructionTypesInPrecedenceG
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Overriding category method '@throwInstructionAST analyze'                              *
+//                             Overriding extension method '@throwInstructionAST analyze'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3772,6 +3853,7 @@ static void categoryMethod_throwInstructionAST_analyze (const cPtr_instructionAS
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_throwInstructionAST_analyze (void) {
@@ -3785,7 +3867,7 @@ C_PrologueEpilogue gMethod_throwInstructionAST_analyze (defineCategoryMethod_thr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@throwInstructionIR llvmInstructionCode'                         *
+//                        Overriding extension method '@throwInstructionIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3805,6 +3887,7 @@ static void categoryMethod_throwInstructionIR_llvmInstructionCode (const cPtr_ab
   ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 114)).add_operation (object->mAttribute_mThrowLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 114)).getter_string (SOURCE_FILE ("instruction-panic.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 114)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 114)), inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 114)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 115)).add_operation (object->mAttribute_mCode.getter_string (SOURCE_FILE ("instruction-panic.galgas", 115)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 115)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 115)), inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 115)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_throwInstructionIR_llvmInstructionCode (void) {
@@ -3818,7 +3901,7 @@ C_PrologueEpilogue gMethod_throwInstructionIR_llvmInstructionCode (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@throwInstructionIR enterAccessibleEntities'                       *
+//                      Overriding extension method '@throwInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3828,6 +3911,7 @@ static void categoryMethod_throwInstructionIR_enterAccessibleEntities (const cPt
                                                                        C_Compiler * /* inCompiler */
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_throwInstructionIR_enterAccessibleEntities (void) {
@@ -3841,7 +3925,7 @@ C_PrologueEpilogue gMethod_throwInstructionIR_enterAccessibleEntities (defineCat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//         Overriding category method '@varOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph'         *
+//        Overriding extension method '@varOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3853,6 +3937,7 @@ static void categoryMethod_varOperatorAssignInstructionAST_noteInstructionTypesI
   macroValidSharedObject (object, cPtr_varOperatorAssignInstructionAST) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 113)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varOperatorAssignInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3866,7 +3951,7 @@ C_PrologueEpilogue gMethod_varOperatorAssignInstructionAST_noteInstructionTypesI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//       Overriding category method '@selfVarOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph'       *
+//      Overriding extension method '@selfVarOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph'       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3878,6 +3963,7 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_noteInstructionTy
   macroValidSharedObject (object, cPtr_selfVarOperatorAssignInstructionAST) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 119)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfVarOperatorAssignInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -3891,7 +3977,7 @@ C_PrologueEpilogue gMethod_selfVarOperatorAssignInstructionAST_noteInstructionTy
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@varOperatorAssignInstructionAST analyze'                        *
+//                       Overriding extension method '@varOperatorAssignInstructionAST analyze'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4088,6 +4174,7 @@ static void categoryMethod_varOperatorAssignInstructionAST_analyze (const cPtr_i
   callCategoryMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValue, object->mAttribute_mTargetVarName.mAttribute_location, var_sourceValue, var_targetType, var_newResultingValue, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 238)) ;
   categoryMethod_storeInMemory (var_targetVariableKind, var_newResultingValue, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 247)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_varOperatorAssignInstructionAST_analyze (void) {
@@ -4101,7 +4188,7 @@ C_PrologueEpilogue gMethod_varOperatorAssignInstructionAST_analyze (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@selfVarOperatorAssignInstructionAST analyze'                      *
+//                     Overriding extension method '@selfVarOperatorAssignInstructionAST analyze'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4331,6 +4418,7 @@ static void categoryMethod_selfVarOperatorAssignInstructionAST_analyze (const cP
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfVarOperatorAssignInstructionAST_analyze (void) {
@@ -4344,7 +4432,7 @@ C_PrologueEpilogue gMethod_selfVarOperatorAssignInstructionAST_analyze (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category method '@ifInstructionAST noteInstructionTypesInPrecedenceGraph'                 *
+//                Overriding extension method '@ifInstructionAST noteInstructionTypesInPrecedenceGraph'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4358,6 +4446,7 @@ static void categoryMethod_ifInstructionAST_noteInstructionTypesInPrecedenceGrap
   categoryMethod_noteInstructionListTypesInPrecedenceGraph (object->mAttribute_mElseInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 108)) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mTestExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 109)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_ifInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -4371,7 +4460,7 @@ C_PrologueEpilogue gMethod_ifInstructionAST_noteInstructionTypesInPrecedenceGrap
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Overriding category method '@ifInstructionAST analyze'                                *
+//                               Overriding extension method '@ifInstructionAST analyze'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4412,6 +4501,7 @@ static void categoryMethod_ifInstructionAST_analyze (const cPtr_instructionAST *
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_ifInstructionIR::constructor_new (var_testResult, object->mAttribute_mTestExpressionEndLocation, var_thenInstructionGenerationList, var_elseInstructionGenerationList  COMMA_SOURCE_FILE ("instruction-if.galgas", 183))  COMMA_SOURCE_FILE ("instruction-if.galgas", 183)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_ifInstructionAST_analyze (void) {
@@ -4425,7 +4515,7 @@ C_PrologueEpilogue gMethod_ifInstructionAST_analyze (defineCategoryMethod_ifInst
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@ifInstructionIR llvmInstructionCode'                          *
+//                         Overriding extension method '@ifInstructionIR llvmInstructionCode'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4452,6 +4542,7 @@ static void categoryMethod_ifInstructionIR_llvmInstructionCode (const cPtr_abstr
     "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 220)), inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 220)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_labelEnd.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 222)), inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 222)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_ifInstructionIR_llvmInstructionCode (void) {
@@ -4465,7 +4556,7 @@ C_PrologueEpilogue gMethod_ifInstructionIR_llvmInstructionCode (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@ifInstructionIR enterAccessibleEntities'                        *
+//                       Overriding extension method '@ifInstructionIR enterAccessibleEntities'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4479,6 +4570,7 @@ static void categoryMethod_ifInstructionIR_enterAccessibleEntities (const cPtr_a
   categoryMethod_enterAccessibleEntities (object->mAttribute_mThenInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 231)) ;
   categoryMethod_enterAccessibleEntities (object->mAttribute_mElseInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 232)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_ifInstructionIR_enterAccessibleEntities (void) {
@@ -4492,7 +4584,7 @@ C_PrologueEpilogue gMethod_ifInstructionIR_enterAccessibleEntities (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category method '@onInstructionAST noteInstructionTypesInPrecedenceGraph'                 *
+//                Overriding extension method '@onInstructionAST noteInstructionTypesInPrecedenceGraph'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4508,6 +4600,7 @@ static void categoryMethod_onInstructionAST_noteInstructionTypesInPrecedenceGrap
     enumerator_5219.gotoNextObject () ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_onInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -4521,7 +4614,7 @@ C_PrologueEpilogue gMethod_onInstructionAST_noteInstructionTypesInPrecedenceGrap
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Overriding category method '@onInstructionAST analyze'                                *
+//                               Overriding extension method '@onInstructionAST analyze'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4625,6 +4718,7 @@ static void categoryMethod_onInstructionAST_analyze (const cPtr_instructionAST *
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_onInstructionIR::constructor_new (var_onInstructionBranchListIR  COMMA_SOURCE_FILE ("instruction-select.galgas", 278))  COMMA_SOURCE_FILE ("instruction-select.galgas", 278)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_onInstructionAST_analyze (void) {
@@ -4638,7 +4732,7 @@ C_PrologueEpilogue gMethod_onInstructionAST_analyze (defineCategoryMethod_onInst
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@onInstructionIR llvmInstructionCode'                          *
+//                         Overriding extension method '@onInstructionIR llvmInstructionCode'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4794,6 +4888,7 @@ static void categoryMethod_onInstructionIR_llvmInstructionCode (const cPtr_abstr
     "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 457)), inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 457)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_exitLabelName.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 458)), inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 458)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_onInstructionIR_llvmInstructionCode (void) {
@@ -4807,7 +4902,7 @@ C_PrologueEpilogue gMethod_onInstructionIR_llvmInstructionCode (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@onInstructionIR enterAccessibleEntities'                        *
+//                       Overriding extension method '@onInstructionIR enterAccessibleEntities'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4870,6 +4965,7 @@ static void categoryMethod_onInstructionIR_enterAccessibleEntities (const cPtr_a
     enumerator_21052.gotoNextObject () ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_onInstructionIR_enterAccessibleEntities (void) {
@@ -4883,7 +4979,7 @@ C_PrologueEpilogue gMethod_onInstructionIR_enterAccessibleEntities (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@abstractCallInstructionAST noteInstructionTypesInPrecedenceGraph'            *
+//           Overriding extension method '@abstractCallInstructionAST noteInstructionTypesInPrecedenceGraph'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4933,6 +5029,7 @@ static void categoryMethod_abstractCallInstructionAST_noteInstructionTypesInPrec
     enumerator_6660.gotoNextObject () ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_abstractCallInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -4946,7 +5043,7 @@ C_PrologueEpilogue gMethod_abstractCallInstructionAST_noteInstructionTypesInPrec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@selfRoutineCallInstructionAST analyze'                         *
+//                        Overriding extension method '@selfRoutineCallInstructionAST analyze'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4979,6 +5076,7 @@ static void categoryMethod_selfRoutineCallInstructionAST_analyze (const cPtr_ins
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_procCallInstructionIR::constructor_new (GALGAS_string::makeEmptyString (), var_routineMangledName.mAttribute_string, var_routineKindIR, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 250))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 250)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfRoutineCallInstructionAST_analyze (void) {
@@ -4992,7 +5090,7 @@ C_PrologueEpilogue gMethod_selfRoutineCallInstructionAST_analyze (defineCategory
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@standaloneRoutineCallInstructionAST analyze'                      *
+//                     Overriding extension method '@standaloneRoutineCallInstructionAST analyze'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5025,6 +5123,7 @@ static void categoryMethod_standaloneRoutineCallInstructionAST_analyze (const cP
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_procCallInstructionIR::constructor_new (GALGAS_string::makeEmptyString (), var_routineMangledName.mAttribute_string, var_routineKindIR, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 295))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 295)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_standaloneRoutineCallInstructionAST_analyze (void) {
@@ -5038,7 +5137,7 @@ C_PrologueEpilogue gMethod_standaloneRoutineCallInstructionAST_analyze (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@remoteRoutineCallInstructionAST analyze'                        *
+//                       Overriding extension method '@remoteRoutineCallInstructionAST analyze'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5071,6 +5170,7 @@ static void categoryMethod_remoteRoutineCallInstructionAST_analyze (const cPtr_i
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_procCallInstructionIR::constructor_new (object->mAttribute_mReceiverName.mAttribute_string, var_routineMangledName.mAttribute_string, var_routineKindIR, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 340))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 340)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_remoteRoutineCallInstructionAST_analyze (void) {
@@ -5084,7 +5184,7 @@ C_PrologueEpilogue gMethod_remoteRoutineCallInstructionAST_analyze (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@selfRemoteRoutineCallInstructionAST analyze'                      *
+//                     Overriding extension method '@selfRemoteRoutineCallInstructionAST analyze'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5227,6 +5327,7 @@ static void categoryMethod_selfRemoteRoutineCallInstructionAST_analyze (const cP
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_selfRemoteRoutineCallInstructionAST_analyze (void) {
@@ -5240,7 +5341,7 @@ C_PrologueEpilogue gMethod_selfRemoteRoutineCallInstructionAST_analyze (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@procCallInstructionIR llvmInstructionCode'                       *
+//                      Overriding extension method '@procCallInstructionIR llvmInstructionCode'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5321,6 +5422,7 @@ static void categoryMethod_procCallInstructionIR_llvmInstructionCode (const cPtr
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")\n"), inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 794)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_procCallInstructionIR_llvmInstructionCode (void) {
@@ -5334,7 +5436,7 @@ C_PrologueEpilogue gMethod_procCallInstructionIR_llvmInstructionCode (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@procCallInstructionIR enterAccessibleEntities'                     *
+//                    Overriding extension method '@procCallInstructionIR enterAccessibleEntities'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5351,6 +5453,7 @@ static void categoryMethod_procCallInstructionIR_enterAccessibleEntities (const 
     ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (object->mAttribute_mGlobalVariableName  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 805)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_procCallInstructionIR_enterAccessibleEntities (void) {
@@ -5364,7 +5467,7 @@ C_PrologueEpilogue gMethod_procCallInstructionIR_enterAccessibleEntities (define
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category method '@whileInstructionAST noteInstructionTypesInPrecedenceGraph'               *
+//              Overriding extension method '@whileInstructionAST noteInstructionTypesInPrecedenceGraph'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5377,6 +5480,7 @@ static void categoryMethod_whileInstructionAST_noteInstructionTypesInPrecedenceG
   categoryMethod_noteInstructionListTypesInPrecedenceGraph (object->mAttribute_mWhileInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 62)) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mTestExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 63)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_whileInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -5390,7 +5494,7 @@ C_PrologueEpilogue gMethod_whileInstructionAST_noteInstructionTypesInPrecedenceG
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Overriding category method '@whileInstructionAST analyze'                              *
+//                             Overriding extension method '@whileInstructionAST analyze'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5430,6 +5534,7 @@ static void categoryMethod_whileInstructionAST_analyze (const cPtr_instructionAS
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_whileInstructionIR::constructor_new (object->mAttribute_mEndOf_5F_test_5F_expression.getter_locationIndex (inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 124)), var_testInstructionGenerationList, var_testValue, var_instructionGenerationList  COMMA_SOURCE_FILE ("instruction-while.galgas", 123))  COMMA_SOURCE_FILE ("instruction-while.galgas", 123)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_whileInstructionAST_analyze (void) {
@@ -5443,7 +5548,7 @@ C_PrologueEpilogue gMethod_whileInstructionAST_analyze (defineCategoryMethod_whi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@whileInstructionIR llvmInstructionCode'                         *
+//                        Overriding extension method '@whileInstructionIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5470,6 +5575,7 @@ static void categoryMethod_whileInstructionIR_llvmInstructionCode (const cPtr_ab
     "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 158)), inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 158)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_labelEnd.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 159)), inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 159)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_whileInstructionIR_llvmInstructionCode (void) {
@@ -5483,7 +5589,7 @@ C_PrologueEpilogue gMethod_whileInstructionIR_llvmInstructionCode (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@whileInstructionIR enterAccessibleEntities'                       *
+//                      Overriding extension method '@whileInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5497,6 +5603,7 @@ static void categoryMethod_whileInstructionIR_enterAccessibleEntities (const cPt
   categoryMethod_enterAccessibleEntities (object->mAttribute_mTestInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 168)) ;
   categoryMethod_enterAccessibleEntities (object->mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 169)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_whileInstructionIR_enterAccessibleEntities (void) {
@@ -5510,7 +5617,7 @@ C_PrologueEpilogue gMethod_whileInstructionIR_enterAccessibleEntities (defineCat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category method '@forInstructionAST noteInstructionTypesInPrecedenceGraph'                *
+//               Overriding extension method '@forInstructionAST noteInstructionTypesInPrecedenceGraph'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5523,6 +5630,7 @@ static void categoryMethod_forInstructionAST_noteInstructionTypesInPrecedenceGra
   categoryMethod_noteInstructionListTypesInPrecedenceGraph (object->mAttribute_mDoInstructionList, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 49)) ;
   callCategoryMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mIteratedExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 50)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_forInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
@@ -5536,7 +5644,7 @@ C_PrologueEpilogue gMethod_forInstructionAST_noteInstructionTypesInPrecedenceGra
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Overriding category method '@forInstructionAST analyze'                               *
+//                              Overriding extension method '@forInstructionAST analyze'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5577,6 +5685,7 @@ static void categoryMethod_forInstructionAST_analyze (const cPtr_instructionAST 
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_forInstructionIR::constructor_new (var_enumeratedVarLLVMName, var_iteratedElementType, object->mAttribute_mEndOf_5F_iteratedExpression_5F_instruction, var_iteratedExpressionResult, var_instructionGenerationList  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 120))  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 120)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_forInstructionAST_analyze (void) {
@@ -5590,7 +5699,7 @@ C_PrologueEpilogue gMethod_forInstructionAST_analyze (defineCategoryMethod_forIn
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@forInstructionIR llvmInstructionCode'                          *
+//                         Overriding extension method '@forInstructionIR llvmInstructionCode'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5632,6 +5741,7 @@ static void categoryMethod_forInstructionIR_llvmInstructionCode (const cPtr_abst
     "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 177)), inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 177)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_endLabel.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 180)), inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 180)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_forInstructionIR_llvmInstructionCode (void) {
@@ -5645,7 +5755,7 @@ C_PrologueEpilogue gMethod_forInstructionIR_llvmInstructionCode (defineCategoryM
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@forInstructionIR enterAccessibleEntities'                        *
+//                       Overriding extension method '@forInstructionIR enterAccessibleEntities'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5658,6 +5768,7 @@ static void categoryMethod_forInstructionIR_enterAccessibleEntities (const cPtr_
   macroValidSharedObject (object, cPtr_forInstructionIR) ;
   categoryMethod_enterAccessibleEntities (object->mAttribute_mInstructionList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 189)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_forInstructionIR_enterAccessibleEntities (void) {
@@ -5671,7 +5782,7 @@ C_PrologueEpilogue gMethod_forInstructionIR_enterAccessibleEntities (defineCateg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Overriding category method '@extendIR llvmInstructionCode'                              *
+//                             Overriding extension method '@extendIR llvmInstructionCode'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5699,6 +5810,7 @@ static void categoryMethod_extendIR_llvmInstructionCode (const cPtr_abstractInst
   ioArgument_ioLLVMcode.plusAssign_operation(temp_0, inCompiler  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 25)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" ").add_operation (object->mAttribute_mSource.mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)).add_operation (extensionGetter_llvmName (object->mAttribute_mSource.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)).add_operation (object->mAttribute_mResult.mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)), inCompiler  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 26)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_extendIR_llvmInstructionCode (void) {
@@ -5712,7 +5824,7 @@ C_PrologueEpilogue gMethod_extendIR_llvmInstructionCode (defineCategoryMethod_ex
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Overriding category method '@extendIR enterAccessibleEntities'                            *
+//                           Overriding extension method '@extendIR enterAccessibleEntities'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5722,6 +5834,7 @@ static void categoryMethod_extendIR_enterAccessibleEntities (const cPtr_abstract
                                                              C_Compiler * /* inCompiler */
                                                              COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_extendIR_enterAccessibleEntities (void) {
@@ -5735,7 +5848,7 @@ C_PrologueEpilogue gMethod_extendIR_enterAccessibleEntities (defineCategoryMetho
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@binaryOperationIR enterAccessibleEntities'                       *
+//                      Overriding extension method '@binaryOperationIR enterAccessibleEntities'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5745,6 +5858,7 @@ static void categoryMethod_binaryOperationIR_enterAccessibleEntities (const cPtr
                                                                       C_Compiler * /* inCompiler */
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_binaryOperationIR_enterAccessibleEntities (void) {
@@ -5758,7 +5872,7 @@ C_PrologueEpilogue gMethod_binaryOperationIR_enterAccessibleEntities (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@binaryOperationIR llvmInstructionCode'                         *
+//                        Overriding extension method '@binaryOperationIR llvmInstructionCode'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5951,6 +6065,7 @@ static void categoryMethod_binaryOperationIR_llvmInstructionCode (const cPtr_abs
     break ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_binaryOperationIR_llvmInstructionCode (void) {
@@ -5964,7 +6079,7 @@ C_PrologueEpilogue gMethod_binaryOperationIR_llvmInstructionCode (defineCategory
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Overriding category method '@shortCircuitAndOperationIR enterAccessibleEntities'                   *
+//                  Overriding extension method '@shortCircuitAndOperationIR enterAccessibleEntities'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5978,6 +6093,7 @@ static void categoryMethod_shortCircuitAndOperationIR_enterAccessibleEntities (c
   categoryMethod_enterAccessibleEntities (object->mAttribute_mLeftInstructionList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 38)) ;
   categoryMethod_enterAccessibleEntities (object->mAttribute_mRightInstructionList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 39)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_shortCircuitAndOperationIR_enterAccessibleEntities (void) {
@@ -5991,7 +6107,7 @@ C_PrologueEpilogue gMethod_shortCircuitAndOperationIR_enterAccessibleEntities (d
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@shortCircuitAndOperationIR llvmInstructionCode'                     *
+//                    Overriding extension method '@shortCircuitAndOperationIR llvmInstructionCode'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6019,6 +6135,7 @@ static void categoryMethod_shortCircuitAndOperationIR_llvmInstructionCode (const
   ioArgument_ioLLVMcode.plusAssign_operation(var_falseLabel.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 59)), inCompiler  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 59)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTargetOperand.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)).add_operation (GALGAS_string (" = phi i1 ["), inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)).add_operation (extensionGetter_llvmName (object->mAttribute_mRightOperand.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)).add_operation (GALGAS_string (", %"), inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)).add_operation (var_trueLabel, inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)).add_operation (GALGAS_string ("], [false, %"), inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)).add_operation (var_startLabel, inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)), inCompiler  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 60)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_shortCircuitAndOperationIR_llvmInstructionCode (void) {
@@ -6032,7 +6149,7 @@ C_PrologueEpilogue gMethod_shortCircuitAndOperationIR_llvmInstructionCode (defin
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@loadRegisterIR llvmInstructionCode'                           *
+//                          Overriding extension method '@loadRegisterIR llvmInstructionCode'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6047,6 +6164,7 @@ static void categoryMethod_loadRegisterIR_llvmInstructionCode (const cPtr_abstra
   GALGAS_string var_llvmType = object->mAttribute_mTargetValue.mAttribute_mType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTargetValue.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 26)).add_operation (GALGAS_string (" = load volatile "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 26)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 26)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 26)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 26)).add_operation (GALGAS_string ("* inttoptr (i32 "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 26)).add_operation (object->mAttribute_mRegisterAddress.getter_string (SOURCE_FILE ("intermediate-load-volatile-register.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 27)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 27)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 27)).add_operation (GALGAS_string ("*) ; "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 27)).add_operation (object->mAttribute_mRegisterAddress.getter_hexString (SOURCE_FILE ("intermediate-load-volatile-register.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 27)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 27)), inCompiler  COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 26)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadRegisterIR_llvmInstructionCode (void) {
@@ -6060,7 +6178,7 @@ C_PrologueEpilogue gMethod_loadRegisterIR_llvmInstructionCode (defineCategoryMet
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@loadRegisterIR enterAccessibleEntities'                         *
+//                        Overriding extension method '@loadRegisterIR enterAccessibleEntities'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6073,6 +6191,7 @@ static void categoryMethod_loadRegisterIR_enterAccessibleEntities (const cPtr_ab
   macroValidSharedObject (object, cPtr_loadRegisterIR) ;
   ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (object->mAttribute_mRegisterName  COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 36)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadRegisterIR_enterAccessibleEntities (void) {
@@ -6086,7 +6205,7 @@ C_PrologueEpilogue gMethod_loadRegisterIR_enterAccessibleEntities (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@loadGlobalVariableIR llvmInstructionCode'                        *
+//                       Overriding extension method '@loadGlobalVariableIR llvmInstructionCode'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6106,6 +6225,7 @@ static void categoryMethod_loadGlobalVariableIR_llvmInstructionCode (const cPtr_
   }
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-global-variable.galgas", 30)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-global-variable.galgas", 30)).add_operation (GALGAS_string ("* @"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-global-variable.galgas", 30)).add_operation (function_llvmNameForGlobalVariable (object->mAttribute_mVariableName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-global-variable.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-global-variable.galgas", 30)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-global-variable.galgas", 30)), inCompiler  COMMA_SOURCE_FILE ("intermediate-load-global-variable.galgas", 30)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadGlobalVariableIR_llvmInstructionCode (void) {
@@ -6119,7 +6239,7 @@ C_PrologueEpilogue gMethod_loadGlobalVariableIR_llvmInstructionCode (defineCateg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@loadGlobalVariableIR enterAccessibleEntities'                      *
+//                     Overriding extension method '@loadGlobalVariableIR enterAccessibleEntities'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6132,6 +6252,7 @@ static void categoryMethod_loadGlobalVariableIR_enterAccessibleEntities (const c
   macroValidSharedObject (object, cPtr_loadGlobalVariableIR) ;
   ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (object->mAttribute_mVariableName  COMMA_SOURCE_FILE ("intermediate-load-global-variable.galgas", 39)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadGlobalVariableIR_enterAccessibleEntities (void) {
@@ -6145,7 +6266,7 @@ C_PrologueEpilogue gMethod_loadGlobalVariableIR_enterAccessibleEntities (defineC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@loadLocalVariableIR llvmInstructionCode'                        *
+//                       Overriding extension method '@loadLocalVariableIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6161,6 +6282,7 @@ static void categoryMethod_loadLocalVariableIR_llvmInstructionCode (const cPtr_a
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTargetValue.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 24)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 24)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 24)), inCompiler  COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 24)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 25)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 25)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 25)).add_operation (function_llvmNameForLocalVariable (object->mAttribute_mVariableName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 25)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 25)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 25)), inCompiler  COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 25)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadLocalVariableIR_llvmInstructionCode (void) {
@@ -6174,7 +6296,7 @@ C_PrologueEpilogue gMethod_loadLocalVariableIR_llvmInstructionCode (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@loadLocalVariableIR enterAccessibleEntities'                      *
+//                     Overriding extension method '@loadLocalVariableIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6184,6 +6306,7 @@ static void categoryMethod_loadLocalVariableIR_enterAccessibleEntities (const cP
                                                                         C_Compiler * /* inCompiler */
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadLocalVariableIR_enterAccessibleEntities (void) {
@@ -6197,7 +6320,7 @@ C_PrologueEpilogue gMethod_loadLocalVariableIR_enterAccessibleEntities (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@loadTaskVariableIR llvmInstructionCode'                         *
+//                        Overriding extension method '@loadTaskVariableIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6213,6 +6336,7 @@ static void categoryMethod_loadTaskVariableIR_llvmInstructionCode (const cPtr_ab
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTargetValue.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 26)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 26)), inCompiler  COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 26)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 27)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 27)).add_operation (GALGAS_string ("* @"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 27)).add_operation (function_llvmNameForTaskVariable (object->mAttribute_mTaskName, object->mAttribute_mVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 27)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 27)), inCompiler  COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 27)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadTaskVariableIR_llvmInstructionCode (void) {
@@ -6226,7 +6350,7 @@ C_PrologueEpilogue gMethod_loadTaskVariableIR_llvmInstructionCode (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@loadTaskVariableIR enterAccessibleEntities'                       *
+//                      Overriding extension method '@loadTaskVariableIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6239,6 +6363,7 @@ static void categoryMethod_loadTaskVariableIR_enterAccessibleEntities (const cPt
   macroValidSharedObject (object, cPtr_loadTaskVariableIR) ;
   ioArgument_ioAccessibleEntities.mAttribute_mTaskVariableSet.addAssign_operation (object->mAttribute_mTaskName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 36)).add_operation (object->mAttribute_mVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 36))  COMMA_SOURCE_FILE ("intermediate-load-task-variable.galgas", 36)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadTaskVariableIR_enterAccessibleEntities (void) {
@@ -6252,7 +6377,7 @@ C_PrologueEpilogue gMethod_loadTaskVariableIR_enterAccessibleEntities (defineCat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@storeVolatileIR llvmInstructionCode'                          *
+//                         Overriding extension method '@storeVolatileIR llvmInstructionCode'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6267,6 +6392,7 @@ static void categoryMethod_storeVolatileIR_llvmInstructionCode (const cPtr_abstr
   GALGAS_string var_llvmType = object->mAttribute_mTargetVarType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 27)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store volatile ").add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 28)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 28)).add_operation (extensionGetter_llvmName (object->mAttribute_mSourceValue.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 28)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 28)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 28)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 28)).add_operation (GALGAS_string ("* inttoptr (i32 "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 28)).add_operation (object->mAttribute_mAddress.getter_string (SOURCE_FILE ("intermediate-store-volatile-register.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 29)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 29)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 29)).add_operation (GALGAS_string ("*) ; "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 29)).add_operation (object->mAttribute_mAddress.getter_hexString (SOURCE_FILE ("intermediate-store-volatile-register.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 29)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 29)), inCompiler  COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 28)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_storeVolatileIR_llvmInstructionCode (void) {
@@ -6280,7 +6406,7 @@ C_PrologueEpilogue gMethod_storeVolatileIR_llvmInstructionCode (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@storeVolatileIR enterAccessibleEntities'                        *
+//                       Overriding extension method '@storeVolatileIR enterAccessibleEntities'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6293,6 +6419,7 @@ static void categoryMethod_storeVolatileIR_enterAccessibleEntities (const cPtr_a
   macroValidSharedObject (object, cPtr_storeVolatileIR) ;
   ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (object->mAttribute_mRegisterName  COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 38)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_storeVolatileIR_enterAccessibleEntities (void) {
@@ -6306,7 +6433,7 @@ C_PrologueEpilogue gMethod_storeVolatileIR_enterAccessibleEntities (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@storeGlobalVariableIR llvmInstructionCode'                       *
+//                      Overriding extension method '@storeGlobalVariableIR llvmInstructionCode'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6326,6 +6453,7 @@ static void categoryMethod_storeGlobalVariableIR_llvmInstructionCode (const cPtr
   }
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)).add_operation (extensionGetter_llvmName (object->mAttribute_mSourceValue.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)).add_operation (GALGAS_string ("* @"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)).add_operation (function_llvmNameForGlobalVariable (object->mAttribute_mGlobalVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)), inCompiler  COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 32)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_storeGlobalVariableIR_llvmInstructionCode (void) {
@@ -6339,7 +6467,7 @@ C_PrologueEpilogue gMethod_storeGlobalVariableIR_llvmInstructionCode (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@storeGlobalVariableIR enterAccessibleEntities'                     *
+//                    Overriding extension method '@storeGlobalVariableIR enterAccessibleEntities'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6352,6 +6480,7 @@ static void categoryMethod_storeGlobalVariableIR_enterAccessibleEntities (const 
   macroValidSharedObject (object, cPtr_storeGlobalVariableIR) ;
   ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (object->mAttribute_mGlobalVarName  COMMA_SOURCE_FILE ("intermediate-store-global-variable.galgas", 41)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_storeGlobalVariableIR_enterAccessibleEntities (void) {
@@ -6365,7 +6494,7 @@ C_PrologueEpilogue gMethod_storeGlobalVariableIR_enterAccessibleEntities (define
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@storeTaskVariableIR llvmInstructionCode'                        *
+//                       Overriding extension method '@storeTaskVariableIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6382,6 +6511,7 @@ static void categoryMethod_storeTaskVariableIR_llvmInstructionCode (const cPtr_a
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 29)).add_operation (extensionGetter_llvmName (object->mAttribute_mSourceValue.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 29)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 29)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 29)).add_operation (GALGAS_string ("* @"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 29)), inCompiler  COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 29)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(function_llvmNameForTaskVariable (object->mAttribute_mTaskName, object->mAttribute_mVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 30)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 30)), inCompiler  COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 30)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_storeTaskVariableIR_llvmInstructionCode (void) {
@@ -6395,7 +6525,7 @@ C_PrologueEpilogue gMethod_storeTaskVariableIR_llvmInstructionCode (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@storeTaskVariableIR enterAccessibleEntities'                      *
+//                     Overriding extension method '@storeTaskVariableIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6408,6 +6538,7 @@ static void categoryMethod_storeTaskVariableIR_enterAccessibleEntities (const cP
   macroValidSharedObject (object, cPtr_storeTaskVariableIR) ;
   ioArgument_ioAccessibleEntities.mAttribute_mTaskVariableSet.addAssign_operation (object->mAttribute_mTaskName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 39)).add_operation (object->mAttribute_mVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 39))  COMMA_SOURCE_FILE ("intermediate-store-task-variable.galgas", 39)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_storeTaskVariableIR_enterAccessibleEntities (void) {
@@ -6421,7 +6552,7 @@ C_PrologueEpilogue gMethod_storeTaskVariableIR_enterAccessibleEntities (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@storeLocalVariableIR llvmInstructionCode'                        *
+//                       Overriding extension method '@storeLocalVariableIR llvmInstructionCode'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6437,6 +6568,7 @@ static void categoryMethod_storeLocalVariableIR_llvmInstructionCode (const cPtr_
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store "), inCompiler  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 26)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (extensionGetter_llvmName (object->mAttribute_mSourceValue.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (function_llvmNameForLocalVariable (object->mAttribute_mLocalVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)), inCompiler  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_storeLocalVariableIR_llvmInstructionCode (void) {
@@ -6450,7 +6582,7 @@ C_PrologueEpilogue gMethod_storeLocalVariableIR_llvmInstructionCode (defineCateg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@storeLocalVariableIR enterAccessibleEntities'                      *
+//                     Overriding extension method '@storeLocalVariableIR enterAccessibleEntities'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6460,6 +6592,7 @@ static void categoryMethod_storeLocalVariableIR_enterAccessibleEntities (const c
                                                                          C_Compiler * /* inCompiler */
                                                                          COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_storeLocalVariableIR_enterAccessibleEntities (void) {
@@ -6473,7 +6606,7 @@ C_PrologueEpilogue gMethod_storeLocalVariableIR_enterAccessibleEntities (defineC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@loadStructureConstantIR llvmInstructionCode'                      *
+//                     Overriding extension method '@loadStructureConstantIR llvmInstructionCode'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6489,6 +6622,7 @@ static void categoryMethod_loadStructureConstantIR_llvmInstructionCode (const cP
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTargetValue.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 24)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 24)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 24)), inCompiler  COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 24)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 25)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 25)).add_operation (GALGAS_string ("* @"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 25)).add_operation (object->mAttribute_mTypeName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 25)).add_operation (GALGAS_string (".init\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 25)), inCompiler  COMMA_SOURCE_FILE ("intermediate-load-structure-constant.galgas", 25)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadStructureConstantIR_llvmInstructionCode (void) {
@@ -6502,7 +6636,7 @@ C_PrologueEpilogue gMethod_loadStructureConstantIR_llvmInstructionCode (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@loadStructureConstantIR enterAccessibleEntities'                    *
+//                   Overriding extension method '@loadStructureConstantIR enterAccessibleEntities'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6512,6 +6646,7 @@ static void categoryMethod_loadStructureConstantIR_enterAccessibleEntities (cons
                                                                             C_Compiler * /* inCompiler */
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_loadStructureConstantIR_enterAccessibleEntities (void) {
@@ -6525,7 +6660,7 @@ C_PrologueEpilogue gMethod_loadStructureConstantIR_enterAccessibleEntities (defi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@getElementPtrIR llvmInstructionCode'                          *
+//                         Overriding extension method '@getElementPtrIR llvmInstructionCode'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6541,6 +6676,7 @@ static void categoryMethod_getElementPtrIR_llvmInstructionCode (const cPtr_abstr
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 26)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 26)), inCompiler  COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 26)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)).add_operation (extensionGetter_llvmName (object->mAttribute_mSource, inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)).add_operation (GALGAS_string (", i32 0, i32 "), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)).add_operation (object->mAttribute_mIndex.getter_string (SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)), inCompiler  COMMA_SOURCE_FILE ("intermediate-get-element-ptr.galgas", 27)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_getElementPtrIR_llvmInstructionCode (void) {
@@ -6554,7 +6690,7 @@ C_PrologueEpilogue gMethod_getElementPtrIR_llvmInstructionCode (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@getElementPtrIR enterAccessibleEntities'                        *
+//                       Overriding extension method '@getElementPtrIR enterAccessibleEntities'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6564,6 +6700,7 @@ static void categoryMethod_getElementPtrIR_enterAccessibleEntities (const cPtr_a
                                                                     C_Compiler * /* inCompiler */
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_getElementPtrIR_enterAccessibleEntities (void) {
@@ -6577,7 +6714,7 @@ C_PrologueEpilogue gMethod_getElementPtrIR_enterAccessibleEntities (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@getElementPtrFromSelfIR llvmInstructionCode'                      *
+//                     Overriding extension method '@getElementPtrFromSelfIR llvmInstructionCode'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6593,6 +6730,7 @@ static void categoryMethod_getElementPtrFromSelfIR_llvmInstructionCode (const cP
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 28)), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 28)).add_operation (GALGAS_string (" = getelementptr inbounds "), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 28)), inCompiler  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 28)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_llvmType.add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)).add_operation (GALGAS_string ("* %self, i32 0, i32 "), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)).add_operation (object->mAttribute_mFieldIndex.getter_string (SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)).add_operation (GALGAS_string (" ; "), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)).add_operation (object->mAttribute_mFieldName, inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)), inCompiler  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 29)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_getElementPtrFromSelfIR_llvmInstructionCode (void) {
@@ -6606,7 +6744,7 @@ C_PrologueEpilogue gMethod_getElementPtrFromSelfIR_llvmInstructionCode (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@getElementPtrFromSelfIR enterAccessibleEntities'                    *
+//                   Overriding extension method '@getElementPtrFromSelfIR enterAccessibleEntities'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6616,6 +6754,7 @@ static void categoryMethod_getElementPtrFromSelfIR_enterAccessibleEntities (cons
                                                                             C_Compiler * /* inCompiler */
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_getElementPtrFromSelfIR_enterAccessibleEntities (void) {

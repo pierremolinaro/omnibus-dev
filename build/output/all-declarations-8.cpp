@@ -8049,7 +8049,7 @@ GALGAS_operandIR GALGAS_operandIR::extractObject (const GALGAS_object & inObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Category method '@globalVarDeclarationList-element enterInContext'                          *
+//                         Extension method '@globalVarDeclarationList-element enterInContext'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8383,7 +8383,7 @@ GALGAS_globalVariableMapIR_2D_element GALGAS_globalVariableMapIR_2D_element::ext
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Category method '@taskVarListAST-element enterInContext'                               *
+//                              Extension method '@taskVarListAST-element enterInContext'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8446,7 +8446,7 @@ void categoryMethod_enterInContext (const GALGAS_taskVarListAST_2D_element inObj
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Category method '@taskList-element semanticAnalysis'                                 *
+//                                Extension method '@taskList-element semanticAnalysis'                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8505,7 +8505,7 @@ void categoryMethod_semanticAnalysis (const GALGAS_taskList_2D_element inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category method '@panicClauseListAST-element enterInContext'                             *
+//                            Extension method '@panicClauseListAST-element enterInContext'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8534,7 +8534,7 @@ void categoryMethod_enterInContext (const GALGAS_panicClauseListAST_2D_element i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Category method '@initList-element enterInContext'                                  *
+//                                 Extension method '@initList-element enterInContext'                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8550,7 +8550,7 @@ void categoryMethod_enterInContext (const GALGAS_initList_2D_element inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Category method '@externProcedureDeclarationListAST-element enterExternProcInContext'                *
+//               Extension method '@externProcedureDeclarationListAST-element enterExternProcInContext'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8589,7 +8589,7 @@ void categoryMethod_enterExternProcInContext (const GALGAS_externProcedureDeclar
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Category method '@externProcedureMapIR-element llvmPrototypeGeneration'                       *
+//                      Extension method '@externProcedureMapIR-element llvmPrototypeGeneration'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8640,7 +8640,7 @@ void categoryMethod_llvmPrototypeGeneration (const GALGAS_externProcedureMapIR_2
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Category method '@guardMapIR-element llvmCodeGeneration'                               *
+//                              Extension method '@guardMapIR-element llvmCodeGeneration'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8815,7 +8815,7 @@ void categoryMethod_llvmCodeGeneration (const GALGAS_guardMapIR_2D_element inObj
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category method '@routineMapIR-element llvmCodeGeneration'                              *
+//                             Extension method '@routineMapIR-element llvmCodeGeneration'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8964,7 +8964,7 @@ void categoryMethod_llvmCodeGeneration (const GALGAS_routineMapIR_2D_element inO
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                    Category Getter '@objectInMemoryIR llvmName'                                     *
+//                                    Extension Getter '@objectInMemoryIR llvmName'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9016,7 +9016,7 @@ GALGAS_string extensionGetter_llvmName (const GALGAS_objectInMemoryIR & inObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Category Getter '@objectInMemoryIR name'                                       *
+//                                      Extension Getter '@objectInMemoryIR name'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9066,7 +9066,7 @@ GALGAS_string extensionGetter_name (const GALGAS_objectInMemoryIR & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Category Getter '@objectInMemoryIR type'                                       *
+//                                      Extension Getter '@objectInMemoryIR type'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9116,7 +9116,7 @@ GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const GALGAS_objectInMemory
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Category Getter '@objectInMemoryIR address'                                     *
+//                                    Extension Getter '@objectInMemoryIR address'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9166,7 +9166,7 @@ GALGAS_operandIR extensionGetter_address (const GALGAS_objectInMemoryIR & inObje
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Category method '@objectInMemoryIR loadFromMemory'                                  *
+//                                 Extension method '@objectInMemoryIR loadFromMemory'                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9236,7 +9236,7 @@ void categoryMethod_loadFromMemory (const GALGAS_objectInMemoryIR inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Category method '@objectInMemoryIR storeInMemory'                                  *
+//                                 Extension method '@objectInMemoryIR storeInMemory'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9292,7 +9292,7 @@ void categoryMethod_storeInMemory (const GALGAS_objectInMemoryIR inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category method '@objectInMemoryIR enterAccessibleEntities'                             *
+//                            Extension method '@objectInMemoryIR enterAccessibleEntities'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -9337,7 +9337,7 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_objectInMemoryIR inObj
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Category Getter '@objectInMemoryIR mangledName'                                   *
+//                                  Extension Getter '@objectInMemoryIR mangledName'                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10491,7 +10491,7 @@ GALGAS_availableInterruptMap_2D_element GALGAS_availableInterruptMap_2D_element:
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category method '@globalVariableMapIR-element generateLLVM'                             *
+//                            Extension method '@globalVariableMapIR-element generateLLVM'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10514,7 +10514,7 @@ void categoryMethod_generateLLVM (const GALGAS_globalVariableMapIR_2D_element in
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Overriding category getter '@booleanDeclaration location'                              *
+//                             Overriding extension getter '@booleanDeclaration location'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10543,7 +10543,7 @@ C_PrologueEpilogue gGetter_booleanDeclaration_location (defineCategoryGetter_boo
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Overriding category method '@booleanDeclaration addExtension'                            *
+//                           Overriding extension method '@booleanDeclaration addExtension'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10557,6 +10557,7 @@ static void categoryMethod_booleanDeclaration_addExtension (const cPtr_abstractD
   const GALGAS_booleanDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_booleanDeclaration_addExtension (void) {
@@ -10570,7 +10571,7 @@ C_PrologueEpilogue gMethod_booleanDeclaration_addExtension (defineCategoryMethod
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@booleanDeclaration enterInPrecedenceGraph'                       *
+//                      Overriding extension method '@booleanDeclaration enterInPrecedenceGraph'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10586,6 +10587,7 @@ static void categoryMethod_booleanDeclaration_enterInPrecedenceGraph (const cPtr
   ioArgument_ioGraph.setter_addNode (var_boolTypeName, temp_0, inCompiler COMMA_SOURCE_FILE ("type-bool.galgas", 35)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_booleanDeclaration_enterInPrecedenceGraph (void) {
@@ -10599,7 +10601,7 @@ C_PrologueEpilogue gMethod_booleanDeclaration_enterInPrecedenceGraph (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Overriding category getter '@booleanDeclaration keyRepresentationForErrorSignaling'                 *
+//                Overriding extension getter '@booleanDeclaration keyRepresentationForErrorSignaling'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10628,7 +10630,7 @@ C_PrologueEpilogue gGetter_booleanDeclaration_keyRepresentationForErrorSignaling
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Overriding category method '@booleanDeclaration enterInContext'                           *
+//                          Overriding extension method '@booleanDeclaration enterInContext'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10668,6 +10670,7 @@ static void categoryMethod_booleanDeclaration_enterInContext (const cPtr_abstrac
   routine_enterBooleanOperators (object->mAttribute_mBooleanTypeName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-bool.galgas", 82)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_booleanDeclaration_enterInContext (void) {
@@ -10681,7 +10684,7 @@ C_PrologueEpilogue gMethod_booleanDeclaration_enterInContext (defineCategoryMeth
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@booleanDeclaration enterRoutinesInContext'                       *
+//                      Overriding extension method '@booleanDeclaration enterRoutinesInContext'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10692,6 +10695,7 @@ static void categoryMethod_booleanDeclaration_enterRoutinesInContext (const cPtr
                                                                       C_Compiler * /* inCompiler */
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_booleanDeclaration_enterRoutinesInContext (void) {
@@ -10705,7 +10709,7 @@ C_PrologueEpilogue gMethod_booleanDeclaration_enterRoutinesInContext (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@booleanDeclaration semanticAnalysis'                          *
+//                         Overriding extension method '@booleanDeclaration semanticAnalysis'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10716,6 +10720,7 @@ static void categoryMethod_booleanDeclaration_semanticAnalysis (const cPtr_abstr
                                                                 C_Compiler * /* inCompiler */
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_booleanDeclaration_semanticAnalysis (void) {
@@ -10729,7 +10734,7 @@ C_PrologueEpilogue gMethod_booleanDeclaration_semanticAnalysis (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Overriding category getter '@enumerationDeclaration location'                            *
+//                           Overriding extension getter '@enumerationDeclaration location'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10758,7 +10763,7 @@ C_PrologueEpilogue gGetter_enumerationDeclaration_location (defineCategoryGetter
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@enumerationDeclaration addExtension'                          *
+//                         Overriding extension method '@enumerationDeclaration addExtension'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10772,6 +10777,7 @@ static void categoryMethod_enumerationDeclaration_addExtension (const cPtr_abstr
   const GALGAS_enumerationDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_enumerationDeclaration_addExtension (void) {
@@ -10785,7 +10791,7 @@ C_PrologueEpilogue gMethod_enumerationDeclaration_addExtension (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@enumerationDeclaration enterInPrecedenceGraph'                     *
+//                    Overriding extension method '@enumerationDeclaration enterInPrecedenceGraph'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10804,6 +10810,7 @@ static void categoryMethod_enumerationDeclaration_enterInPrecedenceGraph (const 
   ioArgument_ioGraph.setter_addEdge (var_typeName, GALGAS_string ("$").add_operation (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 74)).getter_nowhere (SOURCE_FILE ("type-enumeration-declaration.galgas", 74)) COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 74)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_enumerationDeclaration_enterInPrecedenceGraph (void) {
@@ -10817,7 +10824,7 @@ C_PrologueEpilogue gMethod_enumerationDeclaration_enterInPrecedenceGraph (define
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category getter '@enumerationDeclaration keyRepresentationForErrorSignaling'               *
+//              Overriding extension getter '@enumerationDeclaration keyRepresentationForErrorSignaling'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10846,7 +10853,7 @@ C_PrologueEpilogue gGetter_enumerationDeclaration_keyRepresentationForErrorSigna
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@enumerationDeclaration enterInContext'                         *
+//                        Overriding extension method '@enumerationDeclaration enterInContext'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10879,6 +10886,7 @@ static void categoryMethod_enumerationDeclaration_enterInContext (const cPtr_abs
   routine_enterEnumerationOperators (object->mAttribute_mEnumerationName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 129)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_enumerationDeclaration_enterInContext (void) {
@@ -10892,7 +10900,7 @@ C_PrologueEpilogue gMethod_enumerationDeclaration_enterInContext (defineCategory
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@enumerationDeclaration enterRoutinesInContext'                     *
+//                    Overriding extension method '@enumerationDeclaration enterRoutinesInContext'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10903,6 +10911,7 @@ static void categoryMethod_enumerationDeclaration_enterRoutinesInContext (const 
                                                                           C_Compiler * /* inCompiler */
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_enumerationDeclaration_enterRoutinesInContext (void) {
@@ -10916,7 +10925,7 @@ C_PrologueEpilogue gMethod_enumerationDeclaration_enterRoutinesInContext (define
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@enumerationDeclaration semanticAnalysis'                        *
+//                       Overriding extension method '@enumerationDeclaration semanticAnalysis'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10927,6 +10936,7 @@ static void categoryMethod_enumerationDeclaration_semanticAnalysis (const cPtr_a
                                                                     C_Compiler * /* inCompiler */
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_enumerationDeclaration_semanticAnalysis (void) {
@@ -10940,7 +10950,7 @@ C_PrologueEpilogue gMethod_enumerationDeclaration_semanticAnalysis (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Overriding category getter '@structureDeclaration location'                             *
+//                            Overriding extension getter '@structureDeclaration location'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10969,7 +10979,7 @@ C_PrologueEpilogue gGetter_structureDeclaration_location (defineCategoryGetter_s
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Overriding category method '@structureDeclaration addExtension'                           *
+//                          Overriding extension method '@structureDeclaration addExtension'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10996,6 +11006,7 @@ static void categoryMethod_structureDeclaration_addExtension (const cPtr_abstrac
   }
   outArgument_outNewDeclaration = var_newDeclaration ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_structureDeclaration_addExtension (void) {
@@ -11009,7 +11020,7 @@ C_PrologueEpilogue gMethod_structureDeclaration_addExtension (defineCategoryMeth
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@structureDeclaration enterInPrecedenceGraph'                      *
+//                     Overriding extension method '@structureDeclaration enterInPrecedenceGraph'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11067,6 +11078,7 @@ static void categoryMethod_structureDeclaration_enterInPrecedenceGraph (const cP
   categoryMethod_notePrimitiveTypesInPrecedenceGraph (object->mAttribute_mPrimitiveListAST, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 163)) ;
   categoryMethod_noteTypesInPrecedenceGraph (object->mAttribute_mGuardListAST, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 165)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_structureDeclaration_enterInPrecedenceGraph (void) {
@@ -11080,7 +11092,7 @@ C_PrologueEpilogue gMethod_structureDeclaration_enterInPrecedenceGraph (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category getter '@structureDeclaration keyRepresentationForErrorSignaling'                *
+//               Overriding extension getter '@structureDeclaration keyRepresentationForErrorSignaling'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11109,7 +11121,7 @@ C_PrologueEpilogue gGetter_structureDeclaration_keyRepresentationForErrorSignali
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@structureDeclaration enterInContext'                          *
+//                         Overriding extension method '@structureDeclaration enterInContext'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11239,6 +11251,7 @@ static void categoryMethod_structureDeclaration_enterInContext (const cPtr_abstr
   ioArgument_ioContext.mAttribute_mTypeMap.setter_insertKey (object->mAttribute_mStructureName, GALGAS_string ("%$").add_operation (object->mAttribute_mStructureName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 298)), GALGAS_typeKind::constructor_structure (var_propertyMap, var_propertyList  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 299)), GALGAS_typedConstantMap::constructor_emptyMap (SOURCE_FILE ("type-structure-declaration.galgas", 300)), GALGAS_bool (true), var_copyableAttribute, GALGAS_bool (false), GALGAS_bool (false), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-structure-declaration.galgas", 305)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 296)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_structureDeclaration_enterInContext (void) {
@@ -11252,7 +11265,7 @@ C_PrologueEpilogue gMethod_structureDeclaration_enterInContext (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@structureDeclaration enterRoutinesInContext'                      *
+//                     Overriding extension method '@structureDeclaration enterRoutinesInContext'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11269,6 +11282,7 @@ static void categoryMethod_structureDeclaration_enterRoutinesInContext (const cP
   categoryMethod_enterInContext (object->mAttribute_mPrimitiveListAST, GALGAS_string ("$").add_operation (object->mAttribute_mStructureName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 318)), ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 318)) ;
   categoryMethod_enterInContext (object->mAttribute_mGuardListAST, GALGAS_string ("$").add_operation (object->mAttribute_mStructureName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 319)), ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 319)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_structureDeclaration_enterRoutinesInContext (void) {
@@ -11282,7 +11296,7 @@ C_PrologueEpilogue gMethod_structureDeclaration_enterRoutinesInContext (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@structureDeclaration semanticAnalysis'                         *
+//                        Overriding extension method '@structureDeclaration semanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11348,6 +11362,7 @@ static void categoryMethod_structureDeclaration_semanticAnalysis (const cPtr_abs
   categoryMethod_primitiveSemanticAnalysis (object->mAttribute_mPrimitiveListAST, var_structureType, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 358)) ;
   categoryMethod_guardSemanticAnalysis (object->mAttribute_mGuardListAST, var_structureType, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 365)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_structureDeclaration_semanticAnalysis (void) {
@@ -11361,7 +11376,7 @@ C_PrologueEpilogue gMethod_structureDeclaration_semanticAnalysis (defineCategory
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Overriding category getter '@typeAliasDeclaration location'                             *
+//                            Overriding extension getter '@typeAliasDeclaration location'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11390,7 +11405,7 @@ C_PrologueEpilogue gGetter_typeAliasDeclaration_location (defineCategoryGetter_t
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Overriding category method '@typeAliasDeclaration addExtension'                           *
+//                          Overriding extension method '@typeAliasDeclaration addExtension'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11404,6 +11419,7 @@ static void categoryMethod_typeAliasDeclaration_addExtension (const cPtr_abstrac
   const GALGAS_typeAliasDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_typeAliasDeclaration_addExtension (void) {
@@ -11417,7 +11433,7 @@ C_PrologueEpilogue gMethod_typeAliasDeclaration_addExtension (defineCategoryMeth
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@typeAliasDeclaration enterInPrecedenceGraph'                      *
+//                     Overriding extension method '@typeAliasDeclaration enterInPrecedenceGraph'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11437,6 +11453,7 @@ static void categoryMethod_typeAliasDeclaration_enterInPrecedenceGraph (const cP
   ioArgument_ioGraph.setter_addEdge (var_newTypeName, var_aliasedTypeName COMMA_SOURCE_FILE ("type-alias.galgas", 60)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_typeAliasDeclaration_enterInPrecedenceGraph (void) {
@@ -11450,7 +11467,7 @@ C_PrologueEpilogue gMethod_typeAliasDeclaration_enterInPrecedenceGraph (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Overriding category getter '@typeAliasDeclaration keyRepresentationForErrorSignaling'                *
+//               Overriding extension getter '@typeAliasDeclaration keyRepresentationForErrorSignaling'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11479,7 +11496,7 @@ C_PrologueEpilogue gGetter_typeAliasDeclaration_keyRepresentationForErrorSignali
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@typeAliasDeclaration enterRoutinesInContext'                      *
+//                     Overriding extension method '@typeAliasDeclaration enterRoutinesInContext'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11490,6 +11507,7 @@ static void categoryMethod_typeAliasDeclaration_enterRoutinesInContext (const cP
                                                                         C_Compiler * /* inCompiler */
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_typeAliasDeclaration_enterRoutinesInContext (void) {
@@ -11503,7 +11521,7 @@ C_PrologueEpilogue gMethod_typeAliasDeclaration_enterRoutinesInContext (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@typeAliasDeclaration enterInContext'                          *
+//                         Overriding extension method '@typeAliasDeclaration enterInContext'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11611,6 +11629,7 @@ static void categoryMethod_typeAliasDeclaration_enterInContext (const cPtr_abstr
   routine_enterAliasPrefixOperator (ioArgument_ioContext.mAttribute_mUnsignedComplementOperatorMap, object->mAttribute_mNewTypeName, object->mAttribute_mAliasedTypeName, inCompiler  COMMA_SOURCE_FILE ("type-alias.galgas", 364)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_typeAliasDeclaration_enterInContext (void) {
@@ -11624,7 +11643,7 @@ C_PrologueEpilogue gMethod_typeAliasDeclaration_enterInContext (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@typeAliasDeclaration semanticAnalysis'                         *
+//                        Overriding extension method '@typeAliasDeclaration semanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11635,6 +11654,7 @@ static void categoryMethod_typeAliasDeclaration_semanticAnalysis (const cPtr_abs
                                                                   C_Compiler * /* inCompiler */
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_typeAliasDeclaration_semanticAnalysis (void) {
@@ -11648,7 +11668,7 @@ C_PrologueEpilogue gMethod_typeAliasDeclaration_semanticAnalysis (defineCategory
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Overriding category getter '@integerDeclaration location'                              *
+//                             Overriding extension getter '@integerDeclaration location'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11675,7 +11695,7 @@ C_PrologueEpilogue gGetter_integerDeclaration_location (defineCategoryGetter_int
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Overriding category method '@integerDeclaration addExtension'                            *
+//                           Overriding extension method '@integerDeclaration addExtension'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11689,6 +11709,7 @@ static void categoryMethod_integerDeclaration_addExtension (const cPtr_abstractD
   const GALGAS_integerDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_integerDeclaration_addExtension (void) {
@@ -11702,7 +11723,7 @@ C_PrologueEpilogue gMethod_integerDeclaration_addExtension (defineCategoryMethod
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@integerDeclaration enterInPrecedenceGraph'                       *
+//                      Overriding extension method '@integerDeclaration enterInPrecedenceGraph'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11722,6 +11743,7 @@ static void categoryMethod_integerDeclaration_enterInPrecedenceGraph (const cPtr
   ioArgument_ioGraph.setter_addEdge (var_integerTypeName, GALGAS_string ("$").add_operation (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 42)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 42)).getter_nowhere (SOURCE_FILE ("type-integer.galgas", 42)) COMMA_SOURCE_FILE ("type-integer.galgas", 42)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_integerDeclaration_enterInPrecedenceGraph (void) {
@@ -11735,7 +11757,7 @@ C_PrologueEpilogue gMethod_integerDeclaration_enterInPrecedenceGraph (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Overriding category getter '@integerDeclaration keyRepresentationForErrorSignaling'                 *
+//                Overriding extension getter '@integerDeclaration keyRepresentationForErrorSignaling'                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11765,7 +11787,7 @@ C_PrologueEpilogue gGetter_integerDeclaration_keyRepresentationForErrorSignaling
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Overriding category method '@integerDeclaration enterInContext'                           *
+//                          Overriding extension method '@integerDeclaration enterInContext'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11802,6 +11824,7 @@ static void categoryMethod_integerDeclaration_enterInContext (const cPtr_abstrac
   routine_enter_5F_literal_5F_integer_5F_operators (var_integerTypeName, object->mAttribute_mIsSigned, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 96)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_integerDeclaration_enterInContext (void) {
@@ -11815,7 +11838,7 @@ C_PrologueEpilogue gMethod_integerDeclaration_enterInContext (defineCategoryMeth
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@integerDeclaration enterRoutinesInContext'                       *
+//                      Overriding extension method '@integerDeclaration enterRoutinesInContext'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11826,6 +11849,7 @@ static void categoryMethod_integerDeclaration_enterRoutinesInContext (const cPtr
                                                                       C_Compiler * /* inCompiler */
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_integerDeclaration_enterRoutinesInContext (void) {
@@ -11839,7 +11863,7 @@ C_PrologueEpilogue gMethod_integerDeclaration_enterRoutinesInContext (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@integerDeclaration semanticAnalysis'                          *
+//                         Overriding extension method '@integerDeclaration semanticAnalysis'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11850,6 +11874,7 @@ static void categoryMethod_integerDeclaration_semanticAnalysis (const cPtr_abstr
                                                                 C_Compiler * /* inCompiler */
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_integerDeclaration_semanticAnalysis (void) {
@@ -11863,7 +11888,7 @@ C_PrologueEpilogue gMethod_integerDeclaration_semanticAnalysis (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//            Overriding category method '@infixObjectObjectOperatorDescription generateInfixOperatorCode'             *
+//            Overriding extension method '@infixObjectObjectOperatorDescription generateInfixOperatorCode'            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11901,6 +11926,7 @@ static void categoryMethod_infixObjectObjectOperatorDescription_generateInfixOpe
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_infixObjectObjectOperatorDescription_generateInfixOperatorCode (void) {
@@ -11914,7 +11940,7 @@ C_PrologueEpilogue gMethod_infixObjectObjectOperatorDescription_generateInfixOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Overriding category method '@integerObject_literal_infixOperator generateInfixOperatorCode'             *
+//            Overriding extension method '@integerObject_literal_infixOperator generateInfixOperatorCode'             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -11956,6 +11982,7 @@ static void categoryMethod_integerObject_5F_literal_5F_infixOperator_generateInf
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_integerObject_5F_literal_5F_infixOperator_generateInfixOperatorCode (void) {
@@ -11969,7 +11996,7 @@ C_PrologueEpilogue gMethod_integerObject_5F_literal_5F_infixOperator_generateInf
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Overriding category method '@integerObject_literal_divisionOperator generateInfixOperatorCode'            *
+//           Overriding extension method '@integerObject_literal_divisionOperator generateInfixOperatorCode'           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12017,6 +12044,7 @@ static void categoryMethod_integerObject_5F_literal_5F_divisionOperator_generate
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_integerObject_5F_literal_5F_divisionOperator_generateInfixOperatorCode (void) {
@@ -12030,7 +12058,7 @@ C_PrologueEpilogue gMethod_integerObject_5F_literal_5F_divisionOperator_generate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Overriding category method '@literal_integerObject_infixOperator generateInfixOperatorCode'             *
+//            Overriding extension method '@literal_integerObject_infixOperator generateInfixOperatorCode'             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12072,6 +12100,7 @@ static void categoryMethod_literal_5F_integerObject_5F_infixOperator_generateInf
     }
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literal_5F_integerObject_5F_infixOperator_generateInfixOperatorCode (void) {
@@ -12085,7 +12114,7 @@ C_PrologueEpilogue gMethod_literal_5F_integerObject_5F_infixOperator_generateInf
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category getter '@literalIntegerDeclaration location'                           *
+//                          Overriding extension getter '@literalIntegerDeclaration location'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12112,7 +12141,7 @@ C_PrologueEpilogue gGetter_literalIntegerDeclaration_location (defineCategoryGet
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@literalIntegerDeclaration addExtension'                         *
+//                        Overriding extension method '@literalIntegerDeclaration addExtension'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12126,6 +12155,7 @@ static void categoryMethod_literalIntegerDeclaration_addExtension (const cPtr_ab
   const GALGAS_literalIntegerDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalIntegerDeclaration_addExtension (void) {
@@ -12139,7 +12169,7 @@ C_PrologueEpilogue gMethod_literalIntegerDeclaration_addExtension (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Overriding category method '@literalIntegerDeclaration enterInPrecedenceGraph'                    *
+//                   Overriding extension method '@literalIntegerDeclaration enterInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12158,6 +12188,7 @@ static void categoryMethod_literalIntegerDeclaration_enterInPrecedenceGraph (con
   ioArgument_ioGraph.setter_addEdge (var_staticIntegerTypeName, GALGAS_string ("$").add_operation (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 34)), inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 34)).getter_nowhere (SOURCE_FILE ("type-literal-integer.galgas", 34)) COMMA_SOURCE_FILE ("type-literal-integer.galgas", 34)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalIntegerDeclaration_enterInPrecedenceGraph (void) {
@@ -12171,7 +12202,7 @@ C_PrologueEpilogue gMethod_literalIntegerDeclaration_enterInPrecedenceGraph (def
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Overriding category getter '@literalIntegerDeclaration keyRepresentationForErrorSignaling'              *
+//             Overriding extension getter '@literalIntegerDeclaration keyRepresentationForErrorSignaling'             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12198,7 +12229,7 @@ C_PrologueEpilogue gGetter_literalIntegerDeclaration_keyRepresentationForErrorSi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Overriding category method '@literalIntegerDeclaration enterRoutinesInContext'                    *
+//                   Overriding extension method '@literalIntegerDeclaration enterRoutinesInContext'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12209,6 +12240,7 @@ static void categoryMethod_literalIntegerDeclaration_enterRoutinesInContext (con
                                                                              C_Compiler * /* inCompiler */
                                                                              COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalIntegerDeclaration_enterRoutinesInContext (void) {
@@ -12222,7 +12254,7 @@ C_PrologueEpilogue gMethod_literalIntegerDeclaration_enterRoutinesInContext (def
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@literalIntegerDeclaration enterInContext'                        *
+//                       Overriding extension method '@literalIntegerDeclaration enterInContext'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12240,6 +12272,7 @@ static void categoryMethod_literalIntegerDeclaration_enterInContext (const cPtr_
   routine_enterLiteralIntegerOperators (var_integerTypeName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 75)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalIntegerDeclaration_enterInContext (void) {
@@ -12253,7 +12286,7 @@ C_PrologueEpilogue gMethod_literalIntegerDeclaration_enterInContext (defineCateg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Overriding category method '@literalIntegerDeclaration semanticAnalysis'                       *
+//                      Overriding extension method '@literalIntegerDeclaration semanticAnalysis'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12264,6 +12297,7 @@ static void categoryMethod_literalIntegerDeclaration_semanticAnalysis (const cPt
                                                                        C_Compiler * /* inCompiler */
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalIntegerDeclaration_semanticAnalysis (void) {
@@ -12277,7 +12311,7 @@ C_PrologueEpilogue gMethod_literalIntegerDeclaration_semanticAnalysis (defineCat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//            Overriding category method '@literal_literal_integerInfixOperation generateInfixOperatorCode'            *
+//           Overriding extension method '@literal_literal_integerInfixOperation generateInfixOperatorCode'            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12301,6 +12335,7 @@ static void categoryMethod_literal_5F_literal_5F_integerInfixOperation_generateI
   GALGAS_bigint var_result = callCategoryGetter_performStaticOperation ((const cPtr_literal_5F_literal_5F_integerInfixOperation *) temp_0.ptr (), var_leftValue, var_rightValue, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 263)) ;
   outArgument_outResult = GALGAS_operandIR::constructor_new (constinArgument_inResultType, GALGAS_valueIR::constructor_literalInteger (var_result  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 282))  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 282)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literal_5F_literal_5F_integerInfixOperation_generateInfixOperatorCode (void) {
@@ -12314,7 +12349,7 @@ C_PrologueEpilogue gMethod_literal_5F_literal_5F_integerInfixOperation_generateI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Overriding category getter '@literalStringDeclaration location'                           *
+//                          Overriding extension getter '@literalStringDeclaration location'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12343,7 +12378,7 @@ C_PrologueEpilogue gGetter_literalStringDeclaration_location (defineCategoryGett
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@literalStringDeclaration addExtension'                         *
+//                        Overriding extension method '@literalStringDeclaration addExtension'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12357,6 +12392,7 @@ static void categoryMethod_literalStringDeclaration_addExtension (const cPtr_abs
   const GALGAS_literalStringDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalStringDeclaration_addExtension (void) {
@@ -12370,7 +12406,7 @@ C_PrologueEpilogue gMethod_literalStringDeclaration_addExtension (defineCategory
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@literalStringDeclaration enterInPrecedenceGraph'                    *
+//                   Overriding extension method '@literalStringDeclaration enterInPrecedenceGraph'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12389,6 +12425,7 @@ static void categoryMethod_literalStringDeclaration_enterInPrecedenceGraph (cons
   ioArgument_ioGraph.setter_addEdge (var_literalStringTypeName, GALGAS_string ("$uint8").getter_nowhere (SOURCE_FILE ("type-static-string.galgas", 35)) COMMA_SOURCE_FILE ("type-static-string.galgas", 35)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalStringDeclaration_enterInPrecedenceGraph (void) {
@@ -12402,7 +12439,7 @@ C_PrologueEpilogue gMethod_literalStringDeclaration_enterInPrecedenceGraph (defi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//              Overriding category getter '@literalStringDeclaration keyRepresentationForErrorSignaling'              *
+//             Overriding extension getter '@literalStringDeclaration keyRepresentationForErrorSignaling'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12431,7 +12468,7 @@ C_PrologueEpilogue gGetter_literalStringDeclaration_keyRepresentationForErrorSig
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding category method '@literalStringDeclaration enterRoutinesInContext'                    *
+//                   Overriding extension method '@literalStringDeclaration enterRoutinesInContext'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12442,6 +12479,7 @@ static void categoryMethod_literalStringDeclaration_enterRoutinesInContext (cons
                                                                             C_Compiler * /* inCompiler */
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalStringDeclaration_enterRoutinesInContext (void) {
@@ -12455,7 +12493,7 @@ C_PrologueEpilogue gMethod_literalStringDeclaration_enterRoutinesInContext (defi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@literalStringDeclaration enterInContext'                        *
+//                       Overriding extension method '@literalStringDeclaration enterInContext'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12472,6 +12510,7 @@ static void categoryMethod_literalStringDeclaration_enterInContext (const cPtr_a
   ioArgument_ioContext.mAttribute_mTypeMap.setter_insertKey (object->mAttribute_mLiteralStringTypeName, GALGAS_string ("i8*"), GALGAS_typeKind::constructor_literalString (SOURCE_FILE ("type-static-string.galgas", 67)), GALGAS_typedConstantMap::constructor_emptyMap (SOURCE_FILE ("type-static-string.galgas", 68)), GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (true), var_uint_38_Type, inCompiler COMMA_SOURCE_FILE ("type-static-string.galgas", 64)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalStringDeclaration_enterInContext (void) {
@@ -12485,7 +12524,7 @@ C_PrologueEpilogue gMethod_literalStringDeclaration_enterInContext (defineCatego
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@literalStringDeclaration semanticAnalysis'                       *
+//                      Overriding extension method '@literalStringDeclaration semanticAnalysis'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12496,6 +12535,7 @@ static void categoryMethod_literalStringDeclaration_semanticAnalysis (const cPtr
                                                                       C_Compiler * /* inCompiler */
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_literalStringDeclaration_semanticAnalysis (void) {
@@ -12509,7 +12549,7 @@ C_PrologueEpilogue gMethod_literalStringDeclaration_semanticAnalysis (defineCate
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Overriding category getter '@opaqueTypeDeclaration location'                             *
+//                            Overriding extension getter '@opaqueTypeDeclaration location'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12538,7 +12578,7 @@ C_PrologueEpilogue gGetter_opaqueTypeDeclaration_location (defineCategoryGetter_
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category method '@opaqueTypeDeclaration addExtension'                           *
+//                          Overriding extension method '@opaqueTypeDeclaration addExtension'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12552,6 +12592,7 @@ static void categoryMethod_opaqueTypeDeclaration_addExtension (const cPtr_abstra
   const GALGAS_opaqueTypeDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_opaqueTypeDeclaration_addExtension (void) {
@@ -12565,7 +12606,7 @@ C_PrologueEpilogue gMethod_opaqueTypeDeclaration_addExtension (defineCategoryMet
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@opaqueTypeDeclaration enterInPrecedenceGraph'                      *
+//                     Overriding extension method '@opaqueTypeDeclaration enterInPrecedenceGraph'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12584,6 +12625,7 @@ static void categoryMethod_opaqueTypeDeclaration_enterInPrecedenceGraph (const c
   ioArgument_ioGraph.setter_addEdge (var_typeName, GALGAS_string ("$").add_operation (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 63)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 63)).getter_nowhere (SOURCE_FILE ("type-opaque-declaration.galgas", 63)) COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 63)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_opaqueTypeDeclaration_enterInPrecedenceGraph (void) {
@@ -12597,7 +12639,7 @@ C_PrologueEpilogue gMethod_opaqueTypeDeclaration_enterInPrecedenceGraph (defineC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Overriding category getter '@opaqueTypeDeclaration keyRepresentationForErrorSignaling'                *
+//               Overriding extension getter '@opaqueTypeDeclaration keyRepresentationForErrorSignaling'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12626,7 +12668,7 @@ C_PrologueEpilogue gGetter_opaqueTypeDeclaration_keyRepresentationForErrorSignal
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@opaqueTypeDeclaration enterInContext'                          *
+//                         Overriding extension method '@opaqueTypeDeclaration enterInContext'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12680,6 +12722,7 @@ static void categoryMethod_opaqueTypeDeclaration_enterInContext (const cPtr_abst
   ioArgument_ioContext.mAttribute_mConstructorMap.setter_insertKey (object->mAttribute_mOpaqueTypeName, GALGAS_constructorValue::constructor_simple (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117))  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_opaqueTypeDeclaration_enterInContext (void) {
@@ -12693,7 +12736,7 @@ C_PrologueEpilogue gMethod_opaqueTypeDeclaration_enterInContext (defineCategoryM
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Overriding category method '@opaqueTypeDeclaration enterRoutinesInContext'                      *
+//                     Overriding extension method '@opaqueTypeDeclaration enterRoutinesInContext'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12704,6 +12747,7 @@ static void categoryMethod_opaqueTypeDeclaration_enterRoutinesInContext (const c
                                                                          C_Compiler * /* inCompiler */
                                                                          COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_opaqueTypeDeclaration_enterRoutinesInContext (void) {
@@ -12717,7 +12761,7 @@ C_PrologueEpilogue gMethod_opaqueTypeDeclaration_enterRoutinesInContext (defineC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@opaqueTypeDeclaration semanticAnalysis'                         *
+//                        Overriding extension method '@opaqueTypeDeclaration semanticAnalysis'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12728,6 +12772,7 @@ static void categoryMethod_opaqueTypeDeclaration_semanticAnalysis (const cPtr_ab
                                                                    C_Compiler * /* inCompiler */
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_opaqueTypeDeclaration_semanticAnalysis (void) {
@@ -12741,7 +12786,7 @@ C_PrologueEpilogue gMethod_opaqueTypeDeclaration_semanticAnalysis (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Overriding category getter '@globalConstantDeclaration location'                           *
+//                          Overriding extension getter '@globalConstantDeclaration location'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12770,7 +12815,7 @@ C_PrologueEpilogue gGetter_globalConstantDeclaration_location (defineCategoryGet
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Overriding category method '@globalConstantDeclaration addExtension'                         *
+//                        Overriding extension method '@globalConstantDeclaration addExtension'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12784,6 +12829,7 @@ static void categoryMethod_globalConstantDeclaration_addExtension (const cPtr_ab
   const GALGAS_globalConstantDeclaration temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_globalConstantDeclaration_addExtension (void) {
@@ -12797,7 +12843,7 @@ C_PrologueEpilogue gMethod_globalConstantDeclaration_addExtension (defineCategor
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Overriding category method '@globalConstantDeclaration enterInPrecedenceGraph'                    *
+//                   Overriding extension method '@globalConstantDeclaration enterInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12820,6 +12866,7 @@ static void categoryMethod_globalConstantDeclaration_enterInPrecedenceGraph (con
   }
   callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), object->mAttribute_mConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 79)) ;
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_globalConstantDeclaration_enterInPrecedenceGraph (void) {
@@ -12833,7 +12880,7 @@ C_PrologueEpilogue gMethod_globalConstantDeclaration_enterInPrecedenceGraph (def
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Overriding category getter '@globalConstantDeclaration keyRepresentationForErrorSignaling'              *
+//             Overriding extension getter '@globalConstantDeclaration keyRepresentationForErrorSignaling'             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12862,7 +12909,7 @@ C_PrologueEpilogue gGetter_globalConstantDeclaration_keyRepresentationForErrorSi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@globalConstantDeclaration enterInContext'                        *
+//                       Overriding extension method '@globalConstantDeclaration enterInContext'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12905,6 +12952,7 @@ static void categoryMethod_globalConstantDeclaration_enterInContext (const cPtr_
   ioArgument_ioContext.mAttribute_mGlobalConstantMap.setter_insertKey (object->mAttribute_mConstantName, var_result, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 142)) ;
   }
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_globalConstantDeclaration_enterInContext (void) {
@@ -12918,7 +12966,7 @@ C_PrologueEpilogue gMethod_globalConstantDeclaration_enterInContext (defineCateg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Overriding category method '@globalConstantDeclaration enterRoutinesInContext'                    *
+//                   Overriding extension method '@globalConstantDeclaration enterRoutinesInContext'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12929,6 +12977,7 @@ static void categoryMethod_globalConstantDeclaration_enterRoutinesInContext (con
                                                                              C_Compiler * /* inCompiler */
                                                                              COMMA_UNUSED_LOCATION_ARGS) {
 }
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void defineCategoryMethod_globalConstantDeclaration_enterRoutinesInContext (void) {

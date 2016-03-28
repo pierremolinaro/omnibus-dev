@@ -11,7 +11,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Abstract category method '@expressionAST addDependenceEdgeForStaticExpression'                    *
+//                   Abstract extension method '@expressionAST addDependenceEdgeForStaticExpression'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -36,7 +36,7 @@ void callCategoryMethod_addDependenceEdgeForStaticExpression (const class cPtr_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Abstract category method '@expressionAST noteExpressionTypesInPrecedenceGraph'                    *
+//                   Abstract extension method '@expressionAST noteExpressionTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -59,7 +59,7 @@ void callCategoryMethod_noteExpressionTypesInPrecedenceGraph (const class cPtr_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Category method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'                   *
+//                  Extension method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -70,7 +70,7 @@ void categoryMethod_noteInstructionListTypesInPrecedenceGraph (const class GALGA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Category method '@taskVarListAST-element enterInContext'                               *
+//                              Extension method '@taskVarListAST-element enterInContext'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -85,7 +85,7 @@ void categoryMethod_enterInContext (const class GALGAS_taskVarListAST_2D_element
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Category method '@taskList-element semanticAnalysis'                                 *
+//                                Extension method '@taskList-element semanticAnalysis'                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -98,7 +98,7 @@ void categoryMethod_semanticAnalysis (const class GALGAS_taskList_2D_element inO
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Category method '@externProcedureDeclarationListAST-element enterExternProcInContext'                *
+//               Extension method '@externProcedureDeclarationListAST-element enterExternProcInContext'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -109,7 +109,7 @@ void categoryMethod_enterExternProcInContext (const class GALGAS_externProcedure
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//            Category method '@externProcedureDeclarationListAST-element externProcedureSemanticAnalysis'             *
+//            Extension method '@externProcedureDeclarationListAST-element externProcedureSemanticAnalysis'            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -122,7 +122,7 @@ void categoryMethod_externProcedureSemanticAnalysis (const class GALGAS_externPr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Category method '@externProcedureMapIR-element llvmPrototypeGeneration'                       *
+//                      Extension method '@externProcedureMapIR-element llvmPrototypeGeneration'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -133,7 +133,7 @@ void categoryMethod_llvmPrototypeGeneration (const class GALGAS_externProcedureM
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Category method '@guardMapIR-element llvmCodeGeneration'                               *
+//                              Extension method '@guardMapIR-element llvmCodeGeneration'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -146,7 +146,7 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_guardMapIR_2D_element
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Abstract category method '@instructionAST noteInstructionTypesInPrecedenceGraph'                   *
+//                  Abstract extension method '@instructionAST noteInstructionTypesInPrecedenceGraph'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -169,7 +169,7 @@ void callCategoryMethod_noteInstructionTypesInPrecedenceGraph (const class cPtr_
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Abstract category method '@instructionAST analyze'                                  *
+//                                 Abstract extension method '@instructionAST analyze'                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -210,7 +210,7 @@ void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Category method '@instructionListAST analyzeBranchInstructionList'                          *
+//                         Extension method '@instructionListAST analyzeBranchInstructionList'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -231,7 +231,7 @@ void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instruction
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Abstract category method '@abstractInstructionIR llvmInstructionCode'                        *
+//                       Abstract extension method '@abstractInstructionIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -258,7 +258,7 @@ void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category method '@routineMapIR-element llvmCodeGeneration'                              *
+//                             Extension method '@routineMapIR-element llvmCodeGeneration'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -272,7 +272,7 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_eleme
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Category setter '@instructionListIR appendExtend'                                  *
+//                                 Extension setter '@instructionListIR appendExtend'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -284,7 +284,7 @@ void categoryModifier_appendExtend (class GALGAS_instructionListIR & ioObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category setter '@instructionListIR appendBinaryOperation'                              *
+//                             Extension setter '@instructionListIR appendBinaryOperation'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -300,7 +300,7 @@ void categoryModifier_appendBinaryOperation (class GALGAS_instructionListIR & io
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Category setter '@instructionListIR appendShortCircuitAndOperation'                         *
+//                        Extension setter '@instructionListIR appendShortCircuitAndOperation'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -316,7 +316,7 @@ void categoryModifier_appendShortCircuitAndOperation (class GALGAS_instructionLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Category setter '@instructionListIR appendLoadVolatileRegister'                           *
+//                          Extension setter '@instructionListIR appendLoadVolatileRegister'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -329,7 +329,7 @@ void categoryModifier_appendLoadVolatileRegister (class GALGAS_instructionListIR
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category setter '@instructionListIR appendLoadGlobalVariable'                            *
+//                           Extension setter '@instructionListIR appendLoadGlobalVariable'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -342,7 +342,7 @@ void categoryModifier_appendLoadGlobalVariable (class GALGAS_instructionListIR &
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category setter '@instructionListIR appendLoadLocalVariable'                             *
+//                            Extension setter '@instructionListIR appendLoadLocalVariable'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -354,7 +354,7 @@ void categoryModifier_appendLoadLocalVariable (class GALGAS_instructionListIR & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category setter '@instructionListIR appendLoadTaskVariable'                             *
+//                            Extension setter '@instructionListIR appendLoadTaskVariable'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -367,7 +367,7 @@ void categoryModifier_appendLoadTaskVariable (class GALGAS_instructionListIR & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Category setter '@instructionListIR appendStoreVolatileRegister'                           *
+//                          Extension setter '@instructionListIR appendStoreVolatileRegister'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -381,7 +381,7 @@ void categoryModifier_appendStoreVolatileRegister (class GALGAS_instructionListI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Category setter '@instructionListIR appendStoreGlobalVariable'                            *
+//                           Extension setter '@instructionListIR appendStoreGlobalVariable'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -395,7 +395,7 @@ void categoryModifier_appendStoreGlobalVariable (class GALGAS_instructionListIR 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category setter '@instructionListIR appendStoreTaskVariable'                             *
+//                            Extension setter '@instructionListIR appendStoreTaskVariable'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -409,7 +409,7 @@ void categoryModifier_appendStoreTaskVariable (class GALGAS_instructionListIR & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category setter '@instructionListIR appendStoreLocalVariable'                            *
+//                           Extension setter '@instructionListIR appendStoreLocalVariable'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -422,7 +422,7 @@ void categoryModifier_appendStoreLocalVariable (class GALGAS_instructionListIR &
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Category setter '@instructionListIR appendLoadStructureConstant'                           *
+//                          Extension setter '@instructionListIR appendLoadStructureConstant'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -434,7 +434,7 @@ void categoryModifier_appendLoadStructureConstant (class GALGAS_instructionListI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Category setter '@instructionListIR appendGetElementPtr'                               *
+//                              Extension setter '@instructionListIR appendGetElementPtr'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -447,7 +447,7 @@ void categoryModifier_appendGetElementPtr (class GALGAS_instructionListIR & ioOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Abstract category method '@abstractInstructionIR enterAccessibleEntities'                      *
+//                     Abstract extension method '@abstractInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -472,7 +472,7 @@ void callCategoryMethod_enterAccessibleEntities (const class cPtr_abstractInstru
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Category method '@structureDeclaration procedureSemanticAnalysis'                          *
+//                         Extension method '@structureDeclaration procedureSemanticAnalysis'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -501,7 +501,7 @@ void callCategoryMethod_procedureSemanticAnalysis (const class cPtr_structureDec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Category getter '@integerDeclaration typeName'                                    *
+//                                   Extension getter '@integerDeclaration typeName'                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -522,7 +522,7 @@ class GALGAS_string callCategoryGetter_typeName (const cPtr_integerDeclaration *
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category method '@infixOperatorMap checkBinaryOperationWith'                             *
+//                            Extension method '@infixOperatorMap checkBinaryOperationWith'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -537,7 +537,7 @@ void categoryMethod_checkBinaryOperationWith (const class GALGAS_infixOperatorMa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Abstract category method '@infixOperatorDescription generateInfixOperatorCode'                    *
+//                   Abstract extension method '@infixOperatorDescription generateInfixOperatorCode'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -572,7 +572,7 @@ void callCategoryMethod_generateInfixOperatorCode (const class cPtr_infixOperato
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Category getter '@infixOperatorDescription performStaticOperation'                          *
+//                         Extension getter '@infixOperatorDescription performStaticOperation'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -597,7 +597,7 @@ class GALGAS_bigint callCategoryGetter_performStaticOperation (const cPtr_infixO
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                    Category getter '@valueIR name' (as function)                                    *
+//                                   Extension getter '@valueIR name' (as function)                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -607,7 +607,7 @@ class GALGAS_string extensionGetter_name (const class GALGAS_valueIR & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Category getter '@valueIR isStatic' (as function)                                  *
+//                                 Extension getter '@valueIR isStatic' (as function)                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -617,7 +617,7 @@ class GALGAS_bool extensionGetter_isStatic (const class GALGAS_valueIR & inObjec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Category method '@binaryOperationIR enterCodeForOverflowOperation'                          *
+//                         Extension method '@binaryOperationIR enterCodeForOverflowOperation'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -648,7 +648,7 @@ void callCategoryMethod_enterCodeForOverflowOperation (const class cPtr_binaryOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Category method '@binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic'                    *
+//                   Extension method '@binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 

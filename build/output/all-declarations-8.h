@@ -11,7 +11,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Category getter '@objectInMemoryIR type' (as function)                                *
+//                               Extension getter '@objectInMemoryIR type' (as function)                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -21,7 +21,7 @@ class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_ob
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Category method '@objectInMemoryIR loadFromMemory'                                  *
+//                                 Extension method '@objectInMemoryIR loadFromMemory'                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -34,7 +34,7 @@ void categoryMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Category method '@objectInMemoryIR storeInMemory'                                  *
+//                                 Extension method '@objectInMemoryIR storeInMemory'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -46,7 +46,7 @@ void categoryMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category method '@objectInMemoryIR enterAccessibleEntities'                             *
+//                            Extension method '@objectInMemoryIR enterAccessibleEntities'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -57,7 +57,7 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_objectInMemoryIR
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Category getter '@objectInMemoryIR mangledName' (as function)                            *
+//                           Extension getter '@objectInMemoryIR mangledName' (as function)                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
