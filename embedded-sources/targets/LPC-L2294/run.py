@@ -44,9 +44,9 @@ openOCD = [
   "--search",
   toolpath.toolDir (),
   "-f",
-  "openocd-interface/olimex-arm-usb-ocd.cfg",
+  "openocd-interfaces/olimex-arm-usb-ocd.cfg",
   "-f",
-  "openocd-board/olimex-lpc-l2294-1Mo.cfg",
+  "openocd-boards/olimex-lpc-l2294-1Mo.cfg",
 ]
 str = "+"
 for s in openOCD :

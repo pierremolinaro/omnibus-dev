@@ -256,7 +256,7 @@ SWIHandler:
   ldmfd sp!, {r6-r8, lr}
 @--------------------------- Context Switch
   teq    r2, r3 @ Compare R2 (new task), with R3 (calling task)
-  moveqs pc, lr @ Return from interrupt if no context swith
+  moveq  pc, lr @ Return from interrupt if no context swith
 @--------------------------- Perform the context switch
 @----------- First save context of calling task
 @--- If sp is NULL, there is no context to save
