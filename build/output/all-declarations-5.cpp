@@ -10695,9 +10695,9 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "  \"--search\",\n"
   "  toolpath.toolDir (),\n"
   "  \"-f\",\n"
-  "  \"openocd-interface/olimex-arm-usb-ocd.cfg\",\n"
+  "  \"openocd-interfaces/olimex-arm-usb-ocd.cfg\",\n"
   "  \"-f\",\n"
-  "  \"openocd-board/olimex-lpc-l2294-1Mo.cfg\",\n"
+  "  \"openocd-boards/olimex-lpc-l2294-1Mo.cfg\",\n"
   "]\n"
   "str = \"+\"\n"
   "for s in openOCD :\n"
@@ -10748,7 +10748,7 @@ const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "run.py",
   "py",
   true, // Text file
-  3090, // Text length
+  3092, // Text length
   gWrapperFileContent_12_targetTemplates
 ) ;
 
@@ -11753,7 +11753,7 @@ const char * gWrapperFileContent_22_targetTemplates = "  .code 32\n"
   "  ldmfd sp!, {r6-r8, lr}\n"
   "@--------------------------- Context Switch\n"
   "  teq    r2, r3 @ Compare R2 (new task), with R3 (calling task)\n"
-  "  moveqs pc, lr @ Return from interrupt if no context swith\n"
+  "  moveq  pc, lr @ Return from interrupt if no context swith\n"
   "@--------------------------- Perform the context switch\n"
   "@----------- First save context of calling task\n"
   "@--- If sp is NULL, there is no context to save\n"
