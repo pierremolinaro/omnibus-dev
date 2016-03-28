@@ -338,7 +338,7 @@ class cPtr_literalStringDeclaration : public cPtr_abstractDeclaration {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Abstract category method '@abstractDeclaration addExtension'                             *
+//                            Abstract extension method '@abstractDeclaration addExtension'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 

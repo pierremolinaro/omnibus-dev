@@ -90,6 +90,7 @@ method @configurationDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypeP
 # Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
 method @configurationDeclarationList enterInContext ?!context:@semanticContext ioContext {
+  @stringset panicCodeSet = {}
   for config in self do
     if config.mPointerSize.bigint == 0G then
       error config.mPointerSize : "zero size pointer not allowed"
@@ -100,10 +101,15 @@ method @configurationDeclarationList enterInContext ?!context:@semanticContext i
     ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicLineTypeName}
     for (name panicCode) in config.mInterruptionConfigurationList do
       [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
-#      if [panicCode.bigint fitsInUInt] then
-#      else
-#        error panicCode : "value does not fit in $" + config.mPanicCodeTypeName
-#      end
+      switch panicCode
+      case noPanicCode :
+      case panicCode (value) :
+        let s = [value.bigint string]
+        if [panicCodeSet hasKey !s] then
+          error value : "duplicate panic code"
+        end
+        panicCodeSet += !s
+      end
     end
   end
 }
