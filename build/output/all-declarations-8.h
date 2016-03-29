@@ -25,12 +25,12 @@ class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_ob
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject,
-                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                    class GALGAS_operandIR & out_outResultingValue,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject,
+                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                     class GALGAS_operandIR & out_outResultingValue,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -38,11 +38,11 @@ void categoryMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
-                                   class GALGAS_operandIR in_inValue,
-                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
+void extensionMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
+                                    class GALGAS_operandIR in_inValue,
+                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -50,10 +50,10 @@ void categoryMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterAccessibleEntities (const class GALGAS_objectInMemoryIR inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterAccessibleEntities (const class GALGAS_objectInMemoryIR inObject,
+                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

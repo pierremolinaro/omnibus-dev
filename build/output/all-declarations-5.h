@@ -1271,19 +1271,19 @@ class GALGAS_lstring function_procNameForInvocationGraph (class GALGAS_unifiedTy
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                                   const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                                   const class GALGAS_semanticContext constin_inContext,
-                                                   const class GALGAS_stringset constin_inModeSet,
-                                                   const class GALGAS_bool constin_inAllowPanic,
-                                                   class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                   class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                   class GALGAS_variableMap & io_ioVariableMap,
-                                                   class GALGAS_allocaList & io_ioAllocaList,
-                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
+                                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                    const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                    const class GALGAS_semanticContext constin_inContext,
+                                                    const class GALGAS_stringset constin_inModeSet,
+                                                    const class GALGAS_bool constin_inAllowPanic,
+                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                    class GALGAS_variableMap & io_ioVariableMap,
+                                                    class GALGAS_allocaList & io_ioAllocaList,
+                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1479,34 +1479,34 @@ class GALGAS_string function_serviceModeName (class C_Compiler * inCompiler
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*categoryMethodSignature_abstractCallInstructionAST_baseGuardAnalyze) (const class cPtr_abstractCallInstructionAST * inObject,
-                                                                                     const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                                     const class GALGAS_lstring constinArgument1,
-                                                                                     const class GALGAS_semanticContext constinArgument2,
-                                                                                     class GALGAS_semanticTemporariesStruct & ioArgument3,
-                                                                                     class GALGAS_staticStringMap & ioArgument4,
-                                                                                     class GALGAS_variableMap & ioArgument5,
-                                                                                     class GALGAS_guardKindGenerationIR & outArgument6,
-                                                                                     class C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_abstractCallInstructionAST_baseGuardAnalyze) (const class cPtr_abstractCallInstructionAST * inObject,
+                                                                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                                      const class GALGAS_lstring constinArgument1,
+                                                                                      const class GALGAS_semanticContext constinArgument2,
+                                                                                      class GALGAS_semanticTemporariesStruct & ioArgument3,
+                                                                                      class GALGAS_staticStringMap & ioArgument4,
+                                                                                      class GALGAS_variableMap & ioArgument5,
+                                                                                      class GALGAS_guardKindGenerationIR & outArgument6,
+                                                                                      class C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryMethod_baseGuardAnalyze (const int32_t inClassIndex,
-                                           categoryMethodSignature_abstractCallInstructionAST_baseGuardAnalyze inMethod) ;
+void enterExtensionMethod_baseGuardAnalyze (const int32_t inClassIndex,
+                                            extensionMethodSignature_abstractCallInstructionAST_baseGuardAnalyze inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callCategoryMethod_baseGuardAnalyze (const class cPtr_abstractCallInstructionAST * inObject,
-                                          const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                          const GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                          const GALGAS_semanticContext constin_inContext,
-                                          GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                          GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                          GALGAS_variableMap & io_ioVariableMap,
-                                          GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_baseGuardAnalyze (const class cPtr_abstractCallInstructionAST * inObject,
+                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                           const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                           const GALGAS_semanticContext constin_inContext,
+                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                           GALGAS_variableMap & io_ioVariableMap,
+                                           GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1734,44 +1734,44 @@ class GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const 
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*categoryMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
-                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                         const class GALGAS_lstring constinArgument1,
-                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
-                                                                         const class GALGAS_semanticContext constinArgument3,
-                                                                         const class GALGAS_stringset constinArgument4,
-                                                                         const class GALGAS_bool constinArgument5,
-                                                                         class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                                         class GALGAS_staticStringMap & ioArgument7,
-                                                                         class GALGAS_variableMap & ioArgument8,
-                                                                         class GALGAS_allocaList & ioArgument9,
-                                                                         class GALGAS_instructionListIR & ioArgument10,
-                                                                         class GALGAS_operandIR & outArgument11,
-                                                                         class C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
+                                                                          const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                          const class GALGAS_lstring constinArgument1,
+                                                                          const class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
+                                                                          const class GALGAS_semanticContext constinArgument3,
+                                                                          const class GALGAS_stringset constinArgument4,
+                                                                          const class GALGAS_bool constinArgument5,
+                                                                          class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                                                          class GALGAS_staticStringMap & ioArgument7,
+                                                                          class GALGAS_variableMap & ioArgument8,
+                                                                          class GALGAS_allocaList & ioArgument9,
+                                                                          class GALGAS_instructionListIR & ioArgument10,
+                                                                          class GALGAS_operandIR & outArgument11,
+                                                                          class C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryMethod_analyzeExpression (const int32_t inClassIndex,
-                                            categoryMethodSignature_expressionAST_analyzeExpression inMethod) ;
+void enterExtensionMethod_analyzeExpression (const int32_t inClassIndex,
+                                             extensionMethodSignature_expressionAST_analyzeExpression inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
-                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                           const GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
-                                           const GALGAS_semanticContext constin_inContext,
-                                           const GALGAS_stringset constin_inModes,
-                                           const GALGAS_bool constin_inAllowPanic,
-                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                           GALGAS_variableMap & io_ioVariableMap,
-                                           GALGAS_allocaList & io_ioAllocaList,
-                                           GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                           GALGAS_operandIR & out_outResult,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
+                                            const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                            const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
+                                            const GALGAS_semanticContext constin_inContext,
+                                            const GALGAS_stringset constin_inModes,
+                                            const GALGAS_bool constin_inAllowPanic,
+                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                            GALGAS_variableMap & io_ioVariableMap,
+                                            GALGAS_allocaList & io_ioAllocaList,
+                                            GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                            GALGAS_operandIR & out_outResult,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1791,13 +1791,13 @@ void routine_getLocalNameOfNewTempObjectInMemory (const class GALGAS_unifiedType
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryModifier_appendGetElementPtrFromSelf (class GALGAS_instructionListIR & ioObject,
-                                                   const class GALGAS_objectInMemoryIR constin_inTarget,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                                   const class GALGAS_uint constin_inFieldIndex,
-                                                   const class GALGAS_string constin_inFieldName,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+void extensionSetter_appendGetElementPtrFromSelf (class GALGAS_instructionListIR & ioObject,
+                                                  const class GALGAS_objectInMemoryIR constin_inTarget,
+                                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                  const class GALGAS_uint constin_inFieldIndex,
+                                                  const class GALGAS_string constin_inFieldName,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1939,20 +1939,20 @@ class cPtr_integerDeclaration : public cPtr_abstractDeclaration {
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef class GALGAS_string (*categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling) (const class cPtr_abstractDeclaration * inObject,
-                                                                                                               class C_Compiler * inCompiler
-                                                                                                               COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_string (*enterExtensionGetter_abstractDeclaration_keyRepresentationForErrorSignaling) (const class cPtr_abstractDeclaration * inObject,
+                                                                                                            class C_Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryGetter_keyRepresentationForErrorSignaling (const int32_t inClassIndex,
-                                                             categoryGetterSignature_abstractDeclaration_keyRepresentationForErrorSignaling inMethod) ;
+void enterExtensionGetter_keyRepresentationForErrorSignaling (const int32_t inClassIndex,
+                                                              enterExtensionGetter_abstractDeclaration_keyRepresentationForErrorSignaling inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string callCategoryGetter_keyRepresentationForErrorSignaling (const class cPtr_abstractDeclaration * inObject,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) ;
+class GALGAS_string callExtensionGetter_keyRepresentationForErrorSignaling (const class cPtr_abstractDeclaration * inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1960,20 +1960,20 @@ class GALGAS_string callCategoryGetter_keyRepresentationForErrorSignaling (const
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef class GALGAS_location (*categoryGetterSignature_abstractDeclaration_location) (const class cPtr_abstractDeclaration * inObject,
-                                                                                       class C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
+typedef class GALGAS_location (*enterExtensionGetter_abstractDeclaration_location) (const class cPtr_abstractDeclaration * inObject,
+                                                                                    class C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryGetter_location (const int32_t inClassIndex,
-                                   categoryGetterSignature_abstractDeclaration_location inMethod) ;
+void enterExtensionGetter_location (const int32_t inClassIndex,
+                                    enterExtensionGetter_abstractDeclaration_location inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_location callCategoryGetter_location (const class cPtr_abstractDeclaration * inObject,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+class GALGAS_location callExtensionGetter_location (const class cPtr_abstractDeclaration * inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1981,22 +1981,22 @@ class GALGAS_location callCategoryGetter_location (const class cPtr_abstractDecl
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph) (const class cPtr_abstractDeclaration * inObject,
-                                                                                    class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
-                                                                                    class C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_abstractDeclaration_enterInPrecedenceGraph) (const class cPtr_abstractDeclaration * inObject,
+                                                                                     class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
+                                                                                     class C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryMethod_enterInPrecedenceGraph (const int32_t inClassIndex,
-                                                 categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph inMethod) ;
+void enterExtensionMethod_enterInPrecedenceGraph (const int32_t inClassIndex,
+                                                  extensionMethodSignature_abstractDeclaration_enterInPrecedenceGraph inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callCategoryMethod_enterInPrecedenceGraph (const class cPtr_abstractDeclaration * inObject,
-                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_enterInPrecedenceGraph (const class cPtr_abstractDeclaration * inObject,
+                                                 GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2004,10 +2004,10 @@ void callCategoryMethod_enterInPrecedenceGraph (const class cPtr_abstractDeclara
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_bootList inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_bootList inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2015,10 +2015,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_bootList inOb
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_configurationDeclarationList inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_configurationDeclarationList inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2026,10 +2026,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_configuration
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_controlRegisterDeclarationListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_controlRegisterDeclarationListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2037,10 +2037,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_controlRegist
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_externProcedureDeclarationListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_externProcedureDeclarationListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2048,10 +2048,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_externProcedu
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_globalVarDeclarationList inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_globalVarDeclarationList inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2059,10 +2059,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_globalVarDecl
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_guardDeclarationListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_guardDeclarationListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2070,10 +2070,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_guardDeclarat
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_initList inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_initList inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2081,10 +2081,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_initList inOb
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_panicClauseListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_panicClauseListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2092,10 +2092,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_panicClauseLi
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_notePrimitiveTypesInPrecedenceGraph (const class GALGAS_primitiveDeclarationListAST inObject,
-                                                         class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
+void extensionMethod_notePrimitiveTypesInPrecedenceGraph (const class GALGAS_primitiveDeclarationListAST inObject,
+                                                          class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2103,10 +2103,10 @@ void categoryMethod_notePrimitiveTypesInPrecedenceGraph (const class GALGAS_prim
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_procedureDeclarationListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_procedureDeclarationListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2114,10 +2114,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_procedureDecl
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_sectionDeclarationListAST inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_sectionDeclarationListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2125,10 +2125,10 @@ void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_sectionDeclar
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteServiceTypesInPrecedenceGraph (const class GALGAS_serviceDeclarationListAST inObject,
-                                                       class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteServiceTypesInPrecedenceGraph (const class GALGAS_serviceDeclarationListAST inObject,
+                                                        class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2136,10 +2136,10 @@ void categoryMethod_noteServiceTypesInPrecedenceGraph (const class GALGAS_servic
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_noteTypesInPrecedenceGraph (const class GALGAS_taskList inObject,
-                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_taskList inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2197,26 +2197,26 @@ class GALGAS_string function_sectionModeName (class C_Compiler * inCompiler
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*categoryMethodSignature_abstractDeclaration_enterInContext) (const class cPtr_abstractDeclaration * inObject,
-                                                                            const class GALGAS_procedureDeclarationListAST constinArgument0,
-                                                                            class GALGAS_semanticContext & ioArgument1,
-                                                                            class GALGAS_staticStringMap & ioArgument2,
-                                                                            class C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_abstractDeclaration_enterInContext) (const class cPtr_abstractDeclaration * inObject,
+                                                                             const class GALGAS_procedureDeclarationListAST constinArgument0,
+                                                                             class GALGAS_semanticContext & ioArgument1,
+                                                                             class GALGAS_staticStringMap & ioArgument2,
+                                                                             class C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
-                                         categoryMethodSignature_abstractDeclaration_enterInContext inMethod) ;
+void enterExtensionMethod_enterInContext (const int32_t inClassIndex,
+                                          extensionMethodSignature_abstractDeclaration_enterInContext inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * inObject,
-                                        const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
-                                        GALGAS_semanticContext & io_ioContext,
-                                        GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_enterInContext (const class cPtr_abstractDeclaration * inObject,
+                                         const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                         GALGAS_semanticContext & io_ioContext,
+                                         GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2224,26 +2224,26 @@ void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * i
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*categoryMethodSignature_abstractDeclaration_enterRoutinesInContext) (const class cPtr_abstractDeclaration * inObject,
-                                                                                    const class GALGAS_procedureDeclarationListAST constinArgument0,
-                                                                                    class GALGAS_semanticContext & ioArgument1,
-                                                                                    class GALGAS_staticStringMap & ioArgument2,
-                                                                                    class C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_abstractDeclaration_enterRoutinesInContext) (const class cPtr_abstractDeclaration * inObject,
+                                                                                     const class GALGAS_procedureDeclarationListAST constinArgument0,
+                                                                                     class GALGAS_semanticContext & ioArgument1,
+                                                                                     class GALGAS_staticStringMap & ioArgument2,
+                                                                                     class C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryMethod_enterRoutinesInContext (const int32_t inClassIndex,
-                                                 categoryMethodSignature_abstractDeclaration_enterRoutinesInContext inMethod) ;
+void enterExtensionMethod_enterRoutinesInContext (const int32_t inClassIndex,
+                                                  extensionMethodSignature_abstractDeclaration_enterRoutinesInContext inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callCategoryMethod_enterRoutinesInContext (const class cPtr_abstractDeclaration * inObject,
-                                                const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
-                                                GALGAS_semanticContext & io_ioContext,
-                                                GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_enterRoutinesInContext (const class cPtr_abstractDeclaration * inObject,
+                                                 const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                                 GALGAS_semanticContext & io_ioContext,
+                                                 GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2251,10 +2251,10 @@ void callCategoryMethod_enterRoutinesInContext (const class cPtr_abstractDeclara
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_configurationDeclarationList inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_configurationDeclarationList inObject,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2262,10 +2262,10 @@ void categoryMethod_enterInContext (const class GALGAS_configurationDeclarationL
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterExternProcInContext (const class GALGAS_externProcedureDeclarationListAST inObject,
-                                              class GALGAS_semanticContext & io_ioContext,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterExternProcInContext (const class GALGAS_externProcedureDeclarationListAST inObject,
+                                               class GALGAS_semanticContext & io_ioContext,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2273,11 +2273,11 @@ void categoryMethod_enterExternProcInContext (const class GALGAS_externProcedure
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_globalVarDeclarationList_2D_element inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_globalVarDeclarationList_2D_element inObject,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2285,11 +2285,11 @@ void categoryMethod_enterInContext (const class GALGAS_globalVarDeclarationList_
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_guardDeclarationListAST inObject,
-                                    const class GALGAS_string constin_inReceiverTypeName,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_guardDeclarationListAST inObject,
+                                     const class GALGAS_string constin_inReceiverTypeName,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2297,10 +2297,10 @@ void categoryMethod_enterInContext (const class GALGAS_guardDeclarationListAST i
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_initList_2D_element inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_initList_2D_element inObject,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2308,10 +2308,10 @@ void categoryMethod_enterInContext (const class GALGAS_initList_2D_element inObj
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_isrDeclarationListAST inObject,
-                                    class GALGAS_semanticContext & io_ioSemanticContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_isrDeclarationListAST inObject,
+                                     class GALGAS_semanticContext & io_ioSemanticContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2319,10 +2319,10 @@ void categoryMethod_enterInContext (const class GALGAS_isrDeclarationListAST inO
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_element inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_element inObject,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2330,11 +2330,11 @@ void categoryMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_ele
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_primitiveDeclarationListAST inObject,
-                                    const class GALGAS_string constin_inReceiverTypeName,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_primitiveDeclarationListAST inObject,
+                                     const class GALGAS_string constin_inReceiverTypeName,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2342,11 +2342,11 @@ void categoryMethod_enterInContext (const class GALGAS_primitiveDeclarationListA
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListAST inObject,
-                                    const class GALGAS_string constin_inSelfTypeName,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_procedureDeclarationListAST inObject,
+                                     const class GALGAS_string constin_inSelfTypeName,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2354,11 +2354,11 @@ void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListA
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_sectionDeclarationListAST inObject,
-                                    const class GALGAS_string constin_inReceiverTypeName,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_sectionDeclarationListAST inObject,
+                                     const class GALGAS_string constin_inReceiverTypeName,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2366,11 +2366,11 @@ void categoryMethod_enterInContext (const class GALGAS_sectionDeclarationListAST
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_serviceDeclarationListAST inObject,
-                                    const class GALGAS_string constin_inReceiverTypeName,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_serviceDeclarationListAST inObject,
+                                     const class GALGAS_string constin_inReceiverTypeName,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2378,11 +2378,11 @@ void categoryMethod_enterInContext (const class GALGAS_serviceDeclarationListAST
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterInContext (const class GALGAS_taskList inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterInContext (const class GALGAS_taskList inObject,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2417,26 +2417,26 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*categoryMethodSignature_abstractDeclaration_semanticAnalysis) (const class cPtr_abstractDeclaration * inObject,
-                                                                              const class GALGAS_semanticContext constinArgument0,
-                                                                              class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                                                              class GALGAS_intermediateCodeStruct & ioArgument2,
-                                                                              class C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_abstractDeclaration_semanticAnalysis) (const class cPtr_abstractDeclaration * inObject,
+                                                                               const class GALGAS_semanticContext constinArgument0,
+                                                                               class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                                                               class GALGAS_intermediateCodeStruct & ioArgument2,
+                                                                               class C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryMethod_semanticAnalysis (const int32_t inClassIndex,
-                                           categoryMethodSignature_abstractDeclaration_semanticAnalysis inMethod) ;
+void enterExtensionMethod_semanticAnalysis (const int32_t inClassIndex,
+                                            extensionMethodSignature_abstractDeclaration_semanticAnalysis inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callCategoryMethod_semanticAnalysis (const class cPtr_abstractDeclaration * inObject,
-                                          const GALGAS_semanticContext constin_inContext,
-                                          GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                          GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_semanticAnalysis (const class cPtr_abstractDeclaration * inObject,
+                                           const GALGAS_semanticContext constin_inContext,
+                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2444,85 +2444,7 @@ void callCategoryMethod_semanticAnalysis (const class cPtr_abstractDeclaration *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_bootSemanticAnalysis (const class GALGAS_bootList_2D_element inObject,
-                                          const class GALGAS_semanticContext constin_inContext,
-                                          class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                          class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                Extension method '@externProcedureDeclarationListAST externProcedureSemanticAnalysis'                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_externProcedureSemanticAnalysis (const class GALGAS_externProcedureDeclarationListAST inObject,
-                                                     const class GALGAS_semanticContext constin_inContext,
-                                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                     class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Extension method '@globalVarDeclarationList-element semanticAnalysis'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_semanticAnalysis (const class GALGAS_globalVarDeclarationList_2D_element inObject,
-                                      const class GALGAS_semanticContext constin_inContext,
-                                      class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Extension method '@guardDeclarationListAST guardSemanticAnalysis'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_guardSemanticAnalysis (const class GALGAS_guardDeclarationListAST inObject,
-                                           class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
-                                           const class GALGAS_semanticContext constin_inSemanticContext,
-                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Extension method '@initList-element initSemanticAnalysis'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_initSemanticAnalysis (const class GALGAS_initList_2D_element inObject,
-                                          const class GALGAS_semanticContext constin_inContext,
-                                          class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                          class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Extension method '@isrDeclarationListAST isrSemanticAnalysis'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_isrSemanticAnalysis (const class GALGAS_isrDeclarationListAST inObject,
-                                         const class GALGAS_semanticContext constin_inSemanticContext,
-                                         class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                         class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Extension method '@panicClauseListAST-element panicSemanticAnalysis'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_panicSemanticAnalysis (const class GALGAS_panicClauseListAST_2D_element inObject,
+void extensionMethod_bootSemanticAnalysis (const class GALGAS_bootList_2D_element inObject,
                                            const class GALGAS_semanticContext constin_inContext,
                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
@@ -2531,17 +2453,95 @@ void categoryMethod_panicSemanticAnalysis (const class GALGAS_panicClauseListAST
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                Extension method '@externProcedureDeclarationListAST externProcedureSemanticAnalysis'                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externProcedureDeclarationListAST inObject,
+                                                      const class GALGAS_semanticContext constin_inContext,
+                                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                      class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Extension method '@globalVarDeclarationList-element semanticAnalysis'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_semanticAnalysis (const class GALGAS_globalVarDeclarationList_2D_element inObject,
+                                       const class GALGAS_semanticContext constin_inContext,
+                                       class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Extension method '@guardDeclarationListAST guardSemanticAnalysis'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_guardSemanticAnalysis (const class GALGAS_guardDeclarationListAST inObject,
+                                            class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
+                                            const class GALGAS_semanticContext constin_inSemanticContext,
+                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                            class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Extension method '@initList-element initSemanticAnalysis'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_initSemanticAnalysis (const class GALGAS_initList_2D_element inObject,
+                                           const class GALGAS_semanticContext constin_inContext,
+                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension method '@isrDeclarationListAST isrSemanticAnalysis'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_isrSemanticAnalysis (const class GALGAS_isrDeclarationListAST inObject,
+                                          const class GALGAS_semanticContext constin_inSemanticContext,
+                                          class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                          class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Extension method '@panicClauseListAST-element panicSemanticAnalysis'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_panicSemanticAnalysis (const class GALGAS_panicClauseListAST_2D_element inObject,
+                                            const class GALGAS_semanticContext constin_inContext,
+                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                            class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                      Extension method '@primitiveDeclarationListAST primitiveSemanticAnalysis'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_primitiveSemanticAnalysis (const class GALGAS_primitiveDeclarationListAST inObject,
-                                               class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
-                                               const class GALGAS_semanticContext constin_inSemanticContext,
-                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+void extensionMethod_primitiveSemanticAnalysis (const class GALGAS_primitiveDeclarationListAST inObject,
+                                                class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
+                                                const class GALGAS_semanticContext constin_inSemanticContext,
+                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2549,13 +2549,13 @@ void categoryMethod_primitiveSemanticAnalysis (const class GALGAS_primitiveDecla
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_procedureSemanticAnalysis (const class GALGAS_procedureDeclarationListAST inObject,
-                                               class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
-                                               const class GALGAS_semanticContext constin_inSemanticContext,
-                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+void extensionMethod_procedureSemanticAnalysis (const class GALGAS_procedureDeclarationListAST inObject,
+                                                class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
+                                                const class GALGAS_semanticContext constin_inSemanticContext,
+                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2563,12 +2563,12 @@ void categoryMethod_procedureSemanticAnalysis (const class GALGAS_procedureDecla
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_sectionSemanticAnalysis (const class GALGAS_sectionDeclarationListAST inObject,
-                                             const class GALGAS_semanticContext constin_inSemanticContext,
-                                             class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                             class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_sectionSemanticAnalysis (const class GALGAS_sectionDeclarationListAST inObject,
+                                              const class GALGAS_semanticContext constin_inSemanticContext,
+                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                              class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2576,13 +2576,13 @@ void categoryMethod_sectionSemanticAnalysis (const class GALGAS_sectionDeclarati
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_serviceSemanticAnalysis (const class GALGAS_serviceDeclarationListAST inObject,
-                                             class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
-                                             const class GALGAS_semanticContext constin_inSemanticContext,
-                                             class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                             class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_serviceSemanticAnalysis (const class GALGAS_serviceDeclarationListAST inObject,
+                                              class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
+                                              const class GALGAS_semanticContext constin_inSemanticContext,
+                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                              class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2590,12 +2590,12 @@ void categoryMethod_serviceSemanticAnalysis (const class GALGAS_serviceDeclarati
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_semanticAnalysis (const class GALGAS_taskList inObject,
-                                      const class GALGAS_semanticContext constin_inContext,
-                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                      class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
+void extensionMethod_semanticAnalysis (const class GALGAS_taskList inObject,
+                                       const class GALGAS_semanticContext constin_inContext,
+                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                       class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3027,11 +3027,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessibleEntities 
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterAccessibleEntities (const class GALGAS_instructionListIR inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterAccessibleEntities (const class GALGAS_instructionListIR inObject,
+                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3039,11 +3039,11 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_instructionListI
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterAccessibleEntities (const class GALGAS_interruptMapIR inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterAccessibleEntities (const class GALGAS_interruptMapIR inObject,
+                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3051,11 +3051,11 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_interruptMapIR i
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterAccessibleEntities (const class GALGAS_routineMapIR_2D_element inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterAccessibleEntities (const class GALGAS_routineMapIR_2D_element inObject,
+                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3091,11 +3091,11 @@ void routine_exploreProcs (class GALGAS_routineMapIR & ioArgument0,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterAccessibleEntities (const class GALGAS_guardMapIR_2D_element inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_enterAccessibleEntities (const class GALGAS_guardMapIR_2D_element inObject,
+                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3191,10 +3191,10 @@ void routine_generateTarget (const class GALGAS_string constinArgument0,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_llvmPrototypeGeneration (const class GALGAS_externProcedureMapIR inObject,
-                                             class GALGAS_string & io_ioLLVMcode,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_llvmPrototypeGeneration (const class GALGAS_externProcedureMapIR inObject,
+                                              class GALGAS_string & io_ioLLVMcode,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3202,10 +3202,10 @@ void categoryMethod_llvmPrototypeGeneration (const class GALGAS_externProcedureM
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_generateLLVM (const class GALGAS_globalVariableMapIR_2D_element inObject,
-                                  class GALGAS_string & io_ioLLVMcode,
-                                  class C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
+void extensionMethod_generateLLVM (const class GALGAS_globalVariableMapIR_2D_element inObject,
+                                   class GALGAS_string & io_ioLLVMcode,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3213,23 +3213,9 @@ void categoryMethod_generateLLVM (const class GALGAS_globalVariableMapIR_2D_elem
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_guardCodeGeneration (const class GALGAS_guardMapIR inObject,
-                                         class GALGAS_string & io_ioLLVMcode,
-                                         class GALGAS__32_stringlist & io_ioServiceList,
-                                         const class GALGAS_generationContext constin_inGenerationContext,
-                                         class GALGAS_generationAdds & io_ioGenerationAdds,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Extension method '@initListIR generateLLVMinitCode'                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_generateLLVMinitCode (const class GALGAS_initListIR inObject,
+void extensionMethod_guardCodeGeneration (const class GALGAS_guardMapIR inObject,
                                           class GALGAS_string & io_ioLLVMcode,
-                                          const class GALGAS_routineMapIR constin_inProcedureMapIR,
+                                          class GALGAS__32_stringlist & io_ioServiceList,
                                           const class GALGAS_generationContext constin_inGenerationContext,
                                           class GALGAS_generationAdds & io_ioGenerationAdds,
                                           class C_Compiler * inCompiler
@@ -3237,16 +3223,30 @@ void categoryMethod_generateLLVMinitCode (const class GALGAS_initListIR inObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 Extension method '@initListIR generateLLVMinitCode'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_generateLLVMinitCode (const class GALGAS_initListIR inObject,
+                                           class GALGAS_string & io_ioLLVMcode,
+                                           const class GALGAS_routineMapIR constin_inProcedureMapIR,
+                                           const class GALGAS_generationContext constin_inGenerationContext,
+                                           class GALGAS_generationAdds & io_ioGenerationAdds,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Extension method '@instructionListIR instructionListLLVMCode'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListIR inObject,
-                                             class GALGAS_string & io_ioLLVMcode,
-                                             const class GALGAS_generationContext constin_inGenerationContext,
-                                             class GALGAS_generationAdds & io_ioGenerationAdds,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_instructionListLLVMCode (const class GALGAS_instructionListIR inObject,
+                                              class GALGAS_string & io_ioLLVMcode,
+                                              const class GALGAS_generationContext constin_inGenerationContext,
+                                              class GALGAS_generationAdds & io_ioGenerationAdds,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3254,15 +3254,15 @@ void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListI
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_interruptCodeGeneration (const class GALGAS_interruptMapIR inObject,
-                                             class GALGAS_string & io_ioLLVMcode,
-                                             class GALGAS_string & io_ioAScode,
-                                             const class GALGAS_string constin_inUndefinedInterruptString,
-                                             const class GALGAS_string constin_inXTRInterruptHandlerString,
-                                             const class GALGAS_generationContext constin_inGenerationContext,
-                                             class GALGAS_generationAdds & io_ioGenerationAdds,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_interruptCodeGeneration (const class GALGAS_interruptMapIR inObject,
+                                              class GALGAS_string & io_ioLLVMcode,
+                                              class GALGAS_string & io_ioAScode,
+                                              const class GALGAS_string constin_inUndefinedInterruptString,
+                                              const class GALGAS_string constin_inXTRInterruptHandlerString,
+                                              const class GALGAS_generationContext constin_inGenerationContext,
+                                              class GALGAS_generationAdds & io_ioGenerationAdds,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3270,13 +3270,13 @@ void categoryMethod_interruptCodeGeneration (const class GALGAS_interruptMapIR i
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                        class GALGAS_string & io_ioLLVMcode,
-                                        class GALGAS_string & io_ioAssemblerCode,
-                                        const class GALGAS_generationContext constin_inGenerationContext,
-                                        class GALGAS_generationAdds & io_ioGenerationAdds,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObject,
+                                         class GALGAS_string & io_ioLLVMcode,
+                                         class GALGAS_string & io_ioAssemblerCode,
+                                         const class GALGAS_generationContext constin_inGenerationContext,
+                                         class GALGAS_generationAdds & io_ioGenerationAdds,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3284,11 +3284,11 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_routineMapIR inObject
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_primitiveCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                             class GALGAS_string & io_ioLLVMcode,
-                                             class GALGAS__32_stringlist & io_ioServiceList,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionMethod_primitiveCodeGeneration (const class GALGAS_routineMapIR inObject,
+                                              class GALGAS_string & io_ioLLVMcode,
+                                              class GALGAS__32_stringlist & io_ioServiceList,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3296,11 +3296,11 @@ void categoryMethod_primitiveCodeGeneration (const class GALGAS_routineMapIR inO
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_sectionCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                           class GALGAS_string & io_ioLLVMcode,
-                                           class GALGAS__32_stringlist & io_ioSectionList,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
+void extensionMethod_sectionCodeGeneration (const class GALGAS_routineMapIR inObject,
+                                            class GALGAS_string & io_ioLLVMcode,
+                                            class GALGAS__32_stringlist & io_ioSectionList,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3308,11 +3308,11 @@ void categoryMethod_sectionCodeGeneration (const class GALGAS_routineMapIR inObj
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_serviceCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                           class GALGAS_string & io_ioLLVMcode,
-                                           class GALGAS__32_stringlist & io_ioServiceList,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
+void extensionMethod_serviceCodeGeneration (const class GALGAS_routineMapIR inObject,
+                                            class GALGAS_string & io_ioLLVMcode,
+                                            class GALGAS__32_stringlist & io_ioServiceList,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3320,12 +3320,12 @@ void categoryMethod_serviceCodeGeneration (const class GALGAS_routineMapIR inObj
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_generateCode (const class GALGAS_taskMapIR inObject,
-                                  class GALGAS_string & io_ioLLVMcode,
-                                  const class GALGAS_generationContext constin_inGenerationContext,
-                                  class GALGAS_generationAdds & io_ioGenerationAdds,
-                                  class C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
+void extensionMethod_generateCode (const class GALGAS_taskMapIR inObject,
+                                   class GALGAS_string & io_ioLLVMcode,
+                                   const class GALGAS_generationContext constin_inGenerationContext,
+                                   class GALGAS_generationAdds & io_ioGenerationAdds,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3344,11 +3344,11 @@ void routine_declareLLVMTypes (const class GALGAS_unifiedTypeMap constinArgument
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryModifier_findOrAddStaticString (class GALGAS_staticStringMap & ioObject,
-                                             class GALGAS_string in_inString,
-                                             class GALGAS_uint & out_outIndex,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void extensionSetter_findOrAddStaticString (class GALGAS_staticStringMap & ioObject,
+                                            class GALGAS_string in_inString,
+                                            class GALGAS_uint & out_outIndex,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

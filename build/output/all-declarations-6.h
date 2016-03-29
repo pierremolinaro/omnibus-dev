@@ -342,24 +342,24 @@ class cPtr_literalStringDeclaration : public cPtr_abstractDeclaration {
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*categoryMethodSignature_abstractDeclaration_addExtension) (const class cPtr_abstractDeclaration * inObject,
-                                                                          class GALGAS_extensionDeclarationListAST & ioArgument0,
-                                                                          class GALGAS_abstractDeclaration & outArgument1,
-                                                                          class C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_abstractDeclaration_addExtension) (const class cPtr_abstractDeclaration * inObject,
+                                                                           class GALGAS_extensionDeclarationListAST & ioArgument0,
+                                                                           class GALGAS_abstractDeclaration & outArgument1,
+                                                                           class C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryMethod_addExtension (const int32_t inClassIndex,
-                                       categoryMethodSignature_abstractDeclaration_addExtension inMethod) ;
+void enterExtensionMethod_addExtension (const int32_t inClassIndex,
+                                        extensionMethodSignature_abstractDeclaration_addExtension inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callCategoryMethod_addExtension (const class cPtr_abstractDeclaration * inObject,
-                                      GALGAS_extensionDeclarationListAST & io_ioExtensionDeclarationListAST,
-                                      GALGAS_abstractDeclaration & out_outNewDeclaration,
-                                      C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_addExtension (const class cPtr_abstractDeclaration * inObject,
+                                       GALGAS_extensionDeclarationListAST & io_ioExtensionDeclarationListAST,
+                                       GALGAS_abstractDeclaration & out_outNewDeclaration,
+                                       C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
