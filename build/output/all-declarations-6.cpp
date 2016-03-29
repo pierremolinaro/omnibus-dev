@@ -320,7 +320,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   cEnumerator_declarationListAST enumerator_3870 (var_declarationList, kEnumeration_up) ;
   while (enumerator_3870.hasCurrentObject ()) {
     GALGAS_abstractDeclaration var_newDeclaration ;
-    callCategoryMethod_addExtension ((const cPtr_abstractDeclaration *) enumerator_3870.current_mDeclaration (HERE).ptr (), var_extensionDeclarationListAST, var_newDeclaration, inCompiler COMMA_SOURCE_FILE ("program.galgas", 102)) ;
+    callExtensionMethod_addExtension ((const cPtr_abstractDeclaration *) enumerator_3870.current_mDeclaration (HERE).ptr (), var_extensionDeclarationListAST, var_newDeclaration, inCompiler COMMA_SOURCE_FILE ("program.galgas", 102)) ;
     var_newDeclarationList.addAssign_operation (var_newDeclaration  COMMA_SOURCE_FILE ("program.galgas", 103)) ;
     enumerator_3870.gotoNextObject () ;
   }

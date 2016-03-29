@@ -229,7 +229,7 @@ private func getInfixOperatorMap
       outOperatorMap = inContext.mSubOperatorMap
     end
   case subOpNoOvf :
-    outOperatorMap = inContext.mSubOperatorMap
+    outOperatorMap = inContext.mSubNoOvfOperatorMap
   case mulOp :
     if [inModeSet hasKey !panicModeName ()] then
       error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
