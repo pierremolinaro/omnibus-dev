@@ -36,6 +36,19 @@ void routine_copyExecutableFileWithSubstitutions (const class GALGAS_string cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         Routine 'copyFileWithSubstitutions'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_copyFileWithSubstitutions (const class GALGAS_string constinArgument0,
+                                        const class GALGAS_string constinArgument1,
+                                        const class GALGAS_string constinArgument2,
+                                        const class GALGAS__32_stringlist constinArgument3,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                               Routine 'copyTextFile'                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

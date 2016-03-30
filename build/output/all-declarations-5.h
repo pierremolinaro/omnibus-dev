@@ -289,6 +289,7 @@ class GALGAS_lstring function_combineTypeNamesForInfixOperator (const class GALG
 
 class GALGAS_semanticContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
+  public : GALGAS_targetParameters mAttribute_mTargetParameters ;
   public : GALGAS_uint mAttribute_mPointerSize ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mBooleanType ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mLiteralIntegerType ;
@@ -350,7 +351,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_semanticContext (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_semanticContext (const GALGAS_uint & in_mPointerSize,
+  public : GALGAS_semanticContext (const GALGAS_targetParameters & in_mTargetParameters,
+                                   const GALGAS_uint & in_mPointerSize,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mBooleanType,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mLiteralIntegerType,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mPanicCodeType,
@@ -407,25 +409,25 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_semanticContext constructor_new (const class GALGAS_uint & inOperand0,
-                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+  public : static GALGAS_semanticContext constructor_new (const class GALGAS_targetParameters & inOperand0,
+                                                          const class GALGAS_uint & inOperand1,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
-                                                          const class GALGAS_unifiedTypeMap & inOperand5,
-                                                          const class GALGAS_routineMapForContext & inOperand6,
-                                                          const class GALGAS_guardMapForContext & inOperand7,
-                                                          const class GALGAS_initRoutineMap & inOperand8,
-                                                          const class GALGAS_panicRoutinePriorityMap & inOperand9,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
+                                                          const class GALGAS_unifiedTypeMap & inOperand6,
+                                                          const class GALGAS_routineMapForContext & inOperand7,
+                                                          const class GALGAS_guardMapForContext & inOperand8,
+                                                          const class GALGAS_initRoutineMap & inOperand9,
                                                           const class GALGAS_panicRoutinePriorityMap & inOperand10,
-                                                          const class GALGAS_controlRegisterMap & inOperand11,
-                                                          const class GALGAS_globalConstantMap & inOperand12,
-                                                          const class GALGAS_globalVariableMap & inOperand13,
-                                                          const class GALGAS_constructorMap & inOperand14,
-                                                          const class GALGAS_modeMap & inOperand15,
-                                                          const class GALGAS_stringset & inOperand16,
-                                                          const class GALGAS_availableInterruptMap & inOperand17,
-                                                          const class GALGAS_infixOperatorMap & inOperand18,
+                                                          const class GALGAS_panicRoutinePriorityMap & inOperand11,
+                                                          const class GALGAS_controlRegisterMap & inOperand12,
+                                                          const class GALGAS_globalConstantMap & inOperand13,
+                                                          const class GALGAS_globalVariableMap & inOperand14,
+                                                          const class GALGAS_constructorMap & inOperand15,
+                                                          const class GALGAS_modeMap & inOperand16,
+                                                          const class GALGAS_stringset & inOperand17,
+                                                          const class GALGAS_availableInterruptMap & inOperand18,
                                                           const class GALGAS_infixOperatorMap & inOperand19,
                                                           const class GALGAS_infixOperatorMap & inOperand20,
                                                           const class GALGAS_infixOperatorMap & inOperand21,
@@ -447,11 +449,12 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand37,
                                                           const class GALGAS_infixOperatorMap & inOperand38,
                                                           const class GALGAS_infixOperatorMap & inOperand39,
-                                                          const class GALGAS_prefixOperatorMap & inOperand40,
+                                                          const class GALGAS_infixOperatorMap & inOperand40,
                                                           const class GALGAS_prefixOperatorMap & inOperand41,
                                                           const class GALGAS_prefixOperatorMap & inOperand42,
-                                                          const class GALGAS_taskMap & inOperand43,
-                                                          const class GALGAS_globalTaskVariableList & inOperand44
+                                                          const class GALGAS_prefixOperatorMap & inOperand43,
+                                                          const class GALGAS_taskMap & inOperand44,
+                                                          const class GALGAS_globalTaskVariableList & inOperand45
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -545,6 +548,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSubOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mSupEqualOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskMap getter_mTaskMap (LOCATION_ARGS) const ;
 
@@ -960,6 +965,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_taskMapIR mAttribute_mTaskMapIR ;
   public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
   public : GALGAS_uint mAttribute_mMaxBranchOfOnInstructions ;
+  public : GALGAS_targetParameters mAttribute_mTargetParameters ;
 
 
 //--------------------------------- Accessors
@@ -991,7 +997,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_instructionListIR & in_mPanicLoopInstructionListIR,
                                           const GALGAS_taskMapIR & in_mTaskMapIR,
                                           const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
-                                          const GALGAS_uint & in_mMaxBranchOfOnInstructions) ;
+                                          const GALGAS_uint & in_mMaxBranchOfOnInstructions,
+                                          const GALGAS_targetParameters & in_mTargetParameters) ;
 
 //-- Start of generic part --*
 
@@ -1019,7 +1026,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_instructionListIR & inOperand12,
                                                                  const class GALGAS_taskMapIR & inOperand13,
                                                                  const class GALGAS_globalTaskVariableList & inOperand14,
-                                                                 const class GALGAS_uint & inOperand15
+                                                                 const class GALGAS_uint & inOperand15,
+                                                                 const class GALGAS_targetParameters & inOperand16
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1063,6 +1071,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapIR getter_mRoutineMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticStringMap getter_mStaticStringMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_taskMapIR getter_mTaskMapIR (LOCATION_ARGS) const ;
 
@@ -3156,22 +3166,22 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Routine 'generateLLVMfile'                                              *
+//                                             Routine 'generateCodeFiles'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_generateLLVMfile (const class GALGAS_string constinArgument0,
-                               const class GALGAS_string constinArgument1,
-                               const class GALGAS_location constinArgument2,
-                               const class GALGAS_intermediateCodeStruct constinArgument3,
-                               const class GALGAS_unifiedTypeMap constinArgument4,
-                               const class GALGAS_lstring constinArgument5,
-                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
-                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
-                               const class GALGAS_availableInterruptMap constinArgument8,
-                               const class GALGAS_stringset constinArgument9,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
+void routine_generateCodeFiles (const class GALGAS_string constinArgument0,
+                                const class GALGAS_string constinArgument1,
+                                const class GALGAS_location constinArgument2,
+                                const class GALGAS_intermediateCodeStruct constinArgument3,
+                                const class GALGAS_unifiedTypeMap constinArgument4,
+                                const class GALGAS_lstring constinArgument5,
+                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
+                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
+                                const class GALGAS_availableInterruptMap constinArgument8,
+                                const class GALGAS_stringset constinArgument9,
+                                class C_Compiler * inCompiler
+                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3182,6 +3192,7 @@ void routine_generateLLVMfile (const class GALGAS_string constinArgument0,
 void routine_generateTarget (const class GALGAS_string constinArgument0,
                              const class GALGAS_string constinArgument1,
                              const class GALGAS_lstring constinArgument2,
+                             const class GALGAS_targetParameters constinArgument3,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 

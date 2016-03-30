@@ -187,6 +187,15 @@ def runExecutableOnTarget ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   ARM stack computations utility                                                                                     *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def arm_stack_computations ():
+  return [toolpath.toolDir () + "/bin/arm-stack-computations"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #   MAIN                                                                                                               *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -198,6 +207,6 @@ plm.runMakefile (toolpath.toolDir (), archiveBaseURL (), LLVMsourceList (), asse
                  linkerInvocation (), linkerScripts (), linkerLibraries (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \
                  CLANGcompiler (), CsourceList (), LLVMLinkercompiler (), \
-                 currentFile)
+                 currentFile, arm_stack_computations ())
 
 #----------------------------------------------------------------------------------------------------------------------*

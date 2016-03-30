@@ -220,6 +220,7 @@ list @globalTaskVariableList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @semanticContext {
+  @targetParameters mTargetParameters
   @uint mPointerSize # in bit count
   @unifiedTypeMap-proxy mBooleanType
   @unifiedTypeMap-proxy mLiteralIntegerType

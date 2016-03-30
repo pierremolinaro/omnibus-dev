@@ -115,9 +115,10 @@ proc codeGeneration
     !currentDir:inCurrentDirectory
     !productDirectory:productDirectory
     !targetName:inTargetName
+    !targetParameters:inIntermediateCodeStruct.mTargetParameters
   )
-#--- Generate LLVM file
-  generateLLVMfile (
+#--- Generate code files (LLVM, assembly)
+  generateCodeFiles (
     !currentDir:inCurrentDirectory
     !productDir:productDirectory
     !eof:inEndOfSourceFileLocation
@@ -142,7 +143,7 @@ struct @generationContext {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc generateLLVMfile
+private proc generateCodeFiles
   ?currentDir:let @string inCurrentDirectory
   ?productDir:let @string inProductDirectory
   ?eof:let @location inEndOfSourceFileLocation
@@ -388,8 +389,43 @@ private proc generateLLVMfile
   let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
   let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   [s3 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
-#----------------------------------------- Perform compilation
-  if (@uint.errorCount == 0) then # && not [option plm_options.compileOnly value] then
+#----------------------------------------- Write JSON file with stack features
+  var json = "{\n"
+#--- System stack size
+  json += "  \"system-stack-size\" : " + inIntermediateCodeStruct.mTargetParameters.mSystemStackSize.bigint + ",\n"
+  json += "  \"stacked-register-size-on-user-stack\" : "
+       + inIntermediateCodeStruct.mTargetParameters.mStackedUserRegisterOnInterruptByteSize.bigint + ",\n"
+  json += "  \"service-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mServicePushedRegisterByteSize.bigint + ",\n"
+  json += "  \"section-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mSectionPushedRegisterByteSize.bigint + ",\n"
+#--- Tasks
+  json += "  \"tasks\" : {"
+  for task in inIntermediateCodeStruct.mTaskMapIR
+    do json += "\n    \"" + task.lkey + "\" : " + task.mStackSize
+    between json += ","
+  end
+  json += "\n"
+  json += "  },\n"
+#--- Services
+  json += "  \"services\" : ["
+  for (* serviceImplementation) in serviceList
+    do json += "\n    \"" + serviceImplementation + "\""
+    between json += ","
+    after json += "\n"
+  end
+  json += "  ],\n"
+#--- sections
+  json += "  \"sections\" : ["
+  for (* sectionImplementation) in sectionList
+    do json += "\n    \"" + sectionImplementation + "\""
+    between json += ","
+    after json += "\n"
+  end
+  json += "  ]\n"
+#--- Write file
+  json += "}\n"
+  [json writeToFileWhenDifferentContents !sourceDirectory + "/provided-stacks.json" ?*]
+#----------------------------------------- Run compilation script
+  if (@uint.errorCount == 0) then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end
     let fullScript = "python " + inProductDirectory + "/" + script + ".py"
     @sint result = [fullScript system]

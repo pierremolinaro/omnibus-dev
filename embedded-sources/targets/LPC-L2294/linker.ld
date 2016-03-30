@@ -117,7 +117,7 @@ SECTIONS {
 SECTIONS {
   .stacks :{
     . = ALIGN (4) ;
-    . += 1k ;
+    . += !SYSTEMSTACKSIZE! ;
     . = ALIGN (4) ;
     __irq_stack_end = . ;
     __svc_stack_end = . ;

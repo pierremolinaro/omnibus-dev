@@ -90,7 +90,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
                  productDir, linker, linkerScripts, linkerLibraries, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget, \
                  CLANGcompiler, CsourceList, LLVMLinkerCompiler, \
-                 currentFile) :
+                 currentFile, arm_stack_computations) :
   #--- Get max parallel jobs as first argument
   goal = "all"
   if len (sys.argv) > 1 :
@@ -217,17 +217,31 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += [productELF]
     rule.mCommand += [productHEX]
     make.addRule (rule)
-  #--- Add goals
-  make.addGoal ("run", [productHEX], "Building all and run")
-  make.addGoal ("all", [productHEX], "Building all")
+  #---------------------------------------------- Add stack computation rule
+  stackComputationResultFile = objectDir + "/stack-computations.json"
+  rule = makefile.Rule ([stackComputationResultFile], "Stack requirements")
+  rule.mCommand += arm_stack_computations
+  for source in assemblerSourceList:
+    rule.mDependences.append ("sources/" + source)
+    rule.mCommand += ["sources/" + source]
+  for source in LLVMsourceList:
+    src = objectDir + "/opt." + source + ".s"
+    rule.mDependences.append (src)
+    rule.mCommand += [src]
+  rule.mCommand += ["-o", stackComputationResultFile]
+  make.addRule (rule)
+  objectList.append (object)
+  #---------------------------------------------- Add goals
+  make.addGoal ("run", [productHEX, stackComputationResultFile], "Building all and run")
+  make.addGoal ("all", [productHEX, stackComputationResultFile], "Building all")
   make.addGoal ("display-object-size", [productHEX], "Display Object Size")
   make.addGoal ("object-dump", [productHEX], "Dump Object Code")
-  #--- Build
+  #---------------------------------------------- Build
   #make.printRules ()
   make.runGoal (maxParallelJobs, maxParallelJobs == 1)
-  #--- Build Ok ?
+  #---------------------------------------------- Build Ok ?
   make.printErrorCountAndExitOnError ()
-  #--- Run or all ? Display size
+  #---------------------------------------------- Run or all ? Display size
   if (goal == "run") or (goal == "all") :
     s = runProcessAndGetOutput (displayObjectSize + [productELF])
     secondLine = s.split('\n')[1]
@@ -235,7 +249,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     print "Code:        " + str (numbers [0]) + " bytes"
     print "ROM data:    " + str (numbers [1]) + " bytes"
     print "RAM + STACK: " + str (numbers [2]) + " bytes"
-  #--- Run ?
+  #----------------------------------------------- Run ?
   if goal == "run":
     print makefile.BOLD_BLUE () + "Loading Teensy..." + makefile.ENDC ()
     runProcess (runExecutableOnTarget + [productHEX])
