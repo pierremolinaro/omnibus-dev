@@ -384,7 +384,7 @@ static void computeStackRequirements (const bool inVerbose, std::string & ioJSON
   if (!first) {
     ioJSONResult += "\n" ;
   }
-  ioJSONResult += "  }\n" ;
+  ioJSONResult += "  },\n" ;
   ioJSONResult += "  \"undefined\" : {\n" ;
   first = true ;
   for (auto mapIt=unsolvedFunctionMap.cbegin(); mapIt != unsolvedFunctionMap.cend(); ++mapIt) {

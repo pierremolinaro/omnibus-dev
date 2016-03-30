@@ -196,6 +196,15 @@ def arm_stack_computations ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   check stack utility                                                                                                *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def check_stack_utility ():
+  return ["sources/check-stacks.py"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #   MAIN                                                                                                               *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -207,6 +216,6 @@ plm.runMakefile (toolpath.toolDir (), archiveBaseURL (), LLVMsourceList (), asse
                  linkerInvocation (), linkerScripts (), linkerLibraries (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \
                  CLANGcompiler (), CsourceList (), LLVMLinkercompiler (), \
-                 currentFile, arm_stack_computations ())
+                 currentFile, arm_stack_computations (), check_stack_utility ())
 
 #----------------------------------------------------------------------------------------------------------------------*

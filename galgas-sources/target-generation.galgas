@@ -75,6 +75,12 @@ proc generateTarget
     !from:"toolpath.py"
     !to:inProductDirectory + "/sources/toolpath.py"
   )
+#--- Copy check-stacks.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:"check-stacks.py"
+    !to:inProductDirectory + "/sources/check-stacks.py"
+  )
 #--- Copy plm.py
   copyExecutableFile (
     !currentDir:inCurrentDirectory
