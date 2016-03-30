@@ -16,10 +16,20 @@ list @interruptionConfigurationList {
 
 #·······················································································································
 
+struct @targetParameters {
+  @lbigint mSystemStackSize
+  @lbigint mStackedUserRegisterOnInterruptByteSize
+  @lbigint mServicePushedRegisterByteSize
+  @lbigint mSectionPushedRegisterByteSize
+}
+
+#·······················································································································
+
 list @configurationDeclarationList {
   @lbigint mPointerSize
   @lstring mPanicCodeTypeName
   @lstring mPanicLineTypeName
+  @targetParameters mTargetParameters
   @interruptionConfigurationList mInterruptionConfigurationList
 }
 
@@ -38,7 +48,21 @@ syntax extension plm_target_specific_syntax {
     $typeName$ ?let panicCodeTypeName 
     $:$
     $typeName$ ?let panicLineTypeName
+    $:$
+    $integer$ ?let systemStackSize
+    $:$
+    $integer$ ?let stackedUserRegisterOnInterruptByteSize
+    $:$
+    $integer$ ?let servicePushedRegisterByteSize
+    $:$
+    $integer$ ?let sectionPushedRegisterByteSize
     ${$
+    let parameters = @targetParameters.new {
+      !systemStackSize
+      !stackedUserRegisterOnInterruptByteSize
+      !servicePushedRegisterByteSize
+      !sectionPushedRegisterByteSize
+    }
     @interruptionConfigurationList interruptionConfigurationList = {}
     repeat
     while
@@ -58,6 +82,7 @@ syntax extension plm_target_specific_syntax {
       !pointerSize
       !panicCodeTypeName
       !panicLineTypeName
+      !parameters
       !interruptionConfigurationList
   }
 
@@ -97,6 +122,7 @@ method @configurationDeclarationList enterInContext ?!context:@semanticContext i
     else
       ioContext.mPointerSize = [config.mPointerSize.bigint uint]
     end
+    ioContext.mTargetParameters = config.mTargetParameters
     ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicCodeTypeName}
     ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicLineTypeName}
     for (name panicCode) in config.mInterruptionConfigurationList do

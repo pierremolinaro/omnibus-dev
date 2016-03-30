@@ -5952,6 +5952,7 @@ class GALGAS_configurationDeclarationList : public AC_GALGAS_list {
                                                   const class GALGAS_lbigint & in_mPointerSize,
                                                   const class GALGAS_lstring & in_mPanicCodeTypeName,
                                                   const class GALGAS_lstring & in_mPanicLineTypeName,
+                                                  const class GALGAS_targetParameters & in_mTargetParameters,
                                                   const class GALGAS_interruptionConfigurationList & in_mInterruptionConfigurationList
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -5971,7 +5972,8 @@ class GALGAS_configurationDeclarationList : public AC_GALGAS_list {
   public : static GALGAS_configurationDeclarationList constructor_listWithValue (const class GALGAS_lbigint & inOperand0,
                                                                                  const class GALGAS_lstring & inOperand1,
                                                                                  const class GALGAS_lstring & inOperand2,
-                                                                                 const class GALGAS_interruptionConfigurationList & inOperand3
+                                                                                 const class GALGAS_targetParameters & inOperand3,
+                                                                                 const class GALGAS_interruptionConfigurationList & inOperand4
                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -5983,7 +5985,8 @@ class GALGAS_configurationDeclarationList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lbigint & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_lstring & inOperand2,
-                                                      const class GALGAS_interruptionConfigurationList & inOperand3
+                                                      const class GALGAS_targetParameters & inOperand3,
+                                                      const class GALGAS_interruptionConfigurationList & inOperand4
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_configurationDeclarationList add_operation (const GALGAS_configurationDeclarationList & inOperand,
@@ -5995,30 +5998,34 @@ class GALGAS_configurationDeclarationList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lbigint constinArgument0,
                                                        class GALGAS_lstring constinArgument1,
                                                        class GALGAS_lstring constinArgument2,
-                                                       class GALGAS_interruptionConfigurationList constinArgument3,
-                                                       class GALGAS_uint constinArgument4,
+                                                       class GALGAS_targetParameters constinArgument3,
+                                                       class GALGAS_interruptionConfigurationList constinArgument4,
+                                                       class GALGAS_uint constinArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lbigint & outArgument0,
                                                   class GALGAS_lstring & outArgument1,
                                                   class GALGAS_lstring & outArgument2,
-                                                  class GALGAS_interruptionConfigurationList & outArgument3,
+                                                  class GALGAS_targetParameters & outArgument3,
+                                                  class GALGAS_interruptionConfigurationList & outArgument4,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lbigint & outArgument0,
                                                  class GALGAS_lstring & outArgument1,
                                                  class GALGAS_lstring & outArgument2,
-                                                 class GALGAS_interruptionConfigurationList & outArgument3,
+                                                 class GALGAS_targetParameters & outArgument3,
+                                                 class GALGAS_interruptionConfigurationList & outArgument4,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lbigint & outArgument0,
                                                        class GALGAS_lstring & outArgument1,
                                                        class GALGAS_lstring & outArgument2,
-                                                       class GALGAS_interruptionConfigurationList & outArgument3,
-                                                       class GALGAS_uint constinArgument4,
+                                                       class GALGAS_targetParameters & outArgument3,
+                                                       class GALGAS_interruptionConfigurationList & outArgument4,
+                                                       class GALGAS_uint constinArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -6027,14 +6034,16 @@ class GALGAS_configurationDeclarationList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lbigint & outArgument0,
                                                class GALGAS_lstring & outArgument1,
                                                class GALGAS_lstring & outArgument2,
-                                               class GALGAS_interruptionConfigurationList & outArgument3,
+                                               class GALGAS_targetParameters & outArgument3,
+                                               class GALGAS_interruptionConfigurationList & outArgument4,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lbigint & outArgument0,
                                               class GALGAS_lstring & outArgument1,
                                               class GALGAS_lstring & outArgument2,
-                                              class GALGAS_interruptionConfigurationList & outArgument3,
+                                              class GALGAS_targetParameters & outArgument3,
+                                              class GALGAS_interruptionConfigurationList & outArgument4,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -6056,6 +6065,10 @@ class GALGAS_configurationDeclarationList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSizeAtIndex (const class GALGAS_uint & constinOperand0,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_targetParameters getter_mTargetParametersAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_configurationDeclarationList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                                C_Compiler * inCompiler
@@ -6090,6 +6103,7 @@ class cEnumerator_configurationDeclarationList : public cGenericAbstractEnumerat
   public : class GALGAS_lbigint current_mPointerSize (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mPanicCodeTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mPanicLineTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_targetParameters current_mTargetParameters (LOCATION_ARGS) const ;
   public : class GALGAS_interruptionConfigurationList current_mInterruptionConfigurationList (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_configurationDeclarationList_2D_element current (LOCATION_ARGS) const ;
@@ -6238,6 +6252,87 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                              @targetParameters struct                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_targetParameters : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_lbigint mAttribute_mSystemStackSize ;
+  public : GALGAS_lbigint mAttribute_mStackedUserRegisterOnInterruptByteSize ;
+  public : GALGAS_lbigint mAttribute_mServicePushedRegisterByteSize ;
+  public : GALGAS_lbigint mAttribute_mSectionPushedRegisterByteSize ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_targetParameters constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_targetParameters (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_targetParameters (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_targetParameters (const GALGAS_lbigint & in_mSystemStackSize,
+                                    const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
+                                    const GALGAS_lbigint & in_mServicePushedRegisterByteSize,
+                                    const GALGAS_lbigint & in_mSectionPushedRegisterByteSize) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_targetParameters extractObject (const GALGAS_object & inObject,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_targetParameters constructor_new (const class GALGAS_lbigint & inOperand0,
+                                                           const class GALGAS_lbigint & inOperand1,
+                                                           const class GALGAS_lbigint & inOperand2,
+                                                           const class GALGAS_lbigint & inOperand3
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_targetParameters & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSectionPushedRegisterByteSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mServicePushedRegisterByteSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mStackedUserRegisterOnInterruptByteSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSystemStackSize (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_targetParameters class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_targetParameters ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                   @configurationDeclarationList_2D_element struct                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6247,6 +6342,7 @@ class GALGAS_configurationDeclarationList_2D_element : public AC_GALGAS_root {
   public : GALGAS_lbigint mAttribute_mPointerSize ;
   public : GALGAS_lstring mAttribute_mPanicCodeTypeName ;
   public : GALGAS_lstring mAttribute_mPanicLineTypeName ;
+  public : GALGAS_targetParameters mAttribute_mTargetParameters ;
   public : GALGAS_interruptionConfigurationList mAttribute_mInterruptionConfigurationList ;
 
 
@@ -6267,6 +6363,7 @@ class GALGAS_configurationDeclarationList_2D_element : public AC_GALGAS_root {
   public : GALGAS_configurationDeclarationList_2D_element (const GALGAS_lbigint & in_mPointerSize,
                                                            const GALGAS_lstring & in_mPanicCodeTypeName,
                                                            const GALGAS_lstring & in_mPanicLineTypeName,
+                                                           const GALGAS_targetParameters & in_mTargetParameters,
                                                            const GALGAS_interruptionConfigurationList & in_mInterruptionConfigurationList) ;
 
 //-- Start of generic part --*
@@ -6283,7 +6380,8 @@ class GALGAS_configurationDeclarationList_2D_element : public AC_GALGAS_root {
   public : static GALGAS_configurationDeclarationList_2D_element constructor_new (const class GALGAS_lbigint & inOperand0,
                                                                                   const class GALGAS_lstring & inOperand1,
                                                                                   const class GALGAS_lstring & inOperand2,
-                                                                                  const class GALGAS_interruptionConfigurationList & inOperand3
+                                                                                  const class GALGAS_targetParameters & inOperand3,
+                                                                                  const class GALGAS_interruptionConfigurationList & inOperand4
                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -6305,6 +6403,8 @@ class GALGAS_configurationDeclarationList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicLineTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

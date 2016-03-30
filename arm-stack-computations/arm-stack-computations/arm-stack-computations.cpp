@@ -43,7 +43,7 @@ static std::string gCurrentLabelName ; // Set whenever a label is defined
 static std::string gCurrentFunctionName ; // If empty, outside function
 static std::set <std::string> gCalledSubroutineSet ;
 static std::set <std::string> gBranchedSubroutineSet ;
-static int gSavedRegisterCount = 0 ;
+static int gSavedRegisterByteCount = 0 ;
 static int gPadWordCount = 0 ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ static void startOfFunction (const std::string & inLine, const int inLineNumber,
     gCurrentFunctionName = gCurrentLabelName ;
     gCalledSubroutineSet.clear() ;
     gBranchedSubroutineSet.clear() ;
-    gSavedRegisterCount = 0 ;
+    gSavedRegisterByteCount = 0 ;
     gPadWordCount = 0 ;
   }
 }
@@ -79,7 +79,7 @@ static void endOfFunction (const std::string & inLine, const int inLineNumber, c
   if (gCurrentFunctionName.length() == 0) {
     errorForLine (inLine, inLineNumber, inColumn, "end of function, no current function function") ;
   }
-  const cFunction f (gCalledSubroutineSet, gBranchedSubroutineSet, gSavedRegisterCount, gPadWordCount) ;
+  const cFunction f (gCalledSubroutineSet, gBranchedSubroutineSet, gSavedRegisterByteCount, gPadWordCount) ;
   gFunctionMap.insert (std::pair <std::string, cFunction> (gCurrentFunctionName, f)) ;
   gCurrentFunctionName = "" ;
   gCurrentLabelName = "" ;
@@ -220,8 +220,8 @@ void analyzeLine (const std::string & inLine, const int inLineNumber) {
         // std::cout << inLineNumber << ": '.fnend'\n" ;
       }else if (name == ".save") {
         const int n = getSavedRegisterCount (inLine, inLineNumber, column) ;
-        if (gSavedRegisterCount == 0) {
-          gSavedRegisterCount = n ;
+        if (gSavedRegisterByteCount == 0) {
+          gSavedRegisterByteCount = n * 4 ;
         }else{
           errorForLine (inLine, inLineNumber, column, "duplicated .save") ;
         }
@@ -238,7 +238,7 @@ void analyzeLine (const std::string & inLine, const int inLineNumber) {
           }else if (gPadWordCount != 0) {
             errorForLine (inLine, inLineNumber, column, "duplicated .pad") ;
           }else{
-            gPadWordCount = n / 4 ;
+            gPadWordCount = n ;
           }
         }else{
           errorForLine (inLine, inLineNumber, column, "'#' expected") ;
@@ -427,6 +427,9 @@ static void computeStackRequirements (const bool inVerbose, std::string & ioJSON
   }
   ioJSONResult += "  }\n" ;
   ioJSONResult += "}\n" ;
+  if (unsolvedFunctionMap.size () > 0) {
+    std::cout << "Warning: " << unsolvedFunctionMap.size () << " unsolved function(s)\n" ;
+  }
 }
 
 //----------------------------------------------------------------------------------------------------------------------

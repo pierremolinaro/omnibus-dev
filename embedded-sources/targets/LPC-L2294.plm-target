@@ -1,5 +1,13 @@
 
-configuration 32:$int32:$uint32 {
+configuration
+  32 // Pointer bit count
+  :$int32 // Panic code type
+  :$uint32 // Panic line type
+  :1024 // System stack size
+  :0 // Stacked registers bytes count (ARM7TDMI save no reg in user stack on interrupt)
+  :16 // as_swi_handler saves 4 registers on system stack
+  :8 // as_undef_handler saves 2 registers on system stack
+{
   WDT
   ARMCore0
   ARMCore1

@@ -61,6 +61,7 @@ proc generateTarget
   ?currentDir:let @string inCurrentDirectory
   ?productDirectory:let @string inProductDirectory
   ?targetName:let @lstring inTargetName
+  ?targetParameters:let @targetParameters inTargetParameters
 {
 #--- Copy makefile.py
   copyExecutableFile (
@@ -81,10 +82,11 @@ proc generateTarget
     !to:inProductDirectory + "/sources/plm.py"
   )
 #--- Copy linker.ld
-  copyTextFile (
+  copyFileWithSubstitutions (
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/linker.ld"
     !to:inProductDirectory + "/sources/linker.ld"
+    !{!"!SYSTEMSTACKSIZE!" ![inTargetParameters.mSystemStackSize.bigint string]}
   )
 #--- Copy build.py
   var opt_optimizationOption = "disable-opt"
@@ -194,6 +196,28 @@ private proc copyExecutableFileWithSubstitutions
     s = [s stringByReplacingStringByString !templateString !replacementString]
   end
   [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc copyFileWithSubstitutions
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inSourceFileNamePath
+  ?to:let @string inDestinationAbsoluteFilePath
+  ?let @2stringlist inSubstitutions
+{
+  @string s
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    s = [fw textFileContentsAtPath !inSourceFileNamePath]
+  else
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+  end
+  for (templateString replacementString) in inSubstitutions do
+    s = [s stringByReplacingStringByString !templateString !replacementString]
+  end
+  [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

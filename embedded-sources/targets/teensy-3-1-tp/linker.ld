@@ -116,7 +116,7 @@ SECTIONS {
   .system_stack :{
     . = ALIGN (4) ;
     __system_stack_start = . ;
-    . += 1k ;
+    . += !SYSTEMSTACKSIZE! ;
     . = ALIGN (4) ;
     __system_stack_end = . ;
   } > sram_u

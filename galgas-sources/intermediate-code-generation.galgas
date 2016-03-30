@@ -21,6 +21,7 @@ struct @intermediateCodeStruct {
   @taskMapIR mTaskMapIR
   @globalTaskVariableList mGlobalTaskVariableList
   @uint mMaxBranchOfOnInstructions
+  @targetParameters mTargetParameters
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

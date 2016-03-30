@@ -82,7 +82,7 @@
    ldr pc, FIQAddr      @ FIQ interrupt
 ResetAddr:     .word as_reset_handler
 UndefAddr:     .word as_undef_handler
-SWIAddr:       .word SWIHandler
+SWIAddr:       .word as_swi_handler
 PAbortAddr:    .word !ISR!PAbort
 DAbortAddr:    .word !ISR!DAbort
 IRQAddr:       .word as_irq_handler
@@ -217,9 +217,9 @@ __plm_interrupt_vectors :
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .global SWIHandler
+  .global as_swi_handler
 
-SWIHandler:
+as_swi_handler:
 @ Here :
 @  - lr points to the next instruction after the SWI instruction
 @  - the user sp can be retrieved into reg register using mrs reg, spsr
