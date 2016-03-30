@@ -420,6 +420,14 @@ private proc generateCodeFiles
     between json += ","
     after json += "\n"
   end
+  json += "  ],\n"
+#--- sections
+  json += "  \"isr\" : ["
+  for (interruptName 3*) in inIntermediateCodeStruct.mInterruptMapIR
+    do json += "\n    \"" + llvmNameForISR (!interruptName.string) + "\""
+    between json += ","
+    after json += "\n"
+  end
   json += "  ]\n"
 #--- Write file
   json += "}\n"

@@ -16,7 +16,9 @@
 @----------------------------------------------------------------------------------------------------------------------*
 
 !ISR!:
+	.fnstart
 @----------------------------------------- Save preserved registers
+	.save	{r4, r5, lr}
   push  {r4, r5, lr}
 @----------------------------------------- Activity led On (macro that uses only R4 and R5)
   ACTIVITY_LED_ON
@@ -29,7 +31,9 @@
   ldr   r5, =backgroundTaskContext
   ldr   r5, [r5]
   cmp   r5, #0
-  bne   _handle_context_switch
+  bne   .handle.context.switch
 @----------------------------------------- Still in init : return
   pop   {r4, r5, pc}
+	.cantunwind
+	.fnend
 

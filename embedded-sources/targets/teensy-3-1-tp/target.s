@@ -256,7 +256,7 @@ as_svc_handler:
   blx   r12         @ R4:calling task context address, R5:thread PSP
 @----------------------------------------- Set return code (from R0 to R3) in stacked registers
   stmia r5!, {r0, r1, r2, r3}
-@--- Continues in sequence to _handle_context_switch
+@--- Continues in sequence to .handle.context.switch
 
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
@@ -269,7 +269,7 @@ as_svc_handler:
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-_handle_context_switch:
+.handle.context.switch:
 @----------------------------------------- Select task to run
   bl    kernel_selectTaskToRun
 @----------------------------------------- R0 <- calling task context, R1 <- new task context
