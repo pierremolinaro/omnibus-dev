@@ -90,7 +90,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
                  productDir, linker, linkerScripts, linkerLibraries, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget, \
                  CLANGcompiler, CsourceList, LLVMLinkerCompiler, \
-                 currentFile, arm_stack_computations) :
+                 currentFile, arm_stack_computations, check_stack_utility) :
   #--- Get max parallel jobs as first argument
   goal = "all"
   if len (sys.argv) > 1 :
@@ -231,11 +231,23 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   rule.mCommand += ["-o", stackComputationResultFile]
   make.addRule (rule)
   objectList.append (object)
+  #---------------------------------------------- Add stacks check rule
+  checkStackResultFile = productDir + "/check-stacks-result.txt"
+  rule = makefile.Rule ([checkStackResultFile], "Check stacks")
+  rule.mCommand.append ("python")
+  rule.mCommand += check_stack_utility
+  rule.mDependences.append ("sources/provided-stacks.json")
+  rule.mCommand += ["sources/provided-stacks.json"]
+  rule.mDependences.append (stackComputationResultFile)
+  rule.mCommand += [stackComputationResultFile]
+  rule.mCommand += [checkStackResultFile]
+  make.addRule (rule)
+  objectList.append (object)
   #---------------------------------------------- Add goals
-  make.addGoal ("run", [productHEX, stackComputationResultFile], "Building all and run")
-  make.addGoal ("all", [productHEX, stackComputationResultFile], "Building all")
-  make.addGoal ("display-object-size", [productHEX], "Display Object Size")
-  make.addGoal ("object-dump", [productHEX], "Dump Object Code")
+  make.addGoal ("run", [productHEX, checkStackResultFile], "Building all and run")
+  make.addGoal ("all", [productHEX, checkStackResultFile], "Building all")
+  make.addGoal ("display-object-size", [productHEX, checkStackResultFile], "Display Object Size")
+  make.addGoal ("object-dump", [productHEX, checkStackResultFile], "Dump Object Code")
   #---------------------------------------------- Build
   #make.printRules ()
   make.runGoal (maxParallelJobs, maxParallelJobs == 1)
