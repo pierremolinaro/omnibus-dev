@@ -297,7 +297,7 @@ static void analyzeAssemblyFile (const char * inFilePath) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-static void computeStackRequirements (void) {
+static void computeStackRequirements (const bool inVerbose, std::string & ioJSONResult) {
   std::map <std::string, int> gSolvedFunctionMap ;
   std::map <std::string, cFunction> unsolvedFunctionMap = gFunctionMap ;
   bool loop = true ;
@@ -338,7 +338,9 @@ static void computeStackRequirements (void) {
         calledRoutineStackNeeds += mapIt->second.mPadWordCount + mapIt->second.mSavedRegisterCount ;
         const int stackNeeds = (calledRoutineStackNeeds > branchedRoutineStackNeeds) ? calledRoutineStackNeeds : branchedRoutineStackNeeds ;
         gSolvedFunctionMap.insert (std::pair <std::string, int> (mapIt->first, stackNeeds)) ;
-        std::cout << "SOLVED '" << mapIt->first << "', " << stackNeeds << "\n" ;
+        if (inVerbose) {
+          std::cout << "SOLVED '" << mapIt->first << "', " << stackNeeds << " word(s)\n" ;
+        }
         loop = true ;
       }else{
         unsolvedFunctionMap.insert (*mapIt) ;
@@ -347,30 +349,130 @@ static void computeStackRequirements (void) {
   }
 //--- Not solved keys
   for (auto mapIt=unsolvedFunctionMap.cbegin(); mapIt != unsolvedFunctionMap.cend(); ++mapIt) {
-    std::cout << "NOT SOLVED '" << mapIt->first << "'\n" ;
+    if (inVerbose) {
+      std::cout << "NOT SOLVED '" << mapIt->first << "'\n" ;
+    }
     for (auto subroutineIt = mapIt->second.mCalledSubroutineSet.cbegin();
          subroutineIt != mapIt->second.mCalledSubroutineSet.cend() ;
          ++subroutineIt) {
       const bool solved = gSolvedFunctionMap.count (*subroutineIt) > 0 ;
-      std::cout << "  call '" << *subroutineIt << "', " << (solved ? "solved" : "???") << "\n" ;
+      if (inVerbose) {
+        std::cout << "  call '" << *subroutineIt << "', " << (solved ? "solved" : "???") << "\n" ;
+      }
     }
     for (auto subroutineIt = mapIt->second.mBranchedSubroutineSet.cbegin();
          subroutineIt != mapIt->second.mBranchedSubroutineSet.cend() ;
          ++subroutineIt) {
       const bool solved = gSolvedFunctionMap.count (*subroutineIt) > 0 ;
-      std::cout << "  branch '" << *subroutineIt << "', " << (solved ? "solved" : "???") << "\n" ;
+      if (inVerbose) {
+        std::cout << "  branch '" << *subroutineIt << "', " << (solved ? "solved" : "???") << "\n" ;
+      }
     }
   }
+//--- Build JSON file
+  ioJSONResult += "{\n" ;
+  ioJSONResult += "  \"solved\" : {\n" ;
+  bool first = true ;
+  for (auto mapIt=gSolvedFunctionMap.cbegin(); mapIt != gSolvedFunctionMap.cend(); ++mapIt) {
+    if (first) {
+      first = false ;
+    }else{
+      ioJSONResult += ",\n" ;
+    }
+    ioJSONResult += "    \"" + mapIt->first + "\" : " + std::to_string (mapIt->second) ;
+  }
+  if (!first) {
+    ioJSONResult += "\n" ;
+  }
+  ioJSONResult += "  }\n" ;
+  ioJSONResult += "  \"undefined\" : {\n" ;
+  first = true ;
+  for (auto mapIt=unsolvedFunctionMap.cbegin(); mapIt != unsolvedFunctionMap.cend(); ++mapIt) {
+    if (first) {
+      first = false ;
+    }else{
+      ioJSONResult += ",\n" ;
+    }
+    ioJSONResult += "    \"" + mapIt->first + "\" : {\n" ;
+    bool firstSecondary = true ;
+    for (auto subroutineIt = mapIt->second.mCalledSubroutineSet.cbegin();
+         subroutineIt != mapIt->second.mCalledSubroutineSet.cend() ;
+         ++subroutineIt) {
+      if (firstSecondary) {
+        firstSecondary = false ;
+      }else{
+        ioJSONResult += ",\n" ;
+      }
+      const bool solved = gSolvedFunctionMap.count (*subroutineIt) > 0 ;
+      ioJSONResult += "      \"" + *subroutineIt + "\" : " + (solved ? "true" : "false") ;
+    }
+    for (auto subroutineIt = mapIt->second.mBranchedSubroutineSet.cbegin();
+         subroutineIt != mapIt->second.mBranchedSubroutineSet.cend() ;
+         ++subroutineIt) {
+      if (firstSecondary) {
+        firstSecondary = false ;
+      }else{
+        ioJSONResult += ",\n" ;
+      }
+      const bool solved = gSolvedFunctionMap.count (*subroutineIt) > 0 ;
+      ioJSONResult += "      \"" + *subroutineIt + "\" : " + (solved ? "true" : "false") ;
+    }
+    if (!firstSecondary) {
+      ioJSONResult += "\n" ;
+    }
+    ioJSONResult += "    }" ;
+  }
+  if (!first) {
+    ioJSONResult += "\n" ;
+  }
+  ioJSONResult += "  }\n" ;
+  ioJSONResult += "}\n" ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 int main (int argc, const char * argv[]) {
-//  const char * file = "/Users/pierremolinaro/plm-products/no-panic+Volumes+dev-svn+plm+embedded-sources+sample-code+LPC-L2294+01-blinkleds/objects/opt.all.ll.s" ;
+  std::string outputFile ;
+  bool verbose = false ;
+  bool outputOptionOn = false ;
   for (int i=1 ; i < argc ; i++) {
-    analyzeAssemblyFile (argv [i]) ;
+    if (strcmp (argv [i], "-v") == 0) {
+      verbose = true ;
+    }else if (strcmp (argv [i], "-o") == 0) {
+      if (outputOptionOn) {
+        std::cout << "Error: \"-o\" command line option followed by \"-o\"\n" ;
+        exit (1) ;
+      }
+      outputOptionOn = true ;
+    }else{
+      if (outputOptionOn) {
+        if (outputFile.size () > 0) {
+          std::cout << "Error: duplicated \"-o\" command line option\n" ;
+          exit (1) ;
+        }
+        outputFile += argv [i] ;
+        outputOptionOn = false ;
+      }else{
+        analyzeAssemblyFile (argv [i]) ;
+      }
+    }
   }
-  computeStackRequirements () ;
+  if (outputOptionOn) {
+    std::cout << "Error: \"-o\" is the last command line option\n" ;
+    exit (1) ;
+  }
+  std::string jsonResult ;
+  computeStackRequirements (verbose, jsonResult) ;
+  if (verbose) {
+    std::cout << "--- JSON result -----------------------------------------\n" ;
+    std::cout << jsonResult << "\n" ;
+    std::cout << "---------------------------------------------------------\n" ;
+  }
+  if (outputFile.size () > 0) {
+    std::ofstream f (outputFile) ;
+    f << jsonResult ;
+    f.close () ;
+  }
   return 0 ;
 }
 
