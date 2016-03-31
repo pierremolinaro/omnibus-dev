@@ -226,7 +226,6 @@ private proc generateCodeFiles
     !undefinedInterruptString
     !XTRInterruptHandlerString
     !generationContext
-    
     !?generationAdds
   ]
 #----------------------------------------- Extern procedures
@@ -421,14 +420,39 @@ private proc generateCodeFiles
     after json += "\n"
   end
   json += "  ],\n"
-#--- sections
+#--- isr
   json += "  \"isr\" : ["
-  for (interruptName 3*) in inIntermediateCodeStruct.mInterruptMapIR
-    do json += "\n    \"" + llvmNameForISR (!interruptName.string) + "\""
-    between json += ","
-    after json += "\n"
+  var first = true
+  for (interruptName 2* usesXTR) in inIntermediateCodeStruct.mInterruptMapIR do
+    if first then
+      first = false
+    else
+      json += ","
+    end
+    let interruptImplementationName = if usesXTR then
+      llvmNameForInterrupt (!interruptName).string
+    else
+      llvmNameForISR (!interruptName.string)
+    end
+    json += "\n    \"" + interruptImplementationName + "\""
   end
-  json += "  ]\n"
+  if not [option plm_options.noPanicGeneration value] then
+    for (lkey panicCode) in inAvailableInterruptMap do
+      if not [inIntermediateCodeStruct.mInterruptMapIR hasKey !lkey.string] then
+        switch panicCode
+        case noPanicCode :
+        case panicCode (*) :
+          if first then
+            first = false
+          else
+            json += ","
+          end
+          json += "\n    \"" + llvmNameForISR (!lkey.string) + "\""
+        end
+      end
+    end
+  end
+  json += "\n  ]\n"
 #--- Write file
   json += "}\n"
   [json writeToFileWhenDifferentContents !sourceDirectory + "/provided-stacks.json" ?*]

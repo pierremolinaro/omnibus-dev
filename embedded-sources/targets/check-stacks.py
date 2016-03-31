@@ -79,7 +79,7 @@ for serviceName in requirementsDictionary ["services"]:
       print "Error: insufficient stack size for service '" + serviceName + "' task"
       resultContents += "Error: insufficient stack size for service '" + serviceName + "' task\n"
   else:
-    print "Error: service " + serviceName + ": unsolved '"
+    print "Error: service " + serviceName + ": unsolved"
     resultContents += "Error: service " + serviceName + ": unsolved\n"
     ok = False
 resultContents += "\n"
@@ -98,8 +98,27 @@ for sectionName in requirementsDictionary ["sections"]:
       print "Error: insufficient stack size for section '" + sectionName + "' task"
       resultContents += "Error: insufficient stack size for section '" + sectionName + "' task\n"
   else:
-    print "Error: section " + sectionName + ": unsolved '"
+    print "Error: section " + sectionName + ": unsolved"
     resultContents += "Error: section " + sectionName + ": unsolved\n"
+    ok = False
+resultContents += "\n"
+#--- Check sections
+resultContents += "*----------------------------------------------------------------*\n"
+resultContents += "*   CHECK INTERRUPT SERVICE ROUTINE STACKS                       *\n"
+resultContents += "*----------------------------------------------------------------*\n\n"
+resultContents += "  System stack: " + str (systemStackSize) + " bytes\n"
+#resultContents += "  Section handler stack needs: " + str (sectionStackRequirement) + " bytes\n\n"
+for isr in requirementsDictionary ["isr"]:
+  if solvedFunctionDictionary.has_key (isr) :
+    stackRequirement = solvedFunctionDictionary [isr]
+    resultContents += "  ISR '" + isr + "', required stack: " + str (stackRequirement) + "\n"
+    if stackRequirement > systemStackSize:
+      ok = False
+      print "Error: insufficient stack size for isr '" + isr + "' task"
+      resultContents += "Error: insufficient stack size for isr '" + isr + "' task\n"
+  else:
+    print "Error: isr " + isr + ": unsolved"
+    resultContents += "Error: isr " + isr + ": unsolved\n"
     ok = False
 resultContents += "\n"
 #--- Write result file
