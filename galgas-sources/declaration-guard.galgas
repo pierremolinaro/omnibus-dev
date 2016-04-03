@@ -340,7 +340,7 @@ override method @selfRoutineCallInstructionAST baseGuardAnalyze
       @instructionListIR baseGuardInstructionGenerationList = {}
       let routineMangledName = @lstring.new {!"$" + [inSelfType key] + "." + mRoutineName !mRoutineName.location}
       @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-      effectiveParameterListIR += !.outputInput !"" !.new {!inSelfType !.selfObject}
+      effectiveParameterListIR += !.outputInput !.new {!inSelfType !.selfObject}
       [inContext.mGuardMapForContext searchKey
         !routineMangledName
         ?let @procedureSignature formalSignature
@@ -396,7 +396,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
     ?4*
   ]
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  effectiveParameterListIR += !.outputInput !"" ![variableKind address] #--- add "load receiver" as first argument
+  effectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load receiver" as first argument
   @instructionListIR baseGuardInstructionGenerationList = {}
   let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + mRoutineName !mRoutineName.location}
   [inContext.mGuardMapForContext searchKey
@@ -474,7 +474,7 @@ override method @selfRemoteRoutineCallInstructionAST baseGuardAnalyze
       ]        
       let routineMangledName = @lstring.new {!"$" + [propertyType key] + "." + mMethodName !mMethodName.location}
       @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-      effectiveParameterListIR += !.outputInput !"" ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
+      effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
       [inContext.mGuardMapForContext searchKey
         !routineMangledName
         ?let @procedureSignature formalSignature

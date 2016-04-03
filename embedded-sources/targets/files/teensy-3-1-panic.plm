@@ -1,0 +1,25 @@
+//——————————————————————————————————————————————————————————————————————————————
+
+panic func setup 0 {
+  lcd.clearScreenInPanicMode ()
+  lcd.gotoInPanicMode (!line:0 !column:0)
+  lcd.printStringInPanicMode (!FILE)
+  lcd.gotoInPanicMode (!line:1 !column:0)
+  lcd.printStringInPanicMode (!"Line:")
+  lcd.printUnsignedInPanicMode (!LINE)
+  lcd.gotoInPanicMode (!line:2 !column:0)
+  lcd.printStringInPanicMode (!"Code:")
+  lcd.printSignedInPanicMode (!CODE)
+}
+
+//··············································································
+
+panic func loop 0 {
+  lcd.waitMSInPanicMode (!duration:50)
+  leds.on (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
+  lcd.waitMSInPanicMode (!duration:50)
+  leds.off (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+

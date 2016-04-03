@@ -49,9 +49,7 @@ method @routineMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAcc
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc codeOptimisation
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct {
   let initialProcedureMap = ioIntermediateCodeStruct.mRoutineMapIR
   let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
   @uint pass = 0

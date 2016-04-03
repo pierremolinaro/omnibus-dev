@@ -86,7 +86,7 @@ syntax extension common_syntax {
       <instructionList> ?let instructionList !?*
       let endOfProc = @location.here
       $}$
-      taskProcList += !{} !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
+      taskProcList += !{} !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
     while
       $init$
       $integer$ ?let @lbigint priority

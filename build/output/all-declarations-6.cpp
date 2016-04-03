@@ -736,8 +736,8 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    waitUntilMS (!deadline:self.compteur)\n"
   "    leds.off (!LED_L0)\n"
   "    self.compteur +%= 500\n"
-  "    goto (!line:0 !column:0)\n"
-  "    printUnsigned (!millis ())\n"
+  "    lcd.goto (!line:0 !column:0)\n"
+  "    lcd.printUnsigned (!millis ())\n"
   "  }\n"
   "}\n"
   "\n"
@@ -807,7 +807,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  1741, // Text length
+  1749, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -841,72 +841,72 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    var t0 = getSysTick ()\n"
   "    var t1 = getSysTick ()\n"
   "    let systickDuration = t0 - t1\n"
-  "    printUnsigned (!systickDuration)\n"
+  "    lcd.printUnsigned (!systickDuration)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!t0 - t1)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!t0 - t1)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!t0 - t1)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!t0 - t1)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!t0 - t1)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!t0 - t1)\n"
   "  //--- Compute emptySection duration\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    emptySection ()\n"
   "    t1 = getSysTick ()\n"
-  "    goto (!line:1 !column:0)\n"
-  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    lcd.goto (!line:1 !column:0)\n"
+  "    lcd.printUnsigned (!(t0 - t1) - systickDuration)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    emptySection ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!(t0 - t1) - systickDuration)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    emptySection ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!(t0 - t1) - systickDuration)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    emptySection ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!(t0 - t1) - systickDuration)\n"
   "  //--- Compute emptyService duration\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    emptyService ()\n"
   "    t1 = getSysTick ()\n"
-  "    goto (!line:2 !column:0)\n"
-  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    lcd.goto (!line:2 !column:0)\n"
+  "    lcd.printUnsigned (!(t0 - t1) - systickDuration)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    emptyService ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!(t0 - t1) - systickDuration)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    emptyService ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!(t0 - t1) - systickDuration)\n"
   "    waitDuringMS (!delay:1)\n"
   "    t0 = getSysTick ()\n"
   "    emptyService ()\n"
   "    t1 = getSysTick ()\n"
-  "    printSpaces (!1)\n"
-  "    printUnsigned (!(t0 - t1) - systickDuration)\n"
+  "    lcd.printSpaces (!1)\n"
+  "    lcd.printUnsigned (!(t0 - t1) - systickDuration)\n"
   "  }\n"
   "  \n"
   "  func loop () {\n"
@@ -923,7 +923,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "02-section-service-duration.plm",
   "plm",
   true, // Text file
-  2589, // Text length
+  2681, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -1473,8 +1473,8 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    rdvs.input (\?data:let x)\n"
   "    leds.toggle (!LED_L1)\n"
   "    s.P ()\n"
-  "      goto (!line:0 !column:0)\n"
-  "      printUnsigned (!x)\n"
+  "      lcd.goto (!line:0 !column:0)\n"
+  "      lcd.printUnsigned (!x)\n"
   "    s.V ()\n"
   "  }\n"
   "}\n"
@@ -1489,8 +1489,8 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    upon rdvs2.input (\?data:let x) :\n"
   "      leds.toggle (!LED_L2)\n"
   "      s.P ()\n"
-  "        goto (!line:1 !column:0)\n"
-  "        printUnsigned (!x)\n"
+  "        lcd.goto (!line:1 !column:0)\n"
+  "        lcd.printUnsigned (!x)\n"
   "      s.V ()\n"
   "    upon waitUntilMS (!deadline:self.deadline) :\n"
   "      self.deadline += 200\n"
@@ -1505,7 +1505,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2349, // Text length
+  2365, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 

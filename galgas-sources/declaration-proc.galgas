@@ -34,6 +34,7 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@str
 
 list @procedureDeclarationListAST {
   @lstringlist mProcedureModeList
+  @bool mPublic
   @lstring mProcedureName
   @lstringlist mProcedureAttributeList
   @procFormalArgumentList mProcedureFormalArgumentList
@@ -58,6 +59,7 @@ syntax extension common_syntax {
 
   rule <procedure> ?!@procedureDeclarationListAST ioProcListAST {
     <procedure_header>
+      ?public:let public
       ?procModes:let procModeList
       ?name:let procName
       ?attributes:let attributeList
@@ -74,6 +76,7 @@ syntax extension common_syntax {
     $}$
     ioProcListAST +=
       !procModeList
+      !public
       !procName
       !attributeList
       !procFormalArgumentList
@@ -85,11 +88,18 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <procedure_header>
+    !public:@bool outPublic
     !procModes:@lstringlist outProcModeList
     !name:@lstring outProcName
     !attributes:@lstringlist outAttributeList
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
   {
+    select
+      outPublic = false
+    or
+      $public$
+      outPublic = true
+    end
     $func$
     outProcModeList = {}
     repeat

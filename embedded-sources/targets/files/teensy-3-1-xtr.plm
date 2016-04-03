@@ -100,3 +100,10 @@ guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
 }
 
 //-----------------------------------------------------------------------------*
+
+func `panic waitOneMillisecondInPanicMode @noWarningIfUnused () {
+  while not SYST_CSR.COUNTFLAG.bool do
+  end
+}
+  
+//-----------------------------------------------------------------------------*

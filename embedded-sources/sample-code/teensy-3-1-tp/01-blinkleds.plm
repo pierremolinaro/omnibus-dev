@@ -12,8 +12,8 @@ task T1 priority 1 stackSize 512 {
     waitUntilMS (!deadline:self.compteur)
     leds.off (!LED_L0)
     self.compteur +%= 500
-    goto (!line:0 !column:0)
-    printUnsigned (!millis ())
+    lcd.goto (!line:0 !column:0)
+    lcd.printUnsigned (!millis ())
   }
 }
 
