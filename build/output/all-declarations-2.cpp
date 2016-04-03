@@ -758,11 +758,15 @@ GALGAS_procFormalArgumentListForGeneration GALGAS_procFormalArgumentListForGener
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_interruptMapIR::cMapElement_interruptMapIR (const GALGAS_lstring & inKey,
+                                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
+                                                        const GALGAS_string & in_mGlobalVariableName,
                                                         const GALGAS_allocaList & in_mAllocaList,
                                                         const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                                         const GALGAS_bool & in_mXTR
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
+mAttribute_mSelfType (in_mSelfType),
+mAttribute_mGlobalVariableName (in_mGlobalVariableName),
 mAttribute_mAllocaList (in_mAllocaList),
 mAttribute_mInstructionGenerationList (in_mInstructionGenerationList),
 mAttribute_mXTR (in_mXTR) {
@@ -771,20 +775,28 @@ mAttribute_mXTR (in_mXTR) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_interruptMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mXTR.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mSelfType.isValid () && mAttribute_mGlobalVariableName.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mXTR.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_interruptMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_interruptMapIR (mAttribute_lkey, mAttribute_mAllocaList, mAttribute_mInstructionGenerationList, mAttribute_mXTR COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_interruptMapIR (mAttribute_lkey, mAttribute_mSelfType, mAttribute_mGlobalVariableName, mAttribute_mAllocaList, mAttribute_mInstructionGenerationList, mAttribute_mXTR COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_interruptMapIR::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mSelfType" ":" ;
+  mAttribute_mSelfType.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mGlobalVariableName" ":" ;
+  mAttribute_mGlobalVariableName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mAllocaList" ":" ;
@@ -804,6 +816,12 @@ void cMapElement_interruptMapIR::description (C_String & ioString, const int32_t
 typeComparisonResult cMapElement_interruptMapIR::compare (const cCollectionElement * inOperand) const {
   cMapElement_interruptMapIR * operand = (cMapElement_interruptMapIR *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mSelfType.objectCompare (operand->mAttribute_mSelfType) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mGlobalVariableName.objectCompare (operand->mAttribute_mGlobalVariableName) ;
+  }
   if (kOperandEqual == result) {
     result = mAttribute_mAllocaList.objectCompare (operand->mAttribute_mAllocaList) ;
   }
@@ -864,13 +882,15 @@ GALGAS_interruptMapIR GALGAS_interruptMapIR::getter_overriddenMap (C_Compiler * 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptMapIR::addAssign_operation (const GALGAS_lstring & inKey,
-                                                 const GALGAS_allocaList & inArgument0,
-                                                 const GALGAS_instructionListIR & inArgument1,
-                                                 const GALGAS_bool & inArgument2,
+                                                 const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
+                                                 const GALGAS_string & inArgument1,
+                                                 const GALGAS_allocaList & inArgument2,
+                                                 const GALGAS_instructionListIR & inArgument3,
+                                                 const GALGAS_bool & inArgument4,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   cMapElement_interruptMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_interruptMapIR (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_interruptMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -882,13 +902,15 @@ void GALGAS_interruptMapIR::addAssign_operation (const GALGAS_lstring & inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptMapIR::setter_insertKey (GALGAS_lstring inKey,
-                                              GALGAS_allocaList inArgument0,
-                                              GALGAS_instructionListIR inArgument1,
-                                              GALGAS_bool inArgument2,
+                                              GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                              GALGAS_string inArgument1,
+                                              GALGAS_allocaList inArgument2,
+                                              GALGAS_instructionListIR inArgument3,
+                                              GALGAS_bool inArgument4,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
   cMapElement_interruptMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_interruptMapIR (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_interruptMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -904,9 +926,11 @@ const char * kSearchErrorMessage_interruptMapIR_searchKey = "** internal error *
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptMapIR::method_searchKey (GALGAS_lstring inKey,
-                                              GALGAS_allocaList & outArgument0,
-                                              GALGAS_instructionListIR & outArgument1,
-                                              GALGAS_bool & outArgument2,
+                                              GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                              GALGAS_string & outArgument1,
+                                              GALGAS_allocaList & outArgument2,
+                                              GALGAS_instructionListIR & outArgument3,
+                                              GALGAS_bool & outArgument4,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_interruptMapIR * p = (const cMapElement_interruptMapIR *) performSearch (inKey,
@@ -917,20 +941,26 @@ void GALGAS_interruptMapIR::method_searchKey (GALGAS_lstring inKey,
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
+    outArgument3.drop () ;
+    outArgument4.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_interruptMapIR) ;
-    outArgument0 = p->mAttribute_mAllocaList ;
-    outArgument1 = p->mAttribute_mInstructionGenerationList ;
-    outArgument2 = p->mAttribute_mXTR ;
+    outArgument0 = p->mAttribute_mSelfType ;
+    outArgument1 = p->mAttribute_mGlobalVariableName ;
+    outArgument2 = p->mAttribute_mAllocaList ;
+    outArgument3 = p->mAttribute_mInstructionGenerationList ;
+    outArgument4 = p->mAttribute_mXTR ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptMapIR::setter_removeKey (GALGAS_lstring inKey,
-                                              GALGAS_allocaList & outArgument0,
-                                              GALGAS_instructionListIR & outArgument1,
-                                              GALGAS_bool & outArgument2,
+                                              GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                              GALGAS_string & outArgument1,
+                                              GALGAS_allocaList & outArgument2,
+                                              GALGAS_instructionListIR & outArgument3,
+                                              GALGAS_bool & outArgument4,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
   const char * kRemoveErrorMessage = "** internal error **" ;
@@ -939,10 +969,42 @@ void GALGAS_interruptMapIR::setter_removeKey (GALGAS_lstring inKey,
   cMapElement_interruptMapIR * p = (cMapElement_interruptMapIR *) attributes.ptr () ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_interruptMapIR) ;
-    outArgument0 = p->mAttribute_mAllocaList ;
-    outArgument1 = p->mAttribute_mInstructionGenerationList ;
-    outArgument2 = p->mAttribute_mXTR ;
+    outArgument0 = p->mAttribute_mSelfType ;
+    outArgument1 = p->mAttribute_mGlobalVariableName ;
+    outArgument2 = p->mAttribute_mAllocaList ;
+    outArgument3 = p->mAttribute_mInstructionGenerationList ;
+    outArgument4 = p->mAttribute_mXTR ;
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_interruptMapIR::getter_mSelfTypeForKey (const GALGAS_string & inKey,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_interruptMapIR * p = (const cMapElement_interruptMapIR *) attributes ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_interruptMapIR) ;
+    result = p->mAttribute_mSelfType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_interruptMapIR::getter_mGlobalVariableNameForKey (const GALGAS_string & inKey,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_interruptMapIR * p = (const cMapElement_interruptMapIR *) attributes ;
+  GALGAS_string result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_interruptMapIR) ;
+    result = p->mAttribute_mGlobalVariableName ;
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -988,6 +1050,34 @@ GALGAS_bool GALGAS_interruptMapIR::getter_mXTRForKey (const GALGAS_string & inKe
     result = p->mAttribute_mXTR ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_interruptMapIR::setter_setMSelfTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                       GALGAS_string inKey,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_interruptMapIR * p = (cMapElement_interruptMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_interruptMapIR) ;
+    p->mAttribute_mSelfType = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_interruptMapIR::setter_setMGlobalVariableNameForKey (GALGAS_string inAttributeValue,
+                                                                 GALGAS_string inKey,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_interruptMapIR * p = (cMapElement_interruptMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_interruptMapIR) ;
+    p->mAttribute_mGlobalVariableName = inAttributeValue ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1055,7 +1145,7 @@ cGenericAbstractEnumerator () {
 GALGAS_interruptMapIR_2D_element cEnumerator_interruptMapIR::current (LOCATION_ARGS) const {
   const cMapElement_interruptMapIR * p = (const cMapElement_interruptMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_interruptMapIR) ;
-  return GALGAS_interruptMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mAllocaList, p->mAttribute_mInstructionGenerationList, p->mAttribute_mXTR) ;
+  return GALGAS_interruptMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mSelfType, p->mAttribute_mGlobalVariableName, p->mAttribute_mAllocaList, p->mAttribute_mInstructionGenerationList, p->mAttribute_mXTR) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1064,6 +1154,22 @@ GALGAS_lstring cEnumerator_interruptMapIR::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_interruptMapIR::current_mSelfType (LOCATION_ARGS) const {
+  const cMapElement_interruptMapIR * p = (const cMapElement_interruptMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_interruptMapIR) ;
+  return p->mAttribute_mSelfType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cEnumerator_interruptMapIR::current_mGlobalVariableName (LOCATION_ARGS) const {
+  const cMapElement_interruptMapIR * p = (const cMapElement_interruptMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_interruptMapIR) ;
+  return p->mAttribute_mGlobalVariableName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14198,264 +14304,6 @@ GALGAS_constructorMap GALGAS_constructorMap::extractObject (const GALGAS_object 
       result = *p ;
     }else{
       inCompiler->castError ("constructorMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_availableInterruptMap::cMapElement_availableInterruptMap (const GALGAS_lstring & inKey,
-                                                                      const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
-                                                                      COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mAttribute_mInterruptionPanicCode (in_mInterruptionPanicCode) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cMapElement_availableInterruptMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mInterruptionPanicCode.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement * cMapElement_availableInterruptMap::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_availableInterruptMap (mAttribute_lkey, mAttribute_mInterruptionPanicCode COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cMapElement_availableInterruptMap::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInterruptionPanicCode" ":" ;
-  mAttribute_mInterruptionPanicCode.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cMapElement_availableInterruptMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_availableInterruptMap * operand = (cMapElement_availableInterruptMap *) inOperand ;
-  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mInterruptionPanicCode.objectCompare (operand->mAttribute_mInterruptionPanicCode) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_availableInterruptMap::GALGAS_availableInterruptMap (void) :
-AC_GALGAS_map () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_availableInterruptMap::GALGAS_availableInterruptMap (const GALGAS_availableInterruptMap & inSource) :
-AC_GALGAS_map (inSource) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_availableInterruptMap & GALGAS_availableInterruptMap::operator = (const GALGAS_availableInterruptMap & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
-  return * this ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_availableInterruptMap GALGAS_availableInterruptMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_availableInterruptMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_availableInterruptMap GALGAS_availableInterruptMap::constructor_mapWithMapToOverride (const GALGAS_availableInterruptMap & inMapToOverride
-                                                                                             COMMA_LOCATION_ARGS) {
-  GALGAS_availableInterruptMap result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_availableInterruptMap GALGAS_availableInterruptMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_availableInterruptMap result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_availableInterruptMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                        const GALGAS_interruptionPanicCode & inArgument0,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  cMapElement_availableInterruptMap * p = NULL ;
-  macroMyNew (p, cMapElement_availableInterruptMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@availableInterruptMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_availableInterruptMap::setter_insertKey (GALGAS_lstring inKey,
-                                                     GALGAS_interruptionPanicCode inArgument0,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_availableInterruptMap * p = NULL ;
-  macroMyNew (p, cMapElement_availableInterruptMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "interrupt '%K' is already defined" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_availableInterruptMap_searchKey = "interrupt '%K' is not defined" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_availableInterruptMap::method_searchKey (GALGAS_lstring inKey,
-                                                     GALGAS_interruptionPanicCode & outArgument0,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
-  const cMapElement_availableInterruptMap * p = (const cMapElement_availableInterruptMap *) performSearch (inKey,
-                                                                                                             inCompiler,
-                                                                                                             kSearchErrorMessage_availableInterruptMap_searchKey
-                                                                                                             COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_availableInterruptMap) ;
-    outArgument0 = p->mAttribute_mInterruptionPanicCode ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_interruptionPanicCode GALGAS_availableInterruptMap::getter_mInterruptionPanicCodeForKey (const GALGAS_string & inKey,
-                                                                                                C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_availableInterruptMap * p = (const cMapElement_availableInterruptMap *) attributes ;
-  GALGAS_interruptionPanicCode result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_availableInterruptMap) ;
-    result = p->mAttribute_mInterruptionPanicCode ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_availableInterruptMap::setter_setMInterruptionPanicCodeForKey (GALGAS_interruptionPanicCode inAttributeValue,
-                                                                           GALGAS_string inKey,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_availableInterruptMap * p = (cMapElement_availableInterruptMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_availableInterruptMap) ;
-    p->mAttribute_mInterruptionPanicCode = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_availableInterruptMap * GALGAS_availableInterruptMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                     const GALGAS_string & inKey
-                                                                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_availableInterruptMap * result = (cMapElement_availableInterruptMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_availableInterruptMap) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_availableInterruptMap::cEnumerator_availableInterruptMap (const GALGAS_availableInterruptMap & inEnumeratedObject,
-                                                                      const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator () {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_availableInterruptMap_2D_element cEnumerator_availableInterruptMap::current (LOCATION_ARGS) const {
-  const cMapElement_availableInterruptMap * p = (const cMapElement_availableInterruptMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_availableInterruptMap) ;
-  return GALGAS_availableInterruptMap_2D_element (p->mAttribute_lkey, p->mAttribute_mInterruptionPanicCode) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_availableInterruptMap::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_interruptionPanicCode cEnumerator_availableInterruptMap::current_mInterruptionPanicCode (LOCATION_ARGS) const {
-  const cMapElement_availableInterruptMap * p = (const cMapElement_availableInterruptMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_availableInterruptMap) ;
-  return p->mAttribute_mInterruptionPanicCode ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @availableInterruptMap type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_availableInterruptMap ("availableInterruptMap",
-                                              NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_availableInterruptMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_availableInterruptMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_availableInterruptMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_availableInterruptMap (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_availableInterruptMap GALGAS_availableInterruptMap::extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_availableInterruptMap result ;
-  const GALGAS_availableInterruptMap * p = (const GALGAS_availableInterruptMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_availableInterruptMap *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("availableInterruptMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

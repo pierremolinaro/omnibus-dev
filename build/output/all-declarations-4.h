@@ -201,6 +201,8 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
 
 //----------- '' label
   public : virtual void nt_isr_ (GALGAS_isrDeclarationListAST & ioArgument0,
+                                 const GALGAS_lstring inArgument1,
+                                 const GALGAS_string inArgument2,
                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'op_assign' non terminal

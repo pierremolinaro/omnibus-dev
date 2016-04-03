@@ -6,14 +6,14 @@ task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.on (!LED_L0)
     self.compteur +%= 500
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.off (!LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.printUnsigned (!millis ())
+    lcd.printUnsigned (!time.millis ())
   }
 }
 
@@ -23,10 +23,10 @@ task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.on (!LED_L1)
     self.compteur +%= 499
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.off (!LED_L1)
     self.compteur +%= 499
   }
@@ -38,10 +38,10 @@ task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.on (!LED_L2)
     self.compteur +%= 498
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.off (!LED_L2)
     self.compteur +%= 498
   }
@@ -53,10 +53,10 @@ task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.on (!LED_L3)
     self.compteur +%= 497
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.off (!LED_L3)
     self.compteur +%= 497
   }
@@ -68,10 +68,10 @@ task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.on (!LED_L4)
     self.compteur +%= 496
-    waitUntilMS (!deadline:self.compteur)
+    time.waitUntilMS (!deadline:self.compteur)
     leds.off (!LED_L4)
     self.compteur +%= 496
   }

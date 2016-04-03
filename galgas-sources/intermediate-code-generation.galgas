@@ -86,6 +86,8 @@ map @routineMapIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @interruptMapIR {
+  @unifiedTypeMap-proxy mSelfType # null if standalone
+  @string mGlobalVariableName # "" if standalone
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
   @bool mXTR

@@ -107,7 +107,7 @@ module lcd {
   }
   
   //············································································
-  //   UTILITY ROUTINES                                                          *
+  //   UTILITY ROUTINES                                                         
   //············································································
   
   func `init programLcd4BitDataBusOutput @noWarningIfUnused (?inValue $uint8) {
@@ -120,27 +120,27 @@ module lcd {
   //············································································
   
   func `init write4BitCommand @noWarningIfUnused (?inValue $uint8) {
-    busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1) ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput (!inValue) ;
     self.driveHighE () ;
-    busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1) ;
     self.driveLowE () ;
   }
   
   //············································································
   
   func `init write8bitCommand @noWarningIfUnused (?inCommand $uint8) {
-    busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1) ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput (!inCommand >> 4) ;
     self.driveHighE () ;
-    busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1) ;
     self.driveLowE () ;
-    busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1) ;
     self.programLcd4BitDataBusOutput (!inCommand) ;
     self.driveHighE () ;
-    busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1) ;
     self.driveLowE () ;
   }
   
@@ -151,15 +151,15 @@ module lcd {
   init 10 {
     self.configurePorts () ;
   //--- Étape 1 : attendre 15 ms
-    busyWaitingDuringMS (!15) ;
+    time.busyWaitingDuringMS (!15) ;
   //--- Étape 2 : écrire la commande 0x30
     self.write4BitCommand (!0x3) ;
   //--- Étape 3 : attendre 4,1 ms (en fait 5 ms)
-    busyWaitingDuringMS (!5) ;
+    time.busyWaitingDuringMS (!5) ;
   //--- Étape 4 : écrire la commande 0x30 une 2e fois
     self.write4BitCommand (!0x3) ;
   //--- Étape 5 : attendre 100 µs
-    busyWaitingDuringMS (!1) ;
+    time.busyWaitingDuringMS (!1) ;
   //--- Étape 6 : écrire la commande 0x30 une 3e fois
     self.write4BitCommand (!0x3) ;
   //--- Étape 7 : écrire la commande 0x20 pour passer en 4 bits
@@ -204,32 +204,32 @@ module lcd {
   //············································································
   
   func`user write8bitCommand_inUserMode @noWarningIfUnused (?inCommand $uint8) {
-    waitDuringMS (!delay:1) ;
+    time.waitDuringMS (!delay:1) ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;
     self.driveHighE () ;
-    waitDuringMS (!delay:1) ;
+    time.waitDuringMS (!delay:1) ;
     self.driveLowE () ;
-    waitDuringMS (!delay:1) ;
+    time.waitDuringMS (!delay:1) ;
     self.programLcd4BitDataBusOutput_inUserMode (!inCommand) ;
     self.driveHighE () ;
-    waitDuringMS (!delay:1) ;
+    time.waitDuringMS (!delay:1) ;
     self.driveLowE () ;
   }
   
   //············································································
   
   func`user writeData_inUserMode @noWarningIfUnused (?inData $uint8) {
-    waitDuringMS (!delay:1) ;
+    time.waitDuringMS (!delay:1) ;
     self.driveHighRS () ;
     self.programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;
     self.driveHighE () ;
-    waitDuringMS (!delay:1) ;
+    time.waitDuringMS (!delay:1) ;
     self.driveLowE () ;
-    waitDuringMS (!delay:1) ;
+    time.waitDuringMS (!delay:1) ;
     self.programLcd4BitDataBusOutput_inUserMode (!inData) ;
     self.driveHighE () ;
-    waitDuringMS (!delay:1) ;
+    time.waitDuringMS (!delay:1) ;
     self.driveLowE () ;
   }
   
@@ -377,7 +377,7 @@ module lcd {
   func `panic waitMSInPanicMode @noWarningIfUnused (?duration: inDuration $uint32) {
     var duration = inDuration
     while duration > 0 do
-      waitOneMillisecondInPanicMode ()
+      time.waitOneMillisecondInPanicMode ()
       duration -%= 1
     end
   }
@@ -385,16 +385,16 @@ module lcd {
   //············································································
   
   func `panic writeDataInPanicMode @noWarningIfUnused (?inData $uint8) {
-    waitOneMillisecondInPanicMode () ;
+    time.waitOneMillisecondInPanicMode () ;
     self.driveHighRS () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inData >> 4) ;
     self.driveHighE () ;
-    waitOneMillisecondInPanicMode () ;
+    time.waitOneMillisecondInPanicMode () ;
     self.driveLowE () ;
-    waitOneMillisecondInPanicMode () ;
+    time.waitOneMillisecondInPanicMode () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inData) ;
     self.driveHighE () ;
-    waitOneMillisecondInPanicMode () ;
+    time.waitOneMillisecondInPanicMode () ;
     self.driveLowE () ;
   }
   
@@ -433,16 +433,16 @@ module lcd {
   //············································································
   
   func `panic write8bitCommandInPanicMode @noWarningIfUnused (?inCommand $uint8) {
-    waitOneMillisecondInPanicMode () ;
+    time.waitOneMillisecondInPanicMode () ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inCommand >> 4) ;
     self.driveHighE () ;
-    waitOneMillisecondInPanicMode () ;
+    time.waitOneMillisecondInPanicMode () ;
     self.driveLowE () ;
-    waitOneMillisecondInPanicMode () ;
+    time.waitOneMillisecondInPanicMode () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inCommand) ;
     self.driveHighE () ;
-    waitOneMillisecondInPanicMode () ;
+    time.waitOneMillisecondInPanicMode () ;
     self.driveLowE () ;
   }
   

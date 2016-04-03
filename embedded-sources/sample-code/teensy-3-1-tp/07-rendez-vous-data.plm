@@ -55,7 +55,7 @@ task T0 priority 0 stackSize 512 {
   var n $uint32 = 1
 
   func loop () {
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     rdvs.output (!data:self.n)
     rdvs2.output (!data:self.n)
     leds.toggle (!LED_L0)
@@ -91,7 +91,7 @@ task T2 priority 2 stackSize 1024 {
         lcd.goto (!line:1 !column:0)
         lcd.printUnsigned (!x)
       s.V ()
-    upon waitUntilMS (!deadline:self.deadline) :
+    upon time.waitUntilMS (!deadline:self.deadline) :
       self.deadline += 200
       leds.toggle  (!LED_L4)
     end

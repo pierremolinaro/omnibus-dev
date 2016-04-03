@@ -54,11 +54,11 @@ task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s0.V ()
     self.top += 250
     leds.on (!LED_L0)
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s0.V ()
     self.top += 250
     leds.off (!LED_L0)
@@ -71,11 +71,11 @@ task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s1.V ()
     self.top += 249
     leds.on (!LED_L4)
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s1.V ()
     self.top += 249
     leds.off (!LED_L4)
@@ -93,7 +93,7 @@ task T2 priority 2 stackSize 512 {
       leds.toggle  (!LED_L1)
     upon s1.P () :
       leds.toggle  (!LED_L3)
-    upon waitUntilMS (!deadline:self.deadline) :
+    upon time.waitUntilMS (!deadline:self.deadline) :
       self.deadline += 200
       leds.toggle  (!LED_L2)
     end

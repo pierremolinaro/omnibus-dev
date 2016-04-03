@@ -423,7 +423,7 @@ private proc generateCodeFiles
 #--- isr
   json += "  \"isr\" : ["
   var first = true
-  for (interruptName 2* usesXTR) in inIntermediateCodeStruct.mInterruptMapIR do
+  for (interruptName 4* usesXTR) in inIntermediateCodeStruct.mInterruptMapIR do
     if first then
       first = false
     else

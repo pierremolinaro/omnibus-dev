@@ -22,7 +22,7 @@ syntax common_syntax (plm_lexique) {
     while
       <primitive> !?ioAst.mPrimitiveListAST
     while
-      <isr> !?ioAst.mISRDeclarationListAST
+      <isr> !?ioAst.mISRDeclarationListAST !["" nowhere] !""
     while
       $import$
       $literal_string$ ?let importedFile

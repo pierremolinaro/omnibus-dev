@@ -486,24 +486,30 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_allocaList & inOperand1,
-                                                      const class GALGAS_instructionListIR & inOperand2,
-                                                      const class GALGAS_bool & inOperand3,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                      const class GALGAS_string & inOperand2,
+                                                      const class GALGAS_allocaList & inOperand3,
+                                                      const class GALGAS_instructionListIR & inOperand4,
+                                                      const class GALGAS_bool & inOperand5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_allocaList constinArgument1,
-                                                   class GALGAS_instructionListIR constinArgument2,
-                                                   class GALGAS_bool constinArgument3,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
+                                                   class GALGAS_string constinArgument2,
+                                                   class GALGAS_allocaList constinArgument3,
+                                                   class GALGAS_instructionListIR constinArgument4,
+                                                   class GALGAS_bool constinArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_allocaList & outArgument1,
-                                                   class GALGAS_instructionListIR & outArgument2,
-                                                   class GALGAS_bool & outArgument3,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
+                                                   class GALGAS_string & outArgument2,
+                                                   class GALGAS_allocaList & outArgument3,
+                                                   class GALGAS_instructionListIR & outArgument4,
+                                                   class GALGAS_bool & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -512,10 +518,20 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMGlobalVariableNameForKey (class GALGAS_string constinArgument0,
+                                                                      class GALGAS_string constinArgument1,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
   public : VIRTUAL_IN_DEBUG void setter_setMInstructionGenerationListForKey (class GALGAS_instructionListIR constinArgument0,
                                                                              class GALGAS_string constinArgument1,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSelfTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                            class GALGAS_string constinArgument1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMXTRForKey (class GALGAS_bool constinArgument0,
                                                        class GALGAS_string constinArgument1,
@@ -525,9 +541,11 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_allocaList & outArgument1,
-                                                   class GALGAS_instructionListIR & outArgument2,
-                                                   class GALGAS_bool & outArgument3,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
+                                                   class GALGAS_string & outArgument2,
+                                                   class GALGAS_allocaList & outArgument3,
+                                                   class GALGAS_instructionListIR & outArgument4,
+                                                   class GALGAS_bool & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -538,9 +556,17 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariableNameForKey (const class GALGAS_string & constinOperand0,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationListForKey (const class GALGAS_string & constinOperand0,
                                                                                                     C_Compiler * inCompiler
                                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mSelfTypeForKey (const class GALGAS_string & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mXTRForKey (const class GALGAS_string & constinOperand0,
                                                                  C_Compiler * inCompiler
@@ -572,6 +598,8 @@ class cEnumerator_interruptMapIR : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_unifiedTypeMap_2D_proxy current_mSelfType (LOCATION_ARGS) const ;
+  public : class GALGAS_string current_mGlobalVariableName (LOCATION_ARGS) const ;
   public : class GALGAS_allocaList current_mAllocaList (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mInstructionGenerationList (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mXTR (LOCATION_ARGS) const ;
@@ -591,12 +619,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptMapIR ;
 
 class cMapElement_interruptMapIR : public cMapElement {
 //--- Map attributes
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mSelfType ;
+  public : GALGAS_string mAttribute_mGlobalVariableName ;
   public : GALGAS_allocaList mAttribute_mAllocaList ;
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
   public : GALGAS_bool mAttribute_mXTR ;
 
 //--- Constructor
   public : cMapElement_interruptMapIR (const GALGAS_lstring & inKey,
+                                       const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
+                                       const GALGAS_string & in_mGlobalVariableName,
                                        const GALGAS_allocaList & in_mAllocaList,
                                        const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                        const GALGAS_bool & in_mXTR
@@ -624,6 +656,8 @@ class cMapElement_interruptMapIR : public cMapElement {
 class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mSelfType ;
+  public : GALGAS_string mAttribute_mGlobalVariableName ;
   public : GALGAS_allocaList mAttribute_mAllocaList ;
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
   public : GALGAS_bool mAttribute_mXTR ;
@@ -644,6 +678,8 @@ class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_interruptMapIR_2D_element (const GALGAS_lstring & in_lkey,
+                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
+                                             const GALGAS_string & in_mGlobalVariableName,
                                              const GALGAS_allocaList & in_mAllocaList,
                                              const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                              const GALGAS_bool & in_mXTR) ;
@@ -660,9 +696,11 @@ class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_interruptMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                    const class GALGAS_allocaList & inOperand1,
-                                                                    const class GALGAS_instructionListIR & inOperand2,
-                                                                    const class GALGAS_bool & inOperand3
+                                                                    const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                    const class GALGAS_string & inOperand2,
+                                                                    const class GALGAS_allocaList & inOperand3,
+                                                                    const class GALGAS_instructionListIR & inOperand4,
+                                                                    const class GALGAS_bool & inOperand5
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -681,7 +719,11 @@ class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_allocaList getter_mAllocaList (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mSelfType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mXTR (LOCATION_ARGS) const ;
 
@@ -7205,205 +7247,5 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorMap_2D_element ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @availableInterruptMap map                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_availableInterruptMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const char * kSearchErrorMessage_availableInterruptMap_searchKey ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_availableInterruptMap : public AC_GALGAS_map {
-//--------------------------------- Default constructor
-  public : GALGAS_availableInterruptMap (void) ;
-
-//--------------------------------- Handle copy
-  public : GALGAS_availableInterruptMap (const GALGAS_availableInterruptMap & inSource) ;
-  public : GALGAS_availableInterruptMap & operator = (const GALGAS_availableInterruptMap & inSource) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_availableInterruptMap extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_availableInterruptMap constructor_emptyMap (LOCATION_ARGS) ;
-
-  public : static GALGAS_availableInterruptMap constructor_mapWithMapToOverride (const class GALGAS_availableInterruptMap & inOperand0
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_interruptionPanicCode & inOperand1,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_interruptionPanicCode constinArgument1,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMInterruptionPanicCodeForKey (class GALGAS_interruptionPanicCode constinArgument0,
-                                                                         class GALGAS_string constinArgument1,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_interruptionPanicCode & outArgument1,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_interruptionPanicCode getter_mInterruptionPanicCodeForKey (const class GALGAS_string & constinOperand0,
-                                                                                                    C_Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_availableInterruptMap getter_overriddenMap (C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_availableInterruptMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                   const GALGAS_string & inKey
-                                                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Friend
-
-  friend class cEnumerator_availableInterruptMap ;
- 
-} ; // End of GALGAS_availableInterruptMap class
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumerator_availableInterruptMap : public cGenericAbstractEnumerator {
-  public : cEnumerator_availableInterruptMap (const GALGAS_availableInterruptMap & inEnumeratedObject,
-                                              const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-  public : class GALGAS_interruptionPanicCode current_mInterruptionPanicCode (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_availableInterruptMap_2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_availableInterruptMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Class for element of '@availableInterruptMap' map                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_availableInterruptMap : public cMapElement {
-//--- Map attributes
-  public : GALGAS_interruptionPanicCode mAttribute_mInterruptionPanicCode ;
-
-//--- Constructor
-  public : cMapElement_availableInterruptMap (const GALGAS_lstring & inKey,
-                                              const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
-                                              COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cMapElement * copy (void) ;
-
-//--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      @availableInterruptMap_2D_element struct                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_availableInterruptMap_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_interruptionPanicCode mAttribute_mInterruptionPanicCode ;
-
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_availableInterruptMap_2D_element (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_availableInterruptMap_2D_element (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_availableInterruptMap_2D_element (const GALGAS_lstring & in_lkey,
-                                                    const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_availableInterruptMap_2D_element extractObject (const GALGAS_object & inObject,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_availableInterruptMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                           const class GALGAS_interruptionPanicCode & inOperand1
-                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_availableInterruptMap_2D_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_interruptionPanicCode getter_mInterruptionPanicCode (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_availableInterruptMap_2D_element class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_availableInterruptMap_2D_element ;
 
 #endif
