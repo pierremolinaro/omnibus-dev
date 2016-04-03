@@ -28,11 +28,11 @@ task T0 priority 0 stackSize 512 {
     waitUntilMS (!deadline:self.top)
     s0.V ()
     self.top += 250
-    ledOn (!LED_L0)
+    leds.on (!LED_L0)
     waitUntilMS (!deadline:self.top)
     s0.V ()
     self.top += 250
-    ledOff (!LED_L0)
+    leds.off (!LED_L0)
   }
 }
 
@@ -45,11 +45,11 @@ task T1 priority 1 stackSize 512 {
     waitUntilMS (!deadline:self.top)
     s1.V ()
     self.top += 249
-    ledOn (!LED_L4)
+    leds.on (!LED_L4)
     waitUntilMS (!deadline:self.top)
     s1.V ()
     self.top += 249
-    ledOff (!LED_L4)
+    leds.off (!LED_L4)
   }
 }
 
@@ -60,13 +60,13 @@ task T2 priority 2 stackSize 512 {
   
   func loop () {
     select
-    on s0.P () :
-      ledToggle  (!LED_L1)
-    on PP () :
-      ledToggle  (!LED_L3)
-    on convenienceWaitUntilMS (!deadline:self.deadline) :
+    upon s0.P () :
+      leds.toggle  (!LED_L1)
+    upon PP () :
+      leds.toggle  (!LED_L3)
+    upon convenienceWaitUntilMS (!deadline:self.deadline) :
       self.deadline += 200
-      ledToggle  (!LED_L2)
+      leds.toggle  (!LED_L2)
     end
   }
 }

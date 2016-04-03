@@ -71,11 +71,11 @@ task T0 priority 0 stackSize 512 {
     waitUntilMS (!deadline:self.top)
     rdvs.output ()
     self.top += 250
-    ledOn (!LED_L0)
+    leds.on (!LED_L0)
     waitUntilMS (!deadline:self.top)
     rdvs.output ()
     self.top += 250
-    ledOff (!LED_L0)
+    leds.off (!LED_L0)
   }
 }
 
@@ -85,9 +85,9 @@ task T1 priority 1 stackSize 512 {
 
   func loop () {
     rdvs.input ()
-    ledOn (!LED_L1)
+    leds.on (!LED_L1)
     rdvs.input ()
-    ledOff (!LED_L1)
+    leds.off (!LED_L1)
   }
 }
 

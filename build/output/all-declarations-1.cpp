@@ -13862,7 +13862,7 @@ class cCollectionElement_initListIR : public cCollectionElement {
   public : GALGAS_initListIR_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_initListIR (const GALGAS_lstringlist & in_mInitRequiredByProcList,
+  public : cCollectionElement_initListIR (const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
                                           const GALGAS_location & in_mInitLocation,
                                           const GALGAS_allocaList & in_mAllocaList,
                                           const GALGAS_instructionListIR & in_mInstructionListIR,
@@ -13884,7 +13884,7 @@ class cCollectionElement_initListIR : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_initListIR::cCollectionElement_initListIR (const GALGAS_lstringlist & in_mInitRequiredByProcList,
+cCollectionElement_initListIR::cCollectionElement_initListIR (const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
                                                               const GALGAS_location & in_mInitLocation,
                                                               const GALGAS_allocaList & in_mAllocaList,
                                                               const GALGAS_instructionListIR & in_mInstructionListIR,
@@ -13966,7 +13966,7 @@ GALGAS_initListIR GALGAS_initListIR::constructor_emptyList (LOCATION_ARGS) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_initListIR GALGAS_initListIR::constructor_listWithValue (const GALGAS_lstringlist & inOperand0,
+GALGAS_initListIR GALGAS_initListIR::constructor_listWithValue (const GALGAS__32_lstringlist & inOperand0,
                                                                 const GALGAS_location & inOperand1,
                                                                 const GALGAS_allocaList & inOperand2,
                                                                 const GALGAS_instructionListIR & inOperand3,
@@ -13985,7 +13985,7 @@ GALGAS_initListIR GALGAS_initListIR::constructor_listWithValue (const GALGAS_lst
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                   const GALGAS_lstringlist & in_mInitRequiredByProcList,
+                                                   const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
                                                    const GALGAS_location & in_mInitLocation,
                                                    const GALGAS_allocaList & in_mAllocaList,
                                                    const GALGAS_instructionListIR & in_mInstructionListIR,
@@ -14003,7 +14003,7 @@ void GALGAS_initListIR::makeAttributesFromObjects (capCollectionElement & outAtt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::addAssign_operation (const GALGAS_lstringlist & inOperand0,
+void GALGAS_initListIR::addAssign_operation (const GALGAS__32_lstringlist & inOperand0,
                                              const GALGAS_location & inOperand1,
                                              const GALGAS_allocaList & inOperand2,
                                              const GALGAS_instructionListIR & inOperand3,
@@ -14021,7 +14021,7 @@ void GALGAS_initListIR::addAssign_operation (const GALGAS_lstringlist & inOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::setter_insertAtIndex (const GALGAS_lstringlist inOperand0,
+void GALGAS_initListIR::setter_insertAtIndex (const GALGAS__32_lstringlist inOperand0,
                                               const GALGAS_location inOperand1,
                                               const GALGAS_allocaList inOperand2,
                                               const GALGAS_instructionListIR inOperand3,
@@ -14041,7 +14041,7 @@ void GALGAS_initListIR::setter_insertAtIndex (const GALGAS_lstringlist inOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::setter_removeAtIndex (GALGAS_lstringlist & outOperand0,
+void GALGAS_initListIR::setter_removeAtIndex (GALGAS__32_lstringlist & outOperand0,
                                               GALGAS_location & outOperand1,
                                               GALGAS_allocaList & outOperand2,
                                               GALGAS_instructionListIR & outOperand3,
@@ -14072,7 +14072,7 @@ void GALGAS_initListIR::setter_removeAtIndex (GALGAS_lstringlist & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::setter_popFirst (GALGAS_lstringlist & outOperand0,
+void GALGAS_initListIR::setter_popFirst (GALGAS__32_lstringlist & outOperand0,
                                          GALGAS_location & outOperand1,
                                          GALGAS_allocaList & outOperand2,
                                          GALGAS_instructionListIR & outOperand3,
@@ -14100,7 +14100,7 @@ void GALGAS_initListIR::setter_popFirst (GALGAS_lstringlist & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::setter_popLast (GALGAS_lstringlist & outOperand0,
+void GALGAS_initListIR::setter_popLast (GALGAS__32_lstringlist & outOperand0,
                                         GALGAS_location & outOperand1,
                                         GALGAS_allocaList & outOperand2,
                                         GALGAS_instructionListIR & outOperand3,
@@ -14128,7 +14128,7 @@ void GALGAS_initListIR::setter_popLast (GALGAS_lstringlist & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::method_first (GALGAS_lstringlist & outOperand0,
+void GALGAS_initListIR::method_first (GALGAS__32_lstringlist & outOperand0,
                                       GALGAS_location & outOperand1,
                                       GALGAS_allocaList & outOperand2,
                                       GALGAS_instructionListIR & outOperand3,
@@ -14156,7 +14156,7 @@ void GALGAS_initListIR::method_first (GALGAS_lstringlist & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::method_last (GALGAS_lstringlist & outOperand0,
+void GALGAS_initListIR::method_last (GALGAS__32_lstringlist & outOperand0,
                                      GALGAS_location & outOperand1,
                                      GALGAS_allocaList & outOperand2,
                                      GALGAS_instructionListIR & outOperand3,
@@ -14235,12 +14235,12 @@ void GALGAS_initListIR::plusAssign_operation (const GALGAS_initListIR inOperand,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_initListIR::getter_mInitRequiredByProcListAtIndex (const GALGAS_uint & inIndex,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const {
+GALGAS__32_lstringlist GALGAS_initListIR::getter_mInitRequiredByProcListAtIndex (const GALGAS_uint & inIndex,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_initListIR * p = (cCollectionElement_initListIR *) attributes.ptr () ;
-  GALGAS_lstringlist result ;
+  GALGAS__32_lstringlist result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_initListIR) ;
     result = p->mObject.mAttribute_mInitRequiredByProcList ;
@@ -14329,7 +14329,7 @@ GALGAS_initListIR_2D_element cEnumerator_initListIR::current (LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist cEnumerator_initListIR::current_mInitRequiredByProcList (LOCATION_ARGS) const {
+GALGAS__32_lstringlist cEnumerator_initListIR::current_mInitRequiredByProcList (LOCATION_ARGS) const {
   const cCollectionElement_initListIR * p = (const cCollectionElement_initListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_initListIR) ;
   return p->mObject.mAttribute_mInitRequiredByProcList ;

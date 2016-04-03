@@ -46,11 +46,11 @@ task T1 priority 1 stackSize 512 {
     waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 250
-    ledOn (!LED_L1)
+    leds.on (!LED_L1)
     waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 250
-    ledOff (!LED_L1)
+    leds.off (!LED_L1)
   }
 }
 
@@ -60,9 +60,9 @@ task T2 priority 2 stackSize 512 {
 
   func loop () {
     s.P ()
-    ledOn (!LED_L2)
+    leds.on (!LED_L2)
     s.P ()
-    ledOff (!LED_L2)
+    leds.off (!LED_L2)
   }
 }
 

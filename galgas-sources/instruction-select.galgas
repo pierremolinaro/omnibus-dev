@@ -39,7 +39,7 @@ syntax extension common_syntax {
      select
        outGuardedCommand = .boolean {!expression:expression !endOfExpression:endOfExp}
       or
-        $on$
+        $upon$
         $identifier$ ?let guardName
         <effective_parameters> ?let effectiveParameterList
         outGuardedCommand = .boolAndSync {
@@ -50,7 +50,7 @@ syntax extension common_syntax {
           !effectiveParameterListAST:effectiveParameterList
         }
       or
-        $on$
+        $upon$
         $identifier$ ?let receiverName
         $.$
         $identifier$ ?let guardName
@@ -64,7 +64,7 @@ syntax extension common_syntax {
         }
       end
     or
-      $on$
+      $upon$
       $identifier$ ?let guardName
       <effective_parameters> ?let effectiveParameterList
       outGuardedCommand = .synchronization {
@@ -73,7 +73,7 @@ syntax extension common_syntax {
         !effectiveParameterListAST:effectiveParameterList
       }
     or
-      $on$
+      $upon$
       $identifier$ ?let receiverName
       $.$
       $identifier$ ?let guardName
@@ -90,12 +90,12 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $select$
-    @lstring onLabel
+    @lstring startLabel
     select
-      onLabel = .new {!"" !.here}
+      startLabel = .new {!"" !.here}
     or
-      $attribute$ ?onLabel
-      [!?ioLabelMap insertKey !onLabel]
+      $attribute$ ?startLabel
+      [!?ioLabelMap insertKey !startLabel]
     end
     @onInstructionBranchList onInstructionBranchList = {}
     repeat
@@ -113,9 +113,9 @@ syntax extension common_syntax {
     or
       $attribute$ ?endLabel
     end
-    if onLabel.string != endLabel.string then
+    if startLabel.string != endLabel.string then
       error endLabel : "'end' label does not match 'on' label, it should be "
-         + (if onLabel.string != "" then "@" + onLabel.string else "empty" end)
+         + (if startLabel.string != "" then "@" + startLabel.string else "empty" end)
     end 
   }
   
@@ -377,16 +377,16 @@ override method @onInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   ioGenerationAdds.mUsesGuards = true
-  let onLabel = "on." + ioGenerationAdds.mUniqueIndex
+  let startLabel = "select." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
 #---
-  ioLLVMcode += "  br label %" + onLabel + ".start\n\n"
-  let startLabelName = onLabel + ".start" 
+  ioLLVMcode += "  br label %" + startLabel + ".start\n\n"
+  let startLabelName = startLabel + ".start" 
   ioLLVMcode += startLabelName + ":\n"
-  let exitLabelName = onLabel + ".exit"
+  let exitLabelName = startLabel + ".exit"
   var currentStartBranchLabel = startLabelName
   for branch in mOnInstructionBranchListIR do (idx)
-    let acceptanceVarName = "%" + onLabel + ".accept." + idx 
+    let acceptanceVarName = "%" + startLabel + ".accept." + idx 
     switch branch.mGuardedCommand
     case synchronization (guardMangledName * guardInstructionGenerationList effectiveParameterListIR) :
       [guardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
@@ -407,8 +407,8 @@ override method @onInstructionIR llvmInstructionCode
       ioLLVMcode += ")\n"
     case booleanGuard (instructionGenerationList @operandIR result) :
       [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      let acceptedLabelName = onLabel + "." + idx + ".true"
-      let rejectedLabelName = onLabel + "." + idx + ".false"
+      let acceptedLabelName = startLabel + "." + idx + ".true"
+      let rejectedLabelName = startLabel + "." + idx + ".false"
       ioLLVMcode += "  br i1 " + [result.mValue llvmName] + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += acceptedLabelName + ":\n"
       ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
@@ -417,12 +417,12 @@ override method @onInstructionIR llvmInstructionCode
       ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result.mValue llvmName] + ", 0 ; assignment\n"
     case boolAndSync (ExpInstructionList expResult guardMangledName * guardInstructionList effectiveParameterList) :
       [ExpInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      let testOkLabelName = onLabel + "." + idx + ".boolexp.true"
-      let testExitLabelName = onLabel + "." + idx + ".test.exit"
+      let testOkLabelName = startLabel + "." + idx + ".boolexp.true"
+      let testExitLabelName = startLabel + "." + idx + ".test.exit"
       ioLLVMcode += "  br i1 " + [expResult.mValue llvmName] + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
       ioLLVMcode += testOkLabelName + ":\n"
       [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      let guardAcceptationLabelName = onLabel + "." + idx + ".guard.acceptation"
+      let guardAcceptationLabelName = startLabel + "." + idx + ".guard.acceptation"
       ioLLVMcode += "  %" + guardAcceptationLabelName + " = call i1 @" + llvmNameForGuardCall (!guardMangledName)
       ioLLVMcode += " ("
       for () in effectiveParameterList do
@@ -444,8 +444,8 @@ override method @onInstructionIR llvmInstructionCode
       ioLLVMcode += "[%" + guardAcceptationLabelName + ", %" + testOkLabelName + "], "
       ioLLVMcode += "[false, %" + currentStartBranchLabel + "]\n"
     end
-    let acceptedLabelName = onLabel + ".accepted." + idx
-    let rejectedLabelName = onLabel + ".rejected." + idx
+    let acceptedLabelName = startLabel + ".accepted." + idx
+    let rejectedLabelName = startLabel + ".rejected." + idx
     ioLLVMcode += "  br i1 " + acceptanceVarName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
     ioLLVMcode += acceptedLabelName + ":\n"
     [branch.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]

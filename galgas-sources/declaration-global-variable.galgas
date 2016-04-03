@@ -60,6 +60,12 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
+    <global_variable_declaration> !?ioAST.mGlobalVarDeclarationList
+  }
+  
+  #·····················································································································
+
+  rule <global_variable_declaration> ?!@globalVarDeclarationList ioGlobalVarDeclarationList {
     $var$
     $identifier$ ?let varName
     @lstring typeName
@@ -137,7 +143,7 @@ syntax extension common_syntax {
     while
     end
     $}$
-    ioAST.mGlobalVarDeclarationList +=
+    ioGlobalVarDeclarationList +=
       !typeName
       !varName
       !expression
