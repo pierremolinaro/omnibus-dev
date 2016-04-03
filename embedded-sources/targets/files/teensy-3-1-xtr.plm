@@ -37,14 +37,14 @@ extern public func `kernel `service guardDidChange (?!guard:ioGuard $guardList)
 init 0 { // Configure Systick interrupt every ms
   SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
   SYST_CVR = 0
-  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
+  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::ENABLE | SYST_CSR::TICKINT
 //--- Led Teensy
   PORTC_PCR5 = (1 << 8)
   GPIOC_PDDR |= (1 << 5)
 }
 
 //——————————————————————————————————————————————————————————————————————————————
-//   USER TICK HANDLER                                                                       
+//   USER TICK HANDLER                                                          
 //——————————————————————————————————————————————————————————————————————————————
 
 public func `service userTickHandler @weak () {
@@ -59,6 +59,13 @@ module time {
 
   //············································································
   
+  public func `panic waitOneMillisecondInPanicMode @noWarningIfUnused () {
+    while not SYST_CSR.COUNTFLAG.bool do
+    end
+  }
+
+  //············································································
+  
   public func `service `kernel `user millis @noWarningIfUnused () -> $uint32 {
     result = self.mUptimeMS
   }
@@ -66,8 +73,11 @@ module time {
   //············································································
   
   public func `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
-    let deadline = self.mUptimeMS + inDelay
-    while self.mUptimeMS < deadline do
+    var delay = inDelay
+    while delay > 0 do
+      while not SYST_CSR.COUNTFLAG.bool do
+      end
+      delay -= 1
     end
   }
   
@@ -104,13 +114,6 @@ module time {
     end
   }
   
-  //············································································
-  
-  public func `panic waitOneMillisecondInPanicMode @noWarningIfUnused () {
-    while not SYST_CSR.COUNTFLAG.bool do
-    end
-  }
-
   //············································································
 
 }
