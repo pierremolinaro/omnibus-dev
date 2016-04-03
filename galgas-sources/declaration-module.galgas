@@ -45,7 +45,7 @@ syntax extension common_syntax {
       $;$
     end
     $}$
-    let moduleTypeName = @lstring.new {!moduleName.string !moduleName.location}
+    let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
   #--- Declare init list
     @2lstringlist requiredByList = {}
     for function in procedureDeclarationListAST do

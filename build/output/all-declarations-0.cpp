@@ -13159,35 +13159,35 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i10_ (GALGAS_as
     }
   }
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-module.galgas", 47)) ;
-  GALGAS_lstring var_moduleTypeName = GALGAS_lstring::constructor_new (var_moduleName.mAttribute_string, var_moduleName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-module.galgas", 48)) ;
+  GALGAS_lstring var_moduleTypeName = GALGAS_lstring::constructor_new (var_moduleName.mAttribute_string.add_operation (GALGAS_string ("$"), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 48)), var_moduleName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-module.galgas", 48)) ;
   GALGAS__32_lstringlist var_requiredByList = GALGAS__32_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 50)) ;
-  cEnumerator_procedureDeclarationListAST enumerator_1728 (var_procedureDeclarationListAST, kEnumeration_up) ;
-  while (enumerator_1728.hasCurrentObject ()) {
-    const enumGalgasBool test_1 = enumerator_1728.current (HERE).mAttribute_mPublic.boolEnum () ;
+  cEnumerator_procedureDeclarationListAST enumerator_1734 (var_procedureDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_1734.hasCurrentObject ()) {
+    const enumGalgasBool test_1 = enumerator_1734.current (HERE).mAttribute_mPublic.boolEnum () ;
     if (kBoolTrue == test_1) {
-      var_requiredByList.addAssign_operation (var_moduleTypeName, enumerator_1728.current (HERE).mAttribute_mProcedureName  COMMA_SOURCE_FILE ("declaration-module.galgas", 53)) ;
+      var_requiredByList.addAssign_operation (var_moduleTypeName, enumerator_1734.current (HERE).mAttribute_mProcedureName  COMMA_SOURCE_FILE ("declaration-module.galgas", 53)) ;
     }
-    enumerator_1728.gotoNextObject () ;
+    enumerator_1734.gotoNextObject () ;
   }
-  cEnumerator_serviceDeclarationListAST enumerator_1881 (var_serviceListAST, kEnumeration_up) ;
-  while (enumerator_1881.hasCurrentObject ()) {
-    var_requiredByList.addAssign_operation (var_moduleTypeName, enumerator_1881.current (HERE).mAttribute_mServiceName  COMMA_SOURCE_FILE ("declaration-module.galgas", 57)) ;
-    enumerator_1881.gotoNextObject () ;
+  cEnumerator_serviceDeclarationListAST enumerator_1887 (var_serviceListAST, kEnumeration_up) ;
+  while (enumerator_1887.hasCurrentObject ()) {
+    var_requiredByList.addAssign_operation (var_moduleTypeName, enumerator_1887.current (HERE).mAttribute_mServiceName  COMMA_SOURCE_FILE ("declaration-module.galgas", 57)) ;
+    enumerator_1887.gotoNextObject () ;
   }
-  cEnumerator_guardDeclarationListAST enumerator_1984 (var_guardListAST, kEnumeration_up) ;
-  while (enumerator_1984.hasCurrentObject ()) {
-    var_requiredByList.addAssign_operation (var_moduleTypeName, enumerator_1984.current (HERE).mAttribute_mGuardName  COMMA_SOURCE_FILE ("declaration-module.galgas", 60)) ;
-    enumerator_1984.gotoNextObject () ;
+  cEnumerator_guardDeclarationListAST enumerator_1990 (var_guardListAST, kEnumeration_up) ;
+  while (enumerator_1990.hasCurrentObject ()) {
+    var_requiredByList.addAssign_operation (var_moduleTypeName, enumerator_1990.current (HERE).mAttribute_mGuardName  COMMA_SOURCE_FILE ("declaration-module.galgas", 60)) ;
+    enumerator_1990.gotoNextObject () ;
   }
-  cEnumerator_primitiveDeclarationListAST enumerator_2091 (var_primitiveListAST, kEnumeration_up) ;
-  while (enumerator_2091.hasCurrentObject ()) {
-    var_requiredByList.addAssign_operation (var_moduleTypeName, enumerator_2091.current (HERE).mAttribute_mPrimitiveName  COMMA_SOURCE_FILE ("declaration-module.galgas", 63)) ;
-    enumerator_2091.gotoNextObject () ;
+  cEnumerator_primitiveDeclarationListAST enumerator_2097 (var_primitiveListAST, kEnumeration_up) ;
+  while (enumerator_2097.hasCurrentObject ()) {
+    var_requiredByList.addAssign_operation (var_moduleTypeName, enumerator_2097.current (HERE).mAttribute_mPrimitiveName  COMMA_SOURCE_FILE ("declaration-module.galgas", 63)) ;
+    enumerator_2097.gotoNextObject () ;
   }
-  cEnumerator_initList enumerator_2193 (var_initList, kEnumeration_up) ;
-  while (enumerator_2193.hasCurrentObject ()) {
-    ioArgument_ioAST.mAttribute_mInitList.addAssign_operation (enumerator_2193.current (HERE).mAttribute_mInitLocation, var_moduleTypeName, var_moduleName.mAttribute_string, var_requiredByList, enumerator_2193.current (HERE).mAttribute_mInstructionList, enumerator_2193.current (HERE).mAttribute_mEndOfInitLocation, enumerator_2193.current (HERE).mAttribute_mPriority  COMMA_SOURCE_FILE ("declaration-module.galgas", 66)) ;
-    enumerator_2193.gotoNextObject () ;
+  cEnumerator_initList enumerator_2199 (var_initList, kEnumeration_up) ;
+  while (enumerator_2199.hasCurrentObject ()) {
+    ioArgument_ioAST.mAttribute_mInitList.addAssign_operation (enumerator_2199.current (HERE).mAttribute_mInitLocation, var_moduleTypeName, var_moduleName.mAttribute_string, var_requiredByList, enumerator_2199.current (HERE).mAttribute_mInstructionList, enumerator_2199.current (HERE).mAttribute_mEndOfInitLocation, enumerator_2199.current (HERE).mAttribute_mPriority  COMMA_SOURCE_FILE ("declaration-module.galgas", 66)) ;
+    enumerator_2199.gotoNextObject () ;
   }
   ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_structureDeclaration::constructor_new (var_moduleTypeName, GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 78)), var_fieldList, var_procedureDeclarationListAST, var_serviceListAST, var_primitiveListAST, var_guardListAST  COMMA_SOURCE_FILE ("declaration-module.galgas", 76))  COMMA_SOURCE_FILE ("declaration-module.galgas", 76)) ;
   ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList.addAssign_operation (var_moduleTypeName, var_moduleName, GALGAS_constructorCall::constructor_new (var_moduleTypeName, GALGAS_functionCallEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 89)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 89))  COMMA_SOURCE_FILE ("declaration-module.galgas", 89)), GALGAS_allowedRoutineList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 90)), GALGAS_allowedInitList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 91)), GALGAS_allowedPanicList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 92)), GALGAS_allowedGuardList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 93)), GALGAS_allowedISRList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 94))  COMMA_SOURCE_FILE ("declaration-module.galgas", 86)) ;
