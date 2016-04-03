@@ -106,6 +106,7 @@ proc semanticAnalysis
     !?intermediateCode:outIntermediateCodeStruct
   ]
   [inAST.mSectionListAST sectionSemanticAnalysis
+    !receiverType:.null
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct

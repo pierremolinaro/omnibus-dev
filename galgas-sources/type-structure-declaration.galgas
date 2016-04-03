@@ -8,6 +8,7 @@ class @structureDeclaration : @abstractDeclaration {
   @structureFieldListAST mStructureFieldListAST
   @procedureDeclarationListAST mProcedureDeclarationListAST
   @serviceDeclarationListAST mServiceListAST
+  @sectionDeclarationListAST mSectionListAST
   @primitiveDeclarationListAST mPrimitiveListAST
   @guardDeclarationListAST mGuardListAST
 }
@@ -54,6 +55,7 @@ syntax extension common_syntax {
     @procedureDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
+    @sectionDeclarationListAST sectionListAST = {}
     @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
@@ -77,6 +79,8 @@ syntax extension common_syntax {
     while
       <procedure> !?procedureDeclarationListAST
     while
+     <section> !?sectionListAST
+    while
       <service> !?serviceListAST
     while
       <guard> !?guardListAST
@@ -92,6 +96,7 @@ syntax extension common_syntax {
       !fieldList
       !procedureDeclarationListAST
       !serviceListAST
+      !sectionListAST
       !primitiveListAST
       !guardListAST
     }
@@ -120,6 +125,7 @@ override method @structureDeclaration addExtension
         ![newDeclaration mStructureFieldListAST] + fieldList
         ![newDeclaration mProcedureDeclarationListAST] + procedures
         ![newDeclaration mServiceListAST]
+        ![newDeclaration mSectionListAST]
         ![newDeclaration mPrimitiveListAST]
         ![newDeclaration mGuardListAST]        
       }
@@ -160,6 +166,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
   end
 #--- Add structure services
   [mServiceListAST noteServiceTypesInPrecedenceGraph !?ioGraph]
+  [mSectionListAST noteServiceTypesInPrecedenceGraph !?ioGraph]
   [mPrimitiveListAST notePrimitiveTypesInPrecedenceGraph !?ioGraph]
 #--- Add structure guards
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
@@ -349,6 +356,13 @@ override method @structureDeclaration semanticAnalysis
   ]
 #--- Analyze services
   [mServiceListAST serviceSemanticAnalysis
+    !receiverType:structureType
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+  ]
+#--- Analyze sections
+  [mSectionListAST sectionSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries

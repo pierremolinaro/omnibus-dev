@@ -15,6 +15,7 @@ syntax extension common_syntax {
     @serviceDeclarationListAST serviceListAST = {}
     @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
+    @sectionDeclarationListAST sectionListAST = {}
     @initList initList = {}
     repeat
     while
@@ -37,6 +38,8 @@ syntax extension common_syntax {
       <procedure> !?procedureDeclarationListAST
     while
       <service> !?serviceListAST
+    while
+     <section> !?sectionListAST
     while
       <guard> !?guardListAST
     while
@@ -79,6 +82,7 @@ syntax extension common_syntax {
       !fieldList
       !procedureDeclarationListAST
       !serviceListAST
+      !sectionListAST
       !primitiveListAST
       !guardListAST
     }

@@ -2574,6 +2574,7 @@ void extensionMethod_procedureSemanticAnalysis (const class GALGAS_procedureDecl
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionMethod_sectionSemanticAnalysis (const class GALGAS_sectionDeclarationListAST inObject,
+                                              class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
                                               const class GALGAS_semanticContext constin_inSemanticContext,
                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
