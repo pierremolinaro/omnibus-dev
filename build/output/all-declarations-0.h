@@ -162,6 +162,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__7E_,
    kToken__2D__3E_,
    kToken__3A__3A_,
+   kToken__2E__2E__3C_,
    kToken__7C_,
    kToken__7C__3D_,
    kToken__26_,
@@ -218,7 +219,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 113 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 114 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -7750,6 +7751,12 @@ class cParser_common_5F_syntax {
 
   protected : void rule_common_5F_syntax_instruction_i85_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
+  protected : void rule_common_5F_syntax_instruction_i86_ (GALGAS_instructionListAST & ioArgument0,
+                                                           GALGAS_labelMap & ioArgument1,
+                                                           C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_instruction_i86_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
 
 
 //--- Select methods
@@ -8861,6 +8868,129 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mIteratedExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_iteratedExpression_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @forLowerUpperBoundInstructionAST class                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_forLowerUpperBoundInstructionAST : public GALGAS_instructionAST {
+//--- Constructor
+  public : GALGAS_forLowerUpperBoundInstructionAST (void) ;
+
+//---
+  public : inline const class cPtr_forLowerUpperBoundInstructionAST * ptr (void) const { return (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_forLowerUpperBoundInstructionAST (const cPtr_forLowerUpperBoundInstructionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_forLowerUpperBoundInstructionAST extractObject (const GALGAS_object & inObject,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_forLowerUpperBoundInstructionAST constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                           const class GALGAS_lstring & inOperand1,
+                                                                           const class GALGAS_expressionAST & inOperand2,
+                                                                           const class GALGAS_location & inOperand3,
+                                                                           const class GALGAS_expressionAST & inOperand4,
+                                                                           const class GALGAS_location & inOperand5,
+                                                                           const class GALGAS_instructionListAST & inOperand6,
+                                                                           const class GALGAS_location & inOperand7
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_forLowerUpperBoundInstructionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_lowerBoundExpression_5F_instruction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_upperBoundExpression_5F_instruction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mLowerBoundExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mUpperBoundExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_forLowerUpperBoundInstructionAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Pointer class for @forLowerUpperBoundInstructionAST class                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
+//--- Attributes
+  public : GALGAS_lstring mAttribute_mVarName ;
+  public : GALGAS_lstring mAttribute_mTypeName ;
+  public : GALGAS_expressionAST mAttribute_mLowerBoundExpression ;
+  public : GALGAS_location mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction ;
+  public : GALGAS_expressionAST mAttribute_mUpperBoundExpression ;
+  public : GALGAS_location mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction ;
+  public : GALGAS_instructionListAST mAttribute_mDoInstructionList ;
+  public : GALGAS_location mAttribute_mEndOf_5F_do_5F_instruction ;
+
+//--- Constructor
+  public : cPtr_forLowerUpperBoundInstructionAST (const GALGAS_lstring & in_mVarName,
+                                                  const GALGAS_lstring & in_mTypeName,
+                                                  const GALGAS_expressionAST & in_mLowerBoundExpression,
+                                                  const GALGAS_location & in_mEndOf_5F_lowerBoundExpression_5F_instruction,
+                                                  const GALGAS_expressionAST & in_mUpperBoundExpression,
+                                                  const GALGAS_location & in_mEndOf_5F_upperBoundExpression_5F_instruction,
+                                                  const GALGAS_instructionListAST & in_mDoInstructionList,
+                                                  const GALGAS_location & in_mEndOf_5F_do_5F_instruction
+                                                  COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLowerBoundExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_lowerBoundExpression_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mUpperBoundExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_upperBoundExpression_5F_instruction (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
 //--- Description

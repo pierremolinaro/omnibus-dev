@@ -16663,14 +16663,15 @@ const char * gWrapperFileContent_34_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
   "  public func `init busyWaitingDuringMS @noWarningIfUnused (\?inDelay $uint32) {\n"
-  "//    let deadline = self.mUptimeMS + inDelay\n"
-  "//    while self.mUptimeMS < deadline do\n"
+  "//    var delay = inDelay\n"
+  "//    while delay > 0 do\n"
+  "//      while not SYST_CSR.COUNTFLAG.bool do\n"
+  "//      end\n"
+  "//      delay -= 1\n"
   "//    end\n"
-  "    var delay = inDelay\n"
-  "    while delay > 0 do\n"
+  "    for delay $uint32 in 0 ..< inDelay do\n"
   "      while not SYST_CSR.COUNTFLAG.bool do\n"
   "      end\n"
-  "      delay -= 1\n"
   "    end\n"
   "  }\n"
   "  \n"
@@ -16717,7 +16718,7 @@ const cRegularFileWrapper gWrapperFile_34_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  4559, // Text length
+  4577, // Text length
   gWrapperFileContent_34_targetTemplates
 ) ;
 

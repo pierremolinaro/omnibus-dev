@@ -73,11 +73,15 @@ module time {
   //············································································
   
   public func `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
-    var delay = inDelay
-    while delay > 0 do
+//    var delay = inDelay
+//    while delay > 0 do
+//      while not SYST_CSR.COUNTFLAG.bool do
+//      end
+//      delay -= 1
+//    end
+    for delay $uint32 in 0 ..< inDelay do
       while not SYST_CSR.COUNTFLAG.bool do
       end
-      delay -= 1
     end
   }
   
