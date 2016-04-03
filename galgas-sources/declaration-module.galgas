@@ -45,19 +45,20 @@ syntax extension common_syntax {
       $;$
     end
     $}$
+    let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
   #--- Declare init list
     @2lstringlist requiredByList = {}
     for function in procedureDeclarationListAST do
-      requiredByList += !moduleName !function.mProcedureName
+      requiredByList += !moduleTypeName !function.mProcedureName
     end
     for service in serviceListAST do
-      requiredByList += !moduleName !service.mServiceName
+      requiredByList += !moduleTypeName !service.mServiceName
     end
     for guard in guardListAST do
-      requiredByList += !moduleName !guard.mGuardName
+      requiredByList += !moduleTypeName !guard.mGuardName
     end
     for primitive in primitiveListAST do
-      requiredByList += !moduleName !primitive.mPrimitiveName
+      requiredByList += !moduleTypeName !primitive.mPrimitiveName
     end
     for init in initList do
       ioAST.mInitList +=
@@ -69,7 +70,7 @@ syntax extension common_syntax {
     end
   #--- Declare structure
     ioAST.mDeclarationList += !@structureDeclaration.new {
-      !moduleName
+      !moduleTypeName
       !{}
       !fieldList
       !procedureDeclarationListAST
@@ -79,9 +80,9 @@ syntax extension common_syntax {
     }
   #--- Declare global variable
     ioAST.mGlobalVarDeclarationList +=
+      !moduleTypeName
       !moduleName
-      !moduleName
-      !@constructorCall.new {!moduleName !{} !.here}
+      !@constructorCall.new {!moduleTypeName !{} !.here}
       !{} # allowedRoutineList
       !{} # allowedInitList
       !{} # allowedPanicList
