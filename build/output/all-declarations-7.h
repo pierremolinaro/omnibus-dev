@@ -133,6 +133,17 @@ void extensionMethod_llvmPrototypeGeneration (const class GALGAS_externProcedure
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                   Extension method '@sectionDeclarationListAST noteServiceTypesInPrecedenceGraph'                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_noteServiceTypesInPrecedenceGraph (const class GALGAS_sectionDeclarationListAST inObject,
+                                                        class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Extension method '@guardMapIR-element llvmCodeGeneration'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

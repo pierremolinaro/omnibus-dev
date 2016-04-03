@@ -11221,8 +11221,9 @@ class GALGAS_structureDeclaration : public GALGAS_abstractDeclaration {
                                                                const class GALGAS_structureFieldListAST & inOperand2,
                                                                const class GALGAS_procedureDeclarationListAST & inOperand3,
                                                                const class GALGAS_serviceDeclarationListAST & inOperand4,
-                                                               const class GALGAS_primitiveDeclarationListAST & inOperand5,
-                                                               const class GALGAS_guardDeclarationListAST & inOperand6
+                                                               const class GALGAS_sectionDeclarationListAST & inOperand5,
+                                                               const class GALGAS_primitiveDeclarationListAST & inOperand6,
+                                                               const class GALGAS_guardDeclarationListAST & inOperand7
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -11241,6 +11242,8 @@ class GALGAS_structureDeclaration : public GALGAS_abstractDeclaration {
   public : VIRTUAL_IN_DEBUG class GALGAS_primitiveDeclarationListAST getter_mPrimitiveListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureDeclarationListAST getter_mProcedureDeclarationListAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_sectionDeclarationListAST getter_mSectionListAST (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_serviceDeclarationListAST getter_mServiceListAST (LOCATION_ARGS) const ;
 
@@ -11272,6 +11275,7 @@ class cPtr_structureDeclaration : public cPtr_abstractDeclaration {
   public : GALGAS_structureFieldListAST mAttribute_mStructureFieldListAST ;
   public : GALGAS_procedureDeclarationListAST mAttribute_mProcedureDeclarationListAST ;
   public : GALGAS_serviceDeclarationListAST mAttribute_mServiceListAST ;
+  public : GALGAS_sectionDeclarationListAST mAttribute_mSectionListAST ;
   public : GALGAS_primitiveDeclarationListAST mAttribute_mPrimitiveListAST ;
   public : GALGAS_guardDeclarationListAST mAttribute_mGuardListAST ;
 
@@ -11281,6 +11285,7 @@ class cPtr_structureDeclaration : public cPtr_abstractDeclaration {
                                       const GALGAS_structureFieldListAST & in_mStructureFieldListAST,
                                       const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
                                       const GALGAS_serviceDeclarationListAST & in_mServiceListAST,
+                                      const GALGAS_sectionDeclarationListAST & in_mSectionListAST,
                                       const GALGAS_primitiveDeclarationListAST & in_mPrimitiveListAST,
                                       const GALGAS_guardDeclarationListAST & in_mGuardListAST
                                       COMMA_LOCATION_ARGS) ;
@@ -11294,6 +11299,7 @@ class cPtr_structureDeclaration : public cPtr_abstractDeclaration {
   public : VIRTUAL_IN_DEBUG GALGAS_structureFieldListAST getter_mStructureFieldListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procedureDeclarationListAST getter_mProcedureDeclarationListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_serviceDeclarationListAST getter_mServiceListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_sectionDeclarationListAST getter_mSectionListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_primitiveDeclarationListAST getter_mPrimitiveListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
 //--- Description
