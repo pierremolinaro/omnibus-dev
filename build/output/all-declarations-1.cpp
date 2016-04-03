@@ -13862,11 +13862,12 @@ class cCollectionElement_initListIR : public cCollectionElement {
   public : GALGAS_initListIR_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_initListIR (const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
-                                          const GALGAS_location & in_mInitLocation,
+  public : cCollectionElement_initListIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
+                                          const GALGAS_string & in_mGlobalVariable,
+                                          const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
+                                          const GALGAS_bigint & in_mPriority,
                                           const GALGAS_allocaList & in_mAllocaList,
-                                          const GALGAS_instructionListIR & in_mInstructionListIR,
-                                          const GALGAS_location & in_mEndOfInitLocation
+                                          const GALGAS_instructionListIR & in_mInstructionListIR
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -13884,14 +13885,15 @@ class cCollectionElement_initListIR : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_initListIR::cCollectionElement_initListIR (const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
-                                                              const GALGAS_location & in_mInitLocation,
+cCollectionElement_initListIR::cCollectionElement_initListIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
+                                                              const GALGAS_string & in_mGlobalVariable,
+                                                              const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
+                                                              const GALGAS_bigint & in_mPriority,
                                                               const GALGAS_allocaList & in_mAllocaList,
-                                                              const GALGAS_instructionListIR & in_mInstructionListIR,
-                                                              const GALGAS_location & in_mEndOfInitLocation
+                                                              const GALGAS_instructionListIR & in_mInstructionListIR
                                                               COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mInitRequiredByProcList, in_mInitLocation, in_mAllocaList, in_mInstructionListIR, in_mEndOfInitLocation) {
+mObject (in_mSelfType, in_mGlobalVariable, in_mInitRequiredByProcList, in_mPriority, in_mAllocaList, in_mInstructionListIR) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13904,7 +13906,7 @@ bool cCollectionElement_initListIR::isValid (void) const {
 
 cCollectionElement * cCollectionElement_initListIR::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_initListIR (mObject.mAttribute_mInitRequiredByProcList, mObject.mAttribute_mInitLocation, mObject.mAttribute_mAllocaList, mObject.mAttribute_mInstructionListIR, mObject.mAttribute_mEndOfInitLocation COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_initListIR (mObject.mAttribute_mSelfType, mObject.mAttribute_mGlobalVariable, mObject.mAttribute_mInitRequiredByProcList, mObject.mAttribute_mPriority, mObject.mAttribute_mAllocaList, mObject.mAttribute_mInstructionListIR COMMA_HERE)) ;
   return result ;
 }
 
@@ -13913,12 +13915,20 @@ cCollectionElement * cCollectionElement_initListIR::copy (void) {
 void cCollectionElement_initListIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mSelfType" ":" ;
+  mObject.mAttribute_mSelfType.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mGlobalVariable" ":" ;
+  mObject.mAttribute_mGlobalVariable.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mInitRequiredByProcList" ":" ;
   mObject.mAttribute_mInitRequiredByProcList.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInitLocation" ":" ;
-  mObject.mAttribute_mInitLocation.description (ioString, inIndentation) ;
+  ioString << "mPriority" ":" ;
+  mObject.mAttribute_mPriority.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mAllocaList" ":" ;
@@ -13927,10 +13937,6 @@ void cCollectionElement_initListIR::description (C_String & ioString, const int3
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mInstructionListIR" ":" ;
   mObject.mAttribute_mInstructionListIR.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mEndOfInitLocation" ":" ;
-  mObject.mAttribute_mEndOfInitLocation.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13966,17 +13972,18 @@ GALGAS_initListIR GALGAS_initListIR::constructor_emptyList (LOCATION_ARGS) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_initListIR GALGAS_initListIR::constructor_listWithValue (const GALGAS__32_lstringlist & inOperand0,
-                                                                const GALGAS_location & inOperand1,
-                                                                const GALGAS_allocaList & inOperand2,
-                                                                const GALGAS_instructionListIR & inOperand3,
-                                                                const GALGAS_location & inOperand4
+GALGAS_initListIR GALGAS_initListIR::constructor_listWithValue (const GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                const GALGAS_string & inOperand1,
+                                                                const GALGAS__32_lstringlist & inOperand2,
+                                                                const GALGAS_bigint & inOperand3,
+                                                                const GALGAS_allocaList & inOperand4,
+                                                                const GALGAS_instructionListIR & inOperand5
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_initListIR result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_initListIR::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE) ;
+    GALGAS_initListIR::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -13985,33 +13992,36 @@ GALGAS_initListIR GALGAS_initListIR::constructor_listWithValue (const GALGAS__32
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
+                                                   const GALGAS_string & in_mGlobalVariable,
                                                    const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
-                                                   const GALGAS_location & in_mInitLocation,
+                                                   const GALGAS_bigint & in_mPriority,
                                                    const GALGAS_allocaList & in_mAllocaList,
-                                                   const GALGAS_instructionListIR & in_mInstructionListIR,
-                                                   const GALGAS_location & in_mEndOfInitLocation
+                                                   const GALGAS_instructionListIR & in_mInstructionListIR
                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement_initListIR * p = NULL ;
-  macroMyNew (p, cCollectionElement_initListIR (in_mInitRequiredByProcList,
-                                                in_mInitLocation,
+  macroMyNew (p, cCollectionElement_initListIR (in_mSelfType,
+                                                in_mGlobalVariable,
+                                                in_mInitRequiredByProcList,
+                                                in_mPriority,
                                                 in_mAllocaList,
-                                                in_mInstructionListIR,
-                                                in_mEndOfInitLocation COMMA_THERE)) ;
+                                                in_mInstructionListIR COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::addAssign_operation (const GALGAS__32_lstringlist & inOperand0,
-                                             const GALGAS_location & inOperand1,
-                                             const GALGAS_allocaList & inOperand2,
-                                             const GALGAS_instructionListIR & inOperand3,
-                                             const GALGAS_location & inOperand4
+void GALGAS_initListIR::addAssign_operation (const GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                             const GALGAS_string & inOperand1,
+                                             const GALGAS__32_lstringlist & inOperand2,
+                                             const GALGAS_bigint & inOperand3,
+                                             const GALGAS_allocaList & inOperand4,
+                                             const GALGAS_instructionListIR & inOperand5
                                              COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_initListIR (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_initListIR (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -14021,17 +14031,18 @@ void GALGAS_initListIR::addAssign_operation (const GALGAS__32_lstringlist & inOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::setter_insertAtIndex (const GALGAS__32_lstringlist inOperand0,
-                                              const GALGAS_location inOperand1,
-                                              const GALGAS_allocaList inOperand2,
-                                              const GALGAS_instructionListIR inOperand3,
-                                              const GALGAS_location inOperand4,
+void GALGAS_initListIR::setter_insertAtIndex (const GALGAS_unifiedTypeMap_2D_proxy inOperand0,
+                                              const GALGAS_string inOperand1,
+                                              const GALGAS__32_lstringlist inOperand2,
+                                              const GALGAS_bigint inOperand3,
+                                              const GALGAS_allocaList inOperand4,
+                                              const GALGAS_instructionListIR inOperand5,
                                               const GALGAS_uint inInsertionIndex,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_initListIR (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_initListIR (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -14041,11 +14052,12 @@ void GALGAS_initListIR::setter_insertAtIndex (const GALGAS__32_lstringlist inOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::setter_removeAtIndex (GALGAS__32_lstringlist & outOperand0,
-                                              GALGAS_location & outOperand1,
-                                              GALGAS_allocaList & outOperand2,
-                                              GALGAS_instructionListIR & outOperand3,
-                                              GALGAS_location & outOperand4,
+void GALGAS_initListIR::setter_removeAtIndex (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                              GALGAS_string & outOperand1,
+                                              GALGAS__32_lstringlist & outOperand2,
+                                              GALGAS_bigint & outOperand3,
+                                              GALGAS_allocaList & outOperand4,
+                                              GALGAS_instructionListIR & outOperand5,
                                               const GALGAS_uint inRemoveIndex,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
@@ -14059,24 +14071,27 @@ void GALGAS_initListIR::setter_removeAtIndex (GALGAS__32_lstringlist & outOperan
       outOperand2.drop () ;
       outOperand3.drop () ;
       outOperand4.drop () ;
+      outOperand5.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_initListIR) ;
-      outOperand0 = p->mObject.mAttribute_mInitRequiredByProcList ;
-      outOperand1 = p->mObject.mAttribute_mInitLocation ;
-      outOperand2 = p->mObject.mAttribute_mAllocaList ;
-      outOperand3 = p->mObject.mAttribute_mInstructionListIR ;
-      outOperand4 = p->mObject.mAttribute_mEndOfInitLocation ;
+      outOperand0 = p->mObject.mAttribute_mSelfType ;
+      outOperand1 = p->mObject.mAttribute_mGlobalVariable ;
+      outOperand2 = p->mObject.mAttribute_mInitRequiredByProcList ;
+      outOperand3 = p->mObject.mAttribute_mPriority ;
+      outOperand4 = p->mObject.mAttribute_mAllocaList ;
+      outOperand5 = p->mObject.mAttribute_mInstructionListIR ;
     }
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::setter_popFirst (GALGAS__32_lstringlist & outOperand0,
-                                         GALGAS_location & outOperand1,
-                                         GALGAS_allocaList & outOperand2,
-                                         GALGAS_instructionListIR & outOperand3,
-                                         GALGAS_location & outOperand4,
+void GALGAS_initListIR::setter_popFirst (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                         GALGAS_string & outOperand1,
+                                         GALGAS__32_lstringlist & outOperand2,
+                                         GALGAS_bigint & outOperand3,
+                                         GALGAS_allocaList & outOperand4,
+                                         GALGAS_instructionListIR & outOperand5,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -14088,23 +14103,26 @@ void GALGAS_initListIR::setter_popFirst (GALGAS__32_lstringlist & outOperand0,
     outOperand2.drop () ;
     outOperand3.drop () ;
     outOperand4.drop () ;
+    outOperand5.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_initListIR) ;
-    outOperand0 = p->mObject.mAttribute_mInitRequiredByProcList ;
-    outOperand1 = p->mObject.mAttribute_mInitLocation ;
-    outOperand2 = p->mObject.mAttribute_mAllocaList ;
-    outOperand3 = p->mObject.mAttribute_mInstructionListIR ;
-    outOperand4 = p->mObject.mAttribute_mEndOfInitLocation ;
+    outOperand0 = p->mObject.mAttribute_mSelfType ;
+    outOperand1 = p->mObject.mAttribute_mGlobalVariable ;
+    outOperand2 = p->mObject.mAttribute_mInitRequiredByProcList ;
+    outOperand3 = p->mObject.mAttribute_mPriority ;
+    outOperand4 = p->mObject.mAttribute_mAllocaList ;
+    outOperand5 = p->mObject.mAttribute_mInstructionListIR ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::setter_popLast (GALGAS__32_lstringlist & outOperand0,
-                                        GALGAS_location & outOperand1,
-                                        GALGAS_allocaList & outOperand2,
-                                        GALGAS_instructionListIR & outOperand3,
-                                        GALGAS_location & outOperand4,
+void GALGAS_initListIR::setter_popLast (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                        GALGAS_string & outOperand1,
+                                        GALGAS__32_lstringlist & outOperand2,
+                                        GALGAS_bigint & outOperand3,
+                                        GALGAS_allocaList & outOperand4,
+                                        GALGAS_instructionListIR & outOperand5,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -14116,23 +14134,26 @@ void GALGAS_initListIR::setter_popLast (GALGAS__32_lstringlist & outOperand0,
     outOperand2.drop () ;
     outOperand3.drop () ;
     outOperand4.drop () ;
+    outOperand5.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_initListIR) ;
-    outOperand0 = p->mObject.mAttribute_mInitRequiredByProcList ;
-    outOperand1 = p->mObject.mAttribute_mInitLocation ;
-    outOperand2 = p->mObject.mAttribute_mAllocaList ;
-    outOperand3 = p->mObject.mAttribute_mInstructionListIR ;
-    outOperand4 = p->mObject.mAttribute_mEndOfInitLocation ;
+    outOperand0 = p->mObject.mAttribute_mSelfType ;
+    outOperand1 = p->mObject.mAttribute_mGlobalVariable ;
+    outOperand2 = p->mObject.mAttribute_mInitRequiredByProcList ;
+    outOperand3 = p->mObject.mAttribute_mPriority ;
+    outOperand4 = p->mObject.mAttribute_mAllocaList ;
+    outOperand5 = p->mObject.mAttribute_mInstructionListIR ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::method_first (GALGAS__32_lstringlist & outOperand0,
-                                      GALGAS_location & outOperand1,
-                                      GALGAS_allocaList & outOperand2,
-                                      GALGAS_instructionListIR & outOperand3,
-                                      GALGAS_location & outOperand4,
+void GALGAS_initListIR::method_first (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                      GALGAS_string & outOperand1,
+                                      GALGAS__32_lstringlist & outOperand2,
+                                      GALGAS_bigint & outOperand3,
+                                      GALGAS_allocaList & outOperand4,
+                                      GALGAS_instructionListIR & outOperand5,
                                       C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -14144,23 +14165,26 @@ void GALGAS_initListIR::method_first (GALGAS__32_lstringlist & outOperand0,
     outOperand2.drop () ;
     outOperand3.drop () ;
     outOperand4.drop () ;
+    outOperand5.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_initListIR) ;
-    outOperand0 = p->mObject.mAttribute_mInitRequiredByProcList ;
-    outOperand1 = p->mObject.mAttribute_mInitLocation ;
-    outOperand2 = p->mObject.mAttribute_mAllocaList ;
-    outOperand3 = p->mObject.mAttribute_mInstructionListIR ;
-    outOperand4 = p->mObject.mAttribute_mEndOfInitLocation ;
+    outOperand0 = p->mObject.mAttribute_mSelfType ;
+    outOperand1 = p->mObject.mAttribute_mGlobalVariable ;
+    outOperand2 = p->mObject.mAttribute_mInitRequiredByProcList ;
+    outOperand3 = p->mObject.mAttribute_mPriority ;
+    outOperand4 = p->mObject.mAttribute_mAllocaList ;
+    outOperand5 = p->mObject.mAttribute_mInstructionListIR ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initListIR::method_last (GALGAS__32_lstringlist & outOperand0,
-                                     GALGAS_location & outOperand1,
-                                     GALGAS_allocaList & outOperand2,
-                                     GALGAS_instructionListIR & outOperand3,
-                                     GALGAS_location & outOperand4,
+void GALGAS_initListIR::method_last (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                     GALGAS_string & outOperand1,
+                                     GALGAS__32_lstringlist & outOperand2,
+                                     GALGAS_bigint & outOperand3,
+                                     GALGAS_allocaList & outOperand4,
+                                     GALGAS_instructionListIR & outOperand5,
                                      C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -14172,13 +14196,15 @@ void GALGAS_initListIR::method_last (GALGAS__32_lstringlist & outOperand0,
     outOperand2.drop () ;
     outOperand3.drop () ;
     outOperand4.drop () ;
+    outOperand5.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_initListIR) ;
-    outOperand0 = p->mObject.mAttribute_mInitRequiredByProcList ;
-    outOperand1 = p->mObject.mAttribute_mInitLocation ;
-    outOperand2 = p->mObject.mAttribute_mAllocaList ;
-    outOperand3 = p->mObject.mAttribute_mInstructionListIR ;
-    outOperand4 = p->mObject.mAttribute_mEndOfInitLocation ;
+    outOperand0 = p->mObject.mAttribute_mSelfType ;
+    outOperand1 = p->mObject.mAttribute_mGlobalVariable ;
+    outOperand2 = p->mObject.mAttribute_mInitRequiredByProcList ;
+    outOperand3 = p->mObject.mAttribute_mPriority ;
+    outOperand4 = p->mObject.mAttribute_mAllocaList ;
+    outOperand5 = p->mObject.mAttribute_mInstructionListIR ;
   }
 }
 
@@ -14235,6 +14261,36 @@ void GALGAS_initListIR::plusAssign_operation (const GALGAS_initListIR inOperand,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_initListIR::getter_mSelfTypeAtIndex (const GALGAS_uint & inIndex,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_initListIR * p = (cCollectionElement_initListIR *) attributes.ptr () ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_initListIR) ;
+    result = p->mObject.mAttribute_mSelfType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_initListIR::getter_mGlobalVariableAtIndex (const GALGAS_uint & inIndex,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_initListIR * p = (cCollectionElement_initListIR *) attributes.ptr () ;
+  GALGAS_string result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_initListIR) ;
+    result = p->mObject.mAttribute_mGlobalVariable ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS__32_lstringlist GALGAS_initListIR::getter_mInitRequiredByProcListAtIndex (const GALGAS_uint & inIndex,
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const {
@@ -14250,15 +14306,15 @@ GALGAS__32_lstringlist GALGAS_initListIR::getter_mInitRequiredByProcListAtIndex 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_initListIR::getter_mInitLocationAtIndex (const GALGAS_uint & inIndex,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_initListIR::getter_mPriorityAtIndex (const GALGAS_uint & inIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_initListIR * p = (cCollectionElement_initListIR *) attributes.ptr () ;
-  GALGAS_location result ;
+  GALGAS_bigint result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_initListIR) ;
-    result = p->mObject.mAttribute_mInitLocation ;
+    result = p->mObject.mAttribute_mPriority ;
   }
   return result ;
 }
@@ -14293,21 +14349,6 @@ GALGAS_instructionListIR GALGAS_initListIR::getter_mInstructionListIRAtIndex (co
   return result ;
 }
 
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_initListIR::getter_mEndOfInitLocationAtIndex (const GALGAS_uint & inIndex,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_initListIR * p = (cCollectionElement_initListIR *) attributes.ptr () ;
-  GALGAS_location result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_initListIR) ;
-    result = p->mObject.mAttribute_mEndOfInitLocation ;
-  }
-  return result ;
-}
-
 
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14329,6 +14370,22 @@ GALGAS_initListIR_2D_element cEnumerator_initListIR::current (LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_initListIR::current_mSelfType (LOCATION_ARGS) const {
+  const cCollectionElement_initListIR * p = (const cCollectionElement_initListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_initListIR) ;
+  return p->mObject.mAttribute_mSelfType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cEnumerator_initListIR::current_mGlobalVariable (LOCATION_ARGS) const {
+  const cCollectionElement_initListIR * p = (const cCollectionElement_initListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_initListIR) ;
+  return p->mObject.mAttribute_mGlobalVariable ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS__32_lstringlist cEnumerator_initListIR::current_mInitRequiredByProcList (LOCATION_ARGS) const {
   const cCollectionElement_initListIR * p = (const cCollectionElement_initListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_initListIR) ;
@@ -14337,10 +14394,10 @@ GALGAS__32_lstringlist cEnumerator_initListIR::current_mInitRequiredByProcList (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cEnumerator_initListIR::current_mInitLocation (LOCATION_ARGS) const {
+GALGAS_bigint cEnumerator_initListIR::current_mPriority (LOCATION_ARGS) const {
   const cCollectionElement_initListIR * p = (const cCollectionElement_initListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_initListIR) ;
-  return p->mObject.mAttribute_mInitLocation ;
+  return p->mObject.mAttribute_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14357,14 +14414,6 @@ GALGAS_instructionListIR cEnumerator_initListIR::current_mInstructionListIR (LOC
   const cCollectionElement_initListIR * p = (const cCollectionElement_initListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_initListIR) ;
   return p->mObject.mAttribute_mInstructionListIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cEnumerator_initListIR::current_mEndOfInitLocation (LOCATION_ARGS) const {
-  const cCollectionElement_initListIR * p = (const cCollectionElement_initListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_initListIR) ;
-  return p->mObject.mAttribute_mEndOfInitLocation ;
 }
 
 

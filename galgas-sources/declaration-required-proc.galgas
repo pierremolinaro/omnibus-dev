@@ -20,6 +20,7 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $required$
     <procedure_header>
+      ?public:let public
       ?procModes:let requiredModeList
       ?name:let procName
       ?attributes:let unused attributeList

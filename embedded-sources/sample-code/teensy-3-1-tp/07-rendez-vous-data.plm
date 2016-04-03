@@ -72,8 +72,8 @@ task T1 priority 1 stackSize 1024 {
     rdvs.input (?data:let x)
     leds.toggle (!LED_L1)
     s.P ()
-      goto (!line:0 !column:0)
-      printUnsigned (!x)
+      lcd.goto (!line:0 !column:0)
+      lcd.printUnsigned (!x)
     s.V ()
   }
 }
@@ -88,8 +88,8 @@ task T2 priority 2 stackSize 1024 {
     upon rdvs2.input (?data:let x) :
       leds.toggle (!LED_L2)
       s.P ()
-        goto (!line:1 !column:0)
-        printUnsigned (!x)
+        lcd.goto (!line:1 !column:0)
+        lcd.printUnsigned (!x)
       s.V ()
     upon waitUntilMS (!deadline:self.deadline) :
       self.deadline += 200

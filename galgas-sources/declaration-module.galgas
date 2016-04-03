@@ -45,11 +45,13 @@ syntax extension common_syntax {
       $;$
     end
     $}$
-    let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
+    let moduleTypeName = @lstring.new {!moduleName.string !moduleName.location}
   #--- Declare init list
     @2lstringlist requiredByList = {}
     for function in procedureDeclarationListAST do
-      requiredByList += !moduleTypeName !function.mProcedureName
+      if function.mPublic then
+        requiredByList += !moduleTypeName !function.mProcedureName
+      end
     end
     for service in serviceListAST do
       requiredByList += !moduleTypeName !service.mServiceName
@@ -63,6 +65,8 @@ syntax extension common_syntax {
     for init in initList do
       ioAST.mInitList +=
        !init.mInitLocation
+       !moduleTypeName
+       !moduleName.string
        !requiredByList
        !init.mInstructionList
        !init.mEndOfInitLocation

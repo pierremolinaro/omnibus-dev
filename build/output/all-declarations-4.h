@@ -248,10 +248,11 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
   public : virtual void nt_procedure_5F_header_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_procedure_5F_header_ (GALGAS_lstringlist & outArgument0,
-                                                 GALGAS_lstring & outArgument1,
-                                                 GALGAS_lstringlist & outArgument2,
-                                                 GALGAS_procFormalArgumentList & outArgument3,
+  public : virtual void nt_procedure_5F_header_ (GALGAS_bool & outArgument0,
+                                                 GALGAS_lstringlist & outArgument1,
+                                                 GALGAS_lstring & outArgument2,
+                                                 GALGAS_lstringlist & outArgument3,
+                                                 GALGAS_procFormalArgumentList & outArgument4,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'routine_call' non terminal
@@ -459,6 +460,8 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_70 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_71 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_72 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
