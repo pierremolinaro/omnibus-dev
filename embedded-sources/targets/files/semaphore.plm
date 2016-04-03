@@ -31,7 +31,7 @@ struct $semaphore {
     result = self.value > 0
     if result then
       self.value -= 1
-    elsif inDeadline > millis () then 
+    elsif inDeadline > time.millis () then 
       blockInListAndOnDeadline (!?list:self.list !deadline:inDeadline)
     end
   }

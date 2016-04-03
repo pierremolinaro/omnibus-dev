@@ -9,6 +9,7 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $module$
     $identifier$ ?let moduleName
+    let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
     ${$
     @procedureDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
@@ -21,7 +22,7 @@ syntax extension common_syntax {
     while
       <declaration_init> !?initList
     while
-      <isr> !?ioAST.mISRDeclarationListAST
+      <isr> !?ioAST.mISRDeclarationListAST !moduleTypeName !moduleName.string
     while
       $var$
       $identifier$ ?let fieldName
@@ -48,7 +49,6 @@ syntax extension common_syntax {
       $;$
     end
     $}$
-    let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
   #--- Declare init list
     @2lstringlist requiredByList = {}
     for function in procedureDeclarationListAST do

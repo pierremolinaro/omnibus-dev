@@ -17,7 +17,7 @@ struct $monSemaphore {
     result = self.value > 0
     if result then
       self.value -= 1
-    elsif inDeadline > millis () then 
+    elsif inDeadline > time.millis () then 
       blockInListAndOnDeadline (!?list:self.list !deadline:inDeadline)
     end
   }
@@ -45,11 +45,11 @@ task T1 priority 1 stackSize 512 {
   }
   
   func loop () {
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 300
     leds.on (!LED_L0)
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 700
     leds.off (!LED_L0)

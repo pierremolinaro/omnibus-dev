@@ -16,7 +16,7 @@ guard PP () : s1.P () {
 }
 
 guard convenienceWaitUntilMS (?deadline:inDeadline $uint32)
-: waitUntilMS (!deadline:inDeadline) {
+: time.waitUntilMS (!deadline:inDeadline) {
 }
 
 //-----------------------------------------------------------------------------*
@@ -25,11 +25,11 @@ task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s0.V ()
     self.top += 250
     leds.on (!LED_L0)
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s0.V ()
     self.top += 250
     leds.off (!LED_L0)
@@ -42,11 +42,11 @@ task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
   func loop () {
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s1.V ()
     self.top += 249
     leds.on (!LED_L4)
-    waitUntilMS (!deadline:self.top)
+    time.waitUntilMS (!deadline:self.top)
     s1.V ()
     self.top += 249
     leds.off (!LED_L4)

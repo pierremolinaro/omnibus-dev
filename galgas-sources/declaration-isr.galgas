@@ -4,6 +4,8 @@
 
 list @isrDeclarationListAST {
   @lstring mISRName
+  @lstring mSelfTypeName # "" if standalone
+  @string mGlobalVariableName # "" if standalone
   @lstringlist mISRAttributeList
   @instructionListAST mISRInstructionList
   @location mEndOfISRDeclaration
@@ -17,7 +19,7 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <isr> ?!@isrDeclarationListAST ioISRListAST {
+  rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inSelfTypeName ?let @string inGlobalVarName {
     $isr$
     $identifier$ ?let sectionName
     @lstringlist attributeList = {}
@@ -32,6 +34,8 @@ syntax extension common_syntax {
     $}$
     ioISRListAST +=
       !sectionName
+      !inSelfTypeName
+      !inGlobalVarName
       !attributeList
       !instructionList
       !.here
@@ -91,11 +95,17 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
     )
+  #--- Self type
+    let selfType = if isr.mSelfTypeName.string == "" then
+      @unifiedTypeMap-proxy.null
+    else
+      @unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !isr.mSelfTypeName}
+    end
   #--- Analyze instruction list
     @allocaList allocaList = {}
     @instructionListIR instructionGenerationList = {}
     [isr.mISRInstructionList analyzeRoutineInstructionList
-      !self:.null
+      !self:selfType
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inSemanticContext
       !modes:modeSet
@@ -112,6 +122,8 @@ method @isrDeclarationListAST isrSemanticAnalysis
     [inSemanticContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
       !isr.mISRName
+      !selfType
+      !isr.mGlobalVariableName
       !allocaList
       !instructionGenerationList
       !xtrAttribute
@@ -153,6 +165,13 @@ method @interruptMapIR interruptCodeGeneration
   #--- Alloca
     for (variable type) in interrupt.mAllocaList do
       ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    end
+  #--- Define self
+    if interrupt.mSelfType != .null then
+      let varName = llvmNameForGlobalVariable (!interrupt.mGlobalVariableName)
+      let typeName = [interrupt.mSelfType llvmTypeName]
+      ioLLVMcode += "  %self = getelementptr inbounds " + typeName + ", " + typeName + " * @" + varName 
+      ioLLVMcode += ", i32 0 ; Perform %self = @" + varName + " \n"
     end
   #--- Instruction list
     [interrupt.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
