@@ -1,39 +1,4 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @moduleDeclaration : @abstractDeclaration {
-  @lstring mModuleName
-  @lstringlist mAttributeListAST
-  @moduleVarListAST mModuleVariableListAST
-  @procedureDeclarationListAST mProcedureDeclarationListAST
-  @serviceDeclarationListAST mServiceListAST
-  @primitiveDeclarationListAST mPrimitiveListAST
-  @guardDeclarationListAST mGuardListAST
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @moduleDeclaration location -> @location outLocation {
-  outLocation = mModuleName.location
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-enum @moduleVarInit {
-  case expression (@expressionAST initExpression)
-  case noExpression
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @moduleVarListAST {
-  @lstring mFieldName
-  @lstring mFieldTypeName
-  @moduleVarInit mInitialisation
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -43,20 +8,19 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $module$
-    $typeName$ ?let structureName
-    @lstringlist attributeList = {}
-    repeat
-    while
-      $attribute$ ?let attribute
-      attributeList += !attribute
-    end 
+    $identifier$ ?let moduleName
     ${$
     @procedureDeclarationListAST procedureDeclarationListAST = {}
-    @moduleVarListAST fieldList = {}
+    @structureFieldListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
     @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
+    @initList initList = {}
     repeat
+    while
+      <declaration_init> !?initList
+    while
+      <isr> !?ioAST.mISRDeclarationListAST
     while
       $var$
       $identifier$ ?let fieldName
@@ -70,11 +34,6 @@ syntax extension common_syntax {
       <expression> ?let initExpression
       fieldList += !fieldName !typeName !.expression{!initExpression:initExpression}
     while
-      $var$
-      $identifier$ ?let fieldName
-      $typeName$ ?let typeName
-      fieldList += !fieldName !typeName !.noExpression
-    while
       <procedure> !?procedureDeclarationListAST
     while
       <service> !?serviceListAST
@@ -86,300 +45,52 @@ syntax extension common_syntax {
       $;$
     end
     $}$
-    ioAST.mDeclarationList += !@moduleDeclaration.new {
-      !structureName
-      !attributeList
+  #--- Declare init list
+    @2lstringlist requiredByList = {}
+    for function in procedureDeclarationListAST do
+      requiredByList += !moduleName !function.mProcedureName
+    end
+    for service in serviceListAST do
+      requiredByList += !moduleName !service.mServiceName
+    end
+    for guard in guardListAST do
+      requiredByList += !moduleName !guard.mGuardName
+    end
+    for primitive in primitiveListAST do
+      requiredByList += !moduleName !primitive.mPrimitiveName
+    end
+    for init in initList do
+      ioAST.mInitList +=
+       !init.mInitLocation
+       !requiredByList
+       !init.mInstructionList
+       !init.mEndOfInitLocation
+       !init.mPriority
+    end
+  #--- Declare structure
+    ioAST.mDeclarationList += !@structureDeclaration.new {
+      !moduleName
+      !{}
       !fieldList
       !procedureDeclarationListAST
       !serviceListAST
       !primitiveListAST
       !guardListAST
     }
+  #--- Declare global variable
+    ioAST.mGlobalVarDeclarationList +=
+      !moduleName
+      !moduleName
+      !@constructorCall.new {!moduleName !{} !.here}
+      !{} # allowedRoutineList
+      !{} # allowedInitList
+      !{} # allowedPanicList
+      !{} # allowedGuardList
+      !{} # allowedISRList
   }
 
   #·····················································································································
 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ADD EXTENSION                                                                                                        
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @moduleDeclaration addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @moduleDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let structureTypeName = @lstring.new {!"$" + mModuleName !mModuleName.location}
-#--- Add structure type name as node
-  [!?ioGraph addNode !structureTypeName !self]
-#--- add field types
-  for (* fieldTypeName initExpression) in mModuleVariableListAST do
-    if fieldTypeName.string != "" then
-      let typeName = @lstring.new {!"$" + fieldTypeName !fieldTypeName.location}
-      [!?ioGraph addEdge !structureTypeName !typeName]
-    end
-    switch initExpression
-    case noExpression :
-    case expression (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
-    end
-  end
-#--- Add structure procedures
-  for () in mProcedureDeclarationListAST do
-    for (* * formalArgumentTypeName *) in mProcedureFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
-    [mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
-#--- Add structure services
-  [mServiceListAST noteServiceTypesInPrecedenceGraph !?ioGraph]
-  [mPrimitiveListAST notePrimitiveTypesInPrecedenceGraph !?ioGraph]
-#--- Add structure guards
-  [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @moduleDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "struct $" + mModuleName 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#list @propertyList {
-#  @string mPropertyName
-#  @unifiedTypeMap-proxy mType
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#map @propertyMap {
-#  @unifiedTypeMap-proxy mTypeProxy
-#  @uint mIndex
-#  insert insertKey error message "the '%K' property is already declared"
-#  search searchKey error message "there is no '%K' property"
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#list @constructorSignature {
-#  @string mSelector
-#  @unifiedTypeMap-proxy mType
-#  @uint mFieldIndex
-#}
-#
-##———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#
-#sortedlist @sortedOperandIRList {
-#  @operandIR mOperand
-#  @uint mIndex
-#}{
-#  mIndex <
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @moduleDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-#---------------------------------------- Properties
-  @propertyList propertyList = {}
-  @propertyMap propertyMap = {}
-  @sortedOperandIRList sortedOperandIRList = {}
-  @constructorSignature constructorSignature = {}
-  var canBeCopied = true
-  for () in mModuleVariableListAST do (fieldIndex)
-  #--- Field type
-    let @unifiedTypeMap-proxy fieldType = if mFieldTypeName.string == ""
-      then .null
-      else .searchKey {!ioContext.mTypeMap !mFieldTypeName}
-    end
-  #--- Init expression
-    @instructionListIR initInstructionGenerationList = {}
-    @allocaList allocaList = {}
-    @semanticTemporariesStruct temporaries = .default
-    switch mInitialisation
-    case expression (initExpression) :
-      [initExpression analyzeExpression
-        !self:.null
-        !routineNameForInvocationGraph:.new {!mModuleName.string + " init" !mModuleName.location}
-        !optionalTargetType:fieldType
-        !context:ioContext
-        !modes:{}
-        !allowPanic:false
-        !?temporary:temporaries
-        !?staticStringMap:*
-        !?variableMap:*
-        !?alloca:allocaList
-        !?instructionListIR:initInstructionGenerationList
-        ?result:@operandIR expressionIR
-      ]
-      if ([initInstructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionIR.mValue isStatic] then
-        error mFieldName : "initialization expression cannot be computed statically"
-      end
-      @unifiedTypeMap-proxy actualFieldType
-      if fieldType != .null then
-        actualFieldType = fieldType
-      else
-        actualFieldType = expressionIR.mType
-      end
-      if not [actualFieldType instantiable] then
-        error mFieldName : "$" + [actualFieldType key] + " type is not instanciable"
-      end
-      if not [actualFieldType copyable] then
-        canBeCopied = false
-      end
-      propertyList += !mFieldName.string !actualFieldType
-      [!?propertyMap insertKey !mFieldName !actualFieldType ![propertyMap count]]
-      sortedOperandIRList += !@operandIR.new {!actualFieldType !expressionIR.mValue} !fieldIndex
-    case noExpression :
-      if not [fieldType instantiable] then
-        error mFieldName : "$" + [fieldType key] + " type is not instanciable"
-      end
-      propertyList += !mFieldName.string !fieldType
-      [!?propertyMap insertKey !mFieldName !fieldType ![propertyMap count]]
-      constructorSignature += !mFieldName.string !fieldType !fieldIndex
-    end
-  end
-  [!?ioContext.mConstructorMap insertKey
-    !mModuleName
-    !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
-  ]
-#---------------------------------------- Attribute "copyable"
-  var copyableAttribute = false
-  for (s) in mAttributeListAST do
-    if s.string == "copyable" then
-      if copyableAttribute then
-        error s : "duplicated attribute"
-      end
-      copyableAttribute = true
-    else
-      error s : "only @copyable attribute is allowed here"
-    end
-  end
-  if copyableAttribute && not canBeCopied then
-    error mModuleName : "this structure cannot be copied, one field is not copyable"
-    copyableAttribute = false
-  end
-#---------------------------------------- Enter in type map
-  [!?ioContext.mTypeMap insertKey
-    !lkey:mModuleName
-    !llvmTypeName:"%$" + mModuleName.string
-    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
-    !typedConstantMap:{}
-    !instantiable:true
-    !copyable:copyableAttribute
-    !equatable:false
-    !comparable:false
-    !enumerationType:.null # Not enumerable
-  ]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @moduleDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mModuleName.string !?context:ioContext]
-  [mServiceListAST enterInContext !receiverType:"$" + mModuleName.string !?context:ioContext]
-  [mPrimitiveListAST enterInContext !receiverType:"$" + mModuleName.string !?context:ioContext]
-  [mGuardListAST enterInContext !receiverType:"$" + mModuleName.string !?context:ioContext]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @moduleDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mModuleName}
-  @propertyMap propertyMap
-  switch [structureType kind]
-  case structure (propMap *) : propertyMap = propMap
-  case enumeration (*) : propertyMap = {}
-  case integer (* * * *) : propertyMap = {}
-  case staticInteger : propertyMap = {}
-  case boolean : propertyMap = {}
-  case boolset : propertyMap = {}
-  case literalString : propertyMap = {}
-  case opaque (*) : propertyMap = {}
-  end
-#--- Analyze procedures
-  [self procedureSemanticAnalysis
-    !structureType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-#--- Analyze services
-  [mServiceListAST serviceSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-#--- Analyze primitives
-  [mPrimitiveListAST primitiveSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-#--- Analyze guards
-  [mGuardListAST guardSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @moduleDeclaration procedureSemanticAnalysis
-  ?structureType:let @unifiedTypeMap-proxy inStructureType
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  for procedure in mProcedureDeclarationListAST do
-    routineSemanticAnalysis (
-      !receiverType:inStructureType
-      !.function
-      !procedure.mProcedureModeList
-      !procedure.mProcedureName
-      !procedure.mProcedureFormalArgumentList
-      !returnTypeName:procedure.mReturnTypeName
-      !procedure.mProcedureInstructionList
-      !procedure.mEndOfProcedureDeclaration
-      !warnIfUnused:true
-      !globalProcedure:false
-      !weakProcedure:false
-      !nullOnNoPanic:false
-      !registerAccess:.readWriteAccess
-      !context:inContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-    )
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

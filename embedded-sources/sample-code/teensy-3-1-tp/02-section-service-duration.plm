@@ -96,9 +96,9 @@ task T priority 0 stackSize 512 {
   
   func loop () {
     waitDuringMS (!delay:250)
-    ledOn (!LED_L1) // Allumer la led
+    leds.on (!LED_L1) // Allumer la led
     waitDuringMS (!delay:250)
-    ledOff (!LED_L1)  // Éteindre la led
+    leds.off (!LED_L1)  // Éteindre la led
   }
 }
 

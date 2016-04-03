@@ -4,7 +4,7 @@
 
 sortedlist @initList {
   @location mInitLocation
-  @lstringlist mRequiredByProcList
+  @2lstringlist mRequiredByProcList # Type, name
   @instructionListAST mInstructionList
   @location mEndOfInitLocation
   @lbigint mPriority
@@ -21,26 +21,21 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
+    <declaration_init> !?ioAST.mInitList
+  }
+  
+  #·····················································································································
+
+  rule <declaration_init> ?!@initList ioInitList {
     $init$
     $integer$ ?let @lbigint priority
-    @lstringlist requiredByProcList = {}
-    select
-    or
-      $requiredBy$
-      repeat
-        $identifier$ ?let procName
-        requiredByProcList += !procName
-      while
-        $,$
-      end
-    end
     ${$
     <instructionList> ?let instructionList !?*
     let endOfInit = @location.here
     $}$
-    ioAST.mInitList +=
+    ioInitList +=
       !priority.location
-      !requiredByProcList
+      !{}
       !instructionList
       !endOfInit
       !priority
@@ -123,7 +118,7 @@ proc initSemanticAnalysis
   ?selfType:let @unifiedTypeMap-proxy inSelfType
   ?priority:let @lbigint inPriority
   ?modes:let @stringset inModeSet
-  ?requiredBy:let @lstringlist inRequiredByProcList
+  ?requiredBy:let @2lstringlist inRequiredByProcList
   ?instructionList:let @instructionListAST inInstructionListAST
   ?endOfDeclaration:let @location inEndOfInitDeclaration
   !@allocaList outAllocaList
@@ -139,15 +134,16 @@ proc initSemanticAnalysis
       !routineNameForInvocationGraph
     ]
   end
-  for (procName) in inRequiredByProcList do
+  for (typeName funcName) in inRequiredByProcList do
+    let t = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName}
     [!?ioTemporaries.mSubprogramInvocationGraph addEdge
-      !procNameForInvocationGraph (!inSelfType !procName)
+      !procNameForInvocationGraph (!t !funcName)
       !routineNameForInvocationGraph
     ]
   end
 #--- Check "requiredBy" routines are defined
-  for (procName) in inRequiredByProcList do
-    let lkey = @lstring.new {!"." + procName !procName.location}
+  for (typeName funcName) in inRequiredByProcList do
+    let lkey = @lstring.new {!"$" + typeName + "." + funcName !funcName.location}
     [inContext.mRoutineMapForContext searchKey !lkey ?6*]
   end
 #--- Variable map
@@ -183,7 +179,7 @@ proc initSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @initListIR {
-  @lstringlist mInitRequiredByProcList
+  @2lstringlist mInitRequiredByProcList
   @location mInitLocation
   @allocaList mAllocaList
   @instructionListIR mInstructionListIR
@@ -211,8 +207,8 @@ method @initListIR generateLLVMinitCode
       generate = true
     else
       generate = false
-      for (procName) in init.mInitRequiredByProcList while not generate do
-        generate = [inProcedureMapIR hasKey !"." + procName.string]
+      for (typeName funcName) in init.mInitRequiredByProcList while not generate do
+        generate = [inProcedureMapIR hasKey !"$" + typeName + "." + funcName.string]
       end
     end
     if generate then

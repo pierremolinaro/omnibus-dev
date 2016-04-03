@@ -56,9 +56,7 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <procedure>
-    ?!@procedureDeclarationListAST ioProcListAST
-  {
+  rule <procedure> ?!@procedureDeclarationListAST ioProcListAST {
     <procedure_header>
       ?procModes:let procModeList
       ?name:let procName

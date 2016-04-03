@@ -17,7 +17,7 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <isr> ?!@isrDeclarationListAST ioSectionListAST {
+  rule <isr> ?!@isrDeclarationListAST ioISRListAST {
     $isr$
     $identifier$ ?let sectionName
     @lstringlist attributeList = {}
@@ -30,7 +30,7 @@ syntax extension common_syntax {
     @labelMap labelMap = {}
     <instructionList> ?let instructionList !?labelMap
     $}$
-    ioSectionListAST +=
+    ioISRListAST +=
       !sectionName
       !attributeList
       !instructionList

@@ -58,7 +58,7 @@ task T0 priority 0 stackSize 512 {
     waitUntilMS (!deadline:self.top)
     rdvs.output (!data:self.n)
     rdvs2.output (!data:self.n)
-    ledToggle (!LED_L0)
+    leds.toggle (!LED_L0)
     self.top += 500
     self.n += 1
   }
@@ -70,7 +70,7 @@ task T1 priority 1 stackSize 1024 {
 
   func loop () {
     rdvs.input (?data:let x)
-    ledToggle (!LED_L1)
+    leds.toggle (!LED_L1)
     s.P ()
       goto (!line:0 !column:0)
       printUnsigned (!x)
@@ -85,15 +85,15 @@ task T2 priority 2 stackSize 1024 {
 
   func loop () {
     select
-    on rdvs2.input (?data:let x) :
-      ledToggle (!LED_L2)
+    upon rdvs2.input (?data:let x) :
+      leds.toggle (!LED_L2)
       s.P ()
         goto (!line:1 !column:0)
         printUnsigned (!x)
       s.V ()
-    on waitUntilMS (!deadline:self.deadline) :
+    upon waitUntilMS (!deadline:self.deadline) :
       self.deadline += 200
-      ledToggle  (!LED_L4)
+      leds.toggle  (!LED_L4)
     end
   }
 }

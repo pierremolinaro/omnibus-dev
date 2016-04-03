@@ -144,11 +144,12 @@ func `init write8bitCommand @noWarningIfUnused (?inCommand $uint8) {
 //   LCD INIT                                                                  *
 //-----------------------------------------------------------------------------*
 
-init 10 requiredBy
-writeData_inUserMode,
-write8bitCommand_inUserMode,
-writeDataInExceptionMode,
-write8bitCommandInExceptionMode
+init 10
+// requiredBy
+//writeData_inUserMode,
+//write8bitCommand_inUserMode,
+//writeDataInExceptionMode,
+//write8bitCommandInExceptionMode
 {
   configurePorts () ;
 //--- Étape 1 : attendre 15 ms
@@ -501,9 +502,9 @@ panic func setup 0 {
 
 panic func loop 0 {
   waitMSInExceptionMode (!duration:50)
-  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
+  leds.on (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
   waitMSInExceptionMode (!duration:50)
-  ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
+  leds.off (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
 }
 
 //-----------------------------------------------------------------------------*

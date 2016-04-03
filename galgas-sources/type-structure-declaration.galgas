@@ -379,6 +379,17 @@ method @structureDeclaration procedureSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for procedure in mProcedureDeclarationListAST do
+    var warnIfUnused = true
+    for (attribute) in procedure.mProcedureAttributeList do
+      if attribute.string == noWarningIfUnusedAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+        end
+        warnIfUnused = false    
+      else
+        error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
+      end
+    end
     routineSemanticAnalysis (
       !receiverType:inStructureType
       !.function
@@ -388,7 +399,7 @@ method @structureDeclaration procedureSemanticAnalysis
       !returnTypeName:procedure.mReturnTypeName
       !procedure.mProcedureInstructionList
       !procedure.mEndOfProcedureDeclaration
-      !warnIfUnused:true
+      !warnIfUnused:warnIfUnused
       !globalProcedure:false
       !weakProcedure:false
       !registerAccess:.readWriteAccess
