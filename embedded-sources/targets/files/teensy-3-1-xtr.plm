@@ -14,7 +14,7 @@ extern public func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskL
 //--- Make task Ready
 extern public func `kernel `service makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
 
-extern public func `service makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint32)
+extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint32)
 
 //——————————————————————————————————————————————————————————————————————————————
 //   GUARD                                                                      
@@ -59,7 +59,7 @@ module time {
 
   //············································································
   
-  public func `panic waitOneMillisecondInPanicMode @noWarningIfUnused () {
+  public func `panic `init waitOneMillisecondInPanicMode @noWarningIfUnused () {
     while not SYST_CSR.COUNTFLAG.bool do
     end
   }
@@ -73,15 +73,8 @@ module time {
   //············································································
   
   public func `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
-//    var delay = inDelay
-//    while delay > 0 do
-//      while not SYST_CSR.COUNTFLAG.bool do
-//      end
-//      delay -= 1
-//    end
     for delay $uint32 in 0 ..< inDelay do
-      while not SYST_CSR.COUNTFLAG.bool do
-      end
+      self.waitOneMillisecondInPanicMode ()
     end
   }
   
@@ -90,7 +83,7 @@ module time {
   isr systick @xtr {
     let now = self.mUptimeMS +% 1
     self.mUptimeMS = now
-    makeTasksReadyFromCurrentDate (!currentDate:now)
+    makeTasksReadyFrom (!currentDate:now)
     tickHandlerForGuardedWaitUntil (!currentDate:now)
     userTickHandler ()
   }
@@ -123,3 +116,4 @@ module time {
 }
  
 //——————————————————————————————————————————————————————————————————————————————
+

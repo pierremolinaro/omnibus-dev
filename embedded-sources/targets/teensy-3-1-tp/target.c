@@ -311,10 +311,10 @@ unsigned char makeTaskReady (TaskList * ioWaitingList) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate)
-asm ("!FUNC!.makeTasksReadyFromCurrentDate") ;
+void makeTasksReadyFrom (const unsigned inCurrentDate)
+asm ("!FUNC!.makeTasksReadyFrom") ;
 
-void makeTasksReadyFromCurrentDate (const unsigned inCurrentDate) {
+void makeTasksReadyFrom (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
   while (w > 0) {
     const unsigned taskIndex = countTrainingZeros (w) ;
