@@ -1,105 +1,74 @@
 target "teensy-3-1-tp"
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
 
 section emptySection () {
 }
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
 
 service emptyService () {
 }
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
 
 section getSysTick () -> $uint32 {
   result = SYST_CVR
 }
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
+
+let ITERATIONS = 7
+
+//——————————————————————————————————————————————————————————————————————————————
 
 task T priority 0 stackSize 512 {
 
+  //············································································
+
   init 1 {
+    var cumul $uint32 = 0
   //--- Compute getSysTick duration
-    time.waitDuringMS (!delay:1)
-    var t0 = getSysTick ()
-    var t1 = getSysTick ()
-    let systickDuration = t0 - t1
-    lcd.printUnsigned (!systickDuration)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!t0 - t1)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!t0 - t1)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!t0 - t1)
+    for x $uint32 in 0 ..< ITERATIONS do
+      time.waitDuringMS (!delay:1)
+      let t0 = getSysTick ()
+      let t1 = getSysTick ()
+      cumul += t0 - t1
+      lcd.printUnsigned (!t0 - t1)
+      lcd.printSpaces (!1)
+    end
+    let systickDuration = cumul / ITERATIONS
   //--- Compute emptySection duration
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    emptySection ()
-    t1 = getSysTick ()
     lcd.goto (!line:1 !column:0)
-    lcd.printUnsigned (!(t0 - t1) - systickDuration)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    emptySection ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!(t0 - t1) - systickDuration)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    emptySection ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!(t0 - t1) - systickDuration)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    emptySection ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!(t0 - t1) - systickDuration)
+    for y $uint32 in 0 ..< ITERATIONS do
+      time.waitDuringMS (!delay:1)
+      let t0 = getSysTick ()
+      emptySection ()
+      let t1 = getSysTick ()
+      lcd.printUnsigned (!t0 - t1 - systickDuration)
+      lcd.printSpaces (!1)
+    end
   //--- Compute emptyService duration
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    emptyService ()
-    t1 = getSysTick ()
     lcd.goto (!line:2 !column:0)
-    lcd.printUnsigned (!(t0 - t1) - systickDuration)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    emptyService ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!(t0 - t1) - systickDuration)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    emptyService ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!(t0 - t1) - systickDuration)
-    time.waitDuringMS (!delay:1)
-    t0 = getSysTick ()
-    emptyService ()
-    t1 = getSysTick ()
-    lcd.printSpaces (!1)
-    lcd.printUnsigned (!(t0 - t1) - systickDuration)
+    for z $uint32 in 0 ..< 4 do
+      time.waitDuringMS (!delay:1)
+      let t0 = getSysTick ()
+      emptyService ()
+      let t1 = getSysTick ()
+      lcd.printUnsigned (!t0 - t1 - systickDuration)
+      lcd.printSpaces (!1)
+   end
   }
   
+  //············································································
+
   func loop () {
     time.waitDuringMS (!delay:250)
-    leds.on (!LED_L1) // Allumer la led
-    time.waitDuringMS (!delay:250)
-    leds.off (!LED_L1)  // Éteindre la led
+    leds.toggle (!LED_L1) // Allumer la led
   }
+
+  //············································································
+
 }
 
-//------------------------------------------------*
+//——————————————————————————————————————————————————————————————————————————————
