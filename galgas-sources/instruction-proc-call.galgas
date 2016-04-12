@@ -273,25 +273,6 @@ override method @selfRoutineCallInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:effectiveParameterListIR
   )
-#  analyzeRoutineCall (
-#    !self:inSelfType
-#    !receiverName:.new{![inSelfType key] !mRoutineName.location}
-#    !routineName:mRoutineName
-#    !effective:mEffectiveParameterList
-#    !callerForInvocationGraph:inCallerNameForInvocationGraph
-#    !context:inContext
-#    !requiredModeSet:inRequiredModeSet
-#    !allowPanic:inAllowPanic
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-#    ?routineKind:let @routineKindIR routineKindIR
-#    ?routineMangledName:let @lstring routineMangledName
-#    ?returnType:let @unifiedTypeMap-proxy returnedType
-#  )
   if returnedType != .null then
     error mRoutineName : "cannot be called in instruction: return value"
   end
@@ -641,7 +622,6 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-#        !effective_mSelector.string
         !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!varLLVMName)}}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
@@ -671,6 +651,7 @@ proc analyzeEffectiveParameters
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
+        !inGuard:false
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:formal_mType
         !context:inContext

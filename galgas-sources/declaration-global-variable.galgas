@@ -209,6 +209,7 @@ method @globalVarDeclarationList-element enterInContext
   @variableMap variableMap = variableMapWithConstants (!context:ioContext)
   [mSourceExpression analyzeExpression
      !self:.null
+     !inGuard:false
      !routineNameForInvocationGraph:["compiler" nowhere]
      !optionalTargetType:variableAnnotationType
      !context:ioContext

@@ -91,6 +91,7 @@ override method @varAssignmentInstructionAST analyze
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
+    !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
@@ -176,6 +177,7 @@ override method @selfVarAssignmentInstructionAST analyze
     #--- Analyze source expression
       [mSourceExpression analyzeExpression
         !self:inSelfType
+        !inGuard:false
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:targetType
         !context:inContext

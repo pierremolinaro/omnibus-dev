@@ -115,6 +115,7 @@ override method @globalConstantDeclaration enterInContext
   @allocaList allocaList = {}
   [mSourceExpression analyzeExpression
     !self:.null
+    !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:annotationType
     !context:ioContext

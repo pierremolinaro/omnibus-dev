@@ -101,6 +101,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   #--- Analyze expressions
     [mLowerBoundExpression analyzeExpression
       !self:inSelfType
+      !inGuard:false
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null
       !context:inContext
@@ -115,6 +116,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     ]
     [mUpperBoundExpression analyzeExpression
       !self:inSelfType
+      !inGuard:false
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null
       !context:inContext

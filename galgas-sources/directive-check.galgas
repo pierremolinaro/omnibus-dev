@@ -57,6 +57,7 @@ override method @checkInstructionAST analyze
   @instructionListIR instructionGenerationList = {}
   [mExpression analyzeExpression
     !self:inSelfType
+    !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext

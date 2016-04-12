@@ -111,6 +111,7 @@ override method @controlRegisterFieldInExpressionAST noteExpressionTypesInPreced
 
 override method @varInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
@@ -139,6 +140,14 @@ override method @varInExpressionAST analyzeExpression
   if not copyable then
     error mSourceVarName : "an $" + [variableType key] + " instance is not copyable"
   end
+  if inGuard then
+    switch variableKind
+    case register (***) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
+    case globalVariable (***) : error mSourceVarName : "a global variable cannot be read in guard boolean expression"
+    case localValue (**) :
+    case globalConstant (**) :
+    end
+  end
 #--- Load variable
   [variableKind loadFromMemory
     !?temporary:ioTemporaries
@@ -157,6 +166,7 @@ override method @varInExpressionAST analyzeExpression
 
 override method @selfVarInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext unused inContext
@@ -212,6 +222,7 @@ override method @selfVarInExpressionAST analyzeExpression
 
 override method @controlRegisterFieldInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
@@ -236,6 +247,14 @@ override method @controlRegisterFieldInExpressionAST analyzeExpression
   ]
   if not accessIsAllowed then
     error mRegisterVarName : "routine has no access right on this variable"
+  end
+  if inGuard then
+    switch variableKind
+    case register (***) : error mRegisterVarName : "a control register cannot be read in guard boolean expression"
+    case globalVariable (***) : error mRegisterVarName : "a global variable cannot be read in guard boolean expression"
+    case localValue (**) :
+    case globalConstant (**) :
+    end
   end
 #--- Load variable
   [variableKind loadFromMemory

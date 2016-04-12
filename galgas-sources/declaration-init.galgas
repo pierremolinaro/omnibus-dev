@@ -151,11 +151,6 @@ proc initSemanticAnalysis
       !routineNameForInvocationGraph
     ]
   end
-#--- Check "requiredBy" routines are defined
-#  for (typeName funcName) in inRequiredByProcList do
-#    let lkey = @lstring.new {!"$" + typeName + "." + funcName !funcName.location}
-#    [inContext.mRoutineMapForContext searchKey !lkey ?6*]
-#  end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string

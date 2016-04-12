@@ -217,6 +217,7 @@ method @taskVarListAST-element enterInContext
   @variableMap variableMap = variableMapWithConstants (!context:ioContext)
   [mVarInitExpression analyzeExpression
     !self:.null
+    !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:variableAnnotationType
     !context:ioContext

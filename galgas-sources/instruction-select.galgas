@@ -184,6 +184,7 @@ override method @onInstructionAST analyze
       @instructionListIR guardInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
+        !inGuard:true
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:.null
         !context:inContext
@@ -209,6 +210,7 @@ override method @onInstructionAST analyze
       @instructionListIR boolExpInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
+        !inGuard:true
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:.null
         !context:inContext
