@@ -58,6 +58,7 @@ override method @throwInstructionAST analyze
   @instructionListIR unusedInstructionListIR = {}
   [mCodeExpression analyzeExpression
     !self:inSelfType
+    !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inContext.mPanicCodeType
     !context:inContext

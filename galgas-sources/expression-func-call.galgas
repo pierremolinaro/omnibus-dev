@@ -103,6 +103,7 @@ override method @abstractFunctionCallInExpressionAST noteExpressionTypesInPreced
 
 override method @functionCallInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -115,6 +116,9 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
+  if inGuard then
+    error mFunctionName : "a function cannot be called in guard expression"
+  end
   analyzeRoutineCall (
     !self:inSelfType
     !receiverName:mReceiverName
@@ -152,6 +156,7 @@ override method @functionCallInExpressionAST analyzeExpression
 
 override method @selfFunctionCallInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -164,6 +169,9 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
+  if inGuard then
+    error mFunctionName : "a function cannot be called in guard expression"
+  end
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   let routineMangledName = @lstring.new {!"$" + [inSelfType key] + "." + mFunctionName !mFunctionName.location}
   effectiveParameterListIR += !.outputInput !.new {!inSelfType !.selfObject}
@@ -213,25 +221,6 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:effectiveParameterListIR
   )
-#  analyzeRoutineCall (
-#    !self:inSelfType
-#    !receiverName:mReceiverName
-#    !routineName:mFunctionName
-#    !effective:mEffectiveParameterList
-#    !callerForInvocationGraph:inCallerNameForInvocationGraph
-#    !context:inContext
-#    !requiredModeSet:inRequiredModeSet
-#    !allowPanic:inAllowPanic
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-#    ?routineKind:let @routineKindIR routineKind
-#    ?routineMangledName:let @lstring functionMangledName
-#    ?returnType:let @unifiedTypeMap-proxy returnedType
-#  )
   if returnedType == .null then
     error mFunctionName : "cannot be called in expression: no return value"
   end

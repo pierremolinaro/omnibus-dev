@@ -48,6 +48,7 @@ override method @literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGr
 
 override method @literalIntegerInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext

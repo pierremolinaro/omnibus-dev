@@ -65,6 +65,7 @@ override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanti
 
 override method @constructorCall analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -109,6 +110,7 @@ override method @constructorCall analyzeExpression
           end
           [effective_mExpression analyzeExpression
             !self:inSelfType
+            !inGuard:inGuard
             !routineNameForInvocationGraph:inCallerNameForInvocationGraph
             !optionalTargetType:formal_mType
             !context:inContext

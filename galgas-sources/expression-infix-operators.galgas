@@ -113,6 +113,7 @@ method @infixOperatorMap checkBinaryOperationWith
 
 override method @infixOperatorExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -128,6 +129,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpression
     !self:inSelfType
+    !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -143,6 +145,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
     !self:inSelfType
+    !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:leftOperand.mType
     !context:inContext
@@ -274,6 +277,7 @@ private func getInfixOperatorMap
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -290,6 +294,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   @instructionListIR leftInstructionGenerationList = {}
   [mLeftExpression analyzeExpression
     !self:inSelfType
+    !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -306,6 +311,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   @instructionListIR rightInstructionGenerationList = {}
   [mRightExpression analyzeExpression
     !self:inSelfType
+    !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:leftOperand.mType
     !context:inContext

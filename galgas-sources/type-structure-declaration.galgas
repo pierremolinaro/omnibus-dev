@@ -240,6 +240,7 @@ override method @structureDeclaration enterInContext
     case expression (initExpression) :
       [initExpression analyzeExpression
         !self:.null
+        !inGuard:false
         !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
         !optionalTargetType:fieldType
         !context:ioContext

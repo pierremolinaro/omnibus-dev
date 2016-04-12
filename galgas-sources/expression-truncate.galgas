@@ -64,6 +64,7 @@ override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@s
 
 override method @truncateExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -79,6 +80,7 @@ override method @truncateExpressionAST analyzeExpression
 #--- Analyze expression
   [mExpression analyzeExpression
     !self:inSelfType
+    !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
