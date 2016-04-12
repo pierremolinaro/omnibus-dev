@@ -172,6 +172,7 @@ proc guardSemanticAnalysis
   @procFormalArgumentListForGeneration formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
   @allocaList allocaList = {}
+  @instructionListIR instructionGenerationList = {}
   switch inGuardKind
   case baseGuard :
   #--- Add 'accepted" output variable
@@ -196,6 +197,19 @@ proc guardSemanticAnalysis
       !?formalArguments
     )
     convenienceGuardGenerationIR = .baseGuard
+  #--- Analyze instruction list
+    [inRoutineInstructionList analyzeRoutineInstructionList
+      !self:inSelfType
+      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !context:inContext
+      !modes:{!serviceModeName ()}
+      !allowPanic:true
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?variableMap:variableMap
+      !?alloca:allocaList
+      !?generatedCode:instructionGenerationList
+    ]
   case convenienceGuard (baseGuardInstruction):
   #--- Analyse formal arguments
     enterFormalArguments (
@@ -215,21 +229,20 @@ proc guardSemanticAnalysis
       !?variableMap:variableMap
       ?convenienceGuardGenerationIR
     ]
+  #--- Analyze instruction list
+    [inRoutineInstructionList analyzeRoutineInstructionList
+      !self:inSelfType
+      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !context:inContext
+      !modes:{!userModeName ()} # Convenience guards instructions are executed in user mode
+      !allowPanic:true
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?variableMap:variableMap
+      !?alloca:allocaList
+      !?generatedCode:instructionGenerationList
+    ]
   end 
-#--- Analyze instruction list
-  @instructionListIR instructionGenerationList = {}
-  [inRoutineInstructionList analyzeRoutineInstructionList
-    !self:inSelfType
-    !routineNameForInvocationGraph:routineNameForInvocationGraph
-    !context:inContext
-    !modes:{!serviceModeName ()}
-    !allowPanic:true
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
-    !?alloca:allocaList
-    !?generatedCode:instructionGenerationList
-  ]
 #---
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
 #--- Code generation
@@ -546,28 +559,32 @@ method @guardMapIR guardCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   for guard in self do
-    let guardImplementationName = llvmNameForGuardImplementation (!guard.lkey.string)
-    let guardCallName = llvmNameForGuardCall (!guard.lkey.string)
-    ioServiceList += !guardCallName !guardImplementationName
-    ioLLVMcode += llvmTitleComment (!guardImplementationName)
-    ioLLVMcode += "declare i1 @" + guardCallName + " ("
-    let typeName = [guard.lkey.string stringByDeletingPathExtension]
-    var first = typeName == ""
-    if not first then
-      ioLLVMcode += "%" + typeName + "* %self"  
-    end
-    for () in guard.mFormalArgumentListForGeneration do
-      if first then first = false else ioLLVMcode += ", " end
-      switch mFormalArgumentKind
-      case input :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
-      case output :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
-     case inputOutput :
-        ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+    switch guard.mGuardKindGenerationIR
+    case convenienceGuard (* * * *) :
+    case baseGuard :
+      let guardImplementationName = llvmNameForGuardImplementation (!guard.lkey.string)
+      let guardCallName = llvmNameForGuardCall (!guard.lkey.string)
+      ioServiceList += !guardCallName !guardImplementationName
+      ioLLVMcode += llvmTitleComment (!guardImplementationName)
+      ioLLVMcode += "declare i1 @" + guardCallName + " ("
+      let typeName = [guard.lkey.string stringByDeletingPathExtension]
+      var first = typeName == ""
+      if not first then
+        ioLLVMcode += "%" + typeName + "* %self"  
       end
+      for () in guard.mFormalArgumentListForGeneration do
+        if first then first = false else ioLLVMcode += ", " end
+        switch mFormalArgumentKind
+        case input :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+        case output :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+       case inputOutput :
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+        end
+      end
+      ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
     end
-    ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
     [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   end
 }
@@ -579,9 +596,15 @@ method @guardMapIR-element llvmCodeGeneration
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let guardImplementationName = llvmNameForGuardImplementation (!lkey.string)
-  ioLLVMcode += llvmTitleComment (!guardImplementationName)
-  ioLLVMcode += "define i1 @" + guardImplementationName + " ("
+  @string guardRoutineName
+  switch mGuardKindGenerationIR
+  case convenienceGuard (* * * *) :
+    guardRoutineName = llvmNameForGuardCall (!lkey.string)
+  case baseGuard :
+    guardRoutineName = llvmNameForGuardImplementation (!lkey.string)
+  end
+  ioLLVMcode += llvmTitleComment (!guardRoutineName)
+  ioLLVMcode += "define i1 @" + guardRoutineName + " ("
   let receiverTypeName = [lkey.string stringByDeletingPathExtension]
   var first = true
   if receiverTypeName != "" then
@@ -629,7 +652,6 @@ method @guardMapIR-element llvmCodeGeneration
 #--- Base guard or convenience guard ?
   switch mGuardKindGenerationIR
   case baseGuard :
- #   ioLLVMcode += "  %" + accepted_llvmName + " = alloca i1\n"
     ioLLVMcode += "  store i1 false, i1* %" + accepted_llvmName + "\n"
     [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  %" + accepted_llvmName + ".loaded = load i1, i1* %" + accepted_llvmName + "\n"
@@ -645,7 +667,7 @@ method @guardMapIR-element llvmCodeGeneration
       ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
     end
     [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardImplementation (!baseGuardMangledName)
+    ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardCall (!baseGuardMangledName)
     ioLLVMcode += " ("
     for () in baseGuardEffectiveParameterList do
       switch mEffectiveParameterPassingMode
