@@ -250,6 +250,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   make.addGoal ("object-dump", [productHEX, checkStackResultFile], "Dump Object Code")
   #---------------------------------------------- Build
   #make.printRules ()
+  make.doNotShowProgressString ()
   make.runGoal (maxParallelJobs, maxParallelJobs == 1)
   #---------------------------------------------- Build Ok ?
   make.printErrorCountAndExitOnError ()
