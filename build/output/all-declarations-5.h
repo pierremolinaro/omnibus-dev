@@ -1806,8 +1806,7 @@ void routine_getLocalNameOfNewTempObjectInMemory (const class GALGAS_unifiedType
 void extensionSetter_appendGetElementPtrFromSelf (class GALGAS_instructionListIR & ioObject,
                                                   const class GALGAS_objectInMemoryIR constin_inTarget,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                                  const class GALGAS_uint constin_inFieldIndex,
-                                                  const class GALGAS_string constin_inFieldName,
+                                                  const class GALGAS_elementPtrList constin_inElementList,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 

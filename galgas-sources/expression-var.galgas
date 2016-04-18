@@ -206,8 +206,7 @@ override method @selfVarInExpressionAST analyzeExpression
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf
         !fieldAddress
         !inSelfType
-        !idx
-        !mSourceVarName.string
+        !{!idx !mSourceVarName.string}
       ]        
       [fieldAddress loadFromMemory
         !?temporary:ioTemporaries

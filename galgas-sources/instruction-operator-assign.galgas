@@ -385,8 +385,7 @@ override method @selfVarOperatorAssignInstructionAST analyze
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf
         !fieldAddress
         !inSelfType
-        !idx
-        !mTargetVarName.string
+        !{!idx !mTargetVarName.string}
       ]        
       [fieldAddress loadFromMemory
         !?temporary:ioTemporaries

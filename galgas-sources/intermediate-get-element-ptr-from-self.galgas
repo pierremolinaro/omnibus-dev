@@ -1,11 +1,17 @@
 
+list @elementPtrList {
+  @uint mIndex
+  @string mFieldName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 setter @instructionListIR appendGetElementPtrFromSelf
   ?let @objectInMemoryIR inTarget
   ?let @unifiedTypeMap-proxy inSelfType
-  ?let @uint inFieldIndex
-  ?let @string inFieldName
+  ?let @elementPtrList inElementList
 {
-  self += !@getElementPtrFromSelfIR.new {!inTarget !inSelfType !inFieldIndex !inFieldName}
+  self += !@getElementPtrFromSelfIR.new {!inTarget !inSelfType !inElementList}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -13,8 +19,7 @@ setter @instructionListIR appendGetElementPtrFromSelf
 class @getElementPtrFromSelfIR : @abstractInstructionIR {
   @objectInMemoryIR mTarget
   @unifiedTypeMap-proxy mSelfType
-  @uint mFieldIndex
-  @string mFieldName
+  @elementPtrList mElementList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -26,7 +31,15 @@ override method @getElementPtrFromSelfIR llvmInstructionCode
 {
   let llvmType = [mSelfType llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + "* %self, i32 0, i32 " + mFieldIndex + " ; " + mFieldName + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + "* %self, i32 0"
+  for (idx *) in mElementList do
+    ioLLVMcode += ", i32 " + idx
+  end
+  ioLLVMcode += " ;"
+  for (* fieldName) in mElementList do
+    ioLLVMcode += " " + fieldName
+  end
+  ioLLVMcode += "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

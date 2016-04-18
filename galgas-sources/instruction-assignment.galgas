@@ -171,8 +171,7 @@ override method @selfVarAssignmentInstructionAST analyze
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf
         !fieldPtr
         !inSelfType
-        !idx
-        !mTargetVarName.string
+        !{!idx !mTargetVarName.string}
       ]
     #--- Analyze source expression
       [mSourceExpression analyzeExpression
