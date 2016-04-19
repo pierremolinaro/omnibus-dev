@@ -31,23 +31,10 @@ class @standaloneRoutineCallInstructionAST : @abstractCallInstructionAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @selfRoutineCallInstructionAST : @abstractCallInstructionAST {
-#  @lstring mRoutineName
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 class @remoteRoutineCallInstructionAST : @abstractCallInstructionAST {
   @lstring mReceiverName
   @lstring mRoutineName
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#class @selfRemoteRoutineCallInstructionAST : @abstractCallInstructionAST {
-#  @lstring mPropertyName
-#  @lstring mMethodName
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -91,19 +78,6 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-#  rule <routine_call> !@abstractCallInstructionAST outInstruction {
-#    $self$
-#    $.$
-#    $identifier$ ?let routineName
-#    <effective_parameters> ?let effectiveParameterList
-#    outInstruction = @selfRoutineCallInstructionAST.new {
-#      !effectiveParameterList
-#      !routineName
-#    }
-#  }
-
-  #·····················································································································
-
   rule <routine_call> !@abstractCallInstructionAST outInstruction {
     $identifier$ ?let receiverName
     $.$
@@ -115,22 +89,6 @@ syntax extension common_syntax {
       !routineName
     }
   }
-
-  #·····················································································································
-
-#  rule <routine_call> !@abstractCallInstructionAST outInstruction {
-#    $self$
-#    $.$
-#    $identifier$ ?let receiverName
-#    $.$
-#    $identifier$ ?let routineName
-#    <effective_parameters> ?let effectiveParameterList
-#    outInstruction = @selfRemoteRoutineCallInstructionAST.new {
-#      !effectiveParameterList
-#      !receiverName
-#      !routineName
-#    }
-#  }
 
   #·····················································································································
 
@@ -350,81 +308,6 @@ override method @unifiedSelfCallInstructionAST analyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @selfRoutineCallInstructionAST analyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?modes:let @stringset inRequiredModeSet
-#  ?allowPanic:let @bool inAllowPanic
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@variableMap ioVariableMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#{
-#  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#  let routineMangledName = @lstring.new {!"$" + [inSelfType key] + "." + mRoutineName !mRoutineName.location}
-#  effectiveParameterListIR += !.outputInput !.new {!inSelfType !.selfObject}
-#  [inContext.mRoutineMapForContext searchKey
-#    !routineMangledName
-#    ?let unused mutating
-#    ?let modeMap
-#    ?let @procedureSignature formalSignature
-#    ?let @routineKind routineKind
-#    ?*
-#    ?let returnedType
-#  ]
-##--- Enter in invocation graph
-#  @lstring routineNameForInvocationGraph
-#  switch routineKind
-#  case function :
-#    routineNameForInvocationGraph = procNameForInvocationGraph (!inSelfType !mRoutineName)
-#  case section :
-#    routineNameForInvocationGraph = sectionNameForInvocationGraph (!inSelfType !mRoutineName)
-#  case service :
-#    routineNameForInvocationGraph = serviceNameForInvocationGraph (!inSelfType !mRoutineName)
-#  case primitive :
-#    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!inSelfType !mRoutineName)
-#  end
-#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
-##--- Check modes
-#  let routineKindIR = checkMode (
-#    !requiredModes:inRequiredModeSet
-#    !possibleModes:[modeMap keySet]
-#    !kind:routineKind
-#    !error:mRoutineName.location
-#  )
-##--- Analyze effective parameters
-#  analyzeEffectiveParameters (
-#    !self:inSelfType
-#    !formal:formalSignature
-#    !effective:mEffectiveParameterList
-#    !errorLocation:mRoutineName.location
-#    !callerForInvocationGraph:inCallerNameForInvocationGraph
-#    !context:inContext
-#    !requiredModeSet:inRequiredModeSet
-#    !allowPanic:inAllowPanic
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    !?effectiveIR:effectiveParameterListIR
-#  )
-#  if returnedType != .null then
-#    error mRoutineName : "cannot be called in instruction: return value"
-#  end
-##--- Code generation
-#  ioInstructionGenerationList += !@procCallInstructionIR.new {
-#    !"" # Receiver is self
-#    !routineMangledName.string
-#    !routineKindIR
-#    !effectiveParameterListIR
-#  }
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @standaloneRoutineCallInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -512,109 +395,6 @@ override method @remoteRoutineCallInstructionAST analyze
     !effectiveParameterListIR
   }
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#override method @selfRemoteRoutineCallInstructionAST analyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?modes:let @stringset inRequiredModeSet
-#  ?allowPanic:let @bool inAllowPanic
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@variableMap ioVariableMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#{
-#  if inSelfType == .null then
-#    error mPropertyName : "'self' is not available in this context"
-#  else
-#    switch [inSelfType kind]
-#    case opaque (*) :
-#      error mPropertyName : "an opaque type does not handle field access" : ioInstructionGenerationList
-#    case boolean :
-#      error mPropertyName : "a boolean does not handle field access" : ioInstructionGenerationList
-#    case staticInteger :
-#      error mPropertyName : "an integer does not handle field access" : ioInstructionGenerationList
-#    case boolset :
-#      error mPropertyName : "a boolset does not handle field access" : ioInstructionGenerationList
-#    case literalString :
-#      error mPropertyName : "a literal string does not handle field access" : ioInstructionGenerationList
-#    case enumeration (*) :
-#      error mPropertyName : "an enumeration does not handle field access" : ioInstructionGenerationList
-#    case integer (* * * *) :
-#      error mPropertyName : "an integer does not handle field access" : ioInstructionGenerationList
-#    case structure (@propertyMap propertyMap *) :
-#      [propertyMap searchKey !mPropertyName ?let propertyType ?let idx]
-#      getLocalNameOfNewTempObjectInMemory (!propertyType !?ioTemporaries ?let propertyAddressLLVMvar)
-#      [!?ioInstructionGenerationList appendGetElementPtrFromSelf
-#        !propertyAddressLLVMvar
-#        !inSelfType
-#        !{!idx !mPropertyName.string}
-#      ]        
-#      let routineMangledName = @lstring.new {!"$" + [propertyType key] + "." + mMethodName !mMethodName.location}
-#      @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#      effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
-#      [inContext.mRoutineMapForContext searchKey
-#        !routineMangledName
-#        ?let unused mutating
-#        ?let modeMap
-#        ?let @procedureSignature formalSignature
-#        ?let routineKind
-#        ?*
-#        ?let returnedType
-#      ]
-#    #--- Enter in invocation graph
-#      @lstring routineNameForInvocationGraph
-#      switch routineKind
-#      case function :
-#        routineNameForInvocationGraph = procNameForInvocationGraph (!propertyType !mMethodName)
-#      case section :
-#        routineNameForInvocationGraph = sectionNameForInvocationGraph (!propertyType !mMethodName)
-#      case service :
-#        routineNameForInvocationGraph = serviceNameForInvocationGraph (!propertyType !mMethodName)
-#      case primitive :
-#        routineNameForInvocationGraph = primitiveNameForInvocationGraph (!propertyType !mMethodName)
-#      end
-#      [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
-#    #--- Check modes
-#      let routineKindIR = checkMode (
-#        !requiredModes:inRequiredModeSet
-#        !possibleModes:[modeMap keySet]
-#        !kind:routineKind
-#        !error:mMethodName.location
-#      )
-#    #--- Analyze effective parameters
-#      analyzeEffectiveParameters (
-#        !self:inSelfType
-#        !formal:formalSignature
-#        !effective:mEffectiveParameterList
-#        !errorLocation:mMethodName.location
-#        !callerForInvocationGraph:inCallerNameForInvocationGraph
-#        !context:inContext
-#        !requiredModeSet:inRequiredModeSet
-#        !allowPanic:inAllowPanic
-#        !?temporary:ioTemporaries
-#        !?staticStringMap:ioGlobalLiteralStringMap
-#        !?variableMap:ioVariableMap
-#        !?alloca:ioAllocaList
-#        !?instructionListIR:ioInstructionGenerationList
-#        !?effectiveIR:effectiveParameterListIR
-#      )
-#      if returnedType != .null then
-#        error mMethodName : "cannot be called in instruction: return value"
-#      end
-#    #--- Code generation
-#      ioInstructionGenerationList += !@procCallInstructionIR.new {
-#        !""
-#        !routineMangledName.string
-#        !routineKindIR
-#        !effectiveParameterListIR
-#      }
-#    end    
-#  end
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
