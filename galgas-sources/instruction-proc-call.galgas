@@ -32,8 +32,7 @@ class @standaloneRoutineCallInstructionAST : @abstractCallInstructionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @remoteRoutineCallInstructionAST : @abstractCallInstructionAST {
-  @lstring mReceiverName
-  @lstring mRoutineName
+  @lstringlist mPropertyList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -80,13 +79,17 @@ syntax extension common_syntax {
 
   rule <routine_call> !@abstractCallInstructionAST outInstruction {
     $identifier$ ?let receiverName
-    $.$
-    $identifier$ ?let routineName
+    @lstringlist propertyList = {!receiverName}
+    repeat
+      $.$
+      $identifier$ ?let propertyName
+      propertyList += !propertyName
+    while
+    end
     <effective_parameters> ?let effectiveParameterList
     outInstruction = @remoteRoutineCallInstructionAST.new {
       !effectiveParameterList
-      !receiverName
-      !routineName
+      !propertyList
     }
   }
 
@@ -365,10 +368,14 @@ override method @remoteRoutineCallInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+  @lstringlist propertyList = mPropertyList
+  [!?propertyList popFirst ?let receiverName]
+  [!?propertyList popLast ?let routineName]
+#---
   analyzeRoutineCall (
     !self:inSelfType
-    !receiverName:mReceiverName
-    !routineName:mRoutineName
+    !receiverName:receiverName
+    !routineName:routineName
     !effective:mEffectiveParameterList
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
@@ -385,11 +392,11 @@ override method @remoteRoutineCallInstructionAST analyze
     ?returnType:let @unifiedTypeMap-proxy returnedType
   )
   if returnedType != .null then
-    error mRoutineName : "cannot be called in instruction: return value"
+    error routineName : "cannot be called in instruction: return value"
   end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
-    !mReceiverName.string
+    !receiverName.string
     !routineMangledName.string
     !routineKindIR
     !effectiveParameterListIR
