@@ -378,6 +378,9 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
         [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
         elementPtrList += !idx !propertyName.string
         currentType = propertyType
+        if needsPublic && not public then
+          error propertyName : "this property is not public" : currentType
+        end
         needsPublic = true
       end
     end
@@ -462,7 +465,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
   [inContext.mGuardMapForContext searchKey
     !routineMangledName
-    ?let isPublic
+    ?let unused isPublic
     ?let @procedureSignature formalSignature
   ]
 #--- Enter in invocation graph

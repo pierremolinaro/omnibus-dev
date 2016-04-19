@@ -198,7 +198,7 @@ override method @selfVarInExpressionAST analyzeExpression
     case integer (* * * *) :
       error mSourceVarName : "an integer does not handle field access" : outResult
     case structure (@propertyMap propertyMap *) :
-      [propertyMap searchKey !mSourceVarName ?let public ?let type ?let idx]
+      [propertyMap searchKey !mSourceVarName ?let unused public ?let type ?let idx]
       if not [type copyable] then
         error mSourceVarName : "an $" + [type key] + " instance is not copyable"
       end

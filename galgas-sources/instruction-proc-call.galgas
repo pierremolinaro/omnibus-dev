@@ -240,8 +240,11 @@ override method @unifiedSelfCallInstructionAST analyze
         [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
         elementPtrList += !idx !propertyName.string
         currentType = propertyType
+        if needsPublic && not public then
+          error propertyName : "this property is not public"
+        end
+        needsPublic = true
       end
-      needsPublic = true
     end     
     let routineMangledName = @lstring.new {!"$" + [currentType key] + "." + methodName !methodName.location}
     getLocalNameOfNewTempObjectInMemory (!currentType !?ioTemporaries ?let propertyAddressLLVMvar)
@@ -658,7 +661,7 @@ proc analyzeEffectiveParameters
         case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case structure (@propertyMap propertyMap *) :
-          [propertyMap searchKey !name ?let public ?let type ?let idx]
+          [propertyMap searchKey !name ?let unused public ?let type ?let idx]
           getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
           [!?ioInstructionGenerationList appendGetElementPtrFromSelf
             !fieldAddress
