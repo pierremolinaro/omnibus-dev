@@ -1289,28 +1289,28 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "  public primitive inputUntil (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public primitive inputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    result = makeTaskReady (!\?list:self.outputWaitList)\n"
   "    if (not result) and (inDeadline > time.millis ()) then \n"
   "      blockInListAndOnDeadline (!\?list:self.inputWaitList !deadline:inDeadline)\n"
   "    end\n"
   "  }\n"
   "\n"
-  "  public primitive outputUntil (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public primitive outputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    result = makeTaskReady (!\?list:self.inputWaitList)\n"
   "    if (not result) and (inDeadline > time.millis ()) then \n"
   "      blockInListAndOnDeadline (!\?list:self.outputWaitList !deadline:inDeadline)\n"
   "    end\n"
   "  }\n"
   "\n"
-  "  guard input () {\n"
+  "  guard input @noWarningIfUnused () {\n"
   "    accept = makeTaskReady (!\?list:self.outputWaitList)\n"
   "    if not accept then\n"
   "      handleGuardedCommand (!\?guard:self.inputGuardList)\n"
   "    end\n"
   "  }\n"
   "\n"
-  "  guard output () {\n"
+  "  guard output @noWarningIfUnused () {\n"
   "    accept = makeTaskReady (!\?list:self.inputWaitList)\n"
   "    if not accept then\n"
   "      handleGuardedCommand (!\?guard:self.outputGuardList)\n"
@@ -1362,7 +1362,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-rendez-vous.plm",
   "plm",
   true, // Text file
-  2442, // Text length
+  2518, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 

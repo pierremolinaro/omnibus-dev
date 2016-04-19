@@ -24,12 +24,19 @@ syntax extension common_syntax {
     @structureFieldListAST fieldList = {}
     repeat
     while
+      @bool public
+      select
+        public = false
+      or
+        $public$
+        public = true
+      end
       $var$
       $identifier$ ?let fieldName
       $typeName$ ?let typeName
       $=$
       <expression> ?let initExpression
-      fieldList += !fieldName !typeName !.expression{!initExpression:initExpression}
+      fieldList += !fieldName !public !typeName !.expression{!initExpression:initExpression}
     while
       <procedure> !?procedureDeclarationListAST
     while

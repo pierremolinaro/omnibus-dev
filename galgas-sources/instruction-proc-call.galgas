@@ -237,7 +237,7 @@ override method @unifiedSelfCallInstructionAST analyze
       case integer (* * * *) :
         error propertyName : "an integer does not handle field access" : currentType
       case structure (@propertyMap propertyMap *) :
-        [propertyMap searchKey !propertyName ?let propertyType ?let idx]
+        [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
         elementPtrList += !idx !propertyName.string
         currentType = propertyType
       end
@@ -617,7 +617,6 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
       ioEffectiveParameterListIR += 
         !.output
-#        !effective_mSelector.string
         !result
     case outputInput (@lstring name) :
      [!?ioVariableMap searchForReadWriteAccess
@@ -659,7 +658,7 @@ proc analyzeEffectiveParameters
         case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case structure (@propertyMap propertyMap *) :
-          [propertyMap searchKey !name ?let type ?let idx]
+          [propertyMap searchKey !name ?let public ?let type ?let idx]
           getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
           [!?ioInstructionGenerationList appendGetElementPtrFromSelf
             !fieldAddress

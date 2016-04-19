@@ -34,7 +34,7 @@ syntax extension common_syntax {
       end
       $=$
       <expression> ?let initExpression
-      fieldList += !fieldName !typeName !.expression{!initExpression:initExpression}
+      fieldList += !fieldName !false !typeName !.expression{!initExpression:initExpression}
     while
       <procedure> !?procedureDeclarationListAST
     while
