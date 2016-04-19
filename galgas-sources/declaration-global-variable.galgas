@@ -305,7 +305,7 @@ method @globalVarDeclarationList-element enterInContext
     end
     [ioContext.mGuardMapForContext searchKey
       !guardMangledName
-      ?let isPublic
+      ?let unused isPublic
       ?*
     ]
     executionModes += !serviceModeName ()

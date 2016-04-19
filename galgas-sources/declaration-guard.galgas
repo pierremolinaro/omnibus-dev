@@ -299,6 +299,14 @@ override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
     ?let isPublic
     ?let @procedureSignature formalSignature
   ]
+#--- Check accessibility
+  if not isPublic then
+    let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !routineMangledName.string] file]
+    let invocationFile = [mRoutineName.location file]
+    if invocationFile != declarationFile then
+      error mRoutineName : "this guard is not public"
+    end
+  end  
 #--- Enter in invocation graph
   let routineNameForInvocationGraph = guardNameForInvocationGraph (!.null !mRoutineName)
    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
@@ -349,6 +357,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
     @lstringlist propertyList = mPropertyList
     [!?propertyList popLast ?let @lstring methodName]
     @elementPtrList elementPtrList = {}
+    @bool needsPublic = false
     for (propertyName) in propertyList do
       switch [currentType kind]
       case opaque (*) :
@@ -369,6 +378,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
         [propertyMap searchKey !propertyName ?let propertyType ?let idx]
         elementPtrList += !idx !propertyName.string
         currentType = propertyType
+        needsPublic = true
       end
     end
     getLocalNameOfNewTempObjectInMemory (!currentType !?ioTemporaries ?let propertyAddressLLVMvar)
@@ -386,6 +396,10 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
       ?let isPublic
       ?let @procedureSignature formalSignature
     ]
+  #--- Accessibility
+    if needsPublic && not isPublic then
+      error methodName : "this guard is not public"
+    end
   #--- Enter in invocation graph
     let routineNameForInvocationGraph = guardNameForInvocationGraph (!currentType !methodName)
      [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
@@ -431,7 +445,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   @lstringlist propertyList = mPropertyList
   [!?propertyList popFirst ?let receiverName]
   [!?propertyList popLast ?let routineName]
-#---
+#--- Read variable
   [!?ioVariableMap searchForReadAccess
     !lkey:receiverName
     ?type:let receiverType
@@ -439,6 +453,9 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
     ?variableKind:@objectInMemoryIR variableKind
     ?4*
   ]
+  for (propertyName) in propertyList do
+    error propertyName : "not handled yet (1)"
+  end
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   effectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load receiver" as first argument
   @instructionListIR baseGuardInstructionGenerationList = {}
