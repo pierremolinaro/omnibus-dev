@@ -29,30 +29,30 @@ Pour afficher la liste des fichiers d'exemple, entrez :
 \begin{SHELL}
 {\bfseries plm -l}\\
 Embedded sample code:\\ 
-\hspace*{1.2em}/teensy-3-1-it/01-blinkled.plm\\
+\hspace*{1.2em}/teensy-3-1-it/01-blink-led.plm\\
 \hspace*{1.2em}...
 \end{SHELL}
 
-Les exemples sont triés par cible, ainsi, pour la première ligne, la cible est \texttt{teensy-3-1-it}, et le fichier d'exemple \texttt{01-blinkled.plm}. Les noms des fichiers d'exemple commencent par des chiffres, simplement pour qu'ils apparaissent dans l'ordre souhaité. Vous pouvez nommer vos fichiers PLM comme vous le voulez.
+Les exemples sont triés par cible, ainsi, pour la première ligne, la cible est \texttt{teensy-3-1-it}, et le fichier d'exemple \texttt{01-blink-led.plm}. Les noms des fichiers d'exemple commencent par des chiffres, simplement pour qu'ils apparaissent dans l'ordre souhaité. Vous pouvez nommer vos fichiers PLM comme vous le voulez.
 
-Comme son nom le suggère, l'exemple \texttt{01-blinkled.plm} fait clignoter une led, celle embarquée sur la carte \emph{Teensy 3.1}.
+Comme son nom le suggère, l'exemple \texttt{01-blink-led.plm} fait clignoter une led, celle embarquée sur la carte \emph{Teensy 3.1}.
 
 \subsection{Extraction d'un fichier d'exemple}
 
-Pour extraire le fichier d'exemple \texttt{01-blinkled.plm}, exécuter :
+Pour extraire le fichier d'exemple \texttt{01-blink-led.plm}, exécuter :
 
 \begin{SHELL}
-\bfseries plm -x=/teensy-3-1-it/01-blinkled.plm
+\bfseries plm -x=/teensy-3-1-it/01-blink-led.plm
 \end{SHELL}
 
 
-Ceci écrit le fichier \texttt{01-blinkled.plm} dans le répertoire courant. Ce fichier est prêt à être compilé.
+Ceci écrit le fichier \texttt{01-blink-led.plm} dans le répertoire courant. Ce fichier est prêt à être compilé.
 
 \subsection{Compilation et flashage}
 
 Pour compiler et flasher la cible sur une carte \emph{Teensy 3.1}, entrer\footnote{Pour compiler sans flasher, ajouter l'option « \texttt{-f} » (\refSectionPage{optionCodeEngendre}) ; pour compiler avec des messages détaillés, ajouter l'option « \texttt{-v} » (\refSectionPage{optionsGenerales}). Les options peuvent apparaître sur la ligne de commande avant ou après le nom du fichier compilé.} :
 \begin{SHELL}
-{\bfseries plm 01-blinkled.plm}\\
+{\bfseries plm 01-blink-led.plm}\\
 Downloading compiler tool chain\\
 ..................................................................\\
 Product directory: \emph{voir ci-dessous}\\
@@ -78,34 +78,30 @@ Success
 
 Le programme d'exemple a été flashé (« \emph{Programming} »), puis le micro-contrôleur a été redémarré (« \emph{Booting} ») : la led de la carte clignote.
 
-\subsection{Texte source de \texttt{01-blinkled.plm}}
+\subsection{Texte source de \texttt{01-blink-led.plm}}
 
-Maintenant, nous allons examiner le code source PLM du fichier \texttt{01-blinkled.plm} :
+Maintenant, nous allons examiner le code source PLM du fichier \texttt{01-blink-led.plm} :
 
 \begin{PLM}[1]
-target "teensy-3-1-it"
+target "teensy-3-1-tp"
 
-proc setup `user () {
-  PORTC_PCR5 = PORTC_PCR5::mux (1)
-  GPIOC_PDDR |= (1 << 5)
-}
+task T1 priority 1 stackSize 512 {
+  var compteur $uint32 = 0
 
-var gDelai $uint32 = 0 {
-  @rw proc loop ()
-}
-
-proc loop `user () {
-  gDelai += 1
-  if gDelai == 1_500_000 then
-    GPIOC_PSOR = 1 << 5 // Allumer la led
-  elsif gDelai == 3_000_000 then
-    gDelai = 0
-    GPIOC_PCOR = 1 << 5 // Éteindre la led
-  end  
+  func loop () {
+    time.waitUntilMS (!deadline:self.compteur)
+    leds.on (!LED_L0)
+    self.compteur +%= 500
+    time.waitUntilMS (!deadline:self.compteur)
+    leds.off (!LED_L0)
+    self.compteur +%= 500
+    lcd.goto (!line:0 !column:0)
+    lcd.printUnsigned (!time.millis ())
+  }
 }
 \end{PLM}
 
-La première ligne \plm+target "teensy-3-1-it"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blinkled.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+setup+ et \plm+loop+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
+La première ligne \plm+target "teensy-3-1-it"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blink-led.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+setup+ et \plm+loop+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
 
 Comme pour l'Arduino, la routine \plm+setup+ est exécutée une seule fois, puis la routine \plm+setup+ est exécutée de manière répétitive. En PLM, à toute routine est associé un \emph{mode d'exécution}\index{Mode@Mode d'exécution}. Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\`} » : ici, \plm+`user+. Un \emph{mode d'exécution} permet au compilateur de vérifier la cohérence de l'appel d'une routine, par exemple qu'une routine d'interruption n'est pas appelée directement\footnote{Les \emph{modes d'exécution} font l'objet du \refChapterPage{chapitreModesExecution}.}. Ici, dans le cadre d'un exemple très simple, l'annotation de mode peut sembler superflue, car la sûreté qu'elle apporte n'est pas exploitée. 
 
