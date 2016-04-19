@@ -4442,20 +4442,28 @@ class GALGAS_guardMapForContext : public AC_GALGAS_map {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_procedureSignature & inOperand1,
+                                                      const class GALGAS_bool & inOperand1,
+                                                      const class GALGAS_procedureSignature & inOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_procedureSignature constinArgument1,
+                                                   class GALGAS_bool constinArgument1,
+                                                   class GALGAS_procedureSignature constinArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_procedureSignature & outArgument1,
+                                                   class GALGAS_bool & outArgument1,
+                                                   class GALGAS_procedureSignature & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIsPublicForKey (class GALGAS_bool constinArgument0,
+                                                            class GALGAS_string constinArgument1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMSignatureForKey (class GALGAS_procedureSignature constinArgument0,
                                                              class GALGAS_string constinArgument1,
@@ -4465,13 +4473,18 @@ class GALGAS_guardMapForContext : public AC_GALGAS_map {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_procedureSignature & outArgument1,
+                                                   class GALGAS_bool & outArgument1,
+                                                   class GALGAS_procedureSignature & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublicForKey (const class GALGAS_string & constinOperand0,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureSignature getter_mSignatureForKey (const class GALGAS_string & constinOperand0,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const ;
@@ -4502,6 +4515,7 @@ class cEnumerator_guardMapForContext : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mIsPublic (LOCATION_ARGS) const ;
   public : class GALGAS_procedureSignature current_mSignature (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_guardMapForContext_2D_element current (LOCATION_ARGS) const ;
@@ -4519,10 +4533,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapForContext 
 
 class cMapElement_guardMapForContext : public cMapElement {
 //--- Map attributes
+  public : GALGAS_bool mAttribute_mIsPublic ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
 
 //--- Constructor
   public : cMapElement_guardMapForContext (const GALGAS_lstring & inKey,
+                                           const GALGAS_bool & in_mIsPublic,
                                            const GALGAS_procedureSignature & in_mSignature
                                            COMMA_LOCATION_ARGS) ;
 
@@ -4548,6 +4564,7 @@ class cMapElement_guardMapForContext : public cMapElement {
 class GALGAS_guardMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_bool mAttribute_mIsPublic ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
 
 
@@ -4566,6 +4583,7 @@ class GALGAS_guardMapForContext_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_guardMapForContext_2D_element (const GALGAS_lstring & in_lkey,
+                                                 const GALGAS_bool & in_mIsPublic,
                                                  const GALGAS_procedureSignature & in_mSignature) ;
 
 //-- Start of generic part --*
@@ -4580,7 +4598,8 @@ class GALGAS_guardMapForContext_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_guardMapForContext_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                        const class GALGAS_procedureSignature & inOperand1
+                                                                        const class GALGAS_bool & inOperand1,
+                                                                        const class GALGAS_procedureSignature & inOperand2
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4596,6 +4615,8 @@ class GALGAS_guardMapForContext_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureSignature getter_mSignature (LOCATION_ARGS) const ;
 

@@ -184,6 +184,14 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
     ?*
     ?let returnedType
   ]
+#--- Check accessibility
+  if not isPublic then
+    let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !routineMangledName.string] file]
+    let invocationFile = [mFunctionName.location file]
+    if invocationFile != declarationFile then
+      error mFunctionName : "this function is not public"
+    end
+  end  
 #--- Enter in invocation graph
   @lstring routineNameForInvocationGraph
   switch routineKind

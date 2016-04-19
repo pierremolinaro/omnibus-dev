@@ -23,7 +23,7 @@ struct $monSemaphore {
     end
   }
 
-  guard P () {
+  public guard P () {
     accept = self.value > 0
     if accept then
       self.value -= 1
@@ -32,7 +32,7 @@ struct $monSemaphore {
     end
   }
   
-  guard PP () : self.P () {
+  public guard PP () : self.P () {
   }
 }
 

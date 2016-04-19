@@ -315,7 +315,23 @@ proc analyzeGuardCall
     outGuardMangledName = .new {!"." + inGuardName !inGuardName.location}
     receiverType = .null
   end
-  [inContext.mGuardMapForContext searchKey !outGuardMangledName ?let @procedureSignature formalSignature]
+  [inContext.mGuardMapForContext searchKey
+    !outGuardMangledName
+    ?let isPublic
+    ?let @procedureSignature formalSignature
+  ]
+#--- Check accessibility
+  if not isPublic then
+    if inReceiverName.string == "" then # Standalone function
+      let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !outGuardMangledName.string] file]
+      let invocationFile = [inGuardName.location file]
+      if invocationFile != declarationFile then
+        error inGuardName : "this guard is not public"
+      end
+    else
+      error inGuardName : "this guard is not public"
+    end  
+  end  
 #--- Enter in invocation graph
   let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !inGuardName)
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
