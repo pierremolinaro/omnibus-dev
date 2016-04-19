@@ -9695,29 +9695,35 @@ GALGAS_procedureSignature GALGAS_procedureSignature::extractObject (const GALGAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_guardMapForContext::cMapElement_guardMapForContext (const GALGAS_lstring & inKey,
+                                                                const GALGAS_bool & in_mIsPublic,
                                                                 const GALGAS_procedureSignature & in_mSignature
                                                                 COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
+mAttribute_mIsPublic (in_mIsPublic),
 mAttribute_mSignature (in_mSignature) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_guardMapForContext::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mSignature.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mSignature.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_guardMapForContext::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_guardMapForContext (mAttribute_lkey, mAttribute_mSignature COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_guardMapForContext (mAttribute_lkey, mAttribute_mIsPublic, mAttribute_mSignature COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_guardMapForContext::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIsPublic" ":" ;
+  mAttribute_mIsPublic.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mSignature" ":" ;
@@ -9729,6 +9735,9 @@ void cMapElement_guardMapForContext::description (C_String & ioString, const int
 typeComparisonResult cMapElement_guardMapForContext::compare (const cCollectionElement * inOperand) const {
   cMapElement_guardMapForContext * operand = (cMapElement_guardMapForContext *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mIsPublic.objectCompare (operand->mAttribute_mIsPublic) ;
+  }
   if (kOperandEqual == result) {
     result = mAttribute_mSignature.objectCompare (operand->mAttribute_mSignature) ;
   }
@@ -9783,11 +9792,12 @@ GALGAS_guardMapForContext GALGAS_guardMapForContext::getter_overriddenMap (C_Com
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
-                                                     const GALGAS_procedureSignature & inArgument0,
+                                                     const GALGAS_bool & inArgument0,
+                                                     const GALGAS_procedureSignature & inArgument1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   cMapElement_guardMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_guardMapForContext (inKey, inArgument0 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_guardMapForContext (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -9799,11 +9809,12 @@ void GALGAS_guardMapForContext::addAssign_operation (const GALGAS_lstring & inKe
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardMapForContext::setter_insertKey (GALGAS_lstring inKey,
-                                                  GALGAS_procedureSignature inArgument0,
+                                                  GALGAS_bool inArgument0,
+                                                  GALGAS_procedureSignature inArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
   cMapElement_guardMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_guardMapForContext (inKey, inArgument0 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_guardMapForContext (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -9819,7 +9830,8 @@ const char * kSearchErrorMessage_guardMapForContext_searchKey = "there is no '%K
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardMapForContext::method_searchKey (GALGAS_lstring inKey,
-                                                  GALGAS_procedureSignature & outArgument0,
+                                                  GALGAS_bool & outArgument0,
+                                                  GALGAS_procedureSignature & outArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) performSearch (inKey,
@@ -9828,16 +9840,19 @@ void GALGAS_guardMapForContext::method_searchKey (GALGAS_lstring inKey,
                                                                                                        COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
+    outArgument1.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_guardMapForContext) ;
-    outArgument0 = p->mAttribute_mSignature ;
+    outArgument0 = p->mAttribute_mIsPublic ;
+    outArgument1 = p->mAttribute_mSignature ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardMapForContext::setter_removeKey (GALGAS_lstring inKey,
-                                                  GALGAS_procedureSignature & outArgument0,
+                                                  GALGAS_bool & outArgument0,
+                                                  GALGAS_procedureSignature & outArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
   const char * kRemoveErrorMessage = "there is no '%K' guard" ;
@@ -9846,8 +9861,24 @@ void GALGAS_guardMapForContext::setter_removeKey (GALGAS_lstring inKey,
   cMapElement_guardMapForContext * p = (cMapElement_guardMapForContext *) attributes.ptr () ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_guardMapForContext) ;
-    outArgument0 = p->mAttribute_mSignature ;
+    outArgument0 = p->mAttribute_mIsPublic ;
+    outArgument1 = p->mAttribute_mSignature ;
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_guardMapForContext::getter_mIsPublicForKey (const GALGAS_string & inKey,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
+    result = p->mAttribute_mIsPublic ;
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9863,6 +9894,20 @@ GALGAS_procedureSignature GALGAS_guardMapForContext::getter_mSignatureForKey (co
     result = p->mAttribute_mSignature ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_guardMapForContext::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue,
+                                                           GALGAS_string inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_guardMapForContext * p = (cMapElement_guardMapForContext *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_guardMapForContext) ;
+    p->mAttribute_mIsPublic = inAttributeValue ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9902,7 +9947,7 @@ cGenericAbstractEnumerator () {
 GALGAS_guardMapForContext_2D_element cEnumerator_guardMapForContext::current (LOCATION_ARGS) const {
   const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_guardMapForContext) ;
-  return GALGAS_guardMapForContext_2D_element (p->mAttribute_lkey, p->mAttribute_mSignature) ;
+  return GALGAS_guardMapForContext_2D_element (p->mAttribute_lkey, p->mAttribute_mIsPublic, p->mAttribute_mSignature) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9911,6 +9956,14 @@ GALGAS_lstring cEnumerator_guardMapForContext::current_lkey (LOCATION_ARGS) cons
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_guardMapForContext::current_mIsPublic (LOCATION_ARGS) const {
+  const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_guardMapForContext) ;
+  return p->mAttribute_mIsPublic ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

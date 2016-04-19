@@ -219,6 +219,7 @@ override method @unifiedSelfCallInstructionAST analyze
     @lstringlist propertyList = mPropertyList
     [!?propertyList popLast ?let @lstring methodName]
     @elementPtrList elementPtrList = {}
+    var needsPublic = false
     for (propertyName) in propertyList do
       switch [currentType kind]
       case opaque (*) :
@@ -240,6 +241,7 @@ override method @unifiedSelfCallInstructionAST analyze
         elementPtrList += !idx !propertyName.string
         currentType = propertyType
       end
+      needsPublic = true
     end     
     let routineMangledName = @lstring.new {!"$" + [currentType key] + "." + methodName !methodName.location}
     getLocalNameOfNewTempObjectInMemory (!currentType !?ioTemporaries ?let propertyAddressLLVMvar)
@@ -259,6 +261,9 @@ override method @unifiedSelfCallInstructionAST analyze
       ?*
       ?let returnedType
     ]
+    if needsPublic && not isPublic then
+      error routineMangledName : "this routine is not public"
+    end
   #--- Enter in invocation graph
     @lstring routineNameForInvocationGraph
     switch routineKind

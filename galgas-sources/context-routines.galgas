@@ -31,6 +31,7 @@ map @routineMapForContext {
 
 # Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
 map @guardMapForContext {
+  @bool mIsPublic
   @procedureSignature mSignature
 
   insert insertKey error message "the '%K' guard is already declared in %L"

@@ -11,6 +11,7 @@ enum @guardKind {
 
 list @guardDeclarationListAST {
   @lstring mGuardName
+  @bool mIsPublic
   @lstringlist mGuardAttributeList
   @procFormalArgumentList mGuardFormalArgumentList
   @guardKind mGuardKind
@@ -27,6 +28,13 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <guard> ?!@guardDeclarationListAST ioGuardListAST {
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
     $guard$
     $identifier$ ?let guardName
     @lstringlist attributeList = {}
@@ -49,6 +57,7 @@ syntax extension common_syntax {
     $}$
     ioGuardListAST +=
       !guardName
+      !public
       !attributeList
       !guardFormalArgumentList
       !guardKind
@@ -96,6 +105,7 @@ method @guardDeclarationListAST enterInContext
   #--- Enter in context
     [!?ioContext.mGuardMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + guard.mGuardName !guard.mGuardName.location}
+      !guard.mIsPublic
       !signature
     ]
   end
@@ -286,6 +296,7 @@ override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
   let routineMangledName = @lstring.new {!"." + mRoutineName !mRoutineName.location}
   [inContext.mGuardMapForContext searchKey
     !routineMangledName
+    ?let isPublic
     ?let @procedureSignature formalSignature
   ]
 #--- Enter in invocation graph
@@ -372,6 +383,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
     effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
     [inContext.mGuardMapForContext searchKey
       !routineMangledName
+      ?let isPublic
       ?let @procedureSignature formalSignature
     ]
   #--- Enter in invocation graph
@@ -433,6 +445,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
   [inContext.mGuardMapForContext searchKey
     !routineMangledName
+    ?let isPublic
     ?let @procedureSignature formalSignature
   ]
 #--- Enter in invocation graph

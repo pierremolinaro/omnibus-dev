@@ -1089,7 +1089,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "  guard P () {\n"
+  "  public guard P () {\n"
   "    accept = self.value > 0\n"
   "    if accept then\n"
   "      self.value -= 1\n"
@@ -1098,7 +1098,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "  \n"
-  "  guard PP () : self.P () {\n"
+  "  public guard PP () : self.P () {\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1172,7 +1172,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2198, // Text length
+  2212, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
