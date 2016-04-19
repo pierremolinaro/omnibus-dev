@@ -416,8 +416,12 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   ?!variableMap:@variableMap ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
+  @lstringlist propertyList = mPropertyList
+  [!?propertyList popFirst ?let receiverName]
+  [!?propertyList popLast ?let routineName]
+#---
   [!?ioVariableMap searchForReadAccess
-    !lkey:mReceiverName
+    !lkey:receiverName
     ?type:let receiverType
     ?1*
     ?variableKind:@objectInMemoryIR variableKind
@@ -426,13 +430,13 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   effectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load receiver" as first argument
   @instructionListIR baseGuardInstructionGenerationList = {}
-  let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + mRoutineName !mRoutineName.location}
+  let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
   [inContext.mGuardMapForContext searchKey
     !routineMangledName
     ?let @procedureSignature formalSignature
   ]
 #--- Enter in invocation graph
-  let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !mRoutineName)
+  let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !routineName)
    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
 #--- Analyze effective parameters
   @allocaList baseGuardAllocaList = {}
@@ -440,7 +444,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
     !self:inSelfType
     !formal:formalSignature
     !effective:mEffectiveParameterList
-    !errorLocation:mRoutineName.location
+    !errorLocation:routineName.location
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredModeSet:{!serviceModeName ()}

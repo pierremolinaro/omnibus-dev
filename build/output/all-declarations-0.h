@@ -7903,6 +7903,8 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_73 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_common_5F_syntax_74 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -10715,8 +10717,7 @@ class GALGAS_remoteRoutineCallInstructionAST : public GALGAS_abstractCallInstruc
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_remoteRoutineCallInstructionAST constructor_new (const class GALGAS_effectiveParameterListAST & inOperand0,
-                                                                          const class GALGAS_lstring & inOperand1,
-                                                                          const class GALGAS_lstring & inOperand2
+                                                                          const class GALGAS_lstringlist & inOperand1
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -10728,9 +10729,7 @@ class GALGAS_remoteRoutineCallInstructionAST : public GALGAS_abstractCallInstruc
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRoutineName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mPropertyList (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -10751,21 +10750,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_remoteRoutineCallIn
 
 class cPtr_remoteRoutineCallInstructionAST : public cPtr_abstractCallInstructionAST {
 //--- Attributes
-  public : GALGAS_lstring mAttribute_mReceiverName ;
-  public : GALGAS_lstring mAttribute_mRoutineName ;
+  public : GALGAS_lstringlist mAttribute_mPropertyList ;
 
 //--- Constructor
   public : cPtr_remoteRoutineCallInstructionAST (const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList,
-                                                 const GALGAS_lstring & in_mReceiverName,
-                                                 const GALGAS_lstring & in_mRoutineName
+                                                 const GALGAS_lstringlist & in_mPropertyList
                                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRoutineName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mPropertyList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

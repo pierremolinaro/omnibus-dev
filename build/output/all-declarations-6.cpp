@@ -13987,10 +13987,7 @@ typeComparisonResult cPtr_remoteRoutineCallInstructionAST::dynamicObjectCompare 
     result = mAttribute_mEffectiveParameterList.objectCompare (p->mAttribute_mEffectiveParameterList) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mReceiverName.objectCompare (p->mAttribute_mReceiverName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mRoutineName.objectCompare (p->mAttribute_mRoutineName) ;
+    result = mAttribute_mPropertyList.objectCompare (p->mAttribute_mPropertyList) ;
   }
   return result ;
 }
@@ -14024,8 +14021,7 @@ GALGAS_abstractCallInstructionAST () {
 
 GALGAS_remoteRoutineCallInstructionAST GALGAS_remoteRoutineCallInstructionAST::constructor_default (LOCATION_ARGS) {
   return GALGAS_remoteRoutineCallInstructionAST::constructor_new (GALGAS_effectiveParameterListAST::constructor_emptyList (HERE),
-                                                                  GALGAS_lstring::constructor_default (HERE),
-                                                                  GALGAS_lstring::constructor_default (HERE)
+                                                                  GALGAS_lstringlist::constructor_emptyList (HERE)
                                                                   COMMA_THERE) ;
 }
 
@@ -14039,50 +14035,31 @@ GALGAS_abstractCallInstructionAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_remoteRoutineCallInstructionAST GALGAS_remoteRoutineCallInstructionAST::constructor_new (const GALGAS_effectiveParameterListAST & inAttribute_mEffectiveParameterList,
-                                                                                                const GALGAS_lstring & inAttribute_mReceiverName,
-                                                                                                const GALGAS_lstring & inAttribute_mRoutineName
+                                                                                                const GALGAS_lstringlist & inAttribute_mPropertyList
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_remoteRoutineCallInstructionAST result ;
-  if (inAttribute_mEffectiveParameterList.isValid () && inAttribute_mReceiverName.isValid () && inAttribute_mRoutineName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_remoteRoutineCallInstructionAST (inAttribute_mEffectiveParameterList, inAttribute_mReceiverName, inAttribute_mRoutineName COMMA_THERE)) ;
+  if (inAttribute_mEffectiveParameterList.isValid () && inAttribute_mPropertyList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_remoteRoutineCallInstructionAST (inAttribute_mEffectiveParameterList, inAttribute_mPropertyList COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_remoteRoutineCallInstructionAST::getter_mReceiverName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
+GALGAS_lstringlist GALGAS_remoteRoutineCallInstructionAST::getter_mPropertyList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
   if (NULL != mObjectPtr) {
     const cPtr_remoteRoutineCallInstructionAST * p = (const cPtr_remoteRoutineCallInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_remoteRoutineCallInstructionAST) ;
-    result = p->mAttribute_mReceiverName ;
+    result = p->mAttribute_mPropertyList ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_remoteRoutineCallInstructionAST::getter_mReceiverName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mReceiverName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_remoteRoutineCallInstructionAST::getter_mRoutineName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_remoteRoutineCallInstructionAST * p = (const cPtr_remoteRoutineCallInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_remoteRoutineCallInstructionAST) ;
-    result = p->mAttribute_mRoutineName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_remoteRoutineCallInstructionAST::getter_mRoutineName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRoutineName ;
+GALGAS_lstringlist cPtr_remoteRoutineCallInstructionAST::getter_mPropertyList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mPropertyList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14090,12 +14067,10 @@ GALGAS_lstring cPtr_remoteRoutineCallInstructionAST::getter_mRoutineName (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_remoteRoutineCallInstructionAST::cPtr_remoteRoutineCallInstructionAST (const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList,
-                                                                            const GALGAS_lstring & in_mReceiverName,
-                                                                            const GALGAS_lstring & in_mRoutineName
+                                                                            const GALGAS_lstringlist & in_mPropertyList
                                                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractCallInstructionAST (in_mEffectiveParameterList COMMA_THERE),
-mAttribute_mReceiverName (in_mReceiverName),
-mAttribute_mRoutineName (in_mRoutineName) {
+mAttribute_mPropertyList (in_mPropertyList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14109,9 +14084,7 @@ void cPtr_remoteRoutineCallInstructionAST::description (C_String & ioString,
   ioString << "[@remoteRoutineCallInstructionAST:" ;
   mAttribute_mEffectiveParameterList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mReceiverName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mRoutineName.description (ioString, inIndentation+1) ;
+  mAttribute_mPropertyList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -14119,7 +14092,7 @@ void cPtr_remoteRoutineCallInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_remoteRoutineCallInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_remoteRoutineCallInstructionAST (mAttribute_mEffectiveParameterList, mAttribute_mReceiverName, mAttribute_mRoutineName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_remoteRoutineCallInstructionAST (mAttribute_mEffectiveParameterList, mAttribute_mPropertyList COMMA_THERE)) ;
   return ptr ;
 }
 
