@@ -252,7 +252,7 @@ override method @unifiedSelfCallInstructionAST analyze
     effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
     [inContext.mRoutineMapForContext searchKey
       !routineMangledName
-      ?let unused mutating
+#      ?let unused mutating
       ?let modeMap
       ?let @procedureSignature formalSignature
       ?let @routineKind routineKind
@@ -442,7 +442,7 @@ proc analyzeRoutineCall
   end
   [inContext.mRoutineMapForContext searchKey
     !outRoutineMangledName
-    ?let unused mutating
+#    ?let unused mutating
     ?let modeMap
     ?let @procedureSignature formalSignature
     ?let @routineKind routineKind
