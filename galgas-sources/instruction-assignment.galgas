@@ -166,7 +166,7 @@ override method @selfVarAssignmentInstructionAST analyze
     case opaque (*) :  
       error mTargetVarName : "an opaque type does not have fields"
     case structure (@propertyMap propertyMap *) :
-      [propertyMap searchKey !mTargetVarName ?let public ?let targetType ?let idx]
+      [propertyMap searchKey !mTargetVarName ?let unused public ?let targetType ?let idx]
       getLocalNameOfNewTempObjectInMemory (!targetType !?ioTemporaries ?let fieldPtr)
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf
         !fieldPtr

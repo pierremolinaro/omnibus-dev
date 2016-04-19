@@ -284,7 +284,7 @@ override method @selfVarOperatorAssignInstructionAST analyze
     case integer (* * * *) :
       error mTargetVarName : "an integer does not handle field access"
     case structure (@propertyMap propertyMap *) :
-      [propertyMap searchKey !mTargetVarName ?let public ?let targetType ?let idx]
+      [propertyMap searchKey !mTargetVarName ?let unused public ?let targetType ?let idx]
   #--- Analyze source expression
     [mSourceExpression analyzeExpression
       !self:inSelfType
