@@ -177,7 +177,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
   effectiveParameterListIR += !.outputInput !.new {!inSelfType !.selfObject}
   [inContext.mRoutineMapForContext searchKey
     !routineMangledName
-#    ?let unused mutating
+    ?let isPublic
     ?let modeMap
     ?let @procedureSignature formalSignature
     ?let @routineKind routineKind

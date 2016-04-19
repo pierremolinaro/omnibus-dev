@@ -469,6 +469,12 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
 
   public : virtual int32_t select_common_5F_syntax_74 (C_Lexique_plm_5F_lexique *) ;
 
+  public : virtual int32_t select_common_5F_syntax_75 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_76 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_77 (C_Lexique_plm_5F_lexique *) ;
+
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;

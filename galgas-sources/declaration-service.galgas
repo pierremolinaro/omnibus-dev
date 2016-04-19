@@ -4,6 +4,7 @@
 
 list @serviceDeclarationListAST {
   @lstring mServiceName
+  @bool mPublic
   @lstringlist mServiceAttributeList
   @procFormalArgumentList mServiceFormalArgumentList
   @lstring mReturnTypeName
@@ -20,6 +21,13 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <service> ?!@serviceDeclarationListAST ioServiceListAST {
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
     $service$
     $identifier$ ?let serviceName
     @lstringlist attributeList = {}
@@ -41,6 +49,7 @@ syntax extension common_syntax {
     $}$
     ioServiceListAST +=
       !serviceName
+      !public
       !attributeList
       !serviceFormalArgumentList
       !returnTypeName
@@ -91,7 +100,7 @@ method @serviceDeclarationListAST enterInContext
     end
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
-#      !true # service.mMutating
+      !service.mPublic
       !modeMap
       !signature
       !.service

@@ -4,6 +4,7 @@
 
 list @sectionDeclarationListAST {
   @lstring mSectionName
+  @bool mPublic
   @lstringlist mSectionAttributeList
   @procFormalArgumentList mSectionFormalArgumentList
   @lstring mReturnTypeName
@@ -20,6 +21,13 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <section> ?!@sectionDeclarationListAST ioSectionListAST {
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
     $section$
     $identifier$ ?let sectionName
     @lstringlist attributeList = {}
@@ -42,6 +50,7 @@ syntax extension common_syntax {
     $}$
     ioSectionListAST +=
       !sectionName
+      !public
       !attributeList
       !sectionFormalArgumentList
       !returnTypeName
@@ -65,19 +74,6 @@ method @sectionDeclarationListAST noteServiceTypesInPrecedenceGraph ?!@semanticT
     end
     [mSectionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @sectionMap {
-  @bool mMutating
-  @procedureSignature mSignature
-
-  insert insertKey error message "the '%K' section is already declared in %L"
-  search searchKey error message "there is no '%K' section"
-  remove removeKey error message "there is no '%K' section"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

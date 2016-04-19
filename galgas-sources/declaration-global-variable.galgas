@@ -275,6 +275,7 @@ method @globalVarDeclarationList-element enterInContext
     end
     [ioContext.mRoutineMapForContext searchKey
       !routineMangledName
+      ?let isPublic
       ?let procedureModeMap
       ?4*
     ]
