@@ -284,17 +284,7 @@ override method @selfVarOperatorAssignInstructionAST analyze
     case integer (* * * *) :
       error mTargetVarName : "an integer does not handle field access"
     case structure (@propertyMap propertyMap *) :
-      [propertyMap searchKey !mTargetVarName ?let targetType ?let idx]
-#  #--- Get target type
-#    [!?ioVariableMap neutralAccess
-#      !mTargetVarName
-#      ?let targetType
-#      ?5*
-#      ?let isConstant
-#    ]
-#    if isConstant then
-#      error mTargetVarName : "a constant cannot be modified"
-#    end
+      [propertyMap searchKey !mTargetVarName ?let public ?let targetType ?let idx]
   #--- Analyze source expression
     [mSourceExpression analyzeExpression
       !self:inSelfType
@@ -311,18 +301,6 @@ override method @selfVarOperatorAssignInstructionAST analyze
       !?instructionListIR:ioInstructionGenerationList
       ?result:@operandIR sourceValue
     ]
-#  #--- Write local variable
-#    [!?ioVariableMap searchForReadWriteAccess
-#      !mTargetVarName
-#      ?*
-#      ?let accessIsAllowed
-#      ?let targetVariableKind
-#      ?let isCopyable                                                 
-#      ?3*
-#    ]
-#    if not accessIsAllowed then
-#      error mTargetVarName : "routine has no access right on the this variable"
-#    end
   #--- Check operator is available for type
     let noPanicGeneration = [option plm_options.noPanicGeneration value]
     let panicMode = [inModeSet hasKey !panicModeName ()]

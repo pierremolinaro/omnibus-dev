@@ -30,6 +30,7 @@ enum @structureVarInit {
 
 list @structureFieldListAST {
   @lstring mFieldName
+  @bool mIsPublic
   @lstring mFieldTypeName
   @structureVarInit mInitialisation
 }
@@ -39,6 +40,34 @@ list @structureFieldListAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <declaration_struct_var> ?!@structureFieldListAST ioFieldListAST {
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
+    $var$
+    $identifier$ ?let fieldName
+    select
+      $typeName$ ?let typeName
+      select
+        ioFieldListAST += !fieldName !public !typeName !.noExpression
+      or
+        $=$
+        <expression> ?let initExpression
+        ioFieldListAST += !fieldName !public !typeName !.expression{!initExpression:initExpression}
+      end
+    or
+      $=$
+      <expression> ?let initExpression
+      ioFieldListAST += !fieldName !public !["" nowhere] !.expression{!initExpression:initExpression}
+    end
+  }
 
   #·····················································································································
 
@@ -60,22 +89,7 @@ syntax extension common_syntax {
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
-      $var$
-      $identifier$ ?let fieldName
-      @lstring typeName
-      select
-        $typeName$ ?typeName
-      or
-        typeName = ["" nowhere]
-      end
-      $=$
-      <expression> ?let initExpression
-      fieldList += !fieldName !typeName !.expression{!initExpression:initExpression}
-    while
-      $var$
-      $identifier$ ?let fieldName
-      $typeName$ ?let typeName
-      fieldList += !fieldName !typeName !.noExpression
+      <declaration_struct_var> !?fieldList
     while
       <procedure> !?procedureDeclarationListAST
     while
@@ -145,7 +159,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- add field types
-  for (* fieldTypeName initExpression) in mStructureFieldListAST do
+  for (* * fieldTypeName initExpression) in mStructureFieldListAST do
     if fieldTypeName.string != "" then
       let typeName = @lstring.new {!"$" + fieldTypeName !fieldTypeName.location}
       [!?ioGraph addEdge !structureTypeName !typeName]
@@ -190,6 +204,7 @@ list @propertyList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @propertyMap {
+  @bool mIsPublic
   @unifiedTypeMap-proxy mTypeProxy
   @uint mIndex
   insert insertKey error message "the '%K' property is already declared"
@@ -269,14 +284,14 @@ override method @structureDeclaration enterInContext
         canBeCopied = false
       end
       propertyList += !mFieldName.string !actualFieldType
-      [!?propertyMap insertKey !mFieldName !actualFieldType ![propertyMap count]]
+      [!?propertyMap insertKey !mFieldName !mIsPublic !actualFieldType ![propertyMap count]]
       sortedOperandIRList += !@operandIR.new {!actualFieldType !expressionIR.mValue} !fieldIndex
     case noExpression :
       if not [fieldType instantiable] then
         error mFieldName : "$" + [fieldType key] + " type is not instanciable"
       end
       propertyList += !mFieldName.string !fieldType
-      [!?propertyMap insertKey !mFieldName !fieldType ![propertyMap count]]
+      [!?propertyMap insertKey !mFieldName !mIsPublic !fieldType ![propertyMap count]]
       constructorSignature += !mFieldName.string !fieldType !fieldIndex
     end
   end

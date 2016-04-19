@@ -249,7 +249,7 @@ method @taskVarListAST-element enterInContext
     error mVarName : "$" + [result.mType key] + " type is not instanciable"
   end
   ioPropertyList += !mVarName.string !result.mType
-  [!?ioPropertyMap insertKey !mVarName !result.mType ![ioPropertyMap count]]
+  [!?ioPropertyMap insertKey !mVarName !false !result.mType ![ioPropertyMap count]]
   ioInitialValueList += !result
 }
 

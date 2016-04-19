@@ -11,6 +11,27 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   Extension getter '@integerDeclaration typeName'                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef class GALGAS_string (*enterExtensionGetter_integerDeclaration_typeName) (const class cPtr_integerDeclaration * inObject,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionGetter_typeName (const int32_t inClassIndex,
+                                    enterExtensionGetter_integerDeclaration_typeName inGetter) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string callExtensionGetter_typeName (const cPtr_integerDeclaration * inObject,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Abstract extension method '@expressionAST addDependenceEdgeForStaticExpression'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -509,27 +530,6 @@ void callExtensionMethod_procedureSemanticAnalysis (const class cPtr_structureDe
                                                     GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Extension getter '@integerDeclaration typeName'                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef class GALGAS_string (*enterExtensionGetter_integerDeclaration_typeName) (const class cPtr_integerDeclaration * inObject,
-                                                                                 C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionGetter_typeName (const int32_t inClassIndex,
-                                    enterExtensionGetter_integerDeclaration_typeName inGetter) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string callExtensionGetter_typeName (const cPtr_integerDeclaration * inObject,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

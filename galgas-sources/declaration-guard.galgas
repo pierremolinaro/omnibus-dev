@@ -375,7 +375,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
       case integer (* * * *) :
         error propertyName : "an integer does not handle field access" : currentType
       case structure (@propertyMap unused propertyMap *) :
-        [propertyMap searchKey !propertyName ?let propertyType ?let idx]
+        [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
         elementPtrList += !idx !propertyName.string
         currentType = propertyType
         needsPublic = true
