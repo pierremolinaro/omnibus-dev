@@ -15,7 +15,7 @@ enum @routineKind {
 
 # Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
 map @routineMapForContext {
-  @bool mMutating
+#  @bool mMutating
   @modeMap mModeMap
   @procedureSignature mSignature
   @routineKind mRoutineKind
@@ -112,10 +112,10 @@ method @procedureDeclarationListAST enterInContext
       elsif weakProcedure && weak then
         error procedure.mProcedureName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
-        [!?ioContext.mRoutineMapForContext removeKey !lkey ?6*] # Remove weak routine
+        [!?ioContext.mRoutineMapForContext removeKey !lkey ?5*] # Remove weak routine
         [!?ioContext.mRoutineMapForContext insertKey # Insert routine
           !lkey
-          !false # not mutating
+#          !false # not mutating
           !procedureModeMap
           !signature
           !.function
@@ -125,7 +125,7 @@ method @procedureDeclarationListAST enterInContext
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
           !lkey
-          !false # not mutating
+#          !false # not mutating
           !procedureModeMap
           !signature
           !.function
@@ -136,7 +136,7 @@ method @procedureDeclarationListAST enterInContext
     else
       [!?ioContext.mRoutineMapForContext insertKey
         !lkey
-        !false # not mutating
+#        !false # not mutating
         !procedureModeMap
         !signature
         !.function
@@ -168,7 +168,7 @@ method @sectionDeclarationListAST enterInContext
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
-      !true # section.mMutating
+#      !true # section.mMutating
       !@modeMap {![userModeName () nowhere]}
       !signature
       !.section

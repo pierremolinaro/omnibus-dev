@@ -91,7 +91,7 @@ method @serviceDeclarationListAST enterInContext
     end
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
-      !true # service.mMutating
+#      !true # service.mMutating
       !modeMap
       !signature
       !.service

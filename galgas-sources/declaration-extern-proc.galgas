@@ -88,7 +88,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
   end
   [!?ioContext.mRoutineMapForContext insertKey
     !@lstring.new {!"." + mExternProcedureName !mExternProcedureName.location}
-    !false # not mutating
+#    !false # not mutating
     !procedureModeMap
     !signature
     !.function
