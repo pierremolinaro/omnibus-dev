@@ -376,6 +376,9 @@ override method @remoteRoutineCallInstructionAST analyze
   @lstringlist propertyList = mPropertyList
   [!?propertyList popFirst ?let receiverName]
   [!?propertyList popLast ?let routineName]
+  for (propertyName) in propertyList do
+    error propertyName : "not handled yet (2)"
+  end
 #---
   analyzeRoutineCall (
     !self:inSelfType

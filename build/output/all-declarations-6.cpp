@@ -1392,7 +1392,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    self.autoriserEcriture.V ()\n"
   "  }\n"
   "\n"
-  "  guard input (!data:outData $uint32) : self.autoriserLecture.P () {\n"
+  "  public guard input (!data:outData $uint32) : self.autoriserLecture.P () {\n"
   "    outData = self.data\n"
   "    self.signalerDonneeLue.V ()\n"
   "    self.autoriserEcriture.V ()\n"
@@ -1474,7 +1474,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2389, // Text length
+  2396, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
