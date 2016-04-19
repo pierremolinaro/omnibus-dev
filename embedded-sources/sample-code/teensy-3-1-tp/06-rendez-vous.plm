@@ -8,7 +8,7 @@ struct $rendezVous {
   var inputGuardList = $guardList ()
   var outputGuardList = $guardList ()
 
-  primitive input () {
+  public primitive input () {
     let found = makeTaskReady (!?list:self.outputWaitList)
     if not found then
       guardDidChange (!?guard:self.outputGuardList)
@@ -16,7 +16,7 @@ struct $rendezVous {
     end
   }
 
-  primitive output () {
+  public primitive output () {
     let found = makeTaskReady (!?list:self.inputWaitList)
     if not found then
       guardDidChange (!?guard:self.inputGuardList)
@@ -24,14 +24,14 @@ struct $rendezVous {
     end
   }
 
-  primitive inputUntil (?deadline:inDeadline $uint32) -> $bool {
+  public primitive inputUntil (?deadline:inDeadline $uint32) -> $bool {
     result = makeTaskReady (!?list:self.outputWaitList)
     if (not result) and (inDeadline > time.millis ()) then 
       blockInListAndOnDeadline (!?list:self.inputWaitList !deadline:inDeadline)
     end
   }
 
-  primitive outputUntil (?deadline:inDeadline $uint32) -> $bool {
+  public primitive outputUntil (?deadline:inDeadline $uint32) -> $bool {
     result = makeTaskReady (!?list:self.inputWaitList)
     if (not result) and (inDeadline > time.millis ()) then 
       blockInListAndOnDeadline (!?list:self.outputWaitList !deadline:inDeadline)

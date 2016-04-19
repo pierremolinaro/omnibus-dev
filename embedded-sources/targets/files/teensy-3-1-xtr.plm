@@ -90,7 +90,7 @@ module time {
   
   //············································································
   
-  primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
+  public primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
     if inDate > self.millis () then
       blockOnDeadline (!deadline:inDate)
     end

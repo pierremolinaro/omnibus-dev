@@ -449,6 +449,18 @@ proc analyzeRoutineCall
     ?*
     ?outReturnedType
   ]
+#--- Check accessibility
+  if not isPublic then
+    if inReceiverName.string == "" then # Standalone function
+      let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !outRoutineMangledName.string] file]
+      let invocationFile = [inRoutineName.location file]
+      if invocationFile != declarationFile then
+        error inRoutineName : "this routine is not public"
+      end
+    else
+      error inRoutineName : "this routine is not public"
+    end  
+  end  
 #--- Enter in invocation graph
   @lstring routineNameForInvocationGraph
   switch routineKind
