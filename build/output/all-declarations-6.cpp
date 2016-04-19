@@ -720,11 +720,11 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   gWrapperAllDirectories_embeddedSampleCode_1
 ) ;
 
-//--- File 'teensy-3-1-tp/01-blinkleds.plm'
+//--- File 'teensy-3-1-tp/01-blink-led.plm'
 
 const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
-  "//------------------------------------------------*\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
@@ -741,7 +741,38 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "//------------------------------------------------*\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
+  "01-blink-led.plm",
+  "plm",
+  true, // Text file
+  538, // Text length
+  gWrapperFileContent_1_embeddedSampleCode
+) ;
+
+//--- File 'teensy-3-1-tp/02-blink-leds.plm'
+
+const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
+  "\n"
+  "task T1 priority 1 stackSize 512 {\n"
+  "  var compteur $uint32 = 0\n"
+  "\n"
+  "  func loop () {\n"
+  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    leds.on (!LED_L0)\n"
+  "    self.compteur +%= 500\n"
+  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    leds.off (!LED_L0)\n"
+  "    self.compteur +%= 500\n"
+  "    lcd.goto (!line:0 !column:0)\n"
+  "    lcd.printUnsigned (!time.millis ())\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T2 priority 2 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
@@ -756,7 +787,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "//------------------------------------------------*\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T3 priority 3 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
@@ -771,7 +802,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "//------------------------------------------------*\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T4 priority 4 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
@@ -786,7 +817,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "//------------------------------------------------*\n"
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "task T5 priority 5 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
@@ -801,19 +832,19 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "}\n"
   "\n"
-  "//------------------------------------------------*\n" ;
+  "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
-  "01-blinkleds.plm",
+const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
+  "02-blink-leds.plm",
   "plm",
   true, // Text file
-  1804, // Text length
-  gWrapperFileContent_1_embeddedSampleCode
+  1978, // Text length
+  gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/02-section-service-duration.plm'
+//--- File 'teensy-3-1-tp/03-section-service-duration.plm'
 
-const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -888,17 +919,17 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n" ;
 
-const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
-  "02-section-service-duration.plm",
+const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
+  "03-section-service-duration.plm",
   "plm",
   true, // Text file
   2008, // Text length
-  gWrapperFileContent_2_embeddedSampleCode
+  gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/03-semaphore.plm'
+//--- File 'teensy-3-1-tp/04-semaphore.plm'
 
-const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -968,17 +999,17 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
-  "03-semaphore.plm",
+const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
+  "04-semaphore.plm",
   "plm",
   true, // Text file
   1169, // Text length
-  gWrapperFileContent_3_embeddedSampleCode
+  gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/04-semaphore-P-until.plm'
+//--- File 'teensy-3-1-tp/05-semaphore-P-until.plm'
 
-const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1054,17 +1085,17 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
-  "04-semaphore-P-until.plm",
+const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
+  "05-semaphore-P-until.plm",
   "plm",
   true, // Text file
   1554, // Text length
-  gWrapperFileContent_4_embeddedSampleCode
+  gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/05-guarded-semaphore.plm'
+//--- File 'teensy-3-1-tp/06-guarded-semaphore.plm'
 
-const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1168,17 +1199,17 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
-  "05-guarded-semaphore.plm",
+const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
+  "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
   2212, // Text length
-  gWrapperFileContent_5_embeddedSampleCode
+  gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/05-guarded-semaphore2.plm'
+//--- File 'teensy-3-1-tp/07-guarded-semaphore2.plm'
 
-const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1253,17 +1284,17 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
-  "05-guarded-semaphore2.plm",
+const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
+  "07-guarded-semaphore2.plm",
   "plm",
   true, // Text file
   1621, // Text length
-  gWrapperFileContent_6_embeddedSampleCode
+  gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/06-rendez-vous.plm'
+//--- File 'teensy-3-1-tp/08-rendez-vous.plm'
 
-const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1317,7 +1348,6 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1358,17 +1388,17 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
-  "06-rendez-vous.plm",
+const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
+  "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2518, // Text length
-  gWrapperFileContent_7_embeddedSampleCode
+  2517, // Text length
+  gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/07-rendez-vous-data.plm'
+//--- File 'teensy-3-1-tp/09-rendez-vous-data.plm'
 
-const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1470,17 +1500,17 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
-  "07-rendez-vous-data.plm",
+const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
+  "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
   2396, // Text length
-  gWrapperFileContent_8_embeddedSampleCode
+  gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-tp' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [9] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [10] = {
   & gWrapperFile_1_embeddedSampleCode,
   & gWrapperFile_2_embeddedSampleCode,
   & gWrapperFile_3_embeddedSampleCode,
@@ -1489,6 +1519,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [9] = {
   & gWrapperFile_6_embeddedSampleCode,
   & gWrapperFile_7_embeddedSampleCode,
   & gWrapperFile_8_embeddedSampleCode,
+  & gWrapperFile_9_embeddedSampleCode,
   NULL
 } ;
 
@@ -1502,7 +1533,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_2 [1]
 
 const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode (
   "teensy-3-1-tp",
-  8,
+  9,
   gWrapperAllFiles_embeddedSampleCode_2,
   0,
   gWrapperAllDirectories_embeddedSampleCode_2
@@ -15098,338 +15129,6 @@ GALGAS_forInstructionAST GALGAS_forInstructionAST::extractObject (const GALGAS_o
       result = *p ;
     }else{
       inCompiler->castError ("forInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_forLowerUpperBoundInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mTypeName.objectCompare (p->mAttribute_mTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mLowerBoundExpression.objectCompare (p->mAttribute_mLowerBoundExpression) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction.objectCompare (p->mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mUpperBoundExpression.objectCompare (p->mAttribute_mUpperBoundExpression) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction.objectCompare (p->mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mDoInstructionList.objectCompare (p->mAttribute_mDoInstructionList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mEndOf_5F_do_5F_instruction.objectCompare (p->mAttribute_mEndOf_5F_do_5F_instruction) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_forLowerUpperBoundInstructionAST::objectCompare (const GALGAS_forLowerUpperBoundInstructionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forLowerUpperBoundInstructionAST::GALGAS_forLowerUpperBoundInstructionAST (void) :
-GALGAS_instructionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forLowerUpperBoundInstructionAST::GALGAS_forLowerUpperBoundInstructionAST (const cPtr_forLowerUpperBoundInstructionAST * inSourcePtr) :
-GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_forLowerUpperBoundInstructionAST) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forLowerUpperBoundInstructionAST GALGAS_forLowerUpperBoundInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mVarName,
-                                                                                                  const GALGAS_lstring & inAttribute_mTypeName,
-                                                                                                  const GALGAS_expressionAST & inAttribute_mLowerBoundExpression,
-                                                                                                  const GALGAS_location & inAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction,
-                                                                                                  const GALGAS_expressionAST & inAttribute_mUpperBoundExpression,
-                                                                                                  const GALGAS_location & inAttribute_mEndOf_5F_upperBoundExpression_5F_instruction,
-                                                                                                  const GALGAS_instructionListAST & inAttribute_mDoInstructionList,
-                                                                                                  const GALGAS_location & inAttribute_mEndOf_5F_do_5F_instruction
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_forLowerUpperBoundInstructionAST result ;
-  if (inAttribute_mVarName.isValid () && inAttribute_mTypeName.isValid () && inAttribute_mLowerBoundExpression.isValid () && inAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction.isValid () && inAttribute_mUpperBoundExpression.isValid () && inAttribute_mEndOf_5F_upperBoundExpression_5F_instruction.isValid () && inAttribute_mDoInstructionList.isValid () && inAttribute_mEndOf_5F_do_5F_instruction.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_forLowerUpperBoundInstructionAST (inAttribute_mVarName, inAttribute_mTypeName, inAttribute_mLowerBoundExpression, inAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction, inAttribute_mUpperBoundExpression, inAttribute_mEndOf_5F_upperBoundExpression_5F_instruction, inAttribute_mDoInstructionList, inAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_forLowerUpperBoundInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mVarName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_forLowerUpperBoundInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_forLowerUpperBoundInstructionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mTypeName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_forLowerUpperBoundInstructionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST GALGAS_forLowerUpperBoundInstructionAST::getter_mLowerBoundExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mLowerBoundExpression ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST cPtr_forLowerUpperBoundInstructionAST::getter_mLowerBoundExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLowerBoundExpression ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_lowerBoundExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_lowerBoundExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST GALGAS_forLowerUpperBoundInstructionAST::getter_mUpperBoundExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mUpperBoundExpression ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST cPtr_forLowerUpperBoundInstructionAST::getter_mUpperBoundExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUpperBoundExpression ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_upperBoundExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_upperBoundExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_forLowerUpperBoundInstructionAST::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mDoInstructionList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST cPtr_forLowerUpperBoundInstructionAST::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDoInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_do_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mEndOf_5F_do_5F_instruction ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_do_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOf_5F_do_5F_instruction ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                              Pointer class for @forLowerUpperBoundInstructionAST class                              *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_forLowerUpperBoundInstructionAST::cPtr_forLowerUpperBoundInstructionAST (const GALGAS_lstring & in_mVarName,
-                                                                              const GALGAS_lstring & in_mTypeName,
-                                                                              const GALGAS_expressionAST & in_mLowerBoundExpression,
-                                                                              const GALGAS_location & in_mEndOf_5F_lowerBoundExpression_5F_instruction,
-                                                                              const GALGAS_expressionAST & in_mUpperBoundExpression,
-                                                                              const GALGAS_location & in_mEndOf_5F_upperBoundExpression_5F_instruction,
-                                                                              const GALGAS_instructionListAST & in_mDoInstructionList,
-                                                                              const GALGAS_location & in_mEndOf_5F_do_5F_instruction
-                                                                              COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (THERE),
-mAttribute_mVarName (in_mVarName),
-mAttribute_mTypeName (in_mTypeName),
-mAttribute_mLowerBoundExpression (in_mLowerBoundExpression),
-mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction (in_mEndOf_5F_lowerBoundExpression_5F_instruction),
-mAttribute_mUpperBoundExpression (in_mUpperBoundExpression),
-mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction (in_mEndOf_5F_upperBoundExpression_5F_instruction),
-mAttribute_mDoInstructionList (in_mDoInstructionList),
-mAttribute_mEndOf_5F_do_5F_instruction (in_mEndOf_5F_do_5F_instruction) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_forLowerUpperBoundInstructionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionAST ;
-}
-
-void cPtr_forLowerUpperBoundInstructionAST::description (C_String & ioString,
-                                                         const int32_t inIndentation) const {
-  ioString << "[@forLowerUpperBoundInstructionAST:" ;
-  mAttribute_mVarName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mLowerBoundExpression.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mUpperBoundExpression.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mDoInstructionList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mEndOf_5F_do_5F_instruction.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_forLowerUpperBoundInstructionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forLowerUpperBoundInstructionAST (mAttribute_mVarName, mAttribute_mTypeName, mAttribute_mLowerBoundExpression, mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction, mAttribute_mUpperBoundExpression, mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction, mAttribute_mDoInstructionList, mAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       @forLowerUpperBoundInstructionAST type                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionAST ("forLowerUpperBoundInstructionAST",
-                                                         & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_forLowerUpperBoundInstructionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_forLowerUpperBoundInstructionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_forLowerUpperBoundInstructionAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forLowerUpperBoundInstructionAST GALGAS_forLowerUpperBoundInstructionAST::extractObject (const GALGAS_object & inObject,
-                                                                                                C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_forLowerUpperBoundInstructionAST result ;
-  const GALGAS_forLowerUpperBoundInstructionAST * p = (const GALGAS_forLowerUpperBoundInstructionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_forLowerUpperBoundInstructionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("forLowerUpperBoundInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

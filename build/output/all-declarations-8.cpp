@@ -10,6 +10,105 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                   Extension method '@binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <extensionMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic> gExtensionMethodTable_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const int32_t inClassIndex,
+                                                                    extensionMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic inMethod) {
+  gExtensionMethodTable_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const cPtr_binaryOperationIR * inObject,
+                                                                   const GALGAS_string constin_inOperation,
+                                                                   const GALGAS_uint constin_inCode,
+                                                                   GALGAS_string & io_ioLLVMcode,
+                                                                   const GALGAS_generationContext constin_inGenerationContext,
+                                                                   GALGAS_generationAdds & io_ioGenerationAdds,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) {
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_binaryOperationIR) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic f = NULL ;
+    if (classIndex < gExtensionMethodTable_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic.count ()) {
+      f = gExtensionMethodTable_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gExtensionMethodTable_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic.count ()) {
+           f = gExtensionMethodTable_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gExtensionMethodTable_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inOperation, constin_inCode, io_ioLLVMcode, constin_inGenerationContext, io_ioGenerationAdds, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic (const cPtr_binaryOperationIR * inObject,
+                                                                                        const GALGAS_string constinArgument_inOperation,
+                                                                                        const GALGAS_uint constinArgument_inCode,
+                                                                                        GALGAS_string & ioArgument_ioLLVMcode,
+                                                                                        const GALGAS_generationContext constinArgument_inGenerationContext,
+                                                                                        GALGAS_generationAdds & ioArgument_ioGenerationAdds,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_binaryOperationIR * object = inObject ;
+  macroValidSharedObject (object, cPtr_binaryOperationIR) ;
+  GALGAS_uint var_staticStringIndex ;
+  {
+  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mAttribute_mStaticStringMap, object->mAttribute_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 113)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 113)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 113)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 112)) ;
+  }
+  GALGAS_string var_llvmType = object->mAttribute_mOperandType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 116)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (".isZero = icmp eq "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (", 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)) ;
+  GALGAS_string var_labelName = extensionGetter_name (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".isZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (var_labelName, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".divideByZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (var_labelName, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".ok\n"
+    "\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(var_labelName.add_operation (GALGAS_string (".divideByZero:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 120)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 120)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @raise_panic.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).add_operation (object->mAttribute_mLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)).add_operation (constinArgument_inCode.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  unreachable\n"
+    "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 124)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(var_labelName.add_operation (GALGAS_string (".ok:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (extensionGetter_llvmName (object->mAttribute_mLeft, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic (void) {
+  enterExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (kTypeDescriptor_GALGAS_binaryOperationIR.mSlotID,
+                                                                 extensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeExtensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic (void) {
+  gExtensionMethodTable_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic (defineExtensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic,
+                                                                                       freeExtensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension method '@routineMapIR-element enterAccessibleEntities'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13482,162 +13581,4 @@ static void defineExtensionMethod_integerDeclaration_enterInContext (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_integerDeclaration_enterInContext (defineExtensionMethod_integerDeclaration_enterInContext, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                      Overriding extension method '@integerDeclaration enterRoutinesInContext'                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_integerDeclaration_enterRoutinesInContext (const cPtr_abstractDeclaration * /* inObject */,
-                                                                       const GALGAS_procedureDeclarationListAST /* constinArgument_inProcedureListAST */,
-                                                                       GALGAS_semanticContext & /* ioArgument_ioContext */,
-                                                                       GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                                       C_Compiler * /* inCompiler */
-                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_integerDeclaration_enterRoutinesInContext (void) {
-  enterExtensionMethod_enterRoutinesInContext (kTypeDescriptor_GALGAS_integerDeclaration.mSlotID,
-                                               extensionMethod_integerDeclaration_enterRoutinesInContext) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_integerDeclaration_enterRoutinesInContext (defineExtensionMethod_integerDeclaration_enterRoutinesInContext, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Overriding extension method '@integerDeclaration semanticAnalysis'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_integerDeclaration_semanticAnalysis (const cPtr_abstractDeclaration * /* inObject */,
-                                                                 const GALGAS_semanticContext /* constinArgument_inContext */,
-                                                                 GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
-                                                                 GALGAS_intermediateCodeStruct & /* ioArgument_ioIntermediateCodeStruct */,
-                                                                 C_Compiler * /* inCompiler */
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_integerDeclaration_semanticAnalysis (void) {
-  enterExtensionMethod_semanticAnalysis (kTypeDescriptor_GALGAS_integerDeclaration.mSlotID,
-                                         extensionMethod_integerDeclaration_semanticAnalysis) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_integerDeclaration_semanticAnalysis (defineExtensionMethod_integerDeclaration_semanticAnalysis, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//            Overriding extension method '@infixObjectObjectOperatorDescription generateInfixOperatorCode'            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_infixObjectObjectOperatorDescription_generateInfixOperatorCode (const cPtr_infixOperatorDescription * inObject,
-                                                                                            GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                                                            GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                                                            const GALGAS_operandIR constinArgument_inLeftOperand,
-                                                                                            const GALGAS_location constinArgument_inOperatorLocation,
-                                                                                            const GALGAS_operandIR constinArgument_inRightOperand,
-                                                                                            const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
-                                                                                            GALGAS_operandIR & outArgument_outResult,
-                                                                                            C_Compiler * inCompiler
-                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_infixObjectObjectOperatorDescription * object = (const cPtr_infixObjectObjectOperatorDescription *) inObject ;
-  macroValidSharedObject (object, cPtr_infixObjectObjectOperatorDescription) ;
-  GALGAS_bool test_0 = constinArgument_inLeftOperand.mAttribute_mValue.getter_isLiteralInteger (SOURCE_FILE ("type-integer.galgas", 276)) ;
-  if (kBoolTrue == test_0.boolEnum ()) {
-    test_0 = constinArgument_inRightOperand.mAttribute_mValue.getter_isLiteralInteger (SOURCE_FILE ("type-integer.galgas", 276)) ;
-  }
-  const enumGalgasBool test_1 = test_0.boolEnum () ;
-  if (kBoolTrue == test_1) {
-    GALGAS_bigint var_left ;
-    constinArgument_inLeftOperand.mAttribute_mValue.method_literalInteger (var_left, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 277)) ;
-    GALGAS_bigint var_right ;
-    constinArgument_inRightOperand.mAttribute_mValue.method_literalInteger (var_right, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 278)) ;
-    const GALGAS_infixObjectObjectOperatorDescription temp_2 = object ;
-    GALGAS_bigint var_resultValue = callExtensionGetter_performStaticOperation ((const cPtr_infixObjectObjectOperatorDescription *) temp_2.ptr (), var_left, var_right, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 279)) ;
-    outArgument_outResult = GALGAS_operandIR::constructor_new (constinArgument_inResultType, GALGAS_valueIR::constructor_literalInteger (var_resultValue  COMMA_SOURCE_FILE ("type-integer.galgas", 280))  COMMA_SOURCE_FILE ("type-integer.galgas", 280)) ;
-  }else if (kBoolFalse == test_1) {
-    {
-    routine_getNewTempVariable (constinArgument_inResultType, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 282)) ;
-    }
-    {
-    extensionSetter_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResult.mAttribute_mValue, constinArgument_inLeftOperand.mAttribute_mType, constinArgument_inOperatorLocation, constinArgument_inLeftOperand.mAttribute_mValue, object->mAttribute_mOperator, constinArgument_inRightOperand.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 284)) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_infixObjectObjectOperatorDescription_generateInfixOperatorCode (void) {
-  enterExtensionMethod_generateInfixOperatorCode (kTypeDescriptor_GALGAS_infixObjectObjectOperatorDescription.mSlotID,
-                                                  extensionMethod_infixObjectObjectOperatorDescription_generateInfixOperatorCode) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_infixObjectObjectOperatorDescription_generateInfixOperatorCode (defineExtensionMethod_infixObjectObjectOperatorDescription_generateInfixOperatorCode, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//            Overriding extension method '@integerObject_literal_infixOperator generateInfixOperatorCode'             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_integerObject_5F_literal_5F_infixOperator_generateInfixOperatorCode (const cPtr_infixOperatorDescription * inObject,
-                                                                                                 GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                                                                 GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                                                                 const GALGAS_operandIR constinArgument_inLeftOperand,
-                                                                                                 const GALGAS_location constinArgument_inOperatorLocation,
-                                                                                                 const GALGAS_operandIR constinArgument_inRightOperand,
-                                                                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
-                                                                                                 GALGAS_operandIR & outArgument_outResult,
-                                                                                                 C_Compiler * inCompiler
-                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_integerObject_5F_literal_5F_infixOperator * object = (const cPtr_integerObject_5F_literal_5F_infixOperator *) inObject ;
-  macroValidSharedObject (object, cPtr_integerObject_5F_literal_5F_infixOperator) ;
-  GALGAS_bigint var_literalValue ;
-  constinArgument_inRightOperand.mAttribute_mValue.method_literalInteger (var_literalValue, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 439)) ;
-  GALGAS_bigint var_min ;
-  GALGAS_bigint var_max ;
-  GALGAS_bool joker_16744 ; // Joker input parameter
-  GALGAS_uint joker_16756 ; // Joker input parameter
-  constinArgument_inLeftOperand.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 440)).method_integer (var_min, var_max, joker_16744, joker_16756, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 440)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsStrictInf, var_literalValue.objectCompare (var_min)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("literal right integer expression too small (should be >= ").add_operation (var_min.getter_string (SOURCE_FILE ("type-integer.galgas", 442)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 442)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 442))  COMMA_SOURCE_FILE ("type-integer.galgas", 442)) ;
-    outArgument_outResult.drop () ; // Release error dropped variable
-  }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_1 = GALGAS_bool (kIsStrictSup, var_literalValue.objectCompare (var_max)).boolEnum () ;
-    if (kBoolTrue == test_1) {
-      inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("literal right integer expression too large (should be <= ").add_operation (var_max.getter_string (SOURCE_FILE ("type-integer.galgas", 444)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 444)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 444))  COMMA_SOURCE_FILE ("type-integer.galgas", 444)) ;
-      outArgument_outResult.drop () ; // Release error dropped variable
-    }else if (kBoolFalse == test_1) {
-      {
-      routine_getNewTempVariable (constinArgument_inResultType, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 446)) ;
-      }
-      {
-      extensionSetter_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResult.mAttribute_mValue, constinArgument_inLeftOperand.mAttribute_mType, constinArgument_inOperatorLocation, constinArgument_inLeftOperand.mAttribute_mValue, object->mAttribute_mOperator, constinArgument_inRightOperand.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 447)) ;
-      }
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_integerObject_5F_literal_5F_infixOperator_generateInfixOperatorCode (void) {
-  enterExtensionMethod_generateInfixOperatorCode (kTypeDescriptor_GALGAS_integerObject_5F_literal_5F_infixOperator.mSlotID,
-                                                  extensionMethod_integerObject_5F_literal_5F_infixOperator_generateInfixOperatorCode) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_integerObject_5F_literal_5F_infixOperator_generateInfixOperatorCode (defineExtensionMethod_integerObject_5F_literal_5F_infixOperator_generateInfixOperatorCode, NULL) ;
 
