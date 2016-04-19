@@ -374,7 +374,7 @@ module lcd {
   
   //············································································
   
-  func `panic waitMSInPanicMode @noWarningIfUnused (?duration: inDuration $uint32) {
+  public func `panic waitMSInPanicMode @noWarningIfUnused (?duration: inDuration $uint32) {
     var duration = inDuration
     while duration > 0 do
       time.waitOneMillisecondInPanicMode ()

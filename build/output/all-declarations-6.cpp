@@ -906,7 +906,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var value $uint32\n"
   "  var list = $taskList ()\n"
   "\n"
-  "  primitive P () {\n"
+  "  public primitive P () {\n"
   "    if self.value > 0 then\n"
   "      self.value -= 1\n"
   "    else\n"
@@ -914,7 +914,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "  service V () {\n"
+  "  public service V () {\n"
   "    let found = makeTaskReady (!\?list:self.list)\n"
   "    if not found then\n"
   "      self.value += 1\n"
@@ -972,7 +972,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "03-semaphore.plm",
   "plm",
   true, // Text file
-  1155, // Text length
+  1169, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -986,14 +986,14 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var value $uint32\n"
   "  var list = $taskList ()\n"
   "\n"
-  "  service V () {\n"
+  "  public service V () {\n"
   "    let found = makeTaskReady (!\?list:self.list)\n"
   "    if not found then\n"
   "      self.value += 1\n"
   "    end\n"
   "  }\n"
   "\n"
-  "  primitive P_until (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public primitive P_until (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    result = self.value > 0\n"
   "    if result then\n"
   "      self.value -= 1\n"
@@ -1058,7 +1058,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "04-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1540, // Text length
+  1554, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1073,7 +1073,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var list = $taskList ()\n"
   "  var guardList = $guardList ()\n"
   "\n"
-  "  primitive P @noWarningIfUnused () {\n"
+  "  public primitive P @noWarningIfUnused () {\n"
   "    if self.value > 0 then\n"
   "      self.value -= 1\n"
   "    else\n"
@@ -1081,7 +1081,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "  service V () {\n"
+  "  public service V () {\n"
   "    let found = makeTaskReady (!\?list:self.list)\n"
   "    if not found then\n"
   "      self.value += 1\n"
@@ -1172,7 +1172,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2184, // Text length
+  2198, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1273,7 +1273,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var inputGuardList = $guardList ()\n"
   "  var outputGuardList = $guardList ()\n"
   "\n"
-  "  primitive input () {\n"
+  "  public primitive input () {\n"
   "    let found = makeTaskReady (!\?list:self.outputWaitList)\n"
   "    if not found then\n"
   "      guardDidChange (!\?guard:self.outputGuardList)\n"
@@ -1281,7 +1281,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "  primitive output () {\n"
+  "  public primitive output () {\n"
   "    let found = makeTaskReady (!\?list:self.inputWaitList)\n"
   "    if not found then\n"
   "      guardDidChange (!\?guard:self.inputGuardList)\n"
@@ -1289,14 +1289,14 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "  primitive inputUntil (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public primitive inputUntil (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    result = makeTaskReady (!\?list:self.outputWaitList)\n"
   "    if (not result) and (inDeadline > time.millis ()) then \n"
   "      blockInListAndOnDeadline (!\?list:self.inputWaitList !deadline:inDeadline)\n"
   "    end\n"
   "  }\n"
   "\n"
-  "  primitive outputUntil (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public primitive outputUntil (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    result = makeTaskReady (!\?list:self.inputWaitList)\n"
   "    if (not result) and (inDeadline > time.millis ()) then \n"
   "      blockInListAndOnDeadline (!\?list:self.outputWaitList !deadline:inDeadline)\n"
@@ -1362,7 +1362,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-rendez-vous.plm",
   "plm",
   true, // Text file
-  2414, // Text length
+  2442, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1378,14 +1378,14 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var signalerDonneeLue = $semaphore (!value:0)\n"
   "  var data $uint32 = 0\n"
   "\n"
-  "  func `user output (\?data:inData $uint32) {\n"
+  "  public func `user output (\?data:inData $uint32) {\n"
   "    self.autoriserEcriture.P ()\n"
   "    self.data = inData\n"
   "    self.autoriserLecture.V ()\n"
   "    self.signalerDonneeLue.P ()\n"
   "  }\n"
   "\n"
-  "  func `user input (!data:outData $uint32) {\n"
+  "  public func `user input (!data:outData $uint32) {\n"
   "    self.autoriserLecture.P ()\n"
   "    outData = self.data\n"
   "    self.signalerDonneeLue.V ()\n"
@@ -1474,7 +1474,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2375, // Text length
+  2389, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
