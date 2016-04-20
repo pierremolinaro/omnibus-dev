@@ -10134,8 +10134,9 @@ class GALGAS_onInstructionAST : public GALGAS_instructionAST {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_onInstructionAST constructor_new (const class GALGAS_onInstructionBranchList & inOperand0,
-                                                           const class GALGAS_location & inOperand1
+  public : static GALGAS_onInstructionAST constructor_new (const class GALGAS_location & inOperand0,
+                                                           const class GALGAS_onInstructionBranchList & inOperand1,
+                                                           const class GALGAS_location & inOperand2
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -10150,6 +10151,8 @@ class GALGAS_onInstructionAST : public GALGAS_instructionAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_onInstructionBranchList getter_mBranchList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_on_5F_instruction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mStartOf_5F_on_5F_instruction (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -10321,11 +10324,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_onInstructionBranch
 
 class cPtr_onInstructionAST : public cPtr_instructionAST {
 //--- Attributes
+  public : GALGAS_location mAttribute_mStartOf_5F_on_5F_instruction ;
   public : GALGAS_onInstructionBranchList mAttribute_mBranchList ;
   public : GALGAS_location mAttribute_mEndOf_5F_on_5F_instruction ;
 
 //--- Constructor
-  public : cPtr_onInstructionAST (const GALGAS_onInstructionBranchList & in_mBranchList,
+  public : cPtr_onInstructionAST (const GALGAS_location & in_mStartOf_5F_on_5F_instruction,
+                                  const GALGAS_onInstructionBranchList & in_mBranchList,
                                   const GALGAS_location & in_mEndOf_5F_on_5F_instruction
                                   COMMA_LOCATION_ARGS) ;
 
@@ -10333,6 +10338,7 @@ class cPtr_onInstructionAST : public cPtr_instructionAST {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mStartOf_5F_on_5F_instruction (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_onInstructionBranchList getter_mBranchList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_on_5F_instruction (LOCATION_ARGS) const ;
 //--- Description

@@ -1993,7 +1993,8 @@ class GALGAS_onInstructionIR : public GALGAS_abstractInstructionIR {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_onInstructionIR constructor_new (const class GALGAS_onInstructionBranchListIR & inOperand0
+  public : static GALGAS_onInstructionIR constructor_new (const class GALGAS_location & inOperand0,
+                                                          const class GALGAS_onInstructionBranchListIR & inOperand1
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2006,6 +2007,8 @@ class GALGAS_onInstructionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_onInstructionBranchListIR getter_mOnInstructionBranchListIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSelectInstructionLocation (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2026,16 +2029,19 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_onInstructionIR ;
 
 class cPtr_onInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
+  public : GALGAS_location mAttribute_mSelectInstructionLocation ;
   public : GALGAS_onInstructionBranchListIR mAttribute_mOnInstructionBranchListIR ;
 
 //--- Constructor
-  public : cPtr_onInstructionIR (const GALGAS_onInstructionBranchListIR & in_mOnInstructionBranchListIR
+  public : cPtr_onInstructionIR (const GALGAS_location & in_mSelectInstructionLocation,
+                                 const GALGAS_onInstructionBranchListIR & in_mOnInstructionBranchListIR
                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSelectInstructionLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_onInstructionBranchListIR getter_mOnInstructionBranchListIR (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
