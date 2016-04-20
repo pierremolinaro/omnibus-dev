@@ -78,7 +78,8 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
 #--- Mode map
   @modeMap procedureModeMap = {}
   for () in mProcedureModeList do
-    [!?procedureModeMap insertKey !mValue] ;
+    [ioContext.mModeMap searchKey !mValue]
+    [!?procedureModeMap insertKey !mValue]
   end
 #--- Enter in context
   let returnType = if mReturnTypeName.string == "" then

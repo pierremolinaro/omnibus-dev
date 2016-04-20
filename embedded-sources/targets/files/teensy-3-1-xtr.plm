@@ -12,7 +12,7 @@ extern public func `kernel blockOnDeadline (?deadline:inDeadline $uint32)
 extern public func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
 
 //--- Make task Ready
-extern public func `kernel `service makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
+extern public func `kernel `service `guard makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
 
 extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint32)
 
@@ -22,13 +22,13 @@ extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint
 
 opaqueType $guardList @instantiable : 32
 
-extern public func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
+extern public func `guard handleGuardedCommand (?!guard:ioGuard $guardList)
 
-extern public func `service handleGuardedCommand (?!guard:ioGuard $guardList)
-
-extern public func `service handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
+extern public func `guard handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
 
 extern public func `kernel `service guardDidChange (?!guard:ioGuard $guardList)
+
+extern public func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
 
 //——————————————————————————————————————————————————————————————————————————————
 //   INIT                                                                       
@@ -59,22 +59,22 @@ module time {
 
   //············································································
   
-  public func `panic `init waitOneMillisecondInPanicMode @noWarningIfUnused () {
+  public func `panic `init oneMillisecondBusyWait @noWarningIfUnused () {
     while not SYST_CSR.COUNTFLAG.bool do
     end
   }
 
   //············································································
   
-  public func `service `kernel `user millis @noWarningIfUnused () -> $uint32 {
+  public func `service `kernel `user `guard millis @noWarningIfUnused () -> $uint32 {
     result = self.mUptimeMS
   }
   
   //············································································
   
-  public func `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
+  public func `panic `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
     for delay $uint32 in 0 ..< inDelay do
-      self.waitOneMillisecondInPanicMode ()
+      self.oneMillisecondBusyWait ()
     end
   }
   
@@ -98,8 +98,10 @@ module time {
   
   //············································································
   
-  public func `user waitDuringMS @noWarningIfUnused (?delay: inDelay $uint32) {
-    self.waitUntilMS (!deadline:self.millis () + inDelay)
+  public primitive waitDuringMS @noWarningIfUnused (?delay: inDelay $uint32) {
+    if inDelay > 0 then
+      blockOnDeadline (!deadline:self.millis () +% inDelay)
+    end
   }
   
   //············································································

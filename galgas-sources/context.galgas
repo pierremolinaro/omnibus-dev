@@ -301,6 +301,7 @@ proc buildSemanticContext
   [!?outSemanticContext.mModeMap insertKey ![kernelModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![serviceModeName () nowhere]]
   [!?outSemanticContext.mModeMap insertKey ![userModeName () nowhere]]
+  [!?outSemanticContext.mModeMap insertKey ![guardModeName () nowhere]]
 #--- Enter init routines
   for initRoutine in inAST.mInitList do
     [initRoutine enterInContext !?context:outSemanticContext]
