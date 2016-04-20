@@ -212,7 +212,7 @@ proc guardSemanticAnalysis
       !self:inSelfType
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inContext
-      !modes:{!serviceModeName ()}
+      !modes:{!guardModeName ()}
       !allowPanic:true
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
@@ -480,7 +480,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
     !errorLocation:routineName.location
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
-    !requiredModeSet:{!serviceModeName ()}
+    !requiredModeSet:{!guardModeName ()}
     !allowPanic:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap

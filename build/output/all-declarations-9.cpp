@@ -1275,69 +1275,69 @@ static void extensionMethod_unifiedSelfCallInstructionAST_baseGuardAnalyze (cons
     }
     GALGAS_elementPtrList var_elementPtrList = GALGAS_elementPtrList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 359)) ;
     GALGAS_bool var_needsPublic = GALGAS_bool (false) ;
-    cEnumerator_lstringlist enumerator_14134 (var_propertyList, kEnumeration_up) ;
-    while (enumerator_14134.hasCurrentObject ()) {
+    cEnumerator_lstringlist enumerator_14132 (var_propertyList, kEnumeration_up) ;
+    while (enumerator_14132.hasCurrentObject ()) {
       switch (var_currentType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 362)).enumValue ()) {
       case GALGAS_typeKind::kNotBuilt:
         break ;
       case GALGAS_typeKind::kEnum_opaque:
         {
-          GALGAS_location location_1 (enumerator_14134.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_1 (enumerator_14132.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_1, GALGAS_string ("an opaque type does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 364)) ;
           var_currentType.drop () ; // Release error dropped variable
         }
         break ;
       case GALGAS_typeKind::kEnum_boolean:
         {
-          GALGAS_location location_2 (enumerator_14134.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_2 (enumerator_14132.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_2, GALGAS_string ("a boolean does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 366)) ;
           var_currentType.drop () ; // Release error dropped variable
         }
         break ;
       case GALGAS_typeKind::kEnum_staticInteger:
         {
-          GALGAS_location location_3 (enumerator_14134.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_3 (enumerator_14132.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_3, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 368)) ;
           var_currentType.drop () ; // Release error dropped variable
         }
         break ;
       case GALGAS_typeKind::kEnum_boolset:
         {
-          GALGAS_location location_4 (enumerator_14134.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_4 (enumerator_14132.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_4, GALGAS_string ("a boolset does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 370)) ;
           var_currentType.drop () ; // Release error dropped variable
         }
         break ;
       case GALGAS_typeKind::kEnum_literalString:
         {
-          GALGAS_location location_5 (enumerator_14134.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_5 (enumerator_14132.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_5, GALGAS_string ("a literal string does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 372)) ;
           var_currentType.drop () ; // Release error dropped variable
         }
         break ;
       case GALGAS_typeKind::kEnum_enumeration:
         {
-          GALGAS_location location_6 (enumerator_14134.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_6 (enumerator_14132.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_6, GALGAS_string ("an enumeration does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 374)) ;
           var_currentType.drop () ; // Release error dropped variable
         }
         break ;
       case GALGAS_typeKind::kEnum_integer:
         {
-          GALGAS_location location_7 (enumerator_14134.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_7 (enumerator_14132.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_7, GALGAS_string ("an integer does not handle field access")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 376)) ;
           var_currentType.drop () ; // Release error dropped variable
         }
         break ;
       case GALGAS_typeKind::kEnum_structure:
         {
-          const cEnumAssociatedValues_typeKind_structure * extractPtr_15343 = (const cEnumAssociatedValues_typeKind_structure *) (var_currentType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 362)).unsafePointer ()) ;
-          const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_15343->mAssociatedValue0 ;
+          const cEnumAssociatedValues_typeKind_structure * extractPtr_15341 = (const cEnumAssociatedValues_typeKind_structure *) (var_currentType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 362)).unsafePointer ()) ;
+          const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_15341->mAssociatedValue0 ;
           GALGAS_bool var_public ;
           GALGAS_unifiedTypeMap_2D_proxy var_propertyType ;
           GALGAS_uint var_idx ;
-          extractedValue_propertyMap.method_searchKey (enumerator_14134.current_mValue (HERE), var_public, var_propertyType, var_idx, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 378)) ;
-          var_elementPtrList.addAssign_operation (var_idx, enumerator_14134.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("declaration-guard.galgas", 379)) ;
+          extractedValue_propertyMap.method_searchKey (enumerator_14132.current_mValue (HERE), var_public, var_propertyType, var_idx, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 378)) ;
+          var_elementPtrList.addAssign_operation (var_idx, enumerator_14132.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("declaration-guard.galgas", 379)) ;
           var_currentType = var_propertyType ;
           GALGAS_bool test_8 = var_needsPublic ;
           if (kBoolTrue == test_8.boolEnum ()) {
@@ -1345,7 +1345,7 @@ static void extensionMethod_unifiedSelfCallInstructionAST_baseGuardAnalyze (cons
           }
           const enumGalgasBool test_9 = test_8.boolEnum () ;
           if (kBoolTrue == test_9) {
-            GALGAS_location location_10 (enumerator_14134.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            GALGAS_location location_10 (enumerator_14132.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
             inCompiler->emitSemanticError (location_10, GALGAS_string ("this property is not public")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 382)) ;
             var_currentType.drop () ; // Release error dropped variable
           }
@@ -1353,7 +1353,7 @@ static void extensionMethod_unifiedSelfCallInstructionAST_baseGuardAnalyze (cons
         }
         break ;
       }
-      enumerator_14134.gotoNextObject () ;
+      enumerator_14132.gotoNextObject () ;
     }
     GALGAS_objectInMemoryIR var_propertyAddressLLVMvar ;
     {
@@ -1433,18 +1433,18 @@ static void extensionMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (co
   GALGAS_unifiedTypeMap_2D_proxy var_receiverType ;
   GALGAS_objectInMemoryIR var_variableKind ;
   {
-  GALGAS_bool joker_18312_1 ; // Joker input parameter
-  GALGAS_bool joker_18369_4 ; // Joker input parameter
-  GALGAS_controlRegisterBitSliceAccessMap joker_18369_3 ; // Joker input parameter
-  GALGAS_bool joker_18369_2 ; // Joker input parameter
-  GALGAS_bool joker_18369_1 ; // Joker input parameter
-  ioArgument_ioVariableMap.setter_searchForReadAccess (var_receiverName, var_receiverType, joker_18312_1, var_variableKind, joker_18369_4, joker_18369_3, joker_18369_2, joker_18369_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 452)) ;
+  GALGAS_bool joker_18310_1 ; // Joker input parameter
+  GALGAS_bool joker_18367_4 ; // Joker input parameter
+  GALGAS_controlRegisterBitSliceAccessMap joker_18367_3 ; // Joker input parameter
+  GALGAS_bool joker_18367_2 ; // Joker input parameter
+  GALGAS_bool joker_18367_1 ; // Joker input parameter
+  ioArgument_ioVariableMap.setter_searchForReadAccess (var_receiverName, var_receiverType, joker_18310_1, var_variableKind, joker_18367_4, joker_18367_3, joker_18367_2, joker_18367_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 452)) ;
   }
-  cEnumerator_lstringlist enumerator_18412 (var_propertyList, kEnumeration_up) ;
-  while (enumerator_18412.hasCurrentObject ()) {
-    GALGAS_location location_0 (enumerator_18412.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+  cEnumerator_lstringlist enumerator_18410 (var_propertyList, kEnumeration_up) ;
+  while (enumerator_18410.hasCurrentObject ()) {
+    GALGAS_location location_0 (enumerator_18410.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
     inCompiler->emitSemanticError (location_0, GALGAS_string ("not handled yet (1)")  COMMA_SOURCE_FILE ("declaration-guard.galgas", 460)) ;
-    enumerator_18412.gotoNextObject () ;
+    enumerator_18410.gotoNextObject () ;
   }
   GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 462)) ;
   var_effectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 463)), extensionGetter_address (var_variableKind, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 463))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 463)) ;
@@ -1460,7 +1460,7 @@ static void extensionMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (co
   GALGAS_allocaList var_baseGuardAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 475)) ;
   {
   GALGAS_stringset temp_1 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-guard.galgas", 483)) ;
-  temp_1.addAssign_operation (function_serviceModeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 483))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 483)) ;
+  temp_1.addAssign_operation (function_guardModeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 483))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 483)) ;
   routine_analyzeEffectiveParameters (constinArgument_inSelfType, var_formalSignature, object->mAttribute_mEffectiveParameterList, var_routineName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, temp_1, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 476)) ;
   }
   outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 493)) ;

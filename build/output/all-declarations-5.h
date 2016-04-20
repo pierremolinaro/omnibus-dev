@@ -1465,6 +1465,15 @@ class GALGAS_string function_acceptVariableName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                              Function 'guardModeName'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_guardModeName (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                       Function 'guardNameForInvocationGraph'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1473,15 +1482,6 @@ class GALGAS_lstring function_guardNameForInvocationGraph (class GALGAS_unifiedT
                                                            class GALGAS_lstring inArgument1,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             Function 'serviceModeName'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_serviceModeName (class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2160,6 +2160,15 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_taskList inO
 
 class GALGAS_string function_kernelModeName (class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Function 'serviceModeName'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_serviceModeName (class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

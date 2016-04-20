@@ -235,12 +235,18 @@ module lcd {
   
   //············································································
   
+  public func `user clearScreen @noWarningIfUnused () {
+    self.write8bitCommand_inUserMode (!0x01)
+  }
+  
+  //············································································
+  
   // Line 0 : 00 -> 19
   // Line 1 : 64 -> 83
   // Line 2 : 20 -> 39
   // Line 3 : 84 -> 103
   
-  public func `user goto @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
+  public func `user goto @noWarningIfUnused (?line:inLine $uint2 ?column:inColumn $uint8) {
     if inColumn < 20 then
       if inLine == 0 then
         self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
@@ -248,16 +254,10 @@ module lcd {
         self.write8bitCommand_inUserMode (!0x80 + 64 + inColumn) ;
       elsif inLine == 2 then
         self.write8bitCommand_inUserMode (!0x80 + 20 + inColumn) ;
-      elsif inLine == 3 then
+      else
         self.write8bitCommand_inUserMode (!0x80 + 84 + inColumn) ;
       end
     end
-  }
-  
-  //············································································
-  
-  public func `user clearScreen @noWarningIfUnused () {
-    self.write8bitCommand_inUserMode (!0x01)
   }
   
   //············································································
@@ -304,8 +304,8 @@ module lcd {
   
   //············································································
   
-  public func `user printString @noWarningIfUnused (?inString $staticString) {
-    for c in inString do
+  public func `user printString @noWarningIfUnused (?inValue $staticString) {
+    for c in inValue do
       self.writeData_inUserMode (!c)
     end
   }
@@ -362,7 +362,7 @@ module lcd {
   //}
   
   //············································································
-  //   PANIC                                                                      
+  //   PANIC                                                                    
   //············································································
   
   func `panic programLcd4BitDataBusOutput_inPanicMode @noWarningIfUnused (?inValue $uint8) {
@@ -374,27 +374,17 @@ module lcd {
   
   //············································································
   
-  public func `panic waitMSInPanicMode @noWarningIfUnused (?duration: inDuration $uint32) {
-    var duration = inDuration
-    while duration > 0 do
-      time.waitOneMillisecondInPanicMode ()
-      duration -%= 1
-    end
-  }
-  
-  //············································································
-  
   func `panic writeDataInPanicMode @noWarningIfUnused (?inData $uint8) {
-    time.waitOneMillisecondInPanicMode () ;
+    time.oneMillisecondBusyWait () ;
     self.driveHighRS () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inData >> 4) ;
     self.driveHighE () ;
-    time.waitOneMillisecondInPanicMode () ;
+    time.oneMillisecondBusyWait () ;
     self.driveLowE () ;
-    time.waitOneMillisecondInPanicMode () ;
+    time.oneMillisecondBusyWait () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inData) ;
     self.driveHighE () ;
-    time.waitOneMillisecondInPanicMode () ;
+    time.oneMillisecondBusyWait () ;
     self.driveLowE () ;
   }
   
@@ -433,16 +423,16 @@ module lcd {
   //············································································
   
   func `panic write8bitCommandInPanicMode @noWarningIfUnused (?inCommand $uint8) {
-    time.waitOneMillisecondInPanicMode () ;
+    time.oneMillisecondBusyWait () ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inCommand >> 4) ;
     self.driveHighE () ;
-    time.waitOneMillisecondInPanicMode () ;
+    time.oneMillisecondBusyWait () ;
     self.driveLowE () ;
-    time.waitOneMillisecondInPanicMode () ;
+    time.oneMillisecondBusyWait () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inCommand) ;
     self.driveHighE () ;
-    time.waitOneMillisecondInPanicMode () ;
+    time.oneMillisecondBusyWait () ;
     self.driveLowE () ;
   }
   
@@ -466,7 +456,7 @@ module lcd {
   
   public func `panic clearScreenInPanicMode @noWarningIfUnused () {
     self.write8bitCommandInPanicMode (!0x01)
-    self.waitMSInPanicMode (!duration:4)
+    time.busyWaitingDuringMS (!4)
   }
   
   //············································································

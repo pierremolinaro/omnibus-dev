@@ -108,33 +108,538 @@ Vous pouvez ajouter vos propres routines \plm+init+. À chaque routine \plm+init
 
 \section{API}
 
-L'API de la cible \texttt{teensy-3-1-it} partagent les routines en trois groupes :
+L'API de la cible \texttt{teensy-3-1-it} regroupe les fonctions disponibles dans des modules et des types :
 \begin{itemize}
-  \item les routines appelables dans tous les modes ;
-  \item les routines appelables uniquement dans le mode \plm+`user+ (\refSubsectionPage{RoutinesTousModeTeensy31}) ;
-  \item les routines appelables uniquement dans le mode \plm+`panic+ ;
+  \item le module \plm=time=, la gestion du temps (\refSubsectionPage{moduleTime}) ;
+  \item le module \plm=leds=, la gestion des leds (\refSubsectionPage{moduleLeds}) ;
+  \item le module \plm=lcd=, la gestion de l'afficheur LCD (\refSubsectionPage{moduleLCD}) ;
+  \item le type \plm=$semaphore=, le sémaphore de Dijkstra (\refSubsectionPage{typeSemaphore}) ;
 \end{itemize}
 
-\subsectionLabel{Routines appelables dans tous les modes}{RoutinesTousModeTeensy31}
+\subsectionLabel{Module \texttt{time}}{moduleTime}
 
-Ces routines sont appelables dans les modes \plm+`user+, \plm+`isr+ et \plm+`panic+ :
-\begin{itemize}
-\item \texttt{ledOff} : \refSubsubsectionTitlePage{routineLedOffTeensy31it} ;
-\item \texttt{ledOn} : \refSubsubsectionTitlePage{routineLedOnTeensy31it}.
-\end{itemize}
+Le module \plm=time= regroupe des fonctions dédiées à la gestion du temps. Pour la cible \texttt{teensy-3-1-it}, le temps est compté en nombre de milli-secondes écoulées depuis le démarrage du micro-contrôleur. 
 
-
-\subsubsectionLabel{Routine \texttt{ledOff}}{routineLedOffTeensy31it}
+\subsubsection{Fonction \texttt{oneMillisecondBusyWait}}
 
 \begin{PLM}
-proc ledOff `user `panic `isr (?inLeds $uint32)
+  public func `panic `init oneMillisecondBusyWait ()
 \end{PLM}
 
-\subsubsectionLabel{Routine \texttt{ledOn}}{routineLedOnTeensy31it}
+Cette fonction réalise une attente active jusqu'à la prochaine milli-seconde. Elle n'est appelable que dans les modes \plm=`panic= et \plm=`init=. 
+
+
+
+
+
+\subsubsection{Fonction \texttt{busyWaitingDuringMS}}
 
 \begin{PLM}
-proc ledOn `user `panic `isr (?inLeds $uint32)
+  public func `panic `init busyWaitingDuringMS (?inDelay $uint32)
 \end{PLM}
+
+Cette fonction réalise une attente active en appelant \plm=inDelay= fois la fonction \plm=oneMillisecondBusyWait=. Elle n'est appelable que dans les modes \plm=`panic= et \plm=`init=. 
+
+
+
+
+
+\subsubsection{Primitive \texttt{waitUntilMS}}
+
+\begin{PLM}
+  public primitive waitUntilMS (?deadline: inDate $uint32)
+\end{PLM}
+
+Cette fonction réalise une attente passive jusqu'à la date absolue \plm=inDate=. 
+
+
+
+
+
+
+\subsubsection{Primitive \texttt{waitDuringMS}}
+
+\begin{PLM}
+  public primitive waitDuringMS (?delay: inDelay $uint32)
+\end{PLM}
+
+Cette fonction réalise une attente passive pendant \plm=inDelay= milli-secondes. 
+
+
+
+
+
+\subsubsection{Primitive \texttt{waitDuringMS}}
+
+\begin{PLM}
+  public primitive waitDuringMS (?delay: inDelay $uint32)
+\end{PLM}
+
+Cette fonction réalise une attente passive pendant \plm=inDelay= milli-secondes. 
+
+
+
+
+
+\subsubsection{Garde \texttt{waitUntilMS}}
+
+\begin{PLM}
+  public guard waitUntilMS (?deadline:inDeadline $uint32)
+\end{PLM}
+
+Cette fonction exprime l'attente passive en garde pendant \plm=inDelay= milli-secondes. 
+
+
+
+
+
+
+
+
+
+\subsectionLabel{Module \texttt{leds}}{moduleLeds}
+
+
+\subsubsection{Constantes}
+
+Les constantes suivantes sont de type \plm=$uint32= et sont dédiées aux leds : \plm=LED_L0=, \plm=LED_L1=, \plm=LED_L2=, \plm=LED_L3= et \plm=LED_L4=.
+
+
+\subsubsectionLabel{Fonction \texttt{off}}{routineLedOffTeensy31it}
+
+\begin{PLM}
+  public func `user `panic `service `kernel off (?inLeds $uint32) 
+\end{PLM}
+
+Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
+\begin{PLM}[1]
+  leds.off (!LED_L0)
+\end{PLM}
+
+ Pour éteindre plusieurs leds, utiliser l'opérateur \plm=|= :
+\begin{PLM}[1]
+  leds.off (!LED_L0 | LED_L4)
+\end{PLM}
+
+
+
+\subsubsectionLabel{Fonction \texttt{on}}{routineLedOnTeensy31it}
+
+\begin{PLM}
+  public func `user `panic `service `kernel on (?inLeds $uint32) 
+\end{PLM}
+
+Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
+\begin{PLM}[1]
+  leds.on (!LED_L0)
+\end{PLM}
+
+ Pour allumer plusieurs leds, utiliser l'opérateur \plm=|= :
+\begin{PLM}[1]
+  leds.on (!LED_L0 | LED_L4)
+\end{PLM}
+
+
+
+\subsubsectionLabel{Fonction \texttt{toggle}}{routineLedToggleTeensy31it}
+
+\begin{PLM}
+  public func `user `panic `service `kernel toggle (?inLeds $uint32) 
+\end{PLM}
+
+Cette routine complémente un ensemble de leds. Pour complémenter une led, écrire :
+\begin{PLM}[1]
+  leds.toggle (!LED_L0)
+\end{PLM}
+
+ Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|= :
+\begin{PLM}[1]
+  leds.toggle (!LED_L0 | LED_L4)
+\end{PLM}
+
+
+
+
+
+
+\subsectionLabel{Module \texttt{lcd}}{moduleLCD}
+
+
+\subsubsection{Fonction \texttt{clearScreen}}
+
+\begin{PLM}
+  public func `user clearScreen ()
+\end{PLM}
+
+Cette fonction efface l'afficheur LCD, et place le curseur au début de la première ligne.
+
+
+
+
+
+\subsubsection{Fonction \texttt{goto}}
+
+\begin{PLM}
+  public func `user goto (?line:inLine $uint2
+                          ?column:inColumn $uint8)
+\end{PLM}
+
+Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=inLine=. L'afficheur possédant quatre lignes, l'argument \plm=inLine= est de type \plm=$uint2=.
+
+
+
+
+\subsubsection{Fonction \texttt{printSpaces}}
+
+\begin{PLM}
+  public func `user printSpaces (?inCount $uint32)
+\end{PLM}
+
+Cette fonction écrit \plm=inCount= caractères espace à partir de la position du curseur.
+
+
+
+
+
+\subsubsection{Fonction \texttt{printUnsigned}}
+
+\begin{PLM}
+  public func `user printUnsigned (?inValue $uint32)
+\end{PLM}
+
+Cette fonction écrit la valeur de l'argument (un entier non signé sur 32 bits) \plm=inValue= à partir de la position du curseur.
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{printSigned}}
+
+\begin{PLM}
+  public func `user printSigned (?inValue $int32)
+\end{PLM}
+
+Cette fonction écrit la valeur de l'argument (un entier signé sur 32 bits) \plm=inValue= à partir de la position du curseur.
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{printString}}
+
+\begin{PLM}
+  public func `user printString (?inValue $staticString)
+\end{PLM}
+
+Cette fonction écrit la valeur de l'argument (une chaîne de caractères) \plm=inValue= à partir de la position du curseur.
+
+
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{clearScreenInPanicMode}}
+
+\begin{PLM}
+  public func `panic clearScreenInPanicMode ()
+\end{PLM}
+
+Cette fonction efface l'afficheur LCD, et place le curseur au début de la première ligne. Appelable uniquement en mode \plm=`panic=.
+
+
+
+
+
+\subsubsection{Fonction \texttt{gotoInPanicMode}}
+
+\begin{PLM}
+  public func `panic gotoInPanicMode (?line:inLine $uint2
+                                      ?column:inColumn $uint8)
+\end{PLM}
+
+Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=inLine=. L'afficheur possédant quatre lignes, l'argument \plm=inLine= est de type \plm=$uint2=. Appelable uniquement en mode \plm=`panic=.
+
+
+
+
+\subsubsection{Fonction \texttt{printSpacesInPanicMode}}
+
+\begin{PLM}
+  public func `panic printSpacesInPanicMode (?inCount $uint32)
+\end{PLM}
+
+Cette fonction écrit \plm=inCount= caractères espace à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
+
+
+
+
+
+\subsubsection{Fonction \texttt{printUnsignedInPanicMode}}
+
+\begin{PLM}
+  public func `panic printUnsignedInPanicMode (?inValue $uint32)
+\end{PLM}
+
+Cette fonction écrit la valeur de l'argument (un entier non signé sur 32 bits) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{printSignedInPanicMode}}
+
+\begin{PLM}
+  public func `panic printSignedInPanicMode (?inValue $int32)
+\end{PLM}
+
+Cette fonction écrit la valeur de l'argument (un entier signé sur 32 bits) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{printStringInPanicMode}}
+
+\begin{PLM}
+  public func `panic printStringInPanicMode (?inValue $staticString)
+\end{PLM}
+
+Cette fonction écrit la valeur de l'argument (une chaîne de caractères) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
+
+
+
+
+
+
+
+
+\subsectionLabel{Type \texttt{\$semaphore}}{typeSemaphore}
+
+Le type \plm=$semaphore= implémente le sémaphore de Dijstra. La liste des tâches bloquées est ordonnée selon leur priorité.
+
+
+La déclaration d'un sémaphore mentionne sa valeur initiale, qui est un entier non signé de 32 bits :
+
+\begin{PLM}[1]
+  var s = $semaphore (!value:0)
+\end{PLM}
+
+
+\subsubsection{Service \texttt{V}}
+
+\begin{PLM}
+  public service V ()
+\end{PLM}
+
+Ce service effectue l'opération \texttt{V} sur le sémaphore sur lequel il s'applique. C'est un service, car il est appelable à partir d'une tâche, d'une primitive, et d'une routine d'interruption.
+
+
+
+\subsubsection{Primitive \texttt{P}}
+
+\begin{PLM}
+  public primitive P () 
+\end{PLM}
+
+Cette primitive effectue l'opération \texttt{P} sur le sémaphore sur lequel il s'applique. C'est une primitive, car elle n'est pas appelable à partir d'une routine d'interruption.
+
+
+
+
+\subsubsection{Primitive \texttt{P\_until}}
+
+\begin{PLM}
+  public primitive P_until (?deadline:inDeadline $uint32) -> $bool
+\end{PLM}
+
+Cette primitive attend d'effectuer l'opération \texttt{P}, jusqu'à l'échéance \plm=inDeadline=. Elle renvoie \plm=true= si la primitive \texttt{P} a été effectuée, ou \plm=false= si l'échéance est arrivée.
+
+
+
+
+
+\subsubsection{Garde \texttt{P}}
+
+\begin{PLM}
+  public guard P () {
+\end{PLM}
+
+Cette primitive exprime l'opération \texttt{P} en garde.
+
+
+
+
+
+
+
+
+
+
+
+\subsectionLabel{Écriture des primitives, des services et des gardes}{EcriturePrimitivesServicesGardes}
+
+PLM définit deux types opaques et neuf fonctions externes\footnote{Externes à PLM, car écrites en C.} qui permettent d'écrire outils de synchronisation et gardes.
+
+\subsubsection{Type opaque \texttt{\$taskList}}
+
+Le type opaque \plm=$taskList= est utilisé pour maintenir la liste des tâches bloquées sur un outil de synchronisation.
+
+
+\subsubsection{Type opaque \texttt{\$guardList}}
+
+Le type opaque \plm=$guardList= est utilisé pour maintenir la liste des tâches qui ont invoqué une garde d'un outil de synchronisation.
+
+
+
+\subsubsection{Fonction \texttt{blockInList}}
+
+\begin{PLM}
+func `kernel blockInList (?!list:ioWaitingList $taskList)
+\end{PLM}
+
+Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= passée en argument. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
+
+
+
+
+\subsubsection{Fonction \texttt{blockOnDeadline}}
+
+\begin{PLM}
+func `kernel blockOnDeadline (?deadline:inDeadline $uint32) 
+\end{PLM}
+
+Cette fonction bloque la tâche en cours jusqu'à la date \plm=inDeadline=. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{blockInListAndOnDeadline}}
+
+\begin{PLM}
+func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList
+                                       ?deadline:inDeadline $uint32) 
+\end{PLM}
+
+Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= jusqu'à la date \plm=inDeadline=. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
+
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{makeTaskReady}}
+
+\begin{PLM}
+func `kernel `service `guard
+makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
+\end{PLM}
+
+Si la liste \plm=ioWaitingList= est vide, la fonction renvoie \plm=false=. Si la liste n'est pas vide, cette fonction retire de la liste la tâche de plus forte priorité, la rend prête, et la fonction renvoie \plm=true=.
+
+Cette fonction est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives, et en mode \plm=`service=, c'est-à-dire par les routines d'interruption.
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{makeTasksReadyFrom}}
+
+\begin{PLM}
+func `service
+makeTasksReadyFrom (?currentDate:inCurrentDate $uint32)
+\end{PLM}
+
+Cette fonction rend prête toutes les tâches en attente d'échéance dont l'échéance est atteinte.
+
+Cette fonction est appelable mode \plm=`service=, c'est-à-dire par les routines d'interruption.
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{handleGuardedCommand}}
+
+\begin{PLM}
+func `guard handleGuardedCommand (?!guard:ioGuard $guardList)
+\end{PLM}
+
+Cette fonction enregistre la tâche courante dans la liste \plm=ioGuard=. Cette fonction est appelable mode \plm=`guard=, c'est-à-dire par les gardes.
+
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{handleGuardedWaitUntil}}
+
+\begin{PLM}
+func `guard handleGuardedWaitUntil (?deadline:inDeadline $uint32)
+\end{PLM}
+
+Cette fonction enregistre la tâche courante pour une attente en garde jusqu'à la date \plm=inDeadline=. Cette fonction est appelable mode \plm=`guard=, c'est-à-dire par les gardes.
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{guardDidChange}}
+
+\begin{PLM}
+func `kernel `service guardDidChange (?!guard:ioGuard $guardList)
+\end{PLM}
+
+Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gardes doivent être re-évaluées. Cette fonction est appelable en mode \plm=`kernel= et en mode  \plm=`service=.
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Fonction \texttt{tickHandlerForGuardedWaitUntil}}
+
+\begin{PLM}
+func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
+\end{PLM}
+
+Cette fonction signifie aux tâches en attente d'échéance en garde que l'instant \plm=inCurrentDate= est atteint, et qu'elles doivent re-évaluer leur gardes. Cette fonction est appelable en mode \plm=`service=.
+
+
+
+
+
+
 
 
 \section{Les routines d'interruption}
