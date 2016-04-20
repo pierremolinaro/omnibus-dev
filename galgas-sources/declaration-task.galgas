@@ -136,6 +136,7 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @taskProcedureMap {
+  @bool mHasFormalArguments
   insert insertKey error message "the '%K' proc is already declared in %L"
   search searchKey error message "there is no '%K' proc"
 }
@@ -185,10 +186,15 @@ method @taskList enterInContext
     [task.mTaskProcList enterInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
     @taskProcedureMap taskProcedureMap = {}
     for procedure in task.mTaskProcList do
-      [!?taskProcedureMap insertKey !procedure.mProcedureName]
+      [!?taskProcedureMap insertKey !procedure.mProcedureName ![procedure.mProcedureFormalArgumentList length] > 0]
     end
     if not [taskProcedureMap hasKey !"loop"] then
       error task.mEndOfTaskDeclaration : "a task should declare an 'loop' procedure"
+    else
+      [taskProcedureMap searchKey !["loop" nowhere] ?let hasFormalArguments]
+      if hasFormalArguments then
+        error [taskProcedureMap locationForKey !"loop"] : "the 'loop' function should have no formal argument"
+      end
     end
     [!?ioContext.mTaskMap insertKey !task.mTaskName !taskProcedureMap]
   end

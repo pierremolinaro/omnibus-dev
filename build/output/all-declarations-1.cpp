@@ -10511,28 +10511,34 @@ GALGAS_taskInitSortedListAST GALGAS_taskInitSortedListAST::extractObject (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_taskProcedureMap::cMapElement_taskProcedureMap (const GALGAS_lstring & inKey
+cMapElement_taskProcedureMap::cMapElement_taskProcedureMap (const GALGAS_lstring & inKey,
+                                                            const GALGAS_bool & in_mHasFormalArguments
                                                             COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE) {
+cMapElement (inKey COMMA_THERE),
+mAttribute_mHasFormalArguments (in_mHasFormalArguments) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_taskProcedureMap::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mHasFormalArguments.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_taskProcedureMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_taskProcedureMap (mAttribute_lkey COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_taskProcedureMap (mAttribute_lkey, mAttribute_mHasFormalArguments COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_taskProcedureMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
+void cMapElement_taskProcedureMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mHasFormalArguments" ":" ;
+  mAttribute_mHasFormalArguments.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10540,6 +10546,9 @@ void cMapElement_taskProcedureMap::description (C_String & /* ioString */, const
 typeComparisonResult cMapElement_taskProcedureMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_taskProcedureMap * operand = (cMapElement_taskProcedureMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mHasFormalArguments.objectCompare (operand->mAttribute_mHasFormalArguments) ;
+  }
   return result ;
 }
 
@@ -10591,10 +10600,11 @@ GALGAS_taskProcedureMap GALGAS_taskProcedureMap::getter_overriddenMap (C_Compile
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskProcedureMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                   const GALGAS_bool & inArgument0,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   cMapElement_taskProcedureMap * p = NULL ;
-  macroMyNew (p, cMapElement_taskProcedureMap (inKey COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_taskProcedureMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -10606,10 +10616,11 @@ void GALGAS_taskProcedureMap::addAssign_operation (const GALGAS_lstring & inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskProcedureMap::setter_insertKey (GALGAS_lstring inKey,
+                                                GALGAS_bool inArgument0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   cMapElement_taskProcedureMap * p = NULL ;
-  macroMyNew (p, cMapElement_taskProcedureMap (inKey COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_taskProcedureMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -10625,6 +10636,7 @@ const char * kSearchErrorMessage_taskProcedureMap_searchKey = "there is no '%K' 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskProcedureMap::method_searchKey (GALGAS_lstring inKey,
+                                                GALGAS_bool & outArgument0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   const cMapElement_taskProcedureMap * p = (const cMapElement_taskProcedureMap *) performSearch (inKey,
@@ -10632,8 +10644,39 @@ void GALGAS_taskProcedureMap::method_searchKey (GALGAS_lstring inKey,
                                                                                                    kSearchErrorMessage_taskProcedureMap_searchKey
                                                                                                    COMMA_THERE) ;
   if (NULL == p) {
+    outArgument0.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_taskProcedureMap) ;
+    outArgument0 = p->mAttribute_mHasFormalArguments ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_taskProcedureMap::getter_mHasFormalArgumentsForKey (const GALGAS_string & inKey,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_taskProcedureMap * p = (const cMapElement_taskProcedureMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_taskProcedureMap) ;
+    result = p->mAttribute_mHasFormalArguments ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_taskProcedureMap::setter_setMHasFormalArgumentsForKey (GALGAS_bool inAttributeValue,
+                                                                   GALGAS_string inKey,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_taskProcedureMap * p = (cMapElement_taskProcedureMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_taskProcedureMap) ;
+    p->mAttribute_mHasFormalArguments = inAttributeValue ;
   }
 }
 
@@ -10660,7 +10703,7 @@ cGenericAbstractEnumerator () {
 GALGAS_taskProcedureMap_2D_element cEnumerator_taskProcedureMap::current (LOCATION_ARGS) const {
   const cMapElement_taskProcedureMap * p = (const cMapElement_taskProcedureMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_taskProcedureMap) ;
-  return GALGAS_taskProcedureMap_2D_element (p->mAttribute_lkey) ;
+  return GALGAS_taskProcedureMap_2D_element (p->mAttribute_lkey, p->mAttribute_mHasFormalArguments) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10669,6 +10712,14 @@ GALGAS_lstring cEnumerator_taskProcedureMap::current_lkey (LOCATION_ARGS) const 
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_taskProcedureMap::current_mHasFormalArguments (LOCATION_ARGS) const {
+  const cMapElement_taskProcedureMap * p = (const cMapElement_taskProcedureMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_taskProcedureMap) ;
+  return p->mAttribute_mHasFormalArguments ;
 }
 
 

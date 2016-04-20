@@ -176,9 +176,10 @@ private proc suppressInaccessibleSubprograms
   for init in ioIntermediateCodeStruct.mInitList do
     [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
   end
-#--- Tasks (init and loop)
+#--- Tasks (setup and loop)
   for task in ioIntermediateCodeStruct.mTaskMapIR do
     [task.mInitInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
+    outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + ".setup"
     outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + ".loop"
   end
 #--- Panic clauses (if panic code is generated)

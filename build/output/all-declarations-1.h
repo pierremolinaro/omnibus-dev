@@ -4227,23 +4227,35 @@ class GALGAS_taskProcedureMap : public AC_GALGAS_map {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                      const class GALGAS_bool & inOperand1,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
+                                                   class GALGAS_bool constinArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMHasFormalArgumentsForKey (class GALGAS_bool constinArgument0,
+                                                                      class GALGAS_string constinArgument1,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
+                                                   class GALGAS_bool & outArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHasFormalArgumentsForKey (const class GALGAS_string & constinOperand0,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_taskProcedureMap getter_overriddenMap (C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) const ;
 
@@ -4270,6 +4282,7 @@ class cEnumerator_taskProcedureMap : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mHasFormalArguments (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_taskProcedureMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -4286,9 +4299,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskProcedureMap ;
 
 class cMapElement_taskProcedureMap : public cMapElement {
 //--- Map attributes
+  public : GALGAS_bool mAttribute_mHasFormalArguments ;
 
 //--- Constructor
-  public : cMapElement_taskProcedureMap (const GALGAS_lstring & inKey
+  public : cMapElement_taskProcedureMap (const GALGAS_lstring & inKey,
+                                         const GALGAS_bool & in_mHasFormalArguments
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -4313,6 +4328,7 @@ class cMapElement_taskProcedureMap : public cMapElement {
 class GALGAS_taskProcedureMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_bool mAttribute_mHasFormalArguments ;
 
 
 //--------------------------------- Accessors
@@ -4329,7 +4345,8 @@ class GALGAS_taskProcedureMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_taskProcedureMap_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_taskProcedureMap_2D_element (const GALGAS_lstring & in_lkey) ;
+  public : GALGAS_taskProcedureMap_2D_element (const GALGAS_lstring & in_lkey,
+                                               const GALGAS_bool & in_mHasFormalArguments) ;
 
 //-- Start of generic part --*
 
@@ -4342,7 +4359,8 @@ class GALGAS_taskProcedureMap_2D_element : public AC_GALGAS_root {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_taskProcedureMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_taskProcedureMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                      const class GALGAS_bool & inOperand1
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4358,6 +4376,8 @@ class GALGAS_taskProcedureMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHasFormalArguments (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

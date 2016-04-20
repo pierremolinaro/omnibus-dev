@@ -180,7 +180,7 @@ L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la
 
 L'attribut \plm+@weak+ signifie que la routine peut être redéfinie par une routine de même nom, avec les mêmes arguments formels, les mêmes modes. Les fichiers de définition de cible utilisent cette possibilité pour définir des routines par défaut.
 
-Par exemple, la cible \texttt{teensy-3-1-it} définit cette routine d'interruption (voir le deuxième exemple du tutorial, \refSectionPage{deuxiemeExemple}) :
+%Par exemple, la cible \texttt{teensy-3-1-it} définit cette routine d'interruption (voir le deuxième exemple du tutorial, \refSectionPage{deuxiemeExemple}) :
 
 \begin{PLM}
 proc systickHandler `isr @weak () {
