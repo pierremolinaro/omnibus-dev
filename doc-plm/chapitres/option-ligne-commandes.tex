@@ -35,6 +35,10 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 
 \OPTION{-{}-verbose}, \OPTION{-v} Affiche des messages indiquant la progression de la compilation.
 
+\OPTION{-{}-Werror} Considère tout \emph{warning} comme une erreur.
+
+\OPTION{-{}-no-color} Les textes affichés sur le terminal sont sans l'enrichissement en couleur.
+
 
 
 
@@ -47,22 +51,54 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 \OPTION{-{}-no-panic-generation} Inhibe la génération du code de la panique organisée.
 
 
-
 \OPTION{-{}-no-file-generation} Inhibe l'écriture de fichiers par le compilateur.
 
+\OPTION{-{}-O1} Premier niveau d'optimisation (correspond à l'option \texttt{-O1} de LLVM).
+
+\OPTION{-{}-O2} Premier niveau d'optimisation (correspond à l'option \texttt{-O2} de LLVM).
+
+\OPTION{-{}-O3} Premier niveau d'optimisation (correspond à l'option \texttt{-O3} de LLVM).
+
+\OPTION{-{}-Os} Comme l'option \texttt{-{}-O2}, mais avec des optimisations supplémentaires pour réduire la taille (correspond à l'option \texttt{-Os} de LLVM).
+
+\OPTION{-{}-Oz} Comme l'option \texttt{-{}-Os}, mais avec encore d'autres optimisations pour réduire la taille (correspond à l'option \texttt{-Oz} de LLVM).
+
+
+
+\sectionLabel{Options de débogage}{optionsDebogage}
+
+\OPTION{-{}-output-concrete-syntax-tree} Engendre un fichier au format \texttt{dot} contenant l'arbre syntaxique concret du texte source.
 
 \OPTION{-{}-routine-invocation-graph}, \OPTION{-i} Engendre un fichier au format \texttt{dot} pouvant être ouvert par \texttt{graphviz}\index{graphviz} contenant le graphe d'invocation des routines.
 
-\OPTION{-{}-no-c-compilation}, \OPTION{-c} N'effectue ni la compilation du code C engendré, ni le flashage du micro-contrôleur cible.
+\OPTION{-{}-do-not-detect-recursive-calls}, \OPTION{-r} N'effectue pas la détection des routines récursives. Par défaut le compilateur affiche un message d'erreur si il trouve des routines récursives.\index{Routines!recursives@récursives}
+
+\OPTION{-{}-display-deadcode-elimination}, \OPTION{-z} Affiche sur le terminal les détails d'élimination du code mort.
+
+\OPTION{-{}-control-register-map} Écrit dans un fichier HTML la tables des registres de contrôle.
+
+\OPTION{-{}-global-constant-dependency-graph}, \OPTION{-c} Écrit dans un fichier au format \texttt{dot}  pouvant être ouvert par \texttt{graphviz}\index{graphviz} le graphe de dépendance des constantes statiques.
+
+\OPTION{-{}-routine-invocation-graph}, \OPTION{-i} Écrit dans un fichier au format \texttt{dot}  pouvant être ouvert par \texttt{graphviz}\index{graphviz} le graphe d'invocation des routines.
+
+\OPTION{-{}-type-dependency-graph}, \OPTION{-t} Écrit dans un fichier au format \texttt{dot}  pouvant être ouvert par \texttt{graphviz}\index{graphviz} le graphe de dépendance des types.
+
+\OPTION{-{}-mode=$string$}, où $string$ est l'une des chaînes suivantes : \texttt{lexical-only},\texttt{syntax-only},\texttt{latex}.
+
+\OPTION{-{}-output-keyword-list-file=$string$}, où $string$ est une chaîne décrivant le formatage de la sortie.
+
+
+
+
+
+
+
+
+
+\sectionLabel{Option de flashage du code engendré}{optionFlashageCodeEngendre}
 
 
 \OPTION{-{}-flash-target}, \OPTION{-f} Après une compilation sans erreur, effectue le flashage du micro-contrôleur cible.
-
-
-\OPTION{-{}-do-not-detect-recursive-calls}, \OPTION{-r} N'effectue pas la détection des routines récursives. Par défaut le compilateur affiche un message d'erreur si il trouve des routines récursives.\index{Routines!recursives@récursives}
-
-
-
 
 
 
