@@ -6849,6 +6849,9 @@ typeComparisonResult cPtr_onInstructionIR::dynamicObjectCompare (const acPtr_cla
   const cPtr_onInstructionIR * p = (const cPtr_onInstructionIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_onInstructionIR) ;
   if (kOperandEqual == result) {
+    result = mAttribute_mSelectInstructionLocation.objectCompare (p->mAttribute_mSelectInstructionLocation) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mOnInstructionBranchListIR.objectCompare (p->mAttribute_mOnInstructionBranchListIR) ;
   }
   return result ;
@@ -6882,7 +6885,8 @@ GALGAS_abstractInstructionIR () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_onInstructionIR GALGAS_onInstructionIR::constructor_default (LOCATION_ARGS) {
-  return GALGAS_onInstructionIR::constructor_new (GALGAS_onInstructionBranchListIR::constructor_emptyList (HERE)
+  return GALGAS_onInstructionIR::constructor_new (GALGAS_location::constructor_nowhere (HERE),
+                                                  GALGAS_onInstructionBranchListIR::constructor_emptyList (HERE)
                                                   COMMA_THERE) ;
 }
 
@@ -6895,13 +6899,32 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_onInstructionIR GALGAS_onInstructionIR::constructor_new (const GALGAS_onInstructionBranchListIR & inAttribute_mOnInstructionBranchListIR
+GALGAS_onInstructionIR GALGAS_onInstructionIR::constructor_new (const GALGAS_location & inAttribute_mSelectInstructionLocation,
+                                                                const GALGAS_onInstructionBranchListIR & inAttribute_mOnInstructionBranchListIR
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_onInstructionIR result ;
-  if (inAttribute_mOnInstructionBranchListIR.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_onInstructionIR (inAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
+  if (inAttribute_mSelectInstructionLocation.isValid () && inAttribute_mOnInstructionBranchListIR.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_onInstructionIR (inAttribute_mSelectInstructionLocation, inAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_onInstructionIR::getter_mSelectInstructionLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_onInstructionIR * p = (const cPtr_onInstructionIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_onInstructionIR) ;
+    result = p->mAttribute_mSelectInstructionLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_onInstructionIR::getter_mSelectInstructionLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSelectInstructionLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6926,9 +6949,11 @@ GALGAS_onInstructionBranchListIR cPtr_onInstructionIR::getter_mOnInstructionBran
 //                                      Pointer class for @onInstructionIR class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_onInstructionIR::cPtr_onInstructionIR (const GALGAS_onInstructionBranchListIR & in_mOnInstructionBranchListIR
+cPtr_onInstructionIR::cPtr_onInstructionIR (const GALGAS_location & in_mSelectInstructionLocation,
+                                            const GALGAS_onInstructionBranchListIR & in_mOnInstructionBranchListIR
                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
+mAttribute_mSelectInstructionLocation (in_mSelectInstructionLocation),
 mAttribute_mOnInstructionBranchListIR (in_mOnInstructionBranchListIR) {
 }
 
@@ -6941,6 +6966,8 @@ const C_galgas_type_descriptor * cPtr_onInstructionIR::classDescriptor (void) co
 void cPtr_onInstructionIR::description (C_String & ioString,
                                         const int32_t inIndentation) const {
   ioString << "[@onInstructionIR:" ;
+  mAttribute_mSelectInstructionLocation.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mOnInstructionBranchListIR.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
@@ -6949,7 +6976,7 @@ void cPtr_onInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_onInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_onInstructionIR (mAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_onInstructionIR (mAttribute_mSelectInstructionLocation, mAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
   return ptr ;
 }
 

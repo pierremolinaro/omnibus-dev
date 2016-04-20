@@ -19,6 +19,7 @@ list @onInstructionBranchList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @onInstructionAST : @instructionAST {
+  @location mStartOf_on_instruction
   @onInstructionBranchList mBranchList
   @location mEndOf_on_instruction
 }
@@ -90,6 +91,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $select$
+    let startLocation = @location.here
     @lstring startLabel
     select
       startLabel = .new {!"" !.here}
@@ -105,7 +107,7 @@ syntax extension common_syntax {
       onInstructionBranchList += !guardedCommand !instructionList !.here
     while
     end
-    ioInstructionList += !@onInstructionAST.new {!onInstructionBranchList !.here}
+    ioInstructionList += !@onInstructionAST.new {!startLocation !onInstructionBranchList !.here}
     $end$
     @lstring endLabel
     select
@@ -277,7 +279,7 @@ override method @onInstructionAST analyze
       !branchInstructionGenerationList
   end
 #--- Code generation
-  ioInstructionGenerationList += !@onInstructionIR.new {!onInstructionBranchListIR}
+  ioInstructionGenerationList += !@onInstructionIR.new {!mStartOf_on_instruction !onInstructionBranchListIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -384,6 +386,7 @@ list @onInstructionBranchListIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @onInstructionIR : @abstractInstructionIR {
+  @location mSelectInstructionLocation
   @onInstructionBranchListIR mOnInstructionBranchListIR
 }
 
@@ -402,6 +405,8 @@ override method @onInstructionIR llvmInstructionCode
   let startLabelName = startLabel + ".start" 
   ioLLVMcode += startLabelName + ":\n"
   let exitLabelName = startLabel + ".exit"
+  let selectLabelName = startLabel + ".select"
+  let errorLabelName = startLabel + ".error"
   var currentStartBranchLabel = startLabelName
   for branch in mOnInstructionBranchListIR do (idx)
     let acceptanceVarName = "%" + startLabel + ".accept." + idx 
@@ -471,8 +476,22 @@ override method @onInstructionIR llvmInstructionCode
     ioLLVMcode += rejectedLabelName + ":\n"
     currentStartBranchLabel = rejectedLabelName
   end
-  ioLLVMcode += "  call void @" + llvmNameForServiceCall (!waitForGuardChangeFunctionName ()) + " ()\n"
-  ioLLVMcode += "  br label %" + startLabelName + "\n\n"
+  ioLLVMcode += "  %" + selectLabelName + " = call i1 @" + llvmNameForServiceCall (!waitForGuardChangeFunctionName ()) + " ()\n"
+  ioLLVMcode += "  br i1 %" + selectLabelName + ", label %" + startLabelName + ", label %" + errorLabelName + "\n\n"
+  ioLLVMcode += errorLabelName + ":\n" # Error, all guards are closed
+  if [option plm_options.noPanicGeneration value] then
+    ioLLVMcode += "  br label %" + exitLabelName + "\n\n" # No panic generation, pass instruction
+  else
+    let panicCode = 255  # Panic generation, raise panic 255
+    [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+      ![[[mSelectInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
+      ?let staticStringIndex
+    ]
+    ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mSelectInstructionLocation line] + ", "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCode + ")\n"
+    ioLLVMcode += "  unreachable\n\n"
+  end
   ioLLVMcode += exitLabelName + ":\n"
 }
 

@@ -857,6 +857,9 @@ typeComparisonResult cPtr_onInstructionAST::dynamicObjectCompare (const acPtr_cl
   const cPtr_onInstructionAST * p = (const cPtr_onInstructionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_onInstructionAST) ;
   if (kOperandEqual == result) {
+    result = mAttribute_mStartOf_5F_on_5F_instruction.objectCompare (p->mAttribute_mStartOf_5F_on_5F_instruction) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mBranchList.objectCompare (p->mAttribute_mBranchList) ;
   }
   if (kOperandEqual == result) {
@@ -893,7 +896,8 @@ GALGAS_instructionAST () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_onInstructionAST GALGAS_onInstructionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_onInstructionAST::constructor_new (GALGAS_onInstructionBranchList::constructor_emptyList (HERE),
+  return GALGAS_onInstructionAST::constructor_new (GALGAS_location::constructor_nowhere (HERE),
+                                                   GALGAS_onInstructionBranchList::constructor_emptyList (HERE),
                                                    GALGAS_location::constructor_nowhere (HERE)
                                                    COMMA_THERE) ;
 }
@@ -907,14 +911,33 @@ GALGAS_instructionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_onInstructionAST GALGAS_onInstructionAST::constructor_new (const GALGAS_onInstructionBranchList & inAttribute_mBranchList,
+GALGAS_onInstructionAST GALGAS_onInstructionAST::constructor_new (const GALGAS_location & inAttribute_mStartOf_5F_on_5F_instruction,
+                                                                  const GALGAS_onInstructionBranchList & inAttribute_mBranchList,
                                                                   const GALGAS_location & inAttribute_mEndOf_5F_on_5F_instruction
                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_onInstructionAST result ;
-  if (inAttribute_mBranchList.isValid () && inAttribute_mEndOf_5F_on_5F_instruction.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_onInstructionAST (inAttribute_mBranchList, inAttribute_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
+  if (inAttribute_mStartOf_5F_on_5F_instruction.isValid () && inAttribute_mBranchList.isValid () && inAttribute_mEndOf_5F_on_5F_instruction.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_onInstructionAST (inAttribute_mStartOf_5F_on_5F_instruction, inAttribute_mBranchList, inAttribute_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_onInstructionAST::getter_mStartOf_5F_on_5F_instruction (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_onInstructionAST * p = (const cPtr_onInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_onInstructionAST) ;
+    result = p->mAttribute_mStartOf_5F_on_5F_instruction ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_onInstructionAST::getter_mStartOf_5F_on_5F_instruction (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mStartOf_5F_on_5F_instruction ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -957,10 +980,12 @@ GALGAS_location cPtr_onInstructionAST::getter_mEndOf_5F_on_5F_instruction (UNUSE
 //                                      Pointer class for @onInstructionAST class                                      *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_onInstructionAST::cPtr_onInstructionAST (const GALGAS_onInstructionBranchList & in_mBranchList,
+cPtr_onInstructionAST::cPtr_onInstructionAST (const GALGAS_location & in_mStartOf_5F_on_5F_instruction,
+                                              const GALGAS_onInstructionBranchList & in_mBranchList,
                                               const GALGAS_location & in_mEndOf_5F_on_5F_instruction
                                               COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (THERE),
+mAttribute_mStartOf_5F_on_5F_instruction (in_mStartOf_5F_on_5F_instruction),
 mAttribute_mBranchList (in_mBranchList),
 mAttribute_mEndOf_5F_on_5F_instruction (in_mEndOf_5F_on_5F_instruction) {
 }
@@ -974,6 +999,8 @@ const C_galgas_type_descriptor * cPtr_onInstructionAST::classDescriptor (void) c
 void cPtr_onInstructionAST::description (C_String & ioString,
                                          const int32_t inIndentation) const {
   ioString << "[@onInstructionAST:" ;
+  mAttribute_mStartOf_5F_on_5F_instruction.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mBranchList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mEndOf_5F_on_5F_instruction.description (ioString, inIndentation+1) ;
@@ -984,7 +1011,7 @@ void cPtr_onInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_onInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_onInstructionAST (mAttribute_mBranchList, mAttribute_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_onInstructionAST (mAttribute_mStartOf_5F_on_5F_instruction, mAttribute_mBranchList, mAttribute_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
   return ptr ;
 }
 

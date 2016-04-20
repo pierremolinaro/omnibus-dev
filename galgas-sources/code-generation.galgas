@@ -236,7 +236,7 @@ private proc generateCodeFiles
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
     serviceList += !llvmNameForServiceCall (!waitForGuardChange) !llvmNameForServiceImplementation (!waitForGuardChange)
-    generationAdds.mExternFunctionDeclarationSet += !"declare void @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
+    generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
   end
 #----------------------------------------- Sections
   [inIntermediateCodeStruct.mRoutineMapIR sectionCodeGeneration

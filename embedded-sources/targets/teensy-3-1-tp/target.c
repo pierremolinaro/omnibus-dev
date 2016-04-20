@@ -402,6 +402,7 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
     removeTaskFromGuards (taskControlBlockPtr) ;    
     if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
+      kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
       kernel_makeTaskReady (taskIndex) ;
       taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
     }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
@@ -412,17 +413,21 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void waitForGuardChange (void) asm ("service.call.waitForGuardChange") ;
+bool waitForGuardChange (void) asm ("service.call.waitForGuardChange") ;
 
-void kernel_waitForGuardChange (void) asm ("service.implementation.waitForGuardChange") ;
+bool kernel_waitForGuardChange (void) asm ("service.implementation.waitForGuardChange") ;
 
-void kernel_waitForGuardChange (void) {
-  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
-    gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;
-    kernel_makeNoTaskRunning () ;
-  }else{
-    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+bool kernel_waitForGuardChange (void) {
+  const bool result = gRunningTaskControlBlock->mGuardCount > 0 ;
+  if (result) {
+    if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
+      gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;
+      kernel_makeNoTaskRunning () ;
+    }else{
+      gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+    }
   }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -438,6 +443,7 @@ void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
     if (inUptime >= taskControlBlockPtr->mTaskDeadline) {
       removeTaskFromGuards (taskControlBlockPtr) ;
       if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
+        kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
         kernel_makeTaskReady (taskIndex) ;
         taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
       }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
