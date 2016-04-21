@@ -8,16 +8,16 @@ struct $monSemaphore {
 
   public service V () {
     let found = makeTaskReady (!?list:self.list)
-    if not found then
+    if not found :
       self.value += 1
     end
   }
 
   public primitive P_until (?deadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
-    if result then
+    if result :
       self.value -= 1
-    elsif inDeadline > time.millis () then 
+    elsif inDeadline > time.millis () : 
       blockInListAndOnDeadline (!?list:self.list !deadline:inDeadline)
     end
   }
@@ -63,7 +63,7 @@ task T2 priority 2 stackSize 512 {
 
   func loop () {
     let r = s.P_until (!deadline:self.top)
-    if r then
+    if r :
       leds.toggle (!LED_L1)
     else
       self.top += 400

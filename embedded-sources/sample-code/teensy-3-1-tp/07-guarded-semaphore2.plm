@@ -59,12 +59,12 @@ task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
   func loop () {
-    select
-    upon s0.P () :
+    sync
+    while s0.P () :
       leds.toggle  (!LED_L1)
-    upon PP () :
+    while PP () :
       leds.toggle  (!LED_L3)
-    upon convenienceWaitUntilMS (!deadline:self.deadline) :
+    while convenienceWaitUntilMS (!deadline:self.deadline) :
       self.deadline += 200
       leds.toggle  (!LED_L2)
     end

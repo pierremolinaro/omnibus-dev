@@ -11,6 +11,32 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   @guardKindGenerationIR enum, associated values                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnumAssociatedValues {
+  public : const GALGAS_allocaList mAssociatedValue0 ;
+  public : const GALGAS_instructionListIR mAssociatedValue1 ;
+  public : const GALGAS_string mAssociatedValue2 ;
+  public : const GALGAS_procCallEffectiveParameterListIR mAssociatedValue3 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (const GALGAS_allocaList & inAssociatedValue0,
+                                                                         const GALGAS_instructionListIR & inAssociatedValue1,
+                                                                         const GALGAS_string & inAssociatedValue2,
+                                                                         const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      @objectInMemoryIR enum, associated values                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3346,6 +3372,7 @@ void extensionMethod_generateCode (const class GALGAS_taskMapIR inObject,
                                    class GALGAS_string & io_ioLLVMcode,
                                    const class GALGAS_generationContext constin_inGenerationContext,
                                    class GALGAS_generationAdds & io_ioGenerationAdds,
+                                   class GALGAS__32_stringlist & io_ioServiceList,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 

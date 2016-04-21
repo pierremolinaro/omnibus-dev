@@ -31,7 +31,7 @@ syntax extension common_syntax {
     $..<$
     <expression> ?let @expressionAST upperBoundExpression
     let endOf_upperBoundExpression_instruction = @location.here
-    $do$
+    $:$
     <instructionList> ?let instructionList !?ioLabelMap
     let endOfInstruction = @location.here
     $end$

@@ -224,9 +224,6 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_required = "the 'required
 //--- Syntax error message for terminal '$section$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_section = "the 'section' keyword" ;
 
-//--- Syntax error message for terminal '$select$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique_select = "the 'select' keyword" ;
-
 //--- Syntax error message for terminal '$self$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_self = "the 'self' keyword" ;
 
@@ -239,14 +236,14 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_struct = "the 'struct' ke
 //--- Syntax error message for terminal '$stackSize$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_stackSize = "the 'stackSize' keyword" ;
 
+//--- Syntax error message for terminal '$sync$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_sync = "the 'sync' keyword" ;
+
 //--- Syntax error message for terminal '$target$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_target = "the 'target' keyword" ;
 
 //--- Syntax error message for terminal '$task$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_task = "the 'task' keyword" ;
-
-//--- Syntax error message for terminal '$then$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique_then = "the 'then' keyword" ;
 
 //--- Syntax error message for terminal '$true$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_true = "the 'true' keyword" ;
@@ -254,8 +251,8 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_true = "the 'true' keywor
 //--- Syntax error message for terminal '$truncate$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_truncate = "the 'truncate' keyword" ;
 
-//--- Syntax error message for terminal '$upon$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique_upon = "the 'upon' keyword" ;
+//--- Syntax error message for terminal '$until$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_until = "the 'until' keyword" ;
 
 //--- Syntax error message for terminal '$var$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_var = "the 'var' keyword" ;
@@ -421,7 +418,7 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__21__25__3D_ = "the '!%='
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const char * syntaxErrorMessageArray [115] = {kEndOfSourceLexicalErrorMessage,
+  static const char * syntaxErrorMessageArray [114] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_typeName,
@@ -472,17 +469,16 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_register,
     gSyntaxErrorMessage_plm_5F_lexique_required,
     gSyntaxErrorMessage_plm_5F_lexique_section,
-    gSyntaxErrorMessage_plm_5F_lexique_select,
     gSyntaxErrorMessage_plm_5F_lexique_self,
     gSyntaxErrorMessage_plm_5F_lexique_service,
     gSyntaxErrorMessage_plm_5F_lexique_struct,
     gSyntaxErrorMessage_plm_5F_lexique_stackSize,
+    gSyntaxErrorMessage_plm_5F_lexique_sync,
     gSyntaxErrorMessage_plm_5F_lexique_target,
     gSyntaxErrorMessage_plm_5F_lexique_task,
-    gSyntaxErrorMessage_plm_5F_lexique_then,
     gSyntaxErrorMessage_plm_5F_lexique_true,
     gSyntaxErrorMessage_plm_5F_lexique_truncate,
-    gSyntaxErrorMessage_plm_5F_lexique_upon,
+    gSyntaxErrorMessage_plm_5F_lexique_until,
     gSyntaxErrorMessage_plm_5F_lexique_var,
     gSyntaxErrorMessage_plm_5F_lexique_when,
     gSyntaxErrorMessage_plm_5F_lexique_while,
@@ -1261,17 +1257,6 @@ static const utf32 kUnicodeString_plm_5F_lexique_section [] = {
   TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$select$'
-static const utf32 kUnicodeString_plm_5F_lexique_select [] = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (0)
-} ;
-
 //--- Unicode string for '$self$'
 static const utf32 kUnicodeString_plm_5F_lexique_self [] = {
   TO_UNICODE ('s'),
@@ -1318,6 +1303,15 @@ static const utf32 kUnicodeString_plm_5F_lexique_struct [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$sync$'
+static const utf32 kUnicodeString_plm_5F_lexique_sync [] = {
+  TO_UNICODE ('s'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('c'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$target$'
 static const utf32 kUnicodeString_plm_5F_lexique_target [] = {
   TO_UNICODE ('t'),
@@ -1335,15 +1329,6 @@ static const utf32 kUnicodeString_plm_5F_lexique_task [] = {
   TO_UNICODE ('a'),
   TO_UNICODE ('s'),
   TO_UNICODE ('k'),
-  TO_UNICODE (0)
-} ;
-
-//--- Unicode string for '$then$'
-static const utf32 kUnicodeString_plm_5F_lexique_then [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
   TO_UNICODE (0)
 } ;
 
@@ -1369,12 +1354,13 @@ static const utf32 kUnicodeString_plm_5F_lexique_truncate [] = {
   TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$upon$'
-static const utf32 kUnicodeString_plm_5F_lexique_upon [] = {
+//--- Unicode string for '$until$'
+static const utf32 kUnicodeString_plm_5F_lexique_until [] = {
   TO_UNICODE ('u'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('o'),
   TO_UNICODE ('n'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('l'),
   TO_UNICODE (0)
 } ;
 
@@ -1510,7 +1496,7 @@ int16_t C_Lexique_plm_5F_lexique::search_into_delimitorsList (const C_String & i
 //             Key words table 'keyWordList'                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int32_t ktable_size_plm_5F_lexique_keyWordList = 54 ;
+static const int32_t ktable_size_plm_5F_lexique_keyWordList = 53 ;
 
 static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [ktable_size_plm_5F_lexique_keyWordList] = {
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_at, 2, C_Lexique_plm_5F_lexique::kToken_at),
@@ -1533,16 +1519,16 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_func, 4, C_Lexique_plm_5F_lexique::kToken_func),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_init, 4, C_Lexique_plm_5F_lexique::kToken_init),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_self, 4, C_Lexique_plm_5F_lexique::kToken_self),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_sync, 4, C_Lexique_plm_5F_lexique::kToken_sync),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_task, 4, C_Lexique_plm_5F_lexique::kToken_task),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_then, 4, C_Lexique_plm_5F_lexique::kToken_then),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_true, 4, C_Lexique_plm_5F_lexique::kToken_true),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_upon, 4, C_Lexique_plm_5F_lexique::kToken_upon),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_when, 4, C_Lexique_plm_5F_lexique::kToken_when),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_check, 5, C_Lexique_plm_5F_lexique::kToken_check),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_elsif, 5, C_Lexique_plm_5F_lexique::kToken_elsif),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_false, 5, C_Lexique_plm_5F_lexique::kToken_false),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_guard, 5, C_Lexique_plm_5F_lexique::kToken_guard),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_panic, 5, C_Lexique_plm_5F_lexique::kToken_panic),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_until, 5, C_Lexique_plm_5F_lexique::kToken_until),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_while, 5, C_Lexique_plm_5F_lexique::kToken_while),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_assert, 6, C_Lexique_plm_5F_lexique::kToken_assert),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_extend, 6, C_Lexique_plm_5F_lexique::kToken_extend),
@@ -1550,7 +1536,6 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_import, 6, C_Lexique_plm_5F_lexique::kToken_import),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_module, 6, C_Lexique_plm_5F_lexique::kToken_module),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_public, 6, C_Lexique_plm_5F_lexique::kToken_public),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_select, 6, C_Lexique_plm_5F_lexique::kToken_select),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_struct, 6, C_Lexique_plm_5F_lexique::kToken_struct),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_target, 6, C_Lexique_plm_5F_lexique::kToken_target),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_boolset, 7, C_Lexique_plm_5F_lexique::kToken_boolset),
@@ -1858,11 +1843,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("section") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken_select:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("select") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
     case kToken_self:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("self") ;
@@ -1883,6 +1863,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("stackSize") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken_sync:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("sync") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken_target:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("target") ;
@@ -1891,11 +1876,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_task:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("task") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
-    case kToken_then:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("then") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_true:
@@ -1908,9 +1888,9 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("truncate") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken_upon:
+    case kToken_until:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("upon") ;
+      s.appendCString ("until") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_var:
@@ -2749,17 +2729,16 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("register") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("required") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("section") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("select") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("self") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("service") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("struct") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("stackSize") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("sync") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("target") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("task") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("then") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("true") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("truncate") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("upon") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("until") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("var") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("when") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("while") COMMA_THERE) ;
@@ -2903,16 +2882,16 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.addObject ("func") ;
     ioList.addObject ("init") ;
     ioList.addObject ("self") ;
+    ioList.addObject ("sync") ;
     ioList.addObject ("task") ;
-    ioList.addObject ("then") ;
     ioList.addObject ("true") ;
-    ioList.addObject ("upon") ;
     ioList.addObject ("when") ;
     ioList.addObject ("check") ;
     ioList.addObject ("elsif") ;
     ioList.addObject ("false") ;
     ioList.addObject ("guard") ;
     ioList.addObject ("panic") ;
+    ioList.addObject ("until") ;
     ioList.addObject ("while") ;
     ioList.addObject ("assert") ;
     ioList.addObject ("extend") ;
@@ -2920,7 +2899,6 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.addObject ("import") ;
     ioList.addObject ("module") ;
     ioList.addObject ("public") ;
-    ioList.addObject ("select") ;
     ioList.addObject ("struct") ;
     ioList.addObject ("target") ;
     ioList.addObject ("boolset") ;
@@ -2952,7 +2930,7 @@ __attribute__ ((unused)) (getKeywordLists_plm_5F_lexique, getKeywordsForIdentifi
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [115] = {0,
+  static const uint32_t kTerminalSymbolStyles [114] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_typeName */,
@@ -3003,17 +2981,16 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_register */,
     1 /* plm_lexique_1_required */,
     1 /* plm_lexique_1_section */,
-    1 /* plm_lexique_1_select */,
     1 /* plm_lexique_1_self */,
     1 /* plm_lexique_1_service */,
     1 /* plm_lexique_1_struct */,
     1 /* plm_lexique_1_stackSize */,
+    1 /* plm_lexique_1_sync */,
     1 /* plm_lexique_1_target */,
     1 /* plm_lexique_1_task */,
-    1 /* plm_lexique_1_then */,
     1 /* plm_lexique_1_true */,
     1 /* plm_lexique_1_truncate */,
-    1 /* plm_lexique_1_upon */,
+    1 /* plm_lexique_1_until */,
     1 /* plm_lexique_1_var */,
     1 /* plm_lexique_1_when */,
     1 /* plm_lexique_1_while */,
@@ -11887,6 +11864,7 @@ class cCollectionElement_taskList : public cCollectionElement {
                                         const GALGAS_taskVarListAST & in_mVarList,
                                         const GALGAS_procedureDeclarationListAST & in_mTaskProcList,
                                         const GALGAS_taskInitListAST & in_mTaskInitListAST,
+                                        const GALGAS_selectInstructionBranchList & in_mGuardedCommandList,
                                         const GALGAS_location & in_mEndOfTaskDeclaration
                                         COMMA_LOCATION_ARGS) ;
 
@@ -11911,10 +11889,11 @@ cCollectionElement_taskList::cCollectionElement_taskList (const GALGAS_lstring &
                                                           const GALGAS_taskVarListAST & in_mVarList,
                                                           const GALGAS_procedureDeclarationListAST & in_mTaskProcList,
                                                           const GALGAS_taskInitListAST & in_mTaskInitListAST,
+                                                          const GALGAS_selectInstructionBranchList & in_mGuardedCommandList,
                                                           const GALGAS_location & in_mEndOfTaskDeclaration
                                                           COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mTaskName, in_mPriority, in_mStackSize, in_mVarList, in_mTaskProcList, in_mTaskInitListAST, in_mEndOfTaskDeclaration) {
+mObject (in_mTaskName, in_mPriority, in_mStackSize, in_mVarList, in_mTaskProcList, in_mTaskInitListAST, in_mGuardedCommandList, in_mEndOfTaskDeclaration) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11927,7 +11906,7 @@ bool cCollectionElement_taskList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_taskList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_taskList (mObject.mAttribute_mTaskName, mObject.mAttribute_mPriority, mObject.mAttribute_mStackSize, mObject.mAttribute_mVarList, mObject.mAttribute_mTaskProcList, mObject.mAttribute_mTaskInitListAST, mObject.mAttribute_mEndOfTaskDeclaration COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_taskList (mObject.mAttribute_mTaskName, mObject.mAttribute_mPriority, mObject.mAttribute_mStackSize, mObject.mAttribute_mVarList, mObject.mAttribute_mTaskProcList, mObject.mAttribute_mTaskInitListAST, mObject.mAttribute_mGuardedCommandList, mObject.mAttribute_mEndOfTaskDeclaration COMMA_HERE)) ;
   return result ;
 }
 
@@ -11958,6 +11937,10 @@ void cCollectionElement_taskList::description (C_String & ioString, const int32_
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mTaskInitListAST" ":" ;
   mObject.mAttribute_mTaskInitListAST.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mGuardedCommandList" ":" ;
+  mObject.mAttribute_mGuardedCommandList.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mEndOfTaskDeclaration" ":" ;
@@ -12003,13 +11986,14 @@ GALGAS_taskList GALGAS_taskList::constructor_listWithValue (const GALGAS_lstring
                                                             const GALGAS_taskVarListAST & inOperand3,
                                                             const GALGAS_procedureDeclarationListAST & inOperand4,
                                                             const GALGAS_taskInitListAST & inOperand5,
-                                                            const GALGAS_location & inOperand6
+                                                            const GALGAS_selectInstructionBranchList & inOperand6,
+                                                            const GALGAS_location & inOperand7
                                                             COMMA_LOCATION_ARGS) {
   GALGAS_taskList result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_taskList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6 COMMA_THERE) ;
+    GALGAS_taskList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -12024,6 +12008,7 @@ void GALGAS_taskList::makeAttributesFromObjects (capCollectionElement & outAttri
                                                  const GALGAS_taskVarListAST & in_mVarList,
                                                  const GALGAS_procedureDeclarationListAST & in_mTaskProcList,
                                                  const GALGAS_taskInitListAST & in_mTaskInitListAST,
+                                                 const GALGAS_selectInstructionBranchList & in_mGuardedCommandList,
                                                  const GALGAS_location & in_mEndOfTaskDeclaration
                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement_taskList * p = NULL ;
@@ -12033,6 +12018,7 @@ void GALGAS_taskList::makeAttributesFromObjects (capCollectionElement & outAttri
                                               in_mVarList,
                                               in_mTaskProcList,
                                               in_mTaskInitListAST,
+                                              in_mGuardedCommandList,
                                               in_mEndOfTaskDeclaration COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -12046,11 +12032,12 @@ void GALGAS_taskList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                            const GALGAS_taskVarListAST & inOperand3,
                                            const GALGAS_procedureDeclarationListAST & inOperand4,
                                            const GALGAS_taskInitListAST & inOperand5,
-                                           const GALGAS_location & inOperand6
+                                           const GALGAS_selectInstructionBranchList & inOperand6,
+                                           const GALGAS_location & inOperand7
                                            COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_taskList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_taskList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -12066,13 +12053,14 @@ void GALGAS_taskList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                             const GALGAS_taskVarListAST inOperand3,
                                             const GALGAS_procedureDeclarationListAST inOperand4,
                                             const GALGAS_taskInitListAST inOperand5,
-                                            const GALGAS_location inOperand6,
+                                            const GALGAS_selectInstructionBranchList inOperand6,
+                                            const GALGAS_location inOperand7,
                                             const GALGAS_uint inInsertionIndex,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_taskList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_taskList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -12088,7 +12076,8 @@ void GALGAS_taskList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                             GALGAS_taskVarListAST & outOperand3,
                                             GALGAS_procedureDeclarationListAST & outOperand4,
                                             GALGAS_taskInitListAST & outOperand5,
-                                            GALGAS_location & outOperand6,
+                                            GALGAS_selectInstructionBranchList & outOperand6,
+                                            GALGAS_location & outOperand7,
                                             const GALGAS_uint inRemoveIndex,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
@@ -12104,6 +12093,7 @@ void GALGAS_taskList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
       outOperand4.drop () ;
       outOperand5.drop () ;
       outOperand6.drop () ;
+      outOperand7.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_taskList) ;
       outOperand0 = p->mObject.mAttribute_mTaskName ;
@@ -12112,7 +12102,8 @@ void GALGAS_taskList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
       outOperand3 = p->mObject.mAttribute_mVarList ;
       outOperand4 = p->mObject.mAttribute_mTaskProcList ;
       outOperand5 = p->mObject.mAttribute_mTaskInitListAST ;
-      outOperand6 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
+      outOperand6 = p->mObject.mAttribute_mGuardedCommandList ;
+      outOperand7 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
     }
   }
 }
@@ -12125,7 +12116,8 @@ void GALGAS_taskList::setter_popFirst (GALGAS_lstring & outOperand0,
                                        GALGAS_taskVarListAST & outOperand3,
                                        GALGAS_procedureDeclarationListAST & outOperand4,
                                        GALGAS_taskInitListAST & outOperand5,
-                                       GALGAS_location & outOperand6,
+                                       GALGAS_selectInstructionBranchList & outOperand6,
+                                       GALGAS_location & outOperand7,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -12139,6 +12131,7 @@ void GALGAS_taskList::setter_popFirst (GALGAS_lstring & outOperand0,
     outOperand4.drop () ;
     outOperand5.drop () ;
     outOperand6.drop () ;
+    outOperand7.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_taskList) ;
     outOperand0 = p->mObject.mAttribute_mTaskName ;
@@ -12147,7 +12140,8 @@ void GALGAS_taskList::setter_popFirst (GALGAS_lstring & outOperand0,
     outOperand3 = p->mObject.mAttribute_mVarList ;
     outOperand4 = p->mObject.mAttribute_mTaskProcList ;
     outOperand5 = p->mObject.mAttribute_mTaskInitListAST ;
-    outOperand6 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
+    outOperand6 = p->mObject.mAttribute_mGuardedCommandList ;
+    outOperand7 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
   }
 }
 
@@ -12159,7 +12153,8 @@ void GALGAS_taskList::setter_popLast (GALGAS_lstring & outOperand0,
                                       GALGAS_taskVarListAST & outOperand3,
                                       GALGAS_procedureDeclarationListAST & outOperand4,
                                       GALGAS_taskInitListAST & outOperand5,
-                                      GALGAS_location & outOperand6,
+                                      GALGAS_selectInstructionBranchList & outOperand6,
+                                      GALGAS_location & outOperand7,
                                       C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -12173,6 +12168,7 @@ void GALGAS_taskList::setter_popLast (GALGAS_lstring & outOperand0,
     outOperand4.drop () ;
     outOperand5.drop () ;
     outOperand6.drop () ;
+    outOperand7.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_taskList) ;
     outOperand0 = p->mObject.mAttribute_mTaskName ;
@@ -12181,7 +12177,8 @@ void GALGAS_taskList::setter_popLast (GALGAS_lstring & outOperand0,
     outOperand3 = p->mObject.mAttribute_mVarList ;
     outOperand4 = p->mObject.mAttribute_mTaskProcList ;
     outOperand5 = p->mObject.mAttribute_mTaskInitListAST ;
-    outOperand6 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
+    outOperand6 = p->mObject.mAttribute_mGuardedCommandList ;
+    outOperand7 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
   }
 }
 
@@ -12193,7 +12190,8 @@ void GALGAS_taskList::method_first (GALGAS_lstring & outOperand0,
                                     GALGAS_taskVarListAST & outOperand3,
                                     GALGAS_procedureDeclarationListAST & outOperand4,
                                     GALGAS_taskInitListAST & outOperand5,
-                                    GALGAS_location & outOperand6,
+                                    GALGAS_selectInstructionBranchList & outOperand6,
+                                    GALGAS_location & outOperand7,
                                     C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -12207,6 +12205,7 @@ void GALGAS_taskList::method_first (GALGAS_lstring & outOperand0,
     outOperand4.drop () ;
     outOperand5.drop () ;
     outOperand6.drop () ;
+    outOperand7.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_taskList) ;
     outOperand0 = p->mObject.mAttribute_mTaskName ;
@@ -12215,7 +12214,8 @@ void GALGAS_taskList::method_first (GALGAS_lstring & outOperand0,
     outOperand3 = p->mObject.mAttribute_mVarList ;
     outOperand4 = p->mObject.mAttribute_mTaskProcList ;
     outOperand5 = p->mObject.mAttribute_mTaskInitListAST ;
-    outOperand6 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
+    outOperand6 = p->mObject.mAttribute_mGuardedCommandList ;
+    outOperand7 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
   }
 }
 
@@ -12227,7 +12227,8 @@ void GALGAS_taskList::method_last (GALGAS_lstring & outOperand0,
                                    GALGAS_taskVarListAST & outOperand3,
                                    GALGAS_procedureDeclarationListAST & outOperand4,
                                    GALGAS_taskInitListAST & outOperand5,
-                                   GALGAS_location & outOperand6,
+                                   GALGAS_selectInstructionBranchList & outOperand6,
+                                   GALGAS_location & outOperand7,
                                    C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -12241,6 +12242,7 @@ void GALGAS_taskList::method_last (GALGAS_lstring & outOperand0,
     outOperand4.drop () ;
     outOperand5.drop () ;
     outOperand6.drop () ;
+    outOperand7.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_taskList) ;
     outOperand0 = p->mObject.mAttribute_mTaskName ;
@@ -12249,7 +12251,8 @@ void GALGAS_taskList::method_last (GALGAS_lstring & outOperand0,
     outOperand3 = p->mObject.mAttribute_mVarList ;
     outOperand4 = p->mObject.mAttribute_mTaskProcList ;
     outOperand5 = p->mObject.mAttribute_mTaskInitListAST ;
-    outOperand6 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
+    outOperand6 = p->mObject.mAttribute_mGuardedCommandList ;
+    outOperand7 = p->mObject.mAttribute_mEndOfTaskDeclaration ;
   }
 }
 
@@ -12396,6 +12399,21 @@ GALGAS_taskInitListAST GALGAS_taskList::getter_mTaskInitListASTAtIndex (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_selectInstructionBranchList GALGAS_taskList::getter_mGuardedCommandListAtIndex (const GALGAS_uint & inIndex,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
+  GALGAS_selectInstructionBranchList result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_taskList) ;
+    result = p->mObject.mAttribute_mGuardedCommandList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_location GALGAS_taskList::getter_mEndOfTaskDeclarationAtIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) const {
@@ -12474,6 +12492,14 @@ GALGAS_taskInitListAST cEnumerator_taskList::current_mTaskInitListAST (LOCATION_
   const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_taskList) ;
   return p->mObject.mAttribute_mTaskInitListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_selectInstructionBranchList cEnumerator_taskList::current_mGuardedCommandList (LOCATION_ARGS) const {
+  const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_taskList) ;
+  return p->mObject.mAttribute_mGuardedCommandList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13647,151 +13673,169 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i11_parse (C_Le
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i12_ (GALGAS_ast & ioArgument_ioAST,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_task) COMMA_SOURCE_FILE ("declaration-task.galgas", 51)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_task) COMMA_SOURCE_FILE ("declaration-task.galgas", 52)) ;
   GALGAS_lstring var_taskName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 52)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_priority) COMMA_SOURCE_FILE ("declaration-task.galgas", 53)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 53)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_priority) COMMA_SOURCE_FILE ("declaration-task.galgas", 54)) ;
   GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 54)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_stackSize) COMMA_SOURCE_FILE ("declaration-task.galgas", 55)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 55)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_stackSize) COMMA_SOURCE_FILE ("declaration-task.galgas", 56)) ;
   GALGAS_lbigint var_stackSize = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 56)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 57)) ;
-  GALGAS_taskVarListAST var_taskVarList = GALGAS_taskVarListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 58)) ;
-  GALGAS_procedureDeclarationListAST var_taskProcList = GALGAS_procedureDeclarationListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 59)) ;
-  GALGAS_taskInitListAST var_taskInitListAST = GALGAS_taskInitListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 60)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 57)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 58)) ;
+  GALGAS_taskVarListAST var_taskVarList = GALGAS_taskVarListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 59)) ;
+  GALGAS_procedureDeclarationListAST var_taskProcList = GALGAS_procedureDeclarationListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 60)) ;
+  GALGAS_taskInitListAST var_taskInitListAST = GALGAS_taskInitListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 61)) ;
+  GALGAS_selectInstructionBranchList var_branchList = GALGAS_selectInstructionBranchList::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 62)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_25 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("declaration-task.galgas", 63)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("declaration-task.galgas", 65)) ;
       GALGAS_lstring var_varName = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 64)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 66)) ;
       GALGAS_lstring var_typeName ;
       switch (select_common_5F_syntax_26 (inCompiler)) {
       case 1: {
-        var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-task.galgas", 67)) ;
+        var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-task.galgas", 69)) ;
       } break ;
       case 2: {
         var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-task.galgas", 69)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-task.galgas", 71)) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 71)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 73)) ;
       GALGAS_expressionAST var_initExpression ;
       nt_expression_ (var_initExpression, inCompiler) ;
-      var_taskVarList.addAssign_operation (var_varName, var_typeName, var_initExpression  COMMA_SOURCE_FILE ("declaration-task.galgas", 73)) ;
+      var_taskVarList.addAssign_operation (var_varName, var_typeName, var_initExpression  COMMA_SOURCE_FILE ("declaration-task.galgas", 75)) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-task.galgas", 75)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-task.galgas", 77)) ;
       GALGAS_lstring var_procName = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 76)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 78)) ;
       GALGAS_procFormalArgumentList var_formalArgumentList ;
       nt_procedure_5F_formal_5F_arguments_ (var_formalArgumentList, inCompiler) ;
       GALGAS_lstring var_returnTypeName ;
       switch (select_common_5F_syntax_27 (inCompiler)) {
       case 1: {
-        var_returnTypeName = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 80)) ;
+        var_returnTypeName = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 82)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("declaration-task.galgas", 82)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("declaration-task.galgas", 84)) ;
         var_returnTypeName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-task.galgas", 83)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-task.galgas", 85)) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 85)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 87)) ;
       GALGAS_instructionListAST var_instructionList ;
-      GALGAS_labelMap joker_2878 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 86)) ;
-      nt_instructionList_ (var_instructionList, joker_2878, inCompiler) ;
-      GALGAS_location var_endOfProc = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 87)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 88)) ;
-      var_taskProcList.addAssign_operation (GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 89)), GALGAS_bool (false), var_procName, GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 89)), var_formalArgumentList, var_returnTypeName, var_instructionList, var_endOfProc  COMMA_SOURCE_FILE ("declaration-task.galgas", 89)) ;
+      GALGAS_labelMap joker_2978 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 88)) ;
+      nt_instructionList_ (var_instructionList, joker_2978, inCompiler) ;
+      GALGAS_location var_endOfProc = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 89)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 90)) ;
+      var_taskProcList.addAssign_operation (GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 91)), GALGAS_bool (false), var_procName, GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 91)), var_formalArgumentList, var_returnTypeName, var_instructionList, var_endOfProc  COMMA_SOURCE_FILE ("declaration-task.galgas", 91)) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-task.galgas", 91)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-task.galgas", 93)) ;
       GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 92)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 93)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 94)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 95)) ;
       GALGAS_instructionListAST var_instructionList ;
-      GALGAS_labelMap joker_3157 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 94)) ;
-      nt_instructionList_ (var_instructionList, joker_3157, inCompiler) ;
-      GALGAS_location var_endOfInit = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 95)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 96)) ;
-      var_taskInitListAST.addAssign_operation (var_priority, var_instructionList, var_endOfInit  COMMA_SOURCE_FILE ("declaration-task.galgas", 97)) ;
+      GALGAS_labelMap joker_3257 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 96)) ;
+      nt_instructionList_ (var_instructionList, joker_3257, inCompiler) ;
+      GALGAS_location var_endOfInit = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 97)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 98)) ;
+      var_taskInitListAST.addAssign_operation (var_priority, var_instructionList, var_endOfInit  COMMA_SOURCE_FILE ("declaration-task.galgas", 99)) ;
+    } break ;
+    case 5: {
+      GALGAS_guardedCommand var_guardedCommand ;
+      nt_guarded_5F_command_ (var_guardedCommand, inCompiler) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 102)) ;
+      GALGAS_instructionListAST var_instructionList ;
+      GALGAS_labelMap joker_3496 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 103)) ;
+      nt_instructionList_ (var_instructionList, joker_3496, inCompiler) ;
+      GALGAS_location var_endOfInstructions = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 104)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 105)) ;
+      var_branchList.addAssign_operation (var_guardedCommand, var_instructionList, var_endOfInstructions  COMMA_SOURCE_FILE ("declaration-task.galgas", 106)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  GALGAS_location var_endOfTask = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 99)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 100)) ;
-  ioArgument_ioAST.mAttribute_mTaskList.addAssign_operation (var_taskName, var_priority, var_stackSize, var_taskVarList, var_taskProcList, var_taskInitListAST, var_endOfTask  COMMA_SOURCE_FILE ("declaration-task.galgas", 101)) ;
+  GALGAS_location var_endOfTask = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 108)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 109)) ;
+  ioArgument_ioAST.mAttribute_mTaskList.addAssign_operation (var_taskName, var_priority, var_stackSize, var_taskVarList, var_taskProcList, var_taskInitListAST, var_branchList, var_endOfTask  COMMA_SOURCE_FILE ("declaration-task.galgas", 110)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i12_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_task) COMMA_SOURCE_FILE ("declaration-task.galgas", 51)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 52)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_priority) COMMA_SOURCE_FILE ("declaration-task.galgas", 53)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 54)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_stackSize) COMMA_SOURCE_FILE ("declaration-task.galgas", 55)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 56)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 57)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_task) COMMA_SOURCE_FILE ("declaration-task.galgas", 52)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 53)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_priority) COMMA_SOURCE_FILE ("declaration-task.galgas", 54)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 55)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_stackSize) COMMA_SOURCE_FILE ("declaration-task.galgas", 56)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 57)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 58)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_25 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("declaration-task.galgas", 63)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 64)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("declaration-task.galgas", 65)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 66)) ;
       switch (select_common_5F_syntax_26 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-task.galgas", 69)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-task.galgas", 71)) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 71)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 73)) ;
       nt_expression_parse (inCompiler) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-task.galgas", 75)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 76)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-task.galgas", 77)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-task.galgas", 78)) ;
       nt_procedure_5F_formal_5F_arguments_parse (inCompiler) ;
       switch (select_common_5F_syntax_27 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("declaration-task.galgas", 82)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-task.galgas", 83)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("declaration-task.galgas", 84)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-task.galgas", 85)) ;
       } break ;
       default:
         break ;
       }
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 85)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 87)) ;
       nt_instructionList_parse (inCompiler) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 88)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 90)) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-task.galgas", 91)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 92)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 93)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-task.galgas", 93)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 94)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 95)) ;
       nt_instructionList_parse (inCompiler) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 96)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 98)) ;
+    } break ;
+    case 5: {
+      nt_guarded_5F_command_parse (inCompiler) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 102)) ;
+      nt_instructionList_parse (inCompiler) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 105)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 100)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 109)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -16290,7 +16334,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_if_5F_instruction_i76_ (GAL
   GALGAS_expressionAST var_testExpression ;
   nt_expression_ (var_testExpression, inCompiler) ;
   GALGAS_location var_testExpressionEndLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 51)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_then) COMMA_SOURCE_FILE ("instruction-if.galgas", 52)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-if.galgas", 52)) ;
   GALGAS_instructionListAST var_thenInstructionList ;
   nt_instructionList_ (var_thenInstructionList, ioArgument_ioLabelMap, inCompiler) ;
   GALGAS_location var_endOfThenBranch = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 54)) ;
@@ -16370,7 +16414,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_if_5F_instruction_i76_ (GAL
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_if_5F_instruction_i76_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   nt_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_then) COMMA_SOURCE_FILE ("instruction-if.galgas", 52)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-if.galgas", 52)) ;
   nt_instructionList_parse (inCompiler) ;
   switch (select_common_5F_syntax_67 (inCompiler)) {
   case 1: {
@@ -16414,55 +16458,79 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_guarded_5F_command_i77_ (GA
   outArgument_outGuardedCommand.drop () ; // Release 'out' argument
   switch (select_common_5F_syntax_70 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_when) COMMA_SOURCE_FILE ("instruction-select.galgas", 37)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_when) COMMA_SOURCE_FILE ("instruction-select.galgas", 46)) ;
     GALGAS_expressionAST var_expression ;
     nt_expression_ (var_expression, inCompiler) ;
-    GALGAS_location var_endOfExp = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 39)) ;
+    GALGAS_location var_endOfExp = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 48)) ;
     switch (select_common_5F_syntax_71 (inCompiler)) {
     case 1: {
-      outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_boolean (var_expression, var_endOfExp  COMMA_SOURCE_FILE ("instruction-select.galgas", 41)) ;
+      outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_boolean (var_expression, var_endOfExp  COMMA_SOURCE_FILE ("instruction-select.galgas", 50)) ;
     } break ;
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_upon) COMMA_SOURCE_FILE ("instruction-select.galgas", 43)) ;
-      GALGAS_lstring var_guardName = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 44)) ;
-      GALGAS_effectiveParameterListAST var_effectiveParameterList ;
-      nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
-      outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_boolAndSync (var_expression, var_endOfExp, GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 49)), var_guardName, var_effectiveParameterList  COMMA_SOURCE_FILE ("instruction-select.galgas", 46)) ;
-    } break ;
-    case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_upon) COMMA_SOURCE_FILE ("instruction-select.galgas", 54)) ;
-      GALGAS_lstring var_receiverName = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 55)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-select.galgas", 56)) ;
-      GALGAS_lstring var_guardName = inCompiler->synthetizedAttribute_tokenString () ;
+      switch (select_common_5F_syntax_72 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_until) COMMA_SOURCE_FILE ("instruction-select.galgas", 53)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_while) COMMA_SOURCE_FILE ("instruction-select.galgas", 55)) ;
+      } break ;
+      default:
+        break ;
+      }
+      GALGAS_lstring var_name = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 57)) ;
-      GALGAS_effectiveParameterListAST var_effectiveParameterList ;
-      nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
-      outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_boolAndSync (var_expression, var_endOfExp, var_receiverName, var_guardName, var_effectiveParameterList  COMMA_SOURCE_FILE ("instruction-select.galgas", 59)) ;
+      switch (select_common_5F_syntax_73 (inCompiler)) {
+      case 1: {
+        GALGAS_effectiveParameterListAST var_effectiveParameterList ;
+        nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
+        outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_boolAndSync (var_expression, var_endOfExp, GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 63)), var_name, var_effectiveParameterList  COMMA_SOURCE_FILE ("instruction-select.galgas", 60)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-select.galgas", 68)) ;
+        GALGAS_lstring var_guardName = inCompiler->synthetizedAttribute_tokenString () ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 69)) ;
+        GALGAS_effectiveParameterListAST var_effectiveParameterList ;
+        nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
+        outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_boolAndSync (var_expression, var_endOfExp, var_name, var_guardName, var_effectiveParameterList  COMMA_SOURCE_FILE ("instruction-select.galgas", 71)) ;
+      } break ;
+      default:
+        break ;
+      }
     } break ;
     default:
       break ;
     }
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_upon) COMMA_SOURCE_FILE ("instruction-select.galgas", 68)) ;
-    GALGAS_lstring var_guardName = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 69)) ;
-    GALGAS_effectiveParameterListAST var_effectiveParameterList ;
-    nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
-    outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_synchronization (GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 72)), var_guardName, var_effectiveParameterList  COMMA_SOURCE_FILE ("instruction-select.galgas", 71)) ;
-  } break ;
-  case 3: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_upon) COMMA_SOURCE_FILE ("instruction-select.galgas", 77)) ;
-    GALGAS_lstring var_receiverName = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 78)) ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-select.galgas", 79)) ;
-    GALGAS_lstring var_guardName = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 80)) ;
-    GALGAS_effectiveParameterListAST var_effectiveParameterList ;
-    nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
-    outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_synchronization (var_receiverName, var_guardName, var_effectiveParameterList  COMMA_SOURCE_FILE ("instruction-select.galgas", 82)) ;
+    switch (select_common_5F_syntax_74 (inCompiler)) {
+    case 1: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_until) COMMA_SOURCE_FILE ("instruction-select.galgas", 82)) ;
+    } break ;
+    case 2: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_while) COMMA_SOURCE_FILE ("instruction-select.galgas", 84)) ;
+    } break ;
+    default:
+      break ;
+    }
+    GALGAS_lstring var_name = inCompiler->synthetizedAttribute_tokenString () ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 86)) ;
+    switch (select_common_5F_syntax_75 (inCompiler)) {
+    case 1: {
+      GALGAS_effectiveParameterListAST var_effectiveParameterList ;
+      nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
+      outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_synchronization (GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 90)), var_name, var_effectiveParameterList  COMMA_SOURCE_FILE ("instruction-select.galgas", 89)) ;
+    } break ;
+    case 2: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-select.galgas", 95)) ;
+      GALGAS_lstring var_guardName = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 96)) ;
+      GALGAS_effectiveParameterListAST var_effectiveParameterList ;
+      nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
+      outArgument_outGuardedCommand = GALGAS_guardedCommand::constructor_synchronization (var_name, var_guardName, var_effectiveParameterList  COMMA_SOURCE_FILE ("instruction-select.galgas", 98)) ;
+    } break ;
+    default:
+      break ;
+    }
   } break ;
   default:
     break ;
@@ -16474,38 +16542,64 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_guarded_5F_command_i77_ (GA
 void cParser_common_5F_syntax::rule_common_5F_syntax_guarded_5F_command_i77_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   switch (select_common_5F_syntax_70 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_when) COMMA_SOURCE_FILE ("instruction-select.galgas", 37)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_when) COMMA_SOURCE_FILE ("instruction-select.galgas", 46)) ;
     nt_expression_parse (inCompiler) ;
     switch (select_common_5F_syntax_71 (inCompiler)) {
     case 1: {
     } break ;
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_upon) COMMA_SOURCE_FILE ("instruction-select.galgas", 43)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 44)) ;
-      nt_effective_5F_parameters_parse (inCompiler) ;
-    } break ;
-    case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_upon) COMMA_SOURCE_FILE ("instruction-select.galgas", 54)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 55)) ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-select.galgas", 56)) ;
+      switch (select_common_5F_syntax_72 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_until) COMMA_SOURCE_FILE ("instruction-select.galgas", 53)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_while) COMMA_SOURCE_FILE ("instruction-select.galgas", 55)) ;
+      } break ;
+      default:
+        break ;
+      }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 57)) ;
-      nt_effective_5F_parameters_parse (inCompiler) ;
+      switch (select_common_5F_syntax_73 (inCompiler)) {
+      case 1: {
+        nt_effective_5F_parameters_parse (inCompiler) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-select.galgas", 68)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 69)) ;
+        nt_effective_5F_parameters_parse (inCompiler) ;
+      } break ;
+      default:
+        break ;
+      }
     } break ;
     default:
       break ;
     }
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_upon) COMMA_SOURCE_FILE ("instruction-select.galgas", 68)) ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 69)) ;
-    nt_effective_5F_parameters_parse (inCompiler) ;
-  } break ;
-  case 3: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_upon) COMMA_SOURCE_FILE ("instruction-select.galgas", 77)) ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 78)) ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-select.galgas", 79)) ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 80)) ;
-    nt_effective_5F_parameters_parse (inCompiler) ;
+    switch (select_common_5F_syntax_74 (inCompiler)) {
+    case 1: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_until) COMMA_SOURCE_FILE ("instruction-select.galgas", 82)) ;
+    } break ;
+    case 2: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_while) COMMA_SOURCE_FILE ("instruction-select.galgas", 84)) ;
+    } break ;
+    default:
+      break ;
+    }
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 86)) ;
+    switch (select_common_5F_syntax_75 (inCompiler)) {
+    case 1: {
+      nt_effective_5F_parameters_parse (inCompiler) ;
+    } break ;
+    case 2: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-select.galgas", 95)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-select.galgas", 96)) ;
+      nt_effective_5F_parameters_parse (inCompiler) ;
+    } break ;
+    default:
+      break ;
+    }
   } break ;
   default:
     break ;
@@ -16518,33 +16612,33 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_guarded_5F_command_i77_pars
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_ (GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                        GALGAS_labelMap & ioArgument_ioLabelMap,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_select) COMMA_SOURCE_FILE ("instruction-select.galgas", 93)) ;
-  GALGAS_location var_startLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 94)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_sync) COMMA_SOURCE_FILE ("instruction-select.galgas", 110)) ;
+  GALGAS_location var_startLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 111)) ;
   GALGAS_lstring var_startLabel ;
-  switch (select_common_5F_syntax_72 (inCompiler)) {
+  switch (select_common_5F_syntax_76 (inCompiler)) {
   case 1: {
-    var_startLabel = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 97))  COMMA_SOURCE_FILE ("instruction-select.galgas", 97)) ;
+    var_startLabel = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 114))  COMMA_SOURCE_FILE ("instruction-select.galgas", 114)) ;
   } break ;
   case 2: {
     var_startLabel = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-select.galgas", 99)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-select.galgas", 116)) ;
     {
-    ioArgument_ioLabelMap.setter_insertKey (var_startLabel, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 100)) ;
+    ioArgument_ioLabelMap.setter_insertKey (var_startLabel, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 117)) ;
     }
   } break ;
   default:
     break ;
   }
-  GALGAS_onInstructionBranchList var_onInstructionBranchList = GALGAS_onInstructionBranchList::constructor_emptyList (SOURCE_FILE ("instruction-select.galgas", 102)) ;
+  GALGAS_selectInstructionBranchList var_onInstructionBranchList = GALGAS_selectInstructionBranchList::constructor_emptyList (SOURCE_FILE ("instruction-select.galgas", 119)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     GALGAS_guardedCommand var_guardedCommand ;
     nt_guarded_5F_command_ (var_guardedCommand, inCompiler) ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-select.galgas", 105)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-select.galgas", 122)) ;
     GALGAS_instructionListAST var_instructionList ;
     nt_instructionList_ (var_instructionList, ioArgument_ioLabelMap, inCompiler) ;
-    var_onInstructionBranchList.addAssign_operation (var_guardedCommand, var_instructionList, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 107))  COMMA_SOURCE_FILE ("instruction-select.galgas", 107)) ;
-    switch (select_common_5F_syntax_73 (inCompiler)) {
+    var_onInstructionBranchList.addAssign_operation (var_guardedCommand, var_instructionList, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 124))  COMMA_SOURCE_FILE ("instruction-select.galgas", 124)) ;
+    switch (select_common_5F_syntax_77 (inCompiler)) {
     case 2: {
     } break ;
     default:
@@ -16552,16 +16646,16 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_ (GALGAS_in
       break ;
     }
   }
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_onInstructionAST::constructor_new (var_startLocation, var_onInstructionBranchList, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 110))  COMMA_SOURCE_FILE ("instruction-select.galgas", 110))  COMMA_SOURCE_FILE ("instruction-select.galgas", 110)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-select.galgas", 111)) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_selectInstructionAST::constructor_new (var_startLocation, var_onInstructionBranchList, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 127))  COMMA_SOURCE_FILE ("instruction-select.galgas", 127))  COMMA_SOURCE_FILE ("instruction-select.galgas", 127)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-select.galgas", 128)) ;
   GALGAS_lstring var_endLabel ;
-  switch (select_common_5F_syntax_74 (inCompiler)) {
+  switch (select_common_5F_syntax_78 (inCompiler)) {
   case 1: {
-    var_endLabel = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 114))  COMMA_SOURCE_FILE ("instruction-select.galgas", 114)) ;
+    var_endLabel = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 131))  COMMA_SOURCE_FILE ("instruction-select.galgas", 131)) ;
   } break ;
   case 2: {
     var_endLabel = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-select.galgas", 116)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-select.galgas", 133)) ;
   } break ;
   default:
     break ;
@@ -16571,24 +16665,24 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_ (GALGAS_in
     GALGAS_string temp_2 ;
     const enumGalgasBool test_3 = GALGAS_bool (kIsNotEqual, var_startLabel.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_3) {
-      temp_2 = GALGAS_string ("@").add_operation (var_startLabel.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 120)) ;
+      temp_2 = GALGAS_string ("@").add_operation (var_startLabel.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 137)) ;
     }else if (kBoolFalse == test_3) {
       temp_2 = GALGAS_string ("empty") ;
     }
     GALGAS_location location_4 (var_endLabel.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_4, GALGAS_string ("'end' label does not match 'on' label, it should be ").add_operation (temp_2, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 119))  COMMA_SOURCE_FILE ("instruction-select.galgas", 119)) ;
+    inCompiler->emitSemanticError (location_4, GALGAS_string ("'end' label does not match 'on' label, it should be ").add_operation (temp_2, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 136))  COMMA_SOURCE_FILE ("instruction-select.galgas", 136)) ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_select) COMMA_SOURCE_FILE ("instruction-select.galgas", 93)) ;
-  switch (select_common_5F_syntax_72 (inCompiler)) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_sync) COMMA_SOURCE_FILE ("instruction-select.galgas", 110)) ;
+  switch (select_common_5F_syntax_76 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-select.galgas", 99)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-select.galgas", 116)) ;
   } break ;
   default:
     break ;
@@ -16596,9 +16690,9 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_parse (C_Le
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     nt_guarded_5F_command_parse (inCompiler) ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-select.galgas", 105)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-select.galgas", 122)) ;
     nt_instructionList_parse (inCompiler) ;
-    switch (select_common_5F_syntax_73 (inCompiler)) {
+    switch (select_common_5F_syntax_77 (inCompiler)) {
     case 2: {
     } break ;
     default:
@@ -16606,12 +16700,12 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_parse (C_Le
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-select.galgas", 111)) ;
-  switch (select_common_5F_syntax_74 (inCompiler)) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-select.galgas", 128)) ;
+  switch (select_common_5F_syntax_78 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-select.galgas", 116)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-select.galgas", 133)) ;
   } break ;
   default:
     break ;
@@ -16650,7 +16744,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_routine_5F_call_i80_ (GALGA
     GALGAS_lstring var_routineName = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 66)) ;
     var_propertyList.addAssign_operation (var_routineName  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 67)) ;
-    switch (select_common_5F_syntax_75 (inCompiler)) {
+    switch (select_common_5F_syntax_79 (inCompiler)) {
     case 2: {
     } break ;
     default:
@@ -16671,7 +16765,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_routine_5F_call_i80_parse (
   while (repeatFlag_0) {
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 65)) ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 66)) ;
-    switch (select_common_5F_syntax_75 (inCompiler)) {
+    switch (select_common_5F_syntax_79 (inCompiler)) {
     case 2: {
     } break ;
     default:
@@ -16699,7 +16793,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_routine_5F_call_i81_ (GALGA
     GALGAS_lstring var_propertyName = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 85)) ;
     var_propertyList.addAssign_operation (var_propertyName  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 86)) ;
-    switch (select_common_5F_syntax_76 (inCompiler)) {
+    switch (select_common_5F_syntax_80 (inCompiler)) {
     case 2: {
     } break ;
     default:
@@ -16720,7 +16814,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_routine_5F_call_i81_parse (
   while (repeatFlag_0) {
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 84)) ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 85)) ;
-    switch (select_common_5F_syntax_76 (inCompiler)) {
+    switch (select_common_5F_syntax_80 (inCompiler)) {
     case 2: {
     } break ;
     default:
@@ -16761,7 +16855,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_effective_5F_parameters_i83
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__28_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 111)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_77 (inCompiler)) {
+    switch (select_common_5F_syntax_81 (inCompiler)) {
     case 2: {
       GALGAS_lstring var_selector = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 114)) ;
@@ -16796,7 +16890,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_effective_5F_parameters_i83
       GALGAS_lstring var_selector = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3F_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 132)) ;
       GALGAS_bool var_constant ;
-      switch (select_common_5F_syntax_78 (inCompiler)) {
+      switch (select_common_5F_syntax_82 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 135)) ;
         var_constant = GALGAS_bool (false) ;
@@ -16811,7 +16905,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_effective_5F_parameters_i83
       GALGAS_lstring var_effectiveParameterName = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 141)) ;
       GALGAS_lstring var_typeName ;
-      switch (select_common_5F_syntax_79 (inCompiler)) {
+      switch (select_common_5F_syntax_83 (inCompiler)) {
       case 1: {
         var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("instruction-proc-call.galgas", 144)) ;
       } break ;
@@ -16838,7 +16932,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_effective_5F_parameters_i83
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__28_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 111)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_77 (inCompiler)) {
+    switch (select_common_5F_syntax_81 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 114)) ;
       nt_expression_parse (inCompiler) ;
@@ -16859,7 +16953,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_effective_5F_parameters_i83
     } break ;
     case 6: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3F_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 132)) ;
-      switch (select_common_5F_syntax_78 (inCompiler)) {
+      switch (select_common_5F_syntax_82 (inCompiler)) {
       case 1: {
         inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 135)) ;
       } break ;
@@ -16870,7 +16964,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_effective_5F_parameters_i83
         break ;
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 141)) ;
-      switch (select_common_5F_syntax_79 (inCompiler)) {
+      switch (select_common_5F_syntax_83 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
@@ -16894,17 +16988,18 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_effective_5F_parameters_i83
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i84_ (GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                        GALGAS_labelMap & ioArgument_ioLabelMap,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_while) COMMA_SOURCE_FILE ("instruction-while.galgas", 21)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-while.galgas", 21)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_while) COMMA_SOURCE_FILE ("instruction-while.galgas", 22)) ;
   GALGAS_lstring var_whileLabel ;
-  switch (select_common_5F_syntax_80 (inCompiler)) {
+  switch (select_common_5F_syntax_84 (inCompiler)) {
   case 1: {
-    var_whileLabel = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 24))  COMMA_SOURCE_FILE ("instruction-while.galgas", 24)) ;
+    var_whileLabel = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 25))  COMMA_SOURCE_FILE ("instruction-while.galgas", 25)) ;
   } break ;
   case 2: {
     var_whileLabel = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 26)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 27)) ;
     {
-    ioArgument_ioLabelMap.setter_insertKey (var_whileLabel, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 27)) ;
+    ioArgument_ioLabelMap.setter_insertKey (var_whileLabel, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 28)) ;
     }
   } break ;
   default:
@@ -16912,20 +17007,20 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i84_ (GALGAS_in
   }
   GALGAS_expressionAST var_testExpression ;
   nt_expression_ (var_testExpression, inCompiler) ;
-  GALGAS_location var_testExpressionEndLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 30)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-while.galgas", 31)) ;
+  GALGAS_location var_testExpressionEndLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 31)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-while.galgas", 32)) ;
   GALGAS_instructionListAST var_instructionList ;
   nt_instructionList_ (var_instructionList, ioArgument_ioLabelMap, inCompiler) ;
-  GALGAS_location var_endOfInstruction = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 33)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-while.galgas", 34)) ;
+  GALGAS_location var_endOfInstruction = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 34)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-while.galgas", 35)) ;
   GALGAS_lstring var_endLabel ;
-  switch (select_common_5F_syntax_81 (inCompiler)) {
+  switch (select_common_5F_syntax_85 (inCompiler)) {
   case 1: {
-    var_endLabel = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 37))  COMMA_SOURCE_FILE ("instruction-while.galgas", 37)) ;
+    var_endLabel = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-while.galgas", 38))  COMMA_SOURCE_FILE ("instruction-while.galgas", 38)) ;
   } break ;
   case 2: {
     var_endLabel = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 39)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 40)) ;
   } break ;
   default:
     break ;
@@ -16935,38 +17030,39 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i84_ (GALGAS_in
     GALGAS_string temp_1 ;
     const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_whileLabel.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_2) {
-      temp_1 = GALGAS_string ("@").add_operation (var_whileLabel.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 43)) ;
+      temp_1 = GALGAS_string ("@").add_operation (var_whileLabel.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 44)) ;
     }else if (kBoolFalse == test_2) {
       temp_1 = GALGAS_string ("empty") ;
     }
     GALGAS_location location_3 (var_endLabel.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_3, GALGAS_string ("'end' label does not match 'while' label, it should be ").add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 42))  COMMA_SOURCE_FILE ("instruction-while.galgas", 42)) ;
+    inCompiler->emitSemanticError (location_3, GALGAS_string ("'end' label does not match 'while' label, it should be ").add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 43))  COMMA_SOURCE_FILE ("instruction-while.galgas", 43)) ;
   }
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_whileInstructionAST::constructor_new (var_testExpression, var_testExpressionEndLocation, var_instructionList, var_endOfInstruction  COMMA_SOURCE_FILE ("instruction-while.galgas", 45))  COMMA_SOURCE_FILE ("instruction-while.galgas", 45)) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_whileInstructionAST::constructor_new (var_testExpression, var_testExpressionEndLocation, var_instructionList, var_endOfInstruction  COMMA_SOURCE_FILE ("instruction-while.galgas", 46))  COMMA_SOURCE_FILE ("instruction-while.galgas", 46)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i84_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_while) COMMA_SOURCE_FILE ("instruction-while.galgas", 21)) ;
-  switch (select_common_5F_syntax_80 (inCompiler)) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-while.galgas", 21)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_while) COMMA_SOURCE_FILE ("instruction-while.galgas", 22)) ;
+  switch (select_common_5F_syntax_84 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 26)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 27)) ;
   } break ;
   default:
     break ;
   }
   nt_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-while.galgas", 31)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-while.galgas", 32)) ;
   nt_instructionList_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-while.galgas", 34)) ;
-  switch (select_common_5F_syntax_81 (inCompiler)) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-while.galgas", 35)) ;
+  switch (select_common_5F_syntax_85 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 39)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("instruction-while.galgas", 40)) ;
   } break ;
   default:
     break ;
@@ -16986,7 +17082,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i85_ (GALGAS_in
   GALGAS_expressionAST var_expression ;
   nt_expression_ (var_expression, inCompiler) ;
   GALGAS_location var_endOf_5F_iteratedExpression_5F_instruction = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 26)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 27)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 27)) ;
   GALGAS_instructionListAST var_instructionList ;
   nt_instructionList_ (var_instructionList, ioArgument_ioLabelMap, inCompiler) ;
   GALGAS_location var_endOfInstruction = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 29)) ;
@@ -17001,7 +17097,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i85_parse (C_Le
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 23)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_in) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 24)) ;
   nt_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 27)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 27)) ;
   nt_instructionList_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 30)) ;
   inCompiler->resetTemplateString () ;
@@ -17025,7 +17121,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i86_ (GALGAS_in
   GALGAS_expressionAST var_upperBoundExpression ;
   nt_expression_ (var_upperBoundExpression, inCompiler) ;
   GALGAS_location var_endOf_5F_upperBoundExpression_5F_instruction = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 33)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 34)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 34)) ;
   GALGAS_instructionListAST var_instructionList ;
   nt_instructionList_ (var_instructionList, ioArgument_ioLabelMap, inCompiler) ;
   GALGAS_location var_endOfInstruction = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 36)) ;
@@ -17043,7 +17139,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i86_parse (C_Le
   nt_expression_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E__2E__3C_) COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 31)) ;
   nt_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_do) COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 34)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 34)) ;
   nt_instructionList_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 37)) ;
   inCompiler->resetTemplateString () ;

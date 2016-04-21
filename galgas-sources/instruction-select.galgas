@@ -3,14 +3,23 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardedCommand {
-  case synchronization (@lstring optionalReceiverName @lstring guardName @effectiveParameterListAST effectiveParameterListAST)
-  case boolean (@expressionAST expression @location endOfExpression)
-  case boolAndSync (@expressionAST expression @location endOfExpression @lstring optionalReceiverName @lstring guardName @effectiveParameterListAST effectiveParameterListAST)
+  case synchronization (@lstring optionalReceiverName
+                        @lstring guardName
+                        @effectiveParameterListAST effectiveParameterListAST)
+
+  case boolean (@expressionAST expression
+                @location endOfExpression)
+
+  case boolAndSync (@expressionAST expression
+                    @location endOfExpression
+                    @lstring optionalReceiverName
+                    @lstring guardName
+                    @effectiveParameterListAST effectiveParameterListAST)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @onInstructionBranchList {
+list @selectInstructionBranchList {
   @guardedCommand mGuardedCommand
   @instructionListAST mInstructionList
   @location mEndOfBranch
@@ -18,9 +27,9 @@ list @onInstructionBranchList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @onInstructionAST : @instructionAST {
+class @selectInstructionAST : @instructionAST {
   @location mStartOf_on_instruction
-  @onInstructionBranchList mBranchList
+  @selectInstructionBranchList mBranchList
   @location mEndOf_on_instruction
 }
 
@@ -34,63 +43,71 @@ syntax extension common_syntax {
 
   rule <guarded_command> !@guardedCommand outGuardedCommand {
     select
-     $when$
-     <expression> ?let @expressionAST expression
-     let endOfExp = @location.here
-     select
-       outGuardedCommand = .boolean {!expression:expression !endOfExpression:endOfExp}
+      $when$
+      <expression> ?let @expressionAST expression
+      let endOfExp = @location.here
+      select
+        outGuardedCommand = .boolean {!expression:expression !endOfExpression:endOfExp}
       or
-        $upon$
-        $identifier$ ?let guardName
+        select
+          $until$
+        or
+          $while$
+        end
+        $identifier$ ?let name
+        select
+          <effective_parameters> ?let effectiveParameterList
+          outGuardedCommand = .boolAndSync {
+            !expression:expression
+            !endOfExpression:endOfExp
+            !optionalReceiverName:["" here]
+            !guardName:name
+            !effectiveParameterListAST:effectiveParameterList
+          }
+        or
+          $.$
+          $identifier$ ?let guardName
+          <effective_parameters> ?let effectiveParameterList
+          outGuardedCommand = .boolAndSync {
+            !expression:expression
+            !endOfExpression:endOfExp
+            !optionalReceiverName:name
+            !guardName:guardName
+            !effectiveParameterListAST:effectiveParameterList
+          }
+        end
+      end
+    or
+      select
+        $until$
+      or
+        $while$
+      end
+      $identifier$ ?let name
+      select
         <effective_parameters> ?let effectiveParameterList
-        outGuardedCommand = .boolAndSync {
-          !expression:expression
-          !endOfExpression:endOfExp
+        outGuardedCommand = .synchronization {
           !optionalReceiverName:["" here]
-          !guardName:guardName
+          !guardName:name
           !effectiveParameterListAST:effectiveParameterList
         }
       or
-        $upon$
-        $identifier$ ?let receiverName
         $.$
         $identifier$ ?let guardName
         <effective_parameters> ?let effectiveParameterList
-        outGuardedCommand = .boolAndSync {
-          !expression:expression
-          !endOfExpression:endOfExp
-          !optionalReceiverName:receiverName
+        outGuardedCommand = .synchronization {
+          !optionalReceiverName:name
           !guardName:guardName
           !effectiveParameterListAST:effectiveParameterList
         }
       end
-    or
-      $upon$
-      $identifier$ ?let guardName
-      <effective_parameters> ?let effectiveParameterList
-      outGuardedCommand = .synchronization {
-        !optionalReceiverName:["" here]
-        !guardName:guardName
-        !effectiveParameterListAST:effectiveParameterList
-      }
-    or
-      $upon$
-      $identifier$ ?let receiverName
-      $.$
-      $identifier$ ?let guardName
-      <effective_parameters> ?let effectiveParameterList
-      outGuardedCommand = .synchronization {
-        !optionalReceiverName:receiverName
-        !guardName:guardName
-        !effectiveParameterListAST:effectiveParameterList
-      }
     end
-  }
+ }
   
  #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
-    $select$
+    $sync$
     let startLocation = @location.here
     @lstring startLabel
     select
@@ -99,7 +116,7 @@ syntax extension common_syntax {
       $attribute$ ?startLabel
       [!?ioLabelMap insertKey !startLabel]
     end
-    @onInstructionBranchList onInstructionBranchList = {}
+    @selectInstructionBranchList onInstructionBranchList = {}
     repeat
       <guarded_command> ?let @guardedCommand guardedCommand
       $:$
@@ -107,7 +124,7 @@ syntax extension common_syntax {
       onInstructionBranchList += !guardedCommand !instructionList !.here
     while
     end
-    ioInstructionList += !@onInstructionAST.new {!startLocation !onInstructionBranchList !.here}
+    ioInstructionList += !@selectInstructionAST.new {!startLocation !onInstructionBranchList !.here}
     $end$
     @lstring endLabel
     select
@@ -129,7 +146,7 @@ syntax extension common_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @onInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @selectInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (* instructionList *) in mBranchList do
     [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
@@ -139,7 +156,7 @@ override method @onInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @onInstructionAST analyze
+override method @selectInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -151,7 +168,7 @@ override method @onInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  @onInstructionBranchListIR onInstructionBranchListIR = {}
+  @selectInstructionBranchListIR onInstructionBranchListIR = {}
   for (guardedCommand instructionList endOfBranch) in mBranchList do
     [!?ioVariableMap openOverrideForSelectBlock]
   #--- Guard
@@ -279,7 +296,7 @@ override method @onInstructionAST analyze
       !branchInstructionGenerationList
   end
 #--- Code generation
-  ioInstructionGenerationList += !@onInstructionIR.new {!mStartOf_on_instruction !onInstructionBranchListIR}
+  ioInstructionGenerationList += !@selectInstructionIR.new {!mStartOf_on_instruction !onInstructionBranchListIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -378,21 +395,21 @@ enum @guardedCommandIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @onInstructionBranchListIR {
+list @selectInstructionBranchListIR {
   @guardedCommandIR mGuardedCommand
   @instructionListIR mInstructionGenerationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @onInstructionIR : @abstractInstructionIR {
+class @selectInstructionIR : @abstractInstructionIR {
   @location mSelectInstructionLocation
-  @onInstructionBranchListIR mOnInstructionBranchListIR
+  @selectInstructionBranchListIR mOnInstructionBranchListIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @onInstructionIR llvmInstructionCode
+override method @selectInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -497,7 +514,7 @@ override method @onInstructionIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @onInstructionIR enterAccessibleEntities
+override method @selectInstructionIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint ioMaxBranchOfOnInstructions
 {

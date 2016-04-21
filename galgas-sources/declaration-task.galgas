@@ -9,6 +9,7 @@ list @taskList {
   @taskVarListAST mVarList
   @procedureDeclarationListAST mTaskProcList
   @taskInitListAST mTaskInitListAST
+  @selectInstructionBranchList mGuardedCommandList
   @location mEndOfTaskDeclaration
 }
 
@@ -58,6 +59,7 @@ syntax extension common_syntax {
     @taskVarListAST taskVarList = {}
     @procedureDeclarationListAST taskProcList = {}
     @taskInitListAST taskInitListAST = {}
+    @selectInstructionBranchList branchList = {}
     repeat
     while
       $var$
@@ -95,6 +97,13 @@ syntax extension common_syntax {
       let endOfInit = @location.here
       $}$
       taskInitListAST += !priority !instructionList !endOfInit
+    while
+      <guarded_command> ?let @guardedCommand guardedCommand
+      ${$
+      <instructionList> ?let instructionList !?*
+      let endOfInstructions = @location.here
+      $}$
+      branchList += !guardedCommand !instructionList !endOfInstructions
     end
     let endOfTask = @location.here
     $}$
@@ -105,6 +114,7 @@ syntax extension common_syntax {
       !taskVarList
       !taskProcList
       !taskInitListAST
+      !branchList
       !endOfTask
   }
 
@@ -127,6 +137,9 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
     end
     for procedure in mTaskProcList do
       [procedure.mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    end
+    for guardedCommand in mGuardedCommandList do
+      [guardedCommand.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
   end
 }
@@ -340,6 +353,8 @@ method @taskList-element semanticAnalysis
     initInstructionListIR += partialInstructionGenerationList
     initAllocaList += partialAllocaList
   end
+#------------------------------------------- Analyze task guarded command
+
 #------------------------------------------- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
     !mTaskName
@@ -384,7 +399,12 @@ method @taskMapIR generateCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
+  ?!@2stringlist ioServiceList
 {
+  let taskSelfTerminateServiceName = "self.terminate"
+  let implementationName = llvmNameForServiceImplementation (!taskSelfTerminateServiceName)
+  let callName = llvmNameForServiceCall (!taskSelfTerminateServiceName)
+  ioServiceList += !callName !implementationName
 #--- Declare task variables
   ioLLVMcode += llvmTitleComment (!"Task variables")
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
