@@ -65,7 +65,6 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "truncate",
   "until",
   "var",
-  "when",
   "while",
   "xor"
 }

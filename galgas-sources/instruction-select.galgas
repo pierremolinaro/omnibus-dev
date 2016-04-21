@@ -3,14 +3,17 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardedCommand {
-  case synchronization (@lstring optionalReceiverName
+  case synchronization (@bool isWhileCommand # if false, it is an "until" command
+                        @lstring optionalReceiverName
                         @lstring guardName
                         @effectiveParameterListAST effectiveParameterListAST)
 
-  case boolean (@expressionAST expression
+  case boolean (@bool isWhileCommand # if false, it is an "until" command
+                @expressionAST expression
                 @location endOfExpression)
 
-  case boolAndSync (@expressionAST expression
+  case boolAndSync (@bool isWhileCommand # if false, it is an "until" command
+                    @expressionAST expression
                     @location endOfExpression
                     @lstring optionalReceiverName
                     @lstring guardName
@@ -42,22 +45,27 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <guarded_command> !@guardedCommand outGuardedCommand {
+    @bool isWhileCommand
     select
-      $when$
+      $until$
+      isWhileCommand = false
+    or
+      $while$
+      isWhileCommand = true
+    end
+    select
+      $($
       <expression> ?let @expressionAST expression
+      $)$
       let endOfExp = @location.here
       select
-        outGuardedCommand = .boolean {!expression:expression !endOfExpression:endOfExp}
+        outGuardedCommand = .boolean {!isWhileCommand:isWhileCommand !expression:expression !endOfExpression:endOfExp}
       or
-        select
-          $until$
-        or
-          $while$
-        end
         $identifier$ ?let name
         select
           <effective_parameters> ?let effectiveParameterList
           outGuardedCommand = .boolAndSync {
+            !isWhileCommand:isWhileCommand
             !expression:expression
             !endOfExpression:endOfExp
             !optionalReceiverName:["" here]
@@ -69,6 +77,7 @@ syntax extension common_syntax {
           $identifier$ ?let guardName
           <effective_parameters> ?let effectiveParameterList
           outGuardedCommand = .boolAndSync {
+            !isWhileCommand:isWhileCommand
             !expression:expression
             !endOfExpression:endOfExp
             !optionalReceiverName:name
@@ -78,15 +87,11 @@ syntax extension common_syntax {
         end
       end
     or
-      select
-        $until$
-      or
-        $while$
-      end
       $identifier$ ?let name
       select
         <effective_parameters> ?let effectiveParameterList
         outGuardedCommand = .synchronization {
+          !isWhileCommand:isWhileCommand
           !optionalReceiverName:["" here]
           !guardName:name
           !effectiveParameterListAST:effectiveParameterList
@@ -96,6 +101,7 @@ syntax extension common_syntax {
         $identifier$ ?let guardName
         <effective_parameters> ?let effectiveParameterList
         outGuardedCommand = .synchronization {
+          !isWhileCommand:isWhileCommand
           !optionalReceiverName:name
           !guardName:guardName
           !effectiveParameterListAST:effectiveParameterList
@@ -174,7 +180,7 @@ override method @selectInstructionAST analyze
   #--- Guard
     @guardedCommandIR guardedCommandIR
     switch guardedCommand
-    case synchronization (optionalReceiverName guardName effectiveParameterList) :
+    case synchronization (isWhileCommand optionalReceiverName guardName effectiveParameterList) :
      @instructionListIR guardInstructionGenerationList = {}
      analyzeGuardCall (
         !self:inSelfType
@@ -194,12 +200,13 @@ override method @selectInstructionAST analyze
         ?guardMangledName:let @lstring guardMangledName
       )
       guardedCommandIR = .synchronization {
+        !isWhileCommand:isWhileCommand
         !guardMangledName:guardMangledName.string
         !globalVarName:optionalReceiverName.string
         !guardInstructionGenerationList:guardInstructionGenerationList
         !effectiveParameterListIR:guardEffectiveParameterListIR
       }
-    case boolean (expression endOfExpression) :
+    case boolean (isWhileCommand expression endOfExpression) :
       @instructionListIR guardInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
@@ -222,10 +229,11 @@ override method @selectInstructionAST analyze
         warning endOfExpression : "guarded expression is static"
       end
       guardedCommandIR = .booleanGuard {
+        !isWhileCommand:isWhileCommand
         !instructionGenerationList:guardInstructionGenerationList
         !result:sourceOperand
       }
-    case boolAndSync (expression endOfExpression optionalReceiverName guardName effectiveParameterList) :
+    case boolAndSync (isWhileCommand expression endOfExpression optionalReceiverName guardName effectiveParameterList) :
       @instructionListIR boolExpInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
@@ -266,6 +274,7 @@ override method @selectInstructionAST analyze
         ?guardMangledName:let @lstring guardMangledName
       )
       guardedCommandIR = .boolAndSync {
+        !isWhileCommand:isWhileCommand
         !boolExpInstructionGenerationList:boolExpInstructionGenerationList
         !boolExpResult:boolExpressionResult
         !guardMangledName:guardMangledName.string
@@ -378,14 +387,18 @@ proc analyzeGuardCall
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardedCommandIR {
-  case synchronization (@string guardMangledName
+  case synchronization (@bool isWhileCommand # if false, it is an "until" command
+                        @string guardMangledName
                         @string globalVarName # "" if not global var
                         @instructionListIR guardInstructionGenerationList
                         @procCallEffectiveParameterListIR effectiveParameterListIR)
 
-  case booleanGuard (@instructionListIR instructionGenerationList @operandIR result)
+  case booleanGuard (@bool isWhileCommand # if false, it is an "until" command
+                     @instructionListIR instructionGenerationList
+                     @operandIR result)
 
-  case boolAndSync (@instructionListIR boolExpInstructionGenerationList
+  case boolAndSync (@bool isWhileCommand # if false, it is an "until" command
+                    @instructionListIR boolExpInstructionGenerationList
                     @operandIR boolExpResult
                     @string guardMangledName
                     @string globalVarName # "" if not global var
@@ -426,9 +439,11 @@ override method @selectInstructionIR llvmInstructionCode
   let errorLabelName = startLabel + ".error"
   var currentStartBranchLabel = startLabelName
   for branch in mOnInstructionBranchListIR do (idx)
-    let acceptanceVarName = "%" + startLabel + ".accept." + idx 
+    let acceptanceVarName = "%" + startLabel + ".accept." + idx
+    @bool isWhileGuardedCommand
     switch branch.mGuardedCommand
-    case synchronization (guardMangledName * guardInstructionGenerationList effectiveParameterListIR) :
+    case synchronization (isWhileCommand guardMangledName * guardInstructionGenerationList effectiveParameterListIR) :
+      isWhileGuardedCommand = isWhileCommand
       [guardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + llvmNameForGuardCall (!guardMangledName)
       ioLLVMcode += " ("
@@ -445,7 +460,8 @@ override method @selectInstructionIR llvmInstructionCode
         ioLLVMcode += ", "
       end
       ioLLVMcode += ")\n"
-    case booleanGuard (instructionGenerationList @operandIR result) :
+    case booleanGuard (isWhileCommand instructionGenerationList @operandIR result) :
+      isWhileGuardedCommand = isWhileCommand
       [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let acceptedLabelName = startLabel + "." + idx + ".true"
       let rejectedLabelName = startLabel + "." + idx + ".false"
@@ -455,8 +471,9 @@ override method @selectInstructionIR llvmInstructionCode
       ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += rejectedLabelName + ":\n"
       ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result.mValue llvmName] + ", 0 ; assignment\n"
-    case boolAndSync (ExpInstructionList expResult guardMangledName * guardInstructionList effectiveParameterList) :
-      [ExpInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    case boolAndSync (isWhileCommand expInstructionList expResult guardMangledName * guardInstructionList effectiveParameterList) :
+      isWhileGuardedCommand = isWhileCommand
+      [expInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let testOkLabelName = startLabel + "." + idx + ".boolexp.true"
       let testExitLabelName = startLabel + "." + idx + ".test.exit"
       ioLLVMcode += "  br i1 " + [expResult.mValue llvmName] + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
@@ -489,7 +506,7 @@ override method @selectInstructionIR llvmInstructionCode
     ioLLVMcode += "  br i1 " + acceptanceVarName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
     ioLLVMcode += acceptedLabelName + ":\n"
     [branch.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  br label %" + exitLabelName + "\n\n"
+    ioLLVMcode += "  br label %" + if isWhileGuardedCommand then startLabelName else exitLabelName end + "\n\n"
     ioLLVMcode += rejectedLabelName + ":\n"
     currentStartBranchLabel = rejectedLabelName
   end
@@ -525,15 +542,15 @@ override method @selectInstructionIR enterAccessibleEntities
   for branch in mOnInstructionBranchListIR do
     [branch.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
     switch branch.mGuardedCommand
-    case synchronization (guardMangledName optionalReceiverName guardInstructionGenerationList *) :
+    case synchronization (* guardMangledName optionalReceiverName guardInstructionGenerationList *) :
       [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioAccessibleEntities.mGuardSet += !guardMangledName
       if optionalReceiverName != "" then
         ioAccessibleEntities.mGlobalVariableSet += !optionalReceiverName
       end
-    case booleanGuard (instructionGenerationList *) :
+    case booleanGuard (* instructionGenerationList *) :
       [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    case boolAndSync (instructionGenerationList * guardMangledName optionalReceiverName guardInstructionGenerationList *) :
+    case boolAndSync (* instructionGenerationList * guardMangledName optionalReceiverName guardInstructionGenerationList *) :
       [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioAccessibleEntities.mGuardSet += !guardMangledName
