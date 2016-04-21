@@ -49,7 +49,7 @@ syntax extension common_syntax {
   rule <if_instruction> !@ifInstructionAST outIfInstruction ?!@labelMap ioLabelMap ?let @lstring ifLabel {
     <expression> ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
-    $then$
+    $:$
     <instructionList> ?let thenInstructionList !?ioLabelMap
     let endOfThenBranch = @location.here
     @instructionListAST elseInstructionList

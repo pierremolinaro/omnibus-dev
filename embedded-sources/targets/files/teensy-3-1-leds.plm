@@ -42,23 +42,23 @@ module leds {
   
   public func `user `panic `service `kernel on @noWarningIfUnused (?inLeds $uint32) {
   //--- Led L0
-    if ((inLeds & LED_L0) != 0) then
+    if ((inLeds & LED_L0) != 0) :
       GPIOA_PSOR = 1 << 12 ;
     end
   //--- Led L1
-    if ((inLeds & LED_L1) != 0) then
+    if ((inLeds & LED_L1) != 0) :
       GPIOA_PSOR = 1 << 13 ;
     end
   //--- Led L2
-    if ((inLeds & LED_L2) != 0) then
+    if ((inLeds & LED_L2) != 0) :
       GPIOD_PSOR = 1 << 7 ;
     end
   //--- Led L3
-    if ((inLeds & LED_L3) != 0) then
+    if ((inLeds & LED_L3) != 0) :
       GPIOD_PSOR = 1 << 4 ;
     end
   //--- Led L4
-    if ((inLeds & LED_L4) != 0) then
+    if ((inLeds & LED_L4) != 0) :
       GPIOD_PSOR = 1 << 2 ;
     end
   }
@@ -67,23 +67,23 @@ module leds {
   
   public func `user `panic `service `kernel off @noWarningIfUnused (?inLeds $uint32) {
   //--- Led L0
-    if ((inLeds & LED_L0) != 0) then
+    if ((inLeds & LED_L0) != 0) :
       GPIOA_PCOR = 1 << 12 ;
     end
   //--- Led L1
-    if ((inLeds & LED_L1) != 0) then
+    if ((inLeds & LED_L1) != 0) :
       GPIOA_PCOR = 1 << 13 ;
     end
   //--- Led L2
-    if ((inLeds & LED_L2) != 0) then
+    if ((inLeds & LED_L2) != 0) :
       GPIOD_PCOR = 1 << 7 ;
     end
   //--- Led L3
-    if ((inLeds & LED_L3) != 0) then
+    if ((inLeds & LED_L3) != 0) :
       GPIOD_PCOR = 1 << 4 ;
     end
   //--- Led L4
-    if ((inLeds & LED_L4) != 0) then
+    if ((inLeds & LED_L4) != 0) :
       GPIOD_PCOR = 1 << 2 ;
     end
   }
@@ -92,23 +92,23 @@ module leds {
   
   public func `user `panic `service `kernel toggle @noWarningIfUnused (?inLeds $uint32) {
   //--- Led L0
-    if ((inLeds & LED_L0) != 0) then
+    if ((inLeds & LED_L0) != 0) :
       GPIOA_PTOR = 1 << 12 ;
     end
   //--- Led L1
-    if ((inLeds & LED_L1) != 0) then
+    if ((inLeds & LED_L1) != 0) :
       GPIOA_PTOR = 1 << 13 ;
     end
   //--- Led L2
-    if ((inLeds & LED_L2) != 0) then
+    if ((inLeds & LED_L2) != 0) :
       GPIOD_PTOR = 1 << 7 ;
     end
   //--- Led L3
-    if ((inLeds & LED_L3) != 0) then
+    if ((inLeds & LED_L3) != 0) :
       GPIOD_PTOR = 1 << 4 ;
     end
   //--- Led L4
-    if ((inLeds & LED_L4) != 0) then
+    if ((inLeds & LED_L4) != 0) :
       GPIOD_PTOR = 1 << 2 ;
     end
   }

@@ -260,6 +260,8 @@ private proc generateCodeFiles
     !generationContext
     !?generationAdds
   ]
+#----------------------------------------- tasks
+  [inIntermediateCodeStruct.mTaskMapIR generateCode !?llvmCode !generationContext !?generationAdds !?serviceList]
 #----------------------------------------- Service dispatcher
   generateServiceDispatcher (
     !inCurrentDirectory
@@ -349,8 +351,6 @@ private proc generateCodeFiles
       llvmCode += "}\n\n"
     end
   end
-#----------------------------------------- tasks
-  [inIntermediateCodeStruct.mTaskMapIR generateCode !?llvmCode !generationContext !?generationAdds]
 #----------------------------------------- Intrinsics
   if [generationAdds.mExternFunctionDeclarationSet count] > 0 then
     llvmCode += llvmTitleComment (!"LLVM extern functions")
@@ -387,7 +387,8 @@ private proc generateCodeFiles
   let s1 = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
   let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
   let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
-  [s3 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
+  let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
+  [s4 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
 #----------------------------------------- Write JSON file with stack features
   var json = "{\n"
 #--- System stack size

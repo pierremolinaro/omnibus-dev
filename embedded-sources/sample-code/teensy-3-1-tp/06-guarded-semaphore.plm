@@ -8,7 +8,7 @@ struct $monSemaphore {
   var guardList = $guardList ()
 
   public primitive P @noWarningIfUnused () {
-    if self.value > 0 then
+    if self.value > 0 :
       self.value -= 1
     else
       blockInList (!?list:self.list)
@@ -17,7 +17,7 @@ struct $monSemaphore {
 
   public service V () {
     let found = makeTaskReady (!?list:self.list)
-    if not found then
+    if not found :
       self.value += 1
       guardDidChange (!?guard:self.guardList)
     end
@@ -25,7 +25,7 @@ struct $monSemaphore {
 
   public guard P () {
     accept = self.value > 0
-    if accept then
+    if accept :
       self.value -= 1
     else
       handleGuardedCommand (!?guard:self.guardList)
@@ -88,12 +88,12 @@ task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
   func loop () {
-    select
-    upon s0.PP () :
+    sync
+    while s0.PP () :
       leds.toggle  (!LED_L1)
-    upon s1.P () :
+    while s1.P () :
       leds.toggle  (!LED_L3)
-    upon time.waitUntilMS (!deadline:self.deadline) :
+    while time.waitUntilMS (!deadline:self.deadline) :
       self.deadline += 200
       leds.toggle  (!LED_L2)
     end

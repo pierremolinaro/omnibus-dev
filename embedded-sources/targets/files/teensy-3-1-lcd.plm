@@ -69,7 +69,7 @@ module lcd {
   //············································································
   
   func `init `panic `user setD4 @noWarningIfUnused (?inValue $bool) { // PTB0
-    if inValue then
+    if inValue :
       GPIOB_PSOR = 1 << 0 ;
     else
       GPIOB_PCOR = 1 << 0 ;
@@ -79,7 +79,7 @@ module lcd {
   //············································································
   
   func `init `panic `user setD5 @noWarningIfUnused (?inValue $bool) { // PTC0
-    if inValue then
+    if inValue :
       GPIOC_PSOR = 1 << 0 ;
     else
       GPIOC_PCOR = 1 << 0 ;
@@ -89,7 +89,7 @@ module lcd {
   //············································································
   
   func `init `panic `user setD6 @noWarningIfUnused (?inValue $bool) { // PTD1
-    if inValue then
+    if inValue :
       GPIOD_PSOR = 1 << 1 ;
     else
       GPIOD_PCOR = 1 << 1 ;
@@ -99,7 +99,7 @@ module lcd {
   //············································································
   
   func `init `panic `user setD7 @noWarningIfUnused (?inValue $bool) { // PTB2
-    if inValue then
+    if inValue :
       GPIOB_PSOR = 1 << 2 ;
     else
       GPIOB_PCOR = 1 << 2 ;
@@ -247,12 +247,12 @@ module lcd {
   // Line 3 : 84 -> 103
   
   public func `user goto @noWarningIfUnused (?line:inLine $uint2 ?column:inColumn $uint8) {
-    if inColumn < 20 then
-      if inLine == 0 then
+    if inColumn < 20 :
+      if inLine == 0 :
         self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
-      elsif inLine == 1 then
+      elsif inLine == 1 :
         self.write8bitCommand_inUserMode (!0x80 + 64 + inColumn) ;
-      elsif inLine == 2 then
+      elsif inLine == 2 :
         self.write8bitCommand_inUserMode (!0x80 + 20 + inColumn) ;
       else
         self.write8bitCommand_inUserMode (!0x80 + 84 + inColumn) ;
@@ -264,7 +264,7 @@ module lcd {
   
   public func `user printSpaces @noWarningIfUnused (?inCount $uint32) {
     var count = inCount
-    while (count > 0) do
+    do while (count > 0) :
       self.writeData_inUserMode (!0x20)
       count -= 1
     end
@@ -276,8 +276,8 @@ module lcd {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = false
-    while divisor > 0 do
-      if isPrinting or (value >= divisor) then
+    do while divisor > 0 :
+      if isPrinting or (value >= divisor) :
         let quotient = value / divisor
         let remainder = value - quotient * divisor
         self.writeData_inUserMode (!0x30 + convert quotient : $uint8)
@@ -286,7 +286,7 @@ module lcd {
       end
       divisor = divisor / 10
     end
-    if not isPrinting then
+    if not isPrinting :
       self.writeData_inUserMode (!0x30)
     end
   }
@@ -294,7 +294,7 @@ module lcd {
   //············································································
   
   public func `user printSigned @noWarningIfUnused (?inValue $int32) {
-    if inValue >= 0 then
+    if inValue >= 0 :
       self.printUnsigned (!truncate inValue : $uint32)
     else
       self.writeData_inUserMode (!0x2D) // Signe -
@@ -305,7 +305,7 @@ module lcd {
   //············································································
   
   public func `user printString @noWarningIfUnused (?inValue $staticString) {
-    for c in inValue do
+    for c in inValue :
       self.writeData_inUserMode (!c)
     end
   }
@@ -394,8 +394,8 @@ module lcd {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = false
-    while divisor > 0 do
-      if isPrinting or (value >= divisor) then
+    do while divisor > 0 :
+      if isPrinting or (value >= divisor) :
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor
         self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)
@@ -404,7 +404,7 @@ module lcd {
       end
       divisor = divisor !/ 10
     end
-    if not isPrinting then
+    if not isPrinting :
       self.writeDataInPanicMode (!0x30)
     end
   }
@@ -412,7 +412,7 @@ module lcd {
   //············································································
   
   public func `panic printSignedInPanicMode @noWarningIfUnused (?inValue $int32) {
-    if inValue >= 0 then
+    if inValue >= 0 :
       self.printUnsignedInPanicMode (!truncate inValue : $uint32)
     else
       self.writeDataInPanicMode (!0x2D) // Signe -
@@ -439,14 +439,14 @@ module lcd {
   //············································································
   
   public func `panic gotoInPanicMode @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
-    if inColumn < 20 then
-      if inLine == 0 then
+    if inColumn < 20 :
+      if inLine == 0 :
         self.write8bitCommandInPanicMode (!0x80 +% 0 +% inColumn) ;
-      elsif inLine == 1 then
+      elsif inLine == 1 :
         self.write8bitCommandInPanicMode (!0x80 +% 64 +% inColumn) ;
-      elsif inLine == 2 then
+      elsif inLine == 2 :
         self.write8bitCommandInPanicMode (!0x80 +% 20 +% inColumn) ;
-      elsif inLine == 3 then
+      elsif inLine == 3 :
         self.write8bitCommandInPanicMode (!0x80 +% 84 +% inColumn) ;
       end
     end
@@ -462,7 +462,7 @@ module lcd {
   //············································································
   
   public func `panic printStringInPanicMode @noWarningIfUnused (?inString $staticString) {
-    for c in inString do
+    for c in inString :
       self.writeDataInPanicMode (!c)
     end
   }

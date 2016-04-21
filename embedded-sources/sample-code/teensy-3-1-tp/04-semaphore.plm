@@ -7,7 +7,7 @@ struct $monSemaphore {
   var list = $taskList ()
 
   public primitive P () {
-    if self.value > 0 then
+    if self.value > 0 :
       self.value -= 1
     else
       blockInList (!?list:self.list)
@@ -16,7 +16,7 @@ struct $monSemaphore {
 
   public service V () {
     let found = makeTaskReady (!?list:self.list)
-    if not found then
+    if not found :
       self.value += 1
     end
   }

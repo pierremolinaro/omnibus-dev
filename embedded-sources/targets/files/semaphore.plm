@@ -9,7 +9,7 @@ struct $semaphore {
   
   public service V @noWarningIfUnused () {
     let found = makeTaskReady (!?list:self.list)
-    if not found then
+    if not found :
       self.value += 1
       guardDidChange (!?guard:self.guardList)
     end
@@ -18,7 +18,7 @@ struct $semaphore {
   //············································································
 
   public primitive P @noWarningIfUnused () {
-    if self.value > 0 then
+    if self.value > 0 :
       self.value -= 1
     else
       blockInList (!?list:self.list)
@@ -29,9 +29,9 @@ struct $semaphore {
 
   public primitive P_until @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
-    if result then
+    if result :
       self.value -= 1
-    elsif inDeadline > time.millis () then 
+    elsif inDeadline > time.millis () : 
       blockInListAndOnDeadline (!?list:self.list !deadline:inDeadline)
     end
   }
@@ -40,7 +40,7 @@ struct $semaphore {
 
   public guard P @noWarningIfUnused () {
     accept = self.value > 0
-    if accept then
+    if accept :
       self.value -= 1
     else
       handleGuardedCommand (!?guard:self.guardList)
