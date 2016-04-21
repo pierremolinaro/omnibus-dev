@@ -677,8 +677,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    ledOn ()\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
@@ -693,7 +692,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  597, // Text length
+  586, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -729,8 +728,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    leds.on (!LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
@@ -747,7 +745,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  538, // Text length
+  527, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -760,8 +758,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T1 priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    leds.on (!LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
@@ -777,8 +774,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T2 priority 2 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    leds.on (!LED_L1)\n"
   "    self.compteur +%= 499\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
@@ -792,8 +788,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T3 priority 3 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    leds.on (!LED_L2)\n"
   "    self.compteur +%= 498\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
@@ -807,8 +802,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T4 priority 4 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    leds.on (!LED_L3)\n"
   "    self.compteur +%= 497\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
@@ -822,8 +816,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T5 priority 5 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    leds.on (!LED_L4)\n"
   "    self.compteur +%= 496\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
@@ -838,7 +831,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  1978, // Text length
+  1923, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -906,12 +899,6 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\
   "   end\n"
   "  }\n"
   "  \n"
-  "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
-  "\n"
-  "  func loop () {\n"
-  "    time.waitDuringMS (!delay:250)\n"
-  "    leds.toggle (!LED_L1) // Allumer la led\n"
-  "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
@@ -923,7 +910,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "03-section-service-duration.plm",
   "plm",
   true, // Text file
-  2005, // Text length
+  1823, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -933,31 +920,10 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "struct $monSemaphore {\n"
-  "  var value $uint32\n"
-  "  var list = $taskList ()\n"
+  "func `user loop () {}\n"
   "\n"
-  "  public primitive P () {\n"
-  "    if self.value > 0 :\n"
-  "      self.value -= 1\n"
-  "    else\n"
-  "      blockInList (!\?list:self.list)\n"
-  "    end\n"
-  "  }\n"
-  "\n"
-  "  public service V () {\n"
-  "    let found = makeTaskReady (!\?list:self.list)\n"
-  "    if not found :\n"
-  "      self.value += 1\n"
-  "    end\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "//------------------------------------------------*\n"
-  "\n"
-  "var s = $monSemaphore (!value:0) {\n"
-  "  func $T1.loop\n"
-  "  func $T2.loop\n"
+  "var s = $semaphore (!value:0) {\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -973,8 +939,7 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    self.top += 2\n"
   "  }\n"
   "  \n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s.V ()\n"
   "    self.top += 250\n"
   "    leds.on (!LED_L1)\n"
@@ -989,8 +954,7 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T2 priority 2 stackSize 512 {\n"
   "\n"
-  "  func loop () {\n"
-  "    s.P ()\n"
+  "  while s.P () {\n"
   "    leds.on (!LED_L2)\n"
   "    s.P ()\n"
   "    leds.off (!LED_L2)\n"
@@ -1003,7 +967,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "04-semaphore.plm",
   "plm",
   true, // Text file
-  1163, // Text length
+  758, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1036,10 +1000,10 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
+  "func `user loop () {}\n"
   "\n"
   "var s = $monSemaphore (!value:0) {\n"
-  "  func $T1.loop\n"
-  "  func $T2.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1055,8 +1019,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    self.top += 2\n"
   "  }\n"
   "  \n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s.V ()\n"
   "    self.top += 300\n"
   "    leds.on (!LED_L0)\n"
@@ -1072,7 +1035,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T2 priority 2 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
+  "  while time.waitUntilMS (!deadline:0) { // no wait...\n"
   "    let r = s.P_until (!deadline:self.top)\n"
   "    if r :\n"
   "      leds.toggle (!LED_L1)\n"
@@ -1089,7 +1052,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1542, // Text length
+  1571, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1134,15 +1097,16 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
+  "func `user loop () {}\n"
   "\n"
   "var s0 = $monSemaphore (!value:0) {\n"
-  "  func $T0.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var s1 = $monSemaphore (!value:0) {\n"
-  "  func $T1.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1150,8 +1114,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T0 priority 0 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
   "    leds.on (!LED_L0)\n"
@@ -1167,8 +1130,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T1 priority 1 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
   "    leds.on (!LED_L4)\n"
@@ -1184,16 +1146,17 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T2 priority 2 stackSize 512 {\n"
   "  var deadline $uint32 = 0\n"
   "  \n"
-  "  func loop () {\n"
-  "    sync\n"
-  "    while s0.PP () :\n"
-  "      leds.toggle  (!LED_L1)\n"
-  "    while s1.P () :\n"
-  "      leds.toggle  (!LED_L3)\n"
-  "    while time.waitUntilMS (!deadline:self.deadline) :\n"
-  "      self.deadline += 200\n"
-  "      leds.toggle  (!LED_L2)\n"
-  "    end\n"
+  "  while s0.PP () {\n"
+  "   leds.toggle  (!LED_L1)\n"
+  "  }\n"
+  "  \n"
+  "  while s1.P () {\n"
+  "    leds.toggle  (!LED_L3)\n"
+  "  }\n"
+  "  \n"
+  "  while time.waitUntilMS (!deadline:self.deadline) {\n"
+  "    self.deadline += 200\n"
+  "    leds.toggle  (!LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1203,7 +1166,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2204, // Text length
+  2161, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1211,16 +1174,18 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
 
 const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
+  "func `user loop () {}\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var s0 = $semaphore (!value:0) {\n"
-  "  func $T0.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var s1 = $semaphore (!value:0) {\n"
-  "  func $T1.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "guard PP () : s1.P () {\n"
@@ -1235,8 +1200,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T0 priority 0 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
   "    leds.on (!LED_L0)\n"
@@ -1252,8 +1216,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T1 priority 1 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
   "    leds.on (!LED_L4)\n"
@@ -1269,16 +1232,17 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T2 priority 2 stackSize 512 {\n"
   "  var deadline $uint32 = 0\n"
   "  \n"
-  "  func loop () {\n"
-  "    sync\n"
-  "    while s0.P () :\n"
-  "      leds.toggle  (!LED_L1)\n"
-  "    while PP () :\n"
-  "      leds.toggle  (!LED_L3)\n"
-  "    while convenienceWaitUntilMS (!deadline:self.deadline) :\n"
-  "      self.deadline += 200\n"
-  "      leds.toggle  (!LED_L2)\n"
-  "    end\n"
+  "  while s0.P () {\n"
+  "    leds.toggle  (!LED_L1)\n"
+  "  }\n"
+  "  \n"
+  "  while PP () {\n"
+  "    leds.toggle  (!LED_L3)\n"
+  "  }\n"
+  "  \n"
+  "  while convenienceWaitUntilMS (!deadline:self.deadline) {\n"
+  "    self.deadline += 200\n"
+  "    leds.toggle  (!LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1288,7 +1252,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "07-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1622, // Text length
+  1581, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1334,7 +1298,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    end\n"
   "  }\n"
   "\n"
-  "  guard input @noWarningIfUnused () {\n"
+  "  public guard input @noWarningIfUnused () {\n"
   "    accept = makeTaskReady (!\?list:self.outputWaitList)\n"
   "    if not accept :\n"
   "      handleGuardedCommand (!\?guard:self.inputGuardList)\n"
@@ -1350,11 +1314,12 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "}\n"
   "\n"
+  "func `user loop () {}\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var rdvs = $rendezVous () {\n"
-  "  func $T0.loop\n"
-  "  func $T1.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1362,8 +1327,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T0 priority 0 stackSize 512 {\n"
   "  var top $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    rdvs.output ()\n"
   "    self.top += 250\n"
   "    leds.on (!LED_L0)\n"
@@ -1378,8 +1342,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T1 priority 1 stackSize 512 {\n"
   "\n"
-  "  func loop () {\n"
-  "    rdvs.input ()\n"
+  "  while rdvs.input () {\n"
   "    leds.on (!LED_L1)\n"
   "    rdvs.input ()\n"
   "    leds.off (!LED_L1)\n"
@@ -1392,7 +1355,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2499, // Text length
+  2487, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1415,12 +1378,12 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    self.signalerDonneeLue.P ()\n"
   "  }\n"
   "\n"
-  "  public func `user input (!data:outData $uint32) {\n"
-  "    self.autoriserLecture.P ()\n"
-  "    outData = self.data\n"
-  "    self.signalerDonneeLue.V ()\n"
-  "    self.autoriserEcriture.V ()\n"
-  "  }\n"
+  "//  public func `user input (!data:outData $uint32) {\n"
+  "//    self.autoriserLecture.P ()\n"
+  "//    outData = self.data\n"
+  "//    self.signalerDonneeLue.V ()\n"
+  "//    self.autoriserEcriture.V ()\n"
+  "//  }\n"
   "\n"
   "  public guard input (!data:outData $uint32) : self.autoriserLecture.P () {\n"
   "    outData = self.data\n"
@@ -1430,22 +1393,24 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "}\n"
   "\n"
+  "func `user loop () {}\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var rdvs = $rendezVousData () {\n"
-  "  func $T0.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var rdvs2 = $rendezVousData () {\n"
-  "  func $T1.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "var s = $semaphore (!value:1) {\n"
-  "  func $T0.loop\n"
+  "  func loop\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1454,8 +1419,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var top $uint32 = 0\n"
   "  var n $uint32 = 1\n"
   "\n"
-  "  func loop () {\n"
-  "    time.waitUntilMS (!deadline:self.top)\n"
+  "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    rdvs.output (!data:self.n)\n"
   "    rdvs2.output (!data:self.n)\n"
   "    leds.toggle (!LED_L0)\n"
@@ -1468,8 +1432,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T1 priority 1 stackSize 1024 {\n"
   "\n"
-  "  func loop () {\n"
-  "    rdvs.input (\?data:let x)\n"
+  "  while rdvs.input (\?data:let x) {\n"
   "    leds.toggle (!LED_L1)\n"
   "    s.P ()\n"
   "      lcd.goto (!line:0 !column:0)\n"
@@ -1483,18 +1446,17 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T2 priority 2 stackSize 1024 {\n"
   "  var deadline $uint32 = 0\n"
   "\n"
-  "  func loop () {\n"
-  "    sync\n"
-  "    while rdvs2.input (\?data:let x) :\n"
-  "      leds.toggle (!LED_L2)\n"
-  "      s.P ()\n"
-  "        lcd.goto (!line:1 !column:0)\n"
-  "        lcd.printUnsigned (!x)\n"
-  "      s.V ()\n"
-  "    while time.waitUntilMS (!deadline:self.deadline) :\n"
-  "      self.deadline += 200\n"
-  "      leds.toggle  (!LED_L4)\n"
-  "    end\n"
+  "  while rdvs2.input (\?data:let x) {\n"
+  "    leds.toggle (!LED_L2)\n"
+  "    s.P ()\n"
+  "      lcd.goto (!line:1 !column:0)\n"
+  "      lcd.printUnsigned (!x)\n"
+  "    s.V ()\n"
+  "  }\n"
+  "  \n"
+  "  while time.waitUntilMS (!deadline:self.deadline) {\n"
+  "    self.deadline += 200\n"
+  "    leds.toggle  (!LED_L4)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1504,7 +1466,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2396, // Text length
+  2352, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -7352,190 +7314,6 @@ GALGAS_registerIntegerConstantInExpressionIR GALGAS_registerIntegerConstantInExp
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_selectInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_selectInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mSelectInstructionLocation.objectCompare (p->mAttribute_mSelectInstructionLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOnInstructionBranchListIR.objectCompare (p->mAttribute_mOnInstructionBranchListIR) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_selectInstructionIR::objectCompare (const GALGAS_selectInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selectInstructionIR::GALGAS_selectInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selectInstructionIR GALGAS_selectInstructionIR::constructor_default (LOCATION_ARGS) {
-  return GALGAS_selectInstructionIR::constructor_new (GALGAS_location::constructor_nowhere (HERE),
-                                                      GALGAS_selectInstructionBranchListIR::constructor_emptyList (HERE)
-                                                      COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selectInstructionIR::GALGAS_selectInstructionIR (const cPtr_selectInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_selectInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selectInstructionIR GALGAS_selectInstructionIR::constructor_new (const GALGAS_location & inAttribute_mSelectInstructionLocation,
-                                                                        const GALGAS_selectInstructionBranchListIR & inAttribute_mOnInstructionBranchListIR
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_selectInstructionIR result ;
-  if (inAttribute_mSelectInstructionLocation.isValid () && inAttribute_mOnInstructionBranchListIR.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_selectInstructionIR (inAttribute_mSelectInstructionLocation, inAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_selectInstructionIR::getter_mSelectInstructionLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_selectInstructionIR) ;
-    result = p->mAttribute_mSelectInstructionLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_selectInstructionIR::getter_mSelectInstructionLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelectInstructionLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selectInstructionBranchListIR GALGAS_selectInstructionIR::getter_mOnInstructionBranchListIR (UNUSED_LOCATION_ARGS) const {
-  GALGAS_selectInstructionBranchListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_selectInstructionIR) ;
-    result = p->mAttribute_mOnInstructionBranchListIR ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selectInstructionBranchListIR cPtr_selectInstructionIR::getter_mOnInstructionBranchListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOnInstructionBranchListIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @selectInstructionIR class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_selectInstructionIR::cPtr_selectInstructionIR (const GALGAS_location & in_mSelectInstructionLocation,
-                                                    const GALGAS_selectInstructionBranchListIR & in_mOnInstructionBranchListIR
-                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mSelectInstructionLocation (in_mSelectInstructionLocation),
-mAttribute_mOnInstructionBranchListIR (in_mOnInstructionBranchListIR) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_selectInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_selectInstructionIR ;
-}
-
-void cPtr_selectInstructionIR::description (C_String & ioString,
-                                            const int32_t inIndentation) const {
-  ioString << "[@selectInstructionIR:" ;
-  mAttribute_mSelectInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOnInstructionBranchListIR.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_selectInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_selectInstructionIR (mAttribute_mSelectInstructionLocation, mAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @selectInstructionIR type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_selectInstructionIR ("selectInstructionIR",
-                                            & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_selectInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_selectInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_selectInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_selectInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_selectInstructionIR GALGAS_selectInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_selectInstructionIR result ;
-  const GALGAS_selectInstructionIR * p = (const GALGAS_selectInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_selectInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("selectInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
 typeComparisonResult cPtr_shortCircuitAndOperationIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) inOperandPtr ;
@@ -8693,6 +8471,190 @@ GALGAS_storeVolatileIR GALGAS_storeVolatileIR::extractObject (const GALGAS_objec
       result = *p ;
     }else{
       inCompiler->castError ("storeVolatileIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_syncInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_syncInstructionIR * p = (const cPtr_syncInstructionIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_syncInstructionIR) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mSelectInstructionLocation.objectCompare (p->mAttribute_mSelectInstructionLocation) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mOnInstructionBranchListIR.objectCompare (p->mAttribute_mOnInstructionBranchListIR) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_syncInstructionIR::objectCompare (const GALGAS_syncInstructionIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_syncInstructionIR::GALGAS_syncInstructionIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_syncInstructionIR GALGAS_syncInstructionIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_syncInstructionIR::constructor_new (GALGAS_location::constructor_nowhere (HERE),
+                                                    GALGAS_syncInstructionBranchListIR::constructor_emptyList (HERE)
+                                                    COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_syncInstructionIR::GALGAS_syncInstructionIR (const cPtr_syncInstructionIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_syncInstructionIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_syncInstructionIR GALGAS_syncInstructionIR::constructor_new (const GALGAS_location & inAttribute_mSelectInstructionLocation,
+                                                                    const GALGAS_syncInstructionBranchListIR & inAttribute_mOnInstructionBranchListIR
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_syncInstructionIR result ;
+  if (inAttribute_mSelectInstructionLocation.isValid () && inAttribute_mOnInstructionBranchListIR.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_syncInstructionIR (inAttribute_mSelectInstructionLocation, inAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_syncInstructionIR::getter_mSelectInstructionLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_syncInstructionIR * p = (const cPtr_syncInstructionIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_syncInstructionIR) ;
+    result = p->mAttribute_mSelectInstructionLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_syncInstructionIR::getter_mSelectInstructionLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSelectInstructionLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionIR::getter_mOnInstructionBranchListIR (UNUSED_LOCATION_ARGS) const {
+  GALGAS_syncInstructionBranchListIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_syncInstructionIR * p = (const cPtr_syncInstructionIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_syncInstructionIR) ;
+    result = p->mAttribute_mOnInstructionBranchListIR ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_syncInstructionBranchListIR cPtr_syncInstructionIR::getter_mOnInstructionBranchListIR (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOnInstructionBranchListIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                     Pointer class for @syncInstructionIR class                                      *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_syncInstructionIR::cPtr_syncInstructionIR (const GALGAS_location & in_mSelectInstructionLocation,
+                                                const GALGAS_syncInstructionBranchListIR & in_mOnInstructionBranchListIR
+                                                COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE),
+mAttribute_mSelectInstructionLocation (in_mSelectInstructionLocation),
+mAttribute_mOnInstructionBranchListIR (in_mOnInstructionBranchListIR) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_syncInstructionIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_syncInstructionIR ;
+}
+
+void cPtr_syncInstructionIR::description (C_String & ioString,
+                                          const int32_t inIndentation) const {
+  ioString << "[@syncInstructionIR:" ;
+  mAttribute_mSelectInstructionLocation.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mOnInstructionBranchListIR.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_syncInstructionIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_syncInstructionIR (mAttribute_mSelectInstructionLocation, mAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @syncInstructionIR type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_syncInstructionIR ("syncInstructionIR",
+                                          & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_syncInstructionIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_syncInstructionIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_syncInstructionIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_syncInstructionIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_syncInstructionIR GALGAS_syncInstructionIR::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_syncInstructionIR result ;
+  const GALGAS_syncInstructionIR * p = (const GALGAS_syncInstructionIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_syncInstructionIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("syncInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

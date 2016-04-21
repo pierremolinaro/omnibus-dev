@@ -4766,12 +4766,12 @@ void routine_analyzeGuardCall (const GALGAS_unifiedTypeMap_2D_proxy constinArgum
   if (kBoolTrue == test_0) {
     GALGAS_objectInMemoryIR var_variableKind ;
     {
-    GALGAS_bool joker_13797_1 ; // Joker input parameter
-    GALGAS_bool joker_13858_4 ; // Joker input parameter
-    GALGAS_controlRegisterBitSliceAccessMap joker_13858_3 ; // Joker input parameter
-    GALGAS_bool joker_13858_2 ; // Joker input parameter
-    GALGAS_bool joker_13858_1 ; // Joker input parameter
-    ioArgument_ioVariableMap.setter_searchForReadAccess (constinArgument_inReceiverName, var_receiverType, joker_13797_1, var_variableKind, joker_13858_4, joker_13858_3, joker_13858_2, joker_13858_1, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 333)) ;
+    GALGAS_bool joker_13779_1 ; // Joker input parameter
+    GALGAS_bool joker_13840_4 ; // Joker input parameter
+    GALGAS_controlRegisterBitSliceAccessMap joker_13840_3 ; // Joker input parameter
+    GALGAS_bool joker_13840_2 ; // Joker input parameter
+    GALGAS_bool joker_13840_1 ; // Joker input parameter
+    ioArgument_ioVariableMap.setter_searchForReadAccess (constinArgument_inReceiverName, var_receiverType, joker_13779_1, var_variableKind, joker_13840_4, joker_13840_3, joker_13840_2, joker_13840_1, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 333)) ;
     }
     outArgument_outGuardMangledName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (var_receiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 340)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 340)).add_operation (constinArgument_inGuardName.getter_string (SOURCE_FILE ("instruction-select.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 340)), constinArgument_inGuardName.mAttribute_location  COMMA_SOURCE_FILE ("instruction-select.galgas", 340)) ;
     outArgument_outEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-select.galgas", 341)), extensionGetter_address (var_variableKind, inCompiler COMMA_SOURCE_FILE ("instruction-select.galgas", 341))  COMMA_SOURCE_FILE ("instruction-select.galgas", 341)) ;
@@ -9053,6 +9053,146 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForTaskVariable ("llvmNa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                     Once function 'llvmNameForTaskLoopFunction'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_llvmNameForTaskLoopFunction (C_Compiler * /* inCompiler */
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outName ; // Returned variable
+  result_outName = GALGAS_string ("task$loop") ;
+//---
+  return result_outName ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_llvmNameForTaskLoopFunction = false ;
+static GALGAS_string gOnceFunctionResult_llvmNameForTaskLoopFunction ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForTaskLoopFunction (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_llvmNameForTaskLoopFunction) {
+    gOnceFunctionResult_llvmNameForTaskLoopFunction = onceFunction_llvmNameForTaskLoopFunction (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_llvmNameForTaskLoopFunction = true ;
+  }
+  return gOnceFunctionResult_llvmNameForTaskLoopFunction ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_llvmNameForTaskLoopFunction (void) {
+  gOnceFunctionResult_llvmNameForTaskLoopFunction.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskLoopFunction (NULL,
+                                                                         releaseOnceFunctionResult_llvmNameForTaskLoopFunction) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskLoopFunction [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForTaskLoopFunction (C_Compiler * inCompiler,
+                                                                            const cObjectArray & /* inEffectiveParameterArray */,
+                                                                            const GALGAS_location & /* inErrorLocation */
+                                                                            COMMA_LOCATION_ARGS) {
+  return function_llvmNameForTaskLoopFunction (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForTaskLoopFunction ("llvmNameForTaskLoopFunction",
+                                                                             functionWithGenericHeader_llvmNameForTaskLoopFunction,
+                                                                             & kTypeDescriptor_GALGAS_string,
+                                                                             0,
+                                                                             functionArgs_llvmNameForTaskLoopFunction) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Once function 'llvmNameForTaskSelfTerminateService'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_llvmNameForTaskSelfTerminateService (C_Compiler * /* inCompiler */
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outName ; // Returned variable
+  result_outName = GALGAS_string ("self.terminate") ;
+//---
+  return result_outName ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_llvmNameForTaskSelfTerminateService = false ;
+static GALGAS_string gOnceFunctionResult_llvmNameForTaskSelfTerminateService ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmNameForTaskSelfTerminateService (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_llvmNameForTaskSelfTerminateService) {
+    gOnceFunctionResult_llvmNameForTaskSelfTerminateService = onceFunction_llvmNameForTaskSelfTerminateService (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_llvmNameForTaskSelfTerminateService = true ;
+  }
+  return gOnceFunctionResult_llvmNameForTaskSelfTerminateService ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_llvmNameForTaskSelfTerminateService (void) {
+  gOnceFunctionResult_llvmNameForTaskSelfTerminateService.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskSelfTerminateService (NULL,
+                                                                                 releaseOnceFunctionResult_llvmNameForTaskSelfTerminateService) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskSelfTerminateService [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmNameForTaskSelfTerminateService (C_Compiler * inCompiler,
+                                                                                    const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                    const GALGAS_location & /* inErrorLocation */
+                                                                                    COMMA_LOCATION_ARGS) {
+  return function_llvmNameForTaskSelfTerminateService (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmNameForTaskSelfTerminateService ("llvmNameForTaskSelfTerminateService",
+                                                                                     functionWithGenericHeader_llvmNameForTaskSelfTerminateService,
+                                                                                     & kTypeDescriptor_GALGAS_string,
+                                                                                     0,
+                                                                                     functionArgs_llvmNameForTaskSelfTerminateService) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             Routine 'codeOptimisation'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9215,38 +9355,37 @@ void routine_suppressInaccessibleSubprograms (GALGAS_intermediateCodeStruct & io
   cEnumerator_taskMapIR enumerator_8100 (ioArgument_ioIntermediateCodeStruct.mAttribute_mTaskMapIR, kEnumeration_up) ;
   while (enumerator_8100.hasCurrentObject ()) {
     extensionMethod_enterAccessibleEntities (enumerator_8100.current (HERE).mAttribute_mInitInstructionListIR, outArgument_outAccessibleEntities, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 181)) ;
-    outArgument_outAccessibleEntities.mAttribute_mRoutineSet.addAssign_operation (GALGAS_string ("$").add_operation (enumerator_8100.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 182)).add_operation (GALGAS_string (".setup"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 182))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 182)) ;
-    outArgument_outAccessibleEntities.mAttribute_mRoutineSet.addAssign_operation (GALGAS_string ("$").add_operation (enumerator_8100.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 183)).add_operation (GALGAS_string (".loop"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 183))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 183)) ;
+    outArgument_outAccessibleEntities.mAttribute_mRoutineSet.addAssign_operation (GALGAS_string ("$").add_operation (enumerator_8100.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 182)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 182)).add_operation (function_llvmNameForTaskLoopFunction (inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 182)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 182))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 182)) ;
     enumerator_8100.gotoNextObject () ;
   }
-  const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).operator_not (SOURCE_FILE ("code-optimisation.galgas", 186)).boolEnum () ;
+  const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).operator_not (SOURCE_FILE ("code-optimisation.galgas", 185)).boolEnum () ;
   if (kBoolTrue == test_1) {
-    extensionMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mPanicSetupInstructionListIR, outArgument_outAccessibleEntities, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 187)) ;
-    extensionMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mPanicLoopInstructionListIR, outArgument_outAccessibleEntities, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 191)) ;
+    extensionMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mPanicSetupInstructionListIR, outArgument_outAccessibleEntities, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 186)) ;
+    extensionMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mPanicLoopInstructionListIR, outArgument_outAccessibleEntities, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 190)) ;
   }
-  extensionMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mInterruptMapIR, outArgument_outAccessibleEntities, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 197)) ;
+  extensionMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mInterruptMapIR, outArgument_outAccessibleEntities, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 196)) ;
   GALGAS_bool var_continues = GALGAS_bool (true) ;
-  GALGAS_uint var_bound = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 203)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mGuardMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 204)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 203)) ;
-  if (var_bound.add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 205)).isValid ()) {
-    uint32_t variant_9204 = var_bound.add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 205)).uintValue () ;
-    bool loop_9204 = true ;
-    while (loop_9204) {
-      loop_9204 = var_continues.isValid () ;
-      if (loop_9204) {
-        loop_9204 = var_continues.boolValue () ;
+  GALGAS_uint var_bound = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 202)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mGuardMapIR.getter_count (SOURCE_FILE ("code-optimisation.galgas", 203)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 202)) ;
+  if (var_bound.add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 204)).isValid ()) {
+    uint32_t variant_9157 = var_bound.add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 204)).uintValue () ;
+    bool loop_9157 = true ;
+    while (loop_9157) {
+      loop_9157 = var_continues.isValid () ;
+      if (loop_9157) {
+        loop_9157 = var_continues.boolValue () ;
       }
-      if (loop_9204 && (0 == variant_9204)) {
-        loop_9204 = false ;
-        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 205)) ;
+      if (loop_9157 && (0 == variant_9157)) {
+        loop_9157 = false ;
+        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 204)) ;
       }
-      if (loop_9204) {
-        variant_9204 -- ;
+      if (loop_9157) {
+        variant_9157 -- ;
         var_continues = GALGAS_bool (false) ;
         {
-        routine_exploreProcs (var_accessibleProcedureMap, outArgument_outAccessibleEntities, var_nonExploredProcedureMap, var_continues, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 207)) ;
+        routine_exploreProcs (var_accessibleProcedureMap, outArgument_outAccessibleEntities, var_nonExploredProcedureMap, var_continues, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 206)) ;
         }
         {
-        routine_exploreGuards (var_accessibleGuardMap, outArgument_outAccessibleEntities, var_nonExploredGuardMap, var_continues, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 208)) ;
+        routine_exploreGuards (var_accessibleGuardMap, outArgument_outAccessibleEntities, var_nonExploredGuardMap, var_continues, ioArgument_ioIntermediateCodeStruct.mAttribute_mMaxBranchOfOnInstructions, inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 207)) ;
         }
       }
     }
@@ -9278,22 +9417,22 @@ void routine_exploreProcs (GALGAS_routineMapIR & ioArgument_ioAccessibleProcedur
                            C_Compiler * inCompiler
                            COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_routineMapIR var_exNonExploredProcedureMap = ioArgument_ioNonExploredProcedureMap ;
-  ioArgument_ioNonExploredProcedureMap = GALGAS_routineMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 230)) ;
-  cEnumerator_routineMapIR enumerator_10421 (var_exNonExploredProcedureMap, kEnumeration_up) ;
-  while (enumerator_10421.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = ioArgument_ioAccessibleEntities.mAttribute_mRoutineSet.getter_hasKey (enumerator_10421.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 232)).boolEnum () ;
+  ioArgument_ioNonExploredProcedureMap = GALGAS_routineMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 229)) ;
+  cEnumerator_routineMapIR enumerator_10374 (var_exNonExploredProcedureMap, kEnumeration_up) ;
+  while (enumerator_10374.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = ioArgument_ioAccessibleEntities.mAttribute_mRoutineSet.getter_hasKey (enumerator_10374.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 231)).boolEnum () ;
     if (kBoolTrue == test_0) {
       {
-      ioArgument_ioAccessibleProcedureMap.setter_insertKey (enumerator_10421.current (HERE).mAttribute_lkey, enumerator_10421.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_10421.current (HERE).mAttribute_mAllocaList, enumerator_10421.current (HERE).mAttribute_mInstructionGenerationList, enumerator_10421.current (HERE).mAttribute_mIsRequired, enumerator_10421.current (HERE).mAttribute_mWarnIfUnused, enumerator_10421.current (HERE).mAttribute_mWeak, enumerator_10421.current (HERE).mAttribute_mGlobal, enumerator_10421.current (HERE).mAttribute_mKind, enumerator_10421.current (HERE).mAttribute_mReturnType, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 233)) ;
+      ioArgument_ioAccessibleProcedureMap.setter_insertKey (enumerator_10374.current (HERE).mAttribute_lkey, enumerator_10374.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_10374.current (HERE).mAttribute_mAllocaList, enumerator_10374.current (HERE).mAttribute_mInstructionGenerationList, enumerator_10374.current (HERE).mAttribute_mIsRequired, enumerator_10374.current (HERE).mAttribute_mWarnIfUnused, enumerator_10374.current (HERE).mAttribute_mWeak, enumerator_10374.current (HERE).mAttribute_mGlobal, enumerator_10374.current (HERE).mAttribute_mKind, enumerator_10374.current (HERE).mAttribute_mReturnType, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 232)) ;
       }
-      extensionMethod_enterAccessibleEntities (enumerator_10421.current (HERE), ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 245)) ;
+      extensionMethod_enterAccessibleEntities (enumerator_10374.current (HERE), ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 244)) ;
       ioArgument_ioContinueExploreRoutines = GALGAS_bool (true) ;
     }else if (kBoolFalse == test_0) {
       {
-      ioArgument_ioNonExploredProcedureMap.setter_insertKey (enumerator_10421.current (HERE).mAttribute_lkey, enumerator_10421.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_10421.current (HERE).mAttribute_mAllocaList, enumerator_10421.current (HERE).mAttribute_mInstructionGenerationList, enumerator_10421.current (HERE).mAttribute_mIsRequired, enumerator_10421.current (HERE).mAttribute_mWarnIfUnused, enumerator_10421.current (HERE).mAttribute_mWeak, enumerator_10421.current (HERE).mAttribute_mGlobal, enumerator_10421.current (HERE).mAttribute_mKind, enumerator_10421.current (HERE).mAttribute_mReturnType, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 248)) ;
+      ioArgument_ioNonExploredProcedureMap.setter_insertKey (enumerator_10374.current (HERE).mAttribute_lkey, enumerator_10374.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_10374.current (HERE).mAttribute_mAllocaList, enumerator_10374.current (HERE).mAttribute_mInstructionGenerationList, enumerator_10374.current (HERE).mAttribute_mIsRequired, enumerator_10374.current (HERE).mAttribute_mWarnIfUnused, enumerator_10374.current (HERE).mAttribute_mWeak, enumerator_10374.current (HERE).mAttribute_mGlobal, enumerator_10374.current (HERE).mAttribute_mKind, enumerator_10374.current (HERE).mAttribute_mReturnType, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 247)) ;
       }
     }
-    enumerator_10421.gotoNextObject () ;
+    enumerator_10374.gotoNextObject () ;
   }
 }
 
@@ -9312,22 +9451,22 @@ void routine_exploreGuards (GALGAS_guardMapIR & ioArgument_ioAccessibleGuardMap,
                             C_Compiler * inCompiler
                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_guardMapIR var_exNonExploredGuardMap = ioArgument_ioNonExploredGuardMap ;
-  ioArgument_ioNonExploredGuardMap = GALGAS_guardMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 274)) ;
-  cEnumerator_guardMapIR enumerator_11904 (var_exNonExploredGuardMap, kEnumeration_up) ;
-  while (enumerator_11904.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = ioArgument_ioAccessibleEntities.mAttribute_mGuardSet.getter_hasKey (enumerator_11904.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 276)).boolEnum () ;
+  ioArgument_ioNonExploredGuardMap = GALGAS_guardMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 273)) ;
+  cEnumerator_guardMapIR enumerator_11857 (var_exNonExploredGuardMap, kEnumeration_up) ;
+  while (enumerator_11857.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = ioArgument_ioAccessibleEntities.mAttribute_mGuardSet.getter_hasKey (enumerator_11857.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 275)).boolEnum () ;
     if (kBoolTrue == test_0) {
       {
-      ioArgument_ioAccessibleGuardMap.setter_insertKey (enumerator_11904.current (HERE).mAttribute_lkey, enumerator_11904.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_11904.current (HERE).mAttribute_mGuardKindGenerationIR, enumerator_11904.current (HERE).mAttribute_mAllocaList, enumerator_11904.current (HERE).mAttribute_mInstructionGenerationList, enumerator_11904.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 277)) ;
+      ioArgument_ioAccessibleGuardMap.setter_insertKey (enumerator_11857.current (HERE).mAttribute_lkey, enumerator_11857.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_11857.current (HERE).mAttribute_mGuardKindGenerationIR, enumerator_11857.current (HERE).mAttribute_mAllocaList, enumerator_11857.current (HERE).mAttribute_mInstructionGenerationList, enumerator_11857.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 276)) ;
       }
-      extensionMethod_enterAccessibleEntities (enumerator_11904.current (HERE), ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 285)) ;
+      extensionMethod_enterAccessibleEntities (enumerator_11857.current (HERE), ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 284)) ;
       ioArgument_ioContinueExploreRoutines = GALGAS_bool (true) ;
     }else if (kBoolFalse == test_0) {
       {
-      ioArgument_ioNonExploredGuardMap.setter_insertKey (enumerator_11904.current (HERE).mAttribute_lkey, enumerator_11904.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_11904.current (HERE).mAttribute_mGuardKindGenerationIR, enumerator_11904.current (HERE).mAttribute_mAllocaList, enumerator_11904.current (HERE).mAttribute_mInstructionGenerationList, enumerator_11904.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 288)) ;
+      ioArgument_ioNonExploredGuardMap.setter_insertKey (enumerator_11857.current (HERE).mAttribute_lkey, enumerator_11857.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_11857.current (HERE).mAttribute_mGuardKindGenerationIR, enumerator_11857.current (HERE).mAttribute_mAllocaList, enumerator_11857.current (HERE).mAttribute_mInstructionGenerationList, enumerator_11857.current (HERE).mAttribute_mWarnIfUnused, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 287)) ;
       }
     }
-    enumerator_11904.gotoNextObject () ;
+    enumerator_11857.gotoNextObject () ;
   }
 }
 
@@ -12685,6 +12824,9 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "\n"
   "typedef unsigned char bool ;\n"
   "\n"
+  "#define true  ((bool) 1)\n"
+  "#define false ((bool) 0)\n"
+  "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "// GUARD_EVALUATING_OR_OUTSIDE should be the first constant\n"
@@ -12762,17 +12904,6 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "static void kernel_set_task_context (TaskContext * inTaskContext,\n"
   "                                     const unsigned inTopOfStack,\n"
   "                                     RoutineTaskType inTaskRoutine) {\n"
-  "// --- Initialize LR\n"
-  "//   inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ;\n"
-  "// --- Initialize SP\n"
-  "//   StackedRegisters * ptr = (StackedRegisters *) (inTopOfStack - sizeof (StackedRegisters)) ; // 8 stacked registers\n"
-  "//   inTaskContext->mSP_USR = ptr ;\n"
-  "// --- Initialize PC\n"
-  "//   ptr->mPC = (unsigned) inTaskRoutine ;\n"
-  "// --- Initialize CPSR\n"
-  "//   ptr->mXPSR = 1 << 24 ;\n"
-  "\n"
-  "\n"
   "//--- Initialize PC\n"
   "  inTaskContext->mPC_USR = (unsigned) inTaskRoutine ;\n"
   "//--- Initialize SP\n"
@@ -12805,7 +12936,8 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "  unsigned char mTaskIndex ;\n"
   "//--- Guards\n"
   "  GuardState mGuardState ;\n"
-  "  unsigned short mGuardCount ;\n"
+  "  bool mHaveDeadlineGuard ;\n"
+  "  unsigned mGuardCount ;\n"
   "  GuardList * mGuardListArray [GUARD_COUNT] ;\n"
   "} TaskControlBlock ;\n"
   "\n"
@@ -12878,6 +13010,16 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   kernel_self_terminate                                                                                             *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "void kernel_self_terminate (void) asm (\"!SERVICEIMPLEMENTATION!self.terminate\") ;\n"
+  "\n"
+  "void kernel_self_terminate (void) {\n"
+  "  kernel_makeNoTaskRunning () ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
   "//   L I S T    M A N A G E M E N T                                                                                    *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -12930,10 +13072,10 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "unsigned char makeTaskReady (TaskList * ioWaitingList) asm (\"!FUNC!.makeTaskReady\") ;\n"
+  "bool makeTaskReady (TaskList * ioWaitingList) asm (\"!FUNC!.makeTaskReady\") ;\n"
   "\n"
-  "unsigned char makeTaskReady (TaskList * ioWaitingList) {\n"
-  "  unsigned char found = (* ioWaitingList) != 0 ;\n"
+  "bool makeTaskReady (TaskList * ioWaitingList) {\n"
+  "  const bool found = (* ioWaitingList) != 0 ;\n"
   "  if (found) {\n"
   "  //--- Get index of waiting task\n"
   "    const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;\n"
@@ -12991,8 +13133,9 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "  for (unsigned i=0 ; i<guardCount ; i++) {\n"
   "    taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;\n"
   "  }\n"
-  "  gDeadlineWaitingInGuardTaskList &= ~ mask ;\n"
   "  taskControlBlockPtr->mGuardCount = 0 ;\n"
+  "  gDeadlineWaitingInGuardTaskList &= mask ;\n"
+  "  taskControlBlockPtr->mHaveDeadlineGuard = false ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -13024,13 +13167,34 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "\n"
   "void handleGuardedWaitUntil (const unsigned inDeadline) {\n"
   "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "    gRunningTaskControlBlock->mHaveDeadlineGuard = true ;\n"
   "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
   "    const unsigned mask = 1 << runningTaskIndex ;\n"
-  "    if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {\n"
+  "    if (((gDeadlineWaitingInGuardTaskList & mask) == 0) || (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {\n"
   "      gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
   "    }\n"
   "    gDeadlineWaitingInGuardTaskList |= mask ;\n"
   "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "bool waitForGuardChange (void) asm (\"service.call.waitForGuardChange\") ;\n"
+  "\n"
+  "bool kernel_waitForGuardChange (void) asm (\"service.implementation.waitForGuardChange\") ;\n"
+  "\n"
+  "bool kernel_waitForGuardChange (void) {\n"
+  "  bool result = gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE ;\n"
+  "  if (result) { // GUARD_DID_CHANGE\n"
+  "    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "  }else{ // GUARD_EVALUATING_OR_OUTSIDE\n"
+  "    result = gRunningTaskControlBlock->mHaveDeadlineGuard || (gRunningTaskControlBlock->mGuardCount > 0) ;\n"
+  "    if (result) {\n"
+  "      gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
+  "      kernel_makeNoTaskRunning () ;\n"
+  "    }\n"
+  "  }\n"
+  "  return result ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -13044,26 +13208,14 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
   "    removeTaskFromGuards (taskControlBlockPtr) ;    \n"
   "    if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
+  "      kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
   "      kernel_makeTaskReady (taskIndex) ;\n"
   "      taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "    }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "      taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
+  "    }else{ // GUARD_DID_CHANGE\n"
+  "      // Nothing to do\n"
   "    }\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "void waitForGuardChange (void) asm (\"service.call.waitForGuardChange\") ;\n"
-  "\n"
-  "void kernel_waitForGuardChange (void) asm (\"service.implementation.waitForGuardChange\") ;\n"
-  "\n"
-  "void kernel_waitForGuardChange (void) {\n"
-  "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "    gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
-  "    kernel_makeNoTaskRunning () ;\n"
-  "  }else{\n"
-  "    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "  }\n"
   "}\n"
   "\n"
@@ -13080,10 +13232,13 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "    if (inUptime >= taskControlBlockPtr->mTaskDeadline) {\n"
   "      removeTaskFromGuards (taskControlBlockPtr) ;\n"
   "      if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
-  "        kernel_makeTaskReady (taskIndex) ;\n"
   "        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "        kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
+  "        kernel_makeTaskReady (taskIndex) ;\n"
   "      }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "        taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
+  "      }else{ // GUARD_DID_CHANGE\n"
+  "        // Nothing to do\n"
   "      }\n"
   "    }\n"
   "  }\n"
@@ -13095,7 +13250,7 @@ const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  21367, // Text length
+  22156, // Text length
   gWrapperFileContent_21_targetTemplates
 ) ;
 
@@ -18050,6 +18205,9 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "\n"
   "typedef unsigned char bool ;\n"
   "\n"
+  "#define true  ((bool) 1)\n"
+  "#define false ((bool) 0)\n"
+  "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "// GUARD_EVALUATING_OR_OUTSIDE should be the first constant\n"
@@ -18198,7 +18356,8 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "  unsigned char mTaskIndex ;\n"
   "//--- Guards\n"
   "  GuardState mGuardState ;\n"
-  "  unsigned short mGuardCount ;\n"
+  "  bool mHaveDeadlineGuard ;\n"
+  "  unsigned mGuardCount ;\n"
   "  GuardList * mGuardListArray [GUARD_COUNT] ;\n"
   "} TaskControlBlock ;\n"
   "\n"
@@ -18256,8 +18415,10 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "                         RoutineTaskType inTaskRoutine) {\n"
   "  TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [inTaskIndex] ;\n"
   "  taskControlBlockPtr->mTaskIndex = (unsigned char) inTaskIndex ;\n"
+  "  taskControlBlockPtr->mTaskDeadline = 0 ; // statically initialized to 0\n"
   "  taskControlBlockPtr->mWaitingList = (TaskList *) 0 ; // statically initialized to 0\n"
   "  taskControlBlockPtr->mGuardCount = 0 ; // statically initialized to 0\n"
+  "  taskControlBlockPtr->mHaveDeadlineGuard = false ; // statically initialized to 0\n"
   "  taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ; // statically initialized to 0\n"
   "//--- Store stack parameters\n"
   "//  taskControlBlockPtr->mStackBufferAddress = inStackBufferAddress ;\n"
@@ -18333,10 +18494,10 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "unsigned char makeTaskReady (TaskList * ioWaitingList) asm (\"!FUNC!.makeTaskReady\") ;\n"
+  "bool makeTaskReady (TaskList * ioWaitingList) asm (\"!FUNC!.makeTaskReady\") ;\n"
   "\n"
-  "unsigned char makeTaskReady (TaskList * ioWaitingList) {\n"
-  "  unsigned char found = (* ioWaitingList) != 0 ;\n"
+  "bool makeTaskReady (TaskList * ioWaitingList) {\n"
+  "  const bool found = (* ioWaitingList) != 0 ;\n"
   "  if (found) {\n"
   "  //--- Get index of waiting task\n"
   "    const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;\n"
@@ -18394,8 +18555,9 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "  for (unsigned i=0 ; i<guardCount ; i++) {\n"
   "    taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;\n"
   "  }\n"
-  "  gDeadlineWaitingInGuardTaskList &= ~ mask ;\n"
   "  taskControlBlockPtr->mGuardCount = 0 ;\n"
+  "  gDeadlineWaitingInGuardTaskList &= mask ;\n"
+  "  taskControlBlockPtr->mHaveDeadlineGuard = false ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -18427,13 +18589,34 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "\n"
   "void handleGuardedWaitUntil (const unsigned inDeadline) {\n"
   "  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
+  "    gRunningTaskControlBlock->mHaveDeadlineGuard = true ;\n"
   "    const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;\n"
   "    const unsigned mask = 1 << runningTaskIndex ;\n"
-  "    if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {\n"
+  "    if (((gDeadlineWaitingInGuardTaskList & mask) == 0) || (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {\n"
   "      gRunningTaskControlBlock->mTaskDeadline = inDeadline ;\n"
   "    }\n"
   "    gDeadlineWaitingInGuardTaskList |= mask ;\n"
   "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "bool waitForGuardChange (void) asm (\"service.call.waitForGuardChange\") ;\n"
+  "\n"
+  "bool kernel_waitForGuardChange (void) asm (\"service.implementation.waitForGuardChange\") ;\n"
+  "\n"
+  "bool kernel_waitForGuardChange (void) {\n"
+  "  bool result = gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE ;\n"
+  "  if (result) { // GUARD_DID_CHANGE\n"
+  "    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
+  "  }else{ // GUARD_EVALUATING_OR_OUTSIDE\n"
+  "    result = gRunningTaskControlBlock->mHaveDeadlineGuard || (gRunningTaskControlBlock->mGuardCount > 0) ;\n"
+  "    if (result) {\n"
+  "      gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
+  "      kernel_makeNoTaskRunning () ;\n"
+  "    }\n"
+  "  }\n"
+  "  return result ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -18452,27 +18635,10 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "      taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "    }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "      taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
+  "    }else{ // GUARD_DID_CHANGE\n"
+  "      // Nothing to do\n"
   "    }\n"
   "  }\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "bool waitForGuardChange (void) asm (\"service.call.waitForGuardChange\") ;\n"
-  "\n"
-  "bool kernel_waitForGuardChange (void) asm (\"service.implementation.waitForGuardChange\") ;\n"
-  "\n"
-  "bool kernel_waitForGuardChange (void) {\n"
-  "  const bool result = gRunningTaskControlBlock->mGuardCount > 0 ;\n"
-  "  if (result) {\n"
-  "    if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
-  "      gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;\n"
-  "      kernel_makeNoTaskRunning () ;\n"
-  "    }else{\n"
-  "      gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
-  "    }\n"
-  "  }\n"
-  "  return result ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -18488,11 +18654,13 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "    if (inUptime >= taskControlBlockPtr->mTaskDeadline) {\n"
   "      removeTaskFromGuards (taskControlBlockPtr) ;\n"
   "      if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {\n"
+  "        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "        kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
   "        kernel_makeTaskReady (taskIndex) ;\n"
-  "        taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;\n"
   "      }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {\n"
   "        taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;\n"
+  "      }else{ // GUARD_DID_CHANGE\n"
+  "        // Nothing to do\n"
   "      }\n"
   "    }\n"
   "  }\n"
@@ -18504,7 +18672,7 @@ const cRegularFileWrapper gWrapperFile_49_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  23290, // Text length
+  23821, // Text length
   gWrapperFileContent_49_targetTemplates
 ) ;
 

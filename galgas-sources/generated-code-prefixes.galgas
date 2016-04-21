@@ -339,3 +339,14 @@ func llvmNameForTaskVariable ?@string inTaskName ?@string inVarName -> @string o
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once llvmNameForTaskLoopFunction -> @string outName {
+  outName = "task$loop"
+}
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once llvmNameForTaskSelfTerminateService -> @string outName {
+  outName = "self.terminate"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

@@ -5,8 +5,7 @@ target "teensy-3-1-tp"
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.compteur)
+  while time.waitUntilMS (!deadline:self.compteur) {
     leds.on (!LED_L0)
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)

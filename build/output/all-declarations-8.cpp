@@ -3564,8 +3564,7 @@ GALGAS_taskInitSortedListAST_2D_element GALGAS_taskInitSortedListAST_2D_element:
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap_2D_element::GALGAS_taskProcedureMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mHasFormalArguments () {
+mAttribute_lkey () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3575,27 +3574,23 @@ GALGAS_taskProcedureMap_2D_element::~ GALGAS_taskProcedureMap_2D_element (void) 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskProcedureMap_2D_element::GALGAS_taskProcedureMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                                        const GALGAS_bool & inOperand1) :
-mAttribute_lkey (inOperand0),
-mAttribute_mHasFormalArguments (inOperand1) {
+GALGAS_taskProcedureMap_2D_element::GALGAS_taskProcedureMap_2D_element (const GALGAS_lstring & inOperand0) :
+mAttribute_lkey (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap_2D_element GALGAS_taskProcedureMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_taskProcedureMap_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                             GALGAS_bool::constructor_default (HERE)) ;
+  return GALGAS_taskProcedureMap_2D_element (GALGAS_lstring::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_taskProcedureMap_2D_element GALGAS_taskProcedureMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                        const GALGAS_bool & inOperand1 
+GALGAS_taskProcedureMap_2D_element GALGAS_taskProcedureMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0 
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_taskProcedureMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_taskProcedureMap_2D_element (inOperand0, inOperand1) ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_taskProcedureMap_2D_element (inOperand0) ;
   }
   return result ;
 }
@@ -3607,23 +3602,19 @@ typeComparisonResult GALGAS_taskProcedureMap_2D_element::objectCompare (const GA
   if (result == kOperandEqual) {
     result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
   }
-  if (result == kOperandEqual) {
-    result = mAttribute_mHasFormalArguments.objectCompare (inOperand.mAttribute_mHasFormalArguments) ;
-  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskProcedureMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mHasFormalArguments.isValid () ;
+  return mAttribute_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskProcedureMap_2D_element::drop (void) {
   mAttribute_lkey.drop () ;
-  mAttribute_mHasFormalArguments.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3635,8 +3626,6 @@ void GALGAS_taskProcedureMap_2D_element::description (C_String & ioString,
     ioString << " not built" ;
   }else{
     mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mHasFormalArguments.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -3645,12 +3634,6 @@ void GALGAS_taskProcedureMap_2D_element::description (C_String & ioString,
 
 GALGAS_lstring GALGAS_taskProcedureMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
   return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_taskProcedureMap_2D_element::getter_mHasFormalArguments (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mHasFormalArguments ;
 }
 
 
@@ -6420,7 +6403,7 @@ GALGAS_functionCallEffectiveParameterList_2D_element GALGAS_functionCallEffectiv
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchList_2D_element::GALGAS_selectInstructionBranchList_2D_element (void) :
+GALGAS_syncInstructionBranchList_2D_element::GALGAS_syncInstructionBranchList_2D_element (void) :
 mAttribute_mGuardedCommand (),
 mAttribute_mInstructionList (),
 mAttribute_mEndOfBranch () {
@@ -6428,14 +6411,14 @@ mAttribute_mEndOfBranch () {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchList_2D_element::~ GALGAS_selectInstructionBranchList_2D_element (void) {
+GALGAS_syncInstructionBranchList_2D_element::~ GALGAS_syncInstructionBranchList_2D_element (void) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchList_2D_element::GALGAS_selectInstructionBranchList_2D_element (const GALGAS_guardedCommand & inOperand0,
-                                                                                              const GALGAS_instructionListAST & inOperand1,
-                                                                                              const GALGAS_location & inOperand2) :
+GALGAS_syncInstructionBranchList_2D_element::GALGAS_syncInstructionBranchList_2D_element (const GALGAS_guardedCommand & inOperand0,
+                                                                                          const GALGAS_instructionListAST & inOperand1,
+                                                                                          const GALGAS_location & inOperand2) :
 mAttribute_mGuardedCommand (inOperand0),
 mAttribute_mInstructionList (inOperand1),
 mAttribute_mEndOfBranch (inOperand2) {
@@ -6443,20 +6426,20 @@ mAttribute_mEndOfBranch (inOperand2) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchList_2D_element GALGAS_selectInstructionBranchList_2D_element::constructor_new (const GALGAS_guardedCommand & inOperand0,
-                                                                                                              const GALGAS_instructionListAST & inOperand1,
-                                                                                                              const GALGAS_location & inOperand2 
-                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_selectInstructionBranchList_2D_element result ;
+GALGAS_syncInstructionBranchList_2D_element GALGAS_syncInstructionBranchList_2D_element::constructor_new (const GALGAS_guardedCommand & inOperand0,
+                                                                                                          const GALGAS_instructionListAST & inOperand1,
+                                                                                                          const GALGAS_location & inOperand2 
+                                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_syncInstructionBranchList_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_selectInstructionBranchList_2D_element (inOperand0, inOperand1, inOperand2) ;
+    result = GALGAS_syncInstructionBranchList_2D_element (inOperand0, inOperand1, inOperand2) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult GALGAS_selectInstructionBranchList_2D_element::objectCompare (const GALGAS_selectInstructionBranchList_2D_element & inOperand) const {
+typeComparisonResult GALGAS_syncInstructionBranchList_2D_element::objectCompare (const GALGAS_syncInstructionBranchList_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAttribute_mGuardedCommand.objectCompare (inOperand.mAttribute_mGuardedCommand) ;
@@ -6472,13 +6455,13 @@ typeComparisonResult GALGAS_selectInstructionBranchList_2D_element::objectCompar
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool GALGAS_selectInstructionBranchList_2D_element::isValid (void) const {
+bool GALGAS_syncInstructionBranchList_2D_element::isValid (void) const {
   return mAttribute_mGuardedCommand.isValid () && mAttribute_mInstructionList.isValid () && mAttribute_mEndOfBranch.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_selectInstructionBranchList_2D_element::drop (void) {
+void GALGAS_syncInstructionBranchList_2D_element::drop (void) {
   mAttribute_mGuardedCommand.drop () ;
   mAttribute_mInstructionList.drop () ;
   mAttribute_mEndOfBranch.drop () ;
@@ -6486,9 +6469,9 @@ void GALGAS_selectInstructionBranchList_2D_element::drop (void) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_selectInstructionBranchList_2D_element::description (C_String & ioString,
-                                                                 const int32_t inIndentation) const {
-  ioString << "<struct @selectInstructionBranchList-element:" ;
+void GALGAS_syncInstructionBranchList_2D_element::description (C_String & ioString,
+                                                               const int32_t inIndentation) const {
+  ioString << "<struct @syncInstructionBranchList-element:" ;
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
@@ -6503,19 +6486,19 @@ void GALGAS_selectInstructionBranchList_2D_element::description (C_String & ioSt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_guardedCommand GALGAS_selectInstructionBranchList_2D_element::getter_mGuardedCommand (UNUSED_LOCATION_ARGS) const {
+GALGAS_guardedCommand GALGAS_syncInstructionBranchList_2D_element::getter_mGuardedCommand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mGuardedCommand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST GALGAS_selectInstructionBranchList_2D_element::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST GALGAS_syncInstructionBranchList_2D_element::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_selectInstructionBranchList_2D_element::getter_mEndOfBranch (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_syncInstructionBranchList_2D_element::getter_mEndOfBranch (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOfBranch ;
 }
 
@@ -6523,42 +6506,42 @@ GALGAS_location GALGAS_selectInstructionBranchList_2D_element::getter_mEndOfBran
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      @selectInstructionBranchList-element type                                      *
+//                                       @syncInstructionBranchList-element type                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_selectInstructionBranchList_2D_element ("selectInstructionBranchList-element",
-                                                               NULL) ;
+kTypeDescriptor_GALGAS_syncInstructionBranchList_2D_element ("syncInstructionBranchList-element",
+                                                             NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_selectInstructionBranchList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_selectInstructionBranchList_2D_element ;
+const C_galgas_type_descriptor * GALGAS_syncInstructionBranchList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_syncInstructionBranchList_2D_element ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_selectInstructionBranchList_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_syncInstructionBranchList_2D_element::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_selectInstructionBranchList_2D_element (*this)) ;
+    macroMyNew (result, GALGAS_syncInstructionBranchList_2D_element (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchList_2D_element GALGAS_selectInstructionBranchList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                            C_Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_selectInstructionBranchList_2D_element result ;
-  const GALGAS_selectInstructionBranchList_2D_element * p = (const GALGAS_selectInstructionBranchList_2D_element *) inObject.embeddedObject () ;
+GALGAS_syncInstructionBranchList_2D_element GALGAS_syncInstructionBranchList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                        C_Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_syncInstructionBranchList_2D_element result ;
+  const GALGAS_syncInstructionBranchList_2D_element * p = (const GALGAS_syncInstructionBranchList_2D_element *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_selectInstructionBranchList_2D_element *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_syncInstructionBranchList_2D_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("selectInstructionBranchList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("syncInstructionBranchList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -10145,49 +10128,49 @@ void extensionMethod_enterInContext (const GALGAS_taskVarListAST_2D_element inOb
   GALGAS_unifiedTypeMap_2D_proxy var_variableAnnotationType ;
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, inObject.mAttribute_mVarTypeName.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_variableAnnotationType = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-task.galgas", 228)) ;
+    var_variableAnnotationType = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-task.galgas", 218)) ;
   }else if (kBoolFalse == test_0) {
-    var_variableAnnotationType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, inObject.mAttribute_mVarTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 230)) ;
+    var_variableAnnotationType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, inObject.mAttribute_mVarTypeName, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 220)) ;
   }
-  GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("declaration-task.galgas", 233)) ;
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 234)) ;
-  GALGAS_allocaList var_allocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 235)) ;
-  GALGAS_variableMap var_variableMap = function_variableMapWithConstants (ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 236)) ;
+  GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("declaration-task.galgas", 223)) ;
+  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 224)) ;
+  GALGAS_allocaList var_allocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 225)) ;
+  GALGAS_variableMap var_variableMap = function_variableMapWithConstants (ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 226)) ;
   GALGAS_operandIR var_expressionResult ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) inObject.mAttribute_mVarInitExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-task.galgas", 238)), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-task.galgas", 240)), var_variableAnnotationType, ioArgument_ioContext, GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-task.galgas", 243)), GALGAS_bool (true), var_temporaries, ioArgument_ioGlobalLiteralStringMap, var_variableMap, var_allocaList, var_instructionGenerationList, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 237)) ;
-  GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList.getter_length (SOURCE_FILE ("declaration-task.galgas", 252)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) inObject.mAttribute_mVarInitExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-task.galgas", 228)), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-task.galgas", 230)), var_variableAnnotationType, ioArgument_ioContext, GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-task.galgas", 233)), GALGAS_bool (true), var_temporaries, ioArgument_ioGlobalLiteralStringMap, var_variableMap, var_allocaList, var_instructionGenerationList, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 227)) ;
+  GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList.getter_length (SOURCE_FILE ("declaration-task.galgas", 242)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_1.boolEnum ()) {
-    test_1 = GALGAS_bool (kIsStrictSup, var_allocaList.getter_length (SOURCE_FILE ("declaration-task.galgas", 252)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+    test_1 = GALGAS_bool (kIsStrictSup, var_allocaList.getter_length (SOURCE_FILE ("declaration-task.galgas", 242)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   }
   GALGAS_bool test_2 = test_1 ;
   if (kBoolTrue != test_2.boolEnum ()) {
-    test_2 = extensionGetter_isStatic (var_expressionResult.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 252)).operator_not (SOURCE_FILE ("declaration-task.galgas", 252)) ;
+    test_2 = extensionGetter_isStatic (var_expressionResult.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 242)).operator_not (SOURCE_FILE ("declaration-task.galgas", 242)) ;
   }
   const enumGalgasBool test_3 = test_2.boolEnum () ;
   if (kBoolTrue == test_3) {
     GALGAS_location location_4 (inObject.mAttribute_mVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_4, GALGAS_string ("source expression cannot be statically computed")  COMMA_SOURCE_FILE ("declaration-task.galgas", 253)) ;
+    inCompiler->emitSemanticError (location_4, GALGAS_string ("source expression cannot be statically computed")  COMMA_SOURCE_FILE ("declaration-task.galgas", 243)) ;
   }
-  GALGAS_bool test_5 = GALGAS_bool (kIsEqual, var_variableAnnotationType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-task.galgas", 256)))) ;
+  GALGAS_bool test_5 = GALGAS_bool (kIsEqual, var_variableAnnotationType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-task.galgas", 246)))) ;
   if (kBoolTrue == test_5.boolEnum ()) {
-    test_5 = var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 256)).getter_isStaticInteger (SOURCE_FILE ("declaration-task.galgas", 256)) ;
+    test_5 = var_expressionResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 246)).getter_isStaticInteger (SOURCE_FILE ("declaration-task.galgas", 246)) ;
   }
   const enumGalgasBool test_6 = test_5.boolEnum () ;
   if (kBoolTrue == test_6) {
     GALGAS_location location_7 (inObject.mAttribute_mVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_7, GALGAS_string ("cannot infer type")  COMMA_SOURCE_FILE ("declaration-task.galgas", 257)) ;
+    inCompiler->emitSemanticError (location_7, GALGAS_string ("cannot infer type")  COMMA_SOURCE_FILE ("declaration-task.galgas", 247)) ;
   }
-  GALGAS_operandIR var_result = function_checkAssignmentCompatibility (var_expressionResult, var_variableAnnotationType, inObject.mAttribute_mVarName.mAttribute_location, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 259)) ;
-  const enumGalgasBool test_8 = var_result.mAttribute_mType.getter_instantiable (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 267)).operator_not (SOURCE_FILE ("declaration-task.galgas", 267)).boolEnum () ;
+  GALGAS_operandIR var_result = function_checkAssignmentCompatibility (var_expressionResult, var_variableAnnotationType, inObject.mAttribute_mVarName.mAttribute_location, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 249)) ;
+  const enumGalgasBool test_8 = var_result.mAttribute_mType.getter_instantiable (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 257)).operator_not (SOURCE_FILE ("declaration-task.galgas", 257)).boolEnum () ;
   if (kBoolTrue == test_8) {
     GALGAS_location location_9 (inObject.mAttribute_mVarName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_9, GALGAS_string ("$").add_operation (var_result.mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 268)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 268)).add_operation (GALGAS_string (" type is not instanciable"), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 268))  COMMA_SOURCE_FILE ("declaration-task.galgas", 268)) ;
+    inCompiler->emitSemanticError (location_9, GALGAS_string ("$").add_operation (var_result.mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 258)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 258)).add_operation (GALGAS_string (" type is not instanciable"), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 258))  COMMA_SOURCE_FILE ("declaration-task.galgas", 258)) ;
   }
-  ioArgument_ioPropertyList.addAssign_operation (inObject.mAttribute_mVarName.mAttribute_string, var_result.mAttribute_mType  COMMA_SOURCE_FILE ("declaration-task.galgas", 270)) ;
+  ioArgument_ioPropertyList.addAssign_operation (inObject.mAttribute_mVarName.mAttribute_string, var_result.mAttribute_mType  COMMA_SOURCE_FILE ("declaration-task.galgas", 260)) ;
   {
-  ioArgument_ioPropertyMap.setter_insertKey (inObject.mAttribute_mVarName, GALGAS_bool (false), var_result.mAttribute_mType, ioArgument_ioPropertyMap.getter_count (SOURCE_FILE ("declaration-task.galgas", 271)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 271)) ;
+  ioArgument_ioPropertyMap.setter_insertKey (inObject.mAttribute_mVarName, GALGAS_bool (false), var_result.mAttribute_mType, ioArgument_ioPropertyMap.getter_count (SOURCE_FILE ("declaration-task.galgas", 261)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 261)) ;
   }
-  ioArgument_ioInitialValueList.addAssign_operation (var_result  COMMA_SOURCE_FILE ("declaration-task.galgas", 272)) ;
+  ioArgument_ioInitialValueList.addAssign_operation (var_result  COMMA_SOURCE_FILE ("declaration-task.galgas", 262)) ;
 }
 
 
@@ -10204,48 +10187,59 @@ void extensionMethod_semanticAnalysis (const GALGAS_taskList_2D_element inObject
                                        C_Compiler * inCompiler
                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bigint var_stackSize = inObject.mAttribute_mStackSize.mAttribute_bigint ;
-  GALGAS_bool test_0 = GALGAS_bool (kIsStrictInf, var_stackSize.objectCompare (GALGAS_bigint ("64", inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 308)))) ;
+  GALGAS_bool test_0 = GALGAS_bool (kIsStrictInf, var_stackSize.objectCompare (GALGAS_bigint ("64", inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 298)))) ;
   if (kBoolTrue != test_0.boolEnum ()) {
-    test_0 = GALGAS_bool (kIsNotEqual, var_stackSize.modulo_operation (GALGAS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 308)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 308)).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 308)))) ;
+    test_0 = GALGAS_bool (kIsNotEqual, var_stackSize.modulo_operation (GALGAS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 298)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 298)).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 298)))) ;
   }
   const enumGalgasBool test_1 = test_0.boolEnum () ;
   if (kBoolTrue == test_1) {
     GALGAS_location location_2 (inObject.mAttribute_mStackSize.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_2, GALGAS_string ("stack size should be a multiple of 8, and >= 64")  COMMA_SOURCE_FILE ("declaration-task.galgas", 309)) ;
+    inCompiler->emitSemanticError (location_2, GALGAS_string ("stack size should be a multiple of 8, and >= 64")  COMMA_SOURCE_FILE ("declaration-task.galgas", 299)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_taskType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, inObject.mAttribute_mTaskName, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 312)) ;
-  cEnumerator_procedureDeclarationListAST enumerator_11942 (inObject.mAttribute_mTaskProcList, kEnumeration_up) ;
-  while (enumerator_11942.hasCurrentObject ()) {
+  GALGAS_unifiedTypeMap_2D_proxy var_taskType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, inObject.mAttribute_mTaskName, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 302)) ;
+  cEnumerator_procedureDeclarationListAST enumerator_11403 (inObject.mAttribute_mTaskProcList, kEnumeration_up) ;
+  while (enumerator_11403.hasCurrentObject ()) {
     {
-    GALGAS_lstringlist temp_3 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 317)) ;
-    temp_3.addAssign_operation (GALGAS_lstring::constructor_new (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 317)), enumerator_11942.current (HERE).mAttribute_mProcedureName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-task.galgas", 317))  COMMA_SOURCE_FILE ("declaration-task.galgas", 317)) ;
-    routine_routineSemanticAnalysis (var_taskType, GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-task.galgas", 316)), temp_3, enumerator_11942.current (HERE).mAttribute_mProcedureName, enumerator_11942.current (HERE).mAttribute_mProcedureFormalArgumentList, enumerator_11942.current (HERE).mAttribute_mReturnTypeName, enumerator_11942.current (HERE).mAttribute_mProcedureInstructionList, enumerator_11942.current (HERE).mAttribute_mEndOfProcedureDeclaration, GALGAS_bool (true), GALGAS_bool (false), GALGAS_bool (false), GALGAS_accessKind::constructor_noAccess (SOURCE_FILE ("declaration-task.galgas", 326)), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 314)) ;
+    GALGAS_lstringlist temp_3 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 307)) ;
+    temp_3.addAssign_operation (GALGAS_lstring::constructor_new (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 307)), enumerator_11403.current (HERE).mAttribute_mProcedureName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-task.galgas", 307))  COMMA_SOURCE_FILE ("declaration-task.galgas", 307)) ;
+    routine_routineSemanticAnalysis (var_taskType, GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-task.galgas", 306)), temp_3, enumerator_11403.current (HERE).mAttribute_mProcedureName, enumerator_11403.current (HERE).mAttribute_mProcedureFormalArgumentList, enumerator_11403.current (HERE).mAttribute_mReturnTypeName, enumerator_11403.current (HERE).mAttribute_mProcedureInstructionList, enumerator_11403.current (HERE).mAttribute_mEndOfProcedureDeclaration, GALGAS_bool (true), GALGAS_bool (false), GALGAS_bool (false), GALGAS_accessKind::constructor_noAccess (SOURCE_FILE ("declaration-task.galgas", 316)), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 304)) ;
     }
-    enumerator_11942.gotoNextObject () ;
+    enumerator_11403.gotoNextObject () ;
   }
-  GALGAS_taskInitSortedListAST var_taskInitSortedListAST = GALGAS_taskInitSortedListAST::constructor_emptySortedList (SOURCE_FILE ("declaration-task.galgas", 333)) ;
-  cEnumerator_taskInitListAST enumerator_12729 (inObject.mAttribute_mTaskInitListAST, kEnumeration_up) ;
-  while (enumerator_12729.hasCurrentObject ()) {
-    var_taskInitSortedListAST.addAssign_operation (enumerator_12729.current_mTaskInitPriority (HERE), enumerator_12729.current_mTaskInitInstructionList (HERE), enumerator_12729.current_mEndOfTaskInitDeclaration (HERE), enumerator_12729.current_mTaskInitPriority (HERE).mAttribute_bigint  COMMA_SOURCE_FILE ("declaration-task.galgas", 335)) ;
-    enumerator_12729.gotoNextObject () ;
+  GALGAS_taskInitSortedListAST var_taskInitSortedListAST = GALGAS_taskInitSortedListAST::constructor_emptySortedList (SOURCE_FILE ("declaration-task.galgas", 323)) ;
+  cEnumerator_taskInitListAST enumerator_12190 (inObject.mAttribute_mTaskInitListAST, kEnumeration_up) ;
+  while (enumerator_12190.hasCurrentObject ()) {
+    var_taskInitSortedListAST.addAssign_operation (enumerator_12190.current_mTaskInitPriority (HERE), enumerator_12190.current_mTaskInitInstructionList (HERE), enumerator_12190.current_mEndOfTaskInitDeclaration (HERE), enumerator_12190.current_mTaskInitPriority (HERE).mAttribute_bigint  COMMA_SOURCE_FILE ("declaration-task.galgas", 325)) ;
+    enumerator_12190.gotoNextObject () ;
   }
-  GALGAS_instructionListIR var_initInstructionListIR = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 337)) ;
-  GALGAS_allocaList var_initAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 338)) ;
-  cEnumerator_taskInitSortedListAST enumerator_13012 (var_taskInitSortedListAST, kEnumeration_up) ;
-  while (enumerator_13012.hasCurrentObject ()) {
+  GALGAS_instructionListIR var_initInstructionListIR = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 327)) ;
+  GALGAS_allocaList var_initAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 328)) ;
+  cEnumerator_taskInitSortedListAST enumerator_12473 (var_taskInitSortedListAST, kEnumeration_up) ;
+  while (enumerator_12473.hasCurrentObject ()) {
     GALGAS_allocaList var_partialAllocaList ;
     GALGAS_instructionListIR var_partialInstructionGenerationList ;
     {
-    GALGAS_stringset temp_4 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-task.galgas", 346)) ;
-    temp_4.addAssign_operation (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 346))  COMMA_SOURCE_FILE ("declaration-task.galgas", 346)) ;
-    routine_initSemanticAnalysis (constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, var_taskType, enumerator_13012.current_mTaskInitPriority (HERE), temp_4, GALGAS__32_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 347)), enumerator_13012.current_mTaskInitInstructionList (HERE), enumerator_13012.current_mEndOfTaskInitDeclaration (HERE), var_partialAllocaList, var_partialInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 340)) ;
+    GALGAS_stringset temp_4 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-task.galgas", 336)) ;
+    temp_4.addAssign_operation (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 336))  COMMA_SOURCE_FILE ("declaration-task.galgas", 336)) ;
+    routine_initSemanticAnalysis (constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, var_taskType, enumerator_12473.current_mTaskInitPriority (HERE), temp_4, GALGAS__32_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 337)), enumerator_12473.current_mTaskInitInstructionList (HERE), enumerator_12473.current_mEndOfTaskInitDeclaration (HERE), var_partialAllocaList, var_partialInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 330)) ;
     }
-    var_initInstructionListIR.plusAssign_operation(var_partialInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 353)) ;
-    var_initAllocaList.plusAssign_operation(var_partialAllocaList, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 354)) ;
-    enumerator_13012.gotoNextObject () ;
+    var_initInstructionListIR.plusAssign_operation(var_partialInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 343)) ;
+    var_initAllocaList.plusAssign_operation(var_partialAllocaList, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 344)) ;
+    enumerator_12473.gotoNextObject () ;
+  }
+  GALGAS_instructionListAST var_taskListInstructionList = GALGAS_instructionListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 348)) ;
+  const enumGalgasBool test_5 = GALGAS_bool (kIsStrictSup, inObject.mAttribute_mGuardedCommandList.getter_length (SOURCE_FILE ("declaration-task.galgas", 349)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  if (kBoolTrue == test_5) {
+    GALGAS_syncInstructionAST var_syncInstruction = GALGAS_syncInstructionAST::constructor_new (inObject.mAttribute_mTaskName.mAttribute_location, inObject.mAttribute_mGuardedCommandList, inObject.mAttribute_mTaskName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-task.galgas", 350)) ;
+    var_taskListInstructionList.addAssign_operation (var_syncInstruction  COMMA_SOURCE_FILE ("declaration-task.galgas", 351)) ;
   }
   {
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mTaskMapIR.setter_insertKey (inObject.mAttribute_mTaskName, var_taskType, inObject.mAttribute_mPriority.mAttribute_bigint, inObject.mAttribute_mStackSize.mAttribute_bigint, var_initAllocaList, var_initInstructionListIR, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 359)) ;
+  GALGAS_lstringlist temp_6 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 356)) ;
+  temp_6.addAssign_operation (GALGAS_lstring::constructor_new (function_userModeName (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 356)), inObject.mAttribute_mTaskName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-task.galgas", 356))  COMMA_SOURCE_FILE ("declaration-task.galgas", 356)) ;
+  routine_routineSemanticAnalysis (var_taskType, GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-task.galgas", 355)), temp_6, GALGAS_lstring::constructor_new (function_llvmNameForTaskLoopFunction (inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 357)), inObject.mAttribute_mTaskName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-task.galgas", 357)), GALGAS_procFormalArgumentList::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 358)), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-task.galgas", 359)), var_taskListInstructionList, inObject.mAttribute_mTaskName.mAttribute_location, GALGAS_bool (true), GALGAS_bool (false), GALGAS_bool (false), GALGAS_accessKind::constructor_noAccess (SOURCE_FILE ("declaration-task.galgas", 365)), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 353)) ;
+  }
+  {
+  ioArgument_ioIntermediateCodeStruct.mAttribute_mTaskMapIR.setter_insertKey (inObject.mAttribute_mTaskName, var_taskType, inObject.mAttribute_mPriority.mAttribute_bigint, inObject.mAttribute_mStackSize.mAttribute_bigint, var_initAllocaList, var_initInstructionListIR, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 371)) ;
   }
 }
 
@@ -11619,39 +11613,39 @@ GALGAS_guardDeclarationListAST_2D_element GALGAS_guardDeclarationListAST_2D_elem
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchListIR_2D_element::GALGAS_selectInstructionBranchListIR_2D_element (void) :
+GALGAS_syncInstructionBranchListIR_2D_element::GALGAS_syncInstructionBranchListIR_2D_element (void) :
 mAttribute_mGuardedCommand (),
 mAttribute_mInstructionGenerationList () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchListIR_2D_element::~ GALGAS_selectInstructionBranchListIR_2D_element (void) {
+GALGAS_syncInstructionBranchListIR_2D_element::~ GALGAS_syncInstructionBranchListIR_2D_element (void) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchListIR_2D_element::GALGAS_selectInstructionBranchListIR_2D_element (const GALGAS_guardedCommandIR & inOperand0,
-                                                                                                  const GALGAS_instructionListIR & inOperand1) :
+GALGAS_syncInstructionBranchListIR_2D_element::GALGAS_syncInstructionBranchListIR_2D_element (const GALGAS_guardedCommandIR & inOperand0,
+                                                                                              const GALGAS_instructionListIR & inOperand1) :
 mAttribute_mGuardedCommand (inOperand0),
 mAttribute_mInstructionGenerationList (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchListIR_2D_element GALGAS_selectInstructionBranchListIR_2D_element::constructor_new (const GALGAS_guardedCommandIR & inOperand0,
-                                                                                                                  const GALGAS_instructionListIR & inOperand1 
-                                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_selectInstructionBranchListIR_2D_element result ;
+GALGAS_syncInstructionBranchListIR_2D_element GALGAS_syncInstructionBranchListIR_2D_element::constructor_new (const GALGAS_guardedCommandIR & inOperand0,
+                                                                                                              const GALGAS_instructionListIR & inOperand1 
+                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_syncInstructionBranchListIR_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_selectInstructionBranchListIR_2D_element (inOperand0, inOperand1) ;
+    result = GALGAS_syncInstructionBranchListIR_2D_element (inOperand0, inOperand1) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult GALGAS_selectInstructionBranchListIR_2D_element::objectCompare (const GALGAS_selectInstructionBranchListIR_2D_element & inOperand) const {
+typeComparisonResult GALGAS_syncInstructionBranchListIR_2D_element::objectCompare (const GALGAS_syncInstructionBranchListIR_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAttribute_mGuardedCommand.objectCompare (inOperand.mAttribute_mGuardedCommand) ;
@@ -11664,22 +11658,22 @@ typeComparisonResult GALGAS_selectInstructionBranchListIR_2D_element::objectComp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool GALGAS_selectInstructionBranchListIR_2D_element::isValid (void) const {
+bool GALGAS_syncInstructionBranchListIR_2D_element::isValid (void) const {
   return mAttribute_mGuardedCommand.isValid () && mAttribute_mInstructionGenerationList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_selectInstructionBranchListIR_2D_element::drop (void) {
+void GALGAS_syncInstructionBranchListIR_2D_element::drop (void) {
   mAttribute_mGuardedCommand.drop () ;
   mAttribute_mInstructionGenerationList.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_selectInstructionBranchListIR_2D_element::description (C_String & ioString,
-                                                                   const int32_t inIndentation) const {
-  ioString << "<struct @selectInstructionBranchListIR-element:" ;
+void GALGAS_syncInstructionBranchListIR_2D_element::description (C_String & ioString,
+                                                                 const int32_t inIndentation) const {
+  ioString << "<struct @syncInstructionBranchListIR-element:" ;
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
@@ -11692,13 +11686,13 @@ void GALGAS_selectInstructionBranchListIR_2D_element::description (C_String & io
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_guardedCommandIR GALGAS_selectInstructionBranchListIR_2D_element::getter_mGuardedCommand (UNUSED_LOCATION_ARGS) const {
+GALGAS_guardedCommandIR GALGAS_syncInstructionBranchListIR_2D_element::getter_mGuardedCommand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mGuardedCommand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_selectInstructionBranchListIR_2D_element::getter_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_syncInstructionBranchListIR_2D_element::getter_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mInstructionGenerationList ;
 }
 
@@ -11706,42 +11700,42 @@ GALGAS_instructionListIR GALGAS_selectInstructionBranchListIR_2D_element::getter
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     @selectInstructionBranchListIR-element type                                     *
+//                                      @syncInstructionBranchListIR-element type                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_selectInstructionBranchListIR_2D_element ("selectInstructionBranchListIR-element",
-                                                                 NULL) ;
+kTypeDescriptor_GALGAS_syncInstructionBranchListIR_2D_element ("syncInstructionBranchListIR-element",
+                                                               NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_selectInstructionBranchListIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_selectInstructionBranchListIR_2D_element ;
+const C_galgas_type_descriptor * GALGAS_syncInstructionBranchListIR_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_syncInstructionBranchListIR_2D_element ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_selectInstructionBranchListIR_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_syncInstructionBranchListIR_2D_element::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_selectInstructionBranchListIR_2D_element (*this)) ;
+    macroMyNew (result, GALGAS_syncInstructionBranchListIR_2D_element (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchListIR_2D_element GALGAS_selectInstructionBranchListIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                                C_Compiler * inCompiler
-                                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_selectInstructionBranchListIR_2D_element result ;
-  const GALGAS_selectInstructionBranchListIR_2D_element * p = (const GALGAS_selectInstructionBranchListIR_2D_element *) inObject.embeddedObject () ;
+GALGAS_syncInstructionBranchListIR_2D_element GALGAS_syncInstructionBranchListIR_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                            C_Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_syncInstructionBranchListIR_2D_element result ;
+  const GALGAS_syncInstructionBranchListIR_2D_element * p = (const GALGAS_syncInstructionBranchListIR_2D_element *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_selectInstructionBranchListIR_2D_element *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_syncInstructionBranchListIR_2D_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("selectInstructionBranchListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("syncInstructionBranchListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -13548,55 +13542,4 @@ static void defineExtensionGetter_integerDeclaration_keyRepresentationForErrorSi
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gGetter_integerDeclaration_keyRepresentationForErrorSignaling (defineExtensionGetter_integerDeclaration_keyRepresentationForErrorSignaling, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Overriding extension method '@integerDeclaration enterInContext'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_integerDeclaration_enterInContext (const cPtr_abstractDeclaration * inObject,
-                                                               const GALGAS_procedureDeclarationListAST /* constinArgument_inProcedureListAST */,
-                                                               GALGAS_semanticContext & ioArgument_ioContext,
-                                                               GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_integerDeclaration * object = (const cPtr_integerDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_integerDeclaration) ;
-  const GALGAS_integerDeclaration temp_0 = object ;
-  GALGAS_lstring var_integerTypeName = callExtensionGetter_typeName ((const cPtr_integerDeclaration *) temp_0.ptr (), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 60)).getter_nowhere (SOURCE_FILE ("type-integer.galgas", 60)) ;
-  GALGAS_bigint var_min ;
-  GALGAS_bigint var_max ;
-  const enumGalgasBool test_1 = object->mAttribute_mIsSigned.boolEnum () ;
-  if (kBoolTrue == test_1) {
-    var_min = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 65)).left_shift_operation (object->mAttribute_mSize.substract_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 65)) COMMA_SOURCE_FILE ("type-integer.galgas", 65)).operator_unary_minus (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 65)) ;
-    var_max = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 66)).left_shift_operation (object->mAttribute_mSize.substract_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 66)) COMMA_SOURCE_FILE ("type-integer.galgas", 66)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 66)) ;
-  }else if (kBoolFalse == test_1) {
-    var_min = GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 68)) ;
-    var_max = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 69)).left_shift_operation (object->mAttribute_mSize COMMA_SOURCE_FILE ("type-integer.galgas", 69)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 69)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 69)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mTypeMap.setter_insertKey (var_integerTypeName, GALGAS_string ("i").add_operation (object->mAttribute_mSize.getter_string (SOURCE_FILE ("type-integer.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 74)), GALGAS_typeKind::constructor_integer (var_min, var_max, object->mAttribute_mIsSigned.operator_not (SOURCE_FILE ("type-integer.galgas", 75)), object->mAttribute_mSize  COMMA_SOURCE_FILE ("type-integer.galgas", 75)), GALGAS_typedConstantMap::constructor_emptyMap (SOURCE_FILE ("type-integer.galgas", 76)), GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (true), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-integer.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 72)) ;
-  }
-  {
-  routine_enter_5F_integer_5F_integer_5F_operators (var_integerTypeName, object->mAttribute_mIsSigned, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 84)) ;
-  }
-  {
-  routine_enter_5F_integer_5F_literal_5F_operators (var_integerTypeName, object->mAttribute_mIsSigned, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 90)) ;
-  }
-  {
-  routine_enter_5F_literal_5F_integer_5F_operators (var_integerTypeName, object->mAttribute_mIsSigned, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 96)) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_integerDeclaration_enterInContext (void) {
-  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_integerDeclaration.mSlotID,
-                                       extensionMethod_integerDeclaration_enterInContext) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_integerDeclaration_enterInContext (defineExtensionMethod_integerDeclaration_enterInContext, NULL) ;
 

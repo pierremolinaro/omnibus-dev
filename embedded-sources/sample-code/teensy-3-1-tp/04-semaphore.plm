@@ -2,31 +2,10 @@ target "teensy-3-1-tp"
 
 //------------------------------------------------*
 
-struct $monSemaphore {
-  var value $uint32
-  var list = $taskList ()
+func `user loop () {}
 
-  public primitive P () {
-    if self.value > 0 :
-      self.value -= 1
-    else
-      blockInList (!?list:self.list)
-    end
-  }
-
-  public service V () {
-    let found = makeTaskReady (!?list:self.list)
-    if not found :
-      self.value += 1
-    end
-  }
-}
-
-//------------------------------------------------*
-
-var s = $monSemaphore (!value:0) {
-  func $T1.loop
-  func $T2.loop
+var s = $semaphore (!value:0) {
+  func loop
 }
 
 //------------------------------------------------*
@@ -42,8 +21,7 @@ task T1 priority 1 stackSize 512 {
     self.top += 2
   }
   
-  func loop () {
-    time.waitUntilMS (!deadline:self.top)
+  while time.waitUntilMS (!deadline:self.top) {
     s.V ()
     self.top += 250
     leds.on (!LED_L1)
@@ -58,8 +36,7 @@ task T1 priority 1 stackSize 512 {
 
 task T2 priority 2 stackSize 512 {
 
-  func loop () {
-    s.P ()
+  while s.P () {
     leds.on (!LED_L2)
     s.P ()
     leds.off (!LED_L2)

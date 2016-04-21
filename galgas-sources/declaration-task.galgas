@@ -9,7 +9,7 @@ list @taskList {
   @taskVarListAST mVarList
   @procedureDeclarationListAST mTaskProcList
   @taskInitListAST mTaskInitListAST
-  @selectInstructionBranchList mGuardedCommandList
+  @syncInstructionBranchList mGuardedCommandList
   @location mEndOfTaskDeclaration
 }
 
@@ -59,7 +59,7 @@ syntax extension common_syntax {
     @taskVarListAST taskVarList = {}
     @procedureDeclarationListAST taskProcList = {}
     @taskInitListAST taskInitListAST = {}
-    @selectInstructionBranchList branchList = {}
+    @syncInstructionBranchList branchList = {}
     repeat
     while
       $var$
@@ -149,7 +149,6 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @taskProcedureMap {
-  @bool mHasFormalArguments
   insert insertKey error message "the '%K' proc is already declared in %L"
   search searchKey error message "there is no '%K' proc"
 }
@@ -199,17 +198,8 @@ method @taskList enterInContext
     [task.mTaskProcList enterInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
     @taskProcedureMap taskProcedureMap = {}
     for procedure in task.mTaskProcList do
-      [!?taskProcedureMap insertKey !procedure.mProcedureName ![procedure.mProcedureFormalArgumentList length] > 0]
+      [!?taskProcedureMap insertKey !procedure.mProcedureName]
     end
-    if not [taskProcedureMap hasKey !"loop"] then
-      error task.mEndOfTaskDeclaration : "a task should declare an 'loop' procedure"
-    else
-      [taskProcedureMap searchKey !["loop" nowhere] ?let hasFormalArguments]
-      if hasFormalArguments then
-        error [taskProcedureMap locationForKey !"loop"] : "the 'loop' function should have no formal argument"
-      end
-    end
-    [!?ioContext.mTaskMap insertKey !task.mTaskName !taskProcedureMap]
   end
 }
 
@@ -354,7 +344,29 @@ method @taskList-element semanticAnalysis
     initAllocaList += partialAllocaList
   end
 #------------------------------------------- Analyze task guarded command
-
+#  Build a "task.loop" function that contains a sync instruction
+  @instructionListAST taskListInstructionList = {}
+  if [mGuardedCommandList length] > 0 then
+    let syncInstruction = @syncInstructionAST.new {!mTaskName.location !mGuardedCommandList !mTaskName.location}
+    taskListInstructionList += !syncInstruction
+  end
+  routineSemanticAnalysis (
+    !receiverType:taskType
+    !.function
+    !{!.new {!userModeName () !mTaskName.location}}
+    !.new {!llvmNameForTaskLoopFunction () !mTaskName.location}
+    !{} # No argument
+    !returnTypeName:["" nowhere]
+    !taskListInstructionList
+    !mTaskName.location
+    !warnIfUnused:true
+    !globalProcedure:false
+    !weakProcedure:false
+    !registerAccess:.noAccess
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+  )
 #------------------------------------------- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
     !mTaskName
@@ -401,10 +413,12 @@ method @taskMapIR generateCode
   ?!@generationAdds ioGenerationAdds
   ?!@2stringlist ioServiceList
 {
-  let taskSelfTerminateServiceName = "self.terminate"
-  let implementationName = llvmNameForServiceImplementation (!taskSelfTerminateServiceName)
-  let callName = llvmNameForServiceCall (!taskSelfTerminateServiceName)
-  ioServiceList += !callName !implementationName
+#--- Declare task self terminate service
+  ioLLVMcode += llvmTitleComment (!"Task self terminate service")
+  let selfTerminateImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskSelfTerminateService ())
+  let selfTerminateCallName = llvmNameForServiceCall (!llvmNameForTaskSelfTerminateService ())
+  ioServiceList += !selfTerminateCallName !selfTerminateImplementationName
+  ioLLVMcode += "declare void @" + selfTerminateCallName + " () nounwind noreturn\n\n"
 #--- Declare task variables
   ioLLVMcode += llvmTitleComment (!"Task variables")
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
@@ -445,10 +459,16 @@ method @taskMapIR generateCode
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn {\n"
     ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  br label %loop\n"
-    ioLLVMcode += "loop:\n"
-    ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + ".loop") + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  br label %loop\n"
+#    ioLLVMcode += "  br label %loop\n"
+#    ioLLVMcode += "loop:\n"
+#    ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + ".loop") + " " + effectiveParameter + "\n"
+#    ioLLVMcode += "  br label %loop\n"
+    ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + "." + llvmNameForTaskLoopFunction ()) + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  call void @" + selfTerminateCallName + " ()\n"
+    ioLLVMcode += "  unreachable\n"
+#    ioLLVMcode += "  br label %loop\n"
+#    ioLLVMcode += "loop:\n"
+#    ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "}\n\n"
   end
 #--- Start tasks

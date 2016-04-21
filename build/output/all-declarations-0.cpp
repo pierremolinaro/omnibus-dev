@@ -11842,7 +11842,7 @@ class cCollectionElement_taskList : public cCollectionElement {
                                         const GALGAS_taskVarListAST & in_mVarList,
                                         const GALGAS_procedureDeclarationListAST & in_mTaskProcList,
                                         const GALGAS_taskInitListAST & in_mTaskInitListAST,
-                                        const GALGAS_selectInstructionBranchList & in_mGuardedCommandList,
+                                        const GALGAS_syncInstructionBranchList & in_mGuardedCommandList,
                                         const GALGAS_location & in_mEndOfTaskDeclaration
                                         COMMA_LOCATION_ARGS) ;
 
@@ -11867,7 +11867,7 @@ cCollectionElement_taskList::cCollectionElement_taskList (const GALGAS_lstring &
                                                           const GALGAS_taskVarListAST & in_mVarList,
                                                           const GALGAS_procedureDeclarationListAST & in_mTaskProcList,
                                                           const GALGAS_taskInitListAST & in_mTaskInitListAST,
-                                                          const GALGAS_selectInstructionBranchList & in_mGuardedCommandList,
+                                                          const GALGAS_syncInstructionBranchList & in_mGuardedCommandList,
                                                           const GALGAS_location & in_mEndOfTaskDeclaration
                                                           COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
@@ -11964,7 +11964,7 @@ GALGAS_taskList GALGAS_taskList::constructor_listWithValue (const GALGAS_lstring
                                                             const GALGAS_taskVarListAST & inOperand3,
                                                             const GALGAS_procedureDeclarationListAST & inOperand4,
                                                             const GALGAS_taskInitListAST & inOperand5,
-                                                            const GALGAS_selectInstructionBranchList & inOperand6,
+                                                            const GALGAS_syncInstructionBranchList & inOperand6,
                                                             const GALGAS_location & inOperand7
                                                             COMMA_LOCATION_ARGS) {
   GALGAS_taskList result ;
@@ -11986,7 +11986,7 @@ void GALGAS_taskList::makeAttributesFromObjects (capCollectionElement & outAttri
                                                  const GALGAS_taskVarListAST & in_mVarList,
                                                  const GALGAS_procedureDeclarationListAST & in_mTaskProcList,
                                                  const GALGAS_taskInitListAST & in_mTaskInitListAST,
-                                                 const GALGAS_selectInstructionBranchList & in_mGuardedCommandList,
+                                                 const GALGAS_syncInstructionBranchList & in_mGuardedCommandList,
                                                  const GALGAS_location & in_mEndOfTaskDeclaration
                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement_taskList * p = NULL ;
@@ -12010,7 +12010,7 @@ void GALGAS_taskList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                            const GALGAS_taskVarListAST & inOperand3,
                                            const GALGAS_procedureDeclarationListAST & inOperand4,
                                            const GALGAS_taskInitListAST & inOperand5,
-                                           const GALGAS_selectInstructionBranchList & inOperand6,
+                                           const GALGAS_syncInstructionBranchList & inOperand6,
                                            const GALGAS_location & inOperand7
                                            COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
@@ -12031,7 +12031,7 @@ void GALGAS_taskList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                             const GALGAS_taskVarListAST inOperand3,
                                             const GALGAS_procedureDeclarationListAST inOperand4,
                                             const GALGAS_taskInitListAST inOperand5,
-                                            const GALGAS_selectInstructionBranchList inOperand6,
+                                            const GALGAS_syncInstructionBranchList inOperand6,
                                             const GALGAS_location inOperand7,
                                             const GALGAS_uint inInsertionIndex,
                                             C_Compiler * inCompiler
@@ -12054,7 +12054,7 @@ void GALGAS_taskList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                             GALGAS_taskVarListAST & outOperand3,
                                             GALGAS_procedureDeclarationListAST & outOperand4,
                                             GALGAS_taskInitListAST & outOperand5,
-                                            GALGAS_selectInstructionBranchList & outOperand6,
+                                            GALGAS_syncInstructionBranchList & outOperand6,
                                             GALGAS_location & outOperand7,
                                             const GALGAS_uint inRemoveIndex,
                                             C_Compiler * inCompiler
@@ -12094,7 +12094,7 @@ void GALGAS_taskList::setter_popFirst (GALGAS_lstring & outOperand0,
                                        GALGAS_taskVarListAST & outOperand3,
                                        GALGAS_procedureDeclarationListAST & outOperand4,
                                        GALGAS_taskInitListAST & outOperand5,
-                                       GALGAS_selectInstructionBranchList & outOperand6,
+                                       GALGAS_syncInstructionBranchList & outOperand6,
                                        GALGAS_location & outOperand7,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) {
@@ -12131,7 +12131,7 @@ void GALGAS_taskList::setter_popLast (GALGAS_lstring & outOperand0,
                                       GALGAS_taskVarListAST & outOperand3,
                                       GALGAS_procedureDeclarationListAST & outOperand4,
                                       GALGAS_taskInitListAST & outOperand5,
-                                      GALGAS_selectInstructionBranchList & outOperand6,
+                                      GALGAS_syncInstructionBranchList & outOperand6,
                                       GALGAS_location & outOperand7,
                                       C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) {
@@ -12168,7 +12168,7 @@ void GALGAS_taskList::method_first (GALGAS_lstring & outOperand0,
                                     GALGAS_taskVarListAST & outOperand3,
                                     GALGAS_procedureDeclarationListAST & outOperand4,
                                     GALGAS_taskInitListAST & outOperand5,
-                                    GALGAS_selectInstructionBranchList & outOperand6,
+                                    GALGAS_syncInstructionBranchList & outOperand6,
                                     GALGAS_location & outOperand7,
                                     C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) const {
@@ -12205,7 +12205,7 @@ void GALGAS_taskList::method_last (GALGAS_lstring & outOperand0,
                                    GALGAS_taskVarListAST & outOperand3,
                                    GALGAS_procedureDeclarationListAST & outOperand4,
                                    GALGAS_taskInitListAST & outOperand5,
-                                   GALGAS_selectInstructionBranchList & outOperand6,
+                                   GALGAS_syncInstructionBranchList & outOperand6,
                                    GALGAS_location & outOperand7,
                                    C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) const {
@@ -12377,12 +12377,12 @@ GALGAS_taskInitListAST GALGAS_taskList::getter_mTaskInitListASTAtIndex (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchList GALGAS_taskList::getter_mGuardedCommandListAtIndex (const GALGAS_uint & inIndex,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const {
+GALGAS_syncInstructionBranchList GALGAS_taskList::getter_mGuardedCommandListAtIndex (const GALGAS_uint & inIndex,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_taskList * p = (cCollectionElement_taskList *) attributes.ptr () ;
-  GALGAS_selectInstructionBranchList result ;
+  GALGAS_syncInstructionBranchList result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_taskList) ;
     result = p->mObject.mAttribute_mGuardedCommandList ;
@@ -12474,7 +12474,7 @@ GALGAS_taskInitListAST cEnumerator_taskList::current_mTaskInitListAST (LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionBranchList cEnumerator_taskList::current_mGuardedCommandList (LOCATION_ARGS) const {
+GALGAS_syncInstructionBranchList cEnumerator_taskList::current_mGuardedCommandList (LOCATION_ARGS) const {
   const cCollectionElement_taskList * p = (const cCollectionElement_taskList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_taskList) ;
   return p->mObject.mAttribute_mGuardedCommandList ;
@@ -13664,7 +13664,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i12_ (GALGAS_as
   GALGAS_taskVarListAST var_taskVarList = GALGAS_taskVarListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 59)) ;
   GALGAS_procedureDeclarationListAST var_taskProcList = GALGAS_procedureDeclarationListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 60)) ;
   GALGAS_taskInitListAST var_taskInitListAST = GALGAS_taskInitListAST::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 61)) ;
-  GALGAS_selectInstructionBranchList var_branchList = GALGAS_selectInstructionBranchList::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 62)) ;
+  GALGAS_syncInstructionBranchList var_branchList = GALGAS_syncInstructionBranchList::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 62)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_25 (inCompiler)) {
@@ -13710,8 +13710,8 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i12_ (GALGAS_as
       }
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 87)) ;
       GALGAS_instructionListAST var_instructionList ;
-      GALGAS_labelMap joker_2978 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 88)) ;
-      nt_instructionList_ (var_instructionList, joker_2978, inCompiler) ;
+      GALGAS_labelMap joker_2974 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 88)) ;
+      nt_instructionList_ (var_instructionList, joker_2974, inCompiler) ;
       GALGAS_location var_endOfProc = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 89)) ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 90)) ;
       var_taskProcList.addAssign_operation (GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 91)), GALGAS_bool (false), var_procName, GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-task.galgas", 91)), var_formalArgumentList, var_returnTypeName, var_instructionList, var_endOfProc  COMMA_SOURCE_FILE ("declaration-task.galgas", 91)) ;
@@ -13722,8 +13722,8 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i12_ (GALGAS_as
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-task.galgas", 94)) ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 95)) ;
       GALGAS_instructionListAST var_instructionList ;
-      GALGAS_labelMap joker_3257 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 96)) ;
-      nt_instructionList_ (var_instructionList, joker_3257, inCompiler) ;
+      GALGAS_labelMap joker_3253 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 96)) ;
+      nt_instructionList_ (var_instructionList, joker_3253, inCompiler) ;
       GALGAS_location var_endOfInit = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 97)) ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 98)) ;
       var_taskInitListAST.addAssign_operation (var_priority, var_instructionList, var_endOfInit  COMMA_SOURCE_FILE ("declaration-task.galgas", 99)) ;
@@ -13733,8 +13733,8 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i12_ (GALGAS_as
       nt_guarded_5F_command_ (var_guardedCommand, inCompiler) ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-task.galgas", 102)) ;
       GALGAS_instructionListAST var_instructionList ;
-      GALGAS_labelMap joker_3496 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 103)) ;
-      nt_instructionList_ (var_instructionList, joker_3496, inCompiler) ;
+      GALGAS_labelMap joker_3492 = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 103)) ;
+      nt_instructionList_ (var_instructionList, joker_3492, inCompiler) ;
       GALGAS_location var_endOfInstructions = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 104)) ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-task.galgas", 105)) ;
       var_branchList.addAssign_operation (var_guardedCommand, var_instructionList, var_endOfInstructions  COMMA_SOURCE_FILE ("declaration-task.galgas", 106)) ;
@@ -16592,7 +16592,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_ (GALGAS_in
   default:
     break ;
   }
-  GALGAS_selectInstructionBranchList var_onInstructionBranchList = GALGAS_selectInstructionBranchList::constructor_emptyList (SOURCE_FILE ("instruction-select.galgas", 125)) ;
+  GALGAS_syncInstructionBranchList var_onInstructionBranchList = GALGAS_syncInstructionBranchList::constructor_emptyList (SOURCE_FILE ("instruction-select.galgas", 125)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     GALGAS_guardedCommand var_guardedCommand ;
@@ -16609,7 +16609,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_ (GALGAS_in
       break ;
     }
   }
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_selectInstructionAST::constructor_new (var_startLocation, var_onInstructionBranchList, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 133))  COMMA_SOURCE_FILE ("instruction-select.galgas", 133))  COMMA_SOURCE_FILE ("instruction-select.galgas", 133)) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_syncInstructionAST::constructor_new (var_startLocation, var_onInstructionBranchList, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-select.galgas", 133))  COMMA_SOURCE_FILE ("instruction-select.galgas", 133))  COMMA_SOURCE_FILE ("instruction-select.galgas", 133)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_end) COMMA_SOURCE_FILE ("instruction-select.galgas", 134)) ;
   GALGAS_lstring var_endLabel ;
   switch (select_common_5F_syntax_77 (inCompiler)) {

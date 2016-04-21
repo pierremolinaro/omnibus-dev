@@ -15,12 +15,12 @@ struct $rendezVousData {
     self.signalerDonneeLue.P ()
   }
 
-  public func `user input (!data:outData $uint32) {
-    self.autoriserLecture.P ()
-    outData = self.data
-    self.signalerDonneeLue.V ()
-    self.autoriserEcriture.V ()
-  }
+//  public func `user input (!data:outData $uint32) {
+//    self.autoriserLecture.P ()
+//    outData = self.data
+//    self.signalerDonneeLue.V ()
+//    self.autoriserEcriture.V ()
+//  }
 
   public guard input (!data:outData $uint32) : self.autoriserLecture.P () {
     outData = self.data
@@ -30,22 +30,24 @@ struct $rendezVousData {
 
 }
 
+func `user loop () {}
+
 //-----------------------------------------------------------------------------*
 
 var rdvs = $rendezVousData () {
-  func $T0.loop
+  func loop
 }
 
 //-----------------------------------------------------------------------------*
 
 var rdvs2 = $rendezVousData () {
-  func $T1.loop
+  func loop
 }
 
 //-----------------------------------------------------------------------------*
 
 var s = $semaphore (!value:1) {
-  func $T0.loop
+  func loop
 }
 
 //-----------------------------------------------------------------------------*
@@ -54,8 +56,7 @@ task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
   var n $uint32 = 1
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.top)
+  while time.waitUntilMS (!deadline:self.top) {
     rdvs.output (!data:self.n)
     rdvs2.output (!data:self.n)
     leds.toggle (!LED_L0)
@@ -68,8 +69,7 @@ task T0 priority 0 stackSize 512 {
 
 task T1 priority 1 stackSize 1024 {
 
-  func loop () {
-    rdvs.input (?data:let x)
+  while rdvs.input (?data:let x) {
     leds.toggle (!LED_L1)
     s.P ()
       lcd.goto (!line:0 !column:0)
@@ -83,18 +83,17 @@ task T1 priority 1 stackSize 1024 {
 task T2 priority 2 stackSize 1024 {
   var deadline $uint32 = 0
 
-  func loop () {
-    sync
-    while rdvs2.input (?data:let x) :
-      leds.toggle (!LED_L2)
-      s.P ()
-        lcd.goto (!line:1 !column:0)
-        lcd.printUnsigned (!x)
-      s.V ()
-    while time.waitUntilMS (!deadline:self.deadline) :
-      self.deadline += 200
-      leds.toggle  (!LED_L4)
-    end
+  while rdvs2.input (?data:let x) {
+    leds.toggle (!LED_L2)
+    s.P ()
+      lcd.goto (!line:1 !column:0)
+      lcd.printUnsigned (!x)
+    s.V ()
+  }
+  
+  while time.waitUntilMS (!deadline:self.deadline) {
+    self.deadline += 200
+    leds.toggle  (!LED_L4)
   }
 }
 
