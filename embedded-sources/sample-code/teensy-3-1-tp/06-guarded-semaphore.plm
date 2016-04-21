@@ -37,15 +37,16 @@ struct $monSemaphore {
 }
 
 //-----------------------------------------------------------------------------*
+func `user loop () {}
 
 var s0 = $monSemaphore (!value:0) {
-  func $T0.loop
+  func loop
 }
 
 //-----------------------------------------------------------------------------*
 
 var s1 = $monSemaphore (!value:0) {
-  func $T1.loop
+  func loop
 }
 
 //-----------------------------------------------------------------------------*
@@ -53,8 +54,7 @@ var s1 = $monSemaphore (!value:0) {
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.top)
+  while time.waitUntilMS (!deadline:self.top) {
     s0.V ()
     self.top += 250
     leds.on (!LED_L0)
@@ -70,8 +70,7 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.top)
+  while time.waitUntilMS (!deadline:self.top) {
     s1.V ()
     self.top += 249
     leds.on (!LED_L4)
@@ -87,16 +86,17 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
-  func loop () {
-    sync
-    while s0.PP () :
-      leds.toggle  (!LED_L1)
-    while s1.P () :
-      leds.toggle  (!LED_L3)
-    while time.waitUntilMS (!deadline:self.deadline) :
-      self.deadline += 200
-      leds.toggle  (!LED_L2)
-    end
+  while s0.PP () {
+   leds.toggle  (!LED_L1)
+  }
+  
+  while s1.P () {
+    leds.toggle  (!LED_L3)
+  }
+  
+  while time.waitUntilMS (!deadline:self.deadline) {
+    self.deadline += 200
+    leds.toggle  (!LED_L2)
   }
 }
 

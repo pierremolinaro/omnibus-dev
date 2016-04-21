@@ -53,6 +53,9 @@ typedef struct { unsigned mGuardValue ; } GuardList ;
 
 typedef unsigned char bool ;
 
+#define true  ((bool) 1)
+#define false ((bool) 0)
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 // GUARD_EVALUATING_OR_OUTSIDE should be the first constant
@@ -130,17 +133,6 @@ typedef struct {
 static void kernel_set_task_context (TaskContext * inTaskContext,
                                      const unsigned inTopOfStack,
                                      RoutineTaskType inTaskRoutine) {
-// --- Initialize LR
-//   inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ;
-// --- Initialize SP
-//   StackedRegisters * ptr = (StackedRegisters *) (inTopOfStack - sizeof (StackedRegisters)) ; // 8 stacked registers
-//   inTaskContext->mSP_USR = ptr ;
-// --- Initialize PC
-//   ptr->mPC = (unsigned) inTaskRoutine ;
-// --- Initialize CPSR
-//   ptr->mXPSR = 1 << 24 ;
-
-
 //--- Initialize PC
   inTaskContext->mPC_USR = (unsigned) inTaskRoutine ;
 //--- Initialize SP
@@ -173,7 +165,8 @@ typedef struct {
   unsigned char mTaskIndex ;
 //--- Guards
   GuardState mGuardState ;
-  unsigned short mGuardCount ;
+  bool mHaveDeadlineGuard ;
+  unsigned mGuardCount ;
   GuardList * mGuardListArray [GUARD_COUNT] ;
 } TaskControlBlock ;
 
@@ -246,6 +239,16 @@ void kernel_create_task (const unsigned inTaskIndex,
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+//   kernel_self_terminate                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void kernel_self_terminate (void) asm ("!SERVICEIMPLEMENTATION!self.terminate") ;
+
+void kernel_self_terminate (void) {
+  kernel_makeNoTaskRunning () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //   L I S T    M A N A G E M E N T                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -298,10 +301,10 @@ void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadli
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-unsigned char makeTaskReady (TaskList * ioWaitingList) asm ("!FUNC!.makeTaskReady") ;
+bool makeTaskReady (TaskList * ioWaitingList) asm ("!FUNC!.makeTaskReady") ;
 
-unsigned char makeTaskReady (TaskList * ioWaitingList) {
-  unsigned char found = (* ioWaitingList) != 0 ;
+bool makeTaskReady (TaskList * ioWaitingList) {
+  const bool found = (* ioWaitingList) != 0 ;
   if (found) {
   //--- Get index of waiting task
     const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;
@@ -359,8 +362,9 @@ static void removeTaskFromGuards (TaskControlBlock * taskControlBlockPtr) {
   for (unsigned i=0 ; i<guardCount ; i++) {
     taskControlBlockPtr->mGuardListArray [i]->mGuardValue &= mask ;
   }
-  gDeadlineWaitingInGuardTaskList &= ~ mask ;
   taskControlBlockPtr->mGuardCount = 0 ;
+  gDeadlineWaitingInGuardTaskList &= mask ;
+  taskControlBlockPtr->mHaveDeadlineGuard = false ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -392,13 +396,34 @@ void handleGuardedWaitUntil (const unsigned inDeadline) asm ("!FUNC!.handleGuard
 
 void handleGuardedWaitUntil (const unsigned inDeadline) {
   if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
+    gRunningTaskControlBlock->mHaveDeadlineGuard = true ;
     const unsigned runningTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
     const unsigned mask = 1 << runningTaskIndex ;
-    if (((gDeadlineWaitingInGuardTaskList & mask) != 0) && (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {
+    if (((gDeadlineWaitingInGuardTaskList & mask) == 0) || (gRunningTaskControlBlock->mTaskDeadline > inDeadline)) {
       gRunningTaskControlBlock->mTaskDeadline = inDeadline ;
     }
     gDeadlineWaitingInGuardTaskList |= mask ;
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool waitForGuardChange (void) asm ("service.call.waitForGuardChange") ;
+
+bool kernel_waitForGuardChange (void) asm ("service.implementation.waitForGuardChange") ;
+
+bool kernel_waitForGuardChange (void) {
+  bool result = gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE ;
+  if (result) { // GUARD_DID_CHANGE
+    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+  }else{ // GUARD_EVALUATING_OR_OUTSIDE
+    result = gRunningTaskControlBlock->mHaveDeadlineGuard || (gRunningTaskControlBlock->mGuardCount > 0) ;
+    if (result) {
+      gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;
+      kernel_makeNoTaskRunning () ;
+    }
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -412,26 +437,14 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
     removeTaskFromGuards (taskControlBlockPtr) ;    
     if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
+      kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
       kernel_makeTaskReady (taskIndex) ;
       taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
     }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
       taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
+    }else{ // GUARD_DID_CHANGE
+      // Nothing to do
     }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void waitForGuardChange (void) asm ("service.call.waitForGuardChange") ;
-
-void kernel_waitForGuardChange (void) asm ("service.implementation.waitForGuardChange") ;
-
-void kernel_waitForGuardChange (void) {
-  if (gRunningTaskControlBlock->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
-    gRunningTaskControlBlock->mGuardState = GUARD_WAITING_FOR_CHANGE ;
-    kernel_makeNoTaskRunning () ;
-  }else{
-    gRunningTaskControlBlock->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
   }
 }
 
@@ -448,10 +461,13 @@ void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
     if (inUptime >= taskControlBlockPtr->mTaskDeadline) {
       removeTaskFromGuards (taskControlBlockPtr) ;
       if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
-        kernel_makeTaskReady (taskIndex) ;
         taskControlBlockPtr->mGuardState = GUARD_EVALUATING_OR_OUTSIDE ;
+        kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
+        kernel_makeTaskReady (taskIndex) ;
       }else if (taskControlBlockPtr->mGuardState == GUARD_EVALUATING_OR_OUTSIDE) {
         taskControlBlockPtr->mGuardState = GUARD_DID_CHANGE ;
+      }else{ // GUARD_DID_CHANGE
+        // Nothing to do
       }
     }
   }

@@ -5,8 +5,7 @@ target "teensy-3-1-tp"
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.compteur)
+  while time.waitUntilMS (!deadline:self.compteur) {
     leds.on (!LED_L0)
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)
@@ -22,8 +21,7 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.compteur)
+  while time.waitUntilMS (!deadline:self.compteur) {
     leds.on (!LED_L1)
     self.compteur +%= 499
     time.waitUntilMS (!deadline:self.compteur)
@@ -37,8 +35,7 @@ task T2 priority 2 stackSize 512 {
 task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.compteur)
+  while time.waitUntilMS (!deadline:self.compteur) {
     leds.on (!LED_L2)
     self.compteur +%= 498
     time.waitUntilMS (!deadline:self.compteur)
@@ -52,8 +49,7 @@ task T3 priority 3 stackSize 512 {
 task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.compteur)
+  while time.waitUntilMS (!deadline:self.compteur) {
     leds.on (!LED_L3)
     self.compteur +%= 497
     time.waitUntilMS (!deadline:self.compteur)
@@ -67,8 +63,7 @@ task T4 priority 4 stackSize 512 {
 task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.compteur)
+  while time.waitUntilMS (!deadline:self.compteur) {
     leds.on (!LED_L4)
     self.compteur +%= 496
     time.waitUntilMS (!deadline:self.compteur)

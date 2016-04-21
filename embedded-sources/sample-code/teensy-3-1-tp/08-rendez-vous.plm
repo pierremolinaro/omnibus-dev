@@ -38,7 +38,7 @@ struct $rendezVous {
     end
   }
 
-  guard input @noWarningIfUnused () {
+  public guard input @noWarningIfUnused () {
     accept = makeTaskReady (!?list:self.outputWaitList)
     if not accept :
       handleGuardedCommand (!?guard:self.inputGuardList)
@@ -54,11 +54,12 @@ struct $rendezVous {
 
 }
 
+func `user loop () {}
+
 //-----------------------------------------------------------------------------*
 
 var rdvs = $rendezVous () {
-  func $T0.loop
-  func $T1.loop
+  func loop
 }
 
 //-----------------------------------------------------------------------------*
@@ -66,8 +67,7 @@ var rdvs = $rendezVous () {
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.top)
+  while time.waitUntilMS (!deadline:self.top) {
     rdvs.output ()
     self.top += 250
     leds.on (!LED_L0)
@@ -82,8 +82,7 @@ task T0 priority 0 stackSize 512 {
 
 task T1 priority 1 stackSize 512 {
 
-  func loop () {
-    rdvs.input ()
+  while rdvs.input () {
     leds.on (!LED_L1)
     rdvs.input ()
     leds.off (!LED_L1)
