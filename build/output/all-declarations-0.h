@@ -136,7 +136,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_truncate,
    kToken_until,
    kToken_var,
-   kToken_when,
    kToken_while,
    kToken_xor,
    kToken__3A_,
@@ -218,7 +217,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 113 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 112 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -8194,8 +8193,6 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_84 (C_Lexique_plm_5F_lexique *) = 0 ;
 
-  protected : virtual int32_t select_common_5F_syntax_85 (C_Lexique_plm_5F_lexique *) = 0 ;
-
 
 } ;
 
@@ -12968,20 +12965,23 @@ class GALGAS_guardedCommand : public AC_GALGAS_root {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_guardedCommand constructor_boolAndSync (const class GALGAS_expressionAST & inOperand0,
-                                                                 const class GALGAS_location & inOperand1,
-                                                                 const class GALGAS_lstring & inOperand2,
+  public : static GALGAS_guardedCommand constructor_boolAndSync (const class GALGAS_bool & inOperand0,
+                                                                 const class GALGAS_expressionAST & inOperand1,
+                                                                 const class GALGAS_location & inOperand2,
                                                                  const class GALGAS_lstring & inOperand3,
-                                                                 const class GALGAS_effectiveParameterListAST & inOperand4
+                                                                 const class GALGAS_lstring & inOperand4,
+                                                                 const class GALGAS_effectiveParameterListAST & inOperand5
                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_guardedCommand constructor_boolean (const class GALGAS_expressionAST & inOperand0,
-                                                             const class GALGAS_location & inOperand1
+  public : static GALGAS_guardedCommand constructor_boolean (const class GALGAS_bool & inOperand0,
+                                                             const class GALGAS_expressionAST & inOperand1,
+                                                             const class GALGAS_location & inOperand2
                                                              COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_guardedCommand constructor_synchronization (const class GALGAS_lstring & inOperand0,
+  public : static GALGAS_guardedCommand constructor_synchronization (const class GALGAS_bool & inOperand0,
                                                                      const class GALGAS_lstring & inOperand1,
-                                                                     const class GALGAS_effectiveParameterListAST & inOperand2
+                                                                     const class GALGAS_lstring & inOperand2,
+                                                                     const class GALGAS_effectiveParameterListAST & inOperand3
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -12993,22 +12993,25 @@ class GALGAS_guardedCommand : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_boolAndSync (class GALGAS_expressionAST & outArgument0,
-                                                     class GALGAS_location & outArgument1,
-                                                     class GALGAS_lstring & outArgument2,
+  public : VIRTUAL_IN_DEBUG void method_boolAndSync (class GALGAS_bool & outArgument0,
+                                                     class GALGAS_expressionAST & outArgument1,
+                                                     class GALGAS_location & outArgument2,
                                                      class GALGAS_lstring & outArgument3,
-                                                     class GALGAS_effectiveParameterListAST & outArgument4,
+                                                     class GALGAS_lstring & outArgument4,
+                                                     class GALGAS_effectiveParameterListAST & outArgument5,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_boolean (class GALGAS_expressionAST & outArgument0,
-                                                 class GALGAS_location & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_boolean (class GALGAS_bool & outArgument0,
+                                                 class GALGAS_expressionAST & outArgument1,
+                                                 class GALGAS_location & outArgument2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_synchronization (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_synchronization (class GALGAS_bool & outArgument0,
                                                          class GALGAS_lstring & outArgument1,
-                                                         class GALGAS_effectiveParameterListAST & outArgument2,
+                                                         class GALGAS_lstring & outArgument2,
+                                                         class GALGAS_effectiveParameterListAST & outArgument3,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const ;
 
@@ -13039,14 +13042,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardedCommand ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_guardedCommand_synchronization : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
-  public : const GALGAS_effectiveParameterListAST mAssociatedValue2 ;
+  public : const GALGAS_lstring mAssociatedValue2 ;
+  public : const GALGAS_effectiveParameterListAST mAssociatedValue3 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_guardedCommand_synchronization (const GALGAS_lstring & inAssociatedValue0,
+  public : cEnumAssociatedValues_guardedCommand_synchronization (const GALGAS_bool & inAssociatedValue0,
                                                                  const GALGAS_lstring & inAssociatedValue1,
-                                                                 const GALGAS_effectiveParameterListAST & inAssociatedValue2
+                                                                 const GALGAS_lstring & inAssociatedValue2,
+                                                                 const GALGAS_effectiveParameterListAST & inAssociatedValue3
                                                                  COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -13059,12 +13064,14 @@ class cEnumAssociatedValues_guardedCommand_synchronization : public cEnumAssocia
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_guardedCommand_boolean : public cEnumAssociatedValues {
-  public : const GALGAS_expressionAST mAssociatedValue0 ;
-  public : const GALGAS_location mAssociatedValue1 ;
+  public : const GALGAS_bool mAssociatedValue0 ;
+  public : const GALGAS_expressionAST mAssociatedValue1 ;
+  public : const GALGAS_location mAssociatedValue2 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_guardedCommand_boolean (const GALGAS_expressionAST & inAssociatedValue0,
-                                                         const GALGAS_location & inAssociatedValue1
+  public : cEnumAssociatedValues_guardedCommand_boolean (const GALGAS_bool & inAssociatedValue0,
+                                                         const GALGAS_expressionAST & inAssociatedValue1,
+                                                         const GALGAS_location & inAssociatedValue2
                                                          COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -13077,18 +13084,20 @@ class cEnumAssociatedValues_guardedCommand_boolean : public cEnumAssociatedValue
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_guardedCommand_boolAndSync : public cEnumAssociatedValues {
-  public : const GALGAS_expressionAST mAssociatedValue0 ;
-  public : const GALGAS_location mAssociatedValue1 ;
-  public : const GALGAS_lstring mAssociatedValue2 ;
+  public : const GALGAS_bool mAssociatedValue0 ;
+  public : const GALGAS_expressionAST mAssociatedValue1 ;
+  public : const GALGAS_location mAssociatedValue2 ;
   public : const GALGAS_lstring mAssociatedValue3 ;
-  public : const GALGAS_effectiveParameterListAST mAssociatedValue4 ;
+  public : const GALGAS_lstring mAssociatedValue4 ;
+  public : const GALGAS_effectiveParameterListAST mAssociatedValue5 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_guardedCommand_boolAndSync (const GALGAS_expressionAST & inAssociatedValue0,
-                                                             const GALGAS_location & inAssociatedValue1,
-                                                             const GALGAS_lstring & inAssociatedValue2,
+  public : cEnumAssociatedValues_guardedCommand_boolAndSync (const GALGAS_bool & inAssociatedValue0,
+                                                             const GALGAS_expressionAST & inAssociatedValue1,
+                                                             const GALGAS_location & inAssociatedValue2,
                                                              const GALGAS_lstring & inAssociatedValue3,
-                                                             const GALGAS_effectiveParameterListAST & inAssociatedValue4
+                                                             const GALGAS_lstring & inAssociatedValue4,
+                                                             const GALGAS_effectiveParameterListAST & inAssociatedValue5
                                                              COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
