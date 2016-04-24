@@ -2,11 +2,7 @@ target "teensy-3-1-tp"
 
 //------------------------------------------------*
 
-func `user loop () {}
-
-var s = $semaphore (!value:0) {
-  func loop
-}
+var s = $semaphore (!value:0)
 
 //------------------------------------------------*
 

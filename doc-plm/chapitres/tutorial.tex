@@ -79,7 +79,7 @@ RAM + STACK:~1660 bytes\\
 
 Ensuite, la compilation s'effectue, et range tous ses fichiers de production dans un sous répertoire de \texttt{$\sim$/plm-products/}, dont le nom est le  chemin absolu du fichier source (sans son extension), dans lequel tous les « \texttt{/} » ont été remplacés par des « \texttt{+} ».
 
-Si l'option « \texttt{-f} » était présente, la carte \emph{Teensy 3.1} est prête à être flashée : appuyer sur le bouton \emph{reset} de la carte pour démarrer le flashage\footnote{Si vous ne voulez pas flasher la carte, entrez simplement « \texttt{ctrl~C} ».}. L'affichage sur le terminal devient :
+Si l'option « \texttt{-f} » était présente, la carte \emph{Teensy 3.1} est prête à être flashée : appuyer sur le bouton \emph{reset} de la carte pour démarrer le flashage\footnote{Si vous ne voulez pas flasher le micro-contrôleur, entrez simplement « \texttt{ctrl~C} ».}. L'affichage sur le terminal devient :
 \begin{SHELL}
 Found HalfKay Bootloader\\
 Read "product/product.ihex": 1472 bytes, 1.1\% usage\\
@@ -100,8 +100,7 @@ target "teensy-3-1-tp"
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
 
-  func loop () {
-    time.waitUntilMS (!deadline:self.compteur)
+  while time.waitUntilMS (!deadline:self.compteur) {
     leds.on (!LED_L0)
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)
@@ -135,22 +134,14 @@ Déclaration d'une variable \plm=compteur=, de type \plm=$uint32= (entier non si
 
 
 \begin{PLM}[6]
-  func loop () {
+  while time.waitUntilMS (!deadline:self.compteur) {
 \end{PLM}
 
-Chaque tâche doit définir une fonction \plm=loop= sans argument, qui est exécutée indéfiniment après l'exécution de \plm=setup=.
+Appel de la commande gardée \plm=waitUntilMS= du module \plm=time=, avec un argument, la variable de tâche \plm=compteur=. L'utilisation de \plm=self= est obligatoire pour accéder aux variables de tâche\footnote{Sans \texttt{self}, ce serait un accès à une variable locale à la fonction, ou à une constante globale.}. Cette appel effectue l'attente jusqu'à la date exprimée par l'argument \plm=self.compteur=. Cette date est comptée en millisecondes depuis le démarrage du micro-contrôleur.
 
 
 
 \begin{PLM}[7]
-    time.waitUntilMS (!deadline:self.compteur)
-\end{PLM}
-
-Appel de la fonction \plm=waitUntilMS= du module \plm=time=, avec un argument, la variable de tâche \plm=compteur=. L'utilisation de \plm=self= est oblgatoire pour accéder aux variables de tâche\footnote{Sans \texttt{self}, ce serait un accès à une variable locale à la fonction, ou à une constante globale.}. Cette appel effectue l'attente jusqu'à la date exprimée par l'argument \plm=self.compteur=. Cette date est comptée en millisecondes depuis le démarrage du micro-contrôleur.
-
-
-
-\begin{PLM}[8]
     leds.on (!LED_L0)
 \end{PLM}
 
@@ -158,14 +149,14 @@ Appel de la fonction \plm=on= du module \plm=leds=, avec un argument, la constan
 
 
 
-\begin{PLM}[9]
+\begin{PLM}[8]
     self.compteur +%= 500
 \end{PLM}
 
 Incrémente la variable de tâche \plm=compteur= de \plm=500=. L'opérateur \plm!+%=! est l'addition sans test de débordement. Si on voulait le tester, et exécuter un code de panique en cas de débordement, on utiliserait l'opérateur \plm!+=!. Comme \plm=compteur= est utilisé pour l'attente d'échéance qui s'exprimme en millisecondes, \plm=500= représente la date de la prochaine échéance, qui est $500~ms$ plus tard.
 
 
-\begin{PLM}[10]
+\begin{PLM}[9]
     time.waitUntilMS (!deadline:self.compteur)
     leds.off (!LED_L0)
     self.compteur +%= 500
@@ -174,7 +165,7 @@ Incrémente la variable de tâche \plm=compteur= de \plm=500=. L'opérateur \plm
 Attente de la nouvelle échéance, extinction de la led n°0, incrémentation de l'échéance de $500~ms$.
 
 
-\begin{PLM}[13]
+\begin{PLM}[12]
     lcd.goto (!line:0 !column:0)
 \end{PLM}
 
@@ -183,7 +174,7 @@ Appel de la fonction \plm=goto= du module \plm=lcd=, avec deux arguments. L'effe
 
 
 
-\begin{PLM}[14]
+\begin{PLM}[13]
     lcd.printUnsigned (!time.millis ())
 \end{PLM}
 
@@ -191,6 +182,14 @@ Cette ligne affiche sur l'afficheur LCD à la position du curseur le nombre de m
 
 
 
+
+
+
+\begin{PLM}[14]
+  }
+\end{PLM}
+
+Cette ligne marque la fin de la commande gardée qui commence à la ligne $6$. Comme cette commande gardée commence le mot réservé \plm=while=, elle est re-exécutée.
 
 
 %\sectionLabel{Deuxième exemple : clignotement avec routine d'interruption}{deuxiemeExemple}

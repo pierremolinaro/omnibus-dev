@@ -630,7 +630,8 @@ Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gar
 \subsubsection{Fonction \texttt{tickHandlerForGuardedWaitUntil}}
 
 \begin{PLM}
-func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
+func `service
+tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
 \end{PLM}
 
 Cette fonction signifie aux tâches en attente d'échéance en garde que l'instant \plm=inCurrentDate= est atteint, et qu'elles doivent re-évaluer leur gardes. Cette fonction est appelable en mode \plm=`service=.
