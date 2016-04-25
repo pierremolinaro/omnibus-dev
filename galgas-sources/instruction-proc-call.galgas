@@ -593,8 +593,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-#        !effective_mSelector.string
-        !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![variableKind llvmName])}}
+        !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![variableKind name])}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
@@ -618,9 +617,7 @@ proc analyzeEffectiveParameters
         !staticTypeAllowed:false
       )
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
-      ioEffectiveParameterListIR += 
-        !.output
-        !result
+      ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
      [!?ioVariableMap searchForReadWriteAccess
         !lkey:name
