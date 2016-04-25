@@ -645,132 +645,136 @@ Cette fonction signifie aux tâches en attente d'échéance en garde que l'insta
 
 \section{Les routines d'interruption}
 
-Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySequentialSystick2} et \refTableau{tableItTeensySequentialSystick3} listent les interruptions définies par le processeur qui équipe la carte \emph{Teensy 3.1}. L'utilisateur peut définir une routine d'interruption pour chacune d'entre elles, sauf l'interruption n°1 (remise à zéro), et la n°15 (\texttt{SysTick}) qui est prise en charge de façon particulière (voir la \refSubsectionTitlePage{SystickPourTeensy31It}). Celle des autres interruptions est décrite dans les sections suivantes :
+Toutes les interruptions du micro-contrôleur sont accessibles en PLM, avec quelques exceptions :
 \begin{itemize}
-  \item \refSubsectionTitlePage{itsTeensy31AvecExceptions} ;
-  \item \refSubsectionTitlePage{itsTeensy31SansExceptions} ;
-  \item \refSubsectionTitlePage{itsTeensyRoutinesUtilisateur}.
+  \item l'interruption n°$1$ (\emph{Reset}), est réservée par PLM ;
+  \item l'interruption n°$3$ (\emph{HardFault}), est réservée par PLM ;
+  \item l'interruption n°$11$ (\emph{svc}), est réservée par PLM ;
+  \item l'interruption n°$15$ (\emph{systick}), est implémentée par la cible ; toutefois, une fonction \texttt{userSystickHandler} est disponible, voir \refSubsectionPage{SystickPourTeensy31It}.
+\end{itemize}
+
+Une routine d'interruption porte un des noms définis par la cible :
+\begin{itemize}
+  \item interruptions $1$ à $27$ : \refTableauPage{tableItTeensySequentialSystick1} ;
+  \item interruptions $28$ à $90$ : \refTableauPage{tableItTeensySequentialSystick2} ;
+  \item interruptions $91$ à $110$ : \refTableauPage{tableItTeensySequentialSystick3}.
 \end{itemize}
 
 
+
+
+% Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySequentialSystick2} et \refTableau{tableItTeensySequentialSystick3} listent les interruptions définies par le processeur qui équipe la carte \emph{Teensy 3.1}. L'utilisateur peut définir une routine d'interruption pour chacune d'entre elles, sauf l'interruption n°1 (remise à zéro), et la n°15 (\texttt{SysTick}) qui est prise en charge de façon particulière (voir la \refSubsectionTitlePage{SystickPourTeensy31It}). Celle des autres interruptions est décrite dans les sections suivantes :
+%\begin{itemize}
+%  \item \refSubsectionTitlePage{itsTeensy31AvecExceptions} ;
+%  \item \refSubsectionTitlePage{itsTeensy31SansExceptions} ;
+%  \item \refSubsectionTitlePage{itsTeensyRoutinesUtilisateur}.
+%\end{itemize}
+
+
 \begin{table}[!t]
+  \small
   \centering
-  \begin{tabular}{llllll}
-    \textbf{Numéro}& \textbf{Nom routine} \\
-    1  & \emph{ResetHandler, réservé par PLM} \\
-    2  & \texttt{NMIHandler}\\
-    3  & \texttt{HardFaultHandler}\\
-    4  & \texttt{MemManageHandler}\\
-    5  & \texttt{BusFaultHandler}\\
-    6  & \texttt{UsageFaultHandler}\\
-    7 à 10 & \emph{réservées par ARM} \\
-    11 & \texttt{svcHandler}\\
-    12 & \texttt{DebugMonitorHandler}\\
-    13 & \emph{réservée par ARM} \\
-    14 & \texttt{PendSVHandler}\\
-    15 & \texttt{userSystickHandler}, voir \refSubsectionPage{SystickPourTeensy31It} \\
+  \begin{tabular}{ll|ll}
+    \textbf{Numéro}& \textbf{Nom routine} & \textbf{Numéro} & \textbf{Nom routine} \\
+    1  & \emph{Reset, réservé par PLM} & 16  & \texttt{DMAChannel0TranfertComplete} \\
+    2  & \texttt{NMI} & 17  & \texttt{DMAChannel1TranfertComplete}\\
+    3  & \texttt{HardFault}, réservé par PLM & 18  & \texttt{DMAChannel2TranfertComplete}\\
+    4  & \texttt{MemManage} & 19  & \texttt{DMAChannel3TranfertComplete}\\
+    5  & \texttt{BusFault} & 20  & \texttt{DMAChannel4TranfertComplete}\\
+    6  & \texttt{UsageFault} & 21  & \texttt{DMAChannel5TranfertComplete}\\
+    7 à 10 & \emph{réservées par ARM} & 22  & \texttt{DMAChannel6TranfertComplete} \\
+    11 & \texttt{svc}, \emph{réservé par PLM} & 23  & \texttt{DMAChannel7TranfertComplete} \\
+    12 & \texttt{DebugMonitor} & 24  & \texttt{DMAChannel8TranfertComplete}\\
+    13 & \emph{réservée par ARM} & 25  & \texttt{DMAChannel9TranfertComplete}\\
+    14 & \texttt{PendSV} & 26  & \texttt{DMAChannel10TranfertComplete}\\
+    15 & \texttt{Systick}, voir \refSubsectionPage{SystickPourTeensy31It} & 27  & \texttt{DMAChannel11TranfertComplete}\\
   \end{tabular}
-  \caption{Table des interruptions 1 à 15 de la cible \texttt{teensy-3-1-it}}
+  \caption{Table des interruptions 1 à 27 de la cible \texttt{teensy-3-1-it}}
   \labelTableau{tableItTeensySequentialSystick1}
   \ligne
 \end{table}
 
 \begin{table}[!t]
+  \small
   \centering
-  \begin{tabular}{llllll}
-    \textbf{Numéro} & \textbf{Nom routine} \\
-    16  & \texttt{DMAChannel0TranfertCompleteHandler}\\
-    17  & \texttt{DMAChannel1TranfertCompleteHandler}\\
-    18  & \texttt{DMAChannel2TranfertCompleteHandler}\\
-    19  & \texttt{DMAChannel3TranfertCompleteHandler}\\
-    20  & \texttt{DMAChannel4TranfertCompleteHandler}\\
-    21  & \texttt{DMAChannel5TranfertCompleteHandler}\\
-    22  & \texttt{DMAChannel6TranfertCompleteHandler}\\
-    23  & \texttt{DMAChannel7TranfertCompleteHandler}\\
-    24  & \texttt{DMAChannel8TranfertCompleteHandler}\\
-    25  & \texttt{DMAChannel9TranfertCompleteHandler}\\
-    26  & \texttt{DMAChannel10TranfertCompleteHandler}\\
-    27  & \texttt{DMAChannel11TranfertCompleteHandler}\\
-    28  & \texttt{DMAChannel12TranfertCompleteHandler}\\
-    29  & \texttt{DMAChannel13TranfertCompleteHandler}\\
-    30  & \texttt{DMAChannel14TranfertCompleteHandler}\\
-    31  & \texttt{DMAChannel15TranfertCompleteHandler}\\
-    32  & \texttt{DMAErrorHandler}\\
-    33  & \emph{inutilisée} \\
-    34  & \texttt{flashMemoryCommandCompleteHandler}\\
-    35  & \texttt{flashMemoryReadCollisionHandler}\\
-    36  & \texttt{modeControllerHandler}\\
-    37  & \texttt{LLWUHandler}\\
-    38  & \texttt{WDOGEWMHandler}\\
-    39  & \emph{inutilisée} \\
-    40  & \texttt{I2C0Handler}\\
-    41  & \texttt{I2C1Handler}\\
-    42  & \texttt{SPI0Handler}\\
-    43  & \texttt{SPI1Handler}\\
-    44  & \emph{inutilisée} \\
-    45  & \texttt{CAN0MessageBufferHandler}\\
-    46  & \texttt{CAN0BusOffHandler}\\
-    47  & \texttt{CAN0ErrorHandler}\\
-    48  & \texttt{CAN0TransmitWarningHandler}\\
-    49  & \texttt{CAN0ReceiveWarningHandler}\\
-    50  & \texttt{CAN0WakeUpHandler}\\
-    51  & \texttt{I2S0TransmitHandler}\\
-    52  & \texttt{I2S0ReceiveHandler}\\
-    53 à 59  & \emph{inutilisées} \\
+  \begin{tabular}{ll|ll}
+    \textbf{Numéro}& \textbf{Nom routine} & \textbf{Numéro} & \textbf{Nom routine} \\
+    28  & \texttt{DMAChannel12TranfertComplete} & 60  & \texttt{UART0LON}\\
+    29  & \texttt{DMAChannel13TranfertComplete} & 61  & \texttt{UART0Status}\\
+    30  & \texttt{DMAChannel14TranfertComplete} & 62  & \texttt{UART0Error}\\
+    31  & \texttt{DMAChannel15TranfertComplete} & 63  & \texttt{UART1Status}\\
+    32  & \texttt{DMAError}                     & 64  & \texttt{UART1Error}\\
+    33  & \emph{inutilisée} & 65  & \texttt{UART2Status} \\
+    34  & \texttt{flashMemoryCommandComplete} & 66  & \texttt{UART2Error}\\
+    35  & \texttt{flashMemoryReadCollision} & 67 à 72  & \emph{inutilisées} \\
+    36  & \texttt{modeController} & 73  & \texttt{ADC0}\\
+    37  & \texttt{LLWU}           & 74  & \texttt{ADC1}\\
+    38  & \texttt{WDOGEWM}        & 75  & \texttt{CMP0}\\
+    39  & \emph{inutilisée}       & 76  & \texttt{CMP1}\\
+    40  & \texttt{I2C0}           & 77  & \texttt{CMP2}\\
+    41  & \texttt{I2C1}           & 78  & \texttt{FMT0}\\
+    42  & \texttt{SPI0}           & 79  & \texttt{FMT1}\\
+    43  & \texttt{SPI1}           & 80  & \texttt{FMT2}\\
+    44  & \emph{inutilisée}       & 81  & \texttt{CMT}\\
+    45  & \texttt{CAN0MessageBuffer} & 82  & \texttt{RTCAlarm}\\
+    46  & \texttt{CAN0BusOff} & 83  & \texttt{RTCSecond}\\
+    47  & \texttt{CAN0Error} & 84  & \texttt{PITChannel0}\\
+    48  & \texttt{CAN0TransmitWarning} & 85  & \texttt{PITChannel1}\\
+    49  & \texttt{CAN0ReceiveWarning} & 86  & \texttt{PITChannel2}\\
+    50  & \texttt{CAN0WakeUp} & 87  & \texttt{PITChannel3}\\
+    51  & \texttt{I2S0Transmit} & 88  & \texttt{PDB}\\
+    52  & \texttt{I2S0Receive} & 89  & \texttt{USBOTG}\\
+    53 à 59  & \emph{inutilisées} & 90  & \texttt{USBChargerDetect} \\
   \end{tabular}
-  \caption{Table des interruptions 16 à 59 de la cible \texttt{teensy-3-1-it}}
+  \caption{Table des interruptions 28 à 90 de la cible \texttt{teensy-3-1-it}}
   \labelTableau{tableItTeensySequentialSystick2}
   \ligne
 \end{table}
 
 \begin{table}[!t]
+  \small
   \centering
-  \begin{tabular}{llllll}
-    \textbf{Numéro}& \textbf{Nom routine} \\
-    60  & \texttt{UART0LONHandler}\\
-    61  & \texttt{UART0StatusHandler}\\
-    62  & \texttt{UART0ErrorHandler}\\
-    63  & \texttt{UART1StatusHandler}\\
-    64  & \texttt{UART1ErrorHandler}\\
-    65  & \texttt{UART2StatusHandler}\\
-    66  & \texttt{UART2ErrorHandler}\\
-    67 à 72  & \emph{inutilisées} \\
-    73  & \texttt{ADC0Handler}\\
-    74  & \texttt{ADC1Handler}\\
-    75  & \texttt{CMP0Handler}\\
-    76  & \texttt{CMP1Handler}\\
-    77  & \texttt{CMP2Handler}\\
-    78  & \texttt{FMT0Handler}\\
-    79  & \texttt{FMT1Handler}\\
-    80  & \texttt{FMT2Handler}\\
-    81  & \texttt{CMTHandler}\\
-    82  & \texttt{RTCAlarmHandler}\\
-    83  & \texttt{RTCSecondHandler}\\
-    84  & \texttt{PITChannel0Handler}\\
-    85  & \texttt{PITChannel1Handler}\\
-    86  & \texttt{PITChannel2Handler}\\
-    87  & \texttt{PITChannel3Handler}\\
-    88  & \texttt{PDBHandler}\\
-    89  & \texttt{USBOTGHandler}\\
-    90  & \texttt{USBChargerDetectHandler}\\
-    91 à 96  & \emph{inutilisées} \\
-    97  & \texttt{DAC0Handler}\\
-    98  & \emph{inutilisée} \\
-    99  & \texttt{TSIHandler}\\
-    100  & \texttt{MCGHandler}\\
-    101  & \texttt{lowPowerTimerHandler}\\
-    103  & \texttt{pinDetectPortAHandler}\\
-    104  & \texttt{pinDetectPortBHandler}\\
-    105  & \texttt{pinDetectPortCHandler}\\
-    106  & \texttt{pinDetectPortDHandler}\\
-    107  & \texttt{pinDetectPortEHandler}\\
-    108 et 109  & \emph{inutilisées} \\
-    110  & \texttt{softwareInterruptHandler}
+  \begin{tabular}{ll|ll}
+    \textbf{Numéro}& \textbf{Nom routine} & \textbf{Numéro}& \textbf{Nom routine} \\
+    91 à 96  & \emph{inutilisées} &     104  & \texttt{pinDetectPortB}\\
+    97  & \texttt{DAC0}  & 105  & \texttt{pinDetectPortC} \\
+    98  & \emph{inutilisée} & 106  & \texttt{pinDetectPortD}\\
+    99  & \texttt{TSI} & 107  & \texttt{pinDetectPortE}\\
+    100  & \texttt{MCG} & 108 et 109  & \emph{inutilisées}\\
+    101  & \texttt{lowPowerTimer} & 110  & \texttt{softwareInterrupt}\\
+    103  & \texttt{pinDetectPortA} & &\\
   \end{tabular}
-  \caption{Table des interruptions 60 à 110 de la cible \texttt{teensy-3-1-it}}
+  \caption{Table des interruptions 91 à 110 de la cible \texttt{teensy-3-1-it}}
   \labelTableau{tableItTeensySequentialSystick3}
   \ligne
 \end{table}
+
+
+\subsection{Définir une routine d'interruption}
+
+Prenons l'exemple de l'interruption \texttt{PITChannel0}, qui porte le numéro $84$. La routine d'interruption est écrite comme suit :
+
+\begin{PLM}[1]
+isr PITChannel0 {
+  ...
+}
+\end{PLM}
+
+Une routine d'interruption s'exécute en mode \plm=`section=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles. 
+
+Si l'on veut appeler les routines de l'exécutif du mode \plm=`service=, on ajoute l'attribute \plm=@xtr= :
+
+\begin{PLM}[1]
+isr PITChannel0 @xtr {
+  ...
+}
+\end{PLM}
+
+
+
+
+
+
 
 
 \subsectionLabel{Routines d'interruption par défaut, panique activée}{itsTeensy31AvecExceptions}

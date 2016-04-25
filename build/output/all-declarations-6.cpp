@@ -920,11 +920,7 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "func `user loop () {}\n"
-  "\n"
-  "var s = $semaphore (!value:0) {\n"
-  "  func loop\n"
-  "}\n"
+  "var s = $semaphore (!value:0)\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -967,7 +963,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "04-semaphore.plm",
   "plm",
   true, // Text file
-  758, // Text length
+  719, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1000,11 +996,8 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
-  "func `user loop () {}\n"
   "\n"
-  "var s = $monSemaphore (!value:0) {\n"
-  "  func loop\n"
-  "}\n"
+  "var s = $monSemaphore (!value:0)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1052,7 +1045,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1571, // Text length
+  1533, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1097,17 +1090,12 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
-  "func `user loop () {}\n"
   "\n"
-  "var s0 = $monSemaphore (!value:0) {\n"
-  "  func loop\n"
-  "}\n"
+  "var s0 = $monSemaphore (!value:0)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var s1 = $monSemaphore (!value:0) {\n"
-  "  func loop\n"
-  "}\n"
+  "var s1 = $monSemaphore (!value:0)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1166,7 +1154,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2161, // Text length
+  2107, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1174,19 +1162,13 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
 
 const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
   "\n"
-  "func `user loop () {}\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var s0 = $semaphore (!value:0)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var s0 = $semaphore (!value:0) {\n"
-  "  func loop\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "var s1 = $semaphore (!value:0) {\n"
-  "  func loop\n"
-  "}\n"
+  "var s1 = $semaphore (!value:0)\n"
   "\n"
   "guard PP () : s1.P () {\n"
   "}\n"
@@ -1252,7 +1234,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "07-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1581, // Text length
+  1526, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1314,13 +1296,9 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "}\n"
   "\n"
-  "func `user loop () {}\n"
-  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var rdvs = $rendezVous () {\n"
-  "  func loop\n"
-  "}\n"
+  "var rdvs = $rendezVous ()\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1355,7 +1333,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2487, // Text length
+  2448, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1393,25 +1371,17 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "}\n"
   "\n"
-  "func `user loop () {}\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var rdvs = $rendezVousData ()\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var rdvs = $rendezVousData () {\n"
-  "  func loop\n"
-  "}\n"
+  "var rdvs2 = $rendezVousData ()\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var rdvs2 = $rendezVousData () {\n"
-  "  func loop\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "var s = $semaphore (!value:1) {\n"
-  "  func loop\n"
-  "}\n"
+  "var s = $semaphore (!value:1)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1466,13 +1436,89 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2352, // Text length
+  2281, // Text length
   gWrapperFileContent_9_embeddedSampleCode
+) ;
+
+//--- File 'teensy-3-1-tp/10-pit-unprivileged-mode-it.plm'
+
+const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "init 100_000 {\n"
+  "  SIM_SCGC6 |= SIM_SCGC6_PIT\n"
+  "  NVIC_ISER2 = 1 << ((84 - 16) & 31)\n"
+  "  AICS0_PARCG = 0\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "section setupPIT () {\n"
+  "  PIT_MCR = 0\n"
+  "  PIT_LDVAL0 = 200000\n"
+  "  PIT_TCTRL0 = 3 // Interrupt, enabled\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "section getPITValue (!outValue $uint32) {\n"
+  "  outValue = gPITValue\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "var gPITValue $uint32 = 0 {\n"
+  "  @rw isr PITChannel0\n"
+  "  section getPITValue\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "isr PITChannel0 {\n"
+  "//--- Acquitter l'interruption\n"
+  "  PIT_TFLG0 = 1\n"
+  "//--- Incr\xC3""\xA9""menter le compteur\n"
+  "  gPITValue += 1\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "task T priority 12 stackSize 512 {\n"
+  "  var deadline $uint32 = 0\n"
+  "\n"
+  "  init 0 {\n"
+  "    setupPIT ()\n"
+  "  }\n"
+  "  \n"
+  "  while time.waitUntilMS (!deadline:self.deadline) {\n"
+  "    self.deadline +%= 250\n"
+  "    leds.on (!LED_L1) // Allumer la led\n"
+  "    time.waitUntilMS (!deadline:self.deadline)\n"
+  "    self.deadline +%= 250\n"
+  "    leds.off (!LED_L1)  // \xC3""\x89""teindre la led\n"
+  "    lcd.goto (!line:1 !column:0)\n"
+  "    lcd.printSpaces (!10)\n"
+  "    lcd.goto (!line:1 !column:0)\n"
+  "    var value $uint32\n"
+  "    getPITValue (\?value)\n"
+  "    lcd.printUnsigned (!value)\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
+  "10-pit-unprivileged-mode-it.plm",
+  "plm",
+  true, // Text file
+  1363, // Text length
+  gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-tp' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [10] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [11] = {
   & gWrapperFile_1_embeddedSampleCode,
   & gWrapperFile_2_embeddedSampleCode,
   & gWrapperFile_3_embeddedSampleCode,
@@ -1482,6 +1528,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [10] = 
   & gWrapperFile_7_embeddedSampleCode,
   & gWrapperFile_8_embeddedSampleCode,
   & gWrapperFile_9_embeddedSampleCode,
+  & gWrapperFile_10_embeddedSampleCode,
   NULL
 } ;
 
@@ -1495,7 +1542,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_2 [1]
 
 const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode (
   "teensy-3-1-tp",
-  9,
+  10,
   gWrapperAllFiles_embeddedSampleCode_2,
   0,
   gWrapperAllDirectories_embeddedSampleCode_2
