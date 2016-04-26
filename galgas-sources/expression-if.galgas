@@ -1,0 +1,165 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @ifExpressionAST : @expressionAST {
+  @expressionAST mIfExpression
+  @location mIfExpressionEndLocation
+  @expressionAST mThenExpression
+  @location mThenExpressionEndLocation
+  @expressionAST mElseExpression
+  @location mElseExpressionEndLocation
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+  
+  rule <primary> !@expressionAST outExpression {
+    $if$
+    <expression> ?let ifExpression
+    let @location ifExpressionEndLocation = .here
+    $:$
+    <expression> ?let thenExpression
+    let @location thenExpressionEndLocation = .here
+    $else$
+    <expression> ?let elseExpression
+    let @location elseExpressionEndLocation = .here
+    $end$
+    outExpression = @ifExpressionAST.new {
+      !ifExpression !ifExpressionEndLocation
+      !thenExpression !thenExpressionEndLocation
+      !elseExpression !elseExpressionEndLocation
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @ifExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [mIfExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [mThenExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [mElseExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mIfExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [mThenExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [mElseExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @ifExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@operandIR outResult
+{
+#--- Analyze if expression
+  [mIfExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @operandIR ifExpressionResult
+  ]
+#--- Check "if" expression type is boolean
+  if not [[ifExpressionResult.mType kind] isBoolean] then
+    error mIfExpressionEndLocation : "'if' expression should be boolean"
+  end
+#--- Analyze 'then' expression
+  [mThenExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @operandIR thenExpressionTempResult
+  ]
+  let thenExpressionResult = checkAssignmentCompatibility (
+    !source:thenExpressionTempResult
+    !targetAnnotationType:inOptionalTargetType
+    !errorLocation:mThenExpressionEndLocation
+    !staticTypeAllowed:false
+  )
+#--- Analyze 'else' expression
+  [mElseExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @operandIR elseExpressionTempResult
+  ]
+  let elseExpressionResult = checkAssignmentCompatibility (
+    !source:elseExpressionTempResult
+    !targetAnnotationType:thenExpressionResult.mType
+    !errorLocation:mElseExpressionEndLocation
+    !staticTypeAllowed:false
+  )
+#--- 'if' expression is static ?
+  if [ifExpressionResult.mValue isStatic] then # yes, perform 'if' statically
+    [ifExpressionResult.mValue literalInteger ?value:let value]
+    outResult = if value != 0G then thenExpressionResult else elseExpressionResult end
+  else # No, generate 'select' LLVM instruction
+    getNewTempVariable (!elseExpressionResult.mType !?ioTemporaries ?outResult)
+    [!?ioInstructionGenerationList appendSelectOperation
+      !outResult
+      !ifExpressionResult
+      !thenExpressionResult
+      !elseExpressionResult
+    ]      
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
