@@ -12,7 +12,7 @@
 \centering
 \begin{tabular}{llll}
   \textbf{Priorité} & \textbf{Opérateur} & \textbf{Commentaire} & \textbf{Lien} \\
-   0 (plus prioritaire) & \plm+-+, \plm+-%+ & \emph{moins} unaire & \\
+   0 & \plm+-+, \plm+-%+ & \emph{moins} unaire & \\
    0 & \plm+~+, \plm+not+ & \emph{non} binaire et \emph{non} logique & \\
    1 & \plm=convert= & Conversion &\\
    2 & \plm+*+, \plm+*%+, \plm+/+, \plm+!/+, \plm-%-, \plm-!%- & Multiplication, division, modulo & \\
@@ -25,8 +25,13 @@
    9 & \plm+|+ & \emph{ou} binaire & \\
    10 & \plm+and+ & \emph{et} logique & \\
    11 & \plm+xor+ & \emph{ou exclusif} logique & \\
-   12 (moins prioritaire) & \plm+or+ & \emph{ou} logique & \\
+   12 & \plm+or+ & \emph{ou} logique & \\
 \end{tabular}
 \caption{Priorité des opérateurs}\index{Operateur@Opérateur!Priorite@Priorité}
 \labelTableau{tableauPrioriteOperateurs}
 \end{table}
+
+
+
+\section{Expression \texttt{if}}
+
