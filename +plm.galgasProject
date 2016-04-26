@@ -66,6 +66,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-truncate.galgas"
   "galgas-sources/expression-constructor-call.galgas"
   "galgas-sources/expression-typed-constant.galgas"
+  "galgas-sources/expression-if.galgas"
   "galgas-sources/expression-infix-operators.galgas"
   "galgas-sources/expression-prefix-operators.galgas"
   "galgas-sources/expression-literal-integer.galgas"
@@ -118,6 +119,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-load-structure-constant.galgas"
   "galgas-sources/intermediate-get-element-ptr.galgas"
   "galgas-sources/intermediate-get-element-ptr-from-self.galgas"
+  "galgas-sources/intermediate-select-instruction.galgas"
   "galgas-sources/code-optimisation.galgas"
   "galgas-sources/code-generation.galgas"
 

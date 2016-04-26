@@ -779,36 +779,19 @@ isr PITChannel0 @xtr {
 
 \subsectionLabel{Routines d'interruption par défaut, panique activée}{itsTeensy31AvecExceptions}
 
-Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf la n°1 et la n°15). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est le numéro de l'interruption. Par exemple, pour l'interruption n°2 (\texttt{NMI}), la routine prédéfinie est :
+Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf pour celles réservées par ARM et par PLM). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est le numéro de l'interruption. Par exemple, pour l'interruption $84$ (\texttt{PITChannel0}), la routine prédéfinie est :
 \begin{PLM}[1]
-proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
-  panic 2
+isr PITChannel0 {
+  panic 84
 }
 \end{PLM}
 
 
 \subsectionLabel{Routines d'interruption par défaut, panique inactivée}{itsTeensy31SansExceptions}
 
-Quand la panique est inactivée, l'attribut \plm+@nullWhenPanicDisabled+ associé à chaque routine d'interruption provoque la suppression de cette routine d'interruption, et son remplacement de son adresse dans la table des vecteurs d'interruption par la valeur $0$.
+Quand la panique est inactivée, aucune routine d'interruption pas défaut n'est engendrée ; dans la table des vecteurs d'interruption, l'entrée d'une routine d'interruption indéfinie contient la valeur $0$.
 
 
-
-\subsectionLabel{Routines d'interruption définies par l'utilisateur}{itsTeensyRoutinesUtilisateur}
-
-L'attribut \plm+@weak+ associé à chaque routine d'interruption permet sa redéfinition par l'utilisateur. La routine par défaut est alors ignorée, que la panique soit activée ou non.
-
-Par exemple, l'utilisateur peut définir la routine associée à \texttt{NMI} par :
-\begin{PLM}[1]
-proc NMIHandler `isr {
-  ...
-}
-\end{PLM}
-
-Il est important de conserver le nom. Si celui-ci est mal orthographié et ne correspond à aucune interruption :
-\begin{itemize}
-  \item la routine d'interruption par défaut est conservée (panique activée) ou supprimée (panique inactivée) ;
-  \item un \emph{warning} est déclenché, signalant que la routine utilisateur est inutilisée.
-\end{itemize}
 
 
 
@@ -817,16 +800,18 @@ Il est important de conserver le nom. Si celui-ci est mal orthographié et ne co
 L'interruption \texttt{SysTick} est particulière. Elle est programmé par la routine \plm+init 0+ de façon à engendrer une interruption chaque milliseconde. Cette interruption se déclenche après la fin de l'exécution la routine \plm+init 0+, y compris éventuellement dans les routines \plm+init+ qui suivent. La routine d'interruption associée, inaccessible à l'utilisateur :
 \begin{itemize}
   \item incrémente une variable globale de comptage du temps ;
+  \item appelle la routine \plm=makeTasksReadyFrom= qui contrôle les tâches bloquées en attente d'échéance ; 
+  \item appelle la routine \plm=tickHandlerForGuardedWaitUntil= qui contrôle les tâches en attente d'échéance en garde ; 
   \item appelle la routine \plm+userSystickHandler+.
 \end{itemize}
 
-La routine \plm+userSystickHandler+ est définie par :
+Cette routine \plm+userSystickHandler+ est définie par :
 \begin{PLM}[1]
-proc userSystickHandler `isr @weak () {
+public func `service userTickHandler @weak () {
 }
 \end{PLM}
 
-L'attribut \plm+@weak+ permet sa redéfinition par l'utilisateur.
+Comme elle est déclarée avec l'attribut \plm+@weak+, elle peut être redéfinie par l'utilisateur. Elle s'exécute en mode \plm=`service=, si bien que l'on peut appeler des services de l'exécutif qui débloquent des tâches.
 
 
 

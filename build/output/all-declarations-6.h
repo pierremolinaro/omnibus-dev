@@ -2177,6 +2177,105 @@ class cPtr_registerIntegerConstantInExpressionIR : public cPtr_abstractInstructi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             @selectInstructionIR class                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_selectInstructionIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_selectInstructionIR (void) ;
+
+//---
+  public : inline const class cPtr_selectInstructionIR * ptr (void) const { return (const cPtr_selectInstructionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_selectInstructionIR (const cPtr_selectInstructionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_selectInstructionIR extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_selectInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                              const class GALGAS_operandIR & inOperand1,
+                                                              const class GALGAS_operandIR & inOperand2,
+                                                              const class GALGAS_operandIR & inOperand3
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_selectInstructionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mTargetValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_m_5F_else_5F_variable (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_m_5F_if_5F_variable (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_m_5F_then_5F_variable (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_selectInstructionIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selectInstructionIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Pointer class for @selectInstructionIR class                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_selectInstructionIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_operandIR mAttribute_mTargetValue ;
+  public : GALGAS_operandIR mAttribute_m_5F_if_5F_variable ;
+  public : GALGAS_operandIR mAttribute_m_5F_then_5F_variable ;
+  public : GALGAS_operandIR mAttribute_m_5F_else_5F_variable ;
+
+//--- Constructor
+  public : cPtr_selectInstructionIR (const GALGAS_operandIR & in_mTargetValue,
+                                     const GALGAS_operandIR & in_m_5F_if_5F_variable,
+                                     const GALGAS_operandIR & in_m_5F_then_5F_variable,
+                                     const GALGAS_operandIR & in_m_5F_else_5F_variable
+                                     COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_m_5F_if_5F_variable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_m_5F_then_5F_variable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_m_5F_else_5F_variable (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          @shortCircuitAndOperationIR class                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
