@@ -367,14 +367,9 @@ override method @selfVarOperatorAssignInstructionAST analyze
       [!?ioInstructionGenerationList appendGetElementPtrFromSelf
         !fieldAddress
         !inSelfType
-        !{!idx !mTargetVarName.string}
+        !{!.absolute {!index:idx} !mTargetVarName.string}
       ]        
       [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !fieldAddress ?let targetVariableValue]
-#      [fieldAddress loadFromMemory
-#        !?temporary:ioTemporaries
-#        !?instructionListIR:ioInstructionGenerationList
-#        ?resultingValue:let targetVariableValue
-#      ]
       [binaryOperator generateInfixOperatorCode
         !?ioTemporaries
         !?ioInstructionGenerationList
@@ -385,10 +380,6 @@ override method @selfVarOperatorAssignInstructionAST analyze
         ?let newResultingValue
       ]
       [!?ioInstructionGenerationList appendStoreInMemory !fieldAddress !newResultingValue]
-#      [fieldAddress storeInMemory
-#        !value:newResultingValue
-#        !?instructionListIR:ioInstructionGenerationList
-#      ]
     end    
   end
 }

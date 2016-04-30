@@ -84,16 +84,29 @@ override method @typeArrayDeclaration enterRoutinesInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
+  let elementType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName}
 #--- Enter "count" function
-  let lkey = @lstring.new {!"$" + mArrayTypeName + ".count" !mArrayTypeName.location}
+  let countkey = @lstring.new {!"$" + mArrayTypeName + ".count" !mArrayTypeName.location}
+  let countType = ioContext.mUnsignedIntegerType
   [!?ioContext.mRoutineMapForContext insertKey
-    !lkey
+    !countkey
     !true # Public
     !allModeMap ()
     !{} # Signature
     !.function
     !false # Is not weak
-    !@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !["uint32" nowhere]}
+    !countType
+  ]
+#--- Enter "append" function
+  let appendKey = @lstring.new {!"$" + mArrayTypeName + ".append" !mArrayTypeName.location}
+  [!?ioContext.mRoutineMapForContext insertKey
+    !appendKey
+    !true # Public
+    !allModeMap ()
+    !{!.input !"" !elementType} # Signature
+    !.function
+    !false # Is not weak
+    !.null # No return type
   ]
 }
 
@@ -176,11 +189,12 @@ override method @typeArrayDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let selfType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mArrayTypeName}
-  let countType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["uint32" nowhere]}
+  let elementType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mElementTypeName}
+  let countType = inContext.mUnsignedIntegerType
 #--------------------------------------------------- "count" function
   @instructionListIR countFunctionInstructionGenerationList = {}
   let @objectInMemoryIR countPtr = .localValue {!type:countType !name:"count.ptr"}
-  [!?countFunctionInstructionGenerationList appendGetElementPtrFromSelf !countPtr !selfType !{!0 !"count"}]
+  [!?countFunctionInstructionGenerationList appendGetElementPtrFromSelf !countPtr !selfType !{!.absolute {!index:0} !"count"}]
   [!?countFunctionInstructionGenerationList appendLoadFromMemory !?ioTemporaries !countPtr ?let loadedCountValue]
   let @objectInMemoryIR resultPtr = .localValue {!type:countType !name:"result"}
   [!?countFunctionInstructionGenerationList appendStoreInMemory !resultPtr !loadedCountValue]
@@ -197,10 +211,54 @@ override method @typeArrayDeclaration semanticAnalysis
     !.function
     !countType # Return type
 #--- Enter "count" function in invocation graph
-  let routineNameForInvocationGraph = procNameForInvocationGraph (!selfType !["count" nowhere])
+  let countFunctionNameForInvocationGraph = procNameForInvocationGraph (!selfType !["count" nowhere])
   [!?ioTemporaries.mSubprogramInvocationGraph addNode
-    !routineNameForInvocationGraph
+    !countFunctionNameForInvocationGraph
     !countFunctionName
+  ]
+#--------------------------------------------------- "append" function
+  @instructionListIR appendFunctionInstructionGenerationList = {}
+#--- Load "count" value
+  [!?appendFunctionInstructionGenerationList appendGetElementPtrFromSelf !countPtr !selfType !{!.absolute {!index:0} !"count"}]
+  [!?appendFunctionInstructionGenerationList appendLoadFromMemory !?ioTemporaries !countPtr ?let loadedCountValue2]
+#--- Store value in array
+  let @objectInMemoryIR elementPtr = .localValue {!type:elementType !name:"insert.ptr"}
+  [!?appendFunctionInstructionGenerationList appendGetElementPtrFromSelf
+     !elementPtr
+     !selfType
+     !{!.absolute {!index:1} !"array", !.indirect {!index:loadedCountValue2} !"element"}
+   ]
+  let @objectInMemoryIR insertedValuePtr = .localValue {!type:elementType !name:"inValue"}
+  [!?appendFunctionInstructionGenerationList appendLoadFromMemory !?ioTemporaries !insertedValuePtr ?let loadedInsertionValue]
+  [!?appendFunctionInstructionGenerationList appendStoreInMemory !elementPtr !loadedInsertionValue]
+#--- Increment count
+  getNewTempVariable (!countType !?ioTemporaries ?let incrementedCount)
+  [!?appendFunctionInstructionGenerationList appendBinaryOperation
+     !incrementedCount.mValue
+     !incrementedCount.mType
+     !.nowhere
+     !loadedCountValue2.mValue
+     !.addNoOVF
+     !.literalInteger {!value:1G}
+   ]
+  [!?appendFunctionInstructionGenerationList appendStoreInMemory !countPtr !incrementedCount]
+  let appendFunctionName = @lstring.new {!"$" + mArrayTypeName + ".append" !mArrayTypeName.location}
+  ioIntermediateCodeStruct.mRoutineMapIR +=
+    !appendFunctionName
+    !{!.input !elementType !"inValue"} # Signature
+    !{} # No alloca
+    !appendFunctionInstructionGenerationList
+    !false # No required @bool mIsRequired
+    !false # No warning if unused @bool mWarnIfUnused
+    !false # Not weak @bool mWeak
+    !false # Not global @bool mGlobal
+    !.function
+    !.null # Return type
+#--- Enter "count" function in invocation graph
+  let appendFunctionNameForInvocationGraph = procNameForInvocationGraph (!selfType !["append" nowhere])
+  [!?ioTemporaries.mSubprogramInvocationGraph addNode
+    !appendFunctionNameForInvocationGraph
+    !appendFunctionName
   ]
 }
 

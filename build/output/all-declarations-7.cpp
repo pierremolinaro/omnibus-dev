@@ -297,6 +297,9 @@ typeComparisonResult cPtr_configurationDeclarationAST::dynamicObjectCompare (con
     result = mAttribute_mPanicLineTypeName.objectCompare (p->mAttribute_mPanicLineTypeName) ;
   }
   if (kOperandEqual == result) {
+    result = mAttribute_mUnsignedIntegerTypeName.objectCompare (p->mAttribute_mUnsignedIntegerTypeName) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mTargetParameters.objectCompare (p->mAttribute_mTargetParameters) ;
   }
   if (kOperandEqual == result) {
@@ -336,6 +339,7 @@ GALGAS_configurationDeclarationAST GALGAS_configurationDeclarationAST::construct
   return GALGAS_configurationDeclarationAST::constructor_new (GALGAS_lbigint::constructor_default (HERE),
                                                               GALGAS_lstring::constructor_default (HERE),
                                                               GALGAS_lstring::constructor_default (HERE),
+                                                              GALGAS_lstring::constructor_default (HERE),
                                                               GALGAS_targetParameters::constructor_default (HERE),
                                                               GALGAS_interruptionConfigurationList::constructor_emptyList (HERE)
                                                               COMMA_THERE) ;
@@ -353,12 +357,13 @@ GALGAS_abstractDeclaration (inSourcePtr) {
 GALGAS_configurationDeclarationAST GALGAS_configurationDeclarationAST::constructor_new (const GALGAS_lbigint & inAttribute_mPointerSize,
                                                                                         const GALGAS_lstring & inAttribute_mPanicCodeTypeName,
                                                                                         const GALGAS_lstring & inAttribute_mPanicLineTypeName,
+                                                                                        const GALGAS_lstring & inAttribute_mUnsignedIntegerTypeName,
                                                                                         const GALGAS_targetParameters & inAttribute_mTargetParameters,
                                                                                         const GALGAS_interruptionConfigurationList & inAttribute_mInterruptionConfigurationList
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_configurationDeclarationAST result ;
-  if (inAttribute_mPointerSize.isValid () && inAttribute_mPanicCodeTypeName.isValid () && inAttribute_mPanicLineTypeName.isValid () && inAttribute_mTargetParameters.isValid () && inAttribute_mInterruptionConfigurationList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_configurationDeclarationAST (inAttribute_mPointerSize, inAttribute_mPanicCodeTypeName, inAttribute_mPanicLineTypeName, inAttribute_mTargetParameters, inAttribute_mInterruptionConfigurationList COMMA_THERE)) ;
+  if (inAttribute_mPointerSize.isValid () && inAttribute_mPanicCodeTypeName.isValid () && inAttribute_mPanicLineTypeName.isValid () && inAttribute_mUnsignedIntegerTypeName.isValid () && inAttribute_mTargetParameters.isValid () && inAttribute_mInterruptionConfigurationList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_configurationDeclarationAST (inAttribute_mPointerSize, inAttribute_mPanicCodeTypeName, inAttribute_mPanicLineTypeName, inAttribute_mUnsignedIntegerTypeName, inAttribute_mTargetParameters, inAttribute_mInterruptionConfigurationList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -419,6 +424,24 @@ GALGAS_lstring cPtr_configurationDeclarationAST::getter_mPanicLineTypeName (UNUS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_lstring GALGAS_configurationDeclarationAST::getter_mUnsignedIntegerTypeName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_configurationDeclarationAST * p = (const cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    result = p->mAttribute_mUnsignedIntegerTypeName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_configurationDeclarationAST::getter_mUnsignedIntegerTypeName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mUnsignedIntegerTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_targetParameters GALGAS_configurationDeclarationAST::getter_mTargetParameters (UNUSED_LOCATION_ARGS) const {
   GALGAS_targetParameters result ;
   if (NULL != mObjectPtr) {
@@ -460,6 +483,7 @@ GALGAS_interruptionConfigurationList cPtr_configurationDeclarationAST::getter_mI
 cPtr_configurationDeclarationAST::cPtr_configurationDeclarationAST (const GALGAS_lbigint & in_mPointerSize,
                                                                     const GALGAS_lstring & in_mPanicCodeTypeName,
                                                                     const GALGAS_lstring & in_mPanicLineTypeName,
+                                                                    const GALGAS_lstring & in_mUnsignedIntegerTypeName,
                                                                     const GALGAS_targetParameters & in_mTargetParameters,
                                                                     const GALGAS_interruptionConfigurationList & in_mInterruptionConfigurationList
                                                                     COMMA_LOCATION_ARGS) :
@@ -467,6 +491,7 @@ cPtr_abstractDeclaration (THERE),
 mAttribute_mPointerSize (in_mPointerSize),
 mAttribute_mPanicCodeTypeName (in_mPanicCodeTypeName),
 mAttribute_mPanicLineTypeName (in_mPanicLineTypeName),
+mAttribute_mUnsignedIntegerTypeName (in_mUnsignedIntegerTypeName),
 mAttribute_mTargetParameters (in_mTargetParameters),
 mAttribute_mInterruptionConfigurationList (in_mInterruptionConfigurationList) {
 }
@@ -486,6 +511,8 @@ void cPtr_configurationDeclarationAST::description (C_String & ioString,
   ioString << ", " ;
   mAttribute_mPanicLineTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mAttribute_mUnsignedIntegerTypeName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mTargetParameters.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mInterruptionConfigurationList.description (ioString, inIndentation+1) ;
@@ -496,7 +523,7 @@ void cPtr_configurationDeclarationAST::description (C_String & ioString,
 
 acPtr_class * cPtr_configurationDeclarationAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_configurationDeclarationAST (mAttribute_mPointerSize, mAttribute_mPanicCodeTypeName, mAttribute_mPanicLineTypeName, mAttribute_mTargetParameters, mAttribute_mInterruptionConfigurationList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_configurationDeclarationAST (mAttribute_mPointerSize, mAttribute_mPanicCodeTypeName, mAttribute_mPanicLineTypeName, mAttribute_mUnsignedIntegerTypeName, mAttribute_mTargetParameters, mAttribute_mInterruptionConfigurationList COMMA_THERE)) ;
   return ptr ;
 }
 

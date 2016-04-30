@@ -3,6 +3,7 @@ configuration
   32 // Pointer bit count
   :$int32 // Panic code type
   :$uint32 // Panic line type
+  :$uint32 // Unsigned integer type
   :1024 // System stack size
   :32 // Stacked registers bytes count (Cortex M4 saves 8 regs in user stack on interrupt)
   :12 // as_svc_handler saves 3 registers on system stack
