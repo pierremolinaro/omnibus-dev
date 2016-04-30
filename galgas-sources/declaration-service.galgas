@@ -106,6 +106,7 @@ method @serviceDeclarationListAST enterInContext
       !.service
       !false # Not weak
       !returnType
+      !false # No appendFileAndLineArgumentForPanicLocation
     ]
   end
 }

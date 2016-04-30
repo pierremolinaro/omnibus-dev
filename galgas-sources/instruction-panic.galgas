@@ -97,7 +97,7 @@ override method @panicInstructionAST analyze
 
 class @panicInstructionIR : @abstractInstructionIR {
   @location mThrowLocation
-  @bigint mCode
+  @bigint mPanicCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -113,12 +113,40 @@ override method @panicInstructionIR llvmInstructionCode
   ]
   ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mThrowLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mCode + ")\n"
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   PANIC INSTRUCTION                                                                                                   
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @panicWithLineAndFileInstructionIR : @abstractInstructionIR {
+  @bigint mPanicCode
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @panicWithLineAndFileInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  call void @raise_panic ("
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ", "
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " %LINE, i8* %FILE)\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @panicWithLineAndFileInstructionIR enterAccessibleEntities
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

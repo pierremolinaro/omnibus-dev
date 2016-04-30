@@ -151,6 +151,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
+        !procedure.mAppendFileAndLineArgumentForPanicLocation
       ]        
       [procedure enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
       outAccessibleEntities.mRoutineSet += !procedure.lkey.string
@@ -166,6 +167,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
+        !procedure.mAppendFileAndLineArgumentForPanicLocation
       ]        
     end
   end
@@ -240,6 +242,7 @@ private proc exploreProcs
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
+        !procedure.mAppendFileAndLineArgumentForPanicLocation
       ]        
       [procedure enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
       ioContinueExploreRoutines = true
@@ -255,6 +258,7 @@ private proc exploreProcs
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
+        !procedure.mAppendFileAndLineArgumentForPanicLocation
     ]        
     end
   end

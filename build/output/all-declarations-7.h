@@ -1122,7 +1122,8 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
   public : static GALGAS_functionCallIR constructor_new (const class GALGAS_operandIR & inOperand0,
                                                          const class GALGAS_string & inOperand1,
                                                          const class GALGAS_routineKindIR & inOperand2,
-                                                         const class GALGAS_procCallEffectiveParameterListIR & inOperand3
+                                                         const class GALGAS_procCallEffectiveParameterListIR & inOperand3,
+                                                         const class GALGAS_bool & inOperand4
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1134,6 +1135,8 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mFunctionName (LOCATION_ARGS) const ;
@@ -1165,12 +1168,14 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : GALGAS_string mAttribute_mFunctionName ;
   public : GALGAS_routineKindIR mAttribute_mKind ;
   public : GALGAS_procCallEffectiveParameterListIR mAttribute_mArgumentList ;
+  public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--- Constructor
   public : cPtr_functionCallIR (const GALGAS_operandIR & in_mResult,
                                 const GALGAS_string & in_mFunctionName,
                                 const GALGAS_routineKindIR & in_mKind,
-                                const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
+                                const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList,
+                                const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -1181,6 +1186,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mFunctionName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1972,7 +1978,7 @@ class GALGAS_panicInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mPanicCode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mThrowLocation (LOCATION_ARGS) const ;
 
@@ -1996,11 +2002,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicInstructionIR 
 class cPtr_panicInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_location mAttribute_mThrowLocation ;
-  public : GALGAS_bigint mAttribute_mCode ;
+  public : GALGAS_bigint mAttribute_mPanicCode ;
 
 //--- Constructor
   public : cPtr_panicInstructionIR (const GALGAS_location & in_mThrowLocation,
-                                    const GALGAS_bigint & in_mCode
+                                    const GALGAS_bigint & in_mPanicCode
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2008,7 +2014,91 @@ class cPtr_panicInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mThrowLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mPanicCode (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @panicWithLineAndFileInstructionIR class                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_panicWithLineAndFileInstructionIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_panicWithLineAndFileInstructionIR (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_panicWithLineAndFileInstructionIR constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_panicWithLineAndFileInstructionIR * ptr (void) const { return (const cPtr_panicWithLineAndFileInstructionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_panicWithLineAndFileInstructionIR (const cPtr_panicWithLineAndFileInstructionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_panicWithLineAndFileInstructionIR extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_panicWithLineAndFileInstructionIR constructor_new (const class GALGAS_bigint & inOperand0
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_panicWithLineAndFileInstructionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mPanicCode (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_panicWithLineAndFileInstructionIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicWithLineAndFileInstructionIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Pointer class for @panicWithLineAndFileInstructionIR class                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_panicWithLineAndFileInstructionIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_bigint mAttribute_mPanicCode ;
+
+//--- Constructor
+  public : cPtr_panicWithLineAndFileInstructionIR (const GALGAS_bigint & in_mPanicCode
+                                                   COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mPanicCode (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2047,9 +2137,10 @@ class GALGAS_procCallInstructionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_procCallInstructionIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                const class GALGAS_string & inOperand1,
+                                                                const class GALGAS_lstring & inOperand1,
                                                                 const class GALGAS_routineKindIR & inOperand2,
-                                                                const class GALGAS_procCallEffectiveParameterListIR & inOperand3
+                                                                const class GALGAS_procCallEffectiveParameterListIR & inOperand3,
+                                                                const class GALGAS_bool & inOperand4
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2061,13 +2152,15 @@ class GALGAS_procCallInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procCallEffectiveParameterListIR getter_mParameters (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mProcName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mProcName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2089,15 +2182,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procCallInstruction
 class cPtr_procCallInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mAttribute_mGlobalVariableName ;
-  public : GALGAS_string mAttribute_mProcName ;
+  public : GALGAS_lstring mAttribute_mProcName ;
   public : GALGAS_routineKindIR mAttribute_mKind ;
   public : GALGAS_procCallEffectiveParameterListIR mAttribute_mParameters ;
+  public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--- Constructor
   public : cPtr_procCallInstructionIR (const GALGAS_string & in_mGlobalVariableName,
-                                       const GALGAS_string & in_mProcName,
+                                       const GALGAS_lstring & in_mProcName,
                                        const GALGAS_routineKindIR & in_mKind,
-                                       const GALGAS_procCallEffectiveParameterListIR & in_mParameters
+                                       const GALGAS_procCallEffectiveParameterListIR & in_mParameters,
+                                       const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2105,9 +2200,10 @@ class cPtr_procCallInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mProcName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mProcName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR getter_mParameters (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

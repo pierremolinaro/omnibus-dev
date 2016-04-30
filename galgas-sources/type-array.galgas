@@ -96,6 +96,7 @@ override method @typeArrayDeclaration enterRoutinesInContext
     !.function
     !false # Is not weak
     !countType
+    !false # No appendFileAndLineArgumentForPanicLocation
   ]
 #--- Enter "append" function
   let appendKey = @lstring.new {!"$" + mArrayTypeName + ".append" !mArrayTypeName.location}
@@ -107,6 +108,7 @@ override method @typeArrayDeclaration enterRoutinesInContext
     !.function
     !false # Is not weak
     !.null # No return type
+    !true # appendFileAndLineArgumentForPanicLocation
   ]
 }
 
@@ -201,7 +203,7 @@ override method @typeArrayDeclaration semanticAnalysis
   let @objectInMemoryIR resultPtr = .localValue {!type:countType !name:"result"}
   [!?countFunctionInstructionGenerationList appendStoreInMemory !resultPtr !loadedCountValue]
   let countFunctionName = @lstring.new {!"$" + mArrayTypeName + ".count" !mArrayTypeName.location}
-  ioIntermediateCodeStruct.mRoutineMapIR +=
+  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
     !countFunctionName
     !{} # No argument
     !{} # No alloca
@@ -212,6 +214,8 @@ override method @typeArrayDeclaration semanticAnalysis
     !false # Not global @bool mGlobal
     !.function
     !countType # Return type
+    !false  # do not appendFileAndLineArgumentForPanicLocation
+  ]
 #--- Enter "count" function in invocation graph
   let countFunctionNameForInvocationGraph = procNameForInvocationGraph (!selfType !["count" nowhere])
   [!?ioTemporaries.mSubprogramInvocationGraph addNode
@@ -237,7 +241,7 @@ override method @typeArrayDeclaration semanticAnalysis
     appendFunctionInstructionGenerationList += !@ifInstructionIR.new {
       !overflowVar
       !mArrayTypeName.location
-      !{!@panicInstructionIR.new {!mArrayTypeName.location !panicCodeForArrayOverflow ()}}
+      !{!@panicWithLineAndFileInstructionIR.new {!panicCodeForArrayOverflow ()}}
       !{} # No else instruction
     }
   end
@@ -263,7 +267,7 @@ override method @typeArrayDeclaration semanticAnalysis
   ]
   [!?appendFunctionInstructionGenerationList appendStoreInMemory !countPtr !incrementedCount]
   let appendFunctionName = @lstring.new {!"$" + mArrayTypeName + ".append" !mArrayTypeName.location}
-  ioIntermediateCodeStruct.mRoutineMapIR +=
+  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
     !appendFunctionName
     !{!.input !elementType !"inValue"} # Signature
     !{} # No alloca
@@ -274,6 +278,8 @@ override method @typeArrayDeclaration semanticAnalysis
     !false # Not global @bool mGlobal
     !.function
     !.null # Return type
+    !true  # appendFileAndLineArgumentForPanicLocation
+  ]
 #--- Enter "append" function in invocation graph
   let appendFunctionNameForInvocationGraph = procNameForInvocationGraph (!selfType !["append" nowhere])
   [!?ioTemporaries.mSubprogramInvocationGraph addNode

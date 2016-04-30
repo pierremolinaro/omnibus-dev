@@ -265,6 +265,7 @@ override method @unifiedSelfCallInstructionAST analyze
       ?let @routineKind routineKind
       ?*
       ?let returnedType
+      ?let appendFileAndLineArgumentForPanicLocation
     ]
     if needsPublic && not isPublic then
       error routineMangledName : "this routine is not public"
@@ -312,9 +313,10 @@ override method @unifiedSelfCallInstructionAST analyze
   #--- Code generation
     ioInstructionGenerationList += !@procCallInstructionIR.new {
       !"" # Receiver is self
-      !routineMangledName.string
+      !routineMangledName
       !routineKindIR
       !effectiveParameterListIR
+      !appendFileAndLineArgumentForPanicLocation
     }
   end
  }
@@ -351,6 +353,7 @@ override method @standaloneRoutineCallInstructionAST analyze
     ?routineKind:let @routineKindIR routineKindIR
     ?routineMangledName:let @lstring routineMangledName
     ?returnType:let @unifiedTypeMap-proxy returnedType
+    ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
   )
   if returnedType != .null then
     error mRoutineName : "cannot be called in instruction: return value"
@@ -358,9 +361,10 @@ override method @standaloneRoutineCallInstructionAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !"" # No receiver
-    !routineMangledName.string
+    !routineMangledName
     !routineKindIR
     !effectiveParameterListIR
+    !appendFileAndLineArgumentForPanicLocation
   }
 }
 
@@ -403,6 +407,7 @@ override method @remoteRoutineCallInstructionAST analyze
     ?routineKind:let @routineKindIR routineKindIR
     ?routineMangledName:let @lstring routineMangledName
     ?returnType:let @unifiedTypeMap-proxy returnedType
+    ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
   )
   if returnedType != .null then
     error routineName : "cannot be called in instruction: return value"
@@ -410,9 +415,10 @@ override method @remoteRoutineCallInstructionAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !receiverName.string
-    !routineMangledName.string
+    !routineMangledName
     !routineKindIR
     !effectiveParameterListIR
+    !appendFileAndLineArgumentForPanicLocation
   }
 }
 
@@ -436,6 +442,7 @@ proc analyzeRoutineCall
   !routineKind:@routineKindIR outRoutineKindIR
   !routineMangledName:@lstring outRoutineMangledName
   !returnType:@unifiedTypeMap-proxy outReturnedType
+  !appendFileAndLineArgumentForPanicLocation:@bool outAppendFileAndLineArgumentForPanicLocation
 {
   outEffectiveParameterListIR = {}
   @unifiedTypeMap-proxy receiverType
@@ -461,6 +468,7 @@ proc analyzeRoutineCall
     ?let @routineKind routineKind
     ?*
     ?outReturnedType
+    ?outAppendFileAndLineArgumentForPanicLocation
   ]
 #--- Check accessibility
   if not isPublic then
@@ -729,30 +737,37 @@ enum @routineKindIR {
 
 class @procCallInstructionIR : @abstractInstructionIR {
   @string mGlobalVariableName # Receiver name, "" if not receiver
-  @string mProcName
+  @lstring mProcName
   @routineKindIR mKind
   @procCallEffectiveParameterListIR mParameters
+  @bool mAppendFileAndLineArgumentForPanicLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procCallInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
 {
   ioLLVMcode += "  call void @"
   switch mKind 
-  case function : ioLLVMcode += llvmNameForFunction (!mProcName)
-  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mProcName)
-  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mProcName)
-  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mProcName)
-  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mProcName)
-  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mProcName)
-  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mProcName)
+  case function : ioLLVMcode += llvmNameForFunction (!mProcName.string)
+  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mProcName.string)
+  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mProcName.string)
+  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mProcName.string)
+  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mProcName.string)
+  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mProcName.string)
+  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mProcName.string)
   end
+  var first = true
   ioLLVMcode += " ("
   for () in mParameters do
+    if first then
+      first = false
+    else
+      ioLLVMcode += ", "
+    end
     switch mEffectiveParameterPassingMode
     case input:
       ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
@@ -761,8 +776,20 @@ override method @procCallInstructionIR llvmInstructionCode
     case outputInput:
       ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
     end
-  between
-    ioLLVMcode += ", "
+  end
+  if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
+    let sourceFileName = [[[mProcName.location file] lastPathComponent] stringByDeletingPathExtension]
+    [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+      !sourceFileName
+      ?let staticStringIndex
+    ]
+    if not first then
+      ioLLVMcode += ", "
+    end
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mProcName.location line]
+    let sourceFileNameSize = [sourceFileName length] + 1
+    ioLLVMcode += ", i8* getelementptr inbounds ([" + sourceFileNameSize + " x i8], [" + sourceFileNameSize + " x i8]* @str.array." + staticStringIndex + ", i32 0, i32 0)"
+ #   ioLLVMcode += ", i8* @string." + staticStringIndex
   end
   ioLLVMcode += ")\n"
 }
@@ -773,7 +800,7 @@ override method @procCallInstructionIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioAccessibleEntities.mRoutineSet += !mProcName
+  ioAccessibleEntities.mRoutineSet += !mProcName.string
   if mGlobalVariableName != "" then
     ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
   end
