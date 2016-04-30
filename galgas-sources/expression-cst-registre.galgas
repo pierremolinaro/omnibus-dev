@@ -175,6 +175,8 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   ]
 #--- Check expression type
   switch [expressionResult.mType kind]
+  case arrayType (* * *) :
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
   case opaque (*) :
     error mExpressionLocation: "an unsigned integer expression is required here" : outResult
   case enumeration (*) :

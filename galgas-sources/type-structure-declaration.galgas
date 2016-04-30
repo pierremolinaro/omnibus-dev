@@ -318,7 +318,7 @@ override method @structureDeclaration enterInContext
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
-    !llvmTypeName:"%$" + mStructureName.string
+    !llvmTypeName:"%$" + mStructureName
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !typedConstantMap:{}
     !instantiable:true
@@ -362,6 +362,7 @@ override method @structureDeclaration semanticAnalysis
   case boolset : propertyMap = {}
   case literalString : propertyMap = {}
   case opaque (*) : propertyMap = {}
+  case arrayType (* * *) : propertyMap = {}
   end
 #--- Analyze procedures
   [self procedureSemanticAnalysis

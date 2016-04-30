@@ -13,6 +13,7 @@ enum @typeKind {
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
+  case arrayType (@uint countBitSize @unifiedTypeMap-proxy elementType @bigint size)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -325,7 +326,6 @@ proc buildSemanticContext
     !outSemanticContext.mGlobalConstantMap
     !sourceFile:inSourceFile
   )
-
 #--- Enter control registers in context
   enterControlRegistersInContext (
    !inAST.mControlRegisterDeclarationListAST
