@@ -106,6 +106,7 @@ method @primitiveDeclarationListAST enterInContext
       !.primitive
       !false # Not weak
       !returnType
+      !false # No appendFileAndLineArgumentForPanicLocation
     ]
   end
 }

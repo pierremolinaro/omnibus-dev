@@ -1751,6 +1751,7 @@ void routine_analyzeRoutineCall (const class GALGAS_unifiedTypeMap_2D_proxy cons
                                  class GALGAS_routineKindIR & outArgument14,
                                  class GALGAS_lstring & outArgument15,
                                  class GALGAS_unifiedTypeMap_2D_proxy & outArgument16,
+                                 class GALGAS_bool & outArgument17,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 

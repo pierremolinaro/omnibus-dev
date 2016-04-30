@@ -165,7 +165,7 @@ proc routineSemanticAnalysis
     elsif inWeakProcedure && weak then
       error routineMangledName : "this weak procedure overrides a weak procedure"
     elsif (not inWeakProcedure) && weak then
-      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?9*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?10*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
         !formalArguments
@@ -177,6 +177,7 @@ proc routineSemanticAnalysis
         !inGlobalProcedure
         !inRoutineKind
         !returnType
+        !false
       ]  
     else # (not weakProcedure) && (not weak)
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
@@ -190,6 +191,7 @@ proc routineSemanticAnalysis
         !inGlobalProcedure
         !inRoutineKind
         !returnType
+        !false
       ]
     end
   else
@@ -204,6 +206,7 @@ proc routineSemanticAnalysis
       !inGlobalProcedure
       !inRoutineKind
       !returnType
+      !false
     ]  
   end
 }
@@ -276,6 +279,12 @@ method @routineMapIR-element llvmCodeGeneration
    case inputOutput :
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
     end
+  end
+  if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
+    if not first then
+      ioLLVMcode += ", "
+    end
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " %LINE, i8* %FILE"
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Add result variable ?

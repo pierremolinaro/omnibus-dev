@@ -21,6 +21,7 @@ map @routineMapForContext {
   @routineKind mRoutineKind
   @bool mWeak
   @unifiedTypeMap-proxy mReturnType
+  @bool mAppendFileAndLineArgumentForPanicLocation
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"
@@ -113,7 +114,7 @@ method @procedureDeclarationListAST enterInContext
       elsif weakProcedure && weak then
         error procedure.mProcedureName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
-        [!?ioContext.mRoutineMapForContext removeKey !lkey ?6*] # Remove weak routine
+        [!?ioContext.mRoutineMapForContext removeKey !lkey ?7*] # Remove weak routine
         [!?ioContext.mRoutineMapForContext insertKey # Insert routine
           !lkey
           !procedure.mPublic
@@ -122,6 +123,7 @@ method @procedureDeclarationListAST enterInContext
           !.function
           !weakProcedure
           !returnType
+          !false # No appendFileAndLineArgumentForPanicLocation
         ]
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
@@ -132,6 +134,7 @@ method @procedureDeclarationListAST enterInContext
           !.function
           !weakProcedure
           !returnType
+          !false # No appendFileAndLineArgumentForPanicLocation
         ]
       end
     else
@@ -143,6 +146,7 @@ method @procedureDeclarationListAST enterInContext
         !.function
         !weakProcedure
         !returnType
+        !false # No appendFileAndLineArgumentForPanicLocation
       ]
     end
   end
@@ -175,6 +179,7 @@ method @sectionDeclarationListAST enterInContext
       !.section
       !false # Not weak
       !returnType
+      !false # No appendFileAndLineArgumentForPanicLocation
     ]
   end
 }
