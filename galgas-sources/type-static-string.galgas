@@ -65,7 +65,7 @@ override method @literalStringDeclaration enterInContext
     !lkey:mLiteralStringTypeName
     !llvmTypeName:"i8*"
     !kind:.literalString
-    !typedConstantMap:{}
+    !classMethodMap:{}
     !instantiable:true
     !copyable:true
     !equatable:true

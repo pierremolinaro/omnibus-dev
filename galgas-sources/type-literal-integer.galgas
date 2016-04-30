@@ -64,7 +64,7 @@ override method @literalIntegerDeclaration enterInContext
     !lkey:integerTypeName
     !llvmTypeName:"<<literal integer>>"
     !kind:.staticInteger
-    !typedConstantMap:{}
+    !classMethodMap:{}
     !instantiable:true
     !copyable:true
     !equatable:true

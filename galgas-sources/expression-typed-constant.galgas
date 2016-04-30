@@ -73,18 +73,17 @@ override method @typedConstantCall analyzeExpression
   !result:@operandIR outResult
 {
 #--- Analyze constructor source type
-  @unifiedTypeMap-proxy resultType
+  @unifiedTypeMap-proxy inferredResultType
   if mOptionalTypeName.string == "" then
-    resultType = inOptionalTargetType
+    inferredResultType = inOptionalTargetType
   else
-    resultType = .searchKey {!inContext.mTypeMap !mOptionalTypeName}
+    inferredResultType = .searchKey {!inContext.mTypeMap !mOptionalTypeName}
   end
-  if resultType == .null then
+  if inferredResultType == .null then
     error mConstructorName : "cannot infer type" : outResult
   else
-    let constructorMap = [resultType typedConstantMap]
-    [constructorMap searchKey !mConstructorName ?let resultValue]
-    outResult = .new {!resultType !resultValue}
+    let classMethodMap = [inferredResultType classMethodMap]
+    [classMethodMap searchKey !mConstructorName ?outResult]
   end
 }
 

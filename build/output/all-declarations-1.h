@@ -1025,6 +1025,9 @@ class GALGAS_unifiedTypeMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
 
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_classMethodMap getter_classMethodMap (C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_comparable (C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) const ;
 
@@ -1045,9 +1048,6 @@ class GALGAS_unifiedTypeMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_llvmTypeName (C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_typedConstantMap getter_typedConstantMap (C_Compiler * inCompiler
-                                                                                   COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1710,7 +1710,8 @@ class GALGAS_valueIR : public AC_GALGAS_root {
     kEnum_llvmLocalObject,
     kEnum_llvmGlobalObject,
     kEnum_llvmStructureConstant,
-    kEnum_literalString
+    kEnum_literalString,
+    kEnum_zero
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -1754,6 +1755,8 @@ class GALGAS_valueIR : public AC_GALGAS_root {
                                                                     COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_valueIR constructor_selfObject (LOCATION_ARGS) ;
+
+  public : static GALGAS_valueIR constructor_zero (LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -1799,6 +1802,8 @@ class GALGAS_valueIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmStructureConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSelfObject (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isZero (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

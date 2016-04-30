@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typeArrayDeclaration : @abstractDeclaration {
-  @lstring mNewTypeName
+  @lstring mArrayTypeName
   @lstring mElementTypeName
   @expressionAST mSizeExpression
   @location mSizeExpressionLocation
@@ -12,7 +12,7 @@ class @typeArrayDeclaration : @abstractDeclaration {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @typeArrayDeclaration location -> @location outLocation {
-  outLocation = mNewTypeName.location
+  outLocation = mArrayTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -60,19 +60,19 @@ override method @typeArrayDeclaration addExtension
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeArrayDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let newTypeName = @lstring.new {!"$" + mNewTypeName !mNewTypeName.location}
+  let newTypeName = @lstring.new {!"$" + mArrayTypeName !mArrayTypeName.location}
   let elementTypeName = @lstring.new {!"$" + mElementTypeName !mElementTypeName.location}
   [!?ioGraph addNode !newTypeName !self]
   [!?ioGraph addEdge !newTypeName !elementTypeName]
   [mSizeExpression addDependenceEdgeForStaticExpression !newTypeName !?ioGraph]
-  let rootNode =  @lstring.new {!"config" !mNewTypeName.location}
+  let rootNode = @lstring.new {!"config" !mArrayTypeName.location}
   [!?ioGraph addEdge !newTypeName !rootNode]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @typeArrayDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "arraytype $" + mNewTypeName 
+  outRepresentation = "arraytype $" + mArrayTypeName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -81,9 +81,20 @@ override getter @typeArrayDeclaration keyRepresentationForErrorSignaling -> @str
 
 override method @typeArrayDeclaration enterRoutinesInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
+  ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
+#--- Enter "count" function
+  let lkey = @lstring.new {!"$" + mArrayTypeName + ".count" !mArrayTypeName.location}
+  [!?ioContext.mRoutineMapForContext insertKey
+    !lkey
+    !true # Public
+    !allModeMap ()
+    !{} # Signature
+    !.function
+    !false # Is not weak
+    !@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !["uint32" nowhere]}
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -98,7 +109,7 @@ override method @typeArrayDeclaration enterInContext
     !lkey:mElementTypeName
     ?llvmTypeName:*
     ?kind:*
-    ?typedConstantMap:*
+    ?classMethodMap:*
     ?instantiable:*
     ?copyable:let copyable
     ?equatable:*
@@ -115,7 +126,7 @@ override method @typeArrayDeclaration enterInContext
   [mSizeExpression analyzeExpression
     !self:.null
     !inGuard:false
-    !routineNameForInvocationGraph:.new {!mNewTypeName.string + " init" !mNewTypeName.location}
+    !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
     !optionalTargetType:.null
     !context:ioContext
     !modes:{}
@@ -132,17 +143,25 @@ override method @typeArrayDeclaration enterInContext
   else
     [sizeExpressionIR.mValue literalInteger ?value:let arraySize]
     let elementType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName}
+  #--- Class method map : add "size" method
+    @classMethodMap classMethodMap = {}
+    [!?classMethodMap insertKey !["size" nowhere] !sizeExpressionIR]
   #--- Enter in type map
     [!?ioContext.mTypeMap insertKey
-      !lkey:mNewTypeName
-      !llvmTypeName:"%$" + mNewTypeName
+      !lkey:mArrayTypeName
+      !llvmTypeName:"%$" + mArrayTypeName
       !kind:.arrayType {!countBitSize:ioContext.mPointerSize !elementType:elementType !size:arraySize}
-      !typedConstantMap:{}
+      !classMethodMap:classMethodMap
       !instantiable:true
       !copyable:true
       !equatable:false
       !comparable:false
       !enumerationType:elementType
+    ]
+  #--- Enter array constructor
+    [!?ioContext.mConstructorMap insertKey
+      !mArrayTypeName
+      !.zero
     ]
   end
 }
@@ -152,10 +171,30 @@ override method @typeArrayDeclaration enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeArrayDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+  let selfType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mArrayTypeName}
+  let countType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["uint32" nowhere]}
+#--- "count" function
+  @instructionListIR countFunctionInstructionGenerationList = {}
+  let @objectInMemoryIR countPtr = .localValue {!type:countType !name:"count.ptr"}
+  [!?countFunctionInstructionGenerationList appendGetElementPtrFromSelf !countPtr !selfType !{!0 !"count"}]
+  [countPtr loadFromMemory !?temporary:ioTemporaries !?instructionListIR:countFunctionInstructionGenerationList ?resultingValue:let loadedCountValue]
+  let @objectInMemoryIR resultPtr = .localValue {!type:countType !name:"result"}
+  [resultPtr storeInMemory !value:loadedCountValue !?instructionListIR:countFunctionInstructionGenerationList]
+  ioIntermediateCodeStruct.mRoutineMapIR +=
+    !@lstring.new {!"$" + mArrayTypeName + ".count" !mArrayTypeName.location}
+    !{} # @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+    !{} # No alloca
+    !countFunctionInstructionGenerationList
+    !false # No required @bool mIsRequired
+    !false # No warning if unused @bool mWarnIfUnused
+    !false # Not weak @bool mWeak
+    !false # Not global @bool mGlobal
+    !.function
+    !countType # Return type
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

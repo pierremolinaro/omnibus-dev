@@ -156,7 +156,7 @@ func checkMode
 sharedmap @unifiedTypeMap %selectors {
   @string llvmTypeName # For Example: i23, %$toto
   @typeKind kind
-  @typedConstantMap typedConstantMap
+  @classMethodMap classMethodMap
   @bool instantiable
   @bool copyable
   @bool equatable
@@ -169,10 +169,12 @@ sharedmap @unifiedTypeMap %selectors {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @typedConstantMap {
-  @valueIR mValue
-  insert insertKey error message "the '%K' constructor is already declared in %L"
-  search searchKey error message "there is no '%K' constructor"
+map @classMethodMap {
+  @operandIR mValue
+#  @valueIR mValue
+#  @unifiedTypeMap-proxy mResultType
+  insert insertKey error message "the '%K' class method is already declared in %L"
+  search searchKey error message "there is no '%K' class method"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -190,6 +192,7 @@ list @operandIRList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @constructorValue {
+  case zero
   case simple (@bigint value)
   case structure (@constructorSignature constructorSignature @sortedOperandIRList sortedOperandList)
 }
@@ -288,6 +291,21 @@ abstract method @abstractDeclaration enterRoutinesInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func allModeMap -> @modeMap outModeMap {
+  outModeMap = {}
+  [!?outModeMap insertKey ![bootModeName () nowhere]]
+  [!?outModeMap insertKey ![initModeName () nowhere]]
+  [!?outModeMap insertKey ![panicModeName () nowhere]]
+  [!?outModeMap insertKey ![sectionModeName () nowhere]]
+  [!?outModeMap insertKey ![kernelModeName () nowhere]]
+  [!?outModeMap insertKey ![serviceModeName () nowhere]]
+  [!?outModeMap insertKey ![userModeName () nowhere]]
+  [!?outModeMap insertKey ![guardModeName () nowhere]]
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 proc buildSemanticContext
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
   ?sourceFile:let @lstring inSourceFile
@@ -297,14 +315,7 @@ proc buildSemanticContext
 {
   outSemanticContext = .default
 #--- Add predefined modes
-  [!?outSemanticContext.mModeMap insertKey ![bootModeName () nowhere]]
-  [!?outSemanticContext.mModeMap insertKey ![initModeName () nowhere]]
-  [!?outSemanticContext.mModeMap insertKey ![panicModeName () nowhere]]
-  [!?outSemanticContext.mModeMap insertKey ![sectionModeName () nowhere]]
-  [!?outSemanticContext.mModeMap insertKey ![kernelModeName () nowhere]]
-  [!?outSemanticContext.mModeMap insertKey ![serviceModeName () nowhere]]
-  [!?outSemanticContext.mModeMap insertKey ![userModeName () nowhere]]
-  [!?outSemanticContext.mModeMap insertKey ![guardModeName () nowhere]]
+  outSemanticContext.mModeMap = allModeMap ()
 #--- Enter init routines
   for initRoutine in inAST.mInitList do
     [initRoutine enterInContext !?context:outSemanticContext]

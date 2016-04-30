@@ -320,7 +320,7 @@ override method @structureDeclaration enterInContext
     !lkey:mStructureName
     !llvmTypeName:"%$" + mStructureName
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
-    !typedConstantMap:{}
+    !classMethodMap:{}
     !instantiable:true
     !copyable:copyableAttribute
     !equatable:false

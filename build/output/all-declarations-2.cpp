@@ -11755,7 +11755,7 @@ GALGAS_globalVariableMap GALGAS_globalVariableMap::extractObject (const GALGAS_o
 cMapElement_unifiedTypeMap::cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
                                                         const GALGAS_string & in_llvmTypeName,
                                                         const GALGAS_typeKind & in_kind,
-                                                        const GALGAS_typedConstantMap & in_typedConstantMap,
+                                                        const GALGAS_classMethodMap & in_classMethodMap,
                                                         const GALGAS_bool & in_instantiable,
                                                         const GALGAS_bool & in_copyable,
                                                         const GALGAS_bool & in_equatable,
@@ -11765,7 +11765,7 @@ cMapElement_unifiedTypeMap::cMapElement_unifiedTypeMap (const GALGAS_lstring & i
 cMapElement (inKey COMMA_THERE),
 mAttribute_llvmTypeName (in_llvmTypeName),
 mAttribute_kind (in_kind),
-mAttribute_typedConstantMap (in_typedConstantMap),
+mAttribute_classMethodMap (in_classMethodMap),
 mAttribute_instantiable (in_instantiable),
 mAttribute_copyable (in_copyable),
 mAttribute_equatable (in_equatable),
@@ -11776,14 +11776,14 @@ mAttribute_enumerationType (in_enumerationType) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_unifiedTypeMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_llvmTypeName.isValid () && mAttribute_kind.isValid () && mAttribute_typedConstantMap.isValid () && mAttribute_instantiable.isValid () && mAttribute_copyable.isValid () && mAttribute_equatable.isValid () && mAttribute_comparable.isValid () && mAttribute_enumerationType.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_llvmTypeName.isValid () && mAttribute_kind.isValid () && mAttribute_classMethodMap.isValid () && mAttribute_instantiable.isValid () && mAttribute_copyable.isValid () && mAttribute_equatable.isValid () && mAttribute_comparable.isValid () && mAttribute_enumerationType.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_unifiedTypeMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_unifiedTypeMap (mAttribute_lkey, mAttribute_llvmTypeName, mAttribute_kind, mAttribute_typedConstantMap, mAttribute_instantiable, mAttribute_copyable, mAttribute_equatable, mAttribute_comparable, mAttribute_enumerationType COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_unifiedTypeMap (mAttribute_lkey, mAttribute_llvmTypeName, mAttribute_kind, mAttribute_classMethodMap, mAttribute_instantiable, mAttribute_copyable, mAttribute_equatable, mAttribute_comparable, mAttribute_enumerationType COMMA_HERE)) ;
   return result ;
 }
 
@@ -11800,8 +11800,8 @@ void cMapElement_unifiedTypeMap::description (C_String & ioString, const int32_t
   mAttribute_kind.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "typedConstantMap" ":" ;
-  mAttribute_typedConstantMap.description (ioString, inIndentation) ;
+  ioString << "classMethodMap" ":" ;
+  mAttribute_classMethodMap.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "instantiable" ":" ;
@@ -11836,7 +11836,7 @@ typeComparisonResult cMapElement_unifiedTypeMap::compare (const cCollectionEleme
     result = mAttribute_kind.objectCompare (operand->mAttribute_kind) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_typedConstantMap.objectCompare (operand->mAttribute_typedConstantMap) ;
+    result = mAttribute_classMethodMap.objectCompare (operand->mAttribute_classMethodMap) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_instantiable.objectCompare (operand->mAttribute_instantiable) ;
@@ -11918,7 +11918,7 @@ GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS
 void GALGAS_unifiedTypeMap::setter_insertKey (GALGAS_lstring inKey,
                                               GALGAS_string inArgument0,
                                               GALGAS_typeKind inArgument1,
-                                              GALGAS_typedConstantMap inArgument2,
+                                              GALGAS_classMethodMap inArgument2,
                                               GALGAS_bool inArgument3,
                                               GALGAS_bool inArgument4,
                                               GALGAS_bool inArgument5,
@@ -11951,7 +11951,7 @@ const char * kSearchErrorMessage_unifiedTypeMap_searchKey = "there is no '%K' ty
 void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
                                               GALGAS_string & outArgument0,
                                               GALGAS_typeKind & outArgument1,
-                                              GALGAS_typedConstantMap & outArgument2,
+                                              GALGAS_classMethodMap & outArgument2,
                                               GALGAS_bool & outArgument3,
                                               GALGAS_bool & outArgument4,
                                               GALGAS_bool & outArgument5,
@@ -11976,7 +11976,7 @@ void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
     outArgument0 = p->mAttribute_llvmTypeName ;
     outArgument1 = p->mAttribute_kind ;
-    outArgument2 = p->mAttribute_typedConstantMap ;
+    outArgument2 = p->mAttribute_classMethodMap ;
     outArgument3 = p->mAttribute_instantiable ;
     outArgument4 = p->mAttribute_copyable ;
     outArgument5 = p->mAttribute_equatable ;
@@ -12017,15 +12017,15 @@ GALGAS_typeKind GALGAS_unifiedTypeMap::getter_kindForKey (const GALGAS_string & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap GALGAS_unifiedTypeMap::getter_typedConstantMapForKey (const GALGAS_string & inKey,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const {
+GALGAS_classMethodMap GALGAS_unifiedTypeMap::getter_classMethodMapForKey (const GALGAS_string & inKey,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_typedConstantMap result ;
+  GALGAS_classMethodMap result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_typedConstantMap ;
+    result = p->mAttribute_classMethodMap ;
   }
   return result ;
 }
@@ -12135,15 +12135,15 @@ void GALGAS_unifiedTypeMap::setter_setKindForKey (GALGAS_typeKind inAttributeVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_unifiedTypeMap::setter_setTypedConstantMapForKey (GALGAS_typedConstantMap inAttributeValue,
-                                                              GALGAS_string inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_unifiedTypeMap::setter_setClassMethodMapForKey (GALGAS_classMethodMap inAttributeValue,
+                                                            GALGAS_string inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_typedConstantMap = inAttributeValue ;
+    p->mAttribute_classMethodMap = inAttributeValue ;
   }
 }
 
@@ -12261,10 +12261,10 @@ GALGAS_typeKind cEnumerator_unifiedTypeMap::current_kind (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap cEnumerator_unifiedTypeMap::current_typedConstantMap (LOCATION_ARGS) const {
+GALGAS_classMethodMap cEnumerator_unifiedTypeMap::current_classMethodMap (LOCATION_ARGS) const {
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_typedConstantMap ;
+  return p->mAttribute_classMethodMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12354,30 +12354,30 @@ GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::extractObject (const GALGAS_object 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_typedConstantMap::cMapElement_typedConstantMap (const GALGAS_lstring & inKey,
-                                                            const GALGAS_valueIR & in_mValue
-                                                            COMMA_LOCATION_ARGS) :
+cMapElement_classMethodMap::cMapElement_classMethodMap (const GALGAS_lstring & inKey,
+                                                        const GALGAS_operandIR & in_mValue
+                                                        COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mValue (in_mValue) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cMapElement_typedConstantMap::isValid (void) const {
+bool cMapElement_classMethodMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mValue.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement * cMapElement_typedConstantMap::copy (void) {
+cMapElement * cMapElement_classMethodMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_typedConstantMap (mAttribute_lkey, mAttribute_mValue COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_classMethodMap (mAttribute_lkey, mAttribute_mValue COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_typedConstantMap::description (C_String & ioString, const int32_t inIndentation) const {
+void cMapElement_classMethodMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mValue" ":" ;
@@ -12386,8 +12386,8 @@ void cMapElement_typedConstantMap::description (C_String & ioString, const int32
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cMapElement_typedConstantMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_typedConstantMap * operand = (cMapElement_typedConstantMap *) inOperand ;
+typeComparisonResult cMapElement_classMethodMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_classMethodMap * operand = (cMapElement_classMethodMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
     result = mAttribute_mValue.objectCompare (operand->mAttribute_mValue) ;
@@ -12397,113 +12397,113 @@ typeComparisonResult cMapElement_typedConstantMap::compare (const cCollectionEle
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap::GALGAS_typedConstantMap (void) :
+GALGAS_classMethodMap::GALGAS_classMethodMap (void) :
 AC_GALGAS_map () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap::GALGAS_typedConstantMap (const GALGAS_typedConstantMap & inSource) :
+GALGAS_classMethodMap::GALGAS_classMethodMap (const GALGAS_classMethodMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap & GALGAS_typedConstantMap::operator = (const GALGAS_typedConstantMap & inSource) {
+GALGAS_classMethodMap & GALGAS_classMethodMap::operator = (const GALGAS_classMethodMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap GALGAS_typedConstantMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_typedConstantMap result ;
+GALGAS_classMethodMap GALGAS_classMethodMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_classMethodMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap GALGAS_typedConstantMap::constructor_mapWithMapToOverride (const GALGAS_typedConstantMap & inMapToOverride
-                                                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_typedConstantMap result ;
+GALGAS_classMethodMap GALGAS_classMethodMap::constructor_mapWithMapToOverride (const GALGAS_classMethodMap & inMapToOverride
+                                                                               COMMA_LOCATION_ARGS) {
+  GALGAS_classMethodMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap GALGAS_typedConstantMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const {
-  GALGAS_typedConstantMap result ;
+GALGAS_classMethodMap GALGAS_classMethodMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
+  GALGAS_classMethodMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_typedConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                   const GALGAS_valueIR & inArgument0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_typedConstantMap * p = NULL ;
-  macroMyNew (p, cMapElement_typedConstantMap (inKey, inArgument0 COMMA_HERE)) ;
+void GALGAS_classMethodMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                 const GALGAS_operandIR & inArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_classMethodMap * p = NULL ;
+  macroMyNew (p, cMapElement_classMethodMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typedConstantMap insert error: '%K' already in map" ;
+  const char * kInsertErrorMessage = "@classMethodMap insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_typedConstantMap::setter_insertKey (GALGAS_lstring inKey,
-                                                GALGAS_valueIR inArgument0,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  cMapElement_typedConstantMap * p = NULL ;
-  macroMyNew (p, cMapElement_typedConstantMap (inKey, inArgument0 COMMA_HERE)) ;
+void GALGAS_classMethodMap::setter_insertKey (GALGAS_lstring inKey,
+                                              GALGAS_operandIR inArgument0,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  cMapElement_classMethodMap * p = NULL ;
+  macroMyNew (p, cMapElement_classMethodMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' constructor is already declared in %L" ;
+  const char * kInsertErrorMessage = "the '%K' class method is already declared in %L" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_typedConstantMap_searchKey = "there is no '%K' constructor" ;
+const char * kSearchErrorMessage_classMethodMap_searchKey = "there is no '%K' class method" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_typedConstantMap::method_searchKey (GALGAS_lstring inKey,
-                                                GALGAS_valueIR & outArgument0,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
-  const cMapElement_typedConstantMap * p = (const cMapElement_typedConstantMap *) performSearch (inKey,
-                                                                                                   inCompiler,
-                                                                                                   kSearchErrorMessage_typedConstantMap_searchKey
-                                                                                                   COMMA_THERE) ;
+void GALGAS_classMethodMap::method_searchKey (GALGAS_lstring inKey,
+                                              GALGAS_operandIR & outArgument0,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  const cMapElement_classMethodMap * p = (const cMapElement_classMethodMap *) performSearch (inKey,
+                                                                                               inCompiler,
+                                                                                               kSearchErrorMessage_classMethodMap_searchKey
+                                                                                               COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
   }else{
-    macroValidSharedObject (p, cMapElement_typedConstantMap) ;
+    macroValidSharedObject (p, cMapElement_classMethodMap) ;
     outArgument0 = p->mAttribute_mValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR GALGAS_typedConstantMap::getter_mValueForKey (const GALGAS_string & inKey,
+GALGAS_operandIR GALGAS_classMethodMap::getter_mValueForKey (const GALGAS_string & inKey,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_typedConstantMap * p = (const cMapElement_typedConstantMap *) attributes ;
-  GALGAS_valueIR result ;
+  const cMapElement_classMethodMap * p = (const cMapElement_classMethodMap *) attributes ;
+  GALGAS_operandIR result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_typedConstantMap) ;
+    macroValidSharedObject (p, cMapElement_classMethodMap) ;
     result = p->mAttribute_mValue ;
   }
   return result ;
@@ -12511,47 +12511,47 @@ GALGAS_valueIR GALGAS_typedConstantMap::getter_mValueForKey (const GALGAS_string
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_typedConstantMap::setter_setMValueForKey (GALGAS_valueIR inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_classMethodMap::setter_setMValueForKey (GALGAS_operandIR inAttributeValue,
+                                                    GALGAS_string inKey,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_typedConstantMap * p = (cMapElement_typedConstantMap *) attributes ;
+  cMapElement_classMethodMap * p = (cMapElement_classMethodMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_typedConstantMap) ;
+    macroValidSharedObject (p, cMapElement_classMethodMap) ;
     p->mAttribute_mValue = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_typedConstantMap * GALGAS_typedConstantMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                           const GALGAS_string & inKey
-                                                                                           COMMA_LOCATION_ARGS) {
-  cMapElement_typedConstantMap * result = (cMapElement_typedConstantMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_typedConstantMap) ;
+cMapElement_classMethodMap * GALGAS_classMethodMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                       const GALGAS_string & inKey
+                                                                                       COMMA_LOCATION_ARGS) {
+  cMapElement_classMethodMap * result = (cMapElement_classMethodMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_classMethodMap) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_typedConstantMap::cEnumerator_typedConstantMap (const GALGAS_typedConstantMap & inEnumeratedObject,
-                                                            const typeEnumerationOrder inOrder) :
+cEnumerator_classMethodMap::cEnumerator_classMethodMap (const GALGAS_classMethodMap & inEnumeratedObject,
+                                                        const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap_2D_element cEnumerator_typedConstantMap::current (LOCATION_ARGS) const {
-  const cMapElement_typedConstantMap * p = (const cMapElement_typedConstantMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_typedConstantMap) ;
-  return GALGAS_typedConstantMap_2D_element (p->mAttribute_lkey, p->mAttribute_mValue) ;
+GALGAS_classMethodMap_2D_element cEnumerator_classMethodMap::current (LOCATION_ARGS) const {
+  const cMapElement_classMethodMap * p = (const cMapElement_classMethodMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_classMethodMap) ;
+  return GALGAS_classMethodMap_2D_element (p->mAttribute_lkey, p->mAttribute_mValue) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_typedConstantMap::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_classMethodMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
@@ -12559,9 +12559,9 @@ GALGAS_lstring cEnumerator_typedConstantMap::current_lkey (LOCATION_ARGS) const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR cEnumerator_typedConstantMap::current_mValue (LOCATION_ARGS) const {
-  const cMapElement_typedConstantMap * p = (const cMapElement_typedConstantMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_typedConstantMap) ;
+GALGAS_operandIR cEnumerator_classMethodMap::current_mValue (LOCATION_ARGS) const {
+  const cMapElement_classMethodMap * p = (const cMapElement_classMethodMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_classMethodMap) ;
   return p->mAttribute_mValue ;
 }
 
@@ -12569,42 +12569,42 @@ GALGAS_valueIR cEnumerator_typedConstantMap::current_mValue (LOCATION_ARGS) cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @typedConstantMap type                                                *
+//                                                @classMethodMap type                                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_typedConstantMap ("typedConstantMap",
-                                         NULL) ;
+kTypeDescriptor_GALGAS_classMethodMap ("classMethodMap",
+                                       NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_typedConstantMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_typedConstantMap ;
+const C_galgas_type_descriptor * GALGAS_classMethodMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_classMethodMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_typedConstantMap::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_classMethodMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_typedConstantMap (*this)) ;
+    macroMyNew (result, GALGAS_classMethodMap (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap GALGAS_typedConstantMap::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_typedConstantMap result ;
-  const GALGAS_typedConstantMap * p = (const GALGAS_typedConstantMap *) inObject.embeddedObject () ;
+GALGAS_classMethodMap GALGAS_classMethodMap::extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_classMethodMap result ;
+  const GALGAS_classMethodMap * p = (const GALGAS_classMethodMap *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_typedConstantMap *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_classMethodMap *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("typedConstantMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("classMethodMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -13413,6 +13413,14 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_constructorValue GALGAS_constructorValue::constructor_zero (UNUSED_LOCATION_ARGS) {
+  GALGAS_constructorValue result ;
+  result.mEnum = kEnum_zero ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_constructorValue GALGAS_constructorValue::constructor_simple (const GALGAS_bigint & inAssociatedValue0
                                                                      COMMA_LOCATION_ARGS) {
   GALGAS_constructorValue result ;
@@ -13479,11 +13487,18 @@ void GALGAS_constructorValue::method_structure (GALGAS_constructorSignature & ou
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_constructorValue [3] = {
+static const char * gEnumNameArrayFor_constructorValue [4] = {
   "(not built)",
+  "zero",
   "simple",
   "structure"
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_constructorValue::getter_isZero (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_zero == mEnum) ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 
