@@ -38,8 +38,6 @@ isr PITChannel0 {
   gPITValue += 1
 }
 
-arrayType $A = $uint32 [20]
-
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
