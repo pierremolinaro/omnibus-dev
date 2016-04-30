@@ -188,7 +188,9 @@ override method @typeArrayDeclaration semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+  let boolType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["bool" nowhere]}
   let selfType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mArrayTypeName}
+  [[selfType kind] arrayType ?2* ?size:let arraySize]
   let elementType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mElementTypeName}
   let countType = inContext.mUnsignedIntegerType
 #--------------------------------------------------- "count" function
@@ -221,6 +223,24 @@ override method @typeArrayDeclaration semanticAnalysis
 #--- Load "count" value
   [!?appendFunctionInstructionGenerationList appendGetElementPtrFromSelf !countPtr !selfType !{!.absolute {!index:0} !"count"}]
   [!?appendFunctionInstructionGenerationList appendLoadFromMemory !?ioTemporaries !countPtr ?let loadedCountValue2]
+#--- if "count" value is equal to size, raise panic
+  if not [option plm_options.noPanicGeneration value] then
+    getNewTempVariable (!boolType !?ioTemporaries ?let overflowVar)
+    [!?appendFunctionInstructionGenerationList appendBinaryOperation
+      !overflowVar.mValue
+      !loadedCountValue2.mType
+      !.nowhere
+      !loadedCountValue2.mValue
+      !.icmp_eq
+      !.literalInteger {!value:arraySize}
+    ]
+    appendFunctionInstructionGenerationList += !@ifInstructionIR.new {
+      !overflowVar
+      !mArrayTypeName.location
+      !{!@throwInstructionIR.new {!mArrayTypeName.location !143G}}
+      !{} # No else instruction
+    }
+  end
 #--- Store value in array
   let @objectInMemoryIR elementPtr = .localValue {!type:elementType !name:"insert.ptr"}
   [!?appendFunctionInstructionGenerationList appendGetElementPtrFromSelf
@@ -234,13 +254,13 @@ override method @typeArrayDeclaration semanticAnalysis
 #--- Increment count
   getNewTempVariable (!countType !?ioTemporaries ?let incrementedCount)
   [!?appendFunctionInstructionGenerationList appendBinaryOperation
-     !incrementedCount.mValue
-     !incrementedCount.mType
-     !.nowhere
-     !loadedCountValue2.mValue
-     !.addNoOVF
-     !.literalInteger {!value:1G}
-   ]
+    !incrementedCount.mValue
+    !incrementedCount.mType
+    !.nowhere
+    !loadedCountValue2.mValue
+    !.addNoOVF
+    !.literalInteger {!value:1G}
+  ]
   [!?appendFunctionInstructionGenerationList appendStoreInMemory !countPtr !incrementedCount]
   let appendFunctionName = @lstring.new {!"$" + mArrayTypeName + ".append" !mArrayTypeName.location}
   ioIntermediateCodeStruct.mRoutineMapIR +=
@@ -254,7 +274,7 @@ override method @typeArrayDeclaration semanticAnalysis
     !false # Not global @bool mGlobal
     !.function
     !.null # Return type
-#--- Enter "count" function in invocation graph
+#--- Enter "append" function in invocation graph
   let appendFunctionNameForInvocationGraph = procNameForInvocationGraph (!selfType !["append" nowhere])
   [!?ioTemporaries.mSubprogramInvocationGraph addNode
     !appendFunctionNameForInvocationGraph
