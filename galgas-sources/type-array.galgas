@@ -237,7 +237,7 @@ override method @typeArrayDeclaration semanticAnalysis
     appendFunctionInstructionGenerationList += !@ifInstructionIR.new {
       !overflowVar
       !mArrayTypeName.location
-      !{!@throwInstructionIR.new {!mArrayTypeName.location !143G}}
+      !{!@throwInstructionIR.new {!mArrayTypeName.location !panicCodeForArrayOverflow ()}}
       !{} # No else instruction
     }
   end

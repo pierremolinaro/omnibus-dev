@@ -516,14 +516,13 @@ override method @syncInstructionIR llvmInstructionCode
   if [option plm_options.noPanicGeneration value] then
     ioLLVMcode += "  br label %" + exitLabelName + "\n\n" # No panic generation, pass instruction
   else
-    let panicCode = 255  # Panic generation, raise panic 255
     [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
       ![[[mSelectInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
       ?let staticStringIndex
     ]
     ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
     ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mSelectInstructionLocation line] + ", "
-    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCode + ")\n"
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForClosedSync () + ")\n"
     ioLLVMcode += "  unreachable\n\n"
   end
   ioLLVMcode += exitLabelName + ":\n"
