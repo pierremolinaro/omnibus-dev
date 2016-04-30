@@ -37,6 +37,102 @@ class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          @typeKind enum, associated values                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues {
+  public : const GALGAS_enumConstantMap mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_enumeration (const GALGAS_enumConstantMap & inAssociatedValue0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_enumeration (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
+  public : const GALGAS_propertyMap mAssociatedValue0 ;
+  public : const GALGAS_propertyList mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyMap & inAssociatedValue0,
+                                                     const GALGAS_propertyList & inAssociatedValue1
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_structure (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
+  public : const GALGAS_bigint mAssociatedValue0 ;
+  public : const GALGAS_bigint mAssociatedValue1 ;
+  public : const GALGAS_bool mAssociatedValue2 ;
+  public : const GALGAS_uint mAssociatedValue3 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
+                                                   const GALGAS_bigint & inAssociatedValue1,
+                                                   const GALGAS_bool & inAssociatedValue2,
+                                                   const GALGAS_uint & inAssociatedValue3
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_integer (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKind_opaque : public cEnumAssociatedValues {
+  public : const GALGAS_bigint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_opaque (const GALGAS_bigint & inAssociatedValue0
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_opaque (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
+  public : const GALGAS_uint mAssociatedValue0 ;
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue1 ;
+  public : const GALGAS_bigint mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_arrayType (const GALGAS_uint & inAssociatedValue0,
+                                                     const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue1,
+                                                     const GALGAS_bigint & inAssociatedValue2
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_arrayType (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      @objectInMemoryIR enum, associated values                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3578,133 +3674,5 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationContext ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Filewrapper 'targetTemplates'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const char * gWrapperFileContent_0_targetTemplates ;
-extern const char * gWrapperFileContent_1_targetTemplates ;
-extern const char * gWrapperFileContent_2_targetTemplates ;
-extern const char * gWrapperFileContent_3_targetTemplates ;
-extern const char * gWrapperFileContent_4_targetTemplates ;
-extern const char * gWrapperFileContent_5_targetTemplates ;
-extern const char * gWrapperFileContent_6_targetTemplates ;
-extern const char * gWrapperFileContent_7_targetTemplates ;
-extern const char * gWrapperFileContent_8_targetTemplates ;
-extern const char * gWrapperFileContent_9_targetTemplates ;
-extern const char * gWrapperFileContent_10_targetTemplates ;
-extern const char * gWrapperFileContent_11_targetTemplates ;
-extern const char * gWrapperFileContent_12_targetTemplates ;
-extern const char * gWrapperFileContent_13_targetTemplates ;
-extern const char * gWrapperFileContent_14_targetTemplates ;
-extern const char * gWrapperFileContent_15_targetTemplates ;
-extern const char * gWrapperFileContent_16_targetTemplates ;
-extern const char * gWrapperFileContent_17_targetTemplates ;
-extern const char * gWrapperFileContent_18_targetTemplates ;
-extern const char * gWrapperFileContent_19_targetTemplates ;
-extern const char * gWrapperFileContent_20_targetTemplates ;
-extern const char * gWrapperFileContent_21_targetTemplates ;
-extern const char * gWrapperFileContent_22_targetTemplates ;
-extern const char * gWrapperFileContent_23_targetTemplates ;
-extern const char * gWrapperFileContent_24_targetTemplates ;
-extern const char * gWrapperFileContent_25_targetTemplates ;
-extern const char * gWrapperFileContent_26_targetTemplates ;
-extern const char * gWrapperFileContent_27_targetTemplates ;
-extern const char * gWrapperFileContent_28_targetTemplates ;
-extern const char * gWrapperFileContent_29_targetTemplates ;
-extern const char * gWrapperFileContent_30_targetTemplates ;
-extern const char * gWrapperFileContent_31_targetTemplates ;
-extern const char * gWrapperFileContent_32_targetTemplates ;
-extern const char * gWrapperFileContent_33_targetTemplates ;
-extern const char * gWrapperFileContent_34_targetTemplates ;
-extern const char * gWrapperFileContent_35_targetTemplates ;
-extern const char * gWrapperFileContent_36_targetTemplates ;
-extern const char * gWrapperFileContent_37_targetTemplates ;
-extern const char * gWrapperFileContent_38_targetTemplates ;
-extern const char * gWrapperFileContent_39_targetTemplates ;
-extern const char * gWrapperFileContent_40_targetTemplates ;
-extern const char * gWrapperFileContent_41_targetTemplates ;
-extern const char * gWrapperFileContent_42_targetTemplates ;
-extern const char * gWrapperFileContent_43_targetTemplates ;
-extern const char * gWrapperFileContent_44_targetTemplates ;
-extern const char * gWrapperFileContent_45_targetTemplates ;
-extern const char * gWrapperFileContent_46_targetTemplates ;
-extern const char * gWrapperFileContent_47_targetTemplates ;
-extern const char * gWrapperFileContent_48_targetTemplates ;
-extern const char * gWrapperFileContent_49_targetTemplates ;
-extern const char * gWrapperFileContent_50_targetTemplates ;
-extern const char * gWrapperFileContent_51_targetTemplates ;
-extern const char * gWrapperFileContent_52_targetTemplates ;
-extern const char * gWrapperFileContent_53_targetTemplates ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const cRegularFileWrapper gWrapperFile_0_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_1_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_2_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_3_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_4_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_5_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_6_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_7_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_8_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_9_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_10_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_11_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_12_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_13_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_20_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_21_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_22_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_23_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_24_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_27_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_28_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_29_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_30_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_31_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_32_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_33_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_34_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_35_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_36_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_37_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_38_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_39_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_40_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_41_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_42_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_43_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_44_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_45_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_46_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_47_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_48_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_49_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_50_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_51_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_52_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_53_targetTemplates ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const cDirectoryWrapper gWrapperDirectory_0_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_1_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_2_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_3_targetTemplates ;
 
 #endif

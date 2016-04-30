@@ -153,6 +153,8 @@ override method @selfVarAssignmentInstructionAST analyze
     switch [inSelfType kind]
     case boolean :
       error mTargetVarName : "a boolean does not have fields"
+    case arrayType (* * *) :
+      error mTargetVarName : "an array does not have fields"
     case boolset :
       error mTargetVarName : "a boolset does not have fields"
     case literalString :

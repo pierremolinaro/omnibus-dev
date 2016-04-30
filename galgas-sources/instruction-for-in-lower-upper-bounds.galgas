@@ -86,6 +86,8 @@ override method @forLowerUpperBoundInstructionAST analyze
   switch [type kind]
   case boolean :
     error mTypeName : "an integer type is required here"
+  case arrayType (* * *) :
+    error mTypeName : "an integer type is required here"
   case boolset :
     error mTypeName : "an integer type is required here"
   case enumeration (*) :

@@ -183,7 +183,9 @@ override method @selfVarInExpressionAST analyzeExpression
     error mSourceVarName : "'self' is not available in this context" : outResult
   else
     switch [inSelfType kind]
-    case opaque (*) :
+    case arrayType (* * *) :
+       error mSourceVarName : "an array type does not handle field access" : outResult
+   case opaque (*) :
       error mSourceVarName : "an opaque type does not handle field access" : outResult
     case boolean :
       error mSourceVarName : "a boolean does not handle field access" : outResult

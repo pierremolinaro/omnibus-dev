@@ -224,6 +224,8 @@ override method @unifiedSelfCallInstructionAST analyze
       switch [currentType kind]
       case opaque (*) :
         error propertyName : "an opaque type does not handle field access" : currentType
+      case arrayType (* * *) :
+        error propertyName : "an array type does not handle field access" : currentType
       case boolean :
         error propertyName : "a boolean does not handle field access" : currentType
       case staticInteger :
@@ -645,6 +647,8 @@ proc analyzeEffectiveParameters
         switch [inSelfType kind]
         case opaque (*) :
           error name : "an opaque type does not handle field access" : parameterList, ioEffectiveParameterListIR
+        case arrayType (* * *) :
+          error name : "an array type does not handle field access" : parameterList, ioEffectiveParameterListIR
         case boolean :
           error name : "a boolean does not handle field access" : parameterList, ioEffectiveParameterListIR
         case staticInteger :
