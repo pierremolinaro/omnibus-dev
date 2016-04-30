@@ -129,7 +129,8 @@ override method @varAssignmentInstructionAST analyze
   if not isCopyable then
     error mTargetVarName : "an $" + [targetType key] + " instance is not copyable"
   end
-  [target storeInMemory !value:result !?instructionListIR:ioInstructionGenerationList]
+  [!?ioInstructionGenerationList appendStoreInMemory !target !result]
+#  [target storeInMemory !value:result !?instructionListIR:ioInstructionGenerationList]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -197,10 +198,11 @@ override method @selfVarAssignmentInstructionAST analyze
         !errorLocation:mTargetVarName.location
         !staticTypeAllowed:false
       )
-      [fieldPtr storeInMemory
-        !value:result
-        !?instructionListIR:ioInstructionGenerationList
-      ]
+      [!?ioInstructionGenerationList appendStoreInMemory !fieldPtr !result]
+#      [fieldPtr storeInMemory
+#        !value:result
+#        !?instructionListIR:ioInstructionGenerationList
+#      ]
     end
   end
 }

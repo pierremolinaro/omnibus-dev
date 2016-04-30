@@ -1,28 +1,26 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @objectInMemoryIR loadFromMemory
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !resultingValue:@operandIR outResultingValue
+setter @instructionListIR appendLoadFromMemory
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?let @objectInMemoryIR inSource
+  !@operandIR outResultingValue
 {
-  switch self
+  switch inSource
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendLoadVolatileRegister
+    [!?self appendLoadVolatileRegister
       !outResultingValue
       !name.string
       !address
     ]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendLoadGlobalVariable
+    [!?self appendLoadGlobalVariable
       !outResultingValue
       !name
       !volatile:isVolatile
     ]
   case localValue (@unifiedTypeMap-proxy type @string name) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendLoadLocalVariable
+    [!?self appendLoadLocalVariable
       !outResultingValue
       !name
     ]
@@ -33,17 +31,17 @@ method @objectInMemoryIR loadFromMemory
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @objectInMemoryIR storeInMemory
-  ?value:@operandIR inValue
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+setter @instructionListIR appendStoreInMemory
+  ?let @objectInMemoryIR inTargetPtr
+  ?let @operandIR inValue
 {
-  switch self
+  switch inTargetPtr
   case register (@unifiedTypeMap-proxy type @lstring registerName @bigint address) :
-    [!?ioInstructionGenerationList appendStoreVolatileRegister !registerName.string !type !address !inValue]
+    [!?self appendStoreVolatileRegister !registerName.string !type !address !inValue]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
-    [!?ioInstructionGenerationList appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
+    [!?self appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
   case localValue (@unifiedTypeMap-proxy type @string name) :
-    [!?ioInstructionGenerationList appendStoreLocalVariable !name !type !inValue]
+    [!?self appendStoreLocalVariable !name !type !inValue]
   case globalConstant (* *) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
   end

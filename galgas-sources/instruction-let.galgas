@@ -114,10 +114,11 @@ override method @letInstructionWithAssignmentAST analyze
   ]
 #--- Generate code
   ioAllocaList += !varLLVMName !result.mType
-  [localConstant storeInMemory
-    !value:result
-    !?instructionListIR:ioInstructionGenerationList
-  ]
+  [!?ioInstructionGenerationList appendStoreInMemory !localConstant !result]
+#  [localConstant storeInMemory
+#    !value:result
+#    !?instructionListIR:ioInstructionGenerationList
+#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

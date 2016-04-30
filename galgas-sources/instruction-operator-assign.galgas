@@ -231,11 +231,12 @@ override method @varOperatorAssignInstructionAST analyze
     error mTargetVarName : "an $" + [targetType key] + " instance is not copyable"
   end
 #--- Code generation
-  [targetVariableKind loadFromMemory
-    !?temporary:ioTemporaries
-    !?instructionListIR:ioInstructionGenerationList
-    ?resultingValue:@operandIR variableValue
-  ]
+  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !targetVariableKind ?let variableValue]
+#  [targetVariableKind loadFromMemory
+#    !?temporary:ioTemporaries
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?resultingValue:@operandIR variableValue
+#  ]
   [binaryOperator generateInfixOperatorCode
     !?ioTemporaries
     !?ioInstructionGenerationList
@@ -245,10 +246,11 @@ override method @varOperatorAssignInstructionAST analyze
     !targetType
     ?let newResultingValue
   ]
-  [targetVariableKind storeInMemory
-    !value:newResultingValue
-    !?instructionListIR:ioInstructionGenerationList
-  ]
+  [!?ioInstructionGenerationList appendStoreInMemory !targetVariableKind !newResultingValue]
+#  [targetVariableKind storeInMemory
+#    !value:newResultingValue
+#    !?instructionListIR:ioInstructionGenerationList
+#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -367,11 +369,12 @@ override method @selfVarOperatorAssignInstructionAST analyze
         !inSelfType
         !{!idx !mTargetVarName.string}
       ]        
-      [fieldAddress loadFromMemory
-        !?temporary:ioTemporaries
-        !?instructionListIR:ioInstructionGenerationList
-        ?resultingValue:let targetVariableValue
-      ]
+      [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !fieldAddress ?let targetVariableValue]
+#      [fieldAddress loadFromMemory
+#        !?temporary:ioTemporaries
+#        !?instructionListIR:ioInstructionGenerationList
+#        ?resultingValue:let targetVariableValue
+#      ]
       [binaryOperator generateInfixOperatorCode
         !?ioTemporaries
         !?ioInstructionGenerationList
@@ -381,10 +384,11 @@ override method @selfVarOperatorAssignInstructionAST analyze
         !targetType
         ?let newResultingValue
       ]
-      [fieldAddress storeInMemory
-        !value:newResultingValue
-        !?instructionListIR:ioInstructionGenerationList
-      ]
+      [!?ioInstructionGenerationList appendStoreInMemory !fieldAddress !newResultingValue]
+#      [fieldAddress storeInMemory
+#        !value:newResultingValue
+#        !?instructionListIR:ioInstructionGenerationList
+#      ]
     end    
   end
 }
