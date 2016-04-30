@@ -102,6 +102,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/semantic-routines.galgas"
 
 #--- Intermediate code
+  "galgas-sources/panic-codes.galgas"
   "galgas-sources/generated-code-prefixes.galgas"
   "galgas-sources/intermediate-value-representation.galgas"
   "galgas-sources/intermediate-code-generation.galgas"

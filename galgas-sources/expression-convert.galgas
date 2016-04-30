@@ -154,7 +154,6 @@ override method @convertInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let convertOverflowCode = 9
   [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
@@ -182,7 +181,7 @@ override method @convertInstructionIR llvmInstructionCode
   ioLLVMcode += convertFailLabel + ":\n"
   ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + convertOverflowCode + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForConvertOverflow () + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += convertMaxOkLabel + ":\n"
   ioLLVMcode += "  " + [mTarget.mValue llvmName] + " = trunc " + operandType + " " + [mOperand.mValue llvmName] + " to " + [mTarget.mType llvmTypeName] + "\n"

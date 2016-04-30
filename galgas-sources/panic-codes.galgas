@@ -1,0 +1,36 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once panicCodeForUnsignedAdditionOverflow -> @bigint outResult { outResult = 1G }
+
+func %once panicCodeForSignedAdditionOverflow -> @bigint outResult { outResult = 2G }
+
+func %once panicCodeForUnsignedSubtractOverflow -> @bigint outResult { outResult = 3G }
+
+func %once panicCodeForSignedSubtractOverflow -> @bigint outResult { outResult = 4G }
+
+func %once panicCodeForUnsignedMultiplicationOverflow -> @bigint outResult { outResult = 5G }
+
+func %once panicCodeForSignedMultiplicationOverflow -> @bigint outResult { outResult = 6G }
+
+func %once panicCodeForUnsignedDivisionByZero -> @bigint outResult { outResult = 7G }
+
+func %once panicCodeForSignedDivisionByZero -> @bigint outResult { outResult = 8G }
+
+func %once panicCodeForUnsignedRemainderByZero -> @bigint outResult { outResult = 9G }
+
+func %once panicCodeForSignedRemainderByZero -> @bigint outResult { outResult = 10G }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once panicCodeForConvertOverflow -> @bigint outResult { outResult = 11G }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once panicCodeForArrayOverflow -> @bigint outResult { outResult = 12G }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once panicCodeForClosedSync -> @bigint outResult { outResult = 13G }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

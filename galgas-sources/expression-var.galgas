@@ -256,11 +256,6 @@ override method @controlRegisterFieldInExpressionAST analyzeExpression
   end
 #--- Load variable
   [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
-#  [variableKind loadFromMemory
-#    !?temporary:ioTemporaries
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?resultingValue:outResult
-#  ]
 #--- Solve inferred type
   var expressionType = solveInferredType (
     !targetType:inOptionalTargetType
