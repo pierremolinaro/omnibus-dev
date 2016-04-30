@@ -184,8 +184,9 @@ override method @typeArrayDeclaration semanticAnalysis
   [countPtr loadFromMemory !?temporary:ioTemporaries !?instructionListIR:countFunctionInstructionGenerationList ?resultingValue:let loadedCountValue]
   let @objectInMemoryIR resultPtr = .localValue {!type:countType !name:"result"}
   [resultPtr storeInMemory !value:loadedCountValue !?instructionListIR:countFunctionInstructionGenerationList]
+  let countFunctionName = @lstring.new {!"$" + mArrayTypeName + ".count" !mArrayTypeName.location}
   ioIntermediateCodeStruct.mRoutineMapIR +=
-    !@lstring.new {!"$" + mArrayTypeName + ".count" !mArrayTypeName.location}
+    !countFunctionName
     !{} # @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
     !{} # No alloca
     !countFunctionInstructionGenerationList
@@ -195,6 +196,12 @@ override method @typeArrayDeclaration semanticAnalysis
     !false # Not global @bool mGlobal
     !.function
     !countType # Return type
+#--- Enter "count" function in invocation graph
+  let routineNameForInvocationGraph = procNameForInvocationGraph (!selfType !["count" nowhere])
+  [!?ioTemporaries.mSubprogramInvocationGraph addNode
+    !routineNameForInvocationGraph
+    !countFunctionName
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
