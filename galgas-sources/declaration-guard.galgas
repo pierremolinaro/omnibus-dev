@@ -378,7 +378,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
         error propertyName : "an integer does not handle field access" : currentType
       case structure (@propertyMap unused propertyMap *) :
         [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
-        elementPtrList += !idx !propertyName.string
+        elementPtrList += !.absolute {!index:idx} !propertyName.string
         currentType = propertyType
         if needsPublic && not public then
           error propertyName : "this property is not public" : currentType
@@ -613,7 +613,7 @@ method @guardMapIR-element llvmCodeGeneration
     switch mFormalArgumentKind
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
-      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + llvmType + "\n"
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
     case output, inputOutput :
     end
   end
@@ -621,7 +621,8 @@ method @guardMapIR-element llvmCodeGeneration
     switch mFormalArgumentKind
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
-      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", "
+         + llvmType + "* %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
     case output, inputOutput :
     end
   end

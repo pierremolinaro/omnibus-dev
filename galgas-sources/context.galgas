@@ -230,6 +230,7 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mLiteralIntegerType
   @unifiedTypeMap-proxy mPanicCodeType
   @unifiedTypeMap-proxy mPanicLineType
+  @unifiedTypeMap-proxy mUnsignedIntegerType
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
   @guardMapForContext mGuardMapForContext

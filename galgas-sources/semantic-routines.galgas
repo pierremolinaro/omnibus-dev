@@ -36,7 +36,8 @@ proc enterFormalArguments
         !canBeUsedAsInputParameter:true
         !isConstant:true # Is constant
       ]
-      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
+#      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
+      ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     case inputOutput :
       [!?ioVariableMap insertInputOutputFormalArgument
         !lkey:formalArgumentName
@@ -289,7 +290,7 @@ method @routineMapIR-element llvmCodeGeneration
     switch mFormalArgumentKind
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
-      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + llvmType + "\n"
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
     case output, inputOutput :
     end
   end
@@ -297,7 +298,7 @@ method @routineMapIR-element llvmCodeGeneration
     switch mFormalArgumentKind
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
-      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
     case output, inputOutput :
     end
   end

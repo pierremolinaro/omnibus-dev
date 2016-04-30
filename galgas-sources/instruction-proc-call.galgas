@@ -240,7 +240,7 @@ override method @unifiedSelfCallInstructionAST analyze
         error propertyName : "an integer does not handle field access" : currentType
       case structure (@propertyMap propertyMap *) :
         [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
-        elementPtrList += !idx !propertyName.string
+        elementPtrList += !.absolute {!index:idx} !propertyName.string
         currentType = propertyType
         if needsPublic && not public then
           error propertyName : "this property is not public"
@@ -667,7 +667,7 @@ proc analyzeEffectiveParameters
           [!?ioInstructionGenerationList appendGetElementPtrFromSelf
             !fieldAddress
             !inSelfType
-            !{!idx !name.string}
+            !{!.absolute {!index:idx} !name.string}
           ]        
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
           ioEffectiveParameterListIR +=

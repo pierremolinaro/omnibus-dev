@@ -1,6 +1,14 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @getElementPtrIndexKind {
+  case absolute (@uint index)
+  case indirect (@operandIR index)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @elementPtrList {
-  @uint mIndex
+  @getElementPtrIndexKind mIndex
   @string mFieldName
 }
 
@@ -33,7 +41,10 @@ override method @getElementPtrFromSelfIR llvmInstructionCode
   ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
   ioLLVMcode += llvmType + ", " + llvmType + "* %self, i32 0"
   for (idx *) in mElementList do
-    ioLLVMcode += ", i32 " + idx
+    switch idx
+    case absolute (index) : ioLLVMcode += ", i32 " + index
+    case indirect (index) : ioLLVMcode += ", " + [index.mType llvmTypeName] + " " + [index.mValue llvmName]
+    end
   end
   ioLLVMcode += " ;"
   for (* fieldName) in mElementList do

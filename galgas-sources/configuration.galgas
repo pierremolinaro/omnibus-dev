@@ -29,6 +29,7 @@ class @configurationDeclarationAST : @abstractDeclaration {
   @lbigint mPointerSize
   @lstring mPanicCodeTypeName
   @lstring mPanicLineTypeName
+  @lstring mUnsignedIntegerTypeName
   @targetParameters mTargetParameters
   @interruptionConfigurationList mInterruptionConfigurationList
 }
@@ -48,6 +49,8 @@ syntax extension plm_target_specific_syntax {
     $typeName$ ?let panicCodeTypeName 
     $:$
     $typeName$ ?let panicLineTypeName
+    $:$
+    $typeName$ ?let unsignedIntegerTypeName
     $:$
     $integer$ ?let systemStackSize
     $:$
@@ -82,6 +85,7 @@ syntax extension plm_target_specific_syntax {
       !pointerSize
       !panicCodeTypeName
       !panicLineTypeName
+      !unsignedIntegerTypeName
       !parameters
       !interruptionConfigurationList
     }
@@ -110,6 +114,8 @@ override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticT
   [!?ioGraph addEdge !rootNode !panicCodeTypeName]
   let panicLineTypeName = @lstring.new {!"$" + mPanicLineTypeName !mPanicLineTypeName.location}
   [!?ioGraph addEdge !rootNode !panicLineTypeName]
+  let unsignedIntegerTypeName = @lstring.new {!"$" + mUnsignedIntegerTypeName !mUnsignedIntegerTypeName.location}
+  [!?ioGraph addEdge !rootNode !unsignedIntegerTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -154,6 +160,7 @@ override method @configurationDeclarationAST enterInContext
   ioContext.mTargetParameters = mTargetParameters
   ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
   ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
+  ioContext.mUnsignedIntegerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mUnsignedIntegerTypeName}
   for (name panicCode) in mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
     switch panicCode

@@ -3812,9 +3812,9 @@ void extensionMethod_guardCodeGeneration (const GALGAS_guardMapIR inObject,
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_guardMapIR temp_0 = inObject ;
-  cEnumerator_guardMapIR enumerator_21811 (temp_0, kEnumeration_up) ;
-  while (enumerator_21811.hasCurrentObject ()) {
-    switch (enumerator_21811.current (HERE).mAttribute_mGuardKindGenerationIR.enumValue ()) {
+  cEnumerator_guardMapIR enumerator_21830 (temp_0, kEnumeration_up) ;
+  while (enumerator_21830.hasCurrentObject ()) {
+    switch (enumerator_21830.current (HERE).mAttribute_mGuardKindGenerationIR.enumValue ()) {
     case GALGAS_guardKindGenerationIR::kNotBuilt:
       break ;
     case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
@@ -3823,53 +3823,53 @@ void extensionMethod_guardCodeGeneration (const GALGAS_guardMapIR inObject,
       break ;
     case GALGAS_guardKindGenerationIR::kEnum_baseGuard:
       {
-        GALGAS_string var_guardImplementationName = function_llvmNameForGuardImplementation (enumerator_21811.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 541)) ;
-        GALGAS_string var_guardCallName = function_llvmNameForGuardCall (enumerator_21811.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 542)) ;
+        GALGAS_string var_guardImplementationName = function_llvmNameForGuardImplementation (enumerator_21830.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 541)) ;
+        GALGAS_string var_guardCallName = function_llvmNameForGuardCall (enumerator_21830.current (HERE).mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 542)) ;
         ioArgument_ioServiceList.addAssign_operation (var_guardCallName, var_guardImplementationName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 543)) ;
         ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (var_guardImplementationName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 544)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 544)) ;
         ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("declare i1 @").add_operation (var_guardCallName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 545)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 545)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 545)) ;
-        GALGAS_string var_typeName = enumerator_21811.current (HERE).mAttribute_lkey.mAttribute_string.getter_stringByDeletingPathExtension (SOURCE_FILE ("declaration-guard.galgas", 546)) ;
+        GALGAS_string var_typeName = enumerator_21830.current (HERE).mAttribute_lkey.mAttribute_string.getter_stringByDeletingPathExtension (SOURCE_FILE ("declaration-guard.galgas", 546)) ;
         GALGAS_bool var_first = GALGAS_bool (kIsEqual, var_typeName.objectCompare (GALGAS_string::makeEmptyString ())) ;
         const enumGalgasBool test_1 = var_first.operator_not (SOURCE_FILE ("declaration-guard.galgas", 548)).boolEnum () ;
         if (kBoolTrue == test_1) {
           ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("%").add_operation (var_typeName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 549)).add_operation (GALGAS_string ("* %self"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 549)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 549)) ;
         }
-        cEnumerator_procFormalArgumentListForGeneration enumerator_22498 (enumerator_21811.current (HERE).mAttribute_mFormalArgumentListForGeneration, kEnumeration_up) ;
-        while (enumerator_22498.hasCurrentObject ()) {
+        cEnumerator_procFormalArgumentListForGeneration enumerator_22517 (enumerator_21830.current (HERE).mAttribute_mFormalArgumentListForGeneration, kEnumeration_up) ;
+        while (enumerator_22517.hasCurrentObject ()) {
           const enumGalgasBool test_2 = var_first.boolEnum () ;
           if (kBoolTrue == test_2) {
             var_first = GALGAS_bool (false) ;
           }else if (kBoolFalse == test_2) {
             ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 552)) ;
           }
-          switch (enumerator_22498.current_mFormalArgumentKind (HERE).enumValue ()) {
+          switch (enumerator_22517.current_mFormalArgumentKind (HERE).enumValue ()) {
           case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
             break ;
           case GALGAS_procFormalArgumentPassingMode::kEnum_input:
             {
-              ioArgument_ioLLVMcode.plusAssign_operation(enumerator_22498.current_mFormalArgumentType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)).add_operation (GALGAS_string (" %in."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)).add_operation (enumerator_22498.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)) ;
+              ioArgument_ioLLVMcode.plusAssign_operation(enumerator_22517.current_mFormalArgumentType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)).add_operation (GALGAS_string (" %in."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)).add_operation (enumerator_22517.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)) ;
             }
             break ;
           case GALGAS_procFormalArgumentPassingMode::kEnum_output:
             {
-              ioArgument_ioLLVMcode.plusAssign_operation(enumerator_22498.current_mFormalArgumentType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)).add_operation (enumerator_22498.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)) ;
+              ioArgument_ioLLVMcode.plusAssign_operation(enumerator_22517.current_mFormalArgumentType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)).add_operation (enumerator_22517.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 557)) ;
             }
             break ;
           case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
             {
-              ioArgument_ioLLVMcode.plusAssign_operation(enumerator_22498.current_mFormalArgumentType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 559)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 559)).add_operation (enumerator_22498.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 559)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 559)) ;
+              ioArgument_ioLLVMcode.plusAssign_operation(enumerator_22517.current_mFormalArgumentType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 559)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 559)).add_operation (enumerator_22517.current_mFormalArgumentName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 559)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 559)) ;
             }
             break ;
           }
-          enumerator_22498.gotoNextObject () ;
+          enumerator_22517.gotoNextObject () ;
         }
         ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 562)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 562)).add_operation (GALGAS_string ("\n"
           "\n"), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 562)), inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 562)) ;
       }
       break ;
     }
-    extensionMethod_llvmCodeGeneration (enumerator_21811.current (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 564)) ;
-    enumerator_21811.gotoNextObject () ;
+    extensionMethod_llvmCodeGeneration (enumerator_21830.current (HERE), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 564)) ;
+    enumerator_21830.gotoNextObject () ;
   }
 }
 
@@ -4783,10 +4783,10 @@ void extensionMethod_llvmCodeGeneration (const GALGAS_routineMapIR inObject,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_routineMapIR temp_0 = inObject ;
-  cEnumerator_routineMapIR enumerator_9080 (temp_0, kEnumeration_up) ;
-  while (enumerator_9080.hasCurrentObject ()) {
-    extensionMethod_llvmCodeGeneration (enumerator_9080.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 228)) ;
-    enumerator_9080.gotoNextObject () ;
+  cEnumerator_routineMapIR enumerator_9160 (temp_0, kEnumeration_up) ;
+  while (enumerator_9160.hasCurrentObject ()) {
+    extensionMethod_llvmCodeGeneration (enumerator_9160.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 229)) ;
+    enumerator_9160.gotoNextObject () ;
   }
 }
 
@@ -5141,7 +5141,7 @@ void extensionSetter_appendGetElementPtrFromSelf (GALGAS_instructionListIR & ioO
                                                   const GALGAS_elementPtrList constinArgument_inElementList,
                                                   C_Compiler * /* inCompiler */
                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_getElementPtrFromSelfIR::constructor_new (constinArgument_inTarget, constinArgument_inSelfType, constinArgument_inElementList  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 14))  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 14)) ;
+  ioObject.addAssign_operation (GALGAS_getElementPtrFromSelfIR::constructor_new (constinArgument_inTarget, constinArgument_inSelfType, constinArgument_inElementList  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 22))  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 22)) ;
 }
 
 
@@ -6571,143 +6571,6 @@ GALGAS_instructionListAST_2D_element GALGAS_instructionListAST_2D_element::extra
       result = *p ;
     }else{
       inCompiler->castError ("instructionListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_elementPtrList_2D_element::GALGAS_elementPtrList_2D_element (void) :
-mAttribute_mIndex (),
-mAttribute_mFieldName () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_elementPtrList_2D_element::~ GALGAS_elementPtrList_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_elementPtrList_2D_element::GALGAS_elementPtrList_2D_element (const GALGAS_uint & inOperand0,
-                                                                    const GALGAS_string & inOperand1) :
-mAttribute_mIndex (inOperand0),
-mAttribute_mFieldName (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_elementPtrList_2D_element GALGAS_elementPtrList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_elementPtrList_2D_element (GALGAS_uint::constructor_default (HERE),
-                                           GALGAS_string::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_elementPtrList_2D_element GALGAS_elementPtrList_2D_element::constructor_new (const GALGAS_uint & inOperand0,
-                                                                                    const GALGAS_string & inOperand1 
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_elementPtrList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_elementPtrList_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_elementPtrList_2D_element::objectCompare (const GALGAS_elementPtrList_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mIndex.objectCompare (inOperand.mAttribute_mIndex) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFieldName.objectCompare (inOperand.mAttribute_mFieldName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_elementPtrList_2D_element::isValid (void) const {
-  return mAttribute_mIndex.isValid () && mAttribute_mFieldName.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_elementPtrList_2D_element::drop (void) {
-  mAttribute_mIndex.drop () ;
-  mAttribute_mFieldName.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_elementPtrList_2D_element::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "<struct @elementPtrList-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mIndex.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFieldName.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_elementPtrList_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIndex ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_elementPtrList_2D_element::getter_mFieldName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFieldName ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @elementPtrList-element type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_elementPtrList_2D_element ("elementPtrList-element",
-                                                  NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_elementPtrList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_elementPtrList_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_elementPtrList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_elementPtrList_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_elementPtrList_2D_element GALGAS_elementPtrList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_elementPtrList_2D_element result ;
-  const GALGAS_elementPtrList_2D_element * p = (const GALGAS_elementPtrList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_elementPtrList_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("elementPtrList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -9414,7 +9277,7 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
                                               GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  extensionMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 678)) ;
+  extensionMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 679)) ;
   switch (inObject.mAttribute_mGuardKindGenerationIR.enumValue ()) {
   case GALGAS_guardKindGenerationIR::kNotBuilt:
     break ;
@@ -9424,11 +9287,11 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_guardMapIR_2D_element
     break ;
   case GALGAS_guardKindGenerationIR::kEnum_convenienceGuard:
     {
-      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_28401 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mAttribute_mGuardKindGenerationIR.unsafePointer ()) ;
-      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_28401->mAssociatedValue1 ;
-      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_28401->mAssociatedValue2 ;
-      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 682)) ;
-      ioArgument_ioAccessibleEntities.mAttribute_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 683)) ;
+      const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * extractPtr_28485 = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) (inObject.mAttribute_mGuardKindGenerationIR.unsafePointer ()) ;
+      const GALGAS_instructionListIR extractedValue_baseGuardInstructionGenerationList = extractPtr_28485->mAssociatedValue1 ;
+      const GALGAS_string extractedValue_baseGuardMangledName = extractPtr_28485->mAssociatedValue2 ;
+      extensionMethod_enterAccessibleEntities (extractedValue_baseGuardInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 683)) ;
+      ioArgument_ioAccessibleEntities.mAttribute_mGuardSet.addAssign_operation (extractedValue_baseGuardMangledName  COMMA_SOURCE_FILE ("declaration-guard.galgas", 684)) ;
     }
     break ;
   }
@@ -9854,6 +9717,7 @@ mAttribute_mBooleanType (),
 mAttribute_mLiteralIntegerType (),
 mAttribute_mPanicCodeType (),
 mAttribute_mPanicLineType (),
+mAttribute_mUnsignedIntegerType (),
 mAttribute_mTypeMap (),
 mAttribute_mRoutineMapForContext (),
 mAttribute_mGuardMapForContext (),
@@ -9909,20 +9773,20 @@ GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetParameters & 
                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
-                                                const GALGAS_unifiedTypeMap & inOperand6,
-                                                const GALGAS_routineMapForContext & inOperand7,
-                                                const GALGAS_guardMapForContext & inOperand8,
-                                                const GALGAS_initRoutineMap & inOperand9,
-                                                const GALGAS_panicRoutinePriorityMap & inOperand10,
+                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand6,
+                                                const GALGAS_unifiedTypeMap & inOperand7,
+                                                const GALGAS_routineMapForContext & inOperand8,
+                                                const GALGAS_guardMapForContext & inOperand9,
+                                                const GALGAS_initRoutineMap & inOperand10,
                                                 const GALGAS_panicRoutinePriorityMap & inOperand11,
-                                                const GALGAS_controlRegisterMap & inOperand12,
-                                                const GALGAS_globalConstantMap & inOperand13,
-                                                const GALGAS_globalVariableMap & inOperand14,
-                                                const GALGAS_constructorMap & inOperand15,
-                                                const GALGAS_modeMap & inOperand16,
-                                                const GALGAS_stringset & inOperand17,
-                                                const GALGAS_availableInterruptMap & inOperand18,
-                                                const GALGAS_infixOperatorMap & inOperand19,
+                                                const GALGAS_panicRoutinePriorityMap & inOperand12,
+                                                const GALGAS_controlRegisterMap & inOperand13,
+                                                const GALGAS_globalConstantMap & inOperand14,
+                                                const GALGAS_globalVariableMap & inOperand15,
+                                                const GALGAS_constructorMap & inOperand16,
+                                                const GALGAS_modeMap & inOperand17,
+                                                const GALGAS_stringset & inOperand18,
+                                                const GALGAS_availableInterruptMap & inOperand19,
                                                 const GALGAS_infixOperatorMap & inOperand20,
                                                 const GALGAS_infixOperatorMap & inOperand21,
                                                 const GALGAS_infixOperatorMap & inOperand22,
@@ -9944,57 +9808,59 @@ GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetParameters & 
                                                 const GALGAS_infixOperatorMap & inOperand38,
                                                 const GALGAS_infixOperatorMap & inOperand39,
                                                 const GALGAS_infixOperatorMap & inOperand40,
-                                                const GALGAS_prefixOperatorMap & inOperand41,
+                                                const GALGAS_infixOperatorMap & inOperand41,
                                                 const GALGAS_prefixOperatorMap & inOperand42,
                                                 const GALGAS_prefixOperatorMap & inOperand43,
-                                                const GALGAS_taskMap & inOperand44,
-                                                const GALGAS_globalTaskVariableList & inOperand45) :
+                                                const GALGAS_prefixOperatorMap & inOperand44,
+                                                const GALGAS_taskMap & inOperand45,
+                                                const GALGAS_globalTaskVariableList & inOperand46) :
 mAttribute_mTargetParameters (inOperand0),
 mAttribute_mPointerSize (inOperand1),
 mAttribute_mBooleanType (inOperand2),
 mAttribute_mLiteralIntegerType (inOperand3),
 mAttribute_mPanicCodeType (inOperand4),
 mAttribute_mPanicLineType (inOperand5),
-mAttribute_mTypeMap (inOperand6),
-mAttribute_mRoutineMapForContext (inOperand7),
-mAttribute_mGuardMapForContext (inOperand8),
-mAttribute_mInitRoutineMap (inOperand9),
-mAttribute_mPanicSetupRoutinePriorityMap (inOperand10),
-mAttribute_mPanicLoopRoutinePriorityMap (inOperand11),
-mAttribute_mControlRegisterMap (inOperand12),
-mAttribute_mGlobalConstantMap (inOperand13),
-mAttribute_mGlobalVariableMap (inOperand14),
-mAttribute_mConstructorMap (inOperand15),
-mAttribute_mModeMap (inOperand16),
-mAttribute_mDefinedInterruptSet (inOperand17),
-mAttribute_mAvailableInterruptMap (inOperand18),
-mAttribute_mEqualOperatorMap (inOperand19),
-mAttribute_mNonEqualOperatorMap (inOperand20),
-mAttribute_mStrictInfOperatorMap (inOperand21),
-mAttribute_mInfEqualOperatorMap (inOperand22),
-mAttribute_mStrictSupOperatorMap (inOperand23),
-mAttribute_mSupEqualOperatorMap (inOperand24),
-mAttribute_mAndOperatorMap (inOperand25),
-mAttribute_mOrOperatorMap (inOperand26),
-mAttribute_mXorOperatorMap (inOperand27),
-mAttribute_mBooleanXorOperatorMap (inOperand28),
-mAttribute_mAddOperatorMap (inOperand29),
-mAttribute_mAddNoOvfOperatorMap (inOperand30),
-mAttribute_mSubOperatorMap (inOperand31),
-mAttribute_mSubNoOvfOperatorMap (inOperand32),
-mAttribute_mMulOperatorMap (inOperand33),
-mAttribute_mMulNoOvfOperatorMap (inOperand34),
-mAttribute_mDivOperatorMap (inOperand35),
-mAttribute_mDivNoOvfOperatorMap (inOperand36),
-mAttribute_mModOperatorMap (inOperand37),
-mAttribute_mModNoOvfOperatorMap (inOperand38),
-mAttribute_mLeftShiftOperatorMap (inOperand39),
-mAttribute_mRightShiftOperatorMap (inOperand40),
-mAttribute_mUnaryMinusOperatorMap (inOperand41),
-mAttribute_mNotOperatorMap (inOperand42),
-mAttribute_mUnsignedComplementOperatorMap (inOperand43),
-mAttribute_mTaskMap (inOperand44),
-mAttribute_mGlobalTaskVariableList (inOperand45) {
+mAttribute_mUnsignedIntegerType (inOperand6),
+mAttribute_mTypeMap (inOperand7),
+mAttribute_mRoutineMapForContext (inOperand8),
+mAttribute_mGuardMapForContext (inOperand9),
+mAttribute_mInitRoutineMap (inOperand10),
+mAttribute_mPanicSetupRoutinePriorityMap (inOperand11),
+mAttribute_mPanicLoopRoutinePriorityMap (inOperand12),
+mAttribute_mControlRegisterMap (inOperand13),
+mAttribute_mGlobalConstantMap (inOperand14),
+mAttribute_mGlobalVariableMap (inOperand15),
+mAttribute_mConstructorMap (inOperand16),
+mAttribute_mModeMap (inOperand17),
+mAttribute_mDefinedInterruptSet (inOperand18),
+mAttribute_mAvailableInterruptMap (inOperand19),
+mAttribute_mEqualOperatorMap (inOperand20),
+mAttribute_mNonEqualOperatorMap (inOperand21),
+mAttribute_mStrictInfOperatorMap (inOperand22),
+mAttribute_mInfEqualOperatorMap (inOperand23),
+mAttribute_mStrictSupOperatorMap (inOperand24),
+mAttribute_mSupEqualOperatorMap (inOperand25),
+mAttribute_mAndOperatorMap (inOperand26),
+mAttribute_mOrOperatorMap (inOperand27),
+mAttribute_mXorOperatorMap (inOperand28),
+mAttribute_mBooleanXorOperatorMap (inOperand29),
+mAttribute_mAddOperatorMap (inOperand30),
+mAttribute_mAddNoOvfOperatorMap (inOperand31),
+mAttribute_mSubOperatorMap (inOperand32),
+mAttribute_mSubNoOvfOperatorMap (inOperand33),
+mAttribute_mMulOperatorMap (inOperand34),
+mAttribute_mMulNoOvfOperatorMap (inOperand35),
+mAttribute_mDivOperatorMap (inOperand36),
+mAttribute_mDivNoOvfOperatorMap (inOperand37),
+mAttribute_mModOperatorMap (inOperand38),
+mAttribute_mModNoOvfOperatorMap (inOperand39),
+mAttribute_mLeftShiftOperatorMap (inOperand40),
+mAttribute_mRightShiftOperatorMap (inOperand41),
+mAttribute_mUnaryMinusOperatorMap (inOperand42),
+mAttribute_mNotOperatorMap (inOperand43),
+mAttribute_mUnsignedComplementOperatorMap (inOperand44),
+mAttribute_mTaskMap (inOperand45),
+mAttribute_mGlobalTaskVariableList (inOperand46) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10002,6 +9868,7 @@ mAttribute_mGlobalTaskVariableList (inOperand45) {
 GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_semanticContext (GALGAS_targetParameters::constructor_default (HERE),
                                  GALGAS_uint::constructor_default (HERE),
+                                 GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
                                  GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
                                  GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
                                  GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
@@ -10056,20 +9923,20 @@ GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_tar
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
-                                                                const GALGAS_unifiedTypeMap & inOperand6,
-                                                                const GALGAS_routineMapForContext & inOperand7,
-                                                                const GALGAS_guardMapForContext & inOperand8,
-                                                                const GALGAS_initRoutineMap & inOperand9,
-                                                                const GALGAS_panicRoutinePriorityMap & inOperand10,
+                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand6,
+                                                                const GALGAS_unifiedTypeMap & inOperand7,
+                                                                const GALGAS_routineMapForContext & inOperand8,
+                                                                const GALGAS_guardMapForContext & inOperand9,
+                                                                const GALGAS_initRoutineMap & inOperand10,
                                                                 const GALGAS_panicRoutinePriorityMap & inOperand11,
-                                                                const GALGAS_controlRegisterMap & inOperand12,
-                                                                const GALGAS_globalConstantMap & inOperand13,
-                                                                const GALGAS_globalVariableMap & inOperand14,
-                                                                const GALGAS_constructorMap & inOperand15,
-                                                                const GALGAS_modeMap & inOperand16,
-                                                                const GALGAS_stringset & inOperand17,
-                                                                const GALGAS_availableInterruptMap & inOperand18,
-                                                                const GALGAS_infixOperatorMap & inOperand19,
+                                                                const GALGAS_panicRoutinePriorityMap & inOperand12,
+                                                                const GALGAS_controlRegisterMap & inOperand13,
+                                                                const GALGAS_globalConstantMap & inOperand14,
+                                                                const GALGAS_globalVariableMap & inOperand15,
+                                                                const GALGAS_constructorMap & inOperand16,
+                                                                const GALGAS_modeMap & inOperand17,
+                                                                const GALGAS_stringset & inOperand18,
+                                                                const GALGAS_availableInterruptMap & inOperand19,
                                                                 const GALGAS_infixOperatorMap & inOperand20,
                                                                 const GALGAS_infixOperatorMap & inOperand21,
                                                                 const GALGAS_infixOperatorMap & inOperand22,
@@ -10091,15 +9958,16 @@ GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_tar
                                                                 const GALGAS_infixOperatorMap & inOperand38,
                                                                 const GALGAS_infixOperatorMap & inOperand39,
                                                                 const GALGAS_infixOperatorMap & inOperand40,
-                                                                const GALGAS_prefixOperatorMap & inOperand41,
+                                                                const GALGAS_infixOperatorMap & inOperand41,
                                                                 const GALGAS_prefixOperatorMap & inOperand42,
                                                                 const GALGAS_prefixOperatorMap & inOperand43,
-                                                                const GALGAS_taskMap & inOperand44,
-                                                                const GALGAS_globalTaskVariableList & inOperand45 
+                                                                const GALGAS_prefixOperatorMap & inOperand44,
+                                                                const GALGAS_taskMap & inOperand45,
+                                                                const GALGAS_globalTaskVariableList & inOperand46 
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_semanticContext result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid () && inOperand32.isValid () && inOperand33.isValid () && inOperand34.isValid () && inOperand35.isValid () && inOperand36.isValid () && inOperand37.isValid () && inOperand38.isValid () && inOperand39.isValid () && inOperand40.isValid () && inOperand41.isValid () && inOperand42.isValid () && inOperand43.isValid () && inOperand44.isValid () && inOperand45.isValid ()) {
-    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31, inOperand32, inOperand33, inOperand34, inOperand35, inOperand36, inOperand37, inOperand38, inOperand39, inOperand40, inOperand41, inOperand42, inOperand43, inOperand44, inOperand45) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid () && inOperand32.isValid () && inOperand33.isValid () && inOperand34.isValid () && inOperand35.isValid () && inOperand36.isValid () && inOperand37.isValid () && inOperand38.isValid () && inOperand39.isValid () && inOperand40.isValid () && inOperand41.isValid () && inOperand42.isValid () && inOperand43.isValid () && inOperand44.isValid () && inOperand45.isValid () && inOperand46.isValid ()) {
+    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31, inOperand32, inOperand33, inOperand34, inOperand35, inOperand36, inOperand37, inOperand38, inOperand39, inOperand40, inOperand41, inOperand42, inOperand43, inOperand44, inOperand45, inOperand46) ;
   }
   return result ;
 }
@@ -10125,6 +9993,9 @@ typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanti
   }
   if (result == kOperandEqual) {
     result = mAttribute_mPanicLineType.objectCompare (inOperand.mAttribute_mPanicLineType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mUnsignedIntegerType.objectCompare (inOperand.mAttribute_mUnsignedIntegerType) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mTypeMap.objectCompare (inOperand.mAttribute_mTypeMap) ;
@@ -10252,7 +10123,7 @@ typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanti
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_semanticContext::isValid (void) const {
-  return mAttribute_mTargetParameters.isValid () && mAttribute_mPointerSize.isValid () && mAttribute_mBooleanType.isValid () && mAttribute_mLiteralIntegerType.isValid () && mAttribute_mPanicCodeType.isValid () && mAttribute_mPanicLineType.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mRoutineMapForContext.isValid () && mAttribute_mGuardMapForContext.isValid () && mAttribute_mInitRoutineMap.isValid () && mAttribute_mPanicSetupRoutinePriorityMap.isValid () && mAttribute_mPanicLoopRoutinePriorityMap.isValid () && mAttribute_mControlRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mConstructorMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mDefinedInterruptSet.isValid () && mAttribute_mAvailableInterruptMap.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mBooleanXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mModNoOvfOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () && mAttribute_mNotOperatorMap.isValid () && mAttribute_mUnsignedComplementOperatorMap.isValid () && mAttribute_mTaskMap.isValid () && mAttribute_mGlobalTaskVariableList.isValid () ;
+  return mAttribute_mTargetParameters.isValid () && mAttribute_mPointerSize.isValid () && mAttribute_mBooleanType.isValid () && mAttribute_mLiteralIntegerType.isValid () && mAttribute_mPanicCodeType.isValid () && mAttribute_mPanicLineType.isValid () && mAttribute_mUnsignedIntegerType.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mRoutineMapForContext.isValid () && mAttribute_mGuardMapForContext.isValid () && mAttribute_mInitRoutineMap.isValid () && mAttribute_mPanicSetupRoutinePriorityMap.isValid () && mAttribute_mPanicLoopRoutinePriorityMap.isValid () && mAttribute_mControlRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mConstructorMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mDefinedInterruptSet.isValid () && mAttribute_mAvailableInterruptMap.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mBooleanXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mModNoOvfOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () && mAttribute_mNotOperatorMap.isValid () && mAttribute_mUnsignedComplementOperatorMap.isValid () && mAttribute_mTaskMap.isValid () && mAttribute_mGlobalTaskVariableList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10264,6 +10135,7 @@ void GALGAS_semanticContext::drop (void) {
   mAttribute_mLiteralIntegerType.drop () ;
   mAttribute_mPanicCodeType.drop () ;
   mAttribute_mPanicLineType.drop () ;
+  mAttribute_mUnsignedIntegerType.drop () ;
   mAttribute_mTypeMap.drop () ;
   mAttribute_mRoutineMapForContext.drop () ;
   mAttribute_mGuardMapForContext.drop () ;
@@ -10325,6 +10197,8 @@ void GALGAS_semanticContext::description (C_String & ioString,
     mAttribute_mPanicCodeType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mPanicLineType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mUnsignedIntegerType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mTypeMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -10443,6 +10317,12 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::getter_mPanicCodeType (UN
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::getter_mPanicLineType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPanicLineType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::getter_mUnsignedIntegerType (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mUnsignedIntegerType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

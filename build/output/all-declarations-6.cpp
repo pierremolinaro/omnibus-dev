@@ -97,6 +97,7 @@ const char * gWrapperFileContent_0_targetTemplates = "\n"
   "  32 // Pointer bit count\n"
   "  :$int32 // Panic code type\n"
   "  :$uint32 // Panic line type\n"
+  "  :$uint32 // Unsigned integer type\n"
   "  :1024 // System stack size\n"
   "  :0 // Stacked registers bytes count (ARM7TDMI save no reg in user stack on interrupt)\n"
   "  :16 // as_swi_handler saves 4 registers on system stack\n"
@@ -149,7 +150,7 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   "LPC-L2294.plm-target",
   "plm-target",
   true, // Text file
-  879, // Text length
+  915, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
@@ -1534,6 +1535,7 @@ const char * gWrapperFileContent_4_targetTemplates = "\n"
   "  32 // Pointer bit count\n"
   "  :$int32 // Panic code type\n"
   "  :$uint32 // Panic line type\n"
+  "  :$uint32 // Unsigned integer type\n"
   "  :1024 // System stack size\n"
   "  :32 // Stacked registers bytes count (Cortex M4 saves 8 regs in user stack on interrupt)\n"
   "  :12 // as_svc_handler saves 3 registers on system stack\n"
@@ -1629,7 +1631,7 @@ const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "teensy-3-1-tp.plm-target",
   "plm-target",
   true, // Text file
-  2198, // Text length
+  2234, // Text length
   gWrapperFileContent_4_targetTemplates
 ) ;
 
@@ -10058,6 +10060,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 250\n"
   "    self.deadline +%= self.array.count ()\n"
+  "    self.array.append (!183)\n"
   "    leds.on (!LED_L1) // Allumer la led\n"
   "    time.waitUntilMS (!deadline:self.deadline)\n"
   "    self.deadline +%= 250\n"
@@ -10077,7 +10080,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "00-array-example.plm",
   "plm",
   true, // Text file
-  1454, // Text length
+  1483, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 

@@ -297,7 +297,7 @@ override method @selfVariableFunctionCallInExpressionAST analyzeExpression
   [propertyMap searchKey !mFieldName ?* ?let fieldType ?let fieldIndex]
 #--- Get field pointer
   getLocalNameOfNewTempObjectInMemory (!fieldType !?ioTemporaries ?let fieldPtr)
-  [!?ioInstructionGenerationList appendGetElementPtrFromSelf !fieldPtr !inSelfType !{!fieldIndex !mFieldName.string}]
+  [!?ioInstructionGenerationList appendGetElementPtrFromSelf !fieldPtr !inSelfType !{!.absolute {!index:fieldIndex} !mFieldName.string}]
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   effectiveParameterListIR += !.outputInput ![fieldPtr address]
 #--- Analyze call

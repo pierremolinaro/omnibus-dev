@@ -104,8 +104,9 @@ class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclaration {
   public : static GALGAS_configurationDeclarationAST constructor_new (const class GALGAS_lbigint & inOperand0,
                                                                       const class GALGAS_lstring & inOperand1,
                                                                       const class GALGAS_lstring & inOperand2,
-                                                                      const class GALGAS_targetParameters & inOperand3,
-                                                                      const class GALGAS_interruptionConfigurationList & inOperand4
+                                                                      const class GALGAS_lstring & inOperand3,
+                                                                      const class GALGAS_targetParameters & inOperand4,
+                                                                      const class GALGAS_interruptionConfigurationList & inOperand5
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -126,6 +127,8 @@ class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclaration {
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mUnsignedIntegerTypeName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -367,6 +370,7 @@ class cPtr_configurationDeclarationAST : public cPtr_abstractDeclaration {
   public : GALGAS_lbigint mAttribute_mPointerSize ;
   public : GALGAS_lstring mAttribute_mPanicCodeTypeName ;
   public : GALGAS_lstring mAttribute_mPanicLineTypeName ;
+  public : GALGAS_lstring mAttribute_mUnsignedIntegerTypeName ;
   public : GALGAS_targetParameters mAttribute_mTargetParameters ;
   public : GALGAS_interruptionConfigurationList mAttribute_mInterruptionConfigurationList ;
 
@@ -374,6 +378,7 @@ class cPtr_configurationDeclarationAST : public cPtr_abstractDeclaration {
   public : cPtr_configurationDeclarationAST (const GALGAS_lbigint & in_mPointerSize,
                                              const GALGAS_lstring & in_mPanicCodeTypeName,
                                              const GALGAS_lstring & in_mPanicLineTypeName,
+                                             const GALGAS_lstring & in_mUnsignedIntegerTypeName,
                                              const GALGAS_targetParameters & in_mTargetParameters,
                                              const GALGAS_interruptionConfigurationList & in_mInterruptionConfigurationList
                                              COMMA_LOCATION_ARGS) ;
@@ -385,6 +390,7 @@ class cPtr_configurationDeclarationAST : public cPtr_abstractDeclaration {
   public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPanicCodeTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPanicLineTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mUnsignedIntegerTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_interruptionConfigurationList getter_mInterruptionConfigurationList (LOCATION_ARGS) const ;
 //--- Description

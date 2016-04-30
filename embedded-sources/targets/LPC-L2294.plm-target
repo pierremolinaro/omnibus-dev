@@ -3,6 +3,7 @@ configuration
   32 // Pointer bit count
   :$int32 // Panic code type
   :$uint32 // Panic line type
+  :$uint32 // Unsigned integer type
   :1024 // System stack size
   :0 // Stacked registers bytes count (ARM7TDMI save no reg in user stack on interrupt)
   :16 // as_swi_handler saves 4 registers on system stack
