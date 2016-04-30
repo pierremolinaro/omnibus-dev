@@ -44,6 +44,7 @@ arrayType $A = $uint32 [20]
 
 task T priority 12 stackSize 512 {
   var deadline $uint32 = 0
+  var array $A = $A ()
 
   init 0 {
     setupPIT ()

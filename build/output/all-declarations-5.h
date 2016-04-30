@@ -2283,17 +2283,12 @@ class GALGAS_string function_serviceModeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Routine 'buildSemanticContext'                                            *
+//                                                Function 'allModeMap'                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
-                                   const class GALGAS_lstring constinArgument1,
-                                   const class GALGAS_ast constinArgument2,
-                                   class GALGAS_staticStringMap & ioArgument3,
-                                   class GALGAS_semanticContext & outArgument4,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
+class GALGAS_modeMap function_allModeMap (class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2321,6 +2316,20 @@ class GALGAS_string function_initModeName (class C_Compiler * inCompiler
 
 class GALGAS_string function_sectionModeName (class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Routine 'buildSemanticContext'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
+                                   const class GALGAS_lstring constinArgument1,
+                                   const class GALGAS_ast constinArgument2,
+                                   class GALGAS_staticStringMap & ioArgument3,
+                                   class GALGAS_semanticContext & outArgument4,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

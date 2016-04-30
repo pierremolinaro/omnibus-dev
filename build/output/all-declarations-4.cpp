@@ -16943,13 +16943,13 @@ GALGAS_typeKind GALGAS_unifiedTypeMap_2D_proxy::getter_kind (C_Compiler * inComp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typedConstantMap GALGAS_unifiedTypeMap_2D_proxy::getter_typedConstantMap (C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_typedConstantMap result ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) getAttributeListPointer (inCompiler, "typedConstantMap" COMMA_THERE) ;
+GALGAS_classMethodMap GALGAS_unifiedTypeMap_2D_proxy::getter_classMethodMap (C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_classMethodMap result ;
+  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) getAttributeListPointer (inCompiler, "classMethodMap" COMMA_THERE) ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_typedConstantMap;
+    result = p->mAttribute_classMethodMap;
   }
   return result ;
 }

@@ -90,6 +90,8 @@ override method @constructorCall analyzeExpression
   else
     [inContext.mConstructorMap searchKey ![[resultType key] nowhere] ?let initValue]
     switch initValue
+    case zero :
+      outResult = .new {!resultType !.zero}
     case simple (value) :
       if [mParameterList length] != 0 then
         error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult

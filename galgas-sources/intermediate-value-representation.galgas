@@ -18,12 +18,14 @@ enum @valueIR {
   case llvmGlobalObject (@string name)
   case llvmStructureConstant (@operandIRList values)
   case literalString  (@uint size @uint index)
+  case zero
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @valueIR llvmName -> @string outResult {
   switch self
+  case zero : outResult = "zeroinitializer"
   case selfObject : outResult = "%self"
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = "%" + name
@@ -46,6 +48,7 @@ getter @valueIR llvmName -> @string outResult {
 
 getter @valueIR name -> @string outResult {
   switch self
+  case zero : outResult = "zeroinitializer"
   case selfObject : outResult = "self"
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = name
@@ -59,6 +62,7 @@ getter @valueIR name -> @string outResult {
 
 getter @valueIR isStatic -> @bool outResult {
   switch self
+  case zero : outResult = true
   case selfObject : outResult = false
   case literalInteger (*) : outResult = true
   case llvmLocalObject (*) : outResult = false

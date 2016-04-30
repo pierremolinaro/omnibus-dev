@@ -106,7 +106,7 @@ override method @opaqueTypeDeclaration enterInContext
     !lkey:mOpaqueTypeName
     !llvmTypeName:"i" + mSize.bigint
     !kind:.opaque {!bitCount:mSize.bigint}
-    !typedConstantMap:{}
+    !classMethodMap:{}
     !instantiable:instantiable
     !copyable:copyable
     !equatable:false
