@@ -149,11 +149,12 @@ override method @varInExpressionAST analyzeExpression
     end
   end
 #--- Load variable
-  [variableKind loadFromMemory
-    !?temporary:ioTemporaries
-    !?instructionListIR:ioInstructionGenerationList
-    ?resultingValue:outResult
-  ]
+  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
+#  [variableKind loadFromMemory
+#    !?temporary:ioTemporaries
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?resultingValue:outResult
+#  ]
 #--- Solve inferred type
   var expressionType = solveInferredType (
     !targetType:inOptionalTargetType
@@ -210,11 +211,12 @@ override method @selfVarInExpressionAST analyzeExpression
         !inSelfType
         !{!idx !mSourceVarName.string}
       ]        
-      [fieldAddress loadFromMemory
-        !?temporary:ioTemporaries
-        !?instructionListIR:ioInstructionGenerationList
-        ?resultingValue:outResult
-      ]
+      [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !fieldAddress ?outResult]
+#      [fieldAddress loadFromMemory
+#        !?temporary:ioTemporaries
+#        !?instructionListIR:ioInstructionGenerationList
+#        ?resultingValue:outResult
+#      ]
     end    
   end
 }
@@ -258,11 +260,12 @@ override method @controlRegisterFieldInExpressionAST analyzeExpression
     end
   end
 #--- Load variable
-  [variableKind loadFromMemory
-    !?temporary:ioTemporaries
-    !?instructionListIR:ioInstructionGenerationList
-    ?resultingValue:outResult
-  ]
+  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
+#  [variableKind loadFromMemory
+#    !?temporary:ioTemporaries
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?resultingValue:outResult
+#  ]
 #--- Solve inferred type
   var expressionType = solveInferredType (
     !targetType:inOptionalTargetType

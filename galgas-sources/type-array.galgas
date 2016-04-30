@@ -177,17 +177,17 @@ override method @typeArrayDeclaration semanticAnalysis
 {
   let selfType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mArrayTypeName}
   let countType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["uint32" nowhere]}
-#--- "count" function
+#--------------------------------------------------- "count" function
   @instructionListIR countFunctionInstructionGenerationList = {}
   let @objectInMemoryIR countPtr = .localValue {!type:countType !name:"count.ptr"}
   [!?countFunctionInstructionGenerationList appendGetElementPtrFromSelf !countPtr !selfType !{!0 !"count"}]
-  [countPtr loadFromMemory !?temporary:ioTemporaries !?instructionListIR:countFunctionInstructionGenerationList ?resultingValue:let loadedCountValue]
+  [!?countFunctionInstructionGenerationList appendLoadFromMemory !?ioTemporaries !countPtr ?let loadedCountValue]
   let @objectInMemoryIR resultPtr = .localValue {!type:countType !name:"result"}
-  [resultPtr storeInMemory !value:loadedCountValue !?instructionListIR:countFunctionInstructionGenerationList]
+  [!?countFunctionInstructionGenerationList appendStoreInMemory !resultPtr !loadedCountValue]
   let countFunctionName = @lstring.new {!"$" + mArrayTypeName + ".count" !mArrayTypeName.location}
   ioIntermediateCodeStruct.mRoutineMapIR +=
     !countFunctionName
-    !{} # @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+    !{} # No argument
     !{} # No alloca
     !countFunctionInstructionGenerationList
     !false # No required @bool mIsRequired
