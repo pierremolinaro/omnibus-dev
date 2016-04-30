@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @throwInstructionAST : @instructionAST {
+class @panicInstructionAST : @instructionAST {
   @location mThrowLocation
   @expressionAST mCodeExpression
 }
@@ -19,7 +19,7 @@ syntax extension common_syntax {
     $panic$
     let loc = @location.here
     <expression> ?let @expressionAST codeExpression
-    ioInstructionList += !@throwInstructionAST.new {!loc !codeExpression}
+    ioInstructionList += !@panicInstructionAST.new {!loc !codeExpression}
   }
 
   #·····················································································································
@@ -30,7 +30,7 @@ syntax extension common_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @throwInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mCodeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -38,7 +38,7 @@ override method @throwInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @throwInstructionAST analyze
+override method @panicInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -83,7 +83,7 @@ override method @throwInstructionAST analyze
     if (throwValue < min) || (throwValue > max) then
       error mThrowLocation : "panic expression cannot be represented by an `" +[inContext.mPanicCodeType key]
     elsif not [option plm_options.noPanicGeneration value] then
-      ioInstructionGenerationList += !@throwInstructionIR.new {
+      ioInstructionGenerationList += !@panicInstructionIR.new {
         !mThrowLocation
         !throwValue
       }
@@ -95,14 +95,14 @@ override method @throwInstructionAST analyze
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @throwInstructionIR : @abstractInstructionIR {
+class @panicInstructionIR : @abstractInstructionIR {
   @location mThrowLocation
   @bigint mCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @throwInstructionIR llvmInstructionCode
+override method @panicInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -118,7 +118,7 @@ override method @throwInstructionIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @throwInstructionIR enterAccessibleEntities
+override method @panicInstructionIR enterAccessibleEntities
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
