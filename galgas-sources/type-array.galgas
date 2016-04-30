@@ -1,0 +1,159 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @typeArrayDeclaration : @abstractDeclaration {
+  @lstring mNewTypeName
+  @lstring mElementTypeName
+  @expressionAST mSizeExpression
+  @location mSizeExpressionLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @typeArrayDeclaration location -> @location outLocation {
+  outLocation = mNewTypeName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $arrayType$
+    $typeName$ ?let newTypeName
+    $=$
+    $typeName$ ?let aliasedTypeName
+    $[$
+    <expression> ?let sizeExpression
+    let sizeExpressionLocation = @location.here
+    $]$
+    ioAST.mDeclarationList += !@typeArrayDeclaration.new {
+      !newTypeName
+      !aliasedTypeName
+      !sizeExpression
+      !sizeExpressionLocation
+    }
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeArrayDeclaration addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeArrayDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let newTypeName = @lstring.new {!"$" + mNewTypeName !mNewTypeName.location}
+  let elementTypeName = @lstring.new {!"$" + mElementTypeName !mElementTypeName.location}
+  [!?ioGraph addNode !newTypeName !self]
+  [!?ioGraph addEdge !newTypeName !elementTypeName]
+  [mSizeExpression addDependenceEdgeForStaticExpression !newTypeName !?ioGraph]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @typeArrayDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "arraytype $" + mNewTypeName 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeArrayDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeArrayDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+#--- Get element type
+  [ioContext.mTypeMap searchKey
+    !lkey:mElementTypeName
+    ?llvmTypeName:*
+    ?kind:*
+    ?typedConstantMap:*
+    ?instantiable:*
+    ?copyable:let copyable
+    ?equatable:*
+    ?comparable:*
+    ?enumerationType:*
+  ]
+  if not copyable then
+    error mElementTypeName : "an array element should be copyable"
+  end
+#--- Compute array size
+  @instructionListIR initInstructionGenerationList = {}
+  @allocaList allocaList = {}
+  @semanticTemporariesStruct temporaries = .default
+  [mSizeExpression analyzeExpression
+    !self:.null
+    !inGuard:false
+    !routineNameForInvocationGraph:.new {!mNewTypeName.string + " init" !mNewTypeName.location}
+    !optionalTargetType:.null
+    !context:ioContext
+    !modes:{}
+    !allowPanic:false
+    !?temporary:temporaries
+    !?staticStringMap:*
+    !?variableMap:*
+    !?alloca:allocaList
+    !?instructionListIR:initInstructionGenerationList
+    ?result:@operandIR sizeExpressionIR
+  ]
+  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR.mValue isLiteralInteger] then
+    error mSizeExpressionLocation : "array size expression is not static"
+  else
+    [sizeExpressionIR.mValue literalInteger ?value:let arraySize]
+    let elementType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName}
+  #--- Enter in type map
+    [!?ioContext.mTypeMap insertKey
+      !lkey:mNewTypeName
+      !llvmTypeName:"%$" + mNewTypeName
+      !kind:.arrayType {!countBitSize:ioContext.mPointerSize !elementType:elementType !size:arraySize}
+      !typedConstantMap:{}
+      !instantiable:true
+      !copyable:true
+      !equatable:false
+      !comparable:false
+      !enumerationType:elementType
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @typeArrayDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
