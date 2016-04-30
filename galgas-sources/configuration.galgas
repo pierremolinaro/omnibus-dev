@@ -33,12 +33,6 @@ class @configurationDeclarationAST : @abstractDeclaration {
   @interruptionConfigurationList mInterruptionConfigurationList
 }
 
-#·······················································································································
-
-#list @configurationDeclarationList {
-#  @configurationDeclarationAST mConfiguration
-#}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -109,25 +103,6 @@ override method @configurationDeclarationAST addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @configurationDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-#  var first = true
-#  for (config) in self do
-#    if first then
-#      first = false
-#      let rootNode =  @lstring.new {!"root" ![config mPanicCodeTypeName].location}
-#      [!?ioGraph addNode !rootNode !config]
-#      let panicCodeTypeName = @lstring.new {!"$" + [config mPanicCodeTypeName] ![config mPanicCodeTypeName].location}
-#      [!?ioGraph noteNode !panicCodeTypeName]
-#      let panicLineTypeName = @lstring.new {!"$" + [config mPanicLineTypeName] ![config mPanicLineTypeName].location}
-#      [!?ioGraph noteNode !panicLineTypeName]
-#    else
-#      error [config mPointerSize] : "duplicate configuration"
-#    end
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let rootNode =  @lstring.new {!"config" !mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
@@ -169,7 +144,9 @@ override method @configurationDeclarationAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   @stringset panicCodeSet = {}
-  if mPointerSize.bigint == 0G then
+  if ioContext.mPointerSize != 0 then
+    error mPointerSize : "duplicate configuration"
+  elsif mPointerSize.bigint == 0G then
     error mPointerSize : "zero size pointer not allowed"
   else
     ioContext.mPointerSize = [mPointerSize.bigint uint]

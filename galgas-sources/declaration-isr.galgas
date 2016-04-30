@@ -202,7 +202,7 @@ method @interruptMapIR interruptCodeGeneration
           let name = llvmNameForISR (!lkey.string)
           ioLLVMcode += llvmTitleComment (!"Panic code for " + name)
           ioLLVMcode += "define void @" + name + " ()" + llvmAttributeFunction () + " noreturn {\n"
-          ioLLVMcode += "  call void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType + " " + value.bigint + ")\n"
+          ioLLVMcode += "  call void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType + " " + value.bigint + ") noreturn \n"
           ioLLVMcode += "  unreachable\n"
           ioLLVMcode += "}\n\n"
         end
