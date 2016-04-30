@@ -325,9 +325,10 @@ private proc generateCodeFiles
     llvmCode += llvmTitleComment (!"Panic for ISR")
     llvmCode += "define internal void @panic.isr (" + generationContext.mPanicCodeLLVMType + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
     llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
+    llvmCode += "  %isr.code = sub " + generationContext.mPanicCodeLLVMType + " 0, %in.CODE\n"
     llvmCode += "  call void @raise_panic_internal ("    
     llvmCode += generationContext.mPanicLineLLVMType + " 0, "
-    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
+    llvmCode += generationContext.mPanicCodeLLVMType + " %isr.code, "
     llvmCode += "i8* %str.FILE"
     llvmCode += " )\n"    
     llvmCode += "  unreachable\n"    
