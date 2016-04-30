@@ -279,6 +279,8 @@ abstract method @abstractDeclaration enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 abstract method @abstractDeclaration enterRoutinesInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -320,7 +322,7 @@ proc buildSemanticContext
     ]
   end
 #--- Enter configuration
-  [inAST.mConfigurationDeclarationList enterInContext !?context:outSemanticContext]
+#  [inAST.mConfigurationDeclarationList enterInContext !?context:outSemanticContext]
 #--- Build an HTML containing all glogal constants
   buildGlobalConstantMapHTMLFile (
     !outSemanticContext.mGlobalConstantMap

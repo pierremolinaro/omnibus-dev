@@ -65,6 +65,8 @@ override method @typeArrayDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
   [!?ioGraph addNode !newTypeName !self]
   [!?ioGraph addEdge !newTypeName !elementTypeName]
   [mSizeExpression addDependenceEdgeForStaticExpression !newTypeName !?ioGraph]
+  let rootNode =  @lstring.new {!"config" !mNewTypeName.location}
+  [!?ioGraph addEdge !newTypeName !rootNode]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

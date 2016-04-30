@@ -25,13 +25,19 @@ struct @targetParameters {
 
 #·······················································································································
 
-list @configurationDeclarationList {
+class @configurationDeclarationAST : @abstractDeclaration {
   @lbigint mPointerSize
   @lstring mPanicCodeTypeName
   @lstring mPanicLineTypeName
   @targetParameters mTargetParameters
   @interruptionConfigurationList mInterruptionConfigurationList
 }
+
+#·······················································································································
+
+#list @configurationDeclarationList {
+#  @configurationDeclarationAST mConfiguration
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
@@ -78,12 +84,13 @@ syntax extension plm_target_specific_syntax {
       interruptionConfigurationList += !interruptName !interruptionPanicCode
     end
     $}$
-    ioAST.mConfigurationDeclarationList +=
+    ioAST.mDeclarationList += !@configurationDeclarationAST.new {
       !pointerSize
       !panicCodeTypeName
       !panicLineTypeName
       !parameters
       !interruptionConfigurationList
+    }
   }
 
   #·····················································································································
@@ -91,22 +98,64 @@ syntax extension plm_target_specific_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @configurationDeclarationAST addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @configurationDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  var first = true
-  for config in self do
-    if first then
-      first = false
-      let panicCodeTypeName = @lstring.new {!"$" + config.mPanicCodeTypeName !config.mPanicCodeTypeName.location}
-      [!?ioGraph noteNode !panicCodeTypeName]
-      let panicLineTypeName = @lstring.new {!"$" + config.mPanicLineTypeName !config.mPanicLineTypeName.location}
-      [!?ioGraph noteNode !panicLineTypeName]
-    else
-      error config.mPointerSize : "duplicate configuration"
-    end
-  end
+#method @configurationDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+#  var first = true
+#  for (config) in self do
+#    if first then
+#      first = false
+#      let rootNode =  @lstring.new {!"root" ![config mPanicCodeTypeName].location}
+#      [!?ioGraph addNode !rootNode !config]
+#      let panicCodeTypeName = @lstring.new {!"$" + [config mPanicCodeTypeName] ![config mPanicCodeTypeName].location}
+#      [!?ioGraph noteNode !panicCodeTypeName]
+#      let panicLineTypeName = @lstring.new {!"$" + [config mPanicLineTypeName] ![config mPanicLineTypeName].location}
+#      [!?ioGraph noteNode !panicLineTypeName]
+#    else
+#      error [config mPointerSize] : "duplicate configuration"
+#    end
+#  end
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  let rootNode =  @lstring.new {!"config" !mPanicCodeTypeName.location}
+  [!?ioGraph addNode !rootNode !self]
+  let panicCodeTypeName = @lstring.new {!"$" + mPanicCodeTypeName !mPanicCodeTypeName.location}
+  [!?ioGraph addEdge !rootNode !panicCodeTypeName]
+  let panicLineTypeName = @lstring.new {!"$" + mPanicLineTypeName !mPanicLineTypeName.location}
+  [!?ioGraph addEdge !rootNode !panicLineTypeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @configurationDeclarationAST location -> @location outLocation {
+  outLocation = mPanicCodeTypeName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @configurationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "config" 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @configurationDeclarationAST enterRoutinesInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -114,30 +163,41 @@ method @configurationDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypeP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 # Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
-method @configurationDeclarationList enterInContext ?!context:@semanticContext ioContext {
+override method @configurationDeclarationAST enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
   @stringset panicCodeSet = {}
-  for config in self do
-    if config.mPointerSize.bigint == 0G then
-      error config.mPointerSize : "zero size pointer not allowed"
-    else
-      ioContext.mPointerSize = [config.mPointerSize.bigint uint]
-    end
-    ioContext.mTargetParameters = config.mTargetParameters
-    ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicCodeTypeName}
-    ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !config.mPanicLineTypeName}
-    for (name panicCode) in config.mInterruptionConfigurationList do
-      [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
-      switch panicCode
-      case noPanicCode :
-      case panicCode (value) :
-        let s = [value.bigint string]
-        if [panicCodeSet hasKey !s] then
-          error value : "duplicate panic code"
-        end
-        panicCodeSet += !s
+  if mPointerSize.bigint == 0G then
+    error mPointerSize : "zero size pointer not allowed"
+  else
+    ioContext.mPointerSize = [mPointerSize.bigint uint]
+  end
+  ioContext.mTargetParameters = mTargetParameters
+  ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
+  ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
+  for (name panicCode) in mInterruptionConfigurationList do
+    [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
+    switch panicCode
+    case noPanicCode :
+    case panicCode (value) :
+      let s = [value.bigint string]
+      if [panicCodeSet hasKey !s] then
+        error value : "duplicate panic code"
       end
+      panicCodeSet += !s
     end
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @configurationDeclarationAST semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

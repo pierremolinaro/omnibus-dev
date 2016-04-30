@@ -2144,17 +2144,6 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_bootList inO
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Extension method '@configurationDeclarationList noteTypesInPrecedenceGraph'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_configurationDeclarationList inObject,
-                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                  Extension method '@controlRegisterDeclarationListAST noteTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2386,17 +2375,6 @@ void callExtensionMethod_enterRoutinesInContext (const class cPtr_abstractDeclar
                                                  GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Extension method '@configurationDeclarationList enterInContext'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_enterInContext (const class GALGAS_configurationDeclarationList inObject,
-                                     class GALGAS_semanticContext & io_ioContext,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
