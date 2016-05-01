@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @varAssignmentInstructionAST : @instructionAST {
+class @selfVarAssignmentInstructionAST : @instructionAST {
   @lstring mTargetVarName
   @expressionAST mSourceExpression
 }
@@ -16,10 +16,12 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    $self$
+    $.$
     $identifier$ ?let varName
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@varAssignmentInstructionAST.new {
+    ioInstructionList += !@selfVarAssignmentInstructionAST.new {
       !varName
       !expression
     }
@@ -33,7 +35,7 @@ syntax extension common_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @selfVarAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -41,7 +43,7 @@ override method @varAssignmentInstructionAST noteInstructionTypesInPrecedenceGra
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varAssignmentInstructionAST analyze
+override method @selfVarAssignmentInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -53,56 +55,61 @@ override method @varAssignmentInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Get target type
-  [!?ioVariableMap neutralAccess
-    !lkey:mTargetVarName
-    ?type:@unifiedTypeMap-proxy targetType
-    ?1*
-    ?variableKind:@objectInMemoryIR target
-    ?4*
-  ]
-#--- Analyze source expression
-  [mSourceExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:targetType
-    !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:@operandIR sourceOperand
-  ]
-  let result = checkAssignmentCompatibility (
-    !source:sourceOperand
-    !targetAnnotationType:targetType
-    !errorLocation:mTargetVarName.location
-    !staticTypeAllowed:false
-  )
-#--- Write local variable
-  [!?ioVariableMap searchForWriteAccess
-    !lkey:mTargetVarName
-    ?1*
-    ?readAccessAllowed:let accessIsAllowed
-    ?1*
-    ?copyable:let isCopyable
-    ?2*
-    ?isConstant:let isConstant
-  ]
-  if isConstant then
-    error mTargetVarName : "a constant cannot be modified"
+  if inSelfType == .null then
+    error mTargetVarName : "'self' is not available in this context"
+  else
+  #--- Analyze field name
+    switch [inSelfType kind]
+    case boolean :
+      error mTargetVarName : "a boolean does not have fields"
+    case arrayType (* *) :
+      error mTargetVarName : "an array does not have fields"
+    case boolset :
+      error mTargetVarName : "a boolset does not have fields"
+    case literalString :
+      error mTargetVarName : "a static string does not have fields"
+    case enumeration (*) :
+      error mTargetVarName : "an enumeration does not have fields"
+    case integer (* * * *) :  
+      error mTargetVarName : "an integer does not have fields"
+    case staticInteger :  
+      error mTargetVarName : "an integer does not have fields"
+    case opaque (*) :  
+      error mTargetVarName : "an opaque type does not have fields"
+    case structure (@propertyMap propertyMap *) :
+      [propertyMap searchKey !mTargetVarName ?let unused public ?let targetType ?let idx]
+      getLocalNameOfNewTempObjectInMemory (!targetType !?ioTemporaries ?let fieldPtr)
+      [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+        !fieldPtr
+        !inSelfType
+        !{!.absolute {!index:idx} !mTargetVarName.string}
+      ]
+    #--- Analyze source expression
+      [mSourceExpression analyzeExpression
+        !self:inSelfType
+        !inGuard:false
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:targetType
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+        ?result:@operandIR sourceOperand
+      ]
+      let result = checkAssignmentCompatibility (
+        !source:sourceOperand
+        !targetAnnotationType:targetType
+        !errorLocation:mTargetVarName.location
+        !staticTypeAllowed:false
+      )
+      [!?ioInstructionGenerationList appendStoreInMemory !fieldPtr !result]
+    end
   end
-  if not accessIsAllowed then
-    error mTargetVarName : "routine has no access right on the this variable"
-  end
-  if not isCopyable then
-    error mTargetVarName : "an $" + [targetType key] + " instance is not copyable"
-  end
-  [!?ioInstructionGenerationList appendStoreInMemory !target !result]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
