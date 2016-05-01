@@ -775,7 +775,8 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 250\n"
-  "    self.deadline +%= self.array [self.index]\n"
+  "//    self.deadline +%= self.array [self.index]\n"
+  "    self.array [self.index] = 678\n"
   "    leds.on (!LED_L1) // Allumer la led\n"
   "    time.waitUntilMS (!deadline:self.deadline)\n"
   "    self.deadline +%= 250\n"
@@ -795,7 +796,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "00-array-example.plm",
   "plm",
   true, // Text file
-  1481, // Text length
+  1517, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
