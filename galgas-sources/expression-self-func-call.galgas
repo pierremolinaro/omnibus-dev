@@ -2,14 +2,9 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @functionCallInExpressionAST : @abstractFunctionCallInExpressionAST {
-  @lstring mReceiverName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-abstract class @abstractFunctionCallInExpressionAST : @expressionAST {
-  @lstring mFunctionName
+class @selfFunctionCallInExpressionAST : @expressionAST {
+  @location mSelfLocation
+  @fieldList mFieldList
   @effectiveParameterListAST mEffectiveParameterList
 }
 
@@ -22,19 +17,9 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
-    $identifier$ ?let functionName
+    <self_access> ?let selfLocation ?var fieldList
     <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
-    outExpression = @functionCallInExpressionAST.new {!functionName !effectiveParameterList !["" here]}
-  }
-
-  #·····················································································································
-
-  rule <primary> !@expressionAST outExpression {
-    $identifier$ ?let receiverName
-    $.$
-    $identifier$ ?let functionName
-    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
-    outExpression = @functionCallInExpressionAST.new {!functionName !effectiveParameterList !receiverName}
+    outExpression = @selfFunctionCallInExpressionAST.new {!selfLocation !fieldList !effectiveParameterList}
   }
 
   #·····················································································································
@@ -45,7 +30,7 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @abstractFunctionCallInExpressionAST addDependenceEdgeForStaticExpression
+override method @selfFunctionCallInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -67,7 +52,7 @@ override method @abstractFunctionCallInExpressionAST addDependenceEdgeForStaticE
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @abstractFunctionCallInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @selfFunctionCallInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in mEffectiveParameterList do
     switch mEffectiveParameterKind
     case input (*):
@@ -86,7 +71,7 @@ override method @abstractFunctionCallInExpressionAST noteExpressionTypesInPreced
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @functionCallInExpressionAST analyzeExpression
+override method @selfFunctionCallInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -101,14 +86,77 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
-  if inGuard then
-    error mFunctionName : "a function cannot be called in guard expression"
+#--- Last field is method name, array access not allowed
+  var fieldList = mFieldList
+  [!?fieldList popLast ?let functionName ?let arrayAccess]
+  if [arrayAccess isAccess] then
+    error functionName : "array access not allowed here"
   end
-  analyzeRoutineCall (
+#--- Function call not allowed in guard
+  if inGuard then
+    error functionName : "a function cannot be called in guard expression"
+  end
+#--- Self access analysis
+  analyzeSelfAccess (
+    !fieldList:fieldList
     !self:inSelfType
-    !receiverName:mReceiverName
-    !routineName:mFunctionName
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
+    !context:inContext
+    !modes:inRequiredModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultPtr:let @objectInMemoryIR propertyAddressLLVMvar
+  )
+  let receiverType = [propertyAddressLLVMvar type]
+  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + functionName !functionName.location}
+  effectiveParameterListIR += !.outputInput !.new {!receiverType !.selfObject}
+  [inContext.mRoutineMapForContext searchKey
+    !routineMangledName
+    ?let isPublic
+    ?let modeMap
+    ?let @procedureSignature formalSignature
+    ?let @routineKind routineKind
+    ?*
+    ?let returnedType
+    ?let appendFileAndLineArgumentForPanicLocation
+  ]
+#--- Check accessibility
+  if ([fieldList length] > 0) && not isPublic then
+    error functionName : "this function is not public"
+  end  
+#--- Enter in invocation graph
+  @lstring routineNameForInvocationGraph
+  switch routineKind
+  case function :
+    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !functionName)
+  case section :
+    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !functionName)
+  case service :
+    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !functionName)
+  case primitive :
+    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !functionName)
+  end
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#--- Check modes
+  let routineKindIR = checkMode (
+    !requiredModes:inRequiredModeSet
+    !possibleModes:[modeMap keySet]
+    !kind:routineKind
+    !error:functionName.location
+  )
+#--- Analyze effective parameters
+  analyzeEffectiveParameters (
+    !self:inSelfType
+    !formal:formalSignature
     !effective:mEffectiveParameterList
+    !errorLocation:functionName.location
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredModeSet:inRequiredModeSet
@@ -118,22 +166,18 @@ override method @functionCallInExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-    ?routineKind:let @routineKindIR routineKind
-    ?routineMangledName:let @lstring functionMangledName
-    ?returnType:let @unifiedTypeMap-proxy returnedType
-    ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
+    !?effectiveIR:effectiveParameterListIR
   )
   if returnedType == .null then
-    error mFunctionName : "cannot be called in expression: no return value"
+    error functionName : "cannot be called in expression: no return value"
   end
 #--- New LLVM variable for function call result
   getNewTempVariable (!returnedType !?ioTemporaries ?outResult)
 #--- Code generation
   ioInstructionGenerationList += !@functionCallIR.new {
     !outResult
-    !functionMangledName.string
-    !routineKind
+    !routineMangledName.string
+    !routineKindIR
     !effectiveParameterListIR
     !appendFileAndLineArgumentForPanicLocation
   }
@@ -141,54 +185,113 @@ override method @functionCallInExpressionAST analyzeExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @functionCallIR : @abstractInstructionIR {
-  @operandIR mResult
-  @string mFunctionName
-  @routineKindIR mKind
-  @procCallEffectiveParameterListIR mArgumentList
-  @bool mAppendFileAndLineArgumentForPanicLocation
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @functionCallIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName] + " @"
-  switch mKind 
-  case function : ioLLVMcode += llvmNameForFunction (!mFunctionName)
-  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mFunctionName)
-  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mFunctionName)
-  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mFunctionName)
-  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mFunctionName)
-  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionName)
-  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionName)
-  end
-  ioLLVMcode += " ("
-  for () in mArgumentList do
-    switch mEffectiveParameterPassingMode
-    case input:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
-    case output:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
-    case outputInput:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
-    end
-  between
-    ioLLVMcode += ", "
-  end
-  ioLLVMcode += ")\n"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @functionCallIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
- {
-  ioAccessibleEntities.mRoutineSet += !mFunctionName
-}
+#override method @selfVariableFunctionCallInExpressionAST analyzeExpression
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+#  ?context:let @semanticContext inContext
+#  ?modes:let @stringset inRequiredModeSet
+#  ?allowPanic:let @bool inAllowPanic
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@variableMap ioVariableMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#  !result:@operandIR outResult
+#{
+#  if inGuard then
+#    error mFunctionName : "a function cannot be called in guard expression"
+#  end
+##--- Analyze self type -- should be a structure
+#  @propertyMap propertyMap
+#  switch [inSelfType kind]
+#  case structure (propMap *) : propertyMap = propMap
+#  case enumeration (*) : propertyMap = {}
+#  case integer (* * * *) : propertyMap = {}
+#  case staticInteger : propertyMap = {}
+#  case boolean : propertyMap = {}
+#  case boolset : propertyMap = {}
+#  case literalString : propertyMap = {}
+#  case opaque (*) : propertyMap = {}
+#  case arrayType (* *) : propertyMap = {}
+#  end
+#  [propertyMap searchKey !mFieldName ?* ?let fieldType ?let fieldIndex]
+##--- Get field pointer
+#  getLocalNameOfNewTempObjectInMemory (!fieldType !?ioTemporaries ?let fieldPtr)
+#  [!?ioInstructionGenerationList appendGetElementPtrFromSelf !fieldPtr !inSelfType !{!.absolute {!index:fieldIndex} !mFieldName.string}]
+#  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+#  effectiveParameterListIR += !.outputInput ![fieldPtr address]
+##--- Analyze call
+#  let routineMangledName = @lstring.new {!"$" + [fieldType key] + "." + mFunctionName !mFunctionName.location}
+#  [inContext.mRoutineMapForContext searchKey
+#    !routineMangledName
+#    ?let isPublic
+#    ?let modeMap
+#    ?let @procedureSignature formalSignature
+#    ?let @routineKind routineKind
+#    ?*
+#    ?let returnedType
+#    ?let appendFileAndLineArgumentForPanicLocation
+#  ]
+##--- Check accessibility
+#  if not isPublic then
+#    let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !routineMangledName.string] file]
+#    let invocationFile = [mFunctionName.location file]
+#    if invocationFile != declarationFile then
+#      error mFunctionName : "this function is not public"
+#    end
+#  end  
+##--- Enter in invocation graph
+#  @lstring routineNameForInvocationGraph
+#  switch routineKind
+#  case function :
+#    routineNameForInvocationGraph = procNameForInvocationGraph (!fieldType !mFunctionName)
+#  case section :
+#    routineNameForInvocationGraph = sectionNameForInvocationGraph (!fieldType !mFunctionName)
+#  case service :
+#    routineNameForInvocationGraph = serviceNameForInvocationGraph (!fieldType !mFunctionName)
+#  case primitive :
+#    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!fieldType !mFunctionName)
+#  end
+#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+##--- Check modes
+#  let routineKindIR = checkMode (
+#    !requiredModes:inRequiredModeSet
+#    !possibleModes:[modeMap keySet]
+#    !kind:routineKind
+#    !error:mFunctionName.location
+#  )
+##--- Analyze effective parameters
+#  analyzeEffectiveParameters (
+#    !self:inSelfType
+#    !formal:formalSignature
+#    !effective:mEffectiveParameterList
+#    !errorLocation:mFunctionName.location
+#    !callerForInvocationGraph:inCallerNameForInvocationGraph
+#    !context:inContext
+#    !requiredModeSet:inRequiredModeSet
+#    !allowPanic:inAllowPanic
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioVariableMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    !?effectiveIR:effectiveParameterListIR
+#  )
+#  if returnedType == .null then
+#    error mFunctionName : "cannot be called in expression: no return value"
+#  end
+##--- New LLVM variable for function call result
+#  getNewTempVariable (!returnedType !?ioTemporaries ?outResult)
+##--- Code generation
+#  ioInstructionGenerationList += !@functionCallIR.new {
+#    !outResult
+#    !routineMangledName.string
+#    !routineKindIR
+#    !effectiveParameterListIR
+#    !appendFileAndLineArgumentForPanicLocation
+#  }
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

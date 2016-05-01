@@ -78,6 +78,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-self-var.galgas"
   "galgas-sources/expression-var.galgas"
   "galgas-sources/expression-func-call.galgas"
+  "galgas-sources/expression-self-func-call.galgas"
   "galgas-sources/expression-cst-registre.galgas"
 
 #--- Instructions
