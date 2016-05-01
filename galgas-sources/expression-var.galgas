@@ -8,12 +8,6 @@ class @varInExpressionAST : @expressionAST {
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @selfVarInExpressionAST : @expressionAST {
-  @lstring mSourceVarName
-}
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 class @controlRegisterFieldInExpressionAST : @expressionAST {
   @lstring mRegisterVarName
   @lstringlist mSliceNameList
@@ -47,15 +41,6 @@ syntax extension common_syntax {
   }
 
   #·····················································································································
-  
-  rule <primary> !@expressionAST outExpression {
-    $self$
-    $.$
-    $identifier$ ?let sourceVarName
-    outExpression = @selfVarInExpressionAST.new {!sourceVarName}
-  }
-
-  #·····················································································································
 
 }
 
@@ -64,15 +49,6 @@ syntax extension common_syntax {
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addEdge !inConstantName !mSourceVarName]
-}
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @selfVarInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -93,11 +69,6 @@ override method @controlRegisterFieldInExpressionAST addDependenceEdgeForStaticE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @selfVarInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -150,70 +121,12 @@ override method @varInExpressionAST analyzeExpression
   end
 #--- Load variable
   [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
-#  [variableKind loadFromMemory
-#    !?temporary:ioTemporaries
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?resultingValue:outResult
-#  ]
 #--- Solve inferred type
   var expressionType = solveInferredType (
     !targetType:inOptionalTargetType
     !sourceType:variableType
     !errorLocation:mSourceVarName.location
   )
-}
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @selfVarInExpressionAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?inGuard:let @bool unused inGuard
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowPanic:let @bool unused inAllowPanic
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
-{
-  if inSelfType == .null then
-    error mSourceVarName : "'self' is not available in this context" : outResult
-  else
-    switch [inSelfType kind]
-    case arrayType (* * *) :
-       error mSourceVarName : "an array type does not handle field access" : outResult
-   case opaque (*) :
-      error mSourceVarName : "an opaque type does not handle field access" : outResult
-    case boolean :
-      error mSourceVarName : "a boolean does not handle field access" : outResult
-    case staticInteger :
-      error mSourceVarName : "an integer does not handle field access" : outResult
-    case boolset :
-      error mSourceVarName : "a boolset does not handle field access" : outResult
-    case literalString :
-      error mSourceVarName : "a literal string does not handle field access" : outResult
-    case enumeration (*) :
-      error mSourceVarName : "an enumeration does not handle field access" : outResult
-    case integer (* * * *) :
-      error mSourceVarName : "an integer does not handle field access" : outResult
-    case structure (@propertyMap propertyMap *) :
-      [propertyMap searchKey !mSourceVarName ?let unused public ?let type ?let idx]
-      if not [type copyable] then
-        error mSourceVarName : "an $" + [type key] + " instance is not copyable"
-      end
-      getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
-      [!?ioInstructionGenerationList appendGetElementPtrFromSelf
-        !fieldAddress
-        !inSelfType
-        !{!.absolute {!index:idx} !mSourceVarName.string}
-      ]        
-      [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !fieldAddress ?outResult]
-    end    
-  end
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

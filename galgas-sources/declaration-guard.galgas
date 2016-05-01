@@ -372,7 +372,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
         error propertyName : "a literal string does not handle field access" : currentType
       case enumeration (*) :
         error propertyName : "an enumeration does not handle field access" : currentType
-      case arrayType (* * *) :
+      case arrayType (* *) :
         error propertyName : "an array does not handle field access" : currentType
       case integer (* * * *) :
         error propertyName : "an integer does not handle field access" : currentType
