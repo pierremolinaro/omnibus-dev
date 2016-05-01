@@ -354,11 +354,11 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
     error mSelfLocation : "'self' is not available in this context" : outConvenienceGuardGenerationIR
   else
     @unifiedTypeMap-proxy currentType = inSelfType
-    @lstringlist propertyList = mPropertyList
-    [!?propertyList popLast ?let @lstring methodName]
+    @fieldList propertyList = mFieldList
+    [!?propertyList popLast ?let @lstring methodName ?*]
     @elementPtrList elementPtrList = {}
     @bool needsPublic = false
-    for (propertyName) in propertyList do
+    for (propertyName arrayAccess) in propertyList do
       switch [currentType kind]
       case opaque (*) :
         error propertyName : "an opaque type does not handle field access" : currentType

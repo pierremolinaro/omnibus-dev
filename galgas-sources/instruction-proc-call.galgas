@@ -39,7 +39,7 @@ class @remoteRoutineCallInstructionAST : @abstractCallInstructionAST {
 
 class @unifiedSelfCallInstructionAST : @abstractCallInstructionAST {
   @location mSelfLocation
-  @lstringlist mPropertyList
+  @fieldList mFieldList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -58,20 +58,12 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <routine_call> !@abstractCallInstructionAST outInstruction {
-    $self$
-    let selfLocation = @location.here
-    @lstringlist propertyList = {}
-    repeat
-      $.$
-      $identifier$ ?let routineName
-      propertyList += !routineName
-    while
-    end
+    <self_access> ?let @location selfLocation ?let @fieldList fieldList
     <effective_parameters> ?let effectiveParameterList
     outInstruction = @unifiedSelfCallInstructionAST.new {
       !effectiveParameterList
       !selfLocation
-      !propertyList
+      !fieldList
     }
   }
 
@@ -216,11 +208,11 @@ override method @unifiedSelfCallInstructionAST analyze
     error mSelfLocation : "'self' is not available in this context"
   else
     @unifiedTypeMap-proxy currentType = inSelfType
-    @lstringlist propertyList = mPropertyList
-    [!?propertyList popLast ?let @lstring methodName]
+    @fieldList propertyList = mFieldList
+    [!?propertyList popLast ?let @lstring methodName ?*]
     @elementPtrList elementPtrList = {}
     var needsPublic = false
-    for (propertyName) in propertyList do
+    for (propertyName arrayAccess) in propertyList do
       switch [currentType kind]
       case opaque (*) :
         error propertyName : "an opaque type does not handle field access" : currentType

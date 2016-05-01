@@ -53,7 +53,8 @@ task T priority 12 stackSize 512 {
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 250
-    self.deadline +%= self.array [self.index]
+//    self.deadline +%= self.array [self.index]
+    self.array [self.index] = 678
     leds.on (!LED_L1) // Allumer la led
     time.waitUntilMS (!deadline:self.deadline)
     self.deadline +%= 250
