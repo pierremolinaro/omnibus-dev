@@ -2,9 +2,16 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @selfVarInExpressionAST : @expressionAST {
-  @location mSelfLocation
-  @fieldList mFieldVarNameList
+enum @arrayElementAccess {
+  case noAccess
+  case access (@expressionAST indexExpression @location endOfExp)
+}
+
+#·······················································································································
+
+list @fieldList {
+  @lstring mFieldName
+  @arrayElementAccess mArrayAccess
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -15,9 +22,24 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
-    <self_access> ?let selfLocation ?let fieldList
-    outExpression = @selfVarInExpressionAST.new {!selfLocation !fieldList}
+  rule <self_access> !@location outSelfLocation !@fieldList outFieldList {
+    $self$
+    outSelfLocation = .here
+    outFieldList = {}
+    repeat
+      $.$
+      $identifier$ ?let fieldName
+      select
+        outFieldList += !fieldName !.noAccess
+      or
+        $[$
+        <expression> ?let indexExpression
+        let @location endOfExp = .here
+        $]$
+        outFieldList += !fieldName !.access {!indexExpression:indexExpression !endOfExp:endOfExp}
+      end
+    while
+    end
   }
 
   #·····················································································································
@@ -28,26 +50,39 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @selfVarInExpressionAST addDependenceEdgeForStaticExpression
+method @fieldList addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mFieldVarNameList addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  for (fieldName arrayAccess) in self do
+    switch arrayAccess
+    case noAccess :
+    case access (@expressionAST indexExpression *) :
+      [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @selfVarInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mFieldVarNameList noteExpressionTypesInPrecedenceGraph !?ioGraph]
+method @fieldList noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (fieldName arrayAccess) in self do
+    switch arrayAccess
+    case noAccess :
+    case access (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    end
+  end
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @selfVarInExpressionAST analyzeExpression
+proc analyzeSelfAccess
+  ?fieldList:let @fieldList inFieldList
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -60,28 +95,74 @@ override method @selfVarInExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !resultPtr:@objectInMemoryIR outResultPtr
 {
-  analyzeSelfAccess (
-    !fieldList:mFieldVarNameList
-    !self:inSelfType
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.null
-    !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?resultPtr:let @objectInMemoryIR resultPtr
-  )
-  if not [[resultPtr type] copyable] then
-    error mSelfLocation : "an $" + [[resultPtr type] key] + " instance is not copyable"
+  var type = inSelfType
+  @elementPtrList elementPtrList = {}
+  var publicIsRequired = false
+  for (fieldName arrayElementAccess) in inFieldList do
+    if [[type kind] isStructure] then
+      [[type kind] structure ?propertyMap:let propertyMap ?propertyList:*]
+      [propertyMap searchKey !fieldName ?let public ?type ?let index]
+      if publicIsRequired && not public then
+        error fieldName : "this field is not public"
+      end
+      elementPtrList += {!.absolute {!index:index} !"." + fieldName}
+      publicIsRequired = true
+      switch arrayElementAccess
+      case noAccess :
+      case access (indexExpression endOfExp) :
+        @bigint arraySize
+        if [[type kind] isArrayType] then
+          [[type kind] arrayType ?elementType:type ?size:arraySize]
+        else
+          error fieldName : "this variable should be an array" : arraySize
+        end
+        [indexExpression analyzeExpression
+          !self:inSelfType
+          !inGuard:inGuard
+          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+          !optionalTargetType:.null
+          !context:inContext
+          !modes:inModeSet
+          !allowPanic:inAllowPanic
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioVariableMap
+          !?alloca:ioAllocaList
+          !?instructionListIR:ioInstructionGenerationList
+          ?result:let @operandIR indexResult
+        ]
+        if [indexResult.mValue isLiteralInteger] then
+          [indexResult.mValue literalInteger ?value:let @bigint indexValue]
+          if (indexValue < 0G) || (indexValue >= arraySize) then
+            error endOfExp : "static index should be positive and < " + arraySize : elementPtrList
+          else
+            elementPtrList += {!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
+          end
+        elsif [[indexResult.mType kind] isInteger] then
+          if not [option plm_options.noPanicGeneration value] then
+            [!?ioInstructionGenerationList testArrayIndex !indexResult !endOfExp !arraySize ?let generatePanicInstruction]
+            if generatePanicInstruction && not inAllowPanic then
+              error endOfExp : "index computation can generated panic" : elementPtrList
+            end
+          end
+          let name = [indexResult.mValue name]
+          elementPtrList += {!.indirect {!index:indexResult} !"[" + name + "]"}
+        else
+          error endOfExp : "index expression is not an integer" : elementPtrList
+        end
+      end 
+    else
+      error fieldName : "the field type is not a structure" : type
+    end
   end
-  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !resultPtr ?outResult]
+  getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?outResultPtr)
+  [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+    !outResultPtr
+    !inSelfType
+    !elementPtrList
+  ]        
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

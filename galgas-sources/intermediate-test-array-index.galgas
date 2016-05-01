@@ -3,7 +3,10 @@ setter @instructionListIR testArrayIndex
   ?let @operandIR inIndex
   ?let @location inErrorLocation
   ?let @bigint inSize
+  !@bool outGeneratePanicInstruction
 {
+  [[inIndex.mType kind] integer ?min:* ?max:let max ?unsigned:let isUnsigned ?bitCount:*]
+  outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
   self += !@testArrayIndexIR.new {!inIndex !inErrorLocation !inSize}
 }
 

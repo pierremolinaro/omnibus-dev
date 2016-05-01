@@ -5893,6 +5893,142 @@ void routine_guardSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy constin
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Routine 'analyzeSelfAccess'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeSelfAccess (const GALGAS_fieldList constinArgument_inFieldList,
+                                const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                const GALGAS_bool constinArgument_inGuard,
+                                const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                const GALGAS_unifiedTypeMap_2D_proxy /* constinArgument_inOptionalTargetType */,
+                                const GALGAS_semanticContext constinArgument_inContext,
+                                const GALGAS_stringset constinArgument_inModeSet,
+                                const GALGAS_bool constinArgument_inAllowPanic,
+                                GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                GALGAS_variableMap & ioArgument_ioVariableMap,
+                                GALGAS_allocaList & ioArgument_ioAllocaList,
+                                GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                GALGAS_objectInMemoryIR & outArgument_outResultPtr,
+                                C_Compiler * inCompiler
+                                COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outResultPtr.drop () ; // Release 'out' argument
+  GALGAS_unifiedTypeMap_2D_proxy var_type = constinArgument_inSelfType ;
+  GALGAS_elementPtrList var_elementPtrList = GALGAS_elementPtrList::constructor_emptyList (SOURCE_FILE ("rule-self-access.galgas", 101)) ;
+  GALGAS_bool var_publicIsRequired = GALGAS_bool (false) ;
+  cEnumerator_fieldList enumerator_4456 (constinArgument_inFieldList, kEnumeration_up) ;
+  while (enumerator_4456.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = var_type.getter_kind (inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 104)).getter_isStructure (SOURCE_FILE ("rule-self-access.galgas", 104)).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      GALGAS_propertyMap var_propertyMap ;
+      GALGAS_propertyList joker_4570 ; // Joker input parameter
+      var_type.getter_kind (inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 105)).method_structure (var_propertyMap, joker_4570, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 105)) ;
+      GALGAS_bool var_public ;
+      GALGAS_uint var_index ;
+      var_propertyMap.method_searchKey (enumerator_4456.current_mFieldName (HERE), var_public, var_type, var_index, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 106)) ;
+      GALGAS_bool test_1 = var_publicIsRequired ;
+      if (kBoolTrue == test_1.boolEnum ()) {
+        test_1 = var_public.operator_not (SOURCE_FILE ("rule-self-access.galgas", 107)) ;
+      }
+      const enumGalgasBool test_2 = test_1.boolEnum () ;
+      if (kBoolTrue == test_2) {
+        GALGAS_location location_3 (enumerator_4456.current_mFieldName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+        inCompiler->emitSemanticError (location_3, GALGAS_string ("this field is not public")  COMMA_SOURCE_FILE ("rule-self-access.galgas", 108)) ;
+      }
+      GALGAS_elementPtrList temp_4 = GALGAS_elementPtrList::constructor_emptyList (SOURCE_FILE ("rule-self-access.galgas", 110)) ;
+      temp_4.addAssign_operation (GALGAS_getElementPtrIndexKind::constructor_absolute (var_index  COMMA_SOURCE_FILE ("rule-self-access.galgas", 110)), GALGAS_string (".").add_operation (enumerator_4456.current_mFieldName (HERE).getter_string (SOURCE_FILE ("rule-self-access.galgas", 110)), inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 110))  COMMA_SOURCE_FILE ("rule-self-access.galgas", 110)) ;
+      var_elementPtrList.plusAssign_operation(temp_4, inCompiler  COMMA_SOURCE_FILE ("rule-self-access.galgas", 110)) ;
+      var_publicIsRequired = GALGAS_bool (true) ;
+      switch (enumerator_4456.current_mArrayAccess (HERE).enumValue ()) {
+      case GALGAS_arrayElementAccess::kNotBuilt:
+        break ;
+      case GALGAS_arrayElementAccess::kEnum_noAccess:
+        {
+        }
+        break ;
+      case GALGAS_arrayElementAccess::kEnum_access:
+        {
+          const cEnumAssociatedValues_arrayElementAccess_access * extractPtr_6833 = (const cEnumAssociatedValues_arrayElementAccess_access *) (enumerator_4456.current_mArrayAccess (HERE).unsafePointer ()) ;
+          const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_6833->mAssociatedValue0 ;
+          const GALGAS_location extractedValue_endOfExp = extractPtr_6833->mAssociatedValue1 ;
+          GALGAS_bigint var_arraySize ;
+          const enumGalgasBool test_5 = var_type.getter_kind (inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 116)).getter_isArrayType (SOURCE_FILE ("rule-self-access.galgas", 116)).boolEnum () ;
+          if (kBoolTrue == test_5) {
+            var_type.getter_kind (inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 117)).method_arrayType (var_type, var_arraySize, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 117)) ;
+          }else if (kBoolFalse == test_5) {
+            GALGAS_location location_6 (enumerator_4456.current_mFieldName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            inCompiler->emitSemanticError (location_6, GALGAS_string ("this variable should be an array")  COMMA_SOURCE_FILE ("rule-self-access.galgas", 119)) ;
+            var_arraySize.drop () ; // Release error dropped variable
+          }
+          GALGAS_operandIR var_indexResult ;
+          callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_indexExpression.ptr (), constinArgument_inSelfType, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("rule-self-access.galgas", 125)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_indexResult, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 121)) ;
+          const enumGalgasBool test_7 = var_indexResult.mAttribute_mValue.getter_isLiteralInteger (SOURCE_FILE ("rule-self-access.galgas", 136)).boolEnum () ;
+          if (kBoolTrue == test_7) {
+            GALGAS_bigint var_indexValue ;
+            var_indexResult.mAttribute_mValue.method_literalInteger (var_indexValue, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 137)) ;
+            GALGAS_bool test_8 = GALGAS_bool (kIsStrictInf, var_indexValue.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("rule-self-access.galgas", 138)))) ;
+            if (kBoolTrue != test_8.boolEnum ()) {
+              test_8 = GALGAS_bool (kIsSupOrEqual, var_indexValue.objectCompare (var_arraySize)) ;
+            }
+            const enumGalgasBool test_9 = test_8.boolEnum () ;
+            if (kBoolTrue == test_9) {
+              inCompiler->emitSemanticError (extractedValue_endOfExp, GALGAS_string ("static index should be positive and < ").add_operation (var_arraySize.getter_string (SOURCE_FILE ("rule-self-access.galgas", 139)), inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 139))  COMMA_SOURCE_FILE ("rule-self-access.galgas", 139)) ;
+              var_elementPtrList.drop () ; // Release error dropped variable
+            }else if (kBoolFalse == test_9) {
+              GALGAS_elementPtrList temp_10 = GALGAS_elementPtrList::constructor_emptyList (SOURCE_FILE ("rule-self-access.galgas", 141)) ;
+              temp_10.addAssign_operation (GALGAS_getElementPtrIndexKind::constructor_absolute (var_indexValue.getter_uint (inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 141))  COMMA_SOURCE_FILE ("rule-self-access.galgas", 141)), GALGAS_string ("[").add_operation (var_indexValue.getter_string (SOURCE_FILE ("rule-self-access.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 141)).add_operation (GALGAS_string ("]"), inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 141))  COMMA_SOURCE_FILE ("rule-self-access.galgas", 141)) ;
+              var_elementPtrList.plusAssign_operation(temp_10, inCompiler  COMMA_SOURCE_FILE ("rule-self-access.galgas", 141)) ;
+            }
+          }else if (kBoolFalse == test_7) {
+            const enumGalgasBool test_11 = var_indexResult.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 143)).getter_isInteger (SOURCE_FILE ("rule-self-access.galgas", 143)).boolEnum () ;
+            if (kBoolTrue == test_11) {
+              const enumGalgasBool test_12 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).operator_not (SOURCE_FILE ("rule-self-access.galgas", 144)).boolEnum () ;
+              if (kBoolTrue == test_12) {
+                GALGAS_bool var_generatePanicInstruction ;
+                {
+                extensionSetter_testArrayIndex (ioArgument_ioInstructionGenerationList, var_indexResult, extractedValue_endOfExp, var_arraySize, var_generatePanicInstruction, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 145)) ;
+                }
+                GALGAS_bool test_13 = var_generatePanicInstruction ;
+                if (kBoolTrue == test_13.boolEnum ()) {
+                  test_13 = constinArgument_inAllowPanic.operator_not (SOURCE_FILE ("rule-self-access.galgas", 146)) ;
+                }
+                const enumGalgasBool test_14 = test_13.boolEnum () ;
+                if (kBoolTrue == test_14) {
+                  inCompiler->emitSemanticError (extractedValue_endOfExp, GALGAS_string ("index computation can generated panic")  COMMA_SOURCE_FILE ("rule-self-access.galgas", 147)) ;
+                  var_elementPtrList.drop () ; // Release error dropped variable
+                }
+              }
+              GALGAS_string var_name = extensionGetter_name (var_indexResult.mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 150)) ;
+              GALGAS_elementPtrList temp_15 = GALGAS_elementPtrList::constructor_emptyList (SOURCE_FILE ("rule-self-access.galgas", 151)) ;
+              temp_15.addAssign_operation (GALGAS_getElementPtrIndexKind::constructor_indirect (var_indexResult  COMMA_SOURCE_FILE ("rule-self-access.galgas", 151)), GALGAS_string ("[").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 151)).add_operation (GALGAS_string ("]"), inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 151))  COMMA_SOURCE_FILE ("rule-self-access.galgas", 151)) ;
+              var_elementPtrList.plusAssign_operation(temp_15, inCompiler  COMMA_SOURCE_FILE ("rule-self-access.galgas", 151)) ;
+            }else if (kBoolFalse == test_11) {
+              inCompiler->emitSemanticError (extractedValue_endOfExp, GALGAS_string ("index expression is not an integer")  COMMA_SOURCE_FILE ("rule-self-access.galgas", 153)) ;
+              var_elementPtrList.drop () ; // Release error dropped variable
+            }
+          }
+        }
+        break ;
+      }
+    }else if (kBoolFalse == test_0) {
+      GALGAS_location location_16 (enumerator_4456.current_mFieldName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+      inCompiler->emitSemanticError (location_16, GALGAS_string ("the field type is not a structure")  COMMA_SOURCE_FILE ("rule-self-access.galgas", 157)) ;
+      var_type.drop () ; // Release error dropped variable
+    }
+    enumerator_4456.gotoNextObject () ;
+  }
+  {
+  routine_getLocalNameOfNewTempObjectInMemory (var_type, ioArgument_ioTemporaries, outArgument_outResultPtr, inCompiler  COMMA_SOURCE_FILE ("rule-self-access.galgas", 160)) ;
+  }
+  {
+  extensionSetter_appendGetElementPtrFromSelf (ioArgument_ioInstructionGenerationList, outArgument_outResultPtr, constinArgument_inSelfType, var_elementPtrList, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 161)) ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Function 'getInfixOperatorMap'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11429,174 +11565,4 @@ C_galgas_function_descriptor functionDescriptor_stackAddressForTask ("stackAddre
                                                                      & kTypeDescriptor_GALGAS_string,
                                                                      1,
                                                                      functionArgs_stackAddressForTask) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'mainRoutineNameForTask'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgument_inTaskName,
-                                               C_Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 331)) ;
-//---
-  return result_outResult ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_mainRoutineNameForTask [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_mainRoutineNameForTask (C_Compiler * inCompiler,
-                                                                       const cObjectArray & inEffectiveParameterArray,
-                                                                       const GALGAS_location & /* §§ inErrorLocation */
-                                                                       COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_mainRoutineNameForTask (operand0,
-                                          inCompiler
-                                          COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_mainRoutineNameForTask ("mainRoutineNameForTask",
-                                                                        functionWithGenericHeader_mainRoutineNameForTask,
-                                                                        & kTypeDescriptor_GALGAS_string,
-                                                                        1,
-                                                                        functionArgs_mainRoutineNameForTask) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Function 'llvmNameForTaskVariable'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForTaskVariable (GALGAS_string inArgument_inTaskName,
-                                                GALGAS_string inArgument_inVarName,
-                                                C_Compiler * inCompiler
-                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 337)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 337)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 337)) ;
-//---
-  return result_outName ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskVariable [3] = {
-  & kTypeDescriptor_GALGAS_string,
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForTaskVariable (C_Compiler * inCompiler,
-                                                                        const cObjectArray & inEffectiveParameterArray,
-                                                                        const GALGAS_location & /* §§ inErrorLocation */
-                                                                        COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  const GALGAS_string operand1 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_llvmNameForTaskVariable (operand0,
-                                           operand1,
-                                           inCompiler
-                                           COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForTaskVariable ("llvmNameForTaskVariable",
-                                                                         functionWithGenericHeader_llvmNameForTaskVariable,
-                                                                         & kTypeDescriptor_GALGAS_string,
-                                                                         2,
-                                                                         functionArgs_llvmNameForTaskVariable) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Once function 'llvmNameForTaskLoopFunction'                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_string onceFunction_llvmNameForTaskLoopFunction (C_Compiler * /* inCompiler */
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("task$loop") ;
-//---
-  return result_outName ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function implementation                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static bool gOnceFunctionResultAvailable_llvmNameForTaskLoopFunction = false ;
-static GALGAS_string gOnceFunctionResult_llvmNameForTaskLoopFunction ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_llvmNameForTaskLoopFunction (class C_Compiler * inCompiler
-              COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_llvmNameForTaskLoopFunction) {
-    gOnceFunctionResult_llvmNameForTaskLoopFunction = onceFunction_llvmNameForTaskLoopFunction (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_llvmNameForTaskLoopFunction = true ;
-  }
-  return gOnceFunctionResult_llvmNameForTaskLoopFunction ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void releaseOnceFunctionResult_llvmNameForTaskLoopFunction (void) {
-  gOnceFunctionResult_llvmNameForTaskLoopFunction.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskLoopFunction (NULL,
-                                                                         releaseOnceFunctionResult_llvmNameForTaskLoopFunction) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskLoopFunction [1] = {
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_llvmNameForTaskLoopFunction (C_Compiler * inCompiler,
-                                                                            const cObjectArray & /* inEffectiveParameterArray */,
-                                                                            const GALGAS_location & /* inErrorLocation */
-                                                                            COMMA_LOCATION_ARGS) {
-  return function_llvmNameForTaskLoopFunction (inCompiler COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_llvmNameForTaskLoopFunction ("llvmNameForTaskLoopFunction",
-                                                                             functionWithGenericHeader_llvmNameForTaskLoopFunction,
-                                                                             & kTypeDescriptor_GALGAS_string,
-                                                                             0,
-                                                                             functionArgs_llvmNameForTaskLoopFunction) ;
 

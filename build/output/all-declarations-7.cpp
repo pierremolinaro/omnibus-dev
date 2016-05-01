@@ -767,7 +767,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T priority 12 stackSize 512 {\n"
   "  var deadline $uint32 = 0\n"
   "  var array = $A ()\n"
-  "  var index $uint32 = 0\n"
+  "  var index $uint4 = 0\n"
   "\n"
   "  init 0 {\n"
   "    setupPIT ()\n"
@@ -795,7 +795,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "00-array-example.plm",
   "plm",
   true, // Text file
-  1482, // Text length
+  1481, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
