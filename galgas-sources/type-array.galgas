@@ -112,6 +112,7 @@ override method @typeArrayDeclaration enterInContext
   @instructionListIR initInstructionGenerationList = {}
   @allocaList allocaList = {}
   @semanticTemporariesStruct temporaries = .default
+  var variableMap = variableMapWithConstants (!context:ioContext)
   [mSizeExpression analyzeExpression
     !self:.null
     !inGuard:false
@@ -122,7 +123,7 @@ override method @typeArrayDeclaration enterInContext
     !allowPanic:false
     !?temporary:temporaries
     !?staticStringMap:*
-    !?variableMap:*
+    !?variableMap:variableMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:@operandIR sizeExpressionIR

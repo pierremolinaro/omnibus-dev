@@ -41,7 +41,6 @@ proc buildOrderedDeclarationList
   [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGlobalVarDeclarationList noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskList noteTypesInPrecedenceGraph !?precedenceGraph]
-#  [inAST.mConfigurationDeclarationList noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed $uintXX and $intXX types
   for () in [precedenceGraph undefinedNodeKeyList] do
     let split = [mValue componentsSeparatedByString !"int"]
@@ -58,7 +57,7 @@ proc buildOrderedDeclarationList
     end
   end
 #------------------------------------------  Write precedence graph file ?
-  if (@uint.errorCount == 0) && [option plm_options.writeTypeDependencyGraphFile value] then
+  if (@uint.errorCount == 0) && [option plm_options.writeDeclarationDependencyGraphFile value] then
     let s = [precedenceGraph graphviz]
     let filePath = inSourceFile + ".declarationDependency.dot"
     [s writeToFileWhenDifferentContents !filePath ?*]
