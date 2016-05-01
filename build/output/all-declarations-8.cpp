@@ -6431,6 +6431,73 @@ void extensionMethod_guardCodeGeneration (const GALGAS_guardMapIR inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                         Extension method '@fieldList addDependenceEdgeForStaticExpression'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_addDependenceEdgeForStaticExpression (const GALGAS_fieldList inObject,
+                                                           const GALGAS_lstring constinArgument_inConstantName,
+                                                           GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_fieldList temp_0 = inObject ;
+  cEnumerator_fieldList enumerator_2345 (temp_0, kEnumeration_up) ;
+  while (enumerator_2345.hasCurrentObject ()) {
+    switch (enumerator_2345.current_mArrayAccess (HERE).enumValue ()) {
+    case GALGAS_arrayElementAccess::kNotBuilt:
+      break ;
+    case GALGAS_arrayElementAccess::kEnum_noAccess:
+      {
+      }
+      break ;
+    case GALGAS_arrayElementAccess::kEnum_access:
+      {
+        const cEnumAssociatedValues_arrayElementAccess_access * extractPtr_2531 = (const cEnumAssociatedValues_arrayElementAccess_access *) (enumerator_2345.current_mArrayAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_2531->mAssociatedValue0 ;
+        callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) extractedValue_indexExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 61)) ;
+      }
+      break ;
+    }
+    enumerator_2345.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Extension method '@fieldList noteExpressionTypesInPrecedenceGraph'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_noteExpressionTypesInPrecedenceGraph (const GALGAS_fieldList inObject,
+                                                           GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_fieldList temp_0 = inObject ;
+  cEnumerator_fieldList enumerator_3046 (temp_0, kEnumeration_up) ;
+  while (enumerator_3046.hasCurrentObject ()) {
+    switch (enumerator_3046.current_mArrayAccess (HERE).enumValue ()) {
+    case GALGAS_arrayElementAccess::kNotBuilt:
+      break ;
+    case GALGAS_arrayElementAccess::kEnum_noAccess:
+      {
+      }
+      break ;
+    case GALGAS_arrayElementAccess::kEnum_access:
+      {
+        const cEnumAssociatedValues_arrayElementAccess_access * extractPtr_3216 = (const cEnumAssociatedValues_arrayElementAccess_access *) (enumerator_3046.current_mArrayAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_3216->mAssociatedValue0 ;
+        callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) extractedValue_indexExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("rule-self-access.galgas", 75)) ;
+      }
+      break ;
+    }
+    enumerator_3046.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Abstract extension method '@expressionAST noteExpressionTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7728,9 +7795,21 @@ void extensionSetter_testArrayIndex (GALGAS_instructionListIR & ioObject,
                                      const GALGAS_operandIR constinArgument_inIndex,
                                      const GALGAS_location constinArgument_inErrorLocation,
                                      const GALGAS_bigint constinArgument_inSize,
-                                     C_Compiler * /* inCompiler */
+                                     GALGAS_bool & outArgument_outGeneratePanicInstruction,
+                                     C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_testArrayIndexIR::constructor_new (constinArgument_inIndex, constinArgument_inErrorLocation, constinArgument_inSize  COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 7)) ;
+  outArgument_outGeneratePanicInstruction.drop () ; // Release 'out' argument
+  GALGAS_bigint var_max ;
+  GALGAS_bool var_isUnsigned ;
+  GALGAS_bigint joker_198 ; // Joker input parameter
+  GALGAS_uint joker_248 ; // Joker input parameter
+  constinArgument_inIndex.mAttribute_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)).method_integer (joker_198, var_max, var_isUnsigned, joker_248, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)) ;
+  GALGAS_bool test_0 = var_isUnsigned.operator_not (SOURCE_FILE ("intermediate-test-array-index.galgas", 9)) ;
+  if (kBoolTrue != test_0.boolEnum ()) {
+    test_0 = GALGAS_bool (kIsSupOrEqual, var_max.objectCompare (constinArgument_inSize)) ;
+  }
+  outArgument_outGeneratePanicInstruction = test_0 ;
+  ioObject.addAssign_operation (GALGAS_testArrayIndexIR::constructor_new (constinArgument_inIndex, constinArgument_inErrorLocation, constinArgument_inSize  COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 10))  COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 10)) ;
 }
 
 
