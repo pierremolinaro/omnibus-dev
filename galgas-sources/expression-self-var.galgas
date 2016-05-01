@@ -4,7 +4,7 @@
 
 class @selfVarInExpressionAST : @expressionAST {
   @location mSelfLocation
-  @fieldList mFieldVarNameList
+  @fieldList mFieldList
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -32,7 +32,7 @@ override method @selfVarInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mFieldVarNameList addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [mFieldList addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -40,7 +40,7 @@ override method @selfVarInExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @selfVarInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mFieldVarNameList noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [mFieldList noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -63,7 +63,7 @@ override method @selfVarInExpressionAST analyzeExpression
   !result:@operandIR outResult
 {
   analyzeSelfAccess (
-    !fieldList:mFieldVarNameList
+    !fieldList:mFieldList
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph

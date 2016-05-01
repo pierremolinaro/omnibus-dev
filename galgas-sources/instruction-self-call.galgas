@@ -17,7 +17,6 @@ syntax extension common_syntax {
 
   rule <routine_call> !@abstractCallInstructionAST outInstruction {
     <self_access> ?let @location selfLocation ?let @fieldList fieldList
-    warning .here : "<self_access>"
     <effective_parameters> ?let effectiveParameterList
     outInstruction = @unifiedSelfCallInstructionAST.new {
       !effectiveParameterList

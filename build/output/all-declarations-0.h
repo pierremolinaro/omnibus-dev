@@ -10567,7 +10567,7 @@ class cPtr_remoteRoutineCallInstructionAST : public cPtr_abstractCallInstruction
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_selfFunctionCallInExpressionAST : public GALGAS_abstractFunctionCallInExpressionAST {
+class GALGAS_selfFunctionCallInExpressionAST : public GALGAS_expressionAST {
 //--- Constructor
   public : GALGAS_selfFunctionCallInExpressionAST (void) ;
 
@@ -10591,8 +10591,9 @@ class GALGAS_selfFunctionCallInExpressionAST : public GALGAS_abstractFunctionCal
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_selfFunctionCallInExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                          const class GALGAS_effectiveParameterListAST & inOperand1
+  public : static GALGAS_selfFunctionCallInExpressionAST constructor_new (const class GALGAS_location & inOperand0,
+                                                                          const class GALGAS_fieldList & inOperand1,
+                                                                          const class GALGAS_effectiveParameterListAST & inOperand2
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -10604,6 +10605,12 @@ class GALGAS_selfFunctionCallInExpressionAST : public GALGAS_abstractFunctionCal
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_effectiveParameterListAST getter_mEffectiveParameterList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_fieldList getter_mFieldList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -10614,92 +10621,6 @@ class GALGAS_selfFunctionCallInExpressionAST : public GALGAS_abstractFunctionCal
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selfFunctionCallInExpressionAST ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Pointer class for @selfFunctionCallInExpressionAST class                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_selfFunctionCallInExpressionAST : public cPtr_abstractFunctionCallInExpressionAST {
-//--- Attributes
-
-//--- Constructor
-  public : cPtr_selfFunctionCallInExpressionAST (const GALGAS_lstring & in_mFunctionName,
-                                                 const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       @selfVarAssignmentInstructionAST class                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_selfVarAssignmentInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
-  public : GALGAS_selfVarAssignmentInstructionAST (void) ;
-
-//---
-  public : inline const class cPtr_selfVarAssignmentInstructionAST * ptr (void) const { return (const cPtr_selfVarAssignmentInstructionAST *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_selfVarAssignmentInstructionAST (const cPtr_selfVarAssignmentInstructionAST * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_selfVarAssignmentInstructionAST extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_selfVarAssignmentInstructionAST constructor_new (const class GALGAS_location & inOperand0,
-                                                                          const class GALGAS_fieldList & inOperand1,
-                                                                          const class GALGAS_expressionAST & inOperand2
-                                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_selfVarAssignmentInstructionAST & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_fieldList getter_mFieldList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_selfVarAssignmentInstructionAST class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selfVarAssignmentInstructionAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -10840,6 +10761,99 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fieldList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                              Pointer class for @selfFunctionCallInExpressionAST class                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_selfFunctionCallInExpressionAST : public cPtr_expressionAST {
+//--- Attributes
+  public : GALGAS_location mAttribute_mSelfLocation ;
+  public : GALGAS_fieldList mAttribute_mFieldList ;
+  public : GALGAS_effectiveParameterListAST mAttribute_mEffectiveParameterList ;
+
+//--- Constructor
+  public : cPtr_selfFunctionCallInExpressionAST (const GALGAS_location & in_mSelfLocation,
+                                                 const GALGAS_fieldList & in_mFieldList,
+                                                 const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList
+                                                 COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_fieldList getter_mFieldList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_effectiveParameterListAST getter_mEffectiveParameterList (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @selfVarAssignmentInstructionAST class                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_selfVarAssignmentInstructionAST : public GALGAS_instructionAST {
+//--- Constructor
+  public : GALGAS_selfVarAssignmentInstructionAST (void) ;
+
+//---
+  public : inline const class cPtr_selfVarAssignmentInstructionAST * ptr (void) const { return (const cPtr_selfVarAssignmentInstructionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_selfVarAssignmentInstructionAST (const cPtr_selfVarAssignmentInstructionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_selfVarAssignmentInstructionAST extractObject (const GALGAS_object & inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_selfVarAssignmentInstructionAST constructor_new (const class GALGAS_location & inOperand0,
+                                                                          const class GALGAS_fieldList & inOperand1,
+                                                                          const class GALGAS_expressionAST & inOperand2
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_selfVarAssignmentInstructionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_fieldList getter_mFieldList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_selfVarAssignmentInstructionAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selfVarAssignmentInstructionAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Pointer class for @selfVarAssignmentInstructionAST class                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10916,7 +10930,7 @@ class GALGAS_selfVarInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_fieldList getter_mFieldVarNameList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_fieldList getter_mFieldList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
 
@@ -10940,11 +10954,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selfVarInExpression
 class cPtr_selfVarInExpressionAST : public cPtr_expressionAST {
 //--- Attributes
   public : GALGAS_location mAttribute_mSelfLocation ;
-  public : GALGAS_fieldList mAttribute_mFieldVarNameList ;
+  public : GALGAS_fieldList mAttribute_mFieldList ;
 
 //--- Constructor
   public : cPtr_selfVarInExpressionAST (const GALGAS_location & in_mSelfLocation,
-                                        const GALGAS_fieldList & in_mFieldVarNameList
+                                        const GALGAS_fieldList & in_mFieldList
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -10952,7 +10966,7 @@ class cPtr_selfVarInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_fieldList getter_mFieldVarNameList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_fieldList getter_mFieldList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -11168,94 +11182,6 @@ class cPtr_selfVarOperatorAssignInstructionAST : public cPtr_instructionAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTargetVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_operatorAssignKind getter_mOperator (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   @selfVariableFunctionCallInExpressionAST class                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_selfVariableFunctionCallInExpressionAST : public GALGAS_selfFunctionCallInExpressionAST {
-//--- Constructor
-  public : GALGAS_selfVariableFunctionCallInExpressionAST (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_selfVariableFunctionCallInExpressionAST constructor_default (LOCATION_ARGS) ;
-
-//---
-  public : inline const class cPtr_selfVariableFunctionCallInExpressionAST * ptr (void) const { return (const cPtr_selfVariableFunctionCallInExpressionAST *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_selfVariableFunctionCallInExpressionAST (const cPtr_selfVariableFunctionCallInExpressionAST * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_selfVariableFunctionCallInExpressionAST extractObject (const GALGAS_object & inObject,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_selfVariableFunctionCallInExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                  const class GALGAS_effectiveParameterListAST & inOperand1,
-                                                                                  const class GALGAS_lstring & inOperand2
-                                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_selfVariableFunctionCallInExpressionAST & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_selfVariableFunctionCallInExpressionAST class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selfVariableFunctionCallInExpressionAST ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Pointer class for @selfVariableFunctionCallInExpressionAST class                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_selfVariableFunctionCallInExpressionAST : public cPtr_selfFunctionCallInExpressionAST {
-//--- Attributes
-  public : GALGAS_lstring mAttribute_mFieldName ;
-
-//--- Constructor
-  public : cPtr_selfVariableFunctionCallInExpressionAST (const GALGAS_lstring & in_mFunctionName,
-                                                         const GALGAS_effectiveParameterListAST & in_mEffectiveParameterList,
-                                                         const GALGAS_lstring & in_mFieldName
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

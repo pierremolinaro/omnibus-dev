@@ -15325,39 +15325,17 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i60_parse (C_Lexiqu
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i61_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_location var_selfLocation ;
-  GALGAS_fieldList var_fieldList ;
-  nt_self_5F_access_ (var_selfLocation, var_fieldList, inCompiler) ;
-  inCompiler->emitSemanticWarning (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 52)), GALGAS_string ("<self_access>")  COMMA_SOURCE_FILE ("expression-func-call.galgas", 52)) ;
+  GALGAS_lstring var_functionName = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 25)) ;
   GALGAS_effectiveParameterListAST var_effectiveParameterList ;
   nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_fieldList.getter_length (SOURCE_FILE ("expression-func-call.galgas", 54)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    GALGAS_lstring var_functionName ;
-    {
-    GALGAS_arrayElementAccess joker_2520 ; // Joker input parameter
-    var_fieldList.setter_popFirst (var_functionName, joker_2520, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 55)) ;
-    }
-    outArgument_outExpression = GALGAS_selfFunctionCallInExpressionAST::constructor_new (var_functionName, var_effectiveParameterList  COMMA_SOURCE_FILE ("expression-func-call.galgas", 56)) ;
-  }else if (kBoolFalse == test_0) {
-    GALGAS_lstring var_selfVariableName ;
-    {
-    GALGAS_arrayElementAccess joker_2682 ; // Joker input parameter
-    var_fieldList.setter_popFirst (var_selfVariableName, joker_2682, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 58)) ;
-    }
-    GALGAS_lstring var_functionName ;
-    {
-    GALGAS_arrayElementAccess joker_2732 ; // Joker input parameter
-    var_fieldList.setter_popFirst (var_functionName, joker_2732, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 59)) ;
-    }
-    outArgument_outExpression = GALGAS_selfVariableFunctionCallInExpressionAST::constructor_new (var_functionName, var_effectiveParameterList, var_selfVariableName  COMMA_SOURCE_FILE ("expression-func-call.galgas", 60)) ;
-  }
+  outArgument_outExpression = GALGAS_functionCallInExpressionAST::constructor_new (var_functionName, var_effectiveParameterList, GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 27))  COMMA_SOURCE_FILE ("expression-func-call.galgas", 27)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i61_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  nt_self_5F_access_parse (inCompiler) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 25)) ;
   nt_effective_5F_parameters_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -15367,17 +15345,22 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i61_parse (C_Lexiqu
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i62_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
+  GALGAS_lstring var_receiverName = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 33)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 34)) ;
   GALGAS_lstring var_functionName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 67)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 35)) ;
   GALGAS_effectiveParameterListAST var_effectiveParameterList ;
   nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
-  outArgument_outExpression = GALGAS_functionCallInExpressionAST::constructor_new (var_functionName, var_effectiveParameterList, GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 69))  COMMA_SOURCE_FILE ("expression-func-call.galgas", 69)) ;
+  outArgument_outExpression = GALGAS_functionCallInExpressionAST::constructor_new (var_functionName, var_effectiveParameterList, var_receiverName  COMMA_SOURCE_FILE ("expression-func-call.galgas", 37)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i62_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 67)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 33)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 34)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 35)) ;
   nt_effective_5F_parameters_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -15387,22 +15370,18 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i62_parse (C_Lexiqu
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i63_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_lstring var_receiverName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 75)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 76)) ;
-  GALGAS_lstring var_functionName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 77)) ;
+  GALGAS_location var_selfLocation ;
+  GALGAS_fieldList var_fieldList ;
+  nt_self_5F_access_ (var_selfLocation, var_fieldList, inCompiler) ;
   GALGAS_effectiveParameterListAST var_effectiveParameterList ;
   nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
-  outArgument_outExpression = GALGAS_functionCallInExpressionAST::constructor_new (var_functionName, var_effectiveParameterList, var_receiverName  COMMA_SOURCE_FILE ("expression-func-call.galgas", 79)) ;
+  outArgument_outExpression = GALGAS_selfFunctionCallInExpressionAST::constructor_new (var_selfLocation, var_fieldList, var_effectiveParameterList  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 22)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i63_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 75)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 76)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 77)) ;
+  nt_self_5F_access_parse (inCompiler) ;
   nt_effective_5F_parameters_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
@@ -16536,10 +16515,9 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_routine_5F_call_i86_ (GALGA
   GALGAS_location var_selfLocation ;
   GALGAS_fieldList var_fieldList ;
   nt_self_5F_access_ (var_selfLocation, var_fieldList, inCompiler) ;
-  inCompiler->emitSemanticWarning (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 20)), GALGAS_string ("<self_access>")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 20)) ;
   GALGAS_effectiveParameterListAST var_effectiveParameterList ;
   nt_effective_5F_parameters_ (var_effectiveParameterList, inCompiler) ;
-  outArgument_outInstruction = GALGAS_unifiedSelfCallInstructionAST::constructor_new (var_effectiveParameterList, var_selfLocation, var_fieldList  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 22)) ;
+  outArgument_outInstruction = GALGAS_unifiedSelfCallInstructionAST::constructor_new (var_effectiveParameterList, var_selfLocation, var_fieldList  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 21)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
