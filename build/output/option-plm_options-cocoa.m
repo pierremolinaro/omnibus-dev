@@ -124,10 +124,10 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
-    identifier:@"writeGlobalConstantDependencyGraphFile"
-    commandChar:99
-    commandString:@"global-constant-dependency-graph"
-    comment:@"Write global constant dependency graph file"
+    identifier:@"writeDeclarationDependencyGraphFile"
+    commandChar:100
+    commandString:@"declaration-dependency-graph"
+    comment:@"Write declaration dependency graph file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
@@ -146,15 +146,6 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:105
     commandString:@"routine-invocation-graph"
     comment:@"Write routine invocation graph file"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
-    identifier:@"writeTypeDependencyGraphFile"
-    commandChar:116
-    commandString:@"type-dependency-graph"
-    comment:@"Write type dependency graph file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

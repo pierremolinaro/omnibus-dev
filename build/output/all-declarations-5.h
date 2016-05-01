@@ -240,13 +240,11 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeControlRegisterHTMLDumpFile ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeGlobalConstantDependencyGraphFile ;
+extern C_BoolCommandLineOption gOption_plm_5F_options_writeDeclarationDependencyGraphFile ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeGlobalConstantHTMLDumpFile ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeTypeDependencyGraphFile ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
