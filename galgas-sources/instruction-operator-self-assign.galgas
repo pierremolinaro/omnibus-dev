@@ -2,28 +2,12 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @operatorAssignKind {
-  case bitWiseOrAssign
-  case bitWiseAndAssign
-  case bitWiseXorAssign
-  case addAssign
-  case addModuloAssign
-  case subAssign
-  case subModuloAssign
-  case mulAssign
-  case mulModuloAssign
-  case divAssign
-  case divZeroAssign
-  case modAssign
-  case modZeroAssign
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @varOperatorAssignInstructionAST : @instructionAST {
-  @lstring mTargetVarName
-  @expressionAST mSourceExpression
+class @selfVarOperatorAssignInstructionAST : @instructionAST {
+  @location mSelfLocation
+  @fieldList mFieldList
   @operatorAssignKind mOperator
+  @location mOperatorLocation
+  @expressionAST mSourceExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -34,47 +18,17 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <op_assign> !@operatorAssignKind outOp {
-    select
-      $|=$
-      outOp = .bitWiseOrAssign
-    or
-      $&=$
-      outOp = .bitWiseAndAssign
-    or
-      $^=$
-      outOp = .bitWiseXorAssign
-    or
-      $+=$
-      outOp = .addAssign
-    or
-      $+%=$
-      outOp = .addModuloAssign
-    or
-      $-=$
-      outOp = .subAssign
-    or
-      $-%=$
-      outOp = .subModuloAssign
-    or
-      $*=$
-      outOp = .mulAssign
-    or
-      $*%=$
-      outOp = .mulModuloAssign
-    end
-  }
-
-  #·····················································································································
-
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-    $identifier$ ?let varName
+    <self_access> ?let selfLocation ?var fieldList
     <op_assign> ?let @operatorAssignKind operatorAssign
+    let operatorLocation = @location.here
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@varOperatorAssignInstructionAST.new {
-      !varName
-      !expression
+    ioInstructionList += !@selfVarOperatorAssignInstructionAST.new {
+      !selfLocation
+      !fieldList
       !operatorAssign
+      !operatorLocation
+      !expression
     }
   }
 
@@ -86,7 +40,7 @@ syntax extension common_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @selfVarOperatorAssignInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -94,7 +48,7 @@ override method @varOperatorAssignInstructionAST noteInstructionTypesInPrecedenc
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varOperatorAssignInstructionAST analyze
+override method @selfVarOperatorAssignInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -106,16 +60,23 @@ override method @varOperatorAssignInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Get target type
-  [!?ioVariableMap neutralAccess
-    !lkey:mTargetVarName
-    ?type:let targetType
-    ?5*
-    ?isConstant:let isConstant
-  ]
-  if isConstant then
-    error mTargetVarName : "a constant cannot be modified"
-  end
+  analyzeSelfAccess (
+    !fieldList:mFieldList
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultPtr:let @objectInMemoryIR targetPtr
+  )
+  let targetType = [targetPtr type]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
@@ -132,18 +93,6 @@ override method @varOperatorAssignInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR sourceValue
   ]
-#--- Write local variable
-  [!?ioVariableMap searchForReadWriteAccess
-    !lkey:mTargetVarName
-    ?1*
-    ?readAccessAllowed:let accessIsAllowed
-    ?variableKind:let targetVariableKind
-    ?copyable:let isCopyable                                                 
-    ?3*
-  ]
-  if not accessIsAllowed then
-    error mTargetVarName : "routine has no access right on the this variable"
-  end
 #--- Check operator is available for type
   let noPanicGeneration = [option plm_options.noPanicGeneration value]
   let panicMode = [inModeSet hasKey !panicModeName ()]
@@ -157,35 +106,35 @@ override method @varOperatorAssignInstructionAST analyze
     operatorMap = inContext.mXorOperatorMap
   case addAssign :
     if panicMode then
-      error mTargetVarName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+      error mOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mAddNoOvfOperatorMap else inContext.mAddOperatorMap end
   case addModuloAssign :
     operatorMap = inContext.mAddNoOvfOperatorMap
   case subAssign :
     if panicMode then
-      error mTargetVarName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+      error mOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mSubNoOvfOperatorMap else inContext.mSubOperatorMap end
   case subModuloAssign :
     operatorMap = inContext.mSubNoOvfOperatorMap
   case mulAssign :
     if panicMode then
-      error mTargetVarName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+      error mOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mMulNoOvfOperatorMap else inContext.mMulOperatorMap end
   case mulModuloAssign :
     operatorMap = inContext.mMulNoOvfOperatorMap
   case divAssign :
     if panicMode then
-      error mTargetVarName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+      error mOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mDivNoOvfOperatorMap else inContext.mDivOperatorMap end
   case divZeroAssign :
     operatorMap = inContext.mDivNoOvfOperatorMap
   case modAssign :
     if panicMode then
-      error mTargetVarName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+      error mOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mModNoOvfOperatorMap else inContext.mModOperatorMap end
   case modZeroAssign :
@@ -194,30 +143,22 @@ override method @varOperatorAssignInstructionAST analyze
   [operatorMap checkBinaryOperationWith
     !leftType:targetType
     !rightType:sourceValue.mType
-    !operatorLocation:mTargetVarName.location
+    !operatorLocation:mOperatorLocation
     ?resultType:*
     ?op:let @infixOperatorDescription binaryOperator
   ]
-  if not isCopyable then
-    error mTargetVarName : "an $" + [targetType key] + " instance is not copyable"
-  end
-#--- Code generation
-  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !targetVariableKind ?let variableValue]
-#  [targetVariableKind loadFromMemory
-#    !?temporary:ioTemporaries
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?resultingValue:@operandIR variableValue
-#  ]
+#--- Generate code
+  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !targetPtr ?let targetVariableValue]
   [binaryOperator generateInfixOperatorCode
     !?ioTemporaries
     !?ioInstructionGenerationList
-    !variableValue
-    !mTargetVarName.location
+    !targetVariableValue
+    !mOperatorLocation
     !sourceValue
     !targetType
     ?let newResultingValue
   ]
-  [!?ioInstructionGenerationList appendStoreInMemory !targetVariableKind !newResultingValue]
+  [!?ioInstructionGenerationList appendStoreInMemory !targetPtr !newResultingValue]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

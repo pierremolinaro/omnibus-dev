@@ -2819,13 +2819,19 @@ typeComparisonResult cPtr_selfVarOperatorAssignInstructionAST::dynamicObjectComp
   const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarName.objectCompare (p->mAttribute_mTargetVarName) ;
+    result = mAttribute_mSelfLocation.objectCompare (p->mAttribute_mSelfLocation) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
+    result = mAttribute_mFieldList.objectCompare (p->mAttribute_mFieldList) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperatorLocation.objectCompare (p->mAttribute_mOperatorLocation) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
   }
   return result ;
 }
@@ -2864,51 +2870,53 @@ GALGAS_instructionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selfVarOperatorAssignInstructionAST GALGAS_selfVarOperatorAssignInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mTargetVarName,
-                                                                                                        const GALGAS_expressionAST & inAttribute_mSourceExpression,
-                                                                                                        const GALGAS_operatorAssignKind & inAttribute_mOperator
+GALGAS_selfVarOperatorAssignInstructionAST GALGAS_selfVarOperatorAssignInstructionAST::constructor_new (const GALGAS_location & inAttribute_mSelfLocation,
+                                                                                                        const GALGAS_fieldList & inAttribute_mFieldList,
+                                                                                                        const GALGAS_operatorAssignKind & inAttribute_mOperator,
+                                                                                                        const GALGAS_location & inAttribute_mOperatorLocation,
+                                                                                                        const GALGAS_expressionAST & inAttribute_mSourceExpression
                                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_selfVarOperatorAssignInstructionAST result ;
-  if (inAttribute_mTargetVarName.isValid () && inAttribute_mSourceExpression.isValid () && inAttribute_mOperator.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_selfVarOperatorAssignInstructionAST (inAttribute_mTargetVarName, inAttribute_mSourceExpression, inAttribute_mOperator COMMA_THERE)) ;
+  if (inAttribute_mSelfLocation.isValid () && inAttribute_mFieldList.isValid () && inAttribute_mOperator.isValid () && inAttribute_mOperatorLocation.isValid () && inAttribute_mSourceExpression.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_selfVarOperatorAssignInstructionAST (inAttribute_mSelfLocation, inAttribute_mFieldList, inAttribute_mOperator, inAttribute_mOperatorLocation, inAttribute_mSourceExpression COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_selfVarOperatorAssignInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
+GALGAS_location GALGAS_selfVarOperatorAssignInstructionAST::getter_mSelfLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
-    result = p->mAttribute_mTargetVarName ;
+    result = p->mAttribute_mSelfLocation ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_selfVarOperatorAssignInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarName ;
+GALGAS_location cPtr_selfVarOperatorAssignInstructionAST::getter_mSelfLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSelfLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_selfVarOperatorAssignInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
+GALGAS_fieldList GALGAS_selfVarOperatorAssignInstructionAST::getter_mFieldList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_fieldList result ;
   if (NULL != mObjectPtr) {
     const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
-    result = p->mAttribute_mSourceExpression ;
+    result = p->mAttribute_mFieldList ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_selfVarOperatorAssignInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceExpression ;
+GALGAS_fieldList cPtr_selfVarOperatorAssignInstructionAST::getter_mFieldList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mFieldList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2930,17 +2938,57 @@ GALGAS_operatorAssignKind cPtr_selfVarOperatorAssignInstructionAST::getter_mOper
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_selfVarOperatorAssignInstructionAST::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
+    result = p->mAttribute_mOperatorLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_selfVarOperatorAssignInstructionAST::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOperatorLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST GALGAS_selfVarOperatorAssignInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_expressionAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_selfVarOperatorAssignInstructionAST * p = (const cPtr_selfVarOperatorAssignInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_selfVarOperatorAssignInstructionAST) ;
+    result = p->mAttribute_mSourceExpression ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST cPtr_selfVarOperatorAssignInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSourceExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                            Pointer class for @selfVarOperatorAssignInstructionAST class                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_selfVarOperatorAssignInstructionAST::cPtr_selfVarOperatorAssignInstructionAST (const GALGAS_lstring & in_mTargetVarName,
-                                                                                    const GALGAS_expressionAST & in_mSourceExpression,
-                                                                                    const GALGAS_operatorAssignKind & in_mOperator
+cPtr_selfVarOperatorAssignInstructionAST::cPtr_selfVarOperatorAssignInstructionAST (const GALGAS_location & in_mSelfLocation,
+                                                                                    const GALGAS_fieldList & in_mFieldList,
+                                                                                    const GALGAS_operatorAssignKind & in_mOperator,
+                                                                                    const GALGAS_location & in_mOperatorLocation,
+                                                                                    const GALGAS_expressionAST & in_mSourceExpression
                                                                                     COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (THERE),
-mAttribute_mTargetVarName (in_mTargetVarName),
-mAttribute_mSourceExpression (in_mSourceExpression),
-mAttribute_mOperator (in_mOperator) {
+mAttribute_mSelfLocation (in_mSelfLocation),
+mAttribute_mFieldList (in_mFieldList),
+mAttribute_mOperator (in_mOperator),
+mAttribute_mOperatorLocation (in_mOperatorLocation),
+mAttribute_mSourceExpression (in_mSourceExpression) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2952,11 +3000,15 @@ const C_galgas_type_descriptor * cPtr_selfVarOperatorAssignInstructionAST::class
 void cPtr_selfVarOperatorAssignInstructionAST::description (C_String & ioString,
                                                             const int32_t inIndentation) const {
   ioString << "[@selfVarOperatorAssignInstructionAST:" ;
-  mAttribute_mTargetVarName.description (ioString, inIndentation+1) ;
+  mAttribute_mSelfLocation.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
+  mAttribute_mFieldList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mOperator.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mOperatorLocation.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -2964,7 +3016,7 @@ void cPtr_selfVarOperatorAssignInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_selfVarOperatorAssignInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_selfVarOperatorAssignInstructionAST (mAttribute_mTargetVarName, mAttribute_mSourceExpression, mAttribute_mOperator COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_selfVarOperatorAssignInstructionAST (mAttribute_mSelfLocation, mAttribute_mFieldList, mAttribute_mOperator, mAttribute_mOperatorLocation, mAttribute_mSourceExpression COMMA_THERE)) ;
   return ptr ;
 }
 
