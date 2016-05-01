@@ -69,41 +69,41 @@ module lcd {
   //············································································
   
   func `init `panic `user setD4 @noWarningIfUnused (?inValue $bool) { // PTB0
-    if inValue :
+    if inValue {
       GPIOB_PSOR = 1 << 0 ;
-    else
+    }else{
       GPIOB_PCOR = 1 << 0 ;
-    end
+    }
   }
   
   //············································································
   
   func `init `panic `user setD5 @noWarningIfUnused (?inValue $bool) { // PTC0
-    if inValue :
+    if inValue {
       GPIOC_PSOR = 1 << 0 ;
-    else
+    }else{
       GPIOC_PCOR = 1 << 0 ;
-    end
+    }
   }
   
   //············································································
   
   func `init `panic `user setD6 @noWarningIfUnused (?inValue $bool) { // PTD1
-    if inValue :
+    if inValue {
       GPIOD_PSOR = 1 << 1 ;
-    else
+    }else{
       GPIOD_PCOR = 1 << 1 ;
-    end
+    }
   }
   
   //············································································
   
   func `init `panic `user setD7 @noWarningIfUnused (?inValue $bool) { // PTB2
-    if inValue :
+    if inValue {
       GPIOB_PSOR = 1 << 2 ;
-    else
+    }else{
       GPIOB_PCOR = 1 << 2 ;
-    end
+    }
   }
   
   //············································································
@@ -247,27 +247,27 @@ module lcd {
   // Line 3 : 84 -> 103
   
   public func `user goto @noWarningIfUnused (?line:inLine $uint2 ?column:inColumn $uint8) {
-    if inColumn < 20 :
-      if inLine == 0 :
+    if inColumn < 20 {
+      if inLine == 0 {
         self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
-      elsif inLine == 1 :
+      }else if inLine == 1 {
         self.write8bitCommand_inUserMode (!0x80 + 64 + inColumn) ;
-      elsif inLine == 2 :
+      }else if inLine == 2 {
         self.write8bitCommand_inUserMode (!0x80 + 20 + inColumn) ;
-      else
+      }else{
         self.write8bitCommand_inUserMode (!0x80 + 84 + inColumn) ;
-      end
-    end
+      }
+    }
   }
   
   //············································································
   
   public func `user printSpaces @noWarningIfUnused (?inCount $uint32) {
     var count = inCount
-    do while (count > 0) :
+    do while (count > 0) {
       self.writeData_inUserMode (!0x20)
       count -= 1
-    end
+    }
   }
   
   //············································································
@@ -276,38 +276,38 @@ module lcd {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = false
-    do while divisor > 0 :
-      if isPrinting or (value >= divisor) :
+    do while divisor > 0 {
+      if isPrinting or (value >= divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
         self.writeData_inUserMode (!0x30 + convert quotient : $uint8)
         value = remainder
         isPrinting = true
-      end
+      }
       divisor = divisor / 10
-    end
-    if not isPrinting :
+    }
+    if not isPrinting {
       self.writeData_inUserMode (!0x30)
-    end
+    }
   }
   
   //············································································
   
   public func `user printSigned @noWarningIfUnused (?inValue $int32) {
-    if inValue >= 0 :
+    if inValue >= 0 {
       self.printUnsigned (!truncate inValue : $uint32)
-    else
+    }else{
       self.writeData_inUserMode (!0x2D) // Signe -
       self.printUnsigned (!truncate - inValue : $uint32)
-    end
+    }
   }
   
   //············································································
   
   public func `user printString @noWarningIfUnused (?inValue $staticString) {
-    for c in inValue :
+    for c in inValue {
       self.writeData_inUserMode (!c)
-    end
+    }
   }
   
   //············································································
@@ -394,30 +394,30 @@ module lcd {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = false
-    do while divisor > 0 :
-      if isPrinting or (value >= divisor) :
+    do while divisor > 0 {
+      if isPrinting or (value >= divisor) {
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor
         self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)
         value = remainder
         isPrinting = true
-      end
+      }
       divisor = divisor !/ 10
-    end
-    if not isPrinting :
+    }
+    if not isPrinting {
       self.writeDataInPanicMode (!0x30)
-    end
+    }
   }
   
   //············································································
   
   public func `panic printSignedInPanicMode @noWarningIfUnused (?inValue $int32) {
-    if inValue >= 0 :
+    if inValue >= 0 {
       self.printUnsignedInPanicMode (!truncate inValue : $uint32)
-    else
+    }else{
       self.writeDataInPanicMode (!0x2D) // Signe -
       self.printUnsignedInPanicMode (!truncate -% inValue : $uint32)
-    end
+    }
   }
   
   //············································································
@@ -439,17 +439,17 @@ module lcd {
   //············································································
   
   public func `panic gotoInPanicMode @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
-    if inColumn < 20 :
-      if inLine == 0 :
+    if inColumn < 20 {
+      if inLine == 0 {
         self.write8bitCommandInPanicMode (!0x80 +% 0 +% inColumn) ;
-      elsif inLine == 1 :
+      }else if inLine == 1 {
         self.write8bitCommandInPanicMode (!0x80 +% 64 +% inColumn) ;
-      elsif inLine == 2 :
+      }else if inLine == 2 {
         self.write8bitCommandInPanicMode (!0x80 +% 20 +% inColumn) ;
-      elsif inLine == 3 :
+      }else if inLine == 3 {
         self.write8bitCommandInPanicMode (!0x80 +% 84 +% inColumn) ;
-      end
-    end
+      }
+    }
   }
   
   //············································································
@@ -462,9 +462,9 @@ module lcd {
   //············································································
   
   public func `panic printStringInPanicMode @noWarningIfUnused (?inString $staticString) {
-    for c in inString :
+    for c in inString {
       self.writeDataInPanicMode (!c)
-    end
+    }
   }
 
   //············································································

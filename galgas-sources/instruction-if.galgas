@@ -31,7 +31,6 @@ syntax extension common_syntax {
     end
     <if_instruction> ?let ifInstruction !?ioLabelMap !ifLabel
     ioInstructionList += !ifInstruction
-    $end$
     @lstring endLabel
     select
       endLabel = .new {!"" !.here}
@@ -49,14 +48,16 @@ syntax extension common_syntax {
   rule <if_instruction> !@ifInstructionAST outIfInstruction ?!@labelMap ioLabelMap ?let @lstring ifLabel {
     <expression> ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
-    $:$
+    ${$
     <instructionList> ?let thenInstructionList !?ioLabelMap
+    $}$
     let endOfThenBranch = @location.here
     @instructionListAST elseInstructionList
     select
       elseInstructionList = {}
     or
       $else$
+      ${$
       @lstring elsifLabel
       select
         elsifLabel = .new {!"" !.here}
@@ -68,8 +69,10 @@ syntax extension common_syntax {
            + (if ifLabel.string != "" then "@" + ifLabel.string else "empty" end)
       end 
       <instructionList> ?elseInstructionList !?ioLabelMap
+      $}$
     or
-      $elsif$
+      $else$
+      $if$
       @lstring elsifIfLabel
       select
         elsifIfLabel = .new {!"" !.here}

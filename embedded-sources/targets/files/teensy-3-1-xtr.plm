@@ -60,8 +60,7 @@ module time {
   //············································································
   
   public func `panic `init oneMillisecondBusyWait @noWarningIfUnused () {
-    do while not SYST_CSR.COUNTFLAG.bool :
-    end
+    do while not SYST_CSR.COUNTFLAG.bool {}
   }
 
   //············································································
@@ -73,9 +72,9 @@ module time {
   //············································································
   
   public func `panic `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
-    for delay $uint32 in 0 ..< inDelay :
+    for delay $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
-    end
+    }
   }
   
   //············································································
@@ -91,26 +90,26 @@ module time {
   //············································································
   
   public primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
-    if inDate > self.millis () :
+    if inDate > self.millis () {
       blockOnDeadline (!deadline:inDate)
-    end
+    }
   }
   
   //············································································
   
   public primitive waitDuringMS @noWarningIfUnused (?delay: inDelay $uint32) {
-    if inDelay > 0 :
+    if inDelay > 0 {
       blockOnDeadline (!deadline:self.millis () +% inDelay)
-    end
+    }
   }
   
   //············································································
   
   public guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
     accept = inDeadline <= self.millis ()
-    if not accept :
+    if not accept {
       handleGuardedWaitUntil (!deadline:inDeadline)
-    end
+    }
   }
   
   //············································································

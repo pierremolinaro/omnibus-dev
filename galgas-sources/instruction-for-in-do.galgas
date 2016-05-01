@@ -24,10 +24,10 @@ syntax extension common_syntax {
     $in$
     <expression> ?let @expressionAST expression
     let endOf_iteratedExpression_instruction = @location.here
-    $:$
+    ${$
     <instructionList> ?let instructionList !?ioLabelMap
     let endOfInstruction = @location.here
-    $end$
+    $}$
     ioInstructionList += !@forInstructionAST.new {
       !varName
       !expression

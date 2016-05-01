@@ -29,10 +29,10 @@ syntax extension common_syntax {
     end
     <expression> ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
-    $:$
+    ${$
     <instructionList> ?let instructionList  !?ioLabelMap
     let endOfInstruction = @location.here
-    $end$
+    $}$
     @lstring endLabel
     select
       endLabel = .new {!"" !.here}

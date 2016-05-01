@@ -114,6 +114,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $sync$
+    ${$
     let startLocation = @location.here
     @lstring startLabel
     select
@@ -131,7 +132,7 @@ syntax extension common_syntax {
     while
     end
     ioInstructionList += !@syncInstructionAST.new {!startLocation !onInstructionBranchList !.here}
-    $end$
+    $}$
     @lstring endLabel
     select
       endLabel = .new {!"" !.here}

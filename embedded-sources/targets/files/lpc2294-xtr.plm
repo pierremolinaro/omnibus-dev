@@ -106,9 +106,9 @@ module time {
   //············································································
   
   public primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
-    if inDate > self.millis () :
+    if inDate > self.millis () {
       blockOnDeadline (!deadline:inDate)
-    end
+    }
   }
   
   //············································································
@@ -121,9 +121,9 @@ module time {
   
   public guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
     accept = inDeadline <= self.millis ()
-    if not accept :
+    if not accept {
       handleGuardedWaitUntil (!deadline:inDeadline)
-    end
+    }
   }
 
   //············································································
