@@ -518,6 +518,19 @@ void extensionSetter_appendSelectOperation (class GALGAS_instructionListIR & ioO
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                Extension setter '@instructionListIR testArrayIndex'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_testArrayIndex (class GALGAS_instructionListIR & ioObject,
+                                     const class GALGAS_operandIR constin_inIndex,
+                                     const class GALGAS_location constin_inErrorLocation,
+                                     const class GALGAS_bigint constin_inSize,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                     Abstract extension method '@abstractInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

@@ -13,7 +13,7 @@ enum @typeKind {
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
-  case arrayType (@uint countBitSize @unifiedTypeMap-proxy elementType @bigint size)
+  case arrayType (@unifiedTypeMap-proxy elementType @bigint size)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

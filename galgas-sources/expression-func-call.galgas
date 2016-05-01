@@ -32,24 +32,32 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <primary> !@expressionAST outExpression {
-    $self$
-    $.$
-    $identifier$ ?let functionName
-    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
-    outExpression = @selfFunctionCallInExpressionAST.new {!functionName !effectiveParameterList}
-  }
+#  rule <primary> !@expressionAST outExpression {
+#    $self$
+#    $.$
+#    $identifier$ ?let functionName
+#    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
+#    outExpression = @selfFunctionCallInExpressionAST.new {!functionName !effectiveParameterList}
+#  }
 
   #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
-    $self$
-    $.$
-    $identifier$ ?let selfVariableName
-    $.$
-    $identifier$ ?let functionName
+    <self_access> ?let selfLocation ?var fieldList
+#    $self$
+#    $.$
+#    $identifier$ ?let selfVariableName
+#    $.$
+#    $identifier$ ?let functionName
     <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
-    outExpression = @selfVariableFunctionCallInExpressionAST.new {!functionName !effectiveParameterList !selfVariableName }
+    if [fieldList length] == 1 then
+      [!?fieldList popFirst ?let functionName ?*]
+      outExpression = @selfFunctionCallInExpressionAST.new {!functionName !effectiveParameterList}
+    else
+      [!?fieldList popFirst ?let selfVariableName ?*]
+      [!?fieldList popFirst ?let functionName ?*]
+      outExpression = @selfVariableFunctionCallInExpressionAST.new {!functionName !effectiveParameterList !selfVariableName}
+    end
   }
 
   #·····················································································································
@@ -296,7 +304,7 @@ override method @selfVariableFunctionCallInExpressionAST analyzeExpression
   case boolset : propertyMap = {}
   case literalString : propertyMap = {}
   case opaque (*) : propertyMap = {}
-  case arrayType (* * *) : propertyMap = {}
+  case arrayType (* *) : propertyMap = {}
   end
   [propertyMap searchKey !mFieldName ?* ?let fieldType ?let fieldIndex]
 #--- Get field pointer

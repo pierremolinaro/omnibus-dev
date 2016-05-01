@@ -170,7 +170,7 @@ proc enterControlRegistersInContext
       error registerTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
     case opaque (*) :
       error registerTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
-    case arrayType (* * *) :
+    case arrayType (* *) :
       error registerTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
     end
   #--- Build bit slice map
@@ -294,7 +294,7 @@ proc controlRegistersSemanticAnalysis
     case enumeration (*) : error registerTypeName : "an enumeration type is not valid for a register"
     case staticInteger : error registerTypeName : "a literal integer type is not valid for a register"
     case opaque (*) : error registerTypeName : "an opaque type is not valid for a register"
-    case arrayType (* * *) : error registerTypeName : "an array type is not valid for a register"
+    case arrayType (* *) : error registerTypeName : "an array type is not valid for a register"
     end
   #--- Check address value
     let @bigint maxAddress = (1G << inContext.mPointerSize) - 1G

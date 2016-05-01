@@ -273,7 +273,7 @@ override method @selfVarOperatorAssignInstructionAST analyze
     switch [inSelfType kind]
     case opaque (*) :
       error mTargetVarName : "an opaque type does not handle field access"
-    case arrayType (* * *) :
+    case arrayType (* *) :
        error mTargetVarName : "an array type does not handle field access"
    case boolean :
       error mTargetVarName : "a boolean does not handle field access"

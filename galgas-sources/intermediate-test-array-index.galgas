@@ -1,0 +1,78 @@
+
+setter @instructionListIR testArrayIndex
+  ?let @operandIR inIndex
+  ?let @location inErrorLocation
+  ?let @bigint inSize
+{
+  self += !@testArrayIndexIR.new {!inIndex !inErrorLocation !inSize}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @testArrayIndexIR : @abstractInstructionIR {
+  @operandIR mIndex
+  @location mErrorLocation
+  @bigint mSize
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @testArrayIndexIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+    ![[[mErrorLocation file] lastPathComponent] stringByDeletingPathExtension]
+    ?let staticStringIndex
+  ]
+  [[mIndex.mType kind] integer ?min:* ?max:let max ?unsigned:let isUnsigned ?bitCount:*]
+#--- Test index >= 0 (for signed index)
+  if not isUnsigned then
+    let testToZero = "%test.index.zero." + ioGenerationAdds.mUniqueIndex
+    let testToZeroOk = "test.index.zero.ok." + ioGenerationAdds.mUniqueIndex
+    let testToZeroFailure = "test.index.zero.fails." + ioGenerationAdds.mUniqueIndex
+    ioGenerationAdds.mUniqueIndex ++
+    ioLLVMcode += "  " + testToZero + " = icmp sge " + [mIndex.mType llvmTypeName] + " " + [mIndex.mValue llvmName] + ", 0\n"
+    ioLLVMcode += "  br i1 " + testToZero + ", label %" + testToZeroOk + ", label %" + testToZeroFailure + "\n\n"
+  
+    ioLLVMcode += testToZeroFailure + ":\n"
+    ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mErrorLocation line] + ", "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForNegativeArrayIndex () + ") noreturn \n"
+    ioLLVMcode += "  unreachable\n\n"
+  
+    ioLLVMcode += testToZeroOk + ":\n"
+  end
+#--- Test index < size (only if index max value is >= size)
+  if max >= mSize then
+    let testToSize = "%test.index.size." + ioGenerationAdds.mUniqueIndex
+    let testToSizeOk = "test.index.size.ok." + ioGenerationAdds.mUniqueIndex
+    let testToSizeFailure = "test.index.size.fails." + ioGenerationAdds.mUniqueIndex
+    ioLLVMcode += "  " + testToSize + " = icmp "
+    ioLLVMcode += if isUnsigned then "ult" else "slt" end
+    ioLLVMcode += " " + [mIndex.mType llvmTypeName] + " " + [mIndex.mValue llvmName] + ", " + mSize + "\n"
+    ioLLVMcode += "  br i1 " + testToSize + ", label %" + testToSizeOk + ", label %" + testToSizeFailure + "\n\n"
+  
+    ioLLVMcode += testToSizeFailure + ":\n"
+    ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mErrorLocation line] + ", "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForTooLargeArrayIndex () + ") noreturn \n"
+    ioLLVMcode += "  unreachable\n\n"
+  
+    ioLLVMcode += testToSizeOk + ":\n"
+  end
+#---
+  ioGenerationAdds.mUniqueIndex ++
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @testArrayIndexIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

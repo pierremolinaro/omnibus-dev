@@ -362,7 +362,7 @@ override method @structureDeclaration semanticAnalysis
   case boolset : propertyMap = {}
   case literalString : propertyMap = {}
   case opaque (*) : propertyMap = {}
-  case arrayType (* * *) : propertyMap = {}
+  case arrayType (* *) : propertyMap = {}
   end
 #--- Analyze procedures
   [self procedureSemanticAnalysis

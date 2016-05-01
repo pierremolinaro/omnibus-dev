@@ -489,8 +489,8 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case literalString : 
     case staticInteger : 
     case opaque (*) :
-    case arrayType (countBitCount elementType arraySize) :
-      ioLLVMcode += "%$" + lkey + " = type {i" + countBitCount + ", [" + arraySize + " x " + [elementType llvmTypeName] + "]}\n"
+    case arrayType (elementType arraySize) :
+      ioLLVMcode += "%$" + lkey + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
     end
   end
   ioLLVMcode += "\n"

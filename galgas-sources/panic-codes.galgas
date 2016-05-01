@@ -34,3 +34,9 @@ func %once panicCodeForClosedSync -> @bigint outResult { outResult = 13G }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once panicCodeForNegativeArrayIndex -> @bigint outResult { outResult = 14G }
+
+func %once panicCodeForTooLargeArrayIndex -> @bigint outResult { outResult = 15G }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

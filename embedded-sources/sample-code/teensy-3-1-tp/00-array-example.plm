@@ -45,6 +45,7 @@ arrayType $A = $uint32 [20]
 task T priority 12 stackSize 512 {
   var deadline $uint32 = 0
   var array = $A ()
+  var index $uint4 = 0
 
   init 0 {
     setupPIT ()
@@ -52,8 +53,7 @@ task T priority 12 stackSize 512 {
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 250
-    self.deadline +%= self.array.count ()
-    self.array.append (!183)
+    self.deadline +%= self.array [self.index]
     leds.on (!LED_L1) // Allumer la led
     time.waitUntilMS (!deadline:self.deadline)
     self.deadline +%= 250
