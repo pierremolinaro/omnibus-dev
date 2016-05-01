@@ -49,6 +49,7 @@ syntax extension common_syntax {
 #    $identifier$ ?let selfVariableName
 #    $.$
 #    $identifier$ ?let functionName
+    warning .here : "<self_access>"
     <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
     if [fieldList length] == 1 then
       [!?fieldList popFirst ?let functionName ?*]

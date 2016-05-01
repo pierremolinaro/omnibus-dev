@@ -36,13 +36,6 @@ class @remoteRoutineCallInstructionAST : @abstractCallInstructionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @unifiedSelfCallInstructionAST : @abstractCallInstructionAST {
-  @location mSelfLocation
-  @fieldList mFieldList
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -53,18 +46,6 @@ syntax extension common_syntax {
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
      <routine_call> ?let @abstractCallInstructionAST call_instruction
      ioInstructionList += !call_instruction
-  }
-
-  #·····················································································································
-
-  rule <routine_call> !@abstractCallInstructionAST outInstruction {
-    <self_access> ?let @location selfLocation ?let @fieldList fieldList
-    <effective_parameters> ?let effectiveParameterList
-    outInstruction = @unifiedSelfCallInstructionAST.new {
-      !effectiveParameterList
-      !selfLocation
-      !fieldList
-    }
   }
 
   #·····················································································································
@@ -189,129 +170,6 @@ list @procEffectiveParameterList {
   @lstring mSelector
   @unifiedTypeMap-proxy mParameterType
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @unifiedSelfCallInstructionAST analyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?modes:let @stringset inRequiredModeSet
-  ?allowPanic:let @bool inAllowPanic
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-  if inSelfType == .null then
-    error mSelfLocation : "'self' is not available in this context"
-  else
-    @unifiedTypeMap-proxy currentType = inSelfType
-    @fieldList propertyList = mFieldList
-    [!?propertyList popLast ?let @lstring methodName ?*]
-    @elementPtrList elementPtrList = {}
-    var needsPublic = false
-    for (propertyName arrayAccess) in propertyList do
-      switch [currentType kind]
-      case opaque (*) :
-        error propertyName : "an opaque type does not handle field access" : currentType
-      case arrayType (* *) :
-        error propertyName : "an array type does not handle field access" : currentType
-      case boolean :
-        error propertyName : "a boolean does not handle field access" : currentType
-      case staticInteger :
-        error propertyName : "an integer does not handle field access" : currentType
-      case boolset :
-        error propertyName : "a boolset does not handle field access" : currentType
-      case literalString :
-        error propertyName : "a literal string does not handle field access" : currentType
-      case enumeration (*) :
-        error propertyName : "an enumeration does not handle field access" : currentType
-      case integer (* * * *) :
-        error propertyName : "an integer does not handle field access" : currentType
-      case structure (@propertyMap propertyMap *) :
-        [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
-        elementPtrList += !.absolute {!index:idx} !propertyName.string
-        currentType = propertyType
-        if needsPublic && not public then
-          error propertyName : "this property is not public"
-        end
-        needsPublic = true
-      end
-    end     
-    let routineMangledName = @lstring.new {!"$" + [currentType key] + "." + methodName !methodName.location}
-    getLocalNameOfNewTempObjectInMemory (!currentType !?ioTemporaries ?let propertyAddressLLVMvar)
-    [!?ioInstructionGenerationList appendGetElementPtrFromSelf
-      !propertyAddressLLVMvar
-      !inSelfType
-      !elementPtrList
-    ]
-    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-    effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
-    [inContext.mRoutineMapForContext searchKey
-      !routineMangledName
-      ?let isPublic
-      ?let modeMap
-      ?let @procedureSignature formalSignature
-      ?let @routineKind routineKind
-      ?*
-      ?let returnedType
-      ?let appendFileAndLineArgumentForPanicLocation
-    ]
-    if needsPublic && not isPublic then
-      error routineMangledName : "this routine is not public"
-    end
-  #--- Enter in invocation graph
-    @lstring routineNameForInvocationGraph
-    switch routineKind
-    case function :
-      routineNameForInvocationGraph = procNameForInvocationGraph (!currentType !methodName)
-    case section :
-      routineNameForInvocationGraph = sectionNameForInvocationGraph (!currentType !methodName)
-    case service :
-      routineNameForInvocationGraph = serviceNameForInvocationGraph (!currentType !methodName)
-    case primitive :
-      routineNameForInvocationGraph = primitiveNameForInvocationGraph (!currentType !methodName)
-    end
-    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
-  #--- Check modes
-    let routineKindIR = checkMode (
-      !requiredModes:inRequiredModeSet
-      !possibleModes:[modeMap keySet]
-      !kind:routineKind
-      !error:methodName.location
-    )
-  #--- Analyze effective parameters
-    analyzeEffectiveParameters (
-      !self:inSelfType
-      !formal:formalSignature
-      !effective:mEffectiveParameterList
-      !errorLocation:methodName.location
-      !callerForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !requiredModeSet:inRequiredModeSet
-      !allowPanic:inAllowPanic
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      !?effectiveIR:effectiveParameterListIR
-    )
-    if returnedType != .null then
-      error methodName : "cannot be called in instruction: return value"
-    end
-  #--- Code generation
-    ioInstructionGenerationList += !@procCallInstructionIR.new {
-      !"" # Receiver is self
-      !routineMangledName
-      !routineKindIR
-      !effectiveParameterListIR
-      !appendFileAndLineArgumentForPanicLocation
-    }
-  end
- }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

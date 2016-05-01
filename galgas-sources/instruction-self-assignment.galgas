@@ -93,68 +93,6 @@ override method @selfVarAssignmentInstructionAST analyze
     !staticTypeAllowed:false
   )
   [!?ioInstructionGenerationList appendStoreInMemory !resultPtr !result]
-
-#  if not [[resultPtr type] copyable] then
-#    error mSelfLocation : "an $" + [[resultPtr type] key] + " instance is not copyable"
-#  end
-#  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !resultPtr ?outResult]
-
-
-
-#  if inSelfType == .null then
-#    error mTargetVarName : "'self' is not available in this context"
-#  else
-#  #--- Analyze field name
-#    switch [inSelfType kind]
-#    case boolean :
-#      error mTargetVarName : "a boolean does not have fields"
-#    case arrayType (* *) :
-#      error mTargetVarName : "an array does not have fields"
-#    case boolset :
-#      error mTargetVarName : "a boolset does not have fields"
-#    case literalString :
-#      error mTargetVarName : "a static string does not have fields"
-#    case enumeration (*) :
-#      error mTargetVarName : "an enumeration does not have fields"
-#    case integer (* * * *) :  
-#      error mTargetVarName : "an integer does not have fields"
-#    case staticInteger :  
-#      error mTargetVarName : "an integer does not have fields"
-#    case opaque (*) :  
-#      error mTargetVarName : "an opaque type does not have fields"
-#    case structure (@propertyMap propertyMap *) :
-#      [propertyMap searchKey !mTargetVarName ?let unused public ?let targetType ?let idx]
-#      getLocalNameOfNewTempObjectInMemory (!targetType !?ioTemporaries ?let fieldPtr)
-#      [!?ioInstructionGenerationList appendGetElementPtrFromSelf
-#        !fieldPtr
-#        !inSelfType
-#        !{!.absolute {!index:idx} !mTargetVarName.string}
-#      ]
-#    #--- Analyze source expression
-#      [mSourceExpression analyzeExpression
-#        !self:inSelfType
-#        !inGuard:false
-#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#        !optionalTargetType:targetType
-#        !context:inContext
-#        !modes:inModeSet
-#        !allowPanic:inAllowPanic
-#        !?temporary:ioTemporaries
-#        !?staticStringMap:ioGlobalLiteralStringMap
-#        !?variableMap:ioVariableMap
-#        !?alloca:ioAllocaList
-#        !?instructionListIR:ioInstructionGenerationList
-#        ?result:@operandIR sourceOperand
-#      ]
-#      let result = checkAssignmentCompatibility (
-#        !source:sourceOperand
-#        !targetAnnotationType:targetType
-#        !errorLocation:mTargetVarName.location
-#        !staticTypeAllowed:false
-#      )
-#      [!?ioInstructionGenerationList appendStoreInMemory !fieldPtr !result]
-#    end
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
