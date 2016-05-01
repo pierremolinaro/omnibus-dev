@@ -31,10 +31,10 @@ syntax extension common_syntax {
     $..<$
     <expression> ?let @expressionAST upperBoundExpression
     let endOf_upperBoundExpression_instruction = @location.here
-    $:$
+    ${$
     <instructionList> ?let instructionList !?ioLabelMap
     let endOfInstruction = @location.here
-    $end$
+    $}$
     ioInstructionList += !@forLowerUpperBoundInstructionAST.new {
       !varName
       !typeName

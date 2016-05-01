@@ -10,46 +10,46 @@ struct $rendezVous {
 
   public primitive input () {
     let found = makeTaskReady (!?list:self.outputWaitList)
-    if not found :
+    if not found {
       guardDidChange (!?guard:self.outputGuardList)
       blockInList (!?list:self.inputWaitList)
-    end
+    }
   }
 
   public primitive output () {
     let found = makeTaskReady (!?list:self.inputWaitList)
-    if not found :
+    if not found {
       guardDidChange (!?guard:self.inputGuardList)
       blockInList (!?list:self.outputWaitList)
-    end
+    }
   }
 
   public primitive inputUntil @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
     result = makeTaskReady (!?list:self.outputWaitList)
-    if (not result) and (inDeadline > time.millis ()) : 
+    if (not result) and (inDeadline > time.millis ()) { 
       blockInListAndOnDeadline (!?list:self.inputWaitList !deadline:inDeadline)
-    end
+    }
   }
 
   public primitive outputUntil @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
     result = makeTaskReady (!?list:self.inputWaitList)
-    if (not result) and (inDeadline > time.millis ()) : 
+    if (not result) and (inDeadline > time.millis ()) { 
       blockInListAndOnDeadline (!?list:self.outputWaitList !deadline:inDeadline)
-    end
+    }
   }
 
   public guard input @noWarningIfUnused () {
     accept = makeTaskReady (!?list:self.outputWaitList)
-    if not accept :
+    if not accept {
       handleGuardedCommand (!?guard:self.inputGuardList)
-    end
+    }
   }
 
   guard output @noWarningIfUnused () {
     accept = makeTaskReady (!?list:self.inputWaitList)
-    if not accept :
+    if not accept {
       handleGuardedCommand (!?guard:self.outputGuardList)
-    end
+    }
   }
 
 }

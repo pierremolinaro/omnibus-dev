@@ -98,8 +98,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_convert,
    kToken_do,
    kToken_else,
-   kToken_elsif,
-   kToken_end,
    kToken_enum,
    kToken_extend,
    kToken_extension,
@@ -218,7 +216,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 113 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 111 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;

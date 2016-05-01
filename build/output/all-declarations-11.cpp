@@ -198,11 +198,11 @@ static void extensionMethod_forLowerUpperBoundInstructionAST_analyze (const cPtr
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_7759 = (const cEnumAssociatedValues_typeKind_integer *) (var_type.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 86)).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_min = extractPtr_7759->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_max = extractPtr_7759->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_7759->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_bitCount = extractPtr_7759->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_7757 = (const cEnumAssociatedValues_typeKind_integer *) (var_type.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 86)).unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_min = extractPtr_7757->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_max = extractPtr_7757->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_7757->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_bitCount = extractPtr_7757->mAssociatedValue3 ;
       GALGAS_operandIR var_lowerBoundExpressionResult ;
       callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mLowerBoundExpression.ptr (), constinArgument_inSelfType, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 108)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_lowerBoundExpressionResult, inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 104)) ;
       GALGAS_operandIR var_upperBoundExpressionResult ;

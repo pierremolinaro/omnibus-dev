@@ -8,28 +8,28 @@ struct $monSemaphore {
   var guardList = $guardList ()
 
   public primitive P @noWarningIfUnused () {
-    if self.value > 0 :
+    if self.value > 0 {
       self.value -= 1
-    else
+    }else{
       blockInList (!?list:self.list)
-    end
+    }
   }
 
   public service V () {
     let found = makeTaskReady (!?list:self.list)
-    if not found :
+    if not found {
       self.value += 1
       guardDidChange (!?guard:self.guardList)
-    end
+    }
   }
 
   public guard P () {
     accept = self.value > 0
-    if accept :
+    if accept {
       self.value -= 1
-    else
+    }else{
       handleGuardedCommand (!?guard:self.guardList)
-    end
+    }
   }
   
   public guard PP () : self.P () {

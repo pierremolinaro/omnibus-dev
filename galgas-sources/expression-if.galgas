@@ -23,13 +23,15 @@ syntax extension common_syntax {
     $if$
     <expression> ?let ifExpression
     let @location ifExpressionEndLocation = .here
-    $:$
+    ${$
     <expression> ?let thenExpression
     let @location thenExpressionEndLocation = .here
+    $}$
     $else$
+    ${$
     <expression> ?let elseExpression
     let @location elseExpressionEndLocation = .here
-    $end$
+    $}$
     outExpression = @ifExpressionAST.new {
       !ifExpression !ifExpressionEndLocation
       !thenExpression !thenExpressionEndLocation
