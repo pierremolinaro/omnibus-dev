@@ -11004,9 +11004,11 @@ class GALGAS_selfVarOperatorAssignInstructionAST : public GALGAS_instructionAST 
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_selfVarOperatorAssignInstructionAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                              const class GALGAS_expressionAST & inOperand1,
-                                                                              const class GALGAS_operatorAssignKind & inOperand2
+  public : static GALGAS_selfVarOperatorAssignInstructionAST constructor_new (const class GALGAS_location & inOperand0,
+                                                                              const class GALGAS_fieldList & inOperand1,
+                                                                              const class GALGAS_operatorAssignKind & inOperand2,
+                                                                              const class GALGAS_location & inOperand3,
+                                                                              const class GALGAS_expressionAST & inOperand4
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -11018,11 +11020,15 @@ class GALGAS_selfVarOperatorAssignInstructionAST : public GALGAS_instructionAST 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_fieldList getter_mFieldList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_operatorAssignKind getter_mOperator (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTargetVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -11165,23 +11171,29 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_operatorAssignKind 
 
 class cPtr_selfVarOperatorAssignInstructionAST : public cPtr_instructionAST {
 //--- Attributes
-  public : GALGAS_lstring mAttribute_mTargetVarName ;
-  public : GALGAS_expressionAST mAttribute_mSourceExpression ;
+  public : GALGAS_location mAttribute_mSelfLocation ;
+  public : GALGAS_fieldList mAttribute_mFieldList ;
   public : GALGAS_operatorAssignKind mAttribute_mOperator ;
+  public : GALGAS_location mAttribute_mOperatorLocation ;
+  public : GALGAS_expressionAST mAttribute_mSourceExpression ;
 
 //--- Constructor
-  public : cPtr_selfVarOperatorAssignInstructionAST (const GALGAS_lstring & in_mTargetVarName,
-                                                     const GALGAS_expressionAST & in_mSourceExpression,
-                                                     const GALGAS_operatorAssignKind & in_mOperator
+  public : cPtr_selfVarOperatorAssignInstructionAST (const GALGAS_location & in_mSelfLocation,
+                                                     const GALGAS_fieldList & in_mFieldList,
+                                                     const GALGAS_operatorAssignKind & in_mOperator,
+                                                     const GALGAS_location & in_mOperatorLocation,
+                                                     const GALGAS_expressionAST & in_mSourceExpression
                                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTargetVarName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSelfLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_fieldList getter_mFieldList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_operatorAssignKind getter_mOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
