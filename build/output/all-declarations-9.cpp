@@ -13831,14 +13831,14 @@ static void extensionMethod_typeArrayDeclaration_enterInContext (const cPtr_abst
   const cPtr_typeArrayDeclaration * object = (const cPtr_typeArrayDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_typeArrayDeclaration) ;
   GALGAS_bool var_copyable ;
-  GALGAS_string joker_4690 ; // Joker input parameter
-  GALGAS_typeKind joker_4702 ; // Joker input parameter
-  GALGAS_classMethodMap joker_4724 ; // Joker input parameter
-  GALGAS_bool joker_4744 ; // Joker input parameter
-  GALGAS_bool joker_4788 ; // Joker input parameter
-  GALGAS_bool joker_4806 ; // Joker input parameter
-  GALGAS_unifiedTypeMap_2D_proxy joker_4829 ; // Joker input parameter
-  ioArgument_ioContext.mAttribute_mTypeMap.method_searchKey (object->mAttribute_mElementTypeName, joker_4690, joker_4702, joker_4724, joker_4744, var_copyable, joker_4788, joker_4806, joker_4829, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 97)) ;
+  GALGAS_string joker_4685 ; // Joker input parameter
+  GALGAS_typeKind joker_4697 ; // Joker input parameter
+  GALGAS_classMethodMap joker_4719 ; // Joker input parameter
+  GALGAS_bool joker_4739 ; // Joker input parameter
+  GALGAS_bool joker_4783 ; // Joker input parameter
+  GALGAS_bool joker_4801 ; // Joker input parameter
+  GALGAS_unifiedTypeMap_2D_proxy joker_4824 ; // Joker input parameter
+  ioArgument_ioContext.mAttribute_mTypeMap.method_searchKey (object->mAttribute_mElementTypeName, joker_4685, joker_4697, joker_4719, joker_4739, var_copyable, joker_4783, joker_4801, joker_4824, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 97)) ;
   const enumGalgasBool test_0 = var_copyable.operator_not (SOURCE_FILE ("type-array.galgas", 108)).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (object->mAttribute_mElementTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
@@ -13848,9 +13848,9 @@ static void extensionMethod_typeArrayDeclaration_enterInContext (const cPtr_abst
   GALGAS_allocaList var_allocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("type-array.galgas", 113)) ;
   GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("type-array.galgas", 114)) ;
   GALGAS_variableMap var_variableMap = function_variableMapWithConstants (ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 115)) ;
-  GALGAS_staticStringMap joker_5470 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-array.galgas", 125)) ;
+  GALGAS_staticStringMap joker_5465 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-array.galgas", 125)) ;
   GALGAS_operandIR var_sizeExpressionIR ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSizeExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 117)), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mArrayTypeName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 119)), object->mAttribute_mArrayTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-array.galgas", 119)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 120)), ioArgument_ioContext, GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("type-array.galgas", 122)), GALGAS_bool (false), var_temporaries, joker_5470, var_variableMap, var_allocaList, var_initInstructionGenerationList, var_sizeExpressionIR, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 116)) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSizeExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 117)), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mArrayTypeName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 119)), object->mAttribute_mArrayTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-array.galgas", 119)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 120)), ioArgument_ioContext, GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("type-array.galgas", 122)), GALGAS_bool (false), var_temporaries, joker_5465, var_variableMap, var_allocaList, var_initInstructionGenerationList, var_sizeExpressionIR, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 116)) ;
   GALGAS_bool test_2 = GALGAS_bool (kIsStrictSup, var_allocaList.getter_length (SOURCE_FILE ("type-array.galgas", 131)).add_operation (var_initInstructionGenerationList.getter_length (SOURCE_FILE ("type-array.galgas", 131)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 131)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_2.boolEnum ()) {
     test_2 = var_sizeExpressionIR.mAttribute_mValue.getter_isLiteralInteger (SOURCE_FILE ("type-array.galgas", 131)).operator_not (SOURCE_FILE ("type-array.galgas", 131)) ;

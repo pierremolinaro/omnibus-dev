@@ -24,7 +24,7 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $arrayType$
+    $type$
     $typeName$ ?let newTypeName
     $=$
     $typeName$ ?let aliasedTypeName
