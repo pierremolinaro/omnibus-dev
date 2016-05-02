@@ -14,10 +14,10 @@ Un \emph{type opaque} est un type dont la définition est externe à PLM, dans l
 La déclaration d'un type opaque est introduite par le mot réservé \plm!type! :
 
 \begin{PLM}
-type $monTypeOpaque : ::32::
+type $monTypeOpaque : ((32))
 \end{PLM}
 
-La séquence \plm!::nombre::! caractérise la déclaration d'un type opaque. Le nombre associé (ici \plm!32!) est le nombre de bits pour représenter un objet de ce type.
+La séquence \plm!((nombre))! caractérise la déclaration d'un type opaque. Les deux niveaux de parenthèses sont obligatoires. Le nombre associé (ici \plm!32!) est le nombre de bits pour représenter un objet de ce type.
 
 {\bf Note.} Actuellement, une expression statique n'est pas acceptée pour spécifier ce nombre de bits. 
 
@@ -36,7 +36,7 @@ Ces deux attributs sont cumulables.
 L'attribut \plm=@instantiable= est spécifié après l'indication de taille du type :
 
 \begin{PLM}
-type $monTypeOpaque : ::32:: @instantiable
+type $monTypeOpaque : ((32)) @instantiable
 \end{PLM}
 
 
@@ -64,7 +64,7 @@ L'expression \plm=$monTypeOpaque ()= est à une instance de \plm=$monTypeOpaque=
 L'attribut \plm=@copyable= est spécifié après l'indication de taille du type :
 
 \begin{PLM}
-type $monTypeOpaque : ::32:: @copyable
+type $monTypeOpaque : ((32)) @copyable
 \end{PLM}
 
 
