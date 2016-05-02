@@ -1267,14 +1267,14 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "  public primitive inputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    result = makeTaskReady (!\?list:self.outputWaitList)\n"
-  "    if (not result) && (inDeadline > time.millis ()) { \n"
+  "    if (not result) and (inDeadline > time.millis ()) { \n"
   "      blockInListAndOnDeadline (!\?list:self.inputWaitList !deadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public primitive outputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    result = makeTaskReady (!\?list:self.inputWaitList)\n"
-  "    if (not result) && (inDeadline > time.millis ()) { \n"
+  "    if (not result) and (inDeadline > time.millis ()) { \n"
   "      blockInListAndOnDeadline (!\?list:self.outputWaitList !deadline:inDeadline)\n"
   "    }\n"
   "  }\n"
@@ -1332,7 +1332,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2434, // Text length
+  2436, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 

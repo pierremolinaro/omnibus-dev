@@ -110,9 +110,6 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique__21__3F_ = "the '!\?' or 
 //--- Syntax error message for terminal '$and$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_and = "the 'and' keyword" ;
 
-//--- Syntax error message for terminal '$arrayType$' :
-static const char * gSyntaxErrorMessage_plm_5F_lexique_arrayType = "the 'arrayType' keyword" ;
-
 //--- Syntax error message for terminal '$assert$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_assert = "the 'assert' keyword" ;
 
@@ -247,6 +244,9 @@ static const char * gSyntaxErrorMessage_plm_5F_lexique_true = "the 'true' keywor
 
 //--- Syntax error message for terminal '$truncate$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_truncate = "the 'truncate' keyword" ;
+
+//--- Syntax error message for terminal '$type$' :
+static const char * gSyntaxErrorMessage_plm_5F_lexique_type = "the 'type' keyword" ;
 
 //--- Syntax error message for terminal '$until$' :
 static const char * gSyntaxErrorMessage_plm_5F_lexique_until = "the 'until' keyword" ;
@@ -425,7 +425,6 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique__21_,
     gSyntaxErrorMessage_plm_5F_lexique__21__3F_,
     gSyntaxErrorMessage_plm_5F_lexique_and,
-    gSyntaxErrorMessage_plm_5F_lexique_arrayType,
     gSyntaxErrorMessage_plm_5F_lexique_assert,
     gSyntaxErrorMessage_plm_5F_lexique_at,
     gSyntaxErrorMessage_plm_5F_lexique_boolset,
@@ -471,6 +470,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_task,
     gSyntaxErrorMessage_plm_5F_lexique_true,
     gSyntaxErrorMessage_plm_5F_lexique_truncate,
+    gSyntaxErrorMessage_plm_5F_lexique_type,
     gSyntaxErrorMessage_plm_5F_lexique_until,
     gSyntaxErrorMessage_plm_5F_lexique_var,
     gSyntaxErrorMessage_plm_5F_lexique_while,
@@ -853,20 +853,6 @@ static const utf32 kUnicodeString_plm_5F_lexique_and [] = {
   TO_UNICODE ('a'),
   TO_UNICODE ('n'),
   TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
-
-//--- Unicode string for '$arrayType$'
-static const utf32 kUnicodeString_plm_5F_lexique_arrayType [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('T'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('e'),
   TO_UNICODE (0)
 } ;
 
@@ -1342,6 +1328,15 @@ static const utf32 kUnicodeString_plm_5F_lexique_truncate [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$type$'
+static const utf32 kUnicodeString_plm_5F_lexique_type [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('p'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$until$'
 static const utf32 kUnicodeString_plm_5F_lexique_until [] = {
   TO_UNICODE ('u'),
@@ -1500,6 +1495,7 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_sync, 4, C_Lexique_plm_5F_lexique::kToken_sync),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_task, 4, C_Lexique_plm_5F_lexique::kToken_task),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_true, 4, C_Lexique_plm_5F_lexique::kToken_true),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_type, 4, C_Lexique_plm_5F_lexique::kToken_type),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_check, 5, C_Lexique_plm_5F_lexique::kToken_check),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_false, 5, C_Lexique_plm_5F_lexique::kToken_false),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_guard, 5, C_Lexique_plm_5F_lexique::kToken_guard),
@@ -1523,7 +1519,6 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_register, 8, C_Lexique_plm_5F_lexique::kToken_register),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_required, 8, C_Lexique_plm_5F_lexique::kToken_required),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_truncate, 8, C_Lexique_plm_5F_lexique::kToken_truncate),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_arrayType, 9, C_Lexique_plm_5F_lexique::kToken_arrayType),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_extension, 9, C_Lexique_plm_5F_lexique::kToken_extension),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_primitive, 9, C_Lexique_plm_5F_lexique::kToken_primitive),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_stackSize, 9, C_Lexique_plm_5F_lexique::kToken_stackSize),
@@ -1628,11 +1623,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_and:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("and") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
-    case kToken_arrayType:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("arrayType") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_assert:
@@ -1858,6 +1848,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_truncate:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("truncate") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_type:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("type") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_until:
@@ -2658,7 +2653,6 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("!") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("!\?") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("and") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("arrayType") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("assert") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("at") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("boolset") COMMA_THERE) ;
@@ -2704,6 +2698,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("task") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("true") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("truncate") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("type") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("until") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("var") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("while") COMMA_THERE) ;
@@ -2849,6 +2844,7 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.addObject ("sync") ;
     ioList.addObject ("task") ;
     ioList.addObject ("true") ;
+    ioList.addObject ("type") ;
     ioList.addObject ("check") ;
     ioList.addObject ("false") ;
     ioList.addObject ("guard") ;
@@ -2872,7 +2868,6 @@ static void getKeywordsForIdentifier_plm_5F_lexique (const C_String & inIdentifi
     ioList.addObject ("register") ;
     ioList.addObject ("required") ;
     ioList.addObject ("truncate") ;
-    ioList.addObject ("arrayType") ;
     ioList.addObject ("extension") ;
     ioList.addObject ("primitive") ;
     ioList.addObject ("stackSize") ;
@@ -2906,7 +2901,6 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     9 /* plm_lexique_1__21_ */,
     9 /* plm_lexique_1__21__3F_ */,
     1 /* plm_lexique_1_and */,
-    1 /* plm_lexique_1_arrayType */,
     1 /* plm_lexique_1_assert */,
     1 /* plm_lexique_1_at */,
     1 /* plm_lexique_1_boolset */,
@@ -2952,6 +2946,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_task */,
     1 /* plm_lexique_1_true */,
     1 /* plm_lexique_1_truncate */,
+    1 /* plm_lexique_1_type */,
     1 /* plm_lexique_1_until */,
     1 /* plm_lexique_1_var */,
     1 /* plm_lexique_1_while */,
@@ -12047,7 +12042,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_start_5F_symbol_i0_parse (C
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i1_ (GALGAS_ast & ioArgument_ioAST,
                                                                       C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_arrayType) COMMA_SOURCE_FILE ("type-array.galgas", 27)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_type) COMMA_SOURCE_FILE ("type-array.galgas", 27)) ;
   GALGAS_lstring var_newTypeName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("type-array.galgas", 28)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("type-array.galgas", 29)) ;
@@ -12064,7 +12059,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i1_ (GALGAS_ast
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i1_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_arrayType) COMMA_SOURCE_FILE ("type-array.galgas", 27)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_type) COMMA_SOURCE_FILE ("type-array.galgas", 27)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("type-array.galgas", 28)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("type-array.galgas", 29)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("type-array.galgas", 30)) ;

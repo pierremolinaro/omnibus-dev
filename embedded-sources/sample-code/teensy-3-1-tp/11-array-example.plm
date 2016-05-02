@@ -2,7 +2,7 @@ target "teensy-3-1-tp"
 
 let SIZE = 9
 
-arrayType $A = $uint32 [SIZE]
+type $A = $uint32 [SIZE]
 
 //------------------------------------------------*
 

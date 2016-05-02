@@ -5,7 +5,9 @@
 
 
 
-\chapter{Les types tableau}
+\chapter{Le type tableau}
+
+PLM implémente les tableaux de taille fixe. La déclaration d'un type tableau utilise obligatoirement la construction \plm=type= (\refSectionPage{DecTypeTableau}), il n'est pas possible de déclarer un type tableau anonyme.
 
 
 
@@ -14,5 +16,126 @@
 
 
 
+\sectionLabel{Déclaration d'un type tableau}{DecTypeTableau}
 
+La déclaration d'un type tableau est réalisée par la construction \plm=type= :
+
+\begin{PLM}
+type $monTypeTableau = $uint32 [20]
+\end{PLM}
+
+Cette construction déclare le type \plm=$monTypeTableau= comme tableau de $20$ instances de \plm=$uint32=. La taille du tableau est une expression statique, de type entier. Il est donc possible de faire référence à des constantes globales, comme par exemple :
+
+\begin{PLM}
+let SIZE = 20
+type $monTypeTableau = $uint32 [SIZE]
+\end{PLM}
+
+
+
+
+\sectionLabel{Construction d'un tableau}{ConstructionTableau}
+
+L'expression \plm=$monTypeTableau ()= est une instance du type \plm=$monTypeTableau=, dont tous les éléments sont initialisés à une valeur correspondant à un zéro binaire. Cette expression permet de fixer la valeur initiale d'une variable de ce type.
+
+
+\fbox{\begin{minipage}{1.0\textwidth}
+   En fait, cette construction n'est pas satisfaisante. Rien n'indique qu'un zéro binaire corresponde à une valeur valide d'un élément de n'importe quel type. Pour un entier, cela correspond à $0$, et c'est acceptable, mais pour une structure ? \bf Cette construction est à améliorer.
+\end{minipage}}
+
+
+
+\sectionLabel{Déclaration d'une instance de tableau}{DecInstanceTableau}
+
+La déclaration d'une instance de tableau s'effectue en nommant le type tableau et l'expression de construction de ce tableau :
+
+\begin{PLM}
+var t $monTypeTableau = $monTypeTableau ()
+\end{PLM}
+
+Et on peut omettre l'annotation de type :
+
+\begin{PLM}
+var t = $monTypeTableau ()
+\end{PLM}
+
+
+
+
+\sectionLabel{Obtention de la taille d'un tableau}{ObtentionTailleTableau}
+
+L'expression \plm=$monTypeTableau.size= renvoie la taille du tableau, sous la forme d'un entier statique (c'est-à-dire de type \plm=$staticInt=, voir \refChapterPage{chapitreTypeEntierStatique}).
+
+Une erreur de compilation est déclenchée si on écrit :
+\begin{PLM}
+var s = $monTypeTableau.size // ERREUR
+\end{PLM}
+
+En effet, \plm=$monTypeTableau.size= est un entier statique et le type \emph{entier statique} ne peut pas être attribué à une variable. Il faut préciser obligatoirement un type d'entier :
+
+\begin{PLM}
+var s $uint32 = $monTypeTableau.size // Ok
+\end{PLM}
+
+Ce type peut être signé ou non signé, du moment que sa plage de valeur permet de représenter la valeur statique.
+
+On peut utiliser l'expression \plm=$monTypeTableau.size= pour itérer sur tous les élements d'un tableau :
+\begin{PLM}
+var t = $monTypeTableau ()
+for i $uint32 in 0 ..< $monTypeTableau.size {
+  t [i] = i
+}
+\end{PLM}
+
+
+
+
+
+\sectionLabel{Accès à un élément d'un tableau}{AccesElementTableau}
+
+L'accès à un élément d'un tableau s'effectue par la notation classique \plm=[expression_indice]=. Les indices valides commencent à $0$ jusqu'à la taille du tableau moins $1$.
+
+L'accès à un élément de tableau est valide dans les constructions suivantes :
+\begin{itemize}
+  \item expression : \plm!var x = t [1]! ;
+  \item cible d'une affectation : \plm!t [1] = x! ;
+  \item cible d'un opérateur combiné à une affectation : \plm!t [1] += x! ;
+\end{itemize}
+
+L'\plm=expression_indice= doit être une expression entière, signée ou non signée.
+
+\subsection{Expression indice statique}
+
+Si l'\plm=expression_indice= est statique, c'est-à-dire dont la valeur est calculée à la compilation, la vérification de sa validité est effectuée à la compilation. Par exemple, pour un tableau \plm=t= de $20$ éléments :
+\begin{PLM}
+t [0] // Ok
+t [19] // Ok
+t [-1] // Erreur de compilation, indice négatif
+t [20] // Erreur de compilation, indice trop grand
+\end{PLM}
+
+Comme la validité est effectuée à la compilation, aucune vérification de validité n'est effectuée à l'exécution.
+
+
+\subsection{Expression indice non signée}
+
+Si l'\plm=expression_indice= est une instance d'un type entier non signé, il y a deux possibilités.
+
+Soit ce type entier non signé présente une valeur maximum supérieure ou égale à la taille du tableau : alors le code engendré vérifie à l'exécution que l'\plm=expression_indice= a une valeur valide. Dans l'exemple ci-dessous, le tableau \plm=t= contient $20$ éléments, l'\plm=expression_indice= doit donc être inférieure ou égale à $19$ ; or la plage de valeurs de \plm=$uint32= dépasse cette borne, aussi la validité est vérifiée à l'exécution. En cas d'échec, la panique est déclenchée.
+\begin{PLM}
+var i $uint32 = ...
+var x = t [i] // Vérification à l'exécution que i < 20
+\end{PLM}
+
+
+
+La seconde possibilité est que ce type entier non signé présente une valeur maximum strictement inférieure à la taille du tableau : la compilation garantit que l'indice sera toujours valide, aucune vérification n'est effectuée à l'exécution. Par exemple :
+\begin{PLM}
+var i $uint4 = ...
+var x = t [i] // Aucune vérification à l'exécution car i < 16
+\end{PLM}
+
+
+
+\subsection{Expression indice signée}
 
