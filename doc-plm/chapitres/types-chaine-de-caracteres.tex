@@ -40,16 +40,16 @@ x = "Bonjour !"
 
 L'instruction \plm!for! permet d'énumérer un objet de type \plm+$staticString+ :
 \begin{PLM}
-for c in x :
+for c in x {
   ...
-end
+}
 \end{PLM}
 
 \plm!c! est une constante locale à l'instruction \plm!for!, de type \plm!$uint8!. Pour le moment, la seule opération que l'on peut faire à l'intérieur de la boucle est d'afficher \plm!c! sous la forme d'un caractère sur l'afficheur LCD :
 \begin{PLM}
-for c in x :
+for c in x {
   lcd.writeData_inUserMode (!c)
-end
+}
 \end{PLM}
 
 

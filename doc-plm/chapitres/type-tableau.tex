@@ -24,14 +24,16 @@ La déclaration d'un type tableau est réalisée par la construction \plm=type= 
 type $monTypeTableau : $uint32 [20]
 \end{PLM}
 
-Cette construction déclare le type \plm=$monTypeTableau= comme tableau de $20$ instances de \plm=$uint32=. La taille du tableau est une expression statique, de type entier. Il est donc possible de faire référence à des constantes globales, comme par exemple :
+Cette construction déclare le type \plm=$monTypeTableau= comme tableau de $20$ instances de \plm=$uint32=.
+
+Tout type est acceptable comme élément de tableau (ici \plm=$uint32=), du moment qu'il est instanciable et copiable. Essayer de définir un type tableau avec un type non instanciable et/ou non copiable entraîne une erreur de compilation.
+
+La taille du tableau est une expression statique, de type entier. Il est donc possible de faire référence à des constantes globales, comme par exemple :
 
 \begin{PLM}
 let SIZE = 20
 type $monTypeTableau : $uint32 [SIZE]
 \end{PLM}
-
-
 
 
 \sectionLabel{Construction d'un tableau}{ConstructionTableau}

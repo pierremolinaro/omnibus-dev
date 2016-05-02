@@ -779,10 +779,10 @@ isr PITChannel0 @xtr {
 
 \subsectionLabel{Routines d'interruption par défaut, panique activée}{itsTeensy31AvecExceptions}
 
-Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf pour celles réservées par ARM et par PLM). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est le numéro de l'interruption. Par exemple, pour l'interruption $84$ (\texttt{PITChannel0}), la routine prédéfinie est :
+Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf pour celles réservées par ARM et par PLM). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est l'opposé du numéro de l'interruption. Par exemple, pour l'interruption $84$ (\texttt{PITChannel0}), la routine prédéfinie est :
 \begin{PLM}[1]
 isr PITChannel0 {
-  panic 84
+  panic -84
 }
 \end{PLM}
 

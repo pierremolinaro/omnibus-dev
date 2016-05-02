@@ -96,7 +96,7 @@ override method @typeArrayDeclaration enterInContext
     ?llvmTypeName:*
     ?kind:*
     ?classMethodMap:*
-    ?instantiable:*
+    ?instantiable:let instantiable
     ?copyable:let copyable
     ?equatable:*
     ?comparable:*
@@ -104,6 +104,9 @@ override method @typeArrayDeclaration enterInContext
   ]
   if not copyable then
     error mElementTypeName : "an array element should be copyable"
+  end
+  if not instantiable then
+    error mElementTypeName : "an array element should be instanciable"
   end
 #--- Compute array size
   @instructionListIR initInstructionGenerationList = {}

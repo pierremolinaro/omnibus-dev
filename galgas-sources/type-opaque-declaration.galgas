@@ -23,9 +23,11 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclaration outDeclaration {
-    $::$
+    $($
+    $($
     $integer$ ?let bitSize
-    $::$
+    $)$
+    $)$
     @lstringlist attributeList = {}
     repeat
     while

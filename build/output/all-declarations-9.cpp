@@ -13830,47 +13830,52 @@ static void extensionMethod_typeArrayDeclaration_enterInContext (const cPtr_abst
                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_typeArrayDeclaration * object = (const cPtr_typeArrayDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_typeArrayDeclaration) ;
+  GALGAS_bool var_instantiable ;
   GALGAS_bool var_copyable ;
   GALGAS_string joker_4683 ; // Joker input parameter
   GALGAS_typeKind joker_4695 ; // Joker input parameter
   GALGAS_classMethodMap joker_4717 ; // Joker input parameter
-  GALGAS_bool joker_4737 ; // Joker input parameter
-  GALGAS_bool joker_4781 ; // Joker input parameter
-  GALGAS_bool joker_4799 ; // Joker input parameter
-  GALGAS_unifiedTypeMap_2D_proxy joker_4822 ; // Joker input parameter
-  ioArgument_ioContext.mAttribute_mTypeMap.method_searchKey (object->mAttribute_mElementTypeName, joker_4683, joker_4695, joker_4717, joker_4737, var_copyable, joker_4781, joker_4799, joker_4822, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 94)) ;
+  GALGAS_bool joker_4796 ; // Joker input parameter
+  GALGAS_bool joker_4814 ; // Joker input parameter
+  GALGAS_unifiedTypeMap_2D_proxy joker_4837 ; // Joker input parameter
+  ioArgument_ioContext.mAttribute_mTypeMap.method_searchKey (object->mAttribute_mElementTypeName, joker_4683, joker_4695, joker_4717, var_instantiable, var_copyable, joker_4796, joker_4814, joker_4837, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 94)) ;
   const enumGalgasBool test_0 = var_copyable.operator_not (SOURCE_FILE ("type-array.galgas", 105)).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (object->mAttribute_mElementTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
     inCompiler->emitSemanticError (location_1, GALGAS_string ("an array element should be copyable")  COMMA_SOURCE_FILE ("type-array.galgas", 106)) ;
   }
-  GALGAS_instructionListIR var_initInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("type-array.galgas", 109)) ;
-  GALGAS_allocaList var_allocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("type-array.galgas", 110)) ;
-  GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("type-array.galgas", 111)) ;
-  GALGAS_variableMap var_variableMap = function_variableMapWithConstants (ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 112)) ;
-  GALGAS_staticStringMap joker_5463 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-array.galgas", 122)) ;
-  GALGAS_operandIR var_sizeExpressionIR ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSizeExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 114)), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mArrayTypeName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 116)), object->mAttribute_mArrayTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-array.galgas", 116)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 117)), ioArgument_ioContext, GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("type-array.galgas", 119)), GALGAS_bool (false), var_temporaries, joker_5463, var_variableMap, var_allocaList, var_initInstructionGenerationList, var_sizeExpressionIR, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 113)) ;
-  GALGAS_bool test_2 = GALGAS_bool (kIsStrictSup, var_allocaList.getter_length (SOURCE_FILE ("type-array.galgas", 128)).add_operation (var_initInstructionGenerationList.getter_length (SOURCE_FILE ("type-array.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 128)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
-  if (kBoolTrue != test_2.boolEnum ()) {
-    test_2 = var_sizeExpressionIR.mAttribute_mValue.getter_isLiteralInteger (SOURCE_FILE ("type-array.galgas", 128)).operator_not (SOURCE_FILE ("type-array.galgas", 128)) ;
+  const enumGalgasBool test_2 = var_instantiable.operator_not (SOURCE_FILE ("type-array.galgas", 108)).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    GALGAS_location location_3 (object->mAttribute_mElementTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_3, GALGAS_string ("an array element should be instanciable")  COMMA_SOURCE_FILE ("type-array.galgas", 109)) ;
   }
-  const enumGalgasBool test_3 = test_2.boolEnum () ;
-  if (kBoolTrue == test_3) {
-    inCompiler->emitSemanticError (object->mAttribute_mSizeExpressionLocation, GALGAS_string ("array size expression is not static")  COMMA_SOURCE_FILE ("type-array.galgas", 129)) ;
-  }else if (kBoolFalse == test_3) {
+  GALGAS_instructionListIR var_initInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("type-array.galgas", 112)) ;
+  GALGAS_allocaList var_allocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("type-array.galgas", 113)) ;
+  GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("type-array.galgas", 114)) ;
+  GALGAS_variableMap var_variableMap = function_variableMapWithConstants (ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 115)) ;
+  GALGAS_staticStringMap joker_5582 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-array.galgas", 125)) ;
+  GALGAS_operandIR var_sizeExpressionIR ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSizeExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 117)), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mArrayTypeName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 119)), object->mAttribute_mArrayTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-array.galgas", 119)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 120)), ioArgument_ioContext, GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("type-array.galgas", 122)), GALGAS_bool (false), var_temporaries, joker_5582, var_variableMap, var_allocaList, var_initInstructionGenerationList, var_sizeExpressionIR, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 116)) ;
+  GALGAS_bool test_4 = GALGAS_bool (kIsStrictSup, var_allocaList.getter_length (SOURCE_FILE ("type-array.galgas", 131)).add_operation (var_initInstructionGenerationList.getter_length (SOURCE_FILE ("type-array.galgas", 131)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 131)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  if (kBoolTrue != test_4.boolEnum ()) {
+    test_4 = var_sizeExpressionIR.mAttribute_mValue.getter_isLiteralInteger (SOURCE_FILE ("type-array.galgas", 131)).operator_not (SOURCE_FILE ("type-array.galgas", 131)) ;
+  }
+  const enumGalgasBool test_5 = test_4.boolEnum () ;
+  if (kBoolTrue == test_5) {
+    inCompiler->emitSemanticError (object->mAttribute_mSizeExpressionLocation, GALGAS_string ("array size expression is not static")  COMMA_SOURCE_FILE ("type-array.galgas", 132)) ;
+  }else if (kBoolFalse == test_5) {
     GALGAS_bigint var_arraySize ;
-    var_sizeExpressionIR.mAttribute_mValue.method_literalInteger (var_arraySize, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 131)) ;
-    GALGAS_unifiedTypeMap_2D_proxy var_elementType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, object->mAttribute_mElementTypeName, inCompiler  COMMA_SOURCE_FILE ("type-array.galgas", 132)) ;
-    GALGAS_classMethodMap var_classMethodMap = GALGAS_classMethodMap::constructor_emptyMap (SOURCE_FILE ("type-array.galgas", 134)) ;
+    var_sizeExpressionIR.mAttribute_mValue.method_literalInteger (var_arraySize, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 134)) ;
+    GALGAS_unifiedTypeMap_2D_proxy var_elementType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, object->mAttribute_mElementTypeName, inCompiler  COMMA_SOURCE_FILE ("type-array.galgas", 135)) ;
+    GALGAS_classMethodMap var_classMethodMap = GALGAS_classMethodMap::constructor_emptyMap (SOURCE_FILE ("type-array.galgas", 137)) ;
     {
-    var_classMethodMap.setter_insertKey (GALGAS_string ("size").getter_nowhere (SOURCE_FILE ("type-array.galgas", 135)), var_sizeExpressionIR, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 135)) ;
+    var_classMethodMap.setter_insertKey (GALGAS_string ("size").getter_nowhere (SOURCE_FILE ("type-array.galgas", 138)), var_sizeExpressionIR, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 138)) ;
     }
     {
-    ioArgument_ioContext.mAttribute_mTypeMap.setter_insertKey (object->mAttribute_mArrayTypeName, GALGAS_string ("%$").add_operation (object->mAttribute_mArrayTypeName.getter_string (SOURCE_FILE ("type-array.galgas", 139)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 139)), GALGAS_typeKind::constructor_arrayType (var_elementType, var_arraySize  COMMA_SOURCE_FILE ("type-array.galgas", 140)), var_classMethodMap, GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (false), GALGAS_bool (false), var_elementType, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 137)) ;
+    ioArgument_ioContext.mAttribute_mTypeMap.setter_insertKey (object->mAttribute_mArrayTypeName, GALGAS_string ("%$").add_operation (object->mAttribute_mArrayTypeName.getter_string (SOURCE_FILE ("type-array.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 142)), GALGAS_typeKind::constructor_arrayType (var_elementType, var_arraySize  COMMA_SOURCE_FILE ("type-array.galgas", 143)), var_classMethodMap, GALGAS_bool (true), GALGAS_bool (true), GALGAS_bool (false), GALGAS_bool (false), var_elementType, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 140)) ;
     }
     {
-    ioArgument_ioContext.mAttribute_mConstructorMap.setter_insertKey (object->mAttribute_mArrayTypeName, GALGAS_constructorValue::constructor_zero (SOURCE_FILE ("type-array.galgas", 151)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 149)) ;
+    ioArgument_ioContext.mAttribute_mConstructorMap.setter_insertKey (object->mAttribute_mArrayTypeName, GALGAS_constructorValue::constructor_zero (SOURCE_FILE ("type-array.galgas", 154)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 152)) ;
     }
   }
 }
@@ -13885,29 +13890,4 @@ static void defineExtensionMethod_typeArrayDeclaration_enterInContext (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_typeArrayDeclaration_enterInContext (defineExtensionMethod_typeArrayDeclaration_enterInContext, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Overriding extension method '@typeArrayDeclaration semanticAnalysis'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_typeArrayDeclaration_semanticAnalysis (const cPtr_abstractDeclaration * /* inObject */,
-                                                                   const GALGAS_semanticContext /* constinArgument_inContext */,
-                                                                   GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
-                                                                   GALGAS_intermediateCodeStruct & /* ioArgument_ioIntermediateCodeStruct */,
-                                                                   C_Compiler * /* inCompiler */
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_typeArrayDeclaration_semanticAnalysis (void) {
-  enterExtensionMethod_semanticAnalysis (kTypeDescriptor_GALGAS_typeArrayDeclaration.mSlotID,
-                                         extensionMethod_typeArrayDeclaration_semanticAnalysis) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_typeArrayDeclaration_semanticAnalysis (defineExtensionMethod_typeArrayDeclaration_semanticAnalysis, NULL) ;
 
