@@ -21,5 +21,12 @@ returnCode = subprocess.call ([
 ])
 if returnCode != 0 :
   sys.exit (returnCode)
+#----------------------------------------------------------------- Get delimiter list 
+returnCode = subprocess.call ([
+  scriptDir + "/../makefile-macosx/plm",
+  "--output-keyword-list-file=plm_lexique:delimitorsList:12:\plm@:@:" + scriptDir + "/chapitres/delimiterList.tex"
+])
+if returnCode != 0 :
+  sys.exit (returnCode)
 
 #----------------------------------------------------------------------------------------------------------------------*

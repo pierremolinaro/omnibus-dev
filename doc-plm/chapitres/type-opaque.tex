@@ -7,23 +7,72 @@
 
 \chapter{Les types opaque}
 
-Un \emph{type opaque} est un type dont la définition est externe à PLM, dans le code C associé. Les objets de ce type ne peuvent pas être copiés, ni comparés, et leur contenu est inaccessible. 
+Un \emph{type opaque} est un type dont la définition est externe à PLM, dans le code C associé. Par défaut, les objets de ce type ne peuvent pas être copiés, ni comparés, ni instanciés et leur contenu est inaccessible. La déclaration d'attributs associés modifie ces propriétés par défaut (\refSectionPage{attributTypeOpaque}).
 
 \section{Déclaration d'un type opaque}
 
-La déclaration d'un type opaque est introduite par le mot réservé \plm!opaqueType! :
+La déclaration d'un type opaque est introduite par le mot réservé \plm!type! :
 
 \begin{PLM}
-opaqueType MonTypeOpaque : 32
+type $monTypeOpaque : ::32::
 \end{PLM}
 
-Le nombre associé (ici \plm!32!) est le nombre de bits nécessaires pour représenter un objet de ce type.
+La séquence \plm!::nombre::! caractérise la déclaration d'un type opaque. Le nombre associé (ici \plm!32!) est le nombre de bits pour représenter un objet de ce type.
+
+{\bf Note.} Actuellement, une expression statique n'est pas acceptée pour spécifier ce nombre de bits. 
+
+\sectionLabel{Attributs d'un type opaque}{attributTypeOpaque}
+
+La déclaration d'un type opaque accepte deux attributs :
+\begin{itemize}
+\item \plm=@instantiable=, qui rend instanciable un objet d'un type opaque ;
+\item \plm=@copyable=, qui rend copiable un objet d'un type opaque.
+\end{itemize}
+
+Ces deux attributs sont cumulables.
+
+\subsection{Attribut \texttt{@instantiable}}
+
+L'attribut \plm=@instantiable= est spécifié après l'indication de taille du type :
+
+\begin{PLM}
+type $monTypeOpaque : ::32:: @instantiable
+\end{PLM}
+
+
+Par défaut, un type opaque n'est pas instanciable ; l'attribut \plm=@instantiable= le rend instanciable, c'est-à-dire que l'on peut écrire :
+
+\begin{PLM}
+var t $monTypeOpaque = $monTypeOpaque ()
+\end{PLM}
+
+Ou encore, en supprimant l'annotation de type :
+
+\begin{PLM}
+var t = $monTypeOpaque ()
+\end{PLM}
+
+L'expression \plm=$monTypeOpaque ()= est à une instance de \plm=$monTypeOpaque= dont la valeur correspond à des zéros binaires.
 
 
 
 
 
 
+\subsection{Attribut \texttt{@copyable}}
 
+L'attribut \plm=@copyable= est spécifié après l'indication de taille du type :
+
+\begin{PLM}
+type $monTypeOpaque : ::32:: @copyable
+\end{PLM}
+
+
+Par défaut, un type opaque n'est pas copiable ; l'attribut \plm=@copyable= le rend copiable, c'est-à-dire que l'on peut écrire :
+
+\begin{PLM}
+var t = $monTypeOpaque ()
+var u = t // Copie d'une instance de $monTypeOpaque
+\end{PLM}
 
 

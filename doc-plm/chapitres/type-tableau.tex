@@ -5,7 +5,7 @@
 
 
 
-\chapter{Le type tableau}
+\chapter{Les types tableau}
 
 PLM implémente les tableaux de taille fixe. La déclaration d'un type tableau utilise obligatoirement la construction \plm=type= (\refSectionPage{DecTypeTableau}), il n'est pas possible de déclarer un type tableau anonyme.
 
@@ -21,14 +21,14 @@ PLM implémente les tableaux de taille fixe. La déclaration d'un type tableau u
 La déclaration d'un type tableau est réalisée par la construction \plm=type= :
 
 \begin{PLM}
-type $monTypeTableau = $uint32 [20]
+type $monTypeTableau : $uint32 [20]
 \end{PLM}
 
 Cette construction déclare le type \plm=$monTypeTableau= comme tableau de $20$ instances de \plm=$uint32=. La taille du tableau est une expression statique, de type entier. Il est donc possible de faire référence à des constantes globales, comme par exemple :
 
 \begin{PLM}
 let SIZE = 20
-type $monTypeTableau = $uint32 [SIZE]
+type $monTypeTableau : $uint32 [SIZE]
 \end{PLM}
 
 
@@ -131,11 +131,49 @@ var x = t [i] // Vérification à l'exécution que i < 20
 
 La seconde possibilité est que ce type entier non signé présente une valeur maximum strictement inférieure à la taille du tableau : la compilation garantit que l'indice sera toujours valide, aucune vérification n'est effectuée à l'exécution. Par exemple :
 \begin{PLM}
-var i $uint4 = ...
-var x = t [i] // Aucune vérification à l'exécution car i < 16
+var i $uint4 = ... // Donc 0 <= i <= 15
+var x = t [i] // Aucune vérification à l'exécution car toujours i < 20
 \end{PLM}
 
 
 
 \subsection{Expression indice signée}
+
+Quand l'\plm=expression_indice= est une expression entière signée, il faut vérifier :
+\begin{itemize}
+  \item qu'elle est positive ou nulle ;
+  \item qu'elle est strictement inférieure à la taille du tableau.
+\end{itemize}
+
+La première vérification est toujours réalisée à l'exécution ; la seconde dépend de la valeur maximum du type entier, de manière analogue à ce qui est fait pour un indice entier non signé. Donc, pour un tableau \plm=t= de $20$ éléments :
+
+\begin{PLM}
+var i $int32 = ...
+var x = t [i] // Vérification à l'exécution que 0 <= i < 20
+\end{PLM}
+
+
+\begin{PLM}
+var i $int4 = ... // Donc -16 <= i < 15
+var x = t [i] // Vérification à l'exécution que 0 <= i
+\end{PLM}
+
+
+\subsection{Accès à un élément en mode panique}
+
+Dans une liste d'instructions devant être exécutée en mode panique, les instructions pouvant engendrer une panique sont interdites et leur présence entraîne une erreur de compilation.
+
+L'accès à un élément de tableau est donc accepté par le compilateur si \plm=expression_indice= :
+\begin{itemize}
+\item est une expression statique ;
+\item est une expression entière non signée, dont la valeur maximum est strictement inférieure à la taille du tableau.
+\end{itemize}
+
+
+L'accès à un élément de tableau est donc rejeté par le compilateur si \plm=expression_indice= :
+\begin{itemize}
+\item est une expression entière signée ;
+\item est une expression entière non signée, dont la valeur maximum est supérieure ou égale à la taille du tableau.
+\end{itemize}
+
 

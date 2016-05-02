@@ -2,7 +2,7 @@
 //   SYNCHRONIZATION TOOLS ROUTINES                                             
 //——————————————————————————————————————————————————————————————————————————————
 
-opaqueType $taskList @instantiable : 32
+type $taskList : ::32:: @instantiable
 
 //--- Block running task
 extern public func `kernel blockInList (?!list:ioWaitingList $taskList)
@@ -20,7 +20,7 @@ extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint
 //   GUARD                                                                      
 //——————————————————————————————————————————————————————————————————————————————
 
-opaqueType $guardList @instantiable : 32
+type $guardList : ::32:: @instantiable
 
 extern public func `guard handleGuardedCommand (?!guard:ioGuard $guardList)
 

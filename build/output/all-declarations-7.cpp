@@ -1521,7 +1521,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp
   "\n"
   "let SIZE = 9\n"
   "\n"
-  "arrayType $A = $uint32 [SIZE]\n"
+  "type $A : $uint32 [SIZE]\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1557,7 +1557,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  766, // Text length
+  761, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 

@@ -22,18 +22,17 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
-    $opaqueType$
-    $typeName$ ?let opaqueTypeName
+  rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclaration outDeclaration {
+    $::$
+    $integer$ ?let bitSize
+    $::$
     @lstringlist attributeList = {}
     repeat
     while
       $attribute$ ?let attribute
       attributeList += !attribute
     end
-    $:$
-    $integer$ ?let size
-    ioAST.mDeclarationList += !@opaqueTypeDeclaration.new {!opaqueTypeName !attributeList !size}
+    outDeclaration = @opaqueTypeDeclaration.new {!inNewTypeName !attributeList !bitSize}
   }
 
   #·····················································································································
