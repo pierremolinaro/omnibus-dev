@@ -15,7 +15,6 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 class cFunction {
- // public : const std::string mCurrentFunctionName ; // If empty, outside function
   public : const std::set <std::string> mCalledSubroutineSet ;
   public : const std::set <std::string> mBranchedSubroutineSet ;
   public : const int mSavedRegisterCount ;
