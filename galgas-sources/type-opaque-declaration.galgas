@@ -5,7 +5,8 @@
 class @opaqueTypeDeclaration : @abstractDeclaration {
   @lstring mOpaqueTypeName
   @lstringlist mAttributeList
-  @lbigint mSize
+  @expressionAST mSizeExpression
+  @location mSizeExpressionLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -25,7 +26,8 @@ syntax extension common_syntax {
   rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclaration outDeclaration {
     $($
     $($
-    $integer$ ?let bitSize
+    <expression> ?let sizeExpression
+    let sizeExpressionLocation = @location.here
     $)$
     $)$
     @lstringlist attributeList = {}
@@ -34,7 +36,7 @@ syntax extension common_syntax {
       $attribute$ ?let attribute
       attributeList += !attribute
     end
-    outDeclaration = @opaqueTypeDeclaration.new {!inNewTypeName !attributeList !bitSize}
+    outDeclaration = @opaqueTypeDeclaration.new {!inNewTypeName !attributeList !sizeExpression !sizeExpressionLocation}
   }
 
   #·····················································································································
@@ -62,6 +64,7 @@ override method @opaqueTypeDeclaration enterInPrecedenceGraph
   let typeName = @lstring.new {!"$" + mOpaqueTypeName !mOpaqueTypeName.location}
   [!?ioGraph addNode !typeName !self]
   [!?ioGraph addEdge !typeName !["$" + staticIntegerTypeName () nowhere]]
+  [mSizeExpression addDependenceEdgeForStaticExpression !typeName !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -99,23 +102,44 @@ override method @opaqueTypeDeclaration enterInContext
       error attribute : "only @copyable and @instantiable attributes are allowed here"
     end
   end
-#---
-  if mSize.bigint == 0G then
-    error mSize : "the opaque type size should be > 0"
-  end
-  [!?ioContext.mTypeMap insertKey
-    !lkey:mOpaqueTypeName
-    !llvmTypeName:"i" + mSize.bigint
-    !kind:.opaque {!bitCount:mSize.bigint}
-    !classMethodMap:{}
-    !instantiable:instantiable
-    !copyable:copyable
-    !equatable:false
-    !comparable:false
-    !enumerationType:.null # Not enumerable
+#--- Compute array size
+  @instructionListIR initInstructionGenerationList = {}
+  @allocaList allocaList = {}
+  @semanticTemporariesStruct temporaries = .default
+  var variableMap = variableMapWithConstants (!context:ioContext)
+  [mSizeExpression analyzeExpression
+    !self:.null
+    !inGuard:false
+    !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
+    !optionalTargetType:.null
+    !context:ioContext
+    !modes:{}
+    !allowPanic:false
+    !?temporary:temporaries
+    !?staticStringMap:*
+    !?variableMap:variableMap
+    !?alloca:allocaList
+    !?instructionListIR:initInstructionGenerationList
+    ?result:@operandIR sizeExpressionIR
   ]
-#--- Constructor
-  [!?ioContext.mConstructorMap insertKey !mOpaqueTypeName !.simple {!value:0G}]
+  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR.mValue isLiteralInteger] then
+    error mSizeExpressionLocation : "array size expression is not static"
+  else
+    [sizeExpressionIR.mValue literalInteger ?value:let bitSize]
+    [!?ioContext.mTypeMap insertKey
+      !lkey:mOpaqueTypeName
+      !llvmTypeName:"i" + bitSize
+      !kind:.opaque {!bitCount:bitSize}
+      !classMethodMap:{}
+      !instantiable:instantiable
+      !copyable:copyable
+      !equatable:false
+      !comparable:false
+      !enumerationType:.null # Not enumerable
+    ]
+  #--- Constructor
+    [!?ioContext.mConstructorMap insertKey !mOpaqueTypeName !.simple {!value:0G}]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

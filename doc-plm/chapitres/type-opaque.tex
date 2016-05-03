@@ -17,9 +17,19 @@ La déclaration d'un type opaque est introduite par le mot réservé \plm!type! 
 type $monTypeOpaque : ((32))
 \end{PLM}
 
-La séquence \plm!((nombre))! caractérise la déclaration d'un type opaque. Les deux niveaux de parenthèses sont obligatoires. Le nombre associé (ici \plm!32!) est le nombre de bits pour représenter un objet de ce type.
+La séquence \plm!((expression))! caractérise la déclaration d'un type opaque. Les deux niveaux de parenthèses sont obligatoires. Le nombre associé (ici \plm!32!) est le nombre de bits pour représenter un objet de ce type.
 
-{\bf Note.} Actuellement, une expression statique n'est pas acceptée pour spécifier ce nombre de bits. 
+L'\plm!expression! doit être une expression statique (c'est-à-dire calculée à la compilation), de type entier. On peut donc faire appel à des constantes globales, comme par exemple :
+
+\begin{PLM}
+let TAILLE = 32
+type $monTypeOpaque : ((TAILLE)) // 32 bits
+type $autreTypeOpaque : ((TAILLE * 2)) // 64 bits
+\end{PLM}
+
+
+
+
 
 \sectionLabel{Attributs d'un type opaque}{attributTypeOpaque}
 

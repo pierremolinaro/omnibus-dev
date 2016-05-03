@@ -9952,9 +9952,6 @@ class GALGAS_opaqueTypeDeclaration : public GALGAS_abstractDeclaration {
 //--- Constructor
   public : GALGAS_opaqueTypeDeclaration (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_opaqueTypeDeclaration constructor_default (LOCATION_ARGS) ;
-
 //---
   public : inline const class cPtr_opaqueTypeDeclaration * ptr (void) const { return (const cPtr_opaqueTypeDeclaration *) mObjectPtr ; }
 
@@ -9974,7 +9971,8 @@ class GALGAS_opaqueTypeDeclaration : public GALGAS_abstractDeclaration {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_opaqueTypeDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
                                                                 const class GALGAS_lstringlist & inOperand1,
-                                                                const class GALGAS_lbigint & inOperand2
+                                                                const class GALGAS_expressionAST & inOperand2,
+                                                                const class GALGAS_location & inOperand3
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -9990,7 +9988,9 @@ class GALGAS_opaqueTypeDeclaration : public GALGAS_abstractDeclaration {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSize (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -10013,12 +10013,14 @@ class cPtr_opaqueTypeDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mOpaqueTypeName ;
   public : GALGAS_lstringlist mAttribute_mAttributeList ;
-  public : GALGAS_lbigint mAttribute_mSize ;
+  public : GALGAS_expressionAST mAttribute_mSizeExpression ;
+  public : GALGAS_location mAttribute_mSizeExpressionLocation ;
 
 //--- Constructor
   public : cPtr_opaqueTypeDeclaration (const GALGAS_lstring & in_mOpaqueTypeName,
                                        const GALGAS_lstringlist & in_mAttributeList,
-                                       const GALGAS_lbigint & in_mSize
+                                       const GALGAS_expressionAST & in_mSizeExpression,
+                                       const GALGAS_location & in_mSizeExpressionLocation
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -10027,7 +10029,8 @@ class cPtr_opaqueTypeDeclaration : public cPtr_abstractDeclaration {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mSize (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
