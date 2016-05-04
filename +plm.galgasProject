@@ -94,7 +94,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/instruction-operator-assign.galgas"
   "galgas-sources/instruction-operator-self-assign.galgas"
   "galgas-sources/instruction-if.galgas"
-  "galgas-sources/instruction-select.galgas"
+  "galgas-sources/instruction-sync.galgas"
   "galgas-sources/instruction-proc-call.galgas"
   "galgas-sources/instruction-self-call.galgas"
   "galgas-sources/instruction-while.galgas"
