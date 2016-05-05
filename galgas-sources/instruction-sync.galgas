@@ -166,6 +166,7 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 override method @syncInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
@@ -212,6 +213,7 @@ override method @syncInstructionAST analyze
       @instructionListIR guardInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
         !inGuard:true
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:.null
@@ -239,6 +241,7 @@ override method @syncInstructionAST analyze
       @instructionListIR boolExpInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
         !inGuard:true
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:.null
@@ -290,6 +293,7 @@ override method @syncInstructionAST analyze
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !propertiesAreMutable:inRoutineCanMutateProperties
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:endOfBranch
       !context:inContext
@@ -369,6 +373,7 @@ proc analyzeGuardCall
 #--- Analyze effective parameters
   analyzeEffectiveParameters (
     !self:inSelfType
+    !directAccessToPropertiesAllowed:true
     !propertiesAreMutable:true
     !formal:formalSignature
     !effective:inEffectiveParameterList

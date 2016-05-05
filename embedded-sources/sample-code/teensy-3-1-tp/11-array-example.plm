@@ -33,3 +33,24 @@ task T priority 12 stackSize 512 {
 }
 
 //------------------------------------------------*
+
+struct $exemple {
+  var x $int32
+  
+  func `user store @mutating @access (?x: inX $int32) {
+    self.x = inX
+  }
+  
+  func `user increment @mutating @access () {
+    self.inc ()
+    self.x += 1
+  }
+  
+  func `user get @access () -> $int32 {
+    result = self.x
+  }
+  
+  section inc () {
+    self.x += 1
+  }
+}

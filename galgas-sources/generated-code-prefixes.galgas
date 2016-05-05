@@ -288,6 +288,12 @@ func %once mutatingAttribute -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once accessAttribute -> @string outResult {
+  outResult = "access"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func %once noWarningIfUnusedAttribute -> @string outResult {
   outResult = "noWarningIfUnused"
 }

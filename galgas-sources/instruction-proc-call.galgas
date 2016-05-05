@@ -176,6 +176,7 @@ list @procEffectiveParameterList {
 override method @standaloneRoutineCallInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
@@ -189,6 +190,7 @@ override method @standaloneRoutineCallInstructionAST analyze
   analyzeRoutineCall (
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !receiverName:.new{!"" !mRoutineName.location}
     !routineName:mRoutineName
     !effective:mEffectiveParameterList
@@ -225,6 +227,7 @@ override method @standaloneRoutineCallInstructionAST analyze
 override method @remoteRoutineCallInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
@@ -245,6 +248,7 @@ override method @remoteRoutineCallInstructionAST analyze
   analyzeRoutineCall (
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !receiverName:receiverName
     !routineName:routineName
     !effective:mEffectiveParameterList
@@ -281,6 +285,7 @@ override method @remoteRoutineCallInstructionAST analyze
 proc analyzeRoutineCall
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?receiverName:let @lstring inReceiverName
   ?routineName:let @lstring inRoutineName
   ?effective:let @effectiveParameterListAST inEffectiveParameterList
@@ -365,6 +370,7 @@ proc analyzeRoutineCall
 #--- Analyze effective parameters
   analyzeEffectiveParameters (
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !propertiesAreMutable:inRoutineCanMutateProperties
     !formal:formalSignature
     !effective:inEffectiveParameterList
@@ -386,6 +392,7 @@ proc analyzeRoutineCall
 
 proc analyzeEffectiveParameters
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?formal:let @procedureSignature inFormalSignature
   ?effective:let @effectiveParameterListAST inEffectiveParameterList
@@ -469,6 +476,7 @@ proc analyzeEffectiveParameters
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
         !inGuard:false
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:formal_mType
@@ -513,6 +521,8 @@ proc analyzeEffectiveParameters
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
+      elsif not inDirectAccessToPropertiesAllowed then
+        error name : "the current function should be declared @" + accessAttribute ()
       elsif not inRoutineCanMutateProperties then
         error name : "the current routine should be declared @" + mutatingAttribute ()
       else

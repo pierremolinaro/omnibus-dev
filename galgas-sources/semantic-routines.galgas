@@ -85,6 +85,7 @@ proc routineSemanticAnalysis
   ?returnTypeName:let @lstring inReturnTypeName
   ?let @instructionListAST inRoutineInstructionList
   ?let @location inEndOfRoutineDeclaration
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?warnIfUnused:let @bool inWarnIfUnused
   ?globalFunction:let @bool inGlobalFunction
@@ -136,6 +137,7 @@ proc routineSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   [inRoutineInstructionList analyzeRoutineInstructionList
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !propertiesAreMutable:inRoutineCanMutateProperties
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext

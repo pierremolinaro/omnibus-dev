@@ -82,6 +82,7 @@ override method @controlRegisterFieldInExpressionAST noteExpressionTypesInPreced
 
 override method @varInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -133,6 +134,7 @@ override method @varInExpressionAST analyzeExpression
 
 override method @controlRegisterFieldInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType

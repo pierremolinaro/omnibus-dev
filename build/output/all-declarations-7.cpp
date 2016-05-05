@@ -1348,7 +1348,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var signalerDonneeLue = $semaphore (!value:0)\n"
   "  var data $uint32 = 0\n"
   "\n"
-  "  public func `user output @mutating (\?data:inData $uint32) {\n"
+  "  public func `user output @mutating @access (\?data:inData $uint32) {\n"
   "    self.autoriserEcriture.P ()\n"
   "    self.data = inData\n"
   "    self.autoriserLecture.V ()\n"
@@ -1435,7 +1435,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2291, // Text length
+  2299, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -1551,13 +1551,34 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp
   "  }\n"
   "}\n"
   "\n"
-  "//------------------------------------------------*\n" ;
+  "//------------------------------------------------*\n"
+  "\n"
+  "struct $exemple {\n"
+  "  var x $int32\n"
+  "  \n"
+  "  func `user store @mutating @access (\?x: inX $int32) {\n"
+  "    self.x = inX\n"
+  "  }\n"
+  "  \n"
+  "  func `user increment @mutating @access () {\n"
+  "    self.inc ()\n"
+  "    self.x += 1\n"
+  "  }\n"
+  "  \n"
+  "  func `user get @access () -> $int32 {\n"
+  "    result = self.x\n"
+  "  }\n"
+  "  \n"
+  "  section inc () {\n"
+  "    self.x += 1\n"
+  "  }\n"
+  "}\n" ;
 
 const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  761, // Text length
+  1071, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 

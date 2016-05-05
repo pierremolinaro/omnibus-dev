@@ -66,13 +66,48 @@ syntax extension common_syntax {
 #  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionDeclarationListAST noteServiceTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @sectionDeclarationListAST noteSectionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
     [mSectionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @sectionDeclarationListAST enterInContext
+  ?receiverType:let @string inReceiverTypeName
+  ?!context:@semanticContext ioContext
+{
+  for section in self do
+  #--- Signature
+    @procedureSignature signature = {}
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in section.mSectionFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      signature += !formalArgumentPassingMode !selector.string !typeProxy
+    end
+    let returnType = if section.mReturnTypeName.string == "" then
+      @unifiedTypeMap-proxy.null
+    else
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !section.mReturnTypeName}
+    end
+  #--- Enter in context
+    [!?ioContext.mRoutineMapForContext insertKey
+      !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
+      !section.mPublic
+      !@modeMap {![userModeName () nowhere]}
+      !signature
+      !.section
+      !false # Not weak
+      !returnType
+      !false # No appendFileAndLineArgumentForPanicLocation
+      !true # canMutateProperties
+    ]
   end
 }
 
@@ -96,6 +131,7 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
       !returnTypeName:section.mReturnTypeName
       !section.mSectionInstructionList
       !section.mEndOfSectionLocation
+      !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
       !warnIfUnused:true
       !globalFunction:true

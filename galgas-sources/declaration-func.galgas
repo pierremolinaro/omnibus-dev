@@ -202,6 +202,7 @@ method @functionDeclarationListAST procedureSemanticAnalysis
       !returnTypeName:procedure.mFunctionReturnTypeName
       !procedure.mFunctionInstructionList
       !procedure.mEndOfFunctionDeclaration
+      !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
       !warnIfUnused:warnIfUnused
       !globalFunction:globalProcedure

@@ -163,36 +163,3 @@ method @functionDeclarationListAST enterInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @sectionDeclarationListAST enterInContext
-  ?receiverType:let @string inReceiverTypeName
-  ?!context:@semanticContext ioContext
-{
-  for section in self do
-  #--- Signature
-    @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in section.mSectionFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-      signature += !formalArgumentPassingMode !selector.string !typeProxy
-    end
-    let returnType = if section.mReturnTypeName.string == "" then
-      @unifiedTypeMap-proxy.null
-    else
-      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !section.mReturnTypeName}
-    end
-  #--- Enter in context
-    [!?ioContext.mRoutineMapForContext insertKey
-      !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
-      !section.mPublic
-      !@modeMap {![userModeName () nowhere]}
-      !signature
-      !.section
-      !false # Not weak
-      !returnType
-      !false # No appendFileAndLineArgumentForPanicLocation
-      !true # canMutateProperties
-    ]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -115,6 +115,7 @@ override method @typeArrayDeclaration enterInContext
   var variableMap = variableMapWithConstants (!context:ioContext)
   [mSizeExpression analyzeExpression
     !self:.null
+    !directAccessToPropertiesAllowed:false
     !inGuard:false
     !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
     !optionalTargetType:.null

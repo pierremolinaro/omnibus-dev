@@ -210,6 +210,7 @@ proc guardSemanticAnalysis
   #--- Analyze instruction list
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
+      !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inContext
@@ -243,6 +244,7 @@ proc guardSemanticAnalysis
   #--- Analyze instruction list
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
+      !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inContext
@@ -320,6 +322,7 @@ override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
   @allocaList baseGuardAllocaList = {}
   analyzeEffectiveParameters (
     !self:inSelfType
+    !directAccessToPropertiesAllowed:true
     !propertiesAreMutable:true
     !formal:formalSignature
     !effective:mEffectiveParameterList
@@ -417,6 +420,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
     @allocaList baseGuardAllocaList = {}
     analyzeEffectiveParameters (
       !self:inSelfType
+      !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
       !formal:formalSignature
       !effective:mEffectiveParameterList
@@ -483,6 +487,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   @allocaList baseGuardAllocaList = {}
   analyzeEffectiveParameters (
     !self:inSelfType
+    !directAccessToPropertiesAllowed:true
     !propertiesAreMutable:true
     !formal:formalSignature
     !effective:mEffectiveParameterList

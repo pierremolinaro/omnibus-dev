@@ -154,11 +154,11 @@ void extensionMethod_llvmPrototypeGeneration (const class GALGAS_externProcedure
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Extension method '@sectionDeclarationListAST noteServiceTypesInPrecedenceGraph'                   *
+//                   Extension method '@sectionDeclarationListAST noteSectionTypesInPrecedenceGraph'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_noteServiceTypesInPrecedenceGraph (const class GALGAS_sectionDeclarationListAST inObject,
+void extensionMethod_noteSectionTypesInPrecedenceGraph (const class GALGAS_sectionDeclarationListAST inObject,
                                                         class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                         class C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
@@ -231,15 +231,16 @@ void callExtensionMethod_noteInstructionTypesInPrecedenceGraph (const class cPtr
 typedef void (*extensionMethodSignature_instructionAST_analyze) (const class cPtr_instructionAST * inObject,
                                                                  const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                                                  const class GALGAS_bool constinArgument1,
-                                                                 const class GALGAS_lstring constinArgument2,
-                                                                 const class GALGAS_semanticContext constinArgument3,
-                                                                 const class GALGAS_stringset constinArgument4,
-                                                                 const class GALGAS_bool constinArgument5,
-                                                                 class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                                 class GALGAS_staticStringMap & ioArgument7,
-                                                                 class GALGAS_variableMap & ioArgument8,
-                                                                 class GALGAS_allocaList & ioArgument9,
-                                                                 class GALGAS_instructionListIR & ioArgument10,
+                                                                 const class GALGAS_bool constinArgument2,
+                                                                 const class GALGAS_lstring constinArgument3,
+                                                                 const class GALGAS_semanticContext constinArgument4,
+                                                                 const class GALGAS_stringset constinArgument5,
+                                                                 const class GALGAS_bool constinArgument6,
+                                                                 class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                                                 class GALGAS_staticStringMap & ioArgument8,
+                                                                 class GALGAS_variableMap & ioArgument9,
+                                                                 class GALGAS_allocaList & ioArgument10,
+                                                                 class GALGAS_instructionListIR & ioArgument11,
                                                                  class C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -253,6 +254,7 @@ void enterExtensionMethod_analyze (const int32_t inClassIndex,
 void callExtensionMethod_analyze (const class cPtr_instructionAST * inObject,
                                   const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
                                   const GALGAS_bool constin_inRoutineCanMutateProperties,
+                                  const GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
                                   const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                   const GALGAS_semanticContext constin_inContext,
                                   const GALGAS_stringset constin_inModeSet,
@@ -274,6 +276,7 @@ void callExtensionMethod_analyze (const class cPtr_instructionAST * inObject,
 void extensionMethod_analyzeBranchInstructionList (const class GALGAS_instructionListAST inObject,
                                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
                                                    const class GALGAS_bool constin_inRoutineCanMutateProperties,
+                                                   const class GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
                                                    const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                                    class GALGAS_location in_inEndOfInstructionList,
                                                    const class GALGAS_semanticContext constin_inContext,
