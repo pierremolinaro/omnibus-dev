@@ -165,6 +165,7 @@ proc initSemanticAnalysis
   outAllocaList = {}
   [inInstructionListAST analyzeRoutineInstructionList
     !self:inSelfType
+    !directAccessToPropertiesAllowed:true
     !propertiesAreMutable:true
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext

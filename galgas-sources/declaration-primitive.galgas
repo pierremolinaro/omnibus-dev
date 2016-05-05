@@ -143,6 +143,7 @@ method @primitiveDeclarationListAST primitiveSemanticAnalysis
       !returnTypeName:primitive.mReturnTypeName
       !primitive.mPrimitiveInstructionList
       !primitive.mEndOfPrimitiveDeclaration
+      !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
       !warnIfUnused:warnIfUnused
       !globalFunction:true

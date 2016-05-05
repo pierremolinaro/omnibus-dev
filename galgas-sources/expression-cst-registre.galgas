@@ -86,6 +86,7 @@ override method @registerIntegerExpInExpressionAST noteExpressionTypesInPreceden
 
 override method @registerConstantInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
@@ -123,6 +124,7 @@ override method @registerConstantInExpressionAST analyzeExpression
 
 override method @registerIntegerExpInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -160,6 +162,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
 #--- Analyze expression
   [mExpression analyzeExpression
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType

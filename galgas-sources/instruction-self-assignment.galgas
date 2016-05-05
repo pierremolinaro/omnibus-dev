@@ -46,6 +46,7 @@ override method @selfVarAssignmentInstructionAST noteInstructionTypesInPrecedenc
 override method @selfVarAssignmentInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -56,12 +57,16 @@ override method @selfVarAssignmentInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+  if not inDirectAccessToPropertiesAllowed then
+    error mSelfLocation : "the current function should be declared @" + accessAttribute ()
+  end
   if not inRoutineCanMutateProperties then
     error mSelfLocation : "the current function should be declared @" + mutatingAttribute ()
   end
   analyzeSelfAccess (
     !fieldList:mFieldList
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
@@ -77,6 +82,7 @@ override method @selfVarAssignmentInstructionAST analyze
   )
   [mSourceExpression analyzeExpression
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[resultPtr type]

@@ -57,6 +57,7 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 override method @forInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -70,6 +71,7 @@ override method @forInstructionAST analyze
 #--- Analyze iterated expression
   [mIteratedExpression analyzeExpression
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
@@ -108,6 +110,7 @@ override method @forInstructionAST analyze
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_do_instruction
     !context:inContext

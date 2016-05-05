@@ -83,6 +83,7 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 override method @varInstructionWithAssignmentAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModes
@@ -100,6 +101,7 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
@@ -152,6 +154,7 @@ override method @varInstructionWithAssignmentAST analyze
 override method @varInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModes

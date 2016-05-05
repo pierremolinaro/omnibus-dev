@@ -72,6 +72,7 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
 override method @forLowerUpperBoundInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -104,6 +105,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   #--- Analyze expressions
     [mLowerBoundExpression analyzeExpression
       !self:inSelfType
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:false
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null
@@ -119,6 +121,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     ]
     [mUpperBoundExpression analyzeExpression
       !self:inSelfType
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:false
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null
@@ -165,6 +168,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     [mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
       !propertiesAreMutable:inRoutineCanMutateProperties
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:mEndOf_do_instruction
       !context:inContext

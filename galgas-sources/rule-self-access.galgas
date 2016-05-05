@@ -84,6 +84,7 @@ method @fieldList noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedence
 proc analyzeSelfAccess
   ?fieldList:let @fieldList inFieldList
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
@@ -120,6 +121,7 @@ proc analyzeSelfAccess
         end
         [indexExpression analyzeExpression
           !self:inSelfType
+          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
           !inGuard:inGuard
           !routineNameForInvocationGraph:inCallerNameForInvocationGraph
           !optionalTargetType:.null

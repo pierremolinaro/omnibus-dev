@@ -73,6 +73,7 @@ override method @selfFunctionCallInExpressionAST noteExpressionTypesInPrecedence
 
 override method @selfFunctionCallInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
@@ -100,6 +101,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
   analyzeSelfAccess (
     !fieldList:fieldList
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
@@ -158,6 +160,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
 #--- Analyze effective parameters
   analyzeEffectiveParameters (
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !propertiesAreMutable:false
     !formal:formalSignature
     !effective:mEffectiveParameterList

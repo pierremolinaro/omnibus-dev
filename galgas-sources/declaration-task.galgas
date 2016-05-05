@@ -226,6 +226,7 @@ method @taskVarListAST-element enterInContext
   @variableMap variableMap = variableMapWithConstants (!context:ioContext)
   [mVarInitExpression analyzeExpression
     !self:.null
+    !directAccessToPropertiesAllowed:false
     !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:variableAnnotationType
@@ -310,6 +311,7 @@ method @taskList-element semanticAnalysis
       !returnTypeName:procedure.mFunctionReturnTypeName
       !procedure.mFunctionInstructionList
       !procedure.mEndOfFunctionDeclaration
+      !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
       !warnIfUnused:true
       !globalFunction:false
@@ -360,6 +362,7 @@ method @taskList-element semanticAnalysis
     !returnTypeName:["" nowhere]
     !taskListInstructionList
     !mTaskName.location
+    !directAccessToPropertiesAllowed:true
     !propertiesAreMutable:true
     !warnIfUnused:true
     !globalFunction:false

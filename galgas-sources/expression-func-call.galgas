@@ -88,6 +88,7 @@ override method @abstractFunctionCallInExpressionAST noteExpressionTypesInPreced
 
 override method @functionCallInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
@@ -107,6 +108,7 @@ override method @functionCallInExpressionAST analyzeExpression
   analyzeRoutineCall (
     !self:inSelfType
     !propertiesAreMutable:false
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !receiverName:mReceiverName
     !routineName:mFunctionName
     !effective:mEffectiveParameterList

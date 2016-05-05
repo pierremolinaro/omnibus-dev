@@ -41,6 +41,7 @@ override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 override method @panicInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -59,6 +60,7 @@ override method @panicInstructionAST analyze
   @instructionListIR unusedInstructionListIR = {}
   [mCodeExpression analyzeExpression
     !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inContext.mPanicCodeType

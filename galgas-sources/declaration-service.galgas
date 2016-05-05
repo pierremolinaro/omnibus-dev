@@ -143,6 +143,7 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
       !returnTypeName:service.mReturnTypeName
       !service.mServiceInstructionList
       !service.mEndOfServiceLocation
+      !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
       !warnIfUnused:warnIfUnused
       !globalFunction:true
