@@ -7,7 +7,7 @@ list @taskList {
   @lbigint mPriority
   @lbigint mStackSize
   @taskVarListAST mVarList
-  @procedureDeclarationListAST mTaskProcList
+  @functionDeclarationListAST mTaskProcList
   @taskInitListAST mTaskInitListAST
   @syncInstructionBranchList mGuardedCommandList
   @location mEndOfTaskDeclaration
@@ -57,7 +57,7 @@ syntax extension common_syntax {
     $integer$ ?let @lbigint stackSize
     ${$
     @taskVarListAST taskVarList = {}
-    @procedureDeclarationListAST taskProcList = {}
+    @functionDeclarationListAST taskProcList = {}
     @taskInitListAST taskInitListAST = {}
     @syncInstructionBranchList branchList = {}
     repeat
@@ -136,7 +136,7 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
       end
     end
     for procedure in mTaskProcList do
-      [procedure.mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+      [procedure.mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     end
     for guardedCommand in mGuardedCommandList do
       [guardedCommand.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
@@ -198,7 +198,7 @@ method @taskList enterInContext
     [task.mTaskProcList enterInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
     @taskProcedureMap taskProcedureMap = {}
     for procedure in task.mTaskProcList do
-      [!?taskProcedureMap insertKey !procedure.mProcedureName]
+      [!?taskProcedureMap insertKey !procedure.mFunctionName]
     end
   end
 }
@@ -304,12 +304,12 @@ method @taskList-element semanticAnalysis
     routineSemanticAnalysis (
       !receiverType:taskType
       !.function
-      !{!.new {!userModeName () !procedure.mProcedureName.location}}
-      !procedure.mProcedureName
-      !procedure.mProcedureFormalArgumentList
-      !returnTypeName:procedure.mReturnTypeName
-      !procedure.mProcedureInstructionList
-      !procedure.mEndOfProcedureDeclaration
+      !{!.new {!userModeName () !procedure.mFunctionName.location}}
+      !procedure.mFunctionName
+      !procedure.mFunctionFormalArgumentList
+      !returnTypeName:procedure.mFunctionReturnTypeName
+      !procedure.mFunctionInstructionList
+      !procedure.mEndOfFunctionDeclaration
       !warnIfUnused:true
       !globalProcedure:false
       !weakProcedure:false

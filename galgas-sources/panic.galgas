@@ -162,8 +162,10 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !?alloca:initAllocaList
     !?generatedCode:instructionGenerationList
   ]
-#---
+#--- End of variableMap
+  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !mEndOfPanicInstructions]
+  drop variableMap
 #--- Code generation
   if mPanicClauseName.string == "setup" then
     [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]

@@ -1420,6 +1420,16 @@ void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Extension method '@variableMap deinitTopLevelVariables'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_deinitTopLevelVariables (const class GALGAS_variableMap inObject,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          @semanticTemporariesStruct struct                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2215,6 +2225,17 @@ void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_externProced
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                      Extension method '@functionDeclarationListAST noteTypesInPrecedenceGraph'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_functionDeclarationListAST inObject,
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                       Extension method '@globalVarDeclarationList noteTypesInPrecedenceGraph'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2267,17 +2288,6 @@ void extensionMethod_notePrimitiveTypesInPrecedenceGraph (const class GALGAS_pri
                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                           class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Extension method '@procedureDeclarationListAST noteTypesInPrecedenceGraph'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_noteTypesInPrecedenceGraph (const class GALGAS_procedureDeclarationListAST inObject,
-                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2387,7 +2397,7 @@ void routine_buildSemanticContext (const class GALGAS_declarationListAST constin
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef void (*extensionMethodSignature_abstractDeclaration_enterInContext) (const class cPtr_abstractDeclaration * inObject,
-                                                                             const class GALGAS_procedureDeclarationListAST constinArgument0,
+                                                                             const class GALGAS_functionDeclarationListAST constinArgument0,
                                                                              class GALGAS_semanticContext & ioArgument1,
                                                                              class GALGAS_staticStringMap & ioArgument2,
                                                                              class C_Compiler * inCompiler
@@ -2401,7 +2411,7 @@ void enterExtensionMethod_enterInContext (const int32_t inClassIndex,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void callExtensionMethod_enterInContext (const class cPtr_abstractDeclaration * inObject,
-                                         const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                         const GALGAS_functionDeclarationListAST constin_inProcedureListAST,
                                          GALGAS_semanticContext & io_ioContext,
                                          GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                          C_Compiler * inCompiler
@@ -2414,7 +2424,7 @@ void callExtensionMethod_enterInContext (const class cPtr_abstractDeclaration * 
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef void (*extensionMethodSignature_abstractDeclaration_enterRoutinesInContext) (const class cPtr_abstractDeclaration * inObject,
-                                                                                     const class GALGAS_procedureDeclarationListAST constinArgument0,
+                                                                                     const class GALGAS_functionDeclarationListAST constinArgument0,
                                                                                      class GALGAS_semanticContext & ioArgument1,
                                                                                      class GALGAS_staticStringMap & ioArgument2,
                                                                                      class C_Compiler * inCompiler
@@ -2428,7 +2438,7 @@ void enterExtensionMethod_enterRoutinesInContext (const int32_t inClassIndex,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void callExtensionMethod_enterRoutinesInContext (const class cPtr_abstractDeclaration * inObject,
-                                                 const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                                 const GALGAS_functionDeclarationListAST constin_inProcedureListAST,
                                                  GALGAS_semanticContext & io_ioContext,
                                                  GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                  C_Compiler * inCompiler
@@ -2444,6 +2454,18 @@ void extensionMethod_enterExternProcInContext (const class GALGAS_externProcedur
                                                class GALGAS_semanticContext & io_ioContext,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Extension method '@functionDeclarationListAST enterInContext'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_enterInContext (const class GALGAS_functionDeclarationListAST inObject,
+                                     const class GALGAS_string constin_inSelfTypeName,
+                                     class GALGAS_semanticContext & io_ioContext,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2510,18 +2532,6 @@ void extensionMethod_enterInContext (const class GALGAS_panicClauseListAST_2D_el
 
 void extensionMethod_enterInContext (const class GALGAS_primitiveDeclarationListAST inObject,
                                      const class GALGAS_string constin_inReceiverTypeName,
-                                     class GALGAS_semanticContext & io_ioContext,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Extension method '@procedureDeclarationListAST enterInContext'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_enterInContext (const class GALGAS_procedureDeclarationListAST inObject,
-                                     const class GALGAS_string constin_inSelfTypeName,
                                      class GALGAS_semanticContext & io_ioContext,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
@@ -2644,6 +2654,20 @@ void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externP
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                      Extension method '@functionDeclarationListAST procedureSemanticAnalysis'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_procedureSemanticAnalysis (const class GALGAS_functionDeclarationListAST inObject,
+                                                class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
+                                                const class GALGAS_semanticContext constin_inSemanticContext,
+                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                        Extension method '@globalVarDeclarationList-element semanticAnalysis'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2714,20 +2738,6 @@ void extensionMethod_panicSemanticAnalysis (const class GALGAS_panicClauseListAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionMethod_primitiveSemanticAnalysis (const class GALGAS_primitiveDeclarationListAST inObject,
-                                                class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
-                                                const class GALGAS_semanticContext constin_inSemanticContext,
-                                                class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                      Extension method '@procedureDeclarationListAST procedureSemanticAnalysis'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_procedureSemanticAnalysis (const class GALGAS_procedureDeclarationListAST inObject,
                                                 class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
                                                 const class GALGAS_semanticContext constin_inSemanticContext,
                                                 class GALGAS_semanticTemporariesStruct & io_ioTemporaries,

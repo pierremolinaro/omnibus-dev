@@ -279,14 +279,14 @@ struct @semanticContext {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 

@@ -2495,7 +2495,7 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : virtual void nt_procedure_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_procedure_ (GALGAS_procedureDeclarationListAST & ioArgument0,
+  public : virtual void nt_procedure_ (GALGAS_functionDeclarationListAST & ioArgument0,
                                        C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'procedure_formal_arguments' non terminal

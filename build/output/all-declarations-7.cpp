@@ -3280,7 +3280,7 @@ typeComparisonResult cPtr_structureDeclaration::dynamicObjectCompare (const acPt
     result = mAttribute_mStructureFieldListAST.objectCompare (p->mAttribute_mStructureFieldListAST) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mProcedureDeclarationListAST.objectCompare (p->mAttribute_mProcedureDeclarationListAST) ;
+    result = mAttribute_mFunctionDeclarationListAST.objectCompare (p->mAttribute_mFunctionDeclarationListAST) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mServiceListAST.objectCompare (p->mAttribute_mServiceListAST) ;
@@ -3328,7 +3328,7 @@ GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_default (LO
   return GALGAS_structureDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
                                                        GALGAS_lstringlist::constructor_emptyList (HERE),
                                                        GALGAS_structureFieldListAST::constructor_emptyList (HERE),
-                                                       GALGAS_procedureDeclarationListAST::constructor_emptyList (HERE),
+                                                       GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                                                        GALGAS_serviceDeclarationListAST::constructor_emptyList (HERE),
                                                        GALGAS_sectionDeclarationListAST::constructor_emptyList (HERE),
                                                        GALGAS_primitiveDeclarationListAST::constructor_emptyList (HERE),
@@ -3348,15 +3348,15 @@ GALGAS_abstractDeclaration (inSourcePtr) {
 GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mStructureName,
                                                                           const GALGAS_lstringlist & inAttribute_mAttributeListAST,
                                                                           const GALGAS_structureFieldListAST & inAttribute_mStructureFieldListAST,
-                                                                          const GALGAS_procedureDeclarationListAST & inAttribute_mProcedureDeclarationListAST,
+                                                                          const GALGAS_functionDeclarationListAST & inAttribute_mFunctionDeclarationListAST,
                                                                           const GALGAS_serviceDeclarationListAST & inAttribute_mServiceListAST,
                                                                           const GALGAS_sectionDeclarationListAST & inAttribute_mSectionListAST,
                                                                           const GALGAS_primitiveDeclarationListAST & inAttribute_mPrimitiveListAST,
                                                                           const GALGAS_guardDeclarationListAST & inAttribute_mGuardListAST
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_structureDeclaration result ;
-  if (inAttribute_mStructureName.isValid () && inAttribute_mAttributeListAST.isValid () && inAttribute_mStructureFieldListAST.isValid () && inAttribute_mProcedureDeclarationListAST.isValid () && inAttribute_mServiceListAST.isValid () && inAttribute_mSectionListAST.isValid () && inAttribute_mPrimitiveListAST.isValid () && inAttribute_mGuardListAST.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_structureDeclaration (inAttribute_mStructureName, inAttribute_mAttributeListAST, inAttribute_mStructureFieldListAST, inAttribute_mProcedureDeclarationListAST, inAttribute_mServiceListAST, inAttribute_mSectionListAST, inAttribute_mPrimitiveListAST, inAttribute_mGuardListAST COMMA_THERE)) ;
+  if (inAttribute_mStructureName.isValid () && inAttribute_mAttributeListAST.isValid () && inAttribute_mStructureFieldListAST.isValid () && inAttribute_mFunctionDeclarationListAST.isValid () && inAttribute_mServiceListAST.isValid () && inAttribute_mSectionListAST.isValid () && inAttribute_mPrimitiveListAST.isValid () && inAttribute_mGuardListAST.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_structureDeclaration (inAttribute_mStructureName, inAttribute_mAttributeListAST, inAttribute_mStructureFieldListAST, inAttribute_mFunctionDeclarationListAST, inAttribute_mServiceListAST, inAttribute_mSectionListAST, inAttribute_mPrimitiveListAST, inAttribute_mGuardListAST COMMA_THERE)) ;
   }
   return result ;
 }
@@ -3417,20 +3417,20 @@ GALGAS_structureFieldListAST cPtr_structureDeclaration::getter_mStructureFieldLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procedureDeclarationListAST GALGAS_structureDeclaration::getter_mProcedureDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  GALGAS_procedureDeclarationListAST result ;
+GALGAS_functionDeclarationListAST GALGAS_structureDeclaration::getter_mFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
+  GALGAS_functionDeclarationListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_structureDeclaration * p = (const cPtr_structureDeclaration *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_structureDeclaration) ;
-    result = p->mAttribute_mProcedureDeclarationListAST ;
+    result = p->mAttribute_mFunctionDeclarationListAST ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procedureDeclarationListAST cPtr_structureDeclaration::getter_mProcedureDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureDeclarationListAST ;
+GALGAS_functionDeclarationListAST cPtr_structureDeclaration::getter_mFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mFunctionDeclarationListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3512,7 +3512,7 @@ GALGAS_guardDeclarationListAST cPtr_structureDeclaration::getter_mGuardListAST (
 cPtr_structureDeclaration::cPtr_structureDeclaration (const GALGAS_lstring & in_mStructureName,
                                                       const GALGAS_lstringlist & in_mAttributeListAST,
                                                       const GALGAS_structureFieldListAST & in_mStructureFieldListAST,
-                                                      const GALGAS_procedureDeclarationListAST & in_mProcedureDeclarationListAST,
+                                                      const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
                                                       const GALGAS_serviceDeclarationListAST & in_mServiceListAST,
                                                       const GALGAS_sectionDeclarationListAST & in_mSectionListAST,
                                                       const GALGAS_primitiveDeclarationListAST & in_mPrimitiveListAST,
@@ -3522,7 +3522,7 @@ cPtr_abstractDeclaration (THERE),
 mAttribute_mStructureName (in_mStructureName),
 mAttribute_mAttributeListAST (in_mAttributeListAST),
 mAttribute_mStructureFieldListAST (in_mStructureFieldListAST),
-mAttribute_mProcedureDeclarationListAST (in_mProcedureDeclarationListAST),
+mAttribute_mFunctionDeclarationListAST (in_mFunctionDeclarationListAST),
 mAttribute_mServiceListAST (in_mServiceListAST),
 mAttribute_mSectionListAST (in_mSectionListAST),
 mAttribute_mPrimitiveListAST (in_mPrimitiveListAST),
@@ -3544,7 +3544,7 @@ void cPtr_structureDeclaration::description (C_String & ioString,
   ioString << ", " ;
   mAttribute_mStructureFieldListAST.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mProcedureDeclarationListAST.description (ioString, inIndentation+1) ;
+  mAttribute_mFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mServiceListAST.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -3560,7 +3560,7 @@ void cPtr_structureDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_structureDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_structureDeclaration (mAttribute_mStructureName, mAttribute_mAttributeListAST, mAttribute_mStructureFieldListAST, mAttribute_mProcedureDeclarationListAST, mAttribute_mServiceListAST, mAttribute_mSectionListAST, mAttribute_mPrimitiveListAST, mAttribute_mGuardListAST COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_structureDeclaration (mAttribute_mStructureName, mAttribute_mAttributeListAST, mAttribute_mStructureFieldListAST, mAttribute_mFunctionDeclarationListAST, mAttribute_mServiceListAST, mAttribute_mSectionListAST, mAttribute_mPrimitiveListAST, mAttribute_mGuardListAST COMMA_THERE)) ;
   return ptr ;
 }
 

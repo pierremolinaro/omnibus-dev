@@ -77,7 +77,7 @@ override getter @typeArrayDeclaration keyRepresentationForErrorSignaling -> @str
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeArrayDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -86,7 +86,7 @@ override method @typeArrayDeclaration enterRoutinesInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeArrayDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {

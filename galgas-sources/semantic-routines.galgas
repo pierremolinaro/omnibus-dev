@@ -145,8 +145,10 @@ proc routineSemanticAnalysis
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList
   ]
-#---
+#--- End of variableMap
+  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
+  drop variableMap
 #--- Code generation
   let returnType = if inReturnTypeName.string == "" then
     @unifiedTypeMap-proxy.null

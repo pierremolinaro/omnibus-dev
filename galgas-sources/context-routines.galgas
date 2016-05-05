@@ -44,13 +44,13 @@ map @guardMapForContext {
 #  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
-    for (* * formalArgumentTypeName *) in mProcedureFormalArgumentList do
+    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
-    [mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -78,46 +78,46 @@ list @procedureSignature {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureDeclarationListAST enterInContext 
+method @functionDeclarationListAST enterInContext 
   ?selfTypeName:let @string inSelfTypeName
   ?!context:@semanticContext ioContext
 {
   for procedure in self do
   #--- Signature
     @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcedureFormalArgumentList do
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mFunctionFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
   #--- Return type
-    let returnType = if procedure.mReturnTypeName.string == "" then
+    let returnType = if procedure.mFunctionReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
     else
-      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReturnTypeName}
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mFunctionReturnTypeName}
     end
   #--- Mode map
     @modeMap procedureModeMap = {}
-    for () in procedure.mProcedureModeList do
+    for () in procedure.mFunctionModeList do
       [!?procedureModeMap insertKey !mValue] ;
     end
   #--- Weak procedure ?
     var weakProcedure = false
-    for (attribute) in procedure.mProcedureAttributeList while not weakProcedure do
+    for (attribute) in procedure.mFunctionAttributeList while not weakProcedure do
       weakProcedure = attribute.string == weakAttribute ()
     end
   #--- Enter in context
-    let lkey = @lstring.new {!inSelfTypeName + "." + procedure.mProcedureName !procedure.mProcedureName.location}
+    let lkey = @lstring.new {!inSelfTypeName + "." + procedure.mFunctionName !procedure.mFunctionName.location}
     if [ioContext.mRoutineMapForContext hasKey !lkey.string] then
       let weak = [ioContext.mRoutineMapForContext mWeakForKey !lkey.string]
       if weakProcedure && not weak then
         # redefined weak procedure is ignored
       elsif weakProcedure && weak then
-        error procedure.mProcedureName : "this weak procedure overrides a weak procedure"
+        error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
         [!?ioContext.mRoutineMapForContext removeKey !lkey ?7*] # Remove weak routine
         [!?ioContext.mRoutineMapForContext insertKey # Insert routine
           !lkey
-          !procedure.mPublic
+          !procedure.mPublicFunction
           !procedureModeMap
           !signature
           !.function
@@ -128,7 +128,7 @@ method @procedureDeclarationListAST enterInContext
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
           !lkey
-          !procedure.mPublic
+          !procedure.mPublicFunction
           !procedureModeMap
           !signature
           !.function
@@ -140,7 +140,7 @@ method @procedureDeclarationListAST enterInContext
     else
       [!?ioContext.mRoutineMapForContext insertKey
         !lkey
-        !procedure.mPublic
+        !procedure.mPublicFunction
         !procedureModeMap
         !signature
         !.function

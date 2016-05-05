@@ -2,6 +2,19 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @functionDeclarationListAST {
+  @lstringlist mFunctionModeList
+  @bool mPublicFunction
+  @lstring mFunctionName
+  @lstringlist mFunctionAttributeList
+  @procFormalArgumentList mFunctionFormalArgumentList
+  @lstring mFunctionReturnTypeName # Empty string if no return value
+  @instructionListAST mFunctionInstructionList
+  @location mEndOfFunctionDeclaration
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 enum @procFormalArgumentPassingMode {
   case input
   case output
@@ -32,19 +45,6 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@str
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @procedureDeclarationListAST {
-  @lstringlist mProcedureModeList
-  @bool mPublic
-  @lstring mProcedureName
-  @lstringlist mProcedureAttributeList
-  @procFormalArgumentList mProcedureFormalArgumentList
-  @lstring mReturnTypeName # Empty string if no return value
-  @instructionListAST mProcedureInstructionList
-  @location mEndOfProcedureDeclaration
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @labelMap {
   insert insertKey error message "the '%K' label is already declared"
 }
@@ -57,7 +57,7 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <procedure> ?!@procedureDeclarationListAST ioProcListAST {
+  rule <procedure> ?!@functionDeclarationListAST ioProcListAST {
     <procedure_header>
       ?public:let public
       ?procModes:let procModeList
@@ -162,7 +162,7 @@ syntax extension common_syntax {
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @procedureDeclarationListAST procedureSemanticAnalysis
+method @functionDeclarationListAST procedureSemanticAnalysis
   ?receiverType:@unifiedTypeMap-proxy inReceiverType
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -172,7 +172,7 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
     var warnIfUnused = true
     var globalProcedure = false
     var weakProcedure = false
-    for (attribute) in procedure.mProcedureAttributeList do
+    for (attribute) in procedure.mFunctionAttributeList do
       if attribute.string == noWarningIfUnusedAttribute () then
         if not warnIfUnused then
           error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
@@ -196,12 +196,12 @@ method @procedureDeclarationListAST procedureSemanticAnalysis
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.function
-      !procedure.mProcedureModeList
-      !procedure.mProcedureName
-      !procedure.mProcedureFormalArgumentList
-      !returnTypeName:procedure.mReturnTypeName
-      !procedure.mProcedureInstructionList
-      !procedure.mEndOfProcedureDeclaration
+      !procedure.mFunctionModeList
+      !procedure.mFunctionName
+      !procedure.mFunctionFormalArgumentList
+      !returnTypeName:procedure.mFunctionReturnTypeName
+      !procedure.mFunctionInstructionList
+      !procedure.mEndOfFunctionDeclaration
       !warnIfUnused:warnIfUnused
       !globalProcedure:globalProcedure
       !weakProcedure:weakProcedure

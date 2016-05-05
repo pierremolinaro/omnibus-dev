@@ -116,8 +116,10 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]
-  #---
+  #--- End of variableMap
+    [variableMap deinitTopLevelVariables]
     [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
+    drop variableMap
   #--- Code generation
     [inSemanticContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey

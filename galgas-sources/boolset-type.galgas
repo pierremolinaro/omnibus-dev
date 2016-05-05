@@ -73,7 +73,7 @@ override getter @boolsetDeclaration keyRepresentation -> @string outRepresentati
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @boolsetDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
 {

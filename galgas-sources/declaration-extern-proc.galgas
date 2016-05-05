@@ -147,6 +147,8 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !?variableMap
     !?formalArguments
   )
+#--- End of variableMap
+  drop variableMap
 #--- Enter subprogram invocation graph
   let procNameForInvocationGraph = procNameForInvocationGraph (!.null !mExternProcedureName)
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then

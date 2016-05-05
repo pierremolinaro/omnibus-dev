@@ -20,7 +20,7 @@ override getter @newtypeDeclaration keyRepresentation -> @string outRepresentati
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @newtypeDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
 {
 #--- Get reference type
