@@ -91,6 +91,7 @@ method @bootList-element bootSemanticAnalysis
   @allocaList bootAllocaList = {}
   [mInstructionList analyzeRoutineInstructionList
     !self:.null
+    !propertiesAreMutable:false
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:{!bootModeName ()}

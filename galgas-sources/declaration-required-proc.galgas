@@ -61,7 +61,7 @@ proc checkRequiredProcedures
       end
       error inEndOfSourceFile : s
     else
-      [inSemanticContext.mRoutineMapForContext searchKey !lkey ?* ?let procModes ?5*]
+      [inSemanticContext.mRoutineMapForContext searchKey !lkey ?* ?let procModes ?6*]
       let actualProcModeSet = [procModes keySet]
       let requiredProcModeSet = @stringset.setWithLStringList{!requiredProc.mProcedureModeList}
       if actualProcModeSet != requiredProcModeSet then

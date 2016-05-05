@@ -96,9 +96,10 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
       !returnTypeName:section.mReturnTypeName
       !section.mSectionInstructionList
       !section.mEndOfSectionLocation
+      !propertiesAreMutable:true
       !warnIfUnused:true
-      !globalProcedure:true
-      !weakProcedure:false
+      !globalFunction:true
+      !weakFunction:false
       !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries

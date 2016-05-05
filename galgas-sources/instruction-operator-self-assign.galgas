@@ -50,6 +50,7 @@ override method @selfVarOperatorAssignInstructionAST noteInstructionTypesInPrece
 
 override method @selfVarOperatorAssignInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -60,6 +61,9 @@ override method @selfVarOperatorAssignInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+  if not inRoutineCanMutateProperties then
+    error mSelfLocation : "the current routine should be declared @" + mutatingAttribute ()
+  end
   analyzeSelfAccess (
     !fieldList:mFieldList
     !self:inSelfType

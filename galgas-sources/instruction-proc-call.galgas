@@ -175,6 +175,7 @@ list @procEffectiveParameterList {
 
 override method @standaloneRoutineCallInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
@@ -187,6 +188,7 @@ override method @standaloneRoutineCallInstructionAST analyze
 {
   analyzeRoutineCall (
     !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
     !receiverName:.new{!"" !mRoutineName.location}
     !routineName:mRoutineName
     !effective:mEffectiveParameterList
@@ -222,6 +224,7 @@ override method @standaloneRoutineCallInstructionAST analyze
 
 override method @remoteRoutineCallInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
@@ -241,6 +244,7 @@ override method @remoteRoutineCallInstructionAST analyze
 #---
   analyzeRoutineCall (
     !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
     !receiverName:receiverName
     !routineName:routineName
     !effective:mEffectiveParameterList
@@ -276,6 +280,7 @@ override method @remoteRoutineCallInstructionAST analyze
 
 proc analyzeRoutineCall
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?receiverName:let @lstring inReceiverName
   ?routineName:let @lstring inRoutineName
   ?effective:let @effectiveParameterListAST inEffectiveParameterList
@@ -319,7 +324,12 @@ proc analyzeRoutineCall
     ?*
     ?outReturnedType
     ?outAppendFileAndLineArgumentForPanicLocation
+    ?let unused canMutateProperties
   ]
+#  if canMutateProperties && not inRoutineCanMutateProperties then
+#    error inRoutineName : "the callee mutates properties but current function is not declared with @"
+#      + mutatingAttribute () + " attribute"
+#  end
 #--- Check accessibility
   if not isPublic then
     if inReceiverName.string == "" then # Standalone function
@@ -355,6 +365,7 @@ proc analyzeRoutineCall
 #--- Analyze effective parameters
   analyzeEffectiveParameters (
     !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
     !formal:formalSignature
     !effective:inEffectiveParameterList
     !errorLocation:inRoutineName.location
@@ -375,6 +386,7 @@ proc analyzeRoutineCall
 
 proc analyzeEffectiveParameters
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?formal:let @procedureSignature inFormalSignature
   ?effective:let @effectiveParameterListAST inEffectiveParameterList
   ?errorLocation:let @location inErrorLocation
@@ -501,6 +513,8 @@ proc analyzeEffectiveParameters
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
+      elsif not inRoutineCanMutateProperties then
+        error name : "the current routine should be declared @" + mutatingAttribute ()
       else
         switch [inSelfType kind]
         case opaque (*) :
@@ -639,7 +653,6 @@ override method @procCallInstructionIR llvmInstructionCode
     ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mProcName.location line]
     let sourceFileNameSize = [sourceFileName length] + 1
     ioLLVMcode += ", i8* getelementptr inbounds ([" + sourceFileNameSize + " x i8], [" + sourceFileNameSize + " x i8]* @str.array." + staticStringIndex + ", i32 0, i32 0)"
- #   ioLLVMcode += ", i8* @string." + staticStringIndex
   end
   ioLLVMcode += ")\n"
 }

@@ -175,17 +175,17 @@ method @functionDeclarationListAST procedureSemanticAnalysis
     for (attribute) in procedure.mFunctionAttributeList do
       if attribute.string == noWarningIfUnusedAttribute () then
         if not warnIfUnused then
-          error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+          error attribute : "duplicated @" + noWarningIfUnusedAttribute () + " attribute"
         end
         warnIfUnused = false    
       elsif attribute.string == globalAttribute () then
         if globalProcedure then
-          error attribute : "duplicate @" + globalAttribute () + " attribute"
+          error attribute : "duplicated @" + globalAttribute () + " attribute"
         end
         globalProcedure = true    
       elsif attribute.string == weakAttribute () then
         if weakProcedure then
-          error attribute : "duplicate @" + weakAttribute () + " attribute"
+          error attribute : "duplicated @" + weakAttribute () + " attribute"
         end
         weakProcedure = true    
       else
@@ -202,9 +202,10 @@ method @functionDeclarationListAST procedureSemanticAnalysis
       !returnTypeName:procedure.mFunctionReturnTypeName
       !procedure.mFunctionInstructionList
       !procedure.mEndOfFunctionDeclaration
+      !propertiesAreMutable:true
       !warnIfUnused:warnIfUnused
-      !globalProcedure:globalProcedure
-      !weakProcedure:weakProcedure
+      !globalFunction:globalProcedure
+      !weakFunction:weakProcedure
       !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries

@@ -71,6 +71,7 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
 
 override method @forLowerUpperBoundInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -163,6 +164,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     @instructionListIR instructionGenerationList = {}
     [mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
+      !propertiesAreMutable:inRoutineCanMutateProperties
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:mEndOf_do_instruction
       !context:inContext

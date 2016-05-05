@@ -118,6 +118,7 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 
 override method @ifInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -156,6 +157,7 @@ override method @ifInstructionAST analyze
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfThenInstructionList
     !context:inContext
@@ -171,6 +173,7 @@ override method @ifInstructionAST analyze
   @instructionListIR elseInstructionGenerationList = {}
   [mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOfElseInstructionList
     !context:inContext

@@ -10,6 +10,100 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Function 'initNameForTaskType'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_initNameForTaskType (const GALGAS_string & constinArgument_inTaskTypeName,
+                                            C_Compiler * inCompiler
+                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("@task.init.$").add_operation (constinArgument_inTaskTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 325)) ;
+//---
+  return result_outResult ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_initNameForTaskType [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_initNameForTaskType (C_Compiler * inCompiler,
+                                                                    const cObjectArray & inEffectiveParameterArray,
+                                                                    const GALGAS_location & /* §§ inErrorLocation */
+                                                                    COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_initNameForTaskType (operand0,
+                                       inCompiler
+                                       COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_initNameForTaskType ("initNameForTaskType",
+                                                                     functionWithGenericHeader_initNameForTaskType,
+                                                                     & kTypeDescriptor_GALGAS_string,
+                                                                     1,
+                                                                     functionArgs_initNameForTaskType) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'stackAddressForTask'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_stackAddressForTask (const GALGAS_string & constinArgument_inTaskName,
+                                            C_Compiler * inCompiler
+                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("%task.stack.address.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 331)) ;
+//---
+  return result_outResult ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_stackAddressForTask [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_stackAddressForTask (C_Compiler * inCompiler,
+                                                                    const cObjectArray & inEffectiveParameterArray,
+                                                                    const GALGAS_location & /* §§ inErrorLocation */
+                                                                    COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_stackAddressForTask (operand0,
+                                       inCompiler
+                                       COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_stackAddressForTask ("stackAddressForTask",
+                                                                     functionWithGenericHeader_stackAddressForTask,
+                                                                     & kTypeDescriptor_GALGAS_string,
+                                                                     1,
+                                                                     functionArgs_stackAddressForTask) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          Function 'mainRoutineNameForTask'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -18,7 +112,7 @@ GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgu
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 331)) ;
+  result_outResult = GALGAS_string ("@task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 337)) ;
 //---
   return result_outResult ;
 }
@@ -66,7 +160,7 @@ GALGAS_string function_llvmNameForTaskVariable (GALGAS_string inArgument_inTaskN
                                                 C_Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 337)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 337)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 337)) ;
+  result_outName = GALGAS_string ("task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 343)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 343)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 343)) ;
 //---
   return result_outName ;
 }
@@ -4140,11 +4234,11 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "bool makeTaskReady (TaskList * ioWaitingList) asm (\"!FUNC!.makeTaskReady\") ;\n"
+  "void makeTaskReady (TaskList * ioWaitingList, bool * outFound) asm (\"!FUNC!.makeTaskReady\") ;\n"
   "\n"
-  "bool makeTaskReady (TaskList * ioWaitingList) {\n"
-  "  const bool found = (* ioWaitingList) != 0 ;\n"
-  "  if (found) {\n"
+  "void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {\n"
+  "  *outFound = (* ioWaitingList) != 0 ;\n"
+  "  if (*outFound) {\n"
   "  //--- Get index of waiting task\n"
   "    const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;\n"
   "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
@@ -4158,7 +4252,6 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "    kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
   "    kernel_makeTaskReady (taskIndex) ;\n"
   "  }\n"
-  "  return found ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -4318,7 +4411,7 @@ const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  22156, // Text length
+  22170, // Text length
   gWrapperFileContent_21_targetTemplates
 ) ;
 
@@ -4995,7 +5088,8 @@ const char * gWrapperFileContent_26_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "extern func `kernel blockInListAndOnDeadline (\?!list:ioWaitingList $taskList \?deadline:inDeadline $uint32) \n"
   "\n"
   "//--- Make task Ready\n"
-  "extern func `kernel `service `guard makeTaskReady (\?!list:ioWaitingList $taskList) -> $bool\n"
+  "extern func `kernel `service `guard\n"
+  "makeTaskReady (\?!list:ioWaitingList $taskList !found: outFound $bool)\n"
   "\n"
   "extern func `service makeTasksReadyFromCurrentDate (\?currentDate:inCurrentDate $uint32)\n"
   "\n"
@@ -5119,7 +5213,7 @@ const cRegularFileWrapper gWrapperFile_26_targetTemplates (
   "lpc2294-xtr.plm",
   "plm",
   true, // Text file
-  4721, // Text length
+  4735, // Text length
   gWrapperFileContent_26_targetTemplates
 ) ;
 
@@ -7565,7 +7659,7 @@ const char * gWrapperFileContent_29_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
   "  public service V @noWarningIfUnused () {\n"
-  "    let found = makeTaskReady (!\?list:self.list)\n"
+  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
   "    if not found {\n"
   "      self.value += 1\n"
   "      guardDidChange (!\?guard:self.guardList)\n"
@@ -7614,7 +7708,7 @@ const cRegularFileWrapper gWrapperFile_29_targetTemplates (
   "semaphore.plm",
   "plm",
   true, // Text file
-  1478, // Text length
+  1483, // Text length
   gWrapperFileContent_29_targetTemplates
 ) ;
 
@@ -8354,7 +8448,8 @@ const char * gWrapperFileContent_34_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "extern public func `kernel blockInListAndOnDeadline (\?!list:ioWaitingList $taskList \?deadline:inDeadline $uint32) \n"
   "\n"
   "//--- Make task Ready\n"
-  "extern public func `kernel `service `guard makeTaskReady (\?!list:ioWaitingList $taskList) -> $bool\n"
+  "extern public func `kernel `service `guard\n"
+  "makeTaskReady (\?!list:ioWaitingList $taskList !found: outFound $bool)\n"
   "\n"
   "extern public func `service makeTasksReadyFrom (\?currentDate:inCurrentDate $uint32)\n"
   "\n"
@@ -8465,7 +8560,7 @@ const cRegularFileWrapper gWrapperFile_34_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  4439, // Text length
+  4453, // Text length
   gWrapperFileContent_34_targetTemplates
 ) ;
 
@@ -9555,11 +9650,11 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "//  M A K E    T A S K    R E A D Y                                                                                    *\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "bool makeTaskReady (TaskList * ioWaitingList) asm (\"!FUNC!.makeTaskReady\") ;\n"
+  "void makeTaskReady (TaskList * ioWaitingList, bool * outFound) asm (\"!FUNC!.makeTaskReady\") ;\n"
   "\n"
-  "bool makeTaskReady (TaskList * ioWaitingList) {\n"
-  "  const bool found = (* ioWaitingList) != 0 ;\n"
-  "  if (found) {\n"
+  "void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {\n"
+  "  *outFound = (* ioWaitingList) != 0 ;\n"
+  "  if (*outFound) {\n"
   "  //--- Get index of waiting task\n"
   "    const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;\n"
   "    TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;\n"
@@ -9573,7 +9668,6 @@ const char * gWrapperFileContent_49_targetTemplates = "//-----------------------
   "    kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;\n"
   "    kernel_makeTaskReady (taskIndex) ;\n"
   "  }\n"
-  "  return found ;\n"
   "}\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -9733,7 +9827,7 @@ const cRegularFileWrapper gWrapperFile_49_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  23821, // Text length
+  23835, // Text length
   gWrapperFileContent_49_targetTemplates
 ) ;
 

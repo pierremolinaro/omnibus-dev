@@ -55,6 +55,7 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 
 abstract method @instructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -69,6 +70,7 @@ abstract method @instructionAST analyze
 
 method @instructionListAST analyzeBranchInstructionList
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?endOfInstructionList:@location inEndOfInstructionList
   ?context:let @semanticContext inContext
@@ -85,6 +87,7 @@ method @instructionListAST analyzeBranchInstructionList
   for () in self do
     [mInstruction analyze 
       !self:inSelfType
+      !propertiesAreMutable:inRoutineCanMutateProperties
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !modes:inModeSet
@@ -105,6 +108,7 @@ method @instructionListAST analyzeBranchInstructionList
 
 method @instructionListAST analyzeRoutineInstructionList
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -118,6 +122,7 @@ method @instructionListAST analyzeRoutineInstructionList
   for () in self do
     [mInstruction analyze 
       !self:inSelfType
+      !propertiesAreMutable:inRoutineCanMutateProperties
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
       !modes:inModeSet

@@ -70,6 +70,7 @@ override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 
 override method @whileInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -109,6 +110,7 @@ override method @whileInstructionAST analyze
   [!?ioVariableMap openOverrideForRepeatBlock]
   [mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_while_instruction
     !context:inContext

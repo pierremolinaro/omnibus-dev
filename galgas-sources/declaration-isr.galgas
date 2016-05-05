@@ -106,6 +106,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
     @instructionListIR instructionGenerationList = {}
     [isr.mISRInstructionList analyzeRoutineInstructionList
       !self:selfType
+      !propertiesAreMutable:true
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inSemanticContext
       !modes:modeSet

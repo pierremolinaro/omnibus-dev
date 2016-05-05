@@ -310,9 +310,10 @@ method @taskList-element semanticAnalysis
       !returnTypeName:procedure.mFunctionReturnTypeName
       !procedure.mFunctionInstructionList
       !procedure.mEndOfFunctionDeclaration
+      !propertiesAreMutable:true
       !warnIfUnused:true
-      !globalProcedure:false
-      !weakProcedure:false
+      !globalFunction:false
+      !weakFunction:false
       !registerAccess:.noAccess
       !context:inContext
       !?temporary:ioTemporaries
@@ -359,9 +360,10 @@ method @taskList-element semanticAnalysis
     !returnTypeName:["" nowhere]
     !taskListInstructionList
     !mTaskName.location
+    !propertiesAreMutable:true
     !warnIfUnused:true
-    !globalProcedure:false
-    !weakProcedure:false
+    !globalFunction:false
+    !weakFunction:false
     !registerAccess:.noAccess
     !context:inContext
     !?temporary:ioTemporaries

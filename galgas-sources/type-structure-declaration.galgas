@@ -336,7 +336,10 @@ override method @structureDeclaration enterRoutinesInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  [mFunctionDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
+  [mFunctionDeclarationListAST enterInContext
+    !selfTypeName:"$" + mStructureName.string
+    !?context:ioContext
+  ]
   [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mPrimitiveListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
@@ -397,30 +400,38 @@ method @structureDeclaration procedureSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for procedure in mFunctionDeclarationListAST do
+  for function in mFunctionDeclarationListAST do
     var warnIfUnused = true
-    for (attribute) in procedure.mFunctionAttributeList do
+    var mutating = false
+    for (attribute) in function.mFunctionAttributeList do
       if attribute.string == noWarningIfUnusedAttribute () then
         if not warnIfUnused then
-          error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+          error attribute : "duplicated @" + noWarningIfUnusedAttribute () + " attribute"
         end
         warnIfUnused = false    
+      elsif attribute.string == mutatingAttribute () then
+        if mutating then
+          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+        end
+        mutating = true    
       else
-        error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
+        error attribute : "unknown attribute; available attributes are @" + noWarningIfUnusedAttribute ()
+          + ", @" + mutatingAttribute ()
       end
     end
     routineSemanticAnalysis (
       !receiverType:inStructureType
       !.function
-      !procedure.mFunctionModeList
-      !procedure.mFunctionName
-      !procedure.mFunctionFormalArgumentList
-      !returnTypeName:procedure.mFunctionReturnTypeName
-      !procedure.mFunctionInstructionList
-      !procedure.mEndOfFunctionDeclaration
+      !function.mFunctionModeList
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+      !returnTypeName:function.mFunctionReturnTypeName
+      !function.mFunctionInstructionList
+      !function.mEndOfFunctionDeclaration
+      !propertiesAreMutable:mutating
       !warnIfUnused:warnIfUnused
-      !globalProcedure:false
-      !weakProcedure:false
+      !globalFunction:false
+      !weakFunction:false
       !registerAccess:.readWriteAccess
       !context:inContext
       !?temporary:ioTemporaries

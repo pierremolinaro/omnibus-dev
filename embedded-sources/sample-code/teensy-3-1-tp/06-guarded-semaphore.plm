@@ -16,7 +16,7 @@ struct $monSemaphore {
   }
 
   public service V () {
-    let found = makeTaskReady (!?list:self.list)
+    makeTaskReady (!?list:self.list ?found:let found)
     if not found {
       self.value += 1
       guardDidChange (!?guard:self.guardList)

@@ -977,7 +977,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var list = $taskList ()\n"
   "\n"
   "  public service V () {\n"
-  "    let found = makeTaskReady (!\?list:self.list)\n"
+  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
   "    if not found {\n"
   "      self.value += 1\n"
   "    }\n"
@@ -1044,7 +1044,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1531, // Text length
+  1536, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1068,7 +1068,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "\n"
   "  public service V () {\n"
-  "    let found = makeTaskReady (!\?list:self.list)\n"
+  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
   "    if not found {\n"
   "      self.value += 1\n"
   "      guardDidChange (!\?guard:self.guardList)\n"
@@ -1153,7 +1153,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2105, // Text length
+  2110, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1250,7 +1250,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var outputGuardList = $guardList ()\n"
   "\n"
   "  public primitive input () {\n"
-  "    let found = makeTaskReady (!\?list:self.outputWaitList)\n"
+  "    makeTaskReady (!\?list:self.outputWaitList \?found:let found)\n"
   "    if not found {\n"
   "      guardDidChange (!\?guard:self.outputGuardList)\n"
   "      blockInList (!\?list:self.inputWaitList)\n"
@@ -1258,7 +1258,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "\n"
   "  public primitive output () {\n"
-  "    let found = makeTaskReady (!\?list:self.inputWaitList)\n"
+  "    makeTaskReady (!\?list:self.inputWaitList \?found:let found)\n"
   "    if not found {\n"
   "      guardDidChange (!\?guard:self.inputGuardList)\n"
   "      blockInList (!\?list:self.outputWaitList)\n"
@@ -1266,28 +1266,28 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "\n"
   "  public primitive inputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
-  "    result = makeTaskReady (!\?list:self.outputWaitList)\n"
+  "    makeTaskReady (!\?list:self.outputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.millis ()) { \n"
   "      blockInListAndOnDeadline (!\?list:self.inputWaitList !deadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public primitive outputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
-  "    result = makeTaskReady (!\?list:self.inputWaitList)\n"
+  "    makeTaskReady (!\?list:self.inputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.millis ()) { \n"
   "      blockInListAndOnDeadline (!\?list:self.outputWaitList !deadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public guard input @noWarningIfUnused () {\n"
-  "    accept = makeTaskReady (!\?list:self.outputWaitList)\n"
+  "    makeTaskReady (!\?list:self.outputWaitList \?found:accept)\n"
   "    if not accept {\n"
   "      handleGuardedCommand (!\?guard:self.inputGuardList)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  guard output @noWarningIfUnused () {\n"
-  "    accept = makeTaskReady (!\?list:self.inputWaitList)\n"
+  "    makeTaskReady (!\?list:self.inputWaitList \?found:accept)\n"
   "    if not accept {\n"
   "      handleGuardedCommand (!\?guard:self.outputGuardList)\n"
   "    }\n"
@@ -1332,7 +1332,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2436, // Text length
+  2466, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1348,7 +1348,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var signalerDonneeLue = $semaphore (!value:0)\n"
   "  var data $uint32 = 0\n"
   "\n"
-  "  public func `user output (\?data:inData $uint32) {\n"
+  "  public func `user output @mutating (\?data:inData $uint32) {\n"
   "    self.autoriserEcriture.P ()\n"
   "    self.data = inData\n"
   "    self.autoriserLecture.V ()\n"
@@ -1435,7 +1435,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2281, // Text length
+  2291, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 

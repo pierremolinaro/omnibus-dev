@@ -12,7 +12,8 @@ extern public func `kernel blockOnDeadline (?deadline:inDeadline $uint32)
 extern public func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
 
 //--- Make task Ready
-extern public func `kernel `service `guard makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
+extern public func `kernel `service `guard
+makeTaskReady (?!list:ioWaitingList $taskList !found: outFound $bool)
 
 extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint32)
 
