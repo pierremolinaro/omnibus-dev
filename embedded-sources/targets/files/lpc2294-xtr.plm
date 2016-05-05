@@ -89,7 +89,7 @@ module time {
   
   //············································································
   
-  public func `service `kernel `user `guard millis @noWarningIfUnused @access () -> $uint32 {
+  public func `service `kernel `user `guard millis @noWarningIfUnused @userAccess () -> $uint32 {
     result = self.mUptimeMS
   }
   
@@ -114,7 +114,7 @@ module time {
   
   //············································································
   
-  public func `user waitDuringMS @noWarningIfUnused @mutating @access (?delay: inDelay $uint32) {
+  public func `user waitDuringMS @noWarningIfUnused @mutating @userAccess (?delay: inDelay $uint32) {
     self.waitUntilMS (!deadline:self.millis () + inDelay)
   }
   

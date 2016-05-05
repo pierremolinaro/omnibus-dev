@@ -572,32 +572,32 @@ void callExtensionMethod_enterAccessibleEntities (const class cPtr_abstractInstr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Extension method '@structureDeclaration procedureSemanticAnalysis'                          *
+//                          Extension method '@structureDeclaration functionSemanticAnalysis'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_structureDeclaration_procedureSemanticAnalysis) (const class cPtr_structureDeclaration * inObject,
-                                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                                         const class GALGAS_semanticContext constinArgument1,
-                                                                                         class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                                                                         class GALGAS_intermediateCodeStruct & ioArgument3,
-                                                                                         class C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_structureDeclaration_functionSemanticAnalysis) (const class cPtr_structureDeclaration * inObject,
+                                                                                        const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                                        const class GALGAS_semanticContext constinArgument1,
+                                                                                        class GALGAS_semanticTemporariesStruct & ioArgument2,
+                                                                                        class GALGAS_intermediateCodeStruct & ioArgument3,
+                                                                                        class C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterExtensionMethod_procedureSemanticAnalysis (const int32_t inClassIndex,
-                                                     extensionMethodSignature_structureDeclaration_procedureSemanticAnalysis inMethod) ;
+void enterExtensionMethod_functionSemanticAnalysis (const int32_t inClassIndex,
+                                                    extensionMethodSignature_structureDeclaration_functionSemanticAnalysis inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionMethod_procedureSemanticAnalysis (const class cPtr_structureDeclaration * inObject,
-                                                    const GALGAS_unifiedTypeMap_2D_proxy constin_inStructureType,
-                                                    const GALGAS_semanticContext constin_inContext,
-                                                    GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                    GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_functionSemanticAnalysis (const class cPtr_structureDeclaration * inObject,
+                                                   const GALGAS_unifiedTypeMap_2D_proxy constin_inStructureType,
+                                                   const GALGAS_semanticContext constin_inContext,
+                                                   GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                   GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

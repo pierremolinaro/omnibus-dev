@@ -129,7 +129,12 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
     ?let returnedType
     ?let appendFileAndLineArgumentForPanicLocation
     ?let canMutateProperties
+    ?let canAccessPropertiesInUserMode
   ]
+  if canAccessPropertiesInUserMode && not inDirectAccessToPropertiesAllowed then
+    error functionName : "the callee accesses properties, the current function should be declared with @"
+       + userAccessAttribute () + " attribute"
+  end
   if canMutateProperties then
     error functionName : "a function should not mutate properties"
   end

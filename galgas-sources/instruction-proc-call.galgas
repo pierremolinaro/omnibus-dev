@@ -330,6 +330,7 @@ proc analyzeRoutineCall
     ?outReturnedType
     ?outAppendFileAndLineArgumentForPanicLocation
     ?let unused canMutateProperties
+    ?let unused canAccessPropertiesInUserMode
   ]
 #  if canMutateProperties && not inRoutineCanMutateProperties then
 #    error inRoutineName : "the callee mutates properties but current function is not declared with @"
@@ -522,7 +523,7 @@ proc analyzeEffectiveParameters
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
       elsif not inDirectAccessToPropertiesAllowed then
-        error name : "the current function should be declared @" + accessAttribute ()
+        error name : "the current function should be declared @" + userAccessAttribute ()
       elsif not inRoutineCanMutateProperties then
         error name : "the current routine should be declared @" + mutatingAttribute ()
       else

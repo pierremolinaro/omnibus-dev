@@ -58,7 +58,7 @@ override method @selfVarAssignmentInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if not inDirectAccessToPropertiesAllowed then
-    error mSelfLocation : "the current function should be declared @" + accessAttribute ()
+    error mSelfLocation : "the current function should be declared @" + userAccessAttribute ()
   end
   if not inRoutineCanMutateProperties then
     error mSelfLocation : "the current function should be declared @" + mutatingAttribute ()

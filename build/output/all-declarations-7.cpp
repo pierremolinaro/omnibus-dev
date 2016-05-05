@@ -1556,20 +1556,24 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp
   "struct $exemple {\n"
   "  var x $int32\n"
   "  \n"
-  "  func `user store @mutating @access (\?x: inX $int32) {\n"
+  "  func `user store @mutating @userAccess (\?x: inX $int32) {\n"
   "    self.x = inX\n"
   "  }\n"
   "  \n"
-  "  func `user increment @mutating @access () {\n"
+  "  func `user increment @mutating @userAccess () {\n"
   "    self.inc ()\n"
   "    self.x += 1\n"
   "  }\n"
   "  \n"
-  "  func `user get @access () -> $int32 {\n"
+  "  func `kernel get () -> $int32 {\n"
   "    result = self.x\n"
   "  }\n"
   "  \n"
-  "  section inc () {\n"
+  "  func `user get2 @userAccess () -> $int32 {\n"
+  "    result = self.get ()\n"
+  "  }\n"
+  "  \n"
+  "  section inc @mutating () {\n"
   "    self.x += 1\n"
   "  }\n"
   "}\n" ;
@@ -1578,7 +1582,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  1071, // Text length
+  1160, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 

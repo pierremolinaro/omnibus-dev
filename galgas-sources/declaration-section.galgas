@@ -107,6 +107,7 @@ method @sectionDeclarationListAST enterInContext
       !returnType
       !false # No appendFileAndLineArgumentForPanicLocation
       !true # canMutateProperties
+      !true # canAccessPropertiesInUserMode
     ]
   end
 }
@@ -122,6 +123,17 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for section in self do
+    var mutating = false
+    for (attribute) in section.mSectionAttributeList do
+      if attribute.string == mutatingAttribute () then
+        if mutating then
+          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+        end
+        mutating = true    
+      else
+        error attribute : "unknown attribute; available attribute is @" + mutatingAttribute ()
+      end
+    end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.section
@@ -132,7 +144,7 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
       !section.mSectionInstructionList
       !section.mEndOfSectionLocation
       !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:true
+      !propertiesAreMutable:mutating
       !warnIfUnused:true
       !globalFunction:true
       !weakFunction:false

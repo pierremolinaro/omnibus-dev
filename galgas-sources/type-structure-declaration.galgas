@@ -356,8 +356,8 @@ override method @structureDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
-#--- Analyze procedures
-  [self procedureSemanticAnalysis
+#--- Analyze functions
+  [self functionSemanticAnalysis
     !structureType:structureType
     !context:inContext
     !?temporary:ioTemporaries
@@ -395,7 +395,7 @@ override method @structureDeclaration semanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @structureDeclaration procedureSemanticAnalysis
+method @structureDeclaration functionSemanticAnalysis
   ?structureType:let @unifiedTypeMap-proxy inStructureType
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -411,9 +411,9 @@ method @structureDeclaration procedureSemanticAnalysis
           error attribute : "duplicated @" + noWarningIfUnusedAttribute () + " attribute"
         end
         warnIfUnused = false    
-      elsif attribute.string == accessAttribute () then
+      elsif attribute.string == userAccessAttribute () then
         if accessProperties then
-          error attribute : "duplicated @" + accessAttribute () + " attribute"
+          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
         end
         accessProperties = true    
       elsif attribute.string == mutatingAttribute () then
@@ -423,8 +423,19 @@ method @structureDeclaration procedureSemanticAnalysis
         mutating = true    
       else
         error attribute : "unknown attribute; available attributes are @" + noWarningIfUnusedAttribute ()
-          + ", @" + mutatingAttribute ()
+          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
       end
+    end
+    @stringset modeSet = {}
+    for (mode) in function.mFunctionModeList do
+      modeSet += !mode.string
+    end
+    if not [modeSet hasKey !userModeName ()] then
+      if accessProperties then
+        error function.mFunctionName : "useless @" + userAccessAttribute ()
+          + " attribute: function is never executed in `" + userModeName () + " mode"
+      end
+      accessProperties = true
     end
     routineSemanticAnalysis (
       !receiverType:inStructureType
