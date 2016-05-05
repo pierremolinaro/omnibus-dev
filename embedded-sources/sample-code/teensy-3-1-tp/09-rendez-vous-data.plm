@@ -8,7 +8,7 @@ struct $rendezVousData {
   var signalerDonneeLue = $semaphore (!value:0)
   var data $uint32 = 0
 
-  public func `user output @mutating @access (?data:inData $uint32) {
+  public func `user output @mutating @userAccess (?data:inData $uint32) {
     self.autoriserEcriture.P ()
     self.data = inData
     self.autoriserLecture.V ()

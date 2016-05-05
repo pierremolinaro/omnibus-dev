@@ -288,8 +288,8 @@ func %once mutatingAttribute -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once accessAttribute -> @string outResult {
-  outResult = "access"
+func %once userAccessAttribute -> @string outResult {
+  outResult = "userAccess"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

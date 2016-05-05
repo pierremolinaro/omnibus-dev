@@ -97,6 +97,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     !returnType
     !false # No appendFileAndLineArgumentForPanicLocation
     !false # canMutateProperties
+    !false # canAccessPropertiesInUserMode
   ]
 }
 

@@ -108,6 +108,7 @@ method @primitiveDeclarationListAST enterInContext
       !returnType
       !false # No appendFileAndLineArgumentForPanicLocation
       !true # Can mutate properties
+      !true # canAccessPropertiesInUserMode
     ]
   end
 }

@@ -85,9 +85,13 @@ override method @unifiedSelfCallInstructionAST analyze
     ?let returnedType
     ?let appendFileAndLineArgumentForPanicLocation
     ?let canMutateProperties
+    ?let canAccessPropertiesInUserMode
   ]
+  if canAccessPropertiesInUserMode && not inDirectAccessToPropertiesAllowed then
+    error methodName : "the callee access properties, but current routine is not declared with @" + userAccessAttribute () + " attribute"
+  end
   if canMutateProperties && not inRoutineCanMutateProperties then
-    error methodName : "the routine can mutate properties, but current routine is not declared with @" + mutatingAttribute () + " attribute"
+    error methodName : "the callee mutates properties, but current routine is not declared with @" + mutatingAttribute () + " attribute"
   end
   if ([fieldList length] > 0) && not isPublic then
     error routineMangledName : "this routine is not public"

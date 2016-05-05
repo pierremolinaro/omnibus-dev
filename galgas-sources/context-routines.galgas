@@ -22,6 +22,7 @@ map @routineMapForContext {
   @bool mWeak
   @unifiedTypeMap-proxy mReturnType
   @bool mAppendFileAndLineArgumentForPanicLocation
+  @bool mCanAccessProperties
   @bool mCanMutateProperties
 
   insert insertKey error message "the '%K' routine is already declared in %L"
@@ -104,6 +105,7 @@ method @functionDeclarationListAST enterInContext
   #--- Attribute
     var weakProcedure = false
     var canMutateProperties = false
+    var canAccessProperties = false
     for (attribute) in procedure.mFunctionAttributeList while not weakProcedure do
       if attribute.string == weakAttribute () then
         weakProcedure = true
@@ -111,6 +113,15 @@ method @functionDeclarationListAST enterInContext
       if attribute.string == mutatingAttribute () then
         canMutateProperties = true
       end
+      if attribute.string == userAccessAttribute () then
+        canAccessProperties = true
+        if canAccessProperties && not [procedureModeMap hasKey !userModeName ()] then
+          error attribute : "useless @" + attribute + " attribute: function is never executed in `" + userModeName () + " mode"
+        end
+      end
+    end
+    if not [procedureModeMap hasKey !userModeName ()] then
+      canAccessProperties = true
     end
   #--- Enter in context
     let lkey = @lstring.new {!inSelfTypeName + "." + procedure.mFunctionName !procedure.mFunctionName.location}
@@ -121,7 +132,7 @@ method @functionDeclarationListAST enterInContext
       elsif weakProcedure && weak then
         error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
-        [!?ioContext.mRoutineMapForContext removeKey !lkey ?8*] # Remove weak routine
+        [!?ioContext.mRoutineMapForContext removeKey !lkey ?9*] # Remove weak routine
         [!?ioContext.mRoutineMapForContext insertKey # Insert routine
           !lkey
           !procedure.mPublicFunction
@@ -132,6 +143,7 @@ method @functionDeclarationListAST enterInContext
           !returnType
           !false # No appendFileAndLineArgumentForPanicLocation
           !canMutateProperties
+          !canAccessProperties
         ]
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
@@ -144,6 +156,7 @@ method @functionDeclarationListAST enterInContext
           !returnType
           !false # No appendFileAndLineArgumentForPanicLocation
           !canMutateProperties
+          !canAccessProperties
         ]
       end
     else
@@ -157,6 +170,7 @@ method @functionDeclarationListAST enterInContext
         !returnType
         !false # No appendFileAndLineArgumentForPanicLocation
         !canMutateProperties
+        !canAccessProperties
       ]
     end
   end

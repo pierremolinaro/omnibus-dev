@@ -281,7 +281,7 @@ method @globalVarDeclarationList-element enterInContext
       !routineMangledName
       ?let unused isPublic
       ?let procedureModeMap
-      ?6*
+      ?7*
     ]
     for () in procedureModeMap do
       executionModes += !lkey.string
