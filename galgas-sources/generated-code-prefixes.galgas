@@ -282,6 +282,12 @@ func llvmNameForRegister ?name:@string inName -> @string outName {
 #!   Attributes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func %once mutatingAttribute -> @string outResult {
+  outResult = "mutating"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 func %once noWarningIfUnusedAttribute -> @string outResult {
   outResult = "noWarningIfUnused"
 }

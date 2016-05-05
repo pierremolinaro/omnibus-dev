@@ -8,7 +8,7 @@ struct $semaphore {
   //············································································
   
   public service V @noWarningIfUnused () {
-    let found = makeTaskReady (!?list:self.list)
+    makeTaskReady (!?list:self.list ?found:let found)
     if not found {
       self.value += 1
       guardDidChange (!?guard:self.guardList)

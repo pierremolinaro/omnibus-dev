@@ -85,9 +85,10 @@ proc routineSemanticAnalysis
   ?returnTypeName:let @lstring inReturnTypeName
   ?let @instructionListAST inRoutineInstructionList
   ?let @location inEndOfRoutineDeclaration
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?warnIfUnused:let @bool inWarnIfUnused
-  ?globalProcedure:let @bool inGlobalProcedure
-  ?weakProcedure:let @bool inWeakProcedure
+  ?globalFunction:let @bool inGlobalFunction
+  ?weakFunction:let @bool inWeakFunction
   ?registerAccess:let @accessKind inRegisterAccessKind
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -135,6 +136,7 @@ proc routineSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   [inRoutineInstructionList analyzeRoutineInstructionList
     !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:procedureModeSet
@@ -162,11 +164,11 @@ proc routineSemanticAnalysis
   end
   if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
     let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]
-    if inWeakProcedure && not weak then
+    if inWeakFunction && not weak then
       # redefined weak procedure is ignored
-    elsif inWeakProcedure && weak then
+    elsif inWeakFunction && weak then
       error routineMangledName : "this weak procedure overrides a weak procedure"
-    elsif (not inWeakProcedure) && weak then
+    elsif (not inWeakFunction) && weak then
       [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?10*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
@@ -175,8 +177,8 @@ proc routineSemanticAnalysis
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
-        !inWeakProcedure
-        !inGlobalProcedure
+        !inWeakFunction
+        !inGlobalFunction
         !inRoutineKind
         !returnType
         !false
@@ -189,8 +191,8 @@ proc routineSemanticAnalysis
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
-        !inWeakProcedure
-        !inGlobalProcedure
+        !inWeakFunction
+        !inGlobalFunction
         !inRoutineKind
         !returnType
         !false
@@ -204,8 +206,8 @@ proc routineSemanticAnalysis
       !instructionGenerationList
       ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
       !inWarnIfUnused
-      !inWeakProcedure
-      !inGlobalProcedure
+      !inWeakFunction
+      !inGlobalFunction
       !inRoutineKind
       !returnType
       !false

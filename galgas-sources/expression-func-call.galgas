@@ -106,6 +106,7 @@ override method @functionCallInExpressionAST analyzeExpression
   end
   analyzeRoutineCall (
     !self:inSelfType
+    !propertiesAreMutable:false
     !receiverName:mReceiverName
     !routineName:mFunctionName
     !effective:mEffectiveParameterList

@@ -333,8 +333,6 @@ proc buildSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
-#--- Enter configuration
-#  [inAST.mConfigurationDeclarationList enterInContext !?context:outSemanticContext]
 #--- Build an HTML containing all glogal constants
   buildGlobalConstantMapHTMLFile (
     !outSemanticContext.mGlobalConstantMap
@@ -351,7 +349,7 @@ proc buildSemanticContext
   )
 #--- Enter procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
-  [inAST.mProcedureListAST enterInContext !selfTypeName:"" !?context: outSemanticContext]
+  [inAST.mProcedureListAST enterInContext !selfTypeName:"" !?context:outSemanticContext]
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mSectionListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mServiceListAST enterInContext !receiverType:"" !?context: outSemanticContext]

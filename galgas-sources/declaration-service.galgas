@@ -107,6 +107,7 @@ method @serviceDeclarationListAST enterInContext
       !false # Not weak
       !returnType
       !false # No appendFileAndLineArgumentForPanicLocation
+      !true # Can mutate properties
     ]
   end
 }
@@ -142,9 +143,10 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
       !returnTypeName:service.mReturnTypeName
       !service.mServiceInstructionList
       !service.mEndOfServiceLocation
+      !propertiesAreMutable:true
       !warnIfUnused:warnIfUnused
-      !globalProcedure:true
-      !weakProcedure:false
+      !globalFunction:true
+      !weakFunction:false
       !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries

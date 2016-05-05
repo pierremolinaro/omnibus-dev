@@ -126,7 +126,11 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
     ?*
     ?let returnedType
     ?let appendFileAndLineArgumentForPanicLocation
+    ?let canMutateProperties
   ]
+  if canMutateProperties then
+    error functionName : "a function should not mutate properties"
+  end
 #--- Check accessibility
   if ([fieldList length] > 0) && not isPublic then
     error functionName : "this function is not public"
@@ -154,6 +158,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
 #--- Analyze effective parameters
   analyzeEffectiveParameters (
     !self:inSelfType
+    !propertiesAreMutable:false
     !formal:formalSignature
     !effective:mEffectiveParameterList
     !errorLocation:functionName.location

@@ -152,6 +152,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
   @allocaList initAllocaList = {}
   [mPanicInstructionList analyzeRoutineInstructionList
     !self:.null
+    !propertiesAreMutable:false
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
     !modes:{!panicModeName ()}

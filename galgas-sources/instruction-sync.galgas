@@ -165,6 +165,7 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 
 override method @syncInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inRequiredModeSet
@@ -288,6 +289,7 @@ override method @syncInstructionAST analyze
     @instructionListIR branchInstructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
+      !propertiesAreMutable:inRoutineCanMutateProperties
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:endOfBranch
       !context:inContext
@@ -367,6 +369,7 @@ proc analyzeGuardCall
 #--- Analyze effective parameters
   analyzeEffectiveParameters (
     !self:inSelfType
+    !propertiesAreMutable:true
     !formal:formalSignature
     !effective:inEffectiveParameterList
     !errorLocation:inGuardName.location

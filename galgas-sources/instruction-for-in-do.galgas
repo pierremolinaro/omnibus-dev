@@ -56,6 +56,7 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 
 override method @forInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -106,6 +107,7 @@ override method @forInstructionAST analyze
   @instructionListIR instructionGenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_do_instruction
     !context:inContext

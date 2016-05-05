@@ -304,11 +304,11 @@ void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadli
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool makeTaskReady (TaskList * ioWaitingList) asm ("!FUNC!.makeTaskReady") ;
+void makeTaskReady (TaskList * ioWaitingList, bool * outFound) asm ("!FUNC!.makeTaskReady") ;
 
-bool makeTaskReady (TaskList * ioWaitingList) {
-  const bool found = (* ioWaitingList) != 0 ;
-  if (found) {
+void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {
+  *outFound = (* ioWaitingList) != 0 ;
+  if (*outFound) {
   //--- Get index of waiting task
     const unsigned taskIndex = countTrainingZeros (* ioWaitingList) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
@@ -322,7 +322,6 @@ bool makeTaskReady (TaskList * ioWaitingList) {
     kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
     kernel_makeTaskReady (taskIndex) ;
   }
-  return found ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
