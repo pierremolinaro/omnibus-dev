@@ -5,12 +5,52 @@
 
 
 
-\chapter{Les types structure}
+\chapter{Le type structure}
 
+
+Le type structure est fondamental en PLM : comme dans bien d'autres langages, il permet de décrire des données structurées. Mais en PLM, une structure permet de décrire les outils de synchronisation tels que le sémaphore, le rendez-vous…
+
+Un type structure a une sémantique de \emph{valeur}, c'est-à-dire qu'une affectation entre instances de structure effectue une copie de l'objet source vers l'objet destination. De plus, il est possible d'interdire la copie d'un type structure, ce qui est indispensable dans le cas où ce type décrit un outil de synchronisation.
+
+Un type structure peut contenir les déclarations de :
+\begin{itemize}
+\item propriétés ;
+\item fonctions ;
+\item services ;
+\item sections ;
+\item primitives ;
+\item gardes.
+\end{itemize}
+
+De plus, des attributs paramètrent le comportement de ses instances.
 
 \section{Déclaration d'un type structure}
 
-La déclaration d'un type structure est introduite par le mot réservé \plm!struct! :
+La déclaration d'un type structure est introduite par le mot réservé \plm!struct!.
+
+\begin{PLM}
+struct $point {
+  // Déclaration de propriétés
+  // Déclaration de fonctions
+  // Déclaration de services
+  // Déclaration de sections
+  // Déclaration de primitives
+  // Déclaration de gardes
+}
+\end{PLM}
+
+L'ordre des déclarations est sans importance.
+
+
+\section{Déclaration des propriétés}
+
+Un type structure peut définir, zéro, un ou plusieurs propriétés. Tout type est acceptable pour une propriété. 
+
+Les propriétés déclarées soit présente une valeur initiale par défaut, soit sont initialisées par l'initialiseur engendré implicitement. De cette façon, quand un type structure est instancié, toutes ses propriétés sont initialisées. 
+
+\subsection{Propriétés toutes initialisées par défaut}
+
+Voici un exemple qui déclare une structure contenant deux propriétés initialisées par défaut :
 
 \begin{PLM}
 struct $point {
@@ -19,9 +59,7 @@ struct $point {
 }
 \end{PLM}
 
-Dans la version actuelle de PLM, tous les champs doivent être initialisés.
-
-Déclarer un type structure définit implicitement un initialiseur sans argument, qu'il faut appeler lorsque l'on initialise une variable ou une constante. Par exemple :
+Un type structure dont toutes les propriétés sont initialisées par défaut présente un initialiseur sans argument. On pourra donc écrire :
 \begin{PLM}
 var pt $point = $point ()
 \end{PLM}
@@ -31,21 +69,75 @@ Et l'annotation de type peut être omise :
 var pt = $point ()
 \end{PLM}
 
-Tout type acceptable pour un champ. Par exemple : 
+\subsection{Propriétés non initialisées}
+
+Pour chaque propriété non initialisée par défaut, l'initialiseur synthétisé présente un argument. Par exemple :
+
 \begin{PLM}
-struct $point3D {
+struct $point {
+  var x $int32
+  var y $int32 = 0
+}
+\end{PLM}
+
+La propriété \plm!x! n'étant pas initialisée par défaut, l'initialiseur synthétisé présente un argument dont la sélecteur porte le nom de la propriété non initialisée :
+\begin{PLM}
+var pt = $point (!x:4)
+\end{PLM}
+
+Si plusieurs propriétés ne sont pas initialisées par défaut, l'initialiseur synthétisé présente des arguments dans l'ordre de déclaration des propriétés non initialisées. Par exemple :
+
+\begin{PLM}
+struct $point {
+  var x $int32
+  var y $int32
+}
+\end{PLM}
+
+Alors :
+\begin{PLM}
+var pt = $point (!x:4 !y:8)
+\end{PLM}
+
+\subsection{Propriété d'un type structure}
+
+Tout type acceptable pour une propriété. Par exemple, le type \plm!$point3! a une propriété de type \plm!$point! :
+\begin{PLM}
+struct $point {
+  var x $int32 = 0
+  var y $int32 = 0
+}
+
+struct $point3 {
   var p $point = $point ()
   var z $int32 = 0
 }
 \end{PLM}
 
+Toutes les propriétés du type \plm!$point3! étant initialisées par défaut, l'initialiseur est \plm!$point3 ()!. Si des propriétés ne ne sont pas initialisées par défaut, l'initialiseur synthétisé comporte des arguments en conséquences. Par exemple :
+
+\begin{PLM}
+struct $point {
+  var x $int32
+  var y $int32
+}
+
+struct $point3 {
+  var p $point
+  var z $int32
+}
+\end{PLM}
+
+L'initialisation s'effectue par : 
+\begin{PLM}
+var pt3 = $point3 (!p:$point (!x:4 !y:8) !z:6)
+\end{PLM}
 
 
 
+\section{Fonctions}
 
 
-
-\section{Procédures}
 
 Il existe deux sortes de procédure de structure :
 \begin{itemize}
@@ -73,7 +165,7 @@ Trois remarques :
 \begin{itemize}
   \item une telle procédure ne peut pas modifier l'objet auquel il s'applique (pour le faire, il faut définir une \plm!mutating proc!) ;
   \item l'accès à une variable globale est possible si cette dernière déclare la procédure comme routine autorisée (\refSectionPage{DecRoutinesAutoriseesVarGlobale}) ; l'accès peut être en lecture (par défaut), ou en lecture / écriture (attribut \plm!@rw!) ;
-  \item préfixer l'accès à un champ par \plm!self.! est obligatoire. 
+  \item préfixer l'accès à une propriété par \plm!self.! est obligatoire. 
 \end{itemize}
 
 
@@ -81,7 +173,7 @@ Trois remarques :
 
 \subsectionLabel{Procédure mutable}{procMutableStructure}
 
-Si on veut modifier un champ, il faut déclarer la procédure de structure avec le qualificatif \plm!mutating! :
+Si on veut modifier une propriété, il faut déclarer la procédure de structure avec le qualificatif \plm!mutating! :
 
 \begin{PLM}
 struct $point {
@@ -94,7 +186,7 @@ struct $point {
 }
 \end{PLM}
 
-L'accès à une variable globale est possible si cette dernière déclare la procédure comme routine autorisée (\refSectionPage{DecRoutinesAutoriseesVarGlobale}) ; l'accès peut être en lecture (par défaut), ou en lecture / écriture (attribut \plm!@rm!). Préfixer l'accès à un champ par \plm!self.! est obligatoire. 
+L'accès à une variable globale est possible si cette dernière déclare la procédure comme routine autorisée (\refSectionPage{DecRoutinesAutoriseesVarGlobale}) ; l'accès peut être en lecture (par défaut), ou en lecture / écriture (attribut \plm!@rm!). Préfixer l'accès à une propriété par \plm!self.! est obligatoire. 
 
 Il est possible de modifier l'objet courant en affectant \plm!self! :
 
@@ -151,7 +243,7 @@ struct $point {
 }
 \end{PLM}
 
-Comme pour les procédures de structures, l'usage de \plm!self! est obligatoire pour accéder aux champs. La variable \plm!result! est implicitement déclarée du type renvoyé par la fonction (ici \plm!$int32!).
+Comme pour les procédures de structures, l'usage de \plm!self! est obligatoire pour accéder aux propriétés. La variable \plm!result! est implicitement déclarée du type renvoyé par la fonction (ici \plm!$int32!).
 
 
 
@@ -164,9 +256,9 @@ Comme pour les procédures de structures, l'usage de \plm!self! est obligatoire 
 
 \section{Extensions}
 
-Pour tout type de structure, un nombre quelconque d'extensions peut être défini. Une extension déclare champs, procédures et fonctions.
+Pour tout type de structure, un nombre quelconque d'extensions peut être défini. Une extension déclare propriétés, procédures et fonctions.
 
-Voici un exemple d'extension qui déclare un champ, une fonction et une procédure.
+Voici un exemple d'extension qui déclare une propriété, une fonction et une procédure.
 
 \begin{PLM}
 extension $point {
@@ -187,8 +279,8 @@ extension $point {
 
 
 
-\section{Visibilité des champs et des méthodes}
+\section{Visibilité des propriétés et des méthodes}
 
-Dans la version actuelle, les champs et les méthodes sont publiques.
+Dans la version actuelle, les propriétés et les méthodes sont publiques.
 
 

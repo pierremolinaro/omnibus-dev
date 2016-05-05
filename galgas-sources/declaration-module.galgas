@@ -11,7 +11,7 @@ syntax extension common_syntax {
     $identifier$ ?let moduleName
     let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
     ${$
-    @procedureDeclarationListAST procedureDeclarationListAST = {}
+    @functionDeclarationListAST functionDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
     @primitiveDeclarationListAST primitiveListAST = {}
@@ -36,7 +36,7 @@ syntax extension common_syntax {
       <expression> ?let initExpression
       fieldList += !fieldName !false !typeName !.expression{!initExpression:initExpression}
     while
-      <procedure> !?procedureDeclarationListAST
+      <procedure> !?functionDeclarationListAST
     while
       <service> !?serviceListAST
     while
@@ -51,9 +51,9 @@ syntax extension common_syntax {
     $}$
   #--- Declare init list
     @2lstringlist requiredByList = {}
-    for function in procedureDeclarationListAST do
-      if function.mPublic then
-        requiredByList += !moduleTypeName !function.mProcedureName
+    for function in functionDeclarationListAST do
+      if function.mPublicFunction then
+        requiredByList += !moduleTypeName !function.mFunctionName
       end
     end
     for service in serviceListAST do
@@ -80,7 +80,7 @@ syntax extension common_syntax {
       !moduleTypeName
       !{}
       !fieldList
-      !procedureDeclarationListAST
+      !functionDeclarationListAST
       !serviceListAST
       !sectionListAST
       !primitiveListAST

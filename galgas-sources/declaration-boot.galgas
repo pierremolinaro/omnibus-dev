@@ -101,8 +101,10 @@ method @bootList-element bootSemanticAnalysis
     !?alloca:bootAllocaList
     !?generatedCode:instructionGenerationList
   ]
-#---
+#--- End of variableMap
+  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !mEndOfBootLocation]
+  drop variableMap
 #--- Code generation
   ioIntermediateCodeStruct.mBootList +=
     !mBootLocation

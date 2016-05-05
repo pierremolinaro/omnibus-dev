@@ -175,8 +175,10 @@ proc initSemanticAnalysis
     !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList
   ]
-#---
+#--- End of variableMap
+  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !inEndOfInitDeclaration]
+  drop variableMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

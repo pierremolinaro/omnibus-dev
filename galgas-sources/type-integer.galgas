@@ -53,7 +53,7 @@ override getter @integerDeclaration keyRepresentationForErrorSignaling -> @strin
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -103,7 +103,7 @@ override method @integerDeclaration enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {

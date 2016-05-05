@@ -78,7 +78,7 @@ override getter @opaqueTypeDeclaration keyRepresentationForErrorSignaling -> @st
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @opaqueTypeDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -145,7 +145,7 @@ override method @opaqueTypeDeclaration enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @opaqueTypeDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {

@@ -133,7 +133,7 @@ override getter @configurationDeclarationAST keyRepresentationForErrorSignaling 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @configurationDeclarationAST enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -145,7 +145,7 @@ override method @configurationDeclarationAST enterRoutinesInContext
 # Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
 override method @configurationDeclarationAST enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {

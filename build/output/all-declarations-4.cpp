@@ -15104,7 +15104,7 @@ void cGrammar_plm_5F_target_5F_grammar::nt_procedure_parse (C_Lexique_plm_5F_lex
   }
 }
 
-void cGrammar_plm_5F_target_5F_grammar::nt_procedure_ (GALGAS_procedureDeclarationListAST &  parameter_1,
+void cGrammar_plm_5F_target_5F_grammar::nt_procedure_ (GALGAS_functionDeclarationListAST &  parameter_1,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 19 :

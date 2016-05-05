@@ -253,8 +253,10 @@ proc guardSemanticAnalysis
       !?generatedCode:instructionGenerationList
     ]
   end 
-#---
+#--- End of variableMap
+  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
+  drop variableMap
 #--- Code generation
   let guardMangledName = if inSelfType == .null then
     @lstring.new {!"." + inRoutineName !inRoutineName.location}

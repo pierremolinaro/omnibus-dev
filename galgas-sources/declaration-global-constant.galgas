@@ -90,7 +90,7 @@ override getter @globalConstantDeclaration keyRepresentationForErrorSignaling ->
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @globalConstantDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
@@ -149,7 +149,7 @@ override method @globalConstantDeclaration enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @globalConstantDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {

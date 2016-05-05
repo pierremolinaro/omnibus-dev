@@ -4,7 +4,7 @@
 
 list @extensionDeclarationListAST {
   @lstring mTypeName
-  @procedureDeclarationListAST mProcedureDeclarationListAST
+  @functionDeclarationListAST mProcedureDeclarationListAST
   @structureFieldListAST mFieldList
 }
 
@@ -20,7 +20,7 @@ syntax extension common_syntax {
     $extension$
     $typeName$ ?let typeName
     ${$
-    @procedureDeclarationListAST procedureDeclarationListAST = {}
+    @functionDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
     repeat
     while

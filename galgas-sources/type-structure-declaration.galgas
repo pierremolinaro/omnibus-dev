@@ -6,7 +6,7 @@ class @structureDeclaration : @abstractDeclaration {
   @lstring mStructureName
   @lstringlist mAttributeListAST
   @structureFieldListAST mStructureFieldListAST
-  @procedureDeclarationListAST mProcedureDeclarationListAST
+  @functionDeclarationListAST mFunctionDeclarationListAST
   @serviceDeclarationListAST mServiceListAST
   @sectionDeclarationListAST mSectionListAST
   @primitiveDeclarationListAST mPrimitiveListAST
@@ -81,7 +81,7 @@ syntax extension common_syntax {
       attributeList += !attribute
     end 
     ${$
-    @procedureDeclarationListAST procedureDeclarationListAST = {}
+    @functionDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
     @sectionDeclarationListAST sectionListAST = {}
@@ -137,7 +137,7 @@ override method @structureDeclaration addExtension
         ![newDeclaration mStructureName]
         ![newDeclaration mAttributeListAST]
         ![newDeclaration mStructureFieldListAST] + fieldList
-        ![newDeclaration mProcedureDeclarationListAST] + procedures
+        ![newDeclaration mFunctionDeclarationListAST] + procedures
         ![newDeclaration mServiceListAST]
         ![newDeclaration mSectionListAST]
         ![newDeclaration mPrimitiveListAST]
@@ -171,12 +171,12 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
     end
   end
 #--- Add structure procedures
-  for () in mProcedureDeclarationListAST do
-    for (* * formalArgumentTypeName *) in mProcedureFormalArgumentList do
+  for () in mFunctionDeclarationListAST do
+    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
-    [mProcedureInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 #--- Add structure services
   [mServiceListAST noteServiceTypesInPrecedenceGraph !?ioGraph]
@@ -231,7 +231,7 @@ sortedlist @sortedOperandIRList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
@@ -332,11 +332,11 @@ override method @structureDeclaration enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  [mProcedureDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
+  [mFunctionDeclarationListAST enterInContext !selfTypeName:"$" + mStructureName.string !?context:ioContext]
   [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mPrimitiveListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
@@ -352,18 +352,6 @@ override method @structureDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
-  @propertyMap propertyMap
-  switch [structureType kind]
-  case structure (propMap *) : propertyMap = propMap
-  case enumeration (*) : propertyMap = {}
-  case integer (* * * *) : propertyMap = {}
-  case staticInteger : propertyMap = {}
-  case boolean : propertyMap = {}
-  case boolset : propertyMap = {}
-  case literalString : propertyMap = {}
-  case opaque (*) : propertyMap = {}
-  case arrayType (* *) : propertyMap = {}
-  end
 #--- Analyze procedures
   [self procedureSemanticAnalysis
     !structureType:structureType
@@ -409,9 +397,9 @@ method @structureDeclaration procedureSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for procedure in mProcedureDeclarationListAST do
+  for procedure in mFunctionDeclarationListAST do
     var warnIfUnused = true
-    for (attribute) in procedure.mProcedureAttributeList do
+    for (attribute) in procedure.mFunctionAttributeList do
       if attribute.string == noWarningIfUnusedAttribute () then
         if not warnIfUnused then
           error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
@@ -424,12 +412,12 @@ method @structureDeclaration procedureSemanticAnalysis
     routineSemanticAnalysis (
       !receiverType:inStructureType
       !.function
-      !procedure.mProcedureModeList
-      !procedure.mProcedureName
-      !procedure.mProcedureFormalArgumentList
-      !returnTypeName:procedure.mReturnTypeName
-      !procedure.mProcedureInstructionList
-      !procedure.mEndOfProcedureDeclaration
+      !procedure.mFunctionModeList
+      !procedure.mFunctionName
+      !procedure.mFunctionFormalArgumentList
+      !returnTypeName:procedure.mFunctionReturnTypeName
+      !procedure.mFunctionInstructionList
+      !procedure.mEndOfFunctionDeclaration
       !warnIfUnused:warnIfUnused
       !globalProcedure:false
       !weakProcedure:false
