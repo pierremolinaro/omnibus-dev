@@ -131,7 +131,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
     ?let canMutateProperties
     ?let canAccessPropertiesInUserMode
   ]
-  if canAccessPropertiesInUserMode && not inDirectAccessToPropertiesAllowed then
+  if (routineKind == .function) && canAccessPropertiesInUserMode && not inDirectAccessToPropertiesAllowed then
     error functionName : "the callee accesses properties, the current function should be declared with @"
        + userAccessAttribute () + " attribute"
   end

@@ -171,8 +171,6 @@ sharedmap @unifiedTypeMap %selectors {
 
 map @classMethodMap {
   @operandIR mValue
-#  @valueIR mValue
-#  @unifiedTypeMap-proxy mResultType
   insert insertKey error message "the '%K' class method is already declared in %L"
   search searchKey error message "there is no '%K' class method"
 }

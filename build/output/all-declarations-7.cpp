@@ -1348,7 +1348,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var signalerDonneeLue = $semaphore (!value:0)\n"
   "  var data $uint32 = 0\n"
   "\n"
-  "  public func `user output @mutating @access (\?data:inData $uint32) {\n"
+  "  public func `user output @mutating @userAccess (\?data:inData $uint32) {\n"
   "    self.autoriserEcriture.P ()\n"
   "    self.data = inData\n"
   "    self.autoriserLecture.V ()\n"
@@ -1435,7 +1435,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2299, // Text length
+  2303, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -1556,33 +1556,41 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp
   "struct $exemple {\n"
   "  var x $int32\n"
   "  \n"
-  "  func `user store @mutating @userAccess (\?x: inX $int32) {\n"
-  "    self.x = inX\n"
+  "  func `user getNok () -> $int32 {\n"
+  "    result = self.x // Erreur : @userAccess est n\xC3""\xA9""c\xC3""\xA9""ssaire\n"
   "  }\n"
   "  \n"
-  "  func `user increment @mutating @userAccess () {\n"
-  "    self.inc ()\n"
-  "    self.x += 1\n"
+  "  func `user getOk @userAccess () -> $int32 {\n"
+  "    result = self.x // Ok : @userAccess autorise l'acc\xC3""\xA8""s\n"
   "  }\n"
   "  \n"
-  "  func `kernel get () -> $int32 {\n"
+  "  func `user getNok2  () -> $int32 {\n"
+  "    result = self.getOk () // Erreur : @userAccess est n\xC3""\xA9""c\xC3""\xA9""ssaire\n"
+  "  }\n"
+  "  \n"
+  "  func `user getOk2 @userAccess () -> $int32 {\n"
+  "    result = self.getOk () // Ok : @userAccess autorise l'acc\xC3""\xA8""s\n"
+  "  }\n"
+  "  \n"
+  "  func `section sGet () -> $int32 {\n"
+  "    result = self.x // Ok : @userAccess est inutile\n"
+  "  }\n"
+  "  \n"
+  "  section sectionGet () -> $int32 {\n"
   "    result = self.x\n"
   "  }\n"
-  "  \n"
-  "  func `user get2 @userAccess () -> $int32 {\n"
-  "    result = self.get ()\n"
+  "\n"
+  "  func `user getOk3 () -> $int32 {\n"
+  "    result = self.sectionGet ()\n"
   "  }\n"
-  "  \n"
-  "  section inc @mutating () {\n"
-  "    self.x += 1\n"
-  "  }\n"
+  "\n"
   "}\n" ;
 
 const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  1160, // Text length
+  1467, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
