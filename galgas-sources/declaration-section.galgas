@@ -96,6 +96,13 @@ method @sectionDeclarationListAST enterInContext
     else
       @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !section.mReturnTypeName}
     end
+  #--- Attributes
+    var mutating = false
+    for (attribute) in section.mSectionAttributeList do
+      if attribute.string == mutatingAttribute () then
+        mutating = true    
+      end
+    end
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
@@ -106,7 +113,7 @@ method @sectionDeclarationListAST enterInContext
       !false # Not weak
       !returnType
       !false # No appendFileAndLineArgumentForPanicLocation
-      !true # canMutateProperties
+      !mutating # canMutateProperties
       !true # canAccessPropertiesInUserMode
     ]
   end

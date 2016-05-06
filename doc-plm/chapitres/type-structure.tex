@@ -170,53 +170,101 @@ Les fonctions définies dans une structure sont particulières dans le sens où 
 \item l'attribut \plm!@mutating! autorise la fonction à modifier \emph{directement} ou \emph{indirectement} les propriétés.
 \end{itemize}
 
-L'attribut \plm!@userAccess! peut paraître surprenant, mais il permet de garantir l'absence d'accès en parallèle aux propriétés par plisieurs tâches : la fonction d'une variable globale de type structure ne peut pas être appelée en mode \plm!`user! si la fonction a été définie avec l'attribut  \plm!@userAccess!.
+L'attribut \plm!@userAccess! peut paraître surprenant, mais il permet de garantir l'absence d'accès en parallèle aux propriétés par plusieurs tâches : la fonction d'une variable globale de type structure ne peut pas être appelée en mode \plm!`user! si la fonction a été définie avec l'attribut  \plm!@userAccess!.
 
 \subsection{Attribut \texttt{@userAccess}}
 
-L'attribut \plm!@userAccess! autorise la fonction à accèder aux propriétés en mode \plm!`user!.
+L'attribut \plm!@userAccess! autorise la fonction à lire \emph{directement} les propriétés en mode \plm!`user!. Par \emph{directement}, on entend que les instructions de la fonction nomment les propriétés (notation \plm=self.=), ou appellent des fonctions qui déclarent l'attribut \plm!@userAccess!.
 
+Ainsi, l'attribut \plm!@userAccess! est indispensable pour lire les propriétés en mode \plm!`user!. Par contre, si la fonction ne s'exécute pas en mode \plm!`user!, cet attribut est inutile. Il est aussi inutile si la fonction appelle des sections qui lisent des propriétés.
 
- Prenons un exemple, le code suivant ne compile pas :
+Si l'on veut l'accès en écriture, ajouter l'attribut \plm=@mutating= est indispensable. Comme les services, primitives et gardes ont par défaut un accès en écriture aux propriétés, cet attribut est indispensable pour que leur appel soit valide. 
 
+Voici un code d'exemple qui illustre les différentes possibilités :
 \begin{PLM}
 struct $exemple {
   var x $int32
   
-  func `user get () -> $int32 {
-    result = self.x // Error "for accessing properties, the function
-    //                    should be declared with @userAccess attribute"
+  func `user getNok () -> $int32 {
+    result = self.x // Erreur : @userAccess est nécéssaire
   }
-}
-\end{PLM}
-
-En effet, par défaut, une fonction de structure n'a pas le droit d'accéder directement aux propriétés. Il faut ajouter l'attribut \plm!@userAccess! :
-
-\begin{PLM}
-struct $exemple {
-  var x $int32
   
-  func `user get @userAccess () -> $int32 {
-    result = self.x // Ok
+  func `user getOk @userAccess () -> $int32 {
+    result = self.x // Ok : @userAccess autorise l'accès
   }
-}
-\end{PLM}
-
-L'attribut \plm!@userAccess! autorise l'accès direct, mais sans cet attribut, l'accès \emph{indirect} est autorisé : une fonction peut appeler une autre fonction qui accède directement à l'attribut. Par exemple :
-
-\begin{PLM}
-struct $exemple {
-  var x $int32
   
-  func `user get @userAccess () -> $int32 {
-    result = self.x // Ok, car @userAccess
+  func `user getNok2  () -> $int32 {
+    result = self.getOk () // Erreur : @userAccess est nécéssaire
+  }
+  
+  func `user getOk2 @userAccess () -> $int32 {
+    result = self.getOk () // Ok : @userAccess autorise l'accès
+  }
+  
+  func `section sGet () -> $int32 {
+    result = self.x // Ok : @userAccess est inutile
+  }
+  
+  section sectionGet () -> $int32 {
+    result = self.x
   }
 
-  func `user get2 () -> $int32 {
-    result = self.get () // Ok, même sans @userAccess
+  func `user getOk3 () -> $int32 {
+    result = self.sectionGet ()
   }
 }
 \end{PLM}
+
+Dans le code d'exemple ci-dessus :
+\begin{itemize}
+  \item la fonction \plm=getNok= s'exécute en mode \plm=`user=, ne nomme pas l'attribut \plm=@userAccess=, donc son instruction qui nomme une propriété déclenche une erreur de compilation ;
+  \item la fonction \plm=getOk= s'exécute en mode \plm=`user=, nomme l'attribut \plm=@userAccess=, donc son instruction qui nomme une propriété est acceptée par le compilateur ;
+  \item la fonction \plm=getNok2= s'exécute en mode \plm=`user=, ne nomme pas l'attribut \plm=@userAccess=, donc son instruction qui nomme une fonction déclarée avec cet attribut déclenche une erreur de compilation ;
+  \item la fonction \plm=getOk2= s'exécute en mode \plm=`user=, nomme l'attribut \plm=@userAccess=, donc son instruction qui nomme une fonction déclarée avec cet attribut est acceptée par le compilateur ;
+  \item la fonction \plm=sGet= s'exécute en mode \plm=`section=, l'attribut \plm=@userAccess= est inutile pour que son instruction qui nomme une propriété soit acceptée par le compilateur ;
+  \item la section \plm=sectionGet= s'exécute en mode \plm=`section=, son instruction qui nomme une propriété soit acceptée par le compilateur ;
+  \item la fonction \plm=getOk3= s'exécute en mode \plm=`section=, l'attribut \plm=@userAccess= est inutile pour que l'appel à une section soit acceptée par le compilateur.
+\end{itemize}
+
+
+
+\subsection{Attribut \texttt{@mutating}}
+
+L'attribut \plm=@mutating= autorise une fonction de structure à modifier \emph{directement} les propriétés de la structure, du moment que l'accès ait été autorisé avec \plm=@userAccess=.
+
+
+%En effet, par défaut, une fonction de structure n'a pas le droit d'accéder directement aux propriétés. Il faut ajouter l'attribut \plm!@userAccess! :
+%
+%\begin{PLM}
+%struct $exemple {
+%  var x $int32
+%  
+%  func `user get @userAccess () -> $int32 {
+%    result = self.x // Ok
+%  }
+%}
+%\end{PLM}
+%
+%L'attribut \plm!@userAccess! autorise l'accès direct, mais sans cet attribut, l'accès \emph{indirect} est autorisé : une fonction peut appeler une autre fonction qui accède directement à l'attribut. Par exemple :
+%
+%\begin{PLM}
+%struct $exemple {
+%  var x $int32
+%  
+%  func `user get @userAccess () -> $int32 {
+%    result = self.x // Ok, car @userAccess
+%  }
+%
+%  func `user get2 () -> $int32 {
+%    result = self.get () // Erreur, get2 n'a pas l'attribut @userAccess
+%  }
+%}
+%
+%  func `user get3 @userAccess () -> $int32 {
+%    result = self.get () // Ok, car @userAccess
+%  }
+%}
+%\end{PLM}
 
 
 

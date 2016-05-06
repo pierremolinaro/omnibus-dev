@@ -37,24 +37,32 @@ task T priority 12 stackSize 512 {
 struct $exemple {
   var x $int32
   
-  func `user store @mutating @userAccess (?x: inX $int32) {
-    self.x = inX
+  func `user getNok () -> $int32 {
+    result = self.x // Erreur : @userAccess est nécéssaire
   }
   
-  func `user increment @mutating @userAccess () {
-    self.inc ()
-    self.x += 1
+  func `user getOk @userAccess () -> $int32 {
+    result = self.x // Ok : @userAccess autorise l'accès
   }
   
-  func `user get @userAccess () -> $int32 {
+  func `user getNok2  () -> $int32 {
+    result = self.getOk () // Erreur : @userAccess est nécéssaire
+  }
+  
+  func `user getOk2 @userAccess () -> $int32 {
+    result = self.getOk () // Ok : @userAccess autorise l'accès
+  }
+  
+  func `section sGet () -> $int32 {
+    result = self.x // Ok : @userAccess est inutile
+  }
+  
+  section sectionGet () -> $int32 {
     result = self.x
   }
-  
-  func `user get2 @userAccess () -> $int32 {
-    result = self.get ()
+
+  func `user getOk3 () -> $int32 {
+    result = self.sectionGet ()
   }
-  
-  section inc @mutating () {
-    self.x += 1
-  }
+
 }

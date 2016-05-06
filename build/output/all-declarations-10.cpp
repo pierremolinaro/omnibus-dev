@@ -5507,28 +5507,32 @@ static void extensionMethod_selfFunctionCallInExpressionAST_analyzeExpression (c
   GALGAS_bool var_canAccessPropertiesInUserMode ;
   GALGAS_bool joker_6018 ; // Joker input parameter
   constinArgument_inContext.mAttribute_mRoutineMapForContext.method_searchKey (var_routineMangledName, var_isPublic, var_modeMap, var_formalSignature, var_routineKind, joker_6018, var_returnedType, var_appendFileAndLineArgumentForPanicLocation, var_canMutateProperties, var_canAccessPropertiesInUserMode, inCompiler COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 122)) ;
-  GALGAS_bool test_4 = var_canAccessPropertiesInUserMode ;
+  GALGAS_bool test_4 = GALGAS_bool (kIsEqual, var_routineKind.objectCompare (GALGAS_routineKind::constructor_function (SOURCE_FILE ("expression-self-func-call.galgas", 134)))) ;
   if (kBoolTrue == test_4.boolEnum ()) {
-    test_4 = constinArgument_inDirectAccessToPropertiesAllowed.operator_not (SOURCE_FILE ("expression-self-func-call.galgas", 134)) ;
+    test_4 = var_canAccessPropertiesInUserMode ;
   }
-  const enumGalgasBool test_5 = test_4.boolEnum () ;
-  if (kBoolTrue == test_5) {
-    GALGAS_location location_6 (var_functionName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_6, GALGAS_string ("the callee accesses properties, the current function should be declared with @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 135)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 136))  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 135)) ;
+  GALGAS_bool test_5 = test_4 ;
+  if (kBoolTrue == test_5.boolEnum ()) {
+    test_5 = constinArgument_inDirectAccessToPropertiesAllowed.operator_not (SOURCE_FILE ("expression-self-func-call.galgas", 134)) ;
   }
-  const enumGalgasBool test_7 = var_canMutateProperties.boolEnum () ;
-  if (kBoolTrue == test_7) {
-    GALGAS_location location_8 (var_functionName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_8, GALGAS_string ("a function should not mutate properties")  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 139)) ;
+  const enumGalgasBool test_6 = test_5.boolEnum () ;
+  if (kBoolTrue == test_6) {
+    GALGAS_location location_7 (var_functionName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_7, GALGAS_string ("the callee accesses properties, the current function should be declared with @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 135)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 136))  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 135)) ;
   }
-  GALGAS_bool test_9 = GALGAS_bool (kIsStrictSup, var_fieldList.getter_length (SOURCE_FILE ("expression-self-func-call.galgas", 142)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
-  if (kBoolTrue == test_9.boolEnum ()) {
-    test_9 = var_isPublic.operator_not (SOURCE_FILE ("expression-self-func-call.galgas", 142)) ;
+  const enumGalgasBool test_8 = var_canMutateProperties.boolEnum () ;
+  if (kBoolTrue == test_8) {
+    GALGAS_location location_9 (var_functionName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_9, GALGAS_string ("a function should not mutate properties")  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 139)) ;
   }
-  const enumGalgasBool test_10 = test_9.boolEnum () ;
-  if (kBoolTrue == test_10) {
-    GALGAS_location location_11 (var_functionName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_11, GALGAS_string ("this function is not public")  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 143)) ;
+  GALGAS_bool test_10 = GALGAS_bool (kIsStrictSup, var_fieldList.getter_length (SOURCE_FILE ("expression-self-func-call.galgas", 142)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  if (kBoolTrue == test_10.boolEnum ()) {
+    test_10 = var_isPublic.operator_not (SOURCE_FILE ("expression-self-func-call.galgas", 142)) ;
+  }
+  const enumGalgasBool test_11 = test_10.boolEnum () ;
+  if (kBoolTrue == test_11) {
+    GALGAS_location location_12 (var_functionName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_12, GALGAS_string ("this function is not public")  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 143)) ;
   }
   GALGAS_lstring var_routineNameForInvocationGraph ;
   switch (var_routineKind.enumValue ()) {
@@ -5562,10 +5566,10 @@ static void extensionMethod_selfFunctionCallInExpressionAST_analyzeExpression (c
   {
   routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), var_formalSignature, object->mAttribute_mEffectiveParameterList, var_functionName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 166)) ;
   }
-  const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, var_returnedType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-self-func-call.galgas", 184)))).boolEnum () ;
-  if (kBoolTrue == test_12) {
-    GALGAS_location location_13 (var_functionName.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_13, GALGAS_string ("cannot be called in expression: no return value")  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 185)) ;
+  const enumGalgasBool test_13 = GALGAS_bool (kIsEqual, var_returnedType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-self-func-call.galgas", 184)))).boolEnum () ;
+  if (kBoolTrue == test_13) {
+    GALGAS_location location_14 (var_functionName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_14, GALGAS_string ("cannot be called in expression: no return value")  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 185)) ;
   }
   {
   routine_getNewTempVariable (var_returnedType, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-self-func-call.galgas", 188)) ;
