@@ -78,6 +78,8 @@ map @globalVariableMap %selectors {
   @allowedISRMap allowedISRMap
   @valueIR initialValue
   @bool isConstant
+  @bool allowedAccessToAll
+
   insert insertKey error message "the '%K' global variable is already declared in %L"
   search searchKey error message "there is no '%K' global variable"
 }

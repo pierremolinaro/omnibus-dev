@@ -2,9 +2,12 @@
 setter @instructionListIR appendGetElementPtr
   ?let @objectInMemoryIR inTarget
   ?let @objectInMemoryIR inSource
-  ?let @uint inIndex
+  ?let @elementPtrList inElementList
 {
-  self += !@getElementPtrIR.new {!inTarget !inSource !inIndex}
+  if [inElementList length] == 0 then
+    error .nowhere : "<<INTERNAL ERROR:inElementList is empty>>"
+  end
+  self += !@getElementPtrIR.new {!inTarget !inSource !inElementList}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -12,7 +15,7 @@ setter @instructionListIR appendGetElementPtr
 class @getElementPtrIR : @abstractInstructionIR {
   @objectInMemoryIR mTarget
   @objectInMemoryIR mSource
-  @uint mIndex
+  @elementPtrList mElementList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,7 +27,18 @@ override method @getElementPtrIR llvmInstructionCode
 {
   let llvmType = [[mSource type] llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + "* " + [mSource llvmName] + ", i32 0, i32 " + mIndex + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + "* " + [mSource llvmName] + ", i32 0"
+  for (idx *) in mElementList do
+    switch idx
+    case absolute (index) : ioLLVMcode += ", i32 " + index
+    case indirect (index) : ioLLVMcode += ", " + [index.mType llvmTypeName] + " " + [index.mValue llvmName]
+    end
+  end
+  ioLLVMcode += " ;"
+  for (* fieldName) in mElementList do
+    ioLLVMcode += " " + fieldName
+  end
+  ioLLVMcode += "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

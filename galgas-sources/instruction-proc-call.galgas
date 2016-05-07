@@ -32,7 +32,7 @@ class @standaloneRoutineCallInstructionAST : @abstractCallInstructionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @remoteRoutineCallInstructionAST : @abstractCallInstructionAST {
-  @lstringlist mPropertyList
+  @accessList mAccessList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -51,31 +51,24 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <routine_call> !@abstractCallInstructionAST outInstruction {
-    $identifier$ ?let receiverName
-    @lstringlist propertyList = {!receiverName}
-    repeat
-      $.$
-      $identifier$ ?let propertyName
-      propertyList += !propertyName
-    while
-    end
+    <access> ?let @accessList accessList
     <effective_parameters> ?let effectiveParameterList
     outInstruction = @remoteRoutineCallInstructionAST.new {
       !effectiveParameterList
-      !propertyList
+      !accessList
     }
   }
 
   #·····················································································································
 
-  rule <routine_call> !@abstractCallInstructionAST outInstruction {
-    $identifier$ ?let standaloneRoutineName
-    <effective_parameters> ?let effectiveParameterList
-    outInstruction = @standaloneRoutineCallInstructionAST.new {
-      !effectiveParameterList
-      !standaloneRoutineName
-    }
-  }
+#  rule <routine_call> !@abstractCallInstructionAST outInstruction {
+#    $identifier$ ?let standaloneRoutineName
+#    <effective_parameters> ?let effectiveParameterList
+#    outInstruction = @standaloneRoutineCallInstructionAST.new {
+#      !effectiveParameterList
+#      !standaloneRoutineName
+#    }
+#  }
 
   #·····················································································································
 
@@ -224,7 +217,9 @@ override method @standaloneRoutineCallInstructionAST analyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @remoteRoutineCallInstructionAST analyze
+private proc analyzeStandaloneRoutineCall
+  ?routineName:let @lstring inRoutineName
+  ?effectiveParameters:let @effectiveParameterListAST inEffectiveParameterList
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
@@ -238,20 +233,13 @@ override method @remoteRoutineCallInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  @lstringlist propertyList = mPropertyList
-  [!?propertyList popFirst ?let receiverName]
-  [!?propertyList popLast ?let routineName]
-  for (propertyName) in propertyList do
-    error propertyName : "not handled yet (2)"
-  end
-#---
   analyzeRoutineCall (
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !receiverName:receiverName
-    !routineName:routineName
-    !effective:mEffectiveParameterList
+    !receiverName:.new{!"" !inRoutineName.location}
+    !routineName:inRoutineName
+    !effective:inEffectiveParameterList
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
     !requiredModeSet:inRequiredModeSet
@@ -268,16 +256,170 @@ override method @remoteRoutineCallInstructionAST analyze
     ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
   )
   if returnedType != .null then
-    error routineName : "cannot be called in instruction: return value"
+    error inRoutineName : "cannot be called in instruction: return value"
   end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
-    !receiverName.string
+    !"" # No receiver
     !routineMangledName
     !routineKindIR
     !effectiveParameterListIR
     !appendFileAndLineArgumentForPanicLocation
   }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @remoteRoutineCallInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inRequiredModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  @accessList accessList = mAccessList
+  [!?accessList popLast ?let routineName ?let arrayElementAccess]
+  if arrayElementAccess != .noAccess then
+    error routineName : "array element access is not alowed here"
+  end
+  if [accessList length] == 0 then
+    analyzeStandaloneRoutineCall (
+      !routineName:routineName
+      !effectiveParameters:mEffectiveParameterList
+      !self:inSelfType
+      !propertiesAreMutable:inRoutineCanMutateProperties
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !modes:inRequiredModeSet
+      !allowPanic:inAllowPanic
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+    )
+  else
+  #---
+    analyzeVariableReadWriteAccess (
+      !fieldList:accessList
+      !requiresCopy:false
+      !self:inSelfType
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !inGuard:false
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !modes:inRequiredModeSet
+      !allowPanic:inAllowPanic
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      ?resultPtr:let @objectInMemoryIR targetObjectPtr
+      ?baseGlobalVariableName:let baseGlobalVariableName # "" if base variable is not a global variable
+    )
+    let receiverType = [targetObjectPtr type]
+    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+    let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
+    effectiveParameterListIR += !.outputInput ![targetObjectPtr address] #--- add "load receiver" as first argument
+    [inContext.mRoutineMapForContext searchKey
+      !routineMangledName
+      ?let isPublic
+      ?let modeMap
+      ?let @procedureSignature formalSignature
+      ?let @routineKind routineKind
+      ?*
+      ?let returnedType
+      ?let appendFileAndLineArgumentForPanicLocation
+      ?let unused canMutateProperties
+      ?let unused canAccessPropertiesInUserMode
+    ]
+  #--- Check accessibility
+    if not isPublic then
+      error routineMangledName : "this routine is not public"
+    end  
+  #--- Enter in invocation graph
+    @lstring routineNameForInvocationGraph
+    switch routineKind
+    case function :
+      routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !routineName)
+    case section :
+      routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !routineName)
+    case service :
+      routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !routineName)
+    case primitive :
+      routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !routineName)
+    end
+    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+  #--- Check modes
+    let routineKindIR = checkMode (
+      !requiredModes:inRequiredModeSet
+      !possibleModes:[modeMap keySet]
+      !kind:routineKind
+      !error:routineName.location
+    )
+  #--- Analyze effective parameters
+    analyzeEffectiveParameters (
+      !self:inSelfType
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !propertiesAreMutable:inRoutineCanMutateProperties
+      !formal:formalSignature
+      !effective:mEffectiveParameterList
+      !errorLocation:routineName.location
+      !callerForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !requiredModeSet:inRequiredModeSet
+      !allowPanic:inAllowPanic
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      !?effectiveIR:effectiveParameterListIR
+    )
+
+#    analyzeRoutineCall (
+#      !self:inSelfType
+#      !propertiesAreMutable:inRoutineCanMutateProperties
+#      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#      !receiverName:receiverName
+#      !routineName:routineName
+#      !effective:mEffectiveParameterList
+#      !callerForInvocationGraph:inCallerNameForInvocationGraph
+#      !context:inContext
+#      !requiredModeSet:inRequiredModeSet
+#      !allowPanic:inAllowPanic
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:ioInstructionGenerationList
+#      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+#      ?routineKind:let @routineKindIR routineKindIR
+#      ?routineMangledName:let @lstring routineMangledName
+#      ?returnType:let @unifiedTypeMap-proxy returnedType
+#      ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
+#    )
+    if returnedType != .null then
+      error routineName : "cannot be called in instruction: return value"
+    end
+  #--- Code generation
+    ioInstructionGenerationList += !@procCallInstructionIR.new {
+      !baseGlobalVariableName
+      !routineMangledName
+      !routineKindIR
+      !effectiveParameterListIR
+      !appendFileAndLineArgumentForPanicLocation
+    }
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -611,7 +753,7 @@ enum @routineKindIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @procCallInstructionIR : @abstractInstructionIR {
-  @string mGlobalVariableName # Receiver name, "" if not receiver
+  @string mGlobalVariableName # Receiver name, "" if receiver is not a global variable
   @lstring mProcName
   @routineKindIR mKind
   @procCallEffectiveParameterListIR mParameters

@@ -61,8 +61,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-primitive.galgas"
   "galgas-sources/declaration-guard.galgas"
 
-  "galgas-sources/rule-self-access.galgas"
-
 #--- Expression
   "galgas-sources/expression-operator-priority.galgas"
   "galgas-sources/expression-convert.galgas"
@@ -83,6 +81,8 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-cst-registre.galgas"
 
 #--- Instructions
+  "galgas-sources/rule-access.galgas"
+  "galgas-sources/rule-self-access.galgas"
   "galgas-sources/directive-check.galgas"
   "galgas-sources/instructionList.galgas"
   "galgas-sources/instruction-var.galgas"

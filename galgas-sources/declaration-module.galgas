@@ -96,6 +96,7 @@ syntax extension common_syntax {
       !{} # allowedPanicList
       !{} # allowedGuardList
       !{} # allowedISRList
+      !true # mAllowedAccessToAll
   }
 
   #·····················································································································

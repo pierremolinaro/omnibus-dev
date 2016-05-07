@@ -49,6 +49,7 @@ list @globalVarDeclarationList {
   @allowedPanicList mAllowedPanicList
   @allowedGuardList mAllowedGuardList
   @allowedISRList mAllowedISRList
+  @bool mAllowedAccessToAll
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -155,6 +156,7 @@ syntax extension common_syntax {
       !allowedPanicList
       !allowedGuardList
       !allowedISRList
+      !true # mAllowedAccessToAll
   }
 
   #·····················································································································
@@ -166,7 +168,7 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (globalVariableTypeName 7*) in self do
+  for (globalVariableTypeName 8*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]
@@ -325,7 +327,7 @@ method @globalVarDeclarationList-element enterInContext
       error isr.mISRName : "this isr is not defined"
     end
   end
-#--- Enter variable in globale variable map
+#--- Enter variable in global variable map
   [!?ioContext.mGlobalVariableMap insertKey
     !lkey:mVarName
     !type:result.mType
@@ -335,6 +337,7 @@ method @globalVarDeclarationList-element enterInContext
     !allowedISRMap:allowedISRMap
     !initialValue:result.mValue
     !isConstant:false # Is not constant
+    !allowedAccessToAll:mAllowedAccessToAll
   ]
 }
 
@@ -356,6 +359,7 @@ method @globalVarDeclarationList-element semanticAnalysis
     ?allowedISRMap:let unused allowedISRMap
     ?initialValue:let expressionGeneratedCode
     ?isConstant:let unused isConstant
+    ?allowedAccessToAll:*
   ]
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
     !mVarName
