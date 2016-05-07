@@ -4053,25 +4053,25 @@ static void extensionMethod_remoteRoutineCallInstructionAST_baseGuardAnalyze (co
     GALGAS_bool joker_20713_1 ; // Joker input parameter
     ioArgument_ioVariableMap.setter_searchForMethodCall (var_baseName, joker_20596_1, joker_20624, var_variableKind, joker_20704, joker_20713_2, joker_20713_1, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 510)) ;
     }
-    GALGAS_unifiedTypeMap_2D_proxy var_receiverType = extensionGetter_type (var_targetPtr, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 543)) ;
-    GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 544)) ;
-    var_effectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 545)), extensionGetter_address (var_targetPtr, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 545))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 545)) ;
-    GALGAS_instructionListIR var_baseGuardInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 546)) ;
-    GALGAS_lstring var_routineMangledName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (var_receiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 547)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 547)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 547)).add_operation (var_routineName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 547)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 547)), var_routineName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-guard.galgas", 547)) ;
+    GALGAS_unifiedTypeMap_2D_proxy var_receiverType = extensionGetter_type (var_targetPtr, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 518)) ;
+    GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 519)) ;
+    var_effectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("declaration-guard.galgas", 520)), extensionGetter_address (var_targetPtr, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 520))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 520)) ;
+    GALGAS_instructionListIR var_baseGuardInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 521)) ;
+    GALGAS_lstring var_routineMangledName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (var_receiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 522)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 522)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 522)).add_operation (var_routineName.getter_string (SOURCE_FILE ("declaration-guard.galgas", 522)), inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 522)), var_routineName.mAttribute_location  COMMA_SOURCE_FILE ("declaration-guard.galgas", 522)) ;
     GALGAS_bool var_isPublic ;
     GALGAS_procedureSignature var_formalSignature ;
-    constinArgument_inContext.mAttribute_mGuardMapForContext.method_searchKey (var_routineMangledName, var_isPublic, var_formalSignature, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 548)) ;
-    GALGAS_lstring var_routineNameForInvocationGraph = function_guardNameForInvocationGraph (var_receiverType, var_routineName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 554)) ;
+    constinArgument_inContext.mAttribute_mGuardMapForContext.method_searchKey (var_routineMangledName, var_isPublic, var_formalSignature, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 523)) ;
+    GALGAS_lstring var_routineNameForInvocationGraph = function_guardNameForInvocationGraph (var_receiverType, var_routineName, inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 529)) ;
     {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("declaration-guard.galgas", 555)) ;
+    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("declaration-guard.galgas", 530)) ;
     }
-    GALGAS_allocaList var_baseGuardAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 557)) ;
+    GALGAS_allocaList var_baseGuardAllocaList = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-guard.galgas", 532)) ;
     {
-    GALGAS_stringset temp_3 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-guard.galgas", 567)) ;
-    temp_3.addAssign_operation (function_guardModeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 567))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 567)) ;
-    routine_analyzeEffectiveParameters (constinArgument_inSelfType, GALGAS_bool (true), GALGAS_bool (true), var_formalSignature, object->mAttribute_mEffectiveParameterList, var_routineName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, temp_3, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 558)) ;
+    GALGAS_stringset temp_3 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-guard.galgas", 542)) ;
+    temp_3.addAssign_operation (function_guardModeName (inCompiler COMMA_SOURCE_FILE ("declaration-guard.galgas", 542))  COMMA_SOURCE_FILE ("declaration-guard.galgas", 542)) ;
+    routine_analyzeEffectiveParameters (constinArgument_inSelfType, GALGAS_bool (true), GALGAS_bool (true), var_formalSignature, object->mAttribute_mEffectiveParameterList, var_routineName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, temp_3, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("declaration-guard.galgas", 533)) ;
     }
-    outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 577)) ;
+    outArgument_outConvenienceGuardGenerationIR = GALGAS_guardKindGenerationIR::constructor_convenienceGuard (var_baseGuardAllocaList, var_baseGuardInstructionGenerationList, var_routineMangledName.mAttribute_string, var_effectiveParameterListIR  COMMA_SOURCE_FILE ("declaration-guard.galgas", 552)) ;
   }
 }
 

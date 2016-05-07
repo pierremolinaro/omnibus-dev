@@ -515,31 +515,6 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       ?copyable:*
       ?2*
     ]
-#   let baseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
-#    if not accessIsAllowed then
-#      error baseName : "routine has no access right on the this variable"
-#    end
-#    if inRequiresCopy && not isCopyable then
-#      error baseName : "an $" + [[outResultPtr type] key] + " instance is not copyable"
-#    end
-#    analyzeVariableReadWriteAccess (
-#      !fieldList:accessList
-#      !requiresCopy:false
-#      !self:inSelfType
-#      !directAccessToPropertiesAllowed:true
-#      !inGuard:false
-#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#      !context:inContext
-#      !modes:inModeSet
-#      !allowPanic:true
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#      !?variableMap:ioVariableMap
-#      !?alloca:ioAllocaList
-#      !?instructionListIR:ioInstructionGenerationList
-#      ?resultPtr:let targetPtr
-#      ?baseGlobalVariableName:let @string unused baseGlobalVariableName # "" if base variable is not a global variable
-#    )
     let receiverType = [targetPtr type]
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     effectiveParameterListIR += !.outputInput ![targetPtr address] #--- add "load receiver" as first argument
@@ -552,7 +527,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
     ]
   #--- Enter in invocation graph
     let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !routineName)
-     [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
   #--- Analyze effective parameters
     @allocaList baseGuardAllocaList = {}
     analyzeEffectiveParameters (

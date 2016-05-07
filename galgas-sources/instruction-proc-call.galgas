@@ -259,15 +259,6 @@ override method @remoteRoutineCallInstructionAST analyze
   #--- Extract base variable and access
     [accessList first ?let baseName ?*]
   #--- Check target access
-    [!?ioVariableMap searchForMethodCall # searchForReadWriteAccess
-      !lkey:baseName
-      ?1*
-      ?readAccessAllowed:*
-      ?variableKind:let @objectInMemoryIR variableKind
-      ?copyable:*
-      ?2*
-    ]
-    let baseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
     let receiverType = [targetObjectPtr type]
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
@@ -287,7 +278,27 @@ override method @remoteRoutineCallInstructionAST analyze
   #--- Check accessibility
     if not isPublic then
       error routineMangledName : "this routine is not public"
-    end  
+    end
+    @objectInMemoryIR variableKind
+    if canMutateProperties then
+      [!?ioVariableMap searchForMethodCall
+        !lkey:baseName
+        ?1*
+        ?readAccessAllowed:*
+        ?variableKind:variableKind
+        ?copyable:*
+        ?2*
+      ]
+    else
+      [!?ioVariableMap searchForConstantMethodCall
+        !lkey:baseName
+        ?1*
+        ?readAccessAllowed:*
+        ?variableKind:variableKind
+        ?copyable:*
+        ?2*
+      ]
+    end
   #--- Enter in invocation graph
     @lstring routineNameForInvocationGraph
     switch routineKind
@@ -331,6 +342,7 @@ override method @remoteRoutineCallInstructionAST analyze
       error routineName : "cannot be called in instruction: return value"
     end
   #--- Code generation
+    let baseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
     ioInstructionGenerationList += !@procCallInstructionIR.new {
       !baseGlobalVariableName
       !routineMangledName
