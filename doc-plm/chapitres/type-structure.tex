@@ -14,12 +14,12 @@ Un type structure a une sémantique de \emph{valeur}, c'est-à-dire qu'une affec
 
 Un type structure peut contenir les déclarations de :
 \begin{itemize}
-\item propriétés ;
-\item fonctions ;
-\item services ;
-\item sections ;
-\item primitives ;
-\item gardes.
+\item propriétés, \refSectionTitlePage{proprietesStructure} ;
+\item fonctions, \refSectionTitlePage{fonctionsStructure} ;
+\item services, \refSectionTitlePage{servicesStructure} ;
+\item sections, \refSectionTitlePage{sectionsStructure} ;
+\item primitives, \refSectionTitlePage{primitivesStructure} ;
+\item gardes, \refSectionTitlePage{gardesStructure}.
 \end{itemize}
 
 De plus, des attributs paramètrent le comportement de ses instances.
@@ -60,7 +60,7 @@ L'ordre des déclarations est sans importance.
 
 
 
-\section{Déclaration des propriétés}
+\sectionLabel{Déclaration des propriétés}{proprietesStructure}
 
 Un type structure peut définir, zéro, un ou plusieurs propriétés. Tout type est acceptable pour une propriété. 
 
@@ -162,7 +162,7 @@ var pt3 = $point3 (!p:$point (!x:4 !y:8) !z:6)
 
 
 
-\section{Fonctions}
+\sectionLabel{Fonctions}{fonctionsStructure}
 
 Les fonctions définies dans une structure sont particulières dans le sens où deux attributs permettent de contrôler l'accès aux propriétés :
 \begin{itemize}
@@ -172,7 +172,7 @@ Les fonctions définies dans une structure sont particulières dans le sens où 
 
 L'attribut \plm!@userAccess! peut paraître surprenant, mais il permet de garantir l'absence d'accès en parallèle aux propriétés par plusieurs tâches : la fonction d'une variable globale de type structure ne peut pas être appelée en mode \plm!`user! si la fonction a été définie avec l'attribut  \plm!@userAccess!.
 
-\subsection{Attribut \texttt{@userAccess}}
+\subsection{Attribut \texttt{@userAccess}}\index{"@userAccess}
 
 L'attribut \plm!@userAccess! autorise la fonction à lire \emph{directement} les propriétés en mode \plm!`user!. Par \emph{directement}, on entend que les instructions de la fonction nomment les propriétés (notation \plm=self.=), ou appellent des fonctions qui déclarent l'attribut \plm!@userAccess!.
 
@@ -222,162 +222,58 @@ Dans le code d'exemple ci-dessus :
   \item la fonction \plm=getNok2= s'exécute en mode \plm=`user=, ne nomme pas l'attribut \plm=@userAccess=, donc son instruction qui nomme une fonction déclarée avec cet attribut déclenche une erreur de compilation ;
   \item la fonction \plm=getOk2= s'exécute en mode \plm=`user=, nomme l'attribut \plm=@userAccess=, donc son instruction qui nomme une fonction déclarée avec cet attribut est acceptée par le compilateur ;
   \item la fonction \plm=sGet= s'exécute en mode \plm=`section=, l'attribut \plm=@userAccess= est inutile pour que son instruction qui nomme une propriété soit acceptée par le compilateur ;
-  \item la section \plm=sectionGet= s'exécute en mode \plm=`section=, son instruction qui nomme une propriété soit acceptée par le compilateur ;
-  \item la fonction \plm=getOk3= s'exécute en mode \plm=`section=, l'attribut \plm=@userAccess= est inutile pour que l'appel à une section soit acceptée par le compilateur.
+  \item la section \plm=sectionGet= s'exécute en mode \plm=`section=, son instruction qui nomme une propriété est acceptée par le compilateur ;
+  \item la fonction \plm=getOk3= s'exécute en mode \plm=`user=, l'attribut \plm=@userAccess= est inutile pour que l'appel à une section soit acceptée par le compilateur.
 \end{itemize}
 
 
 
-\subsection{Attribut \texttt{@mutating}}
+\subsection{Attribut \texttt{@mutating}}\index{"@mutating}
 
 L'attribut \plm=@mutating= autorise une fonction de structure à modifier \emph{directement} les propriétés de la structure, du moment que l'accès ait été autorisé avec \plm=@userAccess=.
 
+Voici un code d'exemple qui reprend le code d'exemple de la section précédente et illustre les différentes possibilités :
 
-%En effet, par défaut, une fonction de structure n'a pas le droit d'accéder directement aux propriétés. Il faut ajouter l'attribut \plm!@userAccess! :
-%
-%\begin{PLM}
-%struct $exemple {
-%  var x $int32
-%  
-%  func `user get @userAccess () -> $int32 {
-%    result = self.x // Ok
-%  }
-%}
-%\end{PLM}
-%
-%L'attribut \plm!@userAccess! autorise l'accès direct, mais sans cet attribut, l'accès \emph{indirect} est autorisé : une fonction peut appeler une autre fonction qui accède directement à l'attribut. Par exemple :
-%
-%\begin{PLM}
-%struct $exemple {
-%  var x $int32
-%  
-%  func `user get @userAccess () -> $int32 {
-%    result = self.x // Ok, car @userAccess
-%  }
-%
-%  func `user get2 () -> $int32 {
-%    result = self.get () // Erreur, get2 n'a pas l'attribut @userAccess
-%  }
-%}
-%
-%  func `user get3 @userAccess () -> $int32 {
-%    result = self.get () // Ok, car @userAccess
-%  }
-%}
-%\end{PLM}
+\begin{PLM}
+struct $exemple {
+  var x $int32
+  
+  func `user setNok @userAccess (?inX $int32) {
+    self.x = inX // Erreur : @mutating est nécéssaire
+  }
+  
+  func `user setOk @userAccess @mutating (?inX $int32) {
+    self.x = inX // Ok : @mutating autorise l'écriture
+  }
+  
+  func `user setNok2 @userAccess (?inX $int32) {
+    self.setOk (!inX) // Erreur : @mutating est nécéssaire
+  }
+  
+  func `user setOk2 @userAccess @mutating (?inX $int32) {
+    self.setOk (!inX) // Ok : @mutating autorise l'accès
+  }
+  
+  section sectionSet @mutating (?inX $int32) {
+    self.x = inX
+  }
 
+  func `user setOk3 @userAccess @mutating (?inX $int32) {
+    self.sectionSet (!inX)
+  }
 
+}
+\end{PLM}
 
-
-
-%Il existe deux sortes de procédure de structure :
-%\begin{itemize}
-%  \item les procédures constantes (\plm!proc!), \refSubsectionTitlePage{procConstStructure} ;
-%  \item les procédures mutables (\plm!mutating proc!), \refSubsectionTitlePage{procMutableStructure}.
-%\end{itemize}
-%
-%
-%\subsectionLabel{Procédure constante}{procConstStructure}
-%
-%Un type structure peut définir des procédures grâce à la construction \plm!proc! :
-%
-%\begin{PLM}
-%struct $point {
-%  var x $int32 = 0
-%  var y $int32 = 0
-%  
-%  proc `user getX (!outX $uint32) {
-%    outX = self.x
-%  }
-%}
-%\end{PLM}
-%
-%Trois remarques :
-%\begin{itemize}
-%  \item une telle procédure ne peut pas modifier l'objet auquel il s'applique (pour le faire, il faut définir une \plm!mutating proc!) ;
-%  \item l'accès à une variable globale est possible si cette dernière déclare la procédure comme routine autorisée (\refSectionPage{DecRoutinesAutoriseesVarGlobale}) ; l'accès peut être en lecture (par défaut), ou en lecture / écriture (attribut \plm!@rw!) ;
-%  \item préfixer l'accès à une propriété par \plm!self.! est obligatoire. 
-%\end{itemize}
-%
-%
-%
-%
-%\subsectionLabel{Procédure mutable}{procMutableStructure}
-%
-%Si on veut modifier une propriété, il faut déclarer la procédure de structure avec le qualificatif \plm!mutating! :
-%
-%\begin{PLM}
-%struct $point {
-%  var x $int32 = 0
-%  var y $int32 = 0
-%  
-%  mutating proc `user setX (?inX $uint32) {
-%    self.x = inX
-%  }
-%}
-%\end{PLM}
-%
-%L'accès à une variable globale est possible si cette dernière déclare la procédure comme routine autorisée (\refSectionPage{DecRoutinesAutoriseesVarGlobale}) ; l'accès peut être en lecture (par défaut), ou en lecture / écriture (attribut \plm!@rm!). Préfixer l'accès à une propriété par \plm!self.! est obligatoire. 
-%
-%Il est possible de modifier l'objet courant en affectant \plm!self! :
-%
-%\begin{PLM}
-%struct $point {
-%  var x $int32 = 0
-%  var y $int32 = 0
-%  
-%  mutating proc reset `user () {
-%    self = $point ()
-%  }
-%}
-%\end{PLM}
-%
-%Ou encore :
-%
-%\begin{PLM}
-%struct $point {
-%  var x $int32 = 0
-%  var y $int32 = 0
-%  
-%  mutating proc reset `user () {
-%    newPoint (?self)
-%  }
-%}
-%
-%proc `user newPoint (!p $point) {
-%  p = $point ()
-%}
-%\end{PLM}
-%
-
-
-
-
-
-
-%\section{Fonctions}
-%
-%Une fonction de structure est constante, c'est-à-dire qu'elle ne peut pas modifier l'objet sur lequel elle s'applique.
-%
-%Dans la version actuelle, les variables globales sont aussi inaccessibles.
-%
-%Voici un exemple de fonction de structure :
-%
-%\begin{PLM}
-%struct $point {
-%  var x $int32 = 0
-%  var y $int32 = 0
-%  
-%  func `user getX (?x $int32) -> $int32 {
-%    result = self.x + x
-%  }
-%}
-%\end{PLM}
-%
-%Comme pour les procédures de structures, l'usage de \plm!self! est obligatoire pour accéder aux propriétés. La variable \plm!result! est implicitement déclarée du type renvoyé par la fonction (ici \plm!$int32!).
-
-
-\section{Sections}
+Dans le code d'exemple ci-dessus :
+\begin{itemize}
+  \item la fonction \plm=setNok= ne nomme pas l'attribut \plm=@mutating=, donc son instruction qui écrit une propriété déclenche une erreur de compilation ;
+  \item la fonction \plm=setOk= nomme l'attribut \plm=@mutating=, donc son instruction qui écrit une propriété est acceptée par le compilateur ;
+  \item la fonction \plm=setNok2= ne nomme pas l'attribut \plm=@mutating=, donc son instruction qui écrit une fonction déclarée avec l'attribut \plm=@mutating= déclenche une erreur de compilation ;
+  \item la fonction \plm=setOk2= nomme l'attribut \plm=@mutating=, donc son instruction qui nomme une fonction déclarée avec l'attribut \plm=@mutating= est acceptée par le compilateur ;
+  \item la section \plm=sectionGet= nomme l'attribut \plm=@mutating=, son instruction qui écrit une propriété est acceptée par le compilateur ;
+  \item la fonction \plm=setOk3= s'exécute en mode \plm=`user=, l'attribut \plm=@mutating= est nécessaire pour que l'appel à une section déclarée avec l'attribut \plm=@mutating= soit acceptée par le compilateur.
+\end{itemize}
 
 
 
@@ -387,7 +283,62 @@ L'attribut \plm=@mutating= autorise une fonction de structure à modifier \emph{
 
 
 
-\section{Services}
+
+
+
+\sectionLabel{Sections}{sectionsStructure}
+
+
+Une structure peut définir des \emph{sections}. Une section s'exécute en mode \plm=`section=, c'est-à-dire interruptions matérielles masquées ; aucune primitive de l'exécutif n'est accessible dans ce mode. On peut donc utiliser une section pour accéder en exclusion mutuelle aux propriétés de la structure.
+
+Par défaut, une section définie dans une structure a accès aux propriétés en lecture ; pour pouvoir accéder en écriture, il faut ajouter l'attribut \plm=@mutating=\index{"@mutating}.
+
+\begin{PLM}
+struct $exemple {
+  var x $int32
+  
+  section sectionGet () -> $int32 {
+    result = self.x // Ok, accès en lecture par défaut
+  }
+
+  section sectionSet @mutating (?inX $int32) {
+    self.x = inX // Ok, @mutating  autorise l'accès en écriture
+  }
+
+}
+\end{PLM}
+
+Par défaut, une section définie dans une structure est privée, c'est-à-dire appelable uniquement par les autres routines (fonctions, sections, services, primitives, gardes) de la structure. Pour la rendre publique, il faut la déclarer avec le mot réservé \plm=public=\index{public} :
+
+
+\begin{PLM}
+struct $exemple {
+  var x $int32
+  
+  public section sectionGet () -> $int32 {
+    result = self.x // Ok, accès en lecture par défaut
+  }
+
+  public section sectionSet @mutating (?inX $int32) {
+    self.x = inX // Ok, @mutating  autorise l'accès en écriture
+  }
+
+}
+\end{PLM}
+
+
+
+
+
+
+
+\sectionLabel{Services}{servicesStructure}
+
+Une structure peut définir des \emph{services}. Un service s'exécute en mode \plm=`service=\index{\`{}service}, c'est-à-dire interruptions matérielles masquées ; seules les fonctions de l'exécutif pouvant libérer des tâches sont accessibles dans ce mode, qui est celui des routines d'interruption. Un exemple de service est la primitive \plm=V= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
+
+Par défaut, un service défini dans une structure a accès aux propriétés en lecture et en écriture (l'attribut \plm=@mutating= est inutile).
+
+Par défaut, un service défini dans une structure est privé. Pour le rendre publique, il faut le déclarer avec le mot réservé \plm=public=\index{public}.
 
 
 
@@ -397,7 +348,13 @@ L'attribut \plm=@mutating= autorise une fonction de structure à modifier \emph{
 
 
 
-\section{Primitives}
+\sectionLabel{Primitives}{primitivesStructure}
+
+Une structure peut définir des \emph{primitives}. Une primitive s'exécute en mode \plm=`kernel=\index{\`{}kernel}, c'est-à-dire interruptions matérielles masquées ; les fonctions de l'exécutif pouvant bloquer ou libérer des tâches sont accessibles dans ce mode. Un exemple de service est la primitive \plm=P= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
+
+Par défaut, une primitive définie dans une structure a accès aux propriétés en lecture et en écriture (l'attribut \plm=@mutating= est inutile).
+
+Par défaut, une primitive définie dans une structure est privée. Pour la rendre publique, il faut la déclarer avec le mot réservé \plm=public=\index{public}.
 
 
 
@@ -407,8 +364,13 @@ L'attribut \plm=@mutating= autorise une fonction de structure à modifier \emph{
 
 
 
-\section{Gardes}
+\sectionLabel{Gardes}{gardesStructure}
 
+Une structure peut définir des \emph{gardes}. Une garde permet d'exprimer une attente élémentaire dans une instruction \plm=sync= (\refSectionPage{instructionSync}). Un exemple est la garde \plm=P= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
+
+Par défaut, une garde définie dans une structure a accès aux propriétés en lecture et en écriture (l'attribut \plm=@mutating= est inutile).
+
+Par défaut, une garde définie dans une structure est privée. Pour la rendre publique, il faut la déclarer avec le mot réservé \plm=public=\index{public}.
 
 
 
@@ -417,20 +379,34 @@ L'attribut \plm=@mutating= autorise une fonction de structure à modifier \emph{
 
 \section{Extensions}
 
-Pour tout type de structure, un nombre quelconque d'extensions peut être défini. Une extension déclare propriétés, procédures et fonctions.
+Pour tout type de structure, un nombre quelconque d'extensions peut être défini. Une extension peut déclarer propriétés, fonctions, sections, services, primitives et gardes.
 
-Voici un exemple d'extension qui déclare une propriété, une fonction et une procédure.
+Voici des exemples d'extension :
 
 \begin{PLM}
-extension $point {
-  var z $int32 = 0
-  
-  func `user getZ () -> $int32 {
-    result = self.z
+struct $exemple {
+  var x $int32
+}
+
+extension $exemple {
+  func `user setOk @userAccess @mutating (?inX $int32) {
+    self.x = inX
+  }
+}
+
+extension $exemple {
+  func `user setOk2 @userAccess @mutating (?inX $int32) {
+    self.setOk (!inX) 
   }
   
-  mutating proc `user setZ (?z $int32) {
-    self.z = z
+  section sectionSet @mutating (?inX $int32) {
+    self.x = inX
+  }
+}
+
+extension $exemple {
+  func `user setOk3 @userAccess @mutating (?inX $int32) {
+    self.sectionSet (!inX)
   }
 }
 \end{PLM}
@@ -442,6 +418,6 @@ extension $point {
 
 \section{Visibilité des propriétés et des méthodes}
 
-Dans la version actuelle, les propriétés et les méthodes sont publiques.
+Par défaut, les propriétés et les routines définies dans une structure sont privées, c'est-à-dire que seules les routines définies dans la même structure peuvent y accéder. Pour rendre publique une propriété ou une routine, il faut la déclarer avec le mot réservé \plm=public=\index{public}.
 
 

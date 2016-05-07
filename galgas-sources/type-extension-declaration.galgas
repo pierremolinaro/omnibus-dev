@@ -6,6 +6,10 @@ list @extensionDeclarationListAST {
   @lstring mTypeName
   @functionDeclarationListAST mProcedureDeclarationListAST
   @structureFieldListAST mFieldList
+  @serviceDeclarationListAST mServiceListAST
+  @sectionDeclarationListAST mSectionListAST
+  @primitiveDeclarationListAST mPrimitiveListAST
+  @guardDeclarationListAST mGuardListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -22,6 +26,10 @@ syntax extension common_syntax {
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
+    @serviceDeclarationListAST serviceListAST = {}
+    @sectionDeclarationListAST sectionListAST = {}
+    @primitiveDeclarationListAST primitiveListAST = {}
+    @guardDeclarationListAST guardListAST = {}
     repeat
     while
       @bool public
@@ -40,10 +48,25 @@ syntax extension common_syntax {
     while
       <procedure> !?procedureDeclarationListAST
     while
+     <section> !?sectionListAST
+    while
+      <service> !?serviceListAST
+    while
+      <guard> !?guardListAST
+    while
+      <primitive> !?primitiveListAST
+    while
       $;$
     end
     $}$
-    ioAST.mExtensionDeclarationListAST += !typeName !procedureDeclarationListAST !fieldList
+    ioAST.mExtensionDeclarationListAST +=
+      !typeName
+      !procedureDeclarationListAST
+      !fieldList
+      !serviceListAST
+      !sectionListAST
+      !primitiveListAST
+      !guardListAST
   }
 
   #·····················································································································
