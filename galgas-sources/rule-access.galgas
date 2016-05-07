@@ -1,0 +1,299 @@
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @accessList {
+  @lstring mName
+  @arrayElementAccess mArrayAccess
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <access> !@accessList outAccessList {
+    outAccessList = {}
+    repeat
+      $identifier$ ?let fieldName
+      select
+        outAccessList += !fieldName !.noAccess
+      or
+        $[$
+        <expression> ?let indexExpression
+        let @location endOfExp = .here
+        $]$
+        outAccessList += !fieldName !.access {!indexExpression:indexExpression !endOfExp:endOfExp}
+      end
+    while
+      $.$
+    end
+  }
+
+  #·····················································································································
+
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @accessList addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for (fieldName arrayAccess) in self do
+    switch arrayAccess
+    case noAccess :
+    case access (@expressionAST indexExpression *) :
+      [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @accessList noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (fieldName arrayAccess) in self do
+    switch arrayAccess
+    case noAccess :
+    case access (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    end
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc analyzeVariableAccess
+  ?fieldList:let @accessList inAccessList
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !resultPtr:@objectInMemoryIR outResultPtr
+{
+#--- Extract base variable and access
+  var accessList = inAccessList
+  [!?accessList popFirst ?let baseName ?let baseElementArrayAccess]
+#--- Search base name in variable map — can be a local variable, a global variable, a control register, a constant
+  [!?ioVariableMap neutralAccess
+    !lkey:baseName
+    ?type:@unifiedTypeMap-proxy type
+    ?1*
+    ?variableKind:let @objectInMemoryIR sourcePtr
+    ?4*
+  ]
+#--- Handle array access
+  @elementPtrList elementPtrList = {}
+  analyzeArrayElementAccess (
+    !baseElementArrayAccess
+    !?type
+    !?elementPtrList
+    !baseName.location
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+  )
+#--- Handle properties
+  var publicIsRequired = false
+  for (fieldName arrayElementAccess) in accessList do
+    if [[type kind] isStructure] then
+      [[type kind] structure ?propertyMap:let propertyMap ?propertyList:*]
+      [propertyMap searchKey !fieldName ?let public ?type ?let index]
+      if publicIsRequired && not public then
+        error fieldName : "this field is not public"
+      end
+      elementPtrList += {!.absolute {!index:index} !"." + fieldName}
+      publicIsRequired = true
+      analyzeArrayElementAccess (
+        !arrayElementAccess
+        !?type
+        !?elementPtrList
+        !fieldName.location
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+      )
+    else
+      error fieldName : "the field type is not a structure" : type
+    end
+  end
+  if [elementPtrList length] == 0 then
+    outResultPtr = sourcePtr
+  else
+    getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?outResultPtr)
+    [!?ioInstructionGenerationList appendGetElementPtr
+      !outResultPtr
+      !sourcePtr
+      !elementPtrList
+    ]        
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc analyzeVariableWriteAccess
+  ?fieldList:let @accessList inAccessList
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !resultPtr:@objectInMemoryIR outResultPtr
+{
+  analyzeVariableAccess (
+    !fieldList:inAccessList
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultPtr:outResultPtr
+  )
+#--- Extract base variable and access
+  [inAccessList first ?let baseName ?let baseElementArrayAccess]
+#--- Check target access
+  @bool accessIsAllowed
+  @bool isCopyable
+  @bool isConstant
+  if ([inAccessList length] == 1) && (baseElementArrayAccess == .noAccess) then
+    [!?ioVariableMap searchForWriteAccess
+      !lkey:baseName
+      ?1*
+      ?readAccessAllowed:accessIsAllowed
+      ?1*
+      ?copyable:isCopyable
+      ?2*
+      ?isConstant:isConstant
+    ]
+  else
+    [!?ioVariableMap searchForReadWriteAccess
+      !lkey:baseName
+      ?1*
+      ?readAccessAllowed:accessIsAllowed
+      ?1*
+      ?copyable:isCopyable
+      ?2*
+      ?isConstant:isConstant
+    ]
+  end
+  if isConstant then
+    error baseName : "a constant cannot be modified"
+  end
+  if not accessIsAllowed then
+    error baseName : "routine has no access right on the this variable"
+  end
+  if not isCopyable then
+    error baseName : "an $" + [[outResultPtr type] key] + " instance is not copyable"
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc analyzeVariableReadWriteAccess
+  ?fieldList:let @accessList inAccessList
+  ?requiresCopy:let @bool inRequiresCopy
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !resultPtr:@objectInMemoryIR outResultPtr
+  !baseGlobalVariableName:@string outBaseGlobalVariableName # "" if base variable is not a global variable
+{
+  analyzeVariableAccess (
+    !fieldList:inAccessList
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultPtr:outResultPtr
+  )
+#--- Extract base variable and access
+  [inAccessList first ?let baseName ?*]
+#--- Check target access
+  [!?ioVariableMap neutralAccess # searchForReadWriteAccess
+    !lkey:baseName
+    ?1*
+    ?readAccessAllowed:let accessIsAllowed
+    ?variableKind:let @objectInMemoryIR variableKind
+    ?copyable:let isCopyable
+    ?2*
+    ?isConstant:let isConstant
+  ]
+  outBaseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
+  if isConstant then
+    error baseName : "a constant cannot be modified"
+  end
+  if not accessIsAllowed then
+    error baseName : "routine has no access right on the this variable"
+  end
+  if inRequiresCopy && not isCopyable then
+    error baseName : "an $" + [[outResultPtr type] key] + " instance is not copyable"
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
