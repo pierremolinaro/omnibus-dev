@@ -197,7 +197,7 @@ private proc addTargetSpecificFiles
   ioAST.mInitList += ast.mInitList
   ioAST.mBootList += ast.mBootList
   ioAST.mPanicClauses += ast.mPanicClauses # + ioAST.mPanicClauses
-#  ioAST.mConfigurationDeclarationList = ast.mConfigurationDeclarationList + ioAST.mConfigurationDeclarationList
+#  ioAST.mModuleDeclarationList = ast.mModuleDeclarationList + ioAST.mModuleDeclarationList
   ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
   ioAST.mTaskList = ast.mTaskList + ioAST.mTaskList
 }

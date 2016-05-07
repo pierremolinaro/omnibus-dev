@@ -197,7 +197,6 @@ proc guardSemanticAnalysis
       !copyable:true
       !fieldMap:{}
       !canBeUsedAsInputParameter:true
-      !isConstant:false # Is not constant
     ]
   #--- Analyse formal arguments
     enterFormalArguments (
@@ -489,9 +488,8 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       ?outConvenienceGuardGenerationIR
     )
   else
-    analyzeVariableReadWriteAccess (
+    analyzeVariableAccess (
       !fieldList:accessList
-      !requiresCopy:false
       !self:inSelfType
       !directAccessToPropertiesAllowed:true
       !inGuard:false
@@ -505,54 +503,43 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?resultPtr:let targetPtr
-      ?baseGlobalVariableName:let @string unused baseGlobalVariableName # "" if base variable is not a global variable
     )
-#  #--- Extract base variable and access
-#    [accessList first ?let baseName ?*]
-#  #--- Check target access
-#    [!?ioVariableMap searchForReadWriteAccess
-#      !lkey:baseName
-#      ?1*
-#      ?readAccessAllowed:let accessIsAllowed
-#      ?variableKind:let @objectInMemoryIR variableKind
-#      ?copyable:let isCopyable
-#      ?2*
-#      ?isConstant:let isConstant
-#    ]
-#    outBaseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
-#    if isConstant then
-#      error baseName : "a constant cannot be modified"
-#    end
+  #--- Extract base variable and access
+    [accessList first ?let baseName ?*]
+  #--- Check target access
+    [!?ioVariableMap searchForMethodCall
+      !lkey:baseName
+      ?1*
+      ?readAccessAllowed:*
+      ?variableKind:let @objectInMemoryIR unused variableKind
+      ?copyable:*
+      ?2*
+    ]
+#   let baseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
 #    if not accessIsAllowed then
 #      error baseName : "routine has no access right on the this variable"
 #    end
-#    if not isCopyable then
+#    if inRequiresCopy && not isCopyable then
 #      error baseName : "an $" + [[outResultPtr type] key] + " instance is not copyable"
 #    end
-
-
-
-
-
-
-
-
-
-
-#    @lstringlist propertyList = mPropertyList
-#    [!?propertyList popFirst ?let receiverName]
-#    [!?propertyList popLast ?let routineName]
-#  #--- Read variable
-#    [!?ioVariableMap searchForReadAccess
-#      !lkey:receiverName
-#      ?type:let receiverType
-#      ?1*
-#      ?variableKind:@objectInMemoryIR variableKind
-#      ?4*
-#    ]
-#    for (propertyName) in propertyList do
-#      error propertyName : "not handled yet (1)"
-#    end
+#    analyzeVariableReadWriteAccess (
+#      !fieldList:accessList
+#      !requiresCopy:false
+#      !self:inSelfType
+#      !directAccessToPropertiesAllowed:true
+#      !inGuard:false
+#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#      !context:inContext
+#      !modes:inModeSet
+#      !allowPanic:true
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:ioInstructionGenerationList
+#      ?resultPtr:let targetPtr
+#      ?baseGlobalVariableName:let @string unused baseGlobalVariableName # "" if base variable is not a global variable
+#    )
     let receiverType = [targetPtr type]
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     effectiveParameterListIR += !.outputInput ![targetPtr address] #--- add "load receiver" as first argument

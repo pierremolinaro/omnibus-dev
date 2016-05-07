@@ -116,7 +116,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !copyable:[inContext.mPanicCodeType copyable]
     !fieldMap:{}
     !canBeUsedAsInputParameter:false
-    !isConstant:false
   ]
   let fileArg = @lstring.new {!"FILE" !mPanicClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
@@ -127,7 +126,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !copyable:[StaticStringType copyable]
     !fieldMap:{}
     !canBeUsedAsInputParameter:false
-    !isConstant:false
   ]
   let lineArg = @lstring.new {!"LINE" !mPanicClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
@@ -138,7 +136,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !copyable:[inContext.mPanicLineType copyable]
     !fieldMap:{}
     !canBeUsedAsInputParameter:false
-    !isConstant:false
   ]
 #---
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then

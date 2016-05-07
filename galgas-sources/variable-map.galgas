@@ -14,19 +14,18 @@ func initialVariableMap
   -> @variableMap outVariableMap
 {
   outVariableMap = .emptyMap
-#------------------------------------------------------- Add result variable ?
-  if inReturnTypeName.string != "" then
-    let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
-    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
-    [!?outVariableMap insertOutputFormalArgument
-      !lkey:resultVarName
-      !type:resultType
-      !readAccessAllowed:true
-      !variableKind:.localValue {!type:resultType !name:resultVarName.string}
-      !copyable:true
+#------------------------------------------------------- Add modules
+  for (moduleName) in inContext.mModuleMap do
+    let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
+    let moduleType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
+    [!?outVariableMap insertModule
+      !lkey:moduleName
+      !type:moduleType
+      !readAccessAllowed:false
+      !variableKind:.globalVariable {!type:moduleType !name:moduleName.string !isVolatile:false}
+      !copyable:false
       !fieldMap:{}
-      !canBeUsedAsInputParameter:true
-      !isConstant:false # Is not constant
+      !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
   end
 #------------------------------------------------------- Add registers
@@ -41,7 +40,6 @@ func initialVariableMap
         !copyable:false
         !fieldMap:mRegisterFieldAccessMap
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-        !isConstant:true # Is constant
       ]
     end
   case readAccess :
@@ -55,10 +53,9 @@ func initialVariableMap
           !copyable:true
           !fieldMap:mRegisterFieldAccessMap
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-          !isConstant:true # Is constant
         ]
       elsif mIsReadOnly || inGlobalsAreConstant then
-        [!?outVariableMap insertUsedLocalConstant
+        [!?outVariableMap insertUsedConstant
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
@@ -66,13 +63,12 @@ func initialVariableMap
           !copyable:true
           !fieldMap:mRegisterFieldAccessMap
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-          !isConstant:true # Is constant
         ]
       end
     end
   case readWriteAccess :
     for () in inContext.mControlRegisterMap do
-      [!?outVariableMap insertDefinedLocalVariable
+      [!?outVariableMap insertDefinedVariable
         !lkey:lkey
         !type:mType
         !readAccessAllowed:true
@@ -80,13 +76,12 @@ func initialVariableMap
         !copyable:true
         !fieldMap:mRegisterFieldAccessMap
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-        !isConstant:false # Is not constant
       ]
     end
   end
 #------------------------------------------------------- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
-    [!?outVariableMap insertUsedLocalConstant
+    [!?outVariableMap insertUsedConstant
       !lkey:constantName
       !type:constantValue.mType
       !readAccessAllowed:true
@@ -94,7 +89,6 @@ func initialVariableMap
       !copyable:true
       !fieldMap:{}
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-      !isConstant:true # Is constant
     ]
   end
 #------------------------------------------------------- Add global variables
@@ -112,8 +106,8 @@ func initialVariableMap
         end
       end
     end
-    if inGlobalsAreConstant || not writeAccess then
-      [!?outVariableMap insertUsedLocalConstant
+    if inGlobalsAreConstant || variable.isConstant || not writeAccess then
+      [!?outVariableMap insertUsedConstant
         !lkey:variable.lkey
         !type:variable.type
         !readAccessAllowed:allowedAccess
@@ -121,10 +115,9 @@ func initialVariableMap
         !copyable:[variable.type copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:false
-        !isConstant:true
       ]
     else
-      [!?outVariableMap insertGlobalVariable
+      [!?outVariableMap insertDefinedVariable
         !lkey:variable.lkey
         !type:variable.type
         !readAccessAllowed:allowedAccess
@@ -132,9 +125,22 @@ func initialVariableMap
         !copyable:[variable.type copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:false
-        !isConstant:variable.isConstant
       ]
     end
+  end
+#------------------------------------------------------- Add result variable ?
+  if inReturnTypeName.string != "" then
+    let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
+    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
+    [!?outVariableMap insertOutputFormalArgument
+      !lkey:resultVarName
+      !type:resultType
+      !readAccessAllowed:true
+      !variableKind:.localValue {!type:resultType !name:resultVarName.string}
+      !copyable:true
+      !fieldMap:{}
+      !canBeUsedAsInputParameter:true
+    ]
   end
 }
 
@@ -147,7 +153,7 @@ func variableMapWithConstants
   outVariableMap = .emptyMap
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
-    [!?outVariableMap insertUsedLocalConstant
+    [!?outVariableMap insertUsedConstant
       !lkey:constantName
       !type:constantValue.mType
       !readAccessAllowed:true
@@ -155,7 +161,6 @@ func variableMapWithConstants
       !copyable:true
       !fieldMap:{}
       !canBeUsedAsInputParameter:false
-      !isConstant:true # Is constant
     ]
   end
 }
@@ -191,7 +196,6 @@ sharedmap @variableMap %selectors {
   @bool copyable
   @controlRegisterBitSliceAccessMap fieldMap
   @bool canBeUsedAsInputParameter
-  @bool isConstant
 
 #--- Inaccessible control register
   state inaccessibleControlRegister {
@@ -200,15 +204,19 @@ sharedmap @variableMap %selectors {
     writeAccess     -> inaccessibleControlRegister error "the control register is inaccessible"
     readWriteAccess -> inaccessibleControlRegister error "the control register is inaccessible"
     dropAccess      -> inaccessibleControlRegister error "the control register is inaccessible"
+    constMethodCall -> inaccessibleControlRegister error "the control register is inaccessible"
+    methodCall      -> inaccessibleControlRegister error "the control register is inaccessible"
   }
 
-#--- Used global variable
-  state globalVariable {
-    neutralAccess   -> globalVariable
-    readAccess      -> globalVariable
-    writeAccess     -> globalVariable
-    readWriteAccess -> globalVariable
-    dropAccess      -> globalVariable error "a global variable cannot be dropped"
+#--- module
+  state module {
+    neutralAccess   -> module
+    readAccess      -> module error "a module cannot be read"
+    writeAccess     -> module error "a module cannot be written"
+    readWriteAccess -> module error "a module cannot be modified"
+    constMethodCall -> module
+    methodCall      -> module
+    dropAccess      -> module error "a module cannot be dropped"
   }
 
 #--- Used local constant
@@ -216,7 +224,9 @@ sharedmap @variableMap %selectors {
     neutralAccess   -> usedLocalConstant
     readAccess      -> usedLocalConstant
     writeAccess     -> usedLocalConstant error "a constant cannot be written"
-    readWriteAccess -> usedLocalConstant error "a constant cannot be written"
+    readWriteAccess -> usedLocalConstant error "a constant cannot be modified"
+    constMethodCall -> usedLocalConstant
+    methodCall      -> usedLocalConstant error "a constant cannot be modified"
     dropAccess      -> usedLocalConstant error "a constant cannot be dropped"
   }
 
@@ -225,7 +235,9 @@ sharedmap @variableMap %selectors {
     neutralAccess   -> localConstant
     readAccess      -> usedLocalConstant
     writeAccess     -> usedLocalConstant error "a constant cannot be written"
-    readWriteAccess -> usedLocalConstant error "a constant cannot be written"
+    readWriteAccess -> usedLocalConstant error "a constant cannot be modified"
+    constMethodCall -> usedLocalConstant
+    methodCall      -> usedLocalConstant error "a constant cannot be modified"
     dropAccess      -> usedLocalConstant error "a constant cannot be dropped"
   }
 
@@ -235,6 +247,8 @@ sharedmap @variableMap %selectors {
     readAccess      -> undefinedLocalConstant error "the constant is undefined"
     writeAccess     -> localConstant
     readWriteAccess -> undefinedLocalConstant error "the constant is undefined"
+    constMethodCall -> undefinedLocalConstant error "the constant is undefined"
+    methodCall      -> undefinedLocalConstant error "a constant cannot be modified"
     dropAccess      -> undefinedLocalConstant error "the constant is undefined"
   }
 
@@ -243,28 +257,39 @@ sharedmap @variableMap %selectors {
     neutralAccess   -> undefinedLocalVariable
     readAccess      -> undefinedLocalVariable error "an undefined local variable cannot be read"
     writeAccess     -> definedLocalVariable
-    readWriteAccess -> undefinedLocalVariable error "an undefined local variable cannot be read"
+    readWriteAccess -> undefinedLocalVariable error "an undefined local variable cannot be modified"
+    constMethodCall -> undefinedLocalVariable error "an undefined local variable cannot be read"
+    methodCall      -> undefinedLocalVariable error "an undefined local variable cannot be modified"
     dropAccess      -> undefinedLocalVariable warning "the local variable has no value"
   }
+
   state definedLocalVariable { # warning "the '%K' local variable value is unused" {
     neutralAccess   -> definedLocalVariable
     readAccess      -> usedLocalVariable
     writeAccess     -> definedLocalVariable # warning "the value has been changed without any read"
     readWriteAccess -> usedLocalVariable
+    constMethodCall -> usedLocalVariable
+    methodCall      -> usedLocalVariable
     dropAccess      -> droppedLocalVariable warning "the local variable has been dropped without any read"
   }
+
   state usedLocalVariable {
     neutralAccess   -> usedLocalVariable
     readAccess      -> usedLocalVariable
     writeAccess     -> definedLocalVariable
     readWriteAccess -> definedLocalVariable
+    constMethodCall -> definedLocalVariable
+    methodCall      -> definedLocalVariable
     dropAccess      -> droppedLocalVariable
   }
+
   state droppedLocalVariable {
     neutralAccess   -> droppedLocalVariable
     readAccess      -> droppedLocalVariable error "a dropped local variable cannot be read"
     writeAccess     -> definedLocalVariable
     readWriteAccess -> definedLocalVariable error "a dropped local variable cannot be read"
+    constMethodCall -> definedLocalVariable error "the local variable is dropped"
+    methodCall      -> definedLocalVariable error "the local variable is dropped"
     dropAccess      -> droppedLocalVariable warning "the local variable is already dropped"
   }
 
@@ -274,13 +299,18 @@ sharedmap @variableMap %selectors {
     readAccess      -> undefinedOutputFormalArgument error "an undefined output formal parameter cannot be read"
     writeAccess     -> definedOutputFormalArgument
     readWriteAccess -> undefinedOutputFormalArgument error "an undefined output formal parameter cannot be read"
+    constMethodCall -> undefinedOutputFormalArgument warning "the output formal parameter has no value"
+    methodCall      -> undefinedOutputFormalArgument warning "the output formal parameter has no value"
     dropAccess      -> undefinedOutputFormalArgument warning "the output formal parameter has no value"
   }
+
   state definedOutputFormalArgument {
     neutralAccess   -> definedOutputFormalArgument
     readAccess      -> definedOutputFormalArgument
     writeAccess     -> definedOutputFormalArgument
     readWriteAccess -> definedOutputFormalArgument
+    constMethodCall -> definedOutputFormalArgument
+    methodCall      -> definedOutputFormalArgument
     dropAccess      -> undefinedOutputFormalArgument
   }
 
@@ -290,20 +320,28 @@ sharedmap @variableMap %selectors {
     readAccess      -> usedInputOutputFormalArgument
     writeAccess     -> usedInputOutputFormalArgument
     readWriteAccess -> usedInputOutputFormalArgument
+    constMethodCall -> usedInputOutputFormalArgument
+    methodCall      -> usedInputOutputFormalArgument
     dropAccess      -> droppedInputOutputFormalArgument
   }
+
   state usedInputOutputFormalArgument {
     neutralAccess   -> usedInputOutputFormalArgument
     readAccess      -> usedInputOutputFormalArgument
     writeAccess     -> usedInputOutputFormalArgument
     readWriteAccess -> usedInputOutputFormalArgument
+    constMethodCall -> usedInputOutputFormalArgument
+    methodCall      -> usedInputOutputFormalArgument
     dropAccess      -> droppedInputOutputFormalArgument
   }
+
   state droppedInputOutputFormalArgument error "the '%K' input/ouput formal argument should be valuated at the end of the routine" {
     neutralAccess   -> droppedInputOutputFormalArgument
     readAccess      -> droppedInputOutputFormalArgument error "a dropped input/output formal argument cannot be read"
     writeAccess     -> usedInputOutputFormalArgument
     readWriteAccess -> droppedInputOutputFormalArgument error "a dropped input/output formal argument cannot be read"
+    constMethodCall -> droppedInputOutputFormalArgument error "the input/output formal argument is dropped"
+    methodCall      -> droppedInputOutputFormalArgument error "the input/output formal argument is dropped"
     dropAccess      -> droppedInputOutputFormalArgument warning "the input/output formal argument is already dropped"
   }
 
@@ -313,6 +351,8 @@ sharedmap @variableMap %selectors {
     readAccess      -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
     writeAccess     -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
     readWriteAccess -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
+    constMethodCall -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
+    methodCall      -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
     dropAccess      -> droppedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
   }
 
@@ -321,14 +361,19 @@ sharedmap @variableMap %selectors {
     neutralAccess   -> constantInputFormalArgument
     readAccess      -> usedConstantInputFormalArgument
     writeAccess     -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be written"
-    readWriteAccess -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be written"
+    readWriteAccess -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be modified"
+    constMethodCall -> usedConstantInputFormalArgument
+    methodCall      -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be modified"
     dropAccess      -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be dropped"
   }
+
   state usedConstantInputFormalArgument {
     neutralAccess   -> usedConstantInputFormalArgument
     readAccess      -> usedConstantInputFormalArgument
     writeAccess     -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be written"
-    readWriteAccess -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be written"
+    readWriteAccess -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be modified"
+    constMethodCall -> usedConstantInputFormalArgument
+    methodCall      -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be modified"
     dropAccess      -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be dropped"
   }
 
@@ -337,7 +382,9 @@ sharedmap @variableMap %selectors {
     neutralAccess   -> constantInputFormalArgumentDeclaredAsUnused
     readAccess      -> usedConstantInputFormalArgument warning "the constant input formal parameter is declared as unused"
     writeAccess     -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be written"
-    readWriteAccess -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be written"
+    readWriteAccess -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be modified"
+    constMethodCall -> usedConstantInputFormalArgument warning "the constant input formal parameter is declared as unused"
+    methodCall      -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be modified"
     dropAccess      -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be dropped"
   }
 
@@ -347,20 +394,28 @@ sharedmap @variableMap %selectors {
     readAccess      -> usedInputFormalArgument
     writeAccess     -> usedInputFormalArgument
     readWriteAccess -> usedInputFormalArgument
+    constMethodCall -> usedInputFormalArgument
+    methodCall      -> usedInputFormalArgument
     dropAccess      -> droppedInputFormalArgument
   }
+
   state usedInputFormalArgument {
     neutralAccess   -> usedInputFormalArgument
     readAccess      -> usedInputFormalArgument
     writeAccess     -> usedInputFormalArgument
     readWriteAccess -> usedInputFormalArgument
+    constMethodCall -> usedInputFormalArgument
+    methodCall      -> usedInputFormalArgument
     dropAccess      -> droppedInputFormalArgument
   }
+
   state droppedInputFormalArgument {
     neutralAccess   -> droppedInputFormalArgument
     readAccess      -> droppedInputFormalArgument error "a dropped input formal parameter cannot be read"
     writeAccess     -> usedInputFormalArgument
-    readWriteAccess -> droppedInputFormalArgument error "a dropped input formal parameter cannot be read"
+    readWriteAccess -> droppedInputFormalArgument error "a dropped input formal parameter cannot be modified"
+    constMethodCall -> droppedInputFormalArgument warning "the input formal parameter is dropped"
+    methodCall      -> droppedInputFormalArgument error "a dropped input formal parameter cannot be modified"
     dropAccess      -> droppedInputFormalArgument warning "the input formal parameter is already dropped"
   }
 
@@ -370,67 +425,70 @@ sharedmap @variableMap %selectors {
     readAccess      -> usedInputFormalArgument warning "the input formal parameter is declared as unused"
     writeAccess     -> usedInputFormalArgument warning "the input formal parameter is declared as unused"
     readWriteAccess -> usedInputFormalArgument warning "the input formal parameter is declared as unused"
+    constMethodCall -> droppedInputFormalArgument warning "the input formal parameter is declared as unused"
+    methodCall      -> droppedInputFormalArgument warning "the input formal parameter is declared as unused"
     dropAccess      -> droppedInputFormalArgument warning "the input formal parameter is declared as unused"
-  }
-
-#--- Current instance attribute in a method or a reader
-  state currentInstanceAttribute {
-    neutralAccess   -> currentInstanceAttribute
-    readAccess      -> currentInstanceAttribute
-    writeAccess     -> currentInstanceAttribute error "an attribute cannot be written within a method or a reader"
-    readWriteAccess -> currentInstanceAttribute error "an attribute cannot be modified within a method or a reader"
-    dropAccess      -> currentInstanceAttribute error "an attribute cannot be dropped within a method or a reader"
-  }
-
-#--- Current instance attribute in a modifier
-  state currentInstanceAttributeInModifier {
-    neutralAccess   -> currentInstanceAttributeInModifier
-    readAccess      -> currentInstanceAttributeInModifier
-    writeAccess     -> currentInstanceAttributeInModifier
-    readWriteAccess -> currentInstanceAttributeInModifier
-    dropAccess      -> currentInstanceDroppedAttributeInModifier
-  }
-
-  state currentInstanceDroppedAttributeInModifier warning "the '%K' attribute is in the dropped state at the end of the modifier" {
-    neutralAccess   -> currentInstanceDroppedAttributeInModifier
-    readAccess      -> currentInstanceDroppedAttributeInModifier error "the attribute cannot be read, it has been dropped"
-    writeAccess     -> currentInstanceAttributeInModifier
-    readWriteAccess -> currentInstanceDroppedAttributeInModifier error "the attribute cannot be read/written, it has been dropped"
-    dropAccess      -> currentInstanceDroppedAttributeInModifier  warning "the attribute is already dropped"
   }
 
 #--- Insert methods 
   insert insertInaccessibleControlRegister state inaccessibleControlRegister
-     error message "redefinition of '%K' global variable (previous declaration was in %L)"
-  insert insertGlobalVariable state globalVariable
-    error message "redefinition of '%K' global variable (previous declaration was in %L)"
-  insert insertMutableAttribute state currentInstanceAttributeInModifier error message "redefinition of '%K' attribute (previous declaration was in %L)"
-  insert insertNonMutableAttribute state currentInstanceAttribute error message "redefinition of '%K' attribute (previous declaration was in %L)"
-  insert insertUndefinedLocalVariable state undefinedLocalVariable error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertDefinedLocalVariable state definedLocalVariable error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertUndefinedLocalConstant state undefinedLocalConstant error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertLocalConstant state localConstant error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertUsedLocalConstant state usedLocalConstant error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertInputFormalArgument state inputFormalParameter error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertInputFormalArgumentDeclaredAsUnused state inputFormalArgumentDeclaredAsUnused error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertConstantInputFormalArgument state constantInputFormalArgument error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertUsedConstantInputFormalArgument state usedConstantInputFormalArgument error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertConstantInputFormalArgumentDeclaredAsUnused state constantInputFormalArgumentDeclaredAsUnused error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertOutputFormalArgument state undefinedOutputFormalArgument error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertInputOutputFormalArgument state unusedInputOutputFormalArgument error message "redefinition of '%K' variable (previous declaration was in %L)"
-  insert insertInputOutputFormalArgumentDeclaredAsUnused state inputOutputFormalArgumentDeclaredAsUnused error message "redefinition of '%K' variable (previous declaration was in %L)"
+     error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertModule state module
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertUndefinedVariable state undefinedLocalVariable
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertDefinedVariable state definedLocalVariable
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertUndefinedConstant state undefinedLocalConstant
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertConstant state localConstant
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertUsedConstant state usedLocalConstant
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertInputFormalArgument state inputFormalParameter
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertInputFormalArgumentDeclaredAsUnused state inputFormalArgumentDeclaredAsUnused
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertConstantInputFormalArgument state constantInputFormalArgument
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertUsedConstantInputFormalArgument state usedConstantInputFormalArgument
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertConstantInputFormalArgumentDeclaredAsUnused state constantInputFormalArgumentDeclaredAsUnused
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertOutputFormalArgument state undefinedOutputFormalArgument
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertInputOutputFormalArgument state unusedInputOutputFormalArgument
+    error message "redefinition of '%K' object (previous declaration was in %L)"
+
+  insert insertInputOutputFormalArgumentDeclaredAsUnused state inputOutputFormalArgumentDeclaredAsUnused
+    error message "redefinition of '%K' object (previous declaration was in %L)"
 
 #--- Search methods
   search searchForReadAccess do readAccess error message "the '%K' variable is not declared"
   search searchForWriteAccess do writeAccess error message "the '%K' variable is not declared"
   search searchForReadWriteAccess do readWriteAccess error message "the '%K' variable is not declared"
   search searchForDropAccess do dropAccess error message "the '%K' variable is not declared"
+  search searchForConstantMethodCall do constMethodCall error message "the '%K' object is not declared"
+  search searchForMethodCall do methodCall error message "the '%K' object is not declared"
   search neutralAccess do neutralAccess error message "the '%K' variable is not declared"
 
 #--- 'selectBlock' override definitions
   override selectBlock {
-    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceDroppedAttributeInModifier
-    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier
+#    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceDroppedAttributeInModifier
+#    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier
     constantInputFormalArgument:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     constantInputFormalArgumentDeclaredAsUnused:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     definedLocalVariable:droppedLocalVariable -> droppedLocalVariable
@@ -460,8 +518,8 @@ sharedmap @variableMap %selectors {
     undefinedLocalConstant:localConstant -> undefinedLocalConstant error "this branch defines the '%K' variable, while previous ones let it undefined"
     undefinedLocalConstant:usedLocalConstant -> undefinedLocalConstant error "this branch defines the '%K' variable, while previous ones let it undefined"
   }{
-    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier error "this branch drops the '%K' attribute, while previous ones let it defined"
-    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier error "this branch lets the '%K' attribute defined, while previous ones drop it"
+#    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier error "this branch drops the '%K' attribute, while previous ones let it defined"
+#    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier error "this branch lets the '%K' attribute defined, while previous ones drop it"
     constantInputFormalArgument:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     constantInputFormalArgumentDeclaredAsUnused:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     definedLocalVariable:droppedLocalVariable -> definedLocalVariable error "this branch drops the '%K' variable, while previous ones let it defined"
@@ -498,8 +556,8 @@ sharedmap @variableMap %selectors {
   override repeatBlock {
     undefinedLocalConstant:localConstant -> undefinedLocalConstant error "the repeated branch should not define the '%K' variable"
     undefinedLocalConstant:usedLocalConstant -> undefinedLocalConstant error "the repeated branch should not define the '%K' variable"
-    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier error "the repeated branch should not drop the '%K' attribute"
-    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier
+#    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier error "the repeated branch should not drop the '%K' attribute"
+#    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier
     constantInputFormalArgument:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     constantInputFormalArgumentDeclaredAsUnused:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     definedLocalVariable:droppedLocalVariable -> definedLocalVariable error "the repeated branch should not drop the '%K' variable"
@@ -527,7 +585,7 @@ sharedmap @variableMap %selectors {
     undefinedLocalVariable:droppedLocalVariable -> droppedLocalVariable
     undefinedLocalVariable:usedLocalVariable -> undefinedLocalVariable error "the repeated branch should not define the '%K' variable"
   }{
-    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier
+#    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier
     constantInputFormalArgument:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     constantInputFormalArgumentDeclaredAsUnused:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     definedLocalVariable:usedLocalVariable -> usedLocalVariable

@@ -130,7 +130,7 @@ override method @varInstructionWithAssignmentAST analyze
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
   let targetVar = @objectInMemoryIR.localValue {!type:result.mType !name:varLLVMName}
-  [!?ioVariableMap insertDefinedLocalVariable
+  [!?ioVariableMap insertDefinedVariable
     !lkey:mVarName
     !type:result.mType
     !readAccessAllowed:true
@@ -138,7 +138,6 @@ override method @varInstructionWithAssignmentAST analyze
     !copyable:[result.mType copyable]
     !fieldMap:{}
     !canBeUsedAsInputParameter:true
-    !isConstant:false # Is not constant
   ]
 #--- Code generation
   ioAllocaList += !varLLVMName !result.mType
@@ -174,7 +173,7 @@ override method @varInstructionAST analyze
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
   let targetVar = @objectInMemoryIR.localValue {!type:targetType !name:varLLVMName}
-  [!?ioVariableMap insertUndefinedLocalVariable
+  [!?ioVariableMap insertUndefinedVariable
     !lkey:mVarName
     !type:targetType
     !readAccessAllowed:true
@@ -182,7 +181,6 @@ override method @varInstructionAST analyze
     !copyable:[targetType copyable]
     !fieldMap:{}
     !canBeUsedAsInputParameter:true
-    !isConstant:false # Is not constant
   ]
 #--- Code generation
   ioAllocaList += !varLLVMName !targetType
