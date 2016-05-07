@@ -189,6 +189,12 @@ private proc generateCodeFiles
     do [globalVariable generateLLVM !?llvmCode]
     after llvmCode += "\n"
   end
+#----------------------------------------- Modules
+  for module in inIntermediateCodeStruct.mModuleList
+    before llvmCode += llvmTitleComment (!"Modules")
+    do [module generateLLVM !?llvmCode]
+    after llvmCode += "\n"
+  end
 #----------------------------------------- Boot
   llvmCode += llvmTitleComment (!"Boot")
   llvmCode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"

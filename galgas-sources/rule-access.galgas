@@ -72,7 +72,7 @@ method @accessList noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenc
 #  SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc analyzeVariableAccess
+proc analyzeVariableAccess
   ?fieldList:let @accessList inAccessList
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
@@ -97,7 +97,7 @@ private proc analyzeVariableAccess
     ?type:@unifiedTypeMap-proxy type
     ?1*
     ?variableKind:let @objectInMemoryIR sourcePtr
-    ?4*
+    ?3*
   ]
 #--- Handle array access
   @elementPtrList elementPtrList = {}
@@ -203,7 +203,6 @@ proc analyzeVariableWriteAccess
 #--- Check target access
   @bool accessIsAllowed
   @bool isCopyable
-  @bool isConstant
   if ([inAccessList length] == 1) && (baseElementArrayAccess == .noAccess) then
     [!?ioVariableMap searchForWriteAccess
       !lkey:baseName
@@ -212,7 +211,6 @@ proc analyzeVariableWriteAccess
       ?1*
       ?copyable:isCopyable
       ?2*
-      ?isConstant:isConstant
     ]
   else
     [!?ioVariableMap searchForReadWriteAccess
@@ -222,11 +220,7 @@ proc analyzeVariableWriteAccess
       ?1*
       ?copyable:isCopyable
       ?2*
-      ?isConstant:isConstant
     ]
-  end
-  if isConstant then
-    error baseName : "a constant cannot be modified"
   end
   if not accessIsAllowed then
     error baseName : "routine has no access right on the this variable"
@@ -282,12 +276,8 @@ proc analyzeVariableReadWriteAccess
     ?variableKind:let @objectInMemoryIR variableKind
     ?copyable:let isCopyable
     ?2*
-    ?isConstant:let isConstant
   ]
   outBaseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
-  if isConstant then
-    error baseName : "a constant cannot be modified"
-  end
   if not accessIsAllowed then
     error baseName : "routine has no access right on the this variable"
   end

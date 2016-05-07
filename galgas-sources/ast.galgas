@@ -34,7 +34,6 @@ struct @ast {
   @bootList mBootList
   @initList mInitList
   @panicClauseListAST mPanicClauses
-#  @configurationDeclarationList mConfigurationDeclarationList
   @taskList mTaskList
 }
 

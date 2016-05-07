@@ -104,7 +104,7 @@ override method @varInExpressionAST analyzeExpression
     ?variableKind:let @objectInMemoryIR variableKind
     ?copyable:let copyable
     ?fieldMap:@controlRegisterBitSliceAccessMap registerBitSliceMap
-    ?2*
+    ?canBeUsedAsInputParameter:*
   ]
   if not accessIsAllowed then
     error mSourceVarName : "routine has no access right on this variable"
@@ -156,7 +156,7 @@ override method @controlRegisterFieldInExpressionAST analyzeExpression
     ?variableKind:@objectInMemoryIR variableKind
     ?1*
     ?fieldMap:@controlRegisterBitSliceAccessMap registerBitSliceMap
-    ?2*
+    ?canBeUsedAsInputParameter:*
   ]
   if not accessIsAllowed then
     error mRegisterVarName : "routine has no access right on this variable"

@@ -10,6 +10,913 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Class for element of '@bootListIR' list                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cCollectionElement_bootListIR : public cCollectionElement {
+  public : GALGAS_bootListIR_2D_element mObject ;
+
+//--- Constructor
+  public : cCollectionElement_bootListIR (const GALGAS_location & in_mInitLocation,
+                                          const GALGAS_allocaList & in_mAllocaList,
+                                          const GALGAS_instructionListIR & in_mInstructionListIR,
+                                          const GALGAS_location & in_mEndOfInitLocation
+                                          COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cCollectionElement * copy (void) ;
+
+//--- Description
+  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement_bootListIR::cCollectionElement_bootListIR (const GALGAS_location & in_mInitLocation,
+                                                              const GALGAS_allocaList & in_mAllocaList,
+                                                              const GALGAS_instructionListIR & in_mInstructionListIR,
+                                                              const GALGAS_location & in_mEndOfInitLocation
+                                                              COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (in_mInitLocation, in_mAllocaList, in_mInstructionListIR, in_mEndOfInitLocation) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cCollectionElement_bootListIR::isValid (void) const {
+  return mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement * cCollectionElement_bootListIR::copy (void) {
+  cCollectionElement * result = NULL ;
+  macroMyNew (result, cCollectionElement_bootListIR (mObject.mAttribute_mInitLocation, mObject.mAttribute_mAllocaList, mObject.mAttribute_mInstructionListIR, mObject.mAttribute_mEndOfInitLocation COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cCollectionElement_bootListIR::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mInitLocation" ":" ;
+  mObject.mAttribute_mInitLocation.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mAllocaList" ":" ;
+  mObject.mAttribute_mAllocaList.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mInstructionListIR" ":" ;
+  mObject.mAttribute_mInstructionListIR.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mEndOfInitLocation" ":" ;
+  mObject.mAttribute_mEndOfInitLocation.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cCollectionElement_bootListIR::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_bootListIR * operand = (cCollectionElement_bootListIR *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_bootListIR) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR::GALGAS_bootListIR (void) :
+AC_GALGAS_list () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR::GALGAS_bootListIR (cSharedList * inSharedListPtr) :
+AC_GALGAS_list (inSharedListPtr) {
+  if (NULL == inSharedListPtr) {
+    createNewEmptyList (HERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_bootListIR result ;
+  result.createNewEmptyList (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::constructor_listWithValue (const GALGAS_location & inOperand0,
+                                                                const GALGAS_allocaList & inOperand1,
+                                                                const GALGAS_instructionListIR & inOperand2,
+                                                                const GALGAS_location & inOperand3
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_bootListIR result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    result.createNewEmptyList (THERE) ;
+    capCollectionElement attributes ;
+    GALGAS_bootListIR::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
+    result.addObject (attributes) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                   const GALGAS_location & in_mInitLocation,
+                                                   const GALGAS_allocaList & in_mAllocaList,
+                                                   const GALGAS_instructionListIR & in_mInstructionListIR,
+                                                   const GALGAS_location & in_mEndOfInitLocation
+                                                   COMMA_LOCATION_ARGS) {
+  cCollectionElement_bootListIR * p = NULL ;
+  macroMyNew (p, cCollectionElement_bootListIR (in_mInitLocation,
+                                                in_mAllocaList,
+                                                in_mInstructionListIR,
+                                                in_mEndOfInitLocation COMMA_THERE)) ;
+  outAttributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::addAssign_operation (const GALGAS_location & inOperand0,
+                                             const GALGAS_allocaList & inOperand1,
+                                             const GALGAS_instructionListIR & inOperand2,
+                                             const GALGAS_location & inOperand3
+                                             COMMA_LOCATION_ARGS) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_bootListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    addObject (attributes) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::setter_insertAtIndex (const GALGAS_location inOperand0,
+                                              const GALGAS_allocaList inOperand1,
+                                              const GALGAS_instructionListIR inOperand2,
+                                              const GALGAS_location inOperand3,
+                                              const GALGAS_uint inInsertionIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_bootListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    addObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::setter_removeAtIndex (GALGAS_location & outOperand0,
+                                              GALGAS_allocaList & outOperand1,
+                                              GALGAS_instructionListIR & outOperand2,
+                                              GALGAS_location & outOperand3,
+                                              const GALGAS_uint inRemoveIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  if (isValid () && inRemoveIndex.isValid ()) {
+    capCollectionElement attributes ;
+    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+    cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+    if (NULL == p) {
+      outOperand0.drop () ;
+      outOperand1.drop () ;
+      outOperand2.drop () ;
+      outOperand3.drop () ;
+    }else{
+      macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+      outOperand0 = p->mObject.mAttribute_mInitLocation ;
+      outOperand1 = p->mObject.mAttribute_mAllocaList ;
+      outOperand2 = p->mObject.mAttribute_mInstructionListIR ;
+      outOperand3 = p->mObject.mAttribute_mEndOfInitLocation ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::setter_popFirst (GALGAS_location & outOperand0,
+                                         GALGAS_allocaList & outOperand1,
+                                         GALGAS_instructionListIR & outOperand2,
+                                         GALGAS_location & outOperand3,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    outOperand0 = p->mObject.mAttribute_mInitLocation ;
+    outOperand1 = p->mObject.mAttribute_mAllocaList ;
+    outOperand2 = p->mObject.mAttribute_mInstructionListIR ;
+    outOperand3 = p->mObject.mAttribute_mEndOfInitLocation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::setter_popLast (GALGAS_location & outOperand0,
+                                        GALGAS_allocaList & outOperand1,
+                                        GALGAS_instructionListIR & outOperand2,
+                                        GALGAS_location & outOperand3,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    outOperand0 = p->mObject.mAttribute_mInitLocation ;
+    outOperand1 = p->mObject.mAttribute_mAllocaList ;
+    outOperand2 = p->mObject.mAttribute_mInstructionListIR ;
+    outOperand3 = p->mObject.mAttribute_mEndOfInitLocation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::method_first (GALGAS_location & outOperand0,
+                                      GALGAS_allocaList & outOperand1,
+                                      GALGAS_instructionListIR & outOperand2,
+                                      GALGAS_location & outOperand3,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    outOperand0 = p->mObject.mAttribute_mInitLocation ;
+    outOperand1 = p->mObject.mAttribute_mAllocaList ;
+    outOperand2 = p->mObject.mAttribute_mInstructionListIR ;
+    outOperand3 = p->mObject.mAttribute_mEndOfInitLocation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::method_last (GALGAS_location & outOperand0,
+                                     GALGAS_allocaList & outOperand1,
+                                     GALGAS_instructionListIR & outOperand2,
+                                     GALGAS_location & outOperand3,
+                                     C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    outOperand0 = p->mObject.mAttribute_mInitLocation ;
+    outOperand1 = p->mObject.mAttribute_mAllocaList ;
+    outOperand2 = p->mObject.mAttribute_mInstructionListIR ;
+    outOperand3 = p->mObject.mAttribute_mEndOfInitLocation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::add_operation (const GALGAS_bootListIR & inOperand,
+                                                    C_Compiler * /* inCompiler */
+                                                    COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_bootListIR result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::getter_subListWithRange (const GALGAS_range & inRange,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_bootListIR result = GALGAS_bootListIR::constructor_emptyList (THERE) ;
+  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_bootListIR result = GALGAS_bootListIR::constructor_emptyList (THERE) ;
+  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
+  GALGAS_bootListIR result = GALGAS_bootListIR::constructor_emptyList (THERE) ;
+  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_bootListIR::plusAssign_operation (const GALGAS_bootListIR inOperand,
+                                              C_Compiler * /* inCompiler */
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  appendList (inOperand) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_bootListIR::getter_mInitLocationAtIndex (const GALGAS_uint & inIndex,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  GALGAS_location result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    result = p->mObject.mAttribute_mInitLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allocaList GALGAS_bootListIR::getter_mAllocaListAtIndex (const GALGAS_uint & inIndex,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  GALGAS_allocaList result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    result = p->mObject.mAttribute_mAllocaList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListIR GALGAS_bootListIR::getter_mInstructionListIRAtIndex (const GALGAS_uint & inIndex,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  GALGAS_instructionListIR result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    result = p->mObject.mAttribute_mInstructionListIR ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_bootListIR::getter_mEndOfInitLocationAtIndex (const GALGAS_uint & inIndex,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_bootListIR * p = (cCollectionElement_bootListIR *) attributes.ptr () ;
+  GALGAS_location result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+    result = p->mObject.mAttribute_mEndOfInitLocation ;
+  }
+  return result ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_bootListIR::cEnumerator_bootListIR (const GALGAS_bootListIR & inEnumeratedObject,
+                                                const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR_2D_element cEnumerator_bootListIR::current (LOCATION_ARGS) const {
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+  return p->mObject ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cEnumerator_bootListIR::current_mInitLocation (LOCATION_ARGS) const {
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+  return p->mObject.mAttribute_mInitLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allocaList cEnumerator_bootListIR::current_mAllocaList (LOCATION_ARGS) const {
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+  return p->mObject.mAttribute_mAllocaList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListIR cEnumerator_bootListIR::current_mInstructionListIR (LOCATION_ARGS) const {
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+  return p->mObject.mAttribute_mInstructionListIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cEnumerator_bootListIR::current_mEndOfInitLocation (LOCATION_ARGS) const {
+  const cCollectionElement_bootListIR * p = (const cCollectionElement_bootListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_bootListIR) ;
+  return p->mObject.mAttribute_mEndOfInitLocation ;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                  @bootListIR type                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_bootListIR ("bootListIR",
+                                   NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_bootListIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_bootListIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_bootListIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_bootListIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootListIR GALGAS_bootListIR::extractObject (const GALGAS_object & inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_bootListIR result ;
+  const GALGAS_bootListIR * p = (const GALGAS_bootListIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_bootListIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("bootListIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_initRoutineMap::cMapElement_initRoutineMap (const GALGAS_lstring & inKey
+                                                        COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_initRoutineMap::isValid (void) const {
+  return mAttribute_lkey.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_initRoutineMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_initRoutineMap (mAttribute_lkey COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_initRoutineMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_initRoutineMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_initRoutineMap * operand = (cMapElement_initRoutineMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutineMap::GALGAS_initRoutineMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutineMap::GALGAS_initRoutineMap (const GALGAS_initRoutineMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutineMap & GALGAS_initRoutineMap::operator = (const GALGAS_initRoutineMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutineMap GALGAS_initRoutineMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_initRoutineMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutineMap GALGAS_initRoutineMap::constructor_mapWithMapToOverride (const GALGAS_initRoutineMap & inMapToOverride
+                                                                               COMMA_LOCATION_ARGS) {
+  GALGAS_initRoutineMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutineMap GALGAS_initRoutineMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
+  GALGAS_initRoutineMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_initRoutineMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_initRoutineMap * p = NULL ;
+  macroMyNew (p, cMapElement_initRoutineMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@initRoutineMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_initRoutineMap::setter_insertKey (GALGAS_lstring inKey,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  cMapElement_initRoutineMap * p = NULL ;
+  macroMyNew (p, cMapElement_initRoutineMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "the '%%%K' init routine is already declared" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_initRoutineMap_searchKey = "there is no '%%%K' init routine" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_initRoutineMap::method_searchKey (GALGAS_lstring inKey,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  const cMapElement_initRoutineMap * p = (const cMapElement_initRoutineMap *) performSearch (inKey,
+                                                                                               inCompiler,
+                                                                                               kSearchErrorMessage_initRoutineMap_searchKey
+                                                                                               COMMA_THERE) ;
+  if (NULL == p) {
+  }else{
+    macroValidSharedObject (p, cMapElement_initRoutineMap) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_initRoutineMap * GALGAS_initRoutineMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                       const GALGAS_string & inKey
+                                                                                       COMMA_LOCATION_ARGS) {
+  cMapElement_initRoutineMap * result = (cMapElement_initRoutineMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_initRoutineMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_initRoutineMap::cEnumerator_initRoutineMap (const GALGAS_initRoutineMap & inEnumeratedObject,
+                                                        const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutineMap_2D_element cEnumerator_initRoutineMap::current (LOCATION_ARGS) const {
+  const cMapElement_initRoutineMap * p = (const cMapElement_initRoutineMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_initRoutineMap) ;
+  return GALGAS_initRoutineMap_2D_element (p->mAttribute_lkey) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_initRoutineMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @initRoutineMap type                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_initRoutineMap ("initRoutineMap",
+                                       NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_initRoutineMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_initRoutineMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_initRoutineMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_initRoutineMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutineMap GALGAS_initRoutineMap::extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_initRoutineMap result ;
+  const GALGAS_initRoutineMap * p = (const GALGAS_initRoutineMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_initRoutineMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("initRoutineMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_initRoutinePriorityMap::cMapElement_initRoutinePriorityMap (const GALGAS_lstring & inKey
+                                                                        COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_initRoutinePriorityMap::isValid (void) const {
+  return mAttribute_lkey.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_initRoutinePriorityMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_initRoutinePriorityMap (mAttribute_lkey COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_initRoutinePriorityMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_initRoutinePriorityMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_initRoutinePriorityMap * operand = (cMapElement_initRoutinePriorityMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap::GALGAS_initRoutinePriorityMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap::GALGAS_initRoutinePriorityMap (const GALGAS_initRoutinePriorityMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap & GALGAS_initRoutinePriorityMap::operator = (const GALGAS_initRoutinePriorityMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap GALGAS_initRoutinePriorityMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_initRoutinePriorityMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap GALGAS_initRoutinePriorityMap::constructor_mapWithMapToOverride (const GALGAS_initRoutinePriorityMap & inMapToOverride
+                                                                                               COMMA_LOCATION_ARGS) {
+  GALGAS_initRoutinePriorityMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap GALGAS_initRoutinePriorityMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const {
+  GALGAS_initRoutinePriorityMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_initRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
+  cMapElement_initRoutinePriorityMap * p = NULL ;
+  macroMyNew (p, cMapElement_initRoutinePriorityMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@initRoutinePriorityMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_initRoutinePriorityMap::setter_insertKey (GALGAS_lstring inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_initRoutinePriorityMap * p = NULL ;
+  macroMyNew (p, cMapElement_initRoutinePriorityMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "an init routine with priority %K has been already declared" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_initRoutinePriorityMap * GALGAS_initRoutinePriorityMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                       const GALGAS_string & inKey
+                                                                                                       COMMA_LOCATION_ARGS) {
+  cMapElement_initRoutinePriorityMap * result = (cMapElement_initRoutinePriorityMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_initRoutinePriorityMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_initRoutinePriorityMap::cEnumerator_initRoutinePriorityMap (const GALGAS_initRoutinePriorityMap & inEnumeratedObject,
+                                                                        const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap_2D_element cEnumerator_initRoutinePriorityMap::current (LOCATION_ARGS) const {
+  const cMapElement_initRoutinePriorityMap * p = (const cMapElement_initRoutinePriorityMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_initRoutinePriorityMap) ;
+  return GALGAS_initRoutinePriorityMap_2D_element (p->mAttribute_lkey) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_initRoutinePriorityMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @initRoutinePriorityMap type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_initRoutinePriorityMap ("initRoutinePriorityMap",
+                                               NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_initRoutinePriorityMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_initRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_initRoutinePriorityMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_initRoutinePriorityMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap GALGAS_initRoutinePriorityMap::extractObject (const GALGAS_object & inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_initRoutinePriorityMap result ;
+  const GALGAS_initRoutinePriorityMap * p = (const GALGAS_initRoutinePriorityMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_initRoutinePriorityMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("initRoutinePriorityMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                       Class for element of '@initListIR' list                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8479,8 +9386,7 @@ cMapElement_variableMap::cMapElement_variableMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_objectInMemoryIR & in_variableKind,
                                                   const GALGAS_bool & in_copyable,
                                                   const GALGAS_controlRegisterBitSliceAccessMap & in_fieldMap,
-                                                  const GALGAS_bool & in_canBeUsedAsInputParameter,
-                                                  const GALGAS_bool & in_isConstant
+                                                  const GALGAS_bool & in_canBeUsedAsInputParameter
                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_type (in_type),
@@ -8488,21 +9394,20 @@ mAttribute_readAccessAllowed (in_readAccessAllowed),
 mAttribute_variableKind (in_variableKind),
 mAttribute_copyable (in_copyable),
 mAttribute_fieldMap (in_fieldMap),
-mAttribute_canBeUsedAsInputParameter (in_canBeUsedAsInputParameter),
-mAttribute_isConstant (in_isConstant) {
+mAttribute_canBeUsedAsInputParameter (in_canBeUsedAsInputParameter) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_variableMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_type.isValid () && mAttribute_readAccessAllowed.isValid () && mAttribute_variableKind.isValid () && mAttribute_copyable.isValid () && mAttribute_fieldMap.isValid () && mAttribute_canBeUsedAsInputParameter.isValid () && mAttribute_isConstant.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_type.isValid () && mAttribute_readAccessAllowed.isValid () && mAttribute_variableKind.isValid () && mAttribute_copyable.isValid () && mAttribute_fieldMap.isValid () && mAttribute_canBeUsedAsInputParameter.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_variableMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_variableMap (mAttribute_lkey, mAttribute_type, mAttribute_readAccessAllowed, mAttribute_variableKind, mAttribute_copyable, mAttribute_fieldMap, mAttribute_canBeUsedAsInputParameter, mAttribute_isConstant COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_variableMap (mAttribute_lkey, mAttribute_type, mAttribute_readAccessAllowed, mAttribute_variableKind, mAttribute_copyable, mAttribute_fieldMap, mAttribute_canBeUsedAsInputParameter COMMA_HERE)) ;
   return result ;
 }
 
@@ -8533,10 +9438,6 @@ void cMapElement_variableMap::description (C_String & ioString, const int32_t in
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "canBeUsedAsInputParameter" ":" ;
   mAttribute_canBeUsedAsInputParameter.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "isConstant" ":" ;
-  mAttribute_isConstant.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8561,9 +9462,6 @@ typeComparisonResult cMapElement_variableMap::compare (const cCollectionElement 
   }
   if (kOperandEqual == result) {
     result = mAttribute_canBeUsedAsInputParameter.objectCompare (operand->mAttribute_canBeUsedAsInputParameter) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_isConstant.objectCompare (operand->mAttribute_isConstant) ;
   }
   return result ;
 }
@@ -8600,24 +9498,21 @@ GALGAS_variableMap GALGAS_variableMap::constructor_emptyMap (LOCATION_ARGS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 #ifndef DO_NOT_GENERATE_CHECKINGS
-  static const uint32_t kMapStateCount_variableMap = 25 ;
+  static const uint32_t kMapStateCount_variableMap = 22 ;
 #endif
 static const uint32_t kMapState_variableMap_constantInputFormalArgument = 15 ;
 static const uint32_t kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused = 17 ;
-static const uint32_t kMapState_variableMap_currentInstanceAttribute = 22 ;
-static const uint32_t kMapState_variableMap_currentInstanceAttributeInModifier = 23 ;
-static const uint32_t kMapState_variableMap_currentInstanceDroppedAttributeInModifier = 24 ;
 static const uint32_t kMapState_variableMap_definedLocalVariable = 6 ;
 static const uint32_t kMapState_variableMap_definedOutputFormalArgument = 10 ;
 static const uint32_t kMapState_variableMap_droppedInputFormalArgument = 20 ;
 static const uint32_t kMapState_variableMap_droppedInputOutputFormalArgument = 13 ;
 static const uint32_t kMapState_variableMap_droppedLocalVariable = 8 ;
-static const uint32_t kMapState_variableMap_globalVariable = 1 ;
 static const uint32_t kMapState_variableMap_inaccessibleControlRegister = 0 ;
 static const uint32_t kMapState_variableMap_inputFormalArgumentDeclaredAsUnused = 21 ;
 static const uint32_t kMapState_variableMap_inputFormalParameter = 18 ;
 static const uint32_t kMapState_variableMap_inputOutputFormalArgumentDeclaredAsUnused = 14 ;
 static const uint32_t kMapState_variableMap_localConstant = 3 ;
+static const uint32_t kMapState_variableMap_module = 1 ;
 static const uint32_t kMapState_variableMap_undefinedLocalConstant = 4 ;
 static const uint32_t kMapState_variableMap_undefinedLocalVariable = 5 ;
 static const uint32_t kMapState_variableMap_undefinedOutputFormalArgument = 9 ;
@@ -8632,9 +9527,9 @@ static const uint32_t kMapState_variableMap_usedLocalVariable = 7 ;
 //  Map automaton state names                                                  *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * kMapStateNames_variableMap [25] = {
+static const char * kMapStateNames_variableMap [22] = {
   "inaccessibleControlRegister",
-  "globalVariable",
+  "module",
   "usedLocalConstant",
   "localConstant",
   "undefinedLocalConstant",
@@ -8654,19 +9549,18 @@ static const char * kMapStateNames_variableMap [25] = {
   "inputFormalParameter",
   "usedInputFormalArgument",
   "droppedInputFormalArgument",
-  "inputFormalArgumentDeclaredAsUnused",
-  "currentInstanceAttribute",
-  "currentInstanceAttributeInModifier",
-  "currentInstanceDroppedAttributeInModifier"
+  "inputFormalArgumentDeclaredAsUnused"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //  Map automaton actions                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const uint32_t kMapActionCount_variableMap = 5 ;
+static const uint32_t kMapActionCount_variableMap = 7 ;
+static const uint32_t kMapAction_variableMap_constMethodCall = 4 ;
 static const uint32_t kMapAction_variableMap_dropAccess = 3 ;
-static const uint32_t kMapAction_variableMap_neutralAccess = 4 ;
+static const uint32_t kMapAction_variableMap_methodCall = 5 ;
+static const uint32_t kMapAction_variableMap_neutralAccess = 6 ;
 static const uint32_t kMapAction_variableMap_readAccess = 0 ;
 static const uint32_t kMapAction_variableMap_readWriteAccess = 2 ;
 static const uint32_t kMapAction_variableMap_writeAccess = 1 ;
@@ -8675,8 +9569,10 @@ static const uint32_t kMapAction_variableMap_writeAccess = 1 ;
 //  Map automaton action names                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * kMapActionNames_variableMap [5] = {
+static const char * kMapActionNames_variableMap [7] = {
+  "constMethodCall",
   "dropAccess",
+  "methodCall",
   "neutralAccess",
   "readAccess",
   "readWriteAccess",
@@ -8687,166 +9583,192 @@ static const char * kMapActionNames_variableMap [5] = {
 //  Map automaton transitions                                                  *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const cMapAutomatonTransition kMapTransitions_variableMap [25 * 5] = {
+static const cMapAutomatonTransition kMapTransitions_variableMap [22 * 7] = {
 // State 'inaccessibleControlRegister', index 0 
   {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
-// State 'globalVariable', index 1 
-  {kMapState_variableMap_globalVariable /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_variableMap_globalVariable /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_globalVariable /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_variableMap_globalVariable /* 1 */, kMapAutomatonIssueError, "a global variable cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_globalVariable /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'module', index 1 
+  {kMapState_variableMap_module /* 1 */, kMapAutomatonIssueError, "a module cannot be read"}, // for action 'readAccess', (index 0)
+  {kMapState_variableMap_module /* 1 */, kMapAutomatonIssueError, "a module cannot be written"}, // for action 'writeAccess', (index 1)
+  {kMapState_variableMap_module /* 1 */, kMapAutomatonIssueError, "a module cannot be modified"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_variableMap_module /* 1 */, kMapAutomatonIssueError, "a module cannot be dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_variableMap_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'usedLocalConstant', index 2 
   {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be written"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'localConstant', index 3 
   {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be written"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_localConstant /* 3 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_localConstant /* 3 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'undefinedLocalConstant', index 4 
   {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_localConstant /* 3 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'undefinedLocalVariable', index 5 
   {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be read"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be read"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be modified"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapAutomatonIssueWarning, "the local variable has no value"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be read"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapAutomatonIssueError, "an undefined local variable cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'definedLocalVariable', index 6 
   {kMapState_variableMap_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedLocalVariable /* 8 */, kMapAutomatonIssueWarning, "the local variable has been dropped without any read"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'usedLocalVariable', index 7 
   {kMapState_variableMap_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_usedLocalVariable /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'droppedLocalVariable', index 8 
   {kMapState_variableMap_droppedLocalVariable /* 8 */, kMapAutomatonIssueError, "a dropped local variable cannot be read"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "a dropped local variable cannot be read"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedLocalVariable /* 8 */, kMapAutomatonIssueWarning, "the local variable is already dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "the local variable is dropped"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "the local variable is dropped"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'undefinedOutputFormalArgument', index 9 
   {kMapState_variableMap_undefinedOutputFormalArgument /* 9 */, kMapAutomatonIssueError, "an undefined output formal parameter cannot be read"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_undefinedOutputFormalArgument /* 9 */, kMapAutomatonIssueError, "an undefined output formal parameter cannot be read"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_undefinedOutputFormalArgument /* 9 */, kMapAutomatonIssueWarning, "the output formal parameter has no value"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_undefinedOutputFormalArgument /* 9 */, kMapAutomatonIssueWarning, "the output formal parameter has no value"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_undefinedOutputFormalArgument /* 9 */, kMapAutomatonIssueWarning, "the output formal parameter has no value"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'definedOutputFormalArgument', index 10 
   {kMapState_variableMap_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_undefinedOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_definedOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'unusedInputOutputFormalArgument', index 11 
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_unusedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_unusedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'usedInputOutputFormalArgument', index 12 
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'droppedInputOutputFormalArgument', index 13 
   {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "a dropped input/output formal argument cannot be read"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "a dropped input/output formal argument cannot be read"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueWarning, "the input/output formal argument is already dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "the input/output formal argument is dropped"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueError, "the input/output formal argument is dropped"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'inputOutputFormalArgumentDeclaredAsUnused', index 14 
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedInputOutputFormalArgument /* 13 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedInputOutputFormalArgument /* 12 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_inputOutputFormalArgumentDeclaredAsUnused /* 14 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'constantInputFormalArgument', index 15 
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_constantInputFormalArgument /* 15 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_constantInputFormalArgument /* 15 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'usedConstantInputFormalArgument', index 16 
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'constantInputFormalArgumentDeclaredAsUnused', index 17 
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueWarning, "the constant input formal parameter is declared as unused"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueWarning, "the constant input formal parameter is declared as unused"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedConstantInputFormalArgument /* 16 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'inputFormalParameter', index 18 
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_inputFormalParameter /* 18 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_inputFormalParameter /* 18 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'usedInputFormalArgument', index 19 
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'droppedInputFormalArgument', index 20 
   {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be read"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be read"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is already dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is dropped"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'inputFormalArgumentDeclaredAsUnused', index 21 
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
-// State 'currentInstanceAttribute', index 22 
-  {kMapState_variableMap_currentInstanceAttribute /* 22 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_variableMap_currentInstanceAttribute /* 22 */, kMapAutomatonIssueError, "an attribute cannot be written within a method or a reader"}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_currentInstanceAttribute /* 22 */, kMapAutomatonIssueError, "an attribute cannot be modified within a method or a reader"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_variableMap_currentInstanceAttribute /* 22 */, kMapAutomatonIssueError, "an attribute cannot be dropped within a method or a reader"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_currentInstanceAttribute /* 22 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
-// State 'currentInstanceAttributeInModifier', index 23 
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
-// State 'currentInstanceDroppedAttributeInModifier', index 24 
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapAutomatonIssueError, "the attribute cannot be read, it has been dropped"}, // for action 'readAccess', (index 0)
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapAutomatonIssueError, "the attribute cannot be read/written, it has been dropped"}, // for action 'readWriteAccess', (index 2)
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapAutomatonIssueWarning, "the attribute is already dropped"}, // for action 'dropAccess', (index 3)
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 4)
+  {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'constMethodCall', (index 4)
+  {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'methodCall', (index 5)
+  {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //  Map automaton final state issues                                           *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const cMapAutomatonFinalIssue kMapAutomatonFinalIssue_variableMap [25] = {
+static const cMapAutomatonFinalIssue kMapAutomatonFinalIssue_variableMap [22] = {
   {kMapAutomatonNoIssue, ""},// state 'inaccessibleControlRegister' (index 0)
-  {kMapAutomatonNoIssue, ""},// state 'globalVariable' (index 1)
+  {kMapAutomatonNoIssue, ""},// state 'module' (index 1)
   {kMapAutomatonNoIssue, ""},// state 'usedLocalConstant' (index 2)
   {kMapAutomatonIssueWarning, "the '%K' constant value is unused"},// state 'localConstant' (index 3)
   {kMapAutomatonIssueWarning, "the '%K' constant value is unused"},// state 'undefinedLocalConstant' (index 4)
@@ -8867,9 +9789,6 @@ static const cMapAutomatonFinalIssue kMapAutomatonFinalIssue_variableMap [25] = 
   {kMapAutomatonNoIssue, ""},// state 'usedInputFormalArgument' (index 19)
   {kMapAutomatonNoIssue, ""},// state 'droppedInputFormalArgument' (index 20)
   {kMapAutomatonNoIssue, ""},// state 'inputFormalArgumentDeclaredAsUnused' (index 21)
-  {kMapAutomatonNoIssue, ""},// state 'currentInstanceAttribute' (index 22)
-  {kMapAutomatonNoIssue, ""},// state 'currentInstanceAttributeInModifier' (index 23)
-  {kMapAutomatonIssueWarning, "the '%K' attribute is in the dropped state at the end of the modifier"},// state 'currentInstanceDroppedAttributeInModifier' (index 24)
 } ;
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -8896,7 +9815,7 @@ void GALGAS_variableMap::method_checkAutomatonStates (GALGAS_location inErrorLoc
 //                                             map override 'selectBlock'                                              *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride_variableMap_selectBlock [30] = {
+static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride_variableMap_selectBlock [28] = {
   {kMapState_variableMap_localConstant /* 3 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
   {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapState_variableMap_localConstant /* 3 */, kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
@@ -8925,13 +9844,11 @@ static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride
   {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""},
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapAutomatonNoIssue, ""},
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""},
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverride_variableMap_selectBlock [42] = {
+static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverride_variableMap_selectBlock [40] = {
   {kMapState_variableMap_usedLocalConstant /* 2 */, kMapState_variableMap_localConstant /* 3 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_localConstant /* 3 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapState_variableMap_definedLocalVariable /* 6 */, kMapState_variableMap_definedLocalVariable /* 6 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
@@ -8972,16 +9889,14 @@ static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverrid
   {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonNoIssue, ""},
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonIssueError, "this branch drops the '%K' attribute, while previous ones let it defined"},
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonIssueError, "this branch lets the '%K' attribute defined, while previous ones drop it"},
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_variableMap::setter_openOverrideForSelectBlock (C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
-  openOverride (kBranchBehaviourForOverride_variableMap_selectBlock, 30,
-                kBranchCombinationForOverride_variableMap_selectBlock, 42,
+  openOverride (kBranchBehaviourForOverride_variableMap_selectBlock, 28,
+                kBranchCombinationForOverride_variableMap_selectBlock, 40,
                 "selectBlock",
                 inCompiler
                 COMMA_THERE) ;
@@ -8991,7 +9906,7 @@ void GALGAS_variableMap::setter_openOverrideForSelectBlock (C_Compiler * inCompi
 //                                             map override 'repeatBlock'                                              *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride_variableMap_repeatBlock [30] = {
+static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride_variableMap_repeatBlock [28] = {
   {kMapState_variableMap_localConstant /* 3 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
   {kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapState_variableMap_localConstant /* 3 */, kMapState_variableMap_undefinedLocalConstant /* 4 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
@@ -9020,13 +9935,11 @@ static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride
   {kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
   {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_droppedInputFormalArgument /* 20 */, kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' attribute"},
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""},
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverride_variableMap_repeatBlock [20] = {
+static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverride_variableMap_repeatBlock [18] = {
   {kMapState_variableMap_usedLocalConstant /* 2 */, kMapState_variableMap_localConstant /* 3 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_localConstant /* 3 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapState_variableMap_usedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_undefinedLocalVariable /* 5 */, kMapState_variableMap_droppedLocalVariable /* 8 */, kMapState_variableMap_droppedLocalVariable /* 8 */, kMapAutomatonNoIssue, ""},
@@ -9045,16 +9958,14 @@ static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverrid
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapState_variableMap_inputFormalParameter /* 18 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
   {kMapState_variableMap_inputFormalArgumentDeclaredAsUnused /* 21 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapState_variableMap_usedInputFormalArgument /* 19 */, kMapAutomatonNoIssue, ""},
-  {kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""},
-  {kMapState_variableMap_currentInstanceDroppedAttributeInModifier /* 24 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapState_variableMap_currentInstanceAttributeInModifier /* 23 */, kMapAutomatonNoIssue, ""},
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_variableMap::setter_openOverrideForRepeatBlock (C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
-  openOverride (kBranchBehaviourForOverride_variableMap_repeatBlock, 30,
-                kBranchCombinationForOverride_variableMap_repeatBlock, 20,
+  openOverride (kBranchBehaviourForOverride_variableMap_repeatBlock, 28,
+                kBranchCombinationForOverride_variableMap_repeatBlock, 18,
                 "repeatBlock",
                 inCompiler
                 COMMA_THERE) ;
@@ -9070,15 +9981,14 @@ void GALGAS_variableMap::setter_insertInaccessibleControlRegister (GALGAS_lstrin
                                                                    GALGAS_bool inArgument3,
                                                                    GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                                    GALGAS_bool inArgument5,
-                                                                   GALGAS_bool inArgument6,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' global variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9091,27 +10001,26 @@ void GALGAS_variableMap::setter_insertInaccessibleControlRegister (GALGAS_lstrin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::setter_insertGlobalVariable (GALGAS_lstring inKey,
-                                                      GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                      GALGAS_bool inArgument1,
-                                                      GALGAS_objectInMemoryIR inArgument2,
-                                                      GALGAS_bool inArgument3,
-                                                      GALGAS_controlRegisterBitSliceAccessMap inArgument4,
-                                                      GALGAS_bool inArgument5,
-                                                      GALGAS_bool inArgument6,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertModule (GALGAS_lstring inKey,
+                                              GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                              GALGAS_bool inArgument1,
+                                              GALGAS_objectInMemoryIR inArgument2,
+                                              GALGAS_bool inArgument3,
+                                              GALGAS_controlRegisterBitSliceAccessMap inArgument4,
+                                              GALGAS_bool inArgument5,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' global variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
-                        kMapState_variableMap_globalVariable,
-                        kMapStateNames_variableMap [kMapState_variableMap_globalVariable],
+                        kMapState_variableMap_module,
+                        kMapStateNames_variableMap [kMapState_variableMap_module],
                         kInsertErrorMessage,
                         kShadowErrorMessage
                         COMMA_THERE) ;
@@ -9119,78 +10028,21 @@ void GALGAS_variableMap::setter_insertGlobalVariable (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::setter_insertMutableAttribute (GALGAS_lstring inKey,
-                                                        GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                        GALGAS_bool inArgument1,
-                                                        GALGAS_objectInMemoryIR inArgument2,
-                                                        GALGAS_bool inArgument3,
-                                                        GALGAS_controlRegisterBitSliceAccessMap inArgument4,
-                                                        GALGAS_bool inArgument5,
-                                                        GALGAS_bool inArgument6,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertUndefinedVariable (GALGAS_lstring inKey,
+                                                         GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                         GALGAS_bool inArgument1,
+                                                         GALGAS_objectInMemoryIR inArgument2,
+                                                         GALGAS_bool inArgument3,
+                                                         GALGAS_controlRegisterBitSliceAccessMap inArgument4,
+                                                         GALGAS_bool inArgument5,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' attribute (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_currentInstanceAttributeInModifier,
-                        kMapStateNames_variableMap [kMapState_variableMap_currentInstanceAttributeInModifier],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::setter_insertNonMutableAttribute (GALGAS_lstring inKey,
-                                                           GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                           GALGAS_bool inArgument1,
-                                                           GALGAS_objectInMemoryIR inArgument2,
-                                                           GALGAS_bool inArgument3,
-                                                           GALGAS_controlRegisterBitSliceAccessMap inArgument4,
-                                                           GALGAS_bool inArgument5,
-                                                           GALGAS_bool inArgument6,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' attribute (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_currentInstanceAttribute,
-                        kMapStateNames_variableMap [kMapState_variableMap_currentInstanceAttribute],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap::setter_insertUndefinedLocalVariable (GALGAS_lstring inKey,
-                                                              GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                              GALGAS_bool inArgument1,
-                                                              GALGAS_objectInMemoryIR inArgument2,
-                                                              GALGAS_bool inArgument3,
-                                                              GALGAS_controlRegisterBitSliceAccessMap inArgument4,
-                                                              GALGAS_bool inArgument5,
-                                                              GALGAS_bool inArgument6,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9203,22 +10055,21 @@ void GALGAS_variableMap::setter_insertUndefinedLocalVariable (GALGAS_lstring inK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::setter_insertDefinedLocalVariable (GALGAS_lstring inKey,
-                                                            GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                            GALGAS_bool inArgument1,
-                                                            GALGAS_objectInMemoryIR inArgument2,
-                                                            GALGAS_bool inArgument3,
-                                                            GALGAS_controlRegisterBitSliceAccessMap inArgument4,
-                                                            GALGAS_bool inArgument5,
-                                                            GALGAS_bool inArgument6,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertDefinedVariable (GALGAS_lstring inKey,
+                                                       GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                       GALGAS_bool inArgument1,
+                                                       GALGAS_objectInMemoryIR inArgument2,
+                                                       GALGAS_bool inArgument3,
+                                                       GALGAS_controlRegisterBitSliceAccessMap inArgument4,
+                                                       GALGAS_bool inArgument5,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9231,22 +10082,21 @@ void GALGAS_variableMap::setter_insertDefinedLocalVariable (GALGAS_lstring inKey
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::setter_insertUndefinedLocalConstant (GALGAS_lstring inKey,
-                                                              GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                              GALGAS_bool inArgument1,
-                                                              GALGAS_objectInMemoryIR inArgument2,
-                                                              GALGAS_bool inArgument3,
-                                                              GALGAS_controlRegisterBitSliceAccessMap inArgument4,
-                                                              GALGAS_bool inArgument5,
-                                                              GALGAS_bool inArgument6,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertUndefinedConstant (GALGAS_lstring inKey,
+                                                         GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                         GALGAS_bool inArgument1,
+                                                         GALGAS_objectInMemoryIR inArgument2,
+                                                         GALGAS_bool inArgument3,
+                                                         GALGAS_controlRegisterBitSliceAccessMap inArgument4,
+                                                         GALGAS_bool inArgument5,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9259,22 +10109,21 @@ void GALGAS_variableMap::setter_insertUndefinedLocalConstant (GALGAS_lstring inK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::setter_insertLocalConstant (GALGAS_lstring inKey,
-                                                     GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                     GALGAS_bool inArgument1,
-                                                     GALGAS_objectInMemoryIR inArgument2,
-                                                     GALGAS_bool inArgument3,
-                                                     GALGAS_controlRegisterBitSliceAccessMap inArgument4,
-                                                     GALGAS_bool inArgument5,
-                                                     GALGAS_bool inArgument6,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertConstant (GALGAS_lstring inKey,
+                                                GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                GALGAS_bool inArgument1,
+                                                GALGAS_objectInMemoryIR inArgument2,
+                                                GALGAS_bool inArgument3,
+                                                GALGAS_controlRegisterBitSliceAccessMap inArgument4,
+                                                GALGAS_bool inArgument5,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9287,22 +10136,21 @@ void GALGAS_variableMap::setter_insertLocalConstant (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::setter_insertUsedLocalConstant (GALGAS_lstring inKey,
-                                                         GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                         GALGAS_bool inArgument1,
-                                                         GALGAS_objectInMemoryIR inArgument2,
-                                                         GALGAS_bool inArgument3,
-                                                         GALGAS_controlRegisterBitSliceAccessMap inArgument4,
-                                                         GALGAS_bool inArgument5,
-                                                         GALGAS_bool inArgument6,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_insertUsedConstant (GALGAS_lstring inKey,
+                                                    GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                    GALGAS_bool inArgument1,
+                                                    GALGAS_objectInMemoryIR inArgument2,
+                                                    GALGAS_bool inArgument3,
+                                                    GALGAS_controlRegisterBitSliceAccessMap inArgument4,
+                                                    GALGAS_bool inArgument5,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9322,15 +10170,14 @@ void GALGAS_variableMap::setter_insertInputFormalArgument (GALGAS_lstring inKey,
                                                            GALGAS_bool inArgument3,
                                                            GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                            GALGAS_bool inArgument5,
-                                                           GALGAS_bool inArgument6,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9350,15 +10197,14 @@ void GALGAS_variableMap::setter_insertInputFormalArgumentDeclaredAsUnused (GALGA
                                                                            GALGAS_bool inArgument3,
                                                                            GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                                            GALGAS_bool inArgument5,
-                                                                           GALGAS_bool inArgument6,
                                                                            C_Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9378,15 +10224,14 @@ void GALGAS_variableMap::setter_insertConstantInputFormalArgument (GALGAS_lstrin
                                                                    GALGAS_bool inArgument3,
                                                                    GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                                    GALGAS_bool inArgument5,
-                                                                   GALGAS_bool inArgument6,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9406,15 +10251,14 @@ void GALGAS_variableMap::setter_insertUsedConstantInputFormalArgument (GALGAS_ls
                                                                        GALGAS_bool inArgument3,
                                                                        GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                                        GALGAS_bool inArgument5,
-                                                                       GALGAS_bool inArgument6,
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9434,15 +10278,14 @@ void GALGAS_variableMap::setter_insertConstantInputFormalArgumentDeclaredAsUnuse
                                                                                    GALGAS_bool inArgument3,
                                                                                    GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                                                    GALGAS_bool inArgument5,
-                                                                                   GALGAS_bool inArgument6,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9462,15 +10305,14 @@ void GALGAS_variableMap::setter_insertOutputFormalArgument (GALGAS_lstring inKey
                                                             GALGAS_bool inArgument3,
                                                             GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                             GALGAS_bool inArgument5,
-                                                            GALGAS_bool inArgument6,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9490,15 +10332,14 @@ void GALGAS_variableMap::setter_insertInputOutputFormalArgument (GALGAS_lstring 
                                                                  GALGAS_bool inArgument3,
                                                                  GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                                  GALGAS_bool inArgument5,
-                                                                 GALGAS_bool inArgument6,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9518,15 +10359,14 @@ void GALGAS_variableMap::setter_insertInputOutputFormalArgumentDeclaredAsUnused 
                                                                                  GALGAS_bool inArgument3,
                                                                                  GALGAS_controlRegisterBitSliceAccessMap inArgument4,
                                                                                  GALGAS_bool inArgument5,
-                                                                                 GALGAS_bool inArgument6,
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "redefinition of '%K' variable (previous declaration was in %L)" ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes,
                         inCompiler,
@@ -9550,7 +10390,6 @@ void GALGAS_variableMap::setter_searchForReadAccess (GALGAS_lstring inKey,
                                                      GALGAS_bool & outArgument3,
                                                      GALGAS_controlRegisterBitSliceAccessMap & outArgument4,
                                                      GALGAS_bool & outArgument5,
-                                                     GALGAS_bool & outArgument6,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -9572,7 +10411,6 @@ void GALGAS_variableMap::setter_searchForReadAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
-    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
@@ -9581,7 +10419,6 @@ void GALGAS_variableMap::setter_searchForReadAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_copyable ;
     outArgument4 = p->mAttribute_fieldMap ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
-    outArgument6 = p->mAttribute_isConstant ;
   }
 }
 
@@ -9598,7 +10435,6 @@ void GALGAS_variableMap::setter_searchForWriteAccess (GALGAS_lstring inKey,
                                                       GALGAS_bool & outArgument3,
                                                       GALGAS_controlRegisterBitSliceAccessMap & outArgument4,
                                                       GALGAS_bool & outArgument5,
-                                                      GALGAS_bool & outArgument6,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -9620,7 +10456,6 @@ void GALGAS_variableMap::setter_searchForWriteAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
-    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
@@ -9629,7 +10464,6 @@ void GALGAS_variableMap::setter_searchForWriteAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_copyable ;
     outArgument4 = p->mAttribute_fieldMap ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
-    outArgument6 = p->mAttribute_isConstant ;
   }
 }
 
@@ -9646,7 +10480,6 @@ void GALGAS_variableMap::setter_searchForReadWriteAccess (GALGAS_lstring inKey,
                                                           GALGAS_bool & outArgument3,
                                                           GALGAS_controlRegisterBitSliceAccessMap & outArgument4,
                                                           GALGAS_bool & outArgument5,
-                                                          GALGAS_bool & outArgument6,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -9668,7 +10501,6 @@ void GALGAS_variableMap::setter_searchForReadWriteAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
-    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
@@ -9677,7 +10509,6 @@ void GALGAS_variableMap::setter_searchForReadWriteAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_copyable ;
     outArgument4 = p->mAttribute_fieldMap ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
-    outArgument6 = p->mAttribute_isConstant ;
   }
 }
 
@@ -9694,7 +10525,6 @@ void GALGAS_variableMap::setter_searchForDropAccess (GALGAS_lstring inKey,
                                                      GALGAS_bool & outArgument3,
                                                      GALGAS_controlRegisterBitSliceAccessMap & outArgument4,
                                                      GALGAS_bool & outArgument5,
-                                                     GALGAS_bool & outArgument6,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -9716,7 +10546,6 @@ void GALGAS_variableMap::setter_searchForDropAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
-    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
@@ -9725,7 +10554,96 @@ void GALGAS_variableMap::setter_searchForDropAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_copyable ;
     outArgument4 = p->mAttribute_fieldMap ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
-    outArgument6 = p->mAttribute_isConstant ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_variableMap_searchForConstantMethodCall = "the '%K' object is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_searchForConstantMethodCall (GALGAS_lstring inKey,
+                                                             GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                             GALGAS_bool & outArgument1,
+                                                             GALGAS_objectInMemoryIR & outArgument2,
+                                                             GALGAS_bool & outArgument3,
+                                                             GALGAS_controlRegisterBitSliceAccessMap & outArgument4,
+                                                             GALGAS_bool & outArgument5,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) {
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
+                                                                                         inCompiler,
+                                                                                         kMapAction_variableMap_constMethodCall,
+                                                                                         kMapTransitions_variableMap,
+                                                                                         kMapActionCount_variableMap,
+                                                                                         kMapStateNames_variableMap,
+                                                                                         kMapActionNames_variableMap,
+                                                                                         #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                           kMapStateCount_variableMap,
+                                                                                         #endif
+                                                                                         kSearchErrorMessage_variableMap_searchForConstantMethodCall
+                                                                                         COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+    outArgument2.drop () ;
+    outArgument3.drop () ;
+    outArgument4.drop () ;
+    outArgument5.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_variableMap) ;
+    outArgument0 = p->mAttribute_type ;
+    outArgument1 = p->mAttribute_readAccessAllowed ;
+    outArgument2 = p->mAttribute_variableKind ;
+    outArgument3 = p->mAttribute_copyable ;
+    outArgument4 = p->mAttribute_fieldMap ;
+    outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_variableMap_searchForMethodCall = "the '%K' object is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_variableMap::setter_searchForMethodCall (GALGAS_lstring inKey,
+                                                     GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                     GALGAS_bool & outArgument1,
+                                                     GALGAS_objectInMemoryIR & outArgument2,
+                                                     GALGAS_bool & outArgument3,
+                                                     GALGAS_controlRegisterBitSliceAccessMap & outArgument4,
+                                                     GALGAS_bool & outArgument5,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
+                                                                                         inCompiler,
+                                                                                         kMapAction_variableMap_methodCall,
+                                                                                         kMapTransitions_variableMap,
+                                                                                         kMapActionCount_variableMap,
+                                                                                         kMapStateNames_variableMap,
+                                                                                         kMapActionNames_variableMap,
+                                                                                         #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                           kMapStateCount_variableMap,
+                                                                                         #endif
+                                                                                         kSearchErrorMessage_variableMap_searchForMethodCall
+                                                                                         COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+    outArgument2.drop () ;
+    outArgument3.drop () ;
+    outArgument4.drop () ;
+    outArgument5.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_variableMap) ;
+    outArgument0 = p->mAttribute_type ;
+    outArgument1 = p->mAttribute_readAccessAllowed ;
+    outArgument2 = p->mAttribute_variableKind ;
+    outArgument3 = p->mAttribute_copyable ;
+    outArgument4 = p->mAttribute_fieldMap ;
+    outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
   }
 }
 
@@ -9742,7 +10660,6 @@ void GALGAS_variableMap::setter_neutralAccess (GALGAS_lstring inKey,
                                                GALGAS_bool & outArgument3,
                                                GALGAS_controlRegisterBitSliceAccessMap & outArgument4,
                                                GALGAS_bool & outArgument5,
-                                               GALGAS_bool & outArgument6,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -9764,7 +10681,6 @@ void GALGAS_variableMap::setter_neutralAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
-    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
@@ -9773,7 +10689,6 @@ void GALGAS_variableMap::setter_neutralAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_copyable ;
     outArgument4 = p->mAttribute_fieldMap ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
-    outArgument6 = p->mAttribute_isConstant ;
   }
 }
 
@@ -9869,21 +10784,6 @@ GALGAS_bool GALGAS_variableMap::getter_canBeUsedAsInputParameterForKey (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_variableMap::getter_isConstantForKey (const GALGAS_string & inKey,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_isConstant ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void GALGAS_variableMap::setter_setTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                GALGAS_string inKey,
                                                C_Compiler * inCompiler
@@ -9968,20 +10868,6 @@ void GALGAS_variableMap::setter_setCanBeUsedAsInputParameterForKey (GALGAS_bool 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::setter_setIsConstantForKey (GALGAS_bool inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_variableMap) ;
-    p->mAttribute_isConstant = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 cMapElement_variableMap * GALGAS_variableMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                  const GALGAS_string & inKey
                                                                                  COMMA_LOCATION_ARGS) {
@@ -10052,14 +10938,6 @@ GALGAS_bool cEnumerator_variableMap::current_canBeUsedAsInputParameter (LOCATION
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_variableMap) ;
   return p->mAttribute_canBeUsedAsInputParameter ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_variableMap::current_isConstant (LOCATION_ARGS) const {
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_variableMap) ;
-  return p->mAttribute_isConstant ;
 }
 
 
@@ -10219,19 +11097,6 @@ GALGAS_bool GALGAS_variableMap_2D_proxy::getter_canBeUsedAsInputParameter (C_Com
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_variableMap_2D_proxy::getter_isConstant (C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "isConstant" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_isConstant;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_searchForReadAccess (const GALGAS_variableMap & inMap,
                                                                                           const GALGAS_lstring & inKey,
                                                                                           C_Compiler * inCompiler
@@ -10271,6 +11136,28 @@ GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_searchForDr
                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_variableMap_2D_proxy result ;
   result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_variableMap_searchForDropAccess, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_searchForConstantMethodCall (const GALGAS_variableMap & inMap,
+                                                                                                  const GALGAS_lstring & inKey,
+                                                                                                  C_Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_variableMap_2D_proxy result ;
+  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_variableMap_searchForConstantMethodCall, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_searchForMethodCall (const GALGAS_variableMap & inMap,
+                                                                                          const GALGAS_lstring & inKey,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_variableMap_2D_proxy result ;
+  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_variableMap_searchForMethodCall, inCompiler COMMA_THERE) ;
   return result ;
 }
 
@@ -13794,608 +14681,6 @@ GALGAS_globalVariableMap GALGAS_globalVariableMap::extractObject (const GALGAS_o
       result = *p ;
     }else{
       inCompiler->castError ("globalVariableMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_unifiedTypeMap::cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
-                                                        const GALGAS_string & in_llvmTypeName,
-                                                        const GALGAS_typeKind & in_kind,
-                                                        const GALGAS_classMethodMap & in_classMethodMap,
-                                                        const GALGAS_bool & in_instantiable,
-                                                        const GALGAS_bool & in_copyable,
-                                                        const GALGAS_bool & in_equatable,
-                                                        const GALGAS_bool & in_comparable,
-                                                        const GALGAS_unifiedTypeMap_2D_proxy & in_enumerationType
-                                                        COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mAttribute_llvmTypeName (in_llvmTypeName),
-mAttribute_kind (in_kind),
-mAttribute_classMethodMap (in_classMethodMap),
-mAttribute_instantiable (in_instantiable),
-mAttribute_copyable (in_copyable),
-mAttribute_equatable (in_equatable),
-mAttribute_comparable (in_comparable),
-mAttribute_enumerationType (in_enumerationType) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cMapElement_unifiedTypeMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_llvmTypeName.isValid () && mAttribute_kind.isValid () && mAttribute_classMethodMap.isValid () && mAttribute_instantiable.isValid () && mAttribute_copyable.isValid () && mAttribute_equatable.isValid () && mAttribute_comparable.isValid () && mAttribute_enumerationType.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement * cMapElement_unifiedTypeMap::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_unifiedTypeMap (mAttribute_lkey, mAttribute_llvmTypeName, mAttribute_kind, mAttribute_classMethodMap, mAttribute_instantiable, mAttribute_copyable, mAttribute_equatable, mAttribute_comparable, mAttribute_enumerationType COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cMapElement_unifiedTypeMap::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "llvmTypeName" ":" ;
-  mAttribute_llvmTypeName.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "kind" ":" ;
-  mAttribute_kind.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "classMethodMap" ":" ;
-  mAttribute_classMethodMap.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "instantiable" ":" ;
-  mAttribute_instantiable.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "copyable" ":" ;
-  mAttribute_copyable.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "equatable" ":" ;
-  mAttribute_equatable.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "comparable" ":" ;
-  mAttribute_comparable.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "enumerationType" ":" ;
-  mAttribute_enumerationType.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cMapElement_unifiedTypeMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_unifiedTypeMap * operand = (cMapElement_unifiedTypeMap *) inOperand ;
-  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_llvmTypeName.objectCompare (operand->mAttribute_llvmTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_kind.objectCompare (operand->mAttribute_kind) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_classMethodMap.objectCompare (operand->mAttribute_classMethodMap) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_instantiable.objectCompare (operand->mAttribute_instantiable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_copyable.objectCompare (operand->mAttribute_copyable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_equatable.objectCompare (operand->mAttribute_equatable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_comparable.objectCompare (operand->mAttribute_comparable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_enumerationType.objectCompare (operand->mAttribute_enumerationType) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap::GALGAS_unifiedTypeMap (void) :
-AC_GALGAS_uniqueMap () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap::GALGAS_unifiedTypeMap (const GALGAS_unifiedTypeMap & inSource) :
-AC_GALGAS_uniqueMap (inSource) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap & GALGAS_unifiedTypeMap::operator = (const GALGAS_unifiedTypeMap & inSource) {
-  * ((AC_GALGAS_uniqueMap *) this) = inSource ;
-  return * this ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton states                                                       *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton state names                                                  *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton actions                                                    *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton action names                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton transitions                                                  *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Map automaton final state issues                                           *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_insertKey (GALGAS_lstring inKey,
-                                              GALGAS_string inArgument0,
-                                              GALGAS_typeKind inArgument1,
-                                              GALGAS_classMethodMap inArgument2,
-                                              GALGAS_bool inArgument3,
-                                              GALGAS_bool inArgument4,
-                                              GALGAS_bool inArgument5,
-                                              GALGAS_bool inArgument6,
-                                              GALGAS_unifiedTypeMap_2D_proxy inArgument7,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedTypeMap * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' type is already declared in %L" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        0,
-                        NULL,
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_unifiedTypeMap_searchKey = "there is no '%K' type" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
-                                              GALGAS_string & outArgument0,
-                                              GALGAS_typeKind & outArgument1,
-                                              GALGAS_classMethodMap & outArgument2,
-                                              GALGAS_bool & outArgument3,
-                                              GALGAS_bool & outArgument4,
-                                              GALGAS_bool & outArgument5,
-                                              GALGAS_bool & outArgument6,
-                                              GALGAS_unifiedTypeMap_2D_proxy & outArgument7,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) performSearch (inKey,
-                                                                                               inCompiler,
-                                                                                               kSearchErrorMessage_unifiedTypeMap_searchKey
-                                                                                               COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-    outArgument5.drop () ;
-    outArgument6.drop () ;
-    outArgument7.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    outArgument0 = p->mAttribute_llvmTypeName ;
-    outArgument1 = p->mAttribute_kind ;
-    outArgument2 = p->mAttribute_classMethodMap ;
-    outArgument3 = p->mAttribute_instantiable ;
-    outArgument4 = p->mAttribute_copyable ;
-    outArgument5 = p->mAttribute_equatable ;
-    outArgument6 = p->mAttribute_comparable ;
-    outArgument7 = p->mAttribute_enumerationType ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_unifiedTypeMap::getter_llvmTypeNameForKey (const GALGAS_string & inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_string result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_llvmTypeName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_typeKind GALGAS_unifiedTypeMap::getter_kindForKey (const GALGAS_string & inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_typeKind result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_kind ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_classMethodMap GALGAS_unifiedTypeMap::getter_classMethodMapForKey (const GALGAS_string & inKey,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_classMethodMap result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_classMethodMap ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedTypeMap::getter_instantiableForKey (const GALGAS_string & inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_instantiable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedTypeMap::getter_copyableForKey (const GALGAS_string & inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_copyable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedTypeMap::getter_equatableForKey (const GALGAS_string & inKey,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_equatable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_unifiedTypeMap::getter_comparableForKey (const GALGAS_string & inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_comparable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap::getter_enumerationTypeForKey (const GALGAS_string & inKey,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_enumerationType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setLlvmTypeNameForKey (GALGAS_string inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_llvmTypeName = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setKindForKey (GALGAS_typeKind inAttributeValue,
-                                                  GALGAS_string inKey,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_kind = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setClassMethodMapForKey (GALGAS_classMethodMap inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_classMethodMap = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setInstantiableForKey (GALGAS_bool inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_instantiable = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setCopyableForKey (GALGAS_bool inAttributeValue,
-                                                      GALGAS_string inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_copyable = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setEquatableForKey (GALGAS_bool inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_equatable = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setComparableForKey (GALGAS_bool inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_comparable = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setEnumerationTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                             GALGAS_string inKey,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_enumerationType = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_unifiedTypeMap * GALGAS_unifiedTypeMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                       const GALGAS_string & inKey
-                                                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedTypeMap * result = (cMapElement_unifiedTypeMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_unifiedTypeMap) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_unifiedTypeMap::cEnumerator_unifiedTypeMap (const GALGAS_unifiedTypeMap & inEnumeratedObject,
-                                                        const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator () {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_unifiedTypeMap::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cEnumerator_unifiedTypeMap::current_llvmTypeName (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_llvmTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_typeKind cEnumerator_unifiedTypeMap::current_kind (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_kind ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_classMethodMap cEnumerator_unifiedTypeMap::current_classMethodMap (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_classMethodMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_unifiedTypeMap::current_instantiable (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_instantiable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_unifiedTypeMap::current_copyable (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_copyable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_unifiedTypeMap::current_equatable (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_equatable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_unifiedTypeMap::current_comparable (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_comparable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_unifiedTypeMap::current_enumerationType (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_enumerationType ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @unifiedTypeMap type                                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_unifiedTypeMap ("unifiedTypeMap",
-                                       NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_unifiedTypeMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_unifiedTypeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_unifiedTypeMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_unifiedTypeMap (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap result ;
-  const GALGAS_unifiedTypeMap * p = (const GALGAS_unifiedTypeMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_unifiedTypeMap *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("unifiedTypeMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

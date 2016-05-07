@@ -154,7 +154,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     ioAllocaList += !enumeratedVarLLVMName !type
   #--- Analyze instruction list
     [!?ioVariableMap openOverrideForRepeatBlock]
-    [!?ioVariableMap insertUsedLocalConstant
+    [!?ioVariableMap insertUsedConstant
       !lkey:mVarName
       !type:type
       !readAccessAllowed:true # Read access ok
@@ -162,7 +162,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !copyable:true
       !fieldMap:{}
       !canBeUsedAsInputParameter:false
-      !isConstant:true
     ]
     @instructionListIR instructionGenerationList = {}
     [mDoInstructionList analyzeBranchInstructionList

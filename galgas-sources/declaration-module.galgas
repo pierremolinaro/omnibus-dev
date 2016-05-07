@@ -1,4 +1,12 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @moduleDeclarationAST : @abstractDeclaration {
+  @lstring mModuleName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -86,18 +94,20 @@ syntax extension common_syntax {
       !primitiveListAST
       !guardListAST
     }
-  #--- Declare global variable
-    ioAST.mGlobalVarDeclarationList +=
-      !moduleTypeName
-      !moduleName
-      !@constructorCall.new {!moduleTypeName !{} !.here}
-      !{} # allowedRoutineList
-      !{} # allowedInitList
-      !{} # allowedPanicList
-      !{} # allowedGuardList
-      !{} # allowedISRList
-      !{} # allowedTaskList
-      !true # mAllowedAccessToAll
+  #--- Declare module
+    ioAST.mDeclarationList += !@moduleDeclarationAST.new {!moduleName}
+
+#    ioAST.mGlobalVarDeclarationList +=
+#      !moduleTypeName
+#      !moduleName
+#      !@constructorCall.new {!moduleTypeName !{} !.here}
+#      !{} # allowedRoutineList
+#      !{} # allowedInitList
+#      !{} # allowedPanicList
+#      !{} # allowedGuardList
+#      !{} # allowedISRList
+#      !{} # allowedTaskList
+#      !true # mAllowedAccessToAll
   }
 
   #·····················································································································
@@ -105,4 +115,114 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+override method @moduleDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+ [!?ioGraph addNode !mModuleName !self]
+  let moduleTypeName = @lstring.new {!"$" + mModuleName + "$" !mModuleName.location}
+ [!?ioGraph addEdge !mModuleName !moduleTypeName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @moduleDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "module " + mModuleName 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @moduleDeclarationAST location -> @location outLocation {
+  outLocation = mModuleName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @moduleDeclarationAST addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @moduleMap {
+  insert insertKey error message "the '%K' module is already declared in %L"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @moduleDeclarationAST enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+  [!?ioContext.mModuleMap insertKey !mModuleName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @moduleDeclarationAST enterRoutinesInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   SEMANTICS                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @moduleListIR {
+  @string mModuleName
+  @unifiedTypeMap-proxy mType
+  @operandIRList mInitialValueList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @moduleDeclarationAST semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  let moduleTypeName = @lstring.new {!mModuleName.string + "$" !mModuleName.location}
+  let moduleType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
+  [inContext.mConstructorMap searchKey !moduleTypeName ?let constructorValue]
+  [constructorValue structure ?constructorSignature:* ?sortedOperandList:let sortedOperandList]
+  @operandIRList initialValueList = {}
+  for (initialValue *) in sortedOperandList do
+    initialValueList += !initialValue
+  end
+  ioIntermediateCodeStruct.mModuleList += 
+    !mModuleName.string
+    !moduleType
+    !initialValueList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {
+  ioLLVMcode += "@" + llvmNameForGlobalVariable (!mModuleName) + " = internal global "
+  ioLLVMcode += [mType llvmTypeName] + " {"
+  for (value) in mInitialValueList
+    do ioLLVMcode += [value.mType llvmTypeName] + " " + [value.mValue llvmName]
+    between ioLLVMcode += ", "  
+  end
+#  let initialString = [mInitialValue llvmName]
+#  if initialString == "" then
+#    ioLLVMcode += "zeroinitializer"
+#  else
+#    ioLLVMcode += initialString
+#  end
+  ioLLVMcode += "}\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

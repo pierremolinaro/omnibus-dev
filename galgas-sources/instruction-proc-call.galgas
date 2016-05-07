@@ -240,9 +240,8 @@ override method @remoteRoutineCallInstructionAST analyze
     )
   else
   #---
-    analyzeVariableReadWriteAccess (
+    analyzeVariableAccess (
       !fieldList:accessList
-      !requiresCopy:false
       !self:inSelfType
       !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:false
@@ -256,8 +255,19 @@ override method @remoteRoutineCallInstructionAST analyze
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?resultPtr:let @objectInMemoryIR targetObjectPtr
-      ?baseGlobalVariableName:let baseGlobalVariableName # "" if base variable is not a global variable
     )
+  #--- Extract base variable and access
+    [accessList first ?let baseName ?*]
+  #--- Check target access
+    [!?ioVariableMap searchForMethodCall # searchForReadWriteAccess
+      !lkey:baseName
+      ?1*
+      ?readAccessAllowed:*
+      ?variableKind:let @objectInMemoryIR variableKind
+      ?copyable:*
+      ?2*
+    ]
+    let baseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
     let receiverType = [targetObjectPtr type]
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
@@ -358,12 +368,12 @@ proc analyzeRoutineCall
   outEffectiveParameterListIR = {}
   @unifiedTypeMap-proxy receiverType
   if inReceiverName.string != "" then
-    [!?ioVariableMap searchForReadAccess
+    [!?ioVariableMap searchForMethodCall
       !lkey:inReceiverName
       ?type:receiverType
       ?1*
       ?variableKind:@objectInMemoryIR variableKind
-      ?4*
+      ?3*
     ]
     outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
     outEffectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load self" as first argument
@@ -470,7 +480,7 @@ proc analyzeEffectiveParameters
       ioTemporaries.mTemporaryIndex ++
       let targetVar = @objectInMemoryIR.localValue {!type:type !name:varLLVMName}
       if constant then
-        [!?ioVariableMap insertLocalConstant
+        [!?ioVariableMap insertConstant
           !lkey:name
           !type:type
           !readAccessAllowed:true
@@ -478,10 +488,9 @@ proc analyzeEffectiveParameters
           !copyable:true
           !fieldMap:{}
           !canBeUsedAsInputParameter:true
-          !isConstant:false
         ]
       else
-        [!?ioVariableMap insertDefinedLocalVariable
+        [!?ioVariableMap insertDefinedVariable
           !lkey:name
           !type:type
           !readAccessAllowed:true
@@ -489,7 +498,6 @@ proc analyzeEffectiveParameters
           !copyable:true
           !fieldMap:{}
           !canBeUsedAsInputParameter:true
-          !isConstant:false
         ]
       end
       ioAllocaList += !varLLVMName !type
@@ -506,7 +514,6 @@ proc analyzeEffectiveParameters
         ?copyable:let isCopyable                                                 
         ?fieldMap:*
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
-        ?isConstant:*
       ]
       if not accessIsAllowed then
         error name : "routine has no access right on the this variable"
@@ -554,7 +561,6 @@ proc analyzeEffectiveParameters
         ?variableKind:let variableKind
         ?2*
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
-        ?isConstant:*
       ]
       if not canBeUsedAsInputParameter then
         error name : "this variable cannot be used as output/input parameter"

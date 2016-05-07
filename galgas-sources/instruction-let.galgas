@@ -105,7 +105,7 @@ override method @letInstructionWithAssignmentAST analyze
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
   let localConstant = @objectInMemoryIR.localValue {!type:result.mType !name:varLLVMName}
-  [!?ioVariableMap insertLocalConstant
+  [!?ioVariableMap insertConstant
     !lkey:mVarName
     !type:result.mType
     !readAccessAllowed:true
@@ -113,15 +113,10 @@ override method @letInstructionWithAssignmentAST analyze
     !copyable:[result.mType copyable]
     !fieldMap:{}
     !canBeUsedAsInputParameter:true
-    !isConstant:true
   ]
 #--- Generate code
   ioAllocaList += !varLLVMName !result.mType
   [!?ioInstructionGenerationList appendStoreInMemory !localConstant !result]
-#  [localConstant storeInMemory
-#    !value:result
-#    !?instructionListIR:ioInstructionGenerationList
-#  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

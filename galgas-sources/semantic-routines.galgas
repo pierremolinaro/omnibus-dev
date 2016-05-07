@@ -34,9 +34,7 @@ proc enterFormalArguments
         !copyable:[typeProxy copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:true
-        !isConstant:true # Is constant
       ]
-#      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
       ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     case inputOutput :
       [!?ioVariableMap insertInputOutputFormalArgument
@@ -47,7 +45,6 @@ proc enterFormalArguments
         !copyable:[typeProxy copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:true
-        !isConstant:false # Is not constant
       ]
       ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     case output :
@@ -59,7 +56,6 @@ proc enterFormalArguments
         !copyable:[typeProxy copyable]
         !fieldMap:{}
         !canBeUsedAsInputParameter:true
-        !isConstant:false # Is not constant
       ]
       ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     end
