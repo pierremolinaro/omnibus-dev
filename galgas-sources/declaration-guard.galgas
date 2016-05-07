@@ -296,68 +296,6 @@ abstract method @abstractCallInstructionAST baseGuardAnalyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?modes:let @stringset unused inModeSet
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
-  !@guardKindGenerationIR outConvenienceGuardGenerationIR
-{
-  let routineMangledName = @lstring.new {!"." + mRoutineName !mRoutineName.location}
-  [inContext.mGuardMapForContext searchKey
-    !routineMangledName
-    ?let isPublic
-    ?let @procedureSignature formalSignature
-  ]
-#--- Check accessibility
-  if not isPublic then
-    let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !routineMangledName.string] file]
-    let invocationFile = [mRoutineName.location file]
-    if invocationFile != declarationFile then
-      error mRoutineName : "this guard is not public"
-    end
-  end  
-#--- Enter in invocation graph
-  let routineNameForInvocationGraph = guardNameForInvocationGraph (!.null !mRoutineName)
-   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
-#--- Analyze effective parameters
-  @instructionListIR baseGuardInstructionGenerationList = {}
-  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  @allocaList baseGuardAllocaList = {}
-  analyzeEffectiveParameters (
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:true
-    !propertiesAreMutable:true
-    !formal:formalSignature
-    !effective:mEffectiveParameterList
-    !errorLocation:mRoutineName.location
-    !callerForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !requiredModeSet:{!serviceModeName ()}
-    !allowPanic:true
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?alloca:baseGuardAllocaList
-    !?instructionListIR:baseGuardInstructionGenerationList
-    !?effectiveIR:effectiveParameterListIR
-  )
-#--- Code generation
-  outConvenienceGuardGenerationIR = .convenienceGuard {
-    !baseGuardAllocaList:baseGuardAllocaList
-    !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-    !baseGuardMangledName:routineMangledName.string
-    !baseGuardEffectiveParameterList:effectiveParameterListIR
-  }
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 private proc standaloneBaseGuardAnalyze
   ?routineName:let @lstring inRoutineName
   ?effectiveParameters:let @effectiveParameterListAST inEffectiveParameterList

@@ -40,7 +40,6 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "init",
   "isr",
   "let",
-#  "loop",
   "module",
   "not",
   "or",
@@ -63,6 +62,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "type",
   "until",
   "var",
+  "when",
   "while",
   "xor"
 }

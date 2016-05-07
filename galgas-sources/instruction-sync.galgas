@@ -45,22 +45,21 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <guarded_command> !@guardedCommand outGuardedCommand {
-    @bool isWhileCommand
     select
-      $until$
-      isWhileCommand = false
-    or
-      $while$
-      isWhileCommand = true
-    end
-    select
-      $($
+      $when$
       <expression> ?let @expressionAST expression
-      $)$
       let endOfExp = @location.here
-      select
-        outGuardedCommand = .boolean {!isWhileCommand:isWhileCommand !expression:expression !endOfExpression:endOfExp}
-      or
+#      select
+#        outGuardedCommand = .boolean {!isWhileCommand:isWhileCommand !expression:expression !endOfExpression:endOfExp}
+#      or
+        @bool isWhileCommand
+        select
+          $until$
+          isWhileCommand = false
+        or
+          $while$
+          isWhileCommand = true
+        end
         $identifier$ ?let name
         select
           <effective_parameters> ?let effectiveParameterList
@@ -85,8 +84,16 @@ syntax extension common_syntax {
             !effectiveParameterListAST:effectiveParameterList
           }
         end
-      end
+#      end
     or
+      @bool isWhileCommand
+      select
+        $until$
+        isWhileCommand = false
+      or
+        $while$
+        isWhileCommand = true
+      end
       $identifier$ ?let name
       select
         <effective_parameters> ?let effectiveParameterList
