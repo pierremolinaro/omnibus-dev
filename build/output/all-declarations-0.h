@@ -508,6 +508,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                   const class GALGAS_allowedPanicList & in_mAllowedPanicList,
                                                   const class GALGAS_allowedGuardList & in_mAllowedGuardList,
                                                   const class GALGAS_allowedISRList & in_mAllowedISRList,
+                                                  const class GALGAS_allowedTaskList & in_mAllowedTaskList,
                                                   const class GALGAS_bool & in_mAllowedAccessToAll
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -532,7 +533,8 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                                              const class GALGAS_allowedPanicList & inOperand5,
                                                                              const class GALGAS_allowedGuardList & inOperand6,
                                                                              const class GALGAS_allowedISRList & inOperand7,
-                                                                             const class GALGAS_bool & inOperand8
+                                                                             const class GALGAS_allowedTaskList & inOperand8,
+                                                                             const class GALGAS_bool & inOperand9
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -549,7 +551,8 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                       const class GALGAS_allowedPanicList & inOperand5,
                                                       const class GALGAS_allowedGuardList & inOperand6,
                                                       const class GALGAS_allowedISRList & inOperand7,
-                                                      const class GALGAS_bool & inOperand8
+                                                      const class GALGAS_allowedTaskList & inOperand8,
+                                                      const class GALGAS_bool & inOperand9
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_globalVarDeclarationList add_operation (const GALGAS_globalVarDeclarationList & inOperand,
@@ -566,8 +569,9 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                        class GALGAS_allowedPanicList constinArgument5,
                                                        class GALGAS_allowedGuardList constinArgument6,
                                                        class GALGAS_allowedISRList constinArgument7,
-                                                       class GALGAS_bool constinArgument8,
-                                                       class GALGAS_uint constinArgument9,
+                                                       class GALGAS_allowedTaskList constinArgument8,
+                                                       class GALGAS_bool constinArgument9,
+                                                       class GALGAS_uint constinArgument10,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -579,7 +583,8 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                   class GALGAS_allowedPanicList & outArgument5,
                                                   class GALGAS_allowedGuardList & outArgument6,
                                                   class GALGAS_allowedISRList & outArgument7,
-                                                  class GALGAS_bool & outArgument8,
+                                                  class GALGAS_allowedTaskList & outArgument8,
+                                                  class GALGAS_bool & outArgument9,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -591,7 +596,8 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                  class GALGAS_allowedPanicList & outArgument5,
                                                  class GALGAS_allowedGuardList & outArgument6,
                                                  class GALGAS_allowedISRList & outArgument7,
-                                                 class GALGAS_bool & outArgument8,
+                                                 class GALGAS_allowedTaskList & outArgument8,
+                                                 class GALGAS_bool & outArgument9,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -603,8 +609,9 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                        class GALGAS_allowedPanicList & outArgument5,
                                                        class GALGAS_allowedGuardList & outArgument6,
                                                        class GALGAS_allowedISRList & outArgument7,
-                                                       class GALGAS_bool & outArgument8,
-                                                       class GALGAS_uint constinArgument9,
+                                                       class GALGAS_allowedTaskList & outArgument8,
+                                                       class GALGAS_bool & outArgument9,
+                                                       class GALGAS_uint constinArgument10,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -618,7 +625,8 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                class GALGAS_allowedPanicList & outArgument5,
                                                class GALGAS_allowedGuardList & outArgument6,
                                                class GALGAS_allowedISRList & outArgument7,
-                                               class GALGAS_bool & outArgument8,
+                                               class GALGAS_allowedTaskList & outArgument8,
+                                               class GALGAS_bool & outArgument9,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
@@ -630,7 +638,8 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                               class GALGAS_allowedPanicList & outArgument5,
                                               class GALGAS_allowedGuardList & outArgument6,
                                               class GALGAS_allowedISRList & outArgument7,
-                                              class GALGAS_bool & outArgument8,
+                                              class GALGAS_allowedTaskList & outArgument8,
+                                              class GALGAS_bool & outArgument9,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -660,6 +669,10 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_allowedRoutineList getter_mAllowedProcListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                             C_Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_allowedTaskList getter_mAllowedTaskListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpressionAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                         C_Compiler * inCompiler
@@ -711,6 +724,7 @@ class cEnumerator_globalVarDeclarationList : public cGenericAbstractEnumerator {
   public : class GALGAS_allowedPanicList current_mAllowedPanicList (LOCATION_ARGS) const ;
   public : class GALGAS_allowedGuardList current_mAllowedGuardList (LOCATION_ARGS) const ;
   public : class GALGAS_allowedISRList current_mAllowedISRList (LOCATION_ARGS) const ;
+  public : class GALGAS_allowedTaskList current_mAllowedTaskList (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mAllowedAccessToAll (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_globalVarDeclarationList_2D_element current (LOCATION_ARGS) const ;
@@ -1518,6 +1532,143 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allowedRoutineList 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                @allowedTaskList list                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_allowedTaskList : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_allowedTaskList (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_allowedTaskList (cSharedList * inSharedListPtr) ;
+
+//--------------------------------- Element constructor used by listmap
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_bool & in_mHasWriteAccess,
+                                                  const class GALGAS_lstring & in_mTaskName
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_allowedTaskList extractObject (const GALGAS_object & inObject,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_allowedTaskList constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static GALGAS_allowedTaskList constructor_listWithValue (const class GALGAS_bool & inOperand0,
+                                                                    const class GALGAS_lstring & inOperand1
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_allowedTaskList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_bool & inOperand0,
+                                                      const class GALGAS_lstring & inOperand1
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_allowedTaskList add_operation (const GALGAS_allowedTaskList & inOperand,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_bool constinArgument0,
+                                                       class GALGAS_lstring constinArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_bool & outArgument0,
+                                                  class GALGAS_lstring & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_bool & outArgument0,
+                                                 class GALGAS_lstring & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_bool & outArgument0,
+                                                       class GALGAS_lstring & outArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_bool & outArgument0,
+                                               class GALGAS_lstring & outArgument1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_bool & outArgument0,
+                                              class GALGAS_lstring & outArgument1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHasWriteAccessAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTaskNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_allowedTaskList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_allowedTaskList getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_allowedTaskList getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_allowedTaskList ;
+ 
+} ; // End of GALGAS_allowedTaskList class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_allowedTaskList : public cGenericAbstractEnumerator {
+  public : cEnumerator_allowedTaskList (const GALGAS_allowedTaskList & inEnumeratedObject,
+                                        const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_bool current_mHasWriteAccess (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mTaskName (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_allowedTaskList_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allowedTaskList ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                     @globalVarDeclarationList_2D_element struct                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1532,6 +1683,7 @@ class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
   public : GALGAS_allowedPanicList mAttribute_mAllowedPanicList ;
   public : GALGAS_allowedGuardList mAttribute_mAllowedGuardList ;
   public : GALGAS_allowedISRList mAttribute_mAllowedISRList ;
+  public : GALGAS_allowedTaskList mAttribute_mAllowedTaskList ;
   public : GALGAS_bool mAttribute_mAllowedAccessToAll ;
 
 
@@ -1554,6 +1706,7 @@ class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
                                                        const GALGAS_allowedPanicList & in_mAllowedPanicList,
                                                        const GALGAS_allowedGuardList & in_mAllowedGuardList,
                                                        const GALGAS_allowedISRList & in_mAllowedISRList,
+                                                       const GALGAS_allowedTaskList & in_mAllowedTaskList,
                                                        const GALGAS_bool & in_mAllowedAccessToAll) ;
 
 //-- Start of generic part --*
@@ -1575,7 +1728,8 @@ class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
                                                                               const class GALGAS_allowedPanicList & inOperand5,
                                                                               const class GALGAS_allowedGuardList & inOperand6,
                                                                               const class GALGAS_allowedISRList & inOperand7,
-                                                                              const class GALGAS_bool & inOperand8
+                                                                              const class GALGAS_allowedTaskList & inOperand8,
+                                                                              const class GALGAS_bool & inOperand9
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1601,6 +1755,8 @@ class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_allowedPanicList getter_mAllowedPanicList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_allowedRoutineList getter_mAllowedProcList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_allowedTaskList getter_mAllowedTaskList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
 

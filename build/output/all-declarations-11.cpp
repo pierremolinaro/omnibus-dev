@@ -10,6 +10,167 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                    Overriding extension method '@procCallInstructionIR enterAccessibleEntities'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_procCallInstructionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                                           GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
+                                                                           GALGAS_uint & /* ioArgument_ioMaxBranchOfOnInstructions */,
+                                                                           C_Compiler * /* inCompiler */
+                                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_procCallInstructionIR * object = (const cPtr_procCallInstructionIR *) inObject ;
+  macroValidSharedObject (object, cPtr_procCallInstructionIR) ;
+  ioArgument_ioAccessibleEntities.mAttribute_mRoutineSet.addAssign_operation (object->mAttribute_mProcName.mAttribute_string  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 724)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, object->mAttribute_mGlobalVariableName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (object->mAttribute_mGlobalVariableName  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 726)) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_procCallInstructionIR_enterAccessibleEntities (void) {
+  enterExtensionMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_procCallInstructionIR.mSlotID,
+                                                extensionMethod_procCallInstructionIR_enterAccessibleEntities) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_procCallInstructionIR_enterAccessibleEntities (defineExtensionMethod_procCallInstructionIR_enterAccessibleEntities, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Overriding extension method '@unifiedSelfCallInstructionAST analyze'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_unifiedSelfCallInstructionAST_analyze (const cPtr_instructionAST * inObject,
+                                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                   const GALGAS_bool constinArgument_inRoutineCanMutateProperties,
+                                                                   const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
+                                                                   const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                   const GALGAS_semanticContext constinArgument_inContext,
+                                                                   const GALGAS_stringset constinArgument_inRequiredModeSet,
+                                                                   const GALGAS_bool constinArgument_inAllowPanic,
+                                                                   GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                   GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                   GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                   GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                   GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_unifiedSelfCallInstructionAST * object = (const cPtr_unifiedSelfCallInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_unifiedSelfCallInstructionAST) ;
+  GALGAS_fieldList var_fieldList = object->mAttribute_mFieldList ;
+  GALGAS_lstring var_methodName ;
+  GALGAS_arrayElementAccess var_arrayAccess ;
+  {
+  var_fieldList.setter_popLast (var_methodName, var_arrayAccess, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 52)) ;
+  }
+  const enumGalgasBool test_0 = var_arrayAccess.getter_isAccess (SOURCE_FILE ("instruction-self-call.galgas", 53)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_location location_1 (var_methodName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("array access not allowed here")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 54)) ;
+  }
+  GALGAS_objectInMemoryIR var_propertyAddressLLVMvar ;
+  {
+  routine_analyzeSelfAccess (var_fieldList, constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-self-call.galgas", 63)), constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_propertyAddressLLVMvar, inCompiler  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 57)) ;
+  }
+  GALGAS_unifiedTypeMap_2D_proxy var_receiverType = extensionGetter_type (var_propertyAddressLLVMvar, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 74)) ;
+  GALGAS_lstring var_routineMangledName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (var_receiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 75)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 75)).add_operation (var_methodName.getter_string (SOURCE_FILE ("instruction-self-call.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 75)), var_methodName.mAttribute_location  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 75)) ;
+  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (SOURCE_FILE ("instruction-self-call.galgas", 76)) ;
+  var_effectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("instruction-self-call.galgas", 77)), extensionGetter_address (var_propertyAddressLLVMvar, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 77))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 77)) ;
+  GALGAS_bool var_isPublic ;
+  GALGAS_modeMap var_modeMap ;
+  GALGAS_procedureSignature var_formalSignature ;
+  GALGAS_routineKind var_routineKind ;
+  GALGAS_unifiedTypeMap_2D_proxy var_returnedType ;
+  GALGAS_bool var_appendFileAndLineArgumentForPanicLocation ;
+  GALGAS_bool var_canMutateProperties ;
+  GALGAS_bool var_canAccessPropertiesInUserMode ;
+  GALGAS_bool joker_3915 ; // Joker input parameter
+  constinArgument_inContext.mAttribute_mRoutineMapForContext.method_searchKey (var_routineMangledName, var_isPublic, var_modeMap, var_formalSignature, var_routineKind, joker_3915, var_returnedType, var_appendFileAndLineArgumentForPanicLocation, var_canMutateProperties, var_canAccessPropertiesInUserMode, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 78)) ;
+  GALGAS_bool test_2 = var_canAccessPropertiesInUserMode ;
+  if (kBoolTrue == test_2.boolEnum ()) {
+    test_2 = constinArgument_inDirectAccessToPropertiesAllowed.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 90)) ;
+  }
+  const enumGalgasBool test_3 = test_2.boolEnum () ;
+  if (kBoolTrue == test_3) {
+    GALGAS_location location_4 (var_methodName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_4, GALGAS_string ("the callee access properties, but current routine is not declared with @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 91)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 91))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 91)) ;
+  }
+  GALGAS_bool test_5 = var_canMutateProperties ;
+  if (kBoolTrue == test_5.boolEnum ()) {
+    test_5 = constinArgument_inRoutineCanMutateProperties.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 93)) ;
+  }
+  const enumGalgasBool test_6 = test_5.boolEnum () ;
+  if (kBoolTrue == test_6) {
+    GALGAS_location location_7 (var_methodName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_7, GALGAS_string ("the callee mutates properties, but current routine is not declared with @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 94)), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 94)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 94))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 94)) ;
+  }
+  GALGAS_bool test_8 = GALGAS_bool (kIsStrictSup, var_fieldList.getter_length (SOURCE_FILE ("instruction-self-call.galgas", 96)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  if (kBoolTrue == test_8.boolEnum ()) {
+    test_8 = var_isPublic.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 96)) ;
+  }
+  const enumGalgasBool test_9 = test_8.boolEnum () ;
+  if (kBoolTrue == test_9) {
+    GALGAS_location location_10 (var_routineMangledName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_10, GALGAS_string ("this routine is not public")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 97)) ;
+  }
+  GALGAS_lstring var_routineNameForInvocationGraph ;
+  switch (var_routineKind.enumValue ()) {
+  case GALGAS_routineKind::kNotBuilt:
+    break ;
+  case GALGAS_routineKind::kEnum_function:
+    {
+      var_routineNameForInvocationGraph = function_procNameForInvocationGraph (var_receiverType, var_methodName, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 103)) ;
+    }
+    break ;
+  case GALGAS_routineKind::kEnum_section:
+    {
+      var_routineNameForInvocationGraph = function_sectionNameForInvocationGraph (var_receiverType, var_methodName, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 105)) ;
+    }
+    break ;
+  case GALGAS_routineKind::kEnum_service:
+    {
+      var_routineNameForInvocationGraph = function_serviceNameForInvocationGraph (var_receiverType, var_methodName, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 107)) ;
+    }
+    break ;
+  case GALGAS_routineKind::kEnum_primitive:
+    {
+      var_routineNameForInvocationGraph = function_primitiveNameForInvocationGraph (var_receiverType, var_methodName, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 109)) ;
+    }
+    break ;
+  }
+  {
+  ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineNameForInvocationGraph COMMA_SOURCE_FILE ("instruction-self-call.galgas", 111)) ;
+  }
+  GALGAS_routineKindIR var_routineKindIR = function_checkMode (constinArgument_inRequiredModeSet, var_modeMap.getter_keySet (SOURCE_FILE ("instruction-self-call.galgas", 115)), var_routineKind, var_methodName.mAttribute_location, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 113)) ;
+  {
+  routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inRoutineCanMutateProperties, var_formalSignature, object->mAttribute_mEffectiveParameterList, var_methodName.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 120)) ;
+  }
+  const enumGalgasBool test_11 = GALGAS_bool (kIsNotEqual, var_returnedType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-self-call.galgas", 138)))).boolEnum () ;
+  if (kBoolTrue == test_11) {
+    GALGAS_location location_12 (var_methodName.getter_location (HERE)) ; // Implicit use of 'location' getter
+    inCompiler->emitSemanticError (location_12, GALGAS_string ("cannot be called in instruction: routine has a return value")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 139)) ;
+  }
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_procCallInstructionIR::constructor_new (GALGAS_string::makeEmptyString (), var_routineMangledName, var_routineKindIR, var_effectiveParameterListIR, var_appendFileAndLineArgumentForPanicLocation  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 142))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 142)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_unifiedSelfCallInstructionAST_analyze (void) {
+  enterExtensionMethod_analyze (kTypeDescriptor_GALGAS_unifiedSelfCallInstructionAST.mSlotID,
+                                extensionMethod_unifiedSelfCallInstructionAST_analyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_unifiedSelfCallInstructionAST_analyze (defineExtensionMethod_unifiedSelfCallInstructionAST_analyze, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //              Overriding extension method '@whileInstructionAST noteInstructionTypesInPrecedenceGraph'               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

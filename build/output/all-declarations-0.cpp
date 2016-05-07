@@ -3357,6 +3357,7 @@ class cCollectionElement_globalVarDeclarationList : public cCollectionElement {
                                                         const GALGAS_allowedPanicList & in_mAllowedPanicList,
                                                         const GALGAS_allowedGuardList & in_mAllowedGuardList,
                                                         const GALGAS_allowedISRList & in_mAllowedISRList,
+                                                        const GALGAS_allowedTaskList & in_mAllowedTaskList,
                                                         const GALGAS_bool & in_mAllowedAccessToAll
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -3383,10 +3384,11 @@ cCollectionElement_globalVarDeclarationList::cCollectionElement_globalVarDeclara
                                                                                           const GALGAS_allowedPanicList & in_mAllowedPanicList,
                                                                                           const GALGAS_allowedGuardList & in_mAllowedGuardList,
                                                                                           const GALGAS_allowedISRList & in_mAllowedISRList,
+                                                                                          const GALGAS_allowedTaskList & in_mAllowedTaskList,
                                                                                           const GALGAS_bool & in_mAllowedAccessToAll
                                                                                           COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mTypeName, in_mVarName, in_mSourceExpression, in_mAllowedProcList, in_mAllowedInitList, in_mAllowedPanicList, in_mAllowedGuardList, in_mAllowedISRList, in_mAllowedAccessToAll) {
+mObject (in_mTypeName, in_mVarName, in_mSourceExpression, in_mAllowedProcList, in_mAllowedInitList, in_mAllowedPanicList, in_mAllowedGuardList, in_mAllowedISRList, in_mAllowedTaskList, in_mAllowedAccessToAll) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3399,7 +3401,7 @@ bool cCollectionElement_globalVarDeclarationList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_globalVarDeclarationList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_globalVarDeclarationList (mObject.mAttribute_mTypeName, mObject.mAttribute_mVarName, mObject.mAttribute_mSourceExpression, mObject.mAttribute_mAllowedProcList, mObject.mAttribute_mAllowedInitList, mObject.mAttribute_mAllowedPanicList, mObject.mAttribute_mAllowedGuardList, mObject.mAttribute_mAllowedISRList, mObject.mAttribute_mAllowedAccessToAll COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_globalVarDeclarationList (mObject.mAttribute_mTypeName, mObject.mAttribute_mVarName, mObject.mAttribute_mSourceExpression, mObject.mAttribute_mAllowedProcList, mObject.mAttribute_mAllowedInitList, mObject.mAttribute_mAllowedPanicList, mObject.mAttribute_mAllowedGuardList, mObject.mAttribute_mAllowedISRList, mObject.mAttribute_mAllowedTaskList, mObject.mAttribute_mAllowedAccessToAll COMMA_HERE)) ;
   return result ;
 }
 
@@ -3438,6 +3440,10 @@ void cCollectionElement_globalVarDeclarationList::description (C_String & ioStri
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mAllowedISRList" ":" ;
   mObject.mAttribute_mAllowedISRList.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mAllowedTaskList" ":" ;
+  mObject.mAttribute_mAllowedTaskList.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mAllowedAccessToAll" ":" ;
@@ -3485,13 +3491,14 @@ GALGAS_globalVarDeclarationList GALGAS_globalVarDeclarationList::constructor_lis
                                                                                             const GALGAS_allowedPanicList & inOperand5,
                                                                                             const GALGAS_allowedGuardList & inOperand6,
                                                                                             const GALGAS_allowedISRList & inOperand7,
-                                                                                            const GALGAS_bool & inOperand8
+                                                                                            const GALGAS_allowedTaskList & inOperand8,
+                                                                                            const GALGAS_bool & inOperand9
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_globalVarDeclarationList result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_globalVarDeclarationList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8 COMMA_THERE) ;
+    GALGAS_globalVarDeclarationList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -3508,6 +3515,7 @@ void GALGAS_globalVarDeclarationList::makeAttributesFromObjects (capCollectionEl
                                                                  const GALGAS_allowedPanicList & in_mAllowedPanicList,
                                                                  const GALGAS_allowedGuardList & in_mAllowedGuardList,
                                                                  const GALGAS_allowedISRList & in_mAllowedISRList,
+                                                                 const GALGAS_allowedTaskList & in_mAllowedTaskList,
                                                                  const GALGAS_bool & in_mAllowedAccessToAll
                                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement_globalVarDeclarationList * p = NULL ;
@@ -3519,6 +3527,7 @@ void GALGAS_globalVarDeclarationList::makeAttributesFromObjects (capCollectionEl
                                                               in_mAllowedPanicList,
                                                               in_mAllowedGuardList,
                                                               in_mAllowedISRList,
+                                                              in_mAllowedTaskList,
                                                               in_mAllowedAccessToAll COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3534,11 +3543,12 @@ void GALGAS_globalVarDeclarationList::addAssign_operation (const GALGAS_lstring 
                                                            const GALGAS_allowedPanicList & inOperand5,
                                                            const GALGAS_allowedGuardList & inOperand6,
                                                            const GALGAS_allowedISRList & inOperand7,
-                                                           const GALGAS_bool & inOperand8
+                                                           const GALGAS_allowedTaskList & inOperand8,
+                                                           const GALGAS_bool & inOperand9
                                                            COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_globalVarDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_globalVarDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3556,13 +3566,14 @@ void GALGAS_globalVarDeclarationList::setter_insertAtIndex (const GALGAS_lstring
                                                             const GALGAS_allowedPanicList inOperand5,
                                                             const GALGAS_allowedGuardList inOperand6,
                                                             const GALGAS_allowedISRList inOperand7,
-                                                            const GALGAS_bool inOperand8,
+                                                            const GALGAS_allowedTaskList inOperand8,
+                                                            const GALGAS_bool inOperand9,
                                                             const GALGAS_uint inInsertionIndex,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_globalVarDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_globalVarDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3580,7 +3591,8 @@ void GALGAS_globalVarDeclarationList::setter_removeAtIndex (GALGAS_lstring & out
                                                             GALGAS_allowedPanicList & outOperand5,
                                                             GALGAS_allowedGuardList & outOperand6,
                                                             GALGAS_allowedISRList & outOperand7,
-                                                            GALGAS_bool & outOperand8,
+                                                            GALGAS_allowedTaskList & outOperand8,
+                                                            GALGAS_bool & outOperand9,
                                                             const GALGAS_uint inRemoveIndex,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
@@ -3598,6 +3610,7 @@ void GALGAS_globalVarDeclarationList::setter_removeAtIndex (GALGAS_lstring & out
       outOperand6.drop () ;
       outOperand7.drop () ;
       outOperand8.drop () ;
+      outOperand9.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
       outOperand0 = p->mObject.mAttribute_mTypeName ;
@@ -3608,7 +3621,8 @@ void GALGAS_globalVarDeclarationList::setter_removeAtIndex (GALGAS_lstring & out
       outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
       outOperand6 = p->mObject.mAttribute_mAllowedGuardList ;
       outOperand7 = p->mObject.mAttribute_mAllowedISRList ;
-      outOperand8 = p->mObject.mAttribute_mAllowedAccessToAll ;
+      outOperand8 = p->mObject.mAttribute_mAllowedTaskList ;
+      outOperand9 = p->mObject.mAttribute_mAllowedAccessToAll ;
     }
   }
 }
@@ -3623,7 +3637,8 @@ void GALGAS_globalVarDeclarationList::setter_popFirst (GALGAS_lstring & outOpera
                                                        GALGAS_allowedPanicList & outOperand5,
                                                        GALGAS_allowedGuardList & outOperand6,
                                                        GALGAS_allowedISRList & outOperand7,
-                                                       GALGAS_bool & outOperand8,
+                                                       GALGAS_allowedTaskList & outOperand8,
+                                                       GALGAS_bool & outOperand9,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -3639,6 +3654,7 @@ void GALGAS_globalVarDeclarationList::setter_popFirst (GALGAS_lstring & outOpera
     outOperand6.drop () ;
     outOperand7.drop () ;
     outOperand8.drop () ;
+    outOperand9.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
@@ -3649,7 +3665,8 @@ void GALGAS_globalVarDeclarationList::setter_popFirst (GALGAS_lstring & outOpera
     outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
     outOperand6 = p->mObject.mAttribute_mAllowedGuardList ;
     outOperand7 = p->mObject.mAttribute_mAllowedISRList ;
-    outOperand8 = p->mObject.mAttribute_mAllowedAccessToAll ;
+    outOperand8 = p->mObject.mAttribute_mAllowedTaskList ;
+    outOperand9 = p->mObject.mAttribute_mAllowedAccessToAll ;
   }
 }
 
@@ -3663,7 +3680,8 @@ void GALGAS_globalVarDeclarationList::setter_popLast (GALGAS_lstring & outOperan
                                                       GALGAS_allowedPanicList & outOperand5,
                                                       GALGAS_allowedGuardList & outOperand6,
                                                       GALGAS_allowedISRList & outOperand7,
-                                                      GALGAS_bool & outOperand8,
+                                                      GALGAS_allowedTaskList & outOperand8,
+                                                      GALGAS_bool & outOperand9,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -3679,6 +3697,7 @@ void GALGAS_globalVarDeclarationList::setter_popLast (GALGAS_lstring & outOperan
     outOperand6.drop () ;
     outOperand7.drop () ;
     outOperand8.drop () ;
+    outOperand9.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
@@ -3689,7 +3708,8 @@ void GALGAS_globalVarDeclarationList::setter_popLast (GALGAS_lstring & outOperan
     outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
     outOperand6 = p->mObject.mAttribute_mAllowedGuardList ;
     outOperand7 = p->mObject.mAttribute_mAllowedISRList ;
-    outOperand8 = p->mObject.mAttribute_mAllowedAccessToAll ;
+    outOperand8 = p->mObject.mAttribute_mAllowedTaskList ;
+    outOperand9 = p->mObject.mAttribute_mAllowedAccessToAll ;
   }
 }
 
@@ -3703,7 +3723,8 @@ void GALGAS_globalVarDeclarationList::method_first (GALGAS_lstring & outOperand0
                                                     GALGAS_allowedPanicList & outOperand5,
                                                     GALGAS_allowedGuardList & outOperand6,
                                                     GALGAS_allowedISRList & outOperand7,
-                                                    GALGAS_bool & outOperand8,
+                                                    GALGAS_allowedTaskList & outOperand8,
+                                                    GALGAS_bool & outOperand9,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -3719,6 +3740,7 @@ void GALGAS_globalVarDeclarationList::method_first (GALGAS_lstring & outOperand0
     outOperand6.drop () ;
     outOperand7.drop () ;
     outOperand8.drop () ;
+    outOperand9.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
@@ -3729,7 +3751,8 @@ void GALGAS_globalVarDeclarationList::method_first (GALGAS_lstring & outOperand0
     outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
     outOperand6 = p->mObject.mAttribute_mAllowedGuardList ;
     outOperand7 = p->mObject.mAttribute_mAllowedISRList ;
-    outOperand8 = p->mObject.mAttribute_mAllowedAccessToAll ;
+    outOperand8 = p->mObject.mAttribute_mAllowedTaskList ;
+    outOperand9 = p->mObject.mAttribute_mAllowedAccessToAll ;
   }
 }
 
@@ -3743,7 +3766,8 @@ void GALGAS_globalVarDeclarationList::method_last (GALGAS_lstring & outOperand0,
                                                    GALGAS_allowedPanicList & outOperand5,
                                                    GALGAS_allowedGuardList & outOperand6,
                                                    GALGAS_allowedISRList & outOperand7,
-                                                   GALGAS_bool & outOperand8,
+                                                   GALGAS_allowedTaskList & outOperand8,
+                                                   GALGAS_bool & outOperand9,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -3759,6 +3783,7 @@ void GALGAS_globalVarDeclarationList::method_last (GALGAS_lstring & outOperand0,
     outOperand6.drop () ;
     outOperand7.drop () ;
     outOperand8.drop () ;
+    outOperand9.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
     outOperand0 = p->mObject.mAttribute_mTypeName ;
@@ -3769,7 +3794,8 @@ void GALGAS_globalVarDeclarationList::method_last (GALGAS_lstring & outOperand0,
     outOperand5 = p->mObject.mAttribute_mAllowedPanicList ;
     outOperand6 = p->mObject.mAttribute_mAllowedGuardList ;
     outOperand7 = p->mObject.mAttribute_mAllowedISRList ;
-    outOperand8 = p->mObject.mAttribute_mAllowedAccessToAll ;
+    outOperand8 = p->mObject.mAttribute_mAllowedTaskList ;
+    outOperand9 = p->mObject.mAttribute_mAllowedAccessToAll ;
   }
 }
 
@@ -3946,6 +3972,21 @@ GALGAS_allowedISRList GALGAS_globalVarDeclarationList::getter_mAllowedISRListAtI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_allowedTaskList GALGAS_globalVarDeclarationList::getter_mAllowedTaskListAtIndex (const GALGAS_uint & inIndex,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_globalVarDeclarationList * p = (cCollectionElement_globalVarDeclarationList *) attributes.ptr () ;
+  GALGAS_allowedTaskList result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
+    result = p->mObject.mAttribute_mAllowedTaskList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_bool GALGAS_globalVarDeclarationList::getter_mAllowedAccessToAllAtIndex (const GALGAS_uint & inIndex,
                                                                                 C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) const {
@@ -4040,6 +4081,14 @@ GALGAS_allowedISRList cEnumerator_globalVarDeclarationList::current_mAllowedISRL
   const cCollectionElement_globalVarDeclarationList * p = (const cCollectionElement_globalVarDeclarationList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
   return p->mObject.mAttribute_mAllowedISRList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedTaskList cEnumerator_globalVarDeclarationList::current_mAllowedTaskList (LOCATION_ARGS) const {
+  const cCollectionElement_globalVarDeclarationList * p = (const cCollectionElement_globalVarDeclarationList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalVarDeclarationList) ;
+  return p->mObject.mAttribute_mAllowedTaskList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12939,34 +12988,35 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i11_parse (C_Le
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_global_5F_variable_5F_declaration_i12_ (GALGAS_globalVarDeclarationList & ioArgument_ioGlobalVarDeclarationList,
                                                                                              C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 70)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 78)) ;
   GALGAS_lstring var_varName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 71)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 79)) ;
   GALGAS_lstring var_typeName ;
   switch (select_common_5F_syntax_17 (inCompiler)) {
   case 1: {
-    var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 74)) ;
+    var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 82)) ;
   } break ;
   case 2: {
     var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 76)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 84)) ;
   } break ;
   default:
     break ;
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 78)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 86)) ;
   GALGAS_expressionAST var_expression ;
   nt_expression_ (var_expression, inCompiler) ;
-  GALGAS_allowedRoutineList var_allowedRoutineList = GALGAS_allowedRoutineList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 80)) ;
-  GALGAS_allowedInitList var_allowedInitList = GALGAS_allowedInitList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 81)) ;
-  GALGAS_allowedPanicList var_allowedPanicList = GALGAS_allowedPanicList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 82)) ;
-  GALGAS_allowedGuardList var_allowedGuardList = GALGAS_allowedGuardList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 83)) ;
-  GALGAS_allowedISRList var_allowedISRList = GALGAS_allowedISRList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 84)) ;
+  GALGAS_allowedRoutineList var_allowedRoutineList = GALGAS_allowedRoutineList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 88)) ;
+  GALGAS_allowedInitList var_allowedInitList = GALGAS_allowedInitList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 89)) ;
+  GALGAS_allowedPanicList var_allowedPanicList = GALGAS_allowedPanicList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 90)) ;
+  GALGAS_allowedGuardList var_allowedGuardList = GALGAS_allowedGuardList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 91)) ;
+  GALGAS_allowedISRList var_allowedISRList = GALGAS_allowedISRList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 92)) ;
+  GALGAS_allowedTaskList var_allowedTaskList = GALGAS_allowedTaskList::constructor_emptyList (SOURCE_FILE ("declaration-global-variable.galgas", 93)) ;
   switch (select_common_5F_syntax_18 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 87)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 96)) ;
     bool repeatFlag_0 = true ;
     while (repeatFlag_0) {
       GALGAS_bool var_hasWriteAccess ;
@@ -12976,11 +13026,11 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_global_5F_variable_5F_decla
       } break ;
       case 2: {
         GALGAS_lstring var_attribute = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 93)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 102)) ;
         const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_attribute.mAttribute_string.objectCompare (GALGAS_string ("rw"))).boolEnum () ;
         if (kBoolTrue == test_1) {
           GALGAS_location location_2 (var_attribute.getter_location (HERE)) ; // Implicit use of 'location' getter
-          inCompiler->emitSemanticError (location_2, GALGAS_string ("attribute should be @rw")  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 95)) ;
+          inCompiler->emitSemanticError (location_2, GALGAS_string ("attribute should be @rw")  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 104)) ;
         }
         var_hasWriteAccess = GALGAS_bool (true) ;
       } break ;
@@ -12989,78 +13039,84 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_global_5F_variable_5F_decla
       }
       switch (select_common_5F_syntax_21 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_guard) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 100)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_guard) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 109)) ;
         GALGAS_lstring var_typeName ;
         switch (select_common_5F_syntax_22 (inCompiler)) {
         case 1: {
-          var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 103)) ;
+          var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 112)) ;
         } break ;
         case 2: {
           var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
-          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 105)) ;
-          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 106)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 114)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 115)) ;
         } break ;
         default:
           break ;
         }
         GALGAS_lstring var_sectionName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 108)) ;
-        var_allowedGuardList.addAssign_operation (var_typeName, var_sectionName  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 109)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 117)) ;
+        var_allowedGuardList.addAssign_operation (var_typeName, var_sectionName  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 118)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_section) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 111)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_section) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 120)) ;
         GALGAS_lstring var_typeName ;
         switch (select_common_5F_syntax_23 (inCompiler)) {
         case 1: {
-          var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 114)) ;
+          var_typeName = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 123)) ;
         } break ;
         case 2: {
           var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
-          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 116)) ;
-          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 117)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 125)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 126)) ;
         } break ;
         default:
           break ;
         }
         GALGAS_lstring var_sectionName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 119)) ;
-        var_allowedRoutineList.addAssign_operation (var_hasWriteAccess, var_typeName, var_sectionName, GALGAS_routineKind::constructor_section (SOURCE_FILE ("declaration-global-variable.galgas", 120))  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 120)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 128)) ;
+        var_allowedRoutineList.addAssign_operation (var_hasWriteAccess, var_typeName, var_sectionName, GALGAS_routineKind::constructor_section (SOURCE_FILE ("declaration-global-variable.galgas", 129))  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 129)) ;
       } break ;
       case 3: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 122)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 131)) ;
         GALGAS_lstring var_procName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 123)) ;
-        var_allowedRoutineList.addAssign_operation (var_hasWriteAccess, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 124)), var_procName, GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-global-variable.galgas", 124))  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 124)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 132)) ;
+        var_allowedRoutineList.addAssign_operation (var_hasWriteAccess, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 133)), var_procName, GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-global-variable.galgas", 133))  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 133)) ;
       } break ;
       case 4: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 126)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 135)) ;
         GALGAS_lstring var_typeName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 127)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 128)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 136)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 137)) ;
         GALGAS_lstring var_procName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 129)) ;
-        var_allowedRoutineList.addAssign_operation (var_hasWriteAccess, var_typeName, var_procName, GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-global-variable.galgas", 130))  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 130)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 138)) ;
+        var_allowedRoutineList.addAssign_operation (var_hasWriteAccess, var_typeName, var_procName, GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-global-variable.galgas", 139))  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 139)) ;
       } break ;
       case 5: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 132)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 141)) ;
         GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 133)) ;
-        var_allowedInitList.addAssign_operation (var_hasWriteAccess, var_priority  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 134)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 142)) ;
+        var_allowedInitList.addAssign_operation (var_hasWriteAccess, var_priority  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 143)) ;
       } break ;
       case 6: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_isr) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 136)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_isr) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 145)) ;
         GALGAS_lstring var_isrName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 137)) ;
-        var_allowedISRList.addAssign_operation (var_hasWriteAccess, var_isrName  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 138)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 146)) ;
+        var_allowedISRList.addAssign_operation (var_hasWriteAccess, var_isrName  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 147)) ;
       } break ;
       case 7: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 140)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 141)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_task) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 149)) ;
+        GALGAS_lstring var_isrName = inCompiler->synthetizedAttribute_tokenString () ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 150)) ;
+        var_allowedTaskList.addAssign_operation (var_hasWriteAccess, var_isrName  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 151)) ;
+      } break ;
+      case 8: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 153)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 154)) ;
         GALGAS_lstring var_panicName = inCompiler->synthetizedAttribute_tokenString () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 142)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 155)) ;
         GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 143)) ;
-        var_allowedPanicList.addAssign_operation (var_hasWriteAccess, var_panicName, var_priority  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 144)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 156)) ;
+        var_allowedPanicList.addAssign_operation (var_hasWriteAccess, var_panicName, var_priority  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 157)) ;
       } break ;
       default:
         break ;
@@ -13073,98 +13129,102 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_global_5F_variable_5F_decla
         break ;
       }
     }
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 148)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 161)) ;
   } break ;
   default:
     break ;
   }
-  ioArgument_ioGlobalVarDeclarationList.addAssign_operation (var_typeName, var_varName, var_expression, var_allowedRoutineList, var_allowedInitList, var_allowedPanicList, var_allowedGuardList, var_allowedISRList, GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 150)) ;
+  ioArgument_ioGlobalVarDeclarationList.addAssign_operation (var_typeName, var_varName, var_expression, var_allowedRoutineList, var_allowedInitList, var_allowedPanicList, var_allowedGuardList, var_allowedISRList, var_allowedTaskList, GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 163)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_global_5F_variable_5F_declaration_i12_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 70)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 71)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 78)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 79)) ;
   switch (select_common_5F_syntax_17 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 76)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 84)) ;
   } break ;
   default:
     break ;
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 78)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 86)) ;
   nt_expression_parse (inCompiler) ;
   switch (select_common_5F_syntax_18 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 87)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 96)) ;
     bool repeatFlag_0 = true ;
     while (repeatFlag_0) {
       switch (select_common_5F_syntax_20 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 93)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 102)) ;
       } break ;
       default:
         break ;
       }
       switch (select_common_5F_syntax_21 (inCompiler)) {
       case 1: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_guard) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 100)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_guard) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 109)) ;
         switch (select_common_5F_syntax_22 (inCompiler)) {
         case 1: {
         } break ;
         case 2: {
-          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 105)) ;
-          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 106)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 114)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 115)) ;
         } break ;
         default:
           break ;
         }
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 108)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 117)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_section) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 111)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_section) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 120)) ;
         switch (select_common_5F_syntax_23 (inCompiler)) {
         case 1: {
         } break ;
         case 2: {
-          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 116)) ;
-          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 117)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 125)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 126)) ;
         } break ;
         default:
           break ;
         }
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 119)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 128)) ;
       } break ;
       case 3: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 122)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 123)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 131)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 132)) ;
       } break ;
       case 4: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 126)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 127)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 128)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 129)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 135)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 136)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 137)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 138)) ;
       } break ;
       case 5: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 132)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 133)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 141)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 142)) ;
       } break ;
       case 6: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_isr) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 136)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 137)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_isr) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 145)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 146)) ;
       } break ;
       case 7: {
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 140)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 141)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 142)) ;
-        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 143)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_task) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 149)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 150)) ;
+      } break ;
+      case 8: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 153)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_func) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 154)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 155)) ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 156)) ;
       } break ;
       default:
         break ;
@@ -13177,7 +13237,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_global_5F_variable_5F_decla
         break ;
       }
     }
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 148)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 161)) ;
   } break ;
   default:
     break ;
@@ -13285,7 +13345,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i13_ (GALGAS_as
     enumerator_2337.gotoNextObject () ;
   }
   ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_structureDeclaration::constructor_new (var_moduleTypeName, GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 81)), var_fieldList, var_functionDeclarationListAST, var_serviceListAST, var_sectionListAST, var_primitiveListAST, var_guardListAST  COMMA_SOURCE_FILE ("declaration-module.galgas", 79))  COMMA_SOURCE_FILE ("declaration-module.galgas", 79)) ;
-  ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList.addAssign_operation (var_moduleTypeName, var_moduleName, GALGAS_constructorCall::constructor_new (var_moduleTypeName, GALGAS_functionCallEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 93)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 93))  COMMA_SOURCE_FILE ("declaration-module.galgas", 93)), GALGAS_allowedRoutineList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 94)), GALGAS_allowedInitList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 95)), GALGAS_allowedPanicList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 96)), GALGAS_allowedGuardList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 97)), GALGAS_allowedISRList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 98)), GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-module.galgas", 90)) ;
+  ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList.addAssign_operation (var_moduleTypeName, var_moduleName, GALGAS_constructorCall::constructor_new (var_moduleTypeName, GALGAS_functionCallEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 93)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 93))  COMMA_SOURCE_FILE ("declaration-module.galgas", 93)), GALGAS_allowedRoutineList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 94)), GALGAS_allowedInitList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 95)), GALGAS_allowedPanicList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 96)), GALGAS_allowedGuardList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 97)), GALGAS_allowedISRList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 98)), GALGAS_allowedTaskList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 99)), GALGAS_bool (true)  COMMA_SOURCE_FILE ("declaration-module.galgas", 90)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
