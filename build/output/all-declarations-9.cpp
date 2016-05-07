@@ -2062,7 +2062,11 @@ GALGAS_constructorSignature_2D_element GALGAS_constructorSignature_2D_element::e
 GALGAS_extensionDeclarationListAST_2D_element::GALGAS_extensionDeclarationListAST_2D_element (void) :
 mAttribute_mTypeName (),
 mAttribute_mProcedureDeclarationListAST (),
-mAttribute_mFieldList () {
+mAttribute_mFieldList (),
+mAttribute_mServiceListAST (),
+mAttribute_mSectionListAST (),
+mAttribute_mPrimitiveListAST (),
+mAttribute_mGuardListAST () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2074,10 +2078,18 @@ GALGAS_extensionDeclarationListAST_2D_element::~ GALGAS_extensionDeclarationList
 
 GALGAS_extensionDeclarationListAST_2D_element::GALGAS_extensionDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                               const GALGAS_functionDeclarationListAST & inOperand1,
-                                                                                              const GALGAS_structureFieldListAST & inOperand2) :
+                                                                                              const GALGAS_structureFieldListAST & inOperand2,
+                                                                                              const GALGAS_serviceDeclarationListAST & inOperand3,
+                                                                                              const GALGAS_sectionDeclarationListAST & inOperand4,
+                                                                                              const GALGAS_primitiveDeclarationListAST & inOperand5,
+                                                                                              const GALGAS_guardDeclarationListAST & inOperand6) :
 mAttribute_mTypeName (inOperand0),
 mAttribute_mProcedureDeclarationListAST (inOperand1),
-mAttribute_mFieldList (inOperand2) {
+mAttribute_mFieldList (inOperand2),
+mAttribute_mServiceListAST (inOperand3),
+mAttribute_mSectionListAST (inOperand4),
+mAttribute_mPrimitiveListAST (inOperand5),
+mAttribute_mGuardListAST (inOperand6) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2085,18 +2097,26 @@ mAttribute_mFieldList (inOperand2) {
 GALGAS_extensionDeclarationListAST_2D_element GALGAS_extensionDeclarationListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_extensionDeclarationListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
                                                         GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
-                                                        GALGAS_structureFieldListAST::constructor_emptyList (HERE)) ;
+                                                        GALGAS_structureFieldListAST::constructor_emptyList (HERE),
+                                                        GALGAS_serviceDeclarationListAST::constructor_emptyList (HERE),
+                                                        GALGAS_sectionDeclarationListAST::constructor_emptyList (HERE),
+                                                        GALGAS_primitiveDeclarationListAST::constructor_emptyList (HERE),
+                                                        GALGAS_guardDeclarationListAST::constructor_emptyList (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_extensionDeclarationListAST_2D_element GALGAS_extensionDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                               const GALGAS_functionDeclarationListAST & inOperand1,
-                                                                                                              const GALGAS_structureFieldListAST & inOperand2 
+                                                                                                              const GALGAS_structureFieldListAST & inOperand2,
+                                                                                                              const GALGAS_serviceDeclarationListAST & inOperand3,
+                                                                                                              const GALGAS_sectionDeclarationListAST & inOperand4,
+                                                                                                              const GALGAS_primitiveDeclarationListAST & inOperand5,
+                                                                                                              const GALGAS_guardDeclarationListAST & inOperand6 
                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_extensionDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_extensionDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
+    result = GALGAS_extensionDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
   }
   return result ;
 }
@@ -2114,13 +2134,25 @@ typeComparisonResult GALGAS_extensionDeclarationListAST_2D_element::objectCompar
   if (result == kOperandEqual) {
     result = mAttribute_mFieldList.objectCompare (inOperand.mAttribute_mFieldList) ;
   }
+  if (result == kOperandEqual) {
+    result = mAttribute_mServiceListAST.objectCompare (inOperand.mAttribute_mServiceListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSectionListAST.objectCompare (inOperand.mAttribute_mSectionListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mPrimitiveListAST.objectCompare (inOperand.mAttribute_mPrimitiveListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mGuardListAST.objectCompare (inOperand.mAttribute_mGuardListAST) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_extensionDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mTypeName.isValid () && mAttribute_mProcedureDeclarationListAST.isValid () && mAttribute_mFieldList.isValid () ;
+  return mAttribute_mTypeName.isValid () && mAttribute_mProcedureDeclarationListAST.isValid () && mAttribute_mFieldList.isValid () && mAttribute_mServiceListAST.isValid () && mAttribute_mSectionListAST.isValid () && mAttribute_mPrimitiveListAST.isValid () && mAttribute_mGuardListAST.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2129,6 +2161,10 @@ void GALGAS_extensionDeclarationListAST_2D_element::drop (void) {
   mAttribute_mTypeName.drop () ;
   mAttribute_mProcedureDeclarationListAST.drop () ;
   mAttribute_mFieldList.drop () ;
+  mAttribute_mServiceListAST.drop () ;
+  mAttribute_mSectionListAST.drop () ;
+  mAttribute_mPrimitiveListAST.drop () ;
+  mAttribute_mGuardListAST.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2144,6 +2180,14 @@ void GALGAS_extensionDeclarationListAST_2D_element::description (C_String & ioSt
     mAttribute_mProcedureDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mFieldList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mServiceListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSectionListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mPrimitiveListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mGuardListAST.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -2164,6 +2208,30 @@ GALGAS_functionDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element:
 
 GALGAS_structureFieldListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mFieldList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFieldList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_serviceDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mServiceListAST (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mServiceListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sectionDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mSectionListAST (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSectionListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_primitiveDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mPrimitiveListAST (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mPrimitiveListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mGuardListAST (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGuardListAST ;
 }
 
 

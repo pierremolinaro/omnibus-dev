@@ -9987,66 +9987,66 @@ static void extensionMethod_structureDeclaration_functionSemanticAnalysis (const
                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_structureDeclaration * object = inObject ;
   macroValidSharedObject (object, cPtr_structureDeclaration) ;
-  cEnumerator_functionDeclarationListAST enumerator_15732 (object->mAttribute_mFunctionDeclarationListAST, kEnumeration_up) ;
-  while (enumerator_15732.hasCurrentObject ()) {
+  cEnumerator_functionDeclarationListAST enumerator_15850 (object->mAttribute_mFunctionDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_15850.hasCurrentObject ()) {
     GALGAS_bool var_warnIfUnused = GALGAS_bool (true) ;
     GALGAS_bool var_mutating = GALGAS_bool (false) ;
     GALGAS_bool var_accessProperties = GALGAS_bool (false) ;
-    cEnumerator_lstringlist enumerator_15876 (enumerator_15732.current (HERE).mAttribute_mFunctionAttributeList, kEnumeration_up) ;
-    while (enumerator_15876.hasCurrentObject ()) {
-      const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_15876.current_mValue (HERE).mAttribute_string.objectCompare (function_noWarningIfUnusedAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 409)))).boolEnum () ;
+    cEnumerator_lstringlist enumerator_15994 (enumerator_15850.current (HERE).mAttribute_mFunctionAttributeList, kEnumeration_up) ;
+    while (enumerator_15994.hasCurrentObject ()) {
+      const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_15994.current_mValue (HERE).mAttribute_string.objectCompare (function_noWarningIfUnusedAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 409)))).boolEnum () ;
       if (kBoolTrue == test_0) {
         const enumGalgasBool test_1 = var_warnIfUnused.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 410)).boolEnum () ;
         if (kBoolTrue == test_1) {
-          GALGAS_location location_2 (enumerator_15876.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+          GALGAS_location location_2 (enumerator_15994.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
           inCompiler->emitSemanticError (location_2, GALGAS_string ("duplicated @").add_operation (function_noWarningIfUnusedAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 411)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 411)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 411))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 411)) ;
         }
         var_warnIfUnused = GALGAS_bool (false) ;
       }else if (kBoolFalse == test_0) {
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_15876.current_mValue (HERE).mAttribute_string.objectCompare (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 414)))).boolEnum () ;
+        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_15994.current_mValue (HERE).mAttribute_string.objectCompare (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 414)))).boolEnum () ;
         if (kBoolTrue == test_3) {
           const enumGalgasBool test_4 = var_accessProperties.boolEnum () ;
           if (kBoolTrue == test_4) {
-            GALGAS_location location_5 (enumerator_15876.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            GALGAS_location location_5 (enumerator_15994.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
             inCompiler->emitSemanticError (location_5, GALGAS_string ("duplicated @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 416)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 416)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 416))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 416)) ;
           }
           var_accessProperties = GALGAS_bool (true) ;
         }else if (kBoolFalse == test_3) {
-          const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, enumerator_15876.current_mValue (HERE).mAttribute_string.objectCompare (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 419)))).boolEnum () ;
+          const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, enumerator_15994.current_mValue (HERE).mAttribute_string.objectCompare (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 419)))).boolEnum () ;
           if (kBoolTrue == test_6) {
             const enumGalgasBool test_7 = var_mutating.boolEnum () ;
             if (kBoolTrue == test_7) {
-              GALGAS_location location_8 (enumerator_15876.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+              GALGAS_location location_8 (enumerator_15994.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
               inCompiler->emitSemanticError (location_8, GALGAS_string ("duplicated @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 421)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 421)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 421))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 421)) ;
             }
             var_mutating = GALGAS_bool (true) ;
           }else if (kBoolFalse == test_6) {
-            GALGAS_location location_9 (enumerator_15876.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+            GALGAS_location location_9 (enumerator_15994.current_mValue (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
             inCompiler->emitSemanticError (location_9, GALGAS_string ("unknown attribute; available attributes are @").add_operation (function_noWarningIfUnusedAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 425)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 425)).add_operation (GALGAS_string (", @"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 425)).add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 426)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 426)).add_operation (GALGAS_string (" and @"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 426)).add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 426)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 426))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 425)) ;
           }
         }
       }
-      enumerator_15876.gotoNextObject () ;
+      enumerator_15994.gotoNextObject () ;
     }
     GALGAS_stringset var_modeSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("type-structure-declaration.galgas", 429)) ;
-    cEnumerator_lstringlist enumerator_16824 (enumerator_15732.current (HERE).mAttribute_mFunctionModeList, kEnumeration_up) ;
-    while (enumerator_16824.hasCurrentObject ()) {
-      var_modeSet.addAssign_operation (enumerator_16824.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 431)) ;
-      enumerator_16824.gotoNextObject () ;
+    cEnumerator_lstringlist enumerator_16942 (enumerator_15850.current (HERE).mAttribute_mFunctionModeList, kEnumeration_up) ;
+    while (enumerator_16942.hasCurrentObject ()) {
+      var_modeSet.addAssign_operation (enumerator_16942.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 431)) ;
+      enumerator_16942.gotoNextObject () ;
     }
     const enumGalgasBool test_10 = var_modeSet.getter_hasKey (function_userModeName (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 433)) COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 433)).operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 433)).boolEnum () ;
     if (kBoolTrue == test_10) {
       const enumGalgasBool test_11 = var_accessProperties.boolEnum () ;
       if (kBoolTrue == test_11) {
-        GALGAS_location location_12 (enumerator_15732.current (HERE).mAttribute_mFunctionName.getter_location (HERE)) ; // Implicit use of 'location' getter
+        GALGAS_location location_12 (enumerator_15850.current (HERE).mAttribute_mFunctionName.getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_12, GALGAS_string ("useless @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 435)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 435)).add_operation (GALGAS_string (" attribute: function is never executed in `"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 435)).add_operation (function_userModeName (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 436)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 436)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 436))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 435)) ;
       }
       var_accessProperties = GALGAS_bool (true) ;
     }
     {
-    routine_routineSemanticAnalysis (constinArgument_inStructureType, GALGAS_routineKind::constructor_function (SOURCE_FILE ("type-structure-declaration.galgas", 442)), enumerator_15732.current (HERE).mAttribute_mFunctionModeList, enumerator_15732.current (HERE).mAttribute_mFunctionName, enumerator_15732.current (HERE).mAttribute_mFunctionFormalArgumentList, enumerator_15732.current (HERE).mAttribute_mFunctionReturnTypeName, enumerator_15732.current (HERE).mAttribute_mFunctionInstructionList, enumerator_15732.current (HERE).mAttribute_mEndOfFunctionDeclaration, var_accessProperties, var_mutating, var_warnIfUnused, GALGAS_bool (false), GALGAS_bool (false), GALGAS_accessKind::constructor_readWriteAccess (SOURCE_FILE ("type-structure-declaration.galgas", 454)), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 440)) ;
+    routine_routineSemanticAnalysis (constinArgument_inStructureType, GALGAS_routineKind::constructor_function (SOURCE_FILE ("type-structure-declaration.galgas", 442)), enumerator_15850.current (HERE).mAttribute_mFunctionModeList, enumerator_15850.current (HERE).mAttribute_mFunctionName, enumerator_15850.current (HERE).mAttribute_mFunctionFormalArgumentList, enumerator_15850.current (HERE).mAttribute_mFunctionReturnTypeName, enumerator_15850.current (HERE).mAttribute_mFunctionInstructionList, enumerator_15850.current (HERE).mAttribute_mEndOfFunctionDeclaration, var_accessProperties, var_mutating, var_warnIfUnused, GALGAS_bool (false), GALGAS_bool (false), GALGAS_accessKind::constructor_readWriteAccess (SOURCE_FILE ("type-structure-declaration.galgas", 454)), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 440)) ;
     }
-    enumerator_15732.gotoNextObject () ;
+    enumerator_15850.gotoNextObject () ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
