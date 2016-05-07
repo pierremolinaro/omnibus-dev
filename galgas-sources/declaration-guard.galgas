@@ -236,6 +236,9 @@ proc guardSemanticAnalysis
       !self:inSelfType
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inContext
+      !modes:{!userModeName ()} # Convenience guards instructions are executed in user mode
+      !?alloca:allocaList
+      !?instructionListIR:instructionGenerationList
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
@@ -283,6 +286,9 @@ abstract method @abstractCallInstructionAST baseGuardAnalyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -294,6 +300,9 @@ override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
+  ?modes:let @stringset unused inModeSet
+  ?!alloca:@allocaList unused ioAllocaList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -349,10 +358,74 @@ override method @standaloneRoutineCallInstructionAST baseGuardAnalyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+private proc standaloneBaseGuardAnalyze
+  ?routineName:let @lstring inRoutineName
+  ?effectiveParameters:let @effectiveParameterListAST inEffectiveParameterList
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+{
+  let routineMangledName = @lstring.new {!"." + inRoutineName !inRoutineName.location}
+  [inContext.mGuardMapForContext searchKey
+    !routineMangledName
+    ?let isPublic
+    ?let @procedureSignature formalSignature
+  ]
+#--- Check accessibility
+  if not isPublic then
+    let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !routineMangledName.string] file]
+    let invocationFile = [inRoutineName.location file]
+    if invocationFile != declarationFile then
+      error inRoutineName : "this guard is not public"
+    end
+  end  
+#--- Enter in invocation graph
+  let routineNameForInvocationGraph = guardNameForInvocationGraph (!.null !inRoutineName)
+   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#--- Analyze effective parameters
+  @instructionListIR baseGuardInstructionGenerationList = {}
+  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  @allocaList baseGuardAllocaList = {}
+  analyzeEffectiveParameters (
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:true
+    !propertiesAreMutable:true
+    !formal:formalSignature
+    !effective:inEffectiveParameterList
+    !errorLocation:inRoutineName.location
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:{!serviceModeName ()}
+    !allowPanic:true
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:baseGuardAllocaList
+    !?instructionListIR:baseGuardInstructionGenerationList
+    !?effectiveIR:effectiveParameterListIR
+  )
+#--- Code generation
+  outConvenienceGuardGenerationIR = .convenienceGuard {
+    !baseGuardAllocaList:baseGuardAllocaList
+    !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+    !baseGuardMangledName:routineMangledName.string
+    !baseGuardEffectiveParameterList:effectiveParameterListIR
+  }
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 override method @unifiedSelfCallInstructionAST baseGuardAnalyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
+  ?modes:let @stringset unused inModeSet
+  ?!alloca:@allocaList unused ioAllocaList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -452,64 +525,137 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  @lstringlist propertyList = mPropertyList
-  [!?propertyList popFirst ?let receiverName]
-  [!?propertyList popLast ?let routineName]
-#--- Read variable
-  [!?ioVariableMap searchForReadAccess
-    !lkey:receiverName
-    ?type:let receiverType
-    ?1*
-    ?variableKind:@objectInMemoryIR variableKind
-    ?4*
-  ]
-  for (propertyName) in propertyList do
-    error propertyName : "not handled yet (1)"
+  @accessList accessList = mAccessList
+  [!?accessList popLast ?let routineName ?let arrayElementAccess]
+  if arrayElementAccess != .noAccess then
+    error routineName : "array element access is not alowed here"
   end
-  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  effectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load receiver" as first argument
-  @instructionListIR baseGuardInstructionGenerationList = {}
-  let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
-  [inContext.mGuardMapForContext searchKey
-    !routineMangledName
-    ?let unused isPublic
-    ?let @procedureSignature formalSignature
-  ]
-#--- Enter in invocation graph
-  let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !routineName)
-   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
-#--- Analyze effective parameters
-  @allocaList baseGuardAllocaList = {}
-  analyzeEffectiveParameters (
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:true
-    !propertiesAreMutable:true
-    !formal:formalSignature
-    !effective:mEffectiveParameterList
-    !errorLocation:routineName.location
-    !callerForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !requiredModeSet:{!guardModeName ()}
-    !allowPanic:true
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?alloca:baseGuardAllocaList
-    !?instructionListIR:baseGuardInstructionGenerationList
-    !?effectiveIR:effectiveParameterListIR
-  )
-#--- Code generation
-  outConvenienceGuardGenerationIR = .convenienceGuard {
-    !baseGuardAllocaList:baseGuardAllocaList
-    !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-    !baseGuardMangledName:routineMangledName.string
-    !baseGuardEffectiveParameterList:effectiveParameterListIR
-  }
+  if [accessList length] == 0 then
+    standaloneBaseGuardAnalyze (
+      !routineName:routineName
+      !effectiveParameters:mEffectiveParameterList
+      !self:inSelfType
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !context: inContext
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      ?outConvenienceGuardGenerationIR
+    )
+  else
+    analyzeVariableReadWriteAccess (
+      !fieldList:accessList
+      !requiresCopy:false
+      !self:inSelfType
+      !directAccessToPropertiesAllowed:true
+      !inGuard:false
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !modes:inModeSet
+      !allowPanic:true
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      ?resultPtr:let targetPtr
+      ?baseGlobalVariableName:let @string unused baseGlobalVariableName # "" if base variable is not a global variable
+    )
+#  #--- Extract base variable and access
+#    [accessList first ?let baseName ?*]
+#  #--- Check target access
+#    [!?ioVariableMap searchForReadWriteAccess
+#      !lkey:baseName
+#      ?1*
+#      ?readAccessAllowed:let accessIsAllowed
+#      ?variableKind:let @objectInMemoryIR variableKind
+#      ?copyable:let isCopyable
+#      ?2*
+#      ?isConstant:let isConstant
+#    ]
+#    outBaseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
+#    if isConstant then
+#      error baseName : "a constant cannot be modified"
+#    end
+#    if not accessIsAllowed then
+#      error baseName : "routine has no access right on the this variable"
+#    end
+#    if not isCopyable then
+#      error baseName : "an $" + [[outResultPtr type] key] + " instance is not copyable"
+#    end
+
+
+
+
+
+
+
+
+
+
+#    @lstringlist propertyList = mPropertyList
+#    [!?propertyList popFirst ?let receiverName]
+#    [!?propertyList popLast ?let routineName]
+#  #--- Read variable
+#    [!?ioVariableMap searchForReadAccess
+#      !lkey:receiverName
+#      ?type:let receiverType
+#      ?1*
+#      ?variableKind:@objectInMemoryIR variableKind
+#      ?4*
+#    ]
+#    for (propertyName) in propertyList do
+#      error propertyName : "not handled yet (1)"
+#    end
+    let receiverType = [targetPtr type]
+    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+    effectiveParameterListIR += !.outputInput ![targetPtr address] #--- add "load receiver" as first argument
+    @instructionListIR baseGuardInstructionGenerationList = {}
+    let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
+    [inContext.mGuardMapForContext searchKey
+      !routineMangledName
+      ?let unused isPublic
+      ?let @procedureSignature formalSignature
+    ]
+  #--- Enter in invocation graph
+    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !routineName)
+     [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+  #--- Analyze effective parameters
+    @allocaList baseGuardAllocaList = {}
+    analyzeEffectiveParameters (
+      !self:inSelfType
+      !directAccessToPropertiesAllowed:true
+      !propertiesAreMutable:true
+      !formal:formalSignature
+      !effective:mEffectiveParameterList
+      !errorLocation:routineName.location
+      !callerForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !requiredModeSet:{!guardModeName ()}
+      !allowPanic:true
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?alloca:baseGuardAllocaList
+      !?instructionListIR:baseGuardInstructionGenerationList
+      !?effectiveIR:effectiveParameterListIR
+    )
+  #--- Code generation
+    outConvenienceGuardGenerationIR = .convenienceGuard {
+      !baseGuardAllocaList:baseGuardAllocaList
+      !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+      !baseGuardMangledName:routineMangledName.string
+      !baseGuardEffectiveParameterList:effectiveParameterListIR
+    }
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

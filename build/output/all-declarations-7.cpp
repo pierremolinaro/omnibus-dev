@@ -1548,6 +1548,11 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp
   "      lcd.printUnsigned (!self.array2 [i])\n"
   "      lcd.printSpaces (!1)\n"
   "    }\n"
+  "    \n"
+  "    var a = $A ()\n"
+  "    for i $uint32 in 0 ..< $A.size {\n"
+  "      a [i] = 9\n"
+  "    }\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1557,7 +1562,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  761, // Text length
+  843, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
@@ -6085,7 +6090,7 @@ typeComparisonResult cPtr_getElementPtrIR::dynamicObjectCompare (const acPtr_cla
     result = mAttribute_mSource.objectCompare (p->mAttribute_mSource) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mIndex.objectCompare (p->mAttribute_mIndex) ;
+    result = mAttribute_mElementList.objectCompare (p->mAttribute_mElementList) ;
   }
   return result ;
 }
@@ -6126,11 +6131,11 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_getElementPtrIR GALGAS_getElementPtrIR::constructor_new (const GALGAS_objectInMemoryIR & inAttribute_mTarget,
                                                                 const GALGAS_objectInMemoryIR & inAttribute_mSource,
-                                                                const GALGAS_uint & inAttribute_mIndex
+                                                                const GALGAS_elementPtrList & inAttribute_mElementList
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_getElementPtrIR result ;
-  if (inAttribute_mTarget.isValid () && inAttribute_mSource.isValid () && inAttribute_mIndex.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_getElementPtrIR (inAttribute_mTarget, inAttribute_mSource, inAttribute_mIndex COMMA_THERE)) ;
+  if (inAttribute_mTarget.isValid () && inAttribute_mSource.isValid () && inAttribute_mElementList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_getElementPtrIR (inAttribute_mTarget, inAttribute_mSource, inAttribute_mElementList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -6173,20 +6178,20 @@ GALGAS_objectInMemoryIR cPtr_getElementPtrIR::getter_mSource (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_getElementPtrIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
-  GALGAS_uint result ;
+GALGAS_elementPtrList GALGAS_getElementPtrIR::getter_mElementList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_elementPtrList result ;
   if (NULL != mObjectPtr) {
     const cPtr_getElementPtrIR * p = (const cPtr_getElementPtrIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getElementPtrIR) ;
-    result = p->mAttribute_mIndex ;
+    result = p->mAttribute_mElementList ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_getElementPtrIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIndex ;
+GALGAS_elementPtrList cPtr_getElementPtrIR::getter_mElementList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mElementList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6195,12 +6200,12 @@ GALGAS_uint cPtr_getElementPtrIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
 
 cPtr_getElementPtrIR::cPtr_getElementPtrIR (const GALGAS_objectInMemoryIR & in_mTarget,
                                             const GALGAS_objectInMemoryIR & in_mSource,
-                                            const GALGAS_uint & in_mIndex
+                                            const GALGAS_elementPtrList & in_mElementList
                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTarget (in_mTarget),
 mAttribute_mSource (in_mSource),
-mAttribute_mIndex (in_mIndex) {
+mAttribute_mElementList (in_mElementList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6216,7 +6221,7 @@ void cPtr_getElementPtrIR::description (C_String & ioString,
   ioString << ", " ;
   mAttribute_mSource.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mIndex.description (ioString, inIndentation+1) ;
+  mAttribute_mElementList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -6224,7 +6229,7 @@ void cPtr_getElementPtrIR::description (C_String & ioString,
 
 acPtr_class * cPtr_getElementPtrIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_getElementPtrIR (mAttribute_mTarget, mAttribute_mSource, mAttribute_mIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_getElementPtrIR (mAttribute_mTarget, mAttribute_mSource, mAttribute_mElementList COMMA_THERE)) ;
   return ptr ;
 }
 

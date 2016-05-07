@@ -1357,7 +1357,7 @@ class GALGAS_getElementPtrIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_getElementPtrIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
                                                           const class GALGAS_objectInMemoryIR & inOperand1,
-                                                          const class GALGAS_uint & inOperand2
+                                                          const class GALGAS_elementPtrList & inOperand2
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1369,7 +1369,7 @@ class GALGAS_getElementPtrIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_elementPtrList getter_mElementList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_mSource (LOCATION_ARGS) const ;
 
@@ -1396,12 +1396,12 @@ class cPtr_getElementPtrIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectInMemoryIR mAttribute_mTarget ;
   public : GALGAS_objectInMemoryIR mAttribute_mSource ;
-  public : GALGAS_uint mAttribute_mIndex ;
+  public : GALGAS_elementPtrList mAttribute_mElementList ;
 
 //--- Constructor
   public : cPtr_getElementPtrIR (const GALGAS_objectInMemoryIR & in_mTarget,
                                  const GALGAS_objectInMemoryIR & in_mSource,
-                                 const GALGAS_uint & in_mIndex
+                                 const GALGAS_elementPtrList & in_mElementList
                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -1410,7 +1410,7 @@ class cPtr_getElementPtrIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR getter_mTarget (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR getter_mSource (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_elementPtrList getter_mElementList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2137,111 +2137,6 @@ class cPtr_panicWithLineAndFileInstructionIR : public cPtr_abstractInstructionIR
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mPanicCode (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @procCallInstructionIR class                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_procCallInstructionIR : public GALGAS_abstractInstructionIR {
-//--- Constructor
-  public : GALGAS_procCallInstructionIR (void) ;
-
-//---
-  public : inline const class cPtr_procCallInstructionIR * ptr (void) const { return (const cPtr_procCallInstructionIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_procCallInstructionIR (const cPtr_procCallInstructionIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_procCallInstructionIR extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_procCallInstructionIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                const class GALGAS_lstring & inOperand1,
-                                                                const class GALGAS_routineKindIR & inOperand2,
-                                                                const class GALGAS_procCallEffectiveParameterListIR & inOperand3,
-                                                                const class GALGAS_bool & inOperand4
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_procCallInstructionIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_procCallEffectiveParameterListIR getter_mParameters (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mProcName (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_procCallInstructionIR class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procCallInstructionIR ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Pointer class for @procCallInstructionIR class                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_procCallInstructionIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_string mAttribute_mGlobalVariableName ;
-  public : GALGAS_lstring mAttribute_mProcName ;
-  public : GALGAS_routineKindIR mAttribute_mKind ;
-  public : GALGAS_procCallEffectiveParameterListIR mAttribute_mParameters ;
-  public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
-
-//--- Constructor
-  public : cPtr_procCallInstructionIR (const GALGAS_string & in_mGlobalVariableName,
-                                       const GALGAS_lstring & in_mProcName,
-                                       const GALGAS_routineKindIR & in_mKind,
-                                       const GALGAS_procCallEffectiveParameterListIR & in_mParameters,
-                                       const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
-                                       COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mProcName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR getter_mParameters (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

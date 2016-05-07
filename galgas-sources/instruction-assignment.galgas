@@ -3,7 +3,8 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @varAssignmentInstructionAST : @instructionAST {
-  @lstring mTargetVarName
+  @accessList mAccessList
+  @location mTargetErrorLocation
   @expressionAST mSourceExpression
 }
 
@@ -16,11 +17,13 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-    $identifier$ ?let varName
+    <access> ?let @accessList accessList
+    let targetErrorLocation = @location.here
     $=$
     <expression> ?let @expressionAST expression
     ioInstructionList += !@varAssignmentInstructionAST.new {
-      !varName
+      !accessList
+      !targetErrorLocation
       !expression
     }
   }
@@ -56,20 +59,36 @@ override method @varAssignmentInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Get target type
-  [!?ioVariableMap neutralAccess
-    !lkey:mTargetVarName
-    ?type:@unifiedTypeMap-proxy targetType
-    ?1*
-    ?variableKind:@objectInMemoryIR target
-    ?4*
-  ]
+  analyzeVariableWriteAccess (
+    !fieldList:mAccessList
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultPtr:let @objectInMemoryIR targetObjectPtr
+  )
+#  [!?ioVariableMap neutralAccess
+#    !lkey:mTargetVarName
+#    ?type:@unifiedTypeMap-proxy targetType
+#    ?1*
+#    ?variableKind:@objectInMemoryIR target
+#    ?4*
+#  ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:targetType
+    !optionalTargetType:[targetObjectPtr type]
     !context:inContext
     !modes:inModeSet
     !allowPanic:inAllowPanic
@@ -82,30 +101,30 @@ override method @varAssignmentInstructionAST analyze
   ]
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
-    !targetAnnotationType:targetType
-    !errorLocation:mTargetVarName.location
+    !targetAnnotationType:[targetObjectPtr type]
+    !errorLocation:mTargetErrorLocation
     !staticTypeAllowed:false
   )
 #--- Write local variable
-  [!?ioVariableMap searchForWriteAccess
-    !lkey:mTargetVarName
-    ?1*
-    ?readAccessAllowed:let accessIsAllowed
-    ?1*
-    ?copyable:let isCopyable
-    ?2*
-    ?isConstant:let isConstant
-  ]
-  if isConstant then
-    error mTargetVarName : "a constant cannot be modified"
-  end
-  if not accessIsAllowed then
-    error mTargetVarName : "routine has no access right on the this variable"
-  end
-  if not isCopyable then
-    error mTargetVarName : "an $" + [targetType key] + " instance is not copyable"
-  end
-  [!?ioInstructionGenerationList appendStoreInMemory !target !result]
+#  [!?ioVariableMap searchForWriteAccess
+#    !lkey:mTargetVarName
+#    ?1*
+#    ?readAccessAllowed:let accessIsAllowed
+#    ?1*
+#    ?copyable:let isCopyable
+#    ?2*
+#    ?isConstant:let isConstant
+#  ]
+#  if isConstant then
+#    error mTargetErrorLocation : "a constant cannot be modified"
+#  end
+#  if not accessIsAllowed then
+#    error mTargetErrorLocation : "routine has no access right on the this variable"
+#  end
+#  if not isCopyable then
+#    error mTargetErrorLocation : "an $" + [[targetObjectPtr type] key] + " instance is not copyable"
+#  end
+  [!?ioInstructionGenerationList appendStoreInMemory !targetObjectPtr !result]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

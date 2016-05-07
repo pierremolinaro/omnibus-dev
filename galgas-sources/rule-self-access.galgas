@@ -110,51 +110,24 @@ proc analyzeSelfAccess
       end
       elementPtrList += {!.absolute {!index:index} !"." + fieldName}
       publicIsRequired = true
-      switch arrayElementAccess
-      case noAccess :
-      case access (indexExpression endOfExp) :
-        @bigint arraySize
-        if [[type kind] isArrayType] then
-          [[type kind] arrayType ?elementType:type ?size:arraySize]
-        else
-          error fieldName : "this variable should be an array" : arraySize
-        end
-        [indexExpression analyzeExpression
-          !self:inSelfType
-          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-          !inGuard:inGuard
-          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-          !optionalTargetType:.null
-          !context:inContext
-          !modes:inModeSet
-          !allowPanic:inAllowPanic
-          !?temporary:ioTemporaries
-          !?staticStringMap:ioGlobalLiteralStringMap
-          !?variableMap:ioVariableMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
-          ?result:let @operandIR indexResult
-        ]
-        if [indexResult.mValue isLiteralInteger] then
-          [indexResult.mValue literalInteger ?value:let @bigint indexValue]
-          if (indexValue < 0G) || (indexValue >= arraySize) then
-            error endOfExp : "static index should be positive and < " + arraySize : elementPtrList
-          else
-            elementPtrList += {!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
-          end
-        elsif [[indexResult.mType kind] isInteger] then
-          if not [option plm_options.noPanicGeneration value] then
-            [!?ioInstructionGenerationList testArrayIndex !indexResult !endOfExp !arraySize ?let generatePanicInstruction]
-            if generatePanicInstruction && not inAllowPanic then
-              error endOfExp : "index computation can generated panic" : elementPtrList
-            end
-          end
-          let name = [indexResult.mValue name]
-          elementPtrList += {!.indirect {!index:indexResult} !"[" + name + "]"}
-        else
-          error endOfExp : "index expression is not an integer" : elementPtrList
-        end
-      end 
+      analyzeArrayElementAccess (
+        !arrayElementAccess
+        !?type
+        !?elementPtrList
+        !fieldName.location
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+      )
     else
       error fieldName : "the field type is not a structure" : type
     end
@@ -165,6 +138,73 @@ proc analyzeSelfAccess
     !inSelfType
     !elementPtrList
   ]        
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc analyzeArrayElementAccess
+  ?let @arrayElementAccess inArrayElementAccess
+  ?!@unifiedTypeMap-proxy ioType
+  ?!@elementPtrList ioElementPtrList
+  ?let @location inErrorLocation
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  switch inArrayElementAccess
+  case noAccess :
+  case access (indexExpression endOfExp) :
+    @bigint arraySize
+    if [[ioType kind] isArrayType] then
+      [[ioType kind] arrayType ?elementType:ioType ?size:arraySize]
+    else
+      error inErrorLocation : "this variable should be an array" : arraySize
+    end
+    [indexExpression analyzeExpression
+      !self:inSelfType
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !inGuard:inGuard
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !optionalTargetType:.null
+      !context:inContext
+      !modes:inModeSet
+      !allowPanic:inAllowPanic
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      ?result:let @operandIR indexResult
+    ]
+    if [indexResult.mValue isLiteralInteger] then
+      [indexResult.mValue literalInteger ?value:let @bigint indexValue]
+      if (indexValue < 0G) || (indexValue >= arraySize) then
+        error endOfExp : "static index should be positive and < " + arraySize : ioElementPtrList
+      else
+        ioElementPtrList += {!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
+      end
+    elsif [[indexResult.mType kind] isInteger] then
+      if not [option plm_options.noPanicGeneration value] then
+        [!?ioInstructionGenerationList testArrayIndex !indexResult !endOfExp !arraySize ?let generatePanicInstruction]
+        if generatePanicInstruction && not inAllowPanic then
+          error endOfExp : "index computation can generated panic" : ioElementPtrList
+        end
+      end
+      let name = [indexResult.mValue name]
+      ioElementPtrList += {!.indirect {!index:indexResult} !"[" + name + "]"}
+    else
+      error endOfExp : "index expression is not an integer" : ioElementPtrList
+    end
+  end
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

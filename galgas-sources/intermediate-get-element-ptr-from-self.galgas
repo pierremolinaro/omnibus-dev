@@ -19,6 +19,9 @@ setter @instructionListIR appendGetElementPtrFromSelf
   ?let @unifiedTypeMap-proxy inSelfType
   ?let @elementPtrList inElementList
 {
+  if inSelfType == .null then
+    error .nowhere : "<<INTERNAL ERROR>>"
+  end
   self += !@getElementPtrFromSelfIR.new {!inTarget !inSelfType !inElementList}
 }
 

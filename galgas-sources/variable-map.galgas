@@ -36,9 +36,9 @@ func initialVariableMap
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey:lkey
         !type:mType
-        !readAccessAllowed:true
+        !readAccessAllowed:false
         !variableKind:.register {!type:mType !name:lkey !address:mAddress}
-        !copyable:true
+        !copyable:false
         !fieldMap:mRegisterFieldAccessMap
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         !isConstant:true # Is constant
@@ -99,14 +99,17 @@ func initialVariableMap
   end
 #------------------------------------------------------- Add global variables
   for variable in inContext.mGlobalVariableMap do
-    var writeAccess = false
-    var allowedAccess = [variable.allowedRoutineMap hasKey !inRoutineNameForInvocation]
-    if allowedAccess then
-      writeAccess = [variable.allowedRoutineMap mHasWriteAccessForKey !inRoutineNameForInvocation]
-    else
-      allowedAccess = [variable.allowedISRMap hasKey !inRoutineNameForInvocation]
+    var writeAccess = variable.allowedAccessToAll
+    var allowedAccess = writeAccess
+    if not writeAccess then
+      allowedAccess = [variable.allowedRoutineMap hasKey !inRoutineNameForInvocation]
       if allowedAccess then
-        writeAccess = [variable.allowedISRMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+        writeAccess = [variable.allowedRoutineMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+      else
+        allowedAccess = [variable.allowedISRMap hasKey !inRoutineNameForInvocation]
+        if allowedAccess then
+          writeAccess = [variable.allowedISRMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+        end
       end
     end
     if inGlobalsAreConstant || not writeAccess then
@@ -117,7 +120,7 @@ func initialVariableMap
         !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !isVolatile:[variable.executionModeSet count] > 1}
         !copyable:[variable.type copyable]
         !fieldMap:{}
-        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+        !canBeUsedAsInputParameter:false
         !isConstant:true
       ]
     else
@@ -128,7 +131,7 @@ func initialVariableMap
         !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !isVolatile:[variable.executionModeSet count] > 1}
         !copyable:[variable.type copyable]
         !fieldMap:{}
-        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+        !canBeUsedAsInputParameter:false
         !isConstant:variable.isConstant
       ]
     end
@@ -205,7 +208,7 @@ sharedmap @variableMap %selectors {
     readAccess      -> globalVariable
     writeAccess     -> globalVariable
     readWriteAccess -> globalVariable
-    dropAccess      -> globalVariable error "a global variable cannot be drop"
+    dropAccess      -> globalVariable error "a global variable cannot be dropped"
   }
 
 #--- Used local constant
@@ -214,7 +217,7 @@ sharedmap @variableMap %selectors {
     readAccess      -> usedLocalConstant
     writeAccess     -> usedLocalConstant error "a constant cannot be written"
     readWriteAccess -> usedLocalConstant error "a constant cannot be written"
-    dropAccess      -> usedLocalConstant error "a constant cannot be drop"
+    dropAccess      -> usedLocalConstant error "a constant cannot be dropped"
   }
 
 #--- Local constant
@@ -223,7 +226,7 @@ sharedmap @variableMap %selectors {
     readAccess      -> usedLocalConstant
     writeAccess     -> usedLocalConstant error "a constant cannot be written"
     readWriteAccess -> usedLocalConstant error "a constant cannot be written"
-    dropAccess      -> usedLocalConstant error "a constant cannot be drop"
+    dropAccess      -> usedLocalConstant error "a constant cannot be dropped"
   }
 
 #--- Undefined Local constant
