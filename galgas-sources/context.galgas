@@ -76,6 +76,7 @@ map @globalVariableMap %selectors {
   @allowedRoutineMap allowedRoutineMap
   @allowedGuardMap allowedGuardMap
   @allowedISRMap allowedISRMap
+  @allowedTaskMap allowedTaskMap
   @valueIR initialValue
   @bool isConstant
   @bool allowedAccessToAll

@@ -4735,16 +4735,16 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GALGAS_globalVarDeclarati
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_globalVarDeclarationList temp_0 = inObject ;
-  cEnumerator_globalVarDeclarationList enumerator_5674 (temp_0, kEnumeration_up) ;
-  while (enumerator_5674.hasCurrentObject ()) {
-    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_5674.current_mTypeName (HERE).mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  cEnumerator_globalVarDeclarationList enumerator_6087 (temp_0, kEnumeration_up) ;
+  while (enumerator_6087.hasCurrentObject ()) {
+    const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_6087.current_mTypeName (HERE).mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_lstring var_typeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_5674.current_mTypeName (HERE).getter_string (SOURCE_FILE ("declaration-global-variable.galgas", 173)), inCompiler COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 173)), enumerator_5674.current_mTypeName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 173)) ;
+      GALGAS_lstring var_typeName = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_6087.current_mTypeName (HERE).getter_string (SOURCE_FILE ("declaration-global-variable.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 187)), enumerator_6087.current_mTypeName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 187)) ;
       {
-      ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 174)) ;
+      ioArgument_ioGraph.setter_noteNode (var_typeName COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 188)) ;
       }
     }
-    enumerator_5674.gotoNextObject () ;
+    enumerator_6087.gotoNextObject () ;
   }
 }
 
@@ -10040,6 +10040,7 @@ mAttribute_mAllowedInitList (),
 mAttribute_mAllowedPanicList (),
 mAttribute_mAllowedGuardList (),
 mAttribute_mAllowedISRList (),
+mAttribute_mAllowedTaskList (),
 mAttribute_mAllowedAccessToAll () {
 }
 
@@ -10058,7 +10059,8 @@ GALGAS_globalVarDeclarationList_2D_element::GALGAS_globalVarDeclarationList_2D_e
                                                                                         const GALGAS_allowedPanicList & inOperand5,
                                                                                         const GALGAS_allowedGuardList & inOperand6,
                                                                                         const GALGAS_allowedISRList & inOperand7,
-                                                                                        const GALGAS_bool & inOperand8) :
+                                                                                        const GALGAS_allowedTaskList & inOperand8,
+                                                                                        const GALGAS_bool & inOperand9) :
 mAttribute_mTypeName (inOperand0),
 mAttribute_mVarName (inOperand1),
 mAttribute_mSourceExpression (inOperand2),
@@ -10067,7 +10069,8 @@ mAttribute_mAllowedInitList (inOperand4),
 mAttribute_mAllowedPanicList (inOperand5),
 mAttribute_mAllowedGuardList (inOperand6),
 mAttribute_mAllowedISRList (inOperand7),
-mAttribute_mAllowedAccessToAll (inOperand8) {
+mAttribute_mAllowedTaskList (inOperand8),
+mAttribute_mAllowedAccessToAll (inOperand9) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10080,11 +10083,12 @@ GALGAS_globalVarDeclarationList_2D_element GALGAS_globalVarDeclarationList_2D_el
                                                                                                         const GALGAS_allowedPanicList & inOperand5,
                                                                                                         const GALGAS_allowedGuardList & inOperand6,
                                                                                                         const GALGAS_allowedISRList & inOperand7,
-                                                                                                        const GALGAS_bool & inOperand8 
+                                                                                                        const GALGAS_allowedTaskList & inOperand8,
+                                                                                                        const GALGAS_bool & inOperand9 
                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_globalVarDeclarationList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid ()) {
-    result = GALGAS_globalVarDeclarationList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
+    result = GALGAS_globalVarDeclarationList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
   }
   return result ;
 }
@@ -10118,6 +10122,9 @@ typeComparisonResult GALGAS_globalVarDeclarationList_2D_element::objectCompare (
     result = mAttribute_mAllowedISRList.objectCompare (inOperand.mAttribute_mAllowedISRList) ;
   }
   if (result == kOperandEqual) {
+    result = mAttribute_mAllowedTaskList.objectCompare (inOperand.mAttribute_mAllowedTaskList) ;
+  }
+  if (result == kOperandEqual) {
     result = mAttribute_mAllowedAccessToAll.objectCompare (inOperand.mAttribute_mAllowedAccessToAll) ;
   }
   return result ;
@@ -10126,7 +10133,7 @@ typeComparisonResult GALGAS_globalVarDeclarationList_2D_element::objectCompare (
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_globalVarDeclarationList_2D_element::isValid (void) const {
-  return mAttribute_mTypeName.isValid () && mAttribute_mVarName.isValid () && mAttribute_mSourceExpression.isValid () && mAttribute_mAllowedProcList.isValid () && mAttribute_mAllowedInitList.isValid () && mAttribute_mAllowedPanicList.isValid () && mAttribute_mAllowedGuardList.isValid () && mAttribute_mAllowedISRList.isValid () && mAttribute_mAllowedAccessToAll.isValid () ;
+  return mAttribute_mTypeName.isValid () && mAttribute_mVarName.isValid () && mAttribute_mSourceExpression.isValid () && mAttribute_mAllowedProcList.isValid () && mAttribute_mAllowedInitList.isValid () && mAttribute_mAllowedPanicList.isValid () && mAttribute_mAllowedGuardList.isValid () && mAttribute_mAllowedISRList.isValid () && mAttribute_mAllowedTaskList.isValid () && mAttribute_mAllowedAccessToAll.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10140,6 +10147,7 @@ void GALGAS_globalVarDeclarationList_2D_element::drop (void) {
   mAttribute_mAllowedPanicList.drop () ;
   mAttribute_mAllowedGuardList.drop () ;
   mAttribute_mAllowedISRList.drop () ;
+  mAttribute_mAllowedTaskList.drop () ;
   mAttribute_mAllowedAccessToAll.drop () ;
 }
 
@@ -10166,6 +10174,8 @@ void GALGAS_globalVarDeclarationList_2D_element::description (C_String & ioStrin
     mAttribute_mAllowedGuardList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mAllowedISRList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mAllowedTaskList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mAllowedAccessToAll.description (ioString, inIndentation+1) ;
   }
@@ -10218,6 +10228,12 @@ GALGAS_allowedGuardList GALGAS_globalVarDeclarationList_2D_element::getter_mAllo
 
 GALGAS_allowedISRList GALGAS_globalVarDeclarationList_2D_element::getter_mAllowedISRList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mAllowedISRList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_allowedTaskList GALGAS_globalVarDeclarationList_2D_element::getter_mAllowedTaskList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAllowedTaskList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10287,12 +10303,13 @@ void extensionMethod_semanticAnalysis (const GALGAS_globalVarDeclarationList_2D_
   GALGAS_allowedRoutineMap var_allowedProcedureMap ;
   GALGAS_allowedGuardMap var_allowedGuardMap ;
   GALGAS_allowedISRMap var_allowedISRMap ;
+  GALGAS_allowedTaskMap var_allowedTaskMap ;
   GALGAS_valueIR var_expressionGeneratedCode ;
   GALGAS_bool var_isConstant ;
-  GALGAS_bool joker_13794 ; // Joker input parameter
-  constinArgument_inContext.mAttribute_mGlobalVariableMap.method_searchKey (inObject.mAttribute_mVarName, var_inferredType, var_executionModeSet, var_allowedProcedureMap, var_allowedGuardMap, var_allowedISRMap, var_expressionGeneratedCode, var_isConstant, joker_13794, inCompiler COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 353)) ;
+  GALGAS_bool joker_14832 ; // Joker input parameter
+  constinArgument_inContext.mAttribute_mGlobalVariableMap.method_searchKey (inObject.mAttribute_mVarName, var_inferredType, var_executionModeSet, var_allowedProcedureMap, var_allowedGuardMap, var_allowedISRMap, var_allowedTaskMap, var_expressionGeneratedCode, var_isConstant, joker_14832, inCompiler COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 382)) ;
   {
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalVariableMap.setter_insertKey (inObject.mAttribute_mVarName, var_inferredType, GALGAS_bool (kIsStrictSup, var_executionModeSet.getter_count (SOURCE_FILE ("declaration-global-variable.galgas", 367)).objectCompare (GALGAS_uint ((uint32_t) 1U))), var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 364)) ;
+  ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalVariableMap.setter_insertKey (inObject.mAttribute_mVarName, var_inferredType, GALGAS_bool (kIsStrictSup, var_executionModeSet.getter_count (SOURCE_FILE ("declaration-global-variable.galgas", 397)).objectCompare (GALGAS_uint ((uint32_t) 1U))), var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 394)) ;
   }
 }
 

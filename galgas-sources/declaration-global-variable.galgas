@@ -40,6 +40,13 @@ list @allowedISRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @allowedTaskList {
+  @bool mHasWriteAccess
+  @lstring mTaskName
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @globalVarDeclarationList {
   @lstring mTypeName # Empty string if no type annotation
   @lstring mVarName
@@ -49,6 +56,7 @@ list @globalVarDeclarationList {
   @allowedPanicList mAllowedPanicList
   @allowedGuardList mAllowedGuardList
   @allowedISRList mAllowedISRList
+  @allowedTaskList mAllowedTaskList
   @bool mAllowedAccessToAll
 }
 
@@ -82,6 +90,7 @@ syntax extension common_syntax {
     @allowedPanicList allowedPanicList = {}
     @allowedGuardList allowedGuardList = {}
     @allowedISRList allowedISRList = {}
+    @allowedTaskList allowedTaskList = {}
     select
     or
     ${$
@@ -137,6 +146,10 @@ syntax extension common_syntax {
           $identifier$ ?let isrName
           allowedISRList += !hasWriteAccess !isrName
         or
+          $task$
+          $identifier$ ?let isrName
+          allowedTaskList += !hasWriteAccess !isrName
+        or
           $panic$
           $func$
           $identifier$ ?let panicName
@@ -156,6 +169,7 @@ syntax extension common_syntax {
       !allowedPanicList
       !allowedGuardList
       !allowedISRList
+      !allowedTaskList
       !true # mAllowedAccessToAll
   }
 
@@ -168,7 +182,7 @@ syntax extension common_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (globalVariableTypeName 8*) in self do
+  for (globalVariableTypeName 9*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]
@@ -192,6 +206,14 @@ map @allowedISRMap {
   @bool mHasWriteAccess
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @allowedTaskMap {
+  @bool mHasWriteAccess
+  insert insertKey error message "the '%K' task is already declared in %L"
+  search searchKey error message "there is no '%K' task"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -327,6 +349,12 @@ method @globalVarDeclarationList-element enterInContext
       error isr.mISRName : "this isr is not defined"
     end
   end
+#--- Check allowed tasks are defined
+  @allowedTaskMap allowedTaskMap = {}
+  for task in mAllowedTaskList do
+    [ioContext.mTaskMap searchKey !task.mTaskName ?*]
+    [!?allowedTaskMap insertKey !task.mTaskName !task.mHasWriteAccess]
+  end
 #--- Enter variable in global variable map
   [!?ioContext.mGlobalVariableMap insertKey
     !lkey:mVarName
@@ -335,6 +363,7 @@ method @globalVarDeclarationList-element enterInContext
     !allowedRoutineMap:allowedRoutineMap
     !allowedGuardMap:allowedGuardMap
     !allowedISRMap:allowedISRMap
+    !allowedTaskMap:allowedTaskMap
     !initialValue:result.mValue
     !isConstant:false # Is not constant
     !allowedAccessToAll:mAllowedAccessToAll
@@ -357,6 +386,7 @@ method @globalVarDeclarationList-element semanticAnalysis
     ?allowedRoutineMap:let unused allowedProcedureMap
     ?allowedGuardMap:let unused allowedGuardMap
     ?allowedISRMap:let unused allowedISRMap
+    ?allowedTaskMap:let unused allowedTaskMap 
     ?initialValue:let expressionGeneratedCode
     ?isConstant:let unused isConstant
     ?allowedAccessToAll:*
