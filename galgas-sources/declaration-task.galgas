@@ -351,7 +351,7 @@ method @taskList-element semanticAnalysis
   @instructionListAST taskListInstructionList = {}
   if [mGuardedCommandList length] > 0 then
     let syncInstruction = @syncInstructionAST.new {!mTaskName.location !mGuardedCommandList !mTaskName.location}
-    taskListInstructionList += !syncInstruction
+    taskListInstructionList += !.nowhere !syncInstruction
   end
   routineSemanticAnalysis (
     !receiverType:taskType

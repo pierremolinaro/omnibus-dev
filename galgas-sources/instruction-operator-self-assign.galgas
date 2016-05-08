@@ -23,7 +23,7 @@ syntax extension common_syntax {
     <op_assign> ?let @operatorAssignKind operatorAssign
     let operatorLocation = @location.here
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@selfVarOperatorAssignInstructionAST.new {
+    ioInstructionList += !selfLocation !@selfVarOperatorAssignInstructionAST.new {
       !selfLocation
       !fieldList
       !operatorAssign

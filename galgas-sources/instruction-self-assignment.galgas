@@ -20,7 +20,7 @@ syntax extension common_syntax {
     <self_access> ?let @location selfLocation ?let @fieldList fieldList
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@selfVarAssignmentInstructionAST.new {
+    ioInstructionList += !selfLocation !@selfVarAssignmentInstructionAST.new {
       !selfLocation
       !fieldList
       !expression

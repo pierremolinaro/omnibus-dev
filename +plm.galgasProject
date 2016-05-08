@@ -131,6 +131,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-get-element-ptr-from-self.galgas"
   "galgas-sources/intermediate-select-instruction.galgas"
   "galgas-sources/intermediate-test-array-index.galgas"
+  "galgas-sources/intermediate-comment-source-line.galgas"
   "galgas-sources/code-optimisation.galgas"
   "galgas-sources/code-generation.galgas"
 

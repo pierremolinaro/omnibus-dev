@@ -19,6 +19,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $do$
+    let instructionLocation = @location.here
     $while$
     @lstring whileLabel
     select
@@ -43,7 +44,7 @@ syntax extension common_syntax {
       error endLabel : "'end' label does not match 'while' label, it should be "
          + (if whileLabel.string != "" then "@" + whileLabel.string else "empty" end)
     end 
-    ioInstructionList += !@whileInstructionAST.new {
+    ioInstructionList += !instructionLocation !@whileInstructionAST.new {
       !testExpression
       !testExpressionEndLocation
       !instructionList

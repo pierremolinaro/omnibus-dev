@@ -15,12 +15,12 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <routine_call> !@abstractCallInstructionAST outInstruction {
-    <self_access> ?let @location selfLocation ?let @fieldList fieldList
+  rule <routine_call> !@location outInstructionLocation !@abstractCallInstructionAST outInstruction {
+    <self_access> ?outInstructionLocation ?let @fieldList fieldList
     <effective_parameters> ?let effectiveParameterList
     outInstruction = @unifiedSelfCallInstructionAST.new {
       !effectiveParameterList
-      !selfLocation
+      !outInstructionLocation
       !fieldList
     }
   }

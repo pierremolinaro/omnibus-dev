@@ -19,7 +19,7 @@ syntax extension common_syntax {
     $assert$
     let loc = @location.here
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@assertInstructionAST.new {
+    ioInstructionList += !loc !@assertInstructionAST.new {
       !loc
       !expression
     }

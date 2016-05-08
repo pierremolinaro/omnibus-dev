@@ -69,11 +69,11 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-    <access> ?let @accessList accessList
+    <access> ?let instructionLocation ?let @accessList accessList
     let targetErrorLocation = @location.here
     <op_assign> ?let @operatorAssignKind operatorAssign
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@varOperatorAssignInstructionAST.new {
+    ioInstructionList += !instructionLocation !@varOperatorAssignInstructionAST.new {
       !accessList
       !targetErrorLocation
       !expression

@@ -49,7 +49,7 @@ syntax extension common_syntax {
       guardKind = .baseGuard
     or
       $:$
-      <routine_call> ?let @abstractCallInstructionAST instruction
+      <routine_call> ?let unused instructionLocation ?let @abstractCallInstructionAST instruction
       guardKind = .convenienceGuard {!base:instruction}
     end
     ${$

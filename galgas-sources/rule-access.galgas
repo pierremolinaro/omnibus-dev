@@ -15,8 +15,9 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <access> !@accessList outAccessList {
+  rule <access> !@location outInstructionLocation !@accessList outAccessList {
     outAccessList = {}
+    outInstructionLocation = .here
     repeat
       $identifier$ ?let fieldName
       select

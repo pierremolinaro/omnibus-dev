@@ -34,7 +34,7 @@ syntax extension common_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+    ioInstructionList += !varName.location !@varInstructionWithAssignmentAST.new {
       !varName
       !optionalTypeName
       !expression
@@ -47,7 +47,7 @@ syntax extension common_syntax {
     $var$
     $identifier$ ?let varName
     $typeName$ ?let typeName
-    ioInstructionList += !@varInstructionAST.new {
+    ioInstructionList += !varName.location !@varInstructionAST.new {
       !varName
       !typeName
     }

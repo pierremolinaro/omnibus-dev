@@ -8,6 +8,7 @@ abstract class @instructionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @instructionListAST {
+  @location mInstructionLocation
   @instructionAST mInstruction
 }
 
@@ -87,6 +88,7 @@ method @instructionListAST analyzeBranchInstructionList
 #--- Begin branch
   [!?ioVariableMap openBranch]
   for () in self do
+    [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
     [mInstruction analyze 
       !self:inSelfType
       !propertiesAreMutable:inRoutineCanMutateProperties
@@ -124,6 +126,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {
   for () in self do
+    [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
     [mInstruction analyze 
       !self:inSelfType
       !propertiesAreMutable:inRoutineCanMutateProperties

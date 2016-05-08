@@ -27,7 +27,7 @@ syntax extension common_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@letInstructionWithAssignmentAST.new {
+    ioInstructionList += !varName.location !@letInstructionWithAssignmentAST.new {
       !varName
       !optionalTypeName
       !expression

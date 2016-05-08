@@ -22,6 +22,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $if$
+    let instructionLocation = @location.here
     @lstring ifLabel
     select
       ifLabel = .new {!"" !.here}
@@ -30,7 +31,7 @@ syntax extension common_syntax {
       [!?ioLabelMap insertKey !ifLabel]
     end
     <if_instruction> ?let ifInstruction !?ioLabelMap !ifLabel
-    ioInstructionList += !ifInstruction
+    ioInstructionList += !instructionLocation !ifInstruction
     @lstring endLabel
     select
       endLabel = .new {!"" !.here}
@@ -73,6 +74,7 @@ syntax extension common_syntax {
     or
       $else$
       $if$
+      let instructionLocation = @location.here
       @lstring elsifIfLabel
       select
         elsifIfLabel = .new {!"" !.here}
@@ -84,7 +86,7 @@ syntax extension common_syntax {
            + (if ifLabel.string != "" then "@" + ifLabel.string else "empty" end)
       end 
       <if_instruction> ?let ifInstruction !?ioLabelMap !ifLabel
-      elseInstructionList = {!ifInstruction}
+      elseInstructionList = {!instructionLocation !ifInstruction}
     end
     let endOfElseBranch = @location.here
     outIfInstruction = .new {
