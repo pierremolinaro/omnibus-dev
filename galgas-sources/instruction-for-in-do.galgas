@@ -28,7 +28,7 @@ syntax extension common_syntax {
     <instructionList> ?let instructionList !?ioLabelMap
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@forInstructionAST.new {
+    ioInstructionList += !varName.location !@forInstructionAST.new {
       !varName
       !expression
       !endOf_iteratedExpression_instruction

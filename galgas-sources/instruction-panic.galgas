@@ -19,7 +19,7 @@ syntax extension common_syntax {
     $panic$
     let loc = @location.here
     <expression> ?let @expressionAST codeExpression
-    ioInstructionList += !@panicInstructionAST.new {!loc !codeExpression}
+    ioInstructionList += !loc !@panicInstructionAST.new {!loc !codeExpression}
   }
 
   #·····················································································································

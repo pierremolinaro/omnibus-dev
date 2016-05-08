@@ -12124,7 +12124,8 @@ class cCollectionElement_instructionListAST : public cCollectionElement {
   public : GALGAS_instructionListAST_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_instructionListAST (const GALGAS_instructionAST & in_mInstruction
+  public : cCollectionElement_instructionListAST (const GALGAS_location & in_mInstructionLocation,
+                                                  const GALGAS_instructionAST & in_mInstruction
                                                   COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -12142,10 +12143,11 @@ class cCollectionElement_instructionListAST : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_instructionListAST::cCollectionElement_instructionListAST (const GALGAS_instructionAST & in_mInstruction
+cCollectionElement_instructionListAST::cCollectionElement_instructionListAST (const GALGAS_location & in_mInstructionLocation,
+                                                                              const GALGAS_instructionAST & in_mInstruction
                                                                               COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mInstruction) {
+mObject (in_mInstructionLocation, in_mInstruction) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12158,13 +12160,17 @@ bool cCollectionElement_instructionListAST::isValid (void) const {
 
 cCollectionElement * cCollectionElement_instructionListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_instructionListAST (mObject.mAttribute_mInstruction COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_instructionListAST (mObject.mAttribute_mInstructionLocation, mObject.mAttribute_mInstruction COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_instructionListAST::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mInstructionLocation" ":" ;
+  mObject.mAttribute_mInstructionLocation.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mInstruction" ":" ;
@@ -12204,13 +12210,14 @@ GALGAS_instructionListAST GALGAS_instructionListAST::constructor_emptyList (LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST GALGAS_instructionListAST::constructor_listWithValue (const GALGAS_instructionAST & inOperand0
+GALGAS_instructionListAST GALGAS_instructionListAST::constructor_listWithValue (const GALGAS_location & inOperand0,
+                                                                                const GALGAS_instructionAST & inOperand1
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_instructionListAST result ;
-  if (inOperand0.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_instructionListAST::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
+    GALGAS_instructionListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -12219,21 +12226,24 @@ GALGAS_instructionListAST GALGAS_instructionListAST::constructor_listWithValue (
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                           const GALGAS_location & in_mInstructionLocation,
                                                            const GALGAS_instructionAST & in_mInstruction
                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement_instructionListAST * p = NULL ;
-  macroMyNew (p, cCollectionElement_instructionListAST (in_mInstruction COMMA_THERE)) ;
+  macroMyNew (p, cCollectionElement_instructionListAST (in_mInstructionLocation,
+                                                        in_mInstruction COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::addAssign_operation (const GALGAS_instructionAST & inOperand0
+void GALGAS_instructionListAST::addAssign_operation (const GALGAS_location & inOperand0,
+                                                     const GALGAS_instructionAST & inOperand1
                                                      COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_instructionListAST (inOperand0 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_instructionListAST (inOperand0, inOperand1 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -12243,13 +12253,14 @@ void GALGAS_instructionListAST::addAssign_operation (const GALGAS_instructionAST
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::setter_insertAtIndex (const GALGAS_instructionAST inOperand0,
+void GALGAS_instructionListAST::setter_insertAtIndex (const GALGAS_location inOperand0,
+                                                      const GALGAS_instructionAST inOperand1,
                                                       const GALGAS_uint inInsertionIndex,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_instructionListAST (inOperand0 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_instructionListAST (inOperand0, inOperand1 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -12259,7 +12270,8 @@ void GALGAS_instructionListAST::setter_insertAtIndex (const GALGAS_instructionAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::setter_removeAtIndex (GALGAS_instructionAST & outOperand0,
+void GALGAS_instructionListAST::setter_removeAtIndex (GALGAS_location & outOperand0,
+                                                      GALGAS_instructionAST & outOperand1,
                                                       const GALGAS_uint inRemoveIndex,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
@@ -12269,16 +12281,19 @@ void GALGAS_instructionListAST::setter_removeAtIndex (GALGAS_instructionAST & ou
     cCollectionElement_instructionListAST * p = (cCollectionElement_instructionListAST *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
+      outOperand1.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_instructionListAST) ;
-      outOperand0 = p->mObject.mAttribute_mInstruction ;
+      outOperand0 = p->mObject.mAttribute_mInstructionLocation ;
+      outOperand1 = p->mObject.mAttribute_mInstruction ;
     }
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::setter_popFirst (GALGAS_instructionAST & outOperand0,
+void GALGAS_instructionListAST::setter_popFirst (GALGAS_location & outOperand0,
+                                                 GALGAS_instructionAST & outOperand1,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -12286,15 +12301,18 @@ void GALGAS_instructionListAST::setter_popFirst (GALGAS_instructionAST & outOper
   cCollectionElement_instructionListAST * p = (cCollectionElement_instructionListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
+    outOperand1.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_instructionListAST) ;
-    outOperand0 = p->mObject.mAttribute_mInstruction ;
+    outOperand0 = p->mObject.mAttribute_mInstructionLocation ;
+    outOperand1 = p->mObject.mAttribute_mInstruction ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::setter_popLast (GALGAS_instructionAST & outOperand0,
+void GALGAS_instructionListAST::setter_popLast (GALGAS_location & outOperand0,
+                                                GALGAS_instructionAST & outOperand1,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -12302,15 +12320,18 @@ void GALGAS_instructionListAST::setter_popLast (GALGAS_instructionAST & outOpera
   cCollectionElement_instructionListAST * p = (cCollectionElement_instructionListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
+    outOperand1.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_instructionListAST) ;
-    outOperand0 = p->mObject.mAttribute_mInstruction ;
+    outOperand0 = p->mObject.mAttribute_mInstructionLocation ;
+    outOperand1 = p->mObject.mAttribute_mInstruction ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::method_first (GALGAS_instructionAST & outOperand0,
+void GALGAS_instructionListAST::method_first (GALGAS_location & outOperand0,
+                                              GALGAS_instructionAST & outOperand1,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -12318,15 +12339,18 @@ void GALGAS_instructionListAST::method_first (GALGAS_instructionAST & outOperand
   cCollectionElement_instructionListAST * p = (cCollectionElement_instructionListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
+    outOperand1.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_instructionListAST) ;
-    outOperand0 = p->mObject.mAttribute_mInstruction ;
+    outOperand0 = p->mObject.mAttribute_mInstructionLocation ;
+    outOperand1 = p->mObject.mAttribute_mInstruction ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_instructionListAST::method_last (GALGAS_instructionAST & outOperand0,
+void GALGAS_instructionListAST::method_last (GALGAS_location & outOperand0,
+                                             GALGAS_instructionAST & outOperand1,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -12334,9 +12358,11 @@ void GALGAS_instructionListAST::method_last (GALGAS_instructionAST & outOperand0
   cCollectionElement_instructionListAST * p = (cCollectionElement_instructionListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
+    outOperand1.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_instructionListAST) ;
-    outOperand0 = p->mObject.mAttribute_mInstruction ;
+    outOperand0 = p->mObject.mAttribute_mInstructionLocation ;
+    outOperand1 = p->mObject.mAttribute_mInstruction ;
   }
 }
 
@@ -12393,6 +12419,21 @@ void GALGAS_instructionListAST::plusAssign_operation (const GALGAS_instructionLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_location GALGAS_instructionListAST::getter_mInstructionLocationAtIndex (const GALGAS_uint & inIndex,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_instructionListAST * p = (cCollectionElement_instructionListAST *) attributes.ptr () ;
+  GALGAS_location result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_instructionListAST) ;
+    result = p->mObject.mAttribute_mInstructionLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_instructionAST GALGAS_instructionListAST::getter_mInstructionAtIndex (const GALGAS_uint & inIndex,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const {
@@ -12424,6 +12465,14 @@ GALGAS_instructionListAST_2D_element cEnumerator_instructionListAST::current (LO
   return p->mObject ;
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cEnumerator_instructionListAST::current_mInstructionLocation (LOCATION_ARGS) const {
+  const cCollectionElement_instructionListAST * p = (const cCollectionElement_instructionListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_instructionListAST) ;
+  return p->mObject.mAttribute_mInstructionLocation ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 

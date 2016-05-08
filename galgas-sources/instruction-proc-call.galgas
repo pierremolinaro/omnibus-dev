@@ -38,14 +38,14 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-     <routine_call> ?let @abstractCallInstructionAST call_instruction
-     ioInstructionList += !call_instruction
+     <routine_call> ?let instructionLocation ?let @abstractCallInstructionAST call_instruction
+     ioInstructionList += !instructionLocation !call_instruction
   }
 
   #·····················································································································
 
-  rule <routine_call> !@abstractCallInstructionAST outInstruction {
-    <access> ?let @accessList accessList
+  rule <routine_call> !@location outInstructionLocation !@abstractCallInstructionAST outInstruction {
+    <access> ?outInstructionLocation ?let @accessList accessList
     <effective_parameters> ?let effectiveParameterList
     outInstruction = @remoteRoutineCallInstructionAST.new {
       !effectiveParameterList

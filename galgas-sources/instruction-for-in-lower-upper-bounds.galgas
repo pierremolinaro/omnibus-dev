@@ -35,7 +35,7 @@ syntax extension common_syntax {
     <instructionList> ?let instructionList !?ioLabelMap
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@forLowerUpperBoundInstructionAST.new {
+    ioInstructionList += !varName.location !@forLowerUpperBoundInstructionAST.new {
       !varName
       !typeName
       !lowerBoundExpression

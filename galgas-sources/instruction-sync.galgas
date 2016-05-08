@@ -138,7 +138,7 @@ syntax extension common_syntax {
       onInstructionBranchList += !guardedCommand !instructionList !.here
     while
     end
-    ioInstructionList += !@syncInstructionAST.new {!startLocation !onInstructionBranchList !.here}
+    ioInstructionList += !startLocation !@syncInstructionAST.new {!startLocation !onInstructionBranchList !.here}
     $}$
     @lstring endLabel
     select

@@ -4,6 +4,7 @@
 
 class @varInExpressionAST : @expressionAST {
   @lstring mSourceVarName
+  @arrayElementAccess mArrayAccess
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -23,7 +24,17 @@ syntax extension common_syntax {
   
   rule <primary> !@expressionAST outExpression {
     $identifier$ ?let sourceVarName
-    outExpression = @varInExpressionAST.new {!sourceVarName}
+    @arrayElementAccess arrayElementAccess
+    select
+      arrayElementAccess = .noAccess
+    or
+      $[$
+      <expression> ?let indexExpression
+      let @location endOfExp = .here
+      $]$
+      arrayElementAccess = .access {!indexExpression:indexExpression !endOfExp:endOfExp}
+    end
+    outExpression = @varInExpressionAST.new {!sourceVarName !arrayElementAccess}
   }
 
   #·····················································································································
@@ -53,6 +64,11 @@ override method @varInExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addEdge !inConstantName !mSourceVarName]
+  switch mArrayAccess
+  case noAccess :
+  case access (@expressionAST indexExpression *) :
+    [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  end
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -68,7 +84,12 @@ override method @controlRegisterFieldInExpressionAST addDependenceEdgeForStaticE
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+override method @varInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  switch mArrayAccess
+  case noAccess :
+  case access (@expressionAST indexExpression *) :
+    [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -81,25 +102,25 @@ override method @controlRegisterFieldInExpressionAST noteExpressionTypesInPreced
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInExpressionAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowPanic:let @bool unused inAllowPanic
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
 #--- Search variable, constant, register
   [!?ioVariableMap searchForReadAccess
     !lkey:mSourceVarName
-    ?type:let @unifiedTypeMap-proxy variableType
+    ?type:@unifiedTypeMap-proxy type
     ?readAccessAllowed:let accessIsAllowed
     ?variableKind:let @objectInMemoryIR variableKind
     ?copyable:let copyable
@@ -109,9 +130,6 @@ override method @varInExpressionAST analyzeExpression
   if not accessIsAllowed then
     error mSourceVarName : "routine has no access right on this variable"
   end
-  if not copyable then
-    error mSourceVarName : "an $" + [variableType key] + " instance is not copyable"
-  end
   if inGuard then
     switch variableKind
     case register (***) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
@@ -120,12 +138,45 @@ override method @varInExpressionAST analyzeExpression
     case globalConstant (**) :
     end
   end
+#--- Array element access ?
+  @elementPtrList elementPtrList = {}
+  analyzeArrayElementAccess (
+    !mArrayAccess
+    !?type
+    !?elementPtrList
+    !mSourceVarName.location
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+  )
+  if not copyable then
+    error mSourceVarName : "an $" + [type key] + " instance is not copyable"
+  end
 #--- Load variable
-  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
+  if [elementPtrList length] == 0 then
+    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
+  else
+    getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let sourcePtr)
+    [!?ioInstructionGenerationList appendGetElementPtr
+      !sourcePtr
+      !variableKind
+      !elementPtrList
+    ]        
+    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !sourcePtr ?outResult]
+  end
 #--- Solve inferred type
   var expressionType = solveInferredType (
     !targetType:inOptionalTargetType
-    !sourceType:variableType
+    !sourceType:type
     !errorLocation:mSourceVarName.location
   )
 }

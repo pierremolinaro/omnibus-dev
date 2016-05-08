@@ -5218,6 +5218,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionBran
 
 class GALGAS_instructionListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
+  public : GALGAS_location mAttribute_mInstructionLocation ;
   public : GALGAS_instructionAST mAttribute_mInstruction ;
 
 
@@ -5232,7 +5233,8 @@ class GALGAS_instructionListAST_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_instructionListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_instructionListAST_2D_element (const GALGAS_instructionAST & in_mInstruction) ;
+  public : GALGAS_instructionListAST_2D_element (const GALGAS_location & in_mInstructionLocation,
+                                                 const GALGAS_instructionAST & in_mInstruction) ;
 
 //-- Start of generic part --*
 
@@ -5245,7 +5247,8 @@ class GALGAS_instructionListAST_2D_element : public AC_GALGAS_root {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_instructionListAST_2D_element constructor_new (const class GALGAS_instructionAST & inOperand0
+  public : static GALGAS_instructionListAST_2D_element constructor_new (const class GALGAS_location & inOperand0,
+                                                                        const class GALGAS_instructionAST & inOperand1
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -5261,6 +5264,8 @@ class GALGAS_instructionListAST_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionAST getter_mInstruction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mInstructionLocation (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
