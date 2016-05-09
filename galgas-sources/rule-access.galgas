@@ -98,7 +98,7 @@ proc analyzeVariableAccess
     ?type:@unifiedTypeMap-proxy type
     ?1*
     ?variableKind:let @objectInMemoryIR sourcePtr
-    ?3*
+    ?2*
   ]
 #--- Handle array access
   @elementPtrList elementPtrList = {}
@@ -211,7 +211,7 @@ proc analyzeVariableWriteAccess
       ?readAccessAllowed:accessIsAllowed
       ?1*
       ?copyable:isCopyable
-      ?2*
+      ?1*
     ]
   else
     [!?ioVariableMap searchForReadWriteAccess
@@ -220,7 +220,7 @@ proc analyzeVariableWriteAccess
       ?readAccessAllowed:accessIsAllowed
       ?1*
       ?copyable:isCopyable
-      ?2*
+      ?1*
     ]
   end
   if not accessIsAllowed then
@@ -276,7 +276,7 @@ proc analyzeVariableReadWriteAccess
     ?readAccessAllowed:let accessIsAllowed
     ?variableKind:let @objectInMemoryIR variableKind
     ?copyable:let isCopyable
-    ?2*
+    ?1*
   ]
   outBaseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
   if not accessIsAllowed then

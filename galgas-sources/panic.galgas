@@ -114,7 +114,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !readAccessAllowed:true
     !variableKind:.localValue {!type:inContext.mPanicCodeType !name:codeArg.string}
     !copyable:[inContext.mPanicCodeType copyable]
-    !fieldMap:{}
     !canBeUsedAsInputParameter:false
   ]
   let fileArg = @lstring.new {!"FILE" !mPanicClauseName.location}
@@ -124,7 +123,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !readAccessAllowed:true
     !variableKind:.localValue {!type:StaticStringType !name:fileArg.string}
     !copyable:[StaticStringType copyable]
-    !fieldMap:{}
     !canBeUsedAsInputParameter:false
   ]
   let lineArg = @lstring.new {!"LINE" !mPanicClauseName.location}
@@ -134,7 +132,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !readAccessAllowed:true
     !variableKind:.localValue {!type:inContext.mPanicLineType !name:lineArg.string}
     !copyable:[inContext.mPanicLineType copyable]
-    !fieldMap:{}
     !canBeUsedAsInputParameter:false
   ]
 #---

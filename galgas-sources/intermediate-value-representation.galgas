@@ -77,7 +77,7 @@ getter @valueIR isStatic -> @bool outResult {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @objectInMemoryIR {
-  case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
+  case register (@unifiedTypeMap-proxy type @lstring name @bigint address @controlRegisterBitSliceAccessMap sliceMap)
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
   case localValue (@unifiedTypeMap-proxy type @string name)
   case globalConstant (@operandIR value  @string name)
@@ -87,7 +87,7 @@ enum @objectInMemoryIR {
 
 getter @objectInMemoryIR llvmName -> @string outName {
   switch self
-  case register (* @lstring name *) :
+  case register (* @lstring name * *) :
     error name : "@objectInMemoryIR name" : outName
   case globalVariable (* @string name *) :
     outName = "@" + llvmNameForGlobalVariable (!name)
@@ -102,7 +102,7 @@ getter @objectInMemoryIR llvmName -> @string outName {
 
 getter @objectInMemoryIR name -> @string outName {
   switch self
-  case register (* @lstring name *) :
+  case register (* @lstring name * *) :
     outName = name.string
   case globalVariable (* @string name *) :
     outName = name
@@ -117,7 +117,7 @@ getter @objectInMemoryIR name -> @string outName {
 
 getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
   switch self
-  case register (@unifiedTypeMap-proxy type * *) :
+  case register (@unifiedTypeMap-proxy type * * *) :
     outType = type
   case globalVariable (@unifiedTypeMap-proxy type * *) :
     outType = type
@@ -132,7 +132,7 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
 
 getter @objectInMemoryIR address -> @operandIR outOperand {
   switch self
-  case register (* * *) :
+  case register (* * * *) :
     error .nowhere : "@objectInMemoryIR register address" : outOperand
   case globalVariable (@unifiedTypeMap-proxy type @string name *) :
     outOperand  = .new {!type !.llvmGlobalObject {!name:llvmNameForGlobalVariable (!name)}}
