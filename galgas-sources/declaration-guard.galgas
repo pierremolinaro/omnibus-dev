@@ -195,7 +195,6 @@ proc guardSemanticAnalysis
       !readAccessAllowed:true
       !variableKind:.localValue {!type:resultType !name:resultVarName.string}
       !copyable:true
-      !fieldMap:{}
       !canBeUsedAsInputParameter:true
     ]
   #--- Analyse formal arguments
@@ -513,7 +512,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       ?readAccessAllowed:*
       ?variableKind:let @objectInMemoryIR unused variableKind
       ?copyable:*
-      ?2*
+      ?1*
     ]
     let receiverType = [targetPtr type]
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}

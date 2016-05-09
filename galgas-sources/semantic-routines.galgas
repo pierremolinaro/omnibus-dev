@@ -32,7 +32,6 @@ proc enterFormalArguments
         !readAccessAllowed:true
         !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
         !copyable:[typeProxy copyable]
-        !fieldMap:{}
         !canBeUsedAsInputParameter:true
       ]
       ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
@@ -43,7 +42,6 @@ proc enterFormalArguments
         !readAccessAllowed:true
         !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
         !copyable:[typeProxy copyable]
-        !fieldMap:{}
         !canBeUsedAsInputParameter:true
       ]
       ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
@@ -54,7 +52,6 @@ proc enterFormalArguments
         !readAccessAllowed:true
         !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
         !copyable:[typeProxy copyable]
-        !fieldMap:{}
         !canBeUsedAsInputParameter:true
       ]
       ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)

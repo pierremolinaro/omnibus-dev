@@ -2,9 +2,9 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @varInExpressionAST : @expressionAST {
-  @lstring mSourceVarName
-  @arrayElementAccess mArrayAccess
+class @controlRegisterFieldInExpressionAST : @expressionAST {
+  @lstring mRegisterVarName
+  @lstringlist mSliceNameList
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -16,18 +16,15 @@ syntax extension common_syntax {
   #·····················································································································
   
   rule <primary> !@expressionAST outExpression {
-    $identifier$ ?let sourceVarName
-    @arrayElementAccess arrayElementAccess
-    select
-      arrayElementAccess = .noAccess
-    or
-      $[$
-      <expression> ?let indexExpression
-      let @location endOfExp = .here
-      $]$
-      arrayElementAccess = .access {!indexExpression:indexExpression !endOfExp:endOfExp}
+    $identifier$ ?let controlRegisterName
+    @lstringlist fieldList = {}
+    repeat
+      $.$
+      $identifier$ ?let fieldName
+      fieldList += !fieldName
+    while
     end
-    outExpression = @varInExpressionAST.new {!sourceVarName !arrayElementAccess}
+    outExpression = @controlRegisterFieldInExpressionAST.new {!controlRegisterName !fieldList}
   }
 
   #·····················································································································
@@ -38,111 +35,91 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInExpressionAST addDependenceEdgeForStaticExpression
+override method @controlRegisterFieldInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mSourceVarName]
-  switch mArrayAccess
-  case noAccess :
-  case access (@expressionAST indexExpression *) :
-    [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  end
+  [!?ioGraph addEdge !inConstantName !mRegisterVarName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  switch mArrayAccess
-  case noAccess :
-  case access (@expressionAST indexExpression *) :
-    [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  end
+override method @controlRegisterFieldInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInExpressionAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+override method @controlRegisterFieldInExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?context:let @semanticContext unused inContext
+  ?modes:let @stringset unused inModeSet
+  ?allowPanic:let @bool unused inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
 {
 #--- Search variable, constant, register
   [!?ioVariableMap searchForReadAccess
-    !lkey:mSourceVarName
-    ?type:@unifiedTypeMap-proxy type
+    !lkey:mRegisterVarName
+    ?type:let @unifiedTypeMap-proxy variableType
     ?readAccessAllowed:let accessIsAllowed
-    ?variableKind:let @objectInMemoryIR variableKind
-    ?copyable:let copyable
+    ?variableKind:@objectInMemoryIR variableKind
+    ?1*
     ?canBeUsedAsInputParameter:*
   ]
   if not accessIsAllowed then
-    error mSourceVarName : "routine has no access right on this variable"
+    error mRegisterVarName : "routine has no access right on this variable"
   end
   if inGuard then
     switch variableKind
-    case register (****) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
-    case globalVariable (***) : error mSourceVarName : "a global variable cannot be read in guard boolean expression"
+    case register (****) : error mRegisterVarName : "a control register cannot be read in guard boolean expression"
+    case globalVariable (***) : error mRegisterVarName : "a global variable cannot be read in guard boolean expression"
     case localValue (**) :
     case globalConstant (**) :
     end
   end
-#--- Array element access ?
-  @elementPtrList elementPtrList = {}
-  analyzeArrayElementAccess (
-    !mArrayAccess
-    !?type
-    !?elementPtrList
-    !mSourceVarName.location
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-  )
-  if not copyable then
-    error mSourceVarName : "an $" + [type key] + " instance is not copyable"
-  end
 #--- Load variable
-  if [elementPtrList length] == 0 then
-    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
-  else
-    getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let sourcePtr)
-    [!?ioInstructionGenerationList appendGetElementPtr
-      !sourcePtr
-      !variableKind
-      !elementPtrList
-    ]        
-    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !sourcePtr ?outResult]
-  end
+  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
 #--- Solve inferred type
   var expressionType = solveInferredType (
     !targetType:inOptionalTargetType
-    !sourceType:type
-    !errorLocation:mSourceVarName.location
+    !sourceType:variableType
+    !errorLocation:mRegisterVarName.location
   )
+#--- Field ?
+  [variableKind register ?type:* ?name:* ?address:* ?sliceMap:@controlRegisterBitSliceAccessMap registerBitSliceMap]
+  for (field) in mSliceNameList do
+    [registerBitSliceMap searchKey
+      !field
+      ?let @llvmBinaryOperation accessOperator
+      ?let @bigint accessRightOperand
+      ?let submap
+      ?let newResultType
+     ]
+  #--- Temp var
+    getNewTempVariable (!newResultType !?ioTemporaries ?let newResultingVariable)
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !newResultingVariable.mValue
+      !outResult.mType
+      !mRegisterVarName.location
+      !outResult.mValue
+      !accessOperator
+      !.literalInteger {!value:accessRightOperand}
+    ]
+    outResult = newResultingVariable 
+    registerBitSliceMap = submap
+  end
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

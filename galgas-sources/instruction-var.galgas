@@ -136,7 +136,6 @@ override method @varInstructionWithAssignmentAST analyze
     !readAccessAllowed:true
     !variableKind:targetVar
     !copyable:[result.mType copyable]
-    !fieldMap:{}
     !canBeUsedAsInputParameter:true
   ]
 #--- Code generation
@@ -179,7 +178,6 @@ override method @varInstructionAST analyze
     !readAccessAllowed:true
     !variableKind:targetVar
     !copyable:[targetType copyable]
-    !fieldMap:{}
     !canBeUsedAsInputParameter:true
   ]
 #--- Code generation

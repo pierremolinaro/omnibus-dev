@@ -102,7 +102,6 @@ override method @forInstructionAST analyze
     !readAccessAllowed:true # Read access ok
     !variableKind:.localValue {!type:iteratedElementType !name:enumeratedVarLLVMName}
     !copyable:true
-    !fieldMap:{}
     !canBeUsedAsInputParameter:false
   ]
   @instructionListIR instructionGenerationList = {}

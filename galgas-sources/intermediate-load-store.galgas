@@ -4,7 +4,7 @@ setter @instructionListIR appendLoadFromMemory
   !@operandIR outResultingValue
 {
   switch inSource
-  case register (@unifiedTypeMap-proxy type @lstring name @bigint address) :
+  case register (@unifiedTypeMap-proxy type @lstring name @bigint address *) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadVolatileRegister
       !outResultingValue
@@ -36,7 +36,7 @@ setter @instructionListIR appendStoreInMemory
   ?let @operandIR inValue
 {
   switch inTargetPtr
-  case register (@unifiedTypeMap-proxy type @lstring registerName @bigint address) :
+  case register (@unifiedTypeMap-proxy type @lstring registerName @bigint address *) :
     [!?self appendStoreVolatileRegister !registerName.string !type !address !inValue]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     [!?self appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]

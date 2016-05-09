@@ -4124,7 +4124,8 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 
   public : static GALGAS_objectInMemoryIR constructor_register (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                 const class GALGAS_lstring & inOperand1,
-                                                                const class GALGAS_bigint & inOperand2
+                                                                const class GALGAS_bigint & inOperand2,
+                                                                const class GALGAS_controlRegisterBitSliceAccessMap & inOperand3
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4155,6 +4156,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                   class GALGAS_lstring & outArgument1,
                                                   class GALGAS_bigint & outArgument2,
+                                                  class GALGAS_controlRegisterBitSliceAccessMap & outArgument3,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -4250,8 +4252,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                         class GALGAS_bool constinArgument2,
                                                         class GALGAS_objectInMemoryIR constinArgument3,
                                                         class GALGAS_bool constinArgument4,
-                                                        class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                        class GALGAS_bool constinArgument6,
+                                                        class GALGAS_bool constinArgument5,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -4260,8 +4261,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                            class GALGAS_bool constinArgument2,
                                                                            class GALGAS_objectInMemoryIR constinArgument3,
                                                                            class GALGAS_bool constinArgument4,
-                                                                           class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                           class GALGAS_bool constinArgument6,
+                                                                           class GALGAS_bool constinArgument5,
                                                                            C_Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -4270,8 +4270,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                            class GALGAS_bool constinArgument2,
                                                                                            class GALGAS_objectInMemoryIR constinArgument3,
                                                                                            class GALGAS_bool constinArgument4,
-                                                                                           class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                                           class GALGAS_bool constinArgument6,
+                                                                                           class GALGAS_bool constinArgument5,
                                                                                            C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -4280,8 +4279,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                class GALGAS_bool constinArgument2,
                                                                class GALGAS_objectInMemoryIR constinArgument3,
                                                                class GALGAS_bool constinArgument4,
-                                                               class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                               class GALGAS_bool constinArgument6,
+                                                               class GALGAS_bool constinArgument5,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
@@ -4290,8 +4288,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                            class GALGAS_bool constinArgument2,
                                                                            class GALGAS_objectInMemoryIR constinArgument3,
                                                                            class GALGAS_bool constinArgument4,
-                                                                           class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                           class GALGAS_bool constinArgument6,
+                                                                           class GALGAS_bool constinArgument5,
                                                                            C_Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -4300,8 +4297,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                    class GALGAS_bool constinArgument2,
                                                                    class GALGAS_objectInMemoryIR constinArgument3,
                                                                    class GALGAS_bool constinArgument4,
-                                                                   class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                   class GALGAS_bool constinArgument6,
+                                                                   class GALGAS_bool constinArgument5,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -4310,8 +4306,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                    class GALGAS_bool constinArgument2,
                                                                                    class GALGAS_objectInMemoryIR constinArgument3,
                                                                                    class GALGAS_bool constinArgument4,
-                                                                                   class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                                   class GALGAS_bool constinArgument6,
+                                                                                   class GALGAS_bool constinArgument5,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -4320,8 +4315,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                          class GALGAS_bool constinArgument2,
                                                                          class GALGAS_objectInMemoryIR constinArgument3,
                                                                          class GALGAS_bool constinArgument4,
-                                                                         class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                         class GALGAS_bool constinArgument6,
+                                                                         class GALGAS_bool constinArgument5,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -4330,8 +4324,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                          class GALGAS_bool constinArgument2,
                                                                                          class GALGAS_objectInMemoryIR constinArgument3,
                                                                                          class GALGAS_bool constinArgument4,
-                                                                                         class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                                         class GALGAS_bool constinArgument6,
+                                                                                         class GALGAS_bool constinArgument5,
                                                                                          C_Compiler * inCompiler
                                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -4340,8 +4333,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                       class GALGAS_bool constinArgument2,
                                                       class GALGAS_objectInMemoryIR constinArgument3,
                                                       class GALGAS_bool constinArgument4,
-                                                      class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                      class GALGAS_bool constinArgument6,
+                                                      class GALGAS_bool constinArgument5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -4350,8 +4342,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                     class GALGAS_bool constinArgument2,
                                                                     class GALGAS_objectInMemoryIR constinArgument3,
                                                                     class GALGAS_bool constinArgument4,
-                                                                    class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                    class GALGAS_bool constinArgument6,
+                                                                    class GALGAS_bool constinArgument5,
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
@@ -4360,8 +4351,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                  class GALGAS_bool constinArgument2,
                                                                  class GALGAS_objectInMemoryIR constinArgument3,
                                                                  class GALGAS_bool constinArgument4,
-                                                                 class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                 class GALGAS_bool constinArgument6,
+                                                                 class GALGAS_bool constinArgument5,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -4370,8 +4360,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                  class GALGAS_bool constinArgument2,
                                                                  class GALGAS_objectInMemoryIR constinArgument3,
                                                                  class GALGAS_bool constinArgument4,
-                                                                 class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                 class GALGAS_bool constinArgument6,
+                                                                 class GALGAS_bool constinArgument5,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -4380,8 +4369,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                             class GALGAS_bool constinArgument2,
                                                             class GALGAS_objectInMemoryIR constinArgument3,
                                                             class GALGAS_bool constinArgument4,
-                                                            class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                            class GALGAS_bool constinArgument6,
+                                                            class GALGAS_bool constinArgument5,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
@@ -4390,8 +4378,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                class GALGAS_bool constinArgument2,
                                                                                class GALGAS_objectInMemoryIR constinArgument3,
                                                                                class GALGAS_bool constinArgument4,
-                                                                               class GALGAS_controlRegisterBitSliceAccessMap constinArgument5,
-                                                                               class GALGAS_bool constinArgument6,
+                                                                               class GALGAS_bool constinArgument5,
                                                                                C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) ;
 
@@ -4400,8 +4387,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                        class GALGAS_bool & outArgument2,
                                                        class GALGAS_objectInMemoryIR & outArgument3,
                                                        class GALGAS_bool & outArgument4,
-                                                       class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
-                                                       class GALGAS_bool & outArgument6,
+                                                       class GALGAS_bool & outArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -4416,8 +4402,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                      class GALGAS_bool & outArgument2,
                                                                      class GALGAS_objectInMemoryIR & outArgument3,
                                                                      class GALGAS_bool & outArgument4,
-                                                                     class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
-                                                                     class GALGAS_bool & outArgument6,
+                                                                     class GALGAS_bool & outArgument5,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
@@ -4426,8 +4411,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                              class GALGAS_bool & outArgument2,
                                                              class GALGAS_objectInMemoryIR & outArgument3,
                                                              class GALGAS_bool & outArgument4,
-                                                             class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
-                                                             class GALGAS_bool & outArgument6,
+                                                             class GALGAS_bool & outArgument5,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
@@ -4436,8 +4420,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                              class GALGAS_bool & outArgument2,
                                                              class GALGAS_objectInMemoryIR & outArgument3,
                                                              class GALGAS_bool & outArgument4,
-                                                             class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
-                                                             class GALGAS_bool & outArgument6,
+                                                             class GALGAS_bool & outArgument5,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
@@ -4446,8 +4429,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                              class GALGAS_bool & outArgument2,
                                                              class GALGAS_objectInMemoryIR & outArgument3,
                                                              class GALGAS_bool & outArgument4,
-                                                             class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
-                                                             class GALGAS_bool & outArgument6,
+                                                             class GALGAS_bool & outArgument5,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
@@ -4456,8 +4438,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                   class GALGAS_bool & outArgument2,
                                                                   class GALGAS_objectInMemoryIR & outArgument3,
                                                                   class GALGAS_bool & outArgument4,
-                                                                  class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
-                                                                  class GALGAS_bool & outArgument6,
+                                                                  class GALGAS_bool & outArgument5,
                                                                   C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
 
@@ -4466,8 +4447,7 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                               class GALGAS_bool & outArgument2,
                                                               class GALGAS_objectInMemoryIR & outArgument3,
                                                               class GALGAS_bool & outArgument4,
-                                                              class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
-                                                              class GALGAS_bool & outArgument6,
+                                                              class GALGAS_bool & outArgument5,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
@@ -4477,11 +4457,6 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                             COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setCopyableForKey (class GALGAS_bool constinArgument0,
-                                                           class GALGAS_string constinArgument1,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setFieldMapForKey (class GALGAS_controlRegisterBitSliceAccessMap constinArgument0,
                                                            class GALGAS_string constinArgument1,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
@@ -4517,10 +4492,6 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyableForKey (const class GALGAS_string & constinOperand0,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterBitSliceAccessMap getter_fieldMapForKey (const class GALGAS_string & constinOperand0,
-                                                                                                 C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_readAccessAllowedForKey (const class GALGAS_string & constinOperand0,
                                                                               C_Compiler * inCompiler
@@ -4561,7 +4532,6 @@ class cEnumerator_variableMap : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_readAccessAllowed (LOCATION_ARGS) const ;
   public : class GALGAS_objectInMemoryIR current_variableKind (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_copyable (LOCATION_ARGS) const ;
-  public : class GALGAS_controlRegisterBitSliceAccessMap current_fieldMap (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_canBeUsedAsInputParameter (LOCATION_ARGS) const ;
 } ;
 
@@ -4581,7 +4551,6 @@ class cMapElement_variableMap : public cMapElement {
   public : GALGAS_bool mAttribute_readAccessAllowed ;
   public : GALGAS_objectInMemoryIR mAttribute_variableKind ;
   public : GALGAS_bool mAttribute_copyable ;
-  public : GALGAS_controlRegisterBitSliceAccessMap mAttribute_fieldMap ;
   public : GALGAS_bool mAttribute_canBeUsedAsInputParameter ;
 
 //--- Constructor
@@ -4590,7 +4559,6 @@ class cMapElement_variableMap : public cMapElement {
                                     const GALGAS_bool & in_readAccessAllowed,
                                     const GALGAS_objectInMemoryIR & in_variableKind,
                                     const GALGAS_bool & in_copyable,
-                                    const GALGAS_controlRegisterBitSliceAccessMap & in_fieldMap,
                                     const GALGAS_bool & in_canBeUsedAsInputParameter
                                     COMMA_LOCATION_ARGS) ;
 
@@ -4687,9 +4655,6 @@ class GALGAS_variableMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyable (C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterBitSliceAccessMap getter_fieldMap (C_Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_readAccessAllowed (C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;

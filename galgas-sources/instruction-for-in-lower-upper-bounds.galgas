@@ -160,7 +160,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !readAccessAllowed:true # Read access ok
       !variableKind:.localValue {!type:type !name:enumeratedVarLLVMName}
       !copyable:true
-      !fieldMap:{}
       !canBeUsedAsInputParameter:false
     ]
     @instructionListIR instructionGenerationList = {}

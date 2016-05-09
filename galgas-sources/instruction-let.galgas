@@ -111,7 +111,6 @@ override method @letInstructionWithAssignmentAST analyze
     !readAccessAllowed:true
     !variableKind:localConstant
     !copyable:[result.mType copyable]
-    !fieldMap:{}
     !canBeUsedAsInputParameter:true
   ]
 #--- Generate code

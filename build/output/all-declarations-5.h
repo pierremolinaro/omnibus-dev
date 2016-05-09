@@ -45,11 +45,13 @@ class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedVa
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
   public : const GALGAS_bigint mAssociatedValue2 ;
+  public : const GALGAS_controlRegisterBitSliceAccessMap mAssociatedValue3 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                             const GALGAS_lstring & inAssociatedValue1,
-                                                            const GALGAS_bigint & inAssociatedValue2
+                                                            const GALGAS_bigint & inAssociatedValue2,
+                                                            const GALGAS_controlRegisterBitSliceAccessMap & inAssociatedValue3
                                                             COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

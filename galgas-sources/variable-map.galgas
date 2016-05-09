@@ -24,7 +24,6 @@ func initialVariableMap
       !readAccessAllowed:false
       !variableKind:.globalVariable {!type:moduleType !name:moduleName.string !isVolatile:false}
       !copyable:false
-      !fieldMap:{}
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
   end
@@ -36,9 +35,8 @@ func initialVariableMap
         !lkey:lkey
         !type:mType
         !readAccessAllowed:false
-        !variableKind:.register {!type:mType !name:lkey !address:mAddress}
+        !variableKind:.register {!type:mType !name:lkey !address:mAddress !sliceMap:mRegisterFieldAccessMap}
         !copyable:false
-        !fieldMap:mRegisterFieldAccessMap
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
       ]
     end
@@ -49,9 +47,8 @@ func initialVariableMap
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
-          !variableKind:.register {!type:mType !name:lkey !address:mAddress}
+          !variableKind:.register {!type:mType !name:lkey !address:mAddress !sliceMap:mRegisterFieldAccessMap}
           !copyable:true
-          !fieldMap:mRegisterFieldAccessMap
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         ]
       elsif mIsReadOnly || inGlobalsAreConstant then
@@ -59,9 +56,8 @@ func initialVariableMap
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
-          !variableKind:.register {!type:mType !name:lkey !address:mAddress}
+          !variableKind:.register {!type:mType !name:lkey !address:mAddress !sliceMap:mRegisterFieldAccessMap}
           !copyable:true
-          !fieldMap:mRegisterFieldAccessMap
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         ]
       end
@@ -72,9 +68,8 @@ func initialVariableMap
         !lkey:lkey
         !type:mType
         !readAccessAllowed:true
-        !variableKind:.register {!type:mType !name:lkey !address:mAddress}
+        !variableKind:.register {!type:mType !name:lkey !address:mAddress !sliceMap:mRegisterFieldAccessMap}
         !copyable:true
-        !fieldMap:mRegisterFieldAccessMap
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
       ]
     end
@@ -87,7 +82,6 @@ func initialVariableMap
       !readAccessAllowed:true
       !variableKind:.globalConstant{!value:constantValue !name:constantName.string}
       !copyable:true
-      !fieldMap:{}
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
   end
@@ -113,7 +107,6 @@ func initialVariableMap
         !readAccessAllowed:allowedAccess
         !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !isVolatile:[variable.executionModeSet count] > 1}
         !copyable:[variable.type copyable]
-        !fieldMap:{}
         !canBeUsedAsInputParameter:false
       ]
     else
@@ -123,7 +116,6 @@ func initialVariableMap
         !readAccessAllowed:allowedAccess
         !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !isVolatile:[variable.executionModeSet count] > 1}
         !copyable:[variable.type copyable]
-        !fieldMap:{}
         !canBeUsedAsInputParameter:false
       ]
     end
@@ -138,7 +130,6 @@ func initialVariableMap
       !readAccessAllowed:true
       !variableKind:.localValue {!type:resultType !name:resultVarName.string}
       !copyable:true
-      !fieldMap:{}
       !canBeUsedAsInputParameter:true
     ]
   end
@@ -159,7 +150,6 @@ func variableMapWithConstants
       !readAccessAllowed:true
       !variableKind:.globalConstant{!value:constantValue !name:constantName.string}
       !copyable:true
-      !fieldMap:{}
       !canBeUsedAsInputParameter:false
     ]
   end
@@ -194,7 +184,6 @@ sharedmap @variableMap %selectors {
   @bool readAccessAllowed
   @objectInMemoryIR variableKind
   @bool copyable
-  @controlRegisterBitSliceAccessMap fieldMap
   @bool canBeUsedAsInputParameter
 
 #--- Inaccessible control register

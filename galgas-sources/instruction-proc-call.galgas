@@ -287,7 +287,7 @@ override method @remoteRoutineCallInstructionAST analyze
         ?readAccessAllowed:*
         ?variableKind:variableKind
         ?copyable:*
-        ?2*
+        ?1*
       ]
     else
       [!?ioVariableMap searchForConstantMethodCall
@@ -296,7 +296,7 @@ override method @remoteRoutineCallInstructionAST analyze
         ?readAccessAllowed:*
         ?variableKind:variableKind
         ?copyable:*
-        ?2*
+        ?1*
       ]
     end
   #--- Enter in invocation graph
@@ -385,7 +385,7 @@ proc analyzeRoutineCall
       ?type:receiverType
       ?1*
       ?variableKind:@objectInMemoryIR variableKind
-      ?3*
+      ?2*
     ]
     outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
     outEffectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load self" as first argument
@@ -498,7 +498,6 @@ proc analyzeEffectiveParameters
           !readAccessAllowed:true
           !variableKind:targetVar
           !copyable:true
-          !fieldMap:{}
           !canBeUsedAsInputParameter:true
         ]
       else
@@ -508,7 +507,6 @@ proc analyzeEffectiveParameters
           !readAccessAllowed:true
           !variableKind:targetVar
           !copyable:true
-          !fieldMap:{}
           !canBeUsedAsInputParameter:true
         ]
       end
@@ -524,7 +522,6 @@ proc analyzeEffectiveParameters
         ?readAccessAllowed:let accessIsAllowed
         ?variableKind:let variableKind
         ?copyable:let isCopyable                                                 
-        ?fieldMap:*
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
       ]
       if not accessIsAllowed then
@@ -571,7 +568,7 @@ proc analyzeEffectiveParameters
         ?type:let type
         ?readAccessAllowed:let accessIsAllowed
         ?variableKind:let variableKind
-        ?2*
+        ?1*
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
       ]
       if not canBeUsedAsInputParameter then
