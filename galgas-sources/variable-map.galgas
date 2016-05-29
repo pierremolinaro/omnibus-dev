@@ -186,6 +186,9 @@ sharedmap @variableMap %selectors {
   @bool copyable
   @bool canBeUsedAsInputParameter
 
+#--- Handle shadow variable declaration
+  warning %shadow "declaration of '%K' variable shadows a variable declared in %L"
+
 #--- Inaccessible control register
   state inaccessibleControlRegister {
     neutralAccess   -> inaccessibleControlRegister

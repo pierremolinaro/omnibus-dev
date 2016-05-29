@@ -9460,7 +9460,7 @@ typeComparisonResult cMapElement_variableMap::compare (const cCollectionElement 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_variableMap::GALGAS_variableMap (void) :
-AC_GALGAS_uniqueMap () {
+AC_GALGAS_uniqueMap (kMapAutomatonIssueWarning, "declaration of '%K' variable shadows a variable declared in %L") {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9979,14 +9979,12 @@ void GALGAS_variableMap::setter_insertInaccessibleControlRegister (GALGAS_lstrin
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_inaccessibleControlRegister,
-                        kMapStateNames_variableMap [kMapState_variableMap_inaccessibleControlRegister],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_inaccessibleControlRegister,
+                     kMapStateNames_variableMap [kMapState_variableMap_inaccessibleControlRegister],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10005,14 +10003,12 @@ void GALGAS_variableMap::setter_insertModule (GALGAS_lstring inKey,
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_module,
-                        kMapStateNames_variableMap [kMapState_variableMap_module],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_module,
+                     kMapStateNames_variableMap [kMapState_variableMap_module],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10031,14 +10027,12 @@ void GALGAS_variableMap::setter_insertUndefinedVariable (GALGAS_lstring inKey,
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_undefinedLocalVariable,
-                        kMapStateNames_variableMap [kMapState_variableMap_undefinedLocalVariable],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_undefinedLocalVariable,
+                     kMapStateNames_variableMap [kMapState_variableMap_undefinedLocalVariable],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10057,14 +10051,12 @@ void GALGAS_variableMap::setter_insertDefinedVariable (GALGAS_lstring inKey,
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_definedLocalVariable,
-                        kMapStateNames_variableMap [kMapState_variableMap_definedLocalVariable],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_definedLocalVariable,
+                     kMapStateNames_variableMap [kMapState_variableMap_definedLocalVariable],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10083,14 +10075,12 @@ void GALGAS_variableMap::setter_insertUndefinedConstant (GALGAS_lstring inKey,
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_undefinedLocalConstant,
-                        kMapStateNames_variableMap [kMapState_variableMap_undefinedLocalConstant],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_undefinedLocalConstant,
+                     kMapStateNames_variableMap [kMapState_variableMap_undefinedLocalConstant],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10109,14 +10099,12 @@ void GALGAS_variableMap::setter_insertConstant (GALGAS_lstring inKey,
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_localConstant,
-                        kMapStateNames_variableMap [kMapState_variableMap_localConstant],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_localConstant,
+                     kMapStateNames_variableMap [kMapState_variableMap_localConstant],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10135,14 +10123,12 @@ void GALGAS_variableMap::setter_insertUsedConstant (GALGAS_lstring inKey,
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_usedLocalConstant,
-                        kMapStateNames_variableMap [kMapState_variableMap_usedLocalConstant],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_usedLocalConstant,
+                     kMapStateNames_variableMap [kMapState_variableMap_usedLocalConstant],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10161,14 +10147,12 @@ void GALGAS_variableMap::setter_insertInputFormalArgument (GALGAS_lstring inKey,
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_inputFormalParameter,
-                        kMapStateNames_variableMap [kMapState_variableMap_inputFormalParameter],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_inputFormalParameter,
+                     kMapStateNames_variableMap [kMapState_variableMap_inputFormalParameter],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10187,14 +10171,12 @@ void GALGAS_variableMap::setter_insertInputFormalArgumentDeclaredAsUnused (GALGA
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_inputFormalArgumentDeclaredAsUnused,
-                        kMapStateNames_variableMap [kMapState_variableMap_inputFormalArgumentDeclaredAsUnused],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_inputFormalArgumentDeclaredAsUnused,
+                     kMapStateNames_variableMap [kMapState_variableMap_inputFormalArgumentDeclaredAsUnused],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10213,14 +10195,12 @@ void GALGAS_variableMap::setter_insertConstantInputFormalArgument (GALGAS_lstrin
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_constantInputFormalArgument,
-                        kMapStateNames_variableMap [kMapState_variableMap_constantInputFormalArgument],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_constantInputFormalArgument,
+                     kMapStateNames_variableMap [kMapState_variableMap_constantInputFormalArgument],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10239,14 +10219,12 @@ void GALGAS_variableMap::setter_insertUsedConstantInputFormalArgument (GALGAS_ls
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_usedConstantInputFormalArgument,
-                        kMapStateNames_variableMap [kMapState_variableMap_usedConstantInputFormalArgument],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_usedConstantInputFormalArgument,
+                     kMapStateNames_variableMap [kMapState_variableMap_usedConstantInputFormalArgument],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10265,14 +10243,12 @@ void GALGAS_variableMap::setter_insertConstantInputFormalArgumentDeclaredAsUnuse
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused,
-                        kMapStateNames_variableMap [kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused,
+                     kMapStateNames_variableMap [kMapState_variableMap_constantInputFormalArgumentDeclaredAsUnused],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10291,14 +10267,12 @@ void GALGAS_variableMap::setter_insertOutputFormalArgument (GALGAS_lstring inKey
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_undefinedOutputFormalArgument,
-                        kMapStateNames_variableMap [kMapState_variableMap_undefinedOutputFormalArgument],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_undefinedOutputFormalArgument,
+                     kMapStateNames_variableMap [kMapState_variableMap_undefinedOutputFormalArgument],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10317,14 +10291,12 @@ void GALGAS_variableMap::setter_insertInputOutputFormalArgument (GALGAS_lstring 
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_unusedInputOutputFormalArgument,
-                        kMapStateNames_variableMap [kMapState_variableMap_unusedInputOutputFormalArgument],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_unusedInputOutputFormalArgument,
+                     kMapStateNames_variableMap [kMapState_variableMap_unusedInputOutputFormalArgument],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10343,14 +10315,12 @@ void GALGAS_variableMap::setter_insertInputOutputFormalArgumentDeclaredAsUnused 
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
   const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes,
-                        inCompiler,
-                        kMapState_variableMap_inputOutputFormalArgumentDeclaredAsUnused,
-                        kMapStateNames_variableMap [kMapState_variableMap_inputOutputFormalArgumentDeclaredAsUnused],
-                        kInsertErrorMessage,
-                        kShadowErrorMessage
-                        COMMA_THERE) ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_variableMap_inputOutputFormalArgumentDeclaredAsUnused,
+                     kMapStateNames_variableMap [kMapState_variableMap_inputOutputFormalArgumentDeclaredAsUnused],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
