@@ -1535,12 +1535,12 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp
   "    self.deadline +%= 1000\n"
   "    leds.toggle (!LED_L1)\n"
   "    self.array [self.index] = 0\n"
-  "    self.index += 1\n"
+  "    self.index +%= 1\n"
   "    if self.index == SIZE {\n"
   "      self.index = 0\n"
   "    }\n"
   "    for i $uint32 in 0 ..< $A.size {\n"
-  "      self.array [i] += 1\n"
+  "      self.array [i] +%= 1\n"
   "    }\n"
   "    self.array2 = self.array \n"
   "    lcd.goto (!line:0 !column:0)\n"
@@ -1565,7 +1565,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  898, // Text length
+  900, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
