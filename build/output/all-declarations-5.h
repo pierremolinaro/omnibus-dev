@@ -3455,13 +3455,4 @@ class GALGAS_string function_llvmNameForRegister (class GALGAS_string inArgument
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
-//----------------------------------------------------------------------------------------------------------------------
-//                                                                                                                     *
-//                                        Function 'noWarningIfUnusedAttribute'                                        *
-//                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_noWarningIfUnusedAttribute (class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
 #endif
