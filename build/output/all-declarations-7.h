@@ -3,7 +3,7 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/predefined-types.h"
+#include "all-predefined-types.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -127,9 +127,9 @@ class GALGAS_booleanDeclaration : public GALGAS_abstractDeclaration {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_booleanDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                             const class GALGAS_lstringlist & inOperand1
-                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_booleanDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                   const class GALGAS_lstringlist & inOperand1
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_booleanDeclaration & inOperand) const ;
@@ -217,7 +217,7 @@ class GALGAS_literalIntegerDeclaration : public GALGAS_abstractDeclaration {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_literalIntegerDeclaration constructor_new (LOCATION_ARGS) ;
+  public : static class GALGAS_literalIntegerDeclaration constructor_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_literalIntegerDeclaration & inOperand) const ;
@@ -295,8 +295,8 @@ class GALGAS_literalStringDeclaration : public GALGAS_abstractDeclaration {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_literalStringDeclaration constructor_new (const class GALGAS_lstring & inOperand0
-                                                                   COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_literalStringDeclaration constructor_new (const class GALGAS_lstring & inOperand0
+                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_literalStringDeclaration & inOperand) const ;
@@ -551,10 +551,10 @@ class GALGAS_assertInstructionIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_assertInstructionIR constructor_new (const class GALGAS_location & inOperand0,
-                                                              const class GALGAS_instructionListIR & inOperand1,
-                                                              const class GALGAS_operandIR & inOperand2
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_assertInstructionIR constructor_new (const class GALGAS_location & inOperand0,
+                                                                    const class GALGAS_instructionListIR & inOperand1,
+                                                                    const class GALGAS_operandIR & inOperand2
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_assertInstructionIR & inOperand) const ;
@@ -644,13 +644,13 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_binaryOperationIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                            const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                            const class GALGAS_valueIR & inOperand2,
-                                                            const class GALGAS_llvmBinaryOperation & inOperand3,
-                                                            const class GALGAS_valueIR & inOperand4,
-                                                            const class GALGAS_location & inOperand5
-                                                            COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_binaryOperationIR constructor_new (const class GALGAS_valueIR & inOperand0,
+                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                  const class GALGAS_valueIR & inOperand2,
+                                                                  const class GALGAS_llvmBinaryOperation & inOperand3,
+                                                                  const class GALGAS_valueIR & inOperand4,
+                                                                  const class GALGAS_location & inOperand5
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_binaryOperationIR & inOperand) const ;
@@ -755,10 +755,10 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_convertInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                               const class GALGAS_operandIR & inOperand1,
-                                                               const class GALGAS_location & inOperand2
-                                                               COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_convertInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                     const class GALGAS_operandIR & inOperand1,
+                                                                     const class GALGAS_location & inOperand2
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_convertInstructionIR & inOperand) const ;
@@ -848,9 +848,9 @@ class GALGAS_extendIR : public GALGAS_abstractInstructionIR {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_extendIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                   const class GALGAS_operandIR & inOperand1
-                                                   COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_extendIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                         const class GALGAS_operandIR & inOperand1
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_extendIR & inOperand) const ;
@@ -935,12 +935,12 @@ class GALGAS_forInstructionIR : public GALGAS_abstractInstructionIR {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_forInstructionIR constructor_new (const class GALGAS_string & inOperand0,
-                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                           const class GALGAS_location & inOperand2,
-                                                           const class GALGAS_operandIR & inOperand3,
-                                                           const class GALGAS_instructionListIR & inOperand4
-                                                           COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_forInstructionIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                 const class GALGAS_location & inOperand2,
+                                                                 const class GALGAS_operandIR & inOperand3,
+                                                                 const class GALGAS_instructionListIR & inOperand4
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_forInstructionIR & inOperand) const ;
@@ -1040,14 +1040,14 @@ class GALGAS_forLowerUpperBoundInstructionIR : public GALGAS_abstractInstruction
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_forLowerUpperBoundInstructionIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                          const class GALGAS_bool & inOperand2,
-                                                                          const class GALGAS_location & inOperand3,
-                                                                          const class GALGAS_operandIR & inOperand4,
-                                                                          const class GALGAS_operandIR & inOperand5,
-                                                                          const class GALGAS_instructionListIR & inOperand6
-                                                                          COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_forLowerUpperBoundInstructionIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                                const class GALGAS_bool & inOperand2,
+                                                                                const class GALGAS_location & inOperand3,
+                                                                                const class GALGAS_operandIR & inOperand4,
+                                                                                const class GALGAS_operandIR & inOperand5,
+                                                                                const class GALGAS_instructionListIR & inOperand6
+                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_forLowerUpperBoundInstructionIR & inOperand) const ;
@@ -1157,12 +1157,12 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_functionCallIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                         const class GALGAS_string & inOperand1,
-                                                         const class GALGAS_routineKindIR & inOperand2,
-                                                         const class GALGAS_procCallEffectiveParameterListIR & inOperand3,
-                                                         const class GALGAS_bool & inOperand4
-                                                         COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_functionCallIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                               const class GALGAS_string & inOperand1,
+                                                               const class GALGAS_routineKindIR & inOperand2,
+                                                               const class GALGAS_procCallEffectiveParameterListIR & inOperand3,
+                                                               const class GALGAS_bool & inOperand4
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_functionCallIR & inOperand) const ;
@@ -1262,10 +1262,10 @@ class GALGAS_getElementPtrFromSelfIR : public GALGAS_abstractInstructionIR {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_getElementPtrFromSelfIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
-                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                  const class GALGAS_elementPtrList & inOperand2
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_getElementPtrFromSelfIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
+                                                                        const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                        const class GALGAS_elementPtrList & inOperand2
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_getElementPtrFromSelfIR & inOperand) const ;
@@ -1355,10 +1355,10 @@ class GALGAS_getElementPtrIR : public GALGAS_abstractInstructionIR {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_getElementPtrIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
-                                                          const class GALGAS_objectInMemoryIR & inOperand1,
-                                                          const class GALGAS_elementPtrList & inOperand2
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_getElementPtrIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
+                                                                const class GALGAS_objectInMemoryIR & inOperand1,
+                                                                const class GALGAS_elementPtrList & inOperand2
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_getElementPtrIR & inOperand) const ;
@@ -1448,11 +1448,11 @@ class GALGAS_ifInstructionIR : public GALGAS_abstractInstructionIR {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_ifInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                          const class GALGAS_location & inOperand1,
-                                                          const class GALGAS_instructionListIR & inOperand2,
-                                                          const class GALGAS_instructionListIR & inOperand3
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_ifInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                const class GALGAS_location & inOperand1,
+                                                                const class GALGAS_instructionListIR & inOperand2,
+                                                                const class GALGAS_instructionListIR & inOperand3
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_ifInstructionIR & inOperand) const ;
@@ -1547,10 +1547,10 @@ class GALGAS_loadGlobalVariableIR : public GALGAS_abstractInstructionIR {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_loadGlobalVariableIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                               const class GALGAS_string & inOperand1,
-                                                               const class GALGAS_bool & inOperand2
-                                                               COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_loadGlobalVariableIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                     const class GALGAS_string & inOperand1,
+                                                                     const class GALGAS_bool & inOperand2
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_loadGlobalVariableIR & inOperand) const ;
@@ -1640,9 +1640,9 @@ class GALGAS_loadLocalVariableIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_loadLocalVariableIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                              const class GALGAS_string & inOperand1
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_loadLocalVariableIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                    const class GALGAS_string & inOperand1
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_loadLocalVariableIR & inOperand) const ;
@@ -1727,10 +1727,10 @@ class GALGAS_loadRegisterIR : public GALGAS_abstractInstructionIR {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_loadRegisterIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                         const class GALGAS_string & inOperand1,
-                                                         const class GALGAS_bigint & inOperand2
-                                                         COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_loadRegisterIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                               const class GALGAS_string & inOperand1,
+                                                               const class GALGAS_bigint & inOperand2
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_loadRegisterIR & inOperand) const ;
@@ -1820,9 +1820,9 @@ class GALGAS_loadStructureConstantIR : public GALGAS_abstractInstructionIR {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_loadStructureConstantIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                                  const class GALGAS_string & inOperand1
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_loadStructureConstantIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                        const class GALGAS_string & inOperand1
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_loadStructureConstantIR & inOperand) const ;
@@ -1907,10 +1907,10 @@ class GALGAS_loadTaskVariableIR : public GALGAS_abstractInstructionIR {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_loadTaskVariableIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                             const class GALGAS_string & inOperand1,
-                                                             const class GALGAS_string & inOperand2
-                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_loadTaskVariableIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                   const class GALGAS_string & inOperand1,
+                                                                   const class GALGAS_string & inOperand2
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_loadTaskVariableIR & inOperand) const ;
@@ -2003,9 +2003,9 @@ class GALGAS_panicInstructionIR : public GALGAS_abstractInstructionIR {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_panicInstructionIR constructor_new (const class GALGAS_location & inOperand0,
-                                                             const class GALGAS_bigint & inOperand1
-                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_panicInstructionIR constructor_new (const class GALGAS_location & inOperand0,
+                                                                   const class GALGAS_bigint & inOperand1
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_panicInstructionIR & inOperand) const ;
@@ -2093,8 +2093,8 @@ class GALGAS_panicWithLineAndFileInstructionIR : public GALGAS_abstractInstructi
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_panicWithLineAndFileInstructionIR constructor_new (const class GALGAS_bigint & inOperand0
-                                                                            COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_panicWithLineAndFileInstructionIR constructor_new (const class GALGAS_bigint & inOperand0
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_panicWithLineAndFileInstructionIR & inOperand) const ;
@@ -2174,13 +2174,13 @@ class GALGAS_registerIntegerConstantInExpressionIR : public GALGAS_abstractInstr
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_registerIntegerConstantInExpressionIR constructor_new (const class GALGAS_location & inOperand0,
-                                                                                const class GALGAS_operandIR & inOperand1,
-                                                                                const class GALGAS_uint_36__34_ & inOperand2,
-                                                                                const class GALGAS_uint & inOperand3,
-                                                                                const class GALGAS_operandIR & inOperand4,
-                                                                                const class GALGAS_bool & inOperand5
-                                                                                COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_registerIntegerConstantInExpressionIR constructor_new (const class GALGAS_location & inOperand0,
+                                                                                      const class GALGAS_operandIR & inOperand1,
+                                                                                      const class GALGAS_uint_36__34_ & inOperand2,
+                                                                                      const class GALGAS_uint & inOperand3,
+                                                                                      const class GALGAS_operandIR & inOperand4,
+                                                                                      const class GALGAS_bool & inOperand5
+                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_registerIntegerConstantInExpressionIR & inOperand) const ;
@@ -2285,11 +2285,11 @@ class GALGAS_selectInstructionIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_selectInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                              const class GALGAS_operandIR & inOperand1,
-                                                              const class GALGAS_operandIR & inOperand2,
-                                                              const class GALGAS_operandIR & inOperand3
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_selectInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                    const class GALGAS_operandIR & inOperand1,
+                                                                    const class GALGAS_operandIR & inOperand2,
+                                                                    const class GALGAS_operandIR & inOperand3
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_selectInstructionIR & inOperand) const ;
@@ -2384,13 +2384,13 @@ class GALGAS_shortCircuitAndOperationIR : public GALGAS_abstractInstructionIR {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_shortCircuitAndOperationIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                                     const class GALGAS_operandIR & inOperand1,
-                                                                     const class GALGAS_instructionListIR & inOperand2,
-                                                                     const class GALGAS_operandIR & inOperand3,
-                                                                     const class GALGAS_instructionListIR & inOperand4,
-                                                                     const class GALGAS_location & inOperand5
-                                                                     COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_shortCircuitAndOperationIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                           const class GALGAS_operandIR & inOperand1,
+                                                                           const class GALGAS_instructionListIR & inOperand2,
+                                                                           const class GALGAS_operandIR & inOperand3,
+                                                                           const class GALGAS_instructionListIR & inOperand4,
+                                                                           const class GALGAS_location & inOperand5
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_shortCircuitAndOperationIR & inOperand) const ;
@@ -2498,8 +2498,8 @@ class GALGAS_sourceLocationIR : public GALGAS_abstractInstructionIR {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_sourceLocationIR constructor_new (const class GALGAS_location & inOperand0
-                                                           COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_sourceLocationIR constructor_new (const class GALGAS_location & inOperand0
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_sourceLocationIR & inOperand) const ;
@@ -2579,11 +2579,11 @@ class GALGAS_storeGlobalVariableIR : public GALGAS_abstractInstructionIR {
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_storeGlobalVariableIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                const class GALGAS_operandIR & inOperand2,
-                                                                const class GALGAS_bool & inOperand3
-                                                                COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_storeGlobalVariableIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                      const class GALGAS_operandIR & inOperand2,
+                                                                      const class GALGAS_bool & inOperand3
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_storeGlobalVariableIR & inOperand) const ;
@@ -2678,10 +2678,10 @@ class GALGAS_storeLocalVariableIR : public GALGAS_abstractInstructionIR {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_storeLocalVariableIR constructor_new (const class GALGAS_string & inOperand0,
-                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                               const class GALGAS_operandIR & inOperand2
-                                                               COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_storeLocalVariableIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                     const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                     const class GALGAS_operandIR & inOperand2
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_storeLocalVariableIR & inOperand) const ;
@@ -2771,11 +2771,11 @@ class GALGAS_storeTaskVariableIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_storeTaskVariableIR constructor_new (const class GALGAS_string & inOperand0,
-                                                              const class GALGAS_string & inOperand1,
-                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                              const class GALGAS_operandIR & inOperand3
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_storeTaskVariableIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                    const class GALGAS_string & inOperand1,
+                                                                    const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                    const class GALGAS_operandIR & inOperand3
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_storeTaskVariableIR & inOperand) const ;
@@ -2870,11 +2870,11 @@ class GALGAS_storeVolatileIR : public GALGAS_abstractInstructionIR {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_storeVolatileIR constructor_new (const class GALGAS_string & inOperand0,
-                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                          const class GALGAS_bigint & inOperand2,
-                                                          const class GALGAS_operandIR & inOperand3
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_storeVolatileIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                const class GALGAS_bigint & inOperand2,
+                                                                const class GALGAS_operandIR & inOperand3
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_storeVolatileIR & inOperand) const ;
@@ -2972,9 +2972,9 @@ class GALGAS_syncInstructionIR : public GALGAS_abstractInstructionIR {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_syncInstructionIR constructor_new (const class GALGAS_location & inOperand0,
-                                                            const class GALGAS_syncInstructionBranchListIR & inOperand1
-                                                            COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_syncInstructionIR constructor_new (const class GALGAS_location & inOperand0,
+                                                                  const class GALGAS_syncInstructionBranchListIR & inOperand1
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_syncInstructionIR & inOperand) const ;
@@ -3059,10 +3059,10 @@ class GALGAS_testArrayIndexIR : public GALGAS_abstractInstructionIR {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_testArrayIndexIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                           const class GALGAS_location & inOperand1,
-                                                           const class GALGAS_bigint & inOperand2
-                                                           COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_testArrayIndexIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                 const class GALGAS_location & inOperand1,
+                                                                 const class GALGAS_bigint & inOperand2
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_testArrayIndexIR & inOperand) const ;
@@ -3152,9 +3152,9 @@ class GALGAS_truncateInstructionIR : public GALGAS_abstractInstructionIR {
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_truncateInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                                const class GALGAS_operandIR & inOperand1
-                                                                COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_truncateInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                      const class GALGAS_operandIR & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_truncateInstructionIR & inOperand) const ;
@@ -3239,11 +3239,11 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_whileInstructionIR constructor_new (const class GALGAS_uint & inOperand0,
-                                                             const class GALGAS_instructionListIR & inOperand1,
-                                                             const class GALGAS_operandIR & inOperand2,
-                                                             const class GALGAS_instructionListIR & inOperand3
-                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_whileInstructionIR constructor_new (const class GALGAS_uint & inOperand0,
+                                                                   const class GALGAS_instructionListIR & inOperand1,
+                                                                   const class GALGAS_operandIR & inOperand2,
+                                                                   const class GALGAS_instructionListIR & inOperand3
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_whileInstructionIR & inOperand) const ;
@@ -3364,8 +3364,8 @@ class GALGAS_literalStringTypeIR : public GALGAS_abstractTypeIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_literalStringTypeIR constructor_new (const class GALGAS_string & inOperand0
-                                                              COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_literalStringTypeIR constructor_new (const class GALGAS_string & inOperand0
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_literalStringTypeIR & inOperand) const ;

@@ -43,15 +43,15 @@ Par exemple, voici comment on peut implémenter une variable globale \texttt{gCo
 
 \begin{PLM}
 var gCompteur $uint32 = 0 {
-  @rw proc timerHandler // Ne pas faire figurer
-  proc waitMS           // la liste des arguments
+  @rw func timerHandler // Ne pas faire figurer
+  func waitMS           // la liste des arguments
 }
 
-proc timerHandler `isr () {
+func timerHandler `isr () {
   gCompteur +%= 1
 }
 
-proc wait `user (?inDuration $uint32) {
+func wait `user (?inDuration $uint32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end
@@ -66,14 +66,14 @@ Les routines d'initialisation (\refSectionPage{initRoutine})\index{init@\plm=ini
 \begin{PLM}
 var gCompteur $uint32 = 0 {
   @rw init 112
-  @rw proc panic loop 179
+  @rw func panic loop 179
 }
 
-proc init 112 {
+func init 112 {
   gCompteur = 10
 }
 
-proc panic loop 179 {
+func panic loop 179 {
   gCompteur = 100
 }
 \end{PLM}
@@ -84,11 +84,9 @@ proc panic loop 179 {
 Dans la déclaration d'une variable globale, \plm=en_tetes_routines_autorisees= liste l'ensemble des routines pouvant accédéer à la variable globale. Cette liste doit être non vide. On peut ainsi autoriser l'accès à :
 \begin{itemize}
   \item une routine d'initialisation (\plm!init!) ;
-  \item une procédure (\plm!proc!) ;
   \item une fonction (\plm!func!) ;
   \item une section (\plm!section!) ;
-  \item une routine de panique (\plm!proc panic!) ;
-  \item une procédure de type (\plm!proc!) ;
+  \item une routine de panique (\plm!func panic!) ;
   \item une fonction de type (\plm!func!).
 \end{itemize}
 
@@ -101,11 +99,10 @@ Le compilateur interdit l'accès des routines \plm+boot+ aux variables globales\
 \begin{tabular}{lp{5cm}l}
   \textbf{Déclaration} & \textbf{Routine autorisée} & \textbf{Accés en écriture} \\
   \plm=init priorite= & Routine d'initialisation de priorité \plm=priorite= & Nécessite \plm!@rw! \\
-  \plm=proc nom= & Procédure \plm!nom! & Nécessite \plm!@rw! \\
   \plm=func nom= & Fonction \plm!nom! & Jamais \\
   \plm=section nom= & Section \plm!nom! & Nécessite \plm!@rw! \\
-  \plm=proc panic nom prorite= & Routine de panique \plm!nom! de priorité \plm=priorite= & Nécessite \plm!@rw! \\
-  \plm=proc $type nom= & Procédure \plm!nom! du type \plm!$type! & Nécessite \plm!@rw! \\
+  \plm=func panic nom prorite= & Routine de panique \plm!nom! de priorité \plm=priorite= & Nécessite \plm!@rw! \\
+  \plm=func $type nom= & Procédure \plm!nom! du type \plm!$type! & Nécessite \plm!@rw! \\
   \plm=func $type nom= & Fonction \plm!nom! du type \plm!$type! & Jamais \\
 \end{tabular}
 \caption{Déclaration des routines autorisées}
@@ -136,18 +133,18 @@ Une variable globale ne peut pas :
 
 Prenons un exemple ; la procédure \texttt{uneProcedure} présente un argument formel en sortie, et la variable globale \texttt{gGlobale} peut être accédée en lecture et écriture par la procédure \texttt{autreProcedure} :
 \begin{PLM}
-proc uneProcedure `user (!outValue $uint32) {
+func uneProcedure `user (!outValue $uint32) {
   outValue = 5
 }
 
 var gGlobale $uint32 {
-  @rw proc autreProcedure
+  @rw func autreProcedure
 }
 \end{PLM}
 
 L'écriture suivante est correcte (écriture de la variable globale) :
 \begin{PLM}
-proc autreProcedure `user () {
+func autreProcedure `user () {
   gGlobale = 10 // Ok
 }
 \end{PLM}
@@ -155,7 +152,7 @@ proc autreProcedure `user () {
 
 Par contre, l'écriture suivante est rejetée par le compilateur (passage d'une variable globale comme paramètre effectif en entrée) :
 \begin{PLM}
-proc autreProcedure `user () {
+func autreProcedure `user () {
   uneProcedure (?gGlobale) // Erreur, variable globale comme
                            // paramètre effectif en entrée
 }
