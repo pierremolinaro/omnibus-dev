@@ -3,7 +3,7 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 
-#include "galgas2/predefined-types.h"
+#include "all-predefined-types.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -340,8 +340,8 @@ class GALGAS_infixObjectObjectOperatorDescription : public GALGAS_infixOperatorD
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_infixObjectObjectOperatorDescription constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
-                                                                               COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_infixObjectObjectOperatorDescription constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_infixObjectObjectOperatorDescription & inOperand) const ;
@@ -533,55 +533,55 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_semanticContext constructor_new (const class GALGAS_targetParameters & inOperand0,
-                                                          const class GALGAS_uint & inOperand1,
-                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
-                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
-                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand6,
-                                                          const class GALGAS_unifiedTypeMap & inOperand7,
-                                                          const class GALGAS_routineMapForContext & inOperand8,
-                                                          const class GALGAS_guardMapForContext & inOperand9,
-                                                          const class GALGAS_initRoutineMap & inOperand10,
-                                                          const class GALGAS_panicRoutinePriorityMap & inOperand11,
-                                                          const class GALGAS_panicRoutinePriorityMap & inOperand12,
-                                                          const class GALGAS_controlRegisterMap & inOperand13,
-                                                          const class GALGAS_globalConstantMap & inOperand14,
-                                                          const class GALGAS_globalVariableMap & inOperand15,
-                                                          const class GALGAS_moduleMap & inOperand16,
-                                                          const class GALGAS_constructorMap & inOperand17,
-                                                          const class GALGAS_modeMap & inOperand18,
-                                                          const class GALGAS_stringset & inOperand19,
-                                                          const class GALGAS_availableInterruptMap & inOperand20,
-                                                          const class GALGAS_infixOperatorMap & inOperand21,
-                                                          const class GALGAS_infixOperatorMap & inOperand22,
-                                                          const class GALGAS_infixOperatorMap & inOperand23,
-                                                          const class GALGAS_infixOperatorMap & inOperand24,
-                                                          const class GALGAS_infixOperatorMap & inOperand25,
-                                                          const class GALGAS_infixOperatorMap & inOperand26,
-                                                          const class GALGAS_infixOperatorMap & inOperand27,
-                                                          const class GALGAS_infixOperatorMap & inOperand28,
-                                                          const class GALGAS_infixOperatorMap & inOperand29,
-                                                          const class GALGAS_infixOperatorMap & inOperand30,
-                                                          const class GALGAS_infixOperatorMap & inOperand31,
-                                                          const class GALGAS_infixOperatorMap & inOperand32,
-                                                          const class GALGAS_infixOperatorMap & inOperand33,
-                                                          const class GALGAS_infixOperatorMap & inOperand34,
-                                                          const class GALGAS_infixOperatorMap & inOperand35,
-                                                          const class GALGAS_infixOperatorMap & inOperand36,
-                                                          const class GALGAS_infixOperatorMap & inOperand37,
-                                                          const class GALGAS_infixOperatorMap & inOperand38,
-                                                          const class GALGAS_infixOperatorMap & inOperand39,
-                                                          const class GALGAS_infixOperatorMap & inOperand40,
-                                                          const class GALGAS_infixOperatorMap & inOperand41,
-                                                          const class GALGAS_infixOperatorMap & inOperand42,
-                                                          const class GALGAS_prefixOperatorMap & inOperand43,
-                                                          const class GALGAS_prefixOperatorMap & inOperand44,
-                                                          const class GALGAS_prefixOperatorMap & inOperand45,
-                                                          const class GALGAS_taskMap & inOperand46,
-                                                          const class GALGAS_globalTaskVariableList & inOperand47
-                                                          COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_semanticContext constructor_new (const class GALGAS_targetParameters & inOperand0,
+                                                                const class GALGAS_uint & inOperand1,
+                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
+                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
+                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand6,
+                                                                const class GALGAS_unifiedTypeMap & inOperand7,
+                                                                const class GALGAS_routineMapForContext & inOperand8,
+                                                                const class GALGAS_guardMapForContext & inOperand9,
+                                                                const class GALGAS_initRoutineMap & inOperand10,
+                                                                const class GALGAS_panicRoutinePriorityMap & inOperand11,
+                                                                const class GALGAS_panicRoutinePriorityMap & inOperand12,
+                                                                const class GALGAS_controlRegisterMap & inOperand13,
+                                                                const class GALGAS_globalConstantMap & inOperand14,
+                                                                const class GALGAS_globalVariableMap & inOperand15,
+                                                                const class GALGAS_moduleMap & inOperand16,
+                                                                const class GALGAS_constructorMap & inOperand17,
+                                                                const class GALGAS_modeMap & inOperand18,
+                                                                const class GALGAS_stringset & inOperand19,
+                                                                const class GALGAS_availableInterruptMap & inOperand20,
+                                                                const class GALGAS_infixOperatorMap & inOperand21,
+                                                                const class GALGAS_infixOperatorMap & inOperand22,
+                                                                const class GALGAS_infixOperatorMap & inOperand23,
+                                                                const class GALGAS_infixOperatorMap & inOperand24,
+                                                                const class GALGAS_infixOperatorMap & inOperand25,
+                                                                const class GALGAS_infixOperatorMap & inOperand26,
+                                                                const class GALGAS_infixOperatorMap & inOperand27,
+                                                                const class GALGAS_infixOperatorMap & inOperand28,
+                                                                const class GALGAS_infixOperatorMap & inOperand29,
+                                                                const class GALGAS_infixOperatorMap & inOperand30,
+                                                                const class GALGAS_infixOperatorMap & inOperand31,
+                                                                const class GALGAS_infixOperatorMap & inOperand32,
+                                                                const class GALGAS_infixOperatorMap & inOperand33,
+                                                                const class GALGAS_infixOperatorMap & inOperand34,
+                                                                const class GALGAS_infixOperatorMap & inOperand35,
+                                                                const class GALGAS_infixOperatorMap & inOperand36,
+                                                                const class GALGAS_infixOperatorMap & inOperand37,
+                                                                const class GALGAS_infixOperatorMap & inOperand38,
+                                                                const class GALGAS_infixOperatorMap & inOperand39,
+                                                                const class GALGAS_infixOperatorMap & inOperand40,
+                                                                const class GALGAS_infixOperatorMap & inOperand41,
+                                                                const class GALGAS_infixOperatorMap & inOperand42,
+                                                                const class GALGAS_prefixOperatorMap & inOperand43,
+                                                                const class GALGAS_prefixOperatorMap & inOperand44,
+                                                                const class GALGAS_prefixOperatorMap & inOperand45,
+                                                                const class GALGAS_taskMap & inOperand46,
+                                                                const class GALGAS_globalTaskVariableList & inOperand47
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -794,8 +794,8 @@ class GALGAS_integerObject_5F_literal_5F_infixOperator : public GALGAS_infixOper
                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_integerObject_5F_literal_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
-                                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_integerObject_5F_literal_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_integerObject_5F_literal_5F_infixOperator & inOperand) const ;
@@ -892,8 +892,8 @@ class GALGAS_literal_5F_integerObject_5F_infixOperator : public GALGAS_infixOper
                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_literal_5F_integerObject_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
-                                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_literal_5F_integerObject_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_literal_5F_integerObject_5F_infixOperator & inOperand) const ;
@@ -980,8 +980,8 @@ class GALGAS_literal_5F_literal_5F_integerInfixOperation : public GALGAS_infixOp
                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_literal_5F_literal_5F_integerInfixOperation constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
-                                                                                      COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_literal_5F_literal_5F_integerInfixOperation constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_literal_5F_literal_5F_integerInfixOperation & inOperand) const ;
@@ -1143,25 +1143,25 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_intermediateCodeStruct constructor_new (const class GALGAS_staticStringMap & inOperand0,
-                                                                 const class GALGAS_controlRegisterMapIR & inOperand1,
-                                                                 const class GALGAS_globalVariableMapIR & inOperand2,
-                                                                 const class GALGAS_globalConstantMapIR & inOperand3,
-                                                                 const class GALGAS_routineMapIR & inOperand4,
-                                                                 const class GALGAS_guardMapIR & inOperand5,
-                                                                 const class GALGAS_interruptMapIR & inOperand6,
-                                                                 const class GALGAS_externProcedureMapIR & inOperand7,
-                                                                 const class GALGAS_stringset & inOperand8,
-                                                                 const class GALGAS_bootListIR & inOperand9,
-                                                                 const class GALGAS_initListIR & inOperand10,
-                                                                 const class GALGAS_instructionListIR & inOperand11,
-                                                                 const class GALGAS_instructionListIR & inOperand12,
-                                                                 const class GALGAS_taskMapIR & inOperand13,
-                                                                 const class GALGAS_globalTaskVariableList & inOperand14,
-                                                                 const class GALGAS_uint & inOperand15,
-                                                                 const class GALGAS_targetParameters & inOperand16,
-                                                                 const class GALGAS_moduleListIR & inOperand17
-                                                                 COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_intermediateCodeStruct constructor_new (const class GALGAS_staticStringMap & inOperand0,
+                                                                       const class GALGAS_controlRegisterMapIR & inOperand1,
+                                                                       const class GALGAS_globalVariableMapIR & inOperand2,
+                                                                       const class GALGAS_globalConstantMapIR & inOperand3,
+                                                                       const class GALGAS_routineMapIR & inOperand4,
+                                                                       const class GALGAS_guardMapIR & inOperand5,
+                                                                       const class GALGAS_interruptMapIR & inOperand6,
+                                                                       const class GALGAS_externProcedureMapIR & inOperand7,
+                                                                       const class GALGAS_stringset & inOperand8,
+                                                                       const class GALGAS_bootListIR & inOperand9,
+                                                                       const class GALGAS_initListIR & inOperand10,
+                                                                       const class GALGAS_instructionListIR & inOperand11,
+                                                                       const class GALGAS_instructionListIR & inOperand12,
+                                                                       const class GALGAS_taskMapIR & inOperand13,
+                                                                       const class GALGAS_globalTaskVariableList & inOperand14,
+                                                                       const class GALGAS_uint & inOperand15,
+                                                                       const class GALGAS_targetParameters & inOperand16,
+                                                                       const class GALGAS_moduleListIR & inOperand17
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -1490,13 +1490,13 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_semanticTemporariesStruct constructor_new (const class GALGAS_uint & inOperand0,
-                                                                    const class GALGAS_panicRoutinePriorityMap & inOperand1,
-                                                                    const class GALGAS_panicRoutinePriorityMap & inOperand2,
-                                                                    const class GALGAS_initRoutinePriorityMap & inOperand3,
-                                                                    const class GALGAS_bootRoutinePriorityMap & inOperand4,
-                                                                    const class GALGAS_subprogramInvocationGraph & inOperand5
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_semanticTemporariesStruct constructor_new (const class GALGAS_uint & inOperand0,
+                                                                          const class GALGAS_panicRoutinePriorityMap & inOperand1,
+                                                                          const class GALGAS_panicRoutinePriorityMap & inOperand2,
+                                                                          const class GALGAS_initRoutinePriorityMap & inOperand3,
+                                                                          const class GALGAS_bootRoutinePriorityMap & inOperand4,
+                                                                          const class GALGAS_subprogramInvocationGraph & inOperand5
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -2074,12 +2074,12 @@ class GALGAS_procCallInstructionIR : public GALGAS_abstractInstructionIR {
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_procCallInstructionIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                const class GALGAS_lstring & inOperand1,
-                                                                const class GALGAS_routineKindIR & inOperand2,
-                                                                const class GALGAS_procCallEffectiveParameterListIR & inOperand3,
-                                                                const class GALGAS_bool & inOperand4
-                                                                COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_procCallInstructionIR constructor_new (const class GALGAS_string & inOperand0,
+                                                                      const class GALGAS_lstring & inOperand1,
+                                                                      const class GALGAS_routineKindIR & inOperand2,
+                                                                      const class GALGAS_procCallEffectiveParameterListIR & inOperand3,
+                                                                      const class GALGAS_bool & inOperand4
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_procCallInstructionIR & inOperand) const ;
@@ -2384,9 +2384,9 @@ class GALGAS_integerDeclaration : public GALGAS_abstractDeclaration {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_integerDeclaration constructor_new (const class GALGAS_bool & inOperand0,
-                                                             const class GALGAS_uint & inOperand1
-                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_integerDeclaration constructor_new (const class GALGAS_bool & inOperand0,
+                                                                   const class GALGAS_uint & inOperand1
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public : typeComparisonResult objectCompare (const GALGAS_integerDeclaration & inOperand) const ;
