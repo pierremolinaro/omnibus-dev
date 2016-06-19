@@ -49,7 +49,7 @@ override method @getElementPtrFromSelfIR llvmInstructionCode
     case indirect (index) : ioLLVMcode += ", " + [index.mType llvmTypeName] + " " + [index.mValue llvmName]
     end
   end
-  ioLLVMcode += " ;"
+  ioLLVMcode += " ; azerty"
   for (* fieldName) in mElementList do
     ioLLVMcode += " " + fieldName
   end
